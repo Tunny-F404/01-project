@@ -59,6 +59,7 @@ https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4
 | `Spring Cloud Security`  | 认证和授权框架         | 2.2.5         | https://spring.io/projects/spring-cloud-security             |
 | `Sentinel`               | 分布式系统的流量防卫兵 | 1.8.4         | https://sentinelguard.io/zh-cn/                              |
 | `Seata`                  | 分布式事务解决方案     | 1.5.1         | https://seata.io/zh-cn/                                      |
+| `MapStruct`              | 实体类映射代码生成器   | `1.5.3.Final` | https://mapstruct.org/                                       |
 
 #### 后端扩展技术栈
 
@@ -92,16 +93,18 @@ https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#requirem
 | `Vue`          | 前端框架         | `v3.x`                                                       | https://v3.vuejs.org/                |
 | `Vue-Router`   | 路由框架         | `v4.x`                                                       | https://next.router.vuejs.org/       |
 | `Pinia`        | 全局状态管理框架 | `v2.x`                                                       | https://pinia.vuejs.org/             |
-| `Axios`        | HTTP中间件       | [v0.27.2](https://github.com/axios/axios/releases/tag/v0.27.2) | https://github.com/axios/axios       |
-| `Element-Plus` | 前端`UI`框架     | latest                                                       | https://element-plus.gitee.io/zh-CN/ |
+| `Axios`        | HTTP中间件       | [`v0.27.2`](https://github.com/axios/axios/releases/tag/v0.27.2) | https://github.com/axios/axios       |
+| `Element-Plus` | 前端`UI`框架     | `latest`                                                     | https://element-plus.gitee.io/zh-CN/ |
 
 #### 扩展技术栈
 
-| 技术         | 说明                    | 版本     | 备注                                         |
-| ------------ | ----------------------- | -------- | -------------------------------------------- |
-| `Avue`       | 基于`ElementUI`二次封装 | `v3.1.4` | https://v3.avuejs.com/                       |
-| `V-Charts`   | 基于`Echarts`的图表框架 | latest   | https://v-charts.js.org/                     |
-| `AJ-Captcha` | 验证码插件              | 1.3.0    | https://ajcaptcha.beliefteam.cn/captcha-doc/ |
+| 技术                 | 说明                    | 版本     | 备注                                                         |
+| -------------------- | ----------------------- | -------- | ------------------------------------------------------------ |
+| `Avue`               | 基于`ElementUI`二次封装 | `v3.1.4` | https://v3.avuejs.com/                                       |
+| `V-Charts`           | 基于`Echarts`的图表框架 | latest   | https://v-charts.js.org/                                     |
+| `AJ-Captcha`         | 验证码插件              | 1.3.0    | https://ajcaptcha.beliefteam.cn/captcha-doc/                 |
+| `SheetJS`            | 电子表格插件            | 0.19.2   | https://docs.sheetjs.com/docs/<br>https://docs.sheetjs.com/docs/demos/frontend/vue |
+| `vue-plugin-hiprint` | 打印插件                | 0.0.48   | https://gitee.com/CcSimple/vue-plugin-hiprint                |
 
 ### `CPP`技术栈
 
