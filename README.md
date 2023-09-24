@@ -154,7 +154,8 @@ https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#requirem
 | `Apipost`       | `API`接口调试工具     | latest    | https://www.apipost.cn/                                      |
 | `Mock.js`       | `API`接口模拟测试     | latest    | http://mockjs.com/                                           |
 | `Git`           | 项目版本管控工具      | latest    | https://git-scm.com/                                         |
-| `TAPD`          | 开发过程管控软件      | latest    | https://www.tapd.cn/                                         |
+| `Codeup`        | 项目源码托管平台      | latest    | https://codeup.aliyun.com                                    |
+| `Projex`        | 开发过程管控平台      | latest    | https://devops.aliyun.com/projex                             |
 | `IDEA`          | `Java`开发`IDE`       | 2022.1.3+ | https://www.jetbrains.com/idea/download                      |
 | `Apache Maven`  | Maven 构建工具        | 3.6.3     | https://maven.apache.org/                                    |
 | `Docker Maven`  | Maven Docker插件      | 0.40.2    | https://dmp.fabric8.io/<br>https://github.com/fabric8io/docker-maven-plugin |
