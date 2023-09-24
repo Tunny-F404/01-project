@@ -105,6 +105,7 @@ https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#requirem
 | `AJ-Captcha`         | 验证码插件              | 1.3.0    | https://ajcaptcha.beliefteam.cn/captcha-doc/                 |
 | `SheetJS`            | 电子表格插件            | 0.19.2   | https://docs.sheetjs.com/docs/<br>https://docs.sheetjs.com/docs/demos/frontend/vue |
 | `vue-plugin-hiprint` | 打印插件                | 0.0.48   | https://gitee.com/CcSimple/vue-plugin-hiprint                |
+| `wangEditor`         | 富文本编辑器            | v5       | https://www.wangeditor.com/v5/                               |
 
 ### `CPP`技术栈
 
@@ -112,7 +113,7 @@ https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#requirem
 
 | 技术              | 说明               | 版本                                                   | 备注                                                         |
 | ----------------- | ------------------ | ------------------------------------------------------ | ------------------------------------------------------------ |
-| oat++             | Web框架            | `1.3.0`                                                | https://github.com/oatpp/oatpp                               |
+| `oat++`           | Web框架            | `1.3.0`                                                | https://github.com/oatpp/oatpp                               |
 | `MySQL Connector` | `MySQL`连接驱动库  | 8.0.27                                                 | https://dev.mysql.com/downloads/connector/cpp/<br>https://dev.mysql.com/doc/connector-cpp/1.1/en/connector-cpp-apps.html |
 | `JWT`             | `JSON` Web Token   | [v1.4](https://github.com/arun11299/cpp-jwt/tree/v1.4) | https://opensourcelibs.com/lib/cpp-jwt                       |
 | `OpenSSL`         | 开源安全套接层协议 | `1.1.1L`                                               | https://www.openssl.org/<br>https://www.xolphin.com/support/OpenSSL/OpenSSL_-_Installation_under_Windows |
@@ -142,23 +143,23 @@ https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#requirem
 
 ### 开发工具
 
-| 工具            | 说明                  | 版本     | 备注                                                         |
-| --------------- | --------------------- | -------- | ------------------------------------------------------------ |
-| `Navicat`       | 数据库连接工具        | latest   | https://www.navicat.com.cn/                                  |
-| `RDM`           | `Redis`可视化管理工具 | latest   | https://github.com/uglide/RedisDesktopManager<br>https://gitee.com/qishibo/AnotherRedisDesktopManager |
-| `PowerDesigner` | 数据库设计工具        | 16.6     | http://powerdesigner.de/                                     |
-| `Axure`         | 原型设计工具          | 9        | https://www.axure.com/                                       |
-| `MindMaster`    | 思维导图设计工具      | latest   | http://www.edrawsoft.cn/mindmaster                           |
-| `Visio`         | 流程图绘制工具        | latest   | https://www.microsoft.com/zh-cn/microsoft-365/visio/flowchart-software |
-| `Apipost`       | `API`接口调试工具     | latest   | https://www.apipost.cn/                                      |
-| `Mock.js`       | `API`接口模拟测试     | latest   | http://mockjs.com/                                           |
-| `Git`           | 项目版本管控工具      | latest   | https://git-scm.com/                                         |
-| `TAPD`          | 开发过程管控软件      | latest   | https://www.tapd.cn/                                         |
-| `IDEA`          | `Java`开发`IDE`       | 2022.1.3 | https://www.jetbrains.com/idea/download                      |
-| `Apache Maven`  | Maven 构建工具        | 3.6.3    | https://maven.apache.org/                                    |
-| `Docker Maven`  | Maven Docker插件      | 0.40.2   | https://dmp.fabric8.io/<br>https://github.com/fabric8io/docker-maven-plugin |
-| `VS`            | `C++`开发`IDE`        | 2019     | https://docs.microsoft.com/en-us/visualstudio/releases/2019/release-notes |
-| `Cmake`         | `C++`跨平台编译       | latest   | https://cmake.org/cmake/help/latest/index.html               |
+| 工具            | 说明                  | 版本      | 备注                                                         |
+| --------------- | --------------------- | --------- | ------------------------------------------------------------ |
+| `Navicat`       | 数据库连接工具        | latest    | https://www.navicat.com.cn/                                  |
+| `RDM`           | `Redis`可视化管理工具 | latest    | https://github.com/uglide/RedisDesktopManager<br>https://gitee.com/qishibo/AnotherRedisDesktopManager |
+| `PowerDesigner` | 数据库设计工具        | 16.6      | http://powerdesigner.de/                                     |
+| `Axure`         | 原型设计工具          | 9         | https://www.axure.com/                                       |
+| `MindMaster`    | 思维导图设计工具      | latest    | http://www.edrawsoft.cn/mindmaster                           |
+| `Visio`         | 流程图绘制工具        | latest    | https://www.microsoft.com/zh-cn/microsoft-365/visio/flowchart-software |
+| `Apipost`       | `API`接口调试工具     | latest    | https://www.apipost.cn/                                      |
+| `Mock.js`       | `API`接口模拟测试     | latest    | http://mockjs.com/                                           |
+| `Git`           | 项目版本管控工具      | latest    | https://git-scm.com/                                         |
+| `TAPD`          | 开发过程管控软件      | latest    | https://www.tapd.cn/                                         |
+| `IDEA`          | `Java`开发`IDE`       | 2022.1.3+ | https://www.jetbrains.com/idea/download                      |
+| `Apache Maven`  | Maven 构建工具        | 3.6.3     | https://maven.apache.org/                                    |
+| `Docker Maven`  | Maven Docker插件      | 0.40.2    | https://dmp.fabric8.io/<br>https://github.com/fabric8io/docker-maven-plugin |
+| `VS`            | `C++`开发`IDE`        | 2022      | https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-notes |
+| `Cmake`         | `C++`跨平台编译       | latest    | https://cmake.org/cmake/help/latest/index.html               |
 
 ### 开发环境
 
