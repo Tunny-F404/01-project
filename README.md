@@ -161,6 +161,7 @@ https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#requirem
 | `Docker Maven`  | Maven Docker插件      | 0.40.2    | https://dmp.fabric8.io/<br>https://github.com/fabric8io/docker-maven-plugin |
 | `VS`            | `C++`开发`IDE`        | 2022      | https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-notes |
 | `Cmake`         | `C++`跨平台编译       | latest    | https://cmake.org/cmake/help/latest/index.html               |
+| gtest           | 测试框架              | 1.14.0    | https://github.com/google/googletest                         |
 
 ### 开发环境
 
@@ -201,7 +202,6 @@ https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#requirem
 - `vue`：https://github.com/vuejs
 - `ui`：https://github.com/ElemeFE
 - `oatpp`：https://github.com/oatpp/oatpp
-- `业务参考项目`：
 
 同时也感谢其他没有明确写出来的开源组件提供给与维护者。
 
