@@ -15,14 +15,12 @@
 
 业务参考项目源码地址：
 
-业务参考项目其他参考：
-
-- 参考1：
-- 参考2：
+- https://gitee.com/kutangguo/ktg-mes
+- https://gitee.com/kutangguo/ktg-mes-ui
 
 业务参考项目在线演示：
 
-- 访问地址：
-- 账号：
-- 密码：
+- 访问地址：http://www.029tec.com/
+- 账号：`testuser`
+- 密码：`123456`
 
