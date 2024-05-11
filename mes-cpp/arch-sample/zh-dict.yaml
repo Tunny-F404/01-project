@@ -1,0 +1,13 @@
+sample:
+ get:
+  summary: 测试请求0
+  fields:
+   uid:
+    desc: 用户编号
+ get1:
+  summary: 测试请求1
+  fields:
+   age:
+    desc: 年龄
+ get2:
+  summary: 测试请求2

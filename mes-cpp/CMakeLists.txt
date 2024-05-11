@@ -4,7 +4,7 @@
 cmake_minimum_required (VERSION 3.8)
 
 # 指定工程名
-project ("zero-one-star-cpp-proj")
+project ("zero-one-mes")
 
 # 设置安装目录前缀
 if(NOT WIN32)
@@ -164,3 +164,4 @@ endif()
 # 这是示例模块，后期可以不编译它
 add_subdirectory ("arch-demo")
 # 在后面添加你的模块
+add_subdirectory ("arch-sample")
