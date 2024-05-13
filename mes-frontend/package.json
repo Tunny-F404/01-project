@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "packageManager": "pnpm@8.15.8",
   "scripts": {
+    "git:fetch": "git fetch -p",
     "corepack:pnpm": "corepack enable && corepack install",
     "dev": "vite --open",
     "build": "vite build",
