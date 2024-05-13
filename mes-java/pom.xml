@@ -39,6 +39,7 @@
         <module>mes-doc</module>
         <module>mes-sample</module>
         <module>mes-sample-captcha</module>
+        <module>mes-sample-cpp</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
