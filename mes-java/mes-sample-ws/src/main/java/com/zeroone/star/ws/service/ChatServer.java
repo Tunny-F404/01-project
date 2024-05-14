@@ -1,5 +1,6 @@
 package com.zeroone.star.ws.service;
 
+import cn.hutool.json.JSONUtil;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
@@ -97,5 +98,30 @@ public class ChatServer {
     @OnError
     public void onError(Session session, Throwable throwable) {
         System.out.println("客户端(" + session.getQueryString() + ")：连接异常" + throwable.getMessage());
+    }
+
+    public void sendMessage(String id, Object message) {
+        String messageStr = JSONUtil.toJsonStr(message);
+        // 群发
+        if("ALL".equalsIgnoreCase(id)) {
+            ONLINE_CLIENTS.forEach((k, v) -> {
+                // 发送消息
+                try {
+                    v.getBasicRemote().sendText(messageStr);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            return;
+        }
+        // 指定发送
+        Session target = ONLINE_CLIENTS.get(id);
+        if (target != null) {
+            try {
+                target.getBasicRemote().sendText(messageStr);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

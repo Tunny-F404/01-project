@@ -8,12 +8,12 @@
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>mes-sample-ws</artifactId>
+    <artifactId>mes-sample-publish</artifactId>
     <dependencies>
-        <!--web socket-->
+        <!--web mvc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--common-->
         <dependency>
@@ -47,7 +47,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.zeroone.star.ws.WsApplication</mainClass>
+                    <mainClass>com.zeroone.star.publish.PublishApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
