@@ -40,6 +40,7 @@
         <module>mes-sample</module>
         <module>mes-sample-captcha</module>
         <module>mes-sample-cpp</module>
+        <module>mes-sample-ws</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
