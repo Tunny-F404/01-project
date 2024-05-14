@@ -47,8 +47,19 @@ public class SampleController implements SampleApis {
 
     @ApiOperation(value = "根据id查询")
     @GetMapping("query-one")
-    public JsonVO<SampleDTO> queryByIdValidated(@Min(value = 1, message = "id最小值为1") int id){
+    public JsonVO<SampleDTO> queryByIdValidated(@Min(value = 1, message = "id最小值为1") int id) {
         return queryById(id);
+    }
+
+    @ApiOperation(value = "测试seata")
+    @GetMapping("exec-seata")
+    public JsonVO<String> execSeata() {
+        try {
+            sampleService.testSeata();
+            return JsonVO.success("操作成功");
+        } catch (Exception e) {
+            return JsonVO.fail(e.getMessage());
+        }
     }
 }
 
