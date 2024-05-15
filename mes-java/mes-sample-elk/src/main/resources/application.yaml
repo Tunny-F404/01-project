@@ -1,0 +1,8 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: elk
+#elk服务器地址
+logstash:
+  host: 192.168.220.128

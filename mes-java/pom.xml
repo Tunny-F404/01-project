@@ -43,6 +43,7 @@
         <module>mes-sample-ws</module>
         <module>mes-sample-publish</module>
         <module>mes-sample-seata</module>
+        <module>mes-sample-elk</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
