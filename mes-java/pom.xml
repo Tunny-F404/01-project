@@ -48,6 +48,7 @@
         <module>mes-sample-seata</module>
         <module>mes-sample-elk</module>
         <module>mes-sample-ee</module>
+        <module>mes-sample-mongo</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->

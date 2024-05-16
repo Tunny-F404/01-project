@@ -8,7 +8,7 @@
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>mes-sample-ee</artifactId>
+    <artifactId>mes-sample-mongo</artifactId>
     <dependencies>
         <!--web-->
         <dependency>
@@ -20,6 +20,11 @@
             <groupId>com.zeroone.star</groupId>
             <artifactId>mes-common</artifactId>
         </dependency>
+        <!-- domain -->
+        <dependency>
+            <groupId>com.zeroone.star</groupId>
+            <artifactId>mes-domain</artifactId>
+        </dependency>
         <!--nacos config-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -30,19 +35,10 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!-- easy es -->
+        <!-- mongodb -->
         <dependency>
-            <groupId>cn.easy-es</groupId>
-            <artifactId>easy-es-boot-starter</artifactId>
-        </dependency>
-        <!-- 重新设置ES客户端版本解决与EE内部版本依赖问题 -->
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -51,7 +47,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.zeroone.star.ee.EeApplication</mainClass>
+                    <mainClass>com.zeroone.star.mongo.MongoApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
