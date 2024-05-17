@@ -1,7 +1,15 @@
-# 示例模块
+# 点检/保养计划模块
 
 ## 简介
-架构使用示例项目。
+这个模块完成对：
+
+1、获取计划列表（条件+分页） 2、获取计划详情 3、添加计划 4、修改计划 5、修改计划状态 6、获取点检/保养设备列表（条件+分页） 7、添加点检/保养设备（支持同时添加多个） 8、删除点检/保养设备（支持批量删除）
+
+9、获取计划点检/保养项目列表（条件+分页） 10、添加计划点检/保养项目（支持同时添加多个） 
+
+11、删除计划点检/保养项目（支持批量删除） 12、删除项目（支持批量删除） 13、导出计划
+
+的接口与领域模型定义
 
 ## 目录结构说明
 > `arch-demo`
@@ -32,20 +40,7 @@
 > >
 > > `zh-dict.yaml` -- 中文词典配置
 
-## 测试数据库表
 
-在数据库中创建一张sample表用于测试。
-
-```sql
-DROP TABLE IF EXISTS `sample`;
-CREATE TABLE `sample` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL,
-  `sex` char(1) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-```
 
 ## 各层命名规范
 

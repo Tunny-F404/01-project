@@ -1,7 +1,11 @@
-# 示例模块
+# 维修单模块
 
 ## 简介
-架构使用示例项目。
+这个模块完成：
+
+1、获取维修单列表（条件+分页） 2、获取维修单详情 3、添加维修单 4、修改维修单 5、获取维修内容列表（条件+分页） 6、添加维修内容 7、修改维修内容 8、删除维修内容（支持批量删除） 9、删除维修单（支持批量删除）
+
+的接口与领域模型定义
 
 ## 目录结构说明
 > `arch-demo`
@@ -32,20 +36,7 @@
 > >
 > > `zh-dict.yaml` -- 中文词典配置
 
-## 测试数据库表
 
-在数据库中创建一张sample表用于测试。
-
-```sql
-DROP TABLE IF EXISTS `sample`;
-CREATE TABLE `sample` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL,
-  `sex` char(1) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-```
 
 ## 各层命名规范
 
