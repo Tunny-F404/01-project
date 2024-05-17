@@ -1,4 +1,4 @@
-package com.zeroone.star.sysmanagent.config;
+package com.zeroone.star.sysmanagement.config;
 
 import com.zeroone.star.project.config.swagger.SwaggerCore;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ public class swaggerConfig {
 
     @Bean
     Docket DepartmentApis() {
-        return SwaggerCore.defaultDocketBuilder("部门模块","com.zeroone.star.orgstructure.controller","orgstructure");
+        return SwaggerCore.defaultDocketBuilder("系统管理模块","com.zeroone.star.sysmanagent.controller","sysmanagent");
 }
 
 

@@ -84,7 +84,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.zeroone.star.orgstructure.OrgApplication</mainClass>
+                    <mainClass>com.zeroone.star.orgstructure.OrgStructureApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

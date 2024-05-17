@@ -1,7 +1,8 @@
-package com.zeroone.star.sysmanagent;
+package com.zeroone.star.orgstructure;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * <p>
@@ -13,10 +14,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 1.0.0
  */
 @SpringBootApplication
-public class SysApplication {
+@EnableDiscoveryClient
+public class OrgStructureApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SysApplication.class, args);
+        SpringApplication.run(OrgStructureApplication.class, args);
     }
 
 }
