@@ -40,6 +40,9 @@
         <module>mes-gateway</module>
         <module>mes-oauth2</module>
         <module>mes-login</module>
+        <module>mes-j6-product-classification</module>
+        <module>mes-j6-product-management</module>
+        <module>mes-j6-customer-management</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
