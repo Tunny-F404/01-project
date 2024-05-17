@@ -164,3 +164,6 @@ endif()
 # 这是示例模块，后期可以不编译它
 add_subdirectory ("arch-demo")
 # 在后面添加你的模块
+add_subdirectory ("mes-c6-quality")
+add_subdirectory ("mes-c6-storage-product")
+add_subdirectory ("mes-c6-storage-return")
