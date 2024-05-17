@@ -16,9 +16,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 public class swaggerConfig {
 
     @Bean
-    Docket DepartmentApis() {
-        return SwaggerCore.defaultDocketBuilder("系统管理模块","com.zeroone.star.sysmanagent.controller","sysmanagent");
-}
+    Docket SysmanagentApis() {
+        return SwaggerCore.defaultDocketBuilder("系统管理", "com.zeroone.star.sysmanagent.controller", "sysmanagent");
+    }
 
 
 }
