@@ -51,6 +51,7 @@
         <module>mes-sample-mongo</module>
         <module>mes-sample-sms</module>
         <module>mes-sample-mail</module>
+        <module>mes-sample-pdf</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
