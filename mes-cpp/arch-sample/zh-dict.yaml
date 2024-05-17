@@ -11,3 +11,11 @@ sample:
     desc: 年龄
  get2:
   summary: 测试请求2
+dept:
+ query:
+  summary: 获取部门列表
+ fields:
+  dname: 部门名称
+  status: "状态 0正常 1停用"
+  order: 部门排序
+  ctime: 创建时间
