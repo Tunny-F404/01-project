@@ -20,7 +20,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 public class SwaggerConfig {
     @Bean
     Docket loginApi() {
-        return SwaggerCore.defaultDocketBuilder("登录模块", "com.zeroone.star.login.controller", "login");
+        return SwaggerCore.defaultDocketBuilder("基础数据模块", "com.zeroone.star.basicdata.controller", "basicdata");
     }
 }
 

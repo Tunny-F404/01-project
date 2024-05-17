@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @EnableSwagger2WebMvc
 public class SwaggerConfig {
     @Bean
-    Docket sysApi() {
+    Docket loginApi() {
         return SwaggerCore.defaultDocketBuilder("系统管理模块", "com.zeroone.star.sysmanagement.controller", "sysmanagement");
     }
 }
