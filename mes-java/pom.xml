@@ -50,6 +50,7 @@
         <module>mes-sample-ee</module>
         <module>mes-sample-mongo</module>
         <module>mes-sample-sms</module>
+        <module>mes-sample-mail</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
