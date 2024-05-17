@@ -1,4 +1,4 @@
-package com.zeroone.star.customer;
+package com.zeroone.star.productClassification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
