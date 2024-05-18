@@ -14,13 +14,13 @@ class ProductTableDTO :public oatpp::DTO
 	//领料单编号
 	API_DTO_FIELD(String, pnum, ZH_WORDS_GETTER("product.fields.pnum"), true, "ISSUE20221115004");
 	//领料单名称
-	API_DTO_FIELD(String, pname, ZH_WORDS_GETTER("product.fields.pname"), true, "钢筋生产领出");
+	API_DTO_FIELD(String, pname, ZH_WORDS_GETTER("product.fields.pname"), true, "");
 	//生产工单
 	API_DTO_FIELD(String, plist, ZH_WORDS_GETTER("product.fields.plist"), true, "MO202211030003");
 	//客户编号
 	API_DTO_FIELD(String, pcnum, ZH_WORDS_GETTER("product.fields.pcnum"), true, "C00197");
 	//客户名称
-	API_DTO_FIELD(String, pcname, ZH_WORDS_GETTER("product.fields.pcname"), true, "博世");
+	API_DTO_FIELD(String, pcname, ZH_WORDS_GETTER("product.fields.pcname"), true, "");
 	//领料日期
 	API_DTO_FIELD(String, pdate, ZH_WORDS_GETTER("product.fields.pdate"), true, "2022-11-15 00:00:00");
 	//单据状态
@@ -31,9 +31,9 @@ class ProductDetailDTO :public ProductTableDTO
 {
 	DTO_INIT(ProductDetailDTO, ProductTableDTO);
 	//领料仓库
-	API_DTO_FIELD(String, prname, ZH_WORDS_GETTER("product.fields.prname"), true, "原料仓");
+	API_DTO_FIELD(String, prname, ZH_WORDS_GETTER("product.fields.prname"), true, "");
 	//备注
-	API_DTO_FIELD(String, premark, ZH_WORDS_GETTER("product.fields.premark"), true, "无");
+	API_DTO_FIELD(String, premark, ZH_WORDS_GETTER("product.fields.premark"), true, "");
 
 };
 

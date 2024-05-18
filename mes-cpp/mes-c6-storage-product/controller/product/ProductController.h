@@ -22,8 +22,8 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProductTableJsonVO);
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(String, "pnum", ZH_WORDS_GETTER("product.fields.pnum"), "ISSUE20221115004", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "pname", ZH_WORDS_GETTER("product.fields.pname"), "钢筋生产领出", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "prname", ZH_WORDS_GETTER("product.fields.prname"), "原料仓", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "pname", ZH_WORDS_GETTER("product.fields.pname"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "prname", ZH_WORDS_GETTER("product.fields.prname"), "", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "pdate", ZH_WORDS_GETTER("product.fields.pdate"), "2022-11-15 00:00:00", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "pstatus", ZH_WORDS_GETTER("product.fields.pstatus"), "FINISHED", false);
 
