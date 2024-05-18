@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: Heng_Xin
- @Date: 2024/5/18 15:24:36
+ @Date: 2024/5/18 17:35:43
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,28 +17,21 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _REPAIRORDER_VO_
-#define _REPAIRORDER_VO_
+#ifndef _REPAIROR_DERDETAILS_VO_
+#define _REPAIROR_DERDETAILS_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/repairorder/RepairorderDTO.h"
+#include "../../dto/repairorder/RepairorderDetailsDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
-///**
-// * 维修单显示JsonVO，用于响应给客户端的Json对象
-// */
-//class RepairorderJsonVO : public JsonVO<RepairorderDTO::Wrapper> {
-//    DTO_INIT(RepairorderJsonVO, JsonVO<RepairorderDTO::Wrapper>);
-//};
-
 /**
- * 维修单分页显示JsonVO，用于响应给客户端的Json对象
+ * 维修单详情显示JsonVO，用于响应给客户端的Json对象
  */
-class RepairorderPageJsonVO : public JsonVO<RepairorderPageDTO::Wrapper> {
-    DTO_INIT(RepairorderPageJsonVO, JsonVO<RepairorderPageDTO::Wrapper>);
+class RepairorderDetailsJsonVO : public JsonVO<RepairorderDetailsDTO::Wrapper> {
+    DTO_INIT(RepairorderDetailsJsonVO, JsonVO<RepairorderDetailsDTO::Wrapper>);
 };
 
 #include OATPP_CODEGEN_END(DTO)
 
-#endif // !_REPAIRORDER_VO_
+#endif // !_REPAIROR_DERDETAILS_VO_
