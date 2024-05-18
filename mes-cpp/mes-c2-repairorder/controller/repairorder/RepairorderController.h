@@ -57,7 +57,7 @@ public:
         API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("repairorder.query.fields.status"), "", false);                  // 单据状态
     }
     // 维修单分页查询 接口处理
-    ENDPOINT(API_M_GET, "/repairorder/page-query-repairorder-table", queryRepairorder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+    ENDPOINT(API_M_GET, "/repairorder/page-query-table", queryRepairorder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
         // 解析查询参数为Query领域模型
         API_HANDLER_QUERY_PARAM(pageQuery, RepairorderQuery, queryParams);
         // 呼叫执行函数响应结果
@@ -93,7 +93,7 @@ public:
         API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
     }
     // 添加维修单 接口处理
-    ENDPOINT(API_M_POST, "/add-repairorder", addRepairorder, BODY_DTO(RepairorderDetailsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+    ENDPOINT(API_M_POST, "/repairorder/add-repairorder", addRepairorder, BODY_DTO(RepairorderDetailsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
         // 呼叫执行函数响应结果
         API_HANDLER_RESP_VO(execAddRepairorder(dto));
     }
@@ -108,7 +108,7 @@ public:
         API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
     }
     // 添加维修单 接口处理
-    ENDPOINT(API_M_PUT, "/modify-repairorder", modifyRepairorder, BODY_DTO(RepairorderDetailsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+    ENDPOINT(API_M_PUT, "/repairorder/modify-repairorder", modifyRepairorder, BODY_DTO(RepairorderDetailsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
         // 呼叫执行函数响应结果
         API_HANDLER_RESP_VO(execModifyRepairorder(dto));
     }
@@ -121,7 +121,7 @@ public:
         API_DEF_ADD_AUTH();
     }
     // 删除维修单 接口处理
-    ENDPOINT(API_M_DEL, "/del-repairorder", removeRepairorder, BODY_DTO(DeleteMultipleRepairersDTO::Wrapper, repairIdList), API_HANDLER_AUTH_PARAME) {
+    ENDPOINT(API_M_DEL, "/repairorder/del-repairorder", removeRepairorder, BODY_DTO(DeleteMultipleRepairersDTO::Wrapper, repairIdList), API_HANDLER_AUTH_PARAME) {
         // 呼叫执行函数响应结果
         API_HANDLER_RESP_VO(execRemoveRepairorder(repairIdList));
     }
