@@ -7,6 +7,7 @@ import com.zeroone.star.project.vo.JsonVO;
  * @version 1.0.0
  * @Description: TODO
  */
+
 public interface SysmanagentApis {
     //添加资源
     JsonVO<SysmanagentDTO> addResource(SysmanagentDTO resourceDTO);
