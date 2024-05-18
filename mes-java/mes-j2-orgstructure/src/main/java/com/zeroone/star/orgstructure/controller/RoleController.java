@@ -2,11 +2,10 @@ package com.zeroone.star.orgstructure.controller;
 
 
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j2.orgstructure.dto.RoleDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.orgstructure.dto;
+package com.zeroone.star.project.j2.orgstructure.dto.role;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
