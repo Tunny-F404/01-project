@@ -46,9 +46,9 @@ bool getStartArg(int argc, char* argv[]) {
 	// 数据库连接信息
 	std::string dbUsername = "root";
 	std::string dbPassword = "123456";
-	std::string dbName = "test";
-	std::string dbHost = "192.168.220.128";
-	int dbPort = 3306;
+	std::string dbName = "zo_mes";
+	std::string dbHost = "localhost";
+	int dbPort = 33306;
 	int dbMax = 5;
 #ifdef LINUX
 	// Nacos配置参数
