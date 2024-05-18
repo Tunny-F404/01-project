@@ -5,5 +5,7 @@ package com.zeroone.star.project.j4.sysmanagement.logmanagement;
  * @author: 酌
  * @version 1.0
  */
+
 public interface OperationLogApis {
+
 }
