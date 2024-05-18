@@ -6,9 +6,10 @@ import com.zeroone.star.project.vo.JsonVO;
 /**
  * @author 宵夜
  * @version 1.0.0
- * @Description: TODO
+ * @Description: DepartmentApis
  */
 public interface DepartmentApis {
+
 
     //新增部门
     JsonVO<DepartmentDTO> addDepartment(DepartmentDTO departmentDTO);

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 /**
  * @author 宵夜
  * @version 1.0.0
- * @Description:
+ * @Description:部门传输数据对象
  */
 @Data
 @ApiOperation("部门传输数据对象")
