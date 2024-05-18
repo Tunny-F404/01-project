@@ -13,9 +13,9 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0.0
  */
 @Configuration
-@ComponentScan({
-        "com.zeroone.star.project.components.jwt",
-        "com.zeroone.star.project.components.user"
-})
+//@ComponentScan({
+//        "com.zeroone.star.project.components.jwt",
+//        "com.zeroone.star.project.components.user"
+//})
 public class ComponentInit {
 }
