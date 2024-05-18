@@ -5,10 +5,10 @@
 #include "../../dto/dept/DeptDTO.h"
 #include OATPP_CODEGEN_BEGIN(DTO)
 //定义一个部门列表显示VO
-class DeptTableJsonVO : public JsonVO<DeptTableDTO::Wrapper>
+class DeptTableJsonVO : public JsonVO<oatpp::List<DeptTableDTO::Wrapper>>
 {
 	// 定义初始化
-	DTO_INIT(DeptTableJsonVO, JsonVO<DeptTableDTO::Wrapper>);
+	DTO_INIT(DeptTableJsonVO, JsonVO<oatpp::List<DeptTableDTO::Wrapper>>);
 	
 public:
 	DeptTableJsonVO() {
