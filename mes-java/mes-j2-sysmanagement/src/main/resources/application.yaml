@@ -1,5 +1,5 @@
 server:
-  port: ${sp.sysmanagent}
+  port: ${sp.sysmanagement}
 spring:
   application:
-    name: ${sn.sysmanagent}
+    name: ${sn.sysmanagement}

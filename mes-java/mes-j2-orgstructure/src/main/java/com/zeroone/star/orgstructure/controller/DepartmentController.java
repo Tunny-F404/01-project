@@ -1,6 +1,6 @@
 package com.zeroone.star.orgstructure.controller;
 
-import com.zeroone.star.project.j2.orgstructure.DepartmentApis;
+import com.zeroone.star.project.j2.orgstructure.dept.DepartmentApis;
 import com.zeroone.star.project.j2.orgstructure.dto.DepartmentDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
