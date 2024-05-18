@@ -1,0 +1,4 @@
+list-dtO: 列表DTO
+equipmentledger:
+ remove-device:
+  summary: 删除设备
