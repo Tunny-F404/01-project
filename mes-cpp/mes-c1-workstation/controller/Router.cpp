@@ -20,6 +20,7 @@
 #include "Router.h"
 #include "ApiHelper.h"
 #include"controller/GetList/GetWorkStationListController.h"
+#include"AcStation/AddWorkStationController.h"
 
 
 #ifdef HTTP_SERVER_DEMO
@@ -53,7 +54,8 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(GetWorkStationListController);
+	ROUTER_SIMPLE_BIND(GetWorkStationListController); 
+	ROUTER_SIMPLE_BIND(AddWorkStationController);
 }
 
 #ifdef HTTP_SERVER_DEMO
