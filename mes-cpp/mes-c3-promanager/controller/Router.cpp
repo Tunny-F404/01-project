@@ -19,6 +19,8 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include "process/ProcessController.h"
+#include "set/SetController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -51,7 +53,8 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-
+	ROUTER_SIMPLE_BIND(ProcessController);
+	ROUTER_SIMPLE_BIND(SetController);
 }
 
 #ifdef HTTP_SERVER_DEMO
