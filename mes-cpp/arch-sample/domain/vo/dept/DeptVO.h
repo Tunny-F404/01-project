@@ -28,9 +28,9 @@
 /**
  * 定义一个部门列表显示VO
  */
-class DeptTableJsonVO : public JsonVO<List<DeptTableDTO::Wrapper>>
+class DeptTableJsonVO : public JsonVO<oatpp::List<DeptTableDTO::Wrapper>>
 {
-	DTO_INIT(DeptTableJsonVO, JsonVO<List<DeptTableDTO::Wrapper>>);
+	DTO_INIT(DeptTableJsonVO, JsonVO<oatpp::List<DeptTableDTO::Wrapper>>);
 public:
 	DeptTableJsonVO() {
 		this->data = {};
