@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: ${sn.sysmanagement}
+
+
+sn:
+  sysmanagement: sysmanagement
+
 #  cloud:
 #    sentinel:
 #      transport:
