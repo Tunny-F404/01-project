@@ -2,6 +2,7 @@ package com.zeroone.star.orgstructure.controller;
 
 
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j2.orgstructure.RoleApis;
 import com.zeroone.star.project.j2.orgstructure.dto.RoleDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -22,10 +23,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/orgstructure/role")
 @Api(tags = "角色控制器")
-public class RoleController {
+public class RoleController implements RoleApis {
     /**
      * 获取角色名称列表
      */
+    @Override
     @GetMapping("query-roles")
     @ApiOperation("获取角色名称列表")
     public JsonVO<List<RoleDTO>> queryRoles() {
@@ -35,15 +37,17 @@ public class RoleController {
     /**
      * 获取角色列表(条件+分页)
      */
+    @Override
     @GetMapping("/query-page")
     @ApiOperation("获取角色列表(条件+分页)")
-    public JsonVO<List<RoleDTO>> queryRolePage(@RequestBody RoleDTO condition, @RequestBody PageDTO<RoleDTO> pageDTO) {
+    public JsonVO<List<RoleDTO>> queryRolePage(RoleDTO condition) {
         return JsonVO.success(null);
     }
 
     /**
      * 获取角色详情
      */
+    @Override
     @GetMapping("query-role")
     @ApiOperation("获取角色详情")
     public JsonVO<RoleDTO> queryRole(@RequestParam Integer id) {
@@ -53,6 +57,7 @@ public class RoleController {
     /**
      * 设置数据权限
      */
+    @Override
     @GetMapping("modify-role")
     @ApiOperation("设置数据权限")
     public JsonVO<List<RoleDTO>> modifyRole(@RequestParam Integer id) {

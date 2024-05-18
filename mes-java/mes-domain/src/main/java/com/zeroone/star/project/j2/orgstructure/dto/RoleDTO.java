@@ -1,10 +1,14 @@
 package com.zeroone.star.project.j2.orgstructure.dto;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /**
  * @author: 天衍土豆
@@ -18,7 +22,7 @@ public class RoleDTO {
 
 
     //角色名称
-    @ApiModelProperty(value = "角色名称",example = "1")
+    @ApiModelProperty(value = "角色名称",example = "超级管理员")
     private String roleName;
 
 
@@ -39,5 +43,6 @@ public class RoleDTO {
     //菜单树选择项是否关联显示
     @ApiModelProperty(value = "查询Id",example = "true")
     private Boolean menuCheckStrictly;
+
 
 }

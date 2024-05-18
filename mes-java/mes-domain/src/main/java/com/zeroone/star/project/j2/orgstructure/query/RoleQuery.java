@@ -14,7 +14,7 @@ import lombok.Data;
 public class RoleQuery {
 
     //角色名称
-    @ApiModelProperty(value = "角色名称",example = "1")
+    @ApiModelProperty(value = "角色名称",example = "超级系统管理员")
     private String roleName;
 
 
