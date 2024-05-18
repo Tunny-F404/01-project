@@ -1,0 +1,13 @@
+product:
+ summary: "获取领料单列表"
+ fields:
+  pnum: "领料单编号"
+  pname: "领料单名称"
+  prname: "仓库名称"
+  pdate: "领料日期"
+  pstatus: "领料状态"
+  pid: "领料单id"
+  plist: "生产工单"
+  pcnum: "客户编号"
+  pcname: "客户名称"
+  premark: "备注"

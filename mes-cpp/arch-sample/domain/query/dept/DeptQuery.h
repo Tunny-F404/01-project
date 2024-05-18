@@ -19,6 +19,7 @@ class DeptQuery : public oatpp::DTO
 	//״̬
 	API_DTO_FIELD_DEFAULT(Int32, status, ZH_WORDS_GETTER("dept.fields.dstatus"));
 	
+	
 };
 
 #include OATPP_CODEGEN_END(DTO)
