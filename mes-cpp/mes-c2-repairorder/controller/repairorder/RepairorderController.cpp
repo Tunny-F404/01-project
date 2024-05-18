@@ -39,7 +39,7 @@ Uint64JsonVO::Wrapper RepairorderController::execModifyRepairorder(const Repairo
     return Uint64JsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper RepairorderController::execRemoveRepairorder(const UInt64& id)
+Uint64JsonVO::Wrapper RepairorderController::execRemoveRepairorder(const DeleteMultipleRepairersDTO::Wrapper& id)
 {
     return Uint64JsonVO::Wrapper();
 }

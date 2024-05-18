@@ -25,6 +25,7 @@
 #include "domain/query/repairorder/RepairorderDetailsQuery.h"
 #include "domain/dto/repairorder/RepairorderDTO.h"
 #include "domain/dto/repairorder/RepairorderDetailsDTO.h"
+#include "domain/dto/repairorder/DeleteMultipleRepairersDTO.h"
 #include "domain/vo/repairorder/RepairorderDetailsVO.h"
 #include "domain/vo/repairorder/RepairorderVO.h"
 
@@ -118,13 +119,11 @@ public:
         API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("repairorder.summary.remove_repairorder"), Uint64JsonVO::Wrapper);
         // 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
         API_DEF_ADD_AUTH();
-        // 定义其他路径参数说明
-        API_DEF_ADD_PATH_PARAMS(UInt64, "repairId", ZH_WORDS_GETTER("repairorder.query.fields.repair_id"), 0ULL, true); // 维修单ID (唯一标识)
     }
     // 删除维修单 接口处理
-    ENDPOINT(API_M_DEL, "/del-repairorder/{repairId}", removeRepairorder, PATH(UInt64, repairId), API_HANDLER_AUTH_PARAME) {
+    ENDPOINT(API_M_DEL, "/del-repairorder", removeRepairorder, BODY_DTO(DeleteMultipleRepairersDTO::Wrapper, repairIdList), API_HANDLER_AUTH_PARAME) {
         // 呼叫执行函数响应结果
-        API_HANDLER_RESP_VO(execRemoveRepairorder(repairId));
+        API_HANDLER_RESP_VO(execRemoveRepairorder(repairIdList));
     }
     
 private:
@@ -141,7 +140,7 @@ private:
     Uint64JsonVO::Wrapper execModifyRepairorder(const RepairorderDetailsDTO::Wrapper& dto);
 
     // 删除维修单
-    Uint64JsonVO::Wrapper execRemoveRepairorder(const UInt64& id);
+    Uint64JsonVO::Wrapper execRemoveRepairorder(const DeleteMultipleRepairersDTO::Wrapper& repairIdList);
 };
 
 #include OATPP_CODEGEN_END(ApiController)
