@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagent;
+package com.zeroone.star.project.j2.sysmanagement;
 
 /**
  * @author 宵夜

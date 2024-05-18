@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagent.dto;
+package com.zeroone.star.project.j2.sysmanagement.dto;
 
 /**
  * @author 宵夜

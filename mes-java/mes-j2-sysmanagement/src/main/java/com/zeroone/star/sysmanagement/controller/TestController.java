@@ -1,6 +1,6 @@
 package com.zeroone.star.sysmanagement.controller;
 
-import com.zeroone.star.project.j2.sysmanagent.TestApis;
+import com.zeroone.star.project.j2.sysmanagement.TestApis;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
