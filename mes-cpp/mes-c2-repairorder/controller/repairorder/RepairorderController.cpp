@@ -23,3 +23,8 @@ RepairorderPageJsonVO::Wrapper RepairorderController::execQueryRepairorder(const
 {
     return RepairorderPageJsonVO::Wrapper();
 }
+
+RepairorderDetailsJsonVO::Wrapper RepairorderController::execQueryDetailsRepairorder(const RepairorderDetailsQuery::Wrapper& id)
+{
+    return RepairorderDetailsJsonVO::Wrapper();
+}
