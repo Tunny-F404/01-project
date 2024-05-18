@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * @Description:部门传输数据对象
  */
 @Data
-@ApiOperation("部门传输数据对象")
+@ApiOperation("角色传输数据对象")
 public class DepartmentDTO {
 
     //查询Id
