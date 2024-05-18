@@ -1,9 +1,16 @@
 repairorder:
+ summary: 维修单分页查询
  query:
   fields:
-   repair_code: ά�޵����
-   repair_name: ά�޵�����
-   machinery_code: �豸����
-   machinery_name: �豸����
-   repair_result: ά�޽��
-   status: ����״̬
+   repair_id: 维修单ID
+   repair_code: 维修单编号
+   repair_name: 维修单名称
+   machinery_code: 设备编码
+   machinery_name: 设备名称
+   require_date: 保修日期
+   finish_date: 维修完成日期
+   confirm_date: 验收日期
+   repair_result: 维修结果
+   accepted_by: 维修人员
+   confirm_by: 验收人员
+   status: 单据状态
