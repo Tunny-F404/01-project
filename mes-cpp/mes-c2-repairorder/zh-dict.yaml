@@ -1,0 +1,17 @@
+repaircontent:
+ get:
+  summary: 维修内容
+  add_repaircontent: 添加维修内容
+  modify_repairorder: 修改维修内容
+  remove_repairorder: 删除维修内容
+ field:
+  name: 项目名称
+  instance: 故障描述
+  source: 故障描述资源
+  status: 维修情况
+
+  repaircontent:
+   query:
+    fields:
+     repair_id: 维修单id（唯一标识）
+     repair_name: 项目名称
