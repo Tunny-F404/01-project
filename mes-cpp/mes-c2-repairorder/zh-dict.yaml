@@ -1,0 +1,9 @@
+repairorder:
+ query:
+  fields:
+   repair_code: 维修单编号
+   repair_name: 维修单名称
+   machinery_code: 设备编码
+   machinery_name: 设备名称
+   repair_result: 维修结果
+   status: 单据状态
