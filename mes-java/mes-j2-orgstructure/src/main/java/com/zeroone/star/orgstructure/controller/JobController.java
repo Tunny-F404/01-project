@@ -1,13 +1,19 @@
 package com.zeroone.star.orgstructure.controller;
 
-import com.zeroone.star.project.j2.orgstructure.job.JobApis;
 import com.zeroone.star.project.j2.orgstructure.dto.job.JobDTO;
+import com.zeroone.star.project.j2.orgstructure.job.JobApis;
 import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+/**
+ * @author 爱吃猫的鱼
+ * @version 1.0.0
+ * @Description: 岗位控制器
+ */
 
 @RestController
 @Slf4j
