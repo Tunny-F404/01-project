@@ -28,3 +28,18 @@ RepairorderDetailsJsonVO::Wrapper RepairorderController::execQueryDetailsRepairo
 {
     return RepairorderDetailsJsonVO::Wrapper();
 }
+
+Uint64JsonVO::Wrapper RepairorderController::execAddRepairorder(const RepairorderDetailsDTO::Wrapper& dto)
+{
+    return Uint64JsonVO::Wrapper();
+}
+
+Uint64JsonVO::Wrapper RepairorderController::execModifyRepairorder(const RepairorderDetailsDTO::Wrapper& dto)
+{
+    return Uint64JsonVO::Wrapper();
+}
+
+Uint64JsonVO::Wrapper RepairorderController::execRemoveRepairorder(const UInt64& id)
+{
+    return Uint64JsonVO::Wrapper();
+}

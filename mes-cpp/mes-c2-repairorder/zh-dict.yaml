@@ -2,6 +2,9 @@ repairorder:
  summary: 
   page_query_table: 维修单分页查询
   details: 维修单详情查询
+  add_repairorder: 添加维修单
+  modify_repairorder: 修改维修单
+  remove_repairorder: 删除维修单
  query:
   fields:
    repair_id: 维修单ID
