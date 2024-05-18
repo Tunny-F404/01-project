@@ -1,0 +1,22 @@
+﻿workfixture:
+ query:
+  summary: 获取工装夹具列表
+  detail: 获取工装夹具详情
+ add:
+  summary: 添加工装夹具
+ modify:
+  summary: 修改工装夹具信息
+ fields:
+  id: 唯一标识
+  code: 工装夹具编号
+  name: 工装夹具名称
+  brand: 品牌
+  spec: 型号
+  type: 工装夹具类型
+  quantity: 数量
+  aquantity: 可用数量
+  mtype: 保养维护类型
+  mperiod: 下次保养周期
+  mdate: 下次保养日期
+  status: 状态
+  remark: 备注
