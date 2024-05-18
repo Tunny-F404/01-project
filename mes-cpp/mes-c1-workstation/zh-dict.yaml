@@ -1,0 +1,12 @@
+getlist:
+ fields:
+  workstationId: 工作站ID
+  workstationCode: 工作站编码
+  workstationName: 工作站名称
+  workshopName: 所在车间名称
+  processName: 所属工序
+  enableFlag: 是否启用
+get:
+ summary: 分页查询工作站列表数据
+GetList:
+ query-get-list: 获取工作站列表
