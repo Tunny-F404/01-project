@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j3.query.dict;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zeroone.star.project.query.PageQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,7 +18,7 @@ import java.util.Date;
 
 @Data
 @ApiModel("字典数据查询类")
-public class SysDictDataQuery implements Serializable {
+public class SysDictDataQuery extends PageQuery implements Serializable {
 
     @ApiModelProperty(value = "字典编号", example = "1")
     private Long dictCode;
