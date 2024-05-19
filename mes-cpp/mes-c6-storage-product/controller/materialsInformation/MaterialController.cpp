@@ -21,13 +21,13 @@ Uint64JsonVO::Wrapper MaterialController::execAddMaterial(const MaterialDTO::Wra
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if (!dto->item_code || !dto->item_name || !dto->specification)
+	if (!dto->issue_id || !dto->item_id || !dto->item_code || !dto->item_name || !dto->specification || !dto->unit_of_measure || !dto->quantity_issued || !dto->batch_code || !dto->warehouse_name || !dto->location_name || !dto->area_name)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->item_code->empty() || dto->item_name->empty() || dto->specification->empty())
+	if (dto->issue_id <= 0 || dto->item_id <= 0 || dto->item_code->empty() || dto->item_name->empty() || dto->specification->empty() || dto->unit_of_measure->empty() || dto->quantity_issued <= 0 || dto->batch_code->empty() || dto->warehouse_name->empty() || dto->location_name->empty() || dto->area_name->empty())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -53,7 +53,7 @@ Uint64JsonVO::Wrapper MaterialController::execModifyMaterial(const MaterialDTO::
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!dto->id || dto->id <= 0)
+	if (!dto->line_id || dto->line_id <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -62,11 +62,11 @@ Uint64JsonVO::Wrapper MaterialController::execModifyMaterial(const MaterialDTO::
 	MaterialService service;
 	// 执行数据修改
 	if (service.updateData(dto)) {
-		jvo->success(dto->id);
+		jvo->success(dto->line_id);
 	}
 	else
 	{
-		jvo->fail(dto->id);
+		jvo->fail(dto->line_id);
 	}
 	// 响应结果
 	return jvo;

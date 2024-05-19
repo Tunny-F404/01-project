@@ -9,9 +9,11 @@
 class MaterialDO
 {
 	// 编号
-	CC_SYNTHESIZE(uint64_t, id, Id);
+	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
 	// 领料单ID
 	CC_SYNTHESIZE(uint64_t, issue_id, Issue_id);
+	// 产品物料ID
+	CC_SYNTHESIZE(uint64_t, item_id, Item_id);
 	// 产品物料编码
 	CC_SYNTHESIZE(string, item_code, Item_code);
 	// 产品物料名称
@@ -34,8 +36,9 @@ class MaterialDO
 	CC_SYNTHESIZE(string, remark, Remark);
 public:
 	MaterialDO() {
-		id = 0;
-		issue_id = 0;
+		line_id = 0;
+		issue_id = 0; 
+		item_id = 0;
 		item_code = "";
 		item_name = "";
 		specification = "";

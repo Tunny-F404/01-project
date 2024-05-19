@@ -15,8 +15,6 @@ public:
 	uint64_t count(const MaterialQuery::Wrapper& query);
 	// 分页查询数据
 	list<MaterialDO> selectWithPage(const MaterialQuery::Wrapper& query);
-	// 通过行ID查询数据
-	list<MaterialDO> selectLineId(const int& line_id);
 	// 插入数据
 	uint64_t insert(const MaterialDO& iObj);
 	// 修改数据
