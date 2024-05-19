@@ -3,12 +3,3 @@ server:
 spring:
   application:
     name: ${sn.sysmanagement}
-seata:
-  tx-service-group: tx-business
-  enabled: true
-  service:
-    grouplist:
-      default: ${seata.default}
-    vgroup-mapping:
-      tx-business: default
-    disable-global-transaction: false
