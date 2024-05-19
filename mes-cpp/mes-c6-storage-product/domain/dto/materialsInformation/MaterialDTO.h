@@ -12,13 +12,18 @@ class MaterialDTO : public oatpp::DTO
 {
 	DTO_INIT(MaterialDTO, DTO);
 	// 编号
-	DTO_FIELD(UInt64, id);
-	DTO_FIELD_INFO(id) {
+	DTO_FIELD(UInt64, line_id);
+	DTO_FIELD_INFO(line_id) {
 		info->description = ZH_WORDS_GETTER("Material.field.id");
 	}
 	// 领料单ID
-	DTO_FIELD(Int64, issue_id);
+	DTO_FIELD(UInt64, issue_id);
 	DTO_FIELD_INFO(issue_id) {
+		info->description = ZH_WORDS_GETTER("Material.field.issue_id");
+	}
+	// 产品物料ID
+	DTO_FIELD(UInt64, item_id);
+	DTO_FIELD_INFO(item_id) {
 		info->description = ZH_WORDS_GETTER("Material.field.issue_id");
 	}
 	// 产品物料编码

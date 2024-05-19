@@ -30,7 +30,7 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "issue_id", ZH_WORDS_GETTER("Material.field.issue_id"), "1", false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "issue_id", ZH_WORDS_GETTER("Material.field.issue_id"), 1, false);
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/Material", queryMaterial, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -68,7 +68,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("Material.field.id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/Material/{id}", removeMaterial, PATH(UInt64, id), execRemoveMaterial(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/Material/{line_id}", removeMaterial, PATH(UInt64, line_id), execRemoveMaterial(line_id));
 
 private:
 	// 3.3 分页查询数据

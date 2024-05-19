@@ -14,18 +14,19 @@ public:
 	 MaterialDO mapper(ResultSet* resultSet) const override
 	{
 		 MaterialDO data;
-		data.setId(resultSet->getUInt64(1));
-		data.setIssue_id(resultSet->getInt(2));
-		data.setItem_code(resultSet->getString(3));
-		data.setItem_name(resultSet->getString(4));
-		data.setSpecification(resultSet->getString(5));
-		data.setUnit_of_measure(resultSet->getString(6));
-		data.setQuantity_issued(resultSet->getDouble(7));
-		data.setBatch_code(resultSet->getString(8));
-		data.setWarehouse_name(resultSet->getString(9));
-		data.setLocation_name(resultSet->getString(10));
-		data.setArea_name(resultSet->getString(11));
-		data.setRemark(resultSet->getString(12));
+		data.setLine_id(resultSet->getUInt64(1));
+		data.setIssue_id(resultSet->getInt64(2));
+		data.setItem_id(resultSet->getInt64(3));
+		data.setItem_code(resultSet->getString(4));
+		data.setItem_name(resultSet->getString(5));
+		data.setSpecification(resultSet->getString(6));
+		data.setUnit_of_measure(resultSet->getString(7));
+		data.setQuantity_issued(resultSet->getDouble(8));
+		data.setBatch_code(resultSet->getString(9));
+		data.setWarehouse_name(resultSet->getString(10));
+		data.setLocation_name(resultSet->getString(11));
+		data.setArea_name(resultSet->getString(12));
+		data.setRemark(resultSet->getString(13));
 		return data;
 	}
 };
