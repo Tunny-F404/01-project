@@ -1,7 +1,8 @@
-package com.zeroone.star.sysmanagement;
+package com.zeroone.star.sysManagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * <p>
@@ -13,10 +14,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 1.0.0
  */
 @SpringBootApplication
-public class sysManagementApplication {
+@EnableDiscoveryClient
+public class SysManagementApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(sysManagementApplication.class, args);
+        SpringApplication.run(SysManagementApplication.class, args);
     }
 
 }

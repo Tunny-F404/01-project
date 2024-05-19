@@ -17,7 +17,7 @@ public class swaggerConfig {
 
     @Bean
     Docket DepartmentApis() {
-        return SwaggerCore.defaultDocketBuilder("系统管理模块","com.zeroone.star.sysmanagement.controller","sysmanagement");
+        return SwaggerCore.defaultDocketBuilder("系统管理模块","com.zeroone.star.sysmanagement.controller","sysmanagent");
 }
 
 
