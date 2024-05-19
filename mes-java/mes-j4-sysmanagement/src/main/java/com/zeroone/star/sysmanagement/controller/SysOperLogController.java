@@ -6,10 +6,7 @@ import com.zeroone.star.sysmanagement.service.ISysOperLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,7 +20,7 @@ import java.util.List;
  * @since 2024-05-19
  */
 @RestController
-@RequestMapping("/sysmanagement/sys-oper-log")
+@RequestMapping("/sysmanagement/operlog")
 @Api(tags = "操作日志记录")
 @Validated
 public class SysOperLogController {
@@ -31,10 +28,17 @@ public class SysOperLogController {
     private ISysOperLogService sysOperLogService;
 
     @ApiOperation( value = "删除日志")
-    @DeleteMapping("/operlog")
-    public JsonVO<String> deleteOperLog(List<Long> operIds) {
+    @DeleteMapping
+    public JsonVO<String> deleteOperLog(@RequestParam List<Long> operIds) {
         sysOperLogService.removeByIds(operIds);
         return JsonVO.success("删除成功");
+    }
+
+    @ApiOperation( value = "清空日志")
+    @DeleteMapping("/clean")
+    public JsonVO<String> cleanOperLog() {
+        sysOperLogService.cleanOperLog();
+        return JsonVO.success("清空成功");
     }
 
 }

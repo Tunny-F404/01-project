@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysOperLogService extends IService<SysOperLog> {
 
+    void cleanOperLog();
 }
