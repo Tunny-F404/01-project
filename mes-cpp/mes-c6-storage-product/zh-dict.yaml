@@ -1,0 +1,23 @@
+Material:
+ get:
+  summary: 分页查询物料信息
+ post:
+  summary: 新增一条物料信息
+ put:
+  summary: 修改一条物料信息
+ delete:
+  summary: 删除一条物料信息
+ field:
+  id: 编号
+  issue_code: 领料单编号
+  issue_id: 领料单ID
+  item_code: 产品物料编码
+  item_name: 产品物料名称
+  specification: 规格型号
+  unit_of_measure: 单位
+  quantity_issued: 领料数量
+  batch_code: 批次号
+  warehouse_name: 仓库名称
+  location_name: 库区名称
+  area_name: 库位名称
+  remark: 备注
