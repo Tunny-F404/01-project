@@ -3,27 +3,39 @@
 #define _SET_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
+#include "ApiHelper.h"
+#include "ServerInfo.h"
+//#include "domain/vo/set/DownloadFileVO.h"
 
-// 0 定义API控制器使用宏
-#include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
+#include OATPP_CODEGEN_BEGIN(ApiController)
 
 /**
- * 生产管理-工序设置模块控制器
+ * 文件操作示例接口
  */
-class SetController : public oatpp::web::server::api::ApiController // 1 继承控制器
+class SetController : public oatpp::web::server::api::ApiController
 {
-	// 2 定义控制器访问入口
+	// 定义控制器访问入口
 	API_ACCESS_DECLARE(SetController);
-	// 3 定义接口
-
 public:
 
+	// 定义一个文件下载接口
+	// 定义描述
+	ENDPOINT_INFO(downloadFile) {
+		API_DEF_ADD_COMMON(ZH_WORDS_GETTER("set.download.summary"), Void);
+		API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("set.field.filename"), "file/test.jpg", true);
+	}
+	// 定义端点
+	ENDPOINT(API_M_GET, "/file/download", downloadFile, QUERY(String, filename)) {
+		return execDownloadFile(filename);
+	}
 
-private:
+private: // 定义接口执行函数	
+	// 执行文件下载处理
+	std::shared_ptr<OutgoingResponse> execDownloadFile(const String& filename);
 
 };
 
-// 0 取消API控制器使用宏
-#include OATPP_CODEGEN_END(ApiController) //<- End Codegen
-#endif // _SAMPLE_CONTROLLER_
 
+#include OATPP_CODEGEN_END(ApiController)
+
+#endif // !_FILECONTROLLER_H_

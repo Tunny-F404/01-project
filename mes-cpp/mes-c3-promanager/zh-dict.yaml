@@ -1,0 +1,21 @@
+process:
+ field:
+  id: 唯一编号
+  code: 路线编号 
+  name: 路线名称
+  desc: 路线说明
+  flag: 是否启用
+  remark: 备注
+  createtime: 创建时间
+  updatetime: 更新时间
+ get:
+  summary1: 获取工艺列表 
+  summary2: 获取工艺详情
+ post:
+  summary1: 添加工艺流程   
+set:
+ field: 
+  filename: 工序导出
+ download:
+  summary: 下载文件  
+
