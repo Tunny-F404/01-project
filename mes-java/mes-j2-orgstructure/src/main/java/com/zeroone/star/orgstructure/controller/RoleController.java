@@ -3,10 +3,10 @@ package com.zeroone.star.orgstructure.controller;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
+import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/orgstructure/role")
 @Api(tags = "角色控制器")
-public class RoleController {
+public class RoleController implements RoleApis {
     /**
      * 获取角色名称列表
      */
@@ -58,41 +58,53 @@ public class RoleController {
     public JsonVO<List<RoleDTO>> modifyRole(@RequestParam Integer id) {
         return JsonVO.success(null);
     }
-
-    /*
-     * 获取角色分配用户列表（条件+分页）
-     * */
-    @GetMapping("query-allocate-role")
-    @ApiOperation("获取角色分配用户列表（条件+分页）")
-    public JsonVO<List<RoleDTO>> queryAllocatedList(@RequestBody RoleDTO roleDTO, @RequestBody PageDTO<RoleDTO> pageDTO) {
-        return JsonVO.success(null);
+    /**
+     * 添加角色
+     * @author 0xu0
+     * @param roleDTO
+     * @return
+     */
+    @PostMapping("add-Role")
+    @ApiOperation("添加角色")
+    public JsonVO<RoleDTO> addRole(@RequestBody RoleDTO roleDTO){
+        return JsonVO.success(roleDTO);
     }
 
-    /*
-    * 添加授权
-    * */
-    @PutMapping("addAuth")
-    @ApiOperation("添加授权")
-    public JsonVO<RoleDTO> addAuth(@RequestParam Long roleId,@RequestParam Long[] userIds){
-        return JsonVO.success(null);
+    /***
+     * 修改角色状态（角色页面，有个开关符号，控制停用和启用）
+     * @author 0xu0
+     * @param status
+     * @return
+     */
+    @PostMapping("modify-RoleStatus")
+    @ApiOperation("修改角色状态")
+    public JsonVO<String> modifyRoleStatus(@RequestParam String status){
+        return JsonVO.success(status);
     }
 
-    /*
-    * 取消授权（支持批量）
-    * */
-    @DeleteMapping("cancel")
-    @ApiOperation("取消授权")
-    public JsonVO<List<RoleDTO>> cancelAuthUser(@RequestParam Long roleId, @RequestParam Long[] userIds){
-        return JsonVO.success(null);
+
+    /**
+     * 删除角色，支持批量删除
+     * @author 0xu0
+     * @param id
+     * @return
+     */
+    @DeleteMapping("delete-Roles")
+    @ApiOperation("删除角色")
+    public JsonVO<Long[]> deleteRoles(@RequestParam Long[] id){
+        return JsonVO.success(id);
     }
 
-    /*
-    * 导出角色
-    * */
-    @PostMapping("export")
-    @ApiOperation("导出角色")
-    public ResponseEntity<byte[]> export(){
-        return new ResponseEntity<>(null,null);
+    /**
+     * 修改角色信息
+     * @param roleDTO
+     * @return
+     */
+    @PostMapping("modify-RoleInfo")
+    @ApiOperation("修改角色信息")
+    public JsonVO<RoleDTO> modifyRoleInfo(@RequestBody RoleDTO roleDTO){
+        return JsonVO.success(roleDTO);
     }
+
 }
 
