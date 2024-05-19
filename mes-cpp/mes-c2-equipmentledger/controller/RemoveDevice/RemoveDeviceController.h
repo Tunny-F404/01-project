@@ -35,7 +35,7 @@ class RemoveDeviceController : public oatpp::web::server::api::ApiController
 	API_ACCESS_DECLARE(RemoveDeviceController)
 public: // 定义接口
 	API_DEF_ENDPOINT_INFO(ZH_WORDS_GETTER("equipmentledger.remove-device.summary"), removeDevice, BooleanJsonVO::Wrapper)
-	API_HANDLER_ENDPOINT(API_M_DEL, "/remove-device", removeDevice, BODY_DTO(RemoveDeviceDTO::Wrapper, dto), execRemoveDevice(dto))
+	API_HANDLER_ENDPOINT(API_M_DEL, "/equipmentledger/remove-device", removeDevice, BODY_DTO(RemoveDeviceDTO::Wrapper, dto), execRemoveDevice(dto))
 private: // 定义接口执行函数
 
 	// 前端发过来的dto由这个函数执行

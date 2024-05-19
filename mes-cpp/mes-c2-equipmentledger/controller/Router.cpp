@@ -28,6 +28,7 @@
 #endif
 
 #include "RemoveDevice/RemoveDeviceController.h"
+#include "ExportDevice/ExportDeviceController.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -59,6 +60,12 @@ void Router::initRouter()
 	 * 负责人：。好
 	 */
 	ROUTER_SIMPLE_BIND(RemoveDeviceController);
+
+	/**
+	 * 导出设备
+	 * 负责人：。好
+	 */
+	ROUTER_SIMPLE_BIND(ExportDeviceController);
 }
 
 #ifdef HTTP_SERVER_DEMO
