@@ -21,6 +21,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,7 +48,8 @@ public class SysOperLogController {
 
     List<SysOperLog> sysOperLogs;
 
-/*    @PostConstruct
+
+    @PostConstruct
     public void initData() {
         sysOperLogs = new ArrayList<>() ;
         List<SysOperLog> sysOperLogs = sysOperLogService.list();
@@ -56,9 +58,7 @@ public class SysOperLogController {
             SysOperLog sysOperLog = sysOperLogs.get(i);
             sysOperLogs.add(sysOperLog);
         }
-    }*/
-
-
+    }
 
 
     @ApiOperation( value = "删除日志")
@@ -77,8 +77,11 @@ public class SysOperLogController {
 
     @SneakyThrows
     @GetMapping(value = "download", produces = "application/octet-stream")
-    @ApiOperation(value = "下载Excel")
-    public ResponseEntity<byte[]> downloadExcel() {
+    @ApiOperation(value = "导出操作日志")
+    public ResponseEntity<byte[]> downloadOperLogExcel() {
+
+
+
         // 构建一个输出流
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         // 导出数据到输出流
@@ -96,6 +99,8 @@ public class SysOperLogController {
         // 响应文件给客户端
         return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
+
+
 
 }
 
