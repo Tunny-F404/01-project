@@ -16,8 +16,8 @@ repairorder:
    require_date: 报修日期
    finish_date: 维修完成日期
    confirm_date: 验收日期
-   repair_result: 维修结果
+   repair_result: "维修结果 (SUCCESS: 维修成功; SCRAP: 报废)"
    accepted_by: 维修人员
    confirm_by: 验收人员
-   status: 单据状态
+   status: "单据状态 (PREPARE: 草稿; CONFIRMED: 已确认; APPROVING: 审批中; APPROVED: 已审批; FINISHED: 已完成)"
    remark: 备注
