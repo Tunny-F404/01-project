@@ -4,7 +4,7 @@ import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**
- * @author 宵夜
+ * @author 宵夜、夕秋z
  * @version 1.0.0
  * @Description: TODO
  */
