@@ -1,0 +1,9 @@
+material: 
+ summary: 获取供应商退货行列
+ rtcode: 退货单编号
+ rtname: 退货单名称
+ pocode: 采购订单编号
+ vendorcode: 供应商编码
+ vendorname: 供应商名称
+ rtdate: 退货日期
+ status: 单据状态
