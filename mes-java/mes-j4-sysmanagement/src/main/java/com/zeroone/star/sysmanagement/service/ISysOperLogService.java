@@ -1,5 +1,9 @@
 package com.zeroone.star.sysmanagement.service;
 
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.dto.j4.sysmanagement.logmanagement.OperationLog.OperationLogAddDTO;
+import com.zeroone.star.project.query.j4.sysmanagement.logmanagement.OperationLog.OperationLogQuery;
+import com.zeroone.star.project.query.sample.SampleQuery;
 import com.zeroone.star.sysmanagement.entity.SysOperLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -14,4 +18,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ISysOperLogService extends IService<SysOperLog> {
 
     void cleanOperLog();
+
+    PageDTO<OperationLogAddDTO> listAll(OperationLogQuery query);
+
 }
