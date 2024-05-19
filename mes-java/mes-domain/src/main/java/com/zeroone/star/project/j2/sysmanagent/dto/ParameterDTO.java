@@ -1,6 +1,5 @@
 package com.zeroone.star.project.j2.sysmanagent.dto;
 
-import cn.hutool.core.date.DateTime;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,7 +15,7 @@ import java.util.Date;
  */
 @Data
 @ApiOperation("参数操作传输数据对象")
-public class ConfigDTO {
+public class ParameterDTO {
     // 参数主键
     @ExcelProperty(value = "参数主键",index = 0)
     @ApiModelProperty(value = "参数主键",example = "1")
