@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.orgstructure.query.dept;
+package com.zeroone.star.project.j2.orgstructure.query;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;

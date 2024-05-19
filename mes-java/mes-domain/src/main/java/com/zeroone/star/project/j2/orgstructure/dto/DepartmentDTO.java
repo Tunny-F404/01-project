@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.orgstructure.dto.dept;
+package com.zeroone.star.project.j2.orgstructure.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 /**
  * @author 宵夜
  * @version 1.0.0
- * @Description:部门传输数据对象
+ * @Description:
  */
 @Data
-@ApiOperation("角色传输数据对象")
+@ApiOperation("部门传输数据对象")
 public class DepartmentDTO {
 
     //查询Id
