@@ -20,10 +20,10 @@
 #include "Router.h"
 #include "ApiHelper.h"
 
+#include "add-del-mod/AddDelModController.h"
+
 #ifdef HTTP_SERVER_DEMO
-#include "user/UserController.h"
-#include "sample/SampleController.h"
-#include "file/FileController.h"
+#include "add-del-mod/AddDelModController.h"
 #include "ws/WSController.h"
 #endif
 
@@ -51,7 +51,8 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-
+	
+	ROUTER_SIMPLE_BIND(AddDelModController);
 }
 
 #ifdef HTTP_SERVER_DEMO
