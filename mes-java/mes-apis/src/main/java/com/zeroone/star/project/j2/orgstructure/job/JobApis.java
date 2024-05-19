@@ -4,6 +4,11 @@ import com.zeroone.star.project.j2.orgstructure.dto.job.JobDTO;
 import com.zeroone.star.project.vo.ResultStatus;
 import org.springframework.http.ResponseEntity;
 
+/**
+ * @author 爱吃猫的鱼
+ * @version 1.0.0
+ * @Description:岗位相关API
+ */
 public interface JobApis {
 
     //添加岗位

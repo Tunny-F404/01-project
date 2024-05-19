@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.orgstructure.dto;
+package com.zeroone.star.project.j2.orgstructure.dto.dept;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
@@ -36,6 +36,7 @@ public class DepartmentDTO {
     //部门名称
     @ApiModelProperty(value = "部门名称",example = "1")
     private String Title;
+
 
 
 

@@ -1,6 +1,6 @@
-package com.zeroone.star.project.j2.orgstructure;
+package com.zeroone.star.project.j2.orgstructure.dept;
 
-import com.zeroone.star.project.j2.orgstructure.dto.DepartmentDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**

@@ -9,15 +9,13 @@ import lombok.Data;
 import javax.validation.constraints.Pattern;
 
 /**
- * @author: 天衍土豆
+ * @author: 天衍土豆、0xu0
  * @data: 2024/5/17
  * @description:
  */
 @Data
 @ApiOperation("部门传输数据对象")
 public class RoleDTO {
-
-
 
     //角色名称
     @ApiModelProperty(value = "角色名称",example = "1")
