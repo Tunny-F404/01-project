@@ -6,6 +6,7 @@ import com.zeroone.star.project.j3.dto.dict.SysDictTypeDTO;
 import com.zeroone.star.project.j3.query.dict.SysDictDataQuery;
 import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -17,17 +18,21 @@ public interface DictionaryManageApis {
     /**
      * 字典类型接口
      */
-    JsonVO<List<SysDictTypeDTO>> listDictType(SysDictTypeQuery dictTypeQuery);
+    // 查询字典类型列表
+    public JsonVO<List<SysDictTypeDTO>> listDictType(SysDictTypeQuery dictTypeQuery);
 
-    JsonVO<SysDictTypeDTO> getDictType(Long dictId);
+    // 查询字典类型详情
+    public JsonVO<SysDictTypeDTO> getDictType(Long dictId);
 
-    void exportDictType(SysDictTypeQuery dictTypeQuery);
+    public ResponseEntity<byte[]> exportDictType(SysDictTypeQuery dictTypeQuery);
 
 
     /**
      *  字典数据接口
      */
-    JsonVO<List<SysDictDataDTO>> listDictData(SysDictDataQuery dictDataQuery);
+    // 查询字典数据列表
+    public JsonVO<List<SysDictDataDTO>> listDictData(SysDictDataQuery dictDataQuery);
 
-    JsonVO<SysDictDataDTO> getDictData(Long dictId);
+    // 查询字典数据详情
+    public JsonVO<SysDictDataDTO> getDictData(Long dictId);
 }
