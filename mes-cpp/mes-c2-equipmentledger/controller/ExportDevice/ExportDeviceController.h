@@ -45,7 +45,7 @@ public: // 定义接口
 			ZH_WORDS_GETTER("equipmentledger.export-device.device-name"), {}, false);
 	}
 
-	ENDPOINT(API_M_GET, "/equipmentledger/export-device", exportDevice,
+	ENDPOINT(API_M_GET, "/equipment-ledger/export-device", exportDevice,
 		QUERIES(QueryParams, queryParams))
 	{
 		// 解析查询参数

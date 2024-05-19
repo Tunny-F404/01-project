@@ -19,7 +19,6 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include"../controller/equipment/EquipmentController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -28,6 +27,7 @@
 #include "ws/WSController.h"
 #endif
 
+#include "Equipment/EquipmentController.h"
 #include "RemoveDevice/RemoveDeviceController.h"
 #include "ExportDevice/ExportDeviceController.h"
 #include "ImportDevice/ImportDeviceController.h"
