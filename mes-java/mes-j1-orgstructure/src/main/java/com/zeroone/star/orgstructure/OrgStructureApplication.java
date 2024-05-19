@@ -1,4 +1,4 @@
-package com.zeroone.star.mycenter;
+package com.zeroone.star.orgstructure;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
