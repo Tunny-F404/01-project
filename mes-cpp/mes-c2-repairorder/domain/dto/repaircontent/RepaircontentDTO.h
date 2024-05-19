@@ -30,6 +30,8 @@ class RepaircontentDTO : public oatpp::DTO
 {
 	DTO_INIT(RepaircontentDTO, DTO);
 	
+	//唯一标识(隐藏的)
+	API_DTO_FIELD(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.field.id"), true, 1);
 	//项目名称
 	API_DTO_FIELD(String, projectName, ZH_WORDS_GETTER("repaircontent.field.name"), true, "");
 	//故障描述

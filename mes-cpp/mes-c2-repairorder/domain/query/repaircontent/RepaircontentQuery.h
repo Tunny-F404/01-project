@@ -26,7 +26,7 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 维修内容分页查询对象
+ * 维修内容条件分页查询对象
  */
 class RepaircontentQuery : public PageQuery
 {

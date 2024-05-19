@@ -21,24 +21,30 @@
 //#include "../../service/sample/SampleService.h"
 #include "../ApiDeclarativeServicesHelper.h"
 
-RepaircontentJsonVO::Wrapper execQueryDetailsRepaircontent(const RepaircontentQuery::Wrapper& id)
+RepaircontentJsonVO::Wrapper RepaircontentController::execQueryRepaircontent(const RepaircontentQuery::Wrapper& id)
 {
 	//...
 	return RepaircontentJsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper execAddRepaircontent(const RepaircontentDTO::Wrapper& dto) {
+RepaircontentJsonVO::Wrapper RepaircontentController::execDetailsRepaircontent(const RepaircontentQuery::Wrapper& id)
+{
+	//...
+	return RepaircontentJsonVO::Wrapper();
+}
+
+Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const RepaircontentDTO::Wrapper& dto) {
 	//...
 	return Uint64JsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper execModifyRepaircontent(const RepaircontentDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const RepaircontentDTO::Wrapper& dto)
 {
 	//...
 	return Uint64JsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper execRemoveRepaircontent(const UInt64& id)
+Uint64JsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const RepaircontentDTO::Wrapper& dto)
 {
 	//...
 	return Uint64JsonVO::Wrapper();
