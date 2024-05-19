@@ -37,6 +37,8 @@
         <module>mes-domain</module>
         <module>mes-apis</module>
         <module>mes-doc</module>
+        <module>mes-j3-message</module>
+        <module>mes-j3-sysmanager</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
