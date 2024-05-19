@@ -1,11 +1,9 @@
 package com.zeroone.star.project.j1.orgstructure.query.user;
 
-import io.swagger.annotations.Api;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 /**
@@ -46,7 +44,7 @@ public class UserQuery {
     private String createBy;
     @ApiModelProperty(value = "创建时间", example = "2022-04-07 00:29:31")
     private LocalDateTime createTime;
-    @ApiModelProperty(value = "更新者", example = "")
+    @ApiModelProperty(value = "更新者", example = "admin")
     private String updateBy;
     @ApiModelProperty(value = "更新时间", example = "2024-04-11 16:58:02")
     private LocalDateTime updateTime;
