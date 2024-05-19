@@ -1,0 +1,5 @@
+server:
+  port: ${sp.mycenter}
+spring:
+  application:
+    name: ${sn.mycenter}
