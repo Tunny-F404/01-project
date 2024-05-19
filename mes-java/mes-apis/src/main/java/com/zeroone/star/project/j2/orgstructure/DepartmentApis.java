@@ -1,16 +1,14 @@
-package com.zeroone.star.project.j2.orgstructure.dept;
+package com.zeroone.star.project.j2.orgstructure;
 
-
-import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.DepartmentDTO;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**
  * @author 宵夜
  * @version 1.0.0
- * @Description: DepartmentApis
+ * @Description: TODO
  */
 public interface DepartmentApis {
-
 
     //新增部门
     JsonVO<DepartmentDTO> addDepartment(DepartmentDTO departmentDTO);
