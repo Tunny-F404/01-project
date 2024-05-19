@@ -82,6 +82,13 @@ class EquipmentDetailDTO : public EquipmentDTO
 	//备注
 	API_DTO_FIELD(String, note, ZH_WORDS_GETTER("equipment.fields.note"), true, "sucess");
 };
+/**
+* 定义一个修改设备传输对象
+*/
+class modifyEquipmentDTO : public addEquipmentDTO
+{
+	DTO_INIT(modifyEquipmentDTO, addEquipmentDTO);
+};
 
 /**
 * 定义一个设备列表分页传输对象

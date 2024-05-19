@@ -3,6 +3,7 @@ equipment:
   summary: 获取设备列表（条件+分页）
   summary1: 获取设备详情
   summary2: 新增设备
+  summary3: 修改设备
  fields:
   ecode: 设备编码
   ename: 设备名称

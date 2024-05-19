@@ -27,10 +27,31 @@ EquipmentPageJsonVO::Wrapper EquipmentController::execEquipment(const EquipmentQ
 
 EquipmentDetailJsonVO::Wrapper EquipmentController::execEquipmentDetail(const EquipmentDetailQuery::Wrapper& query)
 {
-	return {};
+	auto res = EquipmentDetailJsonVO::createShared();
+	auto equipmentDetail = EquipmentDetailDTO::createShared();
+	
+	equipmentDetail->eCode = "123";
+	equipmentDetail->brand = "123";
+	equipmentDetail->createtime = "2014";
+	equipmentDetail->eId = 1;
+	equipmentDetail->eName = "123";
+	equipmentDetail->note = "123";
+	equipmentDetail->spec = "123";
+	equipmentDetail->status = "123";
+	equipmentDetail->tName = "123";
+	equipmentDetail->workshop = "123";
+	res->success(equipmentDetail);
+	return res;
 }
 
 Uint64JsonVO::Wrapper EquipmentController::execAddEquipment(const addEquipmentDTO::Wrapper& dto)
+{
+	auto res = Uint64JsonVO::createShared();
+	res->success(true);
+	return res;
+}
+
+Uint64JsonVO::Wrapper EquipmentController::executeModifyEquipment(const modifyEquipmentDTO::Wrapper& dto)
 {
 	auto res = Uint64JsonVO::createShared();
 	res->success(true);

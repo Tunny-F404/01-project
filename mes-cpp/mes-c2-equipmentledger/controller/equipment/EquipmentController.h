@@ -95,6 +95,21 @@ public:
 		API_HANDLER_RESP_VO(execAddEquipment(dto));
 	}
 
+	//4 定义修改设备端点描述
+	ENDPOINT_INFO(modifyEquipment) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("equipment.query.summary3"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+	}
+	// 4定义修改设备端点处理
+	ENDPOINT(API_M_PUT, "/equipment/modify-equipment", modifyEquipment, BODY_DTO(modifyEquipmentDTO::Wrapper, dto),  API_HANDLER_AUTH_PARAME) {
+		// 执行文件保存逻辑
+		API_HANDLER_RESP_VO(executeModifyEquipment(dto));
+	}
+	
 	
 
 private:
@@ -104,6 +119,8 @@ private:
 	EquipmentDetailJsonVO::Wrapper execEquipmentDetail(const EquipmentDetailQuery::Wrapper& query);
 	//增加设备
 	Uint64JsonVO::Wrapper execAddEquipment(const addEquipmentDTO::Wrapper& dto);
+	//修改设备
+	Uint64JsonVO::Wrapper executeModifyEquipment(const modifyEquipmentDTO::Wrapper& dto);
 };
 
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
