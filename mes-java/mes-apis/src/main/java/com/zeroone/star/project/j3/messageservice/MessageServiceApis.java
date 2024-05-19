@@ -44,4 +44,11 @@ public interface MessageServiceApis {
      */
     public ResponseEntity<byte[]> downloadMessage(String group, String storageId);
 
+    /**
+     * 下载导出Excel
+     * @return
+     */
+    public ResponseEntity<byte[]> downloadMessageExcel();
+
+
 }
