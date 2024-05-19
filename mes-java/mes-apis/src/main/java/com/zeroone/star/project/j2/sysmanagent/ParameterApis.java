@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author 40斤 kino
  * @version 1.0.0
- * @Description: 配置参数的 删除 刷新  excel导出
+ * @Description: 参数设置API
  */
 public interface ParameterApis {
     // 删除配置

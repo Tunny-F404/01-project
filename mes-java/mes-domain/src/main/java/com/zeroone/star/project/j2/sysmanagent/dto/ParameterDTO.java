@@ -9,7 +9,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @author 40斤
+ * @author 40斤、kino
  * @version 1.0.0
  * @Description: 参数操作传输数据对象
  */
