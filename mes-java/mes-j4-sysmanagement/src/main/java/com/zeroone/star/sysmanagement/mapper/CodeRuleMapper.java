@@ -1,6 +1,6 @@
 package com.zeroone.star.sysmanagement.mapper;
 
-import com.zeroone.star.sysmanagement.entity.SysAutoCodeRule;
+import com.zeroone.star.sysmanagement.entity.CodeRule;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-05-19
  */
 @Mapper
-public interface SysAutoCodeRuleMapper extends BaseMapper<SysAutoCodeRule> {
+public interface CodeRuleMapper extends BaseMapper<CodeRule> {
 
 }

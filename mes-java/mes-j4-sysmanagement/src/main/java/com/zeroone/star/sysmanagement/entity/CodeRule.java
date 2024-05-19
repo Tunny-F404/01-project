@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("sys_auto_code_rule")
-public class SysAutoCodeRule implements Serializable {
+public class CodeRule implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
