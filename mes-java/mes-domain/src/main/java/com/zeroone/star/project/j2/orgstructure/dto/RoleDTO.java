@@ -1,8 +1,14 @@
-package com.zeroone.star.project.j2.orgstructure.query.role;
+package com.zeroone.star.project.j2.orgstructure.dto;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /**
  * @author: 天衍土豆
@@ -10,11 +16,13 @@ import lombok.Data;
  * @description:
  */
 @Data
-@ApiOperation(value = "角色查询对象")
-public class RoleQuery {
+@ApiOperation("部门传输数据对象")
+public class RoleDTO {
+
+
 
     //角色名称
-    @ApiModelProperty(value = "角色名称",example = "超级系统管理员")
+    @ApiModelProperty(value = "角色名称",example = "超级管理员")
     private String roleName;
 
 
@@ -33,7 +41,8 @@ public class RoleQuery {
 
 
     //菜单树选择项是否关联显示
-    @ApiModelProperty(value = "查询Id",example = "1")
+    @ApiModelProperty(value = "查询Id",example = "true")
     private Boolean menuCheckStrictly;
+
 
 }
