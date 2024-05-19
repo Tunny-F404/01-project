@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagent.dto;
+package com.zeroone.star.project.j2.sysmanagement.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Data
 @ApiOperation("系统管理数据对象")
-public class SysmanagentDTO {
+public class SysmanagementDTO {
 
     //资源id
     @ApiModelProperty(value = "资源id",example = "1")
