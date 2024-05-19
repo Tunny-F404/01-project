@@ -1,4 +1,4 @@
-package com.zeroone.star.holidaysettings;
+package com.zeroone.star.schedulecalendar;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,10 +17,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-public class HolidaySettingsApplication {
+public class ScheduleCalendarApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HolidaySettingsApplication.class, args);
+        SpringApplication.run(ScheduleCalendarApplication.class, args);
     }
 
 }

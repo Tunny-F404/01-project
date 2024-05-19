@@ -38,6 +38,10 @@
         <module>mes-apis</module>
         <module>mes-doc</module>
         <module>mes-j5-holidaysettings</module>
+        <module>mes-j5-scheduleplan</module>
+        <module>mes-j5-shopsettings</module>
+        <module>mes-j5-teamsettings</module>
+        <module>mes-j5-schedulecalendar</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
