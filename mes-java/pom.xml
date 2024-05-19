@@ -40,7 +40,7 @@
         <module>mes-gateway</module>
         <module>mes-oauth2</module>
         <module>mes-login</module>
-        <module>mes-j2-sysmanagent</module>
+        <module>mes-j2-sysmanagement</module>
         <module>mes-j2-orgstructure</module>
     </modules>
     <properties>
