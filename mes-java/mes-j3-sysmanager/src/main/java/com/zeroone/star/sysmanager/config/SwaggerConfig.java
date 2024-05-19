@@ -1,9 +1,6 @@
-package com.zeroone.star.message.config;
+package com.zeroone.star.sysmanager.config;
 
-<<<<<<< HEAD
-=======
 import com.zeroone.star.project.config.swagger.SwaggerCore;
->>>>>>> origin/j3
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -23,6 +20,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 public class SwaggerConfig {
     @Bean
     Docket sampleApi(){
-        return SwaggerCore.defaultDocketBuilder("消息模块","com.zeroone.star.message.controller","message");
+        return SwaggerCore.defaultDocketBuilder("系统模块","com.zeroone.star.sysmanager.controller","sysmanager");
     }
 }
