@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagement.query;
+package com.zeroone.star.project.j2.sysManagement.query;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @version 1.0.0
  * @Description: TODO
  */
-public class SysmanagementQuery {
+public class SysManagementQuery {
 
     //资源名称
     @ApiModelProperty(value = "资源名称",example = "部门管理")

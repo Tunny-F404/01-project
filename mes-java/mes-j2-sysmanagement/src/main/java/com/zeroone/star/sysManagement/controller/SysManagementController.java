@@ -1,7 +1,7 @@
-package com.zeroone.star.sysmanagement.controller;
+package com.zeroone.star.sysManagement.controller;
 
-import com.zeroone.star.project.j2.sysmanagement.SysmanagementApis;
-import com.zeroone.star.project.j2.sysmanagement.dto.SysmanagementDTO;
+import com.zeroone.star.project.j2.sysManagement.SysmanagementApis;
+import com.zeroone.star.project.j2.sysManagement.dto.SysManagementDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("sys")
 @Api(tags = "测试控制器")
-public class SysmanagementController implements SysmanagementApis {
+public class SysManagementController implements SysmanagementApis {
 
 
     @PostMapping("add-resource")
     @ApiOperation("新增资源")
     @Override
-    public JsonVO<SysmanagementDTO> addResource(@RequestBody SysmanagementDTO sysmanagentDTO) {
+    public JsonVO<SysManagementDTO> addResource(@RequestBody SysManagementDTO sysmanagentDTO) {
         return JsonVO.success(sysmanagentDTO);
     }
 
@@ -35,7 +35,7 @@ public class SysmanagementController implements SysmanagementApis {
     @PostMapping("modify-resource")
     @ApiOperation("修改资源")
     @Override
-    public JsonVO<Integer> modifyResource(SysmanagementDTO resourceDTO) {
+    public JsonVO<Integer> modifyResource(SysManagementDTO resourceDTO) {
         return null;
     }
 }

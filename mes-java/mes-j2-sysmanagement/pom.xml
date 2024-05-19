@@ -10,7 +10,7 @@
     </parent>
 
 
-    <artifactId>mes-j2-sysmanagement</artifactId>
+    <artifactId>mes-j2-sysManagement</artifactId>
 
     <dependencies>
         <!-- spring web mvc -->

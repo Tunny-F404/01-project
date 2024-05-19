@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagement.dto;
+package com.zeroone.star.project.j2.sysManagement.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Data
 @ApiOperation("系统管理数据对象")
-public class SysmanagementDTO {
+public class SysManagementDTO {
 
     //资源id
     @ApiModelProperty(value = "资源id",example = "1")
