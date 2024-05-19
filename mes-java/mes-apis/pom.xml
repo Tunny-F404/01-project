@@ -15,5 +15,17 @@
             <groupId>com.zeroone.star</groupId>
             <artifactId>mes-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.zeroone.star</groupId>
+            <artifactId>mes-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zeroone.star</groupId>
+            <artifactId>mes-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zeroone.star</groupId>
+            <artifactId>mes-common</artifactId>
+        </dependency>
     </dependencies>
 </project>

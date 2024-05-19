@@ -1,0 +1,30 @@
+# 应用名称
+server:
+  port: ${sp.publish}
+spring:
+  application:
+    name: ${sn.publish}
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: ${rocket-mq.name-server}
+        bindings:
+          output:
+            producer:
+              group: socketGroup
+              sync: true
+      bindings:
+        output:
+          destination: chat-topic
+          content-type: application/json
+# 开MQ的日志
+logging:
+  level:
+    com:
+      alibaba:
+        cloud:
+          stream:
+            rocketmq:
+              binder:
+                rocketmq: DEBUG
