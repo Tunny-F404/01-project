@@ -1,3 +1,51 @@
+plan:
+ export-plan:
+  summary: 导出计划
+  plan-code: 计划编号
+  plan-name: 计划名称
+  plan-type: 计划类型
+  state: 状态
+machinery-list:
+ field:
+  record-id: 流水号
+  machinery-code: 设备编码
+  machinery-name: 设备名称
+  machinery-brand: 品牌
+  machinery-spec: 规格型号
+  remark: 备注
+  plan-id: 计划ID
+  machinery-id: 设备ID
+ query:
+  summary: 分页查询设备清单数据
+machinery-plan:
+ field:
+  plan-id: 计划ID
+  plan-code: 计划编码
+  plan-name: 计划名称
+  plan-type: 计划类型
+  start-date: 开始日期
+  end-date: 结束日期
+  cycle-type: 频率
+  cycle-count: 次数
+  status: 状态
+  remark: 备注
+ query:
+  summary: 分页查询点检/保养设备计划列表数据
+ query-details:
+  summary: 查询点检/保养设备计划详细信息
+machinery-subject:
+ field:
+  record-id: 流水号
+  plan-id: 计划ID
+  subject-id: 设备ID
+  subject-code: 项目编码
+  subject-name: 项目名称
+  subject-type: 项目类型
+  subject-content: 项目内容
+  subject-standard: 标准
+  remark: 备注
+ query:
+  summary: 分页查询点检/保养项目列表数据
 planSubject:
  query:
   summary: 获取计划要处理的项目列表

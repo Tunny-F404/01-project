@@ -20,6 +20,8 @@
 #include "Router.h"
 #include "ApiHelper.h"
 
+#include "query-ForeverOMC/MachineryPlanQueryController.h"
+
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
@@ -28,13 +30,18 @@
 #endif
 #include "planSubject/PlanSubjectController.h"
 
-// Èç¹û¶¨ÒåÁË¹Ø±ÕSwaggerÎÄµµºê
+#include "ExportPlan/ExportPlanController.h"
+
+
+
+
+// å¦‚æžœå®šä¹‰äº†å…³é—­Swaggeræ–‡æ¡£å®
 #ifdef CLOSE_SWAGGER_DOC
-// ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
+// ç®€åŒ–ç»‘å®šæŽ§åˆ¶å™¨å®å®šä¹‰
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 router->addController(__CLASS__::createShared())
 #else
-// ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
+// ç®€åŒ–ç»‘å®šæŽ§åˆ¶å™¨å®å®šä¹‰
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
@@ -51,7 +58,11 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
-	//#TIP :ÏµÍ³À©Õ¹Â·ÓÉ¶¨Òå£¬Ð´ÔÚÕâ¸öºóÃæ
+	
+	ROUTER_SIMPLE_BIND(ExportPlanController);
+	//#TIP :ç³»ç»Ÿæ‰©å±•è·¯ç”±å®šä¹‰ï¼Œå†™åœ¨è¿™ä¸ªåŽé¢
+	ROUTER_SIMPLE_BIND(MachineryPlanQueryController);
+	
 	ROUTER_SIMPLE_BIND(PlanSubjectController);
 
 }
@@ -59,14 +70,14 @@ void Router::initRouter()
 #ifdef HTTP_SERVER_DEMO
 void Router::createSampleRouter()
 {
-	// °ó¶¨Ê¾Àý¿ØÖÆÆ÷
+	// ç»‘å®šç¤ºä¾‹æŽ§åˆ¶å™¨
 	ROUTER_SIMPLE_BIND(SampleController);
-	// °ó¶¨ÓÃ»§¿ØÖÆÆ÷
+	// ç»‘å®šç”¨æˆ·æŽ§åˆ¶å™¨
 	ROUTER_SIMPLE_BIND(UserController);
-	// °ó¶¨ÎÄ¼þ¿ØÖÆÆ÷
+	// ç»‘å®šæ–‡ä»¶æŽ§åˆ¶å™¨
 	ROUTER_SIMPLE_BIND(FileController);
 	
-	// °ó¶¨WebSocket¿ØÖÆÆ÷
+	// ç»‘å®šWebSocketæŽ§åˆ¶å™¨
 	router->addController(WSContorller::createShared());
 }
 #endif
