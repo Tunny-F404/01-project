@@ -1,6 +1,7 @@
 planSubject:
  query:
-  summary: 获取计划要处理的项目列表
+  summaryTable: 获取计划要处理的项目列表
+  summaryDetailPage: 获取计划要处理的项目列表（分页）
  fields:
   subId: 项目ID
   subCode: 项目编码

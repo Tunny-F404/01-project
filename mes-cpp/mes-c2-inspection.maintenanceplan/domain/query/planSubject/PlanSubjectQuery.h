@@ -6,14 +6,14 @@
 #define _PLANSUBJECTQUERY_H_
 
 #include "../../GlobalInclude.h"
-
+#include "domain/query/PageQuery.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
  * 设备点检/保养管理 查询条件对象
  */
-class PlanSubjectQuery : public oatpp::DTO
+class PlanSubjectQuery : public PageQuery
 {
 	DTO_INIT(PlanSubjectQuery, DTO);
 

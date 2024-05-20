@@ -9,7 +9,7 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- *  部门列表 数据模型
+ *    点检/保养计划，列表数据模型
  */
 class PlanSubjectTableDTO : public oatpp::DTO
 {
@@ -27,8 +27,8 @@ class PlanSubjectTableDTO : public oatpp::DTO
 
 };
 
-/**
-*部门详情数据模型
+/*
+*    点检/保养计划，列表（详细）数据模型
 */
 class PlanSubjectDetailDTO : public PlanSubjectTableDTO
 {
@@ -43,12 +43,19 @@ class PlanSubjectDetailDTO : public PlanSubjectTableDTO
 };
 
 /**
- * 示例分页传输对象
+ *    点检/保养计划，列表数据，分页传输对象
+ */
+ class PlanSubjectPageDTO : public PageDTO<PlanSubjectTableDTO::Wrapper>
+ {
+ 	DTO_INIT(PlanSubjectPageDTO, PageDTO<PlanSubjectTableDTO::Wrapper>);
+ };
+
+ /**
+ *    点检/保养计划，列表（详细）数据，分页传输对象
  */
  class PlanSubjectDetailPageDTO : public PageDTO<PlanSubjectDetailDTO::Wrapper>
  {
- 	DTO_INIT(PlanSubjectDetailPageDTO, PageDTO<PlanSubjectDetailDTO::Wrapper>);
+	 DTO_INIT(PlanSubjectDetailPageDTO, PageDTO<PlanSubjectDetailDTO::Wrapper>);
  };
-
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_SAMPLE_DTO_
