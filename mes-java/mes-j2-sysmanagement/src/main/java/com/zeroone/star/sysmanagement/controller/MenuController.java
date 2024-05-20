@@ -32,7 +32,7 @@ public class MenuController implements MenuApis {
     public JsonVO<Integer> removeResource(String id) {
         return JsonVO.success(1);
     }
-    
+
 
     @PostMapping("modify-resource")
     @ApiOperation("修改资源")
