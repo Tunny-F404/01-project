@@ -20,6 +20,7 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProductTableJsonVO);
+		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(String, "pnum", ZH_WORDS_GETTER("product.fields.pnum"), "ISSUE20221115004", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "pname", ZH_WORDS_GETTER("product.fields.pname"), "", false);
