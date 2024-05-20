@@ -7,21 +7,21 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
-* 点检/保养设备列表显示JsonVO，用于响应给客户端的Json对象
+* 鐐规/淇濆吇璁惧鍒楄〃鏄剧ずJsonVO锛岀敤浜庡搷搴旂粰瀹㈡埛绔殑Json瀵硅薄
 */
 class MachineryPlanJsonVO : public JsonVO<MachineryPlanDTO::Wrapper> {
 	DTO_INIT(MachineryPlanJsonVO, JsonVO<MachineryPlanDTO::Wrapper>);
 };
 
 /**
-* 点检/保养设备列表分页显示JsonVO，用于响应给客户端的Json对象
+* 鐐规/淇濆吇璁惧鍒楄〃鍒嗛〉鏄剧ずJsonVO锛岀敤浜庡搷搴旂粰瀹㈡埛绔殑Json瀵硅薄
 */
 class MachineryPlanPageJsonVO : public JsonVO<MachineryPlanPageDTO::Wrapper> {
 	DTO_INIT(MachineryPlanPageJsonVO, JsonVO<MachineryPlanPageDTO::Wrapper>);
 };
 
 /**
-* 点检/保养设备列表详情显示JsonVO，用于响应给客户端的Json对象
+* 鐐规/淇濆吇璁惧鍒楄〃璇︽儏鏄剧ずJsonVO锛岀敤浜庡搷搴旂粰瀹㈡埛绔殑Json瀵硅薄
 */
 class MachineryPlanDetailsJsonVO : public JsonVO<MachineryPlanDetailsDTO::Wrapper> {
 	DTO_INIT(MachineryPlanDetailsJsonVO, JsonVO<MachineryPlanDetailsDTO::Wrapper>);

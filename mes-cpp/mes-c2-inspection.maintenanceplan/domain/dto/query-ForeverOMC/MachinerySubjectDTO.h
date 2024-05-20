@@ -5,43 +5,43 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
-* µã¼ì/±£ÑøÉè±¸ÁĞ±í´«Êä¶ÔÏó
+* ç‚¹æ£€/ä¿å…»è®¾å¤‡åˆ—è¡¨ä¼ è¾“å¯¹è±¡
 */
 class MachinerySubjectDTO : public oatpp::DTO
 {
 	DTO_INIT(MachinerySubjectDTO, DTO);
 
-	// Á÷Ë®ºÅ
+	// æµæ°´å·
 	DTO_FIELD(UInt64, record_id);
 	DTO_FIELD_INFO(record_id) {
 		info->description = ZH_WORDS_GETTER("machinery-subject.field.record-id");
 	}
 
-	//ÏîÄ¿±àÂë
+	//é¡¹ç›®ç¼–ç 
 	DTO_FIELD(String, subject_code);
 	DTO_FIELD_INFO(subject_code) {
 		info->description = ZH_WORDS_GETTER("machinery-subject.field.subject-code");
 	}
 
-	//ÏîÄ¿Ãû³Æ
+	//é¡¹ç›®åç§°
 	DTO_FIELD(String, subject_name);
 	DTO_FIELD_INFO(subject_name) {
 		info->description = ZH_WORDS_GETTER("machinery-subject.field.subject-name");
 	}
 
-	//ÏîÄ¿ÀàĞÍ
+	//é¡¹ç›®ç±»å‹
 	DTO_FIELD(String, subject_type);
 	DTO_FIELD_INFO(subject_type) {
 		info->description = ZH_WORDS_GETTER("machinery-subject.field.subject-type");
 	}
 
-	//ÏîÄ¿ÄÚÈİ
+	//é¡¹ç›®å†…å®¹
 	DTO_FIELD(String, subject_content);
 	DTO_FIELD_INFO(subject_content) {
 		info->description = ZH_WORDS_GETTER("machinery-subject.field.subject-content");
 	}
 
-	//±ê×¼
+	//æ ‡å‡†
 	DTO_FIELD(String, subject_standard);
 	DTO_FIELD_INFO(subject_standard) {
 		info->description = ZH_WORDS_GETTER("machinery-subject.field.subject-standard");
@@ -49,7 +49,7 @@ class MachinerySubjectDTO : public oatpp::DTO
 };
 
 /**
-* µã¼ì/±£ÑøÉè±¸ÁĞ±í·ÖÒ³´«Êä¶ÔÏó
+* ç‚¹æ£€/ä¿å…»è®¾å¤‡åˆ—è¡¨åˆ†é¡µä¼ è¾“å¯¹è±¡
 */
 class MachinerySubjectPageDTO : public PageDTO<MachinerySubjectDTO::Wrapper>
 {

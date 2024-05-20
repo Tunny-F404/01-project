@@ -7,7 +7,7 @@
 #include OATPP_CODEGEN_BEGIN(DTO)	
 
 /*
-* 点检/保养设备列表分页查询对象
+* 鐐规/淇濆吇璁惧鍒楄〃鍒嗛〉鏌ヨ瀵硅薄
 */
 class MachinerySubjectQuery : public PageQuery
 {

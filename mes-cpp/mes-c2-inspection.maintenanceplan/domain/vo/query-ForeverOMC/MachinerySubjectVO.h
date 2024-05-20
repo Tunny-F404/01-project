@@ -7,14 +7,14 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
-* 点检/保养设备列表显示JsonVO，用于响应给客户端的Json对象
+* 鐐规/淇濆吇璁惧鍒楄〃鏄剧ずJsonVO锛岀敤浜庡搷搴旂粰瀹㈡埛绔殑Json瀵硅薄
 */
 class MachinerySubjectJsonVO : public JsonVO<MachinerySubjectDTO::Wrapper> {
 	DTO_INIT(MachinerySubjectJsonVO, JsonVO<MachinerySubjectDTO::Wrapper>);
 };
 
 /**
-* 点检/保养设备列表分页显示JsonVO，用于响应给客户端的Json对象
+* 鐐规/淇濆吇璁惧鍒楄〃鍒嗛〉鏄剧ずJsonVO锛岀敤浜庡搷搴旂粰瀹㈡埛绔殑Json瀵硅薄
 */
 class MachinerySubjectPageJsonVO : public JsonVO<MachinerySubjectPageDTO::Wrapper> {
 	DTO_INIT(MachinerySubjectPageJsonVO, JsonVO<MachinerySubjectPageDTO::Wrapper>);

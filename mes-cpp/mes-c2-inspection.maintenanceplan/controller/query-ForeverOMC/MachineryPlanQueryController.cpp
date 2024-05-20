@@ -3,7 +3,10 @@
 
 MachineryListPageJsonVO::Wrapper MachineryPlanQueryController::execQueryMachineryList(const MachineryListQuery::Wrapper& query)
 {
-	return {};
+	MachineryListPageDTO::Wrapper a;
+	auto jvo = MachineryListPageJsonVO::createShared();
+	jvo -> success(a);
+	return jvo;
 }
 
 MachineryPlanPageJsonVO::Wrapper MachineryPlanQueryController::execQueryMachineryPlan(const MachineryPlanQuery::Wrapper& query)

@@ -7,31 +7,31 @@
 #include OATPP_CODEGEN_BEGIN(DTO)	
 
 /*
-* µã¼ì/±£Ñø¼Æ»®ÁÐ±íÌõ¼þ·ÖÒ³²éÑ¯¶ÔÏó
+* ç‚¹æ£€/ä¿å…»è®¡åˆ’åˆ—è¡¨æ¡ä»¶åˆ†é¡µæŸ¥è¯¢å¯¹è±¡
 */
 class MachineryPlanQuery : public PageQuery
 {
 	DTO_INIT(MachineryPlanQuery, PageQuery);
 
-	// ¼Æ»®±àºÅ
+	// è®¡åˆ’ç¼–å·
 	DTO_FIELD(String, plan_code);
 	DTO_FIELD_INFO(plan_code) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-code");
 	}
 
-	// ¼Æ»®Ãû³Æ
+	// è®¡åˆ’åç§°
 	DTO_FIELD(String, plan_name);
 	DTO_FIELD_INFO(plan_name) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-name");
 	}
 
-	// ¼Æ»®ÀàÐÍ
+	// è®¡åˆ’ç±»åž‹
 	DTO_FIELD(String, plan_type);
 	DTO_FIELD_INFO(plan_type) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-type");
 	}
 
-	// ×´Ì¬
+	// çŠ¶æ€
 	DTO_FIELD(String, status);
 	DTO_FIELD_INFO(status) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.status");
@@ -39,13 +39,13 @@ class MachineryPlanQuery : public PageQuery
 };
 
 /*
-* »ñÈ¡µã¼ì±£Ñø¼Æ»®ÏêÇé
+* èŽ·å–ç‚¹æ£€ä¿å…»è®¡åˆ’è¯¦æƒ…
 */
 class MachineryPlanDetailsQuery : public oatpp::DTO
 {
 	DTO_INIT(MachineryPlanDetailsQuery, DTO);
 
-	// ¼Æ»®ID
+	// è®¡åˆ’ID
 	DTO_FIELD(UInt64, plan_id);
 	DTO_FIELD_INFO(plan_id) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-id");

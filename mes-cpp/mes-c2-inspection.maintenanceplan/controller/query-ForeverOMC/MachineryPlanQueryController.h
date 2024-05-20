@@ -17,106 +17,106 @@
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
 /*
-* Éè±¸Çåµ¥¿ØÖÆÆ÷
+* è®¾å¤‡æ¸…å•æŽ§åˆ¶å™¨
 */
 class MachineryPlanQueryController : public oatpp::web::server::api::ApiController
 {
 	API_ACCESS_DECLARE(MachineryPlanQueryController);
 
 public:
-	// ¶¨Òå²éÑ¯Éè±¸Çåµ¥ÁÐ±í½Ó¿ÚÃèÊö
+	// å®šä¹‰æŸ¥è¯¢è®¾å¤‡æ¸…å•åˆ—è¡¨æŽ¥å£æè¿°
 	ENDPOINT_INFO(queryMachineryList) {
-		// ¶¨Òå½Ó¿Ú±êÌâ
+		// å®šä¹‰æŽ¥å£æ ‡é¢˜
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("machinery-list.query.summary"));
-		// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊý
+		// å®šä¹‰é»˜è®¤æŽˆæƒå‚æ•°
 		API_DEF_ADD_AUTH();
-		// ¶¨ÒåÏìÓ¦²ÎÊý¸ñÊ½
+		// å®šä¹‰å“åº”å‚æ•°æ ¼å¼
 		API_DEF_ADD_RSP_JSON_WRAPPER(MachineryListPageJsonVO);
-		// ¶¨Òå·ÖÒ³²éÑ¯²ÎÊýÃèÊö
+		// å®šä¹‰åˆ†é¡µæŸ¥è¯¢å‚æ•°æè¿°
 		API_DEF_ADD_PAGE_PARAMS();
 	}
-	// ¶¨Òå²éÑ¯Éè±¸Çåµ¥ÁÐ±í½Ó¿Ú´¦Àí
+	// å®šä¹‰æŸ¥è¯¢è®¾å¤‡æ¸…å•åˆ—è¡¨æŽ¥å£å¤„ç†
 	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-list", queryMachineryList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// ½âÎöÁìÓòÄ£ÐÍ
+		// è§£æžé¢†åŸŸæ¨¡åž‹
 		API_HANDLER_QUERY_PARAM(querymachinerylist, MachineryListQuery, queryParams);
-		// ºô½ÐÖ´ÐÐº¯ÊýÏìÓ¦½á¹û
+		// å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æžœ
 		API_HANDLER_RESP_VO(execQueryMachineryList(querymachinerylist));
 	}
 
-	// ¶¨Òåµã¼ì/±£ÑøÉè±¸¼Æ»®ÁÐ±í½Ó¿ÚÃèÊö
+	// å®šä¹‰ç‚¹æ£€/ä¿å…»è®¾å¤‡è®¡åˆ’åˆ—è¡¨æŽ¥å£æè¿°
 	ENDPOINT_INFO(queryMachineryPlan) {
-		// ¶¨Òå½Ó¿Ú±êÌâ
+		// å®šä¹‰æŽ¥å£æ ‡é¢˜
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("machinery-plan.query.summary"));
-		// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊý
+		// å®šä¹‰é»˜è®¤æŽˆæƒå‚æ•°
 		API_DEF_ADD_AUTH();
-		// ¶¨ÒåÏìÓ¦²ÎÊý¸ñÊ½
+		// å®šä¹‰å“åº”å‚æ•°æ ¼å¼
 		API_DEF_ADD_RSP_JSON_WRAPPER(MachineryPlanPageJsonVO);
-		// ¶¨Òå·ÖÒ³²éÑ¯²ÎÊýÃèÊö
+		// å®šä¹‰åˆ†é¡µæŸ¥è¯¢å‚æ•°æè¿°
 		API_DEF_ADD_PAGE_PARAMS();
-		// ¶¨ÒåÆäËû²ÎÊýÃèÊö
+		// å®šä¹‰å…¶ä»–å‚æ•°æè¿°
 		API_DEF_ADD_QUERY_PARAMS(String, "plan_code", ZH_WORDS_GETTER("machinery-plan.field.plan-code"), "PLAN2022048", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "plan_name", ZH_WORDS_GETTER("machinery-plan.field.plan-name"), "NAME", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "plan_type", ZH_WORDS_GETTER("machinery-plan.field.plan-type"), "CHECK / MAINTEN", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("machinery-plan.field.status"), "PREPARE / FINISHED", false);
 	}
 
-	// ¶¨Òå²éÑ¯Éè±¸Çåµ¥ÁÐ±í½Ó¿Ú´¦Àí
+	// å®šä¹‰æŸ¥è¯¢è®¾å¤‡æ¸…å•åˆ—è¡¨æŽ¥å£å¤„ç†
 	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-plan", queryMachineryPlan, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// ½âÎöÁìÓòÄ£ÐÍ
+		// è§£æžé¢†åŸŸæ¨¡åž‹
 		API_HANDLER_QUERY_PARAM(querymachineryplan, MachineryPlanQuery, queryParams);
-		// ºô½ÐÖ´ÐÐº¯ÊýÏìÓ¦½á¹û
+		// å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æžœ
 		API_HANDLER_RESP_VO(execQueryMachineryPlan(querymachineryplan));
 	}
 
-	// ¶¨Òåµã¼ì/±£ÑøÉè±¸¼Æ»®ÁÐ±í½Ó¿ÚÃèÊö
+	// å®šä¹‰ç‚¹æ£€/ä¿å…»è®¾å¤‡è®¡åˆ’åˆ—è¡¨æŽ¥å£æè¿°
 	ENDPOINT_INFO(queryMachineryPlanDetails) {
-		// ¶¨Òå½Ó¿Ú±êÌâ
+		// å®šä¹‰æŽ¥å£æ ‡é¢˜
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("machinery-plan.query-details.summary"));
-		// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊý
+		// å®šä¹‰é»˜è®¤æŽˆæƒå‚æ•°
 		API_DEF_ADD_AUTH();
-		// ¶¨ÒåÏìÓ¦²ÎÊý¸ñÊ½
+		// å®šä¹‰å“åº”å‚æ•°æ ¼å¼
 		API_DEF_ADD_RSP_JSON_WRAPPER(MachineryPlanDetailsJsonVO);
-		// ¶¨ÒåÆäËû²ÎÊýÃèÊö
+		// å®šä¹‰å…¶ä»–å‚æ•°æè¿°
 		API_DEF_ADD_QUERY_PARAMS(String, "plan_id", ZH_WORDS_GETTER("machinery-plan.field.plan-id"), "207", true);
 	}
-	// ¶¨Òå²éÑ¯Éè±¸Çåµ¥ÁÐ±í½Ó¿Ú´¦Àí
+	// å®šä¹‰æŸ¥è¯¢è®¾å¤‡æ¸…å•åˆ—è¡¨æŽ¥å£å¤„ç†
 	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-plan-details", queryMachineryPlanDetails, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// ½âÎöÁìÓòÄ£ÐÍ
+		// è§£æžé¢†åŸŸæ¨¡åž‹
 		API_HANDLER_QUERY_PARAM(querymachineryplandetails, MachineryPlanDetailsQuery, queryParams);
-		// ºô½ÐÖ´ÐÐº¯ÊýÏìÓ¦½á¹û
+		// å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æžœ
 		API_HANDLER_RESP_VO(execQueryMachineryPlanDetails(querymachineryplandetails));
 	}
 
-	// ¶¨Òå²éÑ¯µã¼ì/±£ÑøÏîÄ¿ÁÐ±í½Ó¿ÚÃèÊö
+	// å®šä¹‰æŸ¥è¯¢ç‚¹æ£€/ä¿å…»é¡¹ç›®åˆ—è¡¨æŽ¥å£æè¿°
 	ENDPOINT_INFO(queryMachinerySubject) {
-		// ¶¨Òå½Ó¿Ú±êÌâ
+		// å®šä¹‰æŽ¥å£æ ‡é¢˜
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("machinery-subject.query.summary"));
-		// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊý
+		// å®šä¹‰é»˜è®¤æŽˆæƒå‚æ•°
 		API_DEF_ADD_AUTH();
-		// ¶¨ÒåÏìÓ¦²ÎÊý¸ñÊ½
+		// å®šä¹‰å“åº”å‚æ•°æ ¼å¼
 		API_DEF_ADD_RSP_JSON_WRAPPER(MachinerySubjectPageJsonVO);
-		// ¶¨Òå·ÖÒ³²éÑ¯²ÎÊýÃèÊö
+		// å®šä¹‰åˆ†é¡µæŸ¥è¯¢å‚æ•°æè¿°
 		API_DEF_ADD_PAGE_PARAMS();
 	}
-	// ¶¨Òå²éÑ¯µã¼ì/±£ÑøÏîÄ¿ÁÐ±í½Ó¿Ú´¦Àí
+	// å®šä¹‰æŸ¥è¯¢ç‚¹æ£€/ä¿å…»é¡¹ç›®åˆ—è¡¨æŽ¥å£å¤„ç†
 	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-subject", queryMachinerySubject, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// ½âÎöÁìÓòÄ£ÐÍ
+		// è§£æžé¢†åŸŸæ¨¡åž‹
 		API_HANDLER_QUERY_PARAM(querymachinerysubject, MachinerySubjectQuery, queryParams);
-		// ºô½ÐÖ´ÐÐº¯ÊýÏìÓ¦½á¹û
+		// å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æžœ
 		API_HANDLER_RESP_VO(execQueryMachinerySubject(querymachinerysubject));
 	}
 
 private:
-	// ·ÖÒ³²éÑ¯Éè±¸Çåµ¥ÁÐ±íÊý¾Ý
+	// åˆ†é¡µæŸ¥è¯¢è®¾å¤‡æ¸…å•åˆ—è¡¨æ•°æ®
 	MachineryListPageJsonVO::Wrapper execQueryMachineryList(const MachineryListQuery::Wrapper& query);
 
-	// ·ÖÒ³²éÑ¯µã¼ì/±£Ñø¼Æ»®ÁÐ±íÊý¾Ý 
+	// åˆ†é¡µæŸ¥è¯¢ç‚¹æ£€/ä¿å…»è®¡åˆ’åˆ—è¡¨æ•°æ® 
 	MachineryPlanPageJsonVO::Wrapper execQueryMachineryPlan(const MachineryPlanQuery::Wrapper& query);
 
-	// ²éÑ¯µã¼ì/±£Ñø¼Æ»®ÏêÏ¸ÐÅÏ¢
+	// æŸ¥è¯¢ç‚¹æ£€/ä¿å…»è®¡åˆ’è¯¦ç»†ä¿¡æ¯
 	MachineryPlanDetailsJsonVO::Wrapper execQueryMachineryPlanDetails(const MachineryPlanDetailsQuery::Wrapper& query);
 
-	// ·ÖÒ³²éÑ¯µã¼ì/±£ÑøÏîÄ¿ÁÐ±íÊý¾Ý
+	// åˆ†é¡µæŸ¥è¯¢ç‚¹æ£€/ä¿å…»é¡¹ç›®åˆ—è¡¨æ•°æ®
 	MachinerySubjectPageJsonVO::Wrapper execQueryMachinerySubject(const MachinerySubjectQuery::Wrapper& query);
 };
 

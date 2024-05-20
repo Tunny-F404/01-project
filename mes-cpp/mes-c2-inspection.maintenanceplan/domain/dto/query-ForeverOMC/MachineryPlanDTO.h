@@ -5,61 +5,61 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
-* µã¼ì/±£Ñø¼Æ»®ÁĞ±í´«Êä¶ÔÏó
+* ç‚¹æ£€/ä¿å…»è®¡åˆ’åˆ—è¡¨ä¼ è¾“å¯¹è±¡
 */
 class MachineryPlanDTO : public oatpp::DTO
 {
 	DTO_INIT(MachineryPlanDTO, DTO);
 
-	// ¼Æ»®ID
+	// è®¡åˆ’ID
 	DTO_FIELD(UInt64, plan_id);
 	DTO_FIELD_INFO(plan_id) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-id");
 	}
 
-	// ¼Æ»®±àÂë
+	// è®¡åˆ’ç¼–ç 
 	DTO_FIELD(String, plan_code);
 	DTO_FIELD_INFO(plan_code) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-code");
 	}
 
-	// ¼Æ»®Ãû³Æ
+	// è®¡åˆ’åç§°
 	DTO_FIELD(String, plan_name);
 	DTO_FIELD_INFO(plan_name) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-name");
 	}
 
-	// ¼Æ»®ÀàĞÍ
+	// è®¡åˆ’ç±»å‹
 	DTO_FIELD(String, plan_type);
 	DTO_FIELD_INFO(plan_type) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-type");
 	}
 
-	// ¿ªÊ¼ÈÕÆÚ
+	// å¼€å§‹æ—¥æœŸ
 	DTO_FIELD(String, start_date);
 	DTO_FIELD_INFO(start_date) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.start-date");
 	}
 
-	// ½áÊøÈÕÆÚ
+	// ç»“æŸæ—¥æœŸ
 	DTO_FIELD(String, end_date);
 	DTO_FIELD_INFO(end_date) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.end-date");
 	}
 
-	// ÆµÂÊ
+	// é¢‘ç‡
 	DTO_FIELD(String, cycle_type);
 	DTO_FIELD_INFO(cycle_type) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.cycle-type");
 	}
 
-	// ´ÎÊı
+	// æ¬¡æ•°
 	DTO_FIELD(String, cycle_count);
 	DTO_FIELD_INFO(cycle_count) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.cycle-count");
 	}
 
-	// ×´Ì¬
+	// çŠ¶æ€
 	DTO_FIELD(String, status);
 	DTO_FIELD_INFO(status) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.status");
@@ -67,7 +67,7 @@ class MachineryPlanDTO : public oatpp::DTO
 };
 
 /**
-* µã¼ì/±£Ñø¼Æ»®ÁĞ±í·ÖÒ³´«Êä¶ÔÏó
+* ç‚¹æ£€/ä¿å…»è®¡åˆ’åˆ—è¡¨åˆ†é¡µä¼ è¾“å¯¹è±¡
 */
 class MachineryPlanPageDTO : public PageDTO<MachineryPlanDTO::Wrapper>
 {
@@ -78,7 +78,7 @@ class MachineryPlanDetailsDTO : public MachineryPlanDTO
 {
 	DTO_INIT(MachineryPlanDetailsDTO, MachineryPlanDTO);
 
-	// ±¸×¢
+	// å¤‡æ³¨
 	DTO_FIELD(String, remark);
 	DTO_FIELD_INFO(remark) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.remark");
