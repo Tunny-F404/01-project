@@ -35,8 +35,8 @@ std::list<MaterialDO> MaterialDAO::selectWithPage(const MaterialQuery::Wrapper& 
 
 uint64_t MaterialDAO::insert(const MaterialDO& iObj)
 {
-	string sql = "INSERT INTO `wm_issue_line` ( `issue_id`,`item_id`,`item_code`,`item_name`, `specification`, `unit_of_measure`,`quantity_issued`,`batch_code`,`warehouse_name`,`location_name`,`area_name`,`remark` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	return sqlSession->executeInsert(sql, "%ull%ull%s%s%s%s%lf%s%s%s%s%s",
+	string sql = "INSERT INTO `wm_issue_line` ( `issue_id`,`item_id`,`item_code`,`item_name`, `specification`, `unit_of_measure`,`quantity_issued`,`batch_code`,`warehouse_name`,`location_name`,`area_name`,`remark` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	return sqlSession->executeInsert(sql, "%ull%ull%s%s%s%s%d%s%s%s%s%s",
 		iObj.getIssue_id(), 
 		iObj.getItem_id(),
 		iObj.getItem_code(),
@@ -54,7 +54,7 @@ uint64_t MaterialDAO::insert(const MaterialDO& iObj)
 int MaterialDAO::update(const MaterialDO& uObj)
 {
 	string sql = "UPDATE `wm_issue_line` SET `issue_id` = ?, `item_id` = ?, `item_code`= ?, `item_name`= ?, `specification`= ? , `unit_of_measure`= ?, `quantity_issued`= ?, `batch_code`= ?, `warehouse_name`= ?, `location_name`= ?, `area_name`= ?, `remark`= ? WHERE `line_id` = ?;";
-	return sqlSession->executeUpdate(sql, "%ull%ull%s%s%s%s%lf%s%s%s%s%s%ull", 
+	return sqlSession->executeUpdate(sql, "%ull%ull%s%s%s%s%d%s%s%s%s%s%ull", 
 		uObj.getIssue_id(), 
 		uObj.getItem_id(),
 		uObj.getItem_code(), 

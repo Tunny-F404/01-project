@@ -15,8 +15,8 @@ public:
 	{
 		 MaterialDO data;
 		data.setLine_id(resultSet->getUInt64(1));
-		data.setIssue_id(resultSet->getInt64(2));
-		data.setItem_id(resultSet->getInt64(3));
+		data.setIssue_id(resultSet->getUInt64(2));
+		data.setItem_id(resultSet->getUInt64(3));
 		data.setItem_code(resultSet->getString(4));
 		data.setItem_name(resultSet->getString(5));
 		data.setSpecification(resultSet->getString(6));
