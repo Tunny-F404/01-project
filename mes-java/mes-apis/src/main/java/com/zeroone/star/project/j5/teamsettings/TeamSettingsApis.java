@@ -1,5 +1,10 @@
 package com.zeroone.star.project.j5.teamsettings;
 
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.teamsettings.TeamListDTO;
+import com.zeroone.star.project.j5.query.teamsettings.TeamQuery;
+import com.zeroone.star.project.vo.JsonVO;
+
 /**
  * <p>
  * 描述：班组设置接口
@@ -10,4 +15,11 @@ package com.zeroone.star.project.j5.teamsettings;
  * @version 1.0.0
  */
 public interface TeamSettingsApis {
+    /**
+     * 查询班组列表
+     * @author interstellar
+     * @param condition 查询条件
+     * @return 班组列表
+     */
+    JsonVO<PageDTO<TeamListDTO>> queryTeamList(TeamQuery condition);
 }
