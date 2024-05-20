@@ -28,7 +28,6 @@
 #endif
 
 #include "controller/device-manage/DeviceManageController.h"
-#include "controller/device-list/DeviceListController.h"
 
 
 // 如果定义了关闭Swagger文档宏
@@ -56,7 +55,6 @@ void Router::initRouter()
 
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(DeviceManageController);
-	ROUTER_SIMPLE_BIND(DeviceListController);
 }
 
 #ifdef HTTP_SERVER_DEMO
