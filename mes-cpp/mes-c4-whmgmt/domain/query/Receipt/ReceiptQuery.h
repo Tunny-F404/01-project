@@ -10,9 +10,9 @@
 /**
 * 单据查询，封装查询条件
 */
-class ReceiptTreeQuery : public oatpp::DTO
+class ReceiptTableQuery : public oatpp::DTO
 {
-	DTO_INIT(ReceiptTreeQuery, DTO);
+	DTO_INIT(ReceiptTableQuery, DTO);
 	// 数据库的表： wm_item_recpt
 	
 	// 入库单编号

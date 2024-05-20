@@ -12,7 +12,7 @@
 */
 class ReceiptDTO : public oatpp::DTO
 {
-	DTO_INIT(ReceiptTreeDTO, DTO);
+	DTO_INIT(ReceiptDTO, DTO);
 	// 数据库的表： wm_item_recpt 
 
 	// 入库单ID
@@ -41,9 +41,9 @@ class ReceiptDTO : public oatpp::DTO
 /**
 * 单据列表数据模型(分页)
 */
-class ReceiptTreeDTO : public PageDTO<ReceiptDTO::Wrapper>
+class ReceiptTableDTO : public PageDTO<ReceiptDTO::Wrapper>
 {
-	DTO_INIT(ReceiptTreeDTO, PageDTO<ReceiptDTO::Wrapper>);
+	DTO_INIT(ReceiptTableDTO, PageDTO<ReceiptDTO::Wrapper>);
 };
 /**
 * 单据列表数据详情

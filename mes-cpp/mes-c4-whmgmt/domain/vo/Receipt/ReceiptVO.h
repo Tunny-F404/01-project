@@ -10,9 +10,9 @@
 /**
 * 定义一个获取单据列表的显示VO
 */
-class ReceiptTreeJsonVO : public JsonVO<List<ReceiptTreeDTO::Wrapper>>
+class ReceiptTableJsonVO : public JsonVO<List<ReceiptTableJsonVO::Wrapper>>
 {
-	DTO_INIT(ReceiptTreeJsonVO, DTO);
+	DTO_INIT(ReceiptTableJsonVO, DTO);
 
 };
 
