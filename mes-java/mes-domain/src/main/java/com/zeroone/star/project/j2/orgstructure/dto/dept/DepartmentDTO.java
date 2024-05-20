@@ -30,13 +30,17 @@ public class DepartmentDTO {
     private String name;
 
     //部门状态 0正常 1停用
-    @ApiModelProperty(value = "部门状态",example = "1")
+    @ApiModelProperty(value = "部门状态",example = "0")
     private int status;
 
-    //显示顺序
+    @ApiModelProperty(value = "排序",example = "1")
     private int orderNum;
 
+    @ApiModelProperty(value = "部门电话",example = "123456")
+    private String phone;
 
+    @ApiModelProperty(value = "部门邮箱",example = "123@qq.com")
+    private String email;
 
     //创建时间
     @ApiModelProperty(value = "创建时间",example = "2024-05-17")

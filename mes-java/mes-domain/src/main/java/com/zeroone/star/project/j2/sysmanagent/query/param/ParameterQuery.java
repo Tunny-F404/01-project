@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j2.sysmanagent.query.param;
 
 
+import com.zeroone.star.project.query.PageQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j2.sysManagement.param;
 
+import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.sysmanagent.dto.param.ParameterDTO;
 import com.zeroone.star.project.j2.sysmanagent.query.param.ParameterQuery;
 import com.zeroone.star.project.vo.JsonVO;
