@@ -1,0 +1,5 @@
+add-mj:
+ add:
+  summary: 添加设备模块
+ fields:
+  status: 状态

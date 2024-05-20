@@ -1,0 +1,11 @@
+add-mj:
+ add:
+  summary: 添加项目模块
+ fields:
+  scode: 项目编码
+  sname: 项目名称
+  stype: 项目类型
+  attr3: 是否启用0关1启
+  scontent: 项目内容
+  sstandard: 标准
+     
