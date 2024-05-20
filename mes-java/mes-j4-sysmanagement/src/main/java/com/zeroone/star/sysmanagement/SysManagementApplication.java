@@ -20,7 +20,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class SysManagementApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(com.zeroone.star.sysmanagement.SysManagementApplication.class, args);
+        SpringApplication.run(SysManagementApplication.class, args);
     }
 
 }

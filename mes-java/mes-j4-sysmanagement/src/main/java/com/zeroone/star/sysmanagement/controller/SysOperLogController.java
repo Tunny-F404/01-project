@@ -50,9 +50,9 @@ public class SysOperLogController {
     @ApiOperation( value = "删除日志")
     @DeleteMapping("/remove-operlog/{operIds}")
     public JsonVO<String> deleteOperLog(@PathVariable List<Long> operIds) {
-        Boolean result = sysOperLogService.removeByOperIds(operIds);
+        Boolean result = sysOperLogService.removeByIds(operIds);
         if (!result) {
-            return JsonVO.fail("删除失败");
+            return JsonVO.fail("日志不存在");
         }
         return JsonVO.success("删除成功");
     }

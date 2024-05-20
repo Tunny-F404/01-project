@@ -5,10 +5,10 @@ spring:
   application:
     name: ${sn.sysmanagement}
 
-
-sn:
-  sysmanagement: sysmanagement
-
+#sn:
+#  sysmanagement: sysmanagement
+#sp:
+#  sysmanagement: 10019
 #  cloud:
 #    sentinel:
 #      transport:
