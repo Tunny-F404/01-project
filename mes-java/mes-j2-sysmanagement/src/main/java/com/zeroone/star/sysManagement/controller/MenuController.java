@@ -32,6 +32,7 @@ public class MenuController implements MenuApis {
         return JsonVO.success(1);
     }
 
+
     @PostMapping("modify-resource")
     @ApiOperation("修改资源")
     @Override
