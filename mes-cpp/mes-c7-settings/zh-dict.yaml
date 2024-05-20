@@ -1,0 +1,34 @@
+storagearea:
+ query:
+  summary: 获取仓库库位列表
+ mulit:
+  summary: 删除库位集合
+ count:
+  counts: 获取统计值
+ add: 
+  insert: 添加库区
+ modify: 
+  update: 修改库区
+ remove: 
+  delete: 删除库区
+  mulitremove: 批量删除库区 
+ fields:
+  areaId: 库位ID
+  areacode: 库位编码
+  areaname: 库位名称
+  locationId: 库区ID
+  positionx: 库位位置X
+  positiony: '库位位置y'
+  positionz: '库位位置z'
+  enableFlag: '是否启用'
+  area: '库位面积'
+  maxLoa: '最大载重量'
+  remark: '备注'
+  attr_one: '预留字段1'
+  attr_two: '预留字段2'
+  attr_three: '预留字段3'
+  attr_four: '预留字段4'
+  createBy: '创建者'
+  createTime: '创建时间'
+  updateBy: '更新者'
+  updateTime: '更新时间'

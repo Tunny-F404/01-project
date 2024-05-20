@@ -255,6 +255,7 @@ ENDPOINT(_METHOD_, _PATH_, __ENDPOINT_FUN_NAME__, _PARAM_MACRO_) { \
  * @param __ENDPOINT_FUN_NAME__: Api端点函数名称
  * @param _PARAM_MACRO_: 指定一个参数解析操作宏。如：BODY_DTO(SampleDTO::Wrapper, dto)
  * @param _EXECUTE_: 处理逻辑，调用execXXX函数。如：execModifySample(dto)
+ * 
  */
 #define API_HANDLER_ENDPOINT_AUTH(_METHOD_, _PATH_, __ENDPOINT_FUN_NAME__, _PARAM_MACRO_, _EXECUTE_) \
 ENDPOINT(_METHOD_, _PATH_, __ENDPOINT_FUN_NAME__, _PARAM_MACRO_, API_HANDLER_AUTH_PARAME) { \
