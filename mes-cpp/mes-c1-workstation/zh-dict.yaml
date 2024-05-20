@@ -1,0 +1,9 @@
+wf_for_ws:
+ fields:
+  typename: 类型名称
+  account: 数量
+ post:
+  summary: 添加资源
+ get:
+  summary: 获得资源
+daoju: 刀具
