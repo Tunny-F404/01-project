@@ -2,7 +2,6 @@ package com.zeroone.star.sysManagement.controller;
 
 import cn.hutool.core.lang.tree.TreeNode;
 import com.zeroone.star.project.j2.sysManagement.menu.MenuApis;
-
 import com.zeroone.star.project.j2.sysmanagent.dto.menu.MenuDTO;
 import com.zeroone.star.project.j2.sysmanagent.query.menu.MenuConditionQuery;
 import com.zeroone.star.project.j2.sysmanagent.vo.ResourceDetailsVO;
@@ -15,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @author  熠
+ * @author 宵夜
  * @version 1.0.0
  * @Description: 测试控制器
  */
 @RestController
-@RequestMapping("/sys/menu")
+@RequestMapping("sys")
 @Api(tags = "测试控制器")
 public class MenuController implements MenuApis {
 
@@ -38,7 +37,6 @@ public class MenuController implements MenuApis {
     public JsonVO<Integer> removeResource(String id) {
         return JsonVO.success(1);
     }
-
 
     @PostMapping("modify-resource")
     @ApiOperation("修改资源")
