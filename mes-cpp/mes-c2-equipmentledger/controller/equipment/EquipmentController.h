@@ -109,6 +109,22 @@ public:
 		// 执行文件保存逻辑
 		API_HANDLER_RESP_VO(executeModifyEquipment(dto));
 	}
+
+	// 5 定义设备分类查询接口描述
+	ENDPOINT_INFO(queryEquipmentClassify) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("equipment.query.summary4"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(EquipmentClassifyJsonVO);
+
+	}
+	// 5 定义设备分类查询接口处理
+	ENDPOINT(API_M_GET, "/equipment/query-classify", queryEquipmentClassify, BODY_DTO(EquipmentClassifyDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+		// 执行文件保存逻辑
+		API_HANDLER_RESP_VO(executeEquipmentClassify(dto));
+	}
 	
 	
 
@@ -121,6 +137,8 @@ private:
 	Uint64JsonVO::Wrapper execAddEquipment(const addEquipmentDTO::Wrapper& dto);
 	//修改设备
 	Uint64JsonVO::Wrapper executeModifyEquipment(const modifyEquipmentDTO::Wrapper& dto);
+	//设备分类
+	EquipmentClassifyJsonVO::Wrapper executeEquipmentClassify(const EquipmentClassifyDTO::Wrapper& dto);
 };
 
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen

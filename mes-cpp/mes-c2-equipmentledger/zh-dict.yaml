@@ -4,6 +4,7 @@ equipment:
   summary1: 获取设备详情
   summary2: 新增设备
   summary3: 修改设备
+  summary4: 设备分类
  fields:
   ecode: 设备编码
   ename: 设备名称
@@ -15,4 +16,15 @@ equipment:
   status: 状态
   ct: 创建时间
   note: 备注
+ class:
+  id: 主键
+  cname: 设备分类
+  children: 子类
+  eclasscode: 设备类型编码
+  eclassname: 设备类型名称
+  pid: 父类型ID
+  allpid: 所有父节点ID
+  enable: 是否启用
+  note: 备注
+
   
