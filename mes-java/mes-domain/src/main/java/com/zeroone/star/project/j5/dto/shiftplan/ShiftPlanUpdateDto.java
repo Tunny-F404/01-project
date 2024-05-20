@@ -1,14 +1,25 @@
-package com.zeroone.star.project.j5.vo.shiftplan;
+package com.zeroone.star.project.j5.dto.shiftplan;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-
+/**
+ * <p>
+ * 描述：班次计划更新Dto
+ * </p>
+ * <p>版权：&copy;01星球</p>
+ * <p>地址：01星球总部</p>
+ * @author qwert
+ * @version 1.0.0
+ */
 @Data
-@ApiModel("添加班次计划")
-public class ShiftPlanAddVo {
+public class ShiftPlanUpdateDto {
+    /**
+     * 班次id
+     */
+    @ApiModelProperty(value="班次id", example="2")
+    private Long shiftId;
     /**
      * 班次序号
      */

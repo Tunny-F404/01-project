@@ -5,7 +5,15 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-
+/**
+ * <p>
+ * 描述：班次计划查询结果Dto
+ * </p>
+ * <p>版权：&copy;01星球</p>
+ * <p>地址：01星球总部</p>
+ * @author qwert
+ * @version 1.0.0
+ */
 @Data
 @ApiModel("班次计划查询结果")
 public class ShiftPlanDto {

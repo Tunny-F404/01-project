@@ -1,11 +1,10 @@
 package com.zeroone.star.project.j5.scheduleplan;
 
+import com.zeroone.star.project.j5.dto.shiftplan.ShiftPlanAddDto;
 import com.zeroone.star.project.j5.dto.shiftplan.ShiftPlanDto;
+import com.zeroone.star.project.j5.dto.shiftplan.ShiftPlanUpdateDto;
 import com.zeroone.star.project.j5.query.shiftplan.ShiftPlanQuery;
-import com.zeroone.star.project.j5.vo.shiftplan.ShiftPlanAddVo;
-import com.zeroone.star.project.j5.vo.shiftplan.ShiftPlanUpdateVo;
 import com.zeroone.star.project.vo.JsonVO;
-import io.swagger.models.auth.In;
 
 import java.util.List;
 
@@ -35,22 +34,22 @@ public interface SchedulePlanApis {
 
     /**
      * 新增班次计划
-     * @param shiftPlanAddVo 新增班次计划数据
+     * @param shiftPlanAddDto 新增班次计划数据
      * @return  新增数据的唯一编号
      */
-    JsonVO<Long> addShiftPlan(ShiftPlanAddVo shiftPlanAddVo);
+    JsonVO<Long> addShiftPlan(ShiftPlanAddDto shiftPlanAddDto);
 
     /**
      * 更新班次计划
-     * @param shiftPlanUpdateVo 更新班次计划数据
+     * @param shiftPlanUpdateDto 更新班次计划数据
      * @return  修改的行数
      */
-    JsonVO<Long> updateShiftPlan(ShiftPlanUpdateVo shiftPlanUpdateVo);
+    JsonVO<Long> updateShiftPlan(ShiftPlanUpdateDto shiftPlanUpdateDto);
 
     /**
      * 删除排班计划v1
      * @param shiftId 排班计划id
      * @return  修改的行数
      */
-    JsonVO<Long> deleteShiftPlan(List<String> shiftId);
+    JsonVO<Long> deleteShiftPlan(List<Long> shiftId);
 }
