@@ -18,11 +18,11 @@
     </resultMap>
 
     <update id="cleanLoginInfo">
-        truncate table ktgmes.sys_logininfor;
+        truncate table zo_mes.sys_logininfor;
     </update>
 
     <delete id="deleteLoginInfo" parameterType="Long">
-        delete from ktgmes.sys_logininfor where info_id in
+        delete from zo_mes.sys_logininfor where info_id in
         <foreach collection="list" item="infoId" open="(" separator="," close=")">
             #{infoId}
         </foreach>
@@ -30,7 +30,7 @@
 
     <select id="selectLoginInfo" resultType="com.zeroone.star.sysmanagement.entity.LoginInfo"
             resultMap="LoginInfoResult">
-        select info_id, user_name, ipaddr, login_location, browser, os, status, msg, login_time from ktgmes.sys_logininfor
+        select info_id, user_name, ipaddr, login_location, browser, os, status, msg, login_time from zo_mes.sys_logininfor
         <where>
             <if test="ipaddr != null and ipaddr != ''">
                 AND ipaddr like concat('%', #{ipaddr}, '%')
