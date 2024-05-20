@@ -9,5 +9,5 @@ package com.zeroone.star.project.j5.dto.teamsettings;
  * @author interstellar
  * @version 1.0.0
  */
-public class TeamSettingsListDTO {
+public class TeamListDTO {
 }

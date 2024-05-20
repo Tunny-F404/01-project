@@ -15,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel("班组列表查询对象")
-public class TeamSettingsQuery {
+public class TeamQuery {
     @ApiModelProperty(value = "班组类型", example = "1")
     private int calendarType;
     @ApiModelProperty(value = "班组编号", example = "T004")
