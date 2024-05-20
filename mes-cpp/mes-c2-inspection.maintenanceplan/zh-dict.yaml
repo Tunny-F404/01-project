@@ -1,0 +1,14 @@
+﻿maintenanceplan:
+ summary: 修改点检保养计划
+ fields: 
+  planid: 计划ID
+  plancode: 计划编码
+  planname: 计划名称
+  plantype: 计划类型
+  circletype: 频率
+  circlecount: 次数
+  startdate: 开始时间
+  enddata: 结束时间
+  status: 状态
+  remark: 备注
+     

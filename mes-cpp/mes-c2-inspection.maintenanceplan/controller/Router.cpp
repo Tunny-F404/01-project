@@ -19,10 +19,12 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include "ModifyPlan/ModifyPlanController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
+#include "ModifyPlan/ModifyPlanController.h"
 #include "file/FileController.h"
 #include "ws/WSController.h"
 #endif
@@ -51,8 +53,10 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-
+	//绑定修改点检保养计划控制器
+	ROUTER_SIMPLE_BIND(ModifyPlanController);
 }
+
 
 #ifdef HTTP_SERVER_DEMO
 void Router::createSampleRouter()
@@ -63,6 +67,7 @@ void Router::createSampleRouter()
 	ROUTER_SIMPLE_BIND(UserController);
 	// 绑定文件控制器
 	ROUTER_SIMPLE_BIND(FileController);
+	
 	
 	// 绑定WebSocket控制器
 	router->addController(WSContorller::createShared());
