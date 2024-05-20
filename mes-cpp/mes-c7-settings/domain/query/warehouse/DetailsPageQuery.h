@@ -40,26 +40,26 @@ class DetailsPageQuery : public PageQuery
 	DTO_FIELD_INFO(warehouse_name) {
 		info->description = ZH_WORDS_GETTER("warehouse.field.warehouse_name");
 	}
-	// 位置
-	DTO_FIELD(String, location);
-	DTO_FIELD_INFO(location) {
-		info->description = ZH_WORDS_GETTER("warehouse.field.location");
-	}
-	// 面积
-	DTO_FIELD(Float32, area);
-	DTO_FIELD_INFO(area) {
-		info->description = ZH_WORDS_GETTER("warehouse.field.area");
-	}
-	//负责人
-	DTO_FIELD(String, charge);
-	DTO_FIELD_INFO(charge) {
-		info->description = ZH_WORDS_GETTER("warehouse.field.charge");
-	}
-	//备注
-	DTO_FIELD(String, remark);
-	DTO_FIELD_INFO(remark) {
-		info->description = ZH_WORDS_GETTER("warehouse.field.remark");
-	}
+	//// 位置
+	//DTO_FIELD(String, location);
+	//DTO_FIELD_INFO(location) {
+	//	info->description = ZH_WORDS_GETTER("warehouse.field.location");
+	//}
+	//// 面积
+	//DTO_FIELD(Float32, area);
+	//DTO_FIELD_INFO(area) {
+	//	info->description = ZH_WORDS_GETTER("warehouse.field.area");
+	//}
+	////负责人
+	//DTO_FIELD(String, charge);
+	//DTO_FIELD_INFO(charge) {
+	//	info->description = ZH_WORDS_GETTER("warehouse.field.charge");
+	//}
+	////备注
+	//DTO_FIELD(String, remark);
+	//DTO_FIELD_INFO(remark) {
+	//	info->description = ZH_WORDS_GETTER("warehouse.field.remark");
+	//}
 };
 
 #include OATPP_CODEGEN_END(DTO)
