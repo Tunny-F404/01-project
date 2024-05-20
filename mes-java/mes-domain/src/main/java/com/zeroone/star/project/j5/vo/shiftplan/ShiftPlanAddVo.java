@@ -13,7 +13,7 @@ public class ShiftPlanAddVo {
      * 班次序号
      */
     @ApiModelProperty(value="班次序号", example="2")
-    private Integer orderNum;
+    private Long orderNum;
 
     /**
      * 班次名称

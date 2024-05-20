@@ -13,5 +13,5 @@ public class ShiftPlanQuery extends PageQuery {
      * 排班计划id
      */
     @ApiModelProperty(value = "排班计划id", example = "1")
-    private Integer PlanId;
+    private Long PlanId;
 }

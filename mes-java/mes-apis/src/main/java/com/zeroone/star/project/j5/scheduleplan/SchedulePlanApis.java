@@ -31,26 +31,26 @@ public interface SchedulePlanApis {
      * @param shiftId 班次id，如 1
      * @return 对应id的班次计划
      */
-    JsonVO<ShiftPlanDto> queryShiftPlan(Integer shiftId);
+    JsonVO<ShiftPlanDto> queryShiftPlan(Long shiftId);
 
     /**
      * 新增班次计划
      * @param shiftPlanAddVo 新增班次计划数据
      * @return  新增数据的唯一编号
      */
-    JsonVO<Integer> addShiftPlan(ShiftPlanAddVo shiftPlanAddVo);
+    JsonVO<Long> addShiftPlan(ShiftPlanAddVo shiftPlanAddVo);
 
     /**
      * 更新班次计划
      * @param shiftPlanUpdateVo 更新班次计划数据
      * @return  修改的行数
      */
-    JsonVO<Integer> updateShiftPlan(ShiftPlanUpdateVo shiftPlanUpdateVo);
+    JsonVO<Long> updateShiftPlan(ShiftPlanUpdateVo shiftPlanUpdateVo);
 
     /**
      * 删除排班计划v1
      * @param shiftId 排班计划id
      * @return  修改的行数
      */
-    JsonVO<Integer> deleteShiftPlan(List<String> shiftId);
+    JsonVO<Long> deleteShiftPlan(List<String> shiftId);
 }

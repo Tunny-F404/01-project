@@ -13,13 +13,13 @@ public class ShiftPlanDto {
      *  班次id
      */
     @ApiModelProperty(value = "班次id", example = "1")
-    private Integer shiftId;
+    private Long shiftId;
 
     /**
      *  班次序号
      */
     @ApiModelProperty(value = "班次序号", example = "2")
-    private Integer orderNum;
+    private Long orderNum;
 
     /**
      *  班次名称
