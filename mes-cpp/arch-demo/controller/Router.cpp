@@ -19,6 +19,7 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include "AddProdWorkorderController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
