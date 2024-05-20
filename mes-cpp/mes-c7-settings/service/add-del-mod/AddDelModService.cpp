@@ -47,8 +47,8 @@ bool AddDelModService::updateData(const AddDelModDTO::Wrapper& dto)
 	return dao.update(data) == 1;
 }
 
-bool AddDelModService::removeData(uint64_t id)
+bool AddDelModService::removeData(uint64_t warehouse_id)
 {
 	AddDelModDAO dao;
-	return dao.deleteById(id) == 1;
+	return dao.deleteById(warehouse_id) == 1;
 }

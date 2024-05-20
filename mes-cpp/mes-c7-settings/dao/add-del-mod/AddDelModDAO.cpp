@@ -29,12 +29,12 @@ uint64_t AddDelModDAO::insert(const AddDelModDO & iObj)
 
 int AddDelModDAO::update(const AddDelModDO& uObj)
 {
-	string sql = "UPDATE `wm_warehouse` SET `warehouse_code`=?, `warehouse_name`=?, `location`=?, `area`=?, `charge`=?, `remark`=? WHERE `id`=?";
+	string sql = "UPDATE `wm_warehouse` SET `warehouse_code`=?, `warehouse_name`=?, `location`=?, `area`=?, `charge`=?, `remark`=? WHERE `warehouse_id`=?";
 	return sqlSession->executeUpdate(sql, "%s%s%s%d%s%s%ull", uObj.getWarehouse_code(), uObj.getWarehouse_name(), uObj.getLocation(), uObj.getArea(), uObj.getCharge(), uObj.getRemark(), uObj.getWarehouse_id());
 }
 
-int AddDelModDAO::deleteById(uint64_t id)
+int AddDelModDAO::deleteById(uint64_t warehouse_id)
 {
-	string sql = "DELETE FROM `wm_warehouse` WHERE `id`=?";
-	return sqlSession->executeUpdate(sql, "%ull", id);
+	string sql = "DELETE FROM `wm_warehouse` WHERE `warehouse_id`=?";
+	return sqlSession->executeUpdate(sql, "%ull", warehouse_id);
 }
