@@ -13,4 +13,10 @@ receipt:
   describe:
    query1: 获取单据列表（条件+分页）
    query2: 获取单据详情
+prodmgmt:
+ delete:
+  fields:
+   recptCode: 生产工单
+  describe:
+   name: 删除报工
   

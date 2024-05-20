@@ -13,6 +13,10 @@
 class DeleteWorkReportDTO : public oatpp::DTO
 {
 	DTO_INIT(DeleteWorkReportDTO, DTO);
+	// 数据库的表： pro_feedback
+	// 
+	// 生产工单编号
+	API_DTO_FIELD_DEFAULT(String, recptCode, ZH_WORDS_GETTER("prodmgmt.delete.fields.recptCode"));
 };
 
 #include OATPP_CODEGEN_END(DTO)

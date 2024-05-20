@@ -42,7 +42,7 @@ class ReceiptDetailQuery : public oatpp::DTO
 	// 数据库的表： wm_item_recpt
 
 	// 入库单编号
-	API_DTO_FIELD_DEFAULT(String, recptCode, ZH_WORDS_GETTER("receipt.query.fields.recptCode"));
+	API_DTO_FIELD_DEFAULT(String, recptCode, ZH_WORDS_GETTER("prodmgmt.delete.fields.recptCode"));
 
 };
 
