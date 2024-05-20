@@ -1,7 +1,7 @@
 package com.zeroone.star.orgstructure.controller;
 
 import com.zeroone.star.project.j2.orgstructure.dto.job.JobDTO;
-import com.zeroone.star.project.j2.orgstructure.query.JobQuery;
+import com.zeroone.star.project.j2.orgstructure.query.job.JobQuery;
 import com.zeroone.star.project.vo.JobVO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.j2.orgstructure.job.JobApis;
@@ -13,12 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 /**
- * @author 爱吃猫的鱼 Di
+ * @author 爱吃猫的鱼 Feng
  * @version 1.0.0
  * @Description: 岗位控制器
  */
-
-
 
 @RestController
 @Slf4j

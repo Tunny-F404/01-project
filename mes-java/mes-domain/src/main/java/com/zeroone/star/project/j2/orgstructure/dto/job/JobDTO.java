@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 
 /**
- * @author 爱吃猫的鱼
+ * @author 爱吃猫的鱼 Feng
  * @version 1.0.0
  * @Description:岗位相关DTO
  */
