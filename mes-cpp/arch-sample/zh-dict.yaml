@@ -1,0 +1,24 @@
+﻿sample:
+...
+...
+productionorder:
+ query:
+  summary: 获取生产工单
+  fields:
+     workorder_code: 工单编号
+     workorder_name: 工单名称
+     source_code: 来源单据
+     product_code: 产品编号
+     product_name: 产品名称
+     client_code: 客户编号
+     client_name: 客户名称
+     request_date: 需求时间
+     item_id: BOM物料ID
+     workorder_id: 生产工单ID
+     item_code: BOM物料编号
+     item_name: BOM物料名称
+     item_spc: 规格型号
+     unit_of_measure: 单位
+     item_or_product: 物料产品标识
+     quantity: 预计使用量
+
