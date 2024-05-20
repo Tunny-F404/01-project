@@ -1,0 +1,11 @@
+post:
+ query:
+  summary: 获取岗位列表
+ fields:
+  pname: 岗位名称 
+  quantity: 岗位数量
+ add:
+  summary: 新增一条岗位数据
+    
+  
+    
