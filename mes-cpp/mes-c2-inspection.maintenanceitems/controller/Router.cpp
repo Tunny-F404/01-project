@@ -1,4 +1,4 @@
-﻿/*
+/*
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
@@ -19,6 +19,7 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include"../controller/getprogect/GetProgectController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -53,6 +54,9 @@ void Router::initRouter()
 #ifdef HTTP_SERVER_DEMO
 	createSampleRouter();
 #endif
+
+	
+	ROUTER_SIMPLE_BIND(GetProgectController);
 
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(DeviceManageController);
