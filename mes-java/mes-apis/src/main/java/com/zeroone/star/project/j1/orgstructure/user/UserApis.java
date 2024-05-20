@@ -1,6 +1,8 @@
 package com.zeroone.star.project.j1.orgstructure.user;
 
+import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UserDTO;
+import com.zeroone.star.project.j1.orgstructure.query.PageQuery;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
@@ -19,23 +21,23 @@ public interface UserApis {
      * @param userQuery
      * @return
      */
-    JsonVO<List<UserDTO>> queryRoleList(UserQuery userQuery);
+    JsonVO<PageDTO<UserDTO>> queryRoleList(UserQuery userQuery);
     /**
      * 查询用户分配角色列表
+     * @param UserName
+     * @return
+     */
+    JsonVO<PageDTO<UserDTO>> queryUserRoleList(String UserName);
+    /**
+     * 添加角色
      * @param userQuery
      * @return
      */
-    JsonVO<List<UserDTO>> queryUserRoleList(UserQuery userQuery);
-    /**
-     * 添加角色
-     * @param
-     * @return
-     */
-    JsonVO<UserDTO> modifyAddRole(List id);
+    JsonVO<UserDTO> modifyAddRole(UserQuery userQuery);
     /**
      * 取消角色
-     * @param
+     * @param userQuery
      * @return
      */
-    JsonVO<UserDTO> modifyDeleteRole(List id);
+    JsonVO<UserDTO> modifyDeleteRole(UserQuery userQuery);
 }
