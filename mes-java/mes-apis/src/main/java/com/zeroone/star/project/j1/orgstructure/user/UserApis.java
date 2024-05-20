@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j1.orgstructure.user;
 
+import com.zeroone.star.project.j1.orgstructure.dto.user.CompleteUserDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UserDTO;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
 import com.zeroone.star.project.vo.JsonVO;
@@ -20,5 +21,10 @@ public interface UserApis {
      * @return 查询结果列表
      */
     JsonVO<List<UserDTO>> queryUserList(UserQuery userQuery);
-    
+    /**
+     * 获取用户详情
+     * @param userDTO 查询条件对象
+     * @return 查询结果
+     */
+    JsonVO<CompleteUserDTO> queryUser(UserDTO userDTO);
 }
