@@ -20,7 +20,7 @@
                 AND status = #{status}
             </if>
         </where>
-        order by oper_id desc
+        order by oper_id ASC
     </select>
 
 </mapper>
