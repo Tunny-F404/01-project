@@ -36,6 +36,10 @@ public:
 
 	//生成ecxcel
 	string creatExcel(const DeviceManageDelDTO::Wrapper& dto);
+
+	// 保存数据
+	uint64_t saveData(const DeviceManageDTO::Wrapper& dto);
+
 };
 
 #endif // !_DEVICEMANAGE_SERVICE_

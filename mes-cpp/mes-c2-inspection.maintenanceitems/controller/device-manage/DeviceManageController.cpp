@@ -111,3 +111,37 @@ Uint64JsonVO::Wrapper DeviceManageController::execExportProj(const DeviceManageD
 }
 
 
+Uint64JsonVO::Wrapper DeviceManageController::execAddProj(const DeviceManageDTO::Wrapper& dto)
+{
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验
+	if (!dto->subjectCode || !dto->subjectName || !dto->subjectType || !dto->subjectStandard || !dto->subjectContent || !dto->enableFlag)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->subjectCode->empty() || dto->subjectName->empty() || dto->subjectType->empty() || dto->subjectStandard->empty() 
+		|| dto->subjectContent->empty() || dto->enableFlag->empty())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	DeviceManageService service;
+	// 执行数据新增
+	uint64_t id = service.saveData(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
+}
+

@@ -13,6 +13,7 @@ device-manage:
     modify-proj: 修改一条示例数据
     remove-proj: 删除数据（支持批量删除)
     export-proj: 导出项目
+    add-proj: 新增项目
   description:
     remove-proj: 通过subject_id进行删除，支持批量删除
   excel:

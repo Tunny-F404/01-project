@@ -105,3 +105,17 @@ bool DeviceManageService::removeData(const DeviceManageDelDTO::Wrapper& dto)
 	return dao.deleteById(data) >= 1;
 }
 
+uint64_t DeviceManageService::saveData(const DeviceManageDTO::Wrapper& dto)
+{
+	// 组装DO数据
+	DeviceManageDO data;
+	// 	data.setName(dto->name.getValue(""));
+	// 	data.setSex(dto->sex.getValue(""));
+	// 	data.setAge(dto->age.getValue(1));
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, SubjectId, subjectId, SubjectCode, subjectCode, SubjectName, subjectName,
+		SubjectType, subjectType, SubjectContent, subjectContent, SubjectStandard, subjectStandard, EnableFlag, enableFlag);
+		// 执行数据添加
+	DeviceManageDAO dao;
+	return dao.insert(data);
+}
+

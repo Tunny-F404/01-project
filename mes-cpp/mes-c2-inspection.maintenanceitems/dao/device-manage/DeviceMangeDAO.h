@@ -35,6 +35,10 @@ public:
 	//查询数据以便生成excel文件
 	list<DeviceManageDO> queryById(const DeviceManageDelDO& uObj);
 
+	// 插入数据
+	uint64_t insert(const DeviceManageDO& iObj);
+
+
 };
 
 class DeviceManageDelDAO : public BaseDAO

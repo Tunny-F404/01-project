@@ -50,6 +50,10 @@ public:
 	API_DEF_ENDPOINT_INFO(ZH_WORDS_GETTER("device-manage.summary.export-proj"), exportProj, Uint64JsonVO::Wrapper);
 	API_HANDLER_ENDPOINT(API_M_POST, "/device-manage/export-proj", exportProj, BODY_DTO(DeviceManageDelDTO::Wrapper, dto), execExportProj(dto));
 
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("device-manage.summary.add-proj"), addProj, Uint64JsonVO::Wrapper);
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/device-manage/add-proj", addProj, BODY_DTO(DeviceManageDTO::Wrapper, dto), execAddProj(dto));
+
+
 
 private:
 	// 3.3 演示修改数据
@@ -60,6 +64,11 @@ private:
 	
 	//导出项目
 	Uint64JsonVO::Wrapper execExportProj(const DeviceManageDelDTO::Wrapper& dto);
+
+	Uint64JsonVO::Wrapper execAddProj(const DeviceManageDTO::Wrapper& dto);
+
+
+
 
 };
 
