@@ -32,114 +32,114 @@
 #include OATPP_CODEGEN_BEGIN(ApiController)
 
 /**
- * Î¬ĞŞµ¥¿ØÖÆÆ÷
+ * ç»´ä¿®å•æ§åˆ¶å™¨
  */
 class RepairorderController : public oatpp::web::server::api::ApiController
 {
     API_ACCESS_DECLARE(RepairorderController);
 public:
-    // Î¬ĞŞµ¥·ÖÒ³²éÑ¯ ½Ó¿ÚÃèÊö
+    // ç»´ä¿®å•åˆ†é¡µæŸ¥è¯¢ æ¥å£æè¿°
     ENDPOINT_INFO(queryRepairorder) {
-        // ¶¨Òå½Ó¿Ú±êÌâ
+        // å®šä¹‰æ¥å£æ ‡é¢˜
         API_DEF_ADD_TITLE(ZH_WORDS_GETTER("repairorder.summary.page_query_table"));
-        // ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+        // å®šä¹‰é»˜è®¤æˆæƒå‚æ•°ï¼ˆå¯é€‰å®šä¹‰ï¼Œå¦‚æœå®šä¹‰äº†ï¼Œä¸‹é¢ENDPOINTé‡Œé¢éœ€è¦åŠ å…¥API_HANDLER_AUTH_PARAMEï¼‰
         API_DEF_ADD_AUTH();
-        // ¶¨ÒåÏìÓ¦²ÎÊı¸ñÊ½
+        // å®šä¹‰å“åº”å‚æ•°æ ¼å¼
         API_DEF_ADD_RSP_JSON_WRAPPER(RepairorderPageJsonVO);
-        // ¶¨Òå·ÖÒ³²éÑ¯²ÎÊıÃèÊö
+        // å®šä¹‰åˆ†é¡µæŸ¥è¯¢å‚æ•°æè¿°
         API_DEF_ADD_PAGE_PARAMS();
-        // ¶¨ÒåÆäËû²éÑ¯²ÎÊıÃèÊö
-        API_DEF_ADD_QUERY_PARAMS(String, "repairCode", ZH_WORDS_GETTER("repairorder.query.fields.repair_code"), "REP20240721", false);      // Î¬ĞŞµ¥±àºÅ
-        API_DEF_ADD_QUERY_PARAMS(String, "repairName", ZH_WORDS_GETTER("repairorder.query.fields.repair_name"), "BUG-Table", false);        // Î¬ĞŞµ¥Ãû³Æ
-        API_DEF_ADD_QUERY_PARAMS(String, "machineryCode", ZH_WORDS_GETTER("repairorder.query.fields.machinery_code"), "M0001", false);      // Éè±¸±àÂë
-        API_DEF_ADD_QUERY_PARAMS(String, "machineryName", ZH_WORDS_GETTER("repairorder.query.fields.machinery_name"), "WG-A1-MK2", false);  // Éè±¸Ãû³Æ
-        API_DEF_ADD_QUERY_PARAMS(String, "repairResult", ZH_WORDS_GETTER("repairorder.query.fields.repair_result"), "SUCCESS", false);      // Î¬ĞŞ½á¹û (SUCCESS: Î¬ĞŞ³É¹¦; SCRAP: ±¨·Ï)
-        API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("repairorder.query.fields.status"), "PREPARE", false);                   // µ¥¾İ×´Ì¬ (PREPARE: ²İ¸å; CONFIRMED: ÒÑÈ·ÈÏ; APPROVING: ÉóÅúÖĞ; APPROVED: ÒÑÉóÅú; FINISHED: ÒÑÍê³É)
+        // å®šä¹‰å…¶ä»–æŸ¥è¯¢å‚æ•°æè¿°
+        API_DEF_ADD_QUERY_PARAMS(String, "repairCode", ZH_WORDS_GETTER("repairorder.query.fields.repair_code"), "REP20240721", false);      // ç»´ä¿®å•ç¼–å·
+        API_DEF_ADD_QUERY_PARAMS(String, "repairName", ZH_WORDS_GETTER("repairorder.query.fields.repair_name"), "BUG-Table", false);        // ç»´ä¿®å•åç§°
+        API_DEF_ADD_QUERY_PARAMS(String, "machineryCode", ZH_WORDS_GETTER("repairorder.query.fields.machinery_code"), "M0001", false);      // è®¾å¤‡ç¼–ç 
+        API_DEF_ADD_QUERY_PARAMS(String, "machineryName", ZH_WORDS_GETTER("repairorder.query.fields.machinery_name"), "WG-A1-MK2", false);  // è®¾å¤‡åç§°
+        API_DEF_ADD_QUERY_PARAMS(String, "repairResult", ZH_WORDS_GETTER("repairorder.query.fields.repair_result"), "SUCCESS", false);      // ç»´ä¿®ç»“æœ (SUCCESS: ç»´ä¿®æˆåŠŸ; SCRAP: æŠ¥åºŸ)
+        API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("repairorder.query.fields.status"), "PREPARE", false);                   // å•æ®çŠ¶æ€ (PREPARE: è‰ç¨¿; CONFIRMED: å·²ç¡®è®¤; APPROVING: å®¡æ‰¹ä¸­; APPROVED: å·²å®¡æ‰¹; FINISHED: å·²å®Œæˆ)
     }
-    // Î¬ĞŞµ¥·ÖÒ³²éÑ¯ ½Ó¿Ú´¦Àí
+    // ç»´ä¿®å•åˆ†é¡µæŸ¥è¯¢ æ¥å£å¤„ç†
     ENDPOINT(API_M_GET, "/repairorder/page-query-table", queryRepairorder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-        // ½âÎö²éÑ¯²ÎÊıÎªQueryÁìÓòÄ£ĞÍ
+        // è§£ææŸ¥è¯¢å‚æ•°ä¸ºQueryé¢†åŸŸæ¨¡å‹
         API_HANDLER_QUERY_PARAM(pageQuery, RepairorderQuery, queryParams);
-        // ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+        // å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æœ
         API_HANDLER_RESP_VO(execQueryRepairorder(pageQuery));
     }
 
-    // Î¬ĞŞµ¥ÏêÇé²éÑ¯ ½Ó¿ÚÃèÊö
+    // ç»´ä¿®å•è¯¦æƒ…æŸ¥è¯¢ æ¥å£æè¿°
     ENDPOINT_INFO(queryDetailsRepairorder) {
-        // ¶¨Òå½Ó¿Ú±êÌâ
+        // å®šä¹‰æ¥å£æ ‡é¢˜
         API_DEF_ADD_TITLE(ZH_WORDS_GETTER("repairorder.summary.details"));
-        // ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+        // å®šä¹‰é»˜è®¤æˆæƒå‚æ•°ï¼ˆå¯é€‰å®šä¹‰ï¼Œå¦‚æœå®šä¹‰äº†ï¼Œä¸‹é¢ENDPOINTé‡Œé¢éœ€è¦åŠ å…¥API_HANDLER_AUTH_PARAMEï¼‰
         API_DEF_ADD_AUTH();
-        // ¶¨ÒåÏìÓ¦²ÎÊı¸ñÊ½
+        // å®šä¹‰å“åº”å‚æ•°æ ¼å¼
         API_DEF_ADD_RSP_JSON_WRAPPER(RepairorderDetailsJsonVO);
-        // ¶¨ÒåÆäËû²éÑ¯²ÎÊıÃèÊö
-        API_DEF_ADD_QUERY_PARAMS(UInt64, "repairId", ZH_WORDS_GETTER("repairorder.query.fields.repair_id"), 0ULL, true); // Î¬ĞŞµ¥±àºÅ
+        // å®šä¹‰å…¶ä»–æŸ¥è¯¢å‚æ•°æè¿°
+        API_DEF_ADD_QUERY_PARAMS(UInt64, "repairId", ZH_WORDS_GETTER("repairorder.query.fields.repair_id"), 0ULL, true); // ç»´ä¿®å•ç¼–å·
     }
-    // Î¬ĞŞµ¥ÏêÇé²éÑ¯ ½Ó¿Ú´¦Àí
+    // ç»´ä¿®å•è¯¦æƒ…æŸ¥è¯¢ æ¥å£å¤„ç†
     ENDPOINT(API_M_GET, "/repairorder/query-details-by-id", queryDetailsRepairorder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-        // ½âÎö²éÑ¯²ÎÊıÎªQueryÁìÓòÄ£ĞÍ
+        // è§£ææŸ¥è¯¢å‚æ•°ä¸ºQueryé¢†åŸŸæ¨¡å‹
         API_HANDLER_QUERY_PARAM(repairId, RepairorderDetailsQuery, queryParams);
-        // ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+        // å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æœ
         API_HANDLER_RESP_VO(execQueryDetailsRepairorder(repairId));
     }
 
-    // Ìí¼ÓÎ¬ĞŞµ¥ ½Ó¿ÚÃèÊö
+    // æ·»åŠ ç»´ä¿®å• æ¥å£æè¿°
     ENDPOINT_INFO(addRepairorder) {
-        // ¶¨Òå½Ó¿Ú±êÌâ
+        // å®šä¹‰æ¥å£æ ‡é¢˜
         API_DEF_ADD_TITLE(ZH_WORDS_GETTER("repairorder.summary.add_repairorder"));
-        // ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+        // å®šä¹‰é»˜è®¤æˆæƒå‚æ•°ï¼ˆå¯é€‰å®šä¹‰ï¼Œå¦‚æœå®šä¹‰äº†ï¼Œä¸‹é¢ENDPOINTé‡Œé¢éœ€è¦åŠ å…¥API_HANDLER_AUTH_PARAMEï¼‰
         API_DEF_ADD_AUTH();
-        // ¶¨ÒåÏìÓ¦²ÎÊı¸ñÊ½
+        // å®šä¹‰å“åº”å‚æ•°æ ¼å¼
         API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
     }
-    // Ìí¼ÓÎ¬ĞŞµ¥ ½Ó¿Ú´¦Àí
+    // æ·»åŠ ç»´ä¿®å• æ¥å£å¤„ç†
     ENDPOINT(API_M_POST, "/repairorder/add-repairorder", addRepairorder, BODY_DTO(RepairorderDetailsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-        // ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+        // å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æœ
         API_HANDLER_RESP_VO(execAddRepairorder(dto));
     }
 
-    // ĞŞ¸ÄÎ¬ĞŞµ¥ ½Ó¿ÚÃèÊö
+    // ä¿®æ”¹ç»´ä¿®å• æ¥å£æè¿°
     ENDPOINT_INFO(modifyRepairorder) {
-        // ¶¨Òå½Ó¿Ú±êÌâ
+        // å®šä¹‰æ¥å£æ ‡é¢˜
         API_DEF_ADD_TITLE(ZH_WORDS_GETTER("repairorder.summary.modify_repairorder"));
-        // ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+        // å®šä¹‰é»˜è®¤æˆæƒå‚æ•°ï¼ˆå¯é€‰å®šä¹‰ï¼Œå¦‚æœå®šä¹‰äº†ï¼Œä¸‹é¢ENDPOINTé‡Œé¢éœ€è¦åŠ å…¥API_HANDLER_AUTH_PARAMEï¼‰
         API_DEF_ADD_AUTH();
-        // ¶¨ÒåÏìÓ¦²ÎÊı¸ñÊ½
+        // å®šä¹‰å“åº”å‚æ•°æ ¼å¼
         API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
     }
-    // Ìí¼ÓÎ¬ĞŞµ¥ ½Ó¿Ú´¦Àí
+    // æ·»åŠ ç»´ä¿®å• æ¥å£å¤„ç†
     ENDPOINT(API_M_PUT, "/repairorder/modify-repairorder", modifyRepairorder, BODY_DTO(RepairorderDetailsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-        // ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+        // å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æœ
         API_HANDLER_RESP_VO(execModifyRepairorder(dto));
     }
 
-    // É¾³ıÎ¬ĞŞµ¥ ½Ó¿ÚÃèÊö
+    // åˆ é™¤ç»´ä¿®å• æ¥å£æè¿°
     ENDPOINT_INFO(removeRepairorder) {
-        // ¶¨Òå±êÌâºÍ·µ»ØÀàĞÍÒÔ¼°ÊÚÈ¨Ö§³Ö
+        // å®šä¹‰æ ‡é¢˜å’Œè¿”å›ç±»å‹ä»¥åŠæˆæƒæ”¯æŒ
         API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("repairorder.summary.remove_repairorder"), Uint64JsonVO::Wrapper);
-        // ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+        // å®šä¹‰é»˜è®¤æˆæƒå‚æ•°ï¼ˆå¯é€‰å®šä¹‰ï¼Œå¦‚æœå®šä¹‰äº†ï¼Œä¸‹é¢ENDPOINTé‡Œé¢éœ€è¦åŠ å…¥API_HANDLER_AUTH_PARAMEï¼‰
         API_DEF_ADD_AUTH();
     }
-    // É¾³ıÎ¬ĞŞµ¥ ½Ó¿Ú´¦Àí
+    // åˆ é™¤ç»´ä¿®å• æ¥å£å¤„ç†
     ENDPOINT(API_M_DEL, "/repairorder/del-repairorder", removeRepairorder, BODY_DTO(DeleteMultipleRepairersDTO::Wrapper, repairIdList), API_HANDLER_AUTH_PARAME) {
-        // ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+        // å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æœ
         API_HANDLER_RESP_VO(execRemoveRepairorder(repairIdList));
     }
     
 private:
-    // Î¬ĞŞµ¥·ÖÒ³²éÑ¯Êı¾İ
+    // ç»´ä¿®å•åˆ†é¡µæŸ¥è¯¢æ•°æ®
     RepairorderPageJsonVO::Wrapper execQueryRepairorder(const RepairorderQuery::Wrapper& query);
 
-    // Î¬ĞŞµ¥ÏêÇé²éÑ¯
+    // ç»´ä¿®å•è¯¦æƒ…æŸ¥è¯¢
     RepairorderDetailsJsonVO::Wrapper execQueryDetailsRepairorder(const RepairorderDetailsQuery::Wrapper& id);
 
-    // Ìí¼ÓÎ¬ĞŞµ¥
+    // æ·»åŠ ç»´ä¿®å•
     Uint64JsonVO::Wrapper execAddRepairorder(const RepairorderDetailsDTO::Wrapper& dto);
 
-    // ĞŞ¸ÄÎ¬ĞŞµ¥
+    // ä¿®æ”¹ç»´ä¿®å•
     Uint64JsonVO::Wrapper execModifyRepairorder(const RepairorderDetailsDTO::Wrapper& dto);
 
-    // É¾³ıÎ¬ĞŞµ¥
+    // åˆ é™¤ç»´ä¿®å•
     Uint64JsonVO::Wrapper execRemoveRepairorder(const DeleteMultipleRepairersDTO::Wrapper& repairIdList);
 };
 
