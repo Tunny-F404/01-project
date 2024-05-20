@@ -19,6 +19,7 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include "repaircontent/RepaircontentController.h"
 
 #include "repairorder/RepairorderController.h"
 
