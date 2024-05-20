@@ -7,6 +7,7 @@ import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -104,6 +105,26 @@ public class RoleController implements RoleApis {
     @ApiOperation("修改角色信息")
     public JsonVO<RoleDTO> modifyRoleInfo(@RequestBody RoleDTO roleDTO){
         return JsonVO.success(roleDTO);
+    }
+
+    @Override
+    public JsonVO<List<RoleDTO>> queryAllocatedList(RoleDTO roleDTO, PageDTO<RoleDTO> pageDTO) {
+        return null;
+    }
+
+    @Override
+    public JsonVO<RoleDTO> addAuth(Long roleId, Long[] userIds) {
+        return null;
+    }
+
+    @Override
+    public JsonVO<List<RoleDTO>> cancelAuthUser(Long roleId, Long[] userIds) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<byte[]> export() {
+        return null;
     }
 
 }
