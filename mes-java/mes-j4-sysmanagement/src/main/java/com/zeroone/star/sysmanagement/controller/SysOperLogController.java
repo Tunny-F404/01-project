@@ -46,41 +46,30 @@ public class SysOperLogController {
     @Value("${fastdfs.nginx-servers}")
     String urlPrefix;
 
-    List<SysOperLog> sysOperLogs;
-
-
-    @PostConstruct
-    public void initData() {
-        sysOperLogs = new ArrayList<>() ;
-        List<SysOperLog> sysOperLogs = sysOperLogService.list();
-
-        for(int i = 0; i <= sysOperLogs.size(); i++) {
-            SysOperLog sysOperLog = sysOperLogs.get(i);
-            sysOperLogs.add(sysOperLog);
-        }
-    }
-
 
     @ApiOperation( value = "删除日志")
-    @DeleteMapping("/{operIds}")
+    @DeleteMapping("/remove-operlog/{operIds}")
     public JsonVO<String> deleteOperLog(@PathVariable List<Long> operIds) {
-        sysOperLogService.removeByIds(operIds);
+        Boolean result = sysOperLogService.removeByOperIds(operIds);
+        if (!result) {
+            return JsonVO.fail("删除失败");
+        }
         return JsonVO.success("删除成功");
     }
 
     @ApiOperation( value = "清空日志")
-    @DeleteMapping("/clean")
+    @DeleteMapping("/clean-operlog")
     public JsonVO<String> cleanOperLog() {
         sysOperLogService.cleanOperLog();
         return JsonVO.success("清空成功");
     }
 
     @SneakyThrows
-    @GetMapping(value = "download", produces = "application/octet-stream")
+    @GetMapping(value = "export-operlog", produces = "application/octet-stream")
     @ApiOperation(value = "导出操作日志")
     public ResponseEntity<byte[]> downloadOperLogExcel() {
 
-
+        List<SysOperLog> sysOperLogs = sysOperLogService.Operloginfo();
 
         // 构建一个输出流
         ByteArrayOutputStream out = new ByteArrayOutputStream();

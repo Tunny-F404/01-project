@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.sql.Wrapper;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -53,7 +54,18 @@ public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOper
         sysOperLogMapper.delete(queryWrapper);
     }
 
-    public PageDTO<OperationLogAddDTO> listAll(OperationLogQuery query) {
+    @Override
+    public Boolean removeByOperIds(List<Long> operIds) {
+        return sysOperLogMapper.deleteBatchIds(operIds) > 0;
+    }
+
+    @Override
+    public List<SysOperLog> Operloginfo() {
+
+       return sysOperLogMapper.selectList(null);
+    }
+
+/*    public PageDTO<OperationLogAddDTO> listAll(OperationLogQuery query) {
         // 构建分页查询对象
         Page<SysOperLog> page = new Page<>(query.getPageIndex(), query.getPageSize());
         // 构建查询条件
@@ -70,7 +82,7 @@ public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOper
         Page<SysOperLog> result = baseMapper.selectPage(page, wrapper);
         // 结果转换成DTO
         return PageDTO.create(result, src -> msOperLogMapper.operloagToOperlogDTO(src));
-    }
+    }*/
 
 }
 

@@ -7,6 +7,8 @@ import com.zeroone.star.project.query.sample.SampleQuery;
 import com.zeroone.star.sysmanagement.entity.SysOperLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 操作日志记录 服务类
@@ -19,6 +21,10 @@ public interface ISysOperLogService extends IService<SysOperLog> {
 
     void cleanOperLog();
 
-    PageDTO<OperationLogAddDTO> listAll(OperationLogQuery query);
+    Boolean removeByOperIds(List<Long> operIds);
+
+    List<SysOperLog> Operloginfo();
+
+    //PageDTO<OperationLogAddDTO> listAll(OperationLogQuery query);
 
 }
