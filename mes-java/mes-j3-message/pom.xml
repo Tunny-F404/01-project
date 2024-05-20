@@ -46,6 +46,7 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
+
         <!-- druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -83,6 +84,7 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <version>2.2.8.RELEASE</version>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>

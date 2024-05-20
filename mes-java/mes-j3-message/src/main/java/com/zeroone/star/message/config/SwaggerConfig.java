@@ -1,9 +1,7 @@
 package com.zeroone.star.message.config;
 
-<<<<<<< HEAD
-=======
+
 import com.zeroone.star.project.config.swagger.SwaggerCore;
->>>>>>> origin/j3
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.spring.web.plugins.Docket;
