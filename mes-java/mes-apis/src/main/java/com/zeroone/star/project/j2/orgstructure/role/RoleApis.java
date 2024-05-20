@@ -3,13 +3,14 @@ package com.zeroone.star.project.j2.orgstructure.role;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.vo.JsonVO;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 /**
  * 描述：角色模块接口
  *
- * @author 0xu0、天衍土豆
+ * @author 0xu0、天衍土豆 迷
  * @version 1.0.0
  */
 public interface RoleApis {
@@ -66,4 +67,25 @@ public interface RoleApis {
      */
 
     public JsonVO<RoleDTO> modifyRoleInfo( RoleDTO roleDTO);
+
+    /*
+     * 获取角色分配用户列表（条件+分页）
+     * */
+    public JsonVO<List<RoleDTO>> queryAllocatedList(RoleDTO roleDTO, PageDTO<RoleDTO> pageDTO);
+
+    /*
+     * 添加授权
+     * */
+    public JsonVO<RoleDTO> addAuth(Long roleId, Long[] userIds);
+
+    /*
+     * 取消授权（支持批量）
+     * */
+    public JsonVO<List<RoleDTO>> cancelAuthUser(Long roleId,Long[] userIds);
+
+    /*
+     * 导出角色
+     * */
+    public ResponseEntity<byte[]> export();
+
 }
