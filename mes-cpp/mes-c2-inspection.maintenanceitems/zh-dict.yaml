@@ -1,0 +1,33 @@
+project:
+ summary: 获取点检/保养项目列表（条件+分页）
+ summary1: 获取项目详情
+ fields:
+  pcode: 项目编码
+  pname: 项目名称
+  ptype: 项目类型
+  pcontent: 项目内容
+  standard: 标准
+  enable: 是否启用
+  note: 备注
+  pid: 唯一标识
+device-manage:
+  field:
+    subjectId: 项目ID
+    subjectCode: 项目编码
+    subjectName: 项目名称
+    subjectType: 项目类型
+    subjectContent: 项目内容
+    subjectStandard: 标准
+    enableFlag: 是否启用
+    subjectDelId: 需要删除的项目的ID
+    subhectExportId: 需要导出的项目的ID
+  summary:
+    modify-proj: 修改一条示例数据
+    remove-proj: 删除数据（支持批量删除)
+    export-proj: 导出项目
+    add-proj: 新增项目
+  description:
+    remove-proj: 通过subject_id进行删除，支持批量删除
+  excel:
+    filePath: "./public/excel/dv-project.xlsx"
+    sheetName: 点检保养项目

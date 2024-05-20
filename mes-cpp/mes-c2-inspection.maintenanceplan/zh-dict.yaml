@@ -1,3 +1,10 @@
+plan:
+ export-plan:
+  summary: 导出计划
+  plan-code: 计划编号
+  plan-name: 计划名称
+  plan-type: 计划类型
+  state: 状态
 machinery-list:
  field:
   record-id: 流水号

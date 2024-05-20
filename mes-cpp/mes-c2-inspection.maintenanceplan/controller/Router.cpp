@@ -29,6 +29,9 @@
 #include "ws/WSController.h"
 #endif
 
+#include "ExportPlan/ExportPlanController.h"
+
+
 
 
 // 如果定义了关闭Swagger文档宏
@@ -54,6 +57,8 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
+	
+	ROUTER_SIMPLE_BIND(ExportPlanController);
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(MachineryPlanQueryController);
 }
