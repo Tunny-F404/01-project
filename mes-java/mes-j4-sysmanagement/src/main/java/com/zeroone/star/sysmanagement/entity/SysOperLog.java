@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,7 +22,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Getter
-@Set
+@Setter
 @TableName("sys_oper_log")
 public class SysOperLog implements Serializable {
 
