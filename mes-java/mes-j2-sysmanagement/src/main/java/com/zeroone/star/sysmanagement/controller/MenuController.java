@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,7 +57,8 @@ public class MenuController implements MenuApis {
     @ApiOperation("根据条件获取资源列表")
     @Override
     public JsonVO<List<ResourceVO>> getResourceListByCondition(@RequestBody MenuConditionQuery menuConditionQuery) {
-        return null;
+        List<ResourceVO> list = new ArrayList<>();
+        return JsonVO.success(list);
     }
 
     @GetMapping("/get-resource-details/{path}")
