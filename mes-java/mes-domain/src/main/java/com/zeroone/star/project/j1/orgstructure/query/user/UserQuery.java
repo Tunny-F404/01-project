@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 @Data
 @ApiModel("新增用户")
 public class UserQuery {
-    @ApiModelProperty(value = "用户ID", example = "1")
+    @ApiModelProperty(value = "用户ID", example = "1", required = true)
     private Long userId;
     @ApiModelProperty(value = "部门ID", example = "4")
     private Long deptId;
-    @ApiModelProperty(value = "用户账户", example = "admin")
+    @ApiModelProperty(value = "用户账户", example = "admin", required = true)
     private String userName;
-    @ApiModelProperty(value = "用户昵称", example = "管理员")
+    @ApiModelProperty(value = "用户昵称", example = "管理员", required = true)
     private String nickName;
     @ApiModelProperty(value = "用户类型 00为系统用户", example = "00")
     private String userType;
