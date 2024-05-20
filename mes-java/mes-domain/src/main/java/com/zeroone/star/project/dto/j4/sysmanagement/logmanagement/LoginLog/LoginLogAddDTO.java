@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Date;
 @ApiModel("登录日志传输数据对象")
 public class LoginLogAddDTO {
     /**
-     * 用户访问ID
+     * 用户访问编号
      */
     @ApiModelProperty(value = "用户访问编号",example = "1")
     private Long infoId;
@@ -27,7 +28,7 @@ public class LoginLogAddDTO {
     private String userName;
 
     /**
-     * 登录IP地址
+     * 登录地址
      */
     @ApiModelProperty(value = "登录地址",example = "127.0.0.1")
     private String ipaddr;
@@ -65,6 +66,6 @@ public class LoginLogAddDTO {
     /**
      * 访问时间
      */
-    @ApiModelProperty(value = "登录的访问时间",example = "2024-05-19 10:00:00")
-    private Date loginTime;
+    @ApiModelProperty(value = "访问时间",example = "2024-05-19 10:00:00")
+    private LocalDateTime loginTime;
 }

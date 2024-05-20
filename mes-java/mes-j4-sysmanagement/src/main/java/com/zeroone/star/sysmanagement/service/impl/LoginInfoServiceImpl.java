@@ -1,5 +1,6 @@
 package com.zeroone.star.sysmanagement.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.sysmanagement.entity.LoginInfo;
 import com.zeroone.star.sysmanagement.mapper.LoginInfoMapper;
 import com.zeroone.star.sysmanagement.service.LoginInfoService;
@@ -17,23 +18,24 @@ import java.util.List;
  * @since 2024-05-19
  */
 @Service
-public class LoginInfoServiceImpl implements LoginInfoService {
+public class LoginInfoServiceImpl extends ServiceImpl<LoginInfoMapper, LoginInfo> implements LoginInfoService {
 
     @Resource
     private LoginInfoMapper loginInfoMapper;
 
+
     @Override
-    public List<LoginInfo> selectLoginInfo(LoginInfo loginInfo) {
-        return null;
+    public List<LoginInfo> listLoginInfo() {
+        return loginInfoMapper.selectLoginInfo();
     }
 
     @Override
-    public Long deleteLoginInfo(List<Long> infoId) {
-        return null;
+    public Long removeLoginInfo(List<Long> ids) {
+        return loginInfoMapper.deleteLoginInfo(ids);
     }
 
     @Override
     public void clearLoginInfo() {
-
+        loginInfoMapper.cleanLoginInfo();
     }
 }

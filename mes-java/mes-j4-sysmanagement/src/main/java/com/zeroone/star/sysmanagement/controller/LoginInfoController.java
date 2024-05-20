@@ -3,7 +3,6 @@ package com.zeroone.star.sysmanagement.controller;
 
 import cn.hutool.core.date.DateTime;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
-import com.zeroone.star.project.dto.j4.sysmanagement.logmanagement.LoginLog.LoginLogAddDTO;
 import com.zeroone.star.project.j4.sysmanagement.logmanagement.LoginLogApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanagement.entity.LoginInfo;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,9 +47,11 @@ public class LoginInfoController implements LoginLogApis {
     @DeleteMapping("remove-LoginLog/{ids}")
     @Override
     public JsonVO<Long> removeLoginLog(@PathVariable List<Long> ids) {
-        Long result = loginInfoService.deleteLoginInfo(ids);
-        //测试
-        return JsonVO.success(result);
+        Long result = loginInfoService.removeLoginInfo(ids);
+        if (result > 0)
+            return JsonVO.success(result);
+        else
+            return JsonVO.fail(result);
     }
 
     /**
@@ -63,7 +62,6 @@ public class LoginInfoController implements LoginLogApis {
     @Override
     public JsonVO<String> clearLoginLog() {
         loginInfoService.clearLoginInfo();
-        //测试
         return JsonVO.success("清空成功");
     }
 
@@ -77,19 +75,8 @@ public class LoginInfoController implements LoginLogApis {
     @Override
     public ResponseEntity<byte[]> exportLoginLog() {
 
-        //测试数据
-        List<LoginInfo> logList=new ArrayList<>();
-        LoginInfo log=new LoginInfo();
-        log.setInfoId(1L);
-        log.setUserName("jingzi");
-        log.setIpaddr("127.0.0.1");
-        log.setLoginLocation("内网IP");
-        log.setBrowser("Chrome 12");
-        log.setOs("Windows 10");
-        log.setStatus("0");
-        log.setMsg("登录成功");
-        log.setLoginTime(LocalDateTime.now());
-        logList.add(log);
+
+        List<LoginInfo> logList = loginInfoService.listLoginInfo();
 
         //创建输出流
         ByteArrayOutputStream out = new ByteArrayOutputStream();

@@ -2,9 +2,11 @@ package com.zeroone.star.project.j4.sysmanagement.logmanagement;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.j4.sysmanagement.logmanagement.LoginLog.LoginLogAddDTO;
+import com.zeroone.star.project.query.j4.sysmanagement.logmanagement.LoginLog.SampleQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 
+import java.time.temporal.Temporal;
 import java.util.List;
 
 /**
