@@ -91,7 +91,8 @@ public class LoginInfoController implements LoginLogApis {
         //构建响应头
         HttpHeaders headers = new HttpHeaders();
         String filename = "report" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
-        headers.setContentDispositionFormData("attachment", filename);
+//        headers.setContentDispositionFormData("attachment", filename);
+        headers.add("Content-Disposition", "attachment;filename=" + filename);
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
         //响应文件给客户端
