@@ -6,7 +6,6 @@
 #include "domain/vo/BaseJsonVO.h"
 #include "domain/GlobalInclude.h"
 #include "domain/dto/AmStation/AddWorkStationDTO.h"
-#include "domain/vo/AmStation/AddWorkStationVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen

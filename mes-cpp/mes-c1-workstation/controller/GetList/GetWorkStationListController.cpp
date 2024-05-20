@@ -3,5 +3,5 @@
 
 GetWorkStationListPageJsonVO::Wrapper GetWorkStationListController::execWorkStationList(const GetWorkStationListQuery::Wrapper& query)
 {
-	return GetWorkStationListPageJsonVO::Wrapper();
+	return {};
 }

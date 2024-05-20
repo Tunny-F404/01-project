@@ -3,5 +3,5 @@
 
 Uint64JsonVO::Wrapper AddWorkStationController::execAddWorkStation(const AddWorkStationDTO::Wrapper& dto)
 {
-	return Uint64JsonVO::Wrapper();
+	return {};
 }
