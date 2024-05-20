@@ -1,6 +1,0 @@
-# 应用名称
-server:
-  port: ${sp.ee}
-spring:
-  application:
-    name: ${sn.ee}
