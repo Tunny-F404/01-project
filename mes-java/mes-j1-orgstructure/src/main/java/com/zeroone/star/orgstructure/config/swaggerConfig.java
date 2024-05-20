@@ -1,4 +1,4 @@
-package com.zeroone.star.mycenter.config;
+package com.zeroone.star.orgstructure.config;
 
 import com.zeroone.star.project.config.swagger.SwaggerCore;
 import org.springframework.context.annotation.Bean;

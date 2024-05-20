@@ -1,4 +1,4 @@
-package com.zeroone.star.mycenter.config;
+package com.zeroone.star.orgstructure.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

@@ -1,8 +1,10 @@
 package com.zeroone.star.syshome;
 
+import com.netflix.config.samples.SampleApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * <p>
@@ -15,10 +17,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableFeignClients
 public class SysHomeApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(SysHomeApplication.class, args);
     }
-
 }

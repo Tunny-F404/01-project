@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 public class swaggerConfig {
 
     @Bean
-    Docket DepartmentApis() {
+    Docket SysHomeApis() {
         return SwaggerCore.defaultDocketBuilder("个人中心模块","com.zeroone.star.mycenter.controller","mycenter");
 }
 

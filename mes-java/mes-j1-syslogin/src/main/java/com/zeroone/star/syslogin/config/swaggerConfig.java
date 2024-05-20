@@ -1,4 +1,4 @@
-package com.zeroone.star.mycenter.config;
+package com.zeroone.star.syslogin.config;
 
 import com.zeroone.star.project.config.swagger.SwaggerCore;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ public class swaggerConfig {
 
     @Bean
     Docket DepartmentApis() {
-        return SwaggerCore.defaultDocketBuilder("组织架构模块","com.zeroone.star.orgstructure.controller","orgstructure");
+        return SwaggerCore.defaultDocketBuilder("系统登录模块","com.zeroone.star.syslogin.controller","syslogin");
 }
 
 

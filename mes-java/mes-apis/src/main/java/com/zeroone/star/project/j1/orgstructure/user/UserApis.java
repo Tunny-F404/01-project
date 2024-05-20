@@ -7,5 +7,5 @@ package com.zeroone.star.project.j1.orgstructure.user;
  * @author twelve
  * @version 1.0.0
  */
-public class UserApis {
+public interface UserApis {
 }
