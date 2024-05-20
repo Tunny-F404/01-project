@@ -1,6 +1,0 @@
-sample:
- get:
-  summary: 测试请求
-  field:
-   uid: 
-    desc: 用户编号

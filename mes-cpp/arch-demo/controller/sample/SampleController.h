@@ -24,7 +24,6 @@
 #include "domain/query/sample/SampleQuery.h"
 #include "domain/dto/sample/SampleDTO.h"
 #include "domain/vo/sample/SampleVO.h"
-
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
@@ -40,7 +39,7 @@ public:
 	// 3.1 定义查询接口描述
 	ENDPOINT_INFO(querySample) {
 		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("sample.get.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("sample.fields.summary"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
