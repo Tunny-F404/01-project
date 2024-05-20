@@ -1,6 +1,7 @@
-package com.zeroone.star.project.j5.dto.schedualplan;
+package com.zeroone.star.project.j5.query.schedualplan;
 
 
+import com.zeroone.star.project.query.PageQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,28 +20,22 @@ import java.time.LocalDate;
  */
 @Data
 @ApiModel("查询排班计划数据对象")
-public class PlanQueryDTO {
-
-    @ApiModelProperty(value = "页码",example = "1")
-    private Long page = 1L;
-
-    @ApiModelProperty(value = "页码",example = "10")
-    private Integer size = 10;
+public class PlanQuery extends PageQuery {
 
     @ApiModelProperty(value = "班组类型",example = "机加工")
     private String teamType;
 
-    @ApiModelProperty(value = "计划编号")
+    @ApiModelProperty(value = "计划编号",example = "PLAN20240511")
     private String planNumber;
 
-    @ApiModelProperty(value = "计划名称")
+    @ApiModelProperty(value = "计划名称",example = "PlanA")
     private String planName;
 
-    @ApiModelProperty(value = "开始日期")
+    @ApiModelProperty(value = "开始日期",example = "2024-05-19")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
-    @ApiModelProperty(value = "结束日期")
+    @ApiModelProperty(value = "结束日期",example = "2024-05-31")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private  LocalDate endDate;
 
