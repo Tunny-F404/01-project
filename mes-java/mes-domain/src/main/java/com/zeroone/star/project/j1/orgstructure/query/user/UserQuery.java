@@ -16,6 +16,10 @@ public class UserQuery {
     private Long userId;
     @ApiModelProperty(value = "部门ID", example = "4")
     private Long deptId;
+    @ApiModelProperty(value = "岗位ID", example = "1")
+    private Long postId;
+    @ApiModelProperty(value = "角色ID", example = "1")
+    private Long roleId;
     @ApiModelProperty(value = "用户账户", example = "admin", required = true)
     private String userName;
     @ApiModelProperty(value = "用户昵称", example = "管理员", required = true)
