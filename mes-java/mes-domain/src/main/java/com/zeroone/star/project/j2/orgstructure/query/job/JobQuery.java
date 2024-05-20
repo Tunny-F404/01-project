@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 
 /**
- * @author 爱吃猫的鱼
+ * @author 爱吃猫的鱼 Feng
  * @version 1.0.0
  * @Description:岗位相关Query
  */
@@ -38,4 +38,12 @@ public class JobQuery {
 
     @ApiModelProperty(value = "备注",example = "1")
     String remark;
+
+
+    @ApiModelProperty(value = "当前页", example = "1")
+    private Integer page;
+
+    @ApiModelProperty(value = "每页数量", example = "10")
+    private Integer size;
 }
+
