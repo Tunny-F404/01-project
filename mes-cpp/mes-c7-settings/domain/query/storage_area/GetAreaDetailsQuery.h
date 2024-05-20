@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2022/10/25 11:34:14
+ @Date: 2022/10/25 11:36:29
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,21 +17,23 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DETAILSPAGEVO_VO_
-#define _DETAILSPAGEVO_VO_
-
+#ifndef _GETAREADETAILS_QUERY_
+#define _GETAREADETAILS_QUERY_
 #include "../../GlobalInclude.h"
-#include "../../dto/warehouse/DetailsPageDTO.h"
+#include "domain/query/PageQuery.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
-/**
- * 分页显示JsonVO，用于响应给客户端的Json对象
- */
-class DetailsPageJsonVO : public JsonVO<DetailsPageDTO::Wrapper> {
-	DTO_INIT(DetailsPageJsonVO, JsonVO<DetailsPageDTO::Wrapper>);
+//分页查询对象
+
+class GetAreaDetailsQuery : public oatpp::DTO
+{
+	DTO_INIT( GetAreaDetailsQuery, PageQuery);
+	//仓库名称
+	API_DTO_FIELD_DEFAULT(String, warehouse_name, ZH_WORDS_GETTER("warehouse.field.warehouse_name"));
+	//库区名称
+	API_DTO_FIELD_DEFAULT(String, location_name, ZH_WORDS_GETTER("location.field.location_name"));
 };
 
 #include OATPP_CODEGEN_END(DTO)
-
-#endif // !_SAMPLE_VO_
+#endif // !_SAMPLE_DTO_
