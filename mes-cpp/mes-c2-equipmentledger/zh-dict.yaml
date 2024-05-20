@@ -16,6 +16,23 @@ equipment:
   status: 状态
   ct: 创建时间
   note: 备注
+  
+list-dtO: 列表DTO
+equipmentledger:
+ remove-device:
+  summary: 删除设备
+ export-device:
+  summary: 导出设备
+  device-code: 设备编码
+  device-name: 设备名称
+ import-device:
+  summary: 导入模板
+  success-count: 成功条数
+  fail_count: 失败条数
+ upload-file:
+  summary: 上传文件
+ download-template:
+  summary: 下载导入模板
  class:
   id: 主键
   cname: 设备分类

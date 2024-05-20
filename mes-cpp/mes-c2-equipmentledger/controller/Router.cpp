@@ -19,7 +19,6 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include"../controller/equipment/EquipmentController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -27,6 +26,12 @@
 #include "file/FileController.h"
 #include "ws/WSController.h"
 #endif
+
+#include "Equipment/EquipmentController.h"
+#include "RemoveDevice/RemoveDeviceController.h"
+#include "ExportDevice/ExportDeviceController.h"
+#include "ImportDevice/ImportDeviceController.h"
+#include "DownloadTemplate/DownloadTemplate.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -54,6 +59,29 @@ void Router::initRouter()
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(EquipmentController);
 
+	/**
+	 * 删除设备
+	 * 负责人：。好
+	 */
+	ROUTER_SIMPLE_BIND(RemoveDeviceController);
+
+	/**
+	 * 导出设备
+	 * 负责人：。好
+	 */
+	ROUTER_SIMPLE_BIND(ExportDeviceController);
+
+	/**
+	 * 导入设备
+	 * 负责人：。好
+	 */
+	ROUTER_SIMPLE_BIND(ImportDeviceController);
+
+	/**
+	 * 下载导入模板
+	 * 负责人：。好
+	 */
+	ROUTER_SIMPLE_BIND(DownloadTemplateController);
 }
 
 #ifdef HTTP_SERVER_DEMO
