@@ -1,23 +1,23 @@
 planSubject:
  query:
-  summary: »ñÈ¡¼Æ»®Òª´¦ÀíµÄÏîÄ¿ÁĞ±í
+  summary: è·å–è®¡åˆ’è¦å¤„ç†çš„é¡¹ç›®åˆ—è¡¨
  fields:
-  subId: ÏîÄ¿ID
-  subCode: ÏîÄ¿±àÂë
-  subName: ÏîÄ¿Ãû³Æ
-  subType: ÏîÄ¿ÀàĞÍ
-  subContent: ÏîÄ¿ÄÚÈİ
-  subStandard: ÏîÄ¿±ê×¼
-  enable: ÊÇ·ñÆôÓÃ
-  remark: ±¸×¢
-  ccreateby: ´´½¨Õß
-  createtime: ´´½¨Ê±¼ä
-  updateby: ¸üĞÂÕß
-  updatetime: ¸üĞÂÊ±¼ä
+  subId: é¡¹ç›®ID
+  subCode: é¡¹ç›®ç¼–ç 
+  subName: é¡¹ç›®åç§°
+  subType: é¡¹ç›®ç±»å‹
+  subContent: é¡¹ç›®å†…å®¹
+  subStandard: é¡¹ç›®æ ‡å‡†
+  enable: æ˜¯å¦å¯ç”¨
+  remark: å¤‡æ³¨
+  ccreateby: åˆ›å»ºè€…
+  createtime: åˆ›å»ºæ—¶é—´
+  updateby: æ›´æ–°è€…
+  updatetime: æ›´æ–°æ—¶é—´
  fieldsDesc:
   subType:
-   inspection: Éè±¸µã¼ì
-   maintenance: Éè±¸±£Ñø
+   inspection: è®¾å¤‡ç‚¹æ£€
+   maintenance: è®¾å¤‡ä¿å…»
    
    
      
