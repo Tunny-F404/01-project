@@ -1,0 +1,12 @@
+project:
+ summary: 获取点检/保养项目列表（条件+分页）
+ summary1: 获取项目详情
+ fields:
+  pcode: 项目编码
+  pname: 项目名称
+  ptype: 项目类型
+  pcontent: 项目内容
+  standard: 标准
+  enable: 是否启用
+  note: 备注
+  pid: 唯一标识
