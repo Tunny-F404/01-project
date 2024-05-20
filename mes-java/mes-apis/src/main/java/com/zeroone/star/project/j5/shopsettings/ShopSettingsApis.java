@@ -10,4 +10,5 @@ package com.zeroone.star.project.j5.shopsettings;
  * @version 1.0.0
  */
 public interface ShopSettingsApis {
+    public getShopSeetingController(ShopsettingsDTO shopsettingsDTO,)
 }
