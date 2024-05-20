@@ -14,5 +14,5 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan("com.zeroone.star.project.config.mybatis")
-public class MyBaitsInit {
+public class MyBatisInit {
 }
