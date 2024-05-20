@@ -3,7 +3,7 @@ package com.zeroone.star.sysmanagement.controller;
 import cn.hutool.core.date.DateTime;
 
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
-import com.zeroone.star.project.j2.sysmanagement.ParameterApis;
+import com.zeroone.star.project.j2.sysManagement.param.ParameterApis;
 import com.zeroone.star.project.j2.sysmanagent.dto.PageDTO;
 import com.zeroone.star.project.j2.sysmanagent.dto.ParameterDTO;
 import com.zeroone.star.project.j2.sysmanagent.query.ParameterQuery;

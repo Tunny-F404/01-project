@@ -1,6 +1,6 @@
 package com.zeroone.star.sysmanagement.controller;
 
-import com.zeroone.star.project.j2.sysmanagement.MenuApis;
+import com.zeroone.star.project.j2.sysManagement.menu.MenuApis;
 import com.zeroone.star.project.j2.sysmanagent.dto.MenuDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;

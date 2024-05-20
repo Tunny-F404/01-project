@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagement;
+package com.zeroone.star.project.j2.sysManagement.menu;
 
 import com.zeroone.star.project.j2.sysmanagent.dto.MenuDTO;
 import com.zeroone.star.project.vo.JsonVO;
