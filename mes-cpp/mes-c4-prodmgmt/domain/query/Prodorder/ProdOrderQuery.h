@@ -22,6 +22,7 @@
 
 #include "../../GlobalInclude.h"
 #include "domain/query/PageQuery.h"
+#include "domain/do/MenuDO/MenuDO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
@@ -33,7 +34,33 @@ class ProdOrderQuery : public PageQuery
 	// 定义初始化
 	DTO_INIT(ProdOrderQuery, PageQuery);
 	// 昵称
-	API_DTO_FIELD_DEFAULT(String, nickname, ZH_WORDS_GETTER("use.field.nickname"));
+	//API_DTO_FIELD_DEFAULT(String, nickname, ZH_WORDS_GETTER("use.field.nickname"));
+	// 任务名
+	API_DTO_FIELD_DEFAULT(String, task_name,ZH_WORDS_GETTER(prod.query.summary.taskName))
+	// 工作站
+	API_DTO_FIELD_DEFAULT(String, workstation_name,ZH_WORDS_GETTER(prod.query.summary.workstationName))
+	// 工序
+	API_DTO_FIELD_DEFAULT(String, process_name, ZH_WORDS_GETTER(prod.query.summary.processName))
+	// 开始时间
+	API_DTO_FIELD_DEFAULT(String, start_time, ZH_WORDS_GETTER(prod.query.summary.startTime))
+	// 结束时间
+	API_DTO_FIELD_DEFAULT(String, end_time, ZH_WORDS_GETTER(prod.query.summary.endTime))
+};
+
+class ProdOrderTreeQuery : public ProdOrderDO
+{
+	// 定义初始化
+	DTO_INIT(ProdOrderTreeQuery, ProdOrderDO);
+	// 任务名
+	API_DTO_FIELD_DEFAULT(string, task_name, ZH_WORDS_GETTER(prod.query.summary.taskName))
+	// 工作站
+	API_DTO_FIELD_DEFAULT(string, workstation_name, ZH_WORDS_GETTER(prod.query.summary.workstationName))
+	// 工序
+	API_DTO_FIELD_DEFAULT(string, process_name, ZH_WORDS_GETTER(prod.query.summary.processName))
+	// 开始时间
+	API_DTO_FIELD_DEFAULT(string, start_time, ZH_WORDS_GETTER(prod.query.summary.startTime))
+	// 结束时间
+	API_DTO_FIELD_DEFAULT(string, end_time, ZH_WORDS_GETTER(prod.query.summary.endTime))
 };
 
 #include OATPP_CODEGEN_END(DTO)

@@ -1,5 +1,26 @@
 prod:
  query:
-  summary: 
+  summary:
+   taskName: 任务名
+   workstationName: 工作站
+   processName: 工序
+   startTime: 开始时间
+   endTime: 结束时间
  field:
-   
+  taskName: 任务名
+  workstationName: 工作站
+  processName: 工序
+  startTime: 开始时间
+  endTime: 结束时间
+ get:
+  sumamry: 分页获取生产任务列表
+ set:
+  sumamry: 设置生产任务
+ put:
+  summary: 修改一条生产任务
+ delete:
+  summary: 删除一条生产任务
+ query-one:
+  summary: 使用声明式服务查询一条生产任务
+ query-all:
+  summary: 使用声明式服务查询多条生产任务

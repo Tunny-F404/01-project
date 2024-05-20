@@ -46,7 +46,7 @@ bool getStartArg(int argc, char* argv[]) {
 	// 数据库连接信息
 	std::string dbUsername = "root";
 	std::string dbPassword = "123456";
-	std::string dbName = "ktgmes";
+	std::string dbName = "zo_mes";
 	std::string dbHost = "192.168.174.130";
 	int dbPort = 3306;
 	int dbMax = 5;
