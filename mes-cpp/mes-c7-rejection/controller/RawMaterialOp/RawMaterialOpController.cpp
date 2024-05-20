@@ -10,6 +10,13 @@ Uint64JsonVO::Wrapper RawMaterialOpController::execRemoveRawMaterialOp(const UIn
 	return Uint64JsonVO::Wrapper();
 }
 
+Uint64JsonVO::Wrapper RawMaterialOpController::execModifyRawMaterialOp(const RawMaterialOpDTO::Wrapper& dto)
+{
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	return jvo;
+}
+
 std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse> RawMaterialOpController::execDownloadFile(const String& filename)
 {
 	// 构建文件全路径

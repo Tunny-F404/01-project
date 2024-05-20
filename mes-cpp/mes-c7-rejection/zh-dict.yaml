@@ -4,7 +4,7 @@ RawMaterialOp:
  post:
   summary: 添加生产退料单行列表
  put:
-  summary: 修改生产退料单行列表
+  summary: 执行退料（修改退料单）
  delete:
   summary: 删除生产退料单行列表（支持批量删除）
  field:

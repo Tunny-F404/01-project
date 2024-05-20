@@ -34,6 +34,13 @@ public:
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/RawMaterialOp/{id}", removeRawMaterialOp, PATH(UInt64, id), execRemoveRawMaterialOp(id));
 
 
+	// 3.1 定义修改接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("RawMaterialOp.put.summary"), modifyRawMaterialOp, Uint64JsonVO::Wrapper);
+	// 3.2 定义修改接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/RawMaterialOp/{oprator}", modifyRawMaterialOp, BODY_DTO(RawMaterialOpDTO::Wrapper, dto), execModifyRawMaterialOp(dto));
+
+
+
 	// 定义文件下载接口
 	ENDPOINT_INFO(downloadFile) {
 		API_DEF_ADD_COMMON(ZH_WORDS_GETTER("RawMaterialOp.file.download.summary"), Void);
@@ -43,9 +50,16 @@ public:
 	ENDPOINT(API_M_GET, "/file/download", downloadFile, QUERY(String, filename)) {
 		return execDownloadFile(filename);
 	}
+
+
+
+
 private:
 	// 删除生产退料单行列表（支持批量删除）
 	Uint64JsonVO::Wrapper execRemoveRawMaterialOp(const UInt64& id);
+
+	// 3.3 修改生产退料单行数据
+	Uint64JsonVO::Wrapper execModifyRawMaterialOp(const RawMaterialOpDTO::Wrapper& dto);
 
 	// 执行文件下载处理
 	std::shared_ptr<OutgoingResponse> execDownloadFile(const String& filename);

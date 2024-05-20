@@ -5,6 +5,7 @@
 #include "../GlobalInclude.h"
 #include "../dto/RawMaterialOp/RawMaterialOpDTO.h"
 
+
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
