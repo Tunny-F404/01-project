@@ -5,6 +5,7 @@ import com.zeroone.star.project.j5.query.shiftplan.ShiftPlanQuery;
 import com.zeroone.star.project.j5.vo.shiftplan.ShiftPlanAddVo;
 import com.zeroone.star.project.j5.vo.shiftplan.ShiftPlanUpdateVo;
 import com.zeroone.star.project.vo.JsonVO;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 
@@ -45,4 +46,11 @@ public interface SchedulePlanApis {
      * @return  修改的行数
      */
     JsonVO<Integer> updateShiftPlan(ShiftPlanUpdateVo shiftPlanUpdateVo);
+
+    /**
+     * 删除排班计划v1
+     * @param shiftId 排班计划id
+     * @return  修改的行数
+     */
+    JsonVO<Integer> deleteShiftPlan(List<String> shiftId);
 }
