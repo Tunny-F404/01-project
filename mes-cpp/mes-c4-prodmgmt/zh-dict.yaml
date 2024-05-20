@@ -1,0 +1,21 @@
+ProdWorkorder:
+ field:
+  workorderId: 编号
+  workorderCode: 工单编号
+  workorderName: 工单名称
+  orderSource: 来源类型
+  sourceCode: 订单编号
+  status: 单据状态
+  workorderType: 工单类型
+  productId: 产品ID
+  productCode: 产品编号
+  productName: 产品名称
+  productSpc: 规格型号
+  unitOfMeasure: 单位
+  quantity: 生产数量
+  requestDate: 需求日期
+  batchCode: 批次号
+  clientId: 客户ID
+  clientCode: 客户编码
+  clientName: 客户名称
+  remark: 备注
