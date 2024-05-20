@@ -57,3 +57,8 @@ Uint64JsonVO::Wrapper EquipmentController::executeModifyEquipment(const modifyEq
 	res->success(true);
 	return res;
 }
+
+EquipmentClassifyJsonVO::Wrapper EquipmentController::executeEquipmentClassify(const EquipmentClassifyDTO::Wrapper& dto)
+{
+	return {};
+}
