@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j5.dto.shopsettings;
 
+import com.zeroone.star.project.dto.PageDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetShopSettingsDTO implements Serializable {
+public class GetShopSettingsDTO  extends PageDTO {
     private Long workshop_id;
     private String workshop_code;
     private String workshop_name;
