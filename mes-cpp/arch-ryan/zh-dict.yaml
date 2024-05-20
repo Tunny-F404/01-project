@@ -1,0 +1,12 @@
+storage:
+ query:
+  summary: 获取供应商退货单
+ fields: 
+   rtid: 退货单编号
+   rtname: 退货单名称 
+   poid: 采购订单编号 
+   veid: 供应商编码
+   vename: 供应商名称 
+   rtdate: 退货日期 
+   status: 单据状态
+   action: 操作
