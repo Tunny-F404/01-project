@@ -36,6 +36,13 @@ class ProductDetailDTO :public ProductTableDTO
 	API_DTO_FIELD(String, premark, ZH_WORDS_GETTER("product.fields.premark"), true, "");
 
 };
+class ProductPageDTO :public PageDTO<ProductTableDTO::Wrapper> {
+	DTO_INIT(ProductPageDTO, PageDTO<ProductTableDTO::Wrapper>);
+};
+//class ProductPageDTO :public PageDTO<ProductDetailDTO::Wrapper> {
+//	DTO_INIT(ProductPageDTO, PageDTO<ProductDetailDTO::Wrapper>);
+//};
+
 
 #include OATPP_CODEGEN_END(DTO)
 #endif

@@ -33,12 +33,12 @@ public:
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ProductQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execProductTable(query));
+		API_HANDLER_RESP_VO(execProductTable(query, authObject->getPayload()));
 	}
 
 private:
 	// 查询数据
-	ProductTableJsonVO::Wrapper execProductTable(const ProductQuery::Wrapper& query);
+	ProductTableJsonVO::Wrapper execProductTable(const ProductQuery::Wrapper& query,const PayloadDTO& payload);
 };
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 #endif

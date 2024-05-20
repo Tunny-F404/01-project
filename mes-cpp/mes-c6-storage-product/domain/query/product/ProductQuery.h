@@ -10,10 +10,10 @@
 /**
  * 生产领料列表查询
  */
-class ProductQuery : public oatpp::DTO
+class ProductQuery : public PageQuery
 {
 	// 定义初始化
-	DTO_INIT(ProductQuery, DTO);
+	DTO_INIT(ProductQuery, PageQuery);
 	//领料单编号
 	API_DTO_FIELD_DEFAULT(String, pnum, ZH_WORDS_GETTER("product.fields.pnum"));
 	//领料单名称

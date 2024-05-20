@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "ProductController.h"
 
-ProductTableJsonVO::Wrapper ProductController::execProductTable(const ProductQuery::Wrapper& query)
+ProductTableJsonVO::Wrapper ProductController::execProductTable(const ProductQuery::Wrapper& query,const PayloadDTO& payload)
 {
-	return ProductTableJsonVO::Wrapper();
+	auto jov = ProductTableJsonVO::createShared();
+	return jov;
 }
