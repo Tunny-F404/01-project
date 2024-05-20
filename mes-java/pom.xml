@@ -381,7 +381,6 @@
                             </goals>
                         </execution>
                     </executions>
-
                 </plugin>
                 <plugin>
                     <groupId>io.fabric8</groupId>
