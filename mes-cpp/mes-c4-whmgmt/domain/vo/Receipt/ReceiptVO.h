@@ -19,6 +19,17 @@ public:
 	}
 };
 
+/**
+* 定义一个获取单据详情的显示VO
+*/
+class ReceiptDetailJsonVO : public JsonVO<ReceiptDetailDTO::Wrapper>
+{
+	DTO_INIT(ReceiptDetailJsonVO, JsonVO<ReceiptDetailDTO::Wrapper>);
+public:
+	ReceiptDetailJsonVO() {
+		this->data = {};
+	}
+};
 #include OATPP_CODEGEN_END(DTO)
 
 #endif // _RECEIPTVO_VO_H

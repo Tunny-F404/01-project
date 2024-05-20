@@ -45,13 +45,12 @@ class ReceiptDTO : public oatpp::DTO
 class ReceiptPageTableDTO : public PageDTO<ReceiptDTO::Wrapper>
 {
 	DTO_INIT(ReceiptPageTableDTO, PageDTO<ReceiptDTO::Wrapper>);
-
-	//API_DTO_FIELD(List<ReceiptTableDTO::Wrapper>, data, ZH_WORDS_GETTER("receipt.query.describe.query1"), false, "ReceiptTableDTO");
 };
+
 /**
 * 单据列表数据详情
 */
-class ReceiptDetailDTO : public ReceiptPageTableDTO
+class ReceiptDetailDTO : public ReceiptDTO
 {
 	DTO_INIT(ReceiptDetailDTO, DTO);
 	// 数据库的表： wm_item_recpt

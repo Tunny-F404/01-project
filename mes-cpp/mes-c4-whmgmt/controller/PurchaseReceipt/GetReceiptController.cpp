@@ -7,3 +7,8 @@ ReceiptPageTableJsonVO::Wrapper GetReceiptController::execQueryReceiptPageTable(
 {
 	return {};
 }
+
+ReceiptDetailJsonVO::Wrapper GetReceiptController::execQueryReceiptDetail(const ReceiptDetailQuery::Wrapper& query)
+{
+	return {};
+}

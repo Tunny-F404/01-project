@@ -8,7 +8,7 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
-* 单据查询，封装查询条件
+* 单据列表查询，封装查询条件
 */
 class ReceiptTableQuery : public oatpp::DTO
 {
@@ -29,6 +29,20 @@ class ReceiptTableQuery : public oatpp::DTO
 
 	// 入库日期 
 	API_DTO_FIELD_DEFAULT(String, recptDate, ZH_WORDS_GETTER("receipt.query.fields.recptDate"));
+
+};
+
+
+/**
+* 单据查询，查询单据详情
+*/
+class ReceiptDetailQuery : public oatpp::DTO
+{
+	DTO_INIT(ReceiptDetailQuery, DTO);
+	// 数据库的表： wm_item_recpt
+
+	// 入库单编号
+	API_DTO_FIELD_DEFAULT(String, recptCode, ZH_WORDS_GETTER("receipt.query.fields.recptCode"));
 
 };
 
