@@ -1,0 +1,8 @@
+receipt:
+ query:
+  fields:
+   recptCode: 入库单编号
+   recptName: 入库单名称
+   vendorName: 供应商名称
+   poCode: 订单编号
+   recptDate: 入库日期
