@@ -20,7 +20,7 @@ import java.time.LocalDate;
  */
 @Data
 @ApiModel("查询排班计划数据对象")
-public class PlanQuery extends PageQuery {
+public class PlanPageQuery extends PageQuery {
 
     @ApiModelProperty(value = "班组类型",example = "机加工")
     private String teamType;

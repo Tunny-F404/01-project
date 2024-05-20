@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j5.vo.schedualplan;
 
+import com.zeroone.star.project.dto.PageDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,7 +18,7 @@ import java.time.LocalDate;
  */
 @Data
 @ApiModel("查询返回排班计划列表数据对象")
-public class PlanVO {
+public class PlanVO extends PageDTO {
 
     @ApiModelProperty(value = "计划ID", example = "1")
     private Long planId;
@@ -28,8 +29,8 @@ public class PlanVO {
     @ApiModelProperty(value = "计划名称", example = "年度计划")
     private String planName;       // 计划名称
 
-    @ApiModelProperty(value = "班组类型", example = "机加工")
-    private String teamType;       // 班组类型（如机加工、仓库、组装）
+    @ApiModelProperty(value = "班组类型", example = "CNC")
+    private String calendarType;       // 班组类型（如机加工、仓库、组装）
 
     @ApiModelProperty(value = "开始日期", example = "2023-01-01")
     private LocalDate startDate;   // 开始日期
@@ -76,8 +77,7 @@ public class PlanVO {
     @ApiModelProperty(value = "备注", example = "备注")
     private String remark;
 
-    @ApiModelProperty(value = "班组类型", example = "CNC")
-    private String calendarType;
+
 //    "searchValue": null,
 //    "params": {},
 
