@@ -5,7 +5,6 @@ import com.zeroone.star.project.j6.product_management.dto.ProductSupplierListDTO
 import com.zeroone.star.project.j6.product_management.dto.SupplierDTO;
 import com.zeroone.star.project.j6.product_management.dto.SupplierListDTO;
 import com.zeroone.star.project.j6.product_management.query.SupplierListQuery;
-import com.zeroone.star.project.j6.product_management.vo.SupplierVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,7 +19,7 @@ public class SupplierController implements SupplierApis {
     @GetMapping("/list")
     @ApiOperation(value = "查询关联供应商列表")
     @Override
-    public JsonVO<List<SupplierVO>> querySupplierList(SupplierListQuery query) {
+    public JsonVO<List<SupplierDTO>> querySupplierList(SupplierListQuery query) {
         return null;
     }
 
