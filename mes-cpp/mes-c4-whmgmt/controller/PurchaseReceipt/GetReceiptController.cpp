@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "GetReceiptController.h"
 
-ReceiptTableJsonVO::Wrapper GetReceiptController::execQueryReceiptTable(const ReceiptTableQuery::Wrapper& query)
+ReceiptPageTableJsonVO::Wrapper GetReceiptController::execQueryReceiptPageTable(const ReceiptTableQuery::Wrapper& query)
 {
-	return ReceiptTableJsonVO::Wrapper();
+	return {};
 }

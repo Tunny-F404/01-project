@@ -4,6 +4,7 @@
 #define _RECEIPT_DTO_H
 
 #include "../../GlobalInclude.h"
+#include "../../dto/Receipt/ReceiptDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
@@ -41,14 +42,16 @@ class ReceiptDTO : public oatpp::DTO
 /**
 * 单据列表数据模型(分页)
 */
-class ReceiptTableDTO : public PageDTO<ReceiptDTO::Wrapper>
+class ReceiptPageTableDTO : public PageDTO<ReceiptDTO::Wrapper>
 {
-	DTO_INIT(ReceiptTableDTO, PageDTO<ReceiptDTO::Wrapper>);
+	DTO_INIT(ReceiptPageTableDTO, PageDTO<ReceiptDTO::Wrapper>);
+
+	//API_DTO_FIELD(List<ReceiptTableDTO::Wrapper>, data, ZH_WORDS_GETTER("receipt.query.describe.query1"), false, "ReceiptTableDTO");
 };
 /**
 * 单据列表数据详情
 */
-class ReceiptDetailDTO : public ReceiptTreeDTO
+class ReceiptDetailDTO : public ReceiptPageTableDTO
 {
 	DTO_INIT(ReceiptDetailDTO, DTO);
 	// 数据库的表： wm_item_recpt

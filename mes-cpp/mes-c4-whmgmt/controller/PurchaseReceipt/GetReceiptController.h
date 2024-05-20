@@ -16,13 +16,13 @@ class GetReceiptController : public oatpp::web::server::api::ApiController
 
 public: // 定义接口
 	// 获取单据列表接口描述
-	ENDPOINT_INFO(queryReceipt) {
+	ENDPOINT_INFO(queryReceiptPageTable) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("receipt.describe.query1"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
-		API_DEF_ADD_RSP_JSON_WRAPPER(ReceiptTreeJsonVO);
+		API_DEF_ADD_RSP_JSON_WRAPPER(ReceiptPageTableJsonVO);
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
@@ -33,14 +33,14 @@ public: // 定义接口
 		API_DEF_ADD_QUERY_PARAMS(String, "recptDate", ZH_WORDS_GETTER("receipt.query.fields.recptDate"), "2023-06-15", false);
 	}
 	// 获取单据列表接口
-	ENDPOINT(API_M_GET, "/whmgmt/query-receipt-table", queryReceiptTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/whmgmt/query-receipt-page-table", queryReceiptPageTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ReceiptTableQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execQueryReceiptTable(query));
+		API_HANDLER_RESP_VO(execQueryReceiptPageTable(query));
 	}
 private: // 定义接口执行函数
-	ReceiptTableJsonVO::Wrapper execQueryReceiptTable(const ReceiptTableQuery::Wrapper& query);
+	ReceiptPageTableJsonVO::Wrapper execQueryReceiptPageTable(const ReceiptTableQuery::Wrapper& query);
 
 
 };
