@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagent.query;
+package com.zeroone.star.project.j2.sysmanagent.query.menu;
 
 import io.swagger.annotations.ApiModelProperty;
 

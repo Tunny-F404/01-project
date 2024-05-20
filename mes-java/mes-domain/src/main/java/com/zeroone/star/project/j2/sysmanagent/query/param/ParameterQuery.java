@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagent.query;
+package com.zeroone.star.project.j2.sysmanagent.query.param;
 
 
 import io.swagger.annotations.ApiModel;

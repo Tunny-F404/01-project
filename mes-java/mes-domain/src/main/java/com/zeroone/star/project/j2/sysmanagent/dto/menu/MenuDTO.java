@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagent.dto;
+package com.zeroone.star.project.j2.sysmanagent.dto.menu;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
