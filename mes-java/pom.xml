@@ -37,6 +37,9 @@
         <module>mes-domain</module>
         <module>mes-apis</module>
         <module>mes-doc</module>
+        <module>mes-gateway</module>
+        <module>mes-oauth2</module>
+        <module>mes-login</module>
         <module>mes-j5-holidaysettings</module>
         <module>mes-j5-scheduleplan</module>
         <module>mes-j5-shopsettings</module>
