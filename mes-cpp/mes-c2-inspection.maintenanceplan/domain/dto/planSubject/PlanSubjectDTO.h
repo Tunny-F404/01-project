@@ -1,0 +1,54 @@
+#pragma once
+/*
+* 
+*/
+#ifndef _PLANSUBJECTDTO_H_
+#define _PLANSUBJECTDTO_H_
+#include "../../GlobalInclude.h"
+
+#include OATPP_CODEGEN_BEGIN(DTO)
+
+/**
+ *  部门列表 数据模型
+ */
+class PlanSubjectTableDTO : public oatpp::DTO
+{
+	DTO_INIT(PlanSubjectTableDTO, DTO);
+	//项目编号
+	API_DTO_FIELD_DEFAULT(String,code, ZH_WORDS_GETTER("planSubject.fields.subCode"));
+	//项目名称
+	API_DTO_FIELD_DEFAULT(String, name, ZH_WORDS_GETTER("planSubject.fields.subName"));
+	//项目类型 （只有两种）
+	API_DTO_FIELD_DEFAULT(String, type, ZH_WORDS_GETTER("planSubject.fields.subType"));
+	//项目内容
+	API_DTO_FIELD_DEFAULT(String, content, ZH_WORDS_GETTER("planSubject.fields.subContent"));
+	//标准
+	API_DTO_FIELD_DEFAULT(String, standard, ZH_WORDS_GETTER("planSubject.fields.subStandard"));
+
+};
+
+/**
+*部门详情数据模型
+*/
+class PlanSubjectDetailDTO : public PlanSubjectTableDTO
+{
+	DTO_INIT(PlanSubjectDetailDTO, PlanSubjectTableDTO);
+	//【扩展】
+	//项目id
+	API_DTO_FIELD_DEFAULT(Int64, id, ZH_WORDS_GETTER("planSubject.fields.subId"));
+	//是否启用
+	API_DTO_FIELD_DEFAULT(String, enable, ZH_WORDS_GETTER("planSubject.fields.enable"));
+	//备注
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("planSubject.fields.remark"));
+};
+
+/**
+ * 示例分页传输对象
+ */
+ class PlanSubjectDetailPageDTO : public PageDTO<PlanSubjectDetailDTO::Wrapper>
+ {
+ 	DTO_INIT(PlanSubjectDetailPageDTO, PageDTO<PlanSubjectDetailDTO::Wrapper>);
+ };
+
+#include OATPP_CODEGEN_END(DTO)
+#endif // !_SAMPLE_DTO_

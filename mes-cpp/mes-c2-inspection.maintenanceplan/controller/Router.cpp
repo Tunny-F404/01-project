@@ -28,6 +28,7 @@
 #include "file/FileController.h"
 #include "ws/WSController.h"
 #endif
+#include "planSubject/PlanSubjectController.h"
 
 #include "ExportPlan/ExportPlanController.h"
 
@@ -61,6 +62,9 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(ExportPlanController);
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(MachineryPlanQueryController);
+	
+	ROUTER_SIMPLE_BIND(PlanSubjectController);
+
 }
 
 #ifdef HTTP_SERVER_DEMO
