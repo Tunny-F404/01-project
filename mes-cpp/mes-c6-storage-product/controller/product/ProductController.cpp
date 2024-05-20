@@ -6,3 +6,8 @@ ProductTableJsonVO::Wrapper ProductController::execProductTable(const ProductQue
 	auto jov = ProductTableJsonVO::createShared();
 	return jov;
 }
+ProductDetailJsonVO::Wrapper ProductController::execProductDetail(const ProductDetailQuery::Wrapper& query)
+{
+	auto jov = ProductDetailJsonVO::createShared();
+	return jov;
+}

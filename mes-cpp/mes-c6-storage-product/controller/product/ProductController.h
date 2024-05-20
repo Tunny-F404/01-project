@@ -12,6 +12,7 @@
 class ProductController : public oatpp::web::server::api::ApiController {
 	API_ACCESS_DECLARE(ProductController);
 public:
+	//分页查询
 	// 3.1 定义查询接口描述
 	ENDPOINT_INFO(queryProductTable) {
 		// 定义接口标题
@@ -36,10 +37,30 @@ public:
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execProductTable(query, authObject->getPayload()));
 	}
+	//详情查询
+	// 3.1 定义查询接口描述
+	ENDPOINT_INFO(queryProductDetail) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("product.summary1"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(ProductDetailJsonVO);
+		// 定义其他查询参数描述
+		API_DEF_ADD_QUERY_PARAMS(String, "pnum", ZH_WORDS_GETTER("product.fields.pnum"), "ISSUE20221115004", false);
+	}
+	// 3.2 定义查询接口处理
+	ENDPOINT(API_M_GET, "/product/query-product-detail", queryProductDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(query, ProductDetailQuery, queryParams);
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execProductDetail(query));
+	}
 
 private:
 	// 查询数据
 	ProductTableJsonVO::Wrapper execProductTable(const ProductQuery::Wrapper& query,const PayloadDTO& payload);
+	ProductDetailJsonVO::Wrapper execProductDetail(const ProductQuery::Wrapper& query);
 };
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 #endif

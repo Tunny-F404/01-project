@@ -26,6 +26,14 @@ class ProductQuery : public PageQuery
 	API_DTO_FIELD_DEFAULT(String, pstatus, ZH_WORDS_GETTER("product.fields.pstatus"));
 
 };
+//详情查询
+class ProductDetailQuery : public oatpp::DTO
+{
+	// 定义初始化
+	DTO_INIT(ProductQuery, DTO);
+	//领料单编号
+	API_DTO_FIELD_DEFAULT(String, pnum, ZH_WORDS_GETTER("product.fields.pnum"));
 
+};
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_DEPTQUERY_H_

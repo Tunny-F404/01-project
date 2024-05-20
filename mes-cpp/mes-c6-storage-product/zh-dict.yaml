@@ -1,5 +1,6 @@
 product:
  summary: "获取领料单列表"
+ summary1: "获取领料单详情"
  fields:
   pnum: "领料单编号"
   pname: "领料单名称"

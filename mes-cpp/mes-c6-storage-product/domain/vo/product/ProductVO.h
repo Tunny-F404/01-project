@@ -15,6 +15,17 @@ public:
 		this->data = {};
 	}
 };
+//详情显示VO
+class ProductDetailJsonVO : public JsonVO<ProductDetailDTO::Wrapper>
+{
+	// 定义初始化
+	DTO_INIT(ProductDetailJsonVO, JsonVO< ProductDetailDTO::Wrapper>);
+
+public:
+	ProductDetailJsonVO() {
+		this->data = {};
+	}
+};
 
 #include OATPP_CODEGEN_END(DTO)
 #endif 

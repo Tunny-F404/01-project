@@ -39,9 +39,7 @@ class ProductDetailDTO :public ProductTableDTO
 class ProductPageDTO :public PageDTO<ProductTableDTO::Wrapper> {
 	DTO_INIT(ProductPageDTO, PageDTO<ProductTableDTO::Wrapper>);
 };
-//class ProductPageDTO :public PageDTO<ProductDetailDTO::Wrapper> {
-//	DTO_INIT(ProductPageDTO, PageDTO<ProductDetailDTO::Wrapper>);
-//};
+
 
 
 #include OATPP_CODEGEN_END(DTO)
