@@ -25,6 +25,6 @@ public interface ISysOperLogService extends IService<SysOperLog> {
 
     List<SysOperLog> Operloginfo();
 
-    //PageDTO<OperationLogAddDTO> listAll(OperationLogQuery query);
+
 
 }

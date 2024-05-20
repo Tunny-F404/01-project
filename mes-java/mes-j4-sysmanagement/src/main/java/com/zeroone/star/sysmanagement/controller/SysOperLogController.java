@@ -74,7 +74,7 @@ public class SysOperLogController {
         // 构建一个输出流
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         // 导出数据到输出流
-        excel.export("导出日志", out, SysOperLog.class, sysOperLogs);
+        excel.export("导出操作日志", out, SysOperLog.class, sysOperLogs);
         // 获取字节数据
         byte[] bytes = out.toByteArray();
         out.close();
@@ -88,6 +88,28 @@ public class SysOperLogController {
         // 响应文件给客户端
         return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
+
+//        List<LoginInfo> logList = loginInfoService.listLoginInfo();
+//
+//        //创建输出流
+//        ByteArrayOutputStream out = new ByteArrayOutputStream();
+//
+//        //导出数据到输出流
+//        excel.export("导出登录日志", out, LoginInfo.class, logList);
+//
+//        //获取字节数据
+//        byte[] bytes = out.toByteArray();
+//        out.close();
+//
+//        //构建响应头
+//        HttpHeaders headers = new HttpHeaders();
+//        String filename = "report" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
+////        headers.setContentDispositionFormData("attachment", filename);
+//        headers.add("Content-Disposition", "attachment;filename=" + filename);
+//        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//
+//        //响应文件给客户端
+//        return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
 
 
 

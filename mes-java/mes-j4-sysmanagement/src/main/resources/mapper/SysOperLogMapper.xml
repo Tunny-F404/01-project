@@ -2,4 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zeroone.star.sysmanagement.mapper.SysOperLogMapper">
 
+
+    <select id="selectOperLogInfo" resultType="com.zeroone.star.sysmanagement.entity.SysOperLog">
+        select oper_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url,
+               oper_ip, oper_location, oper_param, json_result, status, error_msg, oper_time from zo_mes.sys_oper_log
+        <where>
+            <if test="title != null and title != ''">
+                AND title like concat('%', #{title}, '%')
+            </if>
+            <if test="operName != null and operName != ''">
+                AND oper_name like concat('%', #{operName}, '%')
+            </if>
+            <if test="operatorType != null and operatorType != ''">
+                AND operator_type = #{operatorType}
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+        </where>
+        order by oper_id desc
+    </select>
+
 </mapper>

@@ -61,28 +61,9 @@ public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOper
 
     @Override
     public List<SysOperLog> Operloginfo() {
-
-       return sysOperLogMapper.selectList(null);
+        return sysOperLogMapper.selectOperLogInfo();
     }
 
-/*    public PageDTO<OperationLogAddDTO> listAll(OperationLogQuery query) {
-        // 构建分页查询对象
-        Page<SysOperLog> page = new Page<>(query.getPageIndex(), query.getPageSize());
-        // 构建查询条件
-        QueryWrapper<SysOperLog> wrapper = new QueryWrapper<>();
-
-        wrapper.like("title", query.getTitle())
-                .like("oper_name", query.getOperName())
-                .like("business_type",query.getBusinessType())
-                .like("status",query.getStatus());
-        if (query.getStarttime() != null && query.getEndtime() != null) {
-            wrapper.between("oper_time", query.getStarttime(), query.getEndtime());
-        }
-        // 执行分页查询
-        Page<SysOperLog> result = baseMapper.selectPage(page, wrapper);
-        // 结果转换成DTO
-        return PageDTO.create(result, src -> msOperLogMapper.operloagToOperlogDTO(src));
-    }*/
 
 }
 

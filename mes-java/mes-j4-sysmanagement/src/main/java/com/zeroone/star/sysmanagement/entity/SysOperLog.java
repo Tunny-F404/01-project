@@ -6,9 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -18,6 +20,8 @@ import java.util.Date;
  * @since 2024-05-19
  */
 @Data
+@Getter
+@Set
 @TableName("sys_oper_log")
 public class SysOperLog implements Serializable {
 
@@ -51,7 +55,7 @@ public class SysOperLog implements Serializable {
     /**
      * 请求方式
      */
-    @ExcelProperty(value = "请求方式", index = 4)
+    @ExcelProperty(value = "方法名称", index = 4)
     private String requestMethod;
 
     /**
@@ -117,7 +121,6 @@ public class SysOperLog implements Serializable {
     /**
      * 操作时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ExcelProperty(value = "操作时间", index = 15)
-    private Date operTime;
+    private LocalDateTime operTime;
 }
