@@ -22,4 +22,6 @@ public class TeamListDTO {
     private String teamCode;
     @ApiModelProperty(value = "班组名称", example = "风塔2组")
     private String teamName;
+    @ApiModelProperty(value = "班组类型", example = "机加工")
+    private String calendarType;
 }
