@@ -1,7 +1,9 @@
 package com.zeroone.star.project.j5.scheduleplan;
 
+import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDto;
 import com.zeroone.star.project.j5.vo.SchPlan.DeletePlan;
 import com.zeroone.star.project.j5.vo.SchPlan.UpdatePlanStatus;
+import com.zeroone.star.project.vo.JsonVO;
 
 /**
  * <p>
@@ -15,22 +17,21 @@ import com.zeroone.star.project.j5.vo.SchPlan.UpdatePlanStatus;
 public interface SchedulePlanApis {
     /**
      * 删除排版计划(可批量删除)
-     * @param deletePlans 指定删除数据
+     * @param rems 删除数据的id集合
      *  @author sailing
      */
-    void removeSchPlan(DeletePlan[] deletePlans);
+    JsonVO<Integer> removeSchPlan(int[] rems);
 
     /**
      * 修改计划状态
-     * @param updateStatus  修改状态模型
+     * @param schPlanDto  修改状态模型
      * @author sailing
      */
-    void modifySchPlanStatus(UpdatePlanStatus updateStatus);
+    JsonVO<Integer>  modifySchPlanStatus(SchPlanDto schPlanDto);
 
     /**
      * 导出计划
-     * 待和组员沟通排班计划的模型封装,补充参数(同列表类)
      * @author sailing
      */
-    void exportSchPlan();
+    JsonVO<SchPlanDto[]>  exportSchPlan(SchPlanDto[] plans);
 }
