@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/mycenter")
-@Api("用户个人中心")
+@Api("个人中心")
 public class MyCenterController implements MyCenterApis {
 
     //@author 柱
