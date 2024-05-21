@@ -32,9 +32,13 @@ class HumanResourceListQuery : public PageQuery
 {
 	// 定义初始化
 	DTO_INIT(HumanResourceListQuery, PageQuery);
-	// 岗位名称
-	API_DTO_FIELD_DEFAULT(String, postName, ZH_WORDS_GETTER("post.fields.pname"));
-	
+	// 岗位名称(这个，不需要了
+	//API_DTO_FIELD_DEFAULT(String, postName, ZH_WORDS_GETTER("post.fields.pname"));
+	// 岗位数量
+	//API_DTO_FIELD_DEFAULT(Int32, quantity, ZH_WORDS_GETTER("post.fields.quantity"));
+	// 工作站id
+	API_DTO_FIELD_DEFAULT(UInt64, workstation_id, ZH_WORDS_GETTER("post.fields.workstationid"));
+
 };
 
 #include OATPP_CODEGEN_END(DTO)
