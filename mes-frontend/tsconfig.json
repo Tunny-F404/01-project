@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"lib": [
+			"ESNext",
+			"DOM"
+		],
+		"paths": {
+			"@/*": [
+				"./src/*"
+			]
+		},
+		"types": [
+			/** https://juejin.cn/post/7262322846252613693 */
+			"element-plus/global",
+		],
+	},
+	/** https://www.typescriptlang.org/tsconfig#include */
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.d.ts",
+		"src/**/*.tsx",
+		"src/**/*.vue",
+		// 测试文件集
+		"tests/**/*.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
+	],
+}
