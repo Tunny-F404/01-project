@@ -45,9 +45,9 @@ public class PlanTeamDTO {
     private String attr1;
     @ApiModelProperty(value = "预留字段2", example = "null")
     private String attr2;
-    @ApiModelProperty(value = "预留字段3", example = "null")
-    private String attr3;
-    @ApiModelProperty(value = "预留字段4", example = "null")
-    private String attr4;
+    @ApiModelProperty(value = "预留字段3", example = "0")
+    private Long attr3;
+    @ApiModelProperty(value = "预留字段4", example = "0")
+    private Long attr4;
 }
 
