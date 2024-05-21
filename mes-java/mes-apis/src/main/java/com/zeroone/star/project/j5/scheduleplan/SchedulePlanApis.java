@@ -1,10 +1,10 @@
 package com.zeroone.star.project.j5.scheduleplan;
 
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j5.dto.schedualplan.PlanDTO;
-import com.zeroone.star.project.j5.query.schedualplan.PlanPageQuery;
-import com.zeroone.star.project.j5.vo.schedualplan.PlanListVO;
-import com.zeroone.star.project.j5.vo.schedualplan.PlanVO;
+import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
+import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
+import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
+import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**

@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.vo.schedualplan;
+package com.zeroone.star.project.j5.vo.scheduleplan;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -39,6 +39,7 @@ public class PlanListVO {
 
     @ApiModelProperty(value = "轮班方式", example = "白班")
     private String shiftType;
+
     @ApiModelProperty(value = "倒班方式", example = "按月")
     private String shiftMethod;
 

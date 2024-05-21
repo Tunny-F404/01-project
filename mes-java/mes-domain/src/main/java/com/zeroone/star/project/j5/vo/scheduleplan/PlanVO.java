@@ -1,4 +1,5 @@
-package com.zeroone.star.project.j5.dto.schedualplan;
+package com.zeroone.star.project.j5.vo.scheduleplan;
+
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,7 +9,7 @@ import java.time.LocalDate;
 
 /**
  * <p>
- * 描述：排班计划列表显示数据
+ * 描述：排班计划详情
  * </p>
  * <p>版权：&copy;01星球</p>
  * <p>地址：01星球总部</p>
@@ -16,15 +17,22 @@ import java.time.LocalDate;
  * @version 1.0.0
  */
 @Data
-@ApiModel("添加计划数据对象")
-public class PlanDTO {
+@ApiModel("排班计划详情数据")
+public class PlanVO {
+
+    @ApiModelProperty(value = "计划ID", example = "1")
+    private Long planId;
+
     @ApiModelProperty(value = "计划编号", example = "PL12345")
     private String planCode;
 
     @ApiModelProperty(value = "计划名称", example = "年度计划")
     private String planName;
 
-    @ApiModelProperty(value = "班组类型", example = "CNC")
+    @ApiModelProperty(value = "备注", example = "备注")
+    private String remark;
+
+    @ApiModelProperty(value = "班组类型", example = "机加工")
     private String calendarType;
 
     @ApiModelProperty(value = "开始日期", example = "2023-01-01")
@@ -39,16 +47,7 @@ public class PlanDTO {
     @ApiModelProperty(value = "倒班方式", example = "按月")
     private String shiftMethod;
 
-    @ApiModelProperty(value = "备注", example = "备注")
-    private String remark;
-
-    @ApiModelProperty(value = "单据状态", example = "已确认")
-    private String status;
-
-    @ApiModelProperty(value = "创建者", example = "已确认")
-    private String createBy;
-
-    @ApiModelProperty(value = "创建时间", example = "已确认")
-    private LocalDate createTime;
+    @ApiModelProperty(value = "数", example = "1")
+    private Integer shiftCount;
 
 }

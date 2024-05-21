@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.query.schedualplan;
+package com.zeroone.star.project.j5.query.scheduleplan;
 
 
 import com.zeroone.star.project.query.PageQuery;

@@ -10,4 +10,5 @@ package com.zeroone.star.project.j5.scheduleplan.team;
  * @version 1.0.0
  */
 public interface TeamApis {
+
 }
