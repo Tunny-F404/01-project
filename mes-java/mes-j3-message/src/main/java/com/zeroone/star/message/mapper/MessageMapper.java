@@ -3,7 +3,7 @@ package com.zeroone.star.message.mapper;
 import com.zeroone.star.message.entity.Message;
 import com.zeroone.star.project.j3.dto.MessageDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.mapstruct.Mapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author 10439

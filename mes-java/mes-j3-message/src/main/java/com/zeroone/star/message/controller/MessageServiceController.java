@@ -34,8 +34,7 @@ import java.io.ByteArrayOutputStream;
 
 @Api(tags = "消息服务")
 @RequestMapping("/message-service")
-@RestController
-@Validated
+@Controller
 public class MessageServiceController implements MessageServiceApis {
     @Resource
     EasyExcelComponent excel;
