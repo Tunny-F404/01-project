@@ -13,9 +13,31 @@ process:
   summary2: 获取工艺详情
  post:
   summary1: 添加工艺流程   
-set:
- field: 
-  filename: 工序导出
- download:
-  summary: 下载文件  
+set:  
+ query:
+  summary: 获取工序步骤列表(条件+分页)
+ fields:
+  processcode: 工序编码
+  processname: 工序名称
+  enableflag: 是否启用
+  attention: 工序说明
+  remark: 备注
+  processid: 工序ID
+  ordernum: 顺序编码
+  device: 辅助设备
+  material: 辅助材料
+  docurl: 材料URL
+  contentid: 内容ID
+  updatetime: 更新时间
+  createtime: 创建时间
+  updateby: 更新者
+  createby: 创建者
+ add:
+  summary: 添加工序
+ modify:
+  summary: 修改工序
+ addstep: 
+  summary: 添加工序步骤
+ export:
+  summary: 工序导出
 

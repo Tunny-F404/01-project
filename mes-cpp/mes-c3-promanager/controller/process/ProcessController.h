@@ -7,8 +7,6 @@
 #include "domain/query/process/ProcessListQuery.h"
 #include "domain/dto/process/ProcessListDTO.h"
 
-
-// 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
 /**
@@ -18,8 +16,9 @@ class ProcessController : public oatpp::web::server::api::ApiController
 {
 
 	API_ACCESS_DECLARE(ProcessController);
+
 public:
-	// 1 定义查询接口描述-获取工艺列表
+	// 1 获取工艺列表
 	ENDPOINT_INFO(queryProcessList) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.get.summary1"));
@@ -34,14 +33,14 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "routeName", ZH_WORDS_GETTER("process.field.name"), "111", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("process.field.flag"), "Y", false);
 	}
-	ENDPOINT(API_M_GET, "/mes/pro/list", queryProcessList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/pro/list", queryProcessList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(Query, ProcessListQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryProcessList(Query));//, authObject->getPayload()
 	}
 
-	// 2 定义查询接口-获取工艺详情
+	// 2 获取工艺详情
 	ENDPOINT_INFO(queryProcessDetail) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.get.summary2"));
@@ -52,14 +51,14 @@ public:
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(UInt32, "routeId", ZH_WORDS_GETTER("process.field.id"), 239, true);
 	}
-	ENDPOINT(API_M_GET, "mes/pro/detail", queryProcessDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/pro/detail", queryProcessDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(Query, ProcessDetailQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryProcessDetail(Query));
 	}
 
-	// 3 定义新增接口描述-添加工艺流程
+	// 3 添加工艺流程
 	ENDPOINT_INFO(addProcess) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.post.summary1"));
@@ -68,18 +67,18 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	ENDPOINT(API_M_POST, "/mes/pro/addprocess", addProcess, BODY_DTO(ProcessAddDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/pro/addprocess", addProcess, BODY_DTO(ProcessAddDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddProcess(dto));
 	}
 
 
 private:
-	// 1 分页查询工艺列表数据
+	// 1 获取工艺列表数据
 	ProcessListJsonVO::Wrapper execQueryProcessList(const ProcessListQuery::Wrapper& query);
 	// 2 查询工艺详情
 	ProcessDetailJsonVO::Wrapper execQueryProcessDetail(const ProcessDetailQuery::Wrapper& query);
-	// 3 新增工艺数据
+	// 3 添加工艺流程
 	Uint64JsonVO::Wrapper execAddProcess(const ProcessAddDTO::Wrapper& dto);
 };
 
