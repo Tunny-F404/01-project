@@ -72,7 +72,7 @@ public class SysOperLogController {
      */
     @ApiOperation(value = "删除日志")
     @DeleteMapping("/remove-operlog/{operIds}")
-    public JsonVO<String> deleteOperLog(@PathVariable List<Long> operIds) {
+    public JsonVO<String> removeOperLog(@PathVariable List<Long> operIds) {
         Boolean result = sysOperLogService.removeByIds(operIds);
         if (!result) {
             return JsonVO.fail(LOG_NOT_EXIST_MESSAGE);
@@ -88,8 +88,8 @@ public class SysOperLogController {
      */
     @ApiOperation(value = "清空日志")
     @DeleteMapping("/clean-operlog")
-    public JsonVO<String> cleanOperLog() {
-        sysOperLogService.cleanOperLog();
+    public JsonVO<String> removeAllOperLog() {
+        sysOperLogService.removeAllOperLog();
         return JsonVO.success(CLEAR_SUCCESS_MESSAGE);
     }
 

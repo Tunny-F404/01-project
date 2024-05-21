@@ -19,12 +19,8 @@ import java.util.List;
  */
 public interface ISysOperLogService extends IService<SysOperLog> {
 
-    void cleanOperLog();
-
-    Boolean removeByOperIds(List<Long> operIds);
+    void removeAllOperLog();
 
     List<SysOperLog> Operloginfo();
-
-
 
 }

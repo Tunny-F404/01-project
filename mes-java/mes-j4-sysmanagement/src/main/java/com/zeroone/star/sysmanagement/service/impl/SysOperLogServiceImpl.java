@@ -44,19 +44,11 @@ public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOper
     @Resource
     SysOperLogMapper sysOperLogMapper;
 
-    @Resource
-    MsOperLogMapper msOperLogMapper;
-
     @Override
-    public void cleanOperLog() {
+    public void removeAllOperLog() {
         QueryWrapper<SysOperLog> queryWrapper = new QueryWrapper<>();
         queryWrapper.le("oper_time", LocalDateTime.now());
         sysOperLogMapper.delete(queryWrapper);
-    }
-
-    @Override
-    public Boolean removeByOperIds(List<Long> operIds) {
-        return sysOperLogMapper.deleteBatchIds(operIds) > 0;
     }
 
     @Override
