@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zeroone.star.basicdata.mapper.MdUnitMeasureMapper">
 
+    <delete id="deleteByIds" parameterType="long">
+        delete from md_unit_measure where measure_id in<foreach collection="idList" separator="," item="id" open="(" close=")">
+         #{id}
+    </foreach>
+    </delete>
+    <select id="listUnitMeasure" resultType="com.zeroone.star.basicdata.entity.MdUnitMeasure"
+            parameterType="com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO">
+        select * from md_unit_measure
+        <where>
+            <if test="measureCode != null and measureCode != ''"> and measure_code = #{measureCode}</if>
+            <if test="measureName != null and measureName != ''">and measure_name like concat('%', #{measureName}, '%')</if>
+        </where>
+    </select>
+
+
 </mapper>

@@ -1,8 +1,11 @@
 package com.zeroone.star.basicdata.entity;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -14,8 +17,10 @@ import java.time.LocalDateTime;
  */
 
 @Data
-public class MdVendor {
+@TableName("md-vendor")
+public class MdVendor implements Serializable {
     //供应商ID
+    @ExcelIgnore
     private Long vendorId;
     @ExcelProperty(value = "供应商编码",index = 0)
     private String vendorCode;
@@ -30,7 +35,7 @@ public class MdVendor {
     @ExcelProperty(value = "供应商LOGO地址",index = 5)
     private String vendorLogo;
     @ExcelProperty(value = "供应商等级",index = 6)
-    private Character vendorLevel;
+    private String vendorLevel;
     @ExcelProperty(value = "供应商评分",index = 7)
     private Integer vendorScore;
     @ExcelProperty(value = "供应商地址",index = 8)
@@ -56,23 +61,32 @@ public class MdVendor {
     @ExcelProperty(value = "统一社会信用代码",index = 18)
     private String creditCode;
     @ExcelProperty(value = "是否启用",index = 19)
-    private Character enableFlag;
+    private String enableFlag;
     //备注
+    @ExcelIgnore
     private String remark;
     //预留字段1
+    @ExcelIgnore
     private String attr1;
     //预留字段2
+    @ExcelIgnore
     private String attr2;
     //预留字段3
+    @ExcelIgnore
     private Integer attr3;
     //预留字段4
+    @ExcelIgnore
     private Integer attr4;
     //创建者
+    @ExcelIgnore
     private String createBy;
     //创建时间
+    @ExcelIgnore
     private LocalDateTime createTime;
     //更新者
+    @ExcelIgnore
     private String updateBy;
     //更新时间
+    @ExcelIgnore
     private LocalDateTime updateTime;
 }
