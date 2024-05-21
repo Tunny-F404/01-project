@@ -27,7 +27,7 @@
 #include "ws/WSController.h"
 #endif
 
-#include "controller/material/GetReturnListController.h"
+#include "controller/material/ReturnController.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -53,7 +53,7 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(GetReturnListController);
+	ROUTER_SIMPLE_BIND(ReturnController);
 
 }
 

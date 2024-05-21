@@ -1,5 +1,12 @@
 material: 
- summary: 获取供应商退货行列
+ get:
+  summary: 获取供应商退货行列表
+ add:
+  summary: 添加供应商退货行
+ alter:
+  summary: 修改供应商退货行
+ delete:
+  summary: 修改供应商退货行
  rtcode: 退货单编号
  rtname: 退货单名称
  pocode: 采购订单编号
@@ -7,3 +14,7 @@ material:
  vendorname: 供应商名称
  rtdate: 退货日期
  status: 单据状态
+ batchcode: 批次号
+ remark: 备注
+ lineid: 退货行id
+ rtid: 退货单id
