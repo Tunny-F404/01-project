@@ -10,6 +10,14 @@ import com.zeroone.star.project.vo.JsonVO;
  */
 public interface DepartmentApis {
 
+    //获取部门名称树
+    JsonVO<DepartmentDTO> getDepartmentNameTree(String id);
+
+    //获取部门列表(条件)
+    JsonVO<DepartmentDTO> getDepartmentList();
+
+    //获取部门详情
+    JsonVO<DepartmentDTO> getDepartmentDetail(String id);
 
     //新增部门
     JsonVO<DepartmentDTO> addDepartment(DepartmentDTO departmentDTO);
