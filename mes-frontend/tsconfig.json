@@ -1,6 +1,18 @@
+/**
+
+	参考资料
+	https://juejin.cn/post/7043723576121229342
+*/
 {
 	"compilerOptions": {
 		"baseUrl": ".",
+		"moduleResolution": "node",
+		"target": "esnext",
+		"module": "esnext",
+		"useDefineForClassFields": true,
+		"strict": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
 		"lib": [
 			"ESNext",
 			"DOM"
@@ -13,6 +25,7 @@
 		"types": [
 			/** https://juejin.cn/post/7262322846252613693 */
 			"element-plus/global",
+			"vite/client"
 		],
 	},
 	/** https://www.typescriptlang.org/tsconfig#include */
