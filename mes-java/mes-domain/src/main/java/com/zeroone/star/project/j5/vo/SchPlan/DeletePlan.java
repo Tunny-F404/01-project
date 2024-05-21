@@ -11,4 +11,7 @@ public class DeletePlan {
     private int planId;
     @ApiModelProperty(value = "计划编号")
     private String planCode;
+
+    @ApiModelProperty(value = "计划状态")
+    private int shiftStatus;
 }
