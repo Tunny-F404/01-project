@@ -3,9 +3,9 @@
 #define _ADDPRODWORKORDER_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/do/ProdWorkorder/AddProdWorkorderDO.h"
-#include "domain/dto/ProdWorkorder/AddProdWorkorderDTO.h"
-#include "domain/vo/ProdWorkorder/AddProdWorkorderVO.h"
+#include "../mes-c4-prodmgmt/domain/do/ProdWorkorder/AddProdWorkorderDO.h"
+#include "../mes-c4-prodmgmt/domain/dto/ProdWorkorder/AddProdWorkorderDTO.h"
+#include "../mes-c4-prodmgmt/domain/vo/ProdWorkorder/AddProdWorkorderVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -38,3 +38,6 @@ public:
 	// 3.3 演示新增数据
 	Uint64JsonVO::Wrapper execAddProdWorkorder(const AddProdWorkorderDTO::Wrapper& dto);
 };
+// 0 取消API控制器使用宏
+#include OATPP_CODEGEN_END(ApiController) //<- End Codegen
+#endif // _ADDPRODWORKORDER_CONTROLLER_

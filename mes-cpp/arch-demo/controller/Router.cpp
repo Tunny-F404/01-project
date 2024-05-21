@@ -19,7 +19,7 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include "AddProdWorkorderController.h"
+#include "../mes-c4-prodmgmt/controller/ProdWorkorder/AddProdWorkorderController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
