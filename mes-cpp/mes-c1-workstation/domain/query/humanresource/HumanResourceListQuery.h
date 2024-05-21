@@ -34,7 +34,8 @@ class HumanResourceListQuery : public PageQuery
 	DTO_INIT(HumanResourceListQuery, PageQuery);
 	// 岗位名称
 	API_DTO_FIELD_DEFAULT(String, postName, ZH_WORDS_GETTER("post.fields.pname"));
-	
+	//岗位数量
+	API_DTO_FIELD_DEFAULT(Int32, quantity, ZH_WORDS_GETTER("post.fields.quantity"));
 };
 
 #include OATPP_CODEGEN_END(DTO)

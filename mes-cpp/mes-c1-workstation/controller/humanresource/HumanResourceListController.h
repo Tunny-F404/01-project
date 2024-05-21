@@ -21,9 +21,9 @@
 #define _HUMANRESOURCELISTCONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-//#include "domain/query/sample/SampleQuery.h"
+#include "domain/query/humanresource/HumanResourceListQuery.h"
 //#include "domain/dto/sample/SampleDTO.h"
-#include "domain/vo/humanresource/HumanresourceListVO.h"
+#include "domain/vo/humanresource/HumanResourceListVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController)
@@ -37,6 +37,30 @@ class HumanResourceListController : public oatpp::web::server::api::ApiControlle
 	API_ACCESS_DECLARE(HumanResourceListController);
 	// 3 定义接口
 public:
+
+
+	// 3.1 定义查询接口描述
+	ENDPOINT_INFO(queryHumanResource) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("post.query.summary"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(HumanResourceListPageVO);
+		// 定义分页查询参数描述
+		API_DEF_ADD_PAGE_PARAMS();
+		// 定义其他查询参数描述
+		API_DEF_ADD_QUERY_PARAMS(String, "postName", ZH_WORDS_GETTER("post.fields.pname"), "ceo", false);
+		API_DEF_ADD_QUERY_PARAMS(Int32, "quantity", ZH_WORDS_GETTER("post.fields.quantiy"), 0, false);
+	}
+	// 3.2 定义查询接口处理
+	ENDPOINT(API_M_GET, "/huamnresource/query-humanresource-list", queryHumanResource, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(query,HumanResourceListQuery, queryParams);
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execQueryHumanResourceList(query));
+	}
+
 
 	// 3.1 定义新增接口描述
 	ENDPOINT_INFO(addHumanResource) {
@@ -56,10 +80,9 @@ public:
 
 private:
 	// 3.3 演示分页查询数据
-	//SamplePageJsonVO::Wrapper execQuerySample(const SampleQuery::Wrapper& query, const PayloadDTO& payload);
+	HumanResourceListPageVO::Wrapper execQueryHumanResourceList(const HumanResourceListQuery::Wrapper& query);
 	// 3.3 演示新增数据
 	Uint64JsonVO::Wrapper execAddHumanResourceList(const HumanResourceListDTO::Wrapper& dto);
-
 
 };
 
