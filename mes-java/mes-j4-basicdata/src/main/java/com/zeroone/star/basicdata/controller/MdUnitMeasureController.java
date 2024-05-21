@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/basicData/UnitMeasure")
+@RequestMapping("/basicData")
 @Api(tags = "单位相关操作")
 public class MdUnitMeasureController implements AccountUnitApis {
 
@@ -32,7 +32,7 @@ public class MdUnitMeasureController implements AccountUnitApis {
      * 删除单位
      * */
     @ApiOperation(value = "删除单位")
-    @DeleteMapping
+    @DeleteMapping("/delete-by-measureIds")
     public JsonVO<String> deleteUnitMeasure(@RequestParam List<Long> measureIds) {
         Long isRemoved = iMdUnitMeasureService.deleteByIds(measureIds);
         if (isRemoved == 0) {
@@ -44,8 +44,8 @@ public class MdUnitMeasureController implements AccountUnitApis {
     /*
      * 导出单位
      * */
-    @ApiOperation("导出单位")
-    @GetMapping(value = "download", produces = "application/octet-stream")
+    @ApiOperation(value = "导出单位")
+    @GetMapping(value = "/download-unitMeasure", produces = "application/octet-stream")
     public ResponseEntity<byte[]> exportUnitMeasure(UnitExcelSelectDTO unitExcelSelectDTO) {
         ResponseEntity<byte[]> responseEntity = iMdUnitMeasureService.exportUnitMeasure(unitExcelSelectDTO);
         return responseEntity;

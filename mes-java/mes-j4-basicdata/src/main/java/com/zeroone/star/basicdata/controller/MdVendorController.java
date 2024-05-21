@@ -25,7 +25,7 @@ import javax.annotation.Resource;
 
 @RestController
 @Api(tags = "供应商相关操作")
-@RequestMapping("/basicData/vendor")
+@RequestMapping("/basicData")
 @Validated
 public class MdVendorController implements SupplierApis {
 
@@ -34,8 +34,8 @@ public class MdVendorController implements SupplierApis {
     /*
      * 导出供应商
      * */
-    @ApiOperation("导出供应商")
-    @GetMapping(value = "download", produces = "application/octet-stream")
+    @ApiOperation(value = "导出供应商")
+    @GetMapping(value = "download-vendor", produces = "application/octet-stream")
     public ResponseEntity<byte[]> exportVendor(VendorExcelSelectDTO vendorExcelSelectDTO) {
         ResponseEntity<byte[]> responseEntity = iMdVendorService.exportVendor(vendorExcelSelectDTO);
         return responseEntity;
