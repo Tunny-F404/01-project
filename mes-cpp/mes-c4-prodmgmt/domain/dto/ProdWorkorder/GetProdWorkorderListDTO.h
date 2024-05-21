@@ -28,7 +28,17 @@ class GetProdWorkorderListDTO : public oatpp::DTO, public TreeNode
 	DTO_FIELD_INFO(workorder_name) {
 		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.workorder_name");
 	}
-	//来源单据;source_code;varchar
+	//工单类型;workorder_type;varchar
+	DTO_FIELD(String, workorder_type);
+	DTO_FIELD_INFO(workorder_type) {
+		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.workorder_type");
+	}
+	//工单来源;order_source;varchar
+	DTO_FIELD(String, order_source);
+	DTO_FIELD_INFO(order_source) {
+		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.order_source");
+	}
+	//订单编号;source_code;varchar
 	DTO_FIELD(String, source_code);
 	DTO_FIELD_INFO(source_code) {
 		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.source_code");
@@ -43,6 +53,36 @@ class GetProdWorkorderListDTO : public oatpp::DTO, public TreeNode
 	DTO_FIELD_INFO(product_name) {
 		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.product_name");
 	}
+	//规格型号;product_spc;varchar
+	DTO_FIELD(String, product_spc);
+	DTO_FIELD_INFO(product_spc) {
+		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.product_spc");
+	}
+	//单位;unit_of_measure;varchar
+	DTO_FIELD(String, unit_of_measure);
+	DTO_FIELD_INFO(unit_of_measure) {
+		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.unit_of_measure");
+	}
+	//工单数量（生产数量）;quantity;double
+	DTO_FIELD(Float64, quantity);
+	DTO_FIELD_INFO(quantity) {
+		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.quantity");
+	}
+	//调整数量;quantity_changed;double
+	DTO_FIELD(Float64, quantity_changed);
+	DTO_FIELD_INFO(quantity_changed) {
+		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.quantity_changed");
+	}
+	//已生产数量;quantity_produced;double
+	DTO_FIELD(Float64, quantity_produced);
+	DTO_FIELD_INFO(quantity_produced) {
+		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.quantity_produced");
+	}
+	//批次号;batch_code;varchar
+	DTO_FIELD(String, batch_code);
+	DTO_FIELD_INFO(batch_code) {
+		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.batch_code");
+	}
 	//客户编码;client_code;varchar
 	DTO_FIELD(String, client_code);
 	DTO_FIELD_INFO(client_code) {
@@ -53,16 +93,19 @@ class GetProdWorkorderListDTO : public oatpp::DTO, public TreeNode
 	DTO_FIELD_INFO(client_name) {
 		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.client_name");
 	}
-	//工单类型;workorder_type;varchar
-	DTO_FIELD(String, workorder_type);
-	DTO_FIELD_INFO(workorder_type) {
-		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.workorder_type");
-	}
 	//需求日期;request_date;datetime
 	DTO_FIELD(String, request_date);
 	DTO_FIELD_INFO(request_date) {
 		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.request_date");
 	}
+	//单据状态;status;varchar
+	DTO_FIELD(String, status);
+	DTO_FIELD_INFO(status) {
+		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.status");
+	}
+	
+	
+
 	// 子菜单
 	API_DTO_FIELD(List<GetProdWorkorderListDTO::Wrapper>, children, ZH_WORDS_GETTER("addprodworkorder.workorder.menusub"), false, {});
 public:

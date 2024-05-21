@@ -52,7 +52,7 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(AddProdWorkorderController);
+	ROUTER_SIMPLE_BIND(ProdWorkorderController);
 }
 
 #ifdef HTTP_SERVER_DEMO

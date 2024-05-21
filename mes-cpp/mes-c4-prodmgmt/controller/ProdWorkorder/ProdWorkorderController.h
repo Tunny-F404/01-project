@@ -13,9 +13,9 @@
 /**
  * 新增工单控制器
  */
-class AddProdWorkorderController : public oatpp::web::server::api::ApiController {// 1 继承控制器
+class ProdWorkorderController : public oatpp::web::server::api::ApiController {// 1 继承控制器
 	// 2 定义控制器访问入口
-	API_ACCESS_DECLARE(AddProdWorkorderController);
+	API_ACCESS_DECLARE(ProdWorkorderController);
 	// 3 定义接口
 public:
 
@@ -37,6 +37,7 @@ public:
 
 	// 3.3 演示新增数据
 	Uint64JsonVO::Wrapper execAddProdWorkorder(const AddProdWorkorderDTO::Wrapper& dto);
+
 };
 // 0 取消API控制器使用宏
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen

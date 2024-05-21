@@ -3,7 +3,7 @@ addprodworkorder:
   workorder_id: 工单ID
   workorder_code: 工单编号
   workorder_name: 工单名称
-  order_source: 来源类型
+  order_source: 来源类型（工单来源）
   source_code: 来源单据
   status: 单据状态
   workorder_type: 工单类型
@@ -11,13 +11,15 @@ addprodworkorder:
   product_name: 产品名称
   product_spc: 规格型号
   unit_of_measure: 单位
-  quantity: 工单数量
+  quantity: 工单数量（生产数量）
   request_date: 需求日期
   batch_code: 批次号
   remark: 备注
   client_code: 客户编码
   client_name: 客户名称
   menuname: 菜单名称
+  quantity_produced: 已生产数量
+  quantity_changed: 调整数量
   
  post:
   summary: 新增一条生产工单数据 

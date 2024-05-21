@@ -3,7 +3,7 @@
 
 
 
-Uint64JsonVO::Wrapper AddProdWorkorderController::execAddProdWorkorder(const AddProdWorkorderDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProdWorkorderController::execAddProdWorkorder(const AddProdWorkorderDTO::Wrapper& dto)
 {
 	return{};
 }
