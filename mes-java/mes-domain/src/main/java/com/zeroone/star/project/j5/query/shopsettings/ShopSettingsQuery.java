@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.query;
+package com.zeroone.star.project.j5.query.shopsettings;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

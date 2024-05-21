@@ -2,7 +2,7 @@ package com.zeroone.star.project.j5.shopsettings;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.shopsettings.GetShopSettingsDTO;
-import com.zeroone.star.project.j5.query.ShopSettingsQuery;
+import com.zeroone.star.project.j5.query.shopsettings.ShopSettingsQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**
