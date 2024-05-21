@@ -1,5 +1,10 @@
 package com.zeroone.star.project.j5.scheduleplan;
 
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.query.schedualplan.PlanPageQuery;
+import com.zeroone.star.project.j5.vo.schedualplan.PlanListVO;
+import com.zeroone.star.project.vo.JsonVO;
+
 /**
  * <p>
  * 描述：排班计划接口
@@ -10,4 +15,10 @@ package com.zeroone.star.project.j5.scheduleplan;
  * @version 1.0.0
  */
 public interface SchedulePlanApis {
+    /**
+     * 查询排班计划列表
+     * @param condition 查询条件
+     * @return  排班计划列表
+     */
+    JsonVO<PageDTO<PlanListVO>> queryPlanList (PlanPageQuery condition);
 }

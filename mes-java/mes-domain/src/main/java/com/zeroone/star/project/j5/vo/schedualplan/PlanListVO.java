@@ -46,36 +46,5 @@ public class PlanListVO {
     private String status;
 
 }
-//    @ApiModelProperty(value = "数", example = "1")
-//    private Integer shiftCount;
-//    @ApiModelProperty(value = "创建者", example = "已确认")
-//    private String createBy;
-//
-//    @ApiModelProperty(value = "创建时间", example = "已确认")
-//    private LocalDate createTime;
-//
-//    @ApiModelProperty(value = "更新者", example = "已确认")
-//    private String updateBy;
-//
-//    @ApiModelProperty(value = "更新时间", example = "已确认")
-//    private LocalDate updateTime;
-//
-//    @ApiModelProperty(value = "预留字段1", example = "null")
-//    private String attr1;
-//
-//    @ApiModelProperty(value = "预留字段2", example = "null")
-//    private String attr2;
-//
-//    @ApiModelProperty(value = "预留字段3", example = "0")
-//    private Integer attr3;
-//
-//    @ApiModelProperty(value = "预留字段4", example = "0")
-//    private Integer attr4;
-//
-//    @ApiModelProperty(value = "备注", example = "备注")
-//    private String remark;
-
-//    "searchValue": null,
-//    "params": {},
 
 
