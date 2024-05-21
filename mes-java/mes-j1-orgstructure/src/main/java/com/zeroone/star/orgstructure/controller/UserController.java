@@ -1,5 +1,6 @@
 package com.zeroone.star.orgstructure.controller;
 
+import com.zeroone.star.project.j1.orgstructure.dto.PageDTO;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.zeroone.star.project.j1.orgstructure.dto.user.CompleteUserDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserStatusDTO;
@@ -57,5 +58,32 @@ public class UserController implements UserApis {
 		return null;
 	}
 
+
+
+@GetMapping("query-role-table")
+    @ApiOperation(value = "查询角色列表")
+    @Override
+    public JsonVO<PageDTO<UserDTO>> queryRoleList(UserQuery userQuery){
+        return null;
+    }
+    @GetMapping("query-user-role-table")
+    @ApiOperation(value = "查询用户分配角色列表")
+    @Override
+    public JsonVO<PageDTO<UserDTO>> queryUserRoleList(String UserName) {
+        return null;
+    }
+    @PutMapping("modify-add-role")
+    @ApiOperation(value = "添加角色")
+    @Override
+    public JsonVO<UserDTO> modifyAddRole(UserQuery userQuery) {
+        return null;
+    }
+    @PutMapping("modify-delete-role")
+    @ApiOperation(value = "取消角色")
+    @Override
+    public JsonVO<UserDTO> modifyDeleteRole(UserQuery userQuery) {
+        return null;
+
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j1.orgstructure.user;
 
+import com.zeroone.star.project.j1.orgstructure.dto.PageDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.CompleteUserDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserStatusDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UserDTO;
@@ -38,4 +39,30 @@ public interface UserApis {
 	 * 重置用户密码
 	 */
 	public JsonVO resetUserPassword();
+
+
+/**
+     * 查询角色列表
+     * @param userQuery
+     * @return
+     */
+    JsonVO<PageDTO<UserDTO>> queryRoleList(UserQuery userQuery);
+    /**
+     * 查询用户分配角色列表
+     * @param UserName
+     * @return
+     */
+    JsonVO<PageDTO<UserDTO>> queryUserRoleList(String UserName);
+    /**
+     * 添加角色
+     * @param userQuery
+     * @return
+     */
+    JsonVO<UserDTO> modifyAddRole(UserQuery userQuery);
+    /**
+     * 取消角色
+     * @param userQuery
+     * @return
+     */
+    JsonVO<UserDTO> modifyDeleteRole(UserQuery userQuery);
 }

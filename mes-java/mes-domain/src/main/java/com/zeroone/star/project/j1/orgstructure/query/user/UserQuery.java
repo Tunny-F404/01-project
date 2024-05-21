@@ -25,4 +25,11 @@ public class UserQuery {
     private String beginDate;
     @ApiModelProperty(value = "创建时间：结束日期", example = "2024-05-21")
     private String endDate;
+
+
+/**
+ *角色ID
+ */
+@ApiModelProperty(value = "角色编号",example = "1")
+private Long roleId;
 }

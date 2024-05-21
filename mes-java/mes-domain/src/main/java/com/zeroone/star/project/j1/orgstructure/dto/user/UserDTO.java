@@ -27,4 +27,21 @@ public class UserDTO {
     private String status;
     @ApiModelProperty(value = "创建时间", example = "2024-05-20 00:02:30")
     private String createTime;
+
+
+/**
+ *角色编号
+ */
+@ApiModelProperty(value = "角色编号",example = "1")
+private String roleId;
+/**
+ *角色名称
+ */
+@ApiModelProperty(value = "角色名字",example = "测试员")
+private String roleName;
+/**
+ *权限字符
+ */
+@ApiModelProperty(value = "权限字符",example = "tester")
+private String roleKey;
 }
