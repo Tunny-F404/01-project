@@ -28,8 +28,33 @@
  */
 class ProdOrderDTO : public oatpp::DTO
 {
-	DTO_INIT(ProdOrderDTO, PageDTO<DTO::Wrapper>);
-	API_DTO_FIELD()
+	DTO_INIT(ProdOrderDTO, DTO);
+
+	// 任务名
+	DTO_FIELD(String, task_name);
+	DTO_FIELD_INFO(task_name) {
+		info->description = ZH_WORDS_GETTER("prod.field.task_name");
+	}
+	// 工作站
+	DTO_FIELD(String, workstation_name);
+	DTO_FIELD_INFO(workstation_name) {
+		info->description = ZH_WORDS_GETTER("prod.field.workstationName");
+	}
+	// 工序
+	DTO_FIELD(String, process_name);
+	DTO_FIELD_INFO(process_name) {
+		info->description = ZH_WORDS_GETTER("prod.field.processName");
+	}
+	// 开始时间
+	DTO_FIELD(String, start_time);
+	DTO_FIELD_INFO(start_time) {
+		info->description = ZH_WORDS_GETTER("prod.field.startTime");
+	}
+	// 结束时间
+	DTO_FIELD(String, end_time);
+	DTO_FIELD_INFO(end_time) {
+		info->description = ZH_WORDS_GETTER("prod.field.endTime");
+	}
 };
 
 /**

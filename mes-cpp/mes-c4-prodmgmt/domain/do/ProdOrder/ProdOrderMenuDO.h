@@ -17,14 +17,14 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _PRODORDER_DO_
-#define _PRODORDER_DO_
+#ifndef _PRODORDERMENU_DO_
+#define _PRODORDERMENU_DO_
 #include "../DoInclude.h"
 
 /**
  * 示例数据库实体类
  */
-class ProdOrderDO
+class ProdOrderMenuDO
 {
 	// 任务名
 	CC_SYNTHESIZE(string, task_name, Task_name);
@@ -37,7 +37,8 @@ class ProdOrderDO
 	// 结束时间
 	CC_SYNTHESIZE(string, end_time, End_time);
 public:
-	ProdOrderDO() {
+	//ProdOrderMenuDO() {}
+	ProdOrderMenuDO() {
 		task_name = "";
 		workstation_name = "";
 		process_name = "";
@@ -46,4 +47,4 @@ public:
 	}
 };
 
-#endif // !_SAMPLE_DO_
+#endif // !_PRODORDERMENU_DO_

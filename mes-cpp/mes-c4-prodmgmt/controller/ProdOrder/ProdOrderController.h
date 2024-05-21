@@ -80,7 +80,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("prod.put.summary"), modifyProdOrder, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdOrder", modifyProdOrder, BODY_DTO(ProdOrderDTO::Wrapper, dto), execModifySample(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdOrder", modifyProdOrder, BODY_DTO(ProdOrderDTO::Wrapper, dto), execModifyProdOrder(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeProdOrder) {
