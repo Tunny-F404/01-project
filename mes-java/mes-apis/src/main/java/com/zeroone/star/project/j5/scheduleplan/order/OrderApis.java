@@ -44,12 +44,12 @@ public interface OrderApis {
      * @param shiftPlanUpdateDto 更新班次计划数据
      * @return  修改的行数
      */
-    JsonVO<Long> updateShiftPlan(ShiftPlanUpdateDto shiftPlanUpdateDto);
+    JsonVO<Long> modifyShiftPlan(ShiftPlanUpdateDto shiftPlanUpdateDto);
 
     /**
      * 删除排班计划v1
      * @param shiftId 排班计划id
      * @return  修改的行数
      */
-    JsonVO<Long> deleteShiftPlan(List<Long> shiftId);
+    JsonVO<Long> removeShiftPlan(List<Long> shiftId);
 }
