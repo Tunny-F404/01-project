@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-ï»¿/*
-=======
 /*
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
@@ -23,28 +19,12 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-<<<<<<< HEAD
-#include "productionorder/ProductionOrderController.h"
-=======
 
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
 #include "file/FileController.h"
 #include "ws/WSController.h"
-<<<<<<< HEAD
-
-#endif
-
-// å¦‚æžœå®šä¹‰äº†å…³é—­Swaggeræ–‡æ¡£å®
-#ifdef CLOSE_SWAGGER_DOC
-// ç®€åŒ–ç»‘å®šæŽ§åˆ¶å™¨å®å®šä¹‰
-#define ROUTER_SIMPLE_BIND(__CLASS__) \
-router->addController(__CLASS__::createShared())
-#else
-// ç®€åŒ–ç»‘å®šæŽ§åˆ¶å™¨å®å®šä¹‰
-=======
 #endif
 
 // Èç¹û¶¨ÒåÁË¹Ø±ÕSwaggerÎÄµµºê
@@ -54,7 +34,6 @@ router->addController(__CLASS__::createShared())
 router->addController(__CLASS__::createShared())
 #else
 // ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
@@ -71,28 +50,13 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
-<<<<<<< HEAD
-	//#TIP :ç³»ç»Ÿæ‰©å±•è·¯ç”±å®šä¹‰ï¼Œå†™åœ¨è¿™ä¸ªåŽé¢
-	ROUTER_SIMPLE_BIND(ProductionOrderController);
-=======
 	//#TIP :ÏµÍ³À©Õ¹Â·ÓÉ¶¨Òå£¬Ð´ÔÚÕâ¸öºóÃæ
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
 
 }
 
 #ifdef HTTP_SERVER_DEMO
 void Router::createSampleRouter()
 {
-<<<<<<< HEAD
-	// ç»‘å®šç¤ºä¾‹æŽ§åˆ¶å™¨
-	ROUTER_SIMPLE_BIND(SampleController);
-	// ç»‘å®šç”¨æˆ·æŽ§åˆ¶å™¨
-	ROUTER_SIMPLE_BIND(UserController);
-	// ç»‘å®šæ–‡ä»¶æŽ§åˆ¶å™¨
-	ROUTER_SIMPLE_BIND(FileController);
-	
-	// ç»‘å®šWebSocketæŽ§åˆ¶å™¨
-=======
 	// °ó¶¨Ê¾Àý¿ØÖÆÆ÷
 	ROUTER_SIMPLE_BIND(SampleController);
 	// °ó¶¨ÓÃ»§¿ØÖÆÆ÷
@@ -101,7 +65,6 @@ void Router::createSampleRouter()
 	ROUTER_SIMPLE_BIND(FileController);
 	
 	// °ó¶¨WebSocket¿ØÖÆÆ÷
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
 	router->addController(WSContorller::createShared());
 }
 #endif

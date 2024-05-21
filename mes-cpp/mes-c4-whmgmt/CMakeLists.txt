@@ -7,7 +7,7 @@ cmake_minimum_required (VERSION 3.8)
 set(IS_ARCH_DEMO false)
 
 # 设置文件名称
-set (appName arch-sample)
+set (appName mes-c4-whmgmt)
 
 # 包含库目录
 include_directories ("./")
@@ -42,11 +42,7 @@ if(WIN32)
 endif()
 
 # 编译可执行文件
-<<<<<<< HEAD
-add_executable (${appName} ${SC_FILES} "domain/query/productionorder/ExportBomOrderQuery.h" "domain/dto/productionorder/ExportBomOrderDTO.h" "domain/vo/productionorder/ExportBomOrderVO.h" "controller/productionorder/ProductionOrderController.h" "controller/productionorder/ProductionOrderController.cpp" "domain/dto/productionorder/ExportOrderDTO.h")
-=======
 add_executable (${appName} ${SC_FILES})
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
 
 # 给架构示例项目添加特有的宏
 if(${IS_ARCH_DEMO})
