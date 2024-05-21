@@ -7,6 +7,9 @@ import com.zeroone.star.project.j5.vo.schedualplan.PlanListVO;
 import com.zeroone.star.project.j5.vo.schedualplan.PlanVO;
 import com.zeroone.star.project.vo.JsonVO;
 
+import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
+import com.zeroone.star.project.vo.JsonVO;
+
 /**
  * <p>
  * 描述：排班计划接口
@@ -50,5 +53,19 @@ public interface SchedulePlanApis {
      * @return 修改结果
      */
     JsonVO<Integer> modifyTeam(PlanDTO planDTO);
+
+    /**
+     * 删除排版计划(可批量删除)
+     * @param rems 删除数据的id集合
+     *  @author sailing
+     */
+    JsonVO<Integer> removeSchPlan(Long[] rems);
+
+    /**
+     * 修改计划状态
+     * @param schPlanDTO  修改状态模型
+     * @author sailing
+     */
+    JsonVO<Integer>  modifySchPlanStatus(SchPlanDTO schPlanDTO);
 
 }
