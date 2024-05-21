@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import java.time.LocalDate;
 
-import java.util.Date;
 
 /**
  * 为了将文件夹推送到远程仓库而创建的类，用于占位，无其他用途
@@ -16,16 +16,16 @@ public class MessageDTO {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "附件id")
+    @ApiModelProperty(value = "附件id",example = "1")
     /** 附件ID */
     private Long messageId;
 
     /** 消息类型 */
-    @ApiModelProperty(value = "消息类型",example = "公告、提示、告警、聊天信息")
+    @ApiModelProperty(value = "消息类型",example = "公告")
     private String messageType;
 
     /** 消息级别 */
-    @ApiModelProperty(value = "消息级别",example = "普通、警告、紧急")
+    @ApiModelProperty(value = "消息级别",example = "普通")
     private String messageLevel;
 
     /** 标题 */
@@ -61,53 +61,40 @@ public class MessageDTO {
     private String recipientNick;
 
     /** 处理时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "处理时间",dataType = "yyyy-MM-dd",example = "2002-12-30")
-    private Date processTime;
+    private LocalDate processTime;
 
     /** 回调地址 */
     @ApiModelProperty(value = "回调地址",example = "随意写")
     private String callBack;
 
     /** 状态 */
-    @ApiModelProperty(value = "状态",example = "未读、已读、已处理")
+    @ApiModelProperty(value = "状态",example = "未读")
     private String status;
 
     /** 是否删除 */
-    @ApiModelProperty(value = "是否删除",example = "Y/N")
+    @ApiModelProperty(value = "是否删除",example = "N")
     private String deletedFlag;
     /* 备注 */
     @ApiModelProperty(value = "备注")
     private String remark;
+
+
     /** 预留字段1 */
+    @ApiModelProperty(value = "预留字段1",example = "")
     private String attr1;
 
     /** 预留字段2 */
+    @ApiModelProperty(value = "预留字段2",example = "")
     private String attr2;
 
     /** 预留字段3 */
+    @ApiModelProperty(value = "预留字段3",example = "")
     private Long attr3;
 
     /** 预留字段4 */
+    @ApiModelProperty(value = "预留字段4",example = "")
     private Long attr4;
-
-
-    /* 创建者 */
-    @ApiModelProperty(value = "创建者")
-    private String createBy;
-
-    /* 创建时间 */
-    @ApiModelProperty(value = "创建时间")
-    private Date createTime;
-
-    /* 更新者 */
-    @ApiModelProperty(value = "更新者")
-    private String UpdateBy;
-
-    /* 更新时间*/
-    @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
-
 
 
 }

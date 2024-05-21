@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -61,34 +62,39 @@ public class Message {
     private String recipientNick;
 
     /** 处理时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "处理时间",dataType = "yyyy-MM-dd",example = "2002-12-30")
-    private Date processTime;
+    private LocalDate processTime;
 
     /** 回调地址 */
     @ApiModelProperty(value = "回调地址",example = "随意写")
     private String callBack;
 
     /** 状态 */
-    @ApiModelProperty(value = "状态",example = "未读、已读、已处理")
+    @ApiModelProperty(value = "状态",example = "未读")
     private String status;
 
     /** 是否删除 */
-    @ApiModelProperty(value = "是否删除",example = "1/0")
+    @ApiModelProperty(value = "是否删除",example = "N")
     private String deletedFlag;
     /* 备注 */
     @ApiModelProperty(value = "备注")
     private String remark;
+
+
     /** 预留字段1 */
+    @ApiModelProperty(value = "预留字段1",example = "")
     private String attr1;
 
     /** 预留字段2 */
+    @ApiModelProperty(value = "预留字段2",example = "")
     private String attr2;
 
     /** 预留字段3 */
+    @ApiModelProperty(value = "预留字段3",example = "")
     private Long attr3;
 
     /** 预留字段4 */
+    @ApiModelProperty(value = "预留字段4",example = "")
     private Long attr4;
 
 

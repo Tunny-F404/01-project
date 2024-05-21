@@ -4,6 +4,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -20,12 +21,12 @@ public class ExportMessageDTO {
     private static final long serialVersionUID = 1L;
 
     /** 消息类型 */
-    @ApiModelProperty(value = "消息类型",example = "公告、提示、告警、聊天信息")
+    @ApiModelProperty(value = "消息类型",example = "公告")
     @ExcelProperty(value = "消息类型",index = 0)
     private String messageType;
 
     /** 消息级别 */
-    @ApiModelProperty(value = "消息级别",example = "普通、警告、紧急")
+    @ApiModelProperty(value = "消息级别",example = "普通")
     @ExcelProperty(value = "消息级别",index = 1)
     private String messageLevel;
 
@@ -70,10 +71,10 @@ public class ExportMessageDTO {
     private String recipientNick;
 
     /** 处理时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    /** 处理时间 */
     @ApiModelProperty(value = "处理时间",dataType = "yyyy-MM-dd",example = "2002-12-30")
-    @ExcelProperty(value = "处理时间",index = 10)
-    private Date processTime;
+    @ExcelProperty(value = "处理时间")
+    private LocalDate processTime;
 
     /** 回调地址 */
     @ApiModelProperty(value = "回调地址",example = "随意写")
@@ -81,12 +82,12 @@ public class ExportMessageDTO {
     private String callBack;
 
     /** 状态 */
-    @ApiModelProperty(value = "状态",example = "未读、已读、已处理")
+    @ApiModelProperty(value = "状态",example = "未读")
     @ExcelProperty(value = "状态",index = 12)
     private String status;
 
     /** 是否删除 */
-    @ApiModelProperty(value = "是否删除",example = "Y/N")
+    @ApiModelProperty(value = "是否删除",example = "N")
     @ExcelProperty(value = "是否删除",index = 13)
     private String deletedFlag;
 }

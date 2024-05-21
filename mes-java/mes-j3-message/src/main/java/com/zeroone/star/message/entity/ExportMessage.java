@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -75,10 +76,9 @@ public class ExportMessage {
     private String recipientNick;
 
     /** 处理时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "处理时间",dataType = "yyyy-MM-dd",example = "2002-12-30")
-    @ExcelProperty(value = "处理时间",index = 10)
-    private Date processTime;
+    @ExcelProperty(value = "处理时间")
+    private LocalDate processTime;
 
     /** 回调地址 */
     @ApiModelProperty(value = "回调地址",example = "随意写")
@@ -86,12 +86,12 @@ public class ExportMessage {
     private String callBack;
 
     /** 状态 */
-    @ApiModelProperty(value = "状态",example = "未读、已读、已处理")
+    @ApiModelProperty(value = "状态",example = "未读")
     @ExcelProperty(value = "状态",index = 12)
     private String status;
 
     /** 是否删除 */
-    @ApiModelProperty(value = "是否删除",example = "Y/N")
+    @ApiModelProperty(value = "是否删除",example = "N")
     @ExcelProperty(value = "是否删除",index = 13)
     private String deletedFlag;
 
