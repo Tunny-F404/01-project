@@ -5,7 +5,7 @@
 #ifndef _DELETEPLANSUBJECT_H_
 #define _DELETEPLANSUBJECT_H_
 
-#include "../GlobalInclude.h"
+#include "../mes-c2-inspection.maintenanceplan/domain/GlobalInclude.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 

@@ -4,7 +4,8 @@
 #include "domain/vo/BaseJsonVO.h"
 #include "ApiHelper.h"
 #include "Macros.h"
-#include "domain/dto/DeletePlanSubjectDTO.h"
+#include "../../domain/dto/deletePlanSubject/DeletePlanSubjectDTO.h"
+
 
 #include OATPP_CODEGEN_BEGIN(ApiController)
 
@@ -17,7 +18,7 @@ class DeletePlanSubjectController : public oatpp::web::server::api::ApiControlle
 	API_ACCESS_DECLARE(DeletePlanSubjectController)
 public: // 定义接口
 	API_DEF_ENDPOINT_INFO(ZH_WORDS_GETTER("planSubject.op.deleteT"), deletePlanSubject, BooleanJsonVO::Wrapper)
-	API_HANDLER_ENDPOINT(API_M_DEL, "/inspection-maintennace/delete-opration", deletePlanSubject, BODY_DTO(RemoveDeviceDTO::Wrapper, dto), execRemoveDevice(dto))
+	API_HANDLER_ENDPOINT(API_M_DEL, "/inspection-maintennace/delete-opration", deletePlanSubject, BODY_DTO(DeletePlanSubjectDTO::Wrapper, dto), execDeletePlanSubject(dto))
 private: // 定义接口执行函数
 
 	// 前端发过来的dto由这个函数执行

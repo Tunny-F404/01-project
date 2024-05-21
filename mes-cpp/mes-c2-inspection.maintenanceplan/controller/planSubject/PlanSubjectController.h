@@ -22,7 +22,62 @@ class PlanSubjectController : public oatpp::web::server::api::ApiController // 1
 	API_ACCESS_DECLARE(PlanSubjectController);
 	// 3 定义接口
 public:
+	//这里可以定义很多个的接口
+	// 3.1 定义查询接口描述
+	ENDPOINT_INFO(queryPlanSubjectTablePage) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("planSubject.query.summaryTable"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		//API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(PlanSubjectTablePageJsonVO);//ABF 响应格式是我们定义的那个VO
+		// 定义分页查询参数描述
+		API_DEF_ADD_PAGE_PARAMS();//没有分页，不加这个
 
+		// 定义其他查询参数描述，，，ABF 注意，这里要照着query对象来写
+		API_DEF_ADD_QUERY_PARAMS(String, "subCode", ZH_WORDS_GETTER("planSubject.fields.subCode"), "1", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "subName", ZH_WORDS_GETTER("planSubject.fields.subName"), "1", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "subType", ZH_WORDS_GETTER("planSubject.fields.subType"), "1", false);
+
+	}
+	// 3.2 定义查询接口处理                                  查询参数                          开启授权才能用
+	//
+	//ENDPOINT(API_M_GET, "/planSubject/query-panSubject-table", queryPlanSubjectTablePage, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) 
+	// 暂时不开授权
+	ENDPOINT(API_M_GET, "/planSubject/query-panSubject-table", queryPlanSubjectTablePage, QUERIES(QueryParams, queryParams))
+	{
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(query, PlanSubjectQuery, queryParams);//解析成Deptquery
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execPlanSubjectTablePage(query));//改成DeptTable，并减少一个参数
+	}
+
+	//-------------------------------------------------------------
+	ENDPOINT_INFO(queryPlanSubjectDetailPage) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("planSubject.query.summaryDetailPage"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		//API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(PlanSubjectDetailPageJsonVO);//ABF 响应格式是我们定义的那个VO
+		// 定义分页查询参数描述
+		API_DEF_ADD_PAGE_PARAMS();//没有分页，不加这个
+
+		// 定义其他查询参数描述，，，ABF 注意，这里要照着query对象来写
+		API_DEF_ADD_QUERY_PARAMS(String, "subCode", ZH_WORDS_GETTER("planSubject.fields.subCode"), "7", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "subName", ZH_WORDS_GETTER("planSubject.fields.subName"), "7", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "subType", ZH_WORDS_GETTER("planSubject.fields.subType"), "7", false);
+
+	}
+	// 3.2 定义查询接口处理（分页）                                  查询参数                          开启授权才能用
+	ENDPOINT(API_M_GET, "/planSubject/query-panSubject-DetailPage", queryPlanSubjectDetailPage, QUERIES(QueryParams, queryParams)
+		//, API_HANDLER_AUTH_PARAME
+	) {
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(query, PlanSubjectQuery, queryParams);//解析成Deptquery
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execPlanSubjectDetailPage(query));//改成DeptTable，并减少一个参数
+	}
 	
 
 private:

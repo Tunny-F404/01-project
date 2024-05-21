@@ -27,6 +27,7 @@
 #include "ws/WSController.h"
 #endif
 #include "planSubject/PlanSubjectController.h"
+#include "deletePlanSubject/DeletePlanSubject.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -53,8 +54,9 @@ void Router::initRouter()
 
 	//#TIP :系统扩展路由定义，写在这个后面
 	//内联展开看看，abf
-	docEndpoints->append(router->addController(PlanSubjectController::createShared())->getEndpoints());
-	//ROUTER_SIMPLE_BIND(PlanSubjectController);
+	//docEndpoints->append(router->addController(PlanSubjectController::createShared())->getEndpoints());
+	ROUTER_SIMPLE_BIND(PlanSubjectController);
+	ROUTER_SIMPLE_BIND(DeletePlanSubjectController);
 
 }
 
