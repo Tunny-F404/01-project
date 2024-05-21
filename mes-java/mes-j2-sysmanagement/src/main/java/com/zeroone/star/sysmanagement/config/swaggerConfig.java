@@ -1,4 +1,4 @@
-package com.zeroone.star.sysManagement.config;
+package com.zeroone.star.sysmanagement.config;
 
 import com.zeroone.star.project.config.swagger.SwaggerCore;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
  */
 @Configuration
 @EnableSwagger2WebMvc
-public class SwaggerConfig {
+public class swaggerConfig {
 
     @Bean
     Docket DepartmentApis() {
