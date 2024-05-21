@@ -49,14 +49,7 @@ class EquipmentDetailJsonVO : public JsonVO<EquipmentDetailDTO::Wrapper>
 {
 	DTO_INIT(EquipmentDetailJsonVO, JsonVO<EquipmentDetailDTO::Wrapper>);
 };
-/**
- * 定义一个设备分类显示JsonVO对象，用于响应给前端
- */
-class EquipmentClassifyJsonVO : public JsonVO<oatpp::List<EquipmentClassifyDTO::Wrapper>>
-{
-	DTO_INIT(EquipmentClassifyJsonVO, JsonVO<oatpp::List<EquipmentClassifyDTO::Wrapper>>);
 
-};
 
 
 #include OATPP_CODEGEN_END(DTO)

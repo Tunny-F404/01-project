@@ -37,15 +37,5 @@ equipmentledger:
   summary: 上传文件
  download-template:
   summary: 下载导入模板
- class:
-  id: 主键
-  cname: 设备分类
-  children: 子类
-  eclasscode: 设备类型编码
-  eclassname: 设备类型名称
-  pid: 父类型ID
-  allpid: 所有父节点ID
-  enable: 是否启用
-  note: 备注
-
+ 
   

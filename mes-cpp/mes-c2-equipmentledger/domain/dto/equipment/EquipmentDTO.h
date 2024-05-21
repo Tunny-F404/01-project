@@ -112,33 +112,6 @@ class EquipmentPageDTO : public PageDTO< EquipmentDTO::Wrapper>
 
 
 
-/**
- * 设备分类数据传输对象
- */
-class EquipmentClassifyDTO : public oatpp::DTO, public TreeNode
-{
-	DTO_INIT(EquipmentClassifyDTO, DTO);
-	// 菜单名称
-	API_DTO_FIELD_DEFAULT(String,classifyName , ZH_WORDS_GETTER("equipment.class.cname"));
-	// 子菜单
-	API_DTO_FIELD(List<EquipmentClassifyDTO::Wrapper>, children, ZH_WORDS_GETTER("equipment.class.children"), false, {});
-	//主键
-	API_DTO_FIELD_DEFAULT(UInt64, id, ZH_WORDS_GETTER("equipment.class.id"));
-	//设备类型编码
-	API_DTO_FIELD_DEFAULT(String, eClassCode, ZH_WORDS_GETTER("equipment.class.eclasscode"));
-	//设备类型名称
-	API_DTO_FIELD_DEFAULT(String, eClassName, ZH_WORDS_GETTER("equipment.class.eclassname"));
-	//父类型ID
-	API_DTO_FIELD_DEFAULT(UInt64, pid, ZH_WORDS_GETTER("equipment.class.pid"));
-	//所有父节点ID
-	API_DTO_FIELD_DEFAULT(String, allPid, ZH_WORDS_GETTER("equipment.class.allpid"));
-	//是否启用
-	API_DTO_FIELD_DEFAULT(String, enable, ZH_WORDS_GETTER("equipment.class.enable"));
-	//备注
-	API_DTO_FIELD_DEFAULT(String, note, ZH_WORDS_GETTER("equipment.class.note"));
-
-
-};
 
 #include OATPP_CODEGEN_END(DTO)
 #endif // 
