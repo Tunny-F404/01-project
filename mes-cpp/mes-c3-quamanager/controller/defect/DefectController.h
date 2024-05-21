@@ -6,19 +6,21 @@
 #include "domain/query/defect/DefectQuery.h"
 #include "domain/dto/defect/DefectDTO.h"
 #include "domain/vo/defect/DefectVO.h"
+
+#include "domain/dto/defect/DefectUpdateDTO.h"
+
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
 /**
- * 示例控制器，演示基础接口的使用
+ * 常见缺陷控制器
  */
-class DefectController : public oatpp::web::server::api::ApiController // 1 继承控制器
+class DefectController : public oatpp::web::server::api::ApiController 
 {
-	// 2 定义控制器访问入口
 	API_ACCESS_DECLARE(DefectController);
-	// 3 定义接口
+
 public:
-	// 3.1 定义查询接口描述
+	// 1 获取缺陷列表（条件+分页）
 	ENDPOINT_INFO(queryDefect) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("defect.get.summary"));
@@ -33,7 +35,6 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "index_type", ZH_WORDS_GETTER("defect.field.index_type"), "APPEARANCE", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "defect_level", ZH_WORDS_GETTER("defect.field.defect_level"), "MIN", false);
 	}
-	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/defect", queryDefect, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, DefectQuery, queryParams);
@@ -41,7 +42,7 @@ public:
 		API_HANDLER_RESP_VO(execQueryDefect(userQuery, authObject->getPayload()));
 	}
 
-	// 3.1 定义新增接口描述
+	// 2 添加缺陷
 	ENDPOINT_INFO(addDefect) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("defect.post.summary"));
@@ -50,18 +51,39 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	// 3.2 定义新增接口处理
 	ENDPOINT(API_M_POST, "/defect", addDefect, BODY_DTO(DefectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddDefect(dto));
 	}
 
+	// 3 修改缺陷
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("defect.modify.summary"), modifyDefect, Uint64JsonVO::Wrapper);
+	API_HANDLER_ENDPOINT_AUTH(                   //
+		API_M_PUT,                               //
+		"/qc/defect/modify-defect",              //
+		modifyDefect,                            //
+		BODY_DTO(DefectUpdateDTO::Wrapper, dto), //
+		execModifyDefect(dto)                    //
+	);
+
+	// 4 删除缺陷
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("defect.remove.summary"), removeDefect, Uint64JsonVO::Wrapper);
+	API_HANDLER_ENDPOINT_AUTH(                   //
+		API_M_DEL,                               //
+		"/qc/defect/remove-defect/{removeList}", //
+		removeDefect,                            //
+		PATH(String, removeList),                //
+		execRemoveDefect(removeList)             //
+	);
 private:
-	// 3.3 分页查询数据
+	// 1 获取缺陷列表（条件+分页）
 	DefectPageJsonVO::Wrapper execQueryDefect(const DefectQuery::Wrapper& query, const PayloadDTO& payload);
-	// 3.3 新增数据
+	// 2 添加缺陷
 	Uint64JsonVO::Wrapper execAddDefect(const DefectDTO::Wrapper& dto);
-		
+	// 3 修改缺陷
+	Uint64JsonVO::Wrapper execModifyDefect(const DefectUpdateDTO::Wrapper& dto);
+	// 4 删除缺陷
+	Uint64JsonVO::Wrapper execRemoveDefect(const String& removeList);
 };
 
 // 0 取消API控制器使用宏
