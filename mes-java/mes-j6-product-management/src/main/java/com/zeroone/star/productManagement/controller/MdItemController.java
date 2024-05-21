@@ -43,7 +43,7 @@ public class MdItemController implements MdItemApis {
     @SneakyThrows
     @PostMapping(value = "/importTemplate")
     @ApiOperation(value = "下载模板")
-    public ResponseEntity<byte[]> importTemplate() {
+    public ResponseEntity<byte[]> exportTemplate() {
         return null;
     }
     /**

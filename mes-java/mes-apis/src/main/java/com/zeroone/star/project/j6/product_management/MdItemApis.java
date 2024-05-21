@@ -15,7 +15,7 @@ public interface MdItemApis {
      * 下载导入模板
      * @return 导入模板文件内容
      */
-    ResponseEntity<byte[]> importTemplate();
+    ResponseEntity<byte[]> exportTemplate();
     /**
      * 导入物料产品数据
      * @param file Excel 文件
