@@ -39,7 +39,7 @@ EquipmentDetailJsonVO::Wrapper EquipmentController::execEquipmentDetail(const Eq
 	equipmentDetail->spec = "123";
 	equipmentDetail->status = "123";
 	equipmentDetail->tName = "123";
-	equipmentDetail->workshop = "123";
+	
 	res->success(equipmentDetail);
 	return res;
 }

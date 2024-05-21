@@ -32,8 +32,6 @@
 class EquipmentQuery : public  PageQuery
 {
 	DTO_INIT(EquipmentQuery, PageQuery);
-	//分类名称
-	API_DTO_FIELD_DEFAULT(String, tName, ZH_WORDS_GETTER("equipment.fields.tname"));
 	//设备编码
 	API_DTO_FIELD_DEFAULT(String, eCode, ZH_WORDS_GETTER("equipment.fields.ecode"));
 	//设备名称
@@ -47,8 +45,8 @@ class EquipmentQuery : public  PageQuery
 class EquipmentDetailQuery : public  oatpp::DTO
 {
 	DTO_INIT(EquipmentDetailQuery, DTO);
-	//设备编码
-	API_DTO_FIELD_DEFAULT(String, eCode, ZH_WORDS_GETTER("equipment.fields.ecode"));
+	//主键
+	API_DTO_FIELD_DEFAULT(String, eId, ZH_WORDS_GETTER("equipment.fields.id"));
 	
 };
 

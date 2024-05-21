@@ -44,8 +44,6 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
 	
-		//分类名称
-		API_DEF_ADD_QUERY_PARAMS(String, "tName", ZH_WORDS_GETTER("equipment.fields.tname"), "was1", false);
 		//设备编码
 		API_DEF_ADD_QUERY_PARAMS(String, "eCode", ZH_WORDS_GETTER("equipment.fields.ecode"), "english", false);
 		//设备名称
@@ -70,7 +68,7 @@ public:
 		// 定义其他查询参数描述
 		
 		//设备编码
-		API_DEF_ADD_QUERY_PARAMS(String, "eCode", ZH_WORDS_GETTER("equipment.fields.ecode"), "english", true);
+		API_DEF_ADD_QUERY_PARAMS(String, "eId", ZH_WORDS_GETTER("equipment.fields.id"), "english", true);
 	}
 	// 2 定义设备详情查询接口处理
 	ENDPOINT(API_M_GET, "/equipment-ledger/query-detail", queryEquipmentDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -103,10 +101,14 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+		// 定义修改参数描述
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "eId", ZH_WORDS_GETTER("equipment.fields.id"), 5, true);
 	}
 	// 4定义修改设备端点处理
-	ENDPOINT(API_M_PUT, "/equipment-ledger/modify-equipment", modifyEquipment, BODY_DTO(modifyEquipmentDTO::Wrapper, dto),  API_HANDLER_AUTH_PARAME) {
-		// 执行文件保存逻辑
+	ENDPOINT(API_M_PUT, "/equipment-ledger/modify-equipment", modifyEquipment,QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// 解析查询参数
+		API_HANDLER_QUERY_PARAM(dto, modifyEquipmentDTO, queryParams);
+		//呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(executeModifyEquipment(dto));
 	}
 
