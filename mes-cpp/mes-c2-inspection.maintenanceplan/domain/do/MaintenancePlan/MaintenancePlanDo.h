@@ -43,8 +43,8 @@ class MaintenancePlanDo
 	CC_SYNTHESIZE(string, startdate, Startdate);
 	// 计划结束时间
 	CC_SYNTHESIZE(string, enddate, Enddate);
-	// 计划状态（草稿或已完成，不可修改）
-	CC_SYNTHESIZE(string, status, Status);
+	//// 计划状态（草稿或已完成，不可修改）
+	//CC_SYNTHESIZE(string, status, Status);
 	// 备注
 	CC_SYNTHESIZE(string, remark, Remark);
 public:
@@ -57,7 +57,7 @@ public:
 		circlecount = "";
 		startdate = "";
 		enddate = "";
-		status = "";
+		//status = "";
 		remark = "";
 	}
 };

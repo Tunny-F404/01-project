@@ -41,7 +41,7 @@ public:
 		data.setCirclecount(resultSet->getString(8));
 		data.setStartdate(resultSet->getString(5));
 		data.setEnddate(resultSet->getString(6));
-		data.setStatus(resultSet->getString(9));
+		//data.setStatus(resultSet->getString(9));
 		data.setRemark(resultSet->getString(10));
 
 		return data;
