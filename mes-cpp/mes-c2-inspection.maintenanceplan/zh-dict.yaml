@@ -19,6 +19,8 @@ planSubject:
   subType:
    inspection: 设备点检
    maintenance: 设备保养
+ op:
+  deleteT: 删除操作
    
    
      
