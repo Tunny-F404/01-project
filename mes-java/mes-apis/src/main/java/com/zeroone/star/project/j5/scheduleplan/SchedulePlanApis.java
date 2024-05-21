@@ -18,14 +18,14 @@ public interface SchedulePlanApis {
      * @param deletePlans 指定删除数据
      *  @author sailing
      */
-    void deleteSchPlan(DeletePlan[] deletePlans);
+    void removeSchPlan(DeletePlan[] deletePlans);
 
     /**
      * 修改计划状态
      * @param updateStatus  修改状态模型
      * @author sailing
      */
-    void updateSchPlanStatus(UpdatePlanStatus updateStatus);
+    void modifySchPlanStatus(UpdatePlanStatus updateStatus);
 
     /**
      * 导出计划
