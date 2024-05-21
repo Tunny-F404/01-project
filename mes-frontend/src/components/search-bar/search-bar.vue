@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 
-import { ElForm } from 'element-plus'
+import { ElForm, ElInput } from 'element-plus'
 
 defineOptions({
 	name: 'SearchBar'
@@ -13,20 +13,21 @@ type SearchBarProps = {
 
 	/** 双向绑定的表格数据 */
 	data: Record<string, unknown>
+	// data: string
 }
 
-const props = withDefaults(
-	defineProps<SearchBarProps>(),
+const props = withDefaults(defineProps<SearchBarProps>(), {
+	config: {}
+})
 
-	{
-		// config
-	}
-)
+const data = defineModel(<keyof SearchBarProps>'data')
 </script>
 
 <template>
 	<section class="search-bar-root">
-		<ElForm> </ElForm>
+		<!-- <ElForm> </ElForm> -->
+
+		<ElInput v-model="data.input"></ElInput>
 	</section>
 </template>
 
