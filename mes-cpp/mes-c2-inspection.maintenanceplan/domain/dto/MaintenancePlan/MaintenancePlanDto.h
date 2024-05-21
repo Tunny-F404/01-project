@@ -47,7 +47,7 @@ class MaintenancePlanDto : public oatpp::DTO
 	//计划结束时间
 	API_DTO_FIELD(String, enddate, ZH_WORDS_GETTER("maintenance.fields.enddata"), false,"2024-5-19");
 	//计划状态（草稿或已完成，不可修改）
-	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("maintenance.fields.status"), false,"PREPARE");
+	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("maintenance.fields.status"), true,"PREPARE");
 	////计划状态（停用或启用，可修改）
 	//API_DTO_FIELD(Int32, status01, ZH_WORDS_GETTER("maintenance.fields.status01"), true, 0);
 	//备注
