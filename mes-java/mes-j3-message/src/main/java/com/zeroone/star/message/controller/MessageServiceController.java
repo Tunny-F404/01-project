@@ -1,17 +1,9 @@
 package com.zeroone.star.message.controller;
 
-import cn.hutool.core.date.DateTime;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.zeroone.star.message.entity.ExportMessage;
-import com.zeroone.star.message.service.ExportMessageService;
-import com.zeroone.star.message.service.MessageService;
-import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
-import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
-import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
-import com.zeroone.star.project.j3.dto.ExportMessageDTO;
-import com.zeroone.star.project.j3.dto.MessageDTO;
 import com.zeroone.star.project.j3.messageservice.MessageServiceApis;
+import io.swagger.annotations.Api;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Api(tags = "消息服务")
+@Controller
+@RequestMapping("/message-service")
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
