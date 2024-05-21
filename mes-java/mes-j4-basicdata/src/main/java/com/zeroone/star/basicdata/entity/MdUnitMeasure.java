@@ -1,20 +1,25 @@
-package com.zeroone.star.project.dto.excel;
+package com.zeroone.star.basicdata.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
+import org.ehcache.impl.internal.store.offheap.LazyOffHeapValueHolder;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * <p>
- * 描述：导出单位数据
+ * 描述：单位实体类
  * </p>
- * <p>版权：&copy;01星球</p>
- * <p>地址：01星球总部</p>
+
  * @author 本鼠
  * @version 1.0.0
  */
 
 @Data
-public class unitmeasure {
+public class MdUnitMeasure {
+    //单位ID
+    private Long measureId;
     @ExcelProperty(value = "单位编码",index = 0)
     private String measureCode;
     @ExcelProperty(value = "单位名称",index = 1)
@@ -32,8 +37,18 @@ public class unitmeasure {
     @ExcelProperty(value = "预留字段2",index = 7)
     private String arr2;
     @ExcelProperty(value = "预留字段3",index = 8)
-    private String arr3;
+    private Integer arr3;
     @ExcelProperty(value = "预留字段4",index = 9)
-    private String arr4;
+    private Integer arr4;
+    //备注
+    private String remark;
+    //创建者
+    private String createBy;
+    //创建时间
+    private LocalDateTime createTime;
+    //更新者
+    private String updateBy;
+    //更新时间
+    private LocalDateTime updateTime;
 }
 

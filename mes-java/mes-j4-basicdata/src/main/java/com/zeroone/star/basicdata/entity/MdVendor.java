@@ -1,20 +1,22 @@
-package com.zeroone.star.project.dto.excel;
+package com.zeroone.star.basicdata.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 描述：导出供应商数据
+ * 描述：供应商实体类
  * </p>
- * <p>版权：&copy;01星球</p>
- * <p>地址：01星球总部</p>
  * @author 本鼠
  * @version 1.0.0
  */
 
 @Data
-public class vendor {
+public class MdVendor {
+    //供应商ID
+    private Long vendorId;
     @ExcelProperty(value = "供应商编码",index = 0)
     private String vendorCode;
     @ExcelProperty(value = "供应商名称",index = 1)
@@ -55,4 +57,22 @@ public class vendor {
     private String creditCode;
     @ExcelProperty(value = "是否启用",index = 19)
     private Character enableFlag;
+    //备注
+    private String remark;
+    //预留字段1
+    private String attr1;
+    //预留字段2
+    private String attr2;
+    //预留字段3
+    private Integer attr3;
+    //预留字段4
+    private Integer attr4;
+    //创建者
+    private String createBy;
+    //创建时间
+    private LocalDateTime createTime;
+    //更新者
+    private String updateBy;
+    //更新时间
+    private LocalDateTime updateTime;
 }
