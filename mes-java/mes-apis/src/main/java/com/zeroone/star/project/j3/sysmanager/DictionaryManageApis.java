@@ -3,6 +3,7 @@ package com.zeroone.star.project.j3.sysmanager;
 
 import com.zeroone.star.project.query.dict.SysDictTypeQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface DictionaryManageApis {
     /**
      *  批量删除字典
      */
-    JsonVO<Void> deleteDictType(List<Long> dictListIds);
+    JsonVO<Void> deleteDictType(String dictListIdsStr);
     /**
      *  导出字典
      */
