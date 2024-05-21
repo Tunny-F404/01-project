@@ -27,7 +27,7 @@
 #include "ws/WSController.h"
 #endif
 
-#include "../mes-c4-prodmgmt/controller/ProdWorkorder/AddProdWorkorderController.h"
+#include "../mes-c4-prodmgmt/controller/ProdWorkorder/ProdWorkorderController.h"
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
 // 简化绑定控制器宏定义
