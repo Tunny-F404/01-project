@@ -9,7 +9,9 @@ import java.sql.Timestamp;
 
 @Data
 @ApiModel("排班计划数据传输对象")
-public class SchPlanDto {
+public class SchPlanDTO {
+    @ApiModelProperty(value = "计划id")
+    private int planId;
     @ApiModelProperty(value = "计划编号")
     private int planCode;
     @ApiModelProperty(value = "计划名称")
