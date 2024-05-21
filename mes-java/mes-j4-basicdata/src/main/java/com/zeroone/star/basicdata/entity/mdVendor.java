@@ -3,8 +3,10 @@ package com.zeroone.star.basicdata.entity;
 import com.alibaba.druid.sql.visitor.functions.Char;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
-public class Vendor {
+public class mdVendor {
 
     //供应商ID
     private Integer vendorId;
@@ -64,7 +66,7 @@ public class Vendor {
     private String contact2Email;
 
     //统一社会信用代码
-    private String createCode;
+    private String creditCode;
 
     //是否启用
     private Char enableFlag;
@@ -88,12 +90,12 @@ public class Vendor {
     private String createBy;
 
     //创建时间
-    private String createTime;
+    private LocalDateTime createTime;
 
     //更新者
     private String updateBy;
 
     //更新时间
-    private String updateTime;
+    private LocalDateTime updateTime;
 
 }
