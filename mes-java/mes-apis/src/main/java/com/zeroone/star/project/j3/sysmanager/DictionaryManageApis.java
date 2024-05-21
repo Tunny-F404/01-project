@@ -4,6 +4,8 @@ package com.zeroone.star.project.j3.sysmanager;
 import com.zeroone.star.project.query.dict.SysDictTypeQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
+import java.util.List;
+
 /**
  * 系统管理-字典管理相关接口
  */
@@ -15,7 +17,7 @@ public interface DictionaryManageApis {
     /**
      *  批量删除字典
      */
-    JsonVO<Void> deleteDictType(SysDictTypeQuery sysDictTypeQuery);
+    JsonVO<Void> deleteDictType(List<Long> dictListIds);
     /**
      *  导出字典
      */
