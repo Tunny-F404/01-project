@@ -18,4 +18,5 @@ public interface MsCodeRuleMapper{
     CodeRuleDTO toCodeRuleDTO(CodeRule codeRule);
     //    将CodeRuleDTO转换为CodeRule
     CodeRule  toCodeRule(CodeRuleDTO codeRuleDTO);
+
 }

@@ -1,14 +1,18 @@
 package com.zeroone.star.sysmanagement.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.alibaba.druid.wall.violation.ErrorCode;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.j4.sysmanagement.coderule.CodeRuleDTO;
 import com.zeroone.star.project.query.j4.sysmanagement.coderule.CodeRuleQuery;
+import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanagement.entity.CodeRule;
+import com.zeroone.star.sysmanagement.entity.SysAutoCodePart;
 import com.zeroone.star.sysmanagement.mapper.CodeRuleMapper;
 import com.zeroone.star.sysmanagement.mapper.MsCodeRuleMapper;
+import com.zeroone.star.sysmanagement.mapper.SysAutoCodePartMapper;
 import com.zeroone.star.sysmanagement.service.ICodeRuleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +36,26 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleMapper, CodeRule> i
     private CodeRuleMapper codeRuleMapper;
     @Resource
     private MsCodeRuleMapper msCodeRuleMapper;
+    @Autowired
+    private SysAutoCodePartMapper sysAutoCodePartMapper;
 //  删除编码规则（支持批量删除）
     @Override
-    public void removeCodeRule(List<String> ruleIds) {
-        codeRuleMapper.deleteBatchIds(ruleIds);
+    public JsonVO removeCodeRule(List<String> ruleIds) {
+//        在删除前，先查看是否有编码生成规则组成在使用该编码规则
+        QueryWrapper<SysAutoCodePart> queryWrapper = new QueryWrapper<SysAutoCodePart>();
+        // 使用in方法来构建查询条件，检查rule_id是否在ruleIds列表中
+        queryWrapper.in("rule_id", ruleIds);
+
+        // 执行查询，获取匹配的SysAutoCodePart记录数
+        Long count = sysAutoCodePartMapper.selectCount(queryWrapper);
+
+        // 如果有记录匹配，说明存在使用中的规则，可以根据业务需求决定如何处理
+        if (count > 0) {
+            return JsonVO.create(null, ErrorCode.DELETE_NOT_ALLOW, "存在使用中的规则，无法删除");
+        } else {
+            codeRuleMapper.deleteBatchIds(ruleIds);
+            return JsonVO.success(null);
+        }
     }
 
     /**

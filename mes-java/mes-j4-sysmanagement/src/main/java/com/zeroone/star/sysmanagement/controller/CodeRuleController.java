@@ -45,8 +45,7 @@ public class CodeRuleController implements CodeRuleApis {
     @Override
     public JsonVO removeCodeRule(@PathVariable List<String> ruleIds) {
         log.info("删除编码规则,{}",ruleIds);
-        iCodeRuleService.removeCodeRule(ruleIds);
-        return JsonVO.success(null);
+        return iCodeRuleService.removeCodeRule(ruleIds);
     }
     //  根据ruleId查询单个编码规则 get
     @GetMapping("/query-code-rule/{ruleId}")
