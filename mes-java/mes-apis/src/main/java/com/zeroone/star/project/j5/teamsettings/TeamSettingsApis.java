@@ -1,8 +1,5 @@
 package com.zeroone.star.project.j5.teamsettings;
 
-import com.zeroone.star.project.j5.vo.SchPlan.DeletePlan;
-import com.zeroone.star.project.j5.vo.SchPlan.UpdatePlanStatus;
-
 /**
  * <p>
  * 描述：班组设置接口
