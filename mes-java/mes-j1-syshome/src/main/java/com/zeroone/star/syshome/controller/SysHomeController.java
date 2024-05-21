@@ -4,9 +4,13 @@ import com.zeroone.star.project.dto.sample.SampleDTO;
 import com.zeroone.star.project.j1.syshome.SysHomeApis;
 import com.zeroone.star.project.j1.syshome.dto.PageDTO;
 import com.zeroone.star.project.j1.syshome.dto.facility.FacilityDTO;
+import com.zeroone.star.project.j1.syshome.dto.plan.PlanDTO;
 import com.zeroone.star.project.j1.syshome.dto.production.ProductionDTO;
 import com.zeroone.star.project.j1.syshome.dto.quality.QualityDTO;
 import com.zeroone.star.project.j1.syshome.dto.repertory.RepertoryDTO;
+import com.zeroone.star.project.j1.syshome.dto.toDoEvent.ToDoEventDTO;
+import com.zeroone.star.project.j1.syshome.dto.workshop.WorkshopDTO;
+import com.zeroone.star.project.j1.syshome.query.EPageQuery;
 import com.zeroone.star.project.j1.syshome.query.production.ProductionQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.*;
@@ -35,7 +39,7 @@ public class SysHomeController implements SysHomeApis {
     @GetMapping("query-production-table")
     @ApiOperation(value = "生产进度列表")
     @Override
-    public JsonVO<PageDTO<ProductionDTO>> queryProduction(ProductionQuery condition){
+    public JsonVO<PageDTO<ProductionDTO>> queryProduction(EPageQuery condition){
         return null;
     }
 
@@ -62,6 +66,28 @@ public class SysHomeController implements SysHomeApis {
     @ApiOperation(value = "质量统计饼图")
     @Override
     public JsonVO<List<QualityDTO>> queryQuality() {
+        return null;
+    }
+
+
+    @GetMapping("query-workshop")
+    @ApiOperation(value = "查询车间展示信息")
+    @Override
+    public JsonVO<List<WorkshopDTO>> queryWorkshopList() {
+        return null;
+    }
+
+    @GetMapping("query-plan")
+    @ApiOperation(value = "查询排班情况信息")
+    @Override
+    public JsonVO<PageDTO<PlanDTO>> queryPlan(EPageQuery pageQuery) {
+        return null;
+    }
+
+    @GetMapping("query-toDoEvent")
+    @ApiOperation(value = "查询我的待办信息")
+    @Override
+    public JsonVO<PageDTO<ToDoEventDTO>> queryToDoEvent(EPageQuery pageQuery) {
         return null;
     }
 }

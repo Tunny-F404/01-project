@@ -2,10 +2,13 @@ package com.zeroone.star.project.j1.syshome;
 
 import com.zeroone.star.project.j1.syshome.dto.PageDTO;
 import com.zeroone.star.project.j1.syshome.dto.facility.FacilityDTO;
+import com.zeroone.star.project.j1.syshome.dto.plan.PlanDTO;
 import com.zeroone.star.project.j1.syshome.dto.production.ProductionDTO;
 import com.zeroone.star.project.j1.syshome.dto.quality.QualityDTO;
 import com.zeroone.star.project.j1.syshome.dto.repertory.RepertoryDTO;
-import com.zeroone.star.project.j1.syshome.query.production.ProductionQuery;
+import com.zeroone.star.project.j1.syshome.dto.toDoEvent.ToDoEventDTO;
+import com.zeroone.star.project.j1.syshome.dto.workshop.WorkshopDTO;
+import com.zeroone.star.project.j1.syshome.query.EPageQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 import java.util.List;
@@ -23,7 +26,7 @@ public interface SysHomeApis {
      * @param condition 查询条件对象
      * @return 查询结果
      */
-    JsonVO<PageDTO<ProductionDTO>> queryProduction(ProductionQuery condition);
+    JsonVO<PageDTO<ProductionDTO>> queryProduction(EPageQuery condition);
     /**
      * 通过仓库编号查询数据
      * @param id 编号
@@ -42,4 +45,26 @@ public interface SysHomeApis {
      * @return 查询结果
      */
     JsonVO<List<QualityDTO>> queryQuality();
+
+
+/**
+     * 车间信息查询
+     * @param
+     * @return 查询结果
+     */
+    JsonVO<List<WorkshopDTO>> queryWorkshopList();
+
+    /**
+     * 排班情况分页查询
+     * @param
+     * @return 查询结果
+     */
+    JsonVO<PageDTO<PlanDTO>> queryPlan(EPageQuery pageQuery);
+
+    /**
+     * 我的待办分页查询
+     * @param
+     * @return 查询结果
+     */
+    JsonVO<PageDTO<ToDoEventDTO>> queryToDoEvent(EPageQuery pageQuery);
 }
