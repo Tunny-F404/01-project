@@ -4,16 +4,17 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.productManagement.entity.ProductSop;
 import com.zeroone.star.project.j6.product_management.dto.ProductSopDTO;
 import com.zeroone.star.project.j6.product_management.query.ProductSopQuery;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
+@Mapper
 public interface ProductSopMapper extends BaseMapper<ProductSop> {
     /**
      * 查询产品SOP列表
      * @param query 查询条件
      * @return 查询结果
      */
-    List<ProductSopDTO> selectProductSopList(ProductSopQuery query);
+    List<ProductSopDTO> selectProductSopPage(ProductSopQuery query);
 
     /**
      * 通过ID查询产品SOP

@@ -1,6 +1,10 @@
 package com.zeroone.star.productManagement.controller;
 
+import cn.hutool.poi.excel.ExcelUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.zeroone.star.productManagement.entity.ProductSop;
 import com.zeroone.star.productManagement.service.IProductSopService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.product_management.ProductSopApis;
@@ -23,7 +27,7 @@ import java.util.List;
 @Api("产品SOP控制器")
 @RestController
 @RequestMapping("/api/md/sop")
-public class ProductSopController implements ProductSopApis {
+public class ProductSopController  implements ProductSopApis {
 
     @Autowired
     private IProductSopService ProductSopService;
@@ -31,8 +35,7 @@ public class ProductSopController implements ProductSopApis {
     @Override
     @GetMapping("/list")
     public JsonVO<PageDTO<ProductSopDTO>> queryAll(ProductSopQuery query) {
-        List<ProductSopDTO> list = ProductSopService.selectProductSopList(query);
-        return JsonVO.success(new Page<>(list));
+        return JsonVO.success(ProductSopService.selectProductSopPage(query));
     }
 
     @Override
@@ -65,9 +68,8 @@ public class ProductSopController implements ProductSopApis {
 
     @PostMapping("/export")
     public void export(HttpServletResponse response, ProductSopQuery query) {
-        List<ProductSopDTO> list = ProductSopService.selectProductSopList(query);
-        ExcelUtil<ProductSopDTO> util = new ExcelUtil<>(ProductSopDTO.class);
-        util.exportExcel(response, list, "产品SOP数据");
+
+
     }
 }
 
