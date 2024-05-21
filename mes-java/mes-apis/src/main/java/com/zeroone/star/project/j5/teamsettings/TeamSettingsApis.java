@@ -4,6 +4,7 @@ import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.teamsettings.TeamDTO;
 import com.zeroone.star.project.j5.query.teamsettings.TeamQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -57,5 +58,11 @@ public interface TeamSettingsApis {
      */
     JsonVO<Integer> removeTeam(List<Long> ids);
 
-    
+    /**
+     * 导出班组
+     * @author interstellar
+     * @param condition 查询条件
+     * @return 导出结果
+     */
+    ResponseEntity<byte[]> exportTeam(TeamQuery condition);
 }
