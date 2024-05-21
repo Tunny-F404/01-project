@@ -1,13 +1,41 @@
 package com.zeroone.star.project.j5.scheduleplan.team;
 
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.dto.sample.SampleDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.planteam.AddPlanTeamDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.planteam.PlanTeamDTO;
+import com.zeroone.star.project.j5.query.scheduleplan.planteam.PlanTeamQuery;
+import com.zeroone.star.project.query.sample.SampleQuery;
+import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
+
 /**
  * <p>
- * 描述：班组接口
+ * 描述：关联班组API接口定义
  * </p>
- * <p>版权：&copy;01星球</p>
- * <p>地址：01星球总部</p>
- * @author interstellar
+ * @author linglan
  * @version 1.0.0
  */
 public interface TeamApis {
+    /**
+     * 关联班组分页查询
+     * @param condition 查询条件
+     * @return 查询结果
+     */
+    JsonVO<PageDTO<PlanTeamDTO>> queryAllPlanTeam(PlanTeamQuery condition);
+
+    /**
+     * 添加关联班组
+     * @param addPlanTeamDTO 添加关联班组参数
+     * @return 结果
+     */
+    JsonVO<ResultStatus> addPlanTeam(AddPlanTeamDTO addPlanTeamDTO);
+
+    /**
+     * 删除关联班组
+     * @param id 对应数据库record_id
+     * @return 结果
+     */
+    JsonVO<ResultStatus> deletePlanTeam(Long id);
+
 }

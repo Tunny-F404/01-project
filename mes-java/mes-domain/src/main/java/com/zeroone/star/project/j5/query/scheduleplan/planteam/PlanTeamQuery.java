@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.query.planteam;
+package com.zeroone.star.project.j5.query.scheduleplan.planteam;
 
 import com.zeroone.star.project.query.PageQuery;
 import io.swagger.annotations.ApiModel;

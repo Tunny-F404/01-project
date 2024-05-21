@@ -2,10 +2,10 @@ package com.zeroone.star.scheduleplan.controller;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.sample.SampleDTO;
-import com.zeroone.star.project.j5.dto.planteam.AddPlanTeamDTO;
-import com.zeroone.star.project.j5.dto.planteam.PlanTeamDTO;
-import com.zeroone.star.project.j5.query.planteam.PlanTeamQuery;
-import com.zeroone.star.project.j5.scheduleplan.TeamPlanApis;
+import com.zeroone.star.project.j5.dto.scheduleplan.planteam.AddPlanTeamDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.planteam.PlanTeamDTO;
+import com.zeroone.star.project.j5.query.scheduleplan.planteam.PlanTeamQuery;
+import com.zeroone.star.project.j5.scheduleplan.team.TeamApis;
 import com.zeroone.star.project.query.sample.SampleQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/planteam")
 @Api(tags = "关联班组")
-public class PlanTeamController implements TeamPlanApis {
+public class PlanTeamController implements TeamApis {
 
         @GetMapping("/list")
         @ApiOperation("查询指定条件的关联班组")

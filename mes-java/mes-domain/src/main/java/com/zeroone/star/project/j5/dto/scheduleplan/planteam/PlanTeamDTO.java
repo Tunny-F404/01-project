@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.dto.planteam;
+package com.zeroone.star.project.j5.dto.scheduleplan.planteam;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
