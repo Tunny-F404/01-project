@@ -4,6 +4,10 @@ post:
  fields:
   pname: 岗位名称 
   quantity: 岗位数量
+  recordid: 记录id
+  postid: 岗位id
+  ctime: 创建时间
+  workstationid: 工作站id
  add:
   summary: 新增一条岗位数据
     
