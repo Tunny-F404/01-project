@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 @ApiModel("班组列表查询对象")
 public class TeamQuery extends PageQuery {
-    @ApiModelProperty(value = "班组类型", example = "机加工")
+    @ApiModelProperty(value = "班组类型", example = "CNC")
     private String calendarType;
     @ApiModelProperty(value = "班组编号", example = "T004")
     private String teamCode;
