@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j1.orgstructure.user;
 
-import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
+import com.zeroone.star.project.j1.orgstructure.dto.user.AddUserDTO;
+import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserDTO;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**
@@ -13,22 +14,22 @@ import com.zeroone.star.project.vo.JsonVO;
 public interface UserApis {
     /**
      * 新增用户
-     * @param userQuery 新增用户信息
+     * @param addUserDTO 新增用户信息
      * @return 返回信息
      */
-    JsonVO<String> addUser(UserQuery userQuery);
+    JsonVO<String> addUser(AddUserDTO addUserDTO);
 
     /**
      * 更新用户信息
-     * @param userQuery 更新用户信息
+     * @param updateUserDTO 更新用户信息
      * @return 返回信息
      */
-    JsonVO<String> updateUser(UserQuery userQuery);
+    JsonVO<String> modifyUser(UpdateUserDTO updateUserDTO);
 
     /**
      * 删除用户
      * @param userIds 用户ID
      * @return 返回信息
      */
-    JsonVO<String> deleteUser(Long[] userIds);
+    JsonVO<String> removeUser(Long[] userIds);
 }

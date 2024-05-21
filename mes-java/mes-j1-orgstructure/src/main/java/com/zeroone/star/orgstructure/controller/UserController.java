@@ -1,6 +1,7 @@
 package com.zeroone.star.orgstructure.controller;
 
-import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
+import com.zeroone.star.project.j1.orgstructure.dto.user.AddUserDTO;
+import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserDTO;
 import com.zeroone.star.project.j1.orgstructure.user.UserApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -14,21 +15,21 @@ public class UserController implements UserApis {
     @PostMapping("add-user")
     @ApiOperation(value = "新增用户")
     @Override
-    public JsonVO<String> addUser(UserQuery userQuery) {
+    public JsonVO<String> addUser(AddUserDTO addUserDTO) {
         return null;
     }
 
-    @PutMapping("update-user")
+    @PutMapping("modify-user")
     @ApiOperation(value = "修改用户")
     @Override
-    public JsonVO<String> updateUser(UserQuery userQuery) {
+    public JsonVO<String> modifyUser(UpdateUserDTO updateUserDTO) {
         return null;
     }
 
-    @DeleteMapping("delete-user")
+    @DeleteMapping("remove-user")
     @ApiOperation(value = "删除用户")
     @Override
-    public JsonVO<String> deleteUser(Long[] userIds) {
+    public JsonVO<String> removeUser(Long[] userIds) {
         return null;
     }
 }
