@@ -6,8 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Data
-@ApiModel("用户传输对象")
+
 public class UserDTO {
     //用户头像
     @ApiModelProperty(value = "头像url",example = "111.jpg")

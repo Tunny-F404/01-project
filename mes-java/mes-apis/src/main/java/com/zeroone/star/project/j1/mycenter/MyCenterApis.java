@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j1.mycenter;
 
 import com.zeroone.star.project.j1.mycenter.dto.MyCenterDTO;
+import com.zeroone.star.project.j1.mycenter.query.MyCenterQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**
@@ -11,7 +12,7 @@ import com.zeroone.star.project.vo.JsonVO;
 public interface MyCenterApis {
 
     //修改个人信息
-    JsonVO<MyCenterDTO> modifyInfo(MyCenterDTO myCenterDTO);
+    JsonVO<MyCenterQuery> modifyInfo(MyCenterQuery myCenterQuery);
     //修改头像
     JsonVO<String> modifyAvatar(String PattenUrl);
     //修改手机

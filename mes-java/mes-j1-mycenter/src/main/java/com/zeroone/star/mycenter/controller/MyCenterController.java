@@ -2,6 +2,7 @@ package com.zeroone.star.mycenter.controller;
 
 import com.zeroone.star.project.j1.mycenter.MyCenterApis;
 import com.zeroone.star.project.j1.mycenter.dto.MyCenterDTO;
+import com.zeroone.star.project.j1.mycenter.query.MyCenterQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,8 +26,8 @@ public class MyCenterController implements MyCenterApis {
     @Override
     @PostMapping("/modify-info")
     @ApiOperation("修改个人信息")
-    public JsonVO<MyCenterDTO> modifyInfo(MyCenterDTO myCenterDTO) {
-        return JsonVO.success(myCenterDTO);
+    public JsonVO<MyCenterQuery> modifyInfo(MyCenterQuery myCenterQuery) {
+        return JsonVO.success(myCenterQuery);
     }
 
     @Override
