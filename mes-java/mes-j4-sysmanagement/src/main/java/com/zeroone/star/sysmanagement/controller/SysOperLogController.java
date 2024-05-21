@@ -3,6 +3,8 @@ package com.zeroone.star.sysmanagement.controller;
 
 import cn.hutool.core.date.DateTime;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
+import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
+import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanagement.entity.SysOperLog;
 import com.zeroone.star.sysmanagement.service.ISysOperLogService;
@@ -16,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -24,10 +27,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.zeroone.star.sysmanagement.constants.OperLogConstants.*;
+
 /**
- * <p>
- * 操作日志记录 前端控制器
- * </p>
+ * 操作日志记录的RESTful API控制器。
+ * 提供对操作日志的增删查以及导出功能的支持。
+ *
+ * 主要方法包括：
+ * - 删除指定ID的操作日志条目
+ * - 清空所有操作日志
+ * - 导出操作日志为Excel文件并下载
+ * - 将操作日志导出到FastDFS分布式文件系统
+ *
+ * 使用了Hutool库进行日期处理，EasyExcelComponent进行Excel操作，
+ * 以及FastDfsClientComponent处理与FastDFS的交互。
  *
  * @author lenyan
  * @since 2024-05-19
@@ -38,32 +51,54 @@ import java.util.List;
 @Validated
 public class SysOperLogController {
     @Resource
-    private ISysOperLogService sysOperLogService;
+    private ISysOperLogService sysOperLogService; // 操作日志服务接口，用于CRUD操作
 
     @Resource
-    private EasyExcelComponent excel;
+    private EasyExcelComponent excel; // Excel操作组件，用于导出Excel
 
-    @Value("${fastdfs.nginx-servers}")
-    String urlPrefix;
+    @Resource
+    private FastDfsClientComponent dfs; // FastDFS客户端组件，用于文件上传操作
+
+    @Value("${fastdfs.nginx-servers}") // 从配置文件读取FastDFS的Nginx服务器地址前缀
+    private String urlPrefix;
 
 
-    @ApiOperation( value = "删除日志")
+    /**
+     * 根据操作日志ID列表批量删除日志记录。
+     * 成功时返回成功信息，否则返回失败提示。
+     *
+     * @param operIds 操作日志ID列表
+     * @return 包含操作结果信息的JsonVO对象
+     */
+    @ApiOperation(value = "删除日志")
     @DeleteMapping("/remove-operlog/{operIds}")
     public JsonVO<String> deleteOperLog(@PathVariable List<Long> operIds) {
         Boolean result = sysOperLogService.removeByIds(operIds);
         if (!result) {
-            return JsonVO.fail("日志不存在");
+            return JsonVO.fail(LOG_NOT_EXIST_MESSAGE);
         }
-        return JsonVO.success("删除成功");
+        return JsonVO.success(DELETE_SUCCESS_MESSAGE);
     }
 
-    @ApiOperation( value = "清空日志")
+    /**
+     * 清空所有的操作日志记录。
+     * 成功执行后返回清除成功的提示信息。
+     *
+     * @return 包含操作结果信息的JsonVO对象
+     */
+    @ApiOperation(value = "清空日志")
     @DeleteMapping("/clean-operlog")
     public JsonVO<String> cleanOperLog() {
         sysOperLogService.cleanOperLog();
-        return JsonVO.success("清空成功");
+        return JsonVO.success(CLEAR_SUCCESS_MESSAGE);
     }
 
+    /**
+     * 导出操作日志记录为Excel文件并提供下载。
+     * 生成的Excel文件名包含当前日期时间戳，以"xlsx"格式提供下载。
+     *
+     * @return 包含Excel文件字节流的HTTP响应实体
+     */
     @SneakyThrows
     @GetMapping(value = "export-operlog", produces = "application/octet-stream")
     @ApiOperation(value = "导出操作日志")
@@ -82,17 +117,37 @@ public class SysOperLogController {
         // 构建响应头
         HttpHeaders headers = new HttpHeaders();
         String filename = "report-" + DateTime.now().toString("yyyyMMddHHmmssS") + ".xlsx";
-
-/*        headers.setContentDispositionFormData("attachment", filename);
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);*/
-
         headers.add("Content-Disposition", "attachment;filename=" + filename);
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         // 响应文件给客户端
         return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
 
+    /**
+     * 导出操作日志到FastDFS分布式文件系统，并返回文件访问URL。
+     * 成功上传后返回文件的访问URL，失败则返回错误信息。
+     *
+     * @return 包含文件URL或错误信息的JsonVO对象
+     */
+    @SneakyThrows
+    @ResponseBody
+    @GetMapping(value = "export-operlogtodfs")
+    @ApiOperation(value = "导出操作日志到dfs")
+    public JsonVO<String> exportToDfs() {
+        List<SysOperLog> sysOperLogs = sysOperLogService.Operloginfo();
+        // 构建一个输出流
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        // 导出数据到输出流
+        excel.export("测试", out, SysOperLog.class, sysOperLogs);
+        // 获取字节数据
+        byte[] bytes = out.toByteArray();
+        out.close();
 
-
+        // 上传文件到文件服务器
+        FastDfsFileInfo result = dfs.uploadFile(bytes, ".xlsx");
+        if (result != null) {
+            return JsonVO.success(dfs.fetchUrl(result, "http://" + urlPrefix, true));
+        }
+        return JsonVO.fail(null);
+    }
 }
-
