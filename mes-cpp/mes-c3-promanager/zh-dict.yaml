@@ -1,4 +1,15 @@
 process:
+ query:
+  summary: 获取工序列表
+  summary2: 获取工序名称列表
+  summary3: 获取工序详情
+ fields:
+  processId: 唯一标识
+  processCode: 工序编码
+  processName: 工序名称
+  processStatus: "状态 0不启用 1启用"
+  remark: 备注
+  describe: 工序说明
  field:
   id: 唯一编号
   code: 路线编号 

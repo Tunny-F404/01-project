@@ -26,3 +26,18 @@ Uint64JsonVO::Wrapper SetController::execAddStepSet(const SetProListDTO::Wrapper
 {
 	return {};
 }
+// 6 获取工序列表
+ProListJsonVO::Wrapper SetController::execQueryProList(const ProListQuery::Wrapper& query)
+{
+	return ProListJsonVO::Wrapper();
+}
+// 7 获取工序名称列表
+ProListJsonVO::Wrapper SetController::execQueryProNameList(const ProNameListQuery::Wrapper& query)
+{
+	return ProListJsonVO::Wrapper();
+}
+// 8 获取工序详情
+ProDetailJsonVO::Wrapper SetController::execQueryProDetail(const ProDetailQuery::Wrapper& query)
+{
+	return ProDetailJsonVO::Wrapper();
+}
