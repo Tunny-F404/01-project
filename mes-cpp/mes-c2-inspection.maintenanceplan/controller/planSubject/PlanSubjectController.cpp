@@ -4,17 +4,28 @@
 #include "../ApiDeclarativeServicesHelper.h"
 
 
-PlanSubjectTableJsonVO::Wrapper PlanSubjectController::execPlanSubjectTable(const PlanSubjectQuery::Wrapper& query)
+PlanSubjectTablePageJsonVO::Wrapper PlanSubjectController::execPlanSubjectTablePage(const PlanSubjectQuery::Wrapper& query)
 {
+	return {};
 	//return PlanSubjectTableJsonVO::Wrapper();
-		// 定义一个Service
+	
+	
+	// 定义一个Service
 	PlanSubjectService service;
+
+	
 	// 查询数据
 	auto result = service.listAll(query);
+
+	
 	// 响应结果
-	auto jvo = PlanSubjectTableJsonVO::createShared();
+	auto jvo = PlanSubjectTablePageJsonVO::createShared();
+	/*
 	jvo->success(result);
-	return jvo;
+	*/
+	return {};
+	//return jvo;
+	
 }
 
 PlanSubjectDetailPageJsonVO::Wrapper PlanSubjectController::execPlanSubjectDetailPage(const PlanSubjectQuery::Wrapper& query)

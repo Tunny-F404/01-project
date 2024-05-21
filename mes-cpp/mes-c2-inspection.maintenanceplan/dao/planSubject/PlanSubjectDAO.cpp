@@ -8,15 +8,15 @@
 SqlParams params; \
 sql<<" WHERE 1=1"; \
 if (query->subCode) { \
-	sql << " AND `subCode`=?"; \
+	sql << " AND `subject_code`=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->subCode.getValue("")); \
 } \
 if (query->subName) { \
-	sql << " AND subName=?"; \
+	sql << " AND subject_name=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->subName.getValue("")); \
 } \
 if (query->subType) { \
-	sql << " AND subType=?"; \
+	sql << " AND subject_type=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->subType.getValue("")); \
 } 
 

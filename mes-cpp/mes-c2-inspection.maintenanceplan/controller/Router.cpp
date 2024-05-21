@@ -52,7 +52,9 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(PlanSubjectController);
+	//内联展开看看
+	docEndpoints->append(router->addController(PlanSubjectController::createShared())->getEndpoints());
+	//ROUTER_SIMPLE_BIND(PlanSubjectController);
 
 }
 

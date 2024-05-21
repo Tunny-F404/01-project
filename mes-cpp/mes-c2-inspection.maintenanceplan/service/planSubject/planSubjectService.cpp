@@ -76,9 +76,10 @@ PlanSubjectDetailPageDTO::Wrapper PlanSubjectService::listAll(const PlanSubjectQ
 {
 	// 构建返回对象
 	auto pages = PlanSubjectDetailPageDTO::createShared();
+	
 	pages->pageIndex = query->pageIndex;
 	pages->pageSize = query->pageSize;
-
+	
 	// 查询数据总条数
 	PlanSubjectDAO dao;
 	uint64_t count = dao.count(query);
@@ -86,12 +87,13 @@ PlanSubjectDetailPageDTO::Wrapper PlanSubjectService::listAll(const PlanSubjectQ
 	{
 		return pages;
 	}
-
+	
 	// 分页查询数据
 	pages->total = count;
 	pages->calcPages();
 	list<PlanSubjectDO> result = dao.selectWithPage(query);
 	// 将DO转换成DTO
+	
 	for (PlanSubjectDO sub : result)
 	{
 		auto dto = PlanSubjectTableDTO::createShared();
@@ -99,11 +101,23 @@ PlanSubjectDetailPageDTO::Wrapper PlanSubjectService::listAll(const PlanSubjectQ
 		// 		dto->name = sub.getName();
 		// 		dto->sex = sub.getSex();
 		// 		dto->age = sub.getAge();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, code, Code, name, Name, type, Type, content, Content, standard, Standard)
-			pages->addData(dto);
+
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, code, Code, name, Name, type, Type, content, Content, standard, Standard);
+
+		dto->code = sub.getCode(); 
+		dto->name = sub.getName();
+		dto->type = sub.getType();
+		dto->content = sub.getContent();
+		dto->standard = sub.getStandard();;
+
+		//pages->addData(dto);
+
+		//pages->addData(dto);
 	}
+	
 	return pages;
 }
+
 
 //uint64_t PlanSubjectService::saveData(const PlanSubjectTableDTO::Wrapper& dto)
 //{

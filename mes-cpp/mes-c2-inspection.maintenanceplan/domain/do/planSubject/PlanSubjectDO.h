@@ -11,8 +11,16 @@
  */
 class PlanSubjectDO
 {
-	// 项目编码
-	CC_SYNTHESIZE(string, code, Code);
+	// 项目编码，本质可看
+protected: 
+	string code;
+public: 
+	string getCode(void) const {return code;}
+public: 
+	void setCode(string var) {code = var;};
+
+	//CC_SYNTHESIZE(string, code, Code);
+
 	// 项目名称
 	CC_SYNTHESIZE(string, name, Name);
 	// 项目类型
