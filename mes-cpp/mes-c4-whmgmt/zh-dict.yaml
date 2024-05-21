@@ -1,17 +1,17 @@
 whstorageorder:
  field:
-  recpt_id: Èë¿âµ¥ID
-  recpt_name: Èë¿âµ¥Ãû³Æ
-  recpt_code: Èë¿âµ¥±àºÅ
-  vendor_name: ¹©Ó¦ÉÌÃû³Æ
-  po_code: ²É¹º¶©µ¥ºÅ
-  status: µ¥¾İ×´Ì¬
-  recpt_date: Èë¿âÈÕÆÚ
-  warehouse_name: Èë¿â²Ö¿â
-  remark: ±¸×¢
+  recpt_id: å…¥åº“å•ID
+  recpt_name: å…¥åº“å•åç§°
+  recpt_code: å…¥åº“å•ç¼–å·
+  vendor_name: ä¾›åº”å•†åç§°
+  po_code: é‡‡è´­è®¢å•å·
+  status: å•æ®çŠ¶æ€
+  recpt_date: å…¥åº“æ—¥æœŸ
+  warehouse_name: å…¥åº“ä»“åº“
+  remark: å¤‡æ³¨
  defult: 
-  recpt_name: pvc²ÄÁÏÀ´ÁÏ¼ìÑé
+  recpt_name: pvcææ–™æ¥æ–™æ£€éªŒ
  add: 
-  summary: Ìí¼ÓÈë¿âµ¥ĞĞ
+  summary: æ·»åŠ å…¥åº“å•è¡Œ
  modify:
-  summary: ĞŞ¸ÄÈë¿âµ¥ĞĞ
+  summary: ä¿®æ”¹å…¥åº“å•è¡Œ

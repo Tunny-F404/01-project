@@ -2,7 +2,7 @@
 #include "AddWhStorageorderController.h"
 #include "../../ApiDeclarativeServicesHelper.h"
 
-AddWhPageStorageorderVO::Wrapper execAddWhStorageorder(const AddWhPageStorageorderDTO::Wrapper& dto) 
+AddWhPageStorageorderVO::Wrapper AddWhStorageorderController::execAddWhStorageorder(const AddWhPageStorageorderDTO::Wrapper& dto)
 {
 	return {};
 }

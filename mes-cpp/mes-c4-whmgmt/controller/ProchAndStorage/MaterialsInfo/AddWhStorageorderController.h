@@ -1,7 +1,7 @@
 #pragma once
 #ifndef _ADDWHSTORAGEORDERCONTROLLER_H_
 #define _ADDWHSTORAGEORDERCONTROLLER_H_
-#include "domain/vo/BaseJsonVO.h"
+
 #include "../../../domain/vo/ProchAndStorage/MaterialsInfo/AddWhStorageorderVO.h"
 #include "../../../domain/dto/ProchAndStorage/MaterialsInfo/AddWhStorageorderDTO.h"
 //0 定义API控制器使用宏
@@ -32,6 +32,7 @@ private://定义接口执行函数
 	AddWhPageStorageorderVO::Wrapper execAddWhStorageorder(const AddWhPageStorageorderDTO::Wrapper& dto);
 
 };
+// 0 取消API控制器使用宏
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 
 #endif // _ADDWHSTORAGEORDERCONTROLLER_H_
