@@ -17,6 +17,6 @@ public class swaggerConfig {
 
     @Bean
     Docket DepartmentApis() {
-        return SwaggerCore.defaultDocketBuilder("组织架构模块","com.zeroone.star.orgstructure.controller","orgstructure");
+        return SwaggerCore.defaultDocketBuilder("组织架构模块","com.zeroone.star.syslogin.controller","syslogin");
     }
 }

@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 @ApiModel("当前用户菜单")
 public class CurrentUserMenuVO {
+	// TODO: 2023/5/21 菜单信息,字段，待改进
+
 	@ApiModelProperty(value = "菜单名称")
 	String menu_name;
 	@ApiModelProperty(value = "图标")
