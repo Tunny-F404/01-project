@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j5.query.teamsettings;
 
+import com.zeroone.star.project.query.PageQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,7 +16,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel("班组列表查询对象")
-public class TeamQuery {
+public class TeamQuery extends PageQuery {
     @ApiModelProperty(value = "班组类型", example = "1")
     private int calendarType;
     @ApiModelProperty(value = "班组编号", example = "T004")
