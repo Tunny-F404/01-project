@@ -22,6 +22,8 @@
 #include <iostream>
 #include <sstream>
 #include "tree/TreeUtil.h"
+#include "service/return/ReturnService.h"
+#include "../ApiDeclarativeServicesHelper.h"
 
 // FastDFS需要导入的头
 #include "ServerInfo.h"
@@ -69,22 +71,55 @@ ReturnPageJsonVO::Wrapper ReturnController::executeQueryAll(const ReturnQuery::W
 	return vo;
 }
 
-StringJsonVO::Wrapper ReturnController::executeModifyReturn(const String& fileBody, const ReturnDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ReturnController::executeModifyReturn(const ReturnDTO::Wrapper& dto)
 {
-	// 将头像上传到FastDFS文件服务器
-	ZO_CREATE_DFS_CLIENT_URL(dfs, urlPrefix);
-	std::string fieldName = dfs.uploadFile(fileBody->data(), fileBody->size(), "png");
-	std::cout << "upload fieldname is : " << fieldName << std::endl;
-
-	// 拼接文件下载路径
-	std::stringstream ss;
-	ss << urlPrefix << fieldName;
-
-	// TODO:保存单据数据到数据库过程略过
-
-	// 创建响应数据
-	auto vo = StringJsonVO::createShared();
-	vo->success(String(ss.str().c_str()));
-	return vo;
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->returnId || dto->returnId <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ReturnService service;
+	// 执行数据修改
+	// if (service.updateData(dto))  //需要dao支持，还未定义
+	if(true)//直接响应
+	{
+		jvo->success(dto->returnId);
+	}
+	else
+	{
+		jvo->fail(dto->returnId);
+	}
+	// 响应结果
+	return jvo;
 }
 
+Uint64JsonVO::Wrapper ReturnController::execRemoveReturn(const UInt64& id)
+{
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!id || id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ReturnService service;
+	// 执行数据删除
+	// if (service.removeData(id.getValue(0))) 
+
+	if(true)
+	{
+		jvo->success(id);
+	}
+	else
+	{
+		jvo->fail(id);
+	}
+	// 响应结果
+	return jvo;
+}

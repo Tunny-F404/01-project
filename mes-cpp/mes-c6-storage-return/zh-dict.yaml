@@ -1,4 +1,8 @@
 return:
+ remove-return:
+  summary: 删除供应商退货单
+ remove-return1: 
+  summary: 删除供应商退货单
  query-all: 
   summary: 查询所有供应商退货单
  modify-return:

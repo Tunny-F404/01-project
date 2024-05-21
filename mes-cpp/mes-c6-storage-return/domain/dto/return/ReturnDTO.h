@@ -32,10 +32,6 @@ class ReturnDTO : public oatpp::DTO
 	//
 	// 退货单编号
 	API_DTO_FIELD_DEFAULT(UInt64, returnId, ZH_WORDS_GETTER("return.fields.rtid"));
-	/*DTO_FIELD(UInt64, rtid);
-	DTO_FIELD_INFO(rtid) {
-		info->description = ZH_WORDS_GETTER("return.field.rtid");
-	}*/
 	// 退货单名称
 	API_DTO_FIELD(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"), true, "01star");
 	// 采购单编号
