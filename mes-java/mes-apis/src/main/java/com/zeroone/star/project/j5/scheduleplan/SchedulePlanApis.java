@@ -1,8 +1,10 @@
 package com.zeroone.star.project.j5.scheduleplan;
 
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.schedualplan.PlanDTO;
 import com.zeroone.star.project.j5.query.schedualplan.PlanPageQuery;
 import com.zeroone.star.project.j5.vo.schedualplan.PlanListVO;
+import com.zeroone.star.project.j5.vo.schedualplan.PlanVO;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**
@@ -18,7 +20,35 @@ public interface SchedulePlanApis {
     /**
      * 查询排班计划列表
      * @param condition 查询条件
+     * @author brickbreaker
      * @return  排班计划列表
      */
     JsonVO<PageDTO<PlanListVO>> queryPlanList (PlanPageQuery condition);
+
+    /**
+     * 获取计划详情
+     * @param planId
+     * @author brickbreaker
+     * @return 计划详情
+     */
+    JsonVO<PlanVO> queryPlanDetails(Long planId);
+
+
+    /**
+     * 添加计划
+     * @param planDTO 计划信息
+     * @author brickbreaker
+     * @return 添加结果
+     */
+    JsonVO<Integer> addPlan(PlanDTO planDTO);
+
+
+    /**
+     * 修改计划
+     * @param planDTO 计划信息
+     * @author brickbreaker
+     * @return 修改结果
+     */
+    JsonVO<Integer> modifyTeam(PlanDTO planDTO);
+
 }
