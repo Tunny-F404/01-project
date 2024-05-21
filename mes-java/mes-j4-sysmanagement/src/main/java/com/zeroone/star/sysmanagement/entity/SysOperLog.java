@@ -4,13 +4,8 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
-import java.util.Date;
 import java.time.LocalDateTime;
 
 /**
@@ -21,8 +16,6 @@ import java.time.LocalDateTime;
  * @since 2024-05-19
  */
 @Data
-@Getter
-@Setter
 @TableName("sys_oper_log")
 public class SysOperLog implements Serializable {
 
