@@ -11,7 +11,7 @@ import java.util.List;
  * 新增用户数据模型
  */
 @Data
-@ApiModel("更新用户")
+@ApiModel("新增用户")
 public class AddUserDTO {
     @ApiModelProperty(value = "用户ID", example = "1", required = true)
     private Long userId;

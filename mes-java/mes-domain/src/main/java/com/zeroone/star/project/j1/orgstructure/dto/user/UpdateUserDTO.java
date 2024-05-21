@@ -11,7 +11,7 @@ import java.util.List;
  * 更新用户数据模型
  */
 @Data
-@ApiModel("新增用户")
+@ApiModel("更新用户")
 public class UpdateUserDTO {
     @ApiModelProperty(value = "用户ID", example = "1", required = true)
     private Long userId;
