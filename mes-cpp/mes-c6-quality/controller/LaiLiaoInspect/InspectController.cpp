@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "InspectController.h"
-#include "../../service/inspectsInformation/InspectService.h"
+#include "../../service/LaiLiaoInspect/InspectService.h"
 #include "../ApiDeclarativeServicesHelper.h"
 
 InspectPageJsonVO::Wrapper InspectController::execQueryInspect(const InspectQuery::Wrapper& query, const PayloadDTO& payload)
