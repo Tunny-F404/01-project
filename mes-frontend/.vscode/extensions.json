@@ -1,3 +1,12 @@
 {
-  "recommendations": ["Vue.volar", "Vue.vscode-typescript-vue-plugin"]
+	"recommendations": [
+		// vue3的 .vue SFCs 的 LSP 语言支持服务
+		"Vue.volar",
+		// 目前项目默认用 prettier ，未来考虑迁移到 eslint
+		"esbenp.prettier-vscode",
+	],
+	"unwantedRecommendations": [
+		// 不使用该插件 该插件事实上被官方弃用了
+		"Vue.vscode-typescript-vue-plugin"
+	]
 }
