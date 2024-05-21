@@ -1,4 +1,4 @@
-package com.zeroone.star.sysManagement.controller;
+package com.zeroone.star.sysmanagement.controller;
 
 import cn.hutool.core.lang.tree.TreeNode;
 import com.zeroone.star.project.j2.sysManagement.menu.MenuApis;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 宵夜
+ * @author 熠 Di
  * @version 1.0.0
  * @Description: 测试控制器
  */
