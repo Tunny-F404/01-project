@@ -24,7 +24,7 @@ public interface DictionaryManageApis {
     // 查询字典类型详情
     public JsonVO<SysDictTypeDTO> getDictType(Long dictId);
 
-    public ResponseEntity<byte[]> exportDictType(SysDictTypeQuery dictTypeQuery);
+    public ResponseEntity<byte[]> exportDictType(SysDictTypeDTO sysDictTypeDTO);
 
 
     /**
@@ -34,5 +34,5 @@ public interface DictionaryManageApis {
     public JsonVO<List<SysDictDataDTO>> listDictData(SysDictDataQuery dictDataQuery);
 
     // 查询字典数据详情
-    public JsonVO<SysDictDataDTO> getDictData(Long dictId);
+    public JsonVO<SysDictDataDTO> getDictData(Long dictCode);
 }
