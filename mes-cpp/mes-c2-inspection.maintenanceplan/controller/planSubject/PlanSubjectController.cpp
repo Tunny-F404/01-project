@@ -7,6 +7,7 @@
 PlanSubjectTablePageJsonVO::Wrapper PlanSubjectController::execPlanSubjectTablePage(const PlanSubjectQuery::Wrapper& query)
 {
 	return {};
+	/*
 	//return PlanSubjectTableJsonVO::Wrapper();
 	
 	
@@ -20,11 +21,12 @@ PlanSubjectTablePageJsonVO::Wrapper PlanSubjectController::execPlanSubjectTableP
 	
 	// ÏìÓ¦½á¹û
 	auto jvo = PlanSubjectTablePageJsonVO::createShared();
-	/*
+	
 	jvo->success(result);
-	*/
+	
 	return {};
 	//return jvo;
+	*/
 	
 }
 

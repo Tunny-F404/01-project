@@ -50,6 +50,8 @@ public:
 		API_HANDLER_QUERY_PARAM(query, PlanSubjectQuery, queryParams);//解析成Deptquery
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execPlanSubjectTablePage(query));//改成DeptTable，并减少一个参数
+
+		return createDtoResponse(Status::CODE_200, execPlanSubjectTablePage(query));
 	}
 
 	//-------------------------------------------------------------
