@@ -47,7 +47,7 @@ bool getStartArg(int argc, char* argv[]) {
 	std::string dbUsername = "root";
 	std::string dbPassword = "122500";
 	std::string dbName = "test";
-	std::string dbHost = "192.168.0.107";
+	std::string dbHost = "localhost";
 	int dbPort = 3306;
 	int dbMax = 5;
 #ifdef LINUX

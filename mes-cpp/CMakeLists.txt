@@ -165,3 +165,4 @@ endif()
 add_subdirectory ("arch-demo")
 # 在后面添加你的模块
 add_subdirectory ("arch-sample")
+add_subdirectory("mes-c6-quality")

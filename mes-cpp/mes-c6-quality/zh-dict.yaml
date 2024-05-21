@@ -1,0 +1,17 @@
+incoming:
+ get: 
+  summary: 分页查询来料检验单
+ fields:
+  incode: 来料检验单编号
+  vcode: 供应商编码
+  vname: 供应商名称
+  vbatch: 供应商批次号
+  itcode: 产品物料编码
+  itname: 产品物料名称
+  spresult: 检测结果
+  indate: 来料日期
+  spdate: 检测日期
+  spector: 检测人员
+  rcvnum: 接受数量
+  ispnum: 检测数量
+  unqnum: 不合格数量
