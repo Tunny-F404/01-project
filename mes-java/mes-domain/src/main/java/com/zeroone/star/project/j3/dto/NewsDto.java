@@ -1,5 +1,7 @@
 package com.zeroone.star.project.j3.dto;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +22,10 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName(value = "sys_message")
 public class NewsDto implements Serializable {
 
+    @TableId(value = "message_id")
     @ApiModelProperty(value = "附件ID")
     private Integer MessageId;
 

@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel("消息详情")
-public class NewsVo implements Serializable {
+@ApiModel("消息列表")
+public class NewsPageVo implements Serializable {
 
 
     @ApiModelProperty(value = "消息类型")
@@ -29,6 +29,9 @@ public class NewsVo implements Serializable {
 
     @ApiModelProperty(value = "消息级别")
     private String MessageLevel;
+
+    @ApiModelProperty(value = "发送人",example = "若依")
+    private String SenderNick;
 
     @ApiModelProperty(value = "接收人",example = "若依")
     private String RecipientNick;
@@ -39,8 +42,14 @@ public class NewsVo implements Serializable {
     @ApiModelProperty(value = "内容")
     private String MessageContent;
 
+    @ApiModelProperty(value = "处理时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime ProcessTime;
+
     @ApiModelProperty(value = "回调地址")
     private String CallBack;
+
+
 
 
 
