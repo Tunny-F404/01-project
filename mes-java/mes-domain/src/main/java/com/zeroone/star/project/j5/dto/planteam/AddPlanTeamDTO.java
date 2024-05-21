@@ -15,12 +15,14 @@ import lombok.Data;
 @Data
 @ApiModel("添加关联班组模型")
 public class AddPlanTeamDTO {
-    @ApiModelProperty(value = "编号", example = "1")
-    private Integer id;
-    @ApiModelProperty(value = "姓名", example = "张三")
-    private String name;
-    @ApiModelProperty(value = "性别", example = "男")
-    private String sex;
-    @ApiModelProperty(value = "年龄", example = "18")
-    private Integer age;
+    @ApiModelProperty(value = "班组ID", example = "1")
+    private Long teamId;
+    @ApiModelProperty(value = "班组编号", example = "T004")
+    private String teamCode;
+    @ApiModelProperty(value = "班组名称", example = "风塔2组")
+    private String teamName;
+    @ApiModelProperty(value = "计划ID", example = "0")
+    private Long planId;
+    @ApiModelProperty(value = "班组类型", example = "ZS")
+    private String calendarType;
 }

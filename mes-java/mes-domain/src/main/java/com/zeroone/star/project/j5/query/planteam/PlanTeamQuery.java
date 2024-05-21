@@ -21,7 +21,9 @@ import javax.validation.constraints.NotBlank;
 @Data
 @ApiModel("查询关联班组对象")
 public class PlanTeamQuery extends PageQuery {
-    @NotBlank(message = "用户名不能为空")
-    @ApiModelProperty(value = "姓名", example = "张三")
-    private String name;
+//    @NotBlank(message = "用户名不能为空")
+    @ApiModelProperty(value = "计划ID", example = "0")
+    private Long planId;
+    @ApiModelProperty(value = "班组类型", example = "ZS")
+    private String calendarType;
 }
