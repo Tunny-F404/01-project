@@ -19,6 +19,7 @@ import java.util.List;
 @Validated
 public class DictionaryManageController implements DictionaryManageApis {
 
+
     @ApiOperation(value = "新增字典类别")
     @PostMapping("add-dictType")
     @Override

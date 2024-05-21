@@ -1,4 +1,4 @@
-package com.zeroone.star;
+package com.zeroone.star.sysmanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
