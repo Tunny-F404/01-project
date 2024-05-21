@@ -5,9 +5,7 @@
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
-/**
- * 生产退料物料信息传输对象
- */
+
 class RawMaterialOpDTO : public oatpp::DTO
 {
 	DTO_INIT(RawMaterialOpDTO, DTO);
@@ -53,4 +51,4 @@ class RawMaterialOpPageDTO : public PageDTO<RawMaterialOpDTO::Wrapper>
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_MaterialInformation_DTO_
+#endif 

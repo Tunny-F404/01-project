@@ -1,6 +1,6 @@
 RawMaterialOp:
  get:
-  summary: 分页查询示例数据
+  summary: 生产退料单据列表导出
  post:
   summary: 添加生产退料单行列表
  put:

@@ -38,5 +38,5 @@ public:
 
 };
 
-#endif // !_MaterialInformation_SERVICE_
+#endif 
 

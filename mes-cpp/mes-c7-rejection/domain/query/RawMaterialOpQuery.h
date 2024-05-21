@@ -31,4 +31,4 @@ class RawMaterialOpQuery : public PageQuery
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_MATERIALINFORMATION_QUERY_
+#endif 

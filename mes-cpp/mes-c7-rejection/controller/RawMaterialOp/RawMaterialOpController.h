@@ -7,7 +7,9 @@
 #include "domain/dto/RawMaterialOp/RawMaterialOpDTO.h"
 #include "domain/query/RawMaterialOpQuery.h"
 #include "domain/vo/RawMaterialOpVO.h"
-#include "ApiHelper.h"
+#include "ExcelComponent.h"
+
+//#include "ApiHelper.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin
@@ -40,16 +42,31 @@ public:
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/RawMaterialOp/{oprator}", modifyRawMaterialOp, BODY_DTO(RawMaterialOpDTO::Wrapper, dto), execModifyRawMaterialOp(dto));
 
 
+	// 定义查询接口描述
+	ENDPOINT_INFO(queryRawMaterialOp) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("RawMaterialOp.get.summary"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(RawMaterialOpJsonVO);
+		// 定义分页查询参数描述
+		API_DEF_ADD_PAGE_PARAMS();
+		// 定义其他查询参数描述
+		API_DEF_ADD_QUERY_PARAMS(String, "id", ZH_WORDS_GETTER("RawMaterialOp.field.id"), "RT20221115001", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "order", ZH_WORDS_GETTER("RawMaterialOp.field.order"), "MO10023110", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "warehouse", ZH_WORDS_GETTER("RawMaterialOp.field.warehouse"), "N", false);
+	}
+	//定义查询接口处理
+	ENDPOINT(API_M_GET, "/RawMaterialOpQuery", queryRawMaterialOp, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) 
+	{
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(userQuery, RawMaterialOpQuery, queryParams);
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execQueryRawMaterialOp(userQuery, authObject->getPayload()));
+	}
 
-	// 定义文件下载接口
-	ENDPOINT_INFO(downloadFile) {
-		API_DEF_ADD_COMMON(ZH_WORDS_GETTER("RawMaterialOp.file.download.summary"), Void);
-		API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("RawMaterialOp.file.download.filename"), "file/test.jpg", true);
-	}
-	// 定义端点
-	ENDPOINT(API_M_GET, "/file/download", downloadFile, QUERY(String, filename)) {
-		return execDownloadFile(filename);
-	}
+
 
 
 
@@ -61,10 +78,11 @@ private:
 	// 3.3 修改生产退料单行数据
 	Uint64JsonVO::Wrapper execModifyRawMaterialOp(const RawMaterialOpDTO::Wrapper& dto);
 
-	// 执行文件下载处理
-	std::shared_ptr<OutgoingResponse> execDownloadFile(const String& filename);
+    RawMaterialOpJsonVO::Wrapper execQueryRawMaterialOp(const RawMaterialOpQuery::Wrapper& query, const PayloadDTO& payload);
+
+
 };
 
 // 0 取消API控制器使用宏
-#include OATPP_CODEGEN_END(ApiController) //<- End Codegen
+#include OATPP_CODEGEN_END(ApiController) //<- End
 #endif // _SAMPLE_CONTROLLER_
