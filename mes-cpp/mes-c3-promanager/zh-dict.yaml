@@ -11,8 +11,13 @@ process:
  get:
   summary1: 获取工艺列表 
   summary2: 获取工艺详情
+  summary3: 获取关联产品列表
  post:
-  summary1: 添加工艺流程   
+  summary1: 添加工艺   
+ put:
+  summary1: 修改工艺
+ del:
+  summary1: 删除工艺
 set:  
  query:
   summary: 获取工序步骤列表(条件+分页)
@@ -40,4 +45,10 @@ set:
   summary: 添加工序步骤
  export:
   summary: 工序导出
-
+product:
+ field:
+  id: 产品物料编码
+  name: 产品物料名称
+  size: 规格型号
+  unit: 单位
+  routeid: 唯一标识
