@@ -19,6 +19,25 @@ public class DepartmentController  implements DepartmentApis {
 
 
     @Override
+    @GetMapping("get-department-tree")
+    @ApiOperation("获取部门名称树")
+    public JsonVO<DepartmentDTO> getDepartmentNameTree(String id) {
+        return JsonVO.success(new DepartmentDTO());
+    }
+    @Override
+    @GetMapping("get-department-list")
+    @ApiOperation("获取部门列表(条件)")
+    public JsonVO<DepartmentDTO> getDepartmentList() {
+        return JsonVO.success(new DepartmentDTO());
+    }
+    @Override
+    @GetMapping("get-department-detail")
+    @ApiOperation("获知指定部门详情")
+    public JsonVO<DepartmentDTO> getDepartmentDetail(String id) {
+        return JsonVO.success(new DepartmentDTO());
+    }
+
+    @Override
     @PostMapping("add-department")
     @ApiOperation("新增部门")
     public JsonVO<DepartmentDTO> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
