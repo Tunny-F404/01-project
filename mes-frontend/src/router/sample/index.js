@@ -24,6 +24,12 @@ const routes = [
 			{
 				path: '/sample/pdfobject',
 				component: () => import('@/views/sample/pdfobject/PdfObject.vue')
+			},
+
+			// 搜索栏演示页
+			{
+				path: '/sample/search-bar',
+				component: () => import('@/views/sample/search-bar/search-bar-page.vue')
 			}
 		]
 	}
