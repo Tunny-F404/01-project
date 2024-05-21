@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.query.shiftplan;
+package com.zeroone.star.project.j5.query.scheduleplan.shiftplan;
 
 import com.zeroone.star.project.query.PageQuery;
 import io.swagger.annotations.ApiModel;

@@ -1,9 +1,10 @@
 package com.zeroone.star.project.j5.scheduleplan.order;
 
-import com.zeroone.star.project.j5.dto.shiftplan.ShiftPlanAddDto;
-import com.zeroone.star.project.j5.dto.shiftplan.ShiftPlanDto;
-import com.zeroone.star.project.j5.dto.shiftplan.ShiftPlanUpdateDto;
-import com.zeroone.star.project.j5.query.shiftplan.ShiftPlanQuery;
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanAddDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanModifyDTO;
+import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 import java.util.List;
@@ -23,28 +24,28 @@ public interface OrderApis {
      * @param shiftPlanQuery 排班计划id，具体的排班计划表的id，
      * @return  班次计划列表
      */
-    JsonVO<List<ShiftPlanDto>> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery);
+    JsonVO<PageDTO<ShiftPlanDTO>> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery);
 
     /**
      * 根据具体的班次id查找数据
      * @param shiftId 班次id，如 1
      * @return 对应id的班次计划
      */
-    JsonVO<ShiftPlanDto> queryShiftPlan(Long shiftId);
+    //JsonVO<ShiftPlanDTO> queryShiftPlan(Long shiftId);
 
     /**
      * 新增班次计划
      * @param shiftPlanAddDto 新增班次计划数据
      * @return  新增数据的唯一编号
      */
-    JsonVO<Long> addShiftPlan(ShiftPlanAddDto shiftPlanAddDto);
+    JsonVO<Long> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto);
 
     /**
      * 更新班次计划
-     * @param shiftPlanUpdateDto 更新班次计划数据
+     * @param shiftPlanModifyDto 更新班次计划数据
      * @return  修改的行数
      */
-    JsonVO<Long> modifyShiftPlan(ShiftPlanUpdateDto shiftPlanUpdateDto);
+    JsonVO<Long> modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto);
 
     /**
      * 删除排班计划v1

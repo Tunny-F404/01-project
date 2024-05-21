@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.dto.shiftplan;
+package com.zeroone.star.project.j5.dto.scheduleplan.shiftplan;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @ApiModel("添加班次计划")
-public class ShiftPlanAddDto {
+public class ShiftPlanAddDTO {
     /**
      * 班次序号
      */

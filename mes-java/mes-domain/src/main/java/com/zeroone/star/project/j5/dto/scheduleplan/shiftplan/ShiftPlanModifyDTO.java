@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.dto.shiftplan;
+package com.zeroone.star.project.j5.dto.scheduleplan.shiftplan;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * @version 1.0.0
  */
 @Data
-public class ShiftPlanUpdateDto {
+public class ShiftPlanModifyDTO {
     /**
      * 班次id
      */
