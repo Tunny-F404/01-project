@@ -12,7 +12,7 @@
 class ModifyWhStorageorderDTO : public oatpp::DTO
 {
 	DTO_INIT(ModifyWhStorageorderDTO, DTO);
-	//入库单id
+	//入库单id(标识数据唯一)
 	API_DTO_FIELD_DEFAULT(UInt64, recpt_id, ZH_WORDS_GETTER("whstorageorder.field.recpt_id"), true, 0);
 	//入库单名称
 	API_DTO_FIELD_DEFAULT(String, recpt_name, ZH_WORDS_GETTER("whstorageorder.field.recpt_name"), true, ZH_WORDS_GETTER("whstorageorder.defult.recpt_name"));

@@ -9,9 +9,12 @@ whstorageorder:
   recpt_date: 入库日期
   warehouse_name: 入库仓库
   remark: 备注
+  ids: 入库单行唯一标识id
  defult: 
   recpt_name: pvc材料来料检验
  add: 
   summary: 添加入库单行
  modify:
   summary: 修改入库单行
+ delete: 
+  summary: 删除入库单行（支持批量删除）

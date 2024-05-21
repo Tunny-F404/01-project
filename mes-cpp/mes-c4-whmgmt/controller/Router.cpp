@@ -28,6 +28,7 @@
 #endif
 #include "controller/ProchAndStorage/MaterialsInfo/AddWhStorageorderController.h"
 #include "controller/ProchAndStorage/MaterialsInfo/ModifyWhStorageorderController.h"
+#include "controller/ProchAndStorage/MaterialsInfo/DeleteWhStorageorderController.h"
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
 // 简化绑定控制器宏定义
@@ -54,7 +55,7 @@ void Router::initRouter()
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(AddWhStorageorderController);
 	ROUTER_SIMPLE_BIND(ModifyWhStorageorderController);
-
+	ROUTER_SIMPLE_BIND(DeleteWhStorageorderController);
 }
 
 #ifdef HTTP_SERVER_DEMO
