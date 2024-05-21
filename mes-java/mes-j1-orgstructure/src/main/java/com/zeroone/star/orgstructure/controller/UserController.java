@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 @Api(tags ="用户管理")
 public class UserController implements UserApis {
     @GetMapping("query-role-table")
