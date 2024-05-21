@@ -1,9 +1,7 @@
 package com.zeroone.star.project.j1.orgstructure.user;
 
 import com.zeroone.star.project.j1.orgstructure.dto.PageDTO;
-import com.zeroone.star.project.j1.orgstructure.dto.user.CompleteUserDTO;
-import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserStatusDTO;
-import com.zeroone.star.project.j1.orgstructure.dto.user.UserDTO;
+import com.zeroone.star.project.j1.orgstructure.dto.user.*;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
@@ -65,4 +63,27 @@ public interface UserApis {
      * @return
      */
     JsonVO<UserDTO> modifyDeleteRole(UserQuery userQuery);
+
+
+    /**
+     * 新增用户
+     * @param addUserDTO 新增用户信息
+     * @return 返回信息
+     */
+    JsonVO<String> addUser(AddUserDTO addUserDTO);
+
+    /**
+     * 更新用户信息
+     * @param updateUserDTO 更新用户信息
+     * @return 返回信息
+     */
+    JsonVO<String> modifyUser(UpdateUserDTO updateUserDTO);
+
+    /**
+     * 删除用户
+     * @param userIds 用户ID
+     * @return 返回信息
+     */
+    JsonVO<String> removeUser(Long[] userIds);
+
 }

@@ -2,19 +2,14 @@ package com.zeroone.star.orgstructure.controller;
 
 import com.zeroone.star.project.j1.orgstructure.dto.PageDTO;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
-import com.zeroone.star.project.j1.orgstructure.dto.user.CompleteUserDTO;
-import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserStatusDTO;
-import com.zeroone.star.project.j1.orgstructure.dto.user.UserDTO;
+import com.zeroone.star.project.j1.orgstructure.dto.user.*;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
 import com.zeroone.star.project.j1.orgstructure.user.UserApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -84,6 +79,29 @@ public class UserController implements UserApis {
     public JsonVO<UserDTO> modifyDeleteRole(UserQuery userQuery) {
         return null;
 
+    }
+
+
+
+    @PostMapping("add-user")
+    @ApiOperation(value = "新增用户")
+    @Override
+    public JsonVO<String> addUser(AddUserDTO addUserDTO) {
+        return null;
+    }
+
+    @PutMapping("modify-user")
+    @ApiOperation(value = "修改用户")
+    @Override
+    public JsonVO<String> modifyUser(UpdateUserDTO updateUserDTO) {
+        return null;
+    }
+
+    @DeleteMapping("remove-user")
+    @ApiOperation(value = "删除用户")
+    @Override
+    public JsonVO<String> removeUser(Long[] userIds) {
+        return null;
     }
 
 }
