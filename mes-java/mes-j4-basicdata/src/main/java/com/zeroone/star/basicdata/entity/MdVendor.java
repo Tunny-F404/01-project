@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class mdVendor {
+public class MdVendor {
 
     //供应商ID
     private Integer vendorId;
