@@ -1,4 +1,4 @@
-package com.zeroone.star.mycenter.config;
+package com.zeroone.star.syshome.config;
 
 import com.zeroone.star.project.config.swagger.SwaggerCore;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +7,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
- * @author twelve
+ * @author 李兴昊
  * @version 1.0.0
  * @Description: TODO
  */
@@ -16,9 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 public class swaggerConfig {
 
     @Bean
-    Docket DepartmentApis() {
-        return SwaggerCore.defaultDocketBuilder("组织架构模块","com.zeroone.star.orgstructure.controller","orgstructure");
-}
-
-
+    Docket SysHomeApis() {
+        return SwaggerCore.defaultDocketBuilder("系统首页模块","com.zeroone.star.syshome.controller","syshome");
+    }
 }

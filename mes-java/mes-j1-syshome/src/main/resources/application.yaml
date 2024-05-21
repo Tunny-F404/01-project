@@ -3,3 +3,16 @@ server:
 spring:
   application:
     name: ${sn.syshome}
+    #数据库连接信息
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.150.101:3306/zo_mes
+    username: root
+    password: 123456
+  profiles:
+    active: dev # 激活test配置文件
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.addr} # Nacos服务发现地址
+        #namespace: ${nacos.namespace} # Nacos命名空间
