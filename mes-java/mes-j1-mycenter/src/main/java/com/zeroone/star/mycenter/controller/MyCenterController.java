@@ -1,15 +1,11 @@
 package com.zeroone.star.mycenter.controller;
-
 import com.zeroone.star.project.j1.mycenter.MyCenterApis;
 import com.zeroone.star.project.j1.mycenter.dto.mail.MailDTO;
-
 import com.zeroone.star.project.j1.mycenter.dto.user.UserDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +28,7 @@ public class MyCenterController implements MyCenterApis {
      * @param userId
      */
     @Override
-    @PostMapping("/getPersonalInfo")
+    @PostMapping("/get-personal-info")
     @ApiOperation("查询个人信息")
     public JsonVO<UserDTO> getPersonalInfo(Long userId) {
         UserDTO userDTO = new UserDTO();
@@ -46,7 +42,7 @@ public class MyCenterController implements MyCenterApis {
      * @return
      */
     @Override
-    @PostMapping("/getEmailCode")
+    @PostMapping("/get-emailCode")
     @ApiOperation("获取邮箱验证码")
     public JsonVO<Integer> getEMailCode(MailDTO mailDto) {
            return JsonVO.success(1);
@@ -59,7 +55,7 @@ public class MyCenterController implements MyCenterApis {
      * @return
      */
     @Override
-    @PostMapping("/getPhoneCode")
+    @PostMapping("/get-phoneCode")
     @ApiOperation("获取手机验证码")
     public JsonVO<Integer> getPhoneCode(String phone) {
         return JsonVO.success(1);

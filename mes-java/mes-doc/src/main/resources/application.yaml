@@ -11,9 +11,9 @@ knife4j:
     # 注意：这里的路径配置需要配置到nacos配置中心system.yaml中
     routes:
       - name: 示例服务
-        serviceName: ${sn.sample}
+        serviceName: ${sn.center}
         namespaceId: ${nacos.namespace}
-        location: /v2/api-docs?group=sample
+        location: /v2/api-docs?group=center
       - name: 声明式CPP
         serviceName: ${sn.cpp}
         namespaceId: ${nacos.namespace}
