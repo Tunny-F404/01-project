@@ -4,6 +4,7 @@ addprodworkorder:
   workorder_code: 工单编号
   workorder_name: 工单名称
   order_source: 来源类型
+  source_code: 来源单据
   status: 单据状态
   workorder_type: 工单类型
   product_code: 产品编号
@@ -14,5 +15,10 @@ addprodworkorder:
   request_date: 需求日期
   batch_code: 批次号
   remark: 备注
+  client_code: 客户编码
+  client_name: 客户名称
+  menuname: 菜单名称
+  
  post:
   summary: 新增一条生产工单数据 
+  query: 获取生产工单列表（条件+分页）
