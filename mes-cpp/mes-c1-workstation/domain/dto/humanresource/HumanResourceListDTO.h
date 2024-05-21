@@ -51,6 +51,20 @@ class HumanResourceDetailDTO : public HumanResourceListDTO
 	API_DTO_FIELD(UInt64, recordId, ZH_WORDS_GETTER("post.fields.recordid"), true, 1);
 };
 /**
+ * 修改人力资源岗位
+ */
+class HumanResourceModifyDTO : public oatpp::DTO
+{
+	DTO_INIT(HumanResourceModifyDTO, DTO);
+	// 岗位名称
+	API_DTO_FIELD(String, postName, ZH_WORDS_GETTER("post.fields.pname"), true, "ceo");
+	// 岗位数量
+	API_DTO_FIELD(Int32, quantity, ZH_WORDS_GETTER("post.fields.quantity"), true, 1);
+	// 记录ID
+	API_DTO_FIELD(UInt64, recordId, ZH_WORDS_GETTER("post.fields.recordid"), true, 1);
+
+};
+/**
  * 定义一个岗位信息分页传输对象
  */
 class HumanResourcePageDTO : public PageDTO<HumanResourceListDTO::Wrapper>

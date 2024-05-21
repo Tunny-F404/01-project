@@ -76,14 +76,33 @@ public:
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddHumanResourceList(dto));
 	}
+	// 定义修改接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("modify.summary"), modifyHumanResource, Uint64JsonVO::Wrapper);
+	// 定义修改接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/humanresource/modify-hunmanresource", modifyHumanResource, BODY_DTO(HumanResourceModifyDTO::Wrapper, dto), execModifyHumanResource(dto));
+
+	// 定义删除接口描述
+	ENDPOINT_INFO(removeHumanResource) {
+		// 定义标题和返回类型以及授权支持
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("remove.summary"), Uint64JsonVO::Wrapper);
+		// 定义其他路径参数说明
+		API_DEF_ADD_PATH_PARAMS(UInt64, "recordid", ZH_WORDS_GETTER("post.field.recordid"), 1, true);
+	}
+	// 定义删除接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/humanresource/modify-hunmanresource", removeHumanResource, PATH(UInt64, id), execRemoveHumanResource(id));
+
+
 
 
 private:
-	// 3.3 演示分页查询数据
+	// 分页查询数据
 	HumanResourceListPageVO::Wrapper execQueryHumanResourceList(const HumanResourceListQuery::Wrapper& query);
-	// 3.3 演示新增数据
+	// 新增数据
 	Uint64JsonVO::Wrapper execAddHumanResourceList(const HumanResourceListDTO::Wrapper& dto);
-
+	// 新增修改实现
+	Uint64JsonVO::Wrapper execModifyHumanResource(const HumanResourceModifyDTO::Wrapper& dto);
+	// 删除数据实现
+	Uint64JsonVO::Wrapper execRemoveHumanResource(const UInt64& id);
 };
 
 // 0 取消API控制器使用宏
