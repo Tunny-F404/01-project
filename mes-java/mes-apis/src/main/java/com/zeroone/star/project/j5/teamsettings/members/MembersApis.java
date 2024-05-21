@@ -25,14 +25,6 @@ public interface MembersApis {
     JsonVO<PageDTO<MemberDTO>> queryMember(MemberQuery condition);
 
     /**
-     * 通过条件查询数据
-     * @param deptId 部门名称id
-     * @param phonenumber 用户名称
-     * @param username 手机号码
-     * @return 查询结果
-     */
-    JsonVO<MemberDTO> queryTeamByCondition(String deptId, String phonenumber, String username);
-    /**
      * 多项添加班组成员
      * @param memberDTOList 要添加的成员list表
      * @return 添加班组成员

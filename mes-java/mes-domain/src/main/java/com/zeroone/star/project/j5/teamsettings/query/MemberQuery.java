@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j5.teamsettings.query;
 
+import com.zeroone.star.project.query.PageQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,7 +12,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel("查询人员")
-public class MemberQuery {
+public class MemberQuery extends PageQuery {
     @ApiModelProperty(value = "部门名称id", example = "182")
     private String deptId;
     @ApiModelProperty(value = "手机号码", example = "213231")
