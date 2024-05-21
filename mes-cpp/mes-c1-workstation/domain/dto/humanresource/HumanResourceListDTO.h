@@ -32,7 +32,7 @@ class HumanResourceListDTO : public oatpp::DTO
 	// 岗位名称
 	API_DTO_FIELD(String, postName, ZH_WORDS_GETTER("post.fields.pname"),true,"ceo");
 	// 岗位数量
-	API_DTO_FIELD(Int32, quantity, ZH_WORDS_GETTER("post.fields.quantity"),true,0);
+	API_DTO_FIELD(Int32, quantity, ZH_WORDS_GETTER("post.fields.quantity"),true,1);
 
 };
 /**
@@ -44,7 +44,7 @@ class HumanResourceDetailDTO : public HumanResourceListDTO
 	// 岗位名称
 	API_DTO_FIELD(String, postName, ZH_WORDS_GETTER("post.fields.pname"), true, "ceo");
 	// 岗位数量
-	API_DTO_FIELD(Int32, quantity, ZH_WORDS_GETTER("post.fields.quantity"), true, 0);
+	API_DTO_FIELD(Int32, quantity, ZH_WORDS_GETTER("post.fields.quantity"), true, 1);
 };
 /**
  * 定义一个岗位信息分页传输对象

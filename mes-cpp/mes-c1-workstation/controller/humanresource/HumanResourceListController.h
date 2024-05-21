@@ -51,7 +51,7 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(String, "postName", ZH_WORDS_GETTER("post.fields.pname"), "ceo", false);
-		API_DEF_ADD_QUERY_PARAMS(Int32, "quantity", ZH_WORDS_GETTER("post.fields.quantiy"), 0, false);
+		API_DEF_ADD_QUERY_PARAMS(Int32, "quantity", ZH_WORDS_GETTER("post.fields.quantiy"), 1, false);
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/huamnresource/query-humanresource-list", queryHumanResource, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
