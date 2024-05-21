@@ -3,39 +3,40 @@
 #define _SET_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "ApiHelper.h"
-#include "ServerInfo.h"
-//#include "domain/vo/set/DownloadFileVO.h"
+#include "domain/query/set/ProcessExportQuery.h"
 
-#include OATPP_CODEGEN_BEGIN(ApiController)
+
+#include OATPP_CODEGEN_BEGIN(ApiController) 
 
 /**
- * 文件操作示例接口
+ * 工艺流程控制器
  */
-class SetController : public oatpp::web::server::api::ApiController
+class SetController : public oatpp::web::server::api::ApiController 
 {
-	// 定义控制器访问入口
+
 	API_ACCESS_DECLARE(SetController);
+
 public:
 
-	// 定义一个文件下载接口
-	// 定义描述
-	ENDPOINT_INFO(downloadFile) {
-		API_DEF_ADD_COMMON(ZH_WORDS_GETTER("set.download.summary"), Void);
-		API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("set.field.filename"), "file/test.jpg", true);
+// 1 导出文件
+	ENDPOINT_INFO(queryProcessExport) {
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.export.summary"));
+		API_DEF_ADD_AUTH();
+		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
+		API_DEF_ADD_PAGE_PARAMS();
+		API_DEF_ADD_QUERY_PARAMS(String, "processCode", ZH_WORDS_GETTER("set.field.code"), "R1126", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("set.field.name"), "111", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("set.field.flag"), "Y", false);
 	}
-	// 定义端点
-	ENDPOINT(API_M_GET, "/file/download", downloadFile, QUERY(String, filename)) {
-		return execDownloadFile(filename);
+	ENDPOINT(API_M_POST, "/mes/set/export", queryProcessExport, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		API_HANDLER_QUERY_PARAM(Query, ProcessExportQuery, queryParams);
+		API_HANDLER_RESP_VO(execQueryProcess(Query));
 	}
-
-private: // 定义接口执行函数	
-	// 执行文件下载处理
-	std::shared_ptr<OutgoingResponse> execDownloadFile(const String& filename);
-
+private:
+	// 1 导出文件
+	StringJsonVO::Wrapper execQueryProcess(const ProcessExportQuery::Wrapper& query);
 };
 
 
-#include OATPP_CODEGEN_END(ApiController)
-
-#endif // !_FILECONTROLLER_H_
+#include OATPP_CODEGEN_END(ApiController) 
+#endif 

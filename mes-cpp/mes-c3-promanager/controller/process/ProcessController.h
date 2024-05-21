@@ -7,8 +7,6 @@
 #include "domain/query/process/ProcessListQuery.h"
 #include "domain/dto/process/ProcessListDTO.h"
 
-#include "domain/vo/process/ProcessDetailVO.h"
-#include "domain/query/process/ProcessDetailQuery.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -36,7 +34,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "routeName", ZH_WORDS_GETTER("process.field.name"), "111", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("process.field.flag"), "Y", false);
 	}
-	ENDPOINT(API_M_GET, "/prod-api/mes/pro/proroute/list", queryProcessList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/mes/pro/list", queryProcessList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(Query, ProcessListQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -54,7 +52,7 @@ public:
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(UInt32, "routeId", ZH_WORDS_GETTER("process.field.id"), 239, true);
 	}
-	ENDPOINT(API_M_GET, "/prod-api/mes/pro/proroute/detail", queryProcessDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "mes/pro/detail", queryProcessDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(Query, ProcessDetailQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -70,20 +68,19 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/prod-api/mes/pro/proroute/addProcess", addProcess, BODY_DTO(ProcessDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/mes/pro/addprocess", addProcess, BODY_DTO(ProcessAddDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddProcess(dto));
 	}
 
 
 private:
-	// 分页查询工艺列表数据
+	// 1 分页查询工艺列表数据
 	ProcessListJsonVO::Wrapper execQueryProcessList(const ProcessListQuery::Wrapper& query);
-	// 查询工艺详情
+	// 2 查询工艺详情
 	ProcessDetailJsonVO::Wrapper execQueryProcessDetail(const ProcessDetailQuery::Wrapper& query);
-	// 新增工艺数据
-	Uint64JsonVO::Wrapper execAddProcess(const ProcessDTO::Wrapper& dto);
+	// 3 新增工艺数据
+	Uint64JsonVO::Wrapper execAddProcess(const ProcessAddDTO::Wrapper& dto);
 };
 
 // 0 取消API控制器使用宏

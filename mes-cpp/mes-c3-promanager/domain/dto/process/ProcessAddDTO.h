@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _PROCESSLIST_DTO_
-#define _PROCESSLIST_DTO_
+#ifndef _PROCESSADD_DTO_
+#define _PROCESSADD_DTO_
 #include "../../GlobalInclude.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
@@ -11,8 +11,6 @@
 class ProcessAddDTO : public oatpp::DTO
 {
 	DTO_INIT(ProcessAddDTO, DTO);
-
-protected:
 
 	// 路线编号
 	DTO_FIELD(String, routeCode);
@@ -40,30 +38,6 @@ protected:
 		info->description = ZH_WORDS_GETTER("process.field.remark");
 	}
 };
-/**
- * 工艺列表传输对象,与获取工艺详情一样
- */
-class ProcessDTO : public ProcessAddDTO
-{
-	DTO_INIT(ProcessDTO, ProcessAddDTO);
-
-	// 唯一标识
-	DTO_FIELD(UInt32, routeid);
-	DTO_FIELD_INFO(routeid) {
-		info->description = ZH_WORDS_GETTER("process.field.id");
-	}
-
-};
-
-/**
- * 工艺列表分页传输对象
- */
-class ProcessListDTO : public PageDTO<ProcessDTO::Wrapper>
-{
-	DTO_INIT(ProcessListDTO, PageDTO<ProcessDTO::Wrapper>);
-};
-
-
 
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_SAMPLE_DTO_

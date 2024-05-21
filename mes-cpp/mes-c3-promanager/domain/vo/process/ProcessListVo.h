@@ -8,7 +8,14 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 示例分页显示JsonVO，用于响应给客户端的Json对象
+ * 工艺详细信息VO
+ */
+class ProcessDetailJsonVO : public JsonVO<ProcessDTO::Wrapper> {
+	DTO_INIT(ProcessDetailJsonVO, JsonVO<ProcessDTO::Wrapper>);
+};
+
+/**
+ * 工艺列表VO
  */
 class ProcessListJsonVO : public JsonVO<ProcessListDTO::Wrapper> {
 	DTO_INIT(ProcessListJsonVO, JsonVO<ProcessListDTO::Wrapper>);
