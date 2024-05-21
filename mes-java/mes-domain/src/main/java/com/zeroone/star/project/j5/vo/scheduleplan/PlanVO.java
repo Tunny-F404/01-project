@@ -50,19 +50,4 @@ public class PlanVO {
     @ApiModelProperty(value = "数", example = "1")
     private Integer shiftCount;
 
-    @ApiModelProperty(value = "创建者", example = "admin")
-    private String createBy;
-
-    @ApiModelProperty(value = "创建时间", example = "2024-05-21 11:24:41")
-    private LocalDate createTime;
-
-    @ApiModelProperty(value = "更新者", example = "admin")
-    private String updateBy;
-
-    @ApiModelProperty(value = "更新时间", example = "2024-05-21 11:24:41")
-    private LocalDate updateTime;
-
-    //班组Query
-
-    //班次Query
 }

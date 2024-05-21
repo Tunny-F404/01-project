@@ -45,10 +45,4 @@ public class PlanDTO {
     @ApiModelProperty(value = "单据状态", example = "已确认")
     private String status;
 
-    @ApiModelProperty(value = "创建者", example = "已确认")
-    private String createBy;
-
-    @ApiModelProperty(value = "创建时间", example = "已确认")
-    private LocalDate createTime;
-
 }
