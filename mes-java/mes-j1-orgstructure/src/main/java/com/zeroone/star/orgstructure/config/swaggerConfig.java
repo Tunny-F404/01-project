@@ -20,5 +20,4 @@ public class swaggerConfig {
         return SwaggerCore.defaultDocketBuilder("组织架构模块","com.zeroone.star.orgstructure.controller","orgstructure");
     }
 
-
 }

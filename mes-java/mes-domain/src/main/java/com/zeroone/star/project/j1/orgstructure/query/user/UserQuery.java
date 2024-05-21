@@ -22,7 +22,7 @@ public class UserQuery {
     @ApiModelProperty(value = "用户账号状态(0:正常 1:停用)", example = "1")
     private String status;
     @ApiModelProperty(value = "创建时间：开始日期", example = "2024-05-20")
-    private Date beginDate;
+    private String beginDate;
     @ApiModelProperty(value = "创建时间：结束日期", example = "2024-05-21")
-    private Date endDate;
+    private String endDate;
 }

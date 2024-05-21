@@ -19,9 +19,9 @@ public class CompleteUserDTO extends UserDTO {
     private String email;
     @ApiModelProperty(value = "性别(0:男 1:女 2:未知)", example = "0")
     private String sex;
-    @ApiModelProperty(value = "担任的岗位列表", example = "[{\"董事长\"},{\"项目经理\"}]")
+    @ApiModelProperty(value = "担任的岗位列表")
     private List<String> post;
-    @ApiModelProperty(value = "属于的角色列表", example = "[{\"组长\"},{\"职员\"}]")
+    @ApiModelProperty(value = "属于的角色列表")
     private List<String> rule;
     @ApiModelProperty(value = "对于用户的备注", example = "老板的私生子")
     private String commit;
