@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.message.entity.Message;
+import com.zeroone.star.message.mapper.ExportMessageMapper;
 import com.zeroone.star.message.service.MessageService;
 import com.zeroone.star.project.j3.dto.MessageDTO;
 import com.zeroone.star.message.mapper.MessageMapper;
 import com.zeroone.star.project.vo.JsonVO;
 
+import org.apache.http.client.utils.DateUtils;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +60,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
             LambdaUpdateWrapper<Message> updateWrapper = new LambdaUpdateWrapper<>();
 
             updateWrapper.eq(Message::getMessageId, messageDTO.getMessageId());
+
 
             // 执行更新操作
             int updatedRows = messageMapper.update(message, updateWrapper);
@@ -145,7 +148,6 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
             return JsonVO.fail("没有找到匹配的消息进行删除！");
         }
     }
-
 
 }
 

@@ -3,6 +3,7 @@ package com.zeroone.star.message.mapper;
 import com.zeroone.star.message.entity.Message;
 import com.zeroone.star.project.j3.dto.MessageDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.mapstruct.Mapper;
 
 /**
 * @author 10439
@@ -10,6 +11,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2024-05-20 11:26:34
 * @Entity pojo.domain.SysMessage
 */
+
+@Mapper
 public interface MessageMapper extends BaseMapper<Message> {
 
 }

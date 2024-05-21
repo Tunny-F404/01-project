@@ -74,7 +74,7 @@ public class MessageDTO {
     private String status;
 
     /** 是否删除 */
-    @ApiModelProperty(value = "是否删除",example = "1/0")
+    @ApiModelProperty(value = "是否删除",example = "Y/N")
     private String deletedFlag;
     /* 备注 */
     @ApiModelProperty(value = "备注")

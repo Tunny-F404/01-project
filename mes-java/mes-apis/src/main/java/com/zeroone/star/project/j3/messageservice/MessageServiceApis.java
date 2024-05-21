@@ -48,12 +48,12 @@ public interface MessageServiceApis {
      * 下载导出Excel
      * @return 报表
      */
-    public ResponseEntity<byte[]> downloadMessageExcel(MessageDTO messageDTO);
+    public ResponseEntity<byte[]> downloadMessageExcel();
 
 
     /**
      * 导出到dfs
      * @return dfs连接
      */
-    public JsonVO<String> exportMessageToDfs(MessageDTO messageDTO);
+    public JsonVO<String> exportMessageToDfs();
 }
