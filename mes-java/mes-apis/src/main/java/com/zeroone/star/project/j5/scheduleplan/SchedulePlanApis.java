@@ -27,10 +27,4 @@ public interface SchedulePlanApis {
      */
     JsonVO<Integer>  modifySchPlanStatus(SchPlanDTO schPlanDTO);
 
-    /**
-     * 导出计划
-     * @author sailing
-     * 参数待合并后补充query
-     */
-    JsonVO<SchPlanDTO[]>  exportSchPlan();
 }
