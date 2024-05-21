@@ -21,17 +21,17 @@ Uint64JsonVO::Wrapper InspectController::execAddInspect(const InspectDTO::Wrappe
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if (!dto->issue_id || !dto->item_id || !dto->item_code || !dto->item_name || !dto->specification || !dto->unit_of_measure || !dto->quantity_issued || !dto->batch_code || !dto->warehouse_name || !dto->location_name || !dto->area_name)
-	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		return jvo;
-	}
-	// 有效值校验
-	if (dto->issue_id <= 0 || dto->item_id <= 0 || dto->item_code->empty() || dto->item_name->empty() || dto->specification->empty() || dto->unit_of_measure->empty() || dto->quantity_issued <= 0 || dto->batch_code->empty() || dto->warehouse_name->empty() || dto->location_name->empty() || dto->area_name->empty())
-	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		return jvo;
-	}
+	//if (!dto->code || !dto->name || !dto->template_id || !dto->vendor_id || !dto->vendor_code || !dto->vendor_name || !dto->vd_nick || !dto->batch_code || !dto->warehouse_name || !dto->location_name || !dto->area_name)
+	//{
+	//	jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+	//	return jvo;
+	//}
+	//// 有效值校验
+	//if (dto->issue_id <= 0 || dto->item_id <= 0 || dto->item_code->empty() || dto->item_name->empty() || dto->specification->empty() || dto->unit_of_measure->empty() || dto->quantity_issued <= 0 || dto->batch_code->empty() || dto->warehouse_name->empty() || dto->location_name->empty() || dto->area_name->empty())
+	//{
+	//	jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+	//	return jvo;
+	//}
 
 	// 定义一个Service
 	InspectService service;
@@ -94,4 +94,9 @@ Uint64JsonVO::Wrapper InspectController::execRemoveInspect(const UInt64& id)
 	}
 	// 响应结果
 	return jvo;
+}
+
+StringJsonVO::Wrapper InspectController::execExportProcessinSpection(const oatpp::List<UInt64>& ids)
+{
+	return StringJsonVO::Wrapper();
 }
