@@ -1,8 +1,8 @@
 package com.zeroone.star.project.j5.teamsettings.members;
 
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j5.teamsettings.dto.MemberDTO;
-import com.zeroone.star.project.j5.teamsettings.query.MemberQuery;
+import com.zeroone.star.project.j5.dto.teamsettings.MemberDTO;
+import com.zeroone.star.project.j5.query.teamsettings.MemberQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 import java.util.List;

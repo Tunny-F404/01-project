@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.vo.schedualplan;
+package com.zeroone.star.project.j5.vo.scheduleplan;
 
 
 import io.swagger.annotations.ApiModel;

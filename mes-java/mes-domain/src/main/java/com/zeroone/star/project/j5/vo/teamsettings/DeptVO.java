@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.teamsettings.vo;
+package com.zeroone.star.project.j5.vo.teamsettings;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
-package com.zeroone.star.project.j5.teamsettings.dto;
+package com.zeroone.star.project.j5.dto.teamsettings;
 
-import com.zeroone.star.project.j5.teamsettings.vo.DeptVO;
+import com.zeroone.star.project.j5.vo.teamsettings.DeptVO;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -8,12 +8,12 @@ import java.util.List;
 
 /**
  * @Author: Liang
- * @Date: 2024/05/21/20:38
- * @Description:
+ * @Date: 2024/05/21/19:00
+ * @Description:班组成员的dto
  */
 @Data
-@ApiModel("传输数据对象 部门dept的数据")
-public class DeptDTO {
+@ApiModel("传输数据对象 组员member的数据")
+public class MemberDTO {
     private String searchValue;
     private String createBy;
     private String createTime;

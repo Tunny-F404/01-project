@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.teamsettings.query;
+package com.zeroone.star.project.j5.query.teamsettings;
 
 import com.zeroone.star.project.query.PageQuery;
 import io.swagger.annotations.ApiModel;

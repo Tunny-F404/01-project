@@ -1,20 +1,19 @@
-package com.zeroone.star.project.j5.teamsettings.vo;
+package com.zeroone.star.project.j5.dto.teamsettings;
 
-import lombok.AllArgsConstructor;
+import com.zeroone.star.project.j5.vo.teamsettings.DeptVO;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 /**
  * @Author: Liang
- * @Date: 2024/05/21/19:05
- * @Description:班组成员的数图对象
+ * @Date: 2024/05/21/20:38
+ * @Description:
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class MemberVO {
+@ApiModel("传输数据对象 部门dept的数据")
+public class DeptDTO {
     private String searchValue;
     private String createBy;
     private String createTime;
