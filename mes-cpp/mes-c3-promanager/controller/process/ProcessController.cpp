@@ -39,3 +39,10 @@ Uint64JsonVO::Wrapper ProcessController::execRemoveProcess(const UInt64& id)
 	auto jvo = Uint64JsonVO::createShared();
 	return jvo;
 }
+
+//工艺导出
+StringJsonVO::Wrapper ProcessController::execQueryProcess(const ProcessQuery::Wrapper& query)
+{
+	auto jvo = StringJsonVO::createShared();
+	return jvo;
+}

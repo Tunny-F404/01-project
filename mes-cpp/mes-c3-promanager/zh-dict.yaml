@@ -8,6 +8,11 @@ process:
   remark: 备注
   createtime: 创建时间
   updatetime: 更新时间
+  route_code: 工艺路线编号
+  route_name: 工艺路线名称
+  route_desc: 工艺路线说明
+  enable_flag: 是否启用
+  example: 组装
  get:
   summary1: 获取工艺列表 
   summary2: 获取工艺详情
@@ -18,6 +23,9 @@ process:
   summary1: 修改工艺
  del:
   summary1: 删除工艺
+ get_field:
+  summary: 工艺导出
+
 set:  
  query:
   summary: 获取工序步骤列表(条件+分页)
@@ -33,10 +41,6 @@ set:
   material: 辅助材料
   docurl: 材料URL
   contentid: 内容ID
-  updatetime: 更新时间
-  createtime: 创建时间
-  updateby: 更新者
-  createby: 创建者
  add:
   summary: 添加工序
  modify:
@@ -45,6 +49,7 @@ set:
   summary: 添加工序步骤
  export:
   summary: 工序导出
+
 product:
  field:
   id: 产品物料编码

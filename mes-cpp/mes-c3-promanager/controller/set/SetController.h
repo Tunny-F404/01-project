@@ -22,7 +22,7 @@ class SetController : public oatpp::web::server::api::ApiController
 
 public:
 
-// 1 导出文件
+// 1 导出工序
 	ENDPOINT_INFO(queryProcessExport) {
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.export.summary"));
 		API_DEF_ADD_AUTH();
@@ -32,7 +32,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("set.field.name"), "111", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("set.field.flag"), "Y", false);
 	}
-	ENDPOINT(API_M_POST, "/set/export", queryProcessExport, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/set/export-procedure", queryProcessExport, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_QUERY_PARAM(Query, ProcessExportQuery, queryParams);
 		API_HANDLER_RESP_VO(execProcessExport(Query));
 	}

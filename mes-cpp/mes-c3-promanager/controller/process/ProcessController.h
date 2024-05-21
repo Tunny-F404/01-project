@@ -10,6 +10,7 @@
 #include "domain/query/process/ProcessProductsQuery.h"
 #include "domain/dto/process/ProcessProductsDTO.h"
 #include "domain/vo/process/ProcessProductsVO.h"
+#include "domain/query/process/ProcessQuery.h"
 
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
@@ -37,7 +38,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "routeName", ZH_WORDS_GETTER("process.field.name"), "111", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("process.field.flag"), "Y", false);
 	}
-	ENDPOINT(API_M_GET, "/pro/list", queryProcessList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/pro/get-list", queryProcessList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(Query, ProcessListQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -55,7 +56,7 @@ public:
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(UInt32, "routeId", ZH_WORDS_GETTER("process.field.id"), 239, true);
 	}
-	ENDPOINT(API_M_GET, "/pro/detail", queryProcessDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/pro/get-detail", queryProcessDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(Query, ProcessDetailQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -94,7 +95,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "id", ZH_WORDS_GETTER("product.field.id"), "249", false);
 
 	}
-	ENDPOINT(API_M_GET, "/pro/corr-process", queryCorrProduct, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/pro/get-corrprocess", queryCorrProduct, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ProcessProductsQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -110,6 +111,28 @@ public:
 	}
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete-process/{id}", removeProcess, PATH(UInt64, id), execRemoveProcess(id));
 
+	// 7 工艺导出
+	ENDPOINT_INFO(queryProcess) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.get_field.summary"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
+		// 定义分页查询参数描述
+		API_DEF_ADD_PAGE_PARAMS();
+		// 定义其他查询参数描述
+		API_DEF_ADD_QUERY_PARAMS(String, "route_code", ZH_WORDS_GETTER("process.field.route_code"), "R1121", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "route_name", ZH_WORDS_GETTER("process.field.route_name"), ZH_WORDS_GETTER("process.field.example"), false);
+		API_DEF_ADD_QUERY_PARAMS(String, "enable_flag", ZH_WORDS_GETTER("process.field.enable_flag"), "Y", false);
+	}
+	ENDPOINT(API_M_POST, "/set/export-process", queryProcess, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(userQuery, ProcessQuery, queryParams);
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execQueryProcess(userQuery));
+	}
+
 private:
 	// 1 获取工艺列表数据
 	ProcessListJsonVO::Wrapper execQueryProcessList(const ProcessListQuery::Wrapper& query);
@@ -123,6 +146,8 @@ private:
 	ProductsPageJsonVO::Wrapper execQueryProducts(const ProcessProductsQuery::Wrapper& query);
 	// 6 删除组成工序（支持批量删除）
 	Uint64JsonVO::Wrapper execRemoveProcess(const UInt64& id);
+	// 7 工艺导出
+	StringJsonVO::Wrapper execQueryProcess(const ProcessQuery::Wrapper& query);
 };
 
 // 0 取消API控制器使用宏
