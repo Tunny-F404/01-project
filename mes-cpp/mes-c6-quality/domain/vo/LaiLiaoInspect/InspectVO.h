@@ -3,7 +3,7 @@
 #define _INSPECT_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/materialsInformation/MaterialDTO.h"
+#include "../../dto/LaiLiaoInspect/InspectDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
