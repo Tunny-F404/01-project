@@ -17,28 +17,28 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _BOM_VO_
-#define _BOM_VO_
+#ifndef _ORDER_VO_
+#define _ORDER_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/productionorder/ExportBomOrderDTO.h"
+#include "../../dto/productionorder/ExportOrderDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
  * 示例显示JsonVO，用于响应给客户端的Json对象
  */
-class ExportBomOrderJsonVO : public JsonVO<ExportBomOrderDTO::Wrapper> {
-	DTO_INIT(ExportBomOrderJsonVO, JsonVO<ExportBomOrderDTO::Wrapper>);
+class ExportOrderJsonVO : public JsonVO<ExportOrderDTO::Wrapper> {
+	DTO_INIT(ExportOrderJsonVO, JsonVO<ExportOrderDTO::Wrapper>);
 };
 
 /**
  * 示例分页显示JsonVO，用于响应给客户端的Json对象
  */
-class ExportBomOrderPageJsonVO : public JsonVO<ExportBomOrderPageDTO::Wrapper> {
-	DTO_INIT(ExportBomOrderPageJsonVO, JsonVO<ExportBomOrderPageDTO::Wrapper>);
+class ExportOrderPageJsonVO : public JsonVO<ExportOrderPageDTO::Wrapper> {
+	DTO_INIT(ExportOrderPageJsonVO, JsonVO<ExportOrderPageDTO::Wrapper>);
 };
 
 #include OATPP_CODEGEN_END(DTO)
 
-#endif // !_BOM_VO_
+#endif // !_ORDER_VO_
