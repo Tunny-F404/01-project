@@ -7,8 +7,10 @@ inspect:
   summary: 修改一条检验单信息
  export:
   summary: 导出一条检验单信息
+ get:
+  summary: 分页查询来料检验信息
 
- id: 数据库表行id
+ line_id: 数据库表行id
  code: 来料检验单编号
  name: 来料检验单名称
  template_id: 检验模板ID

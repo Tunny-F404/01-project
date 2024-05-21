@@ -9,7 +9,7 @@
 class InspectlDO
 {
 	// 数据库表行id
-	CC_SYNTHESIZE(uint64_t, id, Id);
+	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
 	// 来料检验单编号
 	CC_SYNTHESIZE(string, code, Code);
 	// 来料检验单名称
