@@ -6,7 +6,6 @@
 #define _PLANSUBJECT_DAO_
 #include "BaseDAO.h"
 #include "../../domain/do/planSubject/PlanSubjectDO.h"
-
 #include "../../domain/query/planSubject/PlanSubjectQuery.h"
 
 /**
@@ -18,13 +17,13 @@ public:
 	// 统计数据条数
 	uint64_t count(const PlanSubjectQuery::Wrapper& query);
 	// 分页查询数据
-	list<PlanSubjectDO> selectWithPage(const PlanSubjectQuery::Wrapper& query);
+	list<PlanSubjectTableDO> selectWithPage(const PlanSubjectQuery::Wrapper& query);
 	//// 通过姓名查询数据
-	//list<PlanSubjectDO> selectByName(const string& name);
+	//list<PlanSubjectTableDO> selectByName(const string& name);
 	//// 插入数据
-	//uint64_t insert(const PlanSubjectDO& iObj);
+	//uint64_t insert(const PlanSubjectTableDO& iObj);
 	//// 修改数据
-	//int update(const PlanSubjectDO& uObj);
+	//int update(const PlanSubjectTableDO& uObj);
 	//// 通过ID删除数据
 	//int deleteById(uint64_t id);
 };

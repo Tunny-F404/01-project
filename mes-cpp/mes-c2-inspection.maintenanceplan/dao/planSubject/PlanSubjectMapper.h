@@ -11,7 +11,7 @@
 /**
  * 示例表字段匹配映射
  */
-class PlanSubjectMapper : public Mapper<PlanSubjectDO>
+class PlanSubjectMapper : public Mapper<PlanSubjectTableDO>
 {
 public:
 	// 项目编码
@@ -25,9 +25,9 @@ public:
 	// 项目标准
 	CC_SYNTHESIZE(string, standard, Standard);
 
-	PlanSubjectDO mapper(ResultSet* resultSet) const override
+	PlanSubjectTableDO mapper(ResultSet* resultSet) const override
 	{
-		PlanSubjectDO data;
+		PlanSubjectTableDO data;
 		data.setCode(resultSet->getString(1));
 		data.setName(resultSet->getString(2));
 		data.setType(resultSet->getString(3));

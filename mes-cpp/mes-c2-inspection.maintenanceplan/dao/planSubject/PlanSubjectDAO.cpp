@@ -30,7 +30,7 @@ uint64_t PlanSubjectDAO::count(const PlanSubjectQuery::Wrapper & query)
 	return sqlSession->executeQueryNumerical(sqlStr, params);
 }
 
-std::list<PlanSubjectDO> PlanSubjectDAO::selectWithPage(const PlanSubjectQuery::Wrapper & query)
+std::list<PlanSubjectTableDO> PlanSubjectDAO::selectWithPage(const PlanSubjectQuery::Wrapper & query)
 {
 	stringstream sql;
 	sql << "SELECT id,name,sex,age FROM dv_subject";
@@ -38,23 +38,23 @@ std::list<PlanSubjectDO> PlanSubjectDAO::selectWithPage(const PlanSubjectQuery::
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	PlanSubjectMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<PlanSubjectDO, PlanSubjectMapper>(sqlStr, mapper, params);
+	return sqlSession->executeQuery<PlanSubjectTableDO, PlanSubjectMapper>(sqlStr, mapper, params);
 }
 
-//std::list<PlanSubjectDO> PlanSubjectDAO::selectByName(const string & name)
+//std::list<PlanSubjectTableDO> PlanSubjectDAO::selectByName(const string & name)
 //{
 //	string sql = "SELECT id,name,sex,age FROM sample WHERE `name` LIKE CONCAT('%',?,'%')";
 //	PlanSubjectMapper mapper;
-//	return sqlSession->executeQuery<PlanSubjectDO, PlanSubjectMapper>(sql, mapper, "%s", name);
+//	return sqlSession->executeQuery<PlanSubjectTableDO, PlanSubjectMapper>(sql, mapper, "%s", name);
 //}
 //
-//uint64_t PlanSubjectDAO::insert(const PlanSubjectDO & iObj)
+//uint64_t PlanSubjectDAO::insert(const PlanSubjectTableDO & iObj)
 //{
 //	string sql = "INSERT INTO `sample` (`name`, `sex`, `age`) VALUES (?, ?, ?)";
 //	return sqlSession->executeInsert(sql, "%s%s%i", iObj.getName(), iObj.getSex(), iObj.getAge());
 //}
 //
-//int PlanSubjectDAO::update(const PlanSubjectDO & uObj)
+//int PlanSubjectDAO::update(const PlanSubjectTableDO & uObj)
 //{
 //	string sql = "UPDATE `sample` SET `name`=?, `sex`=?, `age`=? WHERE `id`=?";
 //	return sqlSession->executeUpdate(sql, "%s%s%i%ull", uObj.getName(), uObj.getSex(), uObj.getAge(), uObj.getId());

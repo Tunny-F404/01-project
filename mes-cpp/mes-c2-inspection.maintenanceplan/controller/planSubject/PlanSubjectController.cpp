@@ -4,9 +4,7 @@
 #include "../ApiDeclarativeServicesHelper.h"
 
 
-PlanSubjectTablePageJsonVO::Wrapper PlanSubjectController::execPlanSubjectTablePage(const PlanSubjectQuery::Wrapper& query)
-{
-	return {};
+
 	/*
 	//return PlanSubjectTableJsonVO::Wrapper();
 	
@@ -28,6 +26,12 @@ PlanSubjectTablePageJsonVO::Wrapper PlanSubjectController::execPlanSubjectTableP
 	//return jvo;
 	*/
 	
+
+
+PlanSubjectTablePageJsonVO::Wrapper PlanSubjectController::execPlanSubjectTablePage(const PlanSubjectQuery::Wrapper& query, const PayloadDTO& payload)
+{
+	return {};
+	//PlanSubjectTablePageJsonVO::Wrapper();
 }
 
 PlanSubjectDetailPageJsonVO::Wrapper PlanSubjectController::execPlanSubjectDetailPage(const PlanSubjectQuery::Wrapper& query)

@@ -4,6 +4,7 @@
 #include <domain/do/planSubject/PlanSubjectDO.h>
 
 
+
 //PlanSubjectDetailPageDTO::Wrapper PlanSubjectService::listAll(const PlanSubjectQuery::Wrapper& query)
 //{
 //	// 构建返回对象
@@ -22,9 +23,9 @@
 //	// 分页查询数据
 //	pages->total = count;
 //	pages->calcPages();
-//	list<PlanSubjectDO> result = dao.selectWithPage(query);
+//	list<PlanSubjectTableDO> result = dao.selectWithPage(query);
 //	// 将DO转换成DTO
-//	for (PlanSubjectDO sub : result)
+//	for (PlanSubjectTableDO sub : result)
 //	{
 //		auto dto = PlanSubjectDTO::createShared();
 //		// 		dto->id = sub.getId();
@@ -41,7 +42,7 @@
 //uint64_t PlanSubjectService::saveData(const PlanSubjectDTO::Wrapper& dto)
 //{
 //	// 组装DO数据
-//	PlanSubjectDO data;
+//	PlanSubjectTableDO data;
 //	// 	data.setName(dto->name.getValue(""));
 //	// 	data.setSex(dto->sex.getValue(""));
 //	// 	data.setAge(dto->age.getValue(1));
@@ -54,7 +55,7 @@
 //bool PlanSubjectService::updateData(const PlanSubjectDTO::Wrapper& dto)
 //{
 //	// 组装DO数据
-//	PlanSubjectDO data;
+//	PlanSubjectTableDO data;
 //	// 	data.setId(dto->id.getValue(0));
 //	// 	data.setName(dto->name.getValue(""));
 //	// 	data.setSex(dto->sex.getValue(""));
@@ -91,10 +92,10 @@ PlanSubjectDetailPageDTO::Wrapper PlanSubjectService::listAll(const PlanSubjectQ
 	// 分页查询数据
 	pages->total = count;
 	pages->calcPages();
-	list<PlanSubjectDO> result = dao.selectWithPage(query);
+	list<PlanSubjectTableDO> result = dao.selectWithPage(query);
 	// 将DO转换成DTO
 	
-	for (PlanSubjectDO sub : result)
+	for (PlanSubjectTableDO sub : result)
 	{
 		auto dto = PlanSubjectTableDTO::createShared();
 		// 		dto->id = sub.getId();
@@ -122,7 +123,7 @@ PlanSubjectDetailPageDTO::Wrapper PlanSubjectService::listAll(const PlanSubjectQ
 //uint64_t PlanSubjectService::saveData(const PlanSubjectTableDTO::Wrapper& dto)
 //{
 //	// 组装DO数据
-//	PlanSubjectDO data;
+//	PlanSubjectTableDO data;
 //	// 	data.setName(dto->name.getValue(""));
 //	// 	data.setSex(dto->sex.getValue(""));
 //	// 	data.setAge(dto->age.getValue(1));
@@ -135,7 +136,7 @@ PlanSubjectDetailPageDTO::Wrapper PlanSubjectService::listAll(const PlanSubjectQ
 //bool PlanSubjectService::updateData(const PlanSubjectTableDTO::Wrapper& dto)
 //{
 //	// 组装DO数据
-//	PlanSubjectDO data;
+//	PlanSubjectTableDO data;
 //	// 	data.setId(dto->id.getValue(0));
 //	// 	data.setName(dto->name.getValue(""));
 //	// 	data.setSex(dto->sex.getValue(""));

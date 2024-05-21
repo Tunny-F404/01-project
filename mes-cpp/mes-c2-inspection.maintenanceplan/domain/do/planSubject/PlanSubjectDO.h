@@ -9,8 +9,10 @@
 /**
  * 示例数据库实体类
  */
-class PlanSubjectDO
+class PlanSubjectTableDO
 {
+	//id
+	CC_SYNTHESIZE(uint64_t, id, Id);
 	// 项目编码，本质可看
 protected: 
 	string code;
@@ -18,9 +20,7 @@ public:
 	string getCode(void) const {return code;}
 public: 
 	void setCode(string var) {code = var;};
-
 	//CC_SYNTHESIZE(string, code, Code);
-
 	// 项目名称
 	CC_SYNTHESIZE(string, name, Name);
 	// 项目类型
@@ -30,7 +30,8 @@ public:
 	// 项目标准
 	CC_SYNTHESIZE(string, standard, Standard);
 public:
-	PlanSubjectDO() {
+	PlanSubjectTableDO() {
+		id = 0;
 		code = "";
 		name = "";
 		type = "";

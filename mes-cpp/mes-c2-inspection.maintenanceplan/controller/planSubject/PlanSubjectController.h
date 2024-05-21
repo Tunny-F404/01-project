@@ -28,30 +28,33 @@ public:
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("planSubject.query.summaryTable"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
-		//API_DEF_ADD_AUTH();
+		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(PlanSubjectTablePageJsonVO);//ABF 响应格式是我们定义的那个VO
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();//没有分页，不加这个
 
 		// 定义其他查询参数描述，，，ABF 注意，这里要照着query对象来写
-		API_DEF_ADD_QUERY_PARAMS(String, "subCode", ZH_WORDS_GETTER("planSubject.fields.subCode"), "1", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "subName", ZH_WORDS_GETTER("planSubject.fields.subName"), "1", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "subType", ZH_WORDS_GETTER("planSubject.fields.subType"), "1", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "subCode", ZH_WORDS_GETTER("planSubject.fields.subCode"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "subName", ZH_WORDS_GETTER("planSubject.fields.subName"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "subType", ZH_WORDS_GETTER("planSubject.fields.subType"), "", false);
 
 	}
 	// 3.2 定义查询接口处理                                  查询参数                          开启授权才能用
 	//
-	//ENDPOINT(API_M_GET, "/planSubject/query-panSubject-table", queryPlanSubjectTablePage, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) 
+	ENDPOINT(API_M_GET, "/planSubject/query-panSubject-table", queryPlanSubjectTablePage, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) 
 	// 暂时不开授权
-	ENDPOINT(API_M_GET, "/planSubject/query-panSubject-table", queryPlanSubjectTablePage, QUERIES(QueryParams, queryParams))
+	//ENDPOINT(API_M_GET, "/planSubject/query-panSubject-table", queryPlanSubjectTablePage, QUERIES(QueryParams, queryParams))
 	{
 		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(query, PlanSubjectQuery, queryParams);//解析成Deptquery
+		API_HANDLER_QUERY_PARAM(userQuery, PlanSubjectQuery, queryParams);//解析成Deptquery
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execPlanSubjectTablePage(query));//改成DeptTable，并减少一个参数
+		//API_HANDLER_RESP_VO(execPlanSubjectTablePage(userQuery, authObject->getPayload()));
 
-		return createDtoResponse(Status::CODE_200, execPlanSubjectTablePage(query));
+		return createDtoResponse(Status::CODE_200, execPlanSubjectTablePage(userQuery, authObject->getPayload()));
+
+		//改成DeptTable，并减少一个参数
+		//return createDtoResponse(Status::CODE_200, execPlanSubjectTablePage(query));
 	}
 
 	//-------------------------------------------------------------
@@ -84,7 +87,7 @@ public:
 
 private:
 	// 3.3 演示分页查询数据
-	PlanSubjectTablePageJsonVO::Wrapper execPlanSubjectTablePage(const PlanSubjectQuery::Wrapper& query);//最后那个参数先不要
+	PlanSubjectTablePageJsonVO::Wrapper execPlanSubjectTablePage(const PlanSubjectQuery::Wrapper& query, const PayloadDTO& payload);//最后那个参数先不要
 	//接下来要写一个cpp文件，给execDeptTable
 	//PlanSubjectDetailPageJsonVO::Wrapper execQuerySample(const PlanSubjectQuery::Wrapper& query, const PayloadDTO& payload);
 
