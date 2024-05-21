@@ -24,7 +24,7 @@ class MaterialDTO : public oatpp::DTO
 	// 产品物料ID
 	DTO_FIELD(UInt64, item_id);
 	DTO_FIELD_INFO(item_id) {
-		info->description = ZH_WORDS_GETTER("Material.field.issue_id");
+		info->description = ZH_WORDS_GETTER("Material.field.item_id");
 	}
 	// 产品物料编码
 	DTO_FIELD(String, item_code);
