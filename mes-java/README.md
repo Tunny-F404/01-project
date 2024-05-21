@@ -75,7 +75,7 @@ spring:
 spring:
   #配置MySQL数据库
   datasource:
-    url: jdbc:mysql://192.168.220.128:3306/test?useUnicode=true&useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://192.168.150.101:3306/test?useUnicode=true&useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -100,17 +100,17 @@ spring:
       filters: stat
   #配置Redis数据库
   redis:
-    host: 192.168.220.128
+    host: 192.168.150.101
     port: 6379
     password: 01star
   data:
     #mongodb配置
     mongodb:
       #格式: mongodb://账号:密码@主机地址:端口/数据库名称
-      uri: mongodb://awei:123456@192.168.220.128:27017/firstDb
+      uri: mongodb://awei:123456@192.168.150.101:27017/firstDb
 ```
 
-### `third-services.yaml` 
+### `third-services.yaml`
 
 第三方服务配置
 
