@@ -22,27 +22,19 @@
 #define _MODIFY_PLAN_MAPPER_
 
 #include "Mapper.h"
-#include "../../domain/do/MaintenancePlan/MaintenancePlanDo.h"
+#include "../../domain/do/ModifyPlanStatus/ModifyPlanStatusDo.h"
 
 /**
  * Ê¾Àý±í×Ö¶ÎÆ¥ÅäÓ³Éä
  */
-class ModifyPlanMapper : public Mapper<MaintenancePlanDo>
+class ModifyPlanStatusMapper : public Mapper<ModifyPlanStatusDo>
 {
 public:
-	MaintenancePlanDo mapper(ResultSet* resultSet) const override
+	ModifyPlanStatusDo mapper(ResultSet* resultSet) const override
 	{
-		MaintenancePlanDo data;
+		ModifyPlanStatusDo data;
 		data.setId(resultSet->getUInt64(1));
-		data.setCode(resultSet->getString(2));
-		data.setName(resultSet->getString(3));
-		data.setType(resultSet->getString(4));
-		data.setCircletype(resultSet->getString(7));
-		data.setCirclecount(resultSet->getString(8));
-		data.setStartdate(resultSet->getString(5));
-		data.setEnddate(resultSet->getString(6));
 		data.setStatus(resultSet->getString(9));
-		data.setRemark(resultSet->getString(10));
 
 		return data;
 	}

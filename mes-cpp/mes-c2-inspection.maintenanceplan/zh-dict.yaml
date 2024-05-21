@@ -11,4 +11,7 @@
   enddata: 结束时间
   status: 状态
   remark: 备注
-     
+modifyplanstatus:
+ summary: 修改点检计划状态
+ fields:
+  status: 状态（启用或停用）   

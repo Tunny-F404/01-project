@@ -17,48 +17,24 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _MAINTENANCEPLAN_DO_
-#define _MAINTENANCEPLAN_DO_
+#ifndef _MODIFY_PLAN_STATUS_DO_
+#define _MODIFY_PLAN_STATUS_DO_
 #include "../DoInclude.h"
 #include "../../GlobalInclude.h"
 
 /**
  * 示例数据库实体类
  */
-class MaintenancePlanDo
+class ModifyPlanStatusDo
 {
-	//计划ID
+	// 计划ID
 	CC_SYNTHESIZE(uint64_t, id, Id);
-	// 计划编号
-	CC_SYNTHESIZE(string, code, Code);
-	// 计划名称
-	CC_SYNTHESIZE(string, name, Name);
-	// 计划类型
-	CC_SYNTHESIZE(string, type, Type);
-	// 频率类型
-	CC_SYNTHESIZE(string, circletype, Circletype);
-	// 频率次数
-	CC_SYNTHESIZE(string, circlecount, Circlecount);
-	// 计划开始时间
-	CC_SYNTHESIZE(string, startdate, Startdate);
-	// 计划结束时间
-	CC_SYNTHESIZE(string, enddate, Enddate);
 	// 计划状态（草稿或已完成，不可修改）
 	CC_SYNTHESIZE(string, status, Status);
-	// 备注
-	CC_SYNTHESIZE(string, remark, Remark);
 public:
-	MaintenancePlanDo() {
+	ModifyPlanStatusDo() {
 		id = 0;
-		code = "";
-		name = "";
-		type = "";
-		circletype = "";
-		circlecount = "";
-		startdate = "";
-		enddate = "";
 		status = "";
-		remark = "";
 	}
 };
 

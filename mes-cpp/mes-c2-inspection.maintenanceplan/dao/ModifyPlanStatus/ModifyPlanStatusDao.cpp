@@ -17,9 +17,9 @@
  limitations under the License.
 */
 #include "stdafx.h"
-#include "ModifyPlanDao.h"
-#include "ModifyPlanMapper.h"
-#include "../../domain/dto/MaintenancePlan/MaintenancePlanDto.h"
+#include "ModifyPlanStatusDao.h"
+#include "ModifyPlanStatusMapper.h"
+#include "../../domain/dto/ModifyPlanStatus/ModifyPlanStatusDto.h"
 #include <sstream>
 
 //定义条件解析宏，减少重复代码
@@ -40,8 +40,8 @@ if (query->age) { \
 }
 
 
-int ModifyPlanDao::update(const MaintenancePlanDo& uObj)
+int ModifyPlanStatusDao::update(const ModifyPlanStatusDo& uObj)
 {
-	string sql = "UPDATE `dv_check_plan` SET `plan_code`=?, `plan_name`=?, `plan_type`=?,`circle_type`=?,`circle_count`=?,`start_date`=?,`end_date`=?,`remark`=? WHERE `plan_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%ull", uObj.getCode(), uObj.getName(), uObj.getType(), uObj.getCircletype(), uObj.getCirclecount(), uObj.getStartdate(), uObj.getEnddate(), uObj.getRemark(), uObj.getId());
+	string sql = "UPDATE `dv_check_plan` SET `status`=? WHERE `plan_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%ull",  uObj.getStatus(), uObj.getId());
 }
