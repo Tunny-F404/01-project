@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Api(tags = "消息管理")
 @Controller
-@RequestMapping("/message-manage")
+@RequestMapping("sys-manager/message-manager")
 public class MessageManageController implements MessageManageApis {
 }

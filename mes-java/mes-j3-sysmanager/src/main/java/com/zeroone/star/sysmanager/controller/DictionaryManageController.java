@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Api(tags = "字典管理")
 @Controller
-@RequestMapping("/dict")
+@RequestMapping("sys-manager/dictionary-manager")
 public class DictionaryManageController implements DictionaryManageApis {
 
 }
