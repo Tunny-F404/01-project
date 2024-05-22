@@ -1,5 +1,8 @@
 package com.zeroone.star.productManagement.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zeroone.star.productManagement.entity.MdItem;
+import com.zeroone.star.productManagement.service.IMdItemService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.j6.product_management.MdItemApis;
@@ -7,6 +10,7 @@ import com.zeroone.star.project.j6.product_management.query.MdItemQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,15 +18,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
-@Api(tags = "product-management")
+@Api(tags = "itemsData-export-import")
 @RequestMapping("/mes/md/mditem")
 public class MdItemController implements MdItemApis {
     @Resource
     EasyExcelComponent excel;
     @Resource
     FastDfsClientComponent dfs;
+    @Autowired
+    IMdItemService iMdItemService;
     /**
      * 导出物料产品列表。
      *
@@ -33,6 +40,7 @@ public class MdItemController implements MdItemApis {
     @PostMapping(value = "/export")
     @ApiOperation(value = "导出物料产品列表")
     public ResponseEntity<byte[]> exportToExcel(MdItemQuery mdItemQuery){
+        List<MdItem> items = iMdItemService.getItemsByQuery(mdItemQuery);
         return null;
     }
     /**
