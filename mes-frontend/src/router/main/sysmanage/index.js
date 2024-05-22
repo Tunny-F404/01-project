@@ -28,6 +28,11 @@ const routes = [
     path: '/un-6',
     name: 'UN6',
     component: () => import('@/views/status/403.vue')
+  },
+  {
+    path: '/un-7',
+    name: 'UN7',
+    component: () => import('@/views/status/403.vue')
   }
 ]
 

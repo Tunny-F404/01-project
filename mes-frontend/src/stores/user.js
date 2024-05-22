@@ -4,41 +4,55 @@ import Request from '@/apis/request'
 let testMenus = [
   {
     id: 1,
-    text: '系统管理',
-    icon: 'IconSetting',
+    text: '基础数据',
+    icon: 'IconFolder',
     children: [
       {
         id: 2,
-        text: '系统管理1',
+        text: '物料产品分类',
         href: '/un-1',
         icon: 'IconSetting',
         pid: 1
       },
       {
         id: 3,
-        text: '系统管理2',
+        text: '物料产品管理',
         href: '/un-2',
         icon: 'IconSetting',
         pid: 1
       },
       {
         id: 4,
-        text: '系统管理3',
+        text: '计量单位',
         href: '/un-3',
         icon: 'IconSetting',
         pid: 1
       },
       {
         id: 5,
-        text: '系统管理4',
+        text: '客户管理',
         href: '/un-4',
         icon: 'IconSetting',
         pid: 1
       },
       {
         id: 6,
-        text: '系统管理5',
+        text: '供应商管理',
         href: '/un-5',
+        icon: 'IconSetting',
+        pid: 1
+      },
+      {
+        id: 7,
+        text: '车间设置',
+        href: '/un-6',
+        icon: 'IconSetting',
+        pid: 1
+      },
+      {
+        id: 8,
+        text: '工作站',
+        href: '/un-7',
         icon: 'IconSetting',
         pid: 1
       }
@@ -46,19 +60,19 @@ let testMenus = [
   },
   {
     id: 2,
-    text: '用户管理',
+    text: '生产管理',
     icon: 'IconUser',
     children: [
       {
         id: 2,
-        text: '用户管理1',
+        text: '生产工单',
         href: '/un-11',
         icon: 'IconUser',
         pid: 2
       },
       {
         id: 3,
-        text: '用户管理2',
+        text: '工序设置',
         href: '/un-12',
         icon: 'IconUser',
         pid: 2
@@ -167,15 +181,16 @@ export const userStore = defineStore('user', {
     // 加载菜单
     async loadMenus() {
       //TODO[TEST_CODE]:此处写测试数据设定
-      //this.menus = testMenus
+      //测试基础数据菜单板块
+      this.menus = testMenus
 
       // 发送获取菜单请求
-      let data = await Request.requestForm(
-        Request.GET,
-        '/login/get-menus',
-        null
-      )
-      this.menus = data.data
+      // let data = await Request.requestForm(
+      //   Request.GET,
+      //   '/login/get-menus',
+      //   null
+      // )
+      //this.menus = data.data
     },
     // 加载刷新凭证
     loadRefreshToken() {
