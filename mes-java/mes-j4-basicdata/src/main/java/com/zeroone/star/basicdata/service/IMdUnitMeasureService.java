@@ -27,4 +27,10 @@ public interface IMdUnitMeasureService extends IService<MdUnitMeasure> {
     * 导出单位数据
     * */
     ResponseEntity<byte[]> exportUnitMeasure(UnitExcelSelectDTO unitExcelSelectDTO);
+    /**
+     * 查询单位列表
+     * @param mdUnitMeasure
+     * @return
+     */
+    List<MdUnitMeasure> selectMdUnitMeasureList(MdUnitMeasure mdUnitMeasure);
 }

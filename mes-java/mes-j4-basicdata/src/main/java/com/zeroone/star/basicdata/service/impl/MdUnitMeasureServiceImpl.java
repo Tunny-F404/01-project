@@ -71,4 +71,14 @@ public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper,Md
         //响应文件给客户端
         return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
+
+    /**
+     * 查询单位列表
+     * @param mdUnitMeasure
+     * @return
+     */
+    @Override
+    public List<MdUnitMeasure> selectMdUnitMeasureList(MdUnitMeasure mdUnitMeasure) {
+        return mdUnitMeasureMapper.selectMdUnitMeasureList(mdUnitMeasure);
+    }
 }
