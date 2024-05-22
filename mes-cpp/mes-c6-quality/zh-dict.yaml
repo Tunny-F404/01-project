@@ -49,6 +49,16 @@ inspect:
  min_quantity: 轻微缺陷数量
 
 single: 
+ detail: 
+   summary: 查询检测项信息
+ defect:
+   summary: 查询缺陷记录
+ add:
+  summary: 增加缺陷记录
+ change:
+  summary: 修改缺陷记录
+ delete:
+ summary: 删除缺陷记录
  index_id: 检测项ID
  index_code: 检测项编码
  index_name: 检测项名称
@@ -61,15 +71,13 @@ single:
  threshold_min: 误差下限
  index_remark: 检测项备注
 
- detail: 
-  summary: 查询检测项信息
- defect:
-  summary: 查询缺陷记录
- add:
- summary: 增加缺陷记录
-change:
- summary: 修改缺陷记录
-delete:
- summary: 删除缺陷记录
+ record_id: 缺陷ID(唯一标识)
+ defect_name: 缺陷描述
+ defect_level: 缺陷等级
+ defect_quantity: 缺陷数量
+  
+
+
+ 
 
  

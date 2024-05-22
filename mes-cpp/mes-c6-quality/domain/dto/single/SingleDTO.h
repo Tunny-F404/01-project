@@ -5,7 +5,7 @@
 #include "../../GlobalInclude.h"
 #include OATPP_CODEGEN_BEGIN(DTO)
 
-class singleDTO :public oatpp::DTO
+class SingleDTO :public oatpp::DTO
 {
 	DTO_INIT(singleDTO, DTO);
 
@@ -39,9 +39,29 @@ class singleDTO :public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, index_remark, ZH_WORDS_GETTER("inspect.single.index_remark"));
 };
 
-class singlePageDTO : public PageDTO<singleDTO::Wrapper>
+class SinglePageDTO : public PageDTO<singleDTO::Wrapper>
 {
 	DTO_INIT(singlePageDTO, PageDTO<singleDTO::Wrapper>);
+};
+
+//缺陷信息
+class DefectDTO : public oatpp::DTO
+{
+	DTO_INIT(DefectDTO, DTO);
+	//缺陷ID(唯一标识)
+	API_DTO_FIELD_DEFAULT(UInt64, record_id, ZH_WORDS_GETTER("inspect.single.record_id"));
+	//缺陷描述
+	API_DTO_FIELD_DEFAULT(UInt64, defect_name, ZH_WORDS_GETTER("inspect.single.defect_name"));
+	//缺陷等级
+	API_DTO_FIELD_DEFAULT(String, defect_level, ZH_WORDS_GETTER("inspect.single.defect_level"));
+	//缺陷数量
+	API_DTO_FIELD_DEFAULT(String, defect_quantity, ZH_WORDS_GETTER("inspect.single.defect_quantity"));
+};
+
+//缺陷分页
+class DefectPageDTO : public PageDTO<DefectDTO::Wrapper>
+{
+	DTO_INIT(DefectPageDTO, PageDTO<DefectDTO::Wrapper>);
 };
 
 #include OATPP_CODEGEN_END(DTO)
