@@ -5,3 +5,12 @@ GetWorkStationListPageJsonVO::Wrapper GetWorkStationListController::execWorkStat
 {
 	return {};
 }
+
+oatpp::List<UInt64> GetWorkStationListController::execRemoveWorkStation(const List<UInt64>& workstationId)
+{
+	return oatpp::List<UInt64>();
+}
+
+
+
+

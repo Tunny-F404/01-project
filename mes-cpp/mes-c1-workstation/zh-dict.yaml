@@ -9,6 +9,8 @@ getlist:
   remark: 备注
  get:
   summary: 获取工作站列表
+ delete:
+  summary: 删除工作站
 amstation:
  add:
   summary: 增加工作站

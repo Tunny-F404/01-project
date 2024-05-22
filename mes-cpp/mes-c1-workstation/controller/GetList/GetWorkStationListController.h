@@ -7,7 +7,9 @@
 #include "domain/GlobalInclude.h"
 #include "domain/query/GetList/GetWorkStationListQuery.h"
 #include "domain/dto/GetList/GetWorkStationListDTO.h"
+#include "domain/dto/GetList/RemoveWorkStationDTO.h"
 #include "domain/vo/GetList/GetWorkStationListVO.h"
+#include "domain/vo/GetList/RemoveWorkStationVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -49,9 +51,21 @@ public:
 		API_HANDLER_RESP_VO(execWorkStationList(query));
 	}
 
+	// 3.1 定义删除接口描述
+	ENDPOINT_INFO(removeWorkStation) {
+		// 定义标题和返回类型以及授权支持
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("getlist.delete.summary"), oatpp::List<UInt64>);
+		// 定义其他路径参数说明
+		API_DEF_ADD_PATH_PARAMS(List<UInt64>, "workstationId", ZH_WORDS_GETTER("getlist.fields.workstationId"), {1}, true);
+	}
+	// 3.2 定义删除接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ws/remove-ws", removeWorkStation, BODY_DTO(oatpp::List<UInt64>, workstationId), execRemoveWorkStation(workstationId));
+
 private:
 	// 3.3 分页查询数据
 	GetWorkStationListPageJsonVO::Wrapper execWorkStationList(const GetWorkStationListQuery::Wrapper& query);
+	// 3.3 演示删除数据
+	oatpp::List<UInt64> execRemoveWorkStation(const List<UInt64>& workstationId);
 };
 
 // 0 取消API控制器使用宏
