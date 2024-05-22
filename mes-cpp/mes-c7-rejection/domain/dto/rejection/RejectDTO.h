@@ -2,7 +2,7 @@
 #ifndef _REJECT_DTO_
 #define _REJECT_DTO_
 
-#include "../GlobalInclude.h"
+#include "../../GlobalInclude.h"
 #include "domain/query/PageQuery.h"
 
 

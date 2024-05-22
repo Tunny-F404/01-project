@@ -3,8 +3,8 @@
 #define _REJECT_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "../domain/vo/RejectVo.h"
-#include "../domain/query/RejectQuery.h"
+#include "../../domain/vo/rejection/RejectVo.h"
+#include "../../domain/query/rejection/RejectQuery.h"
 #include "../../arch-demo/controller/file/FileController.h"
 
 
@@ -79,7 +79,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/reject/add", addOrder, BODY_DTO(RejectDetailDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/reject/add-order", addOrder, BODY_DTO(RejectDetailDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddReject(dto));
 	}
@@ -87,7 +87,7 @@ public:
 	// 4.3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("reject.fields.modify"), modifyReject, Uint64JsonVO::Wrapper);
 	// 4.3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/reject/modify", modifyReject, BODY_DTO(RejectDetailDTO::Wrapper, dto), execModifyReject(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/reject/modify-order", modifyReject, BODY_DTO(RejectDetailDTO::Wrapper, dto), execModifyReject(dto));
 
 	
 private:

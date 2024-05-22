@@ -3,9 +3,9 @@
 #ifndef _REJECT_VO_
 #define _REJECT_VO_
 
-#include "../GlobalInclude.h"
+#include "../../GlobalInclude.h"
 #include "domain/query/PageQuery.h"
-#include "../dto/RejectDTO.h"
+#include "../../dto/rejection/RejectDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 

@@ -2,7 +2,7 @@
 #ifndef _REJECT_QUERY_
 #define _REJECT_QUERY_
 
-#include "../GlobalInclude.h"
+#include "../../GlobalInclude.h"
 #include "domain/query/PageQuery.h"
 
 
