@@ -9,14 +9,15 @@ import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
  * 描述：排班计划控制器
  * </p>
+ *
  * @author interstellar
  * @version 1.0.0
  */
@@ -44,16 +45,24 @@ public class SchedulePlanController implements SchedulePlanApis {
         return null;
     }
 
+    @ApiOperation(value = "删除排班计划(可批量删除)")
+    @DeleteMapping("delete-schedule_plan")
     @Override
     public JsonVO<Integer> removeSchPlan(Long[] rems) {
         return null;
     }
 
+
+    @ApiOperation(value = "修改排班计划状态")
+    @PostMapping("modify-plans_status")
     @Override
     public JsonVO<Integer> modifySchPlanStatus(SchPlanDTO schPlanDTO) {
         return null;
     }
 
+
+    @ApiOperation(value = "导出排班计划")
+    @GetMapping("export-schedule_plan")
     @Override
     public ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition) {
         return null;
