@@ -21,32 +21,32 @@
 #include "DeviceManageMapper.h"
 #include <sstream>
 
-int DeviceManageDAO::update(const DeviceManageDO& uObj)
+uint64_t DeviceManageDAO::update(const DeviceManageDO& uObj)
 {
 	string sql = "UPDATE `dv_subject` SET `subject_code`=?, `subject_name`=?, `subject_type`=?, `subject_content`=?, `subject_standard`=?, `enable_flag`=? WHERE `subject_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%ull", uObj.getSubjectCode(), uObj.getSubjectName(), uObj.getSubjectType(), uObj.getSubjectContent(), uObj.getSubjectStandard(), 
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s", uObj.getSubjectCode(), uObj.getSubjectName(), uObj.getSubjectType(), uObj.getSubjectContent(), uObj.getSubjectStandard(), 
 		uObj.getEnableFlag(), uObj.getSubjectId());
 
 }
 
-list<DeviceManageDO> DeviceManageDAO::queryById(const DeviceManageDelDO& uObj)
+list<DeviceManageDO> DeviceManageDAO::queryById(const DeviceManageIdDO& uObj)
 {
-	string sql = "SELECT subject_id,subject_code,subject_name,subject_type,subject_content,subject_standard,enable_flag FROM dv_subject WHERE subject_id in(" + uObj.getSubjectDelId() + ")";
+	string sql = "SELECT subject_id,subject_code,subject_name,subject_type,subject_content,subject_standard,enable_flag FROM dv_subject WHERE subject_id in(" + uObj.getSubjectId() + ")";
 	DeviceManageMapper mapper;
 	return sqlSession->executeQuery<DeviceManageDO, DeviceManageMapper>(sql, mapper);
 
 }
 
-int DeviceManageDelDAO::deleteById(const DeviceManageDelDO& uObj)
+uint64_t DeviceManageIdDAO::deleteById(const DeviceManageIdDO& uObj)
 {
-	string sql = "DELETE from `dv_subject` WHERE `subject_id` in(" + uObj.getSubjectDelId() + ")";
+	string sql = "DELETE from `dv_subject` WHERE `subject_id` in(" + uObj.getSubjectId() + ")";
 
 	 
 	return sqlSession->executeUpdate(sql);
 
 }
 
-uint64_t DeviceManageDAO::insert(const DeviceManageDO& iObj)
+uint64_t DeviceManageDAO::insert(const DeviceManageBaseDO& iObj)
 {
 	string sql = "INSERT INTO `dv_subject` (`subject_code`, `subject_name`, `subject_type`, `subject_content`, `subject_standard`, `enable_flag`) VALUES (?, ?, ?, ?, ?, ?)";
 	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s", iObj.getSubjectCode(), iObj.getSubjectName(), iObj.getSubjectType(), iObj.getSubjectContent(), iObj.getSubjectStandard(), iObj.getEnableFlag());

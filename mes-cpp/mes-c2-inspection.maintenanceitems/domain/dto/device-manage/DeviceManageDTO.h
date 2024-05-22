@@ -23,12 +23,19 @@
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
-class DeviceManageDTO : public oatpp::DTO
+class DeviceManageIdDTO : public oatpp::DTO
 {
-	DTO_INIT(DeviceManageDTO, DTO);
+	DTO_INIT(DeviceManageIdDTO, DTO);
 
 	//项目ID
-	API_DTO_FIELD_DEFAULT(UInt64, subjectId, ZH_WORDS_GETTER("device-manage.field.subjectId"));
+	API_DTO_FIELD_DEFAULT(String, subjectId, ZH_WORDS_GETTER("device-manage.field.subjectId"));
+
+};
+
+
+class DeviceManageBaseDTO : public oatpp::DTO
+{
+	DTO_INIT(DeviceManageBaseDTO, DTO);
 
 	//项目编码
 	API_DTO_FIELD_DEFAULT(String, subjectCode, ZH_WORDS_GETTER("device-manage.field.subjectCode"));
@@ -47,17 +54,34 @@ class DeviceManageDTO : public oatpp::DTO
 
 	//是否启用
 	API_DTO_FIELD_DEFAULT(String, enableFlag, ZH_WORDS_GETTER("device-manage.field.enableFlag"));
-
 };
 
-class DeviceManageDelDTO : public oatpp::DTO
+class DeviceManageDTO : public oatpp::DTO
 {
-	DTO_INIT(DeviceManageDelDTO, DTO);
+	DTO_INIT(DeviceManageDTO, DTO);
 
 	//项目ID
-	API_DTO_FIELD_DEFAULT(String, subjectDelId, ZH_WORDS_GETTER("device-manage.field.subjectDelId"));
+	API_DTO_FIELD_DEFAULT(String, subjectId, ZH_WORDS_GETTER("device-manage.field.subjectId"));
 
+	//项目编码
+	API_DTO_FIELD_DEFAULT(String, subjectCode, ZH_WORDS_GETTER("device-manage.field.subjectCode"));
+
+	//项目名称
+	API_DTO_FIELD_DEFAULT(String, subjectName, ZH_WORDS_GETTER("device-manage.field.subjectName"));
+
+	//项目类型
+	API_DTO_FIELD_DEFAULT(String, subjectType, ZH_WORDS_GETTER("device-manage.field.subjectType"));
+
+	//项目内容
+	API_DTO_FIELD_DEFAULT(String, subjectContent, ZH_WORDS_GETTER("device-manage.field.subjectContent"));
+
+	//标准
+	API_DTO_FIELD_DEFAULT(String, subjectStandard, ZH_WORDS_GETTER("device-manage.field.subjectStandard"));
+
+	//是否启用
+	API_DTO_FIELD_DEFAULT(String, enableFlag, ZH_WORDS_GETTER("device-manage.field.enableFlag"));
 };
+
 
 
 #include OATPP_CODEGEN_END(DTO)

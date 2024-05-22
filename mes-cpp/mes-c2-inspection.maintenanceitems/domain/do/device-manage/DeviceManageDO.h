@@ -24,10 +24,55 @@
 /**
  * 示例数据库实体类
  */
+
+class DeviceManageIdDO
+{
+	//项目ID
+	CC_SYNTHESIZE(string, subjectId, SubjectId);
+
+public:
+	DeviceManageIdDO() {
+		subjectId = "";
+	}
+};
+
+class DeviceManageBaseDO
+{
+	// 项目编码
+	CC_SYNTHESIZE(string, subjectCode, SubjectCode);
+
+	// 项目名称
+	CC_SYNTHESIZE(string, subjectName, SubjectName);
+
+	// 项目类型
+	CC_SYNTHESIZE(string, subjectType, SubjectType);
+
+	// 项目内容
+	CC_SYNTHESIZE(string, subjectContent, SubjectContent);
+
+	//标准
+	CC_SYNTHESIZE(string, subjectStandard, SubjectStandard);
+
+	//是否启用
+	CC_SYNTHESIZE(string, enableFlag, EnableFlag);
+public:
+	DeviceManageBaseDO() {
+		subjectCode = "";
+		subjectName = "";
+		subjectType = "";
+		subjectContent = "";
+		subjectStandard = "";
+		enableFlag = "N";
+
+	}
+
+};
+
+
 class DeviceManageDO
 {
 	//项目ID
-	CC_SYNTHESIZE(uint64_t, subjectId, SubjectId);
+	CC_SYNTHESIZE(string, subjectId, SubjectId);
 
 	// 项目编码
 	CC_SYNTHESIZE(string, subjectCode, SubjectCode);
@@ -49,7 +94,7 @@ class DeviceManageDO
 
 public:
 	DeviceManageDO() {
-		subjectId = 0;
+		subjectId = "";
 		subjectCode = "";
 		subjectName = "";
 		subjectType = "";
@@ -60,16 +105,6 @@ public:
 	}
 };
 
-class DeviceManageDelDO
-{
-	//项目ID
-	CC_SYNTHESIZE(string, subjectDelId, SubjectDelId);
 
-public:
-	DeviceManageDelDO() {
-		subjectDelId = "";
-
-	}
-};
 
 #endif // !_DEVICEMANAGE_DO_

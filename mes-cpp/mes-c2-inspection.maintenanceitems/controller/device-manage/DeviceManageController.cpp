@@ -27,16 +27,22 @@ Uint64JsonVO::Wrapper DeviceManageController::execModifyProj(const DeviceManageD
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!dto->subjectId || dto->subjectId <= 0)
+	if (!dto->subjectId)
 	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		jvo->init(UInt64(-1), ResultStatus(u8"subjectId error", 9995));
+		return jvo;
+	}
+
+	if (std::strcmp(dto->subjectType->c_str(), "CHECK") != 0 || !std::strcmp(dto->subjectType->c_str(), "MAINTEN") != 0)
+	{
+		jvo->init(UInt64(-1), ResultStatus(u8"subjectType only support 'CHECK' or 'MAINTEN'", 9995));
 		return jvo;
 	}
 
 	if (dto->enableFlag != "Y" && dto->enableFlag != "N")
 	{
 		//jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		jvo->init(UInt64(-1), ResultStatus(u8"only support 'Y' or 'N'", 9995));
+		jvo->init(UInt64(-1), ResultStatus(u8"enableFlag only support 'Y' or 'N'", 9995));
 		return jvo;
 	}
 
@@ -44,23 +50,23 @@ Uint64JsonVO::Wrapper DeviceManageController::execModifyProj(const DeviceManageD
 	DeviceManageService service;
 	// 执行数据修改
 	if (service.updateData(dto)) {
-		jvo->success(dto->subjectId);
+		jvo->success(std::atoi(dto->subjectId->c_str()));
 	}
 	else
 	{
-		jvo->fail(dto->subjectId);
+		jvo->fail(std::atoi(dto->subjectId->c_str()));
 	}
 	// 响应结果
 	return jvo;
 }
 
 
-Uint64JsonVO::Wrapper DeviceManageController::execRemoveProj(const DeviceManageDelDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper DeviceManageController::execRemoveProj(const DeviceManageIdDTO::Wrapper& dto)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!dto->subjectDelId)
+	if (!dto->subjectId)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return  jvo;
@@ -71,24 +77,24 @@ Uint64JsonVO::Wrapper DeviceManageController::execRemoveProj(const DeviceManageD
 	// 执行数据修改
 	if (service.removeData(dto))
 	{
-		jvo->init(atoi(dto->subjectDelId->c_str()), ResultStatus(u8"remove data successfully"));
+		jvo->init(atoi(dto->subjectId->c_str()), ResultStatus(u8"remove data successfully"));
 
 	}
 	else
 	{
 
-		jvo->init(atoi(dto->subjectDelId->c_str()), ResultStatus(u8"fail to remove data",9995));
+		jvo->init(atoi(dto->subjectId->c_str()), ResultStatus(u8"fail to remove data",9995));
 	}
 	// 响应结果
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper DeviceManageController::execExportProj(const DeviceManageDelDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper DeviceManageController::execExportProj(const DeviceManageIdDTO::Wrapper& dto)
 {
 	auto jvo = Uint64JsonVO::createShared();
 
 	// 参数校验
-	if (!dto->subjectDelId)
+	if (!dto->subjectId)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return  jvo;
@@ -101,17 +107,17 @@ Uint64JsonVO::Wrapper DeviceManageController::execExportProj(const DeviceManageD
 	string url = service.creatExcel(dto);
 	if (url.empty())
 	{
-		jvo->init(atoi(dto->subjectDelId->c_str()), ResultStatus(u8"fail to export data",9995));
+		jvo->init(atoi(dto->subjectId->c_str()), ResultStatus(u8"fail to export data",9995));
 	}
 	else
 	{
-		jvo->init(atoi(dto->subjectDelId->c_str()), ResultStatus(u8"export data successfully:" + url));
+		jvo->init(atoi(dto->subjectId->c_str()), ResultStatus(url));
 	}
 	return jvo;
 }
 
 
-Uint64JsonVO::Wrapper DeviceManageController::execAddProj(const DeviceManageDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper DeviceManageController::execAddProj(const DeviceManageBaseDTO::Wrapper& dto)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -122,14 +128,12 @@ Uint64JsonVO::Wrapper DeviceManageController::execAddProj(const DeviceManageDTO:
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	// 有效值校验
-	if (dto->subjectCode->empty() || dto->subjectName->empty() || dto->subjectType->empty() || dto->subjectStandard->empty() 
-		|| dto->subjectContent->empty() || dto->enableFlag->empty())
+
+	if (std::strcmp(dto->subjectType->c_str(), "CHECK") != 0 || !std::strcmp(dto->subjectType->c_str(), "MAINTEN") != 0)
 	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		jvo->init(UInt64(-1), ResultStatus(u8"subjectType only support 'CHECK' or 'MAINTEN'", 9995));
 		return jvo;
 	}
-
 	// 定义一个Service
 	DeviceManageService service;
 	// 执行数据新增

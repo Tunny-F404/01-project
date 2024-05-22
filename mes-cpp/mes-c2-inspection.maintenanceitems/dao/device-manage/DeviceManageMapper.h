@@ -26,13 +26,42 @@
 /**
  * Ê¾Àı±í×Ö¶ÎÆ¥ÅäÓ³Éä
  */
+
+class DeviceManageIdMapper : public Mapper<DeviceManageIdDO>
+{
+public:
+	DeviceManageIdDO mapper(ResultSet* resultSet) const override
+	{
+		DeviceManageIdDO data;
+		data.setSubjectId(resultSet->getString(1));
+
+		return data;
+	}
+};
+
+class DeviceManageBaseMapper : public Mapper<DeviceManageBaseDO>
+{
+public:
+	DeviceManageBaseDO mapper(ResultSet* resultSet) const override
+	{
+		DeviceManageBaseDO data;
+		data.setSubjectCode(resultSet->getString(1));
+		data.setSubjectName(resultSet->getString(2));
+		data.setSubjectType(resultSet->getString(3));
+		data.setSubjectContent(resultSet->getString(4));
+		data.setSubjectStandard(resultSet->getString(5));
+		data.setEnableFlag(resultSet->getString(6));
+		return data;
+	}
+};
+
 class DeviceManageMapper : public Mapper<DeviceManageDO>
 {
 public:
 	DeviceManageDO mapper(ResultSet* resultSet) const override
 	{
 		DeviceManageDO data;
-		data.setSubjectId(resultSet->getUInt64(1));
+		data.setSubjectId(resultSet->getString(1));
 		data.setSubjectCode(resultSet->getString(2));
 		data.setSubjectName(resultSet->getString(3));
 		data.setSubjectType(resultSet->getString(4));
@@ -45,16 +74,6 @@ public:
 	}
 };
 
-class DeviceManageDelMapper : public Mapper<DeviceManageDelDO>
-{
-public:
-	DeviceManageDelDO mapper(ResultSet* resultSet) const override
-	{
-		DeviceManageDelDO data;
-		data.setSubjectDelId(resultSet->getString(1));
 
-		return data;
-	}
-};
 
 #endif // !_DEVICEMANAGE_MAPPER_
