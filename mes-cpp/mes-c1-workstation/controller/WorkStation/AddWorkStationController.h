@@ -5,7 +5,7 @@
 
 #include "domain/vo/BaseJsonVO.h"
 #include "domain/GlobalInclude.h"
-#include "domain/dto/AmStation/AddWorkStationDTO.h"
+#include "domain/dto/WorkStation/AddWorkStationDTO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -22,7 +22,7 @@ public:
 	// 3.1 定义新增接口描述
 	ENDPOINT_INFO(addWorkStation) {
 		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("amstation.add.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("workstation.add.summary"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式

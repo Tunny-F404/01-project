@@ -5,11 +5,10 @@
 
 #include "domain/vo/BaseJsonVO.h"
 #include "domain/GlobalInclude.h"
-#include "domain/query/GetList/GetWorkStationListQuery.h"
-#include "domain/dto/GetList/GetWorkStationListDTO.h"
-#include "domain/dto/GetList/RemoveWorkStationDTO.h"
-#include "domain/vo/GetList/GetWorkStationListVO.h"
-#include "domain/vo/GetList/RemoveWorkStationVO.h"
+#include "domain/query/WorkStation/GetWorkStationListQuery.h"
+#include "domain/dto/WorkStation/GetWorkStationListDTO.h"
+#include "domain/dto/WorkStation/RemoveWorkStationDTO.h"
+#include "domain/vo/WorkStation/GetWorkStationListVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -26,7 +25,7 @@ public:
 	// 3.1 定义查询接口描述
 	ENDPOINT_INFO(queryWorkStationList) {
 		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("getlist.get.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("workstation.get.summary"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
@@ -35,13 +34,13 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
 		//工作站编码
-		API_DEF_ADD_QUERY_PARAMS(String, "workstationCode", ZH_WORDS_GETTER("getlist.fields.workstationCode"), "WS0124", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workstationCode", ZH_WORDS_GETTER("workstation.fields.workstationCode"), "WS0124", false);
 		//工作站名称
-		API_DEF_ADD_QUERY_PARAMS(String, "workstationName", ZH_WORDS_GETTER("getlist.fields.workstationName"), "zhusu", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workstationName", ZH_WORDS_GETTER("workstation.fields.workstationName"), "zhusu", false);
 		//所在车间名称
-		API_DEF_ADD_QUERY_PARAMS(String, "workshopName", ZH_WORDS_GETTER("getlist.fields.workshopName"), "car", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workshopName", ZH_WORDS_GETTER("workstation.fields.workshopName"), "car", false);
 		//所属工序(工序名称)
-		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("getlist.fields.processName"), "QCC", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("workstation.fields.processName"), "QCC", false);
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/ws/query-ws-list", queryWorkStationList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -54,9 +53,9 @@ public:
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeWorkStation) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("getlist.delete.summary"), oatpp::List<UInt64>);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("workstation.delete.summary"), oatpp::List<UInt64>);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(List<UInt64>, "workstationId", ZH_WORDS_GETTER("getlist.fields.workstationId"), {1}, true);
+		API_DEF_ADD_PATH_PARAMS(List<UInt64>, "workstationId", ZH_WORDS_GETTER("workstation.fields.workstationId"), {1}, true);
 	}
 	// 3.2 定义删除接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ws/remove-ws", removeWorkStation, BODY_DTO(oatpp::List<UInt64>, workstationId), execRemoveWorkStation(workstationId));

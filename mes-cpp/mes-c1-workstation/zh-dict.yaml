@@ -1,4 +1,4 @@
-getlist:
+workstation:
  fields:
   workstationId: 工作站ID
   workstationCode: 工作站编码
@@ -11,8 +11,9 @@ getlist:
   summary: 获取工作站列表
  delete:
   summary: 删除工作站
-amstation:
  add:
   summary: 增加工作站
  modify:
   summary: 修改工作站
+ export:
+  summary: 导出工作站   

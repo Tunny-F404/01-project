@@ -14,7 +14,7 @@ class RemoveWorkStationDTO : public oatpp::DTO
 {
 	DTO_INIT(RemoveWorkStationDTO, DTO);
 	// 唯一标识（工作站ID）
-	API_DTO_FIELD_DEFAULT(List<UInt64>, workstationId, ZH_WORDS_GETTER("getlist.fields.workstationId"));
+	API_DTO_FIELD_DEFAULT(List<UInt64>, workstationId, ZH_WORDS_GETTER("workstation.fields.workstationId"));
 
 };
 

@@ -19,9 +19,10 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include"controller/GetList/GetWorkStationListController.h"
-#include"AmStation/AddWorkStationController.h"
-#include"AmStation/ModifyWorkStationController.h"
+#include"controller/WorkStation/GetWorkStationListController.h"
+#include"controller/WorkStation/AddWorkStationController.h"
+#include"controller/WorkStation/ModifyWorkStationController.h"
+#include"controller/WorkStation/ExportWorkStationController.h"
 
 
 #ifdef HTTP_SERVER_DEMO
@@ -58,6 +59,8 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(GetWorkStationListController); 
 	ROUTER_SIMPLE_BIND(AddWorkStationController);
 	ROUTER_SIMPLE_BIND(ModifyWorkStationController);
+	ROUTER_SIMPLE_BIND(ExportWorkStationController);
+	ROUTER_SIMPLE_BIND(ExportWorkStationController);
 }
 
 #ifdef HTTP_SERVER_DEMO
