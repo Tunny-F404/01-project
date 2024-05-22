@@ -104,6 +104,12 @@ deleteOP:
   plan: 删除点检/保养计划
   machiner: 删除计划里要点检/保养的机器
   subject: 删除计划里要点检/保养的项目
+device-list:
+ summary:
+  add-proj: 添加点检/保养设备
+maintain-proj:
+ summary:
+  add-proj: 添加计划点检/保养项目
   
    
    
@@ -120,4 +126,4 @@ add-mj:
   edate: 结束日期
   status: 状态
   remark: 备注
-     
+   
