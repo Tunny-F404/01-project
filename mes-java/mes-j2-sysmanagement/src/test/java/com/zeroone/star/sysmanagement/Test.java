@@ -30,4 +30,11 @@ public class Test {
         List<ParameterDO> parameterDOS = mapper.selectBatchIds(ids);
         parameterDOS.forEach(System.out::println);
     }
+
+    @org.junit.Test
+    public void deleteTest(){
+        List<Integer> ids = Arrays.asList(11);
+        int i = mapper.deleteBatchIds(ids);
+        System.out.println(i);
+    }
 }

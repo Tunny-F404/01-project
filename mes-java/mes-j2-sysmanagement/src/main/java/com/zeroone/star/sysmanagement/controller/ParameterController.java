@@ -8,6 +8,7 @@ import com.zeroone.star.project.j2.sysmanagement.param.ParameterApis;
 import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
 import com.zeroone.star.project.j2.sysmanagement.query.param.ParameterQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.sysmanagement.service.ISysConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.SneakyThrows;
@@ -37,11 +38,14 @@ public class ParameterController implements ParameterApis {
     @Resource
     EasyExcelComponent excelComponent;
 
+    @Resource
+    ISysConfigService service;
+
     @Override
-    @DeleteMapping("remove-parameter/{ids}")
+    @DeleteMapping("remove-parameter")
     @ApiOperation("删除参数")
-    public JsonVO<Integer> removeParameter(@PathVariable List<Integer> ids) {
-        return JsonVO.success(1);
+    public JsonVO<Integer> removeParameter(@RequestParam(name = "ids[]", required = true) List<Integer> ids) {
+        return JsonVO.success(service.removeParameters(ids));
     }
 
     @GetMapping("query-parameter")
