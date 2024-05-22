@@ -5,7 +5,8 @@ import com.zeroone.star.project.dto.j4.sysmanagement.logmanagement.LoginLog.Logi
 import com.zeroone.star.project.query.j4.sysmanagement.logmanagement.LoginLog.SampleQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
-
+import com.zeroone.star.project.dto.j4.logmanagement.SysLoginInfoDTO;
+import com.zeroone.star.project.query.j4.logmanagement.SysLoginInfoQuery;
 import java.time.temporal.Temporal;
 import java.util.List;
 
@@ -37,4 +38,17 @@ public interface LoginLogApis {
      * @return
      */
     ResponseEntity<byte[]> exportLoginLog();
+    /**
+     * 获取登录日志的信息列表
+     * @param query  查询条件
+     * @return
+     */
+    JsonVO<PageDTO<SysLoginInfoDTO>> querySysLoginInfos(SysLoginInfoQuery query);
+
+    /**
+     * 添加登录日志信息
+     * @param dto 登录日志信息对象
+     * @return
+     */
+    JsonVO<Boolean> addSysLoginInfo(SysLoginInfoDTO dto);
 }
