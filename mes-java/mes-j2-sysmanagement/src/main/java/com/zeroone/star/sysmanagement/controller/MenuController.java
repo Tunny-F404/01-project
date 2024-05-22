@@ -2,10 +2,10 @@ package com.zeroone.star.sysmanagement.controller;
 
 import cn.hutool.core.lang.tree.TreeNode;
 import com.zeroone.star.project.j2.sysmanagement.menu.MenuApis;
-import com.zeroone.star.project.j2.sysmanagent.dto.menu.MenuDTO;
-import com.zeroone.star.project.j2.sysmanagent.query.menu.MenuConditionQuery;
-import com.zeroone.star.project.j2.sysmanagent.vo.ResourceDetailsVO;
-import com.zeroone.star.project.j2.sysmanagent.vo.ResourceVO;
+import com.zeroone.star.project.j2.sysmanagement.dto.menu.MenuDTO;
+import com.zeroone.star.project.j2.sysmanagement.query.menu.MenuConditionQuery;
+import com.zeroone.star.project.j2.sysmanagement.vo.ResourceDetailsVO;
+import com.zeroone.star.project.j2.sysmanagement.vo.ResourceVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

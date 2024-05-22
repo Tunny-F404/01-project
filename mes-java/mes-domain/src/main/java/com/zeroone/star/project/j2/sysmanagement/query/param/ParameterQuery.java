@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagent.query.param;
+package com.zeroone.star.project.j2.sysmanagement.query.param;
 
 
 import com.zeroone.star.project.query.PageQuery;
@@ -9,7 +9,11 @@ import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
 
-
+/**
+ * @author 40斤、kino
+ * @version 1.0.0
+ * @Description:
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel("参数查询对象")

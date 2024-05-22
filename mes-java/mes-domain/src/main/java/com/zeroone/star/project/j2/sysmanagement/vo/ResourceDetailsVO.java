@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysmanagent.vo;
+package com.zeroone.star.project.j2.sysmanagement.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
