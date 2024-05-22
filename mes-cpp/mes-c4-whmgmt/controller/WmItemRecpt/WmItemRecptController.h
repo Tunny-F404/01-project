@@ -22,33 +22,60 @@
 #define _WM_ITEM_RECPT_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
+#include "ApiHelper.h"
+#include "ServerInfo.h"
 #include "domain/do/WmItemRecpt/WmItemRecptDO.h"   
 #include "domain/dto/WmItemRecpt/WmItemRecptDTO.h"
 #include "domain/vo/WmItemRecpt/WmItemRecptVO.h"
 
-// 0 ¶¨ÒåAPI¿ØÖÆÆ÷Ê¹ÓÃºê
+// 0 å®šä¹‰APIæ§åˆ¶å™¨ä½¿ç”¨å®
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
 /**
- * ÎïÁÏÈë¿âµ¥¿ØÖÆÆ÷£¬ÑİÊ¾»ù´¡½Ó¿ÚµÄÊ¹ÓÃ
+ * ç‰©æ–™å…¥åº“å•æ§åˆ¶å™¨ï¼Œæ¼”ç¤ºåŸºç¡€æ¥å£çš„ä½¿ç”¨
  */
-class WmItemRecptController : public oatpp::web::server::api::ApiController // 1 ¼Ì³Ğ¿ØÖÆÆ÷
+class WmItemRecptController : public oatpp::web::server::api::ApiController // 1 ç»§æ‰¿æ§åˆ¶å™¨
 {
-    // 2 ¶¨Òå¿ØÖÆÆ÷·ÃÎÊÈë¿Ú
+    // 2 å®šä¹‰æ§åˆ¶å™¨è®¿é—®å…¥å£
     API_ACCESS_DECLARE(WmItemRecptController);
-    // 3 ¶¨Òå½Ó¿Ú
+    // 3 å®šä¹‰æ¥å£
 public:
-    // 3.1 ¶¨ÒåĞŞ¸Ä½Ó¿ÚÃèÊö
+    // 3.1 å®šä¹‰ä¿®æ”¹æ¥å£æè¿°
     API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("wm_item_recpt.put.summary"), modifyWmItemRecpt, Uint64JsonVO::Wrapper);
-    // 3.2 ¶¨ÒåĞŞ¸Ä½Ó¿Ú´¦Àí
+    // 3.2 å®šä¹‰ä¿®æ”¹æ¥å£å¤„ç†
     API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/WmItemRecpt", modifyWmItemRecpt, BODY_DTO(WmItemRecptDTO::Wrapper, dto), execModifyWmItemRecpt(dto));
 
+    // 3.1 å®šä¹‰åˆ é™¤æ¥å£æè¿°
+    ENDPOINT_INFO(removeWmItemRecpt) {
+        // å®šä¹‰æ ‡é¢˜å’Œè¿”å›ç±»å‹ä»¥åŠæˆæƒæ”¯æŒ
+        API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("wm_item_recpt.delete.summary"), Uint64JsonVO::Wrapper);
+        // å®šä¹‰å…¶ä»–è·¯å¾„å‚æ•°è¯´æ˜
+        API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("wm_item_recpt.field.id"), 1, true);
+    }
+    // 3.2 å®šä¹‰åˆ é™¤æ¥å£å¤„ç†
+    API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/WmItemRecpt/{id}", removeWmItemRecpt, PATH(UInt64, id), execRemoveWmItemRecpt(id));
+
+
+    // å®šä¹‰å¯¼å‡ºæ¥å£æè¿°
+    ENDPOINT_INFO(exportWmItemRecpt) {
+        API_DEF_ADD_COMMON(ZH_WORDS_GETTER("wm_item_recpt.export.summary"), Void);
+        API_DEF_ADD_QUERY_PARAMS(String, "format", ZH_WORDS_GETTER("wm_item_recpt.field.format"), "xlsx", true);
+    }
+    // å®šä¹‰å¯¼å‡ºç«¯ç‚¹
+    ENDPOINT(API_M_GET, "/WmItemRecpt/export", exportWmItemRecpt, QUERY(String, format)) {
+        return execExportWmItemRecpt(format);
+    }
 
 private:
-    // 3.3 ÑİÊ¾ĞŞ¸ÄÊı¾İ
+    // 3.3 æ¼”ç¤ºä¿®æ”¹æ•°æ®
     Uint64JsonVO::Wrapper execModifyWmItemRecpt(const WmItemRecptDTO::Wrapper& dto);
+    // 3.3 æ¼”ç¤ºåˆ é™¤æ•°æ®
+    Uint64JsonVO::Wrapper execRemoveWmItemRecpt(const UInt64& id);
+
+    // æ‰§è¡Œæ–‡ä»¶ä¸‹è½½å¤„ç†
+    std::shared_ptr<OutgoingResponse> execExportWmItemRecpt(const String& filename);
 };
 
-// 0 È¡ÏûAPI¿ØÖÆÆ÷Ê¹ÓÃºê
+// 0 å–æ¶ˆAPIæ§åˆ¶å™¨ä½¿ç”¨å®
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 #endif // _WM_ITEM_RECPT_CONTROLLER_
