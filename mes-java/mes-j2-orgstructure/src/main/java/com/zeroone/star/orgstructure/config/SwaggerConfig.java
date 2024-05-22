@@ -13,10 +13,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
  */
 @Configuration
 @EnableSwagger2WebMvc
-public class swaggerConfig {
+public class SwaggerConfig {
 
     @Bean
-    Docket DepartmentApis() {
+    Docket OrgStructureApis() {
         return SwaggerCore.defaultDocketBuilder("组织架构模块","com.zeroone.star.orgstructure.controller","orgstructure");
 }
 
