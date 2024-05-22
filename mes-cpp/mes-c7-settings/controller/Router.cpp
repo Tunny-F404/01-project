@@ -20,6 +20,7 @@
 #include "Router.h"
 #include "ApiHelper.h"
 #include "warehouse/GetAllDetailsController.h"
+#include "warehouse/DetailsPageController.h"
 #include "storagearea/AreaController.h"
 #include "storage_area/GetAreaDetailsController.h"
 
@@ -58,6 +59,7 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(GetAllDetailsController);
 	ROUTER_SIMPLE_BIND(AddDelModController);
 	ROUTER_SIMPLE_BIND(GetAreaDetailsController);
+	ROUTER_SIMPLE_BIND(DetailsPageController);
 
 }
 
