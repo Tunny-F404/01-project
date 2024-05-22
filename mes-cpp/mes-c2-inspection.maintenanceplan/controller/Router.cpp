@@ -31,9 +31,9 @@
 #include "planSubject/PlanSubjectController.h"
 
 #include "ExportPlan/ExportPlanController.h"
-
-
-
+#include"query-ForeverOMC/MachineryPlanQueryController.h"
+#include "../controller/device-list/DeviceListController.h"
+#include "../controller/maintain-proj/MaintainProjController.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -58,12 +58,15 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
-	
-	ROUTER_SIMPLE_BIND(ExportPlanController);
 	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(MachineryPlanQueryController);
-	
+	ROUTER_SIMPLE_BIND(ExportPlanController);
+	ROUTER_SIMPLE_BIND(DeviceListController);
+	ROUTER_SIMPLE_BIND(MaintainProjController);
 	ROUTER_SIMPLE_BIND(PlanSubjectController);
+	ROUTER_SIMPLE_BIND(MachineryPlanQueryController);
+
+
+
 
 }
 
@@ -76,7 +79,7 @@ void Router::createSampleRouter()
 	ROUTER_SIMPLE_BIND(UserController);
 	// 绑定文件控制器
 	ROUTER_SIMPLE_BIND(FileController);
-	
+
 	// 绑定WebSocket控制器
 	router->addController(WSContorller::createShared());
 }
