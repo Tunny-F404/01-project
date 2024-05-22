@@ -107,12 +107,7 @@ public class ParameterController implements ParameterApis {
         return JsonVO.success(parameterDTO);
     }
 
-    @Override
-    @DeleteMapping("/delete/id={id}")
-    @ApiOperation("删除参数")
-    public JsonVO<Integer> deleteById(@PathVariable("id") Integer id) {
-        return JsonVO.success(1);
-    }
+
 
     @Override
     @GetMapping("query-all")
