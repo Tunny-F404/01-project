@@ -1,21 +1,25 @@
-ProdWorkorder:
+ï»¿ProdWorkorder:
  field:
-  workorderId: ±àºÅ
-  workorderCode: ¹¤µ¥±àºÅ
-  workorderName: ¹¤µ¥Ãû³Æ
-  orderSource: À´Ô´ÀàĞÍ
-  sourceCode: ¶©µ¥±àºÅ
-  status: µ¥¾İ×´Ì¬
-  workorderType: ¹¤µ¥ÀàĞÍ
-  productId: ²úÆ·ID
-  productCode: ²úÆ·±àºÅ
-  productName: ²úÆ·Ãû³Æ
-  productSpc: ¹æ¸ñĞÍºÅ
-  unitOfMeasure: µ¥Î»
-  quantity: Éú²úÊıÁ¿
-  requestDate: ĞèÇóÈÕÆÚ
-  batchCode: Åú´ÎºÅ
-  clientId: ¿Í»§ID
-  clientCode: ¿Í»§±àÂë
-  clientName: ¿Í»§Ãû³Æ
-  remark: ±¸×¢
+  workorderId: ç¼–å·
+  workorderCode: å·¥å•ç¼–å·
+  workorderName: å·¥å•åç§°
+  orderSource: æ¥æºç±»å‹
+  sourceCode: è®¢å•ç¼–å·
+  status: å•æ®çŠ¶æ€
+  workorderType: å·¥å•ç±»å‹
+  productId: äº§å“ID
+  productCode: äº§å“ç¼–å·
+  productName: äº§å“åç§°
+  productSpc: è§„æ ¼å‹å·
+  unitOfMeasure: å•ä½
+  quantity: ç”Ÿäº§æ•°é‡
+  requestDate: éœ€æ±‚æ—¥æœŸ
+  batchCode: æ‰¹æ¬¡å·
+  clientId: å®¢æˆ·ID
+  clientCode: å®¢æˆ·ç¼–ç 
+  clientName: å®¢æˆ·åç§°
+  remark: å¤‡æ³¨
+ put:
+  summary: ä¿®æ”¹ç”Ÿäº§å·¥å•
+ delete:
+  summary: åˆ é™¤ç”Ÿäº§å·¥å•

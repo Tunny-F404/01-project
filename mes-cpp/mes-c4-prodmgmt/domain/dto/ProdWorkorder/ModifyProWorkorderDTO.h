@@ -1,16 +1,16 @@
 #pragma once
-#ifndef _PROWORKORDER_DTO_
-#define _PROWORKORDER_DTO_
+#ifndef _MODIFYPROWORKORDER_DTO_
+#define _MODIFYPROWORKORDER_DTO_
 #include "../../GlobalInclude.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 生产工单列表数据模型
+ * 生产工单数据传输类型
  */
-class ProWorkorderDTO : public oatpp::DTO
+class ModifyProWorkorderDTO : public oatpp::DTO
 {
-	DTO_INIT(ProWorkorderDTO, DTO);
+	DTO_INIT(ModifyProWorkorderDTO, DTO);
 
 	// 编号
 	DTO_FIELD(UInt64, workorderId);
@@ -72,12 +72,6 @@ class ProWorkorderDTO : public oatpp::DTO
 	DTO_FIELD_INFO(requestDate) {
 		info->description = ZH_WORDS_GETTER("ProdWorkorder.field.requestDate");
 	}
-};
-
-
-class ProWorkorderDetailDTO : public ProWorkorderDTO
-{
-	DTO_INIT(ProWorkorderDetailDTO, DTO);
 
 	// 来源类型
 	DTO_FIELD(String, orderSource);
@@ -104,7 +98,7 @@ class ProWorkorderDetailDTO : public ProWorkorderDTO
 	DTO_FIELD_INFO(quantity) {
 		info->description = ZH_WORDS_GETTER("ProdWorkorder.field.quantity");
 	}
-	
+
 	// 批次号
 	DTO_FIELD(String, batchCode);
 	DTO_FIELD_INFO(batchCode) {
@@ -118,5 +112,6 @@ class ProWorkorderDetailDTO : public ProWorkorderDTO
 };
 
 
+
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_PROWORKORDER_DTO_
+#endif // !_MODIFYPROWORKORDER_DTO_
