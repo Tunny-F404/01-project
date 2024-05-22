@@ -17,3 +17,8 @@ ProdWorkorderInfoJsonVO::Wrapper ProdWorkorderController::execGetProdWorkorderIn
 {
 	return{};
 }
+
+ProdWorkorderBomListJsonVO::Wrapper ProdWorkorderController::execGetProdWorkorderBomList(const ProdWorkorderBomListDTO::Wrapper& dto)
+{
+	return{};
+}

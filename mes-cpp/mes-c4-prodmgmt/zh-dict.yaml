@@ -32,3 +32,15 @@ getprodworkorderlist:
 prodworkorderinfo:
  get:
   summary: 获取生产工单详情
+
+bom:
+ field: 
+  line_id: BOM行ID
+  item_code: BOM物料编号
+  item_name: BOM物料名称
+  item_spc: 规格型号
+  unit_of_measure: 单位
+  item_or_product: 物料/产品
+  quantity: 预计使用量
+ get:
+  summary: 获取生产工单BOM列表
