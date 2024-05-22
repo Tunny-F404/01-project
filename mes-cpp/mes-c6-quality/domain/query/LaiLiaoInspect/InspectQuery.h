@@ -42,8 +42,17 @@ class InspectQuery : public PageQuery
 class Inspect_detailQuery :public PageQuery
 {
 	DTO_INIT(Inspect_detailQuery, PageQuery);
-	// 来料检验单编号
-	API_DTO_FIELD_DEFAULT(String, code, ZH_WORDS_GETTER("inspect.code"));
+	// 来料检验表主键id
+	API_DTO_FIELD_DEFAULT(String, line_id, ZH_WORDS_GETTER("inspect.line_id"));
+
+};
+
+//查看报表
+class Inspect_tableQuery :public oatpp::DTO
+{
+	DTO_INIT(Inspect_tableQuery, PageQuery);
+	// 来料检验表主键id
+	API_DTO_FIELD_DEFAULT(String, line_id, ZH_WORDS_GETTER("inspect.line_id"));
 
 };
 #include OATPP_CODEGEN_END(DTO)

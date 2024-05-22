@@ -4,7 +4,7 @@
 #include "../DoInclude.h"
 
 /**
- * 来料检查数据库实体类
+ * 来料检验列表数据库实体类
  */
 class InspectDO
 {
@@ -69,6 +69,47 @@ public:
 		inspector = "";
 		list_status = "";
 	}
+};
+
+
+/**
+ * 来料检验详情数据库实体类
+ */
+class Inspect_detailDO :public InspectDO
+{
+	//单位
+	CC_SYNTHESIZE(string, unit_of_measure, Unit_of_measure);
+	//致命缺陷率
+	CC_SYNTHESIZE(double, maj_rate, Maj_rate);
+	//严重缺陷率
+	CC_SYNTHESIZE(double, cr_rate, Cr_rate);
+	//轻微缺陷率
+	CC_SYNTHESIZE(double, min_rate, Min_rate);
+	//致命缺陷数量
+	CC_SYNTHESIZE(long long, cr_quantity, Cr_quantity);
+	//严重缺陷数量
+	CC_SYNTHESIZE(long long, maj_quantity, Maj_quantity);
+	//轻微缺陷数量
+	CC_SYNTHESIZE(long long, min_quantity, Min_quantity);
+	//备注
+	CC_SYNTHESIZE(string, remark, Remark);
+
+public:
+	InspectDO() {
+		unit_of_measure = "";
+		maj_rate = 0;
+		cr_rate = 0;
+		min_rate = 0;
+		cr_quantity = 0;
+		maj_quantity = 0;
+		min_quantity = 0;
+		remark = "";
+	}
+};
+
+class Inspect_tableDO :public Inspect_detailDO
+{
+
 };
 
 #endif // !_INSPECT_DO_

@@ -15,6 +15,14 @@ InspectPageJsonVO::Wrapper InspectController::execQueryInspect(const InspectQuer
 	//return jvo;
 	return {};
 }
+Inspect_detailPageJsonVO::Wrapper InspectController::execQueryInspect_detail(const Inspect_detailQuery::Wrapper& query, const PayloadDTO& payload)
+{
+	return {};
+}
+Inspect_detailJsonVO::Wrapper execQueryInspect_table(const Inspect_tableQuery::Wrapper& query, const PayloadDTO& payload)
+{
+	return{};
+}
 
 Uint64JsonVO::Wrapper InspectController::execAddInspect(const InspectDTO::Wrapper& dto)
 {
@@ -105,12 +113,12 @@ StringJsonVO::Wrapper InspectController::execExportInspect(const oatpp::List<UIn
 	return StringJsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper InspectController::execIs_OkInspect(const InspectDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper InspectController::execIs_OkInspect(const Item_idDTO::Wrapper& dto)
 {
 	return{};
 }
 
-Uint64JsonVO::Wrapper InspectController::execIs_FinishedInspect(const InspectDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper InspectController::execIs_FinishedInspect(const Item_idDTO::Wrapper& dto)
 {
 	return{};
 }

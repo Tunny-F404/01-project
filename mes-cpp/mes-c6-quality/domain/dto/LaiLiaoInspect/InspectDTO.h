@@ -80,6 +80,16 @@ class Inspect_detailDTO :public InspectDTO
 	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("inspect.remark"));
 };
 
+class Inspect_detailPageDTO : public PageDTO<Inspect_detailDTO::Wrapper>
+{
+	DTO_INIT(Inspect_detailPageDTO, PageDTO<Inspect_detailDTO::Wrapper>);
+};
+
+class Inspect_tableDTO : public Inspect_detailDTO
+{
+	DTO_INIT(Inspect_tableDTO, Inspect_detailDTO);
+};
+
 class Item_idDTO :public oatpp::DTO
 {
 	DTO_INIT(Inspect_detailDTO, InspectDTO);

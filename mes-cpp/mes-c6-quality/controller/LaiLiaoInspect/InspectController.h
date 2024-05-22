@@ -19,7 +19,7 @@ class InspectController : public oatpp::web::server::api::ApiController // 1 ¼Ì³
 	API_ACCESS_DECLARE(InspectController);
 	// 3 ¶¨Òå½Ó¿Ú
 public:
-	// 3.1 ¶¨Òå²éÑ¯½Ó¿ÚÃèÊö
+	// 3.1 ¶¨Òå²éÑ¯¼ìÑéµ¥ÁĞ±í½Ó¿ÚÃèÊö
 	ENDPOINT_INFO(queryInspect) {
 		// ¶¨Òå½Ó¿Ú±êÌâ
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("inspect.get.summary"));
@@ -58,7 +58,47 @@ public:
 		API_HANDLER_RESP_VO(execQueryInspect(userQuery, authObject->getPayload()));
 	}
 
+	//3.1 ¶¨Òå²éÑ¯¼ìÑéµ¥ÏêÇé½Ó¿ÚÃèÊö
+	ENDPOINT_INFO(queryInspect_detail) {
+	// ¶¨Òå½Ó¿Ú±êÌâ
+	API_DEF_ADD_TITLE(ZH_WORDS_GETTER("inspect.detail.summary"));
+	// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+	API_DEF_ADD_AUTH();
+	// ¶¨ÒåÏìÓ¦²ÎÊı¸ñÊ½
+	API_DEF_ADD_RSP_JSON_WRAPPER(Inspect_detailPageJsonVO);
+	// ¶¨Òå·ÖÒ³²éÑ¯²ÎÊıÃèÊö
+	API_DEF_ADD_PAGE_PARAMS();
+	// ¶¨ÒåÆäËû²éÑ¯²ÎÊıÃèÊö
+	API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("inspect.line_id"), 1, false);
+	}
+	// 3.2 ¶¨Òå²éÑ¯À´ÁÏ¼ìÑéÏêÇé½Ó¿Ú´¦Àí
+	ENDPOINT(API_M_GET, "/Inspect/detail", queryInspect_detail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// ½âÎö²éÑ¯²ÎÊıÎªQueryÁìÓòÄ£ĞÍ
+		API_HANDLER_QUERY_PARAM(userQuery, Inspect_detailQuery, queryParams);
+		// ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+		API_HANDLER_RESP_VO(execQueryInspect_detail(userQuery, authObject->getPayload()));
+	}
 
+	//3.1 ¶¨Òå²é¿´±¨±í½Ó¿ÚÃèÊö
+	ENDPOINT_INFO(queryInspect_table) {
+		// ¶¨Òå½Ó¿Ú±êÌâ
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("inspect.table.summary"));
+		// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+		API_DEF_ADD_AUTH();
+		// ¶¨ÒåÏìÓ¦²ÎÊı¸ñÊ½
+		API_DEF_ADD_RSP_JSON_WRAPPER(Inspect_tableJsonVO);
+		// ¶¨Òå·ÖÒ³²éÑ¯²ÎÊıÃèÊö
+		API_DEF_ADD_PAGE_PARAMS();
+		// ¶¨ÒåÆäËû²éÑ¯²ÎÊıÃèÊö
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("inspect.line_id"), 1, false);
+	}
+	// 3.2 ¶¨Òå²é¿´±¨±í½Ó¿Ú´¦Àí
+	ENDPOINT(API_M_GET, "/Inspect/table", queryInspect_table, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// ½âÎö²éÑ¯²ÎÊıÎªQueryÁìÓòÄ£ĞÍ
+		API_HANDLER_QUERY_PARAM(userQuery, Inspect_tableQuery, queryParams);
+		// ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+		API_HANDLER_RESP_VO(execQueryInspect_table(userQuery, authObject->getPayload()));
+	}
 
 	// 3.1 ¶¨ÒåĞÂÔö½Ó¿ÚÃèÊö
 	ENDPOINT_INFO(addInspect) {
@@ -109,6 +149,10 @@ public:
 private:
 	// 3.3 ·ÖÒ³²éÑ¯À´ÁÏÁĞ±íÊı¾İ
 	InspectPageJsonVO::Wrapper execQueryInspect(const InspectQuery::Wrapper& query, const PayloadDTO& payload);
+	//3.3 ·ÖÒ³²éÑ¯À´ÁÏ¼ìÑé±íÏêÇé
+	Inspect_detailPageJsonVO::Wrapper execQueryInspect_detail(const Inspect_detailQuery::Wrapper& query, const PayloadDTO& payload);
+	//3.3²é¿´±¨±í
+	Inspect_detailJsonVO::Wrapper execQueryInspect_table(const Inspect_tableQuery::Wrapper& query, const PayloadDTO& payload);
 	// 3.3 ĞÂÔöÊı¾İ
 	Uint64JsonVO::Wrapper execAddInspect(const InspectDTO::Wrapper& dto);
 	// 3.3 ĞŞ¸ÄÊı¾İ

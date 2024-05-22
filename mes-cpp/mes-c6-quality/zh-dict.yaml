@@ -11,6 +11,8 @@ inspect:
   summary: 分页查询来料检验列表
  detail: 
   summary: 查询一条来料检验表详情
+ table: 
+  summary: 查看报表
  is_ok: 
   summary: 确认检验单(修改检验单状态为草稿状态)
  finished:
