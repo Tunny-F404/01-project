@@ -1,18 +1,44 @@
 #include "stdafx.h"
 #include "PlanSubjectController.h"
+#include "../../service/planSubject/planSubjectService.h"
+#include "../ApiDeclarativeServicesHelper.h"
 
-PlanSubjectTableJsonVO::Wrapper PlanSubjectController::execPlanSubjectTable(const PlanSubjectQuery::Wrapper& query)
-{
-	//return DeptTableJsonVO::Wrapper();
-	//要返回一个参数，暂时先不说
+
+
+	/*
+	//return PlanSubjectTableJsonVO::Wrapper();
+	
+	
+	// 定义一个Service
+	PlanSubjectService service;
+
+	
+	// 查询数据
+	auto result = service.listAll(query);
+
+	
+	// 响应结果
+	auto jvo = PlanSubjectTablePageJsonVO::createShared();
+	
+	jvo->success(result);
+	
 	return {};
+	//return jvo;
+	*/
+	
+
+
+PlanSubjectTablePageJsonVO::Wrapper PlanSubjectController::execPlanSubjectTablePage(const PlanSubjectQuery::Wrapper& query, const PayloadDTO& payload)
+{
+	return {};
+	//PlanSubjectTablePageJsonVO::Wrapper();
 }
 
-//PlanSubjectDetailPageJsonVO::Wrapper PlanSubjectController::execPlanSubjectDetailPage(const PlanSubjectQuery::Wrapper& query)
-//{
-//	//return PlanSubjectDetailPageJsonVO::Wrapper();
-//	return {};
-//}
+PlanSubjectDetailPageJsonVO::Wrapper PlanSubjectController::execPlanSubjectDetailPage(const PlanSubjectQuery::Wrapper& query)
+{
+	//return PlanSubjectDetailPageJsonVO::Wrapper();
+	return {};
+}
 
 
 

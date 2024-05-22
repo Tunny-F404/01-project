@@ -22,8 +22,6 @@
 #include "ModifyPlan/ModifyPlanController.h"
 #include "ModifyPlanStatus/ModifyPlanStatusController.h"
 
-#include "query-ForeverOMC/MachineryPlanQueryController.h"
-
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
@@ -39,6 +37,8 @@
 #include "../controller/maintain-proj/MaintainProjController.h"
 
 
+
+#include "deletePlanSubject/DeletePlanSubject.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -63,6 +63,9 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
+	//#TIP :系统扩展路由定义，写在这个后面
+	//ROUTER_SIMPLE_BIND(PlanSubjectController);//测试项，abf，暂时注释
+	ROUTER_SIMPLE_BIND(DeletePlanSubjectController);
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(ExportPlanController);
 	ROUTER_SIMPLE_BIND(DeviceListController);

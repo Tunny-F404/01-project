@@ -15,11 +15,11 @@
 
  //class DeptTableJsonVO : public JsonVO<List<DeptTableDTO::Wrapper>> {
  //	DTO_INIT(DeptTableJsonVO, JsonVO<List<DeptTableDTO::Wrapper>>);
-class PlanSubjectTableJsonVO : public JsonVO<PlanSubjectTableDTO::Wrapper> {
-	DTO_INIT(PlanSubjectTableJsonVO, JsonVO<PlanSubjectTableDTO::Wrapper>);
+class PlanSubjectTablePageJsonVO : public JsonVO<PlanSubjectTablePageDTO::Wrapper> {
+	DTO_INIT(PlanSubjectTablePageJsonVO, JsonVO<PlanSubjectTablePageDTO::Wrapper>);
 
 public:
-	PlanSubjectTableJsonVO() {
+	PlanSubjectTablePageJsonVO() {
 		this->data = {};
 	}
 };
