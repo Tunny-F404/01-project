@@ -40,7 +40,7 @@ class RepaircontentController : public oatpp::web::server::api::ApiController //
 	API_ACCESS_DECLARE(RepaircontentController);
 	// 3 定义接口
 public:
-	////维修单内容查询 接口描述
+	//维修单内容查询 接口描述
 	ENDPOINT_INFO(queryRepaircontent) {
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("repaircontent.get.query_repaircontent"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
@@ -50,11 +50,11 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "repairId", ZH_WORDS_GETTER("repaircontent.get.repair_id"),0ULL , false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "repairId", ZH_WORDS_GETTER("repaircontent.get.repair_id"), , false);
 		API_DEF_ADD_QUERY_PARAMS(String, "projectName", ZH_WORDS_GETTER("repaircontent.get.repair_name")," ", false);
 	}
 	//维修单内容查询 接口处理
-	ENDPOINT(API_M_GET, "/repaircontent", queryRepaircontent, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/repaircontent/query-repaircontent", queryRepaircontent, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(repairId, RepaircontentQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -80,13 +80,13 @@ public:
 	//// 3.2 维修单内容 接口处理
 	//ENDPOINT(API_M_GET, "/repaircontent", detailsRepaircontent, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 	//	// 解析查询参数为Query领域模型
-	//	API_HANDLER_QUERY_PARAM(repairId, RepaircontentQuery, queryParams);
+	//	API_HANDLER_QUERY_PARAM(repairId, RepaircontentDetailsQuery, queryParams);
 	//	// 呼叫执行函数响应结果
 	//	API_HANDLER_RESP_VO(execDetailsRepaircontent(repairId));
 	//}
 
 	// 添加设备维修单行 接口描述
-		ENDPOINT_INFO(addRepaircontent) {
+	ENDPOINT_INFO(addRepaircontent) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("repaircontent.get.add_repaircontent"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
