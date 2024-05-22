@@ -36,7 +36,7 @@ class AddDTO : public oatpp::DTO
 	//项目类型
 	API_DTO_FIELD_DEFAULT(String, subjectType, ZH_WORDS_GETTER("add-mj.fields.stype"));
 	//是否启用
-	API_DTO_FIELD_DEFAULT(String, attr3, ZH_WORDS_GETTER("add-mj.fields.attr3"));
+	API_DTO_FIELD_DEFAULT(String, enableFlag, ZH_WORDS_GETTER("add-mj.fields.eflag"));
 	//项目内容
 	API_DTO_FIELD_DEFAULT(String, subjectContent, ZH_WORDS_GETTER("add-mj.fields.scontent"));
 	//标准

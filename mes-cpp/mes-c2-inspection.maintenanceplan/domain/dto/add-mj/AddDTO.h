@@ -30,7 +30,7 @@ class AddDTO : public oatpp::DTO
 {
 	DTO_INIT(AddDTO, DTO);
 	// 计划编码
-	API_DTO_FIELD_DEFAULT(String, planId, ZH_WORDS_GETTER("add-mj.fields.pid"));
+	API_DTO_FIELD_DEFAULT(String, planCode, ZH_WORDS_GETTER("add-mj.fields.pid"));
 	//计划名称
 	API_DTO_FIELD_DEFAULT(String, planName, ZH_WORDS_GETTER("add-mj.fields.pname"));
 	//计划类型
