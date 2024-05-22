@@ -48,7 +48,7 @@ class InspectDTO:public oatpp::DTO
 	//检测人员
 	API_DTO_FIELD_DEFAULT(String, inspector, ZH_WORDS_GETTER("inspect.inspector"));
 	//单据状态
-	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("inspect.status"));
+	API_DTO_FIELD_DEFAULT(String, list_status, ZH_WORDS_GETTER("inspect.list_status"));
 };
 
 //来料检验单列表分页传输对象

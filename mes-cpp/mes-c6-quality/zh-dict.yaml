@@ -1,34 +1,34 @@
 inspect:
  delete:
-  summary: É¾³ıÒ»Ìõ¼ìÑéµ¥ĞÅÏ¢
+  summary: åˆ é™¤ä¸€æ¡æ£€éªŒå•ä¿¡æ¯
  add:
-  summary: Ìí¼ÓÒ»Ìõ¼ìÑéµ¥ĞÅÏ¢
+  summary: æ·»åŠ ä¸€æ¡æ£€éªŒå•ä¿¡æ¯
  change:
-  summary: ĞŞ¸ÄÒ»Ìõ¼ìÑéµ¥ĞÅÏ¢
+  summary: ä¿®æ”¹ä¸€æ¡æ£€éªŒå•ä¿¡æ¯
  export:
-  summary: µ¼³öÒ»Ìõ¼ìÑéµ¥ĞÅÏ¢
+  summary: å¯¼å‡ºä¸€æ¡æ£€éªŒå•ä¿¡æ¯
  get:
-  summary: ·ÖÒ³²éÑ¯À´ÁÏ¼ìÑéĞÅÏ¢
+  summary: åˆ†é¡µæŸ¥è¯¢æ¥æ–™æ£€éªŒä¿¡æ¯
 
- line_id: Êı¾İ¿â±íĞĞid
- code: À´ÁÏ¼ìÑéµ¥±àºÅ
- name: À´ÁÏ¼ìÑéµ¥Ãû³Æ
- template_id: ¼ìÑéÄ£°åID
- vendor_id: ¹©Ó¦ÉÌID
- vendor_code: ¹©Ó¦ÉÌ±àÂë
- vendor_name: ¹©Ó¦ÉÌÃû³Æ
- vd_nick: ¹©Ó¦ÉÌ¼ò³Æ
- vd_batch: ¹©Ó¦ÉÌÅú´ÎºÅ
- item_code: ²úÆ·ÎïÁÏ±àÂë
- item_name: ²úÆ·ÎïÁÏÃû³Æ
- quantity_recived: ½ÓÊÕÊıÁ¿
- quantity_check: ¼ì²âÊıÁ¿
- quantity_unqualified: ²»ºÏ¸ñÊı
- check_result: ¼ì²â½á¹û
- recive_date: À´ÁÏÈÕÆÚ
- inspect_date: ¼ì²âÈÕÆÚ
- inspector: ¼ì²âÈËÔ±
- status: µ¥¾İ×´Ì¬
+ line_id: æ•°æ®åº“è¡¨è¡Œid
+ code: æ¥æ–™æ£€éªŒå•ç¼–å·
+ name: æ¥æ–™æ£€éªŒå•åç§°
+ template_id: æ£€éªŒæ¨¡æ¿ID
+ vendor_id: ä¾›åº”å•†ID
+ vendor_code: ä¾›åº”å•†ç¼–ç 
+ vendor_name: ä¾›åº”å•†åç§°
+ vd_nick: ä¾›åº”å•†ç®€ç§°
+ vd_batch: ä¾›åº”å•†æ‰¹æ¬¡å·
+ item_code: äº§å“ç‰©æ–™ç¼–ç 
+ item_name: äº§å“ç‰©æ–™åç§°
+ quantity_recived: æ¥æ”¶æ•°é‡
+ quantity_check: æ£€æµ‹æ•°é‡
+ quantity_unqualified: ä¸åˆæ ¼æ•°
+ check_result: æ£€æµ‹ç»“æœ
+ recive_date: æ¥æ–™æ—¥æœŸ
+ inspect_date: æ£€æµ‹æ—¥æœŸ
+ inspector: æ£€æµ‹äººå‘˜
+ list_status: å•æ®çŠ¶æ€
 
 single: 
  

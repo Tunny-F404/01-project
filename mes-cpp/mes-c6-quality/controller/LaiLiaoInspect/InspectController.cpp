@@ -5,22 +5,23 @@
 
 InspectPageJsonVO::Wrapper InspectController::execQueryInspect(const InspectQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	// 定义一个Service
-	InspectService service;
-	// 查询数据
-	auto result = service.listAll(query);
-	// 响应结果
-	auto jvo = InspectPageJsonVO::createShared();
-	jvo->success(result);
-	return jvo;
+	//// 定义一个Service
+	//InspectService service;
+	//// 查询数据
+	//auto result = service.listAll(query);
+	//// 响应结果
+	//auto jvo = InspectPageJsonVO::createShared();
+	//jvo->success(result);
+	//return jvo;
+	return {};
 }
 
 Uint64JsonVO::Wrapper InspectController::execAddInspect(const InspectDTO::Wrapper& dto)
 {
-	// 定义返回数据对象
-	auto jvo = Uint64JsonVO::createShared();
-	// 参数校验
-	// 非空校验
+	// //定义返回数据对象
+	//auto jvo = Uint64JsonVO::createShared();
+	// //参数校验
+	// //非空校验
 	//if (!dto->code || !dto->name || !dto->template_id || !dto->vendor_id || !dto->vendor_code || !dto->vendor_name || !dto->vd_nick || !dto->batch_code || !dto->warehouse_name || !dto->location_name || !dto->area_name)
 	//{
 	//	jvo->init(UInt64(-1), RS_PARAMS_INVALID);
@@ -33,67 +34,70 @@ Uint64JsonVO::Wrapper InspectController::execAddInspect(const InspectDTO::Wrappe
 	//	return jvo;
 	//}
 
-	// 定义一个Service
-	InspectService service;
-	// 执行数据新增
-	uint64_t id = service.saveData(dto);
-	if (id > 0) {
-		jvo->success(UInt64(id));
-	}
-	else
-	{
-		jvo->fail(UInt64(id));
-	}
-	//响应结果
-	return jvo;
+	//// 定义一个Service
+	//InspectService service;
+	//// 执行数据新增
+	//uint64_t id = service.saveData(dto);
+	//if (id > 0) {
+	//	jvo->success(UInt64(id));
+	//}
+	//else
+	//{
+	//	jvo->fail(UInt64(id));
+	//}
+	////响应结果
+	//return jvo;
+	return {};
 }
 
 Uint64JsonVO::Wrapper InspectController::execModifyInspect(const InspectDTO::Wrapper& dto)
 {
-	// 定义返回数据对象
-	auto jvo = Uint64JsonVO::createShared();
-	// 参数校验
-	if (!dto->line_id || dto->line_id <= 0)
-	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		return jvo;
-	}
-	// 定义一个Service
-	InspectService service;
-	// 执行数据修改
-	if (service.updateData(dto)) {
-		jvo->success(dto->line_id);
-	}
-	else
-	{
-		jvo->fail(dto->line_id);
-	}
-	// 响应结果
-	return jvo;
+	//// 定义返回数据对象
+	//auto jvo = Uint64JsonVO::createShared();
+	//// 参数校验
+	//if (!dto->line_id || dto->line_id <= 0)
+	//{
+	//	jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+	//	return jvo;
+	//}
+	//// 定义一个Service
+	//InspectService service;
+	//// 执行数据修改
+	//if (service.updateData(dto)) {
+	//	jvo->success(dto->line_id);
+	//}
+	//else
+	//{
+	//	jvo->fail(dto->line_id);
+	//}
+	//// 响应结果
+	//return jvo;
+	return {};
 }
 
 Uint64JsonVO::Wrapper InspectController::execRemoveInspect(const UInt64& id)
 {
-	// 定义返回数据对象
-	auto jvo = Uint64JsonVO::createShared();
-	// 参数校验
-	if (!id || id <= 0)
-	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		return jvo;
-	}
-	// 定义一个Service
-	InspectService service;
-	// 执行数据删除
-	if (service.removeData(id.getValue(0))) {
-		jvo->success(id);
-	}
-	else
-	{
-		jvo->fail(id);
-	}
-	// 响应结果
-	return jvo;
+	//// 定义返回数据对象
+	//auto jvo = Uint64JsonVO::createShared();
+	//// 参数校验
+	//if (!id || id <= 0)
+	//{
+	//	jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+	//	return jvo;
+	//}
+	//// 定义一个Service
+	//InspectService service;
+	//// 执行数据删除
+	//if (service.removeData(id.getValue(0))) {
+	//	jvo->success(id);
+	//}
+	//else
+	//{
+	//	jvo->fail(id);
+	//}
+	//// 响应结果
+	//return jvo;
+	return {};
 }
 
 StringJsonVO::Wrapper InspectController::execExportProcessinSpection(const oatpp::List<UInt64>& ids)

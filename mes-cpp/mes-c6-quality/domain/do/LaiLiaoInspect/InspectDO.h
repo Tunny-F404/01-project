@@ -6,7 +6,7 @@
 /**
  * 来料检查数据库实体类
  */
-class InspectlDO
+class InspectDO
 {
 	// 数据库表行id
 	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
@@ -15,7 +15,7 @@ class InspectlDO
 	// 来料检验单名称
 	CC_SYNTHESIZE(string, name, Name);
 	//检验模板ID
-	CC_SYNTHESIZE(string, template_id, Template_id);
+	CC_SYNTHESIZE(uint64_t, template_id, Template_id);
 	//供应商ID
 	CC_SYNTHESIZE(uint64_t, vendor_id, Vendor_id);
 	//供应商编码
@@ -45,11 +45,11 @@ class InspectlDO
 	//检测人员
 	CC_SYNTHESIZE(string, inspector, Inspector);
 	//单据状态
-	CC_SYNTHESIZE(string, status, Status);
+	CC_SYNTHESIZE(string, list_status, List_status);
 
 public:
-	InspectlDO() {
-		id = 0;
+	InspectDO() {
+		line_id = 0;
 		code = "";
 		name = "";
 		template_id = 0;
@@ -67,7 +67,7 @@ public:
 		recive_date = "";
 		inspect_date = "";
 		inspector = "";
-		status = "";
+		list_status = "";
 	}
 };
 
