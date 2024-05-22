@@ -30,9 +30,9 @@ class ProNameListDTO : public oatpp::DTO
 {
 	DTO_INIT(ProNameListDTO, DTO);
 	// 唯一标识
-	API_DTO_FIELD(UInt64, processId, ZH_WORDS_GETTER("process.query.fields.proId"), true, 1);
+	API_DTO_FIELD(UInt64, processId, ZH_WORDS_GETTER("process.fields.processId"), true, 1);
 	// 工序名称
-	API_DTO_FIELD(String, proName, ZH_WORDS_GETTER("process.query.fields.proName"), true, "01star");
+	API_DTO_FIELD(String, proName, ZH_WORDS_GETTER("process.fields.processName"), true, "01star");
 };
 
 #include OATPP_CODEGEN_END(DTO)

@@ -16,17 +16,17 @@ class ProcessExportQuery : public PageQuery
 	// 工序编号
 	DTO_FIELD(String, processCode);
 	DTO_FIELD_INFO(processCode) {
-		info->description = ZH_WORDS_GETTER("set.field.code");
+		info->description = ZH_WORDS_GETTER("set.fields.processcode");
 	}
 	// 工序名称
 	DTO_FIELD(String, processName);
 	DTO_FIELD_INFO(processName) {
-		info->description = ZH_WORDS_GETTER("set.field.name");
+		info->description = ZH_WORDS_GETTER("set.fields.processname");
 	}
 	// 是否启用
 	DTO_FIELD(String, enableFlag);
 	DTO_FIELD_INFO(enableFlag) {
-		info->description = ZH_WORDS_GETTER("set.field.flag");
+		info->description = ZH_WORDS_GETTER("set.fields.enableflag");
 	}
 };
 

@@ -32,11 +32,11 @@ class ProListQuery : public PageQuery
 {
 	DTO_INIT(ProListQuery, PageQuery);
 	// 工序编码
-	API_DTO_FIELD_DEFAULT(Int32, proCode, ZH_WORDS_GETTER("process.query.fields.proCode"));
+	API_DTO_FIELD_DEFAULT(Int32, proCode, ZH_WORDS_GETTER("process.fields.proCode"));
 	// 工序名称
-	API_DTO_FIELD_DEFAULT(String, proName, ZH_WORDS_GETTER("process.query.fields.proName"));
+	API_DTO_FIELD_DEFAULT(String, proName, ZH_WORDS_GETTER("process.fields.proName"));
 	// 是否启用
-	API_DTO_FIELD(Int32, status, ZH_WORDS_GETTER("process.query.fields.proStatus"), true, 1);
+	API_DTO_FIELD(Int32, status, ZH_WORDS_GETTER("process.fields.proStatus"), true, 1);
 };
 
 #include OATPP_CODEGEN_END(DTO)

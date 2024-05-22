@@ -2,8 +2,8 @@
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: xingshoulang
- @Date: 2024/5/20  17:32
+ @Author: awei
+ @Date: 2022/10/26 23:47:08
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,30 +17,29 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _PROLISTVO_H_
-#define _PROLISTVO_H_
+#ifndef _PROQUERY_H_
+#define _PROQUERY_H_
+
 
 #include "../../GlobalInclude.h"
-#include "../../dto/set/ProListDTO.h"
+#include "../../../../lib-oatpp/include/domain/query/PageQuery.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
-
 /**
- * å®šä¹‰ä¸€ä¸ªå·¥åºåˆ—è¡¨æ˜¾ç¤ºJsonVOå¯¹è±¡ï¼Œç”¨äºå“åº”ç»™å®¢æˆ·ç«¯
+ * ×é³É¹¤ĞòÁĞ±í£¨Ìõ¼ş·ÖÒ³£©
  */
-class ProListJsonVO : public JsonVO<oatpp::List<ProListDTO::Wrapper>>
+class ProQuery : public PageQuery
 {
-	DTO_INIT(ProListJsonVO, JsonVO<oatpp::List<ProListDTO::Wrapper>>);
-};
+	//³õÊ¼»¯
+	DTO_INIT(ProQuery, PageQuery);
+	//¹¤Ğò±àÂë
+	API_DTO_FIELD_DEFAULT(String, process_code, ZH_WORDS_GETTER("pro.fields.proCode"));
+	//¹¤ĞòÃû³Æ
+	API_DTO_FIELD_DEFAULT(String, process_name, ZH_WORDS_GETTER("pro.fields.proName"));
+	//ÊÇ·ñÎª¹Ø¼ü¹¤Ğò
+	API_DTO_FIELD_DEFAULT(String, key_flag, ZH_WORDS_GETTER("pro.fields.key_flag"));
 
-/**
- * å®šä¹‰ä¸€ä¸ªå·¥åºåˆ—è¡¨åˆ†é¡µæ˜¾ç¤ºJsonVOå¯¹è±¡ï¼Œç”¨äºå“åº”ç»™å®¢æˆ·ç«¯
- */
-class ProListPageJsonVO : public JsonVO<ProListPageDTO::Wrapper>
-{
-	DTO_INIT(ProListPageJsonVO, JsonVO<ProListPageDTO::Wrapper>);
 };
-
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // _PROLISTVO_H_
+#endif // !_PROQUERY_H_

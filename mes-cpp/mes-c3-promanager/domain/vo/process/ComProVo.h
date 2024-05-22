@@ -2,8 +2,8 @@
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: xingshoulang
- @Date: 2024.5.21 2:52
+ @Author: awei
+ @Date: 2022/10/26 23:47:08
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,20 +17,23 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _PROCESS_NAME_LIST_QUERY_
-#define _PROCESS_NAME_LIST_QUERY_
+#ifndef _COMPROJOSNVO_H_
+#define _COMPROJOSNVO_H_
 
 #include "../../GlobalInclude.h"
+#include "domain/dto/process/ComProDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 鑾峰彇宸ュ簭鍚嶇О鍒楄〃
+ * 组成工序列表
  */
-class ProNameListQuery : public oatpp::DTO
+class ProJsonVO : public JsonVO<oatpp::List<ComProListDTO::Wrapper>>
 {
-	DTO_INIT(ProNameListQuery, DTO);
+	//初始化
+	DTO_INIT(ProJsonVO, JsonVO<oatpp::List<ComProListDTO::Wrapper>>);
 };
 
+
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_PROCESS_NAME_LIST_QUERY_
+#endif // !_PROJOSNVO_H_

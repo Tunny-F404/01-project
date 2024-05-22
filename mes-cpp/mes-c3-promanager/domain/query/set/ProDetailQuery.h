@@ -31,7 +31,7 @@ class ProDetailQuery : public oatpp::DTO
 {
 	DTO_INIT(ProDetailQuery, DTO);
 	// 工序编码
-	API_DTO_FIELD_DEFAULT(Int32, processCode, ZH_WORDS_GETTER("process.query.fields.processCode"));
+	API_DTO_FIELD_DEFAULT(Int32, processCode, ZH_WORDS_GETTER("process.fields.processCode"));
 };
 
 #include OATPP_CODEGEN_END(DTO)

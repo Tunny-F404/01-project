@@ -34,17 +34,17 @@ class ProcessQuery : public PageQuery
 	// 工艺路线编号
 	DTO_FIELD(String, route_code);
 	DTO_FIELD_INFO(route_code) {
-		info->description = ZH_WORDS_GETTER("route.field.route_code");
+		info->description = ZH_WORDS_GETTER("process.field.route_code");
 	}
 	// 工艺路线名称
 	DTO_FIELD(String, route_name);
 	DTO_FIELD_INFO(route_name) {
-		info->description = ZH_WORDS_GETTER("route.field.route_name");
+		info->description = ZH_WORDS_GETTER("process.field.route_name");
 	}
 	// 是否启用
 	DTO_FIELD(String, enable_flag);
 	DTO_FIELD_INFO(enable_flag) {
-		info->description = ZH_WORDS_GETTER("route.field.enable_flag");
+		info->description = ZH_WORDS_GETTER("process.field.enable_flag");
 	}
 };
 

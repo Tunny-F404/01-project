@@ -30,7 +30,7 @@ class ProcessListQuery : public PageQuery
 	// 工艺路线编号
 	DTO_FIELD(String, routeCode);
 	DTO_FIELD_INFO(routeCode) {
-		info->description = ZH_WORDS_GETTER("process.field.routecode");
+		info->description = ZH_WORDS_GETTER("process.field.code");
 	}
 	// 工艺路线名称
 	DTO_FIELD(String, routeName);

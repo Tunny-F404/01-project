@@ -32,7 +32,7 @@ ProListJsonVO::Wrapper SetController::execQueryProList(const ProListQuery::Wrapp
 	return ProListJsonVO::Wrapper();
 }
 // 7 获取工序名称列表
-ProListJsonVO::Wrapper SetController::execQueryProNameList(const ProNameListQuery::Wrapper& query)
+ProListJsonVO::Wrapper SetController::execQueryProNameList()
 {
 	return ProListJsonVO::Wrapper();
 }

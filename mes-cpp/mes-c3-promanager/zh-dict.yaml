@@ -1,8 +1,4 @@
 process:
- query:
-  summary: 获取工序列表
-  summary2: 获取工序名称列表
-  summary3: 获取工序详情
  fields:
   processId: 唯一标识
   processCode: 工序编码
@@ -17,8 +13,6 @@ process:
   desc: 路线说明
   flag: 是否启用
   remark: 备注
-  createtime: 创建时间
-  updatetime: 更新时间
   route_code: 工艺路线编号
   route_name: 工艺路线名称
   route_desc: 工艺路线说明
@@ -37,9 +31,31 @@ process:
  get_field:
   summary: 工艺导出
 
+pro:
+ get:
+  summary: 获取组成工序列表
+ modify:
+  summary: 修改组成工序
+ add:
+  summary: 新增组成工序
+ fields:
+  proId: 序号
+  proName: 工序名称
+  proCode: 工序编码
+  key_flag: 关键工序
+  kype: 与下一段工序的关系
+  check: 质检
+  preTime: 准备时间
+  sufTime: 等待时间
+  color: 甘特图颜色
+  remark: 备注
+
 set:  
  query:
   summary: 获取工序步骤列表(条件+分页)
+  summary1: 获取工序列表
+  summary2: 获取工序名称列表
+  summary3: 获取工序详情
  fields:
   processcode: 工序编码
   processname: 工序名称

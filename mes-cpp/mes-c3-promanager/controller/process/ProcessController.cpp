@@ -40,9 +40,24 @@ Uint64JsonVO::Wrapper ProcessController::execRemoveProcess(const List<UInt64>& i
 	return jvo;
 }
 
-//工艺导出
+//7 工艺导出
 StringJsonVO::Wrapper ProcessController::execQueryProcess(const ProcessQuery::Wrapper& query)
 {
 	auto jvo = StringJsonVO::createShared();
 	return jvo;
+}
+//8 获取组成工序列表
+ProJsonVO::Wrapper ProcessController::execProTable(const ProQuery::Wrapper& query)
+{
+	return ProJsonVO::Wrapper();
+}
+//9 添加组成工序
+Uint64JsonVO::Wrapper ProcessController::execaddComProcess(const NewProcessDTO::Wrapper& dto)
+{
+	return {};
+}
+//10 修改组成工序
+Uint64JsonVO::Wrapper ProcessController::execModifyProcess(const ModifyProDTO::Wrapper& dto)
+{
+	return {};
 }
