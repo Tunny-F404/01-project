@@ -31,11 +31,13 @@
 /**
  * 生产任务查询控制器，基础接口的使用
  */
-class ProdOrderQueryController : public oatpp::web::server::api::ApiController // 1 继承控制器
+class ProdOrderController : public oatpp::web::server::api::ApiController // 1 继承控制器
 {
 	// 2 定义控制器访问入口
-	API_ACCESS_DECLARE(ProdOrderQueryController);
+	API_ACCESS_DECLARE(ProdOrderController);
+
 	// 3 定义接口
+
 public:
 	// 3.1 定义查询接口描述
 	ENDPOINT_INFO(queryProdOrder) {
@@ -55,7 +57,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "end_time", ZH_WORDS_GETTER("prod.field.endTime"), "N", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/prodOrder", queryProdOrder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/prodOrder/query", queryProdOrder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ProdOrderQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -72,7 +74,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/ProdOrder", addProdOrder, BODY_DTO(ProdOrderDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/ProdOrder/add", addProdOrder, BODY_DTO(ProdOrderDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddProdOrder(dto));
 	}
@@ -80,7 +82,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("prod.put.summary"), modifyProdOrder, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdOrder", modifyProdOrder, BODY_DTO(ProdOrderDTO::Wrapper, dto), execModifyProdOrder(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdOrder/put", modifyProdOrder, BODY_DTO(ProdOrderDTO::Wrapper, dto), execModifyProdOrder(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeProdOrder) {
@@ -90,7 +92,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("sample.field.task_name"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ProdOrder/{id}", removeProdOrder, PATH(UInt64, id), execRemoveProdOrder(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ProdOrder/del", removeProdOrder, PATH(UInt64, id), execRemoveProdOrder(id));
 
 	// 3.1 定义测试声明式服务调用的接口1描述
 	ENDPOINT_INFO(queryOne) {
@@ -113,6 +115,7 @@ public:
 	}
 	// 3.2 定义测试声明式服务调用的接口1处理
 	API_HANDLER_ENDPOINT_QUERY_AUTH(API_M_GET, "/ProdOrder/query-all", queryAll, ProdOrderQuery, execQueryAll(query, authObject->getPayload()));
+
 private:
 	// 3.3 演示分页查询数据
 	ProdOrderPageJsonVO::Wrapper execQueryProdOrder(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload);

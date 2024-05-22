@@ -21,32 +21,32 @@
 #include "../../service/ProdOrder/ProdOrderService.h"
 #include "../ApiDeclarativeServicesHelper.h"
 
-ProdOrderPageJsonVO::Wrapper ProdOrderQueryController::execQueryProdOrder(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload)
+ProdOrderPageJsonVO::Wrapper ProdOrderController::execQueryProdOrder(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload)
 {
 	return {};
 }
 
-Uint64JsonVO::Wrapper ProdOrderQueryController::execAddProdOrder(const ProdOrderDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProdOrderController::execAddProdOrder(const ProdOrderDTO::Wrapper& dto)
 {
 	return {};
 }
 
-Uint64JsonVO::Wrapper ProdOrderQueryController::execModifyProdOrder(const ProdOrderDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProdOrderController::execModifyProdOrder(const ProdOrderDTO::Wrapper& dto)
 {
 	return {};
 }
 
-Uint64JsonVO::Wrapper ProdOrderQueryController::execRemoveProdOrder(const UInt64& id)
+Uint64JsonVO::Wrapper ProdOrderController::execRemoveProdOrder(const UInt64& id)
 {
 	return {};
 }
 
-ProdOrderJsonVO::Wrapper ProdOrderQueryController::execQueryOne(const UInt64& id, const PayloadDTO& payload)
+ProdOrderJsonVO::Wrapper ProdOrderController::execQueryOne(const UInt64& id, const PayloadDTO& payload)
 {
 	return {};
 }
 
-ProdOrderPageJsonVO::Wrapper ProdOrderQueryController::execQueryAll(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload)
+ProdOrderPageJsonVO::Wrapper ProdOrderController::execQueryAll(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload)
 {
 	return {};
 }

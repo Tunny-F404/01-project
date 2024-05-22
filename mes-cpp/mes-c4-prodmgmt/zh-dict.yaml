@@ -1,26 +1,27 @@
 prod:
  query:
   summary:
-   taskName: ÈÎÎñÃû
-   workstationName: ¹¤×÷Õ¾
-   processName: ¹¤Ğò
-   startTime: ¿ªÊ¼Ê±¼ä
-   endTime: ½áÊøÊ±¼ä
+   taskName: ä»»åŠ¡å
+   workstationName: å·¥ä½œç«™
+   processName: å·¥åº
+   startTime: å¼€å§‹æ—¶é—´
+   endTime: ç»“æŸæ—¶é—´
  field:
-  taskName: ÈÎÎñÃû
-  workstationName: ¹¤×÷Õ¾
-  processName: ¹¤Ğò
-  startTime: ¿ªÊ¼Ê±¼ä
-  endTime: ½áÊøÊ±¼ä
+  taskName: ä»»åŠ¡å
+  workstationName: å·¥ä½œç«™
+  processName: å·¥åº
+  startTime: å¼€å§‹æ—¶é—´
+  endTime: ç»“æŸæ—¶é—´
+  menusub: å­èœå•
  get:
-  sumamry: ·ÖÒ³»ñÈ¡Éú²úÈÎÎñÁĞ±í
- set:
-  sumamry: ÉèÖÃÉú²úÈÎÎñ
+  sumamry: è·å–ç”Ÿäº§ä»»åŠ¡
+ post:
+  sumamry: è®¾ç½®ç”Ÿäº§ä»»åŠ¡
  put:
-  summary: ĞŞ¸ÄÒ»ÌõÉú²úÈÎÎñ
+  summary: ä¿®æ”¹ä¸€æ¡ç”Ÿäº§ä»»åŠ¡
  delete:
-  summary: É¾³ıÒ»ÌõÉú²úÈÎÎñ
+  summary: åˆ é™¤ä¸€æ¡ç”Ÿäº§ä»»åŠ¡
  query-one:
-  summary: Ê¹ÓÃÉùÃ÷Ê½·şÎñ²éÑ¯Ò»ÌõÉú²úÈÎÎñ
+  summary: ä½¿ç”¨å£°æ˜å¼æœåŠ¡æŸ¥è¯¢ä¸€æ¡ç”Ÿäº§ä»»åŠ¡
  query-all:
-  summary: Ê¹ÓÃÉùÃ÷Ê½·şÎñ²éÑ¯¶àÌõÉú²úÈÎÎñ
+  summary: ä½¿ç”¨å£°æ˜å¼æœåŠ¡æŸ¥è¯¢å¤šæ¡ç”Ÿäº§ä»»åŠ¡

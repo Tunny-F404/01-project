@@ -20,12 +20,7 @@
 #include "Router.h"
 #include "ApiHelper.h"
 
-#ifdef HTTP_SERVER_DEMO
-#include "user/UserController.h"
-#include "sample/SampleController.h"
-#include "file/FileController.h"
-#include "ws/WSController.h"
-#endif
+#include "ProdOrder/ProdOrderController.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -51,20 +46,13 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-
+	createProdOrderRouter();
 }
 
-#ifdef HTTP_SERVER_DEMO
-void Router::createSampleRouter()
+void Router::createProdOrderRouter()
 {
-	// 绑定示例控制器
-	ROUTER_SIMPLE_BIND(SampleController);
-	// 绑定用户控制器
-	ROUTER_SIMPLE_BIND(UserController);
-	// 绑定文件控制器
-	ROUTER_SIMPLE_BIND(FileController);
-	
+	ROUTER_SIMPLE_BIND(ProdOrderController);
+
 	// 绑定WebSocket控制器
-	router->addController(WSContorller::createShared());
+	//router->addController(WSContorller::createShared());
 }
-#endif
