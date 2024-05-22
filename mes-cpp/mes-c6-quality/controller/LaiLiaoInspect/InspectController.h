@@ -89,9 +89,19 @@ public:
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/inspect/delete/{line_id}", removeInspect, PATH(UInt64, line_id), execRemoveInspect(line_id));
 
 	// 3.1 定义导出接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.export.summary"), exportProcessinSpection, StringJsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.export.summary"), exportInspect, StringJsonVO::Wrapper);
 	// 3.2 定义导出接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/inspect/export", exportProcessinSpection, BODY_DTO(oatpp::List<UInt64>, ids), execExportProcessinSpection(ids));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/inspect/export", exportInspect, BODY_DTO(oatpp::List<UInt64>, ids), execExportInspect(ids));
+
+	// 3.1 定义确认检验单接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.is_ok.summary"), Is_OkInspect, Uint64JsonVO::Wrapper);
+	// 3.2 定义确认检验单接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspect/is_ok", Is_OkInspect, BODY_DTO(InspectDTO::Wrapper, dto), execIs_OkInspect(dto));
+
+	// 3.1 定义完成检验单接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.finished.summary"), Is_FinishedInspect, Uint64JsonVO::Wrapper);
+	// 3.2 定义完成检验单接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspect/finished", Is_FinishedInspect, BODY_DTO(InspectDTO::Wrapper, dto), execIs_FinishedInspect(dto));
 
 private:
 	// 3.3 分页查询数据
@@ -103,8 +113,11 @@ private:
 	// 3.3 删除数据
 	Uint64JsonVO::Wrapper execRemoveInspect(const UInt64& id);
 	// 3.3导出数据
-	StringJsonVO::Wrapper execExportProcessinSpection(const oatpp::List<UInt64>& ids);
-
+	StringJsonVO::Wrapper execExportInspect(const oatpp::List<UInt64>& ids);
+	//3.3确认检验单(检验单状态置为草稿状态)
+	Uint64JsonVO::Wrapper execIs_OkInspect(const InspectDTO::Wrapper& dto);
+	//3.3完成检验单(检验单状态置为已确认状态)
+	Uint64JsonVO::Wrapper execIs_FinishedInspect(const InspectDTO::Wrapper& dto);
 };
 
 // 0 取消API控制器使用宏

@@ -8,7 +8,7 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 定义一个查询来料检验信息的数据传输模型
+ * 定义一个查询来料检验表信息的数据传输模型
  */
 class InspectQuery : public PageQuery
 {
@@ -37,5 +37,14 @@ class InspectQuery : public PageQuery
 
 };
 
+
+//来料检验详情
+class Inspect_detailQuery :public PageQuery
+{
+	DTO_INIT(Inspect_detailQuery, PageQuery);
+	// 来料检验单编号
+	API_DTO_FIELD_DEFAULT(String, code, ZH_WORDS_GETTER("inspect.code"));
+
+};
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_INSPECT_QUERY_

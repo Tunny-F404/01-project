@@ -100,7 +100,17 @@ Uint64JsonVO::Wrapper InspectController::execRemoveInspect(const UInt64& id)
 	return {};
 }
 
-StringJsonVO::Wrapper InspectController::execExportProcessinSpection(const oatpp::List<UInt64>& ids)
+StringJsonVO::Wrapper InspectController::execExportInspect(const oatpp::List<UInt64>& ids)
 {
 	return StringJsonVO::Wrapper();
+}
+
+Uint64JsonVO::Wrapper InspectController::execIs_OkInspect(const InspectDTO::Wrapper& dto)
+{
+	return{};
+}
+
+Uint64JsonVO::Wrapper InspectController::execIs_FinishedInspect(const InspectDTO::Wrapper& dto)
+{
+	return{};
 }

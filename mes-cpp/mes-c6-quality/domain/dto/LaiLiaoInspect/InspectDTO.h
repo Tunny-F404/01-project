@@ -57,6 +57,26 @@ class InspectPageDTO : public PageDTO<InspectDTO::Wrapper>
 	DTO_INIT(InspectPageDTO, PageDTO<InspectDTO::Wrapper>);
 };
 
+class Inspect_detailDTO :public InspectDTO
+{
+	DTO_INIT(Inspect_detailDTO, InspectDTO);
+
+	//单位
+	API_DTO_FIELD_DEFAULT(String, unit_of_measure, ZH_WORDS_GETTER("inspect.unit_of_measure"));
+	//致命缺陷率
+	API_DTO_FIELD_DEFAULT(Float64, maj_rate, ZH_WORDS_GETTER("inspect.maj_rate"));
+	//严重缺陷率
+	API_DTO_FIELD_DEFAULT(Float64, cr_rate, ZH_WORDS_GETTER("inspect.cr_rate")); 
+	//轻微缺陷率
+	API_DTO_FIELD_DEFAULT(Float64, min_rate, ZH_WORDS_GETTER("inspect.min_rate"));
+	//致命缺陷数量
+	API_DTO_FIELD_DEFAULT(Int64, cr_quantity, ZH_WORDS_GETTER("inspect.cr_quantity"));
+	//严重缺陷数量
+	API_DTO_FIELD_DEFAULT(Int64, maj_quantity, ZH_WORDS_GETTER("inspect.maj_quantity"));
+	//轻微缺陷数量
+	API_DTO_FIELD_DEFAULT(Int64, min_quantity, ZH_WORDS_GETTER("inspect.min_quantity"));
+};
+
 #include OATPP_CODEGEN_END(DTO)
 
 #endif // !_INSPECTDTO_H_

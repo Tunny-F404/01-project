@@ -9,6 +9,11 @@ inspect:
   summary: 导出一条检验单信息
  get:
   summary: 分页查询来料检验信息
+ is_ok: 
+  summary: 确认检验单(修改检验单状态为草稿状态)
+ finished:
+  summary: 完成检验单(修改检验单状态为已确认状态)
+
 
  line_id: 数据库表行id
  code: 来料检验单编号
@@ -29,6 +34,14 @@ inspect:
  inspect_date: 检测日期
  inspector: 检测人员
  list_status: 单据状态
+
+ unit_of_measure: 单位
+ maj_rate: 致命缺陷率
+ cr_rate: 严重缺陷率
+ min_rate: 轻微缺陷率
+ cr_quantity: 致命缺陷数量
+ maj_quantity: 严重缺陷数量
+ min_quantity: 轻微缺陷数量
 
 single: 
  
