@@ -21,7 +21,7 @@ import java.util.Date;
 
 @Data
 @ApiModel
-public class ExportMessage {
+public class ExportMessage extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
 

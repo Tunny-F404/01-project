@@ -4,15 +4,17 @@ import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.zeroone.star.message.entity.ExportMessage;
+import com.zeroone.star.message.entity.SysMessage;
+import com.zeroone.star.message.entity.SysMessageTemplate;
 import com.zeroone.star.message.service.ExportMessageService;
-import com.zeroone.star.message.service.MessageService;
+import com.zeroone.star.message.service.ISysMessageService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
-import com.zeroone.star.project.j3.dto.MessageDTO;
+import com.zeroone.star.project.j3.dto.SysMessageDTO;
 import com.zeroone.star.project.j3.messageservice.MessageServiceApis;
 import io.swagger.annotations.Api;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.zeroone.star.project.vo.JsonVO;
 
@@ -23,10 +25,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.io.ByteArrayOutputStream;
 
@@ -34,8 +36,9 @@ import java.io.ByteArrayOutputStream;
 
 @Api(tags = "消息服务")
 @RequestMapping("/message-service")
-@Controller
-public class MessageServiceController implements MessageServiceApis {
+@RestController
+@ResponseBody
+public class SysMessageServiceController implements MessageServiceApis {
     @Resource
     EasyExcelComponent excel;
 
@@ -46,35 +49,34 @@ public class MessageServiceController implements MessageServiceApis {
     String urlPrefix;
 
     @Resource
-    MessageService messageService;
+    ISysMessageService ISysMessageService;
 
     @Resource
     ExportMessageService exportMessageService;
 
     /**
      * 添加消息
-     * @param messageDTO 消息实体
+     * @param sysMessageDTO 消息实体
      * @return
      */
     @PostMapping("add-message")
     @Override
     @ApiOperation(value = "添加消息")
-    public JsonVO<String> addMessage(MessageDTO messageDTO) {
-        JsonVO<String> jsonVO  = messageService.saveMessage(messageDTO);
-        return jsonVO;
+    public JsonVO<String> addMessage(@RequestBody SysMessageDTO sysMessageDTO) {
+        return ISysMessageService.saveMessage(sysMessageDTO);
+
     }
 
     /**
      * 更改消息
-     * @param messageDTO 消息
+     * @param sysMessageDTO 消息
      * @return
      */
     @PutMapping("modify-message")
     @Override
     @ApiOperation(value = "修改消息")
-    public JsonVO<String> modifyMessage(MessageDTO messageDTO) {
-        JsonVO<String> jsonVO  = messageService.updateMessageById(messageDTO);
-        return jsonVO;
+    public JsonVO<String> modifyMessage(@RequestBody SysMessageDTO sysMessageDTO) {
+        return ISysMessageService.updateMessageById(sysMessageDTO);
     }
 
     /**
@@ -85,9 +87,16 @@ public class MessageServiceController implements MessageServiceApis {
     @DeleteMapping("remove-by-messageIds")
     @Override
     @ApiOperation(value = "删除消息根据id")
-    public JsonVO<String> removeMessageByMessageIds(Long[] messageIds) {
-        JsonVO<String> jsonVO  = messageService.removeMessageByIds(messageIds);
-        return jsonVO;
+    public JsonVO<String> removeMessageByMessageIds(@RequestParam String messageIds) {
+
+        List<Long> messageIdsList = new ArrayList<>();
+
+        String[] strs = messageIds.split(",");
+        for (String str:strs){
+            messageIdsList.add(Long.parseLong(str));
+        }
+
+        return ISysMessageService.removeMessageByIds(messageIdsList);
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.zeroone.star.project.j3.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -12,7 +11,7 @@ import java.time.LocalDate;
  */
 @Data
 @ApiModel
-public class MessageDTO {
+public class SysMessageDTO {
 
     private static final long serialVersionUID = 1L;
 

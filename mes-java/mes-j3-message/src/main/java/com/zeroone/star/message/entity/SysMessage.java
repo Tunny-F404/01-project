@@ -1,19 +1,17 @@
 package com.zeroone.star.message.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * 为了将文件夹推送到远程仓库而创建的类，用于占位，无其他用途
  */
 @Data
 @ApiModel
-public class Message {
+public class SysMessage extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
 

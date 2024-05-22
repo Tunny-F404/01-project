@@ -1,7 +1,6 @@
 package com.zeroone.star.message.mapper;
 
-import com.zeroone.star.message.entity.Message;
-import com.zeroone.star.project.j3.dto.MessageDTO;
+import com.zeroone.star.message.entity.SysMessage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
 */
 
 @Mapper
-public interface MessageMapper extends BaseMapper<Message> {
+public interface SysMessageMapper extends BaseMapper<SysMessage> {
 
 }
 
