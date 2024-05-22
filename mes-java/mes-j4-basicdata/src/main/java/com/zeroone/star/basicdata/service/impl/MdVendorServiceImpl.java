@@ -67,7 +67,7 @@ public class MdVendorServiceImpl extends ServiceImpl<MdVendorMapper, MdVendor> i
     @Override
     public int addVendor(VendorDTO data){
         MdVendor mdVendor = new MdVendor();
-        BeanUtils.copyProperties(mdVendor, data);
-        return baseMapper.insert(mdVendor);
+        BeanUtils.copyProperties(data, mdVendor);
+        return mdVendorMapper.insert(mdVendor);
     }
 }

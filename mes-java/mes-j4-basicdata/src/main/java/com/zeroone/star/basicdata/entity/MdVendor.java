@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  */
 
 @Data
-@TableName("md-vendor")
+@TableName("md_vendor")
 public class MdVendor implements Serializable {
     private static final long serialVersionUID = 1L;
 

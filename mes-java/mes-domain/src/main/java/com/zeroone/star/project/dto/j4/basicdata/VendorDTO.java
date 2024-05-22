@@ -3,6 +3,7 @@ package com.zeroone.star.project.dto.j4.basicdata;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -117,6 +118,7 @@ public class VendorDTO {
     private String createBy;
 
     @ApiModelProperty(value = "创建时间", example = "2024-05-20T08:30:00")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createTime;
 
     @Size(max = 64, message = "更新者长度不能超过64个字符")
@@ -124,5 +126,6 @@ public class VendorDTO {
     private String updateBy;
 
     @ApiModelProperty(value = "更新时间", example = "2024-05-21T08:30:00")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime updateTime;
 }

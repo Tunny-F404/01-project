@@ -9,10 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -45,7 +42,7 @@ public class MdVendorController implements SupplierApis {
 
     @ApiOperation(value = "添加供应商")
     @PostMapping("add-vendor")
-    public JsonVO<Integer> addVendor(VendorDTO data)
+    public JsonVO<Integer> addVendor(@RequestBody VendorDTO data)
     {
         return JsonVO.success(iMdVendorService.addVendor(data));
     }
