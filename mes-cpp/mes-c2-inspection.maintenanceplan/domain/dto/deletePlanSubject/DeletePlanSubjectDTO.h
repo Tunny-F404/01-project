@@ -56,7 +56,7 @@ class DeleteTableUniqueDTO :public ListDTO<oatpp::UInt64>
 	//List
 	DTO_INIT(DeleteTableUniqueDTO, ListDTO<oatpp::UInt64>)
 	//表名
-	API_DTO_FIELD_DEFAULT(String,tableName , ZH_WORDS_GETTER("planSubject.deleteTemplate.DESC.tableName"));
+	//API_DTO_FIELD_DEFAULT(String,tableName , ZH_WORDS_GETTER("planSubject.deleteTemplate.DESC.tableName"));
 };
 
 /*用于联表，有主次双主键（id，idList）*/
@@ -65,11 +65,11 @@ class DeleteTableSharedDTO :public ListDTO<oatpp::UInt64>
 	//List（从属表的主键序列）
 	DTO_INIT(DeleteTableSharedDTO, ListDTO<oatpp::UInt64>)
 	//从属表的表名称
-	API_DTO_FIELD_DEFAULT(String, tableNameSec, ZH_WORDS_GETTER("deleteTemplate.DESC.tableNameSec"));
+	//API_DTO_FIELD_DEFAULT(String, tableNameSec, ZH_WORDS_GETTER("deleteTemplate.DESC.tableNameSec"));
 	//keyPri主表主键
 	API_DTO_FIELD_DEFAULT(UInt64, keyPri, ZH_WORDS_GETTER("deleteTemplate.DESC.keyPri"));
 	//主表的表名称
-	API_DTO_FIELD_DEFAULT(String, tableNamePri, ZH_WORDS_GETTER("deleteTemplate.DESC.tableNamePri"));
+	//API_DTO_FIELD_DEFAULT(String, tableNamePri, ZH_WORDS_GETTER("deleteTemplate.DESC.tableNamePri"));
 
 };
 
