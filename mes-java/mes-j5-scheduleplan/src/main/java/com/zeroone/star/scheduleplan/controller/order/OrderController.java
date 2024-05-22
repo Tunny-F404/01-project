@@ -8,8 +8,8 @@ import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
 import com.zeroone.star.project.j5.scheduleplan.order.OrderApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,21 +24,29 @@ import java.util.List;
 @RequestMapping("sch-manage/sch-plan/order")
 @Api(tags = "班次接口")
 public class OrderController implements OrderApis {
+    @GetMapping("/list")
+    @ApiOperation("查询排班id对应的班次列表")
     @Override
     public JsonVO<PageDTO<ShiftPlanDTO>> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery) {
         return null;
     }
 
+    @PostMapping("/add")
+    @ApiOperation("添加班次信息")
     @Override
     public JsonVO<Long> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto) {
         return null;
     }
 
+    @PutMapping("/modify")
+    @ApiOperation("修改班次信息")
     @Override
     public JsonVO<Long> modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto) {
         return null;
     }
 
+    @DeleteMapping("/remove")
+    @ApiOperation("删除班次信息")
     @Override
     public JsonVO<Long> removeShiftPlan(List<Long> shiftId) {
         return null;
