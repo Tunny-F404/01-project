@@ -1,11 +1,12 @@
 package com.zeroone.star.project.j3.dto;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Date;
+
 
 /**
  * ClassName:DfsExportDTO
@@ -16,6 +17,8 @@ import java.util.Date;
  * @Create 2024/5/21  8:41
  * @Version 1.0
  */
+
+@Data
 public class ExportMessageDTO {
 
     private static final long serialVersionUID = 1L;

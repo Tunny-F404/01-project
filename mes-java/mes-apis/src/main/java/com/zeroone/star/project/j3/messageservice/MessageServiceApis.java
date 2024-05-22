@@ -35,14 +35,6 @@ public interface MessageServiceApis {
     public JsonVO<String> removeMessageByMessageIds(String messageIds);
 
     /**
-     * 导出消息
-     * @param group 服务器分组
-     * @param storageId 对应存储id
-     * @return 下载文件
-     */
-    public ResponseEntity<byte[]> downloadMessage(String group, String storageId);
-
-    /**
      * 下载导出Excel
      * @return 报表
      */

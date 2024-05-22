@@ -24,10 +24,10 @@
             <result property="attr2" column="attr2" jdbcType="VARCHAR"/>
             <result property="attr3" column="attr3" jdbcType="INTEGER"/>
             <result property="attr4" column="attr4" jdbcType="INTEGER"/>
-            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+<!--            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>-->
+<!--            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>-->
+<!--            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>-->
+<!--            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>-->
 
     </resultMap>
 
