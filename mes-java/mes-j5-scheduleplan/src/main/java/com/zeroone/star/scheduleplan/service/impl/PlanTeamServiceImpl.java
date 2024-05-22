@@ -53,7 +53,6 @@ public class PlanTeamServiceImpl extends ServiceImpl<CalPlanTeamMapper, CalPlanT
         // 构建查询条件
         QueryWrapper<CalPlanTeam> wrapper = new QueryWrapper<>();
         wrapper.eq("plan_id", query.getPlanId());
-        wrapper.eq("calendar_type", query.getCalendarType());
         // 执行分页查询
         Page<CalPlanTeam> result = baseMapper.selectPage(page, wrapper);
         // 结果转换成DTO
