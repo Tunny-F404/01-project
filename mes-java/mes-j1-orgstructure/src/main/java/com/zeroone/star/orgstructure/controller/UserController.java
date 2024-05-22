@@ -24,7 +24,7 @@ public class UserController implements UserApis {
     @PostMapping("add-user")
     @ApiOperation(value = "新增用户")
     @Override
-    public JsonVO<String> addUser(@RequestBody AddUserDTO addUserDTO) {
+    public JsonVO<String> addUser(AddUserDTO addUserDTO) {
         if (userService.checkUserNameUnique(addUserDTO.getUserName()) == 1)
         {
             return JsonVO.fail("新增用户失败，登录账号已存在");
@@ -48,7 +48,7 @@ public class UserController implements UserApis {
     @PutMapping("modify-user")
     @ApiOperation(value = "修改用户")
     @Override
-    public JsonVO<String> modifyUser(@RequestBody UpdateUserDTO updateUserDTO) {
+    public JsonVO<String> modifyUser(UpdateUserDTO updateUserDTO) {
         if (StringUtils.isNotEmpty(updateUserDTO.getPhonenumber())
                 && userService.checkPhoneUnique(updateUserDTO.getPhonenumber()) == 1)
         {
@@ -66,7 +66,7 @@ public class UserController implements UserApis {
     @DeleteMapping("remove-user")
     @ApiOperation(value = "删除用户")
     @Override
-    public JsonVO<String> removeUser(@RequestBody List<Long> userIds) {
+    public JsonVO<String> removeUser(List<Long> userIds) {
         userService.removeUser(userIds);
         return JsonVO.success("删除成功");
     }

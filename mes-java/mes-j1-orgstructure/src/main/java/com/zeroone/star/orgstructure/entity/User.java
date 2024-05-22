@@ -1,5 +1,6 @@
 package com.zeroone.star.orgstructure.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @Data
 @TableName("sys_user")
 public class User {
-    @TableId
+    @TableId(type = IdType.AUTO)
     @ApiModelProperty(value = "用户ID", example = "1", required = true)
     private Long userId;
     @ApiModelProperty(value = "部门ID", example = "4")
