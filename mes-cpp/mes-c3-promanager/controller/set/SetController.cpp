@@ -41,3 +41,26 @@ ProDetailJsonVO::Wrapper SetController::execQueryProDetail(const ProDetailQuery:
 {
 	return ProDetailJsonVO::Wrapper();
 }
+// 9 修改工序步骤
+Uint64JsonVO::Wrapper SetController::execModifyStepSet(const SetProListDTO::Wrapper& dto)
+{
+	auto jvo = Uint64JsonVO::createShared();
+	return jvo;
+}
+// 10 删除工序步骤
+Uint64JsonVO::Wrapper SetController::execDeleteStepSet(const SetProListDTO::Wrapper& dto)
+{
+	auto jvo = Uint64JsonVO::createShared();
+	return jvo;
+}
+// 11 导出工序步骤
+StringJsonVO::Wrapper SetController::execExportStepSet(const SetStepExportQuery::Wrapper& dto)
+{
+	return StringJsonVO::Wrapper();
+}
+// 12 删除工序
+Uint64JsonVO::Wrapper SetController::execDeleteSet(const SetProAddTableDTO::Wrapper& dto)
+{
+	auto jvo = Uint64JsonVO::createShared();
+	return jvo;
+}

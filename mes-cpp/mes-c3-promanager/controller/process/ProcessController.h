@@ -22,6 +22,8 @@
 #include "domain/vo/process/ProMaterialVO.h"
 #include "domain/query/process/ProMaterialQuery.h"
 
+#include "domain/query/process/outputRouteProductQuery.h"
+
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
 /**
@@ -131,9 +133,9 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "route_code", ZH_WORDS_GETTER("process.field.route_code"), "R1121", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "route_name", ZH_WORDS_GETTER("process.field.route_name"), ZH_WORDS_GETTER("process.field.example"), false);
-		API_DEF_ADD_QUERY_PARAMS(String, "enable_flag", ZH_WORDS_GETTER("process.field.enable_flag"), "Y", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "code", ZH_WORDS_GETTER("process.field.route_code"), "R1121", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "name", ZH_WORDS_GETTER("process.field.route_name"), ZH_WORDS_GETTER("process.field.example"), false);
+		API_DEF_ADD_QUERY_PARAMS(String, "flag", ZH_WORDS_GETTER("process.field.enable_flag"), "Y", false);
 	}
 	ENDPOINT(API_M_POST, "/set/export-process", queryProcess, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
@@ -214,7 +216,6 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "item_code", ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"), 1, false);
 		API_DEF_ADD_QUERY_PARAMS(String, "item_name", ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_name"), "N", false);
 	}
-	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/pro/query-promaterial-table", queryProMaterial, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ProMaterialQuery, queryParams);
@@ -222,6 +223,45 @@ public:
 		API_HANDLER_RESP_VO(execQueryProMaterial(query, authObject->getPayload()));
 	}
 
+	// 14 定义删除工艺流程接口
+	ENDPOINT_INFO(removeProRoute) {
+		// 定义标题和返回类型以及授权支持
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("process.route.delete1"), Uint64JsonVO::Wrapper);
+		// 定义其他路径参数说明
+		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.route.id"), 1, true);
+	}
+	// 3.2 定义删除接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/{id}", removeProRoute, PATH(UInt64, id), execRemoveProRoute(id));
+
+
+	// 15 定义删除工艺关联产品接口
+	ENDPOINT_INFO(removeRouteProduct) {
+		// 定义标题和返回类型以及授权支持
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("process.route.delete2"), Uint64JsonVO::Wrapper);
+		// 定义其他路径参数说明
+		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.route.corproductid"), 1, true);
+	}
+	// 3.2 定义删除接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/product/{id}", removeRouteProduct, PATH(UInt64, id), execRemoveRouteProduct(id));
+
+	// 16 定义工艺关联产品导出接口
+	ENDPOINT_INFO(outputRouteProduct) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.route.ouput"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
+		// 定义分页查询参数描述
+		API_DEF_ADD_PAGE_PARAMS();
+
+	}
+	ENDPOINT(API_M_GET, "/pro/export-corproducts", outputRouteProduct, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(userQuery, outputRouteProductQuery, queryParams);
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execOutputRouteProduct(userQuery, authObject->getPayload()));
+	}
 private:
 	// 1 获取工艺列表数据
 	ProcessListJsonVO::Wrapper execQueryProcessList(const ProcessListQuery::Wrapper& query);
@@ -249,6 +289,12 @@ private:
 	Uint64JsonVO::Wrapper execModifyRelatePro(const ModRelateProDTO::Wrapper& dto);
 	// 13 获取产品制程物料BOM列表
 	ProMaterialPageJsonVO::Wrapper execQueryProMaterial(const ProMaterialQuery::Wrapper& query, const PayloadDTO& payload);
+	// 14 删除工艺流程
+	Uint64JsonVO::Wrapper execRemoveProRoute(const UInt64& id);
+	// 15 删除工艺关联产品
+	Uint64JsonVO::Wrapper execRemoveRouteProduct(const UInt64& id);
+	// 16 导出工艺关联产品
+	StringJsonVO::Wrapper execOutputRouteProduct(const outputRouteProductQuery::Wrapper& query, const PayloadDTO& payload);
 };
 
 // 0 取消API控制器使用宏

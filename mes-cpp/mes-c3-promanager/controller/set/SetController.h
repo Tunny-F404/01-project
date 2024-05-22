@@ -20,6 +20,8 @@
 #include "domain/query/set/ProDetailQuery.h"
 #include "domain/vo/set/ProDetailVO.h"
 
+#include "domain/query/set/SetStepExportQuery.h"
+
 #include OATPP_CODEGEN_BEGIN(ApiController) 
 
 /**
@@ -138,6 +140,47 @@ public:
 		API_HANDLER_RESP_VO(execQueryProDetail(query));
 	}
 
+	// 9 修改工序步骤
+	ENDPOINT_INFO(modifystepSet) {
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.modify.summary1"));
+		API_DEF_ADD_AUTH();
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+	}
+	ENDPOINT(API_M_POST, "/set/modifystep-set", modifystepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+		API_HANDLER_RESP_VO(execModifyStepSet(dto));
+	}
+	// 10 删除工序步骤
+	ENDPOINT_INFO(deletestepSet) {
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.modify.summary2"));
+		API_DEF_ADD_AUTH();
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+	}
+	ENDPOINT(API_M_POST, "/set/delete-process-step", deletestepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+		API_HANDLER_RESP_VO(execDeleteStepSet(dto));
+	}
+	// 11 导出工序步骤
+	ENDPOINT_INFO(SetStepExport) {
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.export.summary"));
+		API_DEF_ADD_AUTH();
+		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
+		API_DEF_ADD_PAGE_PARAMS();
+		API_DEF_ADD_QUERY_PARAMS(String, "setstepCode", ZH_WORDS_GETTER("set.fields.code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "setstepName", ZH_WORDS_GETTER("set.fields.name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("set.fields.flag"), "", false);
+	}
+	ENDPOINT(API_M_POST, "/set/export-process-step", SetStepExport, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		API_HANDLER_QUERY_PARAM(setstepQuery, SetStepExportQuery, queryParams);
+		API_HANDLER_RESP_VO(execExportStepSet(setstepQuery));
+	}
+	// 12 删除工序
+	ENDPOINT_INFO(DeleteSet) {
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.add.summary"));
+		API_DEF_ADD_AUTH();
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+	}
+	ENDPOINT(API_M_POST, "/set/delete-process", DeleteSet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+		API_HANDLER_RESP_VO(execDeleteSet(dto));
+	}
 private:
 	// 1 导出文件
 	StringJsonVO::Wrapper execProcessExport(const ProcessExportQuery::Wrapper& query);
@@ -155,6 +198,14 @@ private:
 	ProListJsonVO::Wrapper execQueryProNameList();
 	// 8 获取工序详情
 	ProDetailJsonVO::Wrapper execQueryProDetail(const ProDetailQuery::Wrapper& query);
+	//9 修改工序步骤
+	Uint64JsonVO::Wrapper execModifyStepSet(const SetProListDTO::Wrapper& dto);
+	//10 删除工序步骤
+	Uint64JsonVO::Wrapper execDeleteStepSet(const SetProListDTO::Wrapper& dto);
+	//11 导出工序步骤
+	StringJsonVO::Wrapper execExportStepSet(const SetStepExportQuery::Wrapper& query);
+	//12 删除工序
+	Uint64JsonVO::Wrapper execDeleteSet(const SetProAddTableDTO::Wrapper& dto);
 };
 
 

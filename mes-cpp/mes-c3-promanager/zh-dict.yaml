@@ -1,4 +1,10 @@
 process:
+ route:
+  delete1: 删除一条工艺流程
+  delete2: 删除一个工艺关联产品
+  output: 导出工艺关联产品
+  id: 工艺流程编号
+  corproductid: 工艺关联产品编号
  fields:
   processId: 唯一标识
   processCode: 工序编码
@@ -8,15 +14,11 @@ process:
   describe: 工序说明
  field:
   id: 唯一编号
-  code: 路线编号 
-  name: 路线名称
-  desc: 路线说明
+  code: 工艺路线编号 
+  name: 工艺路线名称
+  desc: 工艺路线说明
   flag: 是否启用
   remark: 备注
-  route_code: 工艺路线编号
-  route_name: 工艺路线名称
-  route_desc: 工艺路线说明
-  enable_flag: 是否启用
   example: 组装
  get:
   summary1: 获取工艺列表 
@@ -29,7 +31,7 @@ process:
  del:
   summary1: 删除工艺
  get_field:
-  summary: 工艺导出
+  summary: 导出工艺
 
 pro:
  get:
@@ -68,14 +70,20 @@ set:
   material: 辅助材料
   docurl: 材料URL
   contentid: 内容ID
+  code: 工序步骤编码
+  name: 工序步骤名称
+  flag: 是否是关键步骤
  add:
   summary: 添加工序
  modify:
   summary: 修改工序
+  summary1: 修改工序步骤
+  summary2: 删除工序步骤
  addstep: 
   summary: 添加工序步骤
  export:
-  summary: 工序导出
+  summary: 导出工序
+  summary1: 导出工序步骤
 
 product:
  field:

@@ -17,36 +17,27 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _PROCESS_QUERY_
-#define _PROCESS_QUERY_
+#ifndef _OUTPUT_ROUTE_PRODUCT_QUERY_
+#define _OUTPUT_ROUTE_PRODUCT_QUERY_
 
 #include "../../GlobalInclude.h"
-#include "domain/query/PageQuery.h"
+#include "../../../../lib-oatpp/include/domain/query/PageQuery.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
  * 示例分页查询对象
  */
-class ProcessQuery : public PageQuery
+class outputRouteProductQuery : public PageQuery
 {
-	DTO_INIT(ProcessQuery, PageQuery);
-	// 工艺路线编号
-	DTO_FIELD(String, route_code);
-	DTO_FIELD_INFO(route_code) {
-		info->description = ZH_WORDS_GETTER("process.field.code");
+	DTO_INIT(outputRouteProductQuery, PageQuery);
+	//记录id
+	DTO_FIELD(UInt64, recordId);
+	DTO_FIELD_INFO(recordId) {
+		info->description = ZH_WORDS_GETTER("process.route.id");
 	}
-	// 工艺路线名称
-	DTO_FIELD(String, route_name);
-	DTO_FIELD_INFO(route_name) {
-		info->description = ZH_WORDS_GETTER("process.field.name");
-	}
-	// 是否启用
-	DTO_FIELD(String, enable_flag);
-	DTO_FIELD_INFO(enable_flag) {
-		info->description = ZH_WORDS_GETTER("process.field.flag");
-	}
+
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_PROCESS_QUERY_
+#endif // !_SAMPLE_QUERY_

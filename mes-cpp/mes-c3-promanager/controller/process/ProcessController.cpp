@@ -76,3 +76,19 @@ ProMaterialPageJsonVO::Wrapper ProcessController::execQueryProMaterial(const Pro
 {
 	return {};
 }
+// 14 删除工艺流程
+Uint64JsonVO::Wrapper ProcessController::execRemoveProRoute(const UInt64& id)
+{
+	return {};
+}
+// 15 删除工艺关联产品
+Uint64JsonVO::Wrapper ProcessController::execRemoveRouteProduct(const UInt64& id)
+{
+	return {};
+}
+// 16 导出工艺关联产品
+StringJsonVO::Wrapper ProcessController::execOutputRouteProduct(const outputRouteProductQuery::Wrapper& query, const PayloadDTO& payload)
+{
+	return {};
+}
+
