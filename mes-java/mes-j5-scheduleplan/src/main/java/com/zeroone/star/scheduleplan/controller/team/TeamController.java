@@ -1,4 +1,4 @@
-package com.zeroone.star.scheduleplan.controller;
+package com.zeroone.star.scheduleplan.controller.team;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.planteam.AddPlanTeamDTO;
@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
- * 描述：关联班组控制器
+ * 描述：班组控制器
  * </p>
  * @author linglan
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/planteam")
-@Api(tags = "关联班组")
-public class PlanTeamController implements TeamApis {
+@RequestMapping("sch-manage/sch-plan/team")
+@Api(tags = "班组接口")
+public class TeamController implements TeamApis {
 
         @GetMapping("/list")
         @ApiOperation("查询指定条件的关联班组")
