@@ -31,11 +31,13 @@ using namespace oatpp::web::protocol::http;
 using namespace oatpp::web::protocol::http::outgoing;
 
 #ifndef CHECK_TOKEN
-// ¿ªÆôÆ¾Ö¤¼ì²é£¬½â¿ªÏÂÒ»ÐÐ×¢ÊÍ¼´¿É
-// #define CHECK_TOKEN
+// ï¿½ï¿½ï¿½ï¿½Æ¾Ö¤ï¿½ï¿½é£¬ï¿½â¿ªï¿½ï¿½Ò»ï¿½ï¿½×¢ï¿½Í¼ï¿½ï¿½ï¿½
+
+//#define CHECK_TOKEN
+
 #endif
 
-// ¿çÓòÊôÐÔÉèÖÃ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 #define CROS_FIELD_SETTING(__RES__) \
 __RES__->putHeaderIfNotExists("Access-Control-Allow-Origin", "*"); \
 __RES__->putHeaderIfNotExists("Access-Control-Allow-Methods", "*"); \
@@ -84,7 +86,7 @@ std::shared_ptr<oatpp::web::server::interceptor::RequestInterceptor::OutgoingRes
 	auto method = request->getStartingLine().method.toString().getValue("");
 	auto protocol = request->getStartingLine().protocol.toString().getValue("");
 	OATPP_LOGD("Interceptor", "%s:%s->%s", protocol.c_str(), method.c_str(), path.c_str());
-	// SwaggerÎÄµµÓë¹Ø±Õ·þÎñÆ÷ÇëÇó²»À¹½Ø
+	// Swaggerï¿½Äµï¿½ï¿½ï¿½Ø±Õ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (path.find("/chat?") == 0 ||
 		path.find("/swagger/") == 0 || 
 		path.find("/api-docs/") == 0 || 
@@ -94,7 +96,7 @@ std::shared_ptr<oatpp::web::server::interceptor::RequestInterceptor::OutgoingRes
 		return nullptr;
 	}
 #ifdef CHECK_TOKEN
-	// »ñÈ¡ÇëÇóÆ¾Ö¤
+	// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Æ¾Ö¤
 	oatpp::String token = request->getHeader(API_H_TOKEN);
 	if (!token || token->empty()) {
 		return createErrorRespone("empty token", m_objectMapper);
