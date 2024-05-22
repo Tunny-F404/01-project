@@ -32,13 +32,13 @@ public:
 	bool updateData(const DeviceManageDTO::Wrapper& dto);
 
 	// 通过ID删除数据
-	bool removeData(const DeviceManageDelDTO::Wrapper& dto);
+	bool removeData(const DeviceManageIdDTO::Wrapper& dto);
 
 	//生成ecxcel
-	string creatExcel(const DeviceManageDelDTO::Wrapper& dto);
+	string creatExcel(const DeviceManageIdDTO::Wrapper& dto);
 
 	// 保存数据
-	uint64_t saveData(const DeviceManageDTO::Wrapper& dto);
+	uint64_t saveData(const DeviceManageBaseDTO::Wrapper& dto);
 
 };
 

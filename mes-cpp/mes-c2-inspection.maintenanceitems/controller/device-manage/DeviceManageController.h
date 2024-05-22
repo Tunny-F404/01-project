@@ -44,14 +44,15 @@ public:
 
 	//删除接口描述和处理
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("device-manage.summary.remove-proj"), removeProj, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/device-manage/remove-proj", removeProj, BODY_DTO(DeviceManageDelDTO::Wrapper, dto), execRemoveProj(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/device-manage/remove-proj", removeProj, BODY_DTO(DeviceManageIdDTO::Wrapper, dto), execRemoveProj(dto));
 
 	//导出接口描述和处理
 	API_DEF_ENDPOINT_INFO(ZH_WORDS_GETTER("device-manage.summary.export-proj"), exportProj, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT(API_M_POST, "/device-manage/export-proj", exportProj, BODY_DTO(DeviceManageDelDTO::Wrapper, dto), execExportProj(dto));
+	API_HANDLER_ENDPOINT(API_M_POST, "/device-manage/export-proj", exportProj, BODY_DTO(DeviceManageIdDTO::Wrapper, dto), execExportProj(dto));
 
+	//新增接口描述和处理
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("device-manage.summary.add-proj"), addProj, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/device-manage/add-proj", addProj, BODY_DTO(DeviceManageDTO::Wrapper, dto), execAddProj(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/device-manage/add-proj", addProj, BODY_DTO(DeviceManageBaseDTO::Wrapper, dto), execAddProj(dto));
 
 
 
@@ -60,12 +61,13 @@ private:
 	Uint64JsonVO::Wrapper execModifyProj(const DeviceManageDTO::Wrapper& dto);
 
 	// 3.3 演示删除数据
-	Uint64JsonVO::Wrapper execRemoveProj(const DeviceManageDelDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execRemoveProj(const DeviceManageIdDTO::Wrapper& dto);
 	
 	//导出项目
-	Uint64JsonVO::Wrapper execExportProj(const DeviceManageDelDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execExportProj(const DeviceManageIdDTO::Wrapper& dto);
 
-	Uint64JsonVO::Wrapper execAddProj(const DeviceManageDTO::Wrapper& dto);
+	//新增项目
+	Uint64JsonVO::Wrapper execAddProj(const DeviceManageBaseDTO::Wrapper& dto);
 
 
 

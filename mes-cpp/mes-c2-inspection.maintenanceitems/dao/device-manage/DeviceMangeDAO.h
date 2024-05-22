@@ -30,23 +30,23 @@ class DeviceManageDAO : public BaseDAO
 public:
 
 	// 修改数据
-	int update(const DeviceManageDO& uObj);
+	uint64_t update(const DeviceManageDO& uObj);
 
 	//查询数据以便生成excel文件
-	list<DeviceManageDO> queryById(const DeviceManageDelDO& uObj);
+	list<DeviceManageDO> queryById(const DeviceManageIdDO& uObj);
 
 	// 插入数据
-	uint64_t insert(const DeviceManageDO& iObj);
+	uint64_t insert(const DeviceManageBaseDO& iObj);
 
 
 };
 
-class DeviceManageDelDAO : public BaseDAO
+class DeviceManageIdDAO : public BaseDAO
 {
 public:
 
 	// 修改数据
-	int deleteById(const DeviceManageDelDO& uObj);
+	uint64_t deleteById(const DeviceManageIdDO& uObj);
 
 };
 

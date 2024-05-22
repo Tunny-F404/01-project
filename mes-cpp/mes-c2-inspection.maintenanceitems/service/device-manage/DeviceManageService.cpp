@@ -37,12 +37,12 @@ bool DeviceManageService::updateData(const DeviceManageDTO::Wrapper& dto)
 	return dao.update(data) == 1;
 }
 
-string DeviceManageService::creatExcel(const DeviceManageDelDTO::Wrapper& dto) 
+string DeviceManageService::creatExcel(const DeviceManageIdDTO::Wrapper& dto) 
 {
-	DeviceManageDelDO data;
+	DeviceManageIdDO data;
 
 	DeviceManageDAO dao;
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, SubjectDelId, subjectDelId);
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, SubjectId, subjectId);
 
 	list<DeviceManageDO> result = dao.queryById(data);
 
@@ -59,7 +59,7 @@ string DeviceManageService::creatExcel(const DeviceManageDelDTO::Wrapper& dto)
 	for (DeviceManageDO sub : result)
 	{
 		std::vector<string> v;
-		v.push_back(std::to_string(sub.getSubjectId()));
+		v.push_back(sub.getSubjectId());
 		v.push_back(sub.getSubjectCode());
 		v.push_back(sub.getSubjectName());
 		v.push_back(sub.getSubjectType());
@@ -96,25 +96,25 @@ string DeviceManageService::creatExcel(const DeviceManageDelDTO::Wrapper& dto)
 }
 
 
-bool DeviceManageService::removeData(const DeviceManageDelDTO::Wrapper& dto)
+bool DeviceManageService::removeData(const DeviceManageIdDTO::Wrapper& dto)
 {
-	DeviceManageDelDO data;
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, SubjectDelId, subjectDelId);
+	DeviceManageIdDO data;
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, SubjectId, subjectId);
 
-	DeviceManageDelDAO dao;
+	DeviceManageIdDAO dao;
 	return dao.deleteById(data) >= 1;
 }
 
-uint64_t DeviceManageService::saveData(const DeviceManageDTO::Wrapper& dto)
+uint64_t DeviceManageService::saveData(const DeviceManageBaseDTO::Wrapper& dto)
 {
 	// 组装DO数据
-	DeviceManageDO data;
+	DeviceManageBaseDO data;
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, SubjectId, subjectId, SubjectCode, subjectCode, SubjectName, subjectName,
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto,SubjectCode, subjectCode, SubjectName, subjectName,
 		SubjectType, subjectType, SubjectContent, subjectContent, SubjectStandard, subjectStandard, EnableFlag, enableFlag);
-		// 执行数据添加
+	// 执行数据添加
 	DeviceManageDAO dao;
 	return dao.insert(data);
 }
