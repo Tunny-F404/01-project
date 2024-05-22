@@ -41,8 +41,12 @@ class EquipmentDTO : public oatpp::DTO
 	API_DTO_FIELD(String, brand, ZH_WORDS_GETTER("equipment.fields.brand"), true, "QW");
 	//规格型号
 	API_DTO_FIELD(String, spec, ZH_WORDS_GETTER("equipment.fields.spec"), true, "Q1001");
-	//所属车间
-	API_DTO_FIELD(String, workshop, ZH_WORDS_GETTER("equipment.fields.workshop"), true, "w1");
+	//所属车间ID
+	API_DTO_FIELD(UInt64, workshopId, ZH_WORDS_GETTER("equipment.fields.workshopid"), true, 2);
+	//所属车间编码
+	API_DTO_FIELD(String, workshopCode, ZH_WORDS_GETTER("equipment.fields.workshopcode"), true, "w1");
+	//所属车间名称
+	API_DTO_FIELD(String, workshopName, ZH_WORDS_GETTER("equipment.fields.workshopname"), true, "w1");
 	//设备状态
 	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("equipment.fields.status"), true, "enable");
 	//创建时间
@@ -62,12 +66,12 @@ class addEquipmentDTO :public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, eName, ZH_WORDS_GETTER("equipment.fields.ename"));
 	//品牌
 	API_DTO_FIELD_DEFAULT(String, brand, ZH_WORDS_GETTER("equipment.fields.brand"));
-	//设备分类
+	//设备分类名称
 	API_DTO_FIELD_DEFAULT(String, tName, ZH_WORDS_GETTER("equipment.fields.tname"));
 	//规格型号
 	API_DTO_FIELD_DEFAULT(String,spec , ZH_WORDS_GETTER("equipment.fields.spec"));
-	//所属车间
-	API_DTO_FIELD_DEFAULT(String, workshop, ZH_WORDS_GETTER("equipment.fields.workshop"));
+	//所属车间名称
+	API_DTO_FIELD_DEFAULT(String, workshopName, ZH_WORDS_GETTER("equipment.fields.workshopname"));
 	//备注
 	API_DTO_FIELD_DEFAULT(String, note, ZH_WORDS_GETTER("equipment.fields.note"));
 
@@ -78,8 +82,13 @@ class addEquipmentDTO :public oatpp::DTO
 class EquipmentDetailDTO : public EquipmentDTO
 {
 	DTO_INIT(EquipmentDetailDTO, EquipmentDTO);
-	//设备分类
+	//设备类型Id
+	API_DTO_FIELD(String, tId, ZH_WORDS_GETTER("equipment.fields.tid"), true, "0001");
+	//设备类型编码
+	API_DTO_FIELD(String, tCode, ZH_WORDS_GETTER("equipment.fields.tcode"), true, "0001");
+	//设备类型名称
 	API_DTO_FIELD(String, tName, ZH_WORDS_GETTER("equipment.fields.tname"), true, "0001");
+
 	//备注
 	API_DTO_FIELD(String, note, ZH_WORDS_GETTER("equipment.fields.note"), true, "sucess");
 };
@@ -103,33 +112,6 @@ class EquipmentPageDTO : public PageDTO< EquipmentDTO::Wrapper>
 
 
 
-/**
- * 设备分类数据传输对象
- */
-class EquipmentClassifyDTO : public oatpp::DTO, public TreeNode
-{
-	DTO_INIT(EquipmentClassifyDTO, DTO);
-	// 菜单名称
-	API_DTO_FIELD_DEFAULT(String,classifyName , ZH_WORDS_GETTER("equipment.class.cname"));
-	// 子菜单
-	API_DTO_FIELD(List<EquipmentClassifyDTO::Wrapper>, children, ZH_WORDS_GETTER("equipment.class.children"), false, {});
-	//主键
-	API_DTO_FIELD_DEFAULT(UInt64, id, ZH_WORDS_GETTER("equipment.class.id"));
-	//设备类型编码
-	API_DTO_FIELD_DEFAULT(String, eClassCode, ZH_WORDS_GETTER("equipment.class.eclasscode"));
-	//设备类型名称
-	API_DTO_FIELD_DEFAULT(String, eClassName, ZH_WORDS_GETTER("equipment.class.eclassname"));
-	//父类型ID
-	API_DTO_FIELD_DEFAULT(UInt64, pid, ZH_WORDS_GETTER("equipment.class.pid"));
-	//所有父节点ID
-	API_DTO_FIELD_DEFAULT(String, allPid, ZH_WORDS_GETTER("equipment.class.allpid"));
-	//是否启用
-	API_DTO_FIELD_DEFAULT(String, enable, ZH_WORDS_GETTER("equipment.class.enable"));
-	//备注
-	API_DTO_FIELD_DEFAULT(String, note, ZH_WORDS_GETTER("equipment.class.note"));
-
-
-};
 
 #include OATPP_CODEGEN_END(DTO)
 #endif // 

@@ -39,7 +39,7 @@ EquipmentDetailJsonVO::Wrapper EquipmentController::execEquipmentDetail(const Eq
 	equipmentDetail->spec = "123";
 	equipmentDetail->status = "123";
 	equipmentDetail->tName = "123";
-	equipmentDetail->workshop = "123";
+	
 	res->success(equipmentDetail);
 	return res;
 }
@@ -56,9 +56,4 @@ Uint64JsonVO::Wrapper EquipmentController::executeModifyEquipment(const modifyEq
 	auto res = Uint64JsonVO::createShared();
 	res->success(true);
 	return res;
-}
-
-EquipmentClassifyJsonVO::Wrapper EquipmentController::executeEquipmentClassify(const EquipmentClassifyDTO::Wrapper& dto)
-{
-	return {};
 }
