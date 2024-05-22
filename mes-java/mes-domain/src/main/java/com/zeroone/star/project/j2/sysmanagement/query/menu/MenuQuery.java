@@ -9,14 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class MenuQuery {
 
-    //资源名称
-    @ApiModelProperty(value = "资源名称",example = "部门管理")
-    private String title;
-
-    //菜单图标
-    @ApiModelProperty(value = "菜单图标",example = "目录")
-    private String type;
-
-
-
+    //资源id
+    @ApiModelProperty(value = "资源id",example = "1")
+    private String id;
 }
