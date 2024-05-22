@@ -1,111 +1,66 @@
 package com.zeroone.star.basicdata.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
- * 单位表
+ * 描述：单位实体类
  * </p>
- *
- * @author zjx
- * @since 2024-05-20
+
+ * @author 本鼠
+ * @version 1.0.0
  */
+
+@Data
 @Getter
 @Setter
-@TableName("md_unit_measure")
+@TableName("md-unit-measure")
 public class MdUnitMeasure implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 单位ID
-     */
+    //单位ID
+    @ExcelIgnore
     @TableId(value = "measure_id", type = IdType.AUTO)
     private Long measureId;
-
-    /**
-     * 单位编码
-     */
+    @ExcelProperty(value = "单位编码", index = 0)
     private String measureCode;
-
-    /**
-     * 单位名称
-     */
+    @ExcelProperty(value = "单位名称", index = 1)
     private String measureName;
-
-    /**
-     * 是否是主单位
-     */
+    @ExcelProperty(value = "是否是主单位", index = 2)
     private String primaryFlag;
-
-    /**
-     * 主单位ID
-     */
-    private Long primaryId;
-
-    /**
-     * 与主单位换算比例
-     */
+    @ExcelProperty(value = "主单位ID", index = 3)
+    private Integer primaryId;
+    @ExcelProperty(value = "与主单位换算比例", index = 4)
     private Double changeRate;
-
-    /**
-     * 是否启用
-     */
+    @ExcelProperty(value = "是否启用", index = 5)
     private String enableFlag;
-
-    /**
-     * 备注
-     */
-    private String remark;
-
-    /**
-     * 预留字段1
-     */
+    @ExcelProperty(value = "预留字段1", index = 6)
     private String attr1;
-
-    /**
-     * 预留字段2
-     */
-    private String attr2;
-
-    /**
-     * 预留字段3
-     */
-    private Integer attr3;
-
-    /**
-     * 预留字段4
-     */
-    private Integer attr4;
-
-    /**
-     * 创建者
-     */
+    @ExcelProperty(value = "预留字段2", index = 7)
+    private String arr2;
+    @ExcelProperty(value = "预留字段3", index = 8)
+    private Integer arr3;
+    @ExcelProperty(value = "预留字段4", index = 9)
+    private Integer arr4;
+    //备注
+    @ExcelIgnore
+    private String remark;
+    //创建者
+    @ExcelIgnore
     private String createBy;
-
-    /**
-     * 创建时间
-     */
+    //创建时间
+    @ExcelIgnore
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
-
-    /**
-     * 更新者
-     */
+    //更新者
+    @ExcelIgnore
     private String updateBy;
-
-    /**
-     * 更新时间
-     */
+    //更新时间
+    @ExcelIgnore
     private LocalDateTime updateTime;
-
-
 }

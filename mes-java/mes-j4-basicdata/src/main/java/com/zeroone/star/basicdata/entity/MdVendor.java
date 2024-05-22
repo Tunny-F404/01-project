@@ -1,181 +1,96 @@
 package com.zeroone.star.basicdata.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * <p>
- * 供应商表
+ * 描述：供应商实体类
  * </p>
- *
- * @author zjx
- * @since 2024-05-20
+ * @author 本鼠
+ * @version 1.0.0
  */
-@Getter
-@Setter
-@TableName("md_vendor")
-public class MdVendor implements Serializable {
 
+@Data
+@TableName("md-vendor")
+public class MdVendor implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 供应商ID
-     */
+    //供应商ID
+    @ExcelIgnore
     @TableId(value = "vendor_id", type = IdType.AUTO)
     private Long vendorId;
-
-    /**
-     * 供应商编码
-     */
+    @ExcelProperty(value = "供应商编码",index = 0)
     private String vendorCode;
-
-    /**
-     * 供应商名称
-     */
+    @ExcelProperty(value = "供应商名称",index = 1)
     private String vendorName;
-
-    /**
-     * 供应商简称
-     */
+    @ExcelProperty(value = "供应商简称",index = 2)
     private String vendorNick;
-
-    /**
-     * 供应商英文名称
-     */
+    @ExcelProperty(value = "供应商英文名称",index = 3)
     private String vendorEn;
-
-    /**
-     * 供应商简介
-     */
+    @ExcelProperty(value = "供应商简介",index = 4)
     private String vendorDes;
-
-    /**
-     * 供应商LOGO地址
-     */
+    @ExcelProperty(value = "供应商LOGO地址",index = 5)
     private String vendorLogo;
-
-    /**
-     * 供应商等级
-     */
+    @ExcelProperty(value = "供应商等级",index = 6)
     private String vendorLevel;
-
-    /**
-     * 供应商评分
-     */
+    @ExcelProperty(value = "供应商评分",index = 7)
     private Integer vendorScore;
-
-    /**
-     * 供应商地址
-     */
+    @ExcelProperty(value = "供应商地址",index = 8)
     private String address;
-
-    /**
-     * 供应商官网地址
-     */
+    @ExcelProperty(value = "供应商官网地址",index = 9)
     private String website;
-
-    /**
-     * 供应商邮箱地址
-     */
+    @ExcelProperty(value = "供应商邮箱地址",index = 10)
     private String email;
-
-    /**
-     * 供应商电话
-     */
+    @ExcelProperty(value = "供应商电话",index = 11)
     private String tel;
-
-    /**
-     * 联系人1
-     */
+    @ExcelProperty(value = "联系人1",index = 12)
     private String contact1;
-
-    /**
-     * 联系人1-电话
-     */
+    @ExcelProperty(value = "联系人1-电话",index = 13)
     private String contact1Tel;
-
-    /**
-     * 联系人1-邮箱
-     */
+    @ExcelProperty(value = "联系人1-邮箱",index = 14)
     private String contact1Email;
-
-    /**
-     * 联系人2
-     */
+    @ExcelProperty(value = "联系人2",index = 15)
     private String contact2;
-
-    /**
-     * 联系人2-电话
-     */
+    @ExcelProperty(value = "联系人2-电话",index = 16)
     private String contact2Tel;
-
-    /**
-     * 联系人2-邮箱
-     */
+    @ExcelProperty(value = "联系人2-邮箱",index = 17)
     private String contact2Email;
-
-    /**
-     * 统一社会信用代码
-     */
+    @ExcelProperty(value = "统一社会信用代码",index = 18)
     private String creditCode;
-
-    /**
-     * 是否启用
-     */
+    @ExcelProperty(value = "是否启用",index = 19)
     private String enableFlag;
-
-    /**
-     * 备注
-     */
+    //备注
+    @ExcelIgnore
     private String remark;
-
-    /**
-     * 预留字段1
-     */
+    //预留字段1
+    @ExcelIgnore
     private String attr1;
-
-    /**
-     * 预留字段2
-     */
+    //预留字段2
+    @ExcelIgnore
     private String attr2;
-
-    /**
-     * 预留字段3
-     */
+    //预留字段3
+    @ExcelIgnore
     private Integer attr3;
-
-    /**
-     * 预留字段4
-     */
+    //预留字段4
+    @ExcelIgnore
     private Integer attr4;
-
-    /**
-     * 创建者
-     */
+    //创建者
+    @ExcelIgnore
     private String createBy;
-
-    /**
-     * 创建时间
-     */
+    //创建时间
+    @ExcelIgnore
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
-
-    /**
-     * 更新者
-     */
+    //更新者
+    @ExcelIgnore
     private String updateBy;
-
-    /**
-     * 更新时间
-     */
+    //更新时间
+    @ExcelIgnore
     private LocalDateTime updateTime;
-
-
 }
