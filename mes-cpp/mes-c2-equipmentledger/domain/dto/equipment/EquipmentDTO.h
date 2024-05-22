@@ -97,7 +97,10 @@ class EquipmentDetailDTO : public EquipmentDTO
 */
 class modifyEquipmentDTO : public addEquipmentDTO
 {
+
 	DTO_INIT(modifyEquipmentDTO, addEquipmentDTO);
+	//Œ®“ª±Í ∂
+	API_DTO_FIELD_DEFAULT(UInt64, eId, ZH_WORDS_GETTER("equipment.fields.id"));
 };
 
 /**

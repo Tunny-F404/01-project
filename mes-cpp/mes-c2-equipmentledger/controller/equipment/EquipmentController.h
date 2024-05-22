@@ -101,13 +101,10 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
-		// 定义修改参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "eId", ZH_WORDS_GETTER("equipment.fields.id"), 5, true);
 	}
 	// 4定义修改设备端点处理
-	ENDPOINT(API_M_PUT, "/equipment-ledger/modify-equipment", modifyEquipment,QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// 解析查询参数
-		API_HANDLER_QUERY_PARAM(dto, modifyEquipmentDTO, queryParams);
+	ENDPOINT(API_M_PUT, "/equipment-ledger/modify-equipment", modifyEquipment, BODY_DTO(modifyEquipmentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+
 		//呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(executeModifyEquipment(dto));
 	}
