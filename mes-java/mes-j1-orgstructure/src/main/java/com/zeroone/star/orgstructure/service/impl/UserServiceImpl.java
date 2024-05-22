@@ -1,8 +1,6 @@
 package com.zeroone.star.orgstructure.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.orgstructure.entity.User;
 import com.zeroone.star.orgstructure.entity.UserPost;
@@ -11,11 +9,10 @@ import com.zeroone.star.orgstructure.mapper.UserMapper;
 import com.zeroone.star.orgstructure.service.IUserPostService;
 import com.zeroone.star.orgstructure.service.IUserRoleService;
 import com.zeroone.star.orgstructure.service.IUserService;
-import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.j1.orgstructure.dto.user.AddUserDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserDTO;
-import io.swagger.annotations.ApiModelProperty;
+
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -23,7 +20,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -77,6 +73,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         userRoleService.saveBatch(userRoles);
     }
 
+    /**
+     * 修改用户信息
+     * @param updateUserDTO 传入的待更新用户信息
+     */
     @Override
     public void updateUser(UpdateUserDTO updateUserDTO) {
         User user = new  User();
@@ -114,6 +114,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         userRoleService.saveBatch(userRoles);
     }
 
+    /**
+     * 删除用户信息，支持批量删除
+     * @param userIds 要删除的用户id
+     */
     @Override
     public void removeUser(List<Long> userIds) {
         userMapper.deleteBatchIds(userIds);
@@ -129,6 +133,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
     }
 
+    /**
+     * 校验用户名是否唯一
+     * @param name 用户名
+     * @return 返回查询结果个数
+     */
     @Override
     public Long checkUserNameUnique(String name) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
@@ -136,6 +145,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userMapper.selectCount(queryWrapper);
     }
 
+    /**
+     * 校验电话号码是否唯一
+     * @param phoneNumber 电话号码
+     * @return 返回查询结果个数
+     */
     @Override
     public Long checkPhoneUnique(String phoneNumber) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
@@ -143,6 +157,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userMapper.selectCount(queryWrapper);
     }
 
+    /**
+     * 检验邮箱是否唯一
+     * @param email 邮箱
+     * @return 返回查询结果个数
+     */
     @Override
     public Long checkEmailUnique(String email) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
