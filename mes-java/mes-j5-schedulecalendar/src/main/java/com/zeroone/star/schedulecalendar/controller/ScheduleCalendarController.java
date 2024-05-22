@@ -1,9 +1,9 @@
 package com.zeroone.star.schedulecalendar.controller;
 
 import com.zeroone.star.project.j5.dto.schedulecalendar.ScheduleCalendarDTO;
-import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleQueryTeam;
-import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleQueryType;
-import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleQueryUser;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleTeamQuery;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleTypeQuery;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleUserQuery;
 import com.zeroone.star.project.j5.schedulecalendar.ScheduleCalendarApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -29,19 +29,19 @@ public class ScheduleCalendarController implements ScheduleCalendarApis {
     @GetMapping("/list-by-type")
     @ApiOperation("获取指定班组类型排班计划")
     @Override
-    public JsonVO<ScheduleCalendarDTO> listScheduleByType(ScheduleQueryType condition) {
+    public JsonVO<ScheduleCalendarDTO> listScheduleByType(ScheduleTypeQuery condition) {
         return null;
     }
     @GetMapping("/list-by-team")
     @ApiOperation("获取指定班组排班计划")
     @Override
-    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleQueryTeam condition) {
+    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleTeamQuery condition) {
         return null;
     }
     @GetMapping("/list-by-user")
     @ApiOperation("获取指定人员排班计划")
     @Override
-    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleQueryUser condition) {
+    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleUserQuery condition) {
         return null;
     }
 

@@ -17,7 +17,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @ApiModel("获取指定人员排班计划")
-public class ScheduleQueryUser {
+public class ScheduleUserQuery {
     @NotBlank(message = "人员id不能为空")
     @ApiModelProperty(value = "人员id", example = "341")
     private String userId;
