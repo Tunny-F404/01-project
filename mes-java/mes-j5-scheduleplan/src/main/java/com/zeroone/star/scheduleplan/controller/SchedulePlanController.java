@@ -53,7 +53,7 @@ public class SchedulePlanController implements SchedulePlanApis {
     }
 
 
-    @ApiOperation(value = "修改排班计划状态")
+    @ApiOperation(value = "修改计划状态")
     @PutMapping("modify-plans_status")
     @Override
     public JsonVO<Integer> modifySchPlanStatus(SchPlanDTO schPlanDTO) {
@@ -61,7 +61,7 @@ public class SchedulePlanController implements SchedulePlanApis {
     }
 
 
-    @ApiOperation(value = "导出排班计划")
+    @ApiOperation(value = "导出计划")
     @GetMapping("export-schedule_plan")
     @Override
     public ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition) {
