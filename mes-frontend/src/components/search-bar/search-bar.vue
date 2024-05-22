@@ -1,7 +1,7 @@
 <script lang="ts" setup generic="DataType extends Record<string, unknown>">
 import { ref, computed, watch } from 'vue'
 
-import { ElForm, ElInput } from 'element-plus'
+import { ElForm, ElInput, ElSelect, ElOption } from 'element-plus'
 
 type ElInputPropsType = InstanceType<typeof ElInput>['props']
 
@@ -74,18 +74,63 @@ const props = withDefaults(defineProps<SearchBarProps<DataType>>(), {
 })
 
 const data = defineModel<DataType>(<keyof SearchBarProps>'data')
+
+type OptionsItem = {
+	label: string
+	value: string
+	id?: string | number
+}
+
+const options = ref<OptionsItem[]>([
+	{
+		label: '选项1',
+		value: '1'
+	},
+
+	{
+		label: '选项2',
+		value: '2',
+		id: 2
+	},
+
+	{
+		label: '选项agsgsd',
+		value: '3',
+		id: 2
+	},
+
+	{
+		label: '选项4444',
+		value: '5',
+		id: 2
+	}
+])
 </script>
 
 <template>
 	<section class="search-bar-root">
 		<!-- <ElForm> </ElForm> -->
 
-		<ElInput v-model="data.input"></ElInput>
+		<!-- <ElInput v-model="data.input"></ElInput> -->
+
+		<ElSelect
+			v-model="data.input"
+			placeholder="请选择内容"
+			size="large"
+			style="width: 240px"
+		>
+			<ElOption
+				v-for="(item, index) in options"
+				:key="index"
+				:label="item.label"
+				:value="item.value"
+			/>
+		</ElSelect>
 	</section>
 </template>
 
 <style lang="scss" scoped>
 .search-bar-root {
-	background-color: red;
+	background-color: #f3f3f3;
 }
 </style>
