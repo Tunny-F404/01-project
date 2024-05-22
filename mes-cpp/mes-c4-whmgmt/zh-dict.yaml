@@ -1,6 +1,5 @@
 whstorageorder:
  field:
-  recpt_id: 入库单ID
   recpt_name: 入库单名称
   recpt_code: 入库单编号
   vendor_name: 供应商名称
@@ -9,9 +8,7 @@ whstorageorder:
   recpt_date: 入库日期
   warehouse_name: 入库仓库
   remark: 备注
-  ids: 入库单行唯一标识id
- defult: 
-  recpt_name: pvc材料来料检验
+  line_id: 行ID
  add: 
   summary: 添加入库单行
  modify:

@@ -2,8 +2,8 @@
 #ifndef _DELETEWHSTORAGEORDERCONTROLLER_H_
 #define _DELETEWHSTORAGEORDERCONTROLLER_H_
 #include "../../../../lib-oatpp/include/domain/vo/BaseJsonVO.h"
-#include "../../../domain/dto/ProchAndStorage/MaterialsInfo/AddWhStorageorderDTO.h"
-#include "../../../domain/vo/ProchAndStorage/MaterialsInfo/AddWhStorageorderVO.h"
+#include "../../../domain/dto/ProchAndStorage/MaterialsInfo/DeleteWhStorageorderDTO.h"
+#include "../../../domain/vo/ProchAndStorage/MaterialsInfo/DeleteWhStorageorderVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -17,7 +17,7 @@ public:
 	//3.1 定义删除接口描述
 	ENDPOINT_INFO(deleteWhStorageorders) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("whstorageorder.delete.summary"), Uint64JsonVO::Wrapper);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("whstorageorder.delete.summary"), /*Uint64JsonVO::Wrapper*/DeleteWhStorageorderVO::Wrapper);
 		// 添加安全验证
 		API_DEF_ADD_AUTH();
 	}

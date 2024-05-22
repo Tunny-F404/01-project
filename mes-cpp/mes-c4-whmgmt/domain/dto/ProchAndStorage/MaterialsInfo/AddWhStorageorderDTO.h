@@ -11,23 +11,21 @@
 class AddWhStorageorderDTO : public oatpp::DTO
 {
 	DTO_INIT(AddWhStorageorderDTO, DTO);
-	//入库单id
-	API_DTO_FIELD_DEFAULT(UInt64, recpt_id, ZH_WORDS_GETTER("whstorageorder.field.recpt_id"),true,0);
-	//入库单名称
-	API_DTO_FIELD_DEFAULT(String, recpt_name, ZH_WORDS_GETTER("whstorageorder.field.recpt_name"), true, ZH_WORDS_GETTER("whstorageorder.defult.recpt_name"));
-	//入库单编号
-	API_DTO_FIELD_DEFAULT(String, recpt_code, ZH_WORDS_GETTER("whstorageorder.field.recpt_code"), true,"R20230905001");
-	//供应商名称
-	API_DTO_FIELD_DEFAULT(String, vendor_name, ZH_WORDS_GETTER("whstorageorder.field.vendor_name"), true,"DUOMU");
-	//采购订单号
-	API_DTO_FIELD_DEFAULT(String, po_code, ZH_WORDS_GETTER("whstorageorder.field.po_code"), true);
-	//单据状态
-	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("whstorageorder.field.status"),false);
-	//入库日期
-	API_DTO_FIELD_DEFAULT(String, recpt_date, ZH_WORDS_GETTER("whstorageorder.field.recpt_date"), true,"2023-09-05");
-	//入库仓库
+	//入库单名称 recpt_name varchar
+	API_DTO_FIELD_DEFAULT(String, recpt_name, ZH_WORDS_GETTER("whstorageorder.field.recpt_name"));
+	//入库单编号 recpt_code varchar
+	API_DTO_FIELD_DEFAULT(String, recpt_code, ZH_WORDS_GETTER("whstorageorder.field.recpt_code"));
+	//供应商名称 vendor_name varchar
+	API_DTO_FIELD_DEFAULT(String, vendor_name, ZH_WORDS_GETTER("whstorageorder.field.vendor_name"));
+	//采购订单号 po_code varchar
+	API_DTO_FIELD_DEFAULT(String, po_code, ZH_WORDS_GETTER("whstorageorder.field.po_code"));
+	//单据状态 status varchar
+	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("whstorageorder.field.status"));
+	//入库日期 recpt_date String
+	API_DTO_FIELD_DEFAULT(String, recpt_date, ZH_WORDS_GETTER("whstorageorder.field.recpt_date"));
+	//入库仓库 warehouse_name varchar
 	API_DTO_FIELD_DEFAULT(String, warehouse_name, ZH_WORDS_GETTER("whstorageorder.field.warehouse_name"));
-	//备注
+	//备注 remark varchar
 	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("whstorageorder.field.remark"));
 
 };
