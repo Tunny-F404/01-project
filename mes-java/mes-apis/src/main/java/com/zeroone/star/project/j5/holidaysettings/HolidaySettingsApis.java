@@ -1,5 +1,11 @@
 package com.zeroone.star.project.j5.holidaysettings;
 
+import com.zeroone.star.project.j5.dto.schedulecalendar.ScheduleCalendarDTO;
+import com.zeroone.star.project.j5.query.holidaysetting.SettingHolidayQuery;
+import com.zeroone.star.project.j5.query.scheduleplan.planteam.PlanTeamQuery;
+import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
+
 /**
  * <p>
  * 描述：节假日设置接口
@@ -10,4 +16,7 @@ package com.zeroone.star.project.j5.holidaysettings;
  * @version 1.0.0
  */
 public interface HolidaySettingsApis {
+
+
+
 }
