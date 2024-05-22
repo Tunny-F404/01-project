@@ -9,7 +9,7 @@ AreaPageJsonVO::Wrapper AreaController::execQueryArea(const AreaQuery::Wrapper& 
 }
 
 
-AreaPageJsonVO::Wrapper AreaController::execAddArea(const AreaDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper AreaController::execAddArea(const AreaDTO::Wrapper& dto)
 {
 	return {};
 }
@@ -19,7 +19,7 @@ Uint64JsonVO::Wrapper AreaController::execModifyArea(const AreaDTO::Wrapper& dto
 	return {};
 }
 
-AreaPageJsonVO::Wrapper AreaController::execRemoveArea(const List<Int32>& idsdto)
+Uint64JsonVO::Wrapper AreaController::execRemoveArea(const List<Int32>& idsdto)
 {
 	
 	return {};

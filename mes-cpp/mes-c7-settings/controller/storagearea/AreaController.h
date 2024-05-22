@@ -52,7 +52,7 @@ public:
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
-		API_DEF_ADD_RSP_JSON_WRAPPER(AreaPageJsonVO);
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 		
 	// 3.2 定义新增接口处理
@@ -67,7 +67,7 @@ public:
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/storagearea/modify-area", modifyArea, BODY_DTO(AreaDTO::Wrapper, dto), execModifyArea(dto));
 
 	// 3.1 定义删除接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("storagearea.remove.delete"), removeArea, AreaPageJsonVO::Wrapper)
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("storagearea.remove.delete"), removeArea, Uint64JsonVO::Wrapper)
 	// 3.2 定义删除接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/storagearea/remove-area", removeArea, BODY_DTO(List<Int32>, idsdto), execRemoveArea(idsdto));
 
@@ -75,11 +75,11 @@ private:
 	// 3.3 演示分页查询数据
 	AreaPageJsonVO::Wrapper execQueryArea(const AreaQuery::Wrapper& query, const PayloadDTO& payload);
 	// 3.3 演示新增数据
-	AreaPageJsonVO::Wrapper execAddArea(const AreaDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddArea(const AreaDTO::Wrapper& dto);
 	// 3.3 演示修改数据
 	Uint64JsonVO::Wrapper execModifyArea(const AreaDTO::Wrapper& dto);
 	// 3.3 演示删除数据
-	AreaPageJsonVO::Wrapper execRemoveArea( const List<Int32>& idsdto);
+	Uint64JsonVO::Wrapper execRemoveArea( const List<Int32>& idsdto);
 };
 
 #include OATPP_CODEGEN_END(ApiController)
