@@ -3,6 +3,8 @@ return:
   summary: 查询所有供应商退货单
  modify-return:
   summary: 修改供应商退货单
+ execute-return:
+  summary: 执行供应商退货单
  remove-return:
   summary: 删除供应商退货单
  download-return:

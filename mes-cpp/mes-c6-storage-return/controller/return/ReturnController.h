@@ -52,27 +52,33 @@ public:
 	// 定义修改单据接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/return/modify-return", modifyReturn, BODY_DTO(ReturnDTO::Wrapper, dto), executeModifyReturn(dto));
 
-	// 定义删除接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.remove-return.summary"), removeReturn, Uint64JsonVO::Wrapper);
-	// 定义删除单据接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/remove-return", removeReturn, PATH(UInt64, returnId), executeRemoveReturn(returnId));
+	// 定义执行退货接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.execute-return.summary"), executeReturn, Uint64JsonVO::Wrapper);
+	// 定义执行退货接口处理 "/return/{returnId}"必须对应
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/{returnIdexec}", executeReturn, PATH(UInt64, returnIdexec), executeExecuteReturn(returnIdexec));
 
-	// 定义一个文件下载接口
-	// 定义描述
+	// 定义删除单据接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.remove-return.summary"), removeReturn, Uint64JsonVO::Wrapper);
+	// 定义删除单据接口处理 "/return/{returnId}"必须对应
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/{returnIdremo}", removeReturn, PATH(UInt64, returnIdremo), executeRemoveReturn(returnIdremo));
+
+	// 定义导出单据接口描述
 	ENDPOINT_INFO(downloadFile) {
 		API_DEF_ADD_COMMON(ZH_WORDS_GETTER("return.download-return.summary"), Void);
 		API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("return.fields.filename"), "file/C6RyanTest.jpg", true);
 	}
-	// 定义端点
+	// 定义导出单据接口处理
 	ENDPOINT(API_M_GET, "/return/download", downloadFile, QUERY(String, filename)) {
 		return executeDownloadFile(filename);
 	}
 private:
 	// 查询所有单据信息
 	ReturnPageJsonVO::Wrapper executeQueryAll(const ReturnQuery::Wrapper& returnQuery);
-	// 修改单据信息
+	// 修改单据
 	Uint64JsonVO::Wrapper executeModifyReturn(const ReturnDTO::Wrapper& dto);
-	// 删除单据数据
+	// 执行单据
+	Uint64JsonVO::Wrapper executeExecuteReturn(const UInt64& id);
+	// 删除单据
 	Uint64JsonVO::Wrapper executeRemoveReturn(const UInt64& id);
 	// 导出单据
 	std::shared_ptr<OutgoingResponse> executeDownloadFile(const String& filename);

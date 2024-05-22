@@ -97,6 +97,33 @@ Uint64JsonVO::Wrapper ReturnController::executeModifyReturn(const ReturnDTO::Wra
 	return jvo;
 }
 
+Uint64JsonVO::Wrapper ReturnController::executeExecuteReturn(const UInt64& id)
+{
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!id || id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ReturnService service;
+	// 在数据库中执行退货操作
+	// if (service.removeData(id.getValue(0))) 
+
+	if (true)
+	{
+		jvo->success(id);
+	}
+	else
+	{
+		jvo->fail(id);
+	}
+	// 响应结果
+	return jvo;
+}
+
 Uint64JsonVO::Wrapper ReturnController::executeRemoveReturn(const UInt64& id)
 {
 	// 定义返回数据对象
@@ -109,9 +136,17 @@ Uint64JsonVO::Wrapper ReturnController::executeRemoveReturn(const UInt64& id)
 	}
 	// 定义一个Service
 	ReturnService service;
+
+	//在数据库中查询对应id的数据
+	//ReturnDTO::Wrapper dto_remove;
+	//状态不为草稿无法删除
+	/*if (dto_remove->status != 0)
+	{
+		jvo->fail(id);
+	}*/
+	
 	// 执行数据删除
 	// if (service.removeData(id.getValue(0))) 
-
 	if(true)
 	{
 		jvo->success(id);
