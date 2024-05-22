@@ -55,13 +55,13 @@ public class ParameterController implements ParameterApis {
         //模拟一份配置数据
         ArrayList<ParameterDTO> configs = new ArrayList<>();
         ParameterDTO parameterDTO = new ParameterDTO();
-        parameterDTO.setId(1);
-        parameterDTO.setKey("sys.index.skinName");
-        parameterDTO.setName("主框架页-默认皮肤样式名称");
-        parameterDTO.setType("Y");
+        parameterDTO.setConfigId(1);
+        parameterDTO.setConfigKey("sys.index.skinName");
+        parameterDTO.setConfigName("主框架页-默认皮肤样式名称");
+        parameterDTO.setConfigType("Y");
         parameterDTO.setUpdateBy("admin");
         parameterDTO.setUpdateTime(DateTime.now());
-        parameterDTO.setValue("skin-red");
+        parameterDTO.setConfigValue("skin-red");
         parameterDTO.setCreateBy("admin");
         parameterDTO.setCreateTime(DateTime.now());
         parameterDTO.setRemark("深色主题theme-dark，浅色主题theme-light");
@@ -78,13 +78,13 @@ public class ParameterController implements ParameterApis {
         //模拟一份配置数据
         ArrayList<ParameterDTO> Parameters = new ArrayList<>();
         ParameterDTO parameterDTO = new ParameterDTO();
-        parameterDTO.setId(1);
-        parameterDTO.setKey("sys.index.skinName");
-        parameterDTO.setName("主框架页-默认皮肤样式名称");
-        parameterDTO.setType("Y");
+        parameterDTO.setConfigId(1);
+        parameterDTO.setConfigKey("sys.index.skinName");
+        parameterDTO.setConfigName("主框架页-默认皮肤样式名称");
+        parameterDTO.setConfigType("Y");
         parameterDTO.setUpdateBy("admin");
         parameterDTO.setUpdateTime(DateTime.now());
-        parameterDTO.setValue("skin-red");
+        parameterDTO.setConfigValue("skin-red");
         parameterDTO.setCreateBy("admin");
         parameterDTO.setCreateTime(DateTime.now());
         parameterDTO.setRemark("深色主题theme-dark，浅色主题theme-light");
@@ -107,8 +107,8 @@ public class ParameterController implements ParameterApis {
     @Override
     @PostMapping("add")
     @ApiOperation("添加参数")
-    public JsonVO<ParameterDTO> addParam(@RequestBody ParameterDTO parameterDTO){
-        return JsonVO.success(parameterDTO);
+    public JsonVO<Integer> addParam(ParameterDTO parameterDTO){
+        return JsonVO.success(service.saveParameter(parameterDTO));
     }
 
 

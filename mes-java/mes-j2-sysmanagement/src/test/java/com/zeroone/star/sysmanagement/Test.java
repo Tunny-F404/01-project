@@ -3,6 +3,7 @@ package com.zeroone.star.sysmanagement;
 import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
 import com.zeroone.star.sysmanagement.entity.ParameterDO;
 import com.zeroone.star.sysmanagement.mapper.ParameterMapper;
+import com.zeroone.star.sysmanagement.service.ParameterService;
 import org.junit.runner.RunWith;
 import org.mapstruct.Mapper;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,13 +11,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
-interface MsParameterMapper{
 
-    ParameterDO paraDtoToDo(ParameterDTO parameterDTO);
-}
 
 /**
  * 描述： TODO
@@ -31,6 +29,9 @@ public class Test {
 
     @Resource
     ParameterMapper mapper;
+
+    @Resource
+    ParameterService service;
 
     @org.junit.Test
     public void test01(){
@@ -48,11 +49,12 @@ public class Test {
 
     @org.junit.Test
     public void addTest(){
-        ParameterDO parameterDO = new ParameterDO();
-        parameterDO.setConfigName("test");
-        parameterDO.setConfigKey("key1");
-        parameterDO.setConfigValue("hjydashabi");
-        int insert = mapper.insert(parameterDO);
+        ParameterDTO parameterDTO = new ParameterDTO();
+        parameterDTO.setConfigName("date");
+        parameterDTO.setConfigKey("key1");
+        parameterDTO.setConfigValue("testDAte");
+        parameterDTO.setCreateTime(new Date());
+        int insert = service.saveParameter(parameterDTO);
         System.out.println(insert);
     }
 }
