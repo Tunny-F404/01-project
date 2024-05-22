@@ -41,7 +41,7 @@ public class MdItemController implements MdItemApis {
     @ApiOperation(value = "导出物料产品列表")
     public ResponseEntity<byte[]> exportToExcel(MdItemQuery mdItemQuery){
         List<MdItem> items = iMdItemService.getItemsByQuery(mdItemQuery);
-        return null;
+        return iMdItemService.exportToExcel(items);
     }
     /**
      * 下载导入模板。

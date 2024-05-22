@@ -17,5 +17,5 @@ public class MdItemQuery {
     private String itemName;
 
     @ApiModelProperty(value = "产品物料分类ID")
-    private int itemTypeId;
+    private String itemTypeId;
 }

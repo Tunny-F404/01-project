@@ -11,7 +11,7 @@
         <if test="itemName != null and itemName != ''">
             AND item_name LIKE CONCAT('%', #{itemName}, '%')
         </if>
-        <if test="itemTypeId != null">
+        <if test="itemTypeId != null and itemName != ''">
             AND item_type_id = #{itemTypeId}
         </if>
     </select>

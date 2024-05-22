@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.zeroone.star.productManagement.entity.MdItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j6.product_management.query.MdItemQuery;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ import java.util.List;
  */
 public interface IMdItemService extends IService<MdItem> {
     List<MdItem> getItemsByQuery(MdItemQuery query);
+
+    ResponseEntity<byte[]> exportToExcel(List<MdItem> items);
 }
