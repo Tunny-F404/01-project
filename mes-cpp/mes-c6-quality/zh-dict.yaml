@@ -49,4 +49,27 @@ inspect:
  min_quantity: 轻微缺陷数量
 
 single: 
+ index_id: 检测项ID
+ index_code: 检测项编码
+ index_name: 检测项名称
+ index_type: 检测项类型
+ qc_tool: 检测工具
+ check_method: 检测要求
+ stander_val: 标准值
+ unit_of_measure: 单位
+ threshold_max: 误差上限
+ threshold_min: 误差下限
+ index_remark: 检测项备注
+
+ detail: 
+  summary: 查询检测项信息
+ defect:
+  summary: 查询缺陷记录
+ add:
+ summary: 增加缺陷记录
+change:
+ summary: 修改缺陷记录
+delete:
+ summary: 删除缺陷记录
+
  

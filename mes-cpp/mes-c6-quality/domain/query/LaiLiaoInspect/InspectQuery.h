@@ -50,10 +50,12 @@ class Inspect_detailQuery :public PageQuery
 //查看报表
 class Inspect_tableQuery :public oatpp::DTO
 {
-	DTO_INIT(Inspect_tableQuery, PageQuery);
+	DTO_INIT(Inspect_tableQuery, DTO);
 	// 来料检验表主键id
 	API_DTO_FIELD_DEFAULT(String, line_id, ZH_WORDS_GETTER("inspect.line_id"));
 
 };
+
+//
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_INSPECT_QUERY_

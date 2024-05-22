@@ -79,26 +79,26 @@ public:
 		API_HANDLER_RESP_VO(execQueryInspect_detail(userQuery, authObject->getPayload()));
 	}
 
-	//3.1 定义查看报表接口描述
-	ENDPOINT_INFO(queryInspect_table) {
-		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("inspect.table.summary"));
-		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
-		API_DEF_ADD_AUTH();
-		// 定义响应参数格式
-		API_DEF_ADD_RSP_JSON_WRAPPER(Inspect_tableJsonVO);
-		// 定义分页查询参数描述
-		API_DEF_ADD_PAGE_PARAMS();
-		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("inspect.line_id"), 1, false);
-	}
-	// 3.2 定义查看报表接口处理
-	ENDPOINT(API_M_GET, "/Inspect/table", queryInspect_table, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(userQuery, Inspect_tableQuery, queryParams);
-		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execQueryInspect_table(userQuery, authObject->getPayload()));
-	}
+	////3.1 定义查看报表接口描述
+	//ENDPOINT_INFO(queryInspect_table) {
+	//	// 定义接口标题
+	//	API_DEF_ADD_TITLE(ZH_WORDS_GETTER("inspect.table.summary"));
+	//	// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+	//	API_DEF_ADD_AUTH();
+	//	// 定义响应参数格式
+	//	API_DEF_ADD_RSP_JSON_WRAPPER(Inspect_tableJsonVO);
+	//	// 定义分页查询参数描述
+	//	API_DEF_ADD_PAGE_PARAMS();
+	//	// 定义其他查询参数描述
+	//	API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("inspect.line_id"), 1, false);
+	//}
+	//// 3.2 定义查看报表接口处理
+	//ENDPOINT(API_M_GET, "/Inspect/table", queryInspect_table, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	//	// 解析查询参数为Query领域模型
+	//	API_HANDLER_QUERY_PARAM(userQuery, Inspect_tableQuery, queryParams);
+	//	// 呼叫执行函数响应结果
+	//	API_HANDLER_RESP_VO(execQueryInspect_table(userQuery, authObject->getPayload()));
+	//}
 
 	// 3.1 定义新增接口描述
 	ENDPOINT_INFO(addInspect) {
@@ -134,6 +134,17 @@ public:
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.export.summary"), exportInspect, StringJsonVO::Wrapper);
 	// 3.2 定义导出接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/inspect/export", exportInspect, BODY_DTO(oatpp::List<UInt64>, ids), execExportInspect(ids));
+
+	//// 查看报表的接口可能是这个
+	//// 定义描述
+	//ENDPOINT_INFO(downloadFile) {
+	//	API_DEF_ADD_COMMON(ZH_WORDS_GETTER("file.download.summary"), Void);
+	//	API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("file.field.filename"), "file/test.jpg", true);
+	//}
+	//// 定义端点
+	//ENDPOINT(API_M_GET, "/file/download", downloadFile, QUERY(String, filename)) {
+	//	return execDownloadFile(filename);
+	//}
 
 	// 3.1 定义确认检验单接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.is_ok.summary"), Is_OkInspect, Uint64JsonVO::Wrapper);
