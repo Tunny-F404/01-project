@@ -75,13 +75,19 @@ planSubject:
    primaryKey: 双主键一对多删除时的主要主键
 deleteTemplate:
  summary:
-  deleteUnique: 单一主键的批量删除
-  deleteShared: 多个主键的批量删除
+  deleteUnique: 单一主键的批量删除（示例模板1）
+  deleteShared: 多个主键的批量删除（示例模板2）
  DESC:
   tableName: 表名
   tableNamePri: 主表表名
   tableNameSec: 次表表名
   keyPri: 主表主键
+deleteOP:
+ summary:
+  plan: 删除点检/保养计划
+  machiner: 删除计划里要点检/保养的机器
+  subject: 删除计划里要点检/保养的项目
+  
    
    
      

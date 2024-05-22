@@ -71,9 +71,22 @@ class DeleteTableSharedDTO :public ListDTO<oatpp::UInt64>
 	//主表的表名称
 	API_DTO_FIELD_DEFAULT(String, tableNamePri, ZH_WORDS_GETTER("deleteTemplate.DESC.tableNamePri"));
 
+};
 
+class DeleteMachinerDTO :public DeleteTableSharedDTO
+{
+	DTO_INIT(DeleteMachinerDTO, DeleteTableSharedDTO)
+};
 
+class DeleteSubjectDTO :public DeleteTableSharedDTO
+{
+	DTO_INIT(DeleteSubjectDTO, DeleteTableSharedDTO)
+};
 
+/*删除点检/保养计划*/
+class DeletePlanTDO :public DeleteTableUniqueDTO
+{
+	DTO_INIT(DeletePlanTDO, DeleteTableUniqueDTO)
 };
 
 #include OATPP_CODEGEN_END(DTO)
