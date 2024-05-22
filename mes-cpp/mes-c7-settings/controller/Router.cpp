@@ -19,6 +19,7 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include "storage_area/GetAreaDetailsController.h"
 
 #include "add-del-mod/AddDelModController.h"
 
@@ -53,6 +54,7 @@ void Router::initRouter()
 	//#TIP :系统扩展路由定义，写在这个后面
 	
 	ROUTER_SIMPLE_BIND(AddDelModController);
+	ROUTER_SIMPLE_BIND(GetAreaDetailsController);
 }
 
 #ifdef HTTP_SERVER_DEMO
