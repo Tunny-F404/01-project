@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
 /**
- * <p>
- * 操作日志记录 服务类
- * </p>
+ * 操作日志记录服务接口。
+ * 提供操作日志的增删查等相关操作方法定义。
+ * 扩展了MyBatis Plus的IService接口，用于基础的CRUD操作。
  *
  * @author lenyan
  * @since 2024-05-19
@@ -38,6 +38,17 @@ public interface ISysOperLogService extends IService<SysOperLog> {
      * @return 操作日志对象
      */
     public SysOperLog selectOperLogById(Long operId);
+    /**
+     * 删除所有操作日志记录。
+     * 此操作将清空操作日志表中的所有数据，请谨慎使用。
+     */
+    void removeAllOperLog();
 
-    void cleanOperLog();
+    /**
+     * 获取操作日志信息列表。
+     *
+     * @return 操作日志实体列表
+     */
+    List<SysOperLog> Operloginfo();
+
 }
