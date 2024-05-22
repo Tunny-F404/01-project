@@ -1,5 +1,5 @@
 #pragma once
-=
+
 #ifndef _INCOMING_DAO_
 #define _INCOMING_DAO_
 #include "BaseDAO.h"
@@ -19,10 +19,10 @@ public:
 	// 通过姓名查询数据
 	//list<IncomingDO> selectByName(const string& name);
 	// 插入数据
-	//uint64_t insert(const IncomingDO& iObj);
+	uint64_t insert(const IncomingDO& iObj);
 	// 修改数据
-	//int update(const IncomingDO& uObj);
+	int update(const IncomingDO& uObj);
 	// 通过ID删除数据
-	//int deleteById(uint64_t id);
+	int deleteByIcCode(string incomingCode);
 };
 #endif // !_INCOMING_DAO_

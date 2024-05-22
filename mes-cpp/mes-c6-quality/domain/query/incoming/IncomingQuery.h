@@ -4,6 +4,7 @@
 #define _INCOMING_QUERY_
 
 #include "../../GlobalInclude.h"
+#include"domain/query/PageQuery.h"
 
 
 #include OATPP_CODEGEN_BEGIN(DTO)
@@ -11,9 +12,9 @@
 /**
 * 来料检验查询条件对象
 */
-class IncomingQuery : public oatpp::DTO
+class IncomingQuery : public PageQuery
 {
-	DTO_INIT(IncomingQuery, DTO);
+	DTO_INIT(IncomingQuery, PageQuery);
 	// 来料检验单编号
 	API_DTO_FIELD_DEFAULT(String, incomingCode, ZH_WORDS_GETTER("incoming.fields.incode"));
 	// 来料检验单名称

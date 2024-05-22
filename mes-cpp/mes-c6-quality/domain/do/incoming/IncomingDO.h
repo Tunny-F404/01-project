@@ -10,7 +10,7 @@
 class IncomingDO
 {
 	// 来料检验单编号
-	CC_SYNTHESIZE(string, iqcCode, IqcCode);
+	CC_SYNTHESIZE(string, incomingCode, IncomingCode);
 	// 供应商编码
 	CC_SYNTHESIZE(string, vendorCode, VendorCode);
 	// 供应商名称
@@ -19,7 +19,7 @@ class IncomingDO
 	CC_SYNTHESIZE(string, vendorBatch, VendorBatch);
 public:
 	IncomingDO() {
-		iqcCode = "123456";
+		incomingCode = "123456";
 		vendorCode = "1234567";
 		vendorCode = "大西布";
 		vendorBatch = "12345678";

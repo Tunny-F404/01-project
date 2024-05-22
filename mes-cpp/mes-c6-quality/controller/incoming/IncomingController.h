@@ -3,8 +3,6 @@
 #ifndef _INCOMING_CONTROLLER_
 #define _INCOMING_CONTROLLER_
 
-#include"ServerInfo.h"
-#include"ApiHelper.h"
 #include"domain/dto/incoming/IncomingDTO.h"
 #include"domain/query/incoming/IncomingQuery.h"
 #include"domain/vo/incoming/IncomingVO.h"
@@ -33,7 +31,6 @@ public:// 定义接口
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		
 		API_DEF_ADD_QUERY_PARAMS(String, "incomingCode", ZH_WORDS_GETTER("incoming.fields.incode"), "110", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "vendorCode", ZH_WORDS_GETTER("incoming.fields.vcode"), "110", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "vendorName", ZH_WORDS_GETTER("incoming.fields.vname"), "zebul", false);

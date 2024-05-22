@@ -19,8 +19,8 @@ public:
 	uint64_t saveData(const IncomingDTO::Wrapper& dto);
 	// 修改数据
 	bool updateData(const IncomingDTO::Wrapper& dto);
-	// 通过ID删除数据
-	bool removeData(uint64_t id);
+	// 通过iqc_code删除数据
+	bool removeData(string iqc_code);
 };
 
 #endif // !_INCOMING_SERVICE_

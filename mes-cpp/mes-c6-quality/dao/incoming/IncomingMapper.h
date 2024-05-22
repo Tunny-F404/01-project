@@ -14,7 +14,7 @@ public:
 	IncomingDO mapper(ResultSet* resultSet) const override
 	{
 		IncomingDO data;
-		data.setIqcCode(resultSet->getString(1));
+		data.setIncomingCode(resultSet->getString(1));
 		data.setVendorCode(resultSet->getString(2));
 		data.setVendorName(resultSet->getString(3));
 		data.setVendorBatch(resultSet->getString(4));

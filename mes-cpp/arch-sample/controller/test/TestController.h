@@ -42,7 +42,7 @@ public:
 	ENDPOINT_INFO(getUserById) {
 		auto udef=
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("sample.get.summary"));
-		API_DEF_ADD_PAGE_PARAMS(Int64, "userId",
+		API_DEF_ADD_PATH_PARAMS(Int64, "userId",
 			ZH_WORDS_GETTER("sample.get.fields.uid.desc"),
 			1,
 			true);
@@ -82,6 +82,8 @@ public:
 		//响应结果
 		API_HANDLER_RESP_VO(executeGetPage(query));
 	}
+
+
 private://定义接口执行函数
 	StringJsonVO::Wrapper executeGetPage(const PageQuery::Wrapper& query);
 };
