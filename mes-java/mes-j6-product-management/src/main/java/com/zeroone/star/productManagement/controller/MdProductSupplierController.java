@@ -1,5 +1,7 @@
 package com.zeroone.star.productManagement.controller;
 
+
+import com.zeroone.star.productManagement.service.IMdProductSupplierService;
 import com.zeroone.star.project.j6.product_management.SupplierApis;
 import com.zeroone.star.project.j6.product_management.dto.ProductSupplierListDTO;
 import com.zeroone.star.project.j6.product_management.dto.SupplierDTO;
@@ -8,19 +10,31 @@ import com.zeroone.star.project.j6.product_management.query.SupplierListQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author smile
+ * @since 2024-05-22
+ */
 @RestController
 @RequestMapping("/product-management/suppliers")
 @Api(tags = "关联供应商相关接口")
-public class SupplierController implements SupplierApis {
+public class MdProductSupplierController implements SupplierApis {
+    @Autowired
+    private IMdProductSupplierService mdProductSupplierService;
+
     @GetMapping("/list")
     @ApiOperation(value = "查询关联供应商列表")
     @Override
     public JsonVO<List<SupplierDTO>> querySupplierList(SupplierListQuery query) {
-        return null;
+        return JsonVO.success(mdProductSupplierService.querySupplierList(query));
     }
 
     @PostMapping("/add")
