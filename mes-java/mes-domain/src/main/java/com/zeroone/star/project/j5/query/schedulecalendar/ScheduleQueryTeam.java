@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 /**
- * @description:
+ * @description: 根据分类类型获取指定班组排班计划
  * @program: mes-java
  * @ClassName ScheduleQueryTeam
  * @author: nangua

@@ -7,7 +7,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 /**
- * @description:
+ * @description: 根据人员id获取指定班组排班计划
  * @program: mes-java
  * @ClassName ScheduleQueryUser
  * @author: nangua
