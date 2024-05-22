@@ -20,13 +20,15 @@ Uint64JsonVO::Wrapper RawMaterialOpController::execModifyRawMaterialOp(const Raw
 
 RawMaterialOpJsonVO::Wrapper RawMaterialOpController::execQueryRawMaterialOp(const RawMaterialOpQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	// 定义一个Service
-	RawMaterialOpService service;
-	// 查询数据
-	auto result = service.listAll(query);
-	// 响应结果
-	auto jvo = RawMaterialOpPageJsonVO::createShared();
-	jvo->success(result);
-	ExcelComponent ex;
-	return jvo;
+	//// 定义一个Service
+	//RawMaterialOpService service;
+	//// 查询数据
+	//auto result = service.listAll(query);
+	//// 响应结果
+	//auto jvo = RawMaterialOpPageJsonVO::createShared();
+	//jvo->success(result);
+	//ExcelComponent ex;
+	//return jvo;
+
+	return {};
 }
