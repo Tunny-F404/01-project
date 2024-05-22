@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 @ApiModel("班组列表传输对象")
 public class TeamDTO {
-    @ApiModelProperty(value = "班组ID", example = "T004")
+    @ApiModelProperty(value = "班组ID", example = "1")
     private Long teamId;
     @ApiModelProperty(value = "班组编号", example = "TX001")
     private String teamCode;

@@ -8,6 +8,7 @@ import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
 import com.zeroone.star.project.vo.JsonVO;
 
 import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
+import org.springframework.http.ResponseEntity;
 
 /**
  * <p>
@@ -66,5 +67,12 @@ public interface SchedulePlanApis {
      * @author sailing
      */
     JsonVO<Integer>  modifySchPlanStatus(SchPlanDTO schPlanDTO);
+
+    /**
+     * 导出排班计划
+     * @param condition 查询条件
+     * @author interstellar
+     */
+    ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition);
 
 }
