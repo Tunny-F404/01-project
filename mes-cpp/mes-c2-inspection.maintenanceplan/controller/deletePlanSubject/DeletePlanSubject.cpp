@@ -10,3 +10,13 @@ BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanSubject(const 
 
 	//return BooleanJsonVO::Wrapper();
 }
+
+BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanSubjectOneToMany(const DeletePlanSubjectOneToManyDTO::Wrapper& dto)
+{
+	auto res = BooleanJsonVO::createShared();
+
+	res->success(true);
+	return res;
+
+	//return BooleanJsonVO::Wrapper();
+}

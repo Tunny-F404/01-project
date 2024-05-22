@@ -68,7 +68,11 @@ planSubject:
    inspection: 设备点检
    maintenance: 设备保养
  op:
-  deleteT: 删除操作
+  deleteT: 普通的删除操作
+  deleteOneToMany: 联表下，多主键时的删除操作
+ inputDESC:
+  delOneToMany:
+   primaryKey: 双主键一对多删除时的主要主键
    
    
      

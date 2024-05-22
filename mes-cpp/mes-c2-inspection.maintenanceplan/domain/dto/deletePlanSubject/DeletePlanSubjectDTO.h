@@ -21,6 +21,7 @@ class ListDTO : public oatpp::DTO
 	DTO_INIT(ListDTO, oatpp::DTO)
 		// 数据列表
 		API_DTO_FIELD(List<T>, item, ZH_WORDS_GETTER("list_dto"), false, {});
+	//
 public:
 	// 添加一条数据
 	void addItem(const T& item) {
@@ -39,6 +40,13 @@ class DeletePlanSubjectDTO : public ListDTO<oatpp::String>
 	DTO_INIT(DeletePlanSubjectDTO, ListDTO<oatpp::String>);
 };
 
+//在联表情况下是两个表的主键字段，一对多时是id+idList
+// 除了list还要另一个主键，id
+class DeletePlanSubjectOneToManyDTO :public ListDTO<oatpp::String>
+{
+	DTO_INIT(DeletePlanSubjectOneToManyDTO, ListDTO<oatpp::String>)
+	API_DTO_FIELD_DEFAULT(UInt64, primaryKey, ZH_WORDS_GETTER("planSubject.inputDESC.delOneToMany.primaryKey"));
+};
 #include OATPP_CODEGEN_END(DTO)
-
+//one - to - many
 #endif // !_REMOVEDEVICEDTO_H_
