@@ -35,8 +35,8 @@ public class UpdateUserDTO {
     private char status;
     @ApiModelProperty(value = "更新者", example = "admin")
     private String updateBy;
-    @ApiModelProperty(value = "更新时间", example = "2024-04-11 16:58:02")
-    private LocalDateTime updateTime;
+//    @ApiModelProperty(value = "更新时间", example = "2024-04-11 16:58:02")
+//    private LocalDateTime updateTime;
     @ApiModelProperty(value = "备注", example = "管理员")
     private String remark;
 }

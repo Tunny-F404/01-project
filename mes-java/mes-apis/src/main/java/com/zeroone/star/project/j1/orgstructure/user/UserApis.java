@@ -4,6 +4,8 @@ import com.zeroone.star.project.j1.orgstructure.dto.user.AddUserDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserDTO;
 import com.zeroone.star.project.vo.JsonVO;
 
+import java.util.List;
+
 /**
  * <p>
  *     描述：用户管理接口
@@ -31,5 +33,5 @@ public interface UserApis {
      * @param userIds 用户ID
      * @return 返回信息
      */
-    JsonVO<String> removeUser(Long[] userIds);
+    JsonVO<String> removeUser(List<Long> userIds);
 }

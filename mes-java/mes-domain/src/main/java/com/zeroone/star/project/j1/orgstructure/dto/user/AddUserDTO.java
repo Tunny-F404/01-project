@@ -13,8 +13,8 @@ import java.util.List;
 @Data
 @ApiModel("新增用户")
 public class AddUserDTO {
-    @ApiModelProperty(value = "用户ID", example = "1", required = true)
-    private Long userId;
+//    @ApiModelProperty(value = "用户ID", example = "1", required = true)
+//    private Long userId;
     @ApiModelProperty(value = "部门ID", example = "4")
     private Long deptId;
     @ApiModelProperty(value = "岗位ID", example = "1")
@@ -39,8 +39,8 @@ public class AddUserDTO {
     private char status;
     @ApiModelProperty(value = "创建者", example = "admin")
     private String createBy;
-    @ApiModelProperty(value = "创建时间", example = "2022-04-07 00:29:31")
-    private LocalDateTime createTime;
+//    @ApiModelProperty(value = "创建时间", example = "2022-04-07 00:29:31")
+//    private LocalDateTime createTime;
     @ApiModelProperty(value = "备注", example = "管理员")
     private String remark;
 }
