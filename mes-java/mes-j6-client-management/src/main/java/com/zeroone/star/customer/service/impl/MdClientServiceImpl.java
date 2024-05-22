@@ -1,9 +1,9 @@
 package com.zeroone.star.customer.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.customer.entity.MdClient;
 import com.zeroone.star.customer.mapper.MdClientMapper;
 import com.zeroone.star.customer.service.IMdClientService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
@@ -14,24 +14,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Mapper(componentModel = "Spring")
-interface MsClientMapper{
+interface MsClientMapper {
     /**
+     * @return com.zeroone.star.project.j6.customer.dto.clientDTO
      * @Description 将MdClient对象转换为clientDTO对象
      * @Date 13:40 2024/5/20
      * @Param [client]
-     * @return com.zeroone.star.project.j6.customer.dto.clientDTO
      **/
     ClientDTO clientToClientDTO(MdClient client);
 }
 
-/**
- * <p>
- * 客户表 服务实现类
- * </p>
- *
- * @author root
- * @since 2024-05-20
- */
 @Service
 public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> implements IMdClientService {
 

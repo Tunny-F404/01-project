@@ -1,23 +1,12 @@
 package com.zeroone.star.customer.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * <p>
- * 客户表
- * </p>
- *
- * @author 小鱼
- * @since 2024-05-20
- */
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @TableName("md_client")
