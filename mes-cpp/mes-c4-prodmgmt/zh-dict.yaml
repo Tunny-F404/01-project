@@ -20,9 +20,15 @@ addprodworkorder:
   menuname: 菜单名称
   quantity_produced: 已生产数量
   quantity_changed: 调整数量
+  vendor_name: 供应商名称
+  vendor_code: 供应商编码
  post:
   summary: 新增一条生产工单数据 
 
 getprodworkorderlist:
  get:
   summary: 获取生产工单列表（条件+分页）
+
+prodworkorderinfo:
+ get:
+  summary: 获取生产工单详情

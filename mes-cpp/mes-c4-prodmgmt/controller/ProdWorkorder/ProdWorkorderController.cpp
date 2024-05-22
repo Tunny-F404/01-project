@@ -3,12 +3,17 @@
 
 
 
-Uint64JsonVO::Wrapper ProdWorkorderController::execAddProdWorkorder(const AddProdWorkorderDTO::Wrapper& dto)
+AddProdWorkorderJsonVO::Wrapper ProdWorkorderController::execAddProdWorkorder(const AddProdWorkorderDTO::Wrapper& dto)
 {
 	return{};
 }
 
 GetProdWorkorderListPageJsonVO::Wrapper ProdWorkorderController::execQueryGetProdWorkorderList(const GetProdWorkorderListQuery::Wrapper& query, const PayloadDTO& payload)
+{
+	return{};
+}
+
+ProdWorkorderInfoJsonVO::Wrapper ProdWorkorderController::execGetProdWorkorderInfo(const ProdWorkorderInfoDTO::Wrapper& dto)
 {
 	return{};
 }
