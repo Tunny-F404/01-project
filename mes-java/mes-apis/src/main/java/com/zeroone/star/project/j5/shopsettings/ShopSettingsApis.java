@@ -15,17 +15,16 @@ public interface ShopSettingsApis {
     //获取车间管理列表（条件+分页）
     /**
      * 获取车间管理列表（条件+分页）
-     * @param shopsettingsDTO
-     * @return
-     */
-    JsonVO<PageDTO<GetShopSettingsDTO>> getShopSeetingController(GetShopSettingsDTO shopsettingsDTO);
-
-    /**
-     * 通过车间id或车间名称查询数据
      * @param ShopSettingscondition
      * @return
      */
-    JsonVO<PageDTO<GetShopSettingsDTO>> queryAll(ShopSettingsQuery ShopSettingscondition);
+    JsonVO<PageDTO<GetShopSettingsDTO>> getShopSeetingController(ShopSettingsQuery ShopSettingscondition);
+    /**
+     * 获取车间名称列表
+     * @param GetShopSettingsDTO
+     * @return
+     */
+    JsonVO<GetShopSettingsDTO> getShopSeetingALLController(GetShopSettingsDTO GetShopSettingsDTO);
     /**
      * 更新车间信息
      * @param shopsettingsDTO

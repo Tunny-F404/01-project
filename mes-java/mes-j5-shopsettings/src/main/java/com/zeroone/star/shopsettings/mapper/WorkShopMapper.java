@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Repository
-public class WorkShopMapper  {
+public interface WorkShopMapper extends BaseMapper<WorkShop> {
 }
