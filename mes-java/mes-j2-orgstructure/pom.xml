@@ -12,9 +12,6 @@
 
     <artifactId>mes-j2-orgstructure</artifactId>
 
-
-
-
     <dependencies>
         <!-- spring web mvc -->
         <dependency>
@@ -73,11 +70,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!-- seata -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
-        </dependency>
+
     </dependencies>
     <build>
         <plugins>

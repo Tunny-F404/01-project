@@ -20,16 +20,16 @@ public interface DepartmentApis {
     //获取部门详情
     JsonVO<DepartmentDTO> getDepartmentDetail(String id);
 
+
+
     //新增部门
-    JsonVO<DepartmentDTO> addDepartment(DepartmentDTO departmentDTO);
+    JsonVO<String> addDepartment(DepartmentDTO departmentDTO);
 
     //修改部门
-    JsonVO<Integer> modifyDepartment(DepartmentDTO departmentDTO);
+    JsonVO<String> modifyDepartment(DepartmentDTO departmentDTO);
 
     //删除部门
-    JsonVO<Integer> removeDepartment(String id);
-
-
+    JsonVO<String> removeDepartment(int id);
 
 
 
