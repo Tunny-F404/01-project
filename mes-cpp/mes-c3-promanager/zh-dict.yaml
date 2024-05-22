@@ -84,3 +84,25 @@ product:
   size: 规格型号
   unit: 单位
   routeid: 唯一标识
+
+RelatePro:
+ summary: 
+  AddRelatePro: 新增关联产品
+  ModRelatePro: 修改关联产品
+  ProMaterial: 获取产品制程物料BOM表
+ DTO:
+  item_id: 产品物料ID
+  item_code: 产品物料编码
+  item_name: 产品物料名称
+  unit_of_measure: 产品物料单位
+  specification: 产品规格型号
+  RPmodels: 备注
+  Ratio_of_materials_used: 用料比例
+ ProMaterialDTO:
+  item_id: 物料ID
+  item_code: 物料编码
+  item_name: 物料名称
+  unit_of_measure: 物料单位
+  specification: 规格型号
+  RPmodels: 备注
+  Ratio_of_materials_used: 用料比例

@@ -61,3 +61,18 @@ Uint64JsonVO::Wrapper ProcessController::execModifyProcess(const ModifyProDTO::W
 {
 	return {};
 }
+// 11 添加工艺关联产品
+Uint64JsonVO::Wrapper ProcessController::execAddRelatePro(const AddRelateProDTO::Wrapper& dto)
+{
+	return {};
+}
+// 12 修改工艺关联产品
+Uint64JsonVO::Wrapper ProcessController::execModifyRelatePro(const ModRelateProDTO::Wrapper& dto)
+{
+	return {};
+}
+// 13 获取产品制程物料BOM列表
+ProMaterialPageJsonVO::Wrapper ProcessController::execQueryProMaterial(const ProMaterialQuery::Wrapper& query, const PayloadDTO& payload)
+{
+	return {};
+}

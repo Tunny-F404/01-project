@@ -16,6 +16,12 @@
 #include "domain/dto/process/ComProDTO.h"
 #include "domain/query/process/ComProQuery.h"
 
+#include "domain/vo/process/RelateProVO.h"
+#include "domain/dto/process/RelateProDTO.h"
+#include "domain/dto/process/ProMaterialDTO.h"
+#include "domain/vo/process/ProMaterialVO.h"
+#include "domain/query/process/ProMaterialQuery.h"
+
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
 /**
@@ -176,6 +182,46 @@ public:
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pro.modify.summary"), ModifyProcess, Uint64JsonVO::Wrapper);
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-comprocess", ModifyProcess, BODY_DTO(ModifyProDTO::Wrapper, dto), execModifyProcess(dto));
 
+	//11 添加工艺关联产品
+	ENDPOINT_INFO(addRelatePro) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("RelatePro.summary.AddRelatePro"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+	}
+	ENDPOINT(API_M_POST, "/pro/add-relatepro", addRelatePro, BODY_DTO(AddRelateProDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execAddRelatePro(dto));
+	}
+
+	// 12 修改工艺关联产品
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("RelatePro.summary.ModRelatePro"), modifyRelatePro, Uint64JsonVO::Wrapper);
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-relatepro", modifyRelatePro, BODY_DTO(ModRelateProDTO::Wrapper, dto), execModifyRelatePro(dto));
+
+	// 13 获取产品制程物料BOM列表
+	ENDPOINT_INFO(queryProMaterial) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("RelatePro.summary.ProMaterial"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(ProMaterialPageJsonVO);
+		// 定义分页查询参数描述
+		API_DEF_ADD_PAGE_PARAMS();
+		// 定义其他查询参数描述
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "item_code", ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"), 1, false);
+		API_DEF_ADD_QUERY_PARAMS(String, "item_name", ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_name"), "N", false);
+	}
+	// 3.2 定义查询接口处理
+	ENDPOINT(API_M_GET, "/pro/query-promaterial-table", queryProMaterial, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(query, ProMaterialQuery, queryParams);
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execQueryProMaterial(query, authObject->getPayload()));
+	}
+
 private:
 	// 1 获取工艺列表数据
 	ProcessListJsonVO::Wrapper execQueryProcessList(const ProcessListQuery::Wrapper& query);
@@ -197,6 +243,12 @@ private:
 	Uint64JsonVO::Wrapper execaddComProcess(const NewProcessDTO::Wrapper& dto);
 	// 10 修改组成工序
 	Uint64JsonVO::Wrapper execModifyProcess(const ModifyProDTO::Wrapper& dto);
+	// 11 添加工艺关联产品
+	Uint64JsonVO::Wrapper execAddRelatePro(const AddRelateProDTO::Wrapper& dto);
+	// 12 修改工艺关联产品
+	Uint64JsonVO::Wrapper execModifyRelatePro(const ModRelateProDTO::Wrapper& dto);
+	// 13 获取产品制程物料BOM列表
+	ProMaterialPageJsonVO::Wrapper execQueryProMaterial(const ProMaterialQuery::Wrapper& query, const PayloadDTO& payload);
 };
 
 // 0 取消API控制器使用宏
