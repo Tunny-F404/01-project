@@ -1,0 +1,17 @@
+﻿ProduceWork:
+ query:
+  summary: 获取报工详情查询
+ fields:
+   workstation_name: 工作站名称
+   feedback_type: 报工类型
+   workorder_code: 生产工单编号
+   item_code: 产品物料编码
+   item_name: 产品物料名称
+   user_name: 报工人
+   record_user: 记录人
+   status: "状态 0正常 1停用" 
+   specification: 规格型号
+   quantity_feedback: 报工数量
+   feedback_time: 报工时间
+   record_id: 记录id
+   quantity_uncheck: 待检测质量

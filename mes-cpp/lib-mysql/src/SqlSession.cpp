@@ -240,7 +240,7 @@ uint64_t SqlSession::executeQueryNumerical(const string& sql)
 uint64_t SqlSession::executeQueryNumerical(const string& sql, const SqlParams& params)
 {
 	uint64_t result = 0;
-	TryFinally(
+	TryFinally( 
 		[&] {
 			NULL_PTR_CHECK(conn, "connection is null");
 			//1 获取prepareStatement对象
