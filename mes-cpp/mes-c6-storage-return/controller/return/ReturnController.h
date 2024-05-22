@@ -52,9 +52,9 @@ public:
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/return/modify-return", modifyReturn, BODY_DTO(ReturnDTO::Wrapper, dto), executeModifyReturn(dto));
 
 	// 定义删除接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.remove-return.summary"), removeReturn, Uint64JsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.modify-return.summary"), removeReturn, Uint64JsonVO::Wrapper);
 	// 定义删除单据接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/remove-return", removeReturn, PATH(UInt64, returnId), execRemoveReturn(returnId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/remove-return", removeReturn, PATH(UInt64, returnId), executeRemoveReturn(returnId));
 
 private:
 	// 查询所有单据信息
@@ -62,7 +62,7 @@ private:
 	// 修改单据信息
 	Uint64JsonVO::Wrapper executeModifyReturn(const ReturnDTO::Wrapper& dto);
 	// 删除单据数据
-	Uint64JsonVO::Wrapper execRemoveReturn(const UInt64& id);
+	Uint64JsonVO::Wrapper executeRemoveReturn(const UInt64& id);
 
 };
 

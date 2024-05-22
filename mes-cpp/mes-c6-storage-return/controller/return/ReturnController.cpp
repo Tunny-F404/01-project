@@ -97,7 +97,7 @@ Uint64JsonVO::Wrapper ReturnController::executeModifyReturn(const ReturnDTO::Wra
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper ReturnController::execRemoveReturn(const UInt64& id)
+Uint64JsonVO::Wrapper ReturnController::executeRemoveReturn(const UInt64& id)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
