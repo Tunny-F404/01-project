@@ -50,6 +50,5 @@ class RepaircontentPageDTO : public PageDTO<RepaircontentDTO::Wrapper>
 {
 	DTO_INIT(RepaircontentPageDTO, PageDTO<RepaircontentDTO::Wrapper>);
 };
-
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_REPAIRCONTENT_DTO_
