@@ -9,9 +9,7 @@ import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -26,22 +24,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class TeamController implements TeamApis {
 
         @GetMapping("/list")
-        @ApiOperation("查询指定条件的关联班组")
+        @ApiOperation("获取关联班组列表(条件+分页)")
         @Override
         public JsonVO<PageDTO<PlanTeamDTO>> queryAllPlanTeam(PlanTeamQuery condition) {
                 return null;
         }
-        @GetMapping("/add")
-        @ApiOperation("添加关联班组")
+        @PostMapping("/add")
+        @ApiOperation("添加关联班组(支持多项添加)")
         @Override
         public JsonVO<ResultStatus> addPlanTeam(AddPlanTeamDTO addPlanTeamDTO) {
                 return null;
         }
 
-        @GetMapping("/delete")
+        @DeleteMapping("/delete")
         @ApiOperation("删除关联班组")
         @Override
-        public JsonVO<ResultStatus> deletePlanTeam(Long id) {
+        public JsonVO<ResultStatus> deletePlanTeam(Integer recordId) {
                 return null;
         }
 }
