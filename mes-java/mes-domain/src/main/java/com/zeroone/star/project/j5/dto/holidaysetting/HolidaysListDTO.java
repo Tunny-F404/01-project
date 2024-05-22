@@ -1,5 +1,9 @@
 package com.zeroone.star.project.j5.dto.holidaysetting;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 /**
@@ -11,7 +15,9 @@ import java.util.List;
  * @author nangua
  * @version 1.0.0
  */
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class HolidaysListDTO {
     List<HolidayDTO> holidaysList;
 }
