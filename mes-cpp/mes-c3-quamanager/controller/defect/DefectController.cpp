@@ -23,3 +23,9 @@ Uint64JsonVO::Wrapper DefectController::execRemoveDefect(const String& removeLis
 {
 	return {};
 }
+// 5 µ¼³öÈ±ÏÝ
+std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse>
+DefectController::execExportDefect(std::shared_ptr<oatpp::web::server::api::ApiController::IncomingRequest> request)
+{
+	return createResponse(Status::CODE_200, "export defect file content");
+}

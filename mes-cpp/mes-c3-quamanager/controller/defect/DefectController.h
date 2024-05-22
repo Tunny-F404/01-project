@@ -75,6 +75,20 @@ public:
 		PATH(String, removeList),                //
 		execRemoveDefect(removeList)             //
 	);
+	// 导出缺陷
+	ENDPOINT_INFO(exportDefect)
+	{
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("defect.export.summary"), Void);
+	}
+	ENDPOINT(                                               //
+		API_M_POST,                                         //
+		"/qc/defect/export-defect",                         //
+		exportDefect,                                       //
+		REQUEST(std::shared_ptr<IncomingRequest>, request), //
+		API_HANDLER_AUTH_PARAME)
+	{
+		return execExportDefect(request);
+	}
 private:
 	// 1 获取缺陷列表（条件+分页）
 	DefectPageJsonVO::Wrapper execQueryDefect(const DefectQuery::Wrapper& query, const PayloadDTO& payload);
@@ -84,6 +98,8 @@ private:
 	Uint64JsonVO::Wrapper execModifyDefect(const DefectUpdateDTO::Wrapper& dto);
 	// 4 删除缺陷
 	Uint64JsonVO::Wrapper execRemoveDefect(const String& removeList);
+	// 5 导出缺陷、
+	std::shared_ptr<OutgoingResponse> execExportDefect(std::shared_ptr<IncomingRequest> request);
 };
 
 // 0 取消API控制器使用宏
