@@ -25,3 +25,11 @@ warehouse:
   area: 面积
   charge: 负责人
   remark: 备注
+  attr1: 预留字段1
+  attr2: 预留字段2
+  attr3: 预留字段3
+  attr4: 预留字段4
+  create_by: 创建者
+  create_time: 创建时间
+  update_by: 更新者
+  update_time: 更新时间
