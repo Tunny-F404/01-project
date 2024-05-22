@@ -27,11 +27,17 @@ public interface ShopSettingsApis {
      */
     JsonVO<PageDTO<GetShopSettingsDTO>> queryAll(ShopSettingsQuery ShopSettingscondition);
     /**
-     * 新增或更新车间信息
+     * 更新车间信息
      * @param shopsettingsDTO
      * @return
      */
-    JsonVO<GetShopSettingsDTO> saveOrUpdateShopSeetingController(GetShopSettingsDTO shopsettingsDTO);
+    JsonVO<GetShopSettingsDTO> updateShopSeetingController(GetShopSettingsDTO shopsettingsDTO);
+    /**
+     * 新增车间信息
+     * @param shopsettingsDTO
+     * @return
+     */
+    JsonVO<GetShopSettingsDTO> saveShopSeetingController(GetShopSettingsDTO shopsettingsDTO);
     /**
      * 删除或批量删除车间信息
      * @param shopsettingsDTO

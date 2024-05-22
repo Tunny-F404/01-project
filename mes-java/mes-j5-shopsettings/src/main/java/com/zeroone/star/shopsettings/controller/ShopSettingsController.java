@@ -26,7 +26,12 @@ public class ShopSettingsController implements ShopSettingsApis {
     }
 
     @Override
-    public JsonVO<GetShopSettingsDTO> saveOrUpdateShopSeetingController(GetShopSettingsDTO shopsettingsDTO) {
+    public JsonVO<GetShopSettingsDTO> updateShopSeetingController(GetShopSettingsDTO shopsettingsDTO) {
+        return null;
+    }
+
+    @Override
+    public JsonVO<GetShopSettingsDTO> saveShopSeetingController(GetShopSettingsDTO shopsettingsDTO) {
         return null;
     }
 
