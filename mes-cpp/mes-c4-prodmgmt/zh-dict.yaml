@@ -1,5 +1,6 @@
 Approval :
  post:
+  id: 生产工单编号
   draft: 草稿
   remark: 报工类型
   submi: 审批中

@@ -1,20 +1,19 @@
 #pragma once
-#ifndef _GETPRODUCTIONREPORTLIST_VO_
-#define _GETPRODUCTIONREPORTLIST_VO_
+#ifndef _APPROVALSTAGEDTO_VO_
+#define _APPROVALSTAGEDTO_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/ApprovalStage/AddProdWorkorderDTO.h"
+#include "../../dto/ApprovalStage/ApprovalStageDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 新增工单显示JsonVO，用于响应给客户端的Json对象
- * GetProductionReportList
+	报工类型显示JsonVO，用于响应给客户端的Json对象
+	
  */
-class GetProductionReportListJsonVO : public JsonVO<GetProductionReportListDTO::Wrapper> {
-	DTO_INIT(GetProductionReportListJsonVO, JsonVO<GetProductionReportListDTO::Wrapper>);
+class ApprovalStageVO : public JsonVO<ApprovalStageDTO::Wrapper> {
+	DTO_INIT(ApprovalStageVO, JsonVO<ApprovalStageDTO::Wrapper>);
 };
-
 
 #include OATPP_CODEGEN_END(DTO)
 
