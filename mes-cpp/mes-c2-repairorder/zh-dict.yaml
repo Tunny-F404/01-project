@@ -1,7 +1,7 @@
 repaircontent:
  get:
   summary: 维修内容详情
-  query_repaircontent: 查询维修内容
+  query_repaircontent: 获取维修内容详情（条件+分页）
   add_repaircontent: 添加维修内容
   modify_repaircontent: 修改维修内容
   remove_repaircontent: 删除维修内容
