@@ -19,27 +19,27 @@ public class ParameterDTO {
     // 参数主键
     @ExcelProperty(value = "参数主键",index = 0)
     @ApiModelProperty(value = "参数主键",example = "1")
-    private Integer id;
+    private Integer configId;
 
     // 参数名称
     @ExcelProperty(value = "参数名称",index = 1)
     @ApiModelProperty(value = "参数名称",example = "主框架页-默认皮肤样式名称")
-    private String name;
+    private String configName;
 
     // 参数键名
     @ExcelProperty(value = "参数键名",index = 2)
     @ApiModelProperty(value = "参数键名",example = "sys.index.skinName")
-    private String key;
+    private String configKey;
 
     // 参数键值
     @ExcelProperty(value = "参数键值",index = 3)
     @ApiModelProperty(value = "参数键值",example = "skin-red")
-    private String value;
+    private String configValue;
 
     // 系统内置（Y是 N否）
     @ExcelProperty(value = "系统内置 Y是 N否",index = 4)
     @ApiModelProperty(value = "系统内置 Y是 N否",example = "Y")
-    private String type;
+    private String configType;
 
     // 创建者
     @ExcelProperty(value = "创建者",index = 5)

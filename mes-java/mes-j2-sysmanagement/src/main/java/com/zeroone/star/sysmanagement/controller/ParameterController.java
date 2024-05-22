@@ -8,7 +8,7 @@ import com.zeroone.star.project.j2.sysmanagement.param.ParameterApis;
 import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
 import com.zeroone.star.project.j2.sysmanagement.query.param.ParameterQuery;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.sysmanagement.service.ISysConfigService;
+import com.zeroone.star.sysmanagement.service.ParameterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.SneakyThrows;
@@ -39,7 +39,7 @@ public class ParameterController implements ParameterApis {
     EasyExcelComponent excelComponent;
 
     @Resource
-    ISysConfigService service;
+    ParameterService service;
 
     @Override
     @DeleteMapping("remove-parameter")
