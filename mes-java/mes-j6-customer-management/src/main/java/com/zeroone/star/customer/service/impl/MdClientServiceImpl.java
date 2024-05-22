@@ -11,6 +11,8 @@ import com.zeroone.star.project.vo.JsonVO;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Mapper(componentModel = "Spring")
 interface MsClientMapper{
     /**
@@ -34,17 +36,17 @@ interface MsClientMapper{
 public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> implements IMdClientService {
 
     @Override
-    public JsonVO<ClientDTO> addClient(ClientDTO client) {
+    public JsonVO<String> addClient(ClientDTO client) {
         return null;
     }
 
     @Override
-    public JsonVO<String> deleteClient(Long id) {
+    public JsonVO<String> deleteClient(List<Long> ids) {
         return null;
     }
 
     @Override
-    public JsonVO<ClientDTO> updateClient(ClientDTO client) {
+    public JsonVO<String> updateClient(ClientDTO client) {
         return null;
     }
 

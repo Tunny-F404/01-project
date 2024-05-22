@@ -17,12 +17,6 @@ import java.time.LocalDateTime;
 @ApiModel("客户数据传输对象")
 public class ClientDTO {
     /**
-     * 客户ID
-     */
-    @ApiModelProperty(value = "客户ID", example = "1")
-    private Long clientId;
-
-    /**
      * 客户编码
      */
     @ApiModelProperty(value = "客户编码", example = "10001")

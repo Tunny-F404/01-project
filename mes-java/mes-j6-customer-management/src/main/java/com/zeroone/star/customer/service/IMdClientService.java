@@ -9,6 +9,8 @@ import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
  * 客户表 服务类
@@ -23,21 +25,21 @@ public interface IMdClientService extends IService<MdClient> {
      * @Param clientDTO [client]
      * @return com.zeroone.star.project.vo.JsonVO<com.zeroone.star.project.j6.customer.dto.ClientDTO>
      **/
-    JsonVO<ClientDTO> addClient(@RequestBody ClientDTO client);
+    JsonVO<String> addClient(ClientDTO client);
 
     /**
      * @Description 删除客户业务流程
-     * @Param [id]
+     * @Param List<Long> [ids]
      * @return com.zeroone.star.project.vo.JsonVO<java.lang.String>
      **/
-    JsonVO<String> deleteClient(@PathVariable Long id);
+    JsonVO<String> deleteClient(List<Long> ids);
 
     /**
      * @Description 更新客户
      * @Param clientDTO [client]
      * @return com.zeroone.star.project.vo.JsonVO<com.zeroone.star.project.j6.customer.dto.ClientDTO>
      **/
-    JsonVO<ClientDTO> updateClient(@RequestBody ClientDTO client);
+    JsonVO<String> updateClient(ClientDTO client);
 
     /**
      * @Description 分页查询客户数据

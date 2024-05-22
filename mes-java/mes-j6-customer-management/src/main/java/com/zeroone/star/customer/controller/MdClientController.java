@@ -1,6 +1,5 @@
 package com.zeroone.star.customer.controller;
 
-
 import com.zeroone.star.customer.service.IMdClientService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.ClientApis;
@@ -13,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -33,35 +33,35 @@ public class MdClientController implements ClientApis {
     @ApiOperation(value = "新增客户")
     @PostMapping("/add")
     @Override
-    public JsonVO<ClientDTO> addClient(@RequestBody ClientDTO client) {
+    public JsonVO<String> addClient(@RequestBody ClientDTO client) {
         return null;
     }
 
     @ApiOperation("删除客户")
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     @Override
-    public JsonVO<String> deleteClient(@PathVariable Long id) {
+    public JsonVO<String> deleteClient(@RequestBody List<Long> ids) {
         return null;
     }
 
     @ApiOperation("更新客户")
     @PutMapping
     @Override
-    public JsonVO<ClientDTO> updateClient(@RequestBody ClientDTO client) {
+    public JsonVO<String> updateClient(@RequestBody ClientDTO client) {
         return null;
     }
 
     @ApiOperation("查询客户列表")
     @GetMapping("/all")
     @Override
-    public JsonVO<PageDTO<ClientDTO>> queryAll(ClientQuery query) {
+    public JsonVO<PageDTO<ClientDTO>> queryAll(@RequestBody ClientQuery query) {
         return JsonVO.success(clientService.listAll(query));
     }
 
     @ApiOperation("根据ID查询客户")
     @GetMapping("/{id}")
     @Override
-    public JsonVO<ClientDTO> queryById(Long id) {
+    public JsonVO<ClientDTO> queryById(@PathVariable Long id) {
         return JsonVO.success(clientService.getById(id));
     }
 }
