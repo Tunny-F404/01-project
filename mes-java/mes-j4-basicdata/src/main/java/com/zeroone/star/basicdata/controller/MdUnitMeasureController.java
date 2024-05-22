@@ -1,10 +1,10 @@
 package com.zeroone.star.basicdata.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zeroone.star.basicdata.service.IMdUnitMeasureService;
+import com.zeroone.star.basicdata.entity.MdUnitMeasure;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
-import com.zeroone.star.project.dto.j4.basicdata.entity.MdUnitMeasure;
-import org.springframework.web.bind.annotation.*;
+import com.zeroone.star.basicdata.service.IMdUnitMeasureService;
+import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.*;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,7 +66,7 @@ public class MdUnitMeasureController {
     public JsonVO<PageDTO<MdUnitMeasure>> list(MdUnitMeasure mdUnitMeasure) {
 
         // 查询符合条件的单位列表
-        List<MdUnitMeasure> list = mdUnitMeasureService.selectMdUnitMeasureList(mdUnitMeasure);
+        List<MdUnitMeasure> list = iMdUnitMeasureService.selectMdUnitMeasureList(mdUnitMeasure);
 
         // 将查询结果放入Page对象
         Page<MdUnitMeasure> page = new Page<>(1, 10, list.size());

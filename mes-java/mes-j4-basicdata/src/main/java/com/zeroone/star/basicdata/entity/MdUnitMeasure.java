@@ -42,11 +42,11 @@ public class MdUnitMeasure implements Serializable {
     @ExcelProperty(value = "预留字段1", index = 6)
     private String attr1;
     @ExcelProperty(value = "预留字段2", index = 7)
-    private String arr2;
+    private String attr2;
     @ExcelProperty(value = "预留字段3", index = 8)
-    private Integer arr3;
+    private Integer attr3;
     @ExcelProperty(value = "预留字段4", index = 9)
-    private Integer arr4;
+    private Integer attr4;
     //备注
     @ExcelIgnore
     private String remark;
