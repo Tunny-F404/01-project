@@ -8,17 +8,15 @@ import java.time.LocalDateTime;
 @Data
 @ApiModel("用户传输对象")
 public class UserDTO {
-    @ApiModelProperty(value = "所属部门",example = "1")
-    private String deptName;
-
-    @ApiModelProperty(value = "所属角色",example = "1")
-    private String role;
 
     @ApiModelProperty(value = "用户ID",example = "1")
     private Long userId;
 
     @ApiModelProperty(value = "部门ID",example = "3")
     private Long deptId;
+
+    @ApiModelProperty(value = "所属部门",example = "1")
+    private String deptName;
 
     @ApiModelProperty(value = "用户名",example = "张三")
     private String userName;

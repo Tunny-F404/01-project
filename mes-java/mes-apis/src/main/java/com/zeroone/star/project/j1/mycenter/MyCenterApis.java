@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j1.mycenter;
 
 import com.zeroone.star.project.j1.mycenter.dto.MyCenterDTO;
+import com.zeroone.star.project.j1.mycenter.entity.MailMessage;
 import com.zeroone.star.project.j1.mycenter.query.MyCenterQuery;
 import com.zeroone.star.project.j1.mycenter.dto.mail.MailDTO;
 import com.zeroone.star.project.j1.mycenter.dto.user.UserDTO;
@@ -40,10 +41,10 @@ public interface MyCenterApis {
      * @param mailDto
      * @return
      */
-    JsonVO<Integer> getEMailCode(MailDTO mailDto);
+    JsonVO<MailMessage> getEMailCode(MailDTO mailDto);
 
     /**
      * 获取手机验证码
      * @return
      */
-    JsonVO<Integer> getPhoneCode(String phone);}
+    JsonVO<String> getPhoneCode(String phone);}
