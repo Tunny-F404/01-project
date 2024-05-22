@@ -1,7 +1,9 @@
 package com.zeroone.star.project.j5.dto.schedulecalendar;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
  **/
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ScheduleCalendarDTO {
         @ApiModelProperty(value = "日期", example = "2024-05-22")
         private LocalDate theDay;

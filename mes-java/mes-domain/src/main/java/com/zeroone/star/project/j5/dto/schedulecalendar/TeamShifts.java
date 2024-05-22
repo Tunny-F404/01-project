@@ -1,7 +1,9 @@
 package com.zeroone.star.project.j5.dto.schedulecalendar;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -14,6 +16,8 @@ import java.time.LocalDate;
  * @Version 1.0
  **/
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TeamShifts {
     @ApiModelProperty(value = "流水号", example = "5934")
     private int recordId;

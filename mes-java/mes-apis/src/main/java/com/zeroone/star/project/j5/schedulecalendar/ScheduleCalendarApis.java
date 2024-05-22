@@ -1,9 +1,10 @@
 package com.zeroone.star.project.j5.schedulecalendar;
 
 import com.zeroone.star.project.j5.dto.schedulecalendar.ScheduleCalendarDTO;
-import com.zeroone.star.project.j5.query.holidaysetting.SettingHolidayQuery;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleQueryTeam;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleQueryType;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleQueryUser;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.ResultStatus;
 
 /**
  * <p>
@@ -16,15 +17,22 @@ import com.zeroone.star.project.vo.ResultStatus;
  */
 public interface ScheduleCalendarApis {
     /**
-     * 获取节假日配置
-     * @return 返回节假日配置列表
+     * 获取指定班组类型排班计划
+     * @return 排班计划列表
      */
-    public JsonVO<ScheduleCalendarDTO> listHoliday();
+    public JsonVO<ScheduleCalendarDTO> listScheduleByType(ScheduleQueryType condition);
 
     /**
-     * 设置节假日配置
-     * @param condition
-     * @return 返回状态码
+     * 获取指定班组排班计划
+     * @return 排班计划列表
      */
-    public JsonVO<ResultStatus> setHoliday(SettingHolidayQuery condition);
+    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleQueryTeam condition);
+
+    /**
+     * 获取指定人员排班计划
+     * @return 排班计划列表
+     */
+    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleQueryUser condition);
+
+
 }
