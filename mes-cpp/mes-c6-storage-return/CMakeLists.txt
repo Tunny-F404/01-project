@@ -42,7 +42,7 @@ if(WIN32)
 endif()
 
 # 编译可执行文件
-add_executable (${appName} ${SC_FILES} "controller/return/ReturnController.cpp")
+add_executable (${appName} ${SC_FILES} "controller/return/ReturnController.cpp" "service/return/ReturnService.h" "service/return/ReturnService.cpp" "dao/return/ReturnDAO.h" "dao/return/ReturnDAO.cpp" "dao/return/ReturnMapper.h")
 
 # 给架构示例项目添加特有的宏
 if(${IS_ARCH_DEMO})

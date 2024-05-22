@@ -19,10 +19,10 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-
+#include "./return/ReturnController.h"
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
-#include "sample/SampleController.h"
+#include "retrun/ReturnController.h"
 #include "file/FileController.h"
 #include "ws/WSController.h"
 #endif
@@ -51,7 +51,7 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-
+	ROUTER_SIMPLE_BIND(ReturnController);
 }
 
 #ifdef HTTP_SERVER_DEMO

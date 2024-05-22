@@ -19,8 +19,7 @@
 */
 #ifndef _RETURNCONTROLLER_H_
 #define _RETURNCONTROLLER_H_
-#include "oatpp-swagger/Types.hpp"
-#include "../../domain/query/return/ReturnQuery.h"
+#include "domain/query/return/ReturnQuery.h"
 #include "domain/vo/BaseJsonVO.h"
 #include "domain/vo/return/ReturnVO.h"
 
@@ -33,87 +32,89 @@ class ReturnController : public oatpp::web::server::api::ApiController
 	// 添加访问定义
 	API_ACCESS_DECLARE(ReturnController);
 public:
-	// 定义查询所有单据信息接口端点描述
+	// 3.1 定义查询接口描述
 	ENDPOINT_INFO(queryAllReturn) {
-		// 定义接口通用信息
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("return.query-all.summary"), ReturnPageJsonVO::Wrapper);
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("return.query-all.summary"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(ReturnPageJsonVO);
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
+		// 退货单名称
 		API_DEF_ADD_QUERY_PARAMS(String, "returnName", ZH_WORDS_GETTER("return.fields.rtname"), "01star", false);
 		// 退货单编号
-		API_DEF_ADD_QUERY_PARAMS(String, "returnId", ZH_WORDS_GETTER("return.fields.rtid"),"RTV123456",false);
+		API_DEF_ADD_QUERY_PARAMS(String, "returnId", ZH_WORDS_GETTER("return.fields.rtid"), "RTV123456", false);
 		// 采购单编号
-		API_DEF_ADD_QUERY_PARAMS(String, "purchaseId", ZH_WORDS_GETTER("return.fields.rtid"),"",false);
+		API_DEF_ADD_QUERY_PARAMS(String, "purchaseId", ZH_WORDS_GETTER("return.fields.puid"), "null", false);
 		// 供应商名称
-		API_DEF_ADD_QUERY_PARAMS(String, "vendorName", ZH_WORDS_GETTER("return.fields.rtname"), "01star", false);
-
+		API_DEF_ADD_QUERY_PARAMS(String, "vendorName", ZH_WORDS_GETTER("return.fields.vename"), "01star", false);
 	}
-	// 定义查询所有单据信息接口端点处理
-	API_HANDLER_ENDPOINT_QUERY_AUTH(API_M_GET, "/return/query-all", queryAllReturn, ReturnQuery, executeQueryAll(query));
-
+	// 3.2 定义查询接口处理
+	ENDPOINT(API_M_GET, "/return/query-all", queryAllReturn, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(query, ReturnQuery, queryParams);
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(executeQueryAll(query, authObject->getPayload()));
+	}
+	
 	// 定义查询单个单据详细信息接口描述
 	ENDPOINT_INFO(queryReturnDetail) {
-		// 定义接口通用信息
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("return.query-detail.summary"), ReturnDetailJsonVO::Wrapper);
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("return.query-detail.summary"));
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(ReturnDetailJsonVO);
+		// 定义默认授权参数
+		API_DEF_ADD_AUTH();
 		// 定义其他查询参数描述
 		// 退货单编号
 		API_DEF_ADD_QUERY_PARAMS(String, "returnId", ZH_WORDS_GETTER("return.fields.rtid"), "RTV123456", true);
 	}
 	// 定义查询单据详细信息接口端点处理
-	API_HANDLER_ENDPOINT_QUERY_AUTH(API_M_GET, "/return/query-detail", queryReturnDetail, ReturnDetailQuery, executeQueryDetail(query));
+	ENDPOINT(API_M_GET, "/return/query-detail", queryReturnDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(query, ReturnDetailQuery, queryParams);
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(executeQueryDetail(query));
+	}
 
 	// 定义添加新单据信息接口描述
 	ENDPOINT_INFO(addReturnDetail) {
-		// 定义接口通用信息
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("return.add-detail.summary"), Uint64JsonVO::Wrapper);
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("return.add-detail.summary"));
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+		// 定义默认授权参数
+		API_DEF_ADD_AUTH();
 		// 定义其他查询参数描述
 		// 退货单编号
-		API_DEF_ADD_QUERY_PARAMS(String, "returnId", ZH_WORDS_GETTER("return.fields.rtid"), "RTV123456", true);
+		API_DEF_ADD_QUERY_PARAMS(String, "returnId", ZH_WORDS_GETTER("return.fields.rtid"), "RTV123", true);
 		// 退货单名称
 		API_DEF_ADD_QUERY_PARAMS(String, "returnName", ZH_WORDS_GETTER("return.fields.rtname"), "01star", true);
 		// 采购单编号
-		API_DEF_ADD_QUERY_PARAMS(String, "purchaseId", ZH_WORDS_GETTER("return.fields.rtid"), "000", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "purchaseId", ZH_WORDS_GETTER("return.fields.puid"), "null", false);
 		// 供应商名称
-		API_DEF_ADD_QUERY_PARAMS(String, "vendorName", ZH_WORDS_GETTER("return.fields.rtname"), "01star", true);
+		API_DEF_ADD_QUERY_PARAMS(String, "vendorName", ZH_WORDS_GETTER("return.fields.vename"), "01star", true);
 		// 批次号
-		API_DEF_ADD_QUERY_PARAMS(String, "batchCode", ZH_WORDS_GETTER("return.fields.batchcode"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "batchCode", ZH_WORDS_GETTER("return.fields.batchcode"), "null", false);
 		// 退货日期
-		API_DEF_ADD_QUERY_PARAMS(String, "returndate", ZH_WORDS_GETTER("storage.fields.rtdate"), "2024-5-21", true);
+		API_DEF_ADD_QUERY_PARAMS(String, "returndate", ZH_WORDS_GETTER("return.fields.rtdate"), "2024-5-21", true);
 		// 单据状态
-		API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("storage.fields.status"), "PREPARE", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("return.fields.status"), "PREPARE", true);
 		// 备注
-		API_DEF_ADD_QUERY_PARAMS(String, "remark", ZH_WORDS_GETTER("return.fields.remark"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "remark", ZH_WORDS_GETTER("return.fields.remark"), " ", false);
 	}
-	// 定义单据详细信息接口端点处理
+	// 定义新增单据详细信息接口端点处理
 	ENDPOINT(API_M_POST, "/return/add-detail", addReturnDetail, BODY_DTO(ReturnAdd::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddDetail(dto));
 	}
-	//API_HANDLER_ENDPOINT_QUERY_AUTH(API_M_POST, "/return/add-detail", addReturnDetail, ReturnAdd, executeAddDetail(query));
-
-	// 定义修改单据信息端点描述
-	ENDPOINT_INFO(modifyReturn) {
-		// 定义接口通用信息
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("return.modify-return.summary"), StringJsonVO::Wrapper);
-		// 定义修改查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(Int32, "age", ZH_WORDS_GETTER("return.field.age"), 100, false);
-		API_DEF_ADD_QUERY_PARAMS(String, "nickname", ZH_WORDS_GETTER("return.field.nickname"), "feifei", false);
-		// 定义二进制流请求方式，用于选择上传文件
-		info->addConsumes<oatpp::swagger::Binary>("application/octet-stream");
-	}
-	// 定义修改单据信息端点处理（注意：此方式只支持单文件上传，并且更新字段不是很多的场景使用）
-	ENDPOINT(API_M_POST, "/return/modify-return", modifyReturn, BODY_STRING(String, fileBody), QUERIES(QueryParams, qps), API_HANDLER_AUTH_PARAME) {
-		// 解析查询参数
-		API_HANDLER_QUERY_PARAM(dto, ReturnDTO, qps);
-		// 执行文件保存逻辑
-		API_HANDLER_RESP_VO(executeModifyReturn(fileBody, dto));
-	}
+	
 private:
 	// 查询所有单据信息
-	ReturnPageJsonVO::Wrapper executeQueryAll(const ReturnQuery::Wrapper& returnQuery);
-	// 修改单据信息
-	StringJsonVO::Wrapper executeModifyReturn(const String& fileBody, const ReturnDTO::Wrapper& dto);
+	ReturnPageJsonVO::Wrapper executeQueryAll(const ReturnQuery::Wrapper& returnQuery, const PayloadDTO& payload);
 	// 查询单一单据详细信息
 	ReturnDetailJsonVO::Wrapper executeQueryDetail(const ReturnDetailQuery::Wrapper& returnDetailQuery);
 	// 添加新单据详细信息

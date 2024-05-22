@@ -3,8 +3,8 @@ return:
   summary: 查询所有供应商退货单
  query-detail:
   summary: 查询退货单据详细信息
- modify-return:
-  summary: 修改供应商退货单
+ add-detail:
+  summary: 新增单据详细信息
  fields: 
    rtid: 退货单编号
    rtname: 退货单名称 

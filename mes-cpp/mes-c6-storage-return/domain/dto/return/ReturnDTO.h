@@ -29,25 +29,20 @@
 class ReturnDTO : public oatpp::DTO
 {
 	DTO_INIT(ReturnDTO, DTO);
-	//
 	// 退货单编号
-	API_DTO_FIELD_DEFAULT(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"));
-	/*DTO_FIELD(UInt64, rtid);
-	DTO_FIELD_INFO(rtid) {
-		info->description = ZH_WORDS_GETTER("return.field.rtid");
-	}*/
+	API_DTO_FIELD(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"),true,"null");
 	// 退货单名称
 	API_DTO_FIELD(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"), true, "01star");
 	// 采购单编号
-	API_DTO_FIELD_DEFAULT(String, purchaseId, ZH_WORDS_GETTER("return.fields.rtid"));
+	API_DTO_FIELD(String, purchaseId, ZH_WORDS_GETTER("return.fields.puid"),true, "null");
 	// 供应商编码
-	API_DTO_FIELD_DEFAULT(String, vendorCode, ZH_WORDS_GETTER("return.fields.rtid"));
+	API_DTO_FIELD(String, vendorCode, ZH_WORDS_GETTER("return.fields.veid"),true, "null");
 	// 供应商名称
-	API_DTO_FIELD(String, vendorName, ZH_WORDS_GETTER("return.fields.rtname"), true, "01star");
+	API_DTO_FIELD(String, vendorName, ZH_WORDS_GETTER("return.fields.vename"), true, "01star");
 	// 退货日期
-	API_DTO_FIELD(String, returndate, ZH_WORDS_GETTER("storage.fields.rtdate"), true, "2024-5-21");
+	API_DTO_FIELD(String, returndate, ZH_WORDS_GETTER("return.fields.rtdate"), true, "2024-5-21");
 	// 单据状态
-	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("storage.fields.status"), true, "PREPARE");
+	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("return.fields.status"), true, "PREPARE");
 	// 操作
 };
 /**
