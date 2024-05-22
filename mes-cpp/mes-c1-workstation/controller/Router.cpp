@@ -20,12 +20,10 @@
 #include "Router.h"
 #include "ApiHelper.h"
 
-#ifdef HTTP_SERVER_DEMO
-#include "user/UserController.h"
-#include "sample/SampleController.h"
-#include "file/FileController.h"
-#include "ws/WSController.h"
+#ifdef HTTP_SERVER_DEM
 #endif
+#include "equipment/resource/ResourceController.h"
+#include "equipment/EquipmentController.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -51,7 +49,9 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-
+		// 绑定示例控制器
+	//ROUTER_SIMPLE_BIND(ResourceController);
+	ROUTER_SIMPLE_BIND(EquipmentController);
 }
 
 #ifdef HTTP_SERVER_DEMO

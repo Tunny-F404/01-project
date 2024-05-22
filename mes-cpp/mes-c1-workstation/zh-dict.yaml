@@ -1,0 +1,11 @@
+equipment:
+ getEquipmentById:
+  summary: 根据设备id获取设备(Path参数)
+ getEquipment:
+  summary: 根据设备id获取设备(Query参数)
+ getEquipmentPage:
+  summary: 获取设备列表(条件 + 分页)
+ params:
+  equipmentId:
+   desc: 设备id
+   default: 1
