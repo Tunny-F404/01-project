@@ -108,3 +108,16 @@ deleteOP:
    
    
      
+add-mj:
+ add:
+  summary: 添加计划模块
+ fields:
+  pid: 计划编码
+  pname: 计划名称
+  ptype: 计划类型
+  ctype: 频率
+  sdate: 开始日期
+  edate: 结束日期
+  status: 状态
+  remark: 备注
+     

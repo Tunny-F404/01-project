@@ -47,8 +47,8 @@ class GetProgectQuery : public  PageQuery
 class GetProgectDetailQuery : public  oatpp::DTO
 {
 	DTO_INIT(GetProgectDetailQuery, DTO);
-	//项目编码
-	API_DTO_FIELD_DEFAULT(String, pCode, ZH_WORDS_GETTER("project.fields.pcode"));
+	//项目id
+	API_DTO_FIELD(UInt64, pId, ZH_WORDS_GETTER("project.fields.pid"), true, 1);
 
 };
 

@@ -39,3 +39,8 @@ equipmentledger:
   summary: 下载导入模板
  
   
+add-mj:
+ add:
+  summary: 添加设备模块
+ fields:
+  status: 状态
