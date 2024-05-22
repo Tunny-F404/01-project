@@ -43,7 +43,7 @@ public:
 		returnName = "returnName";
 		purchaseId = 1;
 		vendorCode = 2;
-		vendorName = "vendorName"
+		vendorName = "vendorName";
 	}
 };
 

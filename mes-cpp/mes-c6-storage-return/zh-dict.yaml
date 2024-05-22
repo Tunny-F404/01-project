@@ -3,8 +3,10 @@ return:
   summary: 查询所有供应商退货单
  modify-return:
   summary: 修改供应商退货单
- remove:
-  summary: 修改供应商退货单
+ remove-return:
+  summary: 删除供应商退货单
+ download-return:
+  summary: 导出供应商退货单
  fields: 
   rtid: 退货单编号
   rtname: 退货单名称 
@@ -14,3 +16,4 @@ return:
   rtdate: 退货日期 
   status: 单据状态
   action: 操作
+  filename: 退货单文件名
