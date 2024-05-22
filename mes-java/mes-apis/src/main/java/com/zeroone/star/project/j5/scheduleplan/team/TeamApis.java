@@ -31,9 +31,9 @@ public interface TeamApis {
 
     /**
      * 删除关联班组
-     * @param id 对应数据库record_id
+     * @param recordId 流水号, 对应数据库record_id
      * @return 结果
      */
-    JsonVO<ResultStatus> deletePlanTeam(Long id);
+    JsonVO<ResultStatus> deletePlanTeam(Integer recordId);
 
 }

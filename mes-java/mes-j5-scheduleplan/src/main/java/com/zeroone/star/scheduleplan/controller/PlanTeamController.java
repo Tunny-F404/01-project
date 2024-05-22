@@ -8,10 +8,9 @@ import com.zeroone.star.project.j5.scheduleplan.team.TeamApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -31,17 +30,17 @@ public class PlanTeamController implements TeamApis {
         public JsonVO<PageDTO<PlanTeamDTO>> queryAllPlanTeam(PlanTeamQuery condition) {
                 return null;
         }
-        @GetMapping("/add")
+        @PostMapping("/add")
         @ApiOperation("添加关联班组")
         @Override
         public JsonVO<ResultStatus> addPlanTeam(AddPlanTeamDTO addPlanTeamDTO) {
                 return null;
         }
 
-        @GetMapping("/delete")
+        @DeleteMapping("/delete")
         @ApiOperation("删除关联班组")
         @Override
-        public JsonVO<ResultStatus> deletePlanTeam(Long id) {
+        public JsonVO<ResultStatus> deletePlanTeam(Integer recordId) {
                 return null;
         }
 }
