@@ -38,13 +38,15 @@
 #include "../controller/device-list/DeviceListController.h"
 #include "../controller/maintain-proj/MaintainProjController.h"
 
-// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¹Ø±ï¿½Swaggerï¿½Äµï¿½ï¿½ï¿½
+
+
+// Èç¹û¶¨ÒåÁË¹Ø±ÕSwaggerÎÄµµºê
 #ifdef CLOSE_SWAGGER_DOC
-// ï¿½ò»¯°ó¶¨¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¶¨ï¿½ï¿½
+// ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 router->addController(__CLASS__::createShared())
 #else
-// ï¿½ò»¯°ó¶¨¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¶¨ï¿½ï¿½
+// ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
@@ -61,34 +63,29 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
-	//#TIP :ÏµÍ³ï¿½ï¿½Õ¹Â·ï¿½É¶ï¿½ï¿½å£¬Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	//ç»‘å®šä¿®æ”¹ç‚¹æ£€ä¿å…»è®¡åˆ’æŽ§åˆ¶å™¨
-	ROUTER_SIMPLE_BIND(ModifyPlanController);
-	ROUTER_SIMPLE_BIND(ModifyPlanStatusController);
-}
+	//#TIP :ÏµÍ³À©Õ¹Â·ÓÉ¶¨Òå£¬Ð´ÔÚÕâ¸öºóÃæ
 	ROUTER_SIMPLE_BIND(ExportPlanController);
 	ROUTER_SIMPLE_BIND(DeviceListController);
 	ROUTER_SIMPLE_BIND(MaintainProjController);
 	ROUTER_SIMPLE_BIND(PlanSubjectController);
 	ROUTER_SIMPLE_BIND(MachineryPlanQueryController);
+	ROUTER_SIMPLE_BIND(ModifyPlanController);
+	ROUTER_SIMPLE_BIND(ModifyPlanStatusController);
 
 
-
-
+}
 
 #ifdef HTTP_SERVER_DEMO
 void Router::createSampleRouter()
 {
-	// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// °ó¶¨Ê¾Àý¿ØÖÆÆ÷
 	ROUTER_SIMPLE_BIND(SampleController);
-	// ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// °ó¶¨ÓÃ»§¿ØÖÆÆ÷
 	ROUTER_SIMPLE_BIND(UserController);
-	// ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// °ó¶¨ÎÄ¼þ¿ØÖÆÆ÷
 	ROUTER_SIMPLE_BIND(FileController);
-	
-	
 
-	// ï¿½ï¿½WebSocketï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// °ó¶¨WebSocket¿ØÖÆÆ÷
 	router->addController(WSContorller::createShared());
 }
 #endif
