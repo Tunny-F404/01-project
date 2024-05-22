@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysManagement.menu;
+package com.zeroone.star.project.j2.sysmanagement.menu;
 
 import cn.hutool.core.lang.tree.TreeNode;
 import com.zeroone.star.project.j2.sysmanagent.dto.menu.MenuDTO;

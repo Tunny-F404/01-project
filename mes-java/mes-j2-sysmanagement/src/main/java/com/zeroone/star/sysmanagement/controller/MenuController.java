@@ -1,7 +1,7 @@
 package com.zeroone.star.sysmanagement.controller;
 
 import cn.hutool.core.lang.tree.TreeNode;
-import com.zeroone.star.project.j2.sysManagement.menu.MenuApis;
+import com.zeroone.star.project.j2.sysmanagement.menu.MenuApis;
 import com.zeroone.star.project.j2.sysmanagent.dto.menu.MenuDTO;
 import com.zeroone.star.project.j2.sysmanagent.query.menu.MenuConditionQuery;
 import com.zeroone.star.project.j2.sysmanagent.vo.ResourceDetailsVO;

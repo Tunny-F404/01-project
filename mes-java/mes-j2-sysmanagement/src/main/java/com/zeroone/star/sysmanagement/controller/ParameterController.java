@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateTime;
 
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j2.sysManagement.param.ParameterApis;
+import com.zeroone.star.project.j2.sysmanagement.param.ParameterApis;
 import com.zeroone.star.project.j2.sysmanagent.dto.param.ParameterDTO;
 import com.zeroone.star.project.j2.sysmanagent.query.param.ParameterQuery;
 import com.zeroone.star.project.vo.JsonVO;

@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j2.sysManagement.param;
+package com.zeroone.star.project.j2.sysmanagement.param;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.sysmanagent.dto.param.ParameterDTO;
