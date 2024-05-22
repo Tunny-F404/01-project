@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zeroone.star.productManagement.mapper.MdItemMapper">
 
-    <select id="getItemsByQuery" parameterType="com.zeroone.star.project.j6.product_management.query.MdItemQuery" resultType="com.zeroone.star.productManagement.entity.MdItem">
-        SELECT * FROM md_item
+    <select id="selectMdItemList" parameterType="com.zeroone.star.project.j6.product_management.query.MdItemQuery" resultType="com.zeroone.star.productManagement.entity.MdItem">
+        select item_id, item_code, item_name, specification, unit_of_measure, item_or_product,
+        item_type_id,item_type_code,item_type_name,enable_flag,safe_stock_flag,min_stock,max_stock, create_by, create_time, remark
+        from md_item
         WHERE 1=1
         <if test="itemCode != null and itemCode != ''">
             AND item_code LIKE CONCAT('%', #{itemCode}, '%')
@@ -11,8 +13,8 @@
         <if test="itemName != null and itemName != ''">
             AND item_name LIKE CONCAT('%', #{itemName}, '%')
         </if>
-        <if test="itemTypeId != null and itemName != ''">
-            AND item_type_id = #{itemTypeId}
+        <if test="itemTypeId != null and itemName != 0">
+            AND (item_type_id = #{itemTypeId} OR item_type_id in (select item_type_id from md_item_type where find_in_set(#{itemTypeId},ancestors)))
         </if>
     </select>
 </mapper>

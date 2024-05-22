@@ -1,5 +1,6 @@
 package com.zeroone.star.productManagement.entity;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -69,24 +70,29 @@ public class MdItem implements Serializable {
     @ExcelProperty("备注")
     private String remark;
 
+    @ExcelIgnore
     private String attr1;
 
+    @ExcelIgnore
     private String attr2;
 
+    @ExcelIgnore
     private Integer attr3;
 
+    @ExcelIgnore
     private Integer attr4;
 
+    @ExcelIgnore
     private String createBy;
 
     @TableField(fill = FieldFill.INSERT)
-    @ExcelProperty("创建时间")
+    @ExcelIgnore
     private LocalDateTime createTime;
 
-    @ExcelProperty("更新者")
+    @ExcelIgnore
     private String updateBy;
 
-    @ExcelProperty("更新时间")
+    @ExcelIgnore
     private LocalDateTime updateTime;
 
 

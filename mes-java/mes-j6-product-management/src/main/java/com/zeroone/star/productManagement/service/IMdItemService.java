@@ -17,7 +17,7 @@ import java.util.List;
  * @since 2024-05-20
  */
 public interface IMdItemService extends IService<MdItem> {
-    List<MdItem> getItemsByQuery(MdItemQuery query);
+    List<MdItem> selectMdItemList(MdItemQuery query);
 
     ResponseEntity<byte[]> exportToExcel(List<MdItem> items);
 }

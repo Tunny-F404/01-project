@@ -17,5 +17,5 @@ import java.util.List;
  */
 @Mapper
 public interface MdItemMapper extends BaseMapper<MdItem> {
-    List<MdItem> getItemsByQuery(MdItemQuery mdItemQuery);
+    List<MdItem> selectMdItemList(MdItemQuery mdItemQuery);
 }
