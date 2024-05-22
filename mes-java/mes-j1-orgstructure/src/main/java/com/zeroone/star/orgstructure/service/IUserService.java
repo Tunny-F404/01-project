@@ -14,9 +14,9 @@ public interface IUserService extends IService<User> {
 
     public void removeUser(List<Long> userIds);
 
-    public Long checkUserNameUnique(String name);
+    public Long checkUserNameUnique(Long userId, String name);
 
-    public Long checkPhoneUnique(String phoneNumber);
+    public Long checkPhoneUnique(Long userId, String phoneNumber);
 
-    public Long checkEmailUnique(String email);
+    public Long checkEmailUnique(Long userId, String email);
 }

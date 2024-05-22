@@ -24,18 +24,18 @@ public class UserController implements UserApis {
     @PostMapping("add-user")
     @ApiOperation(value = "新增用户")
     @Override
-    public JsonVO<String> addUser(AddUserDTO addUserDTO) {
-        if (userService.checkUserNameUnique(addUserDTO.getUserName()) == 1)
+    public JsonVO<String> addUser(@RequestBody AddUserDTO addUserDTO) {
+        if (userService.checkUserNameUnique(null, addUserDTO.getUserName()) > 0)
         {
             return JsonVO.fail("新增用户失败，登录账号已存在");
         }
         else if (StringUtils.isNotEmpty(addUserDTO.getPhonenumber())
-                && userService.checkPhoneUnique(addUserDTO.getPhonenumber()) == 1)
+                && userService.checkPhoneUnique(null, addUserDTO.getPhonenumber()) > 0)
         {
             return JsonVO.fail("新增用户失败，手机号码已存在");
         }
         else if (StringUtils.isNotEmpty(addUserDTO.getEmail())
-                && userService.checkEmailUnique(addUserDTO.getEmail()) == 1)
+                && userService.checkEmailUnique(null, addUserDTO.getEmail()) > 0)
         {
             return JsonVO.fail("新增用户失败，邮箱账号已存在");
         }
@@ -48,14 +48,14 @@ public class UserController implements UserApis {
     @PutMapping("modify-user")
     @ApiOperation(value = "修改用户")
     @Override
-    public JsonVO<String> modifyUser(UpdateUserDTO updateUserDTO) {
+    public JsonVO<String> modifyUser(@RequestBody UpdateUserDTO updateUserDTO) {
         if (StringUtils.isNotEmpty(updateUserDTO.getPhonenumber())
-                && userService.checkPhoneUnique(updateUserDTO.getPhonenumber()) == 1)
+                && userService.checkPhoneUnique(updateUserDTO.getUserId(), updateUserDTO.getPhonenumber()) > 0)
         {
             return JsonVO.fail("修改用户失败，手机号码已存在");
         }
         else if (StringUtils.isNotEmpty(updateUserDTO.getEmail())
-                && userService.checkEmailUnique(updateUserDTO.getEmail()) == 1)
+                && userService.checkEmailUnique(updateUserDTO.getUserId(), updateUserDTO.getEmail()) > 0)
         {
             return JsonVO.fail("修改用户失败，邮箱账号已存在");
         }
@@ -66,7 +66,7 @@ public class UserController implements UserApis {
     @DeleteMapping("remove-user")
     @ApiOperation(value = "删除用户")
     @Override
-    public JsonVO<String> removeUser(List<Long> userIds) {
+    public JsonVO<String> removeUser(@RequestParam List<Long> userIds) {
         userService.removeUser(userIds);
         return JsonVO.success("删除成功");
     }

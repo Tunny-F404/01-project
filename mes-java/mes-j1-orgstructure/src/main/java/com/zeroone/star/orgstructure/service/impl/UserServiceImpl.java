@@ -139,8 +139,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * @return 返回查询结果个数
      */
     @Override
-    public Long checkUserNameUnique(String name) {
+    public Long checkUserNameUnique(Long userId, String name) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        if(userId != null){
+            queryWrapper.ne(User::getUserId, userId).eq(User::getUserName, name);
+            return userMapper.selectCount(queryWrapper);
+        }
         queryWrapper.eq(User::getUserName, name);
         return userMapper.selectCount(queryWrapper);
     }
@@ -151,8 +155,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * @return 返回查询结果个数
      */
     @Override
-    public Long checkPhoneUnique(String phoneNumber) {
+    public Long checkPhoneUnique(Long userId, String phoneNumber) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        if(userId != null){
+            queryWrapper.ne(User::getUserId, userId).eq(User::getPhonenumber, phoneNumber);
+            return userMapper.selectCount(queryWrapper);
+        }
         queryWrapper.eq(User::getPhonenumber, phoneNumber);
         return userMapper.selectCount(queryWrapper);
     }
@@ -163,8 +171,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * @return 返回查询结果个数
      */
     @Override
-    public Long checkEmailUnique(String email) {
+    public Long checkEmailUnique(Long userId, String email) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        if(userId != null){
+            queryWrapper.ne(User::getUserId, userId).eq(User::getEmail, email);
+            return userMapper.selectCount(queryWrapper);
+        }
         queryWrapper.eq(User::getEmail, email);
         return userMapper.selectCount(queryWrapper);
     }
