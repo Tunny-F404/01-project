@@ -20,3 +20,13 @@ BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanSubjectOneToMa
 
 	//return BooleanJsonVO::Wrapper();
 }
+
+BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeleteUnique(const DeleteTableUniqueDTO::Wrapper& dto)
+{
+	return BooleanJsonVO::Wrapper();
+}
+
+BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeleteShared(const DeleteTableSharedDTO::Wrapper& dto)
+{
+	return BooleanJsonVO::Wrapper();
+}

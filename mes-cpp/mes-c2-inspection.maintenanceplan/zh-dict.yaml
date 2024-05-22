@@ -73,6 +73,15 @@ planSubject:
  inputDESC:
   delOneToMany:
    primaryKey: 双主键一对多删除时的主要主键
+deleteTemplate:
+ summary:
+  deleteUnique: 单一主键的批量删除
+  deleteShared: 多个主键的批量删除
+ DESC:
+  tableName: 表名
+  tableNamePri: 主表表名
+  tableNameSec: 次表表名
+  keyPri: 主表主键
    
    
      

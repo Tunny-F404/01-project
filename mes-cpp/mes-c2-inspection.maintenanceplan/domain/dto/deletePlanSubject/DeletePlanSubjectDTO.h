@@ -47,6 +47,35 @@ class DeletePlanSubjectOneToManyDTO :public ListDTO<oatpp::String>
 	DTO_INIT(DeletePlanSubjectOneToManyDTO, ListDTO<oatpp::String>)
 	API_DTO_FIELD_DEFAULT(UInt64, primaryKey, ZH_WORDS_GETTER("planSubject.inputDESC.delOneToMany.primaryKey"));
 };
+
+//----------------abf，扩充，删除操作对单表应该知道表名和主键【进入页面时就给表名，勾选就给主键，发送就开始操作
+
+/*用于只有一个主键的表（id）*/
+class DeleteTableUniqueDTO :public ListDTO<oatpp::UInt64>
+{
+	//List
+	DTO_INIT(DeleteTableUniqueDTO, ListDTO<oatpp::UInt64>)
+	//表名
+	API_DTO_FIELD_DEFAULT(String,tableName , ZH_WORDS_GETTER("planSubject.deleteTemplate.DESC.tableName"));
+};
+
+/*用于联表，有主次双主键（id，idList）*/
+class DeleteTableSharedDTO :public ListDTO<oatpp::UInt64>
+{
+	//List（从属表的主键序列）
+	DTO_INIT(DeleteTableSharedDTO, ListDTO<oatpp::UInt64>)
+	//从属表的表名称
+	API_DTO_FIELD_DEFAULT(String, tableNameSec, ZH_WORDS_GETTER("deleteTemplate.DESC.tableNameSec"));
+	//keyPri主表主键
+	API_DTO_FIELD_DEFAULT(UInt64, keyPri, ZH_WORDS_GETTER("deleteTemplate.DESC.keyPri"));
+	//主表的表名称
+	API_DTO_FIELD_DEFAULT(String, tableNamePri, ZH_WORDS_GETTER("deleteTemplate.DESC.tableNamePri"));
+
+
+
+
+};
+
 #include OATPP_CODEGEN_END(DTO)
 //one - to - many
 #endif // !_REMOVEDEVICEDTO_H_
