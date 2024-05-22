@@ -1,0 +1,8 @@
+Approval :
+ post:
+  draft: 草稿
+  remark: 报工类型
+  submi: 审批中
+  passed: 审批通过
+  denied: 审批不通过
+ 
