@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @description:
+ * @description: 节假日设置
  * @program: mes-java
  * @ClassName HoildaySettingController
  * @author: nangua
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  **/
 @RestController
-@RequestMapping("/cal/calholiday")
+@RequestMapping("calholiday")
 @Api(tags = "节假日设置")
 public class HoildaySettingController implements HolidaySettingsApis {
     @GetMapping("/list")

@@ -7,11 +7,11 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 /**
+ * @description: 设置节假日配置的数据对象
  * @projectName: mes-java
  * @package: com.zeroone.star.project.j5.query.holidaysetting
  * @className: CalHolidayQuery
  * @author: junhan Zhao
- * @description: TODO
  * @date: 2024/5/19 23:39
  * @version: 1.0
  */
@@ -23,8 +23,9 @@ public class SettingHolidayQuery {
     private String updateTime;
 
     @NotBlank(message = "修改后的日期类型不能为空")
-    @ApiModelProperty(value = "日期类型", example = "HOLIDAY:节假日,WORKDAY:工作日")
+    @ApiModelProperty(value = "日期类型", example = "HOLIDAY")
     private String HolidayType;
+
     @NotBlank(message = "被修改的日期不能为空")
     @ApiModelProperty(value = "被修改的日期", example = "2023-05-01")
     private String theDay;
