@@ -20,6 +20,8 @@
 #include "Router.h"
 #include "ApiHelper.h"
 #include "RawMaterialOp/RawMaterialOpController.h"
+#include "rejection/RejectController.h"
+
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
@@ -53,7 +55,9 @@ void Router::initRouter()
 
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(MaterialInformationController);
+	ROUTER_SIMPLE_BIND(RejectController);
 	ROUTER_SIMPLE_BIND(RawMaterialOpController);
+
 }
 
 #ifdef HTTP_SERVER_DEMO
