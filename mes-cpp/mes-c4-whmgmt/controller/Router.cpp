@@ -19,6 +19,10 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include"controller/setpro/AddListController.h"
+#include"controller/setpro/ModifyListController.h"
+#include"controller/information/GetListController.h"
+
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -51,7 +55,11 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
+	ROUTER_SIMPLE_BIND(ModifyListController);
+	ROUTER_SIMPLE_BIND(AddListController);
+	ROUTER_SIMPLE_BIND(GetListController);
 
+	
 }
 
 #ifdef HTTP_SERVER_DEMO
