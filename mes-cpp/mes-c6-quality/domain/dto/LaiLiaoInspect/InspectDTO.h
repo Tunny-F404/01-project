@@ -49,9 +49,10 @@ class InspectDTO:public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, inspector, ZH_WORDS_GETTER("inspect.inspector"));
 	//单据状态
 	API_DTO_FIELD_DEFAULT(String, list_status, ZH_WORDS_GETTER("inspect.list_status"));
+	
 };
 
-//来料检验单列表分页传输对象
+//来料检验列表分页传输对象
 class InspectPageDTO : public PageDTO<InspectDTO::Wrapper>
 {
 	DTO_INIT(InspectPageDTO, PageDTO<InspectDTO::Wrapper>);
@@ -75,6 +76,15 @@ class Inspect_detailDTO :public InspectDTO
 	API_DTO_FIELD_DEFAULT(Int64, maj_quantity, ZH_WORDS_GETTER("inspect.maj_quantity"));
 	//轻微缺陷数量
 	API_DTO_FIELD_DEFAULT(Int64, min_quantity, ZH_WORDS_GETTER("inspect.min_quantity"));
+	//备注
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("inspect.remark"));
+};
+
+class Item_idDTO :public oatpp::DTO
+{
+	DTO_INIT(Inspect_detailDTO, InspectDTO);
+	// 数据库表行id
+	API_DTO_FIELD_DEFAULT(UInt64, line_id, ZH_WORDS_GETTER("inspect.line_id"));
 };
 
 #include OATPP_CODEGEN_END(DTO)

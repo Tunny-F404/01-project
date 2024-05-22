@@ -51,12 +51,14 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "inspector", ZH_WORDS_GETTER("inspect.inspector"), "", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/inspect/search", queryInspect, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/inspect/search_all", queryInspect, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, InspectQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryInspect(userQuery, authObject->getPayload()));
 	}
+
+
 
 	// 3.1 定义新增接口描述
 	ENDPOINT_INFO(addInspect) {
@@ -96,15 +98,16 @@ public:
 	// 3.1 定义确认检验单接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.is_ok.summary"), Is_OkInspect, Uint64JsonVO::Wrapper);
 	// 3.2 定义确认检验单接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspect/is_ok", Is_OkInspect, BODY_DTO(InspectDTO::Wrapper, dto), execIs_OkInspect(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspect/is_ok", Is_OkInspect, BODY_DTO(Item_idDTO::Wrapper, dto), execIs_OkInspect(dto));
 
 	// 3.1 定义完成检验单接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.finished.summary"), Is_FinishedInspect, Uint64JsonVO::Wrapper);
 	// 3.2 定义完成检验单接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspect/finished", Is_FinishedInspect, BODY_DTO(InspectDTO::Wrapper, dto), execIs_FinishedInspect(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspect/finished", Is_FinishedInspect, BODY_DTO(Item_idDTO::Wrapper, dto), execIs_FinishedInspect(dto));
+
 
 private:
-	// 3.3 分页查询数据
+	// 3.3 分页查询来料列表数据
 	InspectPageJsonVO::Wrapper execQueryInspect(const InspectQuery::Wrapper& query, const PayloadDTO& payload);
 	// 3.3 新增数据
 	Uint64JsonVO::Wrapper execAddInspect(const InspectDTO::Wrapper& dto);
@@ -115,9 +118,9 @@ private:
 	// 3.3导出数据
 	StringJsonVO::Wrapper execExportInspect(const oatpp::List<UInt64>& ids);
 	//3.3确认检验单(检验单状态置为草稿状态)
-	Uint64JsonVO::Wrapper execIs_OkInspect(const InspectDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execIs_OkInspect(const Item_idDTO::Wrapper& dto);
 	//3.3完成检验单(检验单状态置为已确认状态)
-	Uint64JsonVO::Wrapper execIs_FinishedInspect(const InspectDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execIs_FinishedInspect(const Item_idDTO::Wrapper& dto);
 };
 
 // 0 取消API控制器使用宏
