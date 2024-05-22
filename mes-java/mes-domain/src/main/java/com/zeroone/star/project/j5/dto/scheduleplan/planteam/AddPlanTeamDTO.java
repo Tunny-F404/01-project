@@ -23,6 +23,4 @@ public class AddPlanTeamDTO {
     private String teamName;
     @ApiModelProperty(value = "计划ID", example = "0")
     private Long planId;
-    @ApiModelProperty(value = "班组类型", example = "ZS")
-    private String calendarType;
 }

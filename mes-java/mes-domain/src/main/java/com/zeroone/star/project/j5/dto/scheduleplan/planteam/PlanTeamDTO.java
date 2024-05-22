@@ -3,9 +3,7 @@ package com.zeroone.star.project.j5.dto.scheduleplan.planteam;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import java.util.List;
 
 /**
  * <p>
@@ -18,8 +16,6 @@ import java.util.List;
 @Data
 @ApiModel("关联班组模型")
 public class PlanTeamDTO  {
-    @ApiModelProperty(value = "备注", example = "")
-    private String remark;
     @ApiModelProperty(value = "流水号", example = "1")
     private Long recordId;
     @ApiModelProperty(value = "计划ID", example = "0")

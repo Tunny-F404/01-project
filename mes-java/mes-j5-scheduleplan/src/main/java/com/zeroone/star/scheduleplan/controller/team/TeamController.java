@@ -8,7 +8,6 @@ import com.zeroone.star.project.j5.scheduleplan.team.TeamApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,13 +24,13 @@ import org.springframework.web.bind.annotation.*;
 public class TeamController implements TeamApis {
 
         @GetMapping("/list")
-        @ApiOperation("查询指定条件的关联班组")
+        @ApiOperation("获取关联班组列表(条件+分页)")
         @Override
         public JsonVO<PageDTO<PlanTeamDTO>> queryAllPlanTeam(PlanTeamQuery condition) {
                 return null;
         }
         @PostMapping("/add")
-        @ApiOperation("添加关联班组")
+        @ApiOperation("添加关联班组(支持多项添加)")
         @Override
         public JsonVO<ResultStatus> addPlanTeam(AddPlanTeamDTO addPlanTeamDTO) {
                 return null;
