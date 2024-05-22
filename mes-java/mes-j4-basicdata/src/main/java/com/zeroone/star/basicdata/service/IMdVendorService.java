@@ -10,6 +10,8 @@ import com.zeroone.star.project.dto.j4.basicdata.VendorExcelSelectDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 /**
  * <p>
  * 供应商表 服务类
@@ -31,4 +33,8 @@ public interface IMdVendorService extends IService<MdVendor> {
     * 导出供应商
     * */
     ResponseEntity<byte[]> exportVendor(VendorExcelSelectDTO vendorExcelSelectDTO);
+
+    MdVendor getByVendorId(Long vendorId);
+
+    void deleteVendors(List<Integer> ids);
 }

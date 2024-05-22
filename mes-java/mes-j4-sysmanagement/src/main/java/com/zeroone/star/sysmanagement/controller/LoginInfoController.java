@@ -31,7 +31,7 @@ import java.util.List;
 @Api(tags = "登录日志控制器")
 @RestController
 @RequestMapping("LoginInfo")
-public class LoginInfoController implements LoginLogApis {
+public class LoginInfoController {
 
     @Resource
     private LoginInfoService loginInfoService;
@@ -45,7 +45,6 @@ public class LoginInfoController implements LoginLogApis {
      */
     @ApiOperation("删除登录日志")
     @DeleteMapping("remove-LoginLog/{ids}")
-    @Override
     public JsonVO<Long> removeLoginLog(@PathVariable List<Long> ids) {
         Long result = loginInfoService.removeLoginInfo(ids);
         if (result > 0)
@@ -59,7 +58,6 @@ public class LoginInfoController implements LoginLogApis {
      */
     @ApiOperation("清空登录日志")
     @DeleteMapping("clean-LoginLog")
-    @Override
     public JsonVO<String> clearLoginLog() {
         loginInfoService.clearLoginInfo();
         return JsonVO.success("清空成功");
@@ -72,7 +70,6 @@ public class LoginInfoController implements LoginLogApis {
     @ApiOperation("导出登录日志")
     @GetMapping(value = "export-LoginLog", produces = "application/octet-stream")
     @SneakyThrows
-    @Override
     public ResponseEntity<byte[]> exportLoginLog() {
 
 

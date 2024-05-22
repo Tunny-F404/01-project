@@ -70,4 +70,16 @@ public class MdVendorServiceImpl extends ServiceImpl<MdVendorMapper, MdVendor> i
         BeanUtils.copyProperties(data, mdVendor);
         return mdVendorMapper.insert(mdVendor);
     }
+
+    @Override
+    public MdVendor getByVendorId(Long vendorId) {
+        return mdVendorMapper.getById(vendorId);
+    }
+
+    @Override
+    public void deleteVendors(List<Integer> ids) {
+        ids.forEach(vendorId->{
+            mdVendorMapper.deleteVendor(vendorId);
+        });
+    }
 }
