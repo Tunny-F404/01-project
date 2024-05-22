@@ -107,9 +107,8 @@ public:
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("process.del.summary1"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.field.id"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete-process/{id}", removeProcess, PATH(UInt64, id), execRemoveProcess(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete-process/{id}", removeProcess, BODY_DTO(List<UInt64>, id), execRemoveProcess(id));
 
 	// 7 工艺导出
 	ENDPOINT_INFO(queryProcess) {
@@ -145,7 +144,7 @@ private:
 	// 5 获取工艺关联产品列表
 	ProductsPageJsonVO::Wrapper execQueryProducts(const ProcessProductsQuery::Wrapper& query);
 	// 6 删除组成工序（支持批量删除）
-	Uint64JsonVO::Wrapper execRemoveProcess(const UInt64& id);
+	Uint64JsonVO::Wrapper execRemoveProcess(const List<UInt64>& id);
 	// 7 工艺导出
 	StringJsonVO::Wrapper execQueryProcess(const ProcessQuery::Wrapper& query);
 };

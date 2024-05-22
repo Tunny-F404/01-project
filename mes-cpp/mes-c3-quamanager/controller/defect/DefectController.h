@@ -35,7 +35,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "index_type", ZH_WORDS_GETTER("defect.field.index_type"), "APPEARANCE", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "defect_level", ZH_WORDS_GETTER("defect.field.defect_level"), "MIN", false);
 	}
-	ENDPOINT(API_M_GET, "/defect", queryDefect, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/defect/get-list", queryDefect, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, DefectQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -51,7 +51,7 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	ENDPOINT(API_M_POST, "/defect", addDefect, BODY_DTO(DefectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/defect/add-defect", addDefect, BODY_DTO(DefectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddDefect(dto));
 	}
@@ -60,7 +60,7 @@ public:
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("defect.modify.summary"), modifyDefect, Uint64JsonVO::Wrapper);
 	API_HANDLER_ENDPOINT_AUTH(                   //
 		API_M_PUT,                               //
-		"/qc/defect/modify-defect",              //
+		"/defect/modify-defect",              //
 		modifyDefect,                            //
 		BODY_DTO(DefectUpdateDTO::Wrapper, dto), //
 		execModifyDefect(dto)                    //
@@ -70,7 +70,7 @@ public:
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("defect.remove.summary"), removeDefect, Uint64JsonVO::Wrapper);
 	API_HANDLER_ENDPOINT_AUTH(                   //
 		API_M_DEL,                               //
-		"/qc/defect/remove-defect/{removeList}", //
+		"/defect/remove-defect/{removeList}", //
 		removeDefect,                            //
 		PATH(String, removeList),                //
 		execRemoveDefect(removeList)             //

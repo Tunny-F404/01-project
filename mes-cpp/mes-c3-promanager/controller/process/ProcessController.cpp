@@ -34,7 +34,7 @@ ProductsPageJsonVO::Wrapper ProcessController::execQueryProducts(const ProcessPr
 }
 
 // 6 É¾³ý¹¤ÒÕ
-Uint64JsonVO::Wrapper ProcessController::execRemoveProcess(const UInt64& id)
+Uint64JsonVO::Wrapper ProcessController::execRemoveProcess(const List<UInt64>& id)
 {
 	auto jvo = Uint64JsonVO::createShared();
 	return jvo;
