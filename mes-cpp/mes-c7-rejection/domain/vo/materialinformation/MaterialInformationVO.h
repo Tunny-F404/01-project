@@ -20,8 +20,8 @@
 #ifndef _MATERIALINFORMATION_VO_
 #define _MATERIALINFORMATION_VO_
 
-#include "../GlobalInclude.h"
-#include "../dto/materialinformation/MaterialInformationDTO.h"
+#include "../../GlobalInclude.h"
+#include "../../dto/materialinformation/MaterialInformationDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 

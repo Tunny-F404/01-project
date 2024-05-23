@@ -21,7 +21,7 @@
 #define _MaterialInformation_SERVICE_
 #include <list>
 #include "domain/dto/materialinformation/MaterialInformationDTO.h"
-#include "domain/query/MaterialInformationQuery.h"
+#include "domain/query/materialinformation/MaterialInformationQuery.h"
 
 /**
  * 生产退料物料信息的服务接口

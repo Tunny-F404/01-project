@@ -22,8 +22,8 @@
 
 #include "domain/vo/BaseJsonVO.h"
 #include "domain/dto/materialinformation/MaterialInformationDTO.h"
-#include "domain/query/MaterialInformationQuery.h"
-#include "domain/vo/MaterialInformationVO.h"
+#include "domain/query/materialinformation/MaterialInformationQuery.h"
+#include "domain/vo/materialinformation/MaterialInformationVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
