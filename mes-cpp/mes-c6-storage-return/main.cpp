@@ -31,7 +31,7 @@
 
 #ifndef _RELEASE_DOC_
 
-#define _RELEASE_DOC_
+//#define _RELEASE_DOC_
 #endif
 
 
@@ -43,7 +43,7 @@ bool getStartArg(int argc, char* argv[]) {
 	std::string dbPassword = "123456";
 
 	std::string dbName = "test";
-	std::string dbHost = "192.168.220.128";
+	std::string dbHost = "localhost";
 
 	int dbPort = 3306;
 	int dbMax = 5;
