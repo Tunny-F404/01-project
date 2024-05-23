@@ -24,37 +24,20 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 绀轰緥浼犺緭瀵硅薄
+ * 报工列表数据模型
  */
-class SampleDTO : public oatpp::DTO
+class FeedBackListDTO : public oatpp::DTO
 {
-	DTO_INIT(SampleDTO, DTO);
-	// 缂栧彿
-	DTO_FIELD(UInt64, id);
-	DTO_FIELD_INFO(id) {
-		info->description = ZH_WORDS_GETTER("sample.field.id");
-	}
-	// 濮撳悕
-	DTO_FIELD(String, name);
-	DTO_FIELD_INFO(name) {
-		info->description = ZH_WORDS_GETTER("sample.field.name");
-	}
-	// 骞撮緞
-	DTO_FIELD(Int32, age);
-	DTO_FIELD_INFO(age) {
-		info->description = ZH_WORDS_GETTER("sample.field.age");
-	}
-	// 鎬у埆
-	DTO_FIELD(String, sex);
-	DTO_FIELD_INFO(sex) {
-		info->description = ZH_WORDS_GETTER("sample.field.sex");
-	}
+	DTO_INIT(FeedBackListDTO,DTO);
+	//报工类型
+	API_DTO_FIELD(string, type,ZH_WORDS_GETTER());
+
 };
 
 /**
- * 绀轰緥鍒嗛〉浼犺緭瀵硅薄
+ * 示例分页传输对象
  */
-class SamplePageDTO : public PageDTO<SampleDTO::Wrapper> 
+class SamplePageDTO : public PageDTO<SampleDTO::Wrapper>
 {
 	DTO_INIT(SamplePageDTO, PageDTO<SampleDTO::Wrapper>);
 };
