@@ -34,8 +34,6 @@ class GetProgectDTO : public oatpp::DTO
 	API_DTO_FIELD(UInt64, pId, ZH_WORDS_GETTER("project.fields.pid"), true, 1);
 	//项目编码
 	API_DTO_FIELD(String, pCode, ZH_WORDS_GETTER("project.fields.pcode"), true, "01star");
-	//项目名称
-	API_DTO_FIELD(String, pName, ZH_WORDS_GETTER("project.fields.pname"), true, "QQQQQ");
 	//项目类型
 	API_DTO_FIELD(String, pType, ZH_WORDS_GETTER("project.fields.ptype"), true, "QW");
 	//项目内容
@@ -46,6 +44,7 @@ class GetProgectDTO : public oatpp::DTO
 	API_DTO_FIELD(String, enable, ZH_WORDS_GETTER("project.fields.enable"), true, "enable");
 	//备注
 	API_DTO_FIELD(String, note, ZH_WORDS_GETTER("project.fields.note"), true, "asdef");
+	
 
 };
 
@@ -56,8 +55,7 @@ class GetProgectDTO : public oatpp::DTO
 class GetProgectPageDTO : public PageDTO< GetProgectDTO::Wrapper>
 {
 	DTO_INIT(GetProgectPageDTO, PageDTO< GetProgectDTO::Wrapper>);
-
-
+	
 };
 /**
 * 定义一个设备详情传输对象
@@ -65,6 +63,8 @@ class GetProgectPageDTO : public PageDTO< GetProgectDTO::Wrapper>
 class GetProgectDetailDTO : public GetProgectDTO
 {
 	DTO_INIT(GetProgectDetailDTO, GetProgectDTO);
+	//项目名称
+	API_DTO_FIELD(String, pName, ZH_WORDS_GETTER("project.fields.pname"), true, "QQQQQ");
 };
 
 

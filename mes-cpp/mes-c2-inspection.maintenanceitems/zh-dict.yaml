@@ -20,7 +20,7 @@ project:
   standard: 标准
   enable: 是否启用
   note: 备注
-  pid: 唯一标识
+  pid: 项目id
 device-manage:
   field:
     subjectId: 项目ID

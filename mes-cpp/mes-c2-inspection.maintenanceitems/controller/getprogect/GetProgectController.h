@@ -70,7 +70,7 @@ public:
 		// 定义其他查询参数描述
 
 		//设备编码
-		API_DEF_ADD_QUERY_PARAMS(String, "pId", ZH_WORDS_GETTER("project.fields.pid"), 1, true);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "pId", ZH_WORDS_GETTER("project.fields.pid"), 1, true);
 	}
 	// 2 定义设备详情查询接口处理
 	ENDPOINT(API_M_GET, "/progect/query-progectdetail", queryProgectDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
