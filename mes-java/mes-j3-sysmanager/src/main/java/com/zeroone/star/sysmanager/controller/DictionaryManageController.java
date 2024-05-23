@@ -58,7 +58,6 @@ public class DictionaryManageController implements DictionaryManageApis {
     public JsonVO<List<DictTypeNameVO>> queryDictTypeNames() {
         return null;
     }
-}
 
     @Override
     @ApiOperation(value = "删除字典数据接口")
