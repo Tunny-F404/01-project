@@ -38,7 +38,7 @@ spring:
             - Path=/cpp/**
 secure:
   # 配置是否开启鉴权
-  openauthorization: true
+  openauthorization: false
   # 配置白名单路径
   white:
     urls:

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zeroone.star.orgstructure.client.LoginClient;
 import com.zeroone.star.orgstructure.entity.SysPost;
+import com.zeroone.star.orgstructure.entity.SysUserPost;
 import com.zeroone.star.orgstructure.mapper.SysPostMapper;
 import com.zeroone.star.orgstructure.mapper.SysUserMapper;
 import com.zeroone.star.orgstructure.mapper.SysUserPostMapper;
@@ -57,6 +58,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
     /**
      * 新增岗位
+     *
      * @param jobDTO
      * @return
      */
@@ -71,7 +73,8 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
             sysPost.setCreateTime(LocalDateTime.now());
 
             // 获取当前登录人
-            //TODO 获取当前登录人
+            //TODO 获取当前登录人（暂时默认为admin）
+//            sysPost.setCreateBy("admin");
             JsonVO<LoginVO> currUser = loginClient.getCurrUser();
             LoginVO loginVO = currUser.getData();
             if (loginVO != null) {
@@ -94,6 +97,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
     /**
      * 删除岗位
+     *
      * @param ids
      * @return
      */
@@ -110,10 +114,12 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
             //遍历map，删除岗位下的用户
             for (Long id : ids) {
                 List<Long> userids = map.get(id);
-                if (userids != null&&!userids.isEmpty()) {
+                if (userids != null && !userids.isEmpty()) {
                     sysUserMapper.deleteBatchIds(userids);
                 }
             }
+            //删除用户与岗位的关联关系
+            sysUserPostMapper.delete(new QueryWrapper<SysUserPost>().in("post_id", ids));
             // 删除岗位
             return removeByIds(Arrays.asList(ids));
         } catch (Exception e) {
@@ -125,6 +131,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
     /**
      * 修改岗位
+     *
      * @param jobDTO
      * @return
      */
@@ -138,7 +145,8 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
             sysPost.setUpdateTime(LocalDateTime.now());
 
             // 获取当前登录人
-            //TODO 获取当前登录人
+            //TODO 获取当前登录人（暂时默认为admin）
+//            sysPost.setUpdateBy("admin");
             JsonVO<LoginVO> currUser = loginClient.getCurrUser();
             LoginVO loginVO = currUser.getData();
             if (loginVO != null) {
@@ -159,16 +167,21 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     }
 
 
+    /**
+     * 导出岗位信息
+     *
+     * @return
+     */
     @Override
-    public ResponseEntity<byte[]> download(){
+    public ResponseEntity<byte[]> download() {
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.select("post_id","post_name","post_code","post_sort","status","remark");
+        queryWrapper.select("post_id", "post_name", "post_code", "post_sort", "status", "remark");
         List<SysPost> posts = sysPostMapper.selectList(queryWrapper);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         EasyExcel.write(out, SysPost.class).sheet("岗位信息").doWrite(posts);
         // 获取字节数组
         byte[] byteArray = out.toByteArray();
-        String fileName = UUID.randomUUID().toString()+".xlsx";
+        String fileName = UUID.randomUUID().toString() + ".xlsx";
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentDispositionFormData("attachment", fileName);
         httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);

@@ -1,16 +1,20 @@
 package com.zeroone.star.orgstructure.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.zeroone.star.orgstructure.client.LoginClient;
 import com.zeroone.star.orgstructure.entity.SysPost;
 import com.zeroone.star.orgstructure.service.ISysPostService;
 import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
+import com.zeroone.star.project.dto.login.LoginDTO;
+import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.job.JobDTO;
 import com.zeroone.star.project.j2.orgstructure.query.job.JobQuery;
 import com.zeroone.star.project.vo.JobVO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.j2.orgstructure.job.JobApis;
 import com.zeroone.star.project.vo.ResultStatus;
+import com.zeroone.star.project.vo.login.LoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.SneakyThrows;
@@ -91,5 +95,6 @@ public class JobController implements JobApis {
     public JsonVO<JobVO> queryJobDetail(@RequestParam Long id) {
         return null;
     }
+
 
 }
