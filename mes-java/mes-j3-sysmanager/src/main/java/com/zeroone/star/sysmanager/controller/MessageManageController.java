@@ -2,10 +2,12 @@ package com.zeroone.star.sysmanager.controller;
 
 import cn.hutool.core.date.DateTime;
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.util.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
+import com.zeroone.star.project.j3.dto.ExportConditionMessageDTO;
 import com.zeroone.star.project.j3.dto.ExportMessageDTO;
 import com.zeroone.star.project.j3.dto.SysAddMessageDTO;
 import com.zeroone.star.project.j3.dto.SysUpdateMessageDTO;
@@ -110,15 +112,27 @@ public class MessageManageController implements MessageManageApis {
 
     /**
      * 方法封装-转换数据到DTO
-     * @param messageIds 根据消息id 获取数据
+     * @param exportConditionMessageDTO 根据发送参数筛选 获取数据
      * @return 导出类型消息DTO集合
      */
-    public List<ExportMessageDTO> dataConversion(List<Long> messageIds){
+    public List<ExportMessageDTO> dataConversion(ExportConditionMessageDTO exportConditionMessageDTO){
 
         LambdaQueryWrapper<SysMessage> queryWrapper = new LambdaQueryWrapper<>();
-
-        if (!messageIds.isEmpty()){
-            queryWrapper.in(SysMessage::getMessageId,messageIds);
+        //根据传递参数判断是否要进行数据库查询操作
+        if (exportConditionMessageDTO.getMessageType() != null && !StringUtils.isBlank(exportConditionMessageDTO.getMessageType())) {
+            StringUtils.isBlank(null);
+        }
+        if (exportConditionMessageDTO.getMessageLevel() !=null  && !StringUtils.isBlank(exportConditionMessageDTO.getMessageLevel())){
+            queryWrapper.eq(SysMessage::getMessageLevel,exportConditionMessageDTO.getMessageLevel());
+        }
+        if (exportConditionMessageDTO.getSenderNick() !=null  && !StringUtils.isBlank(exportConditionMessageDTO.getSenderNick())){
+            queryWrapper.eq(SysMessage::getSenderName,exportConditionMessageDTO.getSenderNick());
+        }
+        if (exportConditionMessageDTO.getRecipientNick() !=null  && !StringUtils.isBlank(exportConditionMessageDTO.getRecipientNick())){
+            queryWrapper.eq(SysMessage::getRecipientNick,exportConditionMessageDTO.getRecipientNick());
+        }
+        if (exportConditionMessageDTO.getStatus() !=null  && !StringUtils.isBlank(exportConditionMessageDTO.getStatus())){
+            queryWrapper.eq(SysMessage::getStatus,exportConditionMessageDTO.getStatus());
         }
 
         List<SysMessage> messages = ISysMessageService.getBaseMapper().selectList(queryWrapper);
@@ -160,7 +174,7 @@ public class MessageManageController implements MessageManageApis {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         // 导出数据到输出流 这块转换了数据到DTO
-        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(new ArrayList<>()));
+        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(new ExportConditionMessageDTO()));
         // 获取字节数据
         byte[] bytes = out.toByteArray();
         out.close();
@@ -187,7 +201,7 @@ public class MessageManageController implements MessageManageApis {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         // 导出数据到输出流
-        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(new ArrayList<>()));
+        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(new ExportConditionMessageDTO()));
 
         // 获取字节数据
         byte[] bytes = out.toByteArray();
@@ -207,19 +221,16 @@ public class MessageManageController implements MessageManageApis {
      * @return 报表
      */
     @SneakyThrows
-    @GetMapping(value = "download-message", produces = "application/octet-stream")
+    @PostMapping(value = "download-message", produces = "application/octet-stream")
     @ApiOperation(value = "根据id筛选下载Excel")
-    public ResponseEntity<byte[]> downloadMessageExcel(@RequestParam String messageIds) {
-
-        //转换传入字符串id 为集合
-        List<Long> messageIdsList = StringIdToList(messageIds);
+    public ResponseEntity<byte[]> downloadMessageExcel(@RequestBody ExportConditionMessageDTO exportConditionMessageDTO) {
 
         // 构建一个输出流
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
 
         // 导出数据到输出流
-        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(messageIdsList));
+        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(exportConditionMessageDTO));
         // 获取字节数据
         byte[] bytes = out.toByteArray();
         out.close();
@@ -239,18 +250,16 @@ public class MessageManageController implements MessageManageApis {
      */
     @SneakyThrows
     @ResponseBody
-    @GetMapping(value = "export-message-dfs")
+    @PostMapping(value = "export-message-dfs")
     @ApiOperation(value = "根据id筛选导出到dfs")
-    public JsonVO<String> exportMessageToDfs(@RequestParam String messageIds) {
+    public JsonVO<String> exportMessageToDfs(@RequestBody ExportConditionMessageDTO exportConditionMessageDTO) {
 
-        //转换传入字符串id 为集合
-        List<Long> messageIdsList = StringIdToList(messageIds);
 
         // 构建一个输出流
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         // 导出数据到输出流
-        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(messageIdsList));
+        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(exportConditionMessageDTO));
 
         // 获取字节数据
         byte[] bytes = out.toByteArray();

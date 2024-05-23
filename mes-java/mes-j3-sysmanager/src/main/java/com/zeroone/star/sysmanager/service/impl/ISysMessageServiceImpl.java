@@ -10,6 +10,7 @@ import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanager.entity.SysMessage;
 import com.zeroone.star.sysmanager.mapper.SysMessageMapper;
 import com.zeroone.star.sysmanager.service.ISysMessageService;
+import org.apache.poi.ss.formula.functions.T;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,6 +62,11 @@ public class ISysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMes
             // 将DTO转换为实体
             SysMessage sysMessage = msMessageMapper.sysAddMessageDTOToMessage(sysAddMessageDTO);
 
+            //根据昵称获取用户信息
+            String recipientNick = sysMessage.getRecipientNick();
+            LambdaQueryWrapper userQuery = new LambdaQueryWrapper();
+            //查询用户信息添加到数据库中
+
             //额外增加四条属性 id，状态,是否删除,创建时间
 
             //查询最后一条数据id
@@ -100,12 +106,16 @@ public class ISysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMes
             // 将DTO转换为实体
             SysMessage sysMessage = msMessageMapper.sysUpdateAMessageDTOToMessage(sysUpdateMessageDTO);
 
-            //根据信息先来查询id
-
             // 使用 LambdaUpdateWrapper 来构建更新条件
             LambdaUpdateWrapper<SysMessage> updateWrapper = new LambdaUpdateWrapper<>();
 
             updateWrapper.eq(SysMessage::getMessageId, sysUpdateMessageDTO.getMessageId());
+
+            //根据昵称查询用户对应信息
+//            LambdaQueryWrapper<?> queryWrapper = new LambdaQueryWrapper();
+//            queryWrapper.eq(::,sysMessage.getRecipientNick());
+//            xxx.mapper.selectList;
+//            sysMessage.setRecipientId();
 
             //添加 更改时间
             sysMessage.setUpdateTime();

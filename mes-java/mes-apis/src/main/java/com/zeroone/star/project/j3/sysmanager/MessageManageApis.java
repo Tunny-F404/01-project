@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j3.sysmanager;
 
+import com.zeroone.star.project.j3.dto.ExportConditionMessageDTO;
 import com.zeroone.star.project.j3.dto.SysAddMessageDTO;
 import com.zeroone.star.project.j3.dto.SysUpdateMessageDTO;
 import com.zeroone.star.project.vo.JsonVO;
@@ -53,12 +54,12 @@ public interface MessageManageApis {
      * 根据id筛选导出对应Excel
      * @return 报表
      */
-    public ResponseEntity<byte[]> downloadMessageExcel(String messageIds);
+    public ResponseEntity<byte[]> downloadMessageExcel(ExportConditionMessageDTO exportConditionMessageDTO);
 
 
     /**
      * 根据id筛选数据导出到dfs
      * @return dfs连接
      */
-    public JsonVO<String> exportMessageToDfs(String messageIds);
+    public JsonVO<String> exportMessageToDfs(ExportConditionMessageDTO exportConditionMessageDTO);
 }
