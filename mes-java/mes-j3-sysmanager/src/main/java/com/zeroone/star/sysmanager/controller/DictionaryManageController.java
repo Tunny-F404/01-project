@@ -24,8 +24,8 @@ public class DictionaryManageController implements DictionaryManageApis {
 
     @Override
     @ApiOperation(value = "(批量)删除字典")
-    @DeleteMapping("remove/remove/delete/delete-dict-type")
-    public JsonVO<Void> deleteDictType(@PathVariable List<Long> dictListIds) {
+    @DeleteMapping("remove/remove/delete/delete-dict-type/{dictListIds}")
+    public JsonVO<Void> deleteDictType(@PathVariable Long[] dictListIds) {
         return null;
     }
 

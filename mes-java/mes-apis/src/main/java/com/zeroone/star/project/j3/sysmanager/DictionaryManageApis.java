@@ -22,7 +22,7 @@ public interface DictionaryManageApis {
     /**
      *  批量删除字典
      */
-    JsonVO<Void> deleteDictType(List<Long> dictListIds);
+    JsonVO<Void> deleteDictType(Long[] dictListIds);
     /**
      *  导出字典
      */
