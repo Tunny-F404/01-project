@@ -44,7 +44,7 @@ public class ParameterController implements ParameterApis {
     @Override
     @DeleteMapping("remove-parameter")
     @ApiOperation("删除参数")
-    public JsonVO<Integer> removeParameter(@RequestParam(name = "ids[]", required = true) List<Integer> ids) {
+    public JsonVO<Integer> removeParameter(@RequestParam(name = "ids", required = true) List<Integer> ids) {
         return JsonVO.success(service.removeParameters(ids));
     }
 
@@ -117,7 +117,7 @@ public class ParameterController implements ParameterApis {
     @GetMapping("query-all")
     @ApiOperation("查询所有参数")
     public JsonVO<PageDTO<ParameterDTO>> queryAll(ParameterQuery parameterQuery) {
-        PageDTO<ParameterDTO> pageDTO = new PageDTO<ParameterDTO>();
-        return JsonVO.success(pageDTO);
+
+        return JsonVO.success(service.listAll(parameterQuery));
     }
 }
