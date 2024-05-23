@@ -1,4 +1,4 @@
-/*
+	/*
  Copyright Zero One Star. All rights reserved.
 
  @Author: hejianwei
@@ -44,7 +44,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const Rep
 	return Uint64JsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const RepaircontentDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& repairIdList)
 {
 	//...
 	return Uint64JsonVO::Wrapper();
