@@ -3,6 +3,9 @@ package com.zeroone.star.sysmanager.controller;
 import com.zeroone.star.project.j3.dto.PageDto;
 import com.zeroone.star.project.j3.query.NewsPageQuery;
 import com.zeroone.star.project.j3.sysmanager.MessageManageApis;
+import io.swagger.annotations.Api;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.zeroone.star.project.j3.vo.NewsPageVo;
 import com.zeroone.star.project.j3.vo.NewsVo;
 import io.swagger.annotations.Api;
@@ -14,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "消息管理")
-@RestController
-@RequestMapping("/sys-manager/message-manager")
+@Controller
+@RequestMapping("sys-manager/message-manager")
 public class MessageManageController implements MessageManageApis {
     @GetMapping("/news/{id}")
     @ApiOperation(value = "消息详情")
