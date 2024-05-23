@@ -117,7 +117,7 @@ public:
 	// 6 删除组成工序
 	ENDPOINT_INFO(removeProcess) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("process.del.summary1"), Uint64JsonVO::Wrapper);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("process.delete.summary1"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
 	}
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete-process/{id}", removeProcess, QUERY(List<UInt64>, id), execRemoveProcess(id));
@@ -147,7 +147,7 @@ public:
 	// 8 获取组成工序列表
 	ENDPOINT_INFO(QueryProTable) {
 		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("pro.get.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.get.summary4"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
@@ -169,7 +169,7 @@ public:
 	// 9 添加组成工序
 	ENDPOINT_INFO(addComProcess) {
 		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("pro.add.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.add.summary"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
@@ -181,7 +181,7 @@ public:
 	}
 
 	// 10 修改组成工序
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pro.modify.summary"), ModifyProcess, Uint64JsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("process.modify.summary"), ModifyProcess, Uint64JsonVO::Wrapper);
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-comprocess", ModifyProcess, BODY_DTO(ModifyProDTO::Wrapper, dto), execModifyProcess(dto));
 
 	//11 添加工艺关联产品
@@ -230,7 +230,6 @@ public:
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.route.id"), 1, true);
 	}
-	// 3.2 定义删除接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/{id}", removeProRoute, PATH(UInt64, id), execRemoveProRoute(id));
 
 
@@ -241,13 +240,12 @@ public:
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.route.corproductid"), 1, true);
 	}
-	// 3.2 定义删除接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/product/{id}", removeRouteProduct, PATH(UInt64, id), execRemoveRouteProduct(id));
 
 	// 16 定义工艺关联产品导出接口
 	ENDPOINT_INFO(outputRouteProduct) {
 		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.route.ouput"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.route.output"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
@@ -256,12 +254,22 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 
 	}
-	ENDPOINT(API_M_GET, "/pro/export-corproducts", outputRouteProduct, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/pro/export-corproducts", outputRouteProduct, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, outputRouteProductQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execOutputRouteProduct(userQuery, authObject->getPayload()));
 	}
+
+	// 17 删除产品制程物料BOM
+	ENDPOINT_INFO(removeProcessBOM) {
+		// 定义标题和返回类型以及授权支持
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("process.delete.summary2"), Uint64JsonVO::Wrapper);
+		// 定义其他路径参数说明
+		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.field.BOMid"), 1, true);
+	}
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/process/delete/{id}", removeProcessBOM, PATH(UInt64, id), execRemoveProcessBOM(id));
+
 private:
 	// 1 获取工艺列表数据
 	ProcessListJsonVO::Wrapper execQueryProcessList(const ProcessListQuery::Wrapper& query);
@@ -295,6 +303,8 @@ private:
 	Uint64JsonVO::Wrapper execRemoveRouteProduct(const UInt64& id);
 	// 16 导出工艺关联产品
 	StringJsonVO::Wrapper execOutputRouteProduct(const outputRouteProductQuery::Wrapper& query, const PayloadDTO& payload);
+	// 17 删除产品制程物料BOM
+	Uint64JsonVO::Wrapper execRemoveProcessBOM(const UInt64& id);
 };
 
 // 0 取消API控制器使用宏

@@ -20,18 +20,25 @@ process:
   flag: 是否启用
   remark: 备注
   example: 组装
+  BOMid: 产品物料id
  get:
   summary1: 获取工艺列表 
   summary2: 获取工艺详情
   summary3: 获取关联产品列表
+  summary4: 获取组成工序列表
  post:
   summary1: 添加工艺   
  put:
   summary1: 修改工艺
- del:
+ delete:
   summary1: 删除工艺
+  summary2: 删除产品制程物料BOM
  get_field:
   summary: 导出工艺
+ add:
+  summary: 添加组成工序
+ modify:
+  summary: 修改组成工序
 
 pro:
  get:

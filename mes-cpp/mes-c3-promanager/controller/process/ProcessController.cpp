@@ -91,4 +91,10 @@ StringJsonVO::Wrapper ProcessController::execOutputRouteProduct(const outputRout
 {
 	return {};
 }
+// 17 删除产品制程物料BOM
+Uint64JsonVO::Wrapper ProcessController::execRemoveProcessBOM(const UInt64& id)
+{
+	auto jvo = Uint64JsonVO::createShared();
+	return jvo;
+}
 
