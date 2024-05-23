@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api("消息服务")
+@Api(tags="消息服务")
 @RestController
 @RequestMapping("/message-service")
 public class MessageServiceController implements MessageServiceApis {
