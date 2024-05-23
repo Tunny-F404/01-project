@@ -9,7 +9,7 @@
 /**
  * 示例数据库实体类
  */
-class dv_check_palnDO
+class Dv_check_planDO
 {
 	// 计划ID，
 	CC_SYNTHESIZE(uint64_t, plan_id, Plan_id);
@@ -54,7 +54,7 @@ class dv_check_palnDO
 
 public:
 	//默认构造
-	dv_check_palnDO() {
+	Dv_check_planDO() {
 		plan_id = 0;
 		plan_code = "";
 		plan_name = "";
