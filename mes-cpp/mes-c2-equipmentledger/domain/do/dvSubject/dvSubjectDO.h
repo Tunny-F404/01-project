@@ -2,7 +2,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: 。好
- @Date: 2024/05/23 20:42:53
+ @Date: 2024/05/23 21:08:23
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,30 +16,27 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DVMACHINERYTYPEDO_H_
-#define _DVMACHINERYTYPEDO_H_
+#ifndef _DVMACHINERYDO_H_
+#define _DVMACHINERYDO_H_
 
-#include "../DoInclude.h"
-
-/**
- * dv_machinery_type数据表实体类
- * 负责人：。好
- */
-
-class dvMachineryTypeDO
+class dvMachineryDO
 {
-	// 设备类型ID
-	CC_SYNTHESIZE(uint64_t, machinery_type_id, MachineryTypeId)
-	// 设备类型编码
-	CC_SYNTHESIZE(std::string, machinery_type_code, MachineryTypeCode)
-	// 设备类型名称
-	CC_SYNTHESIZE(std::string, machinery_type_name, MachineryTypeName)
-	// 父类型ID
-	CC_SYNTHESIZE(uint64_t, parent_type_id, ParentTypeId)
-	// 所有父节点ID
-	CC_SYNTHESIZE(std::string, ancestors, Ancestors)
+	// 项目ID
+	CC_SYNTHESIZE(uint64_t, subject_id, SubjectId)
+	// 项目编码
+	CC_SYNTHESIZE(std::string, subject_code, SubjectCode)
+	// 项目名称
+	CC_SYNTHESIZE(std::string, subject_name, SubjectName)
+	// 项目类型
+	CC_SYNTHESIZE(std::string, subject_type, SubjectType)
+	// 项目内容
+	CC_SYNTHESIZE(std::string, subject_content, SubjectContent)
+	// 项目标准
+	CC_SYNTHESIZE(std::string, subject_standard, SubjectStandard)
 	// 是否启用
 	CC_SYNTHESIZE(char, enable_flag, EnableFlag)
+	// 设备状态
+	CC_SYNTHESIZE(std::string, status, Status)
 	// 备注
 	CC_SYNTHESIZE(std::string, remark, Remark)
 	// 预留字段 1 ~ 4
@@ -57,4 +54,4 @@ class dvMachineryTypeDO
 	CC_SYNTHESIZE(std::string, update_time, UpdateTime)
 };
 
-#endif // !_DVMACHINERYTYPEDO_H_
+#endif // !_DVMACHINERYDO_H_
