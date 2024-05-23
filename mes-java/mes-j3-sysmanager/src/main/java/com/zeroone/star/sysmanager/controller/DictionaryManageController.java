@@ -1,21 +1,22 @@
 package com.zeroone.star.sysmanager.controller;
 
+import com.zeroone.star.project.j3.query.dict.SysDictTypeModifyQuery;
 import com.zeroone.star.project.j3.sysmanager.DictionaryManageApis;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.zeroone.star.project.query.dict.SysDictTypeQuery;
+import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 @Api(tags = "字典管理")
 @Controller
-@RequestMapping("sys-manager/dictionary-manager")
+@RequestMapping("/dict")
 public class DictionaryManageController implements DictionaryManageApis {
     @Override
     @ApiOperation(value = "编辑修改字典")
     @PutMapping("modify/update/upate/edit-dict-type")
-    public JsonVO<Void> editDictType(@RequestBody SysDictTypeQuery sysDictTypeQuery) {
+    public JsonVO<Void> editDictType(@RequestBody SysDictTypeModifyQuery sysDictTypeModifyQuery) {
         return null;
     }
 

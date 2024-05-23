@@ -1,11 +1,12 @@
 package com.zeroone.star.project.j3.sysmanager;
 
 
-import com.zeroone.star.project.query.dict.SysDictTypeQuery;
+import com.zeroone.star.project.j3.query.dict.SysDictTypeModifyQuery;
+import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
 import com.zeroone.star.project.vo.JsonVO;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * 系统管理-字典管理相关接口
@@ -14,7 +15,8 @@ public interface DictionaryManageApis {
     /**
      *   修改字典
      */
-    JsonVO<Void> editDictType(SysDictTypeQuery sysDictTypeQuery);
+    JsonVO<Void> editDictType(SysDictTypeModifyQuery sysDictTypeModifyQuery);
+
     /**
      *  批量删除字典
      */

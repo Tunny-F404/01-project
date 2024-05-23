@@ -2,7 +2,7 @@ package com.zeroone.star.project.sample;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.sample.SampleDTO;
-import com.zeroone.star.project.query.sample.SampleQuery;
+import com.zeroone.star.project.j3.query.sample.SampleQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**

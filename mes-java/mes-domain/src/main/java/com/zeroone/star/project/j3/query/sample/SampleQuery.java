@@ -1,6 +1,6 @@
-package com.zeroone.star.project.query.sample;
+package com.zeroone.star.project.j3.query.sample;
 
-import com.zeroone.star.project.query.PageQuery;
+import com.zeroone.star.project.j3.query.PageQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

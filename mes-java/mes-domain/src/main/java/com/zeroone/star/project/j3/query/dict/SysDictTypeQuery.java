@@ -1,4 +1,4 @@
-package com.zeroone.star.project.query.dict;
+package com.zeroone.star.project.j3.query.dict;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;

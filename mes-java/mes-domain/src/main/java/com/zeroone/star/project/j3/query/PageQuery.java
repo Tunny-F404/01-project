@@ -1,4 +1,4 @@
-package com.zeroone.star.project.query;
+package com.zeroone.star.project.j3.query;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
