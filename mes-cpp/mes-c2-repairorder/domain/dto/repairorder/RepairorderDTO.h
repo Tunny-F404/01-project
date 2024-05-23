@@ -38,6 +38,8 @@ class RepairorderDTO : public oatpp::DTO
 
     // 维修单名称
     API_DTO_FIELD(String, repairName, ZH_WORDS_GETTER("repairorder.query.fields.repair_name"), true, "");
+    //设备ID
+    API_DTO_FIELD(UInt64, machineryId, ZH_WORDS_GETTER("repairorder.query.fields.machinery_id"), true, 0ULL);
 
     // 设备编码
     API_DTO_FIELD(String, machineryCode, ZH_WORDS_GETTER("repairorder.query.fields.machinery_code"), true, "");
