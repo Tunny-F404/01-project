@@ -1,13 +1,13 @@
 server:
-  port: ${sp.basicdata}
+  port: 10690
 spring:
   application:
-    name: ${sn.basicdata}
+    name: BASICDATA
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.100.130:3306/ktgmes?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://192.168.200.131:3306/ktgmes?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: 1234
+    password: 123456
 
 
 mybatis-plus:

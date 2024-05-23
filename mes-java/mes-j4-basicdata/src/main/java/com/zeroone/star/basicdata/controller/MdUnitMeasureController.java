@@ -4,6 +4,7 @@ import com.zeroone.star.basicdata.entity.MdUnitMeasure;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.basicdata.service.IMdUnitMeasureService;
+import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
 import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.*;
 import com.zeroone.star.project.vo.JsonVO;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -58,22 +60,44 @@ public class MdUnitMeasureController {
 
     /**
      * 查询单位分页列表
-     * @param mdUnitMeasure 单位测量模型，用于筛选查询条件
-     * @return 返回单位列表的信息
+     * @param unitMeasureDTO 单位测量模型，用于传递查询条件,如果为空，返回所有数据
+     * @param pageIndex 请求的页码，默认开始为1
+     * @param pageSize 每页显示的数量，默认最大为10
+     * @return 返回单位列表的信息，包括分页信息
      */
     @GetMapping("/list")
     @ApiOperation("查询单位分页列表")
-    public JsonVO<PageDTO<MdUnitMeasure>> list(MdUnitMeasure mdUnitMeasure) {
+    public JsonVO<PageDTO<UnitMeasureDTO>> list(UnitMeasureDTO unitMeasureDTO,
+                                                @RequestParam(defaultValue = "1") int pageIndex,
+                                                @RequestParam(defaultValue = "10") int pageSize) {
 
-        // 查询符合条件的单位列表
-        List<MdUnitMeasure> list = iMdUnitMeasureService.selectMdUnitMeasureList(mdUnitMeasure);
+        // 根据查询条件查询单位列表
+        List<UnitMeasureDTO> allList = iMdUnitMeasureService.selectMdUnitMeasureList(unitMeasureDTO);
 
-        // 将查询结果放入Page对象
-        Page<MdUnitMeasure> page = new Page<>(1, 10, list.size());
-        page.setRecords(list);
+        // 计算总记录数
+        int total = allList.size();
 
-        // 将Page对象转换为PageDTO对象
-        PageDTO<MdUnitMeasure> pageDTO = PageDTO.create(page);
+        // 计算当前页应该显示的记录的起始和终止的索引
+        int fromIndex = (pageIndex - 1) * pageSize;
+        int toIndex = Math.min(fromIndex + pageSize, total);
+
+        // 如果起始索引大于总记录数，返回空列表
+        if (fromIndex >= total) {
+            List<UnitMeasureDTO> emptyList = Collections.emptyList();
+            Page<UnitMeasureDTO> emptyPage = new Page<>(pageIndex, pageSize, 0);
+            emptyPage.setRecords(emptyList);
+            return JsonVO.success(PageDTO.create(emptyPage));
+        }
+
+        // 获取当前页的数据
+        List<UnitMeasureDTO> pageList = allList.subList(fromIndex, toIndex);
+
+        // 初始化并设置分页信息
+        Page<UnitMeasureDTO> page = new Page<>(pageIndex, pageSize, total);
+        page.setRecords(pageList);
+
+        // 将Page对象转换为前端可接收的PageDTO对象
+        PageDTO<UnitMeasureDTO> pageDTO = PageDTO.create(page);
 
         return JsonVO.success(pageDTO);
     }
