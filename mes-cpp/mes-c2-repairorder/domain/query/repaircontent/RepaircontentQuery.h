@@ -33,9 +33,9 @@ class RepaircontentQuery : public PageQuery
 	DTO_INIT(RepaircontentQuery, PageQuery);
 	
 	// 维修单ID(唯一标识)
-	API_DTO_FIELD_DEFAULT(UInt64, repairId, ZH_WORDS_GETTER("repaircontent.query.fields.repair_id"), true, 0LLU);
+	API_DTO_FIELD_DEFAULT(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.query.fields.repair_id"), true, 0LLU);
 	//项目名称
-	API_DTO_FIELD_DEFAULT(String, projectName, ZH_WORDS_GETTER("repaircontent.query.fields.repair_name"), true, 0LLU);
+	API_DTO_FIELD_DEFAULT(String, subject_name, ZH_WORDS_GETTER("repaircontent.query.fields.repair_name"), true, 0LLU);
 
 };
 

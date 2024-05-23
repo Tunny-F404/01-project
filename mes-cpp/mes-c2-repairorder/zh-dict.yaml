@@ -8,6 +8,19 @@ repaircontent:
   repair_id: 维修单id（唯一标识）
   repair_name: 项目名称
  field:
+  subject_name: 项目名称
+  malfunction: 故障描述
+  malfunction_url: 故障描述资源
+  repair_des: 维修情况
+  repair_id: 维修单id(唯一标识)
+  subject_id: 项目id
+  subject_code: 项目编码
+  subject_type: 项目类型
+  subject_content: 项目内容
+  subject_standard: 标准
+  remark: 备注
+  attr1: 预留字段(string)
+  attr2: 预留字段(int)
   name: 项目名称
   instance: 故障描述
   source: 故障描述资源

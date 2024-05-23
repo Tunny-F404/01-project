@@ -28,8 +28,12 @@ class DeleteMultiRepaircontentDTO :public oatpp::DTO
 {
 	DTO_INIT(DeleteMultiRepaircontentDTO, DTO);
 
-	//(多个)维修单内容的ID--唯一标识
-	API_DTO_FIELD_DEFAULT(oatpp::List<oatpp::UInt64>, repairIdList, ZH_WORDS_GETTER("repaircontent.field.id"));
+	//需要删除的维修单id
+	API_DTO_FIELD(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.field.repair_id"), true, 1);
+
+	//(多个)需要维修单内容的项目名称
+	API_DTO_FIELD_DEFAULT(oatpp::List<oatpp::String>, subject_nameList, ZH_WORDS_GETTER("repaircontent.field.subject_id"));
+	
 };
 
 #include OATPP_CODEGEN_END(DTO)

@@ -30,17 +30,56 @@ class RepaircontentDTO : public oatpp::DTO
 {
 	DTO_INIT(RepaircontentDTO, DTO);
 	
-	//唯一标识(隐藏的)
-	API_DTO_FIELD(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.field.id"), true, 1);
+	//维修单id唯一标识(隐藏的)
+	API_DTO_FIELD(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.field.repair_id"), true, 1);
+	//项目id
+	API_DTO_FIELD(UInt64, subject_id, ZH_WORDS_GETTER("repaircontent.field.subject_id"), true, 1);
+	//项目编码
+	API_DTO_FIELD(String, subject_code, ZH_WORDS_GETTER("repaircontent.field.subject_code"), true, "");
 	//项目名称
-	API_DTO_FIELD(String, projectName, ZH_WORDS_GETTER("repaircontent.field.name"), true, "");
-	//故障描述
-	API_DTO_FIELD(String, errorInstance, ZH_WORDS_GETTER("repaircontent.field.instance"), true, "");
-	//故障资源描述
-	API_DTO_FIELD(String, errorInstanceSource, ZH_WORDS_GETTER("repaircontent.field.source"), true, "");
-	//维修情况
-	API_DTO_FIELD(String, repairStatus, ZH_WORDS_GETTER("repaircontent.field.status"), true, "");
+	API_DTO_FIELD(String, subject_name, ZH_WORDS_GETTER("repaircontent.field.subject_name"), true, "");
+	//项目类型
+	API_DTO_FIELD(String, subject_type, ZH_WORDS_GETTER("repaircontent.field.subject_type"), true, "");
+	//项目类型
+	API_DTO_FIELD(String, subject_content, ZH_WORDS_GETTER("repaircontent.field.subject_content"), true, "");
+	//标准
+	//API_DTO_FIELD(String, subject_standard, ZH_WORDS_GETTER("repaircontent.field.subject_standard"), true, "");
 
+	//故障描述
+	API_DTO_FIELD(String, malfunction, ZH_WORDS_GETTER("repaircontent.field.malfunction"), true, "");
+	//故障资源描述
+	API_DTO_FIELD(String, malfunction_url, ZH_WORDS_GETTER("repaircontent.field.malfunction_url"), true, "");
+	//维修情况
+	API_DTO_FIELD(String, repair_des, ZH_WORDS_GETTER("repaircontent.field.repair_des"), true, "");
+
+	//备注
+	//API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("repaircontent.field.remark"), true, "");
+
+
+
+};
+
+class AddRepaircontentDTO : public oatpp::DTO
+{
+	DTO_INIT(AddRepaircontentDTO, DTO);
+	//维修单id唯一标识(隐藏的)
+	API_DTO_FIELD(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.field.repair_id"), true, 1);
+	//项目名称
+	API_DTO_FIELD(String, subject_name, ZH_WORDS_GETTER("repaircontent.field.subject_name"), true, "");
+	//故障描述
+	API_DTO_FIELD(String, malfunction, ZH_WORDS_GETTER("repaircontent.field.malfunction"), true, "");
+	//故障资源描述
+	API_DTO_FIELD(String, malfunction_url, ZH_WORDS_GETTER("repaircontent.field.malfunction_url"), true, "");
+	//维修情况
+	API_DTO_FIELD(String, repair_des, ZH_WORDS_GETTER("repaircontent.field.repair_des"), true, "");
+
+
+};
+class ModifyRepaircontentDTO : public AddRepaircontentDTO
+{
+	DTO_INIT(ModifyRepaircontentDTO, AddRepaircontentDTO);
+	//项目id
+	API_DTO_FIELD(UInt64, subject_id, ZH_WORDS_GETTER("repaircontent.field.subject_id"), true, 1);
 };
 
 /**
@@ -49,6 +88,7 @@ class RepaircontentDTO : public oatpp::DTO
 class RepaircontentPageDTO : public PageDTO<RepaircontentDTO::Wrapper>
 {
 	DTO_INIT(RepaircontentPageDTO, PageDTO<RepaircontentDTO::Wrapper>);
+
 };
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_REPAIRCONTENT_DTO_

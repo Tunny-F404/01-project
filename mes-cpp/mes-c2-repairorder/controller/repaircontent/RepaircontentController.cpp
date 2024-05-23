@@ -33,20 +33,20 @@ RepaircontentJsonVO::Wrapper RepaircontentController::execDetailsRepaircontent(c
 	return RepaircontentJsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const RepaircontentDTO::Wrapper& dto) {
+Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const AddRepaircontentDTO::Wrapper& dto) {
 	//...
 	return Uint64JsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const RepaircontentDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const ModifyRepaircontentDTO::Wrapper& dto)
 {
 	//...
 	return Uint64JsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& repairIdList)
+StringJsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& subject_nameList)
 {
 	//...
-	return Uint64JsonVO::Wrapper();
+	return StringJsonVO::Wrapper();
 }
 

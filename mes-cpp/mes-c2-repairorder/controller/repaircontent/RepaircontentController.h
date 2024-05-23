@@ -51,15 +51,15 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "repairId", ZH_WORDS_GETTER("repaircontent.get.repair_id"), , false);
-		API_DEF_ADD_QUERY_PARAMS(String, "projectName", ZH_WORDS_GETTER("repaircontent.get.repair_name")," ", false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "repair_id", ZH_WORDS_GETTER("repaircontent.get.repair_id"), , false);
+		API_DEF_ADD_QUERY_PARAMS(String, "subject_name", ZH_WORDS_GETTER("repaircontent.get.repair_name")," ", false);
 	}
 	//维修单内容查询 接口处理
 	ENDPOINT(API_M_GET, "/repaircontent/query-repaircontent", queryRepaircontent, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(repairId, RepaircontentQuery, queryParams);
+		API_HANDLER_QUERY_PARAM(repair_id, RepaircontentQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execQueryRepaircontent(repairId));
+		API_HANDLER_RESP_VO(execQueryRepaircontent(repair_id));
 	}
 
 
@@ -96,7 +96,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 添加维修单 接口处理
-	ENDPOINT(API_M_POST, "/repaircontent/add-repaircontent", addRepaircontent, BODY_DTO(RepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/repaircontent/add-repaircontent", addRepaircontent, BODY_DTO(AddRepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddRepaircontent(dto));
 	}
@@ -111,7 +111,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 修改维修单 接口处理
-	ENDPOINT(API_M_PUT, "/repaircontent/modify-repaircontent", modifyRepaircontent, BODY_DTO(RepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_PUT, "/repaircontent/modify-repaircontent", modifyRepaircontent, BODY_DTO(ModifyRepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execModifyRepaircontent(dto));
 	}
@@ -120,15 +120,15 @@ public:
 	ENDPOINT_INFO(removeRepaircontent) {
 		// 定义接口标题
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("repaircontent.get.remove_repaircontent"), Uint64JsonVO::Wrapper);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("repaircontent.get.remove_repaircontent"), StringJsonVO::Wrapper);
 
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 	}
 	// 删除维修单 接口处理
-	ENDPOINT(API_M_DEL, "/repaircontent/remove-repaircontent", removeRepaircontent, BODY_DTO(DeleteMultiRepaircontentDTO::Wrapper, repairIdList), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_DEL, "/repaircontent/remove-repaircontent", removeRepaircontent, BODY_DTO(DeleteMultiRepaircontentDTO::Wrapper, subject_nameList), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execRemoveRepaircontent(repairIdList));
+		API_HANDLER_RESP_VO(execRemoveRepaircontent(subject_nameList));
 	}
 
 	
@@ -139,11 +139,11 @@ private:
 	// 3.3 维修单内容详情数据
 	RepaircontentJsonVO::Wrapper execDetailsRepaircontent(const RepaircontentQuery::Wrapper& id);	
 	// 3.3 添加维修单内容
-	Uint64JsonVO::Wrapper execAddRepaircontent(const RepaircontentDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddRepaircontent(const AddRepaircontentDTO::Wrapper& dto);
 	// 3.3 修改维修单内容
-	Uint64JsonVO::Wrapper execModifyRepaircontent(const RepaircontentDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyRepaircontent(const ModifyRepaircontentDTO::Wrapper& dto);
 	// 3.3 删除维修单内容
-	Uint64JsonVO::Wrapper execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& repairIdList);
+	StringJsonVO::Wrapper execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& subject_nameList);
 };
 
 // 0 取消API控制器使用宏
