@@ -39,7 +39,7 @@ class ProdOrderController : public oatpp::web::server::api::ApiController // 1 ¼
 	// 3 ¶¨Òå½Ó¿Ú
 
 public:
-	// 3.1 ¶¨Òå²éÑ¯½Ó¿ÚÃèÊö
+	// 3.1 ¶¨Òå²éÑ¯Éú²úÈÎÎñÁĞ±í½Ó¿ÚÃèÊö
 	ENDPOINT_INFO(queryProdOrder) {
 		// ¶¨Òå½Ó¿Ú±êÌâ
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("prod.get.summary"));
@@ -64,6 +64,33 @@ public:
 		API_HANDLER_RESP_VO(execQueryProdOrder(userQuery, authObject->getPayload()));
 	}
 
+	/*
+	// 3.1 ¶¨Òå²éÑ¯Éú²úÈÎÎñÁĞ±íÊ÷½Ó¿ÚÃèÊö
+	ENDPOINT_INFO(queryTreeProdOrder) {
+		// ¶¨Òå½Ó¿Ú±êÌâ
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("prod.getTree.summary"));
+		// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+		API_DEF_ADD_AUTH();
+		// ¶¨ÒåÏìÓ¦²ÎÊı¸ñÊ½
+		API_DEF_ADD_RSP_JSON_WRAPPER(ProdOrderPageJsonVO);
+		// ¶¨Òå·ÖÒ³²éÑ¯²ÎÊıÃèÊö
+		API_DEF_ADD_PAGE_PARAMS();
+		// ¶¨ÒåÆäËû²éÑ¯²ÎÊıÃèÊö
+		API_DEF_ADD_QUERY_PARAMS(String, "task_name", ZH_WORDS_GETTER("prod.field.taskName"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workstation_name", ZH_WORDS_GETTER("prod.field.workstationName"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "process_name", ZH_WORDS_GETTER("prod.field.processName"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "start_time", ZH_WORDS_GETTER("prod.field.startTime"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "end_time", ZH_WORDS_GETTER("prod.field.endTime"), "N", false);
+	}
+	// 3.2 ¶¨Òå²éÑ¯½Ó¿Ú´¦Àí
+	ENDPOINT(API_M_GET, "/prodOrder/queryTree", queryTreeProdOrder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// ½âÎö²éÑ¯²ÎÊıÎªQueryÁìÓòÄ£ĞÍ
+		API_HANDLER_QUERY_PARAM(userQuery, ProdOrderMenuDTO, queryParams);
+		// ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+		API_HANDLER_RESP_VO(execQueryTreeProdOrder(userQuery, authObject->getPayload()));
+	}
+	*/
+	
 	// 3.1 ¶¨ÒåĞÂÔö½Ó¿ÚÃèÊö
 	ENDPOINT_INFO(addProdOrder) {
 		// ¶¨Òå½Ó¿Ú±êÌâ
@@ -79,6 +106,7 @@ public:
 		API_HANDLER_RESP_VO(execAddProdOrder(dto));
 	}
 
+	/*
 	// 3.1 ¶¨ÒåĞŞ¸Ä½Ó¿ÚÃèÊö
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("prod.put.summary"), modifyProdOrder, Uint64JsonVO::Wrapper);
 	// 3.2 ¶¨ÒåĞŞ¸Ä½Ó¿Ú´¦Àí
@@ -103,6 +131,7 @@ public:
 	}
 	// 3.2 ¶¨Òå²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃµÄ½Ó¿Ú1´¦Àí
 	API_HANDLER_ENDPOINT_AUTH(API_M_GET, "/ProdOrder/query-one", queryOne, QUERY(UInt64, id), execQueryOne(id, authObject->getPayload()));
+	
 
 	// 3.1 ¶¨Òå²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃµÄ½Ó¿Ú2ÃèÊö
 	ENDPOINT_INFO(queryAll) {
@@ -115,20 +144,24 @@ public:
 	}
 	// 3.2 ¶¨Òå²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃµÄ½Ó¿Ú1´¦Àí
 	API_HANDLER_ENDPOINT_QUERY_AUTH(API_M_GET, "/ProdOrder/query-all", queryAll, ProdOrderQuery, execQueryAll(query, authObject->getPayload()));
+	*/
 
 private:
-	// 3.3 ÑİÊ¾·ÖÒ³²éÑ¯Êı¾İ
+	// 3.3 ·ÖÒ³²éÑ¯ÁĞ±í
 	ProdOrderPageJsonVO::Wrapper execQueryProdOrder(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload);
+	// 3.3 ·ÖÒ³²éÑ¯ÁĞ±íÊ÷
+	//ProdOrderPageJsonVO::Wrapper execQueryTreeProdOrder(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload);
 	// 3.3 ÑİÊ¾ĞÂÔöÊı¾İ
 	Uint64JsonVO::Wrapper execAddProdOrder(const ProdOrderDTO::Wrapper& dto);
+
 	// 3.3 ÑİÊ¾ĞŞ¸ÄÊı¾İ
-	Uint64JsonVO::Wrapper execModifyProdOrder(const ProdOrderDTO::Wrapper& dto);
+	//Uint64JsonVO::Wrapper execModifyProdOrder(const ProdOrderDTO::Wrapper& dto);
 	// 3.3 ÑİÊ¾É¾³ıÊı¾İ
-	Uint64JsonVO::Wrapper execRemoveProdOrder(const UInt64& id);
+	//Uint64JsonVO::Wrapper execRemoveProdOrder(const UInt64& id);
 	// 3.3 ²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃ1
-	ProdOrderJsonVO::Wrapper execQueryOne(const UInt64& id, const PayloadDTO& payload);
+	//ProdOrderJsonVO::Wrapper execQueryOne(const UInt64& id, const PayloadDTO& payload);
 	// 3.3 ²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃ2
-	ProdOrderPageJsonVO::Wrapper execQueryAll(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload);
+	//ProdOrderPageJsonVO::Wrapper execQueryAll(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload);
 };
 
 // 0 È¡ÏûAPI¿ØÖÆÆ÷Ê¹ÓÃºê

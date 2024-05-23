@@ -26,11 +26,19 @@ ProdOrderPageJsonVO::Wrapper ProdOrderController::execQueryProdOrder(const ProdO
 	return {};
 }
 
+/*
+ProdOrderPageJsonVO::Wrapper ProdOrderController::execQueryTreeProdOrder(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload)
+{
+	return {};
+}
+*/
+
 Uint64JsonVO::Wrapper ProdOrderController::execAddProdOrder(const ProdOrderDTO::Wrapper& dto)
 {
 	return {};
 }
 
+/*
 Uint64JsonVO::Wrapper ProdOrderController::execModifyProdOrder(const ProdOrderDTO::Wrapper& dto)
 {
 	return {};
@@ -50,3 +58,4 @@ ProdOrderPageJsonVO::Wrapper ProdOrderController::execQueryAll(const ProdOrderQu
 {
 	return {};
 }
+*/

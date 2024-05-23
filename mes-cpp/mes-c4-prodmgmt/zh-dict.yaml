@@ -14,7 +14,9 @@ prod:
   endTime: 结束时间
   menusub: 子菜单
  get:
-  sumamry: 获取生产任务
+  sumamry: 获取生产任务列表
+ getTree:
+  summary: 获取生产任务列表树
  post:
   sumamry: 设置生产任务
  put:

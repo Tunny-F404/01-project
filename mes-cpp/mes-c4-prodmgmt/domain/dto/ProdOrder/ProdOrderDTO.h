@@ -95,9 +95,9 @@ class ProdOrderPageDTO : public PageDTO<ProdOrderDTO::Wrapper>
 /**
  * 示例菜单数据传输对象
  */
-class ProdOrderMenuDTO : public oatpp::DTO, public TreeNode
+class ProdOrderMenuDTO : public PageDTO<ProdOrderDTO::Wrapper>, public TreeNode
 {
-	DTO_INIT(ProdOrderMenuDTO, DTO);
+	DTO_INIT(ProdOrderMenuDTO, PageDTO<ProdOrderDTO::Wrapper>);
 
 	// 任务名
 	DTO_FIELD(String, task_name);
