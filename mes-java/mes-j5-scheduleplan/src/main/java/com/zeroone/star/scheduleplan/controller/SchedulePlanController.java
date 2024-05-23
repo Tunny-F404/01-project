@@ -1,6 +1,7 @@
 package com.zeroone.star.scheduleplan.controller;
 
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
@@ -29,24 +30,24 @@ import javax.validation.constraints.Min;
 @Api(tags = "排班计划接口")
 public class SchedulePlanController implements SchedulePlanApis {
     @GetMapping("/query-all")
-    @ApiOperation("分页条件查询排班计划列表")
+    @ApiOperation("获取计划列表（条件+分页）")
     public JsonVO<PageDTO<PlanListVO>> queryPlanList(@Validated PlanPageQuery condition) {
         return null;
     }
 
     @GetMapping("query-by-id")
-    @ApiOperation("获取排班计划详情")
+    @ApiOperation("获取计划详情")
     public JsonVO<PlanVO> queryPlanDetails(@Min(value = 1,message = "planId最小值为1") @RequestParam Long planId) {
         return null;
     }
 
-    @ApiOperation("添加排班计划")
+    @ApiOperation("添加计划")
     @PostMapping("add-plan")
-    public JsonVO<Integer> addPlan(PlanDTO condition) {
+    public JsonVO<Integer> addPlan(AddPlanDTO condition) {
         return null;
     }
 
-    @ApiOperation("修改排班计划")
+    @ApiOperation("修改计划")
     @PutMapping("modify-team")
     public JsonVO<Integer> modifyTeam(PlanDTO planDTO) {
         return null;

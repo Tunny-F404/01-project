@@ -9,20 +9,16 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 描述：修改计划数据对象
+ * 描述：排班计划列表显示数据
  * </p>
  * <p>版权：&copy;01星球</p>
  * <p>地址：01星球总部</p>
  * @author brickbreaker
  * @version 1.0.0
  */
-
 @Data
-@ApiModel("修改计划数据对象")
-public class PlanDTO {
-
-    @ApiModelProperty(value = "计划ID", example = "1")
-    private Long planId;
+@ApiModel("添加计划数据对象")
+public class AddPlanDTO {
 
     @ApiModelProperty(value = "计划编号", example = "PL12345")
     private String planCode;
@@ -50,17 +46,6 @@ public class PlanDTO {
 
     @ApiModelProperty(value = "单据状态", example = "已确认")
     private String status;
-
-    @ApiModelProperty(value = "创建时间", example = "2024-05-22 14:16:05")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty(value = "更新时间", example = "2024-05-22 14:16:05")
-    private LocalDateTime updateTime;
-
-    @ApiModelProperty(value = "创建者", example = "admin")
-    private LocalDateTime createBy;
-
-    @ApiModelProperty(value = "更新者", example = "admin")
-    private LocalDateTime updateBy;
 }
+
 
