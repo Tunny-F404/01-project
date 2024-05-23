@@ -6,6 +6,7 @@ import com.zeroone.star.productManagement.entity.MdProductSupplier;
 import com.zeroone.star.productManagement.mapper.MdProductSupplierMapper;
 import com.zeroone.star.productManagement.service.IMdProductSupplierService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.product_management.dto.SupplierDTO;
 import com.zeroone.star.project.j6.product_management.query.SupplierListQuery;
 import org.mapstruct.Mapper;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author smile
@@ -30,22 +31,23 @@ public class MdProductSupplierServiceImpl extends ServiceImpl<MdProductSupplierM
 
     // TODO List换成PageDTO
     @Override
-    public List<SupplierDTO> querySupplierList(SupplierListQuery query) {
+    public PageDTO<SupplierDTO> querySupplierList(SupplierListQuery query) {
         Page<MdProductSupplier> page = new Page<>(query.getPageIndex(), query.getPageSize());
         QueryWrapper<MdProductSupplier> queryWrapper = new QueryWrapper<>();
 
         Long supplierId = query.getSupplierId();
         Long productId = query.getProductId();
-        if(supplierId != null){
+        if (supplierId != null) {
             queryWrapper.eq("supplier_id", supplierId);
         }
-        if(productId != null){
+        if (productId != null) {
             queryWrapper.eq("product_id", productId);
         }
 
         page(page, queryWrapper);
 
-        return page.getRecords().stream().map(msSupplierMapper::toDto).collect(Collectors.toList()); }
+        return PageDTO.create(page, msSupplierMapper::toDto);
+    }
 }
 
 @Mapper(componentModel = "spring")

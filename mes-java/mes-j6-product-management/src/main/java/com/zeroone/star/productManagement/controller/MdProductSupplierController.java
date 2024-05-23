@@ -2,6 +2,7 @@ package com.zeroone.star.productManagement.controller;
 
 
 import com.zeroone.star.productManagement.service.IMdProductSupplierService;
+import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.product_management.SupplierApis;
 import com.zeroone.star.project.j6.product_management.dto.ProductSupplierListDTO;
 import com.zeroone.star.project.j6.product_management.dto.SupplierDTO;
@@ -33,7 +34,7 @@ public class MdProductSupplierController implements SupplierApis {
     @GetMapping("/list")
     @ApiOperation(value = "查询关联供应商列表")
     @Override
-    public JsonVO<List<SupplierDTO>> querySupplierList(SupplierListQuery query) {
+    public JsonVO<PageDTO<SupplierDTO>> querySupplierList(SupplierListQuery query) {
         return JsonVO.success(mdProductSupplierService.querySupplierList(query));
     }
 
