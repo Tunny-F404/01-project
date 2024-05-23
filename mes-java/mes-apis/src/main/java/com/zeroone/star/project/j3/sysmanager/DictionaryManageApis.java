@@ -1,12 +1,9 @@
 package com.zeroone.star.project.j3.sysmanager;
 
 
-import com.zeroone.star.project.j3.dto.dict.SysDictDataDTO;
-import com.zeroone.star.project.j3.dto.dict.SysDictTypeDTO;
+import com.zeroone.star.project.j3.dto.dict.*;
 import com.zeroone.star.project.j3.query.dict.SysDictDataQuery;
 import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
-import com.zeroone.star.project.j3.vo.SysDictDataVO;
-import com.zeroone.star.project.j3.vo.SysDictTypeVO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 
@@ -21,20 +18,20 @@ public interface DictionaryManageApis {
      * 字典类型接口
      */
     // 查询字典类型列表
-    public JsonVO<List<SysDictTypeVO>> listDictType(SysDictTypeQuery dictTypeQuery);
+    public JsonVO<List<SysDictTypeListDTO>> listDictType(SysDictTypeQuery dictTypeQuery);
 
     // 查询字典类型详情
-    public JsonVO<SysDictTypeDTO> getDictType(Long dictId);
+    public JsonVO<SysDictTypeDetailDTO> getDictType(Long dictId);
 
-    public ResponseEntity<byte[]> exportDictType(SysDictTypeDTO sysDictTypeDTO);
+    public ResponseEntity<byte[]> exportDictType(SysDictTypeExportDTO sysDictTypeExportDTO);
 
 
     /**
      *  字典数据接口
      */
     // 查询字典数据列表
-    public JsonVO<List<SysDictDataVO>> listDictData(SysDictDataQuery dictDataQuery);
+    public JsonVO<List<SysDictDataListDTO>> listDictData(SysDictDataQuery dictDataQuery);
 
     // 查询字典数据详情
-    public JsonVO<SysDictDataDTO> getDictData(Long dictCode);
+    public JsonVO<SysDictDataDetailDTO> getDictData(Long dictCode);
 }

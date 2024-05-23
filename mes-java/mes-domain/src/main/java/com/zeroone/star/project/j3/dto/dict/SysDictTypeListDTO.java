@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j3.vo;
+package com.zeroone.star.project.j3.dto.dict;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -17,7 +17,7 @@ import java.util.Date;
 
 @Data
 @ApiModel("字典类型传输列表类")
-public class SysDictTypeVO implements Serializable {
+public class SysDictTypeListDTO implements Serializable {
 
     @ApiModelProperty(value = "字典主键（编号）", example = "1")
     private Long dictId;
