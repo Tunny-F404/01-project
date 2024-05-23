@@ -13,10 +13,6 @@
 class DeleteWorkReportVO : public JsonVO<DeleteWorkReportDTO::Wrapper>
 {
 	DTO_INIT(DeleteWorkReportVO, JsonVO<DeleteWorkReportDTO::Wrapper>);
-public:
-	DeleteWorkReportVO() {
-		this->data = {};
-	}
 };
 
 #include OATPP_CODEGEN_END(DTO)
