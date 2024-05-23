@@ -5,11 +5,12 @@ import com.zeroone.star.project.j3.dto.dict.SysDictTypeDTO;
 import com.zeroone.star.project.j3.query.dict.SysDictDataQuery;
 import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
 import com.zeroone.star.project.j3.sysmanager.DictionaryManageApis;
+import com.zeroone.star.project.j3.vo.SysDictDataVO;
+import com.zeroone.star.project.j3.vo.SysDictTypeVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class DictionaryManageController implements DictionaryManageApis {
     @GetMapping("/type/list")
     @ApiOperation("获取字典类型列表")
     @Override
-    public JsonVO<List<SysDictTypeDTO>> listDictType(SysDictTypeQuery dictTypeQuery) {
+    public JsonVO<List<SysDictTypeVO>> listDictType(SysDictTypeQuery dictTypeQuery) {
         return null;
     }
 
@@ -43,7 +44,7 @@ public class DictionaryManageController implements DictionaryManageApis {
     @GetMapping("/data/list")
     @ApiOperation("获取字典数据列表")
     @Override
-    public JsonVO<List<SysDictDataDTO>> listDictData(SysDictDataQuery dictDataQuery) {
+    public JsonVO<List<SysDictDataVO>> listDictData(SysDictDataQuery dictDataQuery) {
         return null;
     }
 
