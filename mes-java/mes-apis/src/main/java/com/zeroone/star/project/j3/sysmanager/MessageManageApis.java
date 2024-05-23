@@ -22,7 +22,7 @@ public interface MessageManageApis {
     /**
      * 修改消息
      *
-     * @param sysAddMessageDTO 消息
+     * @param sysUpdateMessageDTO 修改消息DTO
      * @return 结果
      */
     public JsonVO<String> modifyMessage(SysUpdateMessageDTO sysUpdateMessageDTO);
@@ -36,15 +36,29 @@ public interface MessageManageApis {
     public JsonVO<String> removeMessageByMessageIds(String messageIds);
 
     /**
-     * 下载导出Excel
+     * 下载导出全部Excel
      * @return 报表
      */
-    public ResponseEntity<byte[]> downloadMessageExcel();
+    public ResponseEntity<byte[]> downloadMessageExcelALL();
 
 
     /**
-     * 导出到dfs
+     * 所有数据导出到dfs
      * @return dfs连接
      */
-    public JsonVO<String> exportMessageToDfs();
+    public JsonVO<String> exportMessageToDfsALL();
+
+
+    /**
+     * 根据id筛选导出对应Excel
+     * @return 报表
+     */
+    public ResponseEntity<byte[]> downloadMessageExcel(String messageIds);
+
+
+    /**
+     * 根据id筛选数据导出到dfs
+     * @return dfs连接
+     */
+    public JsonVO<String> exportMessageToDfs(String messageIds);
 }

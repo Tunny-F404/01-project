@@ -61,14 +61,21 @@ public class ISysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMes
             // 将DTO转换为实体
             SysMessage sysMessage = msMessageMapper.sysAddMessageDTOToMessage(sysAddMessageDTO);
 
-            //查询最后一条数据id + 1 赋给新添加的数据id
+            //额外增加四条属性 id，状态,是否删除,创建时间
+
+            //查询最后一条数据id
             LambdaQueryWrapper<SysMessage> queryWrapper = new LambdaQueryWrapper<>();
-            //id倒叙 获取最后一条数据
+            //id倒叙搜索 限制获取最后一条数据
             queryWrapper.orderByDesc(SysMessage::getMessageId).last("LIMIT 1");
             //获得数据id
             Long messageId = sysMessageMapper.selectOne(queryWrapper).getMessageId();
-            //id + 1
+
+            //插入 id,状态、是否删除、创建时间 字段
             sysMessage.setMessageId(messageId + 1);
+            sysMessage.setStatus("未读");
+            sysMessage.setDeletedFlag("N");
+            sysMessage.setCreateTime();
+
             // 插入消息到数据库
             sysMessageMapper.insert(sysMessage);
 
@@ -93,13 +100,15 @@ public class ISysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMes
             // 将DTO转换为实体
             SysMessage sysMessage = msMessageMapper.sysUpdateAMessageDTOToMessage(sysUpdateMessageDTO);
 
-
             //根据信息先来查询id
 
             // 使用 LambdaUpdateWrapper 来构建更新条件
             LambdaUpdateWrapper<SysMessage> updateWrapper = new LambdaUpdateWrapper<>();
 
             updateWrapper.eq(SysMessage::getMessageId, sysUpdateMessageDTO.getMessageId());
+
+            //添加 更改时间
+            sysMessage.setUpdateTime();
 
             // 执行更新操作
             int updatedRows = sysMessageMapper.update(sysMessage, updateWrapper);

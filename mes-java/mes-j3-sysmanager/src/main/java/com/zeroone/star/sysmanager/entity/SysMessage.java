@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 @Data
 @ApiModel
-public class SysMessage {
+public class SysMessage extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
 
