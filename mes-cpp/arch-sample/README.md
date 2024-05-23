@@ -1,10 +1,10 @@
 # 示例模块
 
 ## 简介
-架构使用示例项目。
+示例模块。
 
 ## 目录结构说明
-> `mes-c6-storage-product`
+> `arch-sample`
 >
 > > `conf` -- Windows平台需要的配置文件
 > >
