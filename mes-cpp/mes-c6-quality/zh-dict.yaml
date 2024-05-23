@@ -1,0 +1,85 @@
+inspect:
+ delete:
+  summary: 删除一条检验单信息
+ add:
+  summary: 添加一条检验单信息
+ change:
+  summary: 修改一条检验单信息
+ export:
+  summary: 导出一条检验单信息
+ get:
+  summary: 分页查询来料检验列表
+ detail: 
+  summary: 查询一条来料检验表详情
+ table: 
+  summary: 查看报表
+ is_ok: 
+  summary: 确认检验单(修改检验单状态为草稿状态)
+ finished:
+  summary: 完成检验单(修改检验单状态为已确认状态)
+
+
+ line_id: 数据库表行id
+ code: 来料检验单编号
+ name: 来料检验单名称
+ template_id: 检验模板ID
+ vendor_id: 供应商ID
+ vendor_code: 供应商编码
+ vendor_name: 供应商名称
+ vd_nick: 供应商简称
+ vd_batch: 供应商批次号
+ item_code: 产品物料编码
+ item_name: 产品物料名称
+ quantity_recived: 接收数量
+ quantity_check: 检测数量
+ quantity_unqualified: 不合格数
+ check_result: 检测结果
+ recive_date: 来料日期
+ inspect_date: 检测日期
+ inspector: 检测人员
+ list_status: 单据状态
+ remark: 备注
+
+ unit_of_measure: 单位
+ maj_rate: 致命缺陷率
+ cr_rate: 严重缺陷率
+ min_rate: 轻微缺陷率
+ cr_quantity: 致命缺陷数量
+ maj_quantity: 严重缺陷数量
+ min_quantity: 轻微缺陷数量
+
+single: 
+ detail: 
+   summary: 查询检测项信息
+ defect:
+   summary: 查询缺陷记录
+ add:
+  summary: 增加缺陷记录
+ change:
+  summary: 修改缺陷记录
+ delete:
+  summary: 删除缺陷记录
+ index_id: 检测项ID
+ index_code: 检测项编码
+ index_name: 检测项名称
+ index_type: 检测项类型
+ qc_tool: 检测工具
+ check_method: 检测要求
+ stander_val: 标准值
+ unit_of_measure: 单位
+ threshold_max: 误差上限
+ threshold_min: 误差下限
+ index_remark: 检测项备注
+
+ record_id: 缺陷ID(唯一标识)
+ defect_name: 缺陷描述
+ defect_level: 缺陷等级
+ defect_quantity: 缺陷数量
+ qc_id: 检验单id
+
+  
+
+
+ 
+
+ 
