@@ -92,7 +92,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "lineid", ZH_WORDS_GETTER("material.lineid"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/delete/{id}", removeReturnline, PATH(UInt64, lineid), execRemoveReturnline(lineid));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/delete/{lineid}", removeReturnline, PATH(UInt64, lineid), execRemoveReturnline(lineid));
 	
 private:
 	GetReturnListPageJsonVO::Wrapper execQueryList(const GetReturnListQuery::Wrapper& query);

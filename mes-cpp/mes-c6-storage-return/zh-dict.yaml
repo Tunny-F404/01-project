@@ -6,7 +6,7 @@ material:
  alter:
   summary: 修改供应商退货行
  delete:
-  summary: 修改供应商退货行
+  summary: 删除供应商退货行
  rtcode: 退货单编号
  rtname: 退货单名称
  pocode: 采购订单编号
