@@ -107,7 +107,7 @@ public class ParameterController implements ParameterApis {
     @Override
     @PostMapping("add")
     @ApiOperation("添加参数")
-    public JsonVO<Integer> addParam(ParameterDTO parameterDTO){
+    public JsonVO<Integer> addParam(@RequestBody ParameterDTO parameterDTO){
         return JsonVO.success(service.saveParameter(parameterDTO));
     }
 
