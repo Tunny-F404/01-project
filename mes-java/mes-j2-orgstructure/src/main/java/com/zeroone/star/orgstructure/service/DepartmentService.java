@@ -3,6 +3,7 @@ package com.zeroone.star.orgstructure.service;
 import com.zeroone.star.orgstructure.entity.Department;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
+import com.zeroone.star.project.vo.JsonVO;
 
 /**
  * <p>
@@ -15,11 +16,19 @@ import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 public interface DepartmentService extends IService<Department> {
 
     /**
+     * 获取获知指定部门详情
+     * @param id
+     * @return
+     */
+    JsonVO<DepartmentDTO> getDepartmentDetail(int id);
+
+
+    /**
      * 新增部门
      * @param departmentDTO
      * @return
      */
-        int saveDepartment(DepartmentDTO departmentDTO);
+    int saveDepartment(DepartmentDTO departmentDTO);
 
     /**
      * 修改部门

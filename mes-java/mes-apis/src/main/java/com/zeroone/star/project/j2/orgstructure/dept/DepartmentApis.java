@@ -18,7 +18,7 @@ public interface DepartmentApis {
     JsonVO<DepartmentDTO> getDepartmentList();
 
     //获取部门详情
-    JsonVO<DepartmentDTO> getDepartmentDetail(String id);
+    JsonVO<DepartmentDTO> getDepartmentDetail(int id);
 
 
 

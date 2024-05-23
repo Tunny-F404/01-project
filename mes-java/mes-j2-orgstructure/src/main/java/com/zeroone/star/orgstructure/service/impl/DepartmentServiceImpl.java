@@ -5,6 +5,7 @@ import com.zeroone.star.orgstructure.entity.Department;
 import com.zeroone.star.orgstructure.service.DepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
+import com.zeroone.star.project.vo.JsonVO;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,12 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
     MsDepartmentMapper msDepartmentMapper;
 
     @Override
-    public int saveDepartment(DepartmentDTO departmentDTO) {
+    public JsonVO<DepartmentDTO> getDepartmentDetail(int id) {
+        return JsonVO.success(new DepartmentDTO());
+    }
+
+    @Override
+   public int saveDepartment(DepartmentDTO departmentDTO) {
         Department department = msDepartmentMapper.departmentDTOToDepartment(departmentDTO);
         department.setCreateTime(LocalDateTime.now());
         return  baseMapper.insert(department);

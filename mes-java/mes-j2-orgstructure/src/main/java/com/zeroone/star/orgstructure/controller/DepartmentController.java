@@ -40,7 +40,7 @@ public class DepartmentController  implements DepartmentApis {
     @Override
     @GetMapping("get-department-detail")
     @ApiOperation("获知指定部门详情")
-    public JsonVO<DepartmentDTO> getDepartmentDetail(String id) {
+    public JsonVO<DepartmentDTO> getDepartmentDetail(int id) {
         return JsonVO.success(new DepartmentDTO());
     }
 
