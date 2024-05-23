@@ -1,14 +1,13 @@
 package com.zeroone.star.project.j3.dto;
 
-import com.alibaba.excel.annotation.ExcelProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import java.time.LocalDate;
 
 
 /**
- * 更改消息的DTO 经过id校验 然后更改数据
- *
+ * 为了将文件夹推送到远程仓库而创建的类，用于占位，无其他用途
  */
 @Data
 @ApiModel
