@@ -4,7 +4,6 @@ import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zeroone.star.orgstructure.client.LoginClient;
 import com.zeroone.star.orgstructure.entity.SysPost;
 import com.zeroone.star.orgstructure.entity.SysUserPost;
 import com.zeroone.star.orgstructure.mapper.SysPostMapper;
@@ -12,6 +11,8 @@ import com.zeroone.star.orgstructure.mapper.SysUserMapper;
 import com.zeroone.star.orgstructure.mapper.SysUserPostMapper;
 import com.zeroone.star.orgstructure.service.ISysPostService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.j2.orgstructure.dto.job.JobDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.login.LoginVO;
@@ -45,7 +46,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> implements ISysPostService {
 
-    private final LoginClient loginClient;
 
     @Resource
     private SysPostMapper sysPostMapper;
@@ -55,6 +55,9 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
     @Resource
     private SysUserMapper sysUserMapper;
+
+    @Resource
+    private UserHolder userHolder;
 
     /**
      * 新增岗位
@@ -73,16 +76,15 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
             sysPost.setCreateTime(LocalDateTime.now());
 
             // 获取当前登录人
-            //TODO 获取当前登录人（暂时默认为admin）
-            sysPost.setCreateBy("admin");
-            /*JsonVO<LoginVO> currUser = loginClient.getCurrUser();
-            LoginVO loginVO = currUser.getData();
-            if (loginVO != null) {
-                sysPost.setCreateBy(loginVO.getUsername());
-            } else {
-                // 处理获取登录人信息失败的情况，例如设置默认值或者抛出自定义异常
-                throw new RuntimeException("未得到当前登录用户信息");
-            }*/
+            //TODO 获取当前登录人（暂时默认为defult）
+            UserDTO currentUser;
+            currentUser = userHolder.getCurrentUser();
+
+            if (currentUser != null) {
+                sysPost.setCreateBy(currentUser.getUsername());
+            }else {
+                sysPost.setCreateBy("defult");
+            }
 
             // 保存sysPost
             return save(sysPost);
@@ -145,16 +147,15 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
             sysPost.setUpdateTime(LocalDateTime.now());
 
             // 获取当前登录人
-            //TODO 获取当前登录人（暂时默认为admin）
-            sysPost.setUpdateBy("admin");
-           /* JsonVO<LoginVO> currUser = loginClient.getCurrUser();
-            LoginVO loginVO = currUser.getData();
-            if (loginVO != null) {
-                sysPost.setUpdateBy(loginVO.getUsername());
-            } else {
-                // 处理获取登录人信息失败的情况，例如设置默认值或者抛出自定义异常
-                throw new RuntimeException("未得到当前登录用户信息");
-            }*/
+            //TODO 获取当前登录人（暂时默认为defult）
+            UserDTO currentUser;
+            currentUser = userHolder.getCurrentUser();
+            if (currentUser != null) {
+                sysPost.setUpdateBy(currentUser.getUsername());
+            }else{
+                sysPost.setUpdateBy("defult");
+            }
+
 
             // 更新sysPost
             return updateById(sysPost);
