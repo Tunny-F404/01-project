@@ -42,29 +42,20 @@ public:
 
     // 3.1 定义查询接口描述
     ENDPOINT_INFO(exportWarehouse) {
-        // 定义接口标题
-        API_DEF_ADD_TITLE(ZH_WORDS_GETTER("wm_item_recpt.export.summary"));
-        // 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
-        API_DEF_ADD_AUTH();
-        // 定义响应参数格式
-        API_DEF_ADD_RSP_JSON_WRAPPER(WarehouseExportJsonVO);
+        API_DEF_ADD_COMMON(ZH_WORDS_GETTER("wm_item_recpt.export.summary"), Void);
         // 定义导出文件名参数描述
-        API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("wm_item_recpt.field.filename"), "test", true);
-        // 定义导出格式查询参数
-        API_DEF_ADD_QUERY_PARAMS(String, "format", ZH_WORDS_GETTER("wm_item_recpt.field.format"), "xlsx", true);
+        API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("wm_item_recpt.field.filename"), "test.xlsx", true);
+
     }
 
     // 3.2 定义查询接口处理
-    ENDPOINT(API_M_GET, "/wm-item-recpt/export", exportWarehouse, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-        // 解析查询参数为Query领域模型
-        API_HANDLER_QUERY_PARAM(userQuery, WarehouseExportQuery, queryParams);
-        // 呼叫执行函数响应结果
-        API_HANDLER_RESP_VO(execWarehouseExport(userQuery, authObject->getPayload()));
+    ENDPOINT(API_M_GET, "/wm-item-recpt/export", exportWarehouse, QUERY(String, filename)) {
+        return execWarehouseExport(filename);
     }
 
 private:
     // 3.3 演示分页查询数据
-    WarehouseExportJsonVO::Wrapper execWarehouseExport(const WarehouseExportQuery::Wrapper& query, const PayloadDTO& payload);
+     std::shared_ptr<OutgoingResponse> execWarehouseExport(const String& filename);
 };
 
 // 0 取消API控制器使用宏

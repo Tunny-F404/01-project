@@ -32,11 +32,6 @@ class WarehouseExportQuery : public PageQuery
 {
 	DTO_INIT(WarehouseExportQuery, PageQuery);
     // 入库单编号
-    DTO_FIELD(Int32, recpt_id);
-    DTO_FIELD_INFO(recpt_id) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.recpt_id");
-    }
-    // 入库单代码
     DTO_FIELD(String, recpt_code);
     DTO_FIELD_INFO(recpt_code) {
         info->description = ZH_WORDS_GETTER("wm_item_recpt.field.recpt_code");
@@ -51,7 +46,7 @@ class WarehouseExportQuery : public PageQuery
     DTO_FIELD_INFO(iqc_id) {
         info->description = ZH_WORDS_GETTER("wm_item_recpt.field.iqc_id");
     }
-    // 来料检验单代码
+    // 来料检验单编号
     DTO_FIELD(String, iqc_code);
     DTO_FIELD_INFO(iqc_code) {
         info->description = ZH_WORDS_GETTER("wm_item_recpt.field.iqc_code");
@@ -66,7 +61,7 @@ class WarehouseExportQuery : public PageQuery
     DTO_FIELD_INFO(vendor_id) {
         info->description = ZH_WORDS_GETTER("wm_item_recpt.field.vendor_id");
     }
-    // 供应商代码
+    // 供应商编码
     DTO_FIELD(String, vendor_code);
     DTO_FIELD_INFO(vendor_code) {
         info->description = ZH_WORDS_GETTER("wm_item_recpt.field.vendor_code");
@@ -86,7 +81,7 @@ class WarehouseExportQuery : public PageQuery
     DTO_FIELD_INFO(warehouse_id) {
         info->description = ZH_WORDS_GETTER("wm_item_recpt.field.warehouse_id");
     }
-    // 仓库代码
+    // 仓库编码
     DTO_FIELD(String, warehouse_code);
     DTO_FIELD_INFO(warehouse_code) {
         info->description = ZH_WORDS_GETTER("wm_item_recpt.field.warehouse_code");
@@ -97,34 +92,34 @@ class WarehouseExportQuery : public PageQuery
         info->description = ZH_WORDS_GETTER("wm_item_recpt.field.warehouse_name");
     }
     // 库区ID
-    DTO_FIELD(Int32, warehouse_area_id);
-    DTO_FIELD_INFO(warehouse_area_id) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.warehouse_area_id");
+    DTO_FIELD(Int32, location_id);
+    DTO_FIELD_INFO(location_id) {
+        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.location_id");
     }
-    // 库区代码
-    DTO_FIELD(String, warehouse_area_code);
-    DTO_FIELD_INFO(warehouse_area_code) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.warehouse_area_code");
+    // 库区编码
+    DTO_FIELD(String, location_code);
+    DTO_FIELD_INFO(location_code) {
+        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.location_code");
     }
     // 库区名称
-    DTO_FIELD(String, warehouse_area_name);
-    DTO_FIELD_INFO(warehouse_area_name) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.warehouse_area_name");
+    DTO_FIELD(String, location_name);
+    DTO_FIELD_INFO(location_name) {
+        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.location_name");
     }
     // 库位ID
-    DTO_FIELD(Int32, warehouse_location_id);
-    DTO_FIELD_INFO(warehouse_location_id) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.warehouse_location_id");
+    DTO_FIELD(Int32, area_id);
+    DTO_FIELD_INFO(area_id) {
+        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.area_id");
     }
-    // 库位代码
-    DTO_FIELD(String, warehouse_location_code);
-    DTO_FIELD_INFO(warehouse_location_code) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.warehouse_location_code");
+    // 库位编码
+    DTO_FIELD(String, area_code);
+    DTO_FIELD_INFO(area_code) {
+        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.area_code");
     }
     // 库位名称
-    DTO_FIELD(String, warehouse_location_name);
-    DTO_FIELD_INFO(warehouse_location_name) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.warehouse_location_name");
+    DTO_FIELD(String, area_name);
+    DTO_FIELD_INFO(area_name) {
+        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.area_name");
     }
     // 入库日期
     DTO_FIELD(String, recpt_date);
@@ -135,51 +130,6 @@ class WarehouseExportQuery : public PageQuery
     DTO_FIELD(String, status);
     DTO_FIELD_INFO(status) {
         info->description = ZH_WORDS_GETTER("wm_item_recpt.field.status");
-    }
-    // 备注
-    DTO_FIELD(String, remark);
-    DTO_FIELD_INFO(remark) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.remark");
-    }
-    // 属性1
-    DTO_FIELD(String, attr1);
-    DTO_FIELD_INFO(attr1) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.attr1");
-    }
-    // 属性2
-    DTO_FIELD(String, attr2);
-    DTO_FIELD_INFO(attr2) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.attr2");
-    }
-    // 属性3
-    DTO_FIELD(String, attr3);
-    DTO_FIELD_INFO(attr3) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.attr3");
-    }
-    // 属性4
-    DTO_FIELD(String, attr4);
-    DTO_FIELD_INFO(attr4) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.attr4");
-    }
-    // 创建人
-    DTO_FIELD(String, create_by);
-    DTO_FIELD_INFO(create_by) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.create_by");
-    }
-    // 创建时间
-    DTO_FIELD(String, create_time);
-    DTO_FIELD_INFO(create_time) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.create_time");
-    }
-    // 更新人
-    DTO_FIELD(String, update_by);
-    DTO_FIELD_INFO(update_by) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.update_by");
-    }
-    // 更新时间
-    DTO_FIELD(String, update_time);
-    DTO_FIELD_INFO(update_time) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.update_time");
     }
 };
 

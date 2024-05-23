@@ -20,7 +20,7 @@
 #include "stdafx.h"
 #include "WarehouseInboundController.h"
 
-Uint64JsonVO::Wrapper WarehouseInboundController::execWarehouseInbound(const WarehouseInboundDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper WarehouseInboundController::execWarehouseInbound(const UInt64& recpt_id)
 {
     return {};
 }

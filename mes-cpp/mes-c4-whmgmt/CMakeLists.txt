@@ -47,8 +47,6 @@ add_executable (${appName} ${SC_FILES}
 "domain/vo/WarehouseInbound/WarehouseInboundVO.h" 
 "controller/WarehouseInbound/WarehouseInboundController.h" 
 "controller/WarehouseInbound/WarehouseInboundController.cpp" 
-"domain/dto/WarehouseDelete/WarehouseDeleteDTO.h"	
-"domain/vo/WarehouseDelete/WarehouseDeleteVO.h" 
 "controller/WarehouseDelete/WarehouseDeleteController.h" 
 "controller/WarehouseDelete/WarehouseDeleteController.cpp" 
 "domain/dto/WarehouseExport/WarehouseExportDTO.h" 

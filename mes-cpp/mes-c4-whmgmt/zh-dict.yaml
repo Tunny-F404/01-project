@@ -55,36 +55,27 @@ wm_item_recpt:
     summary: 删除单据（支持批量删除）
   export:
     summary: 导出单据
-    format: 导出格式
   field:
     recpt_id: 入库单编号
-    recpt_code: 入库单代码
+    recpt_code: 入库单编号
     recpt_name: 入库单名称
     iqc_id: 来料检验单ID
-    iqc_code: 来料检验单代码
+    iqc_code: 来料检验单编号
     po_code: 采购订单编号
     vendor_id: 供应商ID
-    vendor_code: 供应商代码
+    vendor_code: 供应商编码
     vendor_name: 供应商名称
     vendor_nick: 供应商简称
     warehouse_id: 仓库ID
-    warehouse_code: 仓库代码
+    warehouse_code: 仓库编码
     warehouse_name: 仓库名称
-    warehouse_area_id: 库区ID
-    warehouse_area_code: 库区代码
-    warehouse_area_name: 库区名称
-    warehouse_location_id: 库位ID
-    warehouse_location_code: 库位代码
-    warehouse_location_name: 库位名称
+    location_id: 库区ID
+    location_code: 库区编码
+    location_name: 库区名称
+    area_id: 库位ID
+    area_code: 库位编码
+    area_name: 库位名称
     recpt_date: 入库日期
     status: 单据状态
-    remark: 备注
-    attr1: 属性1
-    attr2: 属性2
-    attr3: 属性3
-    attr4: 属性4
-    create_by: 创建人
-    create_time: 创建时间
-    update_by: 更新人
-    update_time: 更新时间
+    filename: 导出文件名称
     format: 导出格式

@@ -29,12 +29,12 @@
 /**
  * 物料入库单显示JsonVO，用于响应给客户端的Json对象
  */
-class WarehouseExportJsonVO : public JsonVO<WarehouseExportDTO::Wrapper> {
-    DTO_INIT(WarehouseExportJsonVO, JsonVO<WarehouseExportDTO::Wrapper>);
+class WarehouseExportXLSXVO : public JsonVO<WarehouseExportDTO::Wrapper> {
+    DTO_INIT(WarehouseExportXLSXVO, JsonVO<WarehouseExportDTO::Wrapper>);
 };
 
-class WarehouseExportPageJsonVO : public JsonVO<WarehouseExportPageDTO::Wrapper> {
-    DTO_INIT(WarehouseExportPageJsonVO, JsonVO<WarehouseExportPageDTO::Wrapper>);
+class WarehouseExportPageXLSXVO : public JsonVO<WarehouseExportPageDTO::Wrapper> {
+    DTO_INIT(WarehouseExportPageXLSXVO, JsonVO<WarehouseExportPageDTO::Wrapper>);
 };
 
 
