@@ -2,9 +2,13 @@ package com.zeroone.star.sysmanager.controller;
 
 import com.zeroone.star.project.j3.dto.InsertDictTypeDTO;
 import com.zeroone.star.project.j3.dto.SysDictDataDTO;
+import com.zeroone.star.project.j3.dto.dict.*;
+import com.zeroone.star.project.j3.query.dict.SysDictDataQuery;
+import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
 import com.zeroone.star.project.j3.sysmanager.DictionaryManageApis;
 import com.zeroone.star.project.j3.vo.DictDataNameVO;
 import com.zeroone.star.project.j3.vo.DictTypeNameVO;
+import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
@@ -14,6 +18,11 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -24,6 +33,41 @@ import java.util.List;
 @Validated
 public class DictionaryManageController implements DictionaryManageApis {
 
+    @GetMapping("/type/list")
+    @ApiOperation("获取字典类型列表")
+    @Override
+    public JsonVO<List<SysDictTypeListDTO>> listDictType(SysDictTypeQuery dictTypeQuery) {
+        return null;
+    }
+
+    @GetMapping("/type/{dictId}")
+    @ApiOperation("获取字典类型详情")
+    @Override
+    public JsonVO<SysDictTypeDetailDTO> getDictType(@PathVariable Long dictId) {
+        return null;
+    }
+
+    @PostMapping("/type/expert")
+    @ApiOperation("导出字典类型列表（excel）")
+    @Override
+    public ResponseEntity<byte[]> exportDictType(@RequestBody SysDictTypeExportDTO sysDictTypeExportDTO) {
+        return null;
+    }
+
+    @GetMapping("/data/list")
+    @ApiOperation("获取字典数据列表")
+    @Override
+    public JsonVO<List<SysDictDataListDTO>> listDictData(SysDictDataQuery dictDataQuery) {
+        return null;
+    }
+
+    @GetMapping("/type/{dictCode}")
+    @ApiOperation("获取字典数据详情")
+    @Override
+    public JsonVO<SysDictDataDetailDTO> getDictData(@PathVariable Long dictCode) {
+        return null;
+    }
+}
     @Override
     @ApiOperation(value = "新增字典数据接口")
     @PostMapping("add-dict-data")
