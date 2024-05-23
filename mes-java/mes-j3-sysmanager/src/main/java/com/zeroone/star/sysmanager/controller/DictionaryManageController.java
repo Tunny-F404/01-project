@@ -67,7 +67,6 @@ public class DictionaryManageController implements DictionaryManageApis {
     public JsonVO<SysDictDataDetailDTO> getDictData(@PathVariable Long dictCode) {
         return null;
     }
-}
     @Override
     @ApiOperation(value = "新增字典数据接口")
     @PostMapping("add-dict-data")
