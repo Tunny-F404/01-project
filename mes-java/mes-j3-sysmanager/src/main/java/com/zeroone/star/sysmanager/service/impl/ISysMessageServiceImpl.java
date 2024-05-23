@@ -1,14 +1,14 @@
-package com.zeroone.star.message.service.impl;
+package com.zeroone.star.sysmanager.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zeroone.star.message.entity.SysMessage;
-import com.zeroone.star.message.service.ISysMessageService;
-import com.zeroone.star.project.j3.dto.SysMessageDTO;
-import com.zeroone.star.message.mapper.SysMessageMapper;
-import com.zeroone.star.project.vo.JsonVO;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zeroone.star.project.j3.dto.SysMessageDTO;
+import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.sysmanager.entity.SysMessage;
+import com.zeroone.star.sysmanager.mapper.SysMessageMapper;
+import com.zeroone.star.sysmanager.service.ISysMessageService;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

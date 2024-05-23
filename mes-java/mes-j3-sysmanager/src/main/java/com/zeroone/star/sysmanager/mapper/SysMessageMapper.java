@@ -1,7 +1,7 @@
-package com.zeroone.star.message.mapper;
+package com.zeroone.star.sysmanager.mapper;
 
-import com.zeroone.star.message.entity.SysMessage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zeroone.star.sysmanager.entity.SysMessage;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

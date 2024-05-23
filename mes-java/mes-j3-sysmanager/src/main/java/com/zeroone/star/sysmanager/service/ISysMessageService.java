@@ -1,9 +1,10 @@
-package com.zeroone.star.message.service;
+package com.zeroone.star.sysmanager.service;
 
-import com.zeroone.star.message.entity.SysMessage;
-import com.zeroone.star.project.j3.dto.SysMessageDTO;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import com.zeroone.star.project.j3.dto.SysMessageDTO;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.sysmanager.entity.SysMessage;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public interface ISysMessageService extends IService<SysMessage> {
 
     /**
      * 批量删除消息
-     * @param messageIds 消息id数组
+     * @param messageIdsList 消息id数组
      * @return 状态码
      */
     JsonVO<String> removeMessageByIds(List<Long> messageIdsList);

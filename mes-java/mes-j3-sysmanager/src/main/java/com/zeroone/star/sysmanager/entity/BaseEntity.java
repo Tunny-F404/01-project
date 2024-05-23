@@ -1,4 +1,4 @@
-package com.zeroone.star.message.entity;
+package com.zeroone.star.sysmanager.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
