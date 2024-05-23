@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j4.basicdata;
 
+import com.zeroone.star.project.dto.j4.basicdata.UnitDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
@@ -27,4 +28,18 @@ public interface AccountUnitApis {
      * @return
      */
     ResponseEntity<byte[]> exportUnitMeasure(UnitExcelSelectDTO unitExcelSelectDTO);
+    /**
+     * 添加单位
+     * @author ：左某
+     * @param data 单位数据
+     * @return 添加单位结果
+     */
+    JsonVO addUnit(UnitDTO data);
+    /**
+     * 修改单位
+     * @author ：左某
+     * @param data 单位数据
+     * @return 修改单位结果
+     */
+    JsonVO updateUnit(UnitDTO data);
 }

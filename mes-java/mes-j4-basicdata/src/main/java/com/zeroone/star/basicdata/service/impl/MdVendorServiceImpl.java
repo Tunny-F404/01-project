@@ -120,7 +120,7 @@ public class MdVendorServiceImpl extends ServiceImpl<MdVendorMapper, MdVendor> i
     }
 
     @Override
-    public void importVendors(MultipartFile file)  {
+    public void importVendors(MultipartFile file) {
         // 使用EasyExcel读取上传的Excel文件并处理
         try {
             ExcelReadListener<VendorImportDTO> listener = new ExcelReadListener<>();
@@ -138,7 +138,12 @@ public class MdVendorServiceImpl extends ServiceImpl<MdVendorMapper, MdVendor> i
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
 
 
+    public Integer updateVendor(VendorDTO data) {
+        MdVendor mdVendor = new MdVendor();
+        BeanUtils.copyProperties(data, mdVendor);
+        return mdVendorMapper.updateById(mdVendor);
     }
 }

@@ -46,9 +46,16 @@ public class MdVendorController {
 
     @ApiOperation(value = "添加供应商")
     @PostMapping("add-vendor")
-    public JsonVO<Integer> addVendor(@RequestBody VendorDTO data)
+    public JsonVO addVendor(@RequestBody VendorDTO data)
     {
-        return JsonVO.success(iMdVendorService.addVendor(data));
+        iMdVendorService.addVendor(data);
+        return JsonVO.success("操作成功");
+    }
+
+    @Override
+    public JsonVO updateVendor(VendorDTO data) {
+        iMdVendorService.updateVendor(data);
+        return JsonVO.success("操作成功");
     }
 
     /**

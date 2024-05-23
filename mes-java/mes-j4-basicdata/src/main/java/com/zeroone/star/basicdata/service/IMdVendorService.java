@@ -1,13 +1,9 @@
 package com.zeroone.star.basicdata.service;
 
-import com.zeroone.star.basicdata.entity.MdVendor;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zeroone.star.basicdata.entity.MdVendor;
 import com.zeroone.star.project.dto.j4.basicdata.VendorDTO;
-
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.zeroone.star.basicdata.entity.MdVendor;
 import com.zeroone.star.project.dto.j4.basicdata.VendorExcelSelectDTO;
-import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +18,17 @@ import java.util.List;
  * @since 2024-05-20
  */
 public interface IMdVendorService extends IService<MdVendor> {
+    /*
+     * 导出供应商
+     * */
+    ResponseEntity<byte[]> exportVendor(VendorExcelSelectDTO vendorExcelSelectDTO);
+
+    MdVendor getByVendorId(Long vendorId);
+
+    void deleteVendors(List<Integer> ids);
+
+    Integer updateVendor(VendorDTO data);
+
     /**
      * 添加vendor 信息
      *
