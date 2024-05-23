@@ -13,16 +13,16 @@ import java.io.Serializable;
 public class NewsPageQuery extends PageQuery implements Serializable  {
 
     @ApiModelProperty(value = "消息类型",example = "WARNING")
-    private String MessageType;
+    private String messageType;
 
     @ApiModelProperty(value = "消息级别",example = "A")
-    private String MessageLevel;
+    private String messageLevel;
 
     @ApiModelProperty(value = "发送人昵称",example = "若依")
-    private String SenderNick;
+    private String senderNick;
 
     @ApiModelProperty(value = "接收人昵称",example = "若依")
-    private String ReceiverNick;
+    private String receiverNick;
 
     @ApiModelProperty(value = "状态",example = "UNREAD")
     private String status;

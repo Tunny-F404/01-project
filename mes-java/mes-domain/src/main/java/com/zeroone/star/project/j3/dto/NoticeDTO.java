@@ -15,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "sys_notice")
-public class NoticeDto implements Serializable {
+public class NoticeDTO implements Serializable {
 
     @TableId(value = "notice_id")
     @ApiModelProperty(value = "公告ID")
