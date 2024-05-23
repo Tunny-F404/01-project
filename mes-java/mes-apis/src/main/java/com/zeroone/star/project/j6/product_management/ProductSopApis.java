@@ -7,6 +7,9 @@ import com.zeroone.star.project.j6.product_management.query.ProductSopQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -57,4 +60,8 @@ public interface ProductSopApis {
      */
     @ApiOperation("删除产品SOP")
     JsonVO<String> remove(Long[] ids);
+
+    @ApiOperation(value = "上传SOP文件")
+    @PostMapping("/uploadFile")
+    JsonVO<String> uploadFile(@RequestParam("file") MultipartFile file);
 }
