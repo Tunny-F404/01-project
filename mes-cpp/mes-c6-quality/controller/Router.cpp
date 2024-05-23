@@ -28,6 +28,7 @@
 #endif
 
 #include "LaiLiaoInspect/InspectController.h"
+#include "Single_Defect/Single_Defect_Controller.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -53,8 +54,11 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
+	// 
 	// 绑定来料检验信息控制器
 	ROUTER_SIMPLE_BIND(InspectController);
+	// 绑定检测项与缺陷记录信息控制器
+	ROUTER_SIMPLE_BIND(Single_Defect_Controller);
 }
 
 #ifdef HTTP_SERVER_DEMO

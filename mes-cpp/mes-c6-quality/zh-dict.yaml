@@ -58,7 +58,7 @@ single:
  change:
   summary: 修改缺陷记录
  delete:
- summary: 删除缺陷记录
+  summary: 删除缺陷记录
  index_id: 检测项ID
  index_code: 检测项编码
  index_name: 检测项名称
@@ -75,6 +75,8 @@ single:
  defect_name: 缺陷描述
  defect_level: 缺陷等级
  defect_quantity: 缺陷数量
+ qc_id: 检验单id
+
   
 
 

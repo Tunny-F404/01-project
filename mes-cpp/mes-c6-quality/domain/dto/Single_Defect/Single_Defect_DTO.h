@@ -1,13 +1,13 @@
 #pragma once
-#ifndef _SINGLEDTO_H
-#define _SINGLEDTO_H
+#ifndef Single_Defect_DTO_H
+#define Single_Defect_DTO_H
 
 #include "../../GlobalInclude.h"
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 class SingleDTO :public oatpp::DTO
 {
-	DTO_INIT(singleDTO, DTO);
+	DTO_INIT(SingleDTO, DTO);
 
 	// 检测项ID
 	API_DTO_FIELD_DEFAULT(UInt64, index_id, ZH_WORDS_GETTER("inspect.single.index_id"));
@@ -39,9 +39,9 @@ class SingleDTO :public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, index_remark, ZH_WORDS_GETTER("inspect.single.index_remark"));
 };
 
-class SinglePageDTO : public PageDTO<singleDTO::Wrapper>
+class SinglePageDTO : public PageDTO<SingleDTO::Wrapper>
 {
-	DTO_INIT(singlePageDTO, PageDTO<singleDTO::Wrapper>);
+	DTO_INIT(SinglePageDTO, PageDTO<SingleDTO::Wrapper>);
 };
 
 //缺陷信息
@@ -56,6 +56,8 @@ class DefectDTO : public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, defect_level, ZH_WORDS_GETTER("inspect.single.defect_level"));
 	//缺陷数量
 	API_DTO_FIELD_DEFAULT(String, defect_quantity, ZH_WORDS_GETTER("inspect.single.defect_quantity"));
+	//检验单ID
+	API_DTO_FIELD_DEFAULT(String, qc_id, ZH_WORDS_GETTER("inspect.single.qc_id"));
 };
 
 //缺陷分页
@@ -66,4 +68,4 @@ class DefectPageDTO : public PageDTO<DefectDTO::Wrapper>
 
 #include OATPP_CODEGEN_END(DTO)
 
-#endif // !_SINGLEDTO_H
+#endif // !Single_Defect_DTO_H

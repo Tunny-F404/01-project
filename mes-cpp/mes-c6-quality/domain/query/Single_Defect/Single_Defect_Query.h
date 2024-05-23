@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _SINGLE_QUERY_
-#define _SINGLE_QUERY_
+#ifndef Single_Defect_QUERY_
+#define Single_Defect_QUERY_
 
 #include "../../GlobalInclude.h"
 #include "domain/query/PageQuery.h"
@@ -17,6 +17,17 @@ class SingleQuery :public PageQuery
 
 };
 
+class DefectQuery :public PageQuery
+{
+	DTO_INIT(DefectQuery, PageQuery);
+
+	// ºÏ—Èµ•ID
+	API_DTO_FIELD_DEFAULT(UInt64, qc_id, ZH_WORDS_GETTER("inspect.single.qc_id"));
+
+};
+
+
+
 //
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_SINGLE_QUERY_
+#endif // !Single_Defect_QUERY_

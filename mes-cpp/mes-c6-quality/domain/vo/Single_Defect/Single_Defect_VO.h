@@ -3,7 +3,7 @@
 #define _SINGLE_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/Single/SingleDTO.h"
+#include "../../dto/Single_Defect/Single_Defect_DTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
