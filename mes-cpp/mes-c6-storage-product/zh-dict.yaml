@@ -1,3 +1,4 @@
+
 Material:
  get:
   summary: 分页查询物料信息
@@ -21,3 +22,18 @@ Material:
   location_name: 库区名称
   area_name: 库位名称
   remark: 备注
+
+product:
+ summary: "获取领料单列表"
+ summary1: "获取领料单详情"
+ fields:
+  pnum: "领料单编号"
+  pname: "领料单名称"
+  prname: "仓库名称"
+  pdate: "领料日期"
+  pstatus: "领料状态"
+  pid: "领料单id"
+  plist: "生产工单"
+  pcnum: "客户编号"
+  pcname: "客户名称"
+  premark: "备注"
