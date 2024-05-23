@@ -28,8 +28,10 @@ process:
   summary4: 获取组成工序列表
  post:
   summary1: 添加工艺   
+  summary2: 添加产品制程物料BOM
  put:
   summary1: 修改工艺
+  summary2: 修改产品制程BOM
  delete:
   summary1: 删除工艺
   summary2: 删除产品制程物料BOM

@@ -270,6 +270,24 @@ public:
 	}
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/process/delete/{id}", removeProcessBOM, PATH(UInt64, id), execRemoveProcessBOM(id));
 
+	// 18 添加产品制程物料BOM
+	ENDPOINT_INFO(addProductMaterial) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.post.summary2"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+	}
+	ENDPOINT(API_M_POST, "/pro/add-productmaterial", addProductMaterial, BODY_DTO(ProductMaterialDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execAddProductMaterial(dto));
+	}
+
+	// 19 修改产品制程BOM
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("process.put.summary2"), modifyProductMaterial, Uint64JsonVO::Wrapper);
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-productmaterial", modifyProductMaterial, BODY_DTO(ProductMaterialDTO::Wrapper, dto), execModifyProductMaterial(dto));
+
 private:
 	// 1 获取工艺列表数据
 	ProcessListJsonVO::Wrapper execQueryProcessList(const ProcessListQuery::Wrapper& query);
@@ -305,6 +323,10 @@ private:
 	StringJsonVO::Wrapper execOutputRouteProduct(const outputRouteProductQuery::Wrapper& query, const PayloadDTO& payload);
 	// 17 删除产品制程物料BOM
 	Uint64JsonVO::Wrapper execRemoveProcessBOM(const UInt64& id);
+	// 18 添加产品制程物料BOM
+	Uint64JsonVO::Wrapper execAddProductMaterial(const ProductMaterialDTO::Wrapper& dto);
+	// 19 修改产品制程物料BOM
+	Uint64JsonVO::Wrapper execModifyProductMaterial(const ProductMaterialDTO::Wrapper& dto);
 };
 
 // 0 取消API控制器使用宏

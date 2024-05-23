@@ -97,4 +97,14 @@ Uint64JsonVO::Wrapper ProcessController::execRemoveProcessBOM(const UInt64& id)
 	auto jvo = Uint64JsonVO::createShared();
 	return jvo;
 }
+// 18 添加产品制程物料BOM
+Uint64JsonVO::Wrapper ProcessController::execAddProductMaterial(const ProductMaterialDTO::Wrapper& dto)
+{
+	return {};
+}
+// 19 修改产品制程物料BOM
+Uint64JsonVO::Wrapper ProcessController::execModifyProductMaterial(const ProductMaterialDTO::Wrapper& dto)
+{
+	return {};
+}
 
