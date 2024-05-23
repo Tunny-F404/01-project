@@ -29,7 +29,6 @@
 class ReturnDTO : public oatpp::DTO
 {
 	DTO_INIT(ReturnDTO, DTO);
-	//
 	// 退货单编号
 	API_DTO_FIELD(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"),true,"null");
 	// 退货单名称

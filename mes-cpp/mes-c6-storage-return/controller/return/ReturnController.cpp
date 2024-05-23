@@ -12,120 +12,43 @@
 #include "NacosClient.h"
 #include "FastDfsClient.h"
 
-/**
- * 注意：这里的部分代码本应该放到service层中，为了方便演示就写在一起了
- */
-
 ReturnPageJsonVO::Wrapper ReturnController::executeQueryAll(const ReturnQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	/*
-	// 定义一个Service
-	ReturnService service;
-	// 查询数据
-	auto result = service.listAll(query);
-	// 响应结果
-	auto jvo = ReturnPageJsonVO::createShared();
-	jvo->success(result);*/
 	return {};
-	}
+}
 
+ReturnDetailJsonVO::Wrapper ReturnController::executeQueryDetail(const ReturnDetailQuery::Wrapper& returnDetailQuery)
+{
+	return {};
+}
+
+Uint64JsonVO::Wrapper ReturnController::execAddDetail(const ReturnAdd::Wrapper& dto)
+{
+	return {};
+}
+// 修改单据
 Uint64JsonVO::Wrapper ReturnController::executeModifyReturn(const ReturnDTO::Wrapper& dto)
 {
-	// 定义返回数据对象
-	auto jvo = Uint64JsonVO::createShared();
-	// 参数校验
-	if (!dto->returnId || dto->returnId <= 0)
-	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		return jvo;
-	}
-	// 定义一个Service
-	ReturnService service;
-	// 执行数据修改
-	// if (service.updateData(dto))  //需要dao支持，还未定义
-	if(true)//直接响应
-	{
-		jvo->success(dto->returnId);
-	}
-	else
-	{
-		jvo->fail(dto->returnId);
-	}
-	// 响应结果
-	return jvo;
+	return {};
 }
-
+// 执行单据
 Uint64JsonVO::Wrapper ReturnController::executeExecuteReturn(const UInt64& id)
 {
-	/*
-	// 定义返回数据对象
-	auto jvo = Uint64JsonVO::createShared();
-	// 参数校验
-	if (!id || id <= 0)
-	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		return jvo;
-	}
-	// 定义一个Service
-	ReturnService service;
-	// 在数据库中执行退货操作
-	// if (service.removeData(id.getValue(0))) 
-
-	if (true)
-	{
-		jvo->success(id);
-	}
-	else
-	{
-		jvo->fail(id);
-	}
-	// 响应结果
-	return jvo;
+	return {};
 }
-
+// 删除单据
 Uint64JsonVO::Wrapper ReturnController::executeRemoveReturn(const UInt64& id)
 {
-	// 定义返回数据对象
-	auto jvo = Uint64JsonVO::createShared();
-	// 参数校验
-	if (!id || id <= 0)
-	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		return jvo;
-	}
-
-	// 定义一个Service
-	ReturnService service;
-
-	//在数据库中查询对应id的数据
-	//ReturnDTO::Wrapper dto_remove;
-	//状态不为草稿无法删除
-	/*if (dto_remove->status != 0)
-	{
-		jvo->fail(id);
-	}*/
-	
-	// 执行数据删除
-	// if (service.removeData(id.getValue(0))) 
-	if(true)
-	{
-		jvo->success(id);
-	}
-	else
-	{
-		jvo->fail(id);
-	}
-	// 响应结果
-	return jvo;
+	return {};
 }
-
+// 导出单据
 std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse> ReturnController::executeDownloadFile(const String& filename)
 {
 	// 构建文件全路径 // 相对路径无法加载
 	std::string fullPath = "C:/Users/RHY/Desktop/C6/zero-one-08mes/mes-cpp/mes-c6-storage-return/public/static/" + URIUtil::urlDecode(filename.getValue(""));
 	// 读取文件
 	auto fstring = String::loadFromFile(fullPath.c_str());
-	
+
 	// 判断是否读取成功
 	if (!fstring)
 	{

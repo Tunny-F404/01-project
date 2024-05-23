@@ -48,4 +48,4 @@ class ReturnPageJsonVO : public JsonVO<ReturnPageDTO::Wrapper>
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // _RETURNVO_H_
+#endif 

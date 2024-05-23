@@ -19,6 +19,7 @@
 */
 #ifndef _RETURNCONTROLLER_H_
 #define _RETURNCONTROLLER_H_
+#include "oatpp-swagger/Types.hpp"
 #include "domain/query/return/ReturnQuery.h"
 #include "domain/vo/BaseJsonVO.h"
 #include "domain/vo/return/ReturnVO.h"
@@ -33,7 +34,7 @@ class ReturnController : public oatpp::web::server::api::ApiController
 	// 添加访问定义
 	API_ACCESS_DECLARE(ReturnController);
 public:
-	// 定义查询所有单据信息接口端点描述
+	// 3.1 定义查询接口描述
 	ENDPOINT_INFO(queryAllReturn) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("return.query-all.summary"));
@@ -60,7 +61,7 @@ public:
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(executeQueryAll(query, authObject->getPayload()));
 	}
-
+	
 	// 定义查询单个单据详细信息接口描述
 	ENDPOINT_INFO(queryReturnDetail) {
 		// 定义接口标题
@@ -106,11 +107,17 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("return.fields.status"), "PREPARE", true);
 		// 备注
 		API_DEF_ADD_QUERY_PARAMS(String, "remark", ZH_WORDS_GETTER("return.fields.remark"), " ", false);
+	}
+	// 定义新增单据详细信息接口端点处理
+	ENDPOINT(API_M_POST, "/return/add-detail", addReturnDetail, BODY_DTO(ReturnAdd::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execAddDetail(dto));
+	}
 	// 定义修改单据接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.modify-return.summary"), modifyReturn, Uint64JsonVO::Wrapper);
 	// 定义修改单据接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/return/modify-return", modifyReturn, BODY_DTO(ReturnDTO::Wrapper, dto), executeModifyReturn(dto));
-
+	
 	// 定义执行退货接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.execute-return.summary"), executeReturn, Uint64JsonVO::Wrapper);
 	// 定义执行退货接口处理 "/return/{returnId}"必须对应
@@ -126,16 +133,18 @@ public:
 		API_DEF_ADD_COMMON(ZH_WORDS_GETTER("return.download-return.summary"), Void);
 		API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("return.fields.filename"), "file/C6RyanTest.jpg", true);
 	}
-	// 定义新增单据详细信息接口端点处理
-	ENDPOINT(API_M_POST, "/return/add-detail", addReturnDetail, BODY_DTO(ReturnAdd::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execAddDetail(dto));
 	// 定义导出单据接口处理
 	ENDPOINT(API_M_GET, "/return/download", downloadFile, QUERY(String, filename)) {
 		return executeDownloadFile(filename);
 	}
 	
 private:
+	// 查询所有单据信息
+	ReturnPageJsonVO::Wrapper executeQueryAll(const ReturnQuery::Wrapper& returnQuery, const PayloadDTO& payload);
+	// 查询单一单据详细信息
+	ReturnDetailJsonVO::Wrapper executeQueryDetail(const ReturnDetailQuery::Wrapper& returnDetailQuery);
+	// 添加新单据详细信息
+	Uint64JsonVO::Wrapper execAddDetail(const ReturnAdd::Wrapper& returnAdd);
 	// 修改单据
 	Uint64JsonVO::Wrapper executeModifyReturn(const ReturnDTO::Wrapper& dto);
 	// 执行单据
@@ -144,12 +153,6 @@ private:
 	Uint64JsonVO::Wrapper executeRemoveReturn(const UInt64& id);
 	// 导出单据
 	std::shared_ptr<OutgoingResponse> executeDownloadFile(const String& filename);
-	// 查询所有单据信息
-	ReturnPageJsonVO::Wrapper executeQueryAll(const ReturnQuery::Wrapper& returnQuery, const PayloadDTO& payload);
-	// 查询单一单据详细信息
-	ReturnDetailJsonVO::Wrapper executeQueryDetail(const ReturnDetailQuery::Wrapper& returnDetailQuery);
-	// 添加新单据详细信息
-	Uint64JsonVO::Wrapper execAddDetail(const ReturnAdd::Wrapper& returnAdd);
 
 };
 
