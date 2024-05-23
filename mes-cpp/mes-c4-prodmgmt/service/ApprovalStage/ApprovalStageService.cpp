@@ -10,7 +10,7 @@ bool ApprovalStageService::updateData(const ApprovalStageDTO::Wrapper& dto)
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, feedback_type, feedback_type, record_id, record_id)
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, status, status, record_id, record_id)
 		// 执行数据修改
 	ApprovalStageDAO dao;
 	return dao.update(data) == 1;

@@ -16,9 +16,9 @@ class ApprovalStageDTO : public oatpp::DTO
 	DTO_FIELD_INFO(record_id) {
 		info->description = ZH_WORDS_GETTER("Approval.post.id");
 	}
-	//报工类型;feedback_type;varchar
-	DTO_FIELD(String, feedback_type);
-	DTO_FIELD_INFO(feedback_type) {
+	//报工状态;status;varchar
+	DTO_FIELD(String, status);
+	DTO_FIELD_INFO(status) {
 		info->description = ZH_WORDS_GETTER("Approval.post.remark");
 	}
 };

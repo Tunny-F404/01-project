@@ -9,13 +9,13 @@
 class ApprovalStageDO
 {
 	//记录id/生产工单编号;record_id;bigint
-	CC_SYNTHESIZE(int, record_id, record_id);
-	//报工类型;feedback_type;varchar
-	CC_SYNTHESIZE(string, feedback_type, feedback_type);
+	CC_SYNTHESIZE(uint64_t, record_id, record_id);
+	//报工状态;status;varchar
+	CC_SYNTHESIZE(string, status, status);
 public:
 	ApprovalStageDO() {
 		record_id = 0;
-		feedback_type = "";
+		status = "";
 	}
 };
 

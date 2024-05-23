@@ -15,7 +15,7 @@ public:
 	{
 		ApprovalStageDO data;
 		data.setrecord_id(resultSet->getUInt64(1));
-		data.setfeedback_type(resultSet->getString(2));
+		data.setstatus(resultSet->getString(2));
 		return data;
 	}
 };

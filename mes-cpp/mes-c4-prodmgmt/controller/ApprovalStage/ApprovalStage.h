@@ -18,7 +18,7 @@ class ApprovalStage : public oatpp::web::server::api::ApiController // 1 ¼Ì³Ð¿ØÖ
 	// 3 ¶¨Òå½Ó¿Ú
 public:
 	// 3.1 ¶¨ÒåÐÞ¸Ä½Ó¿ÚÃèÊö
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("Approval.post.remark"), modifyApprovalStage, Uint64JsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("Approval.post.name"), modifyApprovalStage, ApprovalStageVO::Wrapper);
 	// 3.2 ¶¨ÒåÐÞ¸Ä½Ó¿Ú´¦Àí
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/sample", modifyApprovalStage, BODY_DTO(ApprovalStageDTO::Wrapper, dto), execModifyApprovalStage(dto));
 
