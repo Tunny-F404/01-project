@@ -19,15 +19,27 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include "add-mj/AddController.h"
+#include "ModifyPlan/ModifyPlanController.h"
+#include "ModifyPlanStatus/ModifyPlanStatusController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
+#include "ModifyPlan/ModifyPlanController.h"
 #include "file/FileController.h"
 #include "ws/WSController.h"
 #endif
+#include "planSubject/PlanSubjectController.h"
 
 #include "ExportPlan/ExportPlanController.h"
+#include"query-ForeverOMC/MachineryPlanQueryController.h"
+#include "../controller/device-list/DeviceListController.h"
+#include "../controller/maintain-proj/MaintainProjController.h"
+
+
+
+#include "deletePlanSubject/DeletePlanSubject.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -53,12 +65,19 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-
-	/**
-	 *  导出计划
-	 *  负责人:。好
-	 */
+	ROUTER_SIMPLE_BIND(AddController);
+	//ROUTER_SIMPLE_BIND(PlanSubjectController);//测试项，abf，暂时注释
+	ROUTER_SIMPLE_BIND(DeletePlanSubjectController);
+	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(ExportPlanController);
+	ROUTER_SIMPLE_BIND(DeviceListController);
+	ROUTER_SIMPLE_BIND(MaintainProjController);
+	ROUTER_SIMPLE_BIND(PlanSubjectController);
+	ROUTER_SIMPLE_BIND(MachineryPlanQueryController);
+	ROUTER_SIMPLE_BIND(ModifyPlanController);
+	ROUTER_SIMPLE_BIND(ModifyPlanStatusController);
+
+
 }
 
 #ifdef HTTP_SERVER_DEMO
@@ -70,7 +89,7 @@ void Router::createSampleRouter()
 	ROUTER_SIMPLE_BIND(UserController);
 	// 绑定文件控制器
 	ROUTER_SIMPLE_BIND(FileController);
-	
+
 	// 绑定WebSocket控制器
 	router->addController(WSContorller::createShared());
 }

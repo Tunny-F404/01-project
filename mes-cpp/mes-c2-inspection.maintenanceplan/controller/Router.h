@@ -25,24 +25,25 @@ using namespace oatpp::web::server;
 using namespace oatpp::web::server::api;
 
 /**
- * Ç°¶Ë·ÃÎÊ·şÎñÆ÷Â·ÓÉ°ó¶¨£¬ÓÃÓÚ¶¨ÒåÇ°¶Ë·ÃÎÊºó¶Ë½Ó¿ÚºÍ·ÃÎÊÂ·¾¶°ó¶¨
- * swaggerÎÄµµ·ÃÎÊÊ¾ÀıµØÖ·£ºhttp://localhost:8090/swagger/ui
+ * å‰ç«¯è®¿é—®æœåŠ¡å™¨è·¯ç”±ç»‘å®šï¼Œç”¨äºå®šä¹‰å‰ç«¯è®¿é—®åç«¯æ¥å£å’Œè®¿é—®è·¯å¾„ç»‘å®š
+ * swaggeræ–‡æ¡£è®¿é—®ç¤ºä¾‹åœ°å€ï¼šhttp://localhost:8090/swagger/ui
  */
 class Router
 {
 private:
-	// ÎÄµµ·ÃÎÊ¶Ëµã
+	// æ–‡æ¡£è®¿é—®ç«¯ç‚¹
 	Endpoints* docEndpoints;
-	// Â·ÓÉ¶ÔÏó
+	// è·¯ç”±å¯¹è±¡
 	HttpRouter* router;
 public:
-	// ¹¹Ôì³õÊ¼»¯
+	// æ„é€ åˆå§‹åŒ–
 	Router(Endpoints* docEndpoints, HttpRouter* router);
-	// ºô½Ğ³õÊ¼»¯
+	// å‘¼å«åˆå§‹åŒ–
 	void initRouter();
+	void createModifyPlanRouter();
 private:
 #ifdef HTTP_SERVER_DEMO
-	// ´´½¨ÑİÊ¾Â·ÓÉ
+	// åˆ›å»ºæ¼”ç¤ºè·¯ç”±
 	void createSampleRouter();
 #endif
 };

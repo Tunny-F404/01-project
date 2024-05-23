@@ -51,6 +51,7 @@ class EquipmentDetailJsonVO : public JsonVO<EquipmentDetailDTO::Wrapper>
 };
 
 
+
 #include OATPP_CODEGEN_END(DTO)
 #endif 
 
