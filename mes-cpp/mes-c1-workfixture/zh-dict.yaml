@@ -6,6 +6,10 @@
   summary: 添加工装夹具
  modify:
   summary: 修改工装夹具信息
+ remove:
+  summary: 删除工装夹具
+ export:
+  summary: 导出工装夹具
  fields:
   id: 唯一标识
   code: 工装夹具编号

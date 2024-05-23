@@ -6,7 +6,7 @@ WorkFixtureJsonVO::Wrapper WorkFixtureController::execQueryWorkFixtureTable(cons
 	return {};
 }
 
-WorkFixtureDetailJsonVO::Wrapper WorkFixtureController::execQueryWorkFixtureDetail(const Uint64JsonVO::Wrapper &queryid)
+WorkFixtureDetailJsonVO::Wrapper WorkFixtureController::execQueryWorkFixtureDetail(const UInt64 id)
 {
 	return {};
 }
@@ -17,6 +17,16 @@ Uint64JsonVO::Wrapper WorkFixtureController::execAddWorkFixture(const WorkFixtur
 }
 
 Uint64JsonVO::Wrapper WorkFixtureController::execModifyWorkFixture(const WorkFixtureDetailDTO::Wrapper &dto)
+{
+	return {};
+}
+
+Uint64JsonVO::Wrapper WorkFixtureController::execRemoveWorkFixture(const UInt64 id)
+{
+	return {};
+}
+
+StringJsonVO::Wrapper WorkFixtureController::execExportWorkFixture(const WorkFixtureQuery::Wrapper &query)
 {
 	return {};
 }
