@@ -27,8 +27,8 @@ public class MdItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ExcelIgnore
     @TableId(value = "item_id", type = IdType.AUTO)
-    @ExcelProperty("产品物料ID")
     private Long itemId;
 
     @ExcelProperty("产品物料编码")
@@ -67,7 +67,7 @@ public class MdItem implements Serializable {
     @ExcelProperty("最大库存量")
     private Double maxStock;
 
-    @ExcelProperty("备注")
+    @ExcelIgnore
     private String remark;
 
     @ExcelIgnore

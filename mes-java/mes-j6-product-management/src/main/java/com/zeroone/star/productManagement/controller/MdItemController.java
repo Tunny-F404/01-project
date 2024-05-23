@@ -6,9 +6,9 @@ import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.j6.product_management.MdItemApis;
 import com.zeroone.star.project.j6.product_management.query.MdItemQuery;
+import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -55,13 +55,12 @@ public class MdItemController implements MdItemApis {
      *
      * @param file 包含物料产品数据的 Excel 文件
      * @param updateSupport 是否支持更新已存在的数据
-     * @return 导入结果的 ResponseEntity 对象
+     * @return 导入结果的 Json 对象
      */
-    @SneakyThrows
     @ApiOperation("导入物料产品数据")
     @PostMapping("/importData")
-    public ResponseEntity<String> importFromExcel(MultipartFile file, boolean updateSupport){
-        return null;
+    public JsonVO<String> importFromExcel(MultipartFile file, boolean updateSupport){
+        return iMdItemService.importFromExcel(file, updateSupport);
     }
 
 }

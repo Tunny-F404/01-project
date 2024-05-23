@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j6.product_management;
 
 import com.zeroone.star.project.j6.product_management.query.MdItemQuery;
+import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,5 +23,5 @@ public interface MdItemApis {
      * @param updateSupport 是否更新已经存在的用户数据
      * @return 导入结果
      */
-    ResponseEntity<String> importFromExcel(MultipartFile file, boolean updateSupport);
+    JsonVO<String> importFromExcel(MultipartFile file, boolean updateSupport);
 }

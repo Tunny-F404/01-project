@@ -17,5 +17,10 @@ import java.util.List;
  */
 @Mapper
 public interface MdItemMapper extends BaseMapper<MdItem> {
+    /**
+     * 根据查询条件返回全部items
+     * @param mdItemQuery 查询条件
+     * @return 列表
+     */
     List<MdItem> selectMdItemList(MdItemQuery mdItemQuery);
 }
