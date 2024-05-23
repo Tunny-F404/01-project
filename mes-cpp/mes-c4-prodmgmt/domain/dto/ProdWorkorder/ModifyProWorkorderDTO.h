@@ -6,7 +6,7 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 生产工单数据传输类型
+ * 修改生产工单数据传输类型
  */
 class ModifyProWorkorderDTO : public oatpp::DTO
 {

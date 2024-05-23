@@ -23,3 +23,7 @@
   summary: 修改生产工单
  delete:
   summary: 删除生产工单
+ confirm: 
+  summary: 确认生产工单
+ complete:
+  summary: 完成生产工单
