@@ -34,7 +34,6 @@ public class MdItemController implements MdItemApis {
      * @param mdItemQuery 查询参数
      * @return 包含 Excel 文件内容的 ResponseEntity 对象
      */
-    @SneakyThrows
     @PostMapping(value = "/export", produces = "application/octet-stream")
     @ApiOperation(value = "导出物料产品列表")
     public ResponseEntity<byte[]> exportToExcel(MdItemQuery mdItemQuery){
@@ -46,11 +45,10 @@ public class MdItemController implements MdItemApis {
      *
      * @return 包含模板文件内容的 ResponseEntity 对象
      */
-    @SneakyThrows
-    @PostMapping(value = "/importTemplate")
+    @PostMapping(value = "/importTemplate", produces = "application/octet-stream")
     @ApiOperation(value = "下载模板")
-    public ResponseEntity<byte[]> exportTemplate() {
-        return null;
+    public ResponseEntity<byte[]> downloadTemplate() {
+        return iMdItemService.downloadTemplate();
     }
     /**
      * 导入物料产品数据。

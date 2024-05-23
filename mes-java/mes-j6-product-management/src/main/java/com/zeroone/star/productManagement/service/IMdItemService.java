@@ -20,4 +20,6 @@ public interface IMdItemService extends IService<MdItem> {
     List<MdItem> selectMdItemList(MdItemQuery query);
 
     ResponseEntity<byte[]> exportToExcel(List<MdItem> items);
+
+    ResponseEntity<byte[]> downloadTemplate();
 }
