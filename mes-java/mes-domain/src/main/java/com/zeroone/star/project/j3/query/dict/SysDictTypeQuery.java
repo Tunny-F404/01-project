@@ -23,10 +23,4 @@ public class SysDictTypeQuery {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", example = "2022-04-07 00:29:32")
     private Date createTime;
-
-    @ApiModelProperty(value = "pageNum")
-    private int pageNum;
-
-    @ApiModelProperty(value = "pageSize")
-    private int pageSize;
 }
