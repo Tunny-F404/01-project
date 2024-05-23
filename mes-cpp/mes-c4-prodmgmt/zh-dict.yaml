@@ -1,6 +1,6 @@
 prodmgmt:
  delete:
   fields:
-   recptCode: 生产工单
+   recordId: 生产工单的记录Id
   describe:
    name: 删除报工

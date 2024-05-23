@@ -21,16 +21,16 @@ public: // 定义接口
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("prodmgmt.delete.describe.name"), DeleteWorkReportVO::Wrapper);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(String, "recptCode", ZH_WORDS_GETTER("prodmgmt.delete.fields.recptCode"), "MO202211030003", false);
+		API_DEF_ADD_PATH_PARAMS(UInt32, "recordId", ZH_WORDS_GETTER("prodmgmt.delete.fields.recordId"), 1, false);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/prodmgmt/remove-work-report/{recptCode}", removeWorkReport, PATH(String, recptCode), execRemoveWorkReport(recptCode));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/prodmgmt/remove-work-report/{recordId}", removeWorkReport, PATH(UInt32, recordId), execRemoveWorkReport(recordId));
 
 
 
 
 private: // 定义接口执行函数
-	StringJsonVO::Wrapper execRemoveWorkReport(const String& recptCode);
+	StringJsonVO::Wrapper execRemoveWorkReport(const int recordId);
 };
 
 #include OATPP_CODEGEN_END(ApiController)
