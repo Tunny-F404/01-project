@@ -51,16 +51,16 @@ public class PlanDTO {
     @ApiModelProperty(value = "单据状态", example = "已确认")
     private String status;
 
-    @ApiModelProperty(value = "创建时间", example = "2024-05-22 14:16:05")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty(value = "更新时间", example = "2024-05-22 14:16:05")
-    private LocalDateTime updateTime;
-
-    @ApiModelProperty(value = "创建者", example = "admin")
-    private LocalDateTime createBy;
-
-    @ApiModelProperty(value = "更新者", example = "admin")
-    private LocalDateTime updateBy;
+//    @ApiModelProperty(value = "创建时间", example = "2024-05-22 14:16:05")
+//    private LocalDateTime createTime;
+//
+//    @ApiModelProperty(value = "更新时间", example = "2024-05-22 14:16:05")
+//    private LocalDateTime updateTime;
+//
+//    @ApiModelProperty(value = "创建者", example = "admin")
+//    private LocalDateTime createBy;
+//
+//    @ApiModelProperty(value = "更新者", example = "admin")
+//    private LocalDateTime updateBy;
 }
 
