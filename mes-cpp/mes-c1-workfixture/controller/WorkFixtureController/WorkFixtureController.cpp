@@ -21,7 +21,7 @@ Uint64JsonVO::Wrapper WorkFixtureController::execModifyWorkFixture(const WorkFix
 	return {};
 }
 
-Uint64JsonVO::Wrapper WorkFixtureController::execRemoveWorkFixture(const UInt64 id)
+Uint64JsonVO::Wrapper WorkFixtureController::execRemoveWorkFixture(const List<UInt64> &id)
 {
 	return {};
 }

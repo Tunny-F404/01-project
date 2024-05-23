@@ -97,10 +97,8 @@ public:
 	ENDPOINT_INFO(removeWorkFixture) {
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("workfixture.remove.summary"), Uint64JsonVO::Wrapper);
-		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "toolId", ZH_WORDS_GETTER("workfixture.field.id"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/workfixture/remove", removeWorkFixture, PATH(UInt64, id), execRemoveWorkFixture(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/workfixture/remove", removeWorkFixture, PATH(List<UInt64>, id), execRemoveWorkFixture(id));
 
 	// 5. 定义工装夹具导出接口描述和处理
 	ENDPOINT_INFO(exportWorkFixture) {
@@ -133,7 +131,7 @@ private:
 	// 修改工装夹具信息功能实现
 	Uint64JsonVO::Wrapper execModifyWorkFixture(const WorkFixtureDetailDTO::Wrapper &dto);
 	// 删除工装夹具功能实现
-	Uint64JsonVO::Wrapper execRemoveWorkFixture(const UInt64 id);
+	Uint64JsonVO::Wrapper execRemoveWorkFixture(const List<UInt64> &id);
 	// 导出工装夹具功能实现
 	StringJsonVO::Wrapper execExportWorkFixture(const WorkFixtureQuery::Wrapper &query);
 };
