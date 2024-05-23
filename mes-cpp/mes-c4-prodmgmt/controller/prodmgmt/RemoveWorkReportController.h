@@ -19,7 +19,7 @@ public: // 定义接口
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeWorkReport) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("prodmgmt.delete.describe.name"), StringJsonVO::Wrapper);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("prodmgmt.delete.describe.name"), DeleteWorkReportVO::Wrapper);
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(String, "recptCode", ZH_WORDS_GETTER("prodmgmt.delete.fields.recptCode"), "MO202211030003", false);
 	}
