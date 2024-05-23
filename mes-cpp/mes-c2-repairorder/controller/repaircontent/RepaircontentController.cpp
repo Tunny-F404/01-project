@@ -44,9 +44,9 @@ Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const Rep
 	return Uint64JsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& repairIdList)
+StringJsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& subject_nameList)
 {
 	//...
-	return Uint64JsonVO::Wrapper();
+	return StringJsonVO::Wrapper();
 }
 
