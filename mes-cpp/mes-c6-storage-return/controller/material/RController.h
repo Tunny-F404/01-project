@@ -34,10 +34,10 @@
 /**
  * 供应商退货行列表控制器，
  */
-class ReturnController : public oatpp::web::server::api::ApiController // 1 继承控制器
+class RController : public oatpp::web::server::api::ApiController // 1 继承控制器
 {
 	// 2 定义控制器访问入口
-	API_ACCESS_DECLARE(ReturnController);
+	API_ACCESS_DECLARE(RController);
 	// 3 定义接口
 public:
 	// 3.1 定义查询接口描述
@@ -99,18 +99,6 @@ private:
 	Uint64JsonVO::Wrapper execAddReturnLine(const AddReturnDTO::Wrapper& dto);
 	Uint64JsonVO::Wrapper execModifyReturnline(const AddReturnDTO::Wrapper& dto);
 	Uint64JsonVO::Wrapper execRemoveReturnline(const UInt64& lineid);
-	// 3.3 演示分页查询数据
-	//SamplePageJsonVO::Wrapper execQuerySample(const SampleQuery::Wrapper& query, const PayloadDTO& payload);
-	// 3.3 演示新增数据
-	//Uint64JsonVO::Wrapper execAddSample(const SampleDTO::Wrapper& dto);
-	// 3.3 演示修改数据
-	//Uint64JsonVO::Wrapper execModifySample(const SampleDTO::Wrapper& dto);
-	// 3.3 演示删除数据
-	//Uint64JsonVO::Wrapper execRemoveSample(const UInt64& id);
-	// 3.3 测试声明式服务调用1
-	//SampleJsonVO::Wrapper execQueryOne(const UInt64& id, const PayloadDTO& payload);
-	// 3.3 测试声明式服务调用2
-	//SamplePageJsonVO::Wrapper execQueryAll(const SampleQuery::Wrapper& query, const PayloadDTO& payload);
 };
 
 // 0 取消API控制器使用宏

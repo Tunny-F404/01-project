@@ -19,7 +19,9 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+
 #include "return/ReturnController.h"
+#include "controller/material/RController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -28,7 +30,7 @@
 #include "ws/WSController.h"
 #endif
 
-#include "controller/material/ReturnController.h"
+
 
 
 #ifdef CLOSE_SWAGGER_DOC
@@ -56,7 +58,7 @@ void Router::initRouter()
 
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(ReturnController);
-
+	ROUTER_SIMPLE_BIND(RController);
 }
 
 #ifdef HTTP_SERVER_DEMO

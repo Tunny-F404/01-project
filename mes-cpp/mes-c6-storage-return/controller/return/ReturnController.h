@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _RETURNCONTROLLER_H_
-#define _RETURNCONTROLLER_H_
+#ifndef _RCONTROLLER_H_
+#define _RCONTROLLER_H_
 #include "oatpp-swagger/Types.hpp"
 #include "../../domain/query/return/ReturnQuery.h"
 #include "domain/vo/BaseJsonVO.h"
@@ -86,4 +86,4 @@ private:
 
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 
-#endif // _RETURNCONTROLLER_H_
+#endif // _RCONTROLLER_H_
