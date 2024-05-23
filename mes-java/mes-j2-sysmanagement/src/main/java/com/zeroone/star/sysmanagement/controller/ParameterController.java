@@ -30,7 +30,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("param")
-@Api(tags = "参数配置控制器")
+@Api(tags = "参数设置控制器")
 public class ParameterController implements ParameterApis {
 
     // 导入easyExcel组件
