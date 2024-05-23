@@ -268,7 +268,7 @@ public:
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.field.BOMid"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/process/delete/{id}", removeProcessBOM, PATH(UInt64, id), execRemoveProcessBOM(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete/{id}", removeProcessBOM, PATH(UInt64, id), execRemoveProcessBOM(id));
 
 	// 18 添加产品制程物料BOM
 	ENDPOINT_INFO(addProductMaterial) {

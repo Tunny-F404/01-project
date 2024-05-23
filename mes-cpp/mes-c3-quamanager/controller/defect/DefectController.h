@@ -82,7 +82,7 @@ public:
 	}
 	ENDPOINT(                                               //
 		API_M_POST,                                         //
-		"/qc/defect/export-defect",                         //
+		"/defect/export-defect",                         //
 		exportDefect,                                       //
 		REQUEST(std::shared_ptr<IncomingRequest>, request), //
 		API_HANDLER_AUTH_PARAME)
