@@ -1,0 +1,14 @@
+pick:
+ post:
+  summary: 添加单据
+ field:
+  id: 领料单ID
+  icode: 领料单编码
+  iname: 领料单名称
+  ctime: 领料日期
+  whname: 领料仓库
+  status: 单据状态
+  wocode: 生产工单
+  cltcode: 客户编号
+  cltname: 客户名称
+  remark: 备注
