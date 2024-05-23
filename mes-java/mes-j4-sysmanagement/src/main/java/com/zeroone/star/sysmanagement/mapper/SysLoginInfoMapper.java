@@ -1,7 +1,8 @@
 package com.zeroone.star.sysmanagement.mapper;
 
-import com.zeroone.star.sysmanagement.entity.SysLoginInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zeroone.star.sysmanagement.entity.SysLoginInfor;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author diwu
@@ -9,7 +10,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2024-05-18 23:35:56
 * @Entity generator.domain.SysLogininfor
 */
-public interface SysLoginInfoMapper extends BaseMapper<SysLoginInfo> {
+@Mapper
+public interface SysLoginInfoMapper extends BaseMapper<SysLoginInfor> {
 
 }
 

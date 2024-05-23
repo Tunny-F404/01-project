@@ -1,5 +1,6 @@
 package com.zeroone.star.project.query.j4.logmanagement;
 
+import com.zeroone.star.project.query.PageQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.util.Date;
  */
 @Data
 @ApiModel("查询登录日志条件对象")
-public class SysLoginInfoQuery {
+public class SysLoginInfoQuery extends PageQuery {
 
 
     /**
@@ -38,9 +39,14 @@ public class SysLoginInfoQuery {
 
 
     /**
-     * 访问时间
+     * 起始访问日期
      */
-    @ApiModelProperty(value = "登录的访问时间",example = "2024-05-19 00:08:59")
-    private Date loginTime;
+    @ApiModelProperty(value = "要查询的登录访问的起始日期",example = "2024-05-19")
+    private Date startLoginTime;
 
+    /**
+     * 结束的访问日期
+     */
+    @ApiModelProperty(value = "要查询的登录访问的结束日期",example = "2024-05-19")
+    private Date endLoginTime;
 }

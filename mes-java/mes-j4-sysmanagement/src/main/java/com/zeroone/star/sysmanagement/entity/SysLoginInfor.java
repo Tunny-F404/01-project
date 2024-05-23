@@ -1,24 +1,32 @@
 package com.zeroone.star.sysmanagement.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
+import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
+ * <p>
  * 系统访问记录
- * @TableName sys_logininfor
+ * </p>
+ *
+ * @author diwu
+ * @since 2024-05-21
  */
-@TableName(value ="sys_logininfor")
-@Data
-public class SysLoginInfo implements Serializable {
+@Getter
+@Setter
+@TableName("sys_logininfor")
+public class SysLoginInfor implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * 访问ID
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(value = "info_id", type = IdType.AUTO)
     private Long infoId;
 
     /**
@@ -59,9 +67,7 @@ public class SysLoginInfo implements Serializable {
     /**
      * 访问时间
      */
-    private Date loginTime;
+    private LocalDateTime loginTime;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 
 }
