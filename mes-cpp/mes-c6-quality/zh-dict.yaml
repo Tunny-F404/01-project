@@ -50,9 +50,9 @@ inspect:
 
 single: 
  detail: 
-   summary: 查询检测项信息
+   summary: 分页查询检测项信息
  defect:
-   summary: 查询缺陷记录
+   summary: 分页查询缺陷记录
  add:
   summary: 增加缺陷记录
  change:

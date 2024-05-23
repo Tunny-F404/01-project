@@ -19,10 +19,12 @@ Inspect_detailPageJsonVO::Wrapper InspectController::execQueryInspect_detail(con
 {
 	return {};
 }
-Inspect_detailJsonVO::Wrapper execQueryInspect_table(const Inspect_tableQuery::Wrapper& query, const PayloadDTO& payload)
+
+StringJsonVO::Wrapper InspectController::execLookTable(const oatpp::List<UInt64>& ids)
 {
-	return{};
+	return StringJsonVO::Wrapper();
 }
+
 
 Uint64JsonVO::Wrapper InspectController::execAddInspect(const InspectDTO::Wrapper& dto)
 {
