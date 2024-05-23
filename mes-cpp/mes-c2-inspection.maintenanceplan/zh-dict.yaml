@@ -107,10 +107,17 @@ deleteOP:
 device-list:
  summary:
   add-proj: 添加点检/保养设备
+ field:
+  planId: 计划ID
+  machineryId: 设备ID列表(多个ID)
+
 maintain-proj:
  summary:
   add-proj: 添加计划点检/保养项目
-  
+ field:
+  planId: 计划ID
+  machineryId: 项目ID列表(多个ID)
+ 
    
    
      
@@ -121,11 +128,12 @@ add-mj:
   pid: 计划编码
   pname: 计划名称
   ptype: 计划类型
-  ctype: 频率
+  ctype: 频率(年，月，日...)
   sdate: 开始日期
   edate: 结束日期
   status: 状态
   remark: 备注
+  ccount: 次数
 
 maintenance:
  fields:

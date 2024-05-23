@@ -33,7 +33,7 @@ device-manage:
     subjectDelId: 需要删除的项目的ID
     subhectExportId: 需要导出的项目的ID
   summary:
-    modify-proj: 修改一条示例数据
+    modify-proj: 修改项目
     remove-proj: 删除数据（支持批量删除)
     export-proj: 导出项目
     add-proj: 新增项目

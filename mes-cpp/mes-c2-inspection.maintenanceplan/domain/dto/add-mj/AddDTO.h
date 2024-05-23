@@ -35,8 +35,11 @@ class AddDTO : public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, planName, ZH_WORDS_GETTER("add-mj.fields.pname"));
 	//计划类型
 	API_DTO_FIELD_DEFAULT(String, planType, ZH_WORDS_GETTER("add-mj.fields.ptype"));
+
 	//频率
 	API_DTO_FIELD_DEFAULT(String, cycleType, ZH_WORDS_GETTER("add-mj.fields.ctype"));
+	//次数
+	API_DTO_FIELD_DEFAULT(UInt32, cycleCount, ZH_WORDS_GETTER("add-mj.fields.ccount"));
 	//开始日期
 	API_DTO_FIELD_DEFAULT(String, startDate, ZH_WORDS_GETTER("add-mj.fields.sdate"));
 	//结束日期
