@@ -48,13 +48,21 @@ public class DepartmentDTO {
     private String leader;
 
     //创建时间
-    @ApiModelProperty(value = "创建时间",example = "2024-05-17")
-    private LocalDateTime CreateTime;
+    @ApiModelProperty(value = "创建时间")
+    private LocalDateTime createTime;
+
+    @ApiModelProperty(value = "祖级列表")
+    private  String ancestors;
+
+    @ApiModelProperty(value = "更新人",example = "小野")
+    private String updateBy;
+
+    @ApiModelProperty(value = "创建人",example = "宵夜")
+    private  String createBy;
 
     //更新时间
-    @ApiModelProperty(value = "更新时间",example = "2024-05-17")
-    private LocalDateTime UpdateTime;
-
+    @ApiModelProperty(value = "更新时间")
+    private LocalDateTime updateTime;
 
 
 
