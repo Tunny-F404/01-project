@@ -17,12 +17,5 @@ class AddWhStorageorderVO : public JsonVO<AddWhStorageorderDTO::Wrapper>
 };
 
 
-/*
-定义一个添加后入库信息分页显示的IsonVO对象，用于响应给客户端
-*/
-class AddWhPageStorageorderVO : public JsonVO<AddWhPageStorageorderDTO::Wrapper>
-{
-	DTO_INIT(AddWhPageStorageorderVO, JsonVO<AddWhPageStorageorderDTO::Wrapper>);
-};
 #include OATPP_CODEGEN_END(DTO)
 #endif // _ADDWHSTORAGEORDERVO_H_

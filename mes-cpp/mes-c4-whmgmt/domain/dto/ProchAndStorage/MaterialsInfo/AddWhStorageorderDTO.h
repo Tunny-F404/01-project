@@ -30,15 +30,6 @@ class AddWhStorageorderDTO : public oatpp::DTO
 
 };
 
-/*
-定义一个添加后入库信息的分页传输对象
-*/
-class AddWhPageStorageorderDTO : public PageDTO<AddWhStorageorderDTO::Wrapper>
-{
-	DTO_INIT(AddWhPageStorageorderDTO, PageDTO<AddWhStorageorderDTO::Wrapper>);
-	//.....
-};
-
 
 
 #include OATPP_CODEGEN_END(DTO)

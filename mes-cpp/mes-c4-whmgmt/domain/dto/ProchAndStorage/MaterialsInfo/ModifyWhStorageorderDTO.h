@@ -31,14 +31,6 @@ class ModifyWhStorageorderDTO : public oatpp::DTO
 
 };
 
-/*
-定义一个修改后入库信息的分页传输对象
-*/
-class ModifyWhPageStorageorderDTO : public PageDTO<ModifyWhStorageorderDTO::Wrapper>
-{
-	DTO_INIT(ModifyWhPageStorageorderDTO, PageDTO<ModifyWhStorageorderDTO::Wrapper>);
-	//.....
-};
 
 
 

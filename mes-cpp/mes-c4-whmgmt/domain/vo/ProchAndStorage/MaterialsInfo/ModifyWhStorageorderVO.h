@@ -17,12 +17,5 @@ class ModifyWhStorageorderVO : public JsonVO<ModifyWhStorageorderDTO::Wrapper>
 };
 
 
-/*
-定义一个修改后入库信息分页显示的IsonVO对象，用于响应给客户端
-*/
-class ModifyWhPageStorageorderVO : public JsonVO<ModifyWhPageStorageorderDTO::Wrapper>
-{
-	DTO_INIT(ModifyWhPageStorageorderVO, JsonVO<ModifyWhPageStorageorderDTO::Wrapper>);
-};
 #include OATPP_CODEGEN_END(DTO)
 #endif // _MODIFYWHSTORAGEORDERVO

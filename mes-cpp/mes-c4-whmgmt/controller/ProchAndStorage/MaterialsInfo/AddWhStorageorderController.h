@@ -20,16 +20,16 @@ public:
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
-		API_DEF_ADD_RSP_JSON_WRAPPER(AddWhPageStorageorderVO);
+		API_DEF_ADD_RSP_JSON_WRAPPER(AddWhStorageorderVO);
 	}
 	//3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/ProchAndStorage/MaterialsInfo", addWhStorageorder, BODY_DTO(AddWhPageStorageorderDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/ProchAndStorage/MaterialsInfo", addWhStorageorder, BODY_DTO(AddWhStorageorderDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		//呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddWhStorageorder(dto));
 	}
 private://定义接口执行函数
 	//演示新增数据
-	AddWhPageStorageorderVO::Wrapper execAddWhStorageorder(const AddWhPageStorageorderDTO::Wrapper& dto);
+	AddWhStorageorderVO::Wrapper execAddWhStorageorder(const AddWhStorageorderDTO::Wrapper& dto);
 
 };
 // 0 取消API控制器使用宏
