@@ -5,9 +5,7 @@ import com.zeroone.star.project.j3.messageservice.MessageServiceApis;
 import com.zeroone.star.project.j3.query.MessageQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +15,7 @@ import java.util.List;
 
 @Api("消息服务")
 @RestController
-@Validated
-@RequestMapping("/message")
+@RequestMapping("/message-service")
 public class MessageServiceController implements MessageServiceApis {
     @Override
     @PostMapping("/delete-messages")
