@@ -43,7 +43,7 @@ class RepaircontentDTO : public oatpp::DTO
 	//项目类型
 	API_DTO_FIELD(String, subject_content, ZH_WORDS_GETTER("repaircontent.field.subject_content"), true, "");
 	//标准
-	API_DTO_FIELD(String, subject_standard, ZH_WORDS_GETTER("repaircontent.field.subject_standard"), true, "");
+	//API_DTO_FIELD(String, subject_standard, ZH_WORDS_GETTER("repaircontent.field.subject_standard"), true, "");
 
 	//故障描述
 	API_DTO_FIELD(String, malfunction, ZH_WORDS_GETTER("repaircontent.field.malfunction"), true, "");
@@ -53,14 +53,33 @@ class RepaircontentDTO : public oatpp::DTO
 	API_DTO_FIELD(String, repair_des, ZH_WORDS_GETTER("repaircontent.field.repair_des"), true, "");
 
 	//备注
-	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("repaircontent.field.remark"), true, "");
-
-	//attr1(string)
-	API_DTO_FIELD(String, attr1, ZH_WORDS_GETTER("repaircontent.field.attr1"), true, "");
-	//attr2(int)
-	API_DTO_FIELD(UInt64, attr2, ZH_WORDS_GETTER("repaircontent.field.attr2"), true, 1);
+	//API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("repaircontent.field.remark"), true, "");
 
 
+
+};
+
+class AddRepaircontentDTO : public oatpp::DTO
+{
+	DTO_INIT(AddRepaircontentDTO, DTO);
+	//维修单id唯一标识(隐藏的)
+	API_DTO_FIELD(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.field.repair_id"), true, 1);
+	//项目名称
+	API_DTO_FIELD(String, subject_name, ZH_WORDS_GETTER("repaircontent.field.subject_name"), true, "");
+	//故障描述
+	API_DTO_FIELD(String, malfunction, ZH_WORDS_GETTER("repaircontent.field.malfunction"), true, "");
+	//故障资源描述
+	API_DTO_FIELD(String, malfunction_url, ZH_WORDS_GETTER("repaircontent.field.malfunction_url"), true, "");
+	//维修情况
+	API_DTO_FIELD(String, repair_des, ZH_WORDS_GETTER("repaircontent.field.repair_des"), true, "");
+
+
+};
+class ModifyRepaircontentDTO : public AddRepaircontentDTO
+{
+	DTO_INIT(ModifyRepaircontentDTO, AddRepaircontentDTO);
+	//项目id
+	API_DTO_FIELD(UInt64, subject_id, ZH_WORDS_GETTER("repaircontent.field.subject_id"), true, 1);
 };
 
 /**
@@ -69,6 +88,7 @@ class RepaircontentDTO : public oatpp::DTO
 class RepaircontentPageDTO : public PageDTO<RepaircontentDTO::Wrapper>
 {
 	DTO_INIT(RepaircontentPageDTO, PageDTO<RepaircontentDTO::Wrapper>);
+
 };
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_REPAIRCONTENT_DTO_

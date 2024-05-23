@@ -33,12 +33,12 @@ RepaircontentJsonVO::Wrapper RepaircontentController::execDetailsRepaircontent(c
 	return RepaircontentJsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const RepaircontentDTO::Wrapper& dto) {
+Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const AddRepaircontentDTO::Wrapper& dto) {
 	//...
 	return Uint64JsonVO::Wrapper();
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const RepaircontentDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const ModifyRepaircontentDTO::Wrapper& dto)
 {
 	//...
 	return Uint64JsonVO::Wrapper();
