@@ -14,7 +14,7 @@ class ApprovalStageDO
 	CC_SYNTHESIZE(string, feedback_type, feedback_type);
 public:
 	ApprovalStageDO() {
-		workorder_id = 0;
+		record_id = 0;
 		feedback_type = "";
 	}
 };
