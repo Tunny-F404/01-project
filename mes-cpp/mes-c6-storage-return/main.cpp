@@ -28,26 +28,23 @@
 #include "NacosClient.h"
 #endif
 
-// 是否是发布Swagger文档包
+
 #ifndef _RELEASE_DOC_
-// 查看Swagger文档的时候不需要连接数据库，解开下面的注释关闭启动连接数据库
+
 //#define _RELEASE_DOC_
 #endif
 
-/**
- * 解析启动参数
- * 注意：
- * 参数中数据需要满足一定的格式，如：sp=8090、sn=feign-cpp-sample
- * 前缀与真实值之间使用=分隔
- */
+
 bool getStartArg(int argc, char* argv[]) {
-	// 服务器端口
+	
 	std::string serverPort = "8090";
-	// 数据库连接信息
+	
 	std::string dbUsername = "root";
-	std::string dbPassword = "1234abc";
+	std::string dbPassword = "123456";
+
 	std::string dbName = "test";
-	std::string dbHost = "127.0.0.1";
+	std::string dbHost = "localhost";
+
 	int dbPort = 3306;
 	int dbMax = 5;
 #ifdef LINUX

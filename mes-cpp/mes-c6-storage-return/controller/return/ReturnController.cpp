@@ -1,7 +1,20 @@
 #include "stdafx.h"
 #include "ReturnController.h"
+#include "oatpp/core/utils/ConversionUtils.hpp"
+#include <iostream>
+#include <sstream>
+#include "tree/TreeUtil.h"
 #include "service/return/ReturnService.h"
 #include "../ApiDeclarativeServicesHelper.h"
+
+// FastDFS需要导入的头
+#include "ServerInfo.h"
+#include "NacosClient.h"
+#include "FastDfsClient.h"
+
+/**
+ * 注意：这里的部分代码本应该放到service层中，为了方便演示就写在一起了
+ */
 
 ReturnPageJsonVO::Wrapper ReturnController::executeQueryAll(const ReturnQuery::Wrapper& query, const PayloadDTO& payload)
 {
@@ -14,36 +27,68 @@ ReturnPageJsonVO::Wrapper ReturnController::executeQueryAll(const ReturnQuery::W
 	auto jvo = ReturnPageJsonVO::createShared();
 	jvo->success(result);*/
 	return {};
-}
+	}
 
-ReturnDetailJsonVO::Wrapper ReturnController::executeQueryDetail(const ReturnDetailQuery::Wrapper& returnDetailQuery)
+Uint64JsonVO::Wrapper ReturnController::executeModifyReturn(const ReturnDTO::Wrapper& dto)
 {
-	/*
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->returnId || dto->returnId <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
 	// 定义一个Service
 	ReturnService service;
-	// 查询数据
-	auto result = service.getDetail(returnDetailQuery);
+	// 执行数据修改
+	// if (service.updateData(dto))  //需要dao支持，还未定义
+	if(true)//直接响应
+	{
+		jvo->success(dto->returnId);
+	}
+	else
+	{
+		jvo->fail(dto->returnId);
+	}
 	// 响应结果
-	auto jvo = ReturnPageJsonVO::createShared();
-	jvo->success(result);
-	*/
-	return {};
+	return jvo;
 }
 
-Uint64JsonVO::Wrapper ReturnController::execAddDetail(const ReturnAdd::Wrapper& dto)
+Uint64JsonVO::Wrapper ReturnController::executeExecuteReturn(const UInt64& id)
 {
 	/*
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	// 非空校验
-	if (!dto->returnId || !dto->returnName || !dto->vendorName || !dto->returndate || !dto->status)
+	if (!id || id <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	// 有效值校验
-	if (dto->returnId->empty() || dto->returnName->empty() || dto->vendorName->empty() || dto->returndate->empty())
+	// 定义一个Service
+	ReturnService service;
+	// 在数据库中执行退货操作
+	// if (service.removeData(id.getValue(0))) 
+
+	if (true)
+	{
+		jvo->success(id);
+	}
+	else
+	{
+		jvo->fail(id);
+	}
+	// 响应结果
+	return jvo;
+}
+
+Uint64JsonVO::Wrapper ReturnController::executeRemoveReturn(const UInt64& id)
+{
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!id || id <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -51,16 +96,49 @@ Uint64JsonVO::Wrapper ReturnController::execAddDetail(const ReturnAdd::Wrapper& 
 
 	// 定义一个Service
 	ReturnService service;
-	// 执行数据新增
-	uint64_t id = service.saveData(dto);
-	if (id > 0) {
-		jvo->success(UInt64(id));
+
+	//在数据库中查询对应id的数据
+	//ReturnDTO::Wrapper dto_remove;
+	//状态不为草稿无法删除
+	/*if (dto_remove->status != 0)
+	{
+		jvo->fail(id);
+	}*/
+	
+	// 执行数据删除
+	// if (service.removeData(id.getValue(0))) 
+	if(true)
+	{
+		jvo->success(id);
 	}
 	else
 	{
-		jvo->fail(UInt64(id));
+		jvo->fail(id);
 	}
-	//响应结果
-	*/
-	return {};
+	// 响应结果
+	return jvo;
+}
+
+std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse> ReturnController::executeDownloadFile(const String& filename)
+{
+	// 构建文件全路径 // 相对路径无法加载
+	std::string fullPath = "C:/Users/RHY/Desktop/C6/zero-one-08mes/mes-cpp/mes-c6-storage-return/public/static/" + URIUtil::urlDecode(filename.getValue(""));
+	// 读取文件
+	auto fstring = String::loadFromFile(fullPath.c_str());
+	
+	// 判断是否读取成功
+	if (!fstring)
+	{
+		std::cerr << "Failed to open file: " << std::strerror(errno) << std::endl;
+		return createResponse(Status::CODE_404, "File Not Found");
+	}
+
+	// 创建响应头
+	auto response = createResponse(Status::CODE_200, fstring);
+
+	// 设置响应头信息
+	response->putHeader("Content-Disposition", "attachment; filename=" + filename.getValue(""));
+
+	// 影响成功结果
+	return response;
 }

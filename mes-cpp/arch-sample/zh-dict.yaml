@@ -1,0 +1,31 @@
+sample:
+ get:
+  summary: 测试请求0
+  fields:
+   uid:
+    desc: 用户编号
+    defa: 1
+ get1:
+  summary: 测试请求1
+  fields:
+   age:
+    desc: 年龄
+ get2:
+  summary: 测试请求2
+incoming:
+ query:
+  summary: 获取检验单列表
+ fields:
+  incode: 来料检验单编号
+  vcode: 供应商编码
+  vname: 供应商名称
+  vbatch: 供应商批次号
+  itcode: 产品物料编码
+  itname: 产品物料名称
+  spresult: 检测结果
+  indate: 来料日期
+  spdate: 检测日期
+  spector: 检测人员
+  rcvnum: 接受数量
+  ispnum: 检测数量
+  unqnum: 不合格数量

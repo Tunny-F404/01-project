@@ -20,6 +20,11 @@
 #include "Router.h"
 #include "ApiHelper.h"
 
+#include "product/ProductController.h"
+
+#include"pick/PickController.h"
+
+
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
@@ -53,8 +58,14 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
+
 	// 绑定物料信息控制器
-	ROUTER_SIMPLE_BIND(MaterialController);
+	ROUTER_SIMPLE_BIND(MaterialController);//小智
+
+	ROUTER_SIMPLE_BIND(ProductController);//灵魂老师
+	
+	ROUTER_SIMPLE_BIND(PickController);//大西布
+
 }
 
 #ifdef HTTP_SERVER_DEMO
