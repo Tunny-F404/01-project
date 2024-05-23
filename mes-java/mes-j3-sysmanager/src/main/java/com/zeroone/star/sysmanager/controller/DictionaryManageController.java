@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @RestController
@@ -125,7 +126,6 @@ public class DictionaryManageController implements DictionaryManageApis {
     public JsonVO<Void> removeDictData(@PathVariable Long[] dictCodes) {
         return null;
     }
-}
 
     @Override
     @ApiOperation(value = "导出字典成excel")
