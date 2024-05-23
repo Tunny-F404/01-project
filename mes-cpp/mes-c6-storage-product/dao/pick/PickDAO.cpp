@@ -17,8 +17,8 @@ if (query->issueName) { \
 } \
 if (query->workorderCode) { \
 	sql << " AND workorder_code=?"; \
-	SQLPARAMS_PUSH(params, "s", int, query->workorderCode.getValue("")); \
-}
+	SQLPARAMS_PUSH(params, "s", std::string, query->workorderCode.getValue("")); \
+} 
 
 //uint64_t PickDAO::count(const PickQuery::Wrapper& query)
 //{
@@ -48,9 +48,9 @@ uint64_t PickDAO::insert(const PickDO& iObj)
 	return sqlSession->executeInsert(sql, "%s%s%s", iObj.getIcode(), iObj.getIname(), iObj.getWcode());
 }
 
-//int PickDAO::update(const PickDO& uObj)
-//{
-//	string sql = "UPDATE `wm_issue_header` SET `issue_code`=?, `issue_name`=?, `workorder_code`=? WHERE `issue_id`=?";
-//	return sqlSession->executeUpdate(sql, "%s%s%s%ll", uObj.getIcode(), uObj.getIname(), uObj.getWcode(), uObj.getId());
-//}
+int PickDAO::update(const PickDO& uObj)
+{
+	string sql = "UPDATE `wm_issue_header` SET `issue_code`=?, `issue_name`=?, `workorder_code`=? WHERE `issue_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%ll", uObj.getIcode(), uObj.getIname(), uObj.getWcode(), uObj.getId());
+}
 

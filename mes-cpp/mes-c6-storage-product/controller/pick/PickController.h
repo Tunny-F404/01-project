@@ -36,11 +36,15 @@ public:
 		API_HANDLER_RESP_VO(execAddPick(dto));
 	}
 
+	// 3.1 定义修改接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pick.put.summary"), modifyPick, Uint64JsonVO::Wrapper);
+	// 3.2 定义修改接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pick", modifyPick, BODY_DTO(PickDTO::Wrapper, dto), execModifyPick(dto));
 private:
 	// 3.3 演示新增数据
 	Uint64JsonVO::Wrapper execAddPick(const PickDTO::Wrapper& dto);
 	// 3.3 演示修改数据
-	//Uint64JsonVO::Wrapper execModifySample(const PickDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyPick(const PickDTO::Wrapper& dto);
 
 };
 

@@ -18,7 +18,7 @@ public:
 	// 保存数据
 	uint64_t saveData(const PickDTO::Wrapper& dto);
 	// 修改数据
-	//bool updateData(const PickDTO::Wrapper& dto);
+	bool updateData(const PickDTO::Wrapper& dto);
 	// 通过ID删除数据
 	//bool removeData(uint64_t id);
 };

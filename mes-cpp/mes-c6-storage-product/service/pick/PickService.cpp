@@ -47,15 +47,15 @@ uint64_t PickService::saveData(const PickDTO::Wrapper& dto)
 	return dao.insert(data);
 }
 
-//bool PickService::updateData(const PickDTO::Wrapper& dto)
-//{
-//	// 组装DO数据
-//	PickDO data;
-//
-//	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Icode, issueCode, Iname, issueName, Wcode, workorderCode)
-//		// 执行数据添加
-//		PickDAO dao;
-//	return dao.update(data) == 1;
-//}
+bool PickService::updateData(const PickDTO::Wrapper& dto)
+{
+	// 组装DO数据
+	PickDO data;
+
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Icode, issueCode, Iname, issueName, Wcode, workorderCode,Id,issueId)
+		// 执行数据添加
+		PickDAO dao;
+	return dao.update(data) == 1;
+}
 
 

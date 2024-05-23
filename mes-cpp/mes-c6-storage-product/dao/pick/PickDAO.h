@@ -21,7 +21,7 @@ public:
 	// 插入数据
 	uint64_t insert(const PickDO& iObj);
 	// 修改数据
-	//int update(const PickDO& uObj);
+	int update(const PickDO& uObj);
 	
 };
 #endif // !_PICK_DAO_

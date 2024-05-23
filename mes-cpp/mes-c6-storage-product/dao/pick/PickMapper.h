@@ -15,7 +15,7 @@ public:
 	PickDO mapper(ResultSet* resultSet) const override
 	{
 		PickDO data;
-		//data.setId(resultSet->getUInt64(1));
+		data.setId(resultSet->getInt64(1));
 		data.setIcode(resultSet->getString(2));
 		data.setIname(resultSet->getString(3));
 		data.setWcode(resultSet->getString(4));

@@ -12,3 +12,6 @@ pick:
   cltcode: 客户编号
   cltname: 客户名称
   remark: 备注
+ put:
+  summary: 修改单据
+

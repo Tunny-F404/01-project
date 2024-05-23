@@ -10,7 +10,7 @@
 class PickDO
 {
 	// 领料单ID
-	CC_SYNTHESIZE(uint64_t, issueId, Id);
+	CC_SYNTHESIZE(int64_t, issueId, Id);
 	// 领料单编号
 	CC_SYNTHESIZE(string, issueCode, Icode);
 	// 领料单名称
@@ -20,9 +20,9 @@ class PickDO
 public:
 	PickDO() {
 		issueId = 0;
-		issueCode = "";
-		issueName = "";
-		workorderCode = "";
+		issueCode = "input issueCode";
+		issueName = "input issueName";
+		workorderCode = "input workorderCode";
 	}
 };
 
