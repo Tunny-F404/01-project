@@ -25,7 +25,7 @@ import static java.awt.SystemColor.menu;
  */
 @RestController
 @RequestMapping("sys")
-@Api(tags = "测试控制器")
+@Api(tags = "菜单管理控制器")
 public class MenuController implements MenuApis {
 
     @Resource
