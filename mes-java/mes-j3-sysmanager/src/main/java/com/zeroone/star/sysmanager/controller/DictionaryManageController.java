@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
+import java.util.List;
+
 @Api(tags = "字典管理")
 @Controller
 @RequestMapping("/dict")
@@ -23,7 +25,7 @@ public class DictionaryManageController implements DictionaryManageApis {
     @Override
     @ApiOperation(value = "(批量)删除字典")
     @DeleteMapping("remove/remove/delete/delete-dict-type")
-    public JsonVO<Void> deleteDictType(@PathVariable String dictListIdsStr) {
+    public JsonVO<Void> deleteDictType(@PathVariable List<Long> dictListIds) {
         return null;
     }
 

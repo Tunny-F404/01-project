@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 /**
  * 系统管理-字典管理相关接口
  */
@@ -20,7 +22,7 @@ public interface DictionaryManageApis {
     /**
      *  批量删除字典
      */
-    JsonVO<Void> deleteDictType(String dictListIdsStr);
+    JsonVO<Void> deleteDictType(List<Long> dictListIds);
     /**
      *  导出字典
      */

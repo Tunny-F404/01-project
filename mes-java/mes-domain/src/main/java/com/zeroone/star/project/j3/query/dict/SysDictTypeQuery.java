@@ -21,6 +21,10 @@ public class SysDictTypeQuery {
     private String status;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间", example = "2022-04-07 00:29:32")
-    private Date createTime;
+    @ApiModelProperty(value = "创建开始时间", example = "2022-04-07 00:29:32")
+    private Date createBeginTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "创建结束时间", example = "2022-04-07 00:29:32")
+    private Date createEndTime;
 }
