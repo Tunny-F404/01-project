@@ -18,13 +18,14 @@
  limitations under the License.
 */
 
-#ifndef _WM_ITEM_RECPT_CONTROLLER_
-#define _WM_ITEM_RECPT_CONTROLLER_
+#ifndef _WAREHOUSE_INBOUND_CONTROLLER_
+#define _WAREHOUSE_INBOUND_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
 #include "ApiHelper.h"
 #include "ServerInfo.h"
 #include "domain/dto/WarehouseInbound/WarehouseInboundDTO.h"
+#include "domain/vo/WarehouseInbound/WarehouseInboundVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -39,7 +40,7 @@ class WarehouseInboundController : public oatpp::web::server::api::ApiController
     // 3 定义接口
 public:
     // 3.1 定义修改接口描述
-    API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("wm_item_recpt.put.summary"), modifyWmItemRecpt, Uint64JsonVO::Wrapper);
+    API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("wm_item_recpt.put.summary"), modifyWmItemRecpt, WarehouseInboundJsonVO::Wrapper);
     // 3.2 定义修改接口处理
     API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/wm-item-recpt", modifyWmItemRecpt, BODY_DTO(WarehouseInboundDTO::Wrapper, dto), execWarehouseInbound(dto));
 
@@ -50,4 +51,4 @@ private:
 
 // 0 取消API控制器使用宏
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
-#endif // _WM_ITEM_RECPT_CONTROLLER_
+#endif // _WAREHOUSE_INBOUND_CONTROLLER_

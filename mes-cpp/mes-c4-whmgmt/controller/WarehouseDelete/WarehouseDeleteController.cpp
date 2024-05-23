@@ -20,7 +20,7 @@
 #include "stdafx.h"
 #include "WarehouseDeleteController.h"
 
-Uint64JsonVO::Wrapper WarehouseDeleteController::execWarehouseRemove(const UInt64& id)
+Uint64JsonVO::Wrapper WarehouseDeleteController::execWarehouseDelete(const UInt64& id)
 {
     return {};
 }

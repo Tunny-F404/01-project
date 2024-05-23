@@ -18,37 +18,26 @@
  limitations under the License.
 */
 
-#ifndef _WAREHOUSING_INBOUND_DTO_
-#define _WAREHOUSING_INBOUND_DTO_
+#ifndef _WAREHOUSING_INBOUND_VO_
+#define _WAREHOUSING_INBOUND_VO_
 #include "../../GlobalInclude.h"
+#include "domain/dto/WarehouseInbound/WarehouseInboundDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 执行入库
+ * 物料入库单显示JsonVO，用于响应给客户端的Json对象
  */
-class WarehouseInboundDTO : public oatpp::DTO
-{
-    DTO_INIT(WarehouseInboundDTO, DTO);
-    // 入库单编号
-    DTO_FIELD(Int32, recpt_id);
-    DTO_FIELD_INFO(recpt_id) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.recpt_id");
-    }
-    // 单据状态
-    DTO_FIELD(String, status);
-    DTO_FIELD_INFO(status) {
-        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.status");
-    }
+class WarehouseInboundJsonVO : public JsonVO<WarehouseInboundDTO::Wrapper> {
+    DTO_INIT(WarehouseInboundJsonVO, JsonVO<WarehouseInboundDTO::Wrapper>);
 };
 
 /**
- * 物料入库单分页传输对象
+ * 物料入库单分页显示JsonVO，用于响应给客户端的Json对象
  */
-class WarehouseInboundPageDTO : public PageDTO<WarehouseInboundDTO::Wrapper>
-{
-    DTO_INIT(WarehouseInboundPageDTO, PageDTO<WarehouseInboundDTO::Wrapper>);
+class WarehouseInboundPageJsonVO : public JsonVO<WarehouseInboundPageDTO::Wrapper> {
+    DTO_INIT(WarehouseInboundPageJsonVO, JsonVO<WarehouseInboundPageDTO::Wrapper>);
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_WAREHOUSING_INBOUND_DTO_
+#endif // !_WAREHOUSING_INBOUND_VO_

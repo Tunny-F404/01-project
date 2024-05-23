@@ -18,26 +18,27 @@
  limitations under the License.
 */
 
-#ifndef _WAREHOUSE_EXPORT_VO_
-#define _WAREHOUSE_EXPORT_VO_
+#ifndef _WAREHOUSE_DELETE_VO_
+#define _WAREHOUSE_DELETE_VO_
 
 #include "../../GlobalInclude.h"
-#include "domain/dto/WarehouseExport/WarehouseExportDTO.h"
+#include "domain/dto/WarehouseDelete/WarehouseDeleteDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
  * 物料入库单显示JsonVO，用于响应给客户端的Json对象
  */
-class WarehouseExportJsonVO : public JsonVO<WarehouseExportDTO::Wrapper> {
-    DTO_INIT(WarehouseExportJsonVO, JsonVO<WarehouseExportDTO::Wrapper>);
+class WarehouseDeleteJsonVO : public JsonVO<WarehouseDeleteDTO::Wrapper> {
+    DTO_INIT(WarehouseDeleteJsonVO, JsonVO<WarehouseDeleteDTO::Wrapper>);
 };
 
-class WarehouseExportPageJsonVO : public JsonVO<WarehouseExportPageDTO::Wrapper> {
-    DTO_INIT(WarehouseExportPageJsonVO, JsonVO<WarehouseExportPageDTO::Wrapper>);
+/**
+ * 物料入库单分页显示JsonVO，用于响应给客户端的Json对象
+ */
+class WarehouseDeletePageJsonVO : public JsonVO<WarehouseDeletePageDTO::Wrapper> {
+    DTO_INIT(WarehouseDeletePageJsonVO, JsonVO<WarehouseDeletePageDTO::Wrapper>);
 };
-
 
 #include OATPP_CODEGEN_END(DTO)
-
-#endif // !_WAREHOUSE_EXPORT_VO_
+#endif // !_WAREHOUSE_DELETE_VO_

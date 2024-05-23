@@ -1,9 +1,9 @@
-#pragma once
+﻿#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
  @Author: xinye
- @Date: 2024/5/22 22:30:00
+ @Date: 2024/5/22 22:00:00
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -18,28 +18,32 @@
  limitations under the License.
 */
 
-#ifndef _WM_ITEM_RECPT_VO_
-#define _WM_ITEM_RECPT_VO_
-
+#ifndef _WAREHOUSING_DELETE_DTO_
+#define _WAREHOUSING_DELETE_DTO_
 #include "../../GlobalInclude.h"
-#include "../../dto/WmItemRecpt/WmItemRecptDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 物料入库单显示JsonVO，用于响应给客户端的Json对象
+ * 执行入库
  */
-class WmItemRecptJsonVO : public JsonVO<WmItemRecptDTO::Wrapper> {
-    DTO_INIT(WmItemRecptJsonVO, JsonVO<WmItemRecptDTO::Wrapper>);
+class WarehouseDeleteDTO : public oatpp::DTO
+{
+    DTO_INIT(WarehouseDeleteDTO, DTO);
+    // 入库单编号
+    DTO_FIELD(Int32, recpt_id);
+    DTO_FIELD_INFO(recpt_id) {
+        info->description = ZH_WORDS_GETTER("wm_item_recpt.field.recpt_id");
+    }
 };
 
 /**
- * 物料入库单分页显示JsonVO，用于响应给客户端的Json对象
+ * 物料入库单分页传输对象
  */
-class WmItemRecptPageJsonVO : public JsonVO<WmItemRecptPageDTO::Wrapper> {
-    DTO_INIT(WmItemRecptPageJsonVO, JsonVO<WmItemRecptPageDTO::Wrapper>);
+class WarehouseDeletePageDTO : public PageDTO<WarehouseDeleteDTO::Wrapper>
+{
+    DTO_INIT(WarehouseDeletePageDTO, PageDTO<WarehouseDeleteDTO::Wrapper>);
 };
 
 #include OATPP_CODEGEN_END(DTO)
-
-#endif // !_WM_ITEM_RECPT_VO_
+#endif // !_WAREHOUSING_DELETE_DTO_

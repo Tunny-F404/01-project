@@ -24,7 +24,7 @@
 #include "domain/vo/BaseJsonVO.h"
 #include "ApiHelper.h"
 #include "ServerInfo.h"
-#include "domain/query/WarehouseQuery/WarehouseExportQuery.h"
+#include "domain/query/WarehouseExport/WarehouseExportQuery.h"
 #include "domain/vo/WarehouseExport/WarehouseExportVO.h"
 
 // 0 定义API控制器使用宏
