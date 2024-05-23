@@ -2,8 +2,8 @@
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: awei
- @Date: 2022/10/25 11:51:41
+ @Author: amie
+ @Date: 2022/10/25 11:34:14
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,13 +17,20 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DO_INCLUDE_
-#define _DO_INCLUDE_
+#ifndef _PROCESS_VO_
+#define _PROCESS_VO_
 
-#include "../../Macros.h"
-#include <string>
-#include <list>
+#include "../../GlobalInclude.h"
+#include "../../dto/productioninvestigation/ProductionProcessDTO.h"
 
-using namespace std;
+#include OATPP_CODEGEN_BEGIN(DTO)
 
-#endif // !_DO_INCLUDE_
+/**
+ * 示例显示JsonVO，用于响应给客户端的Json对象
+ */
+class ProductionProcessJsonVO : public JsonVO<ProductionProcessDTO::Wrapper> {
+	DTO_INIT(ProductionProcessJsonVO, JsonVO<ProductionProcessDTO::Wrapper>);
+};
+#include OATPP_CODEGEN_END(DTO)
+
+#endif // !_PROCESS_VO_

@@ -34,27 +34,12 @@ class ExportOrderQuery : public PageQuery
 	API_DTO_FIELD_DEFAULT(String, workOrderCode, ZH_WORDS_GETTER("productionorder.query.fields.workorder_code"));
 	API_DTO_FIELD_DEFAULT(String, workOrderName, ZH_WORDS_GETTER("productionorder.query.fields.workorder_name"));
 	API_DTO_FIELD_DEFAULT(String, workOrderType, ZH_WORDS_GETTER("productionorder.query.fields.workorder_type"));
-	API_DTO_FIELD_DEFAULT(String, orderSource, ZH_WORDS_GETTER("productionorder.query.fields.order_source"));
 	API_DTO_FIELD_DEFAULT(String, sourceCode, ZH_WORDS_GETTER("productionorder.query.fields.source_code"));
-	API_DTO_FIELD_DEFAULT(Int32, productId, ZH_WORDS_GETTER("productionorder.query.fields.product_id"));
 	API_DTO_FIELD_DEFAULT(String, productCode, ZH_WORDS_GETTER("productionorder.query.fields.product_code"));
 	API_DTO_FIELD_DEFAULT(String, productName, ZH_WORDS_GETTER("productionorder.query.fields.product_name"));
-	API_DTO_FIELD_DEFAULT(String, productSpc, ZH_WORDS_GETTER("productionorder.query.fields.product_spc"));
-	API_DTO_FIELD_DEFAULT(String, unitOfMeasure, ZH_WORDS_GETTER("productionorder.query.fields.unit_of_measure"));
-	API_DTO_FIELD_DEFAULT(String, batchCode, ZH_WORDS_GETTER("productionorder.query.fields.batch_code"));
-	API_DTO_FIELD_DEFAULT(Float64,pQuantity, ZH_WORDS_GETTER("productionorder.query.fields.pquantity"));
-	API_DTO_FIELD_DEFAULT(Float64, quantityProduced,ZH_WORDS_GETTER("productionorder.query.fields.quantity_produced"));
-	API_DTO_FIELD_DEFAULT(Float64, quantityChanged, ZH_WORDS_GETTER("productionorder.query.fields.quantity_changed"));
-	API_DTO_FIELD_DEFAULT(Float64, quantityScheduled, ZH_WORDS_GETTER("productionorder.query.fields.quantity_scheduled"));
-	API_DTO_FIELD_DEFAULT(Float64, clientId, ZH_WORDS_GETTER("productionorder.query.fields.client_id"));
 	API_DTO_FIELD_DEFAULT(String, clientCode, ZH_WORDS_GETTER("productionorder.query.fields.client_code"));
 	API_DTO_FIELD_DEFAULT(String, clientName, ZH_WORDS_GETTER("productionorder.query.fields.client_name"));
-	API_DTO_FIELD_DEFAULT(Float64, vendorId, ZH_WORDS_GETTER("productionorder.query.fields.vendor_id"));
-	API_DTO_FIELD_DEFAULT(String, vendorCode, ZH_WORDS_GETTER("productionorder.query.fields.vendor_code"));
-	API_DTO_FIELD_DEFAULT(String, vendorName, ZH_WORDS_GETTER("productionorder.query.fields.vendor_name"));
-	API_DTO_FIELD_DEFAULT(String, finishDate, ZH_WORDS_GETTER("productionorder.query.fields.finish_date"));
 	API_DTO_FIELD_DEFAULT(String, requestDate, ZH_WORDS_GETTER("productionorder.query.fields.request_date"));
-	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("productionorder.query.fields.status"));
 };
 
 #include OATPP_CODEGEN_END(DTO)

@@ -3,7 +3,7 @@
 ...
 productionorder:
  query:
-  summary: 获取生产工单
+  summary: 生产工单
   fields:
      workorder_code: 工单编号
      workorder_name: 工单名称
@@ -36,4 +36,10 @@ productionorder:
      unit_of_measure: 单位
      item_or_product: 物料产品标识
      quantity: 物料预计使用量
-
+productionprocess:
+ query:
+  summary: 生产排查
+  fields:
+    process_name: 工序名称
+    process_id:  工序ID
+    process_code: 工序编号  

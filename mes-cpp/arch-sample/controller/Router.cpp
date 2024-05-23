@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 ﻿/*
-=======
-/*
 >>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
  Copyright Zero One Star. All rights reserved.
 
@@ -23,11 +20,8 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-<<<<<<< HEAD
 #include "productionorder/ProductionOrderController.h"
-=======
-
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
+#include "productioninvestigation/ProductionProcessController.h"
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
@@ -37,6 +31,14 @@
 
 #endif
 
+// 濡傛灉瀹氫箟浜嗗叧闂璖wagger鏂囨。瀹?
+#ifdef CLOSE_SWAGGER_DOC
+// 绠€鍖栫粦瀹氭帶鍒跺櫒瀹忓畾涔?
+#define ROUTER_SIMPLE_BIND(__CLASS__) \
+router->addController(__CLASS__::createShared())
+#else
+#endif
+
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
 // 简化绑定控制器宏定义
@@ -44,17 +46,6 @@
 router->addController(__CLASS__::createShared())
 #else
 // 简化绑定控制器宏定义
-=======
-#endif
-
-// ��������˹ر�Swagger�ĵ���
-#ifdef CLOSE_SWAGGER_DOC
-// �򻯰󶨿������궨��
-#define ROUTER_SIMPLE_BIND(__CLASS__) \
-router->addController(__CLASS__::createShared())
-#else
-// �򻯰󶨿������궨��
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
@@ -71,19 +62,24 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
-<<<<<<< HEAD
-	//#TIP :系统扩展路由定义，写在这个后面
+	//#TIP :绯荤粺鎵╁睍璺敱瀹氫箟锛屽啓鍦ㄨ繖涓悗闈?
 	ROUTER_SIMPLE_BIND(ProductionOrderController);
-=======
-	//#TIP :ϵͳ��չ·�ɶ��壬д���������
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
-
+	ROUTER_SIMPLE_BIND(ProductionProcessController);
 }
 
 #ifdef HTTP_SERVER_DEMO
 void Router::createSampleRouter()
 {
 <<<<<<< HEAD
+	// 缁戝畾绀轰緥鎺у埗鍣?
+	ROUTER_SIMPLE_BIND(SampleController);
+	// 缁戝畾鐢ㄦ埛鎺у埗鍣?
+	ROUTER_SIMPLE_BIND(UserController);
+	// 缁戝畾鏂囦欢鎺у埗鍣?
+	ROUTER_SIMPLE_BIND(FileController);
+	
+	// 缁戝畾WebSocket鎺у埗鍣?
+=======
 	// 绑定示例控制器
 	ROUTER_SIMPLE_BIND(SampleController);
 	// 绑定用户控制器
@@ -92,15 +88,6 @@ void Router::createSampleRouter()
 	ROUTER_SIMPLE_BIND(FileController);
 	
 	// 绑定WebSocket控制器
-=======
-	// ��ʾ��������
-	ROUTER_SIMPLE_BIND(SampleController);
-	// ���û�������
-	ROUTER_SIMPLE_BIND(UserController);
-	// ���ļ�������
-	ROUTER_SIMPLE_BIND(FileController);
-	
-	// ��WebSocket������
 >>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
 	router->addController(WSContorller::createShared());
 }

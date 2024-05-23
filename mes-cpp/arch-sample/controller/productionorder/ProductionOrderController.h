@@ -48,14 +48,15 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(Int32, "workOrderId", ZH_WORDS_GETTER("productionorder.query.fields.workorder_id"), 0, false);
-		API_DEF_ADD_QUERY_PARAMS(Int32, "itemId", ZH_WORDS_GETTER("productionorder.query.fields.item_id"), 0, false);
-		API_DEF_ADD_QUERY_PARAMS(String, "itemCode", ZH_WORDS_GETTER("productionorder.query.fields.item_code"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "itemName", ZH_WORDS_GETTER("productionorder.query.fields.item_name"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "itemSpc", ZH_WORDS_GETTER("productionorder.query.fields.item_spc"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "uintOfMeasure", ZH_WORDS_GETTER("productionorder.query.fields.unit_of_measure"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "itemOrProduct", ZH_WORDS_GETTER("productionorder.query.fields.item_or_product"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(Float64, "quantity", ZH_WORDS_GETTER("productionorder.query.fields.quantity"), 0.0, false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workOrderCode", ZH_WORDS_GETTER("productionorder.query.fields.workorder_code"),"", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workOrderName", ZH_WORDS_GETTER("productionorder.query.fields.workorder_name"),"",false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workOrderType", ZH_WORDS_GETTER("productionorder.query.fields.workorder_type"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "sourceCode", ZH_WORDS_GETTER("productionorder.query.fields.source_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "productCode", ZH_WORDS_GETTER("productionorder.query.fields.product_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "productName", ZH_WORDS_GETTER("productionorder.query.fields.product_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "clientCode", ZH_WORDS_GETTER("productionorder.query.fields.client_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "clientName", ZH_WORDS_GETTER("productionorder.query.fields.client_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "requestDate", ZH_WORDS_GETTER("productionorder.query.fields.request_date"), "", false);
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/productionorder/query-production-order", queryOrder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {

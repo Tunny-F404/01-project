@@ -2,8 +2,8 @@
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: awei
- @Date: 2022/10/25 11:51:41
+ @Author: amie
+ @Date: 2022/10/25 11:52:32
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,13 +17,24 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DO_INCLUDE_
-#define _DO_INCLUDE_
+#ifndef _ProProcess_DO_
+#define _ProProcess_DO_
+#include "../DoInclude.h"
 
-#include "../../Macros.h"
-#include <string>
-#include <list>
+/**
+ * 示例数据库实体类
+ */
+class ProProcessDO
+{
+	CC_SYNTHESIZE(string, process_code, processCode);
+	CC_SYNTHESIZE(string,process_name, processName);
+	CC_SYNTHESIZE(int, process_id, processId);
+public:
+	ProProcessDO() {
+		process_id = 0;
+		process_name = "";
+		process_code = "";
+	}
+};
 
-using namespace std;
-
-#endif // !_DO_INCLUDE_
+#endif // !_ProProcess_DO_

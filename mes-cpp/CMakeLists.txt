@@ -4,7 +4,7 @@
 cmake_minimum_required (VERSION 3.8)
 
 # 指定工程名
-project ("zero-one-mes")
+project ("c4-prodmgmt-amie")
 
 # 设置安装目录前缀
 if(NOT WIN32)
@@ -164,10 +164,4 @@ endif()
 # 这是示例模块，后期可以不编译它
 add_subdirectory ("arch-demo")
 # 在后面添加你的模块
-<<<<<<< HEAD
 add_subdirectory ("arch-sample")
-=======
-add_subdirectory ("arch-sample")
-add_subdirectory ("mes-c4-prodmgmt")
-add_subdirectory ("mes-c4-whmgmt")
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
