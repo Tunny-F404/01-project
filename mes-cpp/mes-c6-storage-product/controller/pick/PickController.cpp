@@ -70,3 +70,19 @@ Uint64JsonVO::Wrapper PickController::execModifyPick(const PickDTO::Wrapper& dto
 	// 响应结果
 	return jvo;
 }
+
+//执行生产领料
+Uint64JsonVO::Wrapper PickController::executeExecuteGet(const UInt64& id)
+{
+	return{};
+}
+//删除单据
+Uint64JsonVO::Wrapper PickController::executeRemoveReturn(const UInt64& id)
+{
+	return{};
+}
+// 导出单据
+StringJsonVO::Wrapper PickController::executeDownloadFile(const oatpp::List<UInt64>& ids)
+{
+	return{};
+}

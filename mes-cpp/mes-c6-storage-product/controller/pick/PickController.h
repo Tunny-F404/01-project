@@ -8,6 +8,7 @@
 #include "domain/dto/pick/PickDTO.h"
 #include "domain/vo/pick/PickVO.h"
 
+
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
@@ -40,11 +41,34 @@ public:
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pick.put.summary"), modifyPick, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pick", modifyPick, BODY_DTO(PickDTO::Wrapper, dto), execModifyPick(dto));
+
+	// 定义执行领取物料接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pick.execute-get.summary"), executeGet, Uint64JsonVO::Wrapper);
+	// 定义执行领取物料接口处理 "/pick/{Id}"必须对应
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pick/{getId}", executeGet, PATH(UInt64, getId), executeExecuteGet(getId));
+
+	// 定义删除单据接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pick.delete.summary"), removeReturn, Uint64JsonVO::Wrapper);
+	// 定义删除单据接口处理 "/pick/{Id}"必须对应
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/{deleteId}", removeReturn, PATH(UInt64, deleteId), executeRemoveReturn(deleteId));
+
+	
+	// 3.1 定义导出接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pick.download.summary"), downloadFile, StringJsonVO::Wrapper);
+	// 3.2 定义导出接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/pick/download", downloadFile, BODY_DTO(oatpp::List<UInt64>, ids), executeDownloadFile(ids));
+
 private:
-	// 3.3 演示新增数据
+	// 新增数据
 	Uint64JsonVO::Wrapper execAddPick(const PickDTO::Wrapper& dto);
-	// 3.3 演示修改数据
+	// 修改数据
 	Uint64JsonVO::Wrapper execModifyPick(const PickDTO::Wrapper& dto);
+	// 执行单据
+	Uint64JsonVO::Wrapper executeExecuteGet(const UInt64& id);
+	// 删除单据
+	Uint64JsonVO::Wrapper executeRemoveReturn(const UInt64& id);
+	// 导出单据
+	StringJsonVO::Wrapper executeDownloadFile(const oatpp::List<UInt64>& ids);
 
 };
 
