@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j3.dto;
+package com.zeroone.star.project.j3.vo;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -16,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "sys_notice")
-public class NoticeDTO implements Serializable {
+public class NoticeVO implements Serializable {
 
     @TableId(value = "notice_id")
     @ApiModelProperty(value = "公告ID")
@@ -33,20 +33,6 @@ public class NoticeDTO implements Serializable {
 
     @ApiModelProperty(value = "状态",example = "正常")
     private String status;
-
-    @ApiModelProperty(value = "创建人")
-    private String createBy;
-
-    @ApiModelProperty(value = "创建时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private String createTime;
-
-    @ApiModelProperty(value = "修改人")
-    private String updateBy;
-
-    @ApiModelProperty(value = "修改时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private String updateTime;
 
     @ApiModelProperty(value = "备注")
     private String remark;

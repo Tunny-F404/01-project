@@ -27,7 +27,7 @@ public class NewsDTO implements Serializable {
 
     @TableId(value = "message_id")
     @ApiModelProperty(value = "附件ID")
-    private Integer messageId;
+    private Long messageId;
 
     @ApiModelProperty(value = "消息类型")
     private String messageType;

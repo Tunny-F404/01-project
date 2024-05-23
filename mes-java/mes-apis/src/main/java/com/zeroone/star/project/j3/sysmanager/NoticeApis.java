@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j3.sysmanager;
 
-import com.zeroone.star.project.j3.dto.NoticeDTO;
+import com.zeroone.star.project.j3.vo.NoticeVO;
+import com.zeroone.star.project.vo.JsonVO;
 
 /**
  * 系统管理-通知公告相关接口
@@ -9,8 +10,9 @@ import com.zeroone.star.project.j3.dto.NoticeDTO;
 public interface NoticeApis {
     /**
      * 修改通知公告
-     * @param noticeDTO
+     *
+     * @param noticeVO
      * @return
      */
-    NoticeDTO updateNotice(NoticeDTO noticeDTO);
+    JsonVO updateNotice(NoticeVO noticeVO);
 }
