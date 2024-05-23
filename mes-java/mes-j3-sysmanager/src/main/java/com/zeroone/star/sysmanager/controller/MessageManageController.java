@@ -6,7 +6,8 @@ import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
 import com.zeroone.star.project.j3.dto.ExportMessageDTO;
-import com.zeroone.star.project.j3.dto.SysMessageDTO;
+import com.zeroone.star.project.j3.dto.SysAddMessageDTO;
+import com.zeroone.star.project.j3.dto.SysUpdateMessageDTO;
 import com.zeroone.star.project.j3.sysmanager.MessageManageApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanager.entity.SysMessage;
@@ -49,27 +50,27 @@ public class MessageManageController implements MessageManageApis {
 
     /**
      * 添加消息
-     * @param sysMessageDTO 消息实体
+     * @param sysAddMessageDTO 消息实体
      * @return
      */
     @PostMapping("add-message")
     @Override
     @ApiOperation(value = "添加消息")
-    public JsonVO<String> addMessage(@RequestBody SysMessageDTO sysMessageDTO) {
-        return ISysMessageService.saveMessage(sysMessageDTO);
+    public JsonVO<String> addMessage(@RequestBody SysAddMessageDTO sysAddMessageDTO) {
+        return ISysMessageService.saveMessage(sysAddMessageDTO);
 
     }
 
     /**
      * 更改消息
-     * @param sysMessageDTO 消息
+     * @param sysUpdateMessageDTO 消息
      * @return
      */
     @PutMapping("modify-message")
     @Override
     @ApiOperation(value = "修改消息")
-    public JsonVO<String> modifyMessage(@RequestBody SysMessageDTO sysMessageDTO) {
-        return ISysMessageService.updateMessageById(sysMessageDTO);
+    public JsonVO<String> modifyMessage(@RequestBody SysUpdateMessageDTO sysUpdateMessageDTO) {
+        return ISysMessageService.updateMessageById(sysUpdateMessageDTO);
     }
 
     /**

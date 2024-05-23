@@ -1,10 +1,10 @@
 package com.zeroone.star.sysmanager.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zeroone.star.project.j3.dto.SysMessageDTO;
+import com.zeroone.star.project.j3.dto.SysAddMessageDTO;
+import com.zeroone.star.project.j3.dto.SysUpdateMessageDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanager.entity.SysMessage;
 import com.zeroone.star.sysmanager.mapper.SysMessageMapper;
@@ -25,8 +25,11 @@ interface MsMessageMapper {
      * @param sysMessage do对象
      * @return 转换后的结果
      */
-    SysMessageDTO messageToMessageDTO(SysMessage sysMessage);
-    SysMessage messageDTOToMessage(SysMessageDTO sysMessageDTO);
+    SysAddMessageDTO sysMessageToSysAddMessageDTO(SysMessage sysMessage);
+    SysMessage sysAddMessageDTOToMessage(SysAddMessageDTO sysAddMessageDTO);
+
+    SysUpdateMessageDTO sysMessageToSysUpdateMessageDTO(SysMessage sysMessage);
+    SysMessage sysUpdateAMessageDTOToMessage(SysUpdateMessageDTO sysUpdateMessageDTO);
 }
 
 /**
@@ -46,32 +49,19 @@ public class ISysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMes
 
     /**
      * 添加消息
-     * @param sysMessageDTO 消息类
+     * @param sysAddMessageDTO 消息类
      * @return
      */
     @Transactional
     @Override
-    public JsonVO<String> saveMessage(SysMessageDTO sysMessageDTO) {
-
-        // 检查是否已存在相同的消息ID
-        LambdaQueryWrapper<SysMessage> queryWrapper = new LambdaQueryWrapper<>();
-
-        queryWrapper.eq(SysMessage::getMessageId, sysMessageDTO.getMessageId());
-
-        boolean exists = sysMessageMapper.selectCount(queryWrapper) > 0;
-
-        // 如果消息已存在，则返回失败
-        if (exists) {
-            return JsonVO.fail("该条消息已存在");
-        }
+    public JsonVO<String> saveMessage(SysAddMessageDTO sysAddMessageDTO) {
 
         try {
             // 将DTO转换为实体
-            SysMessage sysMessage = msMessageMapper.messageDTOToMessage(sysMessageDTO);
+            SysMessage sysMessage = msMessageMapper.sysAddMessageDTOToMessage(sysAddMessageDTO);
 
             // 插入消息到数据库
             sysMessageMapper.insert(sysMessage);
-
 
             // 返回成功消息
             return JsonVO.success(null);
@@ -84,21 +74,23 @@ public class ISysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMes
 
     /**
      * 更改消息
-     * @param sysMessageDTO 消息类
+     * @param sysUpdateMessageDTO 消息类
      * @return
      */
     @Override
-    public JsonVO<String> updateMessageById(SysMessageDTO sysMessageDTO) {
+    public JsonVO<String> updateMessageById(SysUpdateMessageDTO sysUpdateMessageDTO) {
 
         try {
             // 将DTO转换为实体
-            SysMessage sysMessage = msMessageMapper.messageDTOToMessage(sysMessageDTO);
+            SysMessage sysMessage = msMessageMapper.sysUpdateAMessageDTOToMessage(sysUpdateMessageDTO);
+
+
+            //根据信息先来查询id
 
             // 使用 LambdaUpdateWrapper 来构建更新条件
             LambdaUpdateWrapper<SysMessage> updateWrapper = new LambdaUpdateWrapper<>();
 
-            updateWrapper.eq(SysMessage::getMessageId, sysMessageDTO.getMessageId());
-
+            updateWrapper.eq(SysMessage::getMessageId, sysUpdateMessageDTO.getMessageId());
 
             // 执行更新操作
             int updatedRows = sysMessageMapper.update(sysMessage, updateWrapper);

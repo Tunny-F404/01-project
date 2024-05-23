@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j3.sysmanager;
 
-import com.zeroone.star.project.j3.dto.SysMessageDTO;
+import com.zeroone.star.project.j3.dto.SysAddMessageDTO;
+import com.zeroone.star.project.j3.dto.SysUpdateMessageDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 
@@ -13,18 +14,18 @@ public interface MessageManageApis {
 
     /**
      * 增加消息
-     * @param sysMessageDTO 消息实体
+     * @param sysAddMessageDTO 消息实体
      * @return 响应码
      */
-    public JsonVO<String> addMessage(SysMessageDTO sysMessageDTO);
+    public JsonVO<String> addMessage(SysAddMessageDTO sysAddMessageDTO);
 
     /**
      * 修改消息
      *
-     * @param sysMessageDTO 消息
+     * @param sysAddMessageDTO 消息
      * @return 结果
      */
-    public JsonVO<String> modifyMessage(SysMessageDTO sysMessageDTO);
+    public JsonVO<String> modifyMessage(SysUpdateMessageDTO sysUpdateMessageDTO);
 
     /**
      * 批量删除消息
