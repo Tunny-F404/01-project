@@ -7,29 +7,30 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * <p>°æÈ¨£º&copy;01ĞÇÇò</p>
- * <p>µØÖ·£º01ĞÇÇò×Ü²¿</p>
+ * <p>ç‰ˆæƒï¼š&copy;01æ˜Ÿçƒ</p>
+ * <p>åœ°å€ï¼š01æ˜Ÿçƒæ€»éƒ¨</p>
+ *
  * @author Tme
  * @version 1.0.0
  */
 @Data
-@ApiModel("ÓÃ»§ÁĞ±í²éÑ¯¶ÔÏó")
+@ApiModel("ç”¨æˆ·åˆ—è¡¨æŸ¥è¯¢å¯¹è±¡")
 public class UserQuery {
-    @ApiModelProperty(value = "ÓÃ»§Ãû³Æ", example = "admin")
+    @ApiModelProperty(value = "ç”¨æˆ·åç§°", example = "admin")
     private String userName;
-    @ApiModelProperty(value = "ÊÖ»úºÅÂë", example = "18888888888")
+    @ApiModelProperty(value = "æ‰‹æœºå·ç ", example = "18888888888")
     private String phonenumber;
-    @ApiModelProperty(value = "ÓÃ»§ÕËºÅ×´Ì¬(0:Õı³£ 1:Í£ÓÃ)", example = "1")
+    @ApiModelProperty(value = "ç”¨æˆ·è´¦å·çŠ¶æ€(0:æ­£å¸¸ 1:åœç”¨)", example = "1")
     private String status;
-    @ApiModelProperty(value = "´´½¨Ê±¼ä£º¿ªÊ¼ÈÕÆÚ", example = "2024-05-20")
+    @ApiModelProperty(value = "åˆ›å»ºæ—¶é—´ï¼šå¼€å§‹æ—¥æœŸ", example = "2024-05-20")
     private String beginDate;
-    @ApiModelProperty(value = "´´½¨Ê±¼ä£º½áÊøÈÕÆÚ", example = "2024-05-21")
+    @ApiModelProperty(value = "åˆ›å»ºæ—¶é—´ï¼šç»“æŸæ—¥æœŸ", example = "2024-05-21")
     private String endDate;
 
 
-/**
- *½ÇÉ«ID
- */
-@ApiModelProperty(value = "½ÇÉ«±àºÅ",example = "1")
-private Long roleId;
+    /**
+     * è§’è‰²ID
+     */
+    @ApiModelProperty(value = "è§’è‰²ç¼–å·", example = "1")
+    private Long roleId;
 }
