@@ -16,5 +16,14 @@ modifylist:
   clientname: 客户名称
  put:
   summary: 修改单据
+getlist:
+ field:
+  issuecode: 领料单编号
+  issuename: 领料单名称
+  warehousename: 仓库名称
+  issuedate: 领料日期
+  status: 单据状态
+ get:
+  summary: 分页查询数据
 
   

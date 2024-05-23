@@ -41,7 +41,7 @@ public:
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("modifylist.put.summary"), ModifyList, Uint64JsonVO::Wrapper);
 	
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/sample", ModifyList, BODY_DTO(ModifyListDTO::Wrapper, dto), execmodifylist(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/setpro/modifylist", ModifyList, BODY_DTO(ModifyListDTO::Wrapper, dto), execmodifylist(dto));
 
 private:
 	// 3.3 演示修改数据

@@ -52,7 +52,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "sex", ZH_WORDS_GETTER("getlist.field.sex"), "N", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/sample", GetListQuery, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/information/getlist", GetListQuery, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, GetListQuery, queryParams);
 		// 呼叫执行函数响应结果

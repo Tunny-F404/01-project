@@ -45,12 +45,20 @@ class GetListDTO : public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, warehousename, ZH_WORDS_GETTER("getlist.field.warehousename"));
 
 	//领料日期
-	API_DTO_FIELD_DEFAULT(String, clientid, ZH_WORDS_GETTER("getlist.field.clientid"));
+	API_DTO_FIELD_DEFAULT(String, issuedate, ZH_WORDS_GETTER("getlist.field.issuedate"));
 
 	//单据状态
-	API_DTO_FIELD_DEFAULT(String, clientname, ZH_WORDS_GETTER("getlist.field.clientname"));
+	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("getlist.field.status"));
 
 
+};
+
+/**
+ * 示例分页传输对象
+ */
+class GetListPageDTO : public PageDTO<GetListDTO::Wrapper>
+{
+	DTO_INIT(GetListPageDTO, PageDTO<GetListDTO::Wrapper>);
 };
 
 
