@@ -1,7 +1,7 @@
 package com.zeroone.star.sysmanager.controller;
 
+import com.zeroone.star.project.j3.dto.NoticeDTO;
 import com.zeroone.star.project.j3.sysmanager.NoticeApis;
-import com.zeroone.star.project.j3.vo.NoticeVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
@@ -17,12 +17,12 @@ public class NoticeController implements NoticeApis {
     /**
      * 修改通知公告
      *
-     * @param noticeVO
+     * @param noticeDTO
      * @return
      */
     @PutMapping("/update")
     @ApiOperation(value = "修改通知公告")
-    public JsonVO updateNotice(@RequestBody NoticeVO noticeVO) {
+    public JsonVO<Integer> updateNotice(@RequestBody NoticeDTO noticeDTO) {
         return null;
     }
 }

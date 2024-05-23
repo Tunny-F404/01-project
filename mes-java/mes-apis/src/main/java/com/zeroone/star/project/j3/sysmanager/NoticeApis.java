@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j3.sysmanager;
 
+import com.zeroone.star.project.j3.dto.NoticeDTO;
 import com.zeroone.star.project.j3.vo.NoticeVO;
 import com.zeroone.star.project.vo.JsonVO;
 
@@ -11,8 +12,8 @@ public interface NoticeApis {
     /**
      * 修改通知公告
      *
-     * @param noticeVO
+     * @param noticeDTO
      * @return
      */
-    JsonVO updateNotice(NoticeVO noticeVO);
+    JsonVO<Integer> updateNotice(NoticeDTO noticeDTO);
 }

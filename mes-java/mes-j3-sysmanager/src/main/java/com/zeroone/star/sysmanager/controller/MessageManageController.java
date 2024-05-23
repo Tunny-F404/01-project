@@ -26,7 +26,7 @@ public class MessageManageController implements MessageManageApis {
      */
     @GetMapping("/news/{id}")
     @ApiOperation(value = "消息详情")
-    public JsonVO<NewsVO> getNewsById(@PathVariable Integer id) {
+    public JsonVO<NewsVO> getNewsById(@PathVariable Long id) {
         return null;
     }
 

@@ -17,7 +17,7 @@ public interface MessageManageApis {
      *
      * @return 消息详情
      */
-    JsonVO<NewsVO> getNewsById(Integer id);
+    JsonVO<NewsVO> getNewsById(Long id);
 
     /**
      * 分页查询消息列表
