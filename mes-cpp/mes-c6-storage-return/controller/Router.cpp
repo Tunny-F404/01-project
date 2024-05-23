@@ -28,7 +28,9 @@
 #include "ws/WSController.h"
 #endif
 
-// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¹Ø±ï¿½Swaggerï¿½Äµï¿½ï¿½ï¿½
+#include "controller/material/ReturnController.h"
+
+
 #ifdef CLOSE_SWAGGER_DOC
 // ï¿½ò»¯°ó¶¨¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¶¨ï¿½ï¿½
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
@@ -51,10 +53,9 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
-	//#TIP :ÏµÍ³ï¿½ï¿½Õ¹Â·ï¿½É¶ï¿½ï¿½å£¬Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
+	//#TIP :ÏµÍ³À©Õ¹Â·ÓÉ¶¨Òå£¬Ð´ÔÚÕâ¸öºóÃæ
 	ROUTER_SIMPLE_BIND(ReturnController);
-
 
 }
 
