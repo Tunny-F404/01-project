@@ -40,7 +40,7 @@ class ReceiptDTO : public oatpp::DTO
 };
 
 /**
-* 单据列表数据模型(分页)
+* 单据列表数据模型(分页传输对象)
 */
 class ReceiptPageTableDTO : public PageDTO<ReceiptDTO::Wrapper>
 {

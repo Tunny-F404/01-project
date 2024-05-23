@@ -4,15 +4,16 @@
 #define _RECEIPT_QUERY_H
 
 #include "../../GlobalInclude.h"
+#include "domain/query/PageQuery.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
-* 单据列表查询，封装查询条件
+* 单据列表查询，封装查询条件 分页查询
 */
-class ReceiptTableQuery : public oatpp::DTO
+class ReceiptTableQuery : public PageQuery
 {
-	DTO_INIT(ReceiptTableQuery, DTO);
+	DTO_INIT(ReceiptTableQuery, PageQuery);
 	// 数据库的表： wm_item_recpt
 	
 	// 入库单编号

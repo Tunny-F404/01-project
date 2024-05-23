@@ -10,8 +10,8 @@ receipt:
    status: 单据状态
    warehouseName: 入库仓库
    remark: 备注
-  describe:
-   query1: 获取单据列表（条件+分页）
-   query2: 获取单据详情
+ describe:
+  query1: 获取单据列表（条件+分页）
+  query2: 获取单据详情
 
   

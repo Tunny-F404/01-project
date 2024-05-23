@@ -13,10 +13,6 @@
 class ReceiptPageTableJsonVO : public JsonVO<ReceiptPageTableDTO::Wrapper>
 {
 	DTO_INIT(ReceiptPageTableJsonVO, JsonVO<ReceiptPageTableDTO::Wrapper>);
-public:
-	ReceiptPageTableJsonVO() {
-		this->data = {};
-	}
 };
 
 /**
@@ -25,10 +21,6 @@ public:
 class ReceiptDetailJsonVO : public JsonVO<ReceiptDetailDTO::Wrapper>
 {
 	DTO_INIT(ReceiptDetailJsonVO, JsonVO<ReceiptDetailDTO::Wrapper>);
-public:
-	ReceiptDetailJsonVO() {
-		this->data = {};
-	}
 };
 #include OATPP_CODEGEN_END(DTO)
 
