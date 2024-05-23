@@ -1,5 +1,6 @@
 package com.zeroone.star.orgstructure.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.orgstructure.entity.Department;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
@@ -20,7 +21,7 @@ public interface DepartmentService extends IService<Department> {
      * @param id
      * @return
      */
-    JsonVO<DepartmentDTO> getDepartmentDetail(int id);
+    DepartmentDTO getDepartmentDetail(int id);
 
 
     /**

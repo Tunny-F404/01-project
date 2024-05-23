@@ -40,8 +40,13 @@ public class DepartmentController  implements DepartmentApis {
     @Override
     @GetMapping("get-department-detail")
     @ApiOperation("获知指定部门详情")
-    public JsonVO<DepartmentDTO> getDepartmentDetail(int id) {
-        return JsonVO.success(new DepartmentDTO());
+    public JsonVO<DepartmentDTO> getDepartmentDetail(int id){
+        return  JsonVO.success(departmentService.getDepartmentDetail(id));
+//        //构建DTO
+//        DepartmentDTO departmentDTO = departmentService.getDepartmentDetail(id);
+//        //封装Jsonvo
+//        if(departmentDTO == null) return  JsonVO.fail(departmentDTO);
+//        return JsonVO.success(departmentDTO);
     }
 
 
