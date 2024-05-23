@@ -2,7 +2,7 @@ package com.zeroone.star.project.cpp;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.cpp.SampleDTO;
-import com.zeroone.star.project.query.cpp.SampleQuery;
+import com.zeroone.star.project.j3.query.cpp.SampleQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**

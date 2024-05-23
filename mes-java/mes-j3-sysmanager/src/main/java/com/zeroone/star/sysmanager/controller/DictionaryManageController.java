@@ -5,12 +5,14 @@ import com.zeroone.star.project.j3.dto.SysDictDataDTO;
 import com.zeroone.star.project.j3.dto.dict.*;
 import com.zeroone.star.project.j3.query.dict.SysDictDataQuery;
 import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
+import com.zeroone.star.project.j3.query.dict.SysDictTypeModifyQuery;
 import com.zeroone.star.project.j3.sysmanager.DictionaryManageApis;
 import com.zeroone.star.project.j3.vo.DictDataNameVO;
 import com.zeroone.star.project.j3.vo.DictTypeNameVO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.zeroone.star.project.vo.JsonVO;
@@ -23,8 +25,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
+import com.zeroone.star.project.vo.JsonVO;
 
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @RestController
@@ -32,6 +36,19 @@ import java.util.List;
 @Api(tags = "字典管理")
 @Validated
 public class DictionaryManageController implements DictionaryManageApis {
+    @Override
+    @ApiOperation(value = "编辑修改字典")
+    @PutMapping("modify/update/upate/edit-dict-type")
+    public JsonVO<Void> editDictType(@RequestBody SysDictTypeModifyQuery sysDictTypeModifyQuery) {
+        return null;
+    }
+
+    @Override
+    @ApiOperation(value = "(批量)删除字典")
+    @DeleteMapping("remove/remove/delete/delete-dict-type/{dictListIds}")
+    public JsonVO<Void> deleteDictType(@PathVariable Long[] dictListIds) {
+        return null;
+    }
 
     @GetMapping("/type/list")
     @ApiOperation("获取字典类型列表")
@@ -110,3 +127,17 @@ public class DictionaryManageController implements DictionaryManageApis {
     }
 }
 
+    @Override
+    @ApiOperation(value = "导出字典成excel")
+    @PostMapping("export-dict-type")
+    public JsonVO<Void> exportDictType(@RequestBody SysDictTypeQuery sysDictTypeQuery) {
+        return null;
+    }
+
+    @Override
+    @ApiOperation(value = "刷新字典缓存")
+    @DeleteMapping("refresh-cache")
+    public JsonVO<Void> refreshCache() {
+        return null;
+    }
+}
