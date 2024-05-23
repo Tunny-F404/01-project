@@ -37,4 +37,5 @@ public class MessageServiceController implements MessageServiceApis {
     public JsonVO<List<Long>> modifyMessageStatus(Long id) {
         return null;
     }
+
 }
