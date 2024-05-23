@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("sch-manage/sch-plan")
-@Api(tags = "班组接口")
+@Api(tags = "排班计划接口")
 public class SchedulePlanController implements SchedulePlanApis {
     @Override
     public JsonVO<PageDTO<PlanListVO>> queryPlanList(PlanPageQuery condition) {
@@ -46,7 +46,7 @@ public class SchedulePlanController implements SchedulePlanApis {
     }
 
     @ApiOperation(value = "删除排班计划(可批量删除)")
-    @DeleteMapping("delete-schedule_plan")
+    @DeleteMapping("delete-schedule-plan")
     @Override
     public JsonVO<Integer> removeSchPlan(Long[] rems) {
         return null;
@@ -54,7 +54,7 @@ public class SchedulePlanController implements SchedulePlanApis {
 
 
     @ApiOperation(value = "修改计划状态")
-    @PutMapping("modify-plans_status")
+    @PutMapping("modify-plans-status")
     @Override
     public JsonVO<Integer> modifySchPlanStatus(SchPlanDTO schPlanDTO) {
         return null;
@@ -62,7 +62,7 @@ public class SchedulePlanController implements SchedulePlanApis {
 
 
     @ApiOperation(value = "导出计划")
-    @GetMapping("export-schedule_plan")
+    @GetMapping("export-schedule-plan")
     @Override
     public ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition) {
         return null;

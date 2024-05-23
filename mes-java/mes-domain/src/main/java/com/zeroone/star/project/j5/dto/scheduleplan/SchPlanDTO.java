@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Data
 @ApiModel("排班计划数据传输对象")
@@ -19,9 +20,9 @@ public class SchPlanDTO {
     @ApiModelProperty(value = "班组类型")
     private String calendarType;
     @ApiModelProperty(value = "开始日期")
-    private Timestamp startDate;
+    private LocalDate startDate;
     @ApiModelProperty(value = "结束日期")
-    private Timestamp endDate;
+    private LocalDate endDate;
     @ApiModelProperty(value = "轮班方式")
     private String shiftType;
     @ApiModelProperty(value = "倒班方式")
