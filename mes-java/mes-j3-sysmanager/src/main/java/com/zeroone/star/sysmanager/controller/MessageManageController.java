@@ -5,6 +5,7 @@ import com.zeroone.star.project.j3.query.NewsPageQuery;
 import com.zeroone.star.project.j3.sysmanager.MessageManageApis;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.zeroone.star.project.j3.vo.NewsPageVO;
 import com.zeroone.star.project.j3.vo.NewsVO;
@@ -24,7 +25,7 @@ public class MessageManageController implements MessageManageApis {
 
     @GetMapping("/news/list")
     @ApiOperation(value = "消息列表")
-    public PageDTO<NewsPageVO> queryNewsList(NewsPageQuery newsPageQuery) {
+    public PageDTO<NewsPageVO> queryNewsList(@RequestBody NewsPageQuery newsPageQuery) {
         return null;
     }
 }

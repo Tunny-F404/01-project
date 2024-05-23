@@ -1,5 +1,7 @@
 package com.zeroone.star.project.j3.vo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -21,8 +23,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel("消息列表")
+@TableName(value = "sys_message")
 public class NewsPageVO implements Serializable {
 
+    @TableId(value = "message_id")
+    @ApiModelProperty(value = "附件ID")
+    private Integer id;
 
     @ApiModelProperty(value = "消息类型")
     private String messageType;
@@ -41,6 +47,9 @@ public class NewsPageVO implements Serializable {
 
     @ApiModelProperty(value = "内容")
     private String messageContent;
+
+    @ApiModelProperty(value = "状态")
+    private String status;
 
     @ApiModelProperty(value = "处理时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

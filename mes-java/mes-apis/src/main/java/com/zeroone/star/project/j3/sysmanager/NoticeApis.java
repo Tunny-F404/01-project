@@ -8,9 +8,9 @@ import com.zeroone.star.project.j3.dto.NoticeDTO;
 
 public interface NoticeApis {
     /**
-     * 根据id查询通知公告并修改
-     * @param id 通知公告id
-     * @return 通知公告
+     * 修改通知公告
+     * @param noticeDTO
+     * @return
      */
-    NoticeDTO UpdateNoticeById(Integer id);
+    NoticeDTO updateNotice(NoticeDTO noticeDTO);
 }
