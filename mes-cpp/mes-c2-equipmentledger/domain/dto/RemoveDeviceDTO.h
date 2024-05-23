@@ -47,11 +47,22 @@ public:
  * 删除设备DTO
  * 负责人：。好
  */
+class RemoveDeviceDTO : public oatpp::DTO
+{
+	DTO_INIT(RemoveDeviceDTO, DTO)
+	API_DTO_FIELD_DEFAULT(String, device_code, 
+		ZH_WORDS_GETTER("equipmentledger.remove-device.device-code"))
+};
+
+/**
+ * 删除设备ListDTO
+ * 负责人：。好
+ */
 
 // 继承自ListDTO
-class RemoveDeviceDTO : public ListDTO<oatpp::String>
+class RemoveDeviceListDTO : public ListDTO<RemoveDeviceDTO::Wrapper>
 {
-	DTO_INIT(RemoveDeviceDTO, ListDTO<oatpp::String>);
+	DTO_INIT(RemoveDeviceListDTO, ListDTO<RemoveDeviceDTO::Wrapper>)
 };
 
 #include OATPP_CODEGEN_END(DTO)

@@ -19,7 +19,8 @@ equipment:
 list-dtO: 列表DTO
 equipmentledger:
  remove-device:
-  summary: 删除设备
+  summary: 删除设备（支持批量删除）
+  device-code: 设备编码
  export-device:
   summary: 导出设备
   device-code: 设备编码
@@ -29,6 +30,6 @@ equipmentledger:
   success-count: 成功条数
   fail_count: 失败条数
  upload-file:
-  summary: 上传文件
+  summary: 上传文件（将导入模板上传至服务器）
  download-template:
   summary: 下载导入模板
