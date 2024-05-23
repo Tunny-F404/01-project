@@ -8,13 +8,12 @@ import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.j5.scheduleplan.SchedulePlanApis;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
-import com.zeroone.star.project.query.PageQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Min;
 
@@ -53,16 +52,24 @@ public class SchedulePlanController implements SchedulePlanApis {
         return null;
     }
 
+    @ApiOperation(value = "删除排班计划(可批量删除)")
+    @DeleteMapping("delete-schedule-plan")
     @Override
     public JsonVO<Integer> removeSchPlan(Long[] rems) {
         return null;
     }
 
+
+    @ApiOperation(value = "修改计划状态")
+    @PutMapping("modify-plans-status")
     @Override
     public JsonVO<Integer> modifySchPlanStatus(SchPlanDTO schPlanDTO) {
         return null;
     }
 
+
+    @ApiOperation(value = "导出计划")
+    @GetMapping("export-schedule-plan")
     @Override
     public ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition) {
         return null;
