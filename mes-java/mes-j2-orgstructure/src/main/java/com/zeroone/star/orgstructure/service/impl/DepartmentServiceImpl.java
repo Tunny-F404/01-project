@@ -40,6 +40,7 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
 
     @Override
     public JsonVO<DepartmentDTO> getDepartmentDetail(int id) {
+        return baseMapper.
         return JsonVO.success(new DepartmentDTO());
     }
 
