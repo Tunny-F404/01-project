@@ -126,4 +126,16 @@ add-mj:
   edate: 结束日期
   status: 状态
   remark: 备注
+
+maintenance:
+ fields:
+  planid: 计划ID
+  plancode: 计划编码
+  planname: 计划名称
+  plantype: 计划类型
+  circletype: 频率类型（天，时，分）
+  circlecount: 频率次数
+  startdate: 计划开始时间
+  enddata: 计划结束时间
+  remark: 备注
    
