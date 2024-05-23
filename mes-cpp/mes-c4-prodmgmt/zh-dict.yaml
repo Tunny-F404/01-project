@@ -1,0 +1,6 @@
+prodmgmt:
+ delete:
+  fields:
+   recptCode: 生产工单
+  describe:
+   name: 删除报工
