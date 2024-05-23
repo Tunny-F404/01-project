@@ -27,7 +27,6 @@ public interface ParameterApis {
 
     JsonVO<ParameterDTO> addParam(ParameterDTO parameterDTO);
 
-    JsonVO<Integer> deleteById(Integer id);
 
     JsonVO<PageDTO<ParameterDTO>> queryAll(ParameterQuery parameterQuery);
 

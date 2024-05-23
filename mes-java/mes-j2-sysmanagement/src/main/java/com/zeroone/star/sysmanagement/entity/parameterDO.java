@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 参数配置表
@@ -38,11 +40,13 @@ public class parameterDO implements Serializable {
     /**
      * 参数键名
      */
+    @NotBlank(message = "参数键名不能为空")
     private String configKey;
 
     /**
      * 参数键值
      */
+    @NotBlank(message = "参数键值不能为空")
     private String configValue;
 
     /**

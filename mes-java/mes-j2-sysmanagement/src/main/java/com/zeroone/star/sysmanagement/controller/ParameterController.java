@@ -1,8 +1,4 @@
 package com.zeroone.star.sysmanagement.controller;
-
-import cn.hutool.core.date.DateTime;
-
-import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.sysmanagement.param.ParameterApis;
 import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
@@ -13,15 +9,9 @@ import com.zeroone.star.sysmanagement.service.ISysConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.SneakyThrows;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,8 +28,6 @@ public class ParameterController implements ParameterApis {
     @Resource
     private ISysConfigService sysConfigService;
 
-
-
     @Override
     @DeleteMapping("remove-parameter/{ids}")
     @ApiOperation("删除参数")
@@ -48,8 +36,8 @@ public class ParameterController implements ParameterApis {
         return JsonVO.success(ResultStatus.SUCCESS);
     }
 
-    @GetMapping("refreshCache")
-    @ApiOperation("刷新参数")
+    @DeleteMapping ("refreshCache")
+    @ApiOperation("刷新缓存")
     @Override
     public JsonVO<ResultStatus> refreshCache() {
         sysConfigService.refreshCache();
@@ -72,12 +60,6 @@ public class ParameterController implements ParameterApis {
         return JsonVO.success(parameterDTO);
     }
 
-    @Override
-    @DeleteMapping("/delete/id={id}")
-    @ApiOperation("删除参数")
-    public JsonVO<Integer> deleteById(@PathVariable("id") Integer id) {
-        return JsonVO.success(1);
-    }
 
     @Override
     @GetMapping("query-all")

@@ -1,7 +1,6 @@
 package com.zeroone.star.sysmanagement.service.impl;
 
 import cn.hutool.core.date.DateTime;
-import com.alibaba.nacos.client.config.common.ConfigConstants;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
 import com.zeroone.star.sysmanagement.Constants.configConstants;
@@ -12,15 +11,18 @@ import com.zeroone.star.sysmanagement.service.ISysConfigService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.SneakyThrows;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -50,15 +52,58 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, parameter
     @Resource
     EasyExcelComponent excelComponent;
 
+
+    // 项目启动时，初始化参数到缓存
+    @PostConstruct
+    public void init()
+    {
+        loadConfigCache();
+    }
+
+
     @Override
     public void refreshCache() {
+        //1.清空redis缓存
+        clearConfigCache();
+        //2.将数据库数据缓存到redis中
+        loadConfigCache();
+    }
+
+    /**
+     * @description: 将数据库数据缓存到redis中
+     * @author: 40斤
+     * @date: 2024/5/23 10:42
+     * @param: []
+     * @return: void
+     **/
+    private void loadConfigCache() {
         //1.从数据库中查询所有数据
         List<parameterDO> parameterDOS = sysConfigMapper.selectList(null);
+        if (parameterDOS.isEmpty()) {
+            return;
+        }
         //2.将数据保存到redis中
         for (parameterDO parameterDO : parameterDOS) {
-            redisTemplate.opsForValue().set(configConstants.SYS_CONFIG_KEY+ parameterDO.getConfigKey(),
-                    parameterDO.getConfigValue());
+            if (parameterDO.getConfigKey()!=null&&parameterDO.getConfigValue()!=null){
+                redisTemplate.opsForValue().set(configConstants.SYS_CONFIG_KEY+ parameterDO.getConfigKey(),
+                        parameterDO.getConfigValue());
+            }
+
         }
+    }
+    /**
+     * @description:    清除redis缓存
+     * @author: 40斤
+     * @date: 2024/5/23 14:12
+     * @param: []
+     * @return: void
+     **/
+    private void clearConfigCache() {
+        Set<String> keys = redisTemplate.keys(configConstants.SYS_CONFIG_KEY + "*");
+        if (keys==null||keys.isEmpty()){
+            return;
+        }
+        redisTemplate.delete(keys);
     }
 
     @Override
@@ -87,6 +132,13 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, parameter
         List<parameterDO> parameterDOS = sysConfigMapper.selectList(null);
         //2.转换领域模型
         List<ParameterDTO> parameterDTOS = parameterMapstruct.DOs2DTOs(parameterDOS);
+        for (ParameterDTO parameterDTO : parameterDTOS) {
+            if (parameterDTO.getConfigType().equalsIgnoreCase(configConstants.YES)){
+                parameterDTO.setConfigType("是");
+            }else {
+                parameterDTO.setConfigType("否");
+            }
+        }
         //3.easyexcel构建输出流
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         excelComponent.export("配置导出",out, ParameterDTO.class, parameterDTOS);
