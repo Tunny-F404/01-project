@@ -1,25 +1,17 @@
 package com.zeroone.star.sysmanagement.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.sysmanagement.dto.menu.MenuDTO;
-import com.zeroone.star.project.j2.sysmanagement.query.menu.MenuQuery;
-import com.zeroone.star.sysmanagement.dao.MenuDao;
+import com.zeroone.star.sysmanagement.entity.Menu;
 
-import javax.annotation.Resource;
+public interface MenuService extends IService<Menu> {
 
-public class MenuService {
-    @Resource
-    private MenuDao menuDao;
-    public MenuQuery menu_id;
+    // 新增菜单
+    int addMenu(MenuDTO menuDTO);
 
-    public void addMenu(MenuDTO menuDTO) {
-        menuDao.addMenu(menuDTO);
-    }
+    // 删除菜单
+    int removeMenu(int menu_id);
 
-    public void modifyMenu(MenuDTO menuDTO) {
-        menuDao.modifyMenu(menuDTO);
-    }
-
-    public void removeMenu(MenuQuery menu_id) {
-        menuDao.removeMenu(menu_id);
-    }
+    // 修改菜单
+    int modifyMenu(MenuDTO menuDTO);
 }

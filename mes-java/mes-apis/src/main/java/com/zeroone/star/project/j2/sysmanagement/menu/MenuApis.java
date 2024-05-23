@@ -3,12 +3,9 @@ package com.zeroone.star.project.j2.sysmanagement.menu;
 import cn.hutool.core.lang.tree.TreeNode;
 import com.zeroone.star.project.j2.sysmanagement.dto.menu.MenuDTO;
 import com.zeroone.star.project.j2.sysmanagement.query.menu.MenuConditionQuery;
-import com.zeroone.star.project.j2.sysmanagement.query.menu.MenuQuery;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceDetailsVO;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceVO;
 import com.zeroone.star.project.vo.JsonVO;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -25,10 +22,10 @@ public interface MenuApis {
 
     //删除菜单
 
-    JsonVO<MenuQuery> removeMenu(MenuQuery menu_id);
+    JsonVO<String> removeMenu(int menu_id);
 
     //修改菜单
-    JsonVO<Integer> modifyMenu(MenuDTO menuDTO);
+    JsonVO<String> modifyMenu(MenuDTO menuDTO);
 
     //获取资源名称树
     JsonVO<TreeNode<String>> getResourceNameTree();
