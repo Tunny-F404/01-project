@@ -16,11 +16,11 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-
+/*
 #include "stdafx.h"
 #include "WmItemRecptController.h"
 
-Uint64JsonVO::Wrapper WmItemRecptController::execModifyWmItemRecpt(const WmItemRecptDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper WmItemRecptController::execWarehouseInbound(const WarehouseInboundDTO::Wrapper& dto)
 {
     return {};
 }
@@ -56,6 +56,7 @@ std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse> WmItem
 	// 影响成功结果
 	return response;
 		*/
-
+/*
 	return {};
 }
+*/

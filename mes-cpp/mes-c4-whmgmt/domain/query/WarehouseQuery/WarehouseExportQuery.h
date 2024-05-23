@@ -1,15 +1,15 @@
-#pragma once
+﻿#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
  @Author: xinye
- @Date: 2024/5/22 22:00:00
+ @Date: 2024/5/22 23:00:00
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
 
-     https://www.apache.org/licenses/LICENSE-2.0
+	 https://www.apache.org/licenses/LICENSE-2.0
 
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,19 +17,20 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
+#ifndef _WAREHOUSE_EXPORT_QUERY_
+#define _WAREHOUSE_EXPORT_QUERY_
 
-#ifndef _WM_ITEM_RECPT_DTO_
-#define _WM_ITEM_RECPT_DTO_
 #include "../../GlobalInclude.h"
+#include "domain/query/PageQuery.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 物料入库单传输对象
+ * 示例分页查询对象
  */
-class WmItemRecptDTO : public oatpp::DTO
+class WarehouseExportQuery : public PageQuery
 {
-    DTO_INIT(WmItemRecptDTO, DTO);
+	DTO_INIT(WarehouseExportQuery, PageQuery);
     // 入库单编号
     DTO_FIELD(Int32, recpt_id);
     DTO_FIELD_INFO(recpt_id) {
@@ -182,13 +183,5 @@ class WmItemRecptDTO : public oatpp::DTO
     }
 };
 
-/**
- * 物料入库单分页传输对象
- */
-class WmItemRecptPageDTO : public PageDTO<WmItemRecptDTO::Wrapper>
-{
-    DTO_INIT(WmItemRecptPageDTO, PageDTO<WmItemRecptDTO::Wrapper>);
-};
-
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_WM_ITEM_RECPT_DTO_
+#endif // !_WAREHOUSE_EXPORT_QUERY_

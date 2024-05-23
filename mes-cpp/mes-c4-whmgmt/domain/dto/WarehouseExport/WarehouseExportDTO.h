@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
@@ -18,8 +18,8 @@
  limitations under the License.
 */
 
-#ifndef _WM_ITEM_RECPT_DTO_
-#define _WM_ITEM_RECPT_DTO_
+#ifndef _WAREHOUSING_EXPORT_DTO_
+#define _WAREHOUSING_EXPORT_DTO_
 #include "../../GlobalInclude.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
@@ -27,9 +27,9 @@
 /**
  * 物料入库单传输对象
  */
-class WmItemRecptDTO : public oatpp::DTO
+class WarehouseExportDTO : public oatpp::DTO
 {
-    DTO_INIT(WmItemRecptDTO, DTO);
+    DTO_INIT(WarehouseExportDTO, DTO);
     // 入库单编号
     DTO_FIELD(Int32, recpt_id);
     DTO_FIELD_INFO(recpt_id) {
@@ -185,10 +185,10 @@ class WmItemRecptDTO : public oatpp::DTO
 /**
  * 物料入库单分页传输对象
  */
-class WmItemRecptPageDTO : public PageDTO<WmItemRecptDTO::Wrapper>
+class WarehouseExportPageDTO : public PageDTO<WarehouseExportDTO::Wrapper>
 {
-    DTO_INIT(WmItemRecptPageDTO, PageDTO<WmItemRecptDTO::Wrapper>);
+    DTO_INIT(WarehouseExportPageDTO, PageDTO<WarehouseExportDTO::Wrapper>);
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_WM_ITEM_RECPT_DTO_
+#endif // !_WAREHOUSING_EXPORT_DTO_

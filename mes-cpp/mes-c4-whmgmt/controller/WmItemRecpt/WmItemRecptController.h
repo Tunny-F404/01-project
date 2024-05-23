@@ -17,16 +17,18 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-
+/*
 #ifndef _WM_ITEM_RECPT_CONTROLLER_
 #define _WM_ITEM_RECPT_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
 #include "ApiHelper.h"
 #include "ServerInfo.h"
-#include "domain/do/WmItemRecpt/WmItemRecptDO.h"   
-#include "domain/dto/WmItemRecpt/WmItemRecptDTO.h"
-#include "domain/vo/WmItemRecpt/WmItemRecptVO.h"
+//#include "domain/do/WmItemRecpt/WmItemRecptDO.h"   
+//#include "domain/dto/WmItemRecpt/WmItemRecptDTO.h"
+//#include "domain/dto/WmItemRecpt/WarehouseInboundDTO.h"
+//#include "domain/vo/WmItemRecpt/WmItemRecptVO.h"
+
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -34,6 +36,8 @@
 /**
  * 物料入库单控制器，演示基础接口的使用
  */
+/*
+
 class WmItemRecptController : public oatpp::web::server::api::ApiController // 1 继承控制器
 {
     // 2 定义控制器访问入口
@@ -43,7 +47,7 @@ public:
     // 3.1 定义修改接口描述
     API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("wm_item_recpt.put.summary"), modifyWmItemRecpt, Uint64JsonVO::Wrapper);
     // 3.2 定义修改接口处理
-    API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/WmItemRecpt", modifyWmItemRecpt, BODY_DTO(WmItemRecptDTO::Wrapper, dto), execModifyWmItemRecpt(dto));
+    API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/wm-item-recpt", modifyWmItemRecpt, BODY_DTO(WarehouseInboundDTO::Wrapper, dto), execWarehouseInbound(dto));
 
     // 3.1 定义删除接口描述
     ENDPOINT_INFO(removeWmItemRecpt) {
@@ -53,22 +57,23 @@ public:
         API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("wm_item_recpt.field.id"), 1, true);
     }
     // 3.2 定义删除接口处理
-    API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/WmItemRecpt/{id}", removeWmItemRecpt, PATH(UInt64, id), execRemoveWmItemRecpt(id));
+    API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/wm-item-recpt/{id}", removeWmItemRecpt, PATH(UInt64, id), execRemoveWmItemRecpt(id));
 
 
     // 定义导出接口描述
     ENDPOINT_INFO(exportWmItemRecpt) {
         API_DEF_ADD_COMMON(ZH_WORDS_GETTER("wm_item_recpt.export.summary"), Void);
-        API_DEF_ADD_QUERY_PARAMS(String, "format", ZH_WORDS_GETTER("wm_item_recpt.field.format"), "xlsx", true);
+        API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("wm_item_recpt.field.filename"), "wm_item_recpt/file/test.xlsx", true);
     }
     // 定义导出端点
-    ENDPOINT(API_M_GET, "/WmItemRecpt/export", exportWmItemRecpt, QUERY(String, format)) {
-        return execExportWmItemRecpt(format);
+    ENDPOINT(API_M_GET, "/wm-item-recpt/file/download", exportWmItemRecpt, QUERY(String, filename)) {
+        return execExportWmItemRecpt(filename);
     }
 
 private:
     // 3.3 演示修改数据
-    Uint64JsonVO::Wrapper execModifyWmItemRecpt(const WmItemRecptDTO::Wrapper& dto);
+    Uint64JsonVO::Wrapper execWarehouseInbound(const WarehouseInboundDTO::Wrapper& dto);
+
     // 3.3 演示删除数据
     Uint64JsonVO::Wrapper execRemoveWmItemRecpt(const UInt64& id);
 
@@ -79,3 +84,5 @@ private:
 // 0 取消API控制器使用宏
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 #endif // _WM_ITEM_RECPT_CONTROLLER_
+
+*/

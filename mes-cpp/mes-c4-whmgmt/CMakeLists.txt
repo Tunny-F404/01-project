@@ -42,7 +42,7 @@ if(WIN32)
 endif()
 
 # 编译可执行文件
-add_executable (${appName} ${SC_FILES} "domain/do/WmItemRecpt/WmItemRecptDO.h" "domain/dto/WmItemRecpt/WmItemRecptDTO.h" "domain/vo/WmItemRecpt/WmItemRecptVO.h" "controller/WmItemRecpt/WmItemRecptController.h")
+add_executable (${appName} ${SC_FILES} "domain/dto/WarehouseInbound/WarehouseInboundDTO.h" "controller/WarehouseInbound/WarehouseInboundController.cpp" "controller/WarehouseInbound/WarehouseInboundController.h" "controller/WarehouseDelete/WarehouseDeleteController.cpp" "controller/WarehouseDelete/WarehouseDeleteController.h" "controller/WarehouseExport/WarehouseExportController.h" "controller/WarehouseExport/WarehouseExportController.cpp" "domain/vo/WarehouseExport/WarehouseExportVO.h" "domain/dto/WarehouseExport/WarehouseExportDTO.h" "domain/query/WarehouseQuery/WarehouseExportQuery.h")
 
 # 给架构示例项目添加特有的宏
 if(${IS_ARCH_DEMO})
