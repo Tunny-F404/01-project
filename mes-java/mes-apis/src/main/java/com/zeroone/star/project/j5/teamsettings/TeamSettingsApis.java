@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j5.teamsettings;
 
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.teamsettings.AddTeamDTO;
 import com.zeroone.star.project.j5.dto.teamsettings.TeamDTO;
 import com.zeroone.star.project.j5.query.teamsettings.TeamQuery;
 import com.zeroone.star.project.vo.JsonVO;
@@ -37,10 +38,10 @@ public interface TeamSettingsApis {
     /**
      * 添加班组
      * @author interstellar
-     * @param teamDTO 班组信息
+     * @param condition 班组信息
      * @return 添加结果
      */
-    JsonVO<Integer> addTeam(TeamDTO teamDTO);
+    JsonVO<Integer> addTeam(AddTeamDTO condition);
 
     /**
      * 修改班组
