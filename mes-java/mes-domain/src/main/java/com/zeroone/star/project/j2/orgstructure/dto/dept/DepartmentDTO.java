@@ -23,13 +23,11 @@ public class DepartmentDTO {
     private String deptId;
 
     //父部门id
-    @NotBlank(message = "父部门id不能为空")
-    @ApiModelProperty(value = "父部门id",example = "2")
+    @ApiModelProperty(value = "父部门id",example = "2",required = true)
     private String parentId;
 
     //部门名称
-    @NotBlank(message = "部门名称不能为空")
-    @ApiModelProperty(value = "部门名称",example = "部门1")
+    @ApiModelProperty(value = "部门名称",example = "部门1",required = true)
     private String deptName;
 
     //部门状态 0正常 1停用
@@ -37,7 +35,7 @@ public class DepartmentDTO {
     private int status;
 
     //显示顺序
-    @NotBlank(message = "显示顺序不能为空")
+   @ApiModelProperty(value = "显示顺序",example = "0",required = true)
     private int orderNum;
 
     @ApiModelProperty(value = "部门电话",example = "123456")

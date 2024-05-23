@@ -1,6 +1,7 @@
 package com.zeroone.star.orgstructure.service.impl;
 
 import cn.hutool.core.date.DateTime;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zeroone.star.orgstructure.entity.Department;
 import com.zeroone.star.orgstructure.service.DepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -24,6 +26,7 @@ import java.time.LocalDateTime;
 interface MsDepartmentMapper {
     /**
      * 将department转换为departmentDTO
+     *
      * @param departmentDTO
      * @return
      */
@@ -41,7 +44,7 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
     public int saveDepartment(DepartmentDTO departmentDTO) {
         Department department = msDepartmentMapper.departmentDTOToDepartment(departmentDTO);
         department.setCreateTime(LocalDateTime.now());
-        return  baseMapper.insert(department);
+        return baseMapper.insert(department);
     }
 
     @Override
@@ -53,7 +56,17 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
 
     @Override
     public int removeDepartment(int id) {
-        return   baseMapper.deleteById(id);
+        //查询所有parentId为id的部门
+        QueryWrapper<Department> objectQueryWrapper = new QueryWrapper<>();
+        objectQueryWrapper.eq("parent_id", id);
+        List<Department> departments = baseMapper.selectList(objectQueryWrapper);
+        if (departments.size() != 0) {
+            //删除父id为id的部门
+            for (Department department : departments) {
+                baseMapper.deleteById(department.getDeptId());
+            }
+        }
+        return baseMapper.deleteById(id);
+    }
 
     }
-}
