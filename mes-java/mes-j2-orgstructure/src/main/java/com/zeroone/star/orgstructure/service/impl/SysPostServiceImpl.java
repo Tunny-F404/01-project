@@ -74,15 +74,15 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
             // 获取当前登录人
             //TODO 获取当前登录人（暂时默认为admin）
-//            sysPost.setCreateBy("admin");
-            JsonVO<LoginVO> currUser = loginClient.getCurrUser();
+            sysPost.setCreateBy("admin");
+            /*JsonVO<LoginVO> currUser = loginClient.getCurrUser();
             LoginVO loginVO = currUser.getData();
             if (loginVO != null) {
                 sysPost.setCreateBy(loginVO.getUsername());
             } else {
                 // 处理获取登录人信息失败的情况，例如设置默认值或者抛出自定义异常
                 throw new RuntimeException("未得到当前登录用户信息");
-            }
+            }*/
 
             // 保存sysPost
             return save(sysPost);
@@ -146,15 +146,15 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
             // 获取当前登录人
             //TODO 获取当前登录人（暂时默认为admin）
-//            sysPost.setUpdateBy("admin");
-            JsonVO<LoginVO> currUser = loginClient.getCurrUser();
+            sysPost.setUpdateBy("admin");
+           /* JsonVO<LoginVO> currUser = loginClient.getCurrUser();
             LoginVO loginVO = currUser.getData();
             if (loginVO != null) {
                 sysPost.setUpdateBy(loginVO.getUsername());
             } else {
                 // 处理获取登录人信息失败的情况，例如设置默认值或者抛出自定义异常
                 throw new RuntimeException("未得到当前登录用户信息");
-            }
+            }*/
 
             // 更新sysPost
             return updateById(sysPost);
