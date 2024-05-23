@@ -1,5 +1,6 @@
 package com.zeroone.star.sysmanager.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -60,6 +61,14 @@ public class ISysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMes
             // 将DTO转换为实体
             SysMessage sysMessage = msMessageMapper.sysAddMessageDTOToMessage(sysAddMessageDTO);
 
+            //查询最后一条数据id + 1 赋给新添加的数据id
+            LambdaQueryWrapper<SysMessage> queryWrapper = new LambdaQueryWrapper<>();
+            //id倒叙 获取最后一条数据
+            queryWrapper.orderByDesc(SysMessage::getMessageId).last("LIMIT 1");
+            //获得数据id
+            Long messageId = sysMessageMapper.selectOne(queryWrapper).getMessageId();
+            //id + 1
+            sysMessage.setMessageId(messageId + 1);
             // 插入消息到数据库
             sysMessageMapper.insert(sysMessage);
 

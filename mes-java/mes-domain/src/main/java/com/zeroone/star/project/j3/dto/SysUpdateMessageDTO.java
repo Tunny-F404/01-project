@@ -27,9 +27,9 @@ public class SysUpdateMessageDTO {
     @ApiModelProperty(value = "消息级别",example = "普通")
     private String messageLevel;
 
-    /** 接收人名称 */
-    @ApiModelProperty(value = "接收人名称",example = "李四")
-    private String recipientName;
+    /** 接收人ID*/
+    @ApiModelProperty(value = "接收人ID",example = "87654321")
+    private Long recipientId;
 
     /** 标题 */
     @ApiModelProperty(value = "标题",example = "这是一个标题")

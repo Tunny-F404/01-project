@@ -1,9 +1,9 @@
 package com.zeroone.star.project.j3.dto;
 
+import com.alibaba.excel.annotation.ExcelProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
 
 /**
  * 添加消息的DTO
@@ -22,9 +22,9 @@ public class SysAddMessageDTO {
     @ApiModelProperty(value = "消息级别",example = "普通")
     private String messageLevel;
 
-    /** 接收人名称 */
-    @ApiModelProperty(value = "接收人名称",example = "李四")
-    private String recipientName;
+    /** 接收人ID*/
+    @ApiModelProperty(value = "接收人ID",example = "87654321")
+    private Long recipientId;
 
     /** 标题 */
     @ApiModelProperty(value = "标题",example = "这是一个标题")
