@@ -10,7 +10,7 @@ import com.zeroone.star.project.vo.JsonVO;
 
 @Api(tags = "字典管理")
 @Controller
-@RequestMapping("/dict")
+@RequestMapping("sys-manager/dictionary-manager")
 public class DictionaryManageController implements DictionaryManageApis {
     @Override
     @ApiOperation(value = "编辑修改字典")

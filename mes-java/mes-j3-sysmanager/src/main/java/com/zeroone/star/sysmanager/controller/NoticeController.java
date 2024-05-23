@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Api(tags = "通知公告")
 @Controller
-@RequestMapping("/notice")
+@RequestMapping("sys-manager/notice")
 public class NoticeController implements NoticeApis {
 }
