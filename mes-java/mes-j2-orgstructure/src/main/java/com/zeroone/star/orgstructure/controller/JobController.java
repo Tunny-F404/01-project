@@ -48,7 +48,7 @@ public class JobController implements JobApis {
     @PostMapping("add-post")
     @ApiOperation("新增岗位")
     public ResultStatus addJob(@RequestBody JobDTO jobDTO) {
-        boolean issave = sysPostService.saveJob(jobDTO);
+        boolean issave = sysPostService.execSaveJob(jobDTO);
         return issave ? ResultStatus.SUCCESS : ResultStatus.FAIL;
     }
 
@@ -56,7 +56,7 @@ public class JobController implements JobApis {
     @DeleteMapping("remove-post")
     @ApiOperation("删除岗位")
     public ResultStatus removeJob(@RequestParam Long[] ids) {
-        boolean isdelete = sysPostService.removeJob(ids);
+        boolean isdelete = sysPostService.execRemoveJob(ids);
         return isdelete ? ResultStatus.SUCCESS : ResultStatus.FAIL;
     }
 
@@ -64,7 +64,7 @@ public class JobController implements JobApis {
     @PostMapping("modify-post")
     @ApiOperation("修改岗位")
     public ResultStatus modifyJob(@RequestBody JobDTO jobDTO) {
-        boolean ismodify = sysPostService.modifyJob(jobDTO);
+        boolean ismodify = sysPostService.execModifyJob(jobDTO);
         return ismodify ? ResultStatus.SUCCESS : ResultStatus.FAIL;
     }
 

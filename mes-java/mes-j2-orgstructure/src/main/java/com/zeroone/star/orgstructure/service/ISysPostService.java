@@ -15,11 +15,11 @@ import org.springframework.http.ResponseEntity;
  */
 public interface ISysPostService extends IService<SysPost> {
 
-    boolean saveJob(JobDTO jobDTO);
+    boolean execSaveJob(JobDTO jobDTO);
 
-    boolean removeJob(Long[] ids);
+    boolean execRemoveJob(Long[] ids);
 
-    boolean modifyJob(JobDTO jobDTO);
+    boolean execModifyJob(JobDTO jobDTO);
 
     ResponseEntity<byte[]> download();
 }

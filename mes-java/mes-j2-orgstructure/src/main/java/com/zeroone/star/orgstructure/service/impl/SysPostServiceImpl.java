@@ -67,7 +67,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
      */
     @SneakyThrows
     @Override
-    public boolean saveJob(JobDTO jobDTO) {
+    public boolean execSaveJob(JobDTO jobDTO) {
         try {
             // 复制属性
             SysPost sysPost = BeanUtil.copyProperties(jobDTO, SysPost.class);
@@ -105,7 +105,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
      */
     @Override
     @Transactional
-    public boolean removeJob(Long[] ids) {
+    public boolean execRemoveJob(Long[] ids) {
         try {
             HashMap<Long, List<Long>> map = new HashMap<Long, List<Long>>();
             // 先查询岗位下的用户
@@ -139,7 +139,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
      */
     @SneakyThrows
     @Override
-    public boolean modifyJob(JobDTO jobDTO) {
+    public boolean execModifyJob(JobDTO jobDTO) {
         try {
             SysPost sysPost = BeanUtil.copyProperties(jobDTO, SysPost.class);
 
