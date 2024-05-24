@@ -59,7 +59,7 @@ void Router::initRouter()
 	//#TIP :ϵͳ��չ·�ɶ��壬д���������
 	ROUTER_SIMPLE_BIND(ProdWorkorderController);
 	ROUTER_SIMPLE_BIND(RemoveWorkReportController);
-ROUTER_SIMPLE_BIND(ApprovalStage);
+	ROUTER_SIMPLE_BIND(ApprovalStage);
 
 }
 
