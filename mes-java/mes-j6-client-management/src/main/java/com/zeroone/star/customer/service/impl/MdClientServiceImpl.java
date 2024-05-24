@@ -3,6 +3,7 @@ package com.zeroone.star.customer.service.impl;
 import cn.hutool.core.date.DateTime;
 
 
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.customer.entity.MdClient;
@@ -32,6 +33,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -124,17 +126,10 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
     @SneakyThrows
     @Override
     public JsonVO<String> importClientByExcel(MultipartFile customer) {
-        String filename = customer.getOriginalFilename();
-        assert filename != null;
-        String suffix = filename.substring(filename.lastIndexOf(".") + 1);
-        FastDfsFileInfo result = dfs.uploadFile(customer.getBytes(), suffix);
-        if (result == null) {
-            return JsonVO.fail(null);
-        }
 
-
-        ExcelReadListener excelReadListener = (ExcelReadListener) easyExcelComponent.parseExcel(urlPrefix, MdClient.class);
-        List<MdClient> mdClients = excelReadListener.getDataList();
+        List<MdClient> mdClients = new ArrayList<>();
+        // excel同步读取数据
+        mdClients = EasyExcel.read(new BufferedInputStream(customer.getInputStream())).head(MdClient.class).sheet().doReadSync();
         if (mdClients != null && !mdClients.isEmpty()) {
             val clientIds = mdClients.stream()
                     .map(MdClient::getClientId)
@@ -154,7 +149,7 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
                 }
             }
 
-            return JsonVO.success(dfs.fetchUrl(result, urlPrefix, false));
+            return JsonVO.success("上传成功");
         }
 
         return JsonVO.fail("上传失败");
