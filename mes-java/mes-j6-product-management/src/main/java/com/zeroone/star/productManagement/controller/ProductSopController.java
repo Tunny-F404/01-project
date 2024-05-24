@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
  * </p>
  * @version 1.0.0
  */
-@Api("产品sop相关接口")
+@Api(tags ="产品sop相关接口")
 @RestController
 @RequestMapping("/product-management/sop")
 public class ProductSopController  implements ProductSopApis {
