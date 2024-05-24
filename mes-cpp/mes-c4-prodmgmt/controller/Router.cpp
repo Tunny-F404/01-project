@@ -30,8 +30,10 @@
 #endif
 
 
+
 #include "../mes-c4-prodmgmt/controller/ProdWorkorder/ProdWorkorderController.h"
 #include "../controller/ApprovalStage/ApprovalStage.h"
+#include "controller/ProdWorkorder/ProWorkorderController.h"
 
 #ifdef CLOSE_SWAGGER_DOC
 // �򻯰󶨿������궨��
@@ -56,10 +58,12 @@ void Router::initRouter()
 #endif
 
 
+
 	//#TIP :ϵͳ��չ·�ɶ��壬д���������
 	ROUTER_SIMPLE_BIND(ProdWorkorderController);
 	ROUTER_SIMPLE_BIND(RemoveWorkReportController);
 	ROUTER_SIMPLE_BIND(ApprovalStage);
+	ROUTER_SIMPLE_BIND(ProWorkorderController);
 
 }
 
@@ -77,3 +81,4 @@ void Router::createSampleRouter()
 	router->addController(WSContorller::createShared());
 }
 #endif
+
