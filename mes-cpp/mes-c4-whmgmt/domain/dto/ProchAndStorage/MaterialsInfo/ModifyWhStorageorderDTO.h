@@ -12,20 +12,26 @@
 class ModifyWhStorageorderDTO : public oatpp::DTO
 {
 	DTO_INIT(ModifyWhStorageorderDTO, DTO);
-	//入库单名称 
-	API_DTO_FIELD_DEFAULT(String, recpt_name, ZH_WORDS_GETTER("whstorageorder.field.recpt_name"));
-	//入库单编号 recpt_code varchar
-	API_DTO_FIELD_DEFAULT(String, recpt_code, ZH_WORDS_GETTER("whstorageorder.field.recpt_code"));
-	//供应商名称 vendor_name varchar
-	API_DTO_FIELD_DEFAULT(String, vendor_name, ZH_WORDS_GETTER("whstorageorder.field.vendor_name"));
-	//采购订单号 po_code varchar
-	API_DTO_FIELD_DEFAULT(String, po_code, ZH_WORDS_GETTER("whstorageorder.field.po_code"));
-	//单据状态 status varchar
-	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("whstorageorder.field.status"));
-	//入库日期 recpt_date String
-	API_DTO_FIELD_DEFAULT(String, recpt_date, ZH_WORDS_GETTER("whstorageorder.field.recpt_date"));
+	//物料编码 item_code varchar
+	API_DTO_FIELD_DEFAULT(String, item_code, ZH_WORDS_GETTER("whstorageorder.field.item_code"));
+	//物料名称 item_name varchar
+	API_DTO_FIELD_DEFAULT(String, item_name, ZH_WORDS_GETTER("whstorageorder.field.item_name"));
+	//单位 unit_of_measure varchar
+	API_DTO_FIELD_DEFAULT(String, unit_of_measure, ZH_WORDS_GETTER("whstorageorder.field.unit_of_measure"));
+	//入库数量 quantity_recived double
+	API_DTO_FIELD_DEFAULT(Float64, quantity_recived, ZH_WORDS_GETTER("whstorageorder.field.quantity_recived"));
+	//入库批次号 batch_code varchar
+	API_DTO_FIELD_DEFAULT(String, batch_code, ZH_WORDS_GETTER("whstorageorder.field.batch_code"));
+	//有效期 expire_date String
+	API_DTO_FIELD_DEFAULT(String, expire_date, ZH_WORDS_GETTER("whstorageorder.field.expire_date"));
 	//入库仓库 warehouse_name varchar
 	API_DTO_FIELD_DEFAULT(String, warehouse_name, ZH_WORDS_GETTER("whstorageorder.field.warehouse_name"));
+	//是否检验 iqc_check char
+	API_DTO_FIELD_DEFAULT(String, iqc_check, ZH_WORDS_GETTER("whstorageorder.field.iqc_check"));
+	//来料检验单编码 iqc_code varchar
+	API_DTO_FIELD_DEFAULT(String, iqc_code, ZH_WORDS_GETTER("whstorageorder.field.iqc_code"));
+	//来料检验单ID iqc_id bigint
+	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("whstorageorder.field.iqc_id"));
 	//备注 remark varchar
 	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("whstorageorder.field.remark"));
 

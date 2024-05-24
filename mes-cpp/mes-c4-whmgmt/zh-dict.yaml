@@ -1,12 +1,15 @@
 whstorageorder:
  field:
-  recpt_name: 入库单名称
-  recpt_code: 入库单编号
-  vendor_name: 供应商名称
-  po_code: 采购订单号
-  status: 单据状态
-  recpt_date: 入库日期
+  item_code: 物料编码
+  item_name: 物料名称
+  unit_of_measure: 单位
+  quantity_recived: 入库数量
+  batch_code: 入库批次号
+  expire_date: 有效期
   warehouse_name: 入库仓库
+  iqc_check: 是否检验
+  iqc_code: 来料检验单编码
+  iqc_id: 来料检验单ID
   remark: 备注
   line_id: 行ID
  add: 
