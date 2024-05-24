@@ -31,7 +31,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("sys/config")
+@RequestMapping("sys/param")
 @Api(tags = "参数配置控制器")
 public class ParameterController implements ParameterApis {
 

@@ -59,6 +59,11 @@ public class ParameterServiceImpl extends ServiceImpl<ParameterMapper, Parameter
         return parameterMapper.deleteBatchIds(ids);
     }
 
+    /**
+     * 新增参数
+     * @param parameterDTO
+     * @return
+     */
     @Override
     public Integer saveParameter(ParameterDTO parameterDTO) {
         ParameterDO parameterDO = ms.paraDtoToDo(parameterDTO);
@@ -70,6 +75,11 @@ public class ParameterServiceImpl extends ServiceImpl<ParameterMapper, Parameter
     }
 
 
+    /**
+     * 获取参数列表
+     * @param condition
+     * @return 分页DTO
+     */
     @Override
     public PageDTO listAll(ParameterQuery condition) {
         boolean name = false;
