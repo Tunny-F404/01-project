@@ -1,4 +1,5 @@
 package com.zeroone.star.basicdata.controller;
+import com.alibaba.nacos.shaded.com.google.protobuf.ServiceException;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.basicdata.entity.MdUnitMeasure;
 import com.zeroone.star.project.dto.PageDTO;
@@ -6,6 +7,7 @@ import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.basicdata.service.IMdUnitMeasureService;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
 import lombok.extern.java.Log;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,7 +69,7 @@ public class MdUnitMeasureController {
      */
     @GetMapping("/list")
     @ApiOperation("查询单位分页列表")
-    public JsonVO<PageDTO<UnitMeasureDTO>> list(UnitMeasureDTO unitMeasureDTO,
+    public JsonVO<PageDTO<UnitMeasureDTO>> list(@Validated UnitMeasureDTO unitMeasureDTO,
                                                 @RequestParam(defaultValue = "1") int pageIndex,
                                                 @RequestParam(defaultValue = "10") int pageSize) {
 
@@ -100,6 +102,31 @@ public class MdUnitMeasureController {
         PageDTO<UnitMeasureDTO> pageDTO = PageDTO.create(page);
 
         return JsonVO.success(pageDTO);
+    }
+
+    /**
+     * 添加单位
+     * @param unitMeasureDTO
+     * @return
+     */
+    @PostMapping("/add")
+    @ApiOperation("添加单位")
+    public JsonVO addUnitMeasure(@Validated UnitMeasureDTO unitMeasureDTO) {
+        iMdUnitMeasureService.addUnitMeasure(unitMeasureDTO);
+        return JsonVO.success("添加成功");
+    }
+
+    /**
+     * 修改单位
+     * 注意：修改单位时，需要传入主单位ID，如果主单位ID为空，则修改为非主单位
+     * @param unitMeasureDTO
+     * @return
+     */
+    @PostMapping("/modify")
+    @ApiOperation("修改单位")
+    public JsonVO modifyUnitMeasure(@Validated UnitMeasureDTO unitMeasureDTO){
+        iMdUnitMeasureService.modifyUnitMeasure(unitMeasureDTO);
+        return JsonVO.success("修改成功");
     }
 
 }

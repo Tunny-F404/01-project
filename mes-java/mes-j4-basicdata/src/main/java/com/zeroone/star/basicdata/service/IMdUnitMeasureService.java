@@ -1,6 +1,7 @@
 package com.zeroone.star.basicdata.service;
 
 
+import com.alibaba.nacos.shaded.com.google.protobuf.ServiceException;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.basicdata.entity.MdUnitMeasure;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
@@ -34,4 +35,16 @@ public interface IMdUnitMeasureService extends IService<MdUnitMeasure> {
      * @return
      */
     List<UnitMeasureDTO> selectMdUnitMeasureList(UnitMeasureDTO mdUnitMeasure);
+
+    /**
+     * 添加单位
+     * @param unitMeasureDTO
+     */
+    void addUnitMeasure(UnitMeasureDTO unitMeasureDTO);
+
+    /**
+     * 修改单位
+     * @param unitMeasureDTO
+     */
+    void modifyUnitMeasure(UnitMeasureDTO unitMeasureDTO);
 }

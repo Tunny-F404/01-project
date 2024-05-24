@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Data
 @Getter
 @Setter
-@TableName("md-unit-measure")
+@TableName("md_unit_measure")
 public class MdUnitMeasure implements Serializable {
     //单位ID
     @ExcelIgnore
