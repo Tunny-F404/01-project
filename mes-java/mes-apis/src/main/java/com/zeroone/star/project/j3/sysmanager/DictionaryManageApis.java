@@ -89,20 +89,20 @@ public interface DictionaryManageApis {
      * 字典类型接口
      */
     // 查询字典类型列表
-    public JsonVO<List<SysDictTypeListDTO>> listDictType(SysDictTypeQuery dictTypeQuery);
+    JsonVO<List<SysDictTypeListDTO>> listDictType(SysDictTypeQuery dictTypeQuery);
 
     // 查询字典类型详情
-    public JsonVO<SysDictTypeDetailDTO> getDictType(Long dictId);
+    JsonVO<SysDictTypeDetailDTO> getDictType(Long dictId);
 
-    public ResponseEntity<byte[]> exportDictType(SysDictTypeExportDTO sysDictTypeExportDTO);
+    ResponseEntity<byte[]> exportDictType(SysDictTypeExportDTO sysDictTypeExportDTO);
 
 
     /**
      *  字典数据接口
      */
     // 查询字典数据列表
-    public JsonVO<List<SysDictDataListDTO>> listDictData(SysDictDataQuery dictDataQuery);
+    JsonVO<List<SysDictDataListDTO>> listDictData(SysDictDataQuery dictDataQuery);
 
     // 查询字典数据详情
-    public JsonVO<SysDictDataDetailDTO> getDictData(Long dictCode);
+    JsonVO<SysDictDataDetailDTO> getDictData(Long dictCode);
 }
