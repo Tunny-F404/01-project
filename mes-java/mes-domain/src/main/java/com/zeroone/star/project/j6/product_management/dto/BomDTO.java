@@ -32,7 +32,7 @@ public class BomDTO {
     @ApiModelProperty(value = "创建人", example = "", required = true)
     private String createBy;
     @ApiModelProperty(value = "创建时间", example = "2024-05-20 09:41:55", required = true)
-    private DateTime createTime;
+    private String createTime;
     @ApiModelProperty(value = "是否使用", example = "Y", required = true)
     private Boolean enableFlag;
     @ApiModelProperty(value = "物料/产品分类id", example = "507", required = true)

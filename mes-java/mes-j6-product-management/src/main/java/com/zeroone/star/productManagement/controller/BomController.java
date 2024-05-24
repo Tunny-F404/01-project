@@ -37,7 +37,7 @@ public class BomController implements BomApis {
     @GetMapping("/delete")
     @ApiOperation(value = "删除bom数据")
     @Override
-    public JsonVO<String> deleteBOM(String bomId) {
+    public JsonVO<List<String>> deleteBOM(String bomId) {
         return null;
     }
 }

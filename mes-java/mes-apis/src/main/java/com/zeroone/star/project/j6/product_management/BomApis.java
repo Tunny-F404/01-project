@@ -19,5 +19,5 @@ public interface BomApis {
     JsonVO<List<BomDTO>> queryBomList(BomQuery query);
     JsonVO<String> addBom(BomDTO dto);
     JsonVO<String> updateBom(BomDTO dto);
-    JsonVO<String> deleteBOM(String bomId);
+    JsonVO<List<String>> deleteBOM(String bomId);
 }
