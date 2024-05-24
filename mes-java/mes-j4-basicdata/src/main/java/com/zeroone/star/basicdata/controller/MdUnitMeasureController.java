@@ -1,22 +1,24 @@
 package com.zeroone.star.basicdata.controller;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.basicdata.entity.MdUnitMeasure;
-import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.basicdata.service.IMdUnitMeasureService;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
 import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.*;
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
+import com.zeroone.star.project.j4.basicdata.AccountUnitApis;
 import com.zeroone.star.project.vo.JsonVO;
-import org.springframework.web.bind.annotation.RequestMapping;
-import javax.annotation.Resource;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.http.ResponseEntity;
-
-import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
-
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -30,10 +32,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/basicdata/md-unit-measure")
 @Api(tags = "单位相关操作")
-public class MdUnitMeasureController {
-
+@Validated
+@Slf4j
+public class MdUnitMeasureController implements AccountUnitApis {
     @Resource
     private IMdUnitMeasureService iMdUnitMeasureService;
+
 
     /*
      * 删除单位
@@ -102,4 +106,23 @@ public class MdUnitMeasureController {
         return JsonVO.success(pageDTO);
     }
 
+    /**
+     * 添加单位信息
+     * 成功执行后返回添加成功的提示信息。
+     *
+     * @return 包含操作结果信息的JsonVO对象
+     */
+    @ApiOperation(value = "添加单位")
+    @PostMapping("add-unit")
+    public JsonVO addUnit(@Validated @RequestBody UnitAddDTO data) {
+        if (iMdUnitMeasureService.addUnit(data)) return JsonVO.success("添加成功");
+        else return JsonVO.fail("添加失败");
+    }
+
+    @ApiOperation(value = "修改单位")
+    @PostMapping("update-unit")
+    public JsonVO updateUnit(@Validated @RequestBody UnitAddDTO data) {
+//        iMdUnitMeasureService.updateUnit(data);
+        return JsonVO.success("删除成功");
+    }
 }

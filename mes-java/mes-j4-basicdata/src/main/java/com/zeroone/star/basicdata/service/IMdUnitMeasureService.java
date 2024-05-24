@@ -3,6 +3,7 @@ package com.zeroone.star.basicdata.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.basicdata.entity.MdUnitMeasure;
+import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
 import org.springframework.http.ResponseEntity;
@@ -34,4 +35,13 @@ public interface IMdUnitMeasureService extends IService<MdUnitMeasure> {
      * @return
      */
     List<UnitMeasureDTO> selectMdUnitMeasureList(UnitMeasureDTO mdUnitMeasure);
+
+    List<MdUnitMeasure> selectMdUnitMeasureList(MdUnitMeasure mdUnitMeasure);
+    /**
+     * 添加单位信心
+     *  @param data 添加信息
+     * @return 成功返回true,失败false
+     */
+    Boolean addUnit(UnitAddDTO data);
+
 }

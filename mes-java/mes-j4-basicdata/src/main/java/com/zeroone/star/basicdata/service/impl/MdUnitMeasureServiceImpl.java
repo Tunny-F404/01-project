@@ -1,11 +1,15 @@
 package com.zeroone.star.basicdata.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.basicdata.entity.MdUnitMeasure;
 import com.zeroone.star.basicdata.mapper.MdUnitMeasureMapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.basicdata.service.IMdUnitMeasureService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
+import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
 import lombok.SneakyThrows;
@@ -15,8 +19,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -29,7 +36,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper,MdUnitMeasure> implements IMdUnitMeasureService {
+public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper, MdUnitMeasure> implements IMdUnitMeasureService {
 
 
     @Resource
@@ -37,6 +44,9 @@ public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper,Md
 
     @Resource
     private EasyExcelComponent excel;
+
+    @Resource
+    private UserHolder userHolder;
 
     /*
      * 删除单位
@@ -46,8 +56,8 @@ public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper,Md
     }
 
     /*
-    * 导出单位数据
-    * */
+     * 导出单位数据
+     * */
     @SneakyThrows
     public ResponseEntity<byte[]> exportUnitMeasure(UnitExcelSelectDTO unitExcelSelectDTO) {
         //查询到导出文件的数据
@@ -75,11 +85,29 @@ public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper,Md
 
     /**
      * 查询单位列表
+     *
      * @param mdUnitMeasure
      * @return
      */
     @Override
     public List<UnitMeasureDTO> selectMdUnitMeasureList(UnitMeasureDTO mdUnitMeasure) {
         return mdUnitMeasureMapper.selectMdUnitMeasureList(mdUnitMeasure);
+    }
+
+    @Override
+    public Boolean addUnit(UnitAddDTO data) {
+        try {
+            UserDTO userDTO = userHolder.getCurrentUser();
+            MdUnitMeasure mdUnitMeasure = new MdUnitMeasure();
+            BeanUtil.copyProperties(data, mdUnitMeasure);
+            mdUnitMeasure.setCreateBy(userDTO.getUsername());
+            mdUnitMeasure.setUpdateBy(userDTO.getUsername());
+            mdUnitMeasure.setCreateTime(LocalDateTime.now());
+            mdUnitMeasure.setUpdateTime(LocalDateTime.now());
+            return mdUnitMeasureMapper.insert(mdUnitMeasure) > 0;
+        } catch (Exception e) {
+            log.info("添加单位失败",e.getMessage());
+            return false;
+        }
     }
 }
