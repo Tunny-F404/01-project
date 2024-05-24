@@ -1,11 +1,14 @@
 package com.zeroone.star.orgstructure.controller;
 
+import com.zeroone.star.orgstructure.service.DepartmentService;
 import com.zeroone.star.project.j2.orgstructure.dept.DepartmentApis;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author 宵夜
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("dept")
 @Api(tags = "部门控制器")
 public class DepartmentController  implements DepartmentApis {
+
+    @Resource
+    DepartmentService departmentService;
 
 
     @Override
@@ -30,6 +36,7 @@ public class DepartmentController  implements DepartmentApis {
     public JsonVO<DepartmentDTO> getDepartmentList() {
         return JsonVO.success(new DepartmentDTO());
     }
+
     @Override
     @GetMapping("get-department-detail")
     @ApiOperation("获知指定部门详情")
@@ -37,26 +44,45 @@ public class DepartmentController  implements DepartmentApis {
         return JsonVO.success(new DepartmentDTO());
     }
 
+
+
+
+
+
+
     @Override
     @PostMapping("add-department")
     @ApiOperation("新增部门")
-    public JsonVO<DepartmentDTO> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
-        return JsonVO.success(departmentDTO);
+    public JsonVO<String> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
+        int i = departmentService.saveDepartment(departmentDTO);
+        if (i == 0) {
+            return JsonVO.fail("新增部门失败");
+        }
+        return JsonVO.success("新增部门成功");
 
     }
 
     @Override
     @PostMapping("modify-department")
     @ApiOperation("修改部门")
-    public JsonVO<Integer> modifyDepartment(@RequestBody DepartmentDTO departmentDTO) {
-
-        return JsonVO.success(1);
+        public JsonVO<String> modifyDepartment(@RequestBody DepartmentDTO departmentDTO) {
+        int i = departmentService.updateDepartment(departmentDTO);
+        if (i == 0) {
+            return JsonVO.fail("修改部门失败");
+        }
+        return JsonVO.success("修改部门成功");
     }
 
     @Override
     @DeleteMapping("remove-department")
     @ApiOperation("删除部门")
-    public JsonVO<Integer> removeDepartment(String id) {
-        return JsonVO.success(1);
+    public JsonVO<String> removeDepartment(int id) {
+        int i = departmentService.removeDepartment(id);
+        if (i == 0) {
+            return JsonVO.fail("删除部门失败");
+        }
+        return JsonVO.success("删除部门成功");
     }
+
+
 }

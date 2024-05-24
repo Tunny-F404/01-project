@@ -12,9 +12,6 @@
 
     <artifactId>mes-j2-orgstructure</artifactId>
 
-
-
-
     <dependencies>
         <!-- spring web mvc -->
         <dependency>

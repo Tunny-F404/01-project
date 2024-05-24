@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -19,21 +20,24 @@ public class DepartmentQuery {
 
     //部门Id
     @ApiModelProperty(value = "部门Id",example = "1")
-    private String id;
+    private String deptId;
 
     //父部门id
+    @NotBlank(message = "父部门id不能为空")
     @ApiModelProperty(value = "父部门id",example = "2")
     private String parentId;
 
     //部门名称
+    @NotBlank(message = "部门名称不能为空")
     @ApiModelProperty(value = "部门名称",example = "部门1")
-    private String name;
+    private String deptName;
 
     //部门状态 0正常 1停用
     @ApiModelProperty(value = "部门状态",example = "1")
     private int status;
 
     //显示顺序
+    @NotBlank(message = "显示顺序不能为空")
     private int orderNum;
 
 
