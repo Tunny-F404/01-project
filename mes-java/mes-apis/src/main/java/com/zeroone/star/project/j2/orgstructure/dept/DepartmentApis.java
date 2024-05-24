@@ -1,7 +1,11 @@
 package com.zeroone.star.project.j2.orgstructure.dept;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
+import com.zeroone.star.project.j2.orgstructure.query.dept.DepartmentQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 /**
@@ -15,7 +19,7 @@ public interface DepartmentApis {
     JsonVO<DepartmentDTO> getDepartmentNameTree(String id);
 
     //获取部门列表(条件)
-    JsonVO<DepartmentDTO> getDepartmentList();
+    JsonVO<PageDTO<DepartmentDTO>> getDepartmentList(DepartmentQuery departmentQuery);
 
     //获取部门详情
     JsonVO<DepartmentDTO> getDepartmentDetail(int id);

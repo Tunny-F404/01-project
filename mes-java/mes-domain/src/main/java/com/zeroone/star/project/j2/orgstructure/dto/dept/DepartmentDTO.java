@@ -37,8 +37,7 @@ public class DepartmentDTO {
     private int status;
 
     //显示顺序
-    @NotBlank(message = "显示顺序不能为空")
-    private int orderNum;
+    private Integer orderNum;
 
     @ApiModelProperty(value = "部门电话",example = "123456")
     private String phone;

@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.orgstructure.entity.Department;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
+import com.zeroone.star.project.j2.orgstructure.query.dept.DepartmentQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.dto.PageDTO;
 
 /**
  * <p>
@@ -15,6 +17,13 @@ import com.zeroone.star.project.vo.JsonVO;
  * @since 2024-05-22
  */
 public interface DepartmentService extends IService<Department> {
+
+    /**
+     * 获取部门列表
+     * @param
+     * @return
+     */
+    PageDTO<DepartmentDTO> getDepartmentList(DepartmentQuery query);
 
     /**
      * 获取获知指定部门详情
