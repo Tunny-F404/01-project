@@ -43,7 +43,7 @@ public class ProductSopController  implements ProductSopApis {
 
     @Override
     @ApiOperation(value = "新增sop数据")
-    @PostMapping
+    @PostMapping("/add")
     public JsonVO<String> add(@RequestBody ProductSopDTO dto) {
         ProductSopService.insertProductSop(dto);
         return JsonVO.success("新增成功");
@@ -51,7 +51,7 @@ public class ProductSopController  implements ProductSopApis {
 
     @Override
     @ApiOperation(value = "修改sop数据")
-    @PutMapping
+    @PutMapping("/update")
     public JsonVO<String> edit(@RequestBody ProductSopDTO dto) {
         ProductSopService.updateProductSop(dto);
         return JsonVO.success("修改成功");
