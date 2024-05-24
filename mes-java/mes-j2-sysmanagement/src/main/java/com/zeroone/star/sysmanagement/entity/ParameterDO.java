@@ -22,7 +22,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @TableName("sys_config")
-public class parameterDO implements Serializable {
+public class ParameterDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

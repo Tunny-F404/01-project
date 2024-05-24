@@ -3,11 +3,11 @@ package com.zeroone.star.sysmanagement.service.impl;
 import cn.hutool.core.date.DateTime;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
-import com.zeroone.star.sysmanagement.Constants.configConstant;
-import com.zeroone.star.sysmanagement.entity.parameterDO;
-import com.zeroone.star.sysmanagement.mapper.SysConfigMapper;
-import com.zeroone.star.sysmanagement.mapstruct.parameterMapstruct;
-import com.zeroone.star.sysmanagement.service.ISysConfigService;
+import com.zeroone.star.sysmanagement.constants.ParameterConstant;
+import com.zeroone.star.sysmanagement.entity.ParameterDO;
+import com.zeroone.star.sysmanagement.mapper.ParameterMapper;
+import com.zeroone.star.sysmanagement.parameterMapstruct.ParameterMapstruct;
+import com.zeroone.star.sysmanagement.service.ParameterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.SneakyThrows;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -34,10 +34,10 @@ import java.util.Set;
  */
 
 @Service
-public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, parameterDO> implements ISysConfigService {
+public class ParameterServiceImpl extends ServiceImpl<ParameterMapper, ParameterDO> implements ParameterService {
     // 参数映射 领域模型转换
     @Resource
-    private parameterMapstruct parameterMapstruct;
+    private ParameterMapstruct parameterMapstruct;
 
     // redis组件
     @Resource
@@ -45,7 +45,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, parameter
 
     //dao层
     @Resource
-    private SysConfigMapper sysConfigMapper;
+    private ParameterMapper parameterMapper;
 
     // 导入easyExcel组件
     @Resource
@@ -77,14 +77,14 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, parameter
      **/
     private void loadConfigCache() {
         //1.从数据库中查询所有数据
-        List<parameterDO> parameterDOS = sysConfigMapper.selectList(null);
-        if (parameterDOS.isEmpty()) {
+        List<ParameterDO> ParameterDOS = parameterMapper.selectList(null);
+        if (ParameterDOS.isEmpty()) {
             return;
         }
         //2.将数据保存到redis中
-        for (parameterDO parameterDO : parameterDOS) {
+        for (ParameterDO parameterDO : ParameterDOS) {
             if (parameterDO.getConfigKey()!=null&&parameterDO.getConfigValue()!=null){
-                redisTemplate.opsForValue().set(configConstant.SYS_CONFIG_KEY+ parameterDO.getConfigKey(),
+                redisTemplate.opsForValue().set(ParameterConstant.SYS_CONFIG_KEY+ parameterDO.getConfigKey(),
                         parameterDO.getConfigValue());
             }
 
@@ -98,7 +98,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, parameter
      * @return: void
      **/
     private void clearConfigCache() {
-        Set<String> keys = redisTemplate.keys(configConstant.SYS_CONFIG_KEY + "*");
+        Set<String> keys = redisTemplate.keys(ParameterConstant.SYS_CONFIG_KEY + "*");
         if (keys==null||keys.isEmpty()){
             return;
         }
@@ -110,17 +110,17 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, parameter
         //根据ids遍历每一个sysConfig
         for (Integer id : ids) {
             //1.根据id到数据库中查询对应的redis的key
-            parameterDO parameterDO = sysConfigMapper.selectById(id);
+            ParameterDO parameterDO = parameterMapper.selectById(id);
             //2.删除数据库中的数据
             //2.1判断类型是否为系统内置
-            if (parameterDO.getConfigType().equals(configConstant.YES)){
+            if (parameterDO.getConfigType().equals(ParameterConstant.YES)){
                 //2.1.1是系统内置，则不能删除
                 throw new RuntimeException("系统内置参数不能删除");
             }
             //2.2不是系统内置，则删除
-            sysConfigMapper.deleteById(id);
+            parameterMapper.deleteById(id);
             //3.根据key删除redis的数据
-            redisTemplate.delete(configConstant.SYS_CONFIG_KEY+ parameterDO.getConfigKey());
+            redisTemplate.delete(ParameterConstant.SYS_CONFIG_KEY+ parameterDO.getConfigKey());
         }
     }
 
@@ -128,9 +128,9 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, parameter
     @Override
     public ResponseEntity<byte[]> exportParameter() {
         //1.从数据库中查询所有数据
-        List<parameterDO> parameterDOS = sysConfigMapper.selectList(null);
+        List<ParameterDO> ParameterDOS = parameterMapper.selectList(null);
         //2.转换领域模型
-        List<ParameterDTO> parameterDTOS = parameterMapstruct.DOs2DTOs(parameterDOS);
+        List<ParameterDTO> parameterDTOS = parameterMapstruct.DOs2DTOs(ParameterDOS);
         //3.easyexcel构建输出流
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         excelComponent.export("配置导出",out, ParameterDTO.class, parameterDTOS);
@@ -139,9 +139,9 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, parameter
         out.close();
         //5.构建响应头
         HttpHeaders headers = new HttpHeaders();
-        String filename= configConstant.EXPORT_CONFIG_PREFIX                   //文件名前缀
-                + DateTime.now().toString(configConstant.EXPORT_CONFIG_TIME)   //文件名内容（时间）
-                + configConstant.EXPORT_CONFIG_SUFFIX;                          //文件名后缀
+        String filename= ParameterConstant.EXPORT_CONFIG_PREFIX                   //文件名前缀
+                + DateTime.now().toString(ParameterConstant.EXPORT_CONFIG_TIME)   //文件名内容（时间）
+                + ParameterConstant.EXPORT_CONFIG_SUFFIX;                          //文件名后缀
         headers.setContentDispositionFormData("attachment",filename);
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         //6.返回响应结果

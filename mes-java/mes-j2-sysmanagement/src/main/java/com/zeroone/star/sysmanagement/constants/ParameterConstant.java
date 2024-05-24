@@ -1,4 +1,4 @@
-package com.zeroone.star.sysmanagement.Constants;
+package com.zeroone.star.sysmanagement.constants;
 
 /**
  * @Author: 40斤
@@ -6,7 +6,7 @@ package com.zeroone.star.sysmanagement.Constants;
  * @Description: TODO ： 参数配置常量
  * @Version: 1.0
  */
-public class configConstant {
+public class ParameterConstant {
     // 缓存configKey
     public static final String SYS_CONFIG_KEY = "sys_config:";
     // 系统内置 Y是

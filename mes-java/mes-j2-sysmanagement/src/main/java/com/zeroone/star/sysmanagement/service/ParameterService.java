@@ -1,6 +1,6 @@
 package com.zeroone.star.sysmanagement.service;
 
-import com.zeroone.star.sysmanagement.entity.parameterDO;
+import com.zeroone.star.sysmanagement.entity.ParameterDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.http.ResponseEntity;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author sishijin
  * @since 2024-05-22
  */
-public interface ISysConfigService extends IService<parameterDO> {
+public interface ParameterService extends IService<ParameterDO> {
 
     /**
      * @description: 刷新缓存

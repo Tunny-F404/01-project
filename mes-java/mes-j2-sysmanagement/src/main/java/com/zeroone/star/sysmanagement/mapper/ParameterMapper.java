@@ -1,6 +1,6 @@
 package com.zeroone.star.sysmanagement.mapper;
 
-import com.zeroone.star.sysmanagement.entity.parameterDO;
+import com.zeroone.star.sysmanagement.entity.ParameterDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-05-22
  */
 @Mapper
-public interface SysConfigMapper extends BaseMapper<parameterDO> {
+public interface ParameterMapper extends BaseMapper<ParameterDO> {
 
 }

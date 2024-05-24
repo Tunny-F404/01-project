@@ -1,7 +1,7 @@
-package com.zeroone.star.sysmanagement.mapstruct;
+package com.zeroone.star.sysmanagement.parameterMapstruct;
 
 
-import com.zeroone.star.sysmanagement.Constants.configConstant;
+import com.zeroone.star.sysmanagement.constants.ParameterConstant;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
  * @Version: 1.0
  */
 @Component
-public class strToStrStrategy {
+public class StrToStrStrategy {
     public String strToStr(String configType){
-        if (configType.equals(configConstant.YES)){
+        if (configType.equals(ParameterConstant.YES)){
             return "是";
-        }else if (configType.equals(configConstant.NO)){
+        }else if (configType.equals(ParameterConstant.NO)){
             return "否";
         }else {
             return configType;
