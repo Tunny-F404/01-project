@@ -2,6 +2,11 @@ package com.zeroone.star.project.j2.orgstructure.role;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
+import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RoleListDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RolePermissionsDTO;
+import com.zeroone.star.project.j2.orgstructure.query.role.RoleQuery;
+import com.zeroone.star.project.query.PageQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 
@@ -15,23 +20,36 @@ import java.util.List;
  */
 public interface RoleApis {
 
-    public JsonVO<List<RoleDTO>> queryRoles();
+    /**
+     * 查询角色列表
+     * @author 天衍土豆
+     *
+     */
+    public JsonVO<List<RoleListDTO>> queryRoles();
 
     /**
      * 获取角色列表(条件+分页)
+     * @author 天衍土豆
      */
 
-    public JsonVO<List<RoleDTO>> queryRolePage(RoleDTO condition, PageDTO<RoleDTO> pageDTO);
-
+    public JsonVO<PageDTO<RoleListDTO>> queryRolePage(RoleConditionQuery condition);
     /**
      * 获取角色详情
+     * @author 天衍土豆
      */
-
     public JsonVO<RoleDTO> queryRole(Integer id);
+
+    /**
+     *
+     * 设置数据权限回显
+     * @author 天衍土豆
+     * @return
+     */
+    public JsonVO<RolePermissionsDTO> queryRolePermissions(Integer id);
     /**
      * 设置数据权限
+     * @author 天衍土豆
      */
-
     public JsonVO<List<RoleDTO>> modifyRole(Integer id);
 
     /**

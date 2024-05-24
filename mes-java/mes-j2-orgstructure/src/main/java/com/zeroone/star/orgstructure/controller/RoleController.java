@@ -3,6 +3,10 @@ package com.zeroone.star.orgstructure.controller;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
+import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RoleListDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RolePermissionsDTO;
+import com.zeroone.star.project.j2.orgstructure.query.role.RoleQuery;
 import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -10,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,10 +36,11 @@ public class RoleController implements RoleApis {
      * @return
      */
 
+    @Override
     @GetMapping("query-roles")
     @ApiOperation("获取角色名称列表")
-    public JsonVO<List<RoleDTO>> queryRoles() {
-        return JsonVO.success(null);
+    public JsonVO<List<RoleListDTO>> queryRoles() {
+        return JsonVO.success(new ArrayList<RoleListDTO>());
     }
 
     /**
@@ -42,10 +48,11 @@ public class RoleController implements RoleApis {
      * @author 天衍土豆
      * @return
      */
-    @GetMapping("/query-page")
+    @Override
+    @GetMapping ("/query-page")
     @ApiOperation("获取角色列表(条件+分页)")
-    public JsonVO<List<RoleDTO>> queryRolePage(@RequestBody RoleDTO condition, @RequestBody PageDTO<RoleDTO> pageDTO) {
-        return JsonVO.success(null);
+    public JsonVO<PageDTO<RoleListDTO>> queryRolePage(RoleConditionQuery condition) {
+        return JsonVO.success(new PageDTO<RoleListDTO>());
     }
 
     /**
@@ -53,18 +60,33 @@ public class RoleController implements RoleApis {
      * @author 天衍土豆
      * @return
      */
+    @Override
     @GetMapping("query-role")
     @ApiOperation("获取角色详情")
     public JsonVO<RoleDTO> queryRole(@RequestParam Integer id) {
-        return JsonVO.success(null);
+        return JsonVO.success(new RoleDTO());
     }
+
+
+
+    /**
+     * 设置数据权限回显
+     */
+    @Override
+    @GetMapping("query-role-Permissions")
+    @ApiOperation("设置数据权限回显")
+    public JsonVO<RolePermissionsDTO> queryRolePermissions(Integer id) {
+        return JsonVO.success(new RolePermissionsDTO());
+    }
+
 
     /**
      * 设置数据权限
      * @author 天衍土豆
      * @return
      */
-    @GetMapping("modify-role")
+    @Override
+    @PutMapping("modify-role")
     @ApiOperation("设置数据权限")
     public JsonVO<List<RoleDTO>> modifyRole(@RequestParam Integer id) {
         return JsonVO.success(null);
