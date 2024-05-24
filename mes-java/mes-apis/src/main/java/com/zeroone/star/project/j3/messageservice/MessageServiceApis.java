@@ -1,8 +1,13 @@
 package com.zeroone.star.project.j3.messageservice;
 
-import com.zeroone.star.project.j3.dto.MessageDTO;
-import com.zeroone.star.project.j3.query.MessageQuery;
+import com.zeroone.star.project.dto.login.LoginDTO;
+import com.zeroone.star.project.j3.dto.LogoutDTO;
+import com.zeroone.star.project.j3.dto.SystemNotificationDTO;
+import com.zeroone.star.project.j3.query.SmsQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.components.mail.MailMessage;
+import com.zeroone.star.project.vo.ResultStatus;
+import com.zeroone.star.project.vo.login.LoginVO;
 
 import java.util.List;
 
@@ -12,12 +17,25 @@ import java.util.List;
 
 public interface MessageServiceApis {
 
-    JsonVO<List<Long>> removeMessages(List<Long> ids);
+    /**
+     * 发送短信消息
+     * @return
+     */
+    JsonVO<String> sendOneSms(SmsQuery smsQuery);
 
-    JsonVO<List<MessageDTO>> queryMessage(MessageQuery query);
 
-    JsonVO<List<Long>> modifyMessageStatus(Long id);
+    /**
+     * 发送邮件
+     * @param message 邮件信息
+     * @return
+     */
+    MailMessage sendMail(MailMessage message);
 
+    JsonVO<LoginVO> clientLogin(LoginDTO loginDTO);
+
+    JsonVO<ResultStatus> clientLogout(LogoutDTO logoutDTO);
+
+    JsonVO<ResultStatus> sendNotice(SystemNotificationDTO systemNotificationDTO);
 
 
 }

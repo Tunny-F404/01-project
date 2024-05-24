@@ -29,5 +29,9 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.zeroone.star</groupId>
+            <artifactId>mes-common</artifactId>
+        </dependency>
     </dependencies>
 </project>
