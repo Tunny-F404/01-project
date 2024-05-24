@@ -1,5 +1,11 @@
 package com.zeroone.star.project.j5.schedulecalendar;
 
+import com.zeroone.star.project.j5.dto.schedulecalendar.ScheduleCalendarDTO;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleTeamQuery;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleTypeQuery;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleUserQuery;
+import com.zeroone.star.project.vo.JsonVO;
+
 /**
  * <p>
  * 描述：排班日历接口
@@ -10,4 +16,23 @@ package com.zeroone.star.project.j5.schedulecalendar;
  * @version 1.0.0
  */
 public interface ScheduleCalendarApis {
+    /**
+     * 获取指定班组类型排班计划
+     * @return 排班计划列表
+     */
+    public JsonVO<ScheduleCalendarDTO> listScheduleByType(ScheduleTypeQuery condition);
+
+    /**
+     * 获取指定班组排班计划
+     * @return 排班计划列表
+     */
+    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleTeamQuery condition);
+
+    /**
+     * 获取指定人员排班计划
+     * @return 排班计划列表
+     */
+    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleUserQuery condition);
+
+
 }

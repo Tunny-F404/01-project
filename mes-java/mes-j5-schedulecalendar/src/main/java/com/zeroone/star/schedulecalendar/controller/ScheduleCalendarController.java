@@ -1,23 +1,51 @@
 package com.zeroone.star.schedulecalendar.controller;
 
+import com.zeroone.star.project.j5.dto.schedulecalendar.ScheduleCalendarDTO;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleTeamQuery;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleTypeQuery;
+import com.zeroone.star.project.j5.query.schedulecalendar.ScheduleUserQuery;
 import com.zeroone.star.project.j5.schedulecalendar.ScheduleCalendarApis;
+import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
-import org.springframework.validation.annotation.Validated;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- * 描述：排班日历控制器
- * </p>
- * <p>版权：&copy;01星球</p>
- * <p>地址：01星球总部</p>
- * @author interstellar
- * @version 1.0.0
- */
+ * @description: 排班日历 查询
+ * @program: mes-java
+ * @ClassName ScheduleCalendarIMP
+ * @author: nangua
+ * @create: 2024-05-22 19:45
+ * @Version 1.0
+ **/
+
 @RestController
-@RequestMapping("sch-manage/sch-calendar")
-@Api(tags = "排班日历接口")
-@Validated
+@RequestMapping("calendar")
+@Api(tags = "排班日历")
 public class ScheduleCalendarController implements ScheduleCalendarApis {
+
+    @GetMapping("/list-by-type")
+    @ApiOperation("获取指定班组类型排班计划")
+    @Override
+    public JsonVO<ScheduleCalendarDTO> listScheduleByType(ScheduleTypeQuery condition) {
+        return null;
+    }
+    @GetMapping("/list-by-team")
+    @ApiOperation("获取指定班组排班计划")
+    @Override
+    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleTeamQuery condition) {
+        return null;
+    }
+    @GetMapping("/list-by-user")
+    @ApiOperation("获取指定人员排班计划")
+    @Override
+    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleUserQuery condition) {
+        return null;
+    }
+
+
+
+
 }
