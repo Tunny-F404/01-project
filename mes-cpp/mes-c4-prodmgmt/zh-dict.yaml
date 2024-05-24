@@ -18,7 +18,7 @@ prod:
  getTree:
   summary: 获取生产任务列表树
  post:
-  sumamry: 设置生产任务
+  sumamry: 添加生产任务
  put:
   summary: 修改一条生产任务
  delete:

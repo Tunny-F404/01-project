@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _SAMPLE_VO_
-#define _SAMPLE_VO_
+#ifndef _PRODORDER_VO_
+#define _PRODORDER_VO_
 
 #include "../../GlobalInclude.h"
 #include "../../dto/ProdOrder/ProdOrderDTO.h"
@@ -39,6 +39,17 @@ class ProdOrderPageJsonVO : public JsonVO<ProdOrderDTO::Wrapper> {
 	DTO_INIT(ProdOrderPageJsonVO, JsonVO<ProdOrderDTO::Wrapper>);
 };
 
+//显示生产任务列表树JsonVO
+class ProdOrderQueryTreeJsonVO : public JsonVO<List<ProdOrderQueryTreeDTO::Wrapper>>
+{
+	DTO_INIT(ProdOrderQueryTreeJsonVO, JsonVO<List<ProdOrderQueryTreeDTO::Wrapper>>);
+public:
+	// 在构造函数中实例化data列表
+	ProdOrderQueryTreeJsonVO() {
+		this->data = {};
+	}
+};
+
 #include OATPP_CODEGEN_END(DTO)
 
-#endif // !_SAMPLE_VO_
+#endif // !_PRODORDER_VO_

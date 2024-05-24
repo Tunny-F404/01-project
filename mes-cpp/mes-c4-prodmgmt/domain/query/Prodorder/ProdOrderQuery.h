@@ -34,8 +34,7 @@ class ProdOrderQuery : public PageQuery
 {
 	// 定义初始化
 	DTO_INIT(ProdOrderQuery, PageQuery);
-	// 昵称
-	//API_DTO_FIELD_DEFAULT(String, nickname, ZH_WORDS_GETTER("use.field.nickname"));
+	
 	// 任务名
 	API_DTO_FIELD_DEFAULT(String, task_name, ZH_WORDS_GETTER("prod.query.summary.taskName"));
 	// 工作站
@@ -51,9 +50,8 @@ class ProdOrderQuery : public PageQuery
 class ProdOrderTreeQuery : public PageQuery, public TreeNode
 {
 	// 定义初始化
-	DTO_INIT(ProdOrderQuery, PageQuery);
-	// 昵称
-	//API_DTO_FIELD_DEFAULT(String, nickname, ZH_WORDS_GETTER("use.field.nickname"));
+	DTO_INIT(ProdOrderTreeQuery, PageQuery);
+	
 	// 任务名
 	API_DTO_FIELD_DEFAULT(String, task_name, ZH_WORDS_GETTER("prod.query.summary.taskName"));
 	// 工作站
@@ -66,14 +64,14 @@ class ProdOrderTreeQuery : public PageQuery, public TreeNode
 	API_DTO_FIELD_DEFAULT(String, end_time, ZH_WORDS_GETTER("prod.query.summary.endTime"));
 
 	// 子菜单
-	/*
 	API_DTO_FIELD(List<ProdOrderTreeQuery::Wrapper>, children, ZH_WORDS_GETTER("prod.field.menusub"), false, {});
+
 public:
 	void addChild(shared_ptr<TreeNode> child) override
 	{
 		children->push_back(Wrapper(dynamic_pointer_cast<ProdOrderTreeQuery>(child), Wrapper::Class::getType()));
 	}
-	*/
+	
 };
 
 #include OATPP_CODEGEN_END(DTO)

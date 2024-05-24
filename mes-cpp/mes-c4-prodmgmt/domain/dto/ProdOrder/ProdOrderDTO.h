@@ -61,9 +61,9 @@ class ProdOrderDTO : public oatpp::DTO
 /**
  * 生产任务分页传输对象
  */
-class ProdOrderPageDTO : public PageDTO<ProdOrderDTO::Wrapper>
+class ProdOrderQueryDTO : public PageDTO<ProdOrderDTO::Wrapper>
 {
-	DTO_INIT(ProdOrderPageDTO, PageDTO<ProdOrderDTO::Wrapper>);
+	DTO_INIT(ProdOrderQueryDTO, PageDTO<ProdOrderDTO::Wrapper>);
 
 	// 任务名
 	DTO_FIELD(String, task_name);
@@ -95,42 +95,27 @@ class ProdOrderPageDTO : public PageDTO<ProdOrderDTO::Wrapper>
 /**
  * 示例菜单数据传输对象
  */
-class ProdOrderMenuDTO : public PageDTO<ProdOrderDTO::Wrapper>, public TreeNode
+class ProdOrderQueryTreeDTO : public PageDTO<ProdOrderDTO::Wrapper>, public TreeNode
 {
-	DTO_INIT(ProdOrderMenuDTO, PageDTO<ProdOrderDTO::Wrapper>);
+	DTO_INIT(ProdOrderQueryTreeDTO, PageDTO<ProdOrderDTO::Wrapper>);
 
 	// 任务名
-	DTO_FIELD(String, task_name);
-	DTO_FIELD_INFO(task_name) {
-		info->description = ZH_WORDS_GETTER("prod.field.task_name");
-	}
+	API_DTO_FIELD_DEFAULT(String, task_name, ZH_WORDS_GETTER("prod.query.summary.taskName"));
 	// 工作站
-	DTO_FIELD(String, workstation_name);
-	DTO_FIELD_INFO(workstation_name) {
-		info->description = ZH_WORDS_GETTER("prod.field.workstationName");
-	}
+	API_DTO_FIELD_DEFAULT(String, workstation_name, ZH_WORDS_GETTER("prod.query.summary.workstationName"));
 	// 工序
-	DTO_FIELD(String, process_name);
-	DTO_FIELD_INFO(process_name) {
-		info->description = ZH_WORDS_GETTER("prod.field.processName");
-	}
+	API_DTO_FIELD_DEFAULT(String, process_name, ZH_WORDS_GETTER("prod.query.summary.processName"));
 	// 开始时间
-	DTO_FIELD(String, start_time);
-	DTO_FIELD_INFO(start_time) {
-		info->description = ZH_WORDS_GETTER("prod.field.startTime");
-	}
+	API_DTO_FIELD_DEFAULT(String, start_time, ZH_WORDS_GETTER("prod.query.summary.startTime"));
 	// 结束时间
-	DTO_FIELD(String, end_time);
-	DTO_FIELD_INFO(end_time) {
-		info->description = ZH_WORDS_GETTER("prod.field.endTime");
-	}
+	API_DTO_FIELD_DEFAULT(String, end_time, ZH_WORDS_GETTER("prod.query.summary.endTime"));
 
 	// 子菜单
-	API_DTO_FIELD(List<ProdOrderMenuDTO::Wrapper>, children, ZH_WORDS_GETTER("prod.field.menusub"), false, {});
+	API_DTO_FIELD(List<ProdOrderQueryTreeDTO::Wrapper>, children, ZH_WORDS_GETTER("prod.field.menusub"), false, {});
 public:
 	void addChild(shared_ptr<TreeNode> child) override
 	{
-		children->push_back(Wrapper(dynamic_pointer_cast<ProdOrderMenuDTO>(child), Wrapper::Class::getType()));
+		children->push_back(Wrapper(dynamic_pointer_cast<ProdOrderQueryTreeDTO>(child), Wrapper::Class::getType()));
 	}
 };
 
