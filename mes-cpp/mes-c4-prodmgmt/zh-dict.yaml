@@ -1,4 +1,98 @@
-﻿productionorder:
+addprodworkorder:
+ workorder:
+  workorder_id: 工单ID
+  workorder_code: 工单编号
+  workorder_name: 工单名称
+  order_source: 来源类型（工单来源）
+  source_code: 来源单据
+  status: 单据状态
+  workorder_type: 工单类型
+  product_code: 产品编号
+  product_name: 产品名称
+  product_spc: 规格型号
+  unit_of_measure: 单位
+  quantity: 工单数量（生产数量）
+  request_date: 需求日期
+  batch_code: 批次号
+  remark: 备注
+  client_code: 客户编码
+  client_name: 客户名称
+  menuname: 菜单名称
+  quantity_produced: 已生产数量
+  quantity_changed: 调整数量
+  vendor_name: 供应商名称
+  vendor_code: 供应商编码
+ post:
+  summary: 新增一条生产工单数据 
+
+getprodworkorderlist:
+ get:
+  summary: 获取生产工单列表（条件+分页）
+
+prodworkorderinfo:
+ get:
+  summary: 获取生产工单详情
+
+bom:
+ field: 
+  line_id: BOM行ID
+  item_code: BOM物料编号
+  item_name: BOM物料名称
+  item_spc: 规格型号
+  unit_of_measure: 单位
+  item_or_product: 物料/产品
+  quantity: 预计使用量
+ get:
+  summary: 获取生产工单BOM列表
+  
+prodmgmt:
+ delete:
+  fields:
+   recordId: 生产工单的记录Id
+  describe:
+   name: 删除报工
+
+Approval:
+ post:
+  id: 生产工单编号
+  draft: 草稿
+  remark: 状态
+  name: 审批相关
+  submi: 审批中
+  passed: 审批通过
+  denied: 审批不通过
+
+ProdWorkorder:
+ field:
+  workorderId: 编号
+  workorderCode: 工单编号
+  workorderName: 工单名称
+  orderSource: 来源类型
+  sourceCode: 订单编号
+  status: 单据状态
+  workorderType: 工单类型
+  productId: 产品ID
+  productCode: 产品编号
+  productName: 产品名称
+  productSpc: 规格型号
+  unitOfMeasure: 单位
+  quantity: 生产数量
+  requestDate: 需求日期
+  batchCode: 批次号
+  clientId: 客户ID
+  clientCode: 客户编码
+  clientName: 客户名称
+  remark: 备注
+ put:
+  summary: 修改生产工单
+ delete:
+  summary: 删除生产工单
+ confirm: 
+  summary: 确认生产工单
+ complete:
+  summary: 完成生产工单
+
+productionorder:
  query:
   summary: 生产工单
   fields:

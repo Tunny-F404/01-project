@@ -1,4 +1,4 @@
-﻿/*
+/*
 >>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
  Copyright Zero One Star. All rights reserved.
 
@@ -20,6 +20,9 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+
+#include "PurchaseReceipt/GetReceiptController.h"
+
 #include "productioninvestigation/ProductionProcessController.h"
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -61,6 +64,8 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	ROUTER_SIMPLE_BIND(GetReceiptController);
 	//#TIP :绯荤粺鎵╁睍璺敱瀹氫箟锛屽啓鍦ㄨ繖涓悗闈?
 	ROUTER_SIMPLE_BIND(ProductionProcessController);
 }

@@ -1,4 +1,4 @@
-﻿/*
+/*
 >>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
  Copyright Zero One Star. All rights reserved.
 
@@ -20,6 +20,9 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+
+#include "prodmgmt/RemoveWorkReportController.h"
+
 #include "productionorder/ProductionOrderController.h"
 #include "productioninvestigation/ProductionProcessController.h"
 #ifdef HTTP_SERVER_DEMO
@@ -31,21 +34,18 @@
 
 #endif
 
-	// 濡傛灉瀹氫箟浜嗗叧闂璖wagger鏂囨。瀹?
-#ifdef CLOSE_SWAGGER_DOC
-// 绠€鍖栫粦瀹氭帶鍒跺櫒瀹忓畾涔?
-#define ROUTER_SIMPLE_BIND(__CLASS__) \
-router->addController(__CLASS__::createShared())
-#else
-#endif
 
-// 如果定义了关闭Swagger文档宏
+
+#include "../mes-c4-prodmgmt/controller/ProdWorkorder/ProdWorkorderController.h"
+#include "../controller/ApprovalStage/ApprovalStage.h"
+#include "controller/ProdWorkorder/ProWorkorderController.h"
+
 #ifdef CLOSE_SWAGGER_DOC
-// 简化绑定控制器宏定义
+// �򻯰󶨿������궨��
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 router->addController(__CLASS__::createShared())
 #else
-// 简化绑定控制器宏定义
+// �򻯰󶨿������궨��
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
@@ -62,6 +62,14 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
+
+
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	ROUTER_SIMPLE_BIND(ProdWorkorderController);
+	ROUTER_SIMPLE_BIND(RemoveWorkReportController);
+	ROUTER_SIMPLE_BIND(ApprovalStage);
+	ROUTER_SIMPLE_BIND(ProWorkorderController);
+
 	//#TIP :绯荤粺鎵╁睍璺敱瀹氫箟锛屽啓鍦ㄨ繖涓悗闈?
 	ROUTER_SIMPLE_BIND(ProductionOrderController);
 	ROUTER_SIMPLE_BIND(ProductionProcessController);
@@ -70,6 +78,15 @@ void Router::initRouter()
 #ifdef HTTP_SERVER_DEMO
 void Router::createSampleRouter()
 {
+	// ��ʾ��������
+	ROUTER_SIMPLE_BIND(SampleController);
+	// ���û�������
+	ROUTER_SIMPLE_BIND(UserController);
+	// ���ļ�������
+	ROUTER_SIMPLE_BIND(FileController);
+	
+	// ��WebSocket������
+	router->addController(WSContorller::createShared());
 	<<<<<< < HEAD
 		// 缁戝畾绀轰緥鎺у埗鍣?
 		ROUTER_SIMPLE_BIND(SampleController);
@@ -92,3 +109,4 @@ void Router::createSampleRouter()
 		router->addController(WSContorller::createShared());
 }
 #endif
+
