@@ -27,11 +27,11 @@
 class dv_mainten_record_lineDO
 {
 	// 唯一编号 计划ID
-	CC_SYNTHESIZE(string, line_id, Line_id);
+	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
 	// 计划ID
-	CC_SYNTHESIZE(string, record_id, Record_id);
+	CC_SYNTHESIZE(uint64_t, record_id, Record_id);
 	// 项目ID
-	CC_SYNTHESIZE(string, subject_id, Subject_id);
+	CC_SYNTHESIZE(uint64_t, subject_id, Subject_id);
 	// 项目编码
 	CC_SYNTHESIZE(string, subject_code, Subject_code);
 	// 项目名称
@@ -51,9 +51,9 @@ class dv_mainten_record_lineDO
 	// 预留字段2
 	CC_SYNTHESIZE(string, attr2, Attr2);
 	// 预留字段3
-	CC_SYNTHESIZE(string, attr3, Attr3);
+	CC_SYNTHESIZE(int, attr3, Attr3);
 	// 预留字段4
-	CC_SYNTHESIZE(string, attr4, Attr4);
+	CC_SYNTHESIZE(int, attr4, Attr4);
 	// 创建者
 	CC_SYNTHESIZE(string, create_by, Create_by);
 	// 创建时间
@@ -64,7 +64,7 @@ class dv_mainten_record_lineDO
 	CC_SYNTHESIZE(string, update_time, Update_time);
 public:
 	dv_mainten_record_lineDO() {}
-	dv_mainten_record_lineDO(string line_id, string record_id, string subject_id, string subject_code, string subject_name, string subject_type, string subject_content, string subject_standard, string mainten_status, string mainten_result, string attr1, string attr2, string attr3, string attr4, string create_by, string create_time, string update_by, string update_time)
+	dv_mainten_record_lineDO(uint64_t line_id, uint64_t record_id, uint64_t subject_id, string subject_code, string subject_name, string subject_type, string subject_content, string subject_standard, string mainten_status, string mainten_result, string attr1, string attr2, int attr3, int attr4, string create_by, string create_time, string update_by, string update_time)
 	{
 		this->line_id = line_id;
 		this->record_id = record_id;
