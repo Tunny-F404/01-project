@@ -31,12 +31,14 @@
 						<span>111@luaman.com</span>
 					</el-row>
 					<el-divider />
-					<el-row>
-						<span>所属部门</span>
-						<span>*****</span>
+					<span>所属部门</span>
+					<div>****</div>
+					<span>所属角色</span>
+					<div>****</div>
+					<el-row justify="space-between">
+						<span>创建日期</span>
+						<span>2023-11-20 21:19:01</span>
 					</el-row>
-					<div>所属角色</div>
-					<p>创建日期 2023-11-20 21:19:01</p>
 				</el-card>
 			</div>
 		</el-col>
