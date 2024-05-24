@@ -1,6 +1,7 @@
 package com.zeroone.star.teamsettings.controller;
 
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.teamsettings.AddTeamDTO;
 import com.zeroone.star.project.j5.dto.teamsettings.TeamDTO;
 import com.zeroone.star.project.j5.query.teamsettings.TeamQuery;
 import com.zeroone.star.project.j5.teamsettings.TeamSettingsApis;
@@ -8,11 +9,10 @@ import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 /**
@@ -32,7 +32,7 @@ public class TeamSettingsController implements TeamSettingsApis {
     @ApiOperation(value = "获取班组列表（条件 + 分页）")
     @GetMapping("query-all")
     @Override
-    public JsonVO<PageDTO<TeamDTO>> queryTeamList(TeamQuery condition) {
+    public JsonVO<PageDTO<TeamDTO>> queryTeamList(@Validated TeamQuery condition) {
         return null;
     }
 
@@ -41,23 +41,37 @@ public class TeamSettingsController implements TeamSettingsApis {
         return null;
     }
 
+    @ApiOperation(value = "获取班组详情")
+    @GetMapping("query-by-id")
+    public JsonVO<TeamDTO> queryTeamDetailsValidated(@Min(value = 1, message = "id最小值为1") @RequestParam Long id) {
+        return queryTeamDetails(id);
+    }
+
+    @ApiOperation(value = "添加班组")
+    @PostMapping("add-team")
     @Override
-    public JsonVO<Integer> addTeam(TeamDTO teamDTO) {
+    public JsonVO<Integer> addTeam(@Validated AddTeamDTO condition) {
         return null;
     }
 
+    @ApiOperation(value = "修改班组")
+    @PutMapping("modify-team")
     @Override
-    public JsonVO<Integer> modifyTeam(TeamDTO teamDTO) {
+    public JsonVO<Integer> modifyTeam(@Validated TeamDTO teamDTO) {
         return null;
     }
 
+    @ApiOperation(value = "删除班组")
+    @DeleteMapping("delete-team")
     @Override
-    public JsonVO<Integer> removeTeam(List<Long> ids) {
+    public JsonVO<Integer> removeTeam(@Validated List<Long> ids) {
         return null;
     }
 
+    @ApiOperation(value = "导出班组")
+    @GetMapping("export-team")
     @Override
-    public ResponseEntity<byte[]> exportTeam(TeamQuery condition) {
+    public ResponseEntity<byte[]> exportTeam(@Validated TeamQuery condition) {
         return null;
     }
 }

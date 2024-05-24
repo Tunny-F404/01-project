@@ -23,6 +23,4 @@ public class PlanTeamQuery extends PageQuery {
 //    @NotBlank(message = "用户名不能为空")
     @ApiModelProperty(value = "计划ID", example = "0")
     private Long planId;
-    @ApiModelProperty(value = "班组类型", example = "ZS")
-    private String calendarType;
 }

@@ -1,6 +1,7 @@
 package com.zeroone.star.scheduleplan.controller;
 
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
@@ -9,9 +10,12 @@ import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.Min;
 
 /**
  * <p>
@@ -22,38 +26,50 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("sch-manage/sch-plan")
-@Api(tags = "班组接口")
+@Api(tags = "排班计划接口")
 public class SchedulePlanController implements SchedulePlanApis {
-    @Override
-    public JsonVO<PageDTO<PlanListVO>> queryPlanList(PlanPageQuery condition) {
+    @GetMapping("/query-all")
+    @ApiOperation("获取计划列表（条件+分页）")
+    public JsonVO<PageDTO<PlanListVO>> queryPlanList(@Validated PlanPageQuery condition) {
         return null;
     }
 
-    @Override
-    public JsonVO<PlanVO> queryPlanDetails(Long planId) {
+    @GetMapping("query-by-id")
+    @ApiOperation("获取计划详情")
+    public JsonVO<PlanVO> queryPlanDetails(@Min(value = 1,message = "planId最小值为1") @RequestParam Long planId) {
         return null;
     }
 
-    @Override
-    public JsonVO<Integer> addPlan(PlanDTO planDTO) {
+    @ApiOperation("添加计划")
+    @PostMapping("add-plan")
+    public JsonVO<Integer> addPlan(AddPlanDTO condition) {
         return null;
     }
 
-    @Override
+    @ApiOperation("修改计划")
+    @PutMapping("modify-team")
     public JsonVO<Integer> modifyTeam(PlanDTO planDTO) {
         return null;
     }
 
+    @ApiOperation(value = "删除排班计划(可批量删除)")
+    @DeleteMapping("delete-schedule-plan")
     @Override
     public JsonVO<Integer> removeSchPlan(Long[] rems) {
         return null;
     }
 
+
+    @ApiOperation(value = "修改计划状态")
+    @PutMapping("modify-plans-status")
     @Override
     public JsonVO<Integer> modifySchPlanStatus(SchPlanDTO schPlanDTO) {
         return null;
     }
 
+
+    @ApiOperation(value = "导出计划")
+    @GetMapping("export-schedule-plan")
     @Override
     public ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition) {
         return null;

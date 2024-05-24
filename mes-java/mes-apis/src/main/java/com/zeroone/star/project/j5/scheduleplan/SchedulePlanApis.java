@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j5.scheduleplan;
 
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
@@ -39,11 +40,11 @@ public interface SchedulePlanApis {
 
     /**
      * 添加计划
-     * @param planDTO 计划信息
+     * @param addPlanDTO 计划信息
      * @author brickbreaker
      * @return 添加结果
      */
-    JsonVO<Integer> addPlan(PlanDTO planDTO);
+    JsonVO<Integer> addPlan(AddPlanDTO addPlanDTO);
 
 
     /**
