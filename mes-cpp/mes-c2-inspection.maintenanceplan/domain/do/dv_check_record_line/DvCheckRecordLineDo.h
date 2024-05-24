@@ -46,6 +46,22 @@ class DvCheckRecordLineDo
 	CC_SYNTHESIZE(string, check_status, Check_status);
 	//点检结果
 	CC_SYNTHESIZE(string, check_result, Check_result);
+	//预留字段1
+	CC_SYNTHESIZE(string, attr1, Attr1);
+	//预留字段2
+	CC_SYNTHESIZE(string, attr2, Attr2);
+	//预留字段3
+	CC_SYNTHESIZE(uint64_t, attr3, Attr3);
+	//预留字段4
+	CC_SYNTHESIZE(uint64_t, attr4, Attr4);
+	//创建者
+	CC_SYNTHESIZE(string, create_by, Create_by);
+	//创建时间
+	CC_SYNTHESIZE(string, create_time, Create_time);
+	//更新者
+	CC_SYNTHESIZE(string, update_by, Update_by);
+	//更新时间
+	CC_SYNTHESIZE(string, update_time, Update_time);
 
 public:
 	DvCheckRecordLineDo() {
@@ -59,6 +75,14 @@ public:
 		subject_standard = "";
 		check_status = "";
 		check_result = "";
+		attr1 = "";
+		attr2 = "";
+		attr3 = 0;
+		attr4 = 0;
+		create_by = "";
+		create_time = "";
+		update_by = "";
+		update_timr = "";
 
 	}
 };
