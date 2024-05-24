@@ -5,6 +5,8 @@ import com.zeroone.star.project.j5.dto.shopsettings.GetShopSettingsDTO;
 import com.zeroone.star.project.j5.query.shopsettings.ShopSettingsQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
+import java.util.List;
+
 /**
  * <p>
  * 描述：车间设置接口
@@ -20,7 +22,7 @@ public interface ShopSettingsApis {
      */
     JsonVO<PageDTO<GetShopSettingsDTO>> getShopSeetingController(ShopSettingsQuery ShopSettingscondition);
     /**
-     * 获取车间名称列表
+     * 获取车间详情
      * @param GetShopSettingsDTO
      * @return
      */
@@ -39,12 +41,12 @@ public interface ShopSettingsApis {
     JsonVO<GetShopSettingsDTO> saveShopSeetingController(GetShopSettingsDTO shopsettingsDTO);
     /**
      * 删除或批量删除车间信息
-     * @param shopsettingsDTO
+     * @param ids
      * @return
      */
-    JsonVO<GetShopSettingsDTO> deleteShopSeetingController(GetShopSettingsDTO shopsettingsDTO);
+    JsonVO<GetShopSettingsDTO> deleteShopSeetingController(List<Long> ids );
     /**
-     * 获取车间详情
+     * 获取车间名称列表
      * @param shopsettingsDTO
      * @return
      */

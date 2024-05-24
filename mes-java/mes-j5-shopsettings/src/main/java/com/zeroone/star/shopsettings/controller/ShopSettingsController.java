@@ -8,8 +8,11 @@ import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.shopsettings.service.ShopsettingsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Api(tags = "车间管理")
 @RestController
@@ -22,23 +25,25 @@ public class ShopSettingsController implements ShopSettingsApis {
      * @param ShopSettingscondition
      * @return
      */
-    @GetMapping("getSTQuery")
+    @GetMapping("/query-by")
     @Override
     @ApiOperation("获取车间管理列表（条件+分页）")
-    public JsonVO<PageDTO<GetShopSettingsDTO>> getShopSeetingController(@RequestBody ShopSettingsQuery ShopSettingscondition) {
+    public JsonVO<PageDTO<GetShopSettingsDTO>> getShopSeetingController(
+            @ApiParam("查询条件") @RequestBody ShopSettingsQuery ShopSettingscondition) {
 
 
         return null;
     }
     /**
-     * 获取车间名称列表
+     * 获取车间详情
      * @param GetShopSettingsDTO
      * @return
      */
     @Override
-    @GetMapping("getSTAll")
-    @ApiOperation("获取车间名称列表")
-    public JsonVO<GetShopSettingsDTO> getShopSeetingALLController(@RequestBody GetShopSettingsDTO GetShopSettingsDTO) {
+    @GetMapping("/get-shopsetting")
+    @ApiOperation("获取车间详情")
+    public JsonVO<GetShopSettingsDTO> getShopSeetingALLController(
+            @ApiParam("车间DTO")@RequestBody GetShopSettingsDTO GetShopSettingsDTO) {
 
         return null;
     }
@@ -48,9 +53,10 @@ public class ShopSettingsController implements ShopSettingsApis {
      * @return
      */
     @Override
-    @PutMapping("updateST")
+    @PutMapping("/update-shopsetting")
     @ApiOperation("更新车间信息")
-    public JsonVO<GetShopSettingsDTO> updateShopSeetingController(@RequestBody GetShopSettingsDTO shopsettingsDTO) {
+    public JsonVO<GetShopSettingsDTO> updateShopSeetingController(
+            @ApiParam("车间DTO")@RequestBody GetShopSettingsDTO shopsettingsDTO) {
         shopsettingsService.Update(shopsettingsDTO);
         return null;
     }
@@ -59,21 +65,23 @@ public class ShopSettingsController implements ShopSettingsApis {
      * @param shopsettingsDTO
      * @return
      */
-    @PutMapping("savaST")
+    @PutMapping("/sava-shopsetting")
     @Override
     @ApiOperation("新增车间信息")
-    public JsonVO<GetShopSettingsDTO> saveShopSeetingController(@RequestBody GetShopSettingsDTO shopsettingsDTO) {
+    public JsonVO<GetShopSettingsDTO> saveShopSeetingController(
+            @ApiParam("车间DTO")@RequestBody GetShopSettingsDTO shopsettingsDTO) {
         return null;
     }
     /**
      * 删除或批量删除车间信息
-     * @param shopsettingsDTO
+     * @param ids
      * @return
      */
-    @DeleteMapping("deleteST")
+    @DeleteMapping("/delete-shopsettings")
     @Override
     @ApiOperation("删除或批量删除车间信息")
-    public JsonVO<GetShopSettingsDTO> deleteShopSeetingController(@RequestBody GetShopSettingsDTO shopsettingsDTO) {
+    public JsonVO<GetShopSettingsDTO> deleteShopSeetingController(
+            @ApiParam("车间id")@RequestParam List<Long> ids) {
         return null;
     }
     /**
@@ -81,10 +89,11 @@ public class ShopSettingsController implements ShopSettingsApis {
      * @param shopsettingsDTO
      * @return
      */
-    @GetMapping("getSTName")
+    @GetMapping("/get-shopsettings-name")
     @Override
     @ApiOperation("获取车间名称列表")
-    public JsonVO<GetShopSettingsDTO> getShopSeetingNameController(@RequestBody GetShopSettingsDTO shopsettingsDTO) {
+    public JsonVO<GetShopSettingsDTO> getShopSeetingNameController(
+            @ApiParam("车间DTO")@RequestBody GetShopSettingsDTO shopsettingsDTO) {
         return null;
     }
 
