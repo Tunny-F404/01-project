@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,7 +31,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("param")
+@RequestMapping("sys/config")
 @Api(tags = "参数配置控制器")
 public class ParameterController implements ParameterApis {
 
@@ -42,7 +43,7 @@ public class ParameterController implements ParameterApis {
     ParameterService service;
 
     @Override
-    @DeleteMapping("remove-parameter")
+    @DeleteMapping("remove")
     @ApiOperation("删除参数")
     public JsonVO<Integer> removeParameter(@RequestParam(name = "ids", required = true) List<Integer> ids) {
         return JsonVO.success(service.removeParameters(ids));
@@ -107,7 +108,7 @@ public class ParameterController implements ParameterApis {
     @Override
     @PostMapping("add")
     @ApiOperation("添加参数")
-    public JsonVO<Integer> addParam(@RequestBody ParameterDTO parameterDTO){
+    public JsonVO<Integer> addParam(@Validated @RequestBody ParameterDTO parameterDTO){
         if(service.checkConfigKeyUnique(parameterDTO)) {
             return JsonVO.success(service.saveParameter(parameterDTO));
         }else {
@@ -131,8 +132,8 @@ public class ParameterController implements ParameterApis {
 
 
     @Override
-    @GetMapping("query-all")
-    @ApiOperation("查询所有参数")
+    @GetMapping("list")
+    @ApiOperation("查询参数列表")
     public JsonVO<PageDTO<ParameterDTO>> queryAll(ParameterQuery parameterQuery) {
 
         return JsonVO.success(service.listAll(parameterQuery));
