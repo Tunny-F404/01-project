@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author smile
@@ -35,6 +35,15 @@ public class MdProductSupplierController implements SupplierApis {
     @ApiOperation(value = "查询关联供应商列表")
     @Override
     public JsonVO<PageDTO<SupplierDTO>> querySupplierList(SupplierListQuery query) {
+        Long productId = query.getProductId();
+        if (productId != null && isUnvalid(productId)) {
+            return JsonVO.fail(new PageDTO<>());
+        }
+        Long supplierId = query.getSupplierId();
+        if (supplierId != null && isUnvalid(supplierId)) {
+            return JsonVO.fail(new PageDTO<>());
+        }
+
         return JsonVO.success(mdProductSupplierService.querySupplierList(query));
     }
 
@@ -42,20 +51,66 @@ public class MdProductSupplierController implements SupplierApis {
     @ApiOperation(value = "添加关联供应商")
     @Override
     public JsonVO<String> addSupplierList(@RequestBody SupplierListDTO dto) {
-        return null;
+        Long productId = dto.getProductId();
+        if (productId != null && isUnvalid(productId)) {
+            return JsonVO.fail("Invalid productId");
+        }
+        List<Long> supplierIds = dto.getSupplierIds();
+        if (supplierIds != null && !supplierIds.isEmpty()) {
+            for (Long supplierId : supplierIds) {
+                if (supplierId != null && isUnvalid(supplierId)) {
+                    return JsonVO.fail("Invalid supplierId");
+                }
+            }
+        }
+
+        return JsonVO.success(mdProductSupplierService.addSupplierList(dto));
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ApiOperation(value = "更新关联供应商")
     @Override
     public JsonVO<String> updateSupplier(SupplierDTO dto) {
-        return null;
+        Long id = dto.getId();
+        if (id != null) {
+           if(isUnvalid(id)){
+               return JsonVO.fail("Invalid id");
+           }
+           if(mdProductSupplierService.getById(id) == null){
+               return JsonVO.fail("No record found for the given id");
+           }
+        }
+
+        Long productId = dto.getProductId();
+        if (productId != null && isUnvalid(productId)) {
+            return JsonVO.fail("Invalid productId");
+        }
+
+        Long supplierId = dto.getSupplierId();
+        if (supplierId != null && isUnvalid(supplierId)) {
+            return JsonVO.fail("Invalid supplierId");
+        }
+
+        return JsonVO.success(mdProductSupplierService.updateSupplier(dto));
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     @ApiOperation(value = "删除关联供应商")
     @Override
     public JsonVO<String> deleteBatchSupplier(ProductSupplierListDTO dto) {
-        return null;
+        List<Long> productSupplierIds = dto.getProductSupplierIds();
+        if (productSupplierIds != null && !productSupplierIds.isEmpty()) {
+            for (Long productSupplierId : productSupplierIds) {
+                if (productSupplierId != null && isUnvalid(productSupplierId)) {
+                    return JsonVO.fail("Invalid productSupplierId");
+                }
+            }
+        }
+
+        return JsonVO.success(mdProductSupplierService.deleteBatchSupplier(dto));
+    }
+
+    private boolean isUnvalid(long id) {
+        return id < 0;
     }
 }
