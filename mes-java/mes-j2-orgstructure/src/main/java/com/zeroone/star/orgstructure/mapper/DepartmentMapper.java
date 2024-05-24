@@ -1,6 +1,6 @@
 package com.zeroone.star.orgstructure.mapper;
 
-import com.zeroone.star.orgstructure.entity.Department;
+import com.zeroone.star.orgstructure.entity.DepartmentDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-05-22
  */
 @Mapper
-public interface DepartmentMapper extends BaseMapper<Department> {
+public interface DepartmentMapper extends BaseMapper<DepartmentDO> {
 
 }

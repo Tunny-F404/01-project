@@ -1,6 +1,6 @@
 package com.zeroone.star.orgstructure.service;
 
-import com.zeroone.star.orgstructure.entity.Department;
+import com.zeroone.star.orgstructure.entity.DepartmentDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 
@@ -12,7 +12,7 @@ import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
  * @author 宵夜
  * @since 2024-05-22
  */
-public interface DepartmentService extends IService<Department> {
+public interface DepartmentService extends IService<DepartmentDO> {
 
     /**
      * 新增部门

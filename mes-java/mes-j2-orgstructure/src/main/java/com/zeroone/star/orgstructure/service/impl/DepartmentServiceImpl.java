@@ -1,8 +1,7 @@
 package com.zeroone.star.orgstructure.service.impl;
 
-import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.zeroone.star.orgstructure.entity.Department;
+import com.zeroone.star.orgstructure.entity.DepartmentDO;
 import com.zeroone.star.orgstructure.service.DepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
@@ -30,40 +29,40 @@ interface MsDepartmentMapper {
      * @param departmentDTO
      * @return
      */
-    Department departmentDTOToDepartment(DepartmentDTO departmentDTO);
+    DepartmentDO departmentDTOToDepartment(DepartmentDTO departmentDTO);
 }
 
 
 @Service
-public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstructure.mapper.DepartmentMapper, Department> implements DepartmentService {
+public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstructure.mapper.DepartmentMapper, DepartmentDO> implements DepartmentService {
 
     @Resource
     MsDepartmentMapper msDepartmentMapper;
 
     @Override
     public int saveDepartment(DepartmentDTO departmentDTO) {
-        Department department = msDepartmentMapper.departmentDTOToDepartment(departmentDTO);
-        department.setCreateTime(LocalDateTime.now());
-        return baseMapper.insert(department);
+        DepartmentDO departmentDO = msDepartmentMapper.departmentDTOToDepartment(departmentDTO);
+        departmentDO.setCreateTime(LocalDateTime.now());
+        return baseMapper.insert(departmentDO);
     }
 
     @Override
     public int updateDepartment(DepartmentDTO departmentDTO) {
-        Department department = msDepartmentMapper.departmentDTOToDepartment(departmentDTO);
-        department.setUpdateTime(LocalDateTime.now());
-        return baseMapper.updateById(department);
+        DepartmentDO departmentDO = msDepartmentMapper.departmentDTOToDepartment(departmentDTO);
+        departmentDO.setUpdateTime(LocalDateTime.now());
+        return baseMapper.updateById(departmentDO);
     }
 
     @Override
     public int removeDepartment(int id) {
         //查询所有parentId为id的部门
-        QueryWrapper<Department> objectQueryWrapper = new QueryWrapper<>();
+        QueryWrapper<DepartmentDO> objectQueryWrapper = new QueryWrapper<>();
         objectQueryWrapper.eq("parent_id", id);
-        List<Department> departments = baseMapper.selectList(objectQueryWrapper);
-        if (departments.size() != 0) {
+        List<DepartmentDO> departmentDOS = baseMapper.selectList(objectQueryWrapper);
+        if (departmentDOS.size() != 0) {
             //删除父id为id的部门
-            for (Department department : departments) {
-                baseMapper.deleteById(department.getDeptId());
+            for (DepartmentDO departmentDO : departmentDOS) {
+                baseMapper.deleteById(departmentDO.getDeptId());
             }
         }
         return baseMapper.deleteById(id);

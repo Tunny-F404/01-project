@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("sys_dept")
-public class Department implements Serializable {
+public class DepartmentDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
