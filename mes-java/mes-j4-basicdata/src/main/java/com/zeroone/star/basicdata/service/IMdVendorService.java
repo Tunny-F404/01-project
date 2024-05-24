@@ -38,14 +38,6 @@ public interface IMdVendorService extends IService<MdVendor> {
      */
     Boolean addVendor(VendorAddDTO data);
 
-    /*
-    * 导出供应商
-    * */
-    ResponseEntity<byte[]> exportVendor(VendorExcelSelectDTO vendorExcelSelectDTO);
-
-    MdVendor getByVendorId(Long vendorId);
-
-    void deleteVendors(List<Integer> ids);
 
     ResponseEntity<byte[]> downloadImportTemplate();
 

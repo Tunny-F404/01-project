@@ -36,8 +36,6 @@ public interface IMdUnitMeasureService extends IService<MdUnitMeasure> {
      * @return
      */
     List<UnitMeasureDTO> selectMdUnitMeasureList(UnitMeasureDTO mdUnitMeasure);
-
-    List<MdUnitMeasure> selectMdUnitMeasureList(MdUnitMeasure mdUnitMeasure);
     /**
      * 添加单位信心
      *  @param data 添加信息
