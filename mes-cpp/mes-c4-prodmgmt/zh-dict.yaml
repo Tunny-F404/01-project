@@ -52,3 +52,13 @@ prodmgmt:
   describe:
    name: 删除报工
 
+Approval:
+ post:
+  id: 生产工单编号
+  draft: 草稿
+  remark: 状态
+  name: 审批相关
+  submi: 审批中
+  passed: 审批通过
+  denied: 审批不通过
+

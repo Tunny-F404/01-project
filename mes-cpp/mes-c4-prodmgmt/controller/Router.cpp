@@ -29,8 +29,10 @@
 #include "ws/WSController.h"
 #endif
 
+
 #include "../mes-c4-prodmgmt/controller/ProdWorkorder/ProdWorkorderController.h"
-// ��������˹ر�Swagger�ĵ���
+#include "../controller/ApprovalStage/ApprovalStage.h"
+
 #ifdef CLOSE_SWAGGER_DOC
 // �򻯰󶨿������궨��
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
@@ -53,9 +55,11 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
+
 	//#TIP :ϵͳ��չ·�ɶ��壬д���������
 	ROUTER_SIMPLE_BIND(ProdWorkorderController);
 	ROUTER_SIMPLE_BIND(RemoveWorkReportController);
+ROUTER_SIMPLE_BIND(ApprovalStage);
 
 }
 
