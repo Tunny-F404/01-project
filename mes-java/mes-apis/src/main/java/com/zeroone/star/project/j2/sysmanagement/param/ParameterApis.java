@@ -30,6 +30,8 @@ public interface ParameterApis {
 
     JsonVO<PageDTO<ParameterDTO>> queryAll(ParameterQuery parameterQuery);
 
+    JsonVO<Integer> modifyParam(ParameterDTO parameterDTO);
+
 
 
 

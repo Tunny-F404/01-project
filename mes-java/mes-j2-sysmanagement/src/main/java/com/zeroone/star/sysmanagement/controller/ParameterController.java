@@ -111,6 +111,13 @@ public class ParameterController implements ParameterApis {
         return JsonVO.success(service.saveParameter(parameterDTO));
     }
 
+    @Override
+    @PostMapping("update")
+    @ApiOperation("修改参数")
+    public JsonVO<Integer> modifyParam(@RequestBody ParameterDTO parameterDTO){
+        return JsonVO.success(service.updateParameter(parameterDTO));
+    }
+
 
 
     @Override

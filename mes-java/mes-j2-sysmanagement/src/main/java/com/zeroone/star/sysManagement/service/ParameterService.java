@@ -1,6 +1,8 @@
 package com.zeroone.star.sysmanagement.service;
 
+import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
+import com.zeroone.star.project.j2.sysmanagement.query.param.ParameterQuery;
 import com.zeroone.star.sysmanagement.entity.ParameterDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -19,5 +21,9 @@ public interface ParameterService extends IService<ParameterDO> {
     Integer removeParameters(List<Integer> ids);
 
     Integer saveParameter(ParameterDTO parameterDTO);
+
+    PageDTO listAll(ParameterQuery condition);
+
+    Integer updateParameter(ParameterDTO parameterDTO);
 
 }
