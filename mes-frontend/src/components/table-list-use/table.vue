@@ -1,79 +1,47 @@
 <template>
-    <el-button @click="resetDateFilter">reset date filter</el-button>
-    <el-button @click="clearFilter">reset all filters</el-button>
-    <el-table ref="tableRef" row-key="date" :data="tableData" style="width: 100%">
-        <el-table-column prop="date" label="Date" sortable width="180" column-key="date" :filters="[
-            { text: '2016-05-01', value: '2016-05-01' },
-            { text: '2016-05-02', value: '2016-05-02' },
-            { text: '2016-05-03', value: '2016-05-03' },
-            { text: '2016-05-04', value: '2016-05-04' },
-        ]" :filter-method="filterHandler" />
-        <el-table-column prop="name" label="Name" width="180" />
-        <el-table-column prop="address" label="Address" :formatter="formatter" />
-
-        <el-table-column prop="tag" label="Tag" width="100" :filters="[
-            { text: 'Home', value: 'Home' },
-            { text: 'Office', value: 'Office' },
-        ]" :filter-method="filterTag" filter-placement="bottom-end">
-            <template #default="scope">
-                <el-tag :type="scope.row.tag === 'Home' ? '' : 'success'" disable-transitions>{{ scope.row.tag
-                    }}</el-tag>
-            </template>
-        </el-table-column>
-    </el-table>
+    <div class="cl-PaginationTable">
+        <el-table :data="tableData" height="320">
+            <el-table-column v-for="col of tableColumns" :key="col.data" :prop="col.data" :label="col.label" />
+        </el-table>
+    </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { TableColumnCtx, TableInstance } from 'element-plus'
-//原本是const tableRef = ref(null)但是会爆红，还没找到元解决方案
-const tableRef = ref()
+<script setup>
+import { ElTable, ElTableColumn } from "element-plus";
+import { getPeopleInfo } from "@/api/people.js";
+import { onMounted, ref } from "vue";
 
-const resetDateFilter = () => {
-    tableRef.value.clearFilter(['date'])
-}
-
-const clearFilter = () => {
-    tableRef.value.clearFilter()
-}
-
-const formatter = (row, column) => {
-    return row.address
-}
-
-const filterTag = (value, row) => {
-    return row.tag === value
-}
-
-const filterHandler = (value, row, column) => {
-    const property = column.property
-    return row[property] === value
-}
-
-const tableData = [
+// t- 初始化表格数据
+const tableData = ref([]);
+const tableColumns = [
     {
-        date: '2016-05-03',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-        tag: 'Home',
+        label: "人员",
+        data: "name",
     },
     {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-        tag: 'Office',
+        label: "地址",
+        data: "address",
     },
     {
-        date: '2016-05-04',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-        tag: 'Home',
+        label: "签到时间",
+        data: "time",
     },
-    {
-        date: '2016-05-01',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-        tag: 'Office',
-    },
-]
+];
+async function getTableData() {
+    const res = await getPeopleInfo();
+    tableData.value = res.data;
+}
+onMounted(async () => {
+    getTableData();
+});
 </script>
+
+<style lang="less" scoped>
+.cl-PaginationTable {
+    width: 500px;
+    height: 300px;
+    border: 3px solid;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+</style>
