@@ -35,7 +35,10 @@
 		"src/**/*.tsx",
 		"src/**/*.vue",
 		// 测试文件集
-		"tests/**/*.ts"
+		"tests/**/*.ts",
+		// 导入自动生成的类型声明文件
+		"auto-imports.d.ts",
+		"components.d.ts",
 	],
 	"exclude": [
 		"node_modules",

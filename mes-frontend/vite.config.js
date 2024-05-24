@@ -58,6 +58,8 @@ export default ({ mode }) =>
 				resolvers: [ElementPlusResolver()]
 			}),
 			Components({
+				dts: true,
+				version: 3,
 				resolvers: [ElementPlusResolver()]
 			}),
 			createHtmlPlugin({

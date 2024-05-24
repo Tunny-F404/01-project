@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import { ElBadge } from 'element-plus'
-import SearchBar from '@/components/search-bar/search-bar.vue'
+// import SearchBar from '@/components/search-bar/search-bar.vue'
 
 defineOptions({
 	name: 'SearchBarPage'
