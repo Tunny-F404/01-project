@@ -1,7 +1,9 @@
 package com.zeroone.star.project.j4.basicdata;
 
 import com.zeroone.star.project.dto.j4.basicdata.VendorExcelSelectDTO;
+import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 供应商接口API定义
@@ -16,4 +18,18 @@ public interface SupplierApis {
      * @return
      */
     ResponseEntity<byte[]> exportVendor(VendorExcelSelectDTO vendorExcelSelectDTO);
+
+    /**
+     * 下载供应商导入模板
+     * @return 导入模板
+     */
+    ResponseEntity<byte[]> downloadImportTemplate();
+
+    /**
+     * 导入供应商
+     * @param file
+     * @return 是否导入成功
+     */
+    JsonVO<Boolean> importVendors(MultipartFile file);
+
 }

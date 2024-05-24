@@ -2,7 +2,6 @@ package com.zeroone.star.project.dto;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zeroone.star.project.dto.j4.logmanagement.SysLoginInfoDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -57,13 +56,11 @@ public class PageDTO<T> implements Serializable {
 
     /**
      * 静态构建方法，将分页插件的page对象转换成当前pageDto对象
-     *
-     * @param <T>                 列表元素类型模板一般是DO
-     * @param page                分页插件的page对象
-     * @param sysLoginInfoDTOList
+     * @param page 分页插件的page对象
+     * @param <T>  列表元素类型模板一般是DO
      * @return 返回分页数据对象
      */
-    public static <T> PageDTO<T> create(Page<T> page, List<SysLoginInfoDTO> sysLoginInfoDTOList) {
+    public static <T> PageDTO<T> create(Page<T> page) {
         PageDTO<T> pageResult = new PageDTO<>();
         pageResult.setTotal(page.getTotal());
         pageResult.setRows(page.getRecords());

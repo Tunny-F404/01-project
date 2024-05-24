@@ -1,13 +1,18 @@
 package com.zeroone.star.basicdata.service.impl;
 
 import cn.hutool.core.date.DateTime;
+import com.alibaba.excel.EasyExcel;
 import com.zeroone.star.basicdata.entity.MdVendor;
 import com.zeroone.star.basicdata.mapper.MdVendorMapper;
 import com.zeroone.star.basicdata.service.IMdVendorService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
+import com.zeroone.star.project.components.easyexcel.ExcelReadListener;
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.dto.j4.basicdata.VendorDTO;
 import com.zeroone.star.project.dto.j4.basicdata.VendorExcelSelectDTO;
+import com.zeroone.star.project.dto.j4.basicdata.VendorImportDTO;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpHeaders;
@@ -15,8 +20,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +44,8 @@ public class MdVendorServiceImpl extends ServiceImpl<MdVendorMapper, MdVendor> i
 
     @Resource
     private EasyExcelComponent excel;
+    @Resource
+    private UserHolder userHolder;
     /*
     * 导出供应商
     * */
@@ -81,5 +92,53 @@ public class MdVendorServiceImpl extends ServiceImpl<MdVendorMapper, MdVendor> i
         ids.forEach(vendorId->{
             mdVendorMapper.deleteVendor(vendorId);
         });
+    }
+
+    @Override
+    public ResponseEntity<byte[]> downloadImportTemplate() {
+        // 创建一个空的数据列表，用于生成空白模板
+        List<VendorImportDTO> dataList = new ArrayList<>();
+
+        // 创建一个Excel模板，并写入空数据列表
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        EasyExcel.write(out, VendorImportDTO.class).sheet("导入模板").doWrite(dataList);
+        byte[] bytes;
+        //导出数据到输出流
+        try {
+            //获取字节数据
+            bytes = out.toByteArray();
+            out.close();
+        } catch (IOException e) {
+            throw new RuntimeException("模板生成失败");
+        }
+        // 构造响应头，告诉浏览器返回的内容是一个Excel文件
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.add("Content-Disposition","attachment;filename= vendor_import_template.xlsx");
+        // 返回一个字节数组作为Excel文件内容
+        return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
+    }
+
+    @Override
+    public void importVendors(MultipartFile file)  {
+        // 使用EasyExcel读取上传的Excel文件并处理
+        try {
+            ExcelReadListener<VendorImportDTO> listener = new ExcelReadListener<>();
+            EasyExcel.read(file.getInputStream(), VendorImportDTO.class, listener).sheet().doRead();
+            // 将读取到的数据插入到数据库
+            //获取当前登录用户
+            UserDTO currentUser = userHolder.getCurrentUser();
+            listener.getDataList().forEach(data -> {
+                MdVendor vendor = new MdVendor();
+                BeanUtils.copyProperties(data, vendor);
+                vendor.setCreateBy(currentUser.getUsername());
+                vendor.setUpdateBy(currentUser.getUsername());
+                mdVendorMapper.insert(vendor);
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }

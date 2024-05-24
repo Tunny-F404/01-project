@@ -2,7 +2,6 @@ package com.zeroone.star.sysmanagement.controller;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.j4.logmanagement.SysLoginInfoDTO;
-import com.zeroone.star.project.j4.sysmanagement.logmanagement.LoginLogApis;
 import com.zeroone.star.project.query.j4.logmanagement.SysLoginInfoQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
@@ -22,13 +21,12 @@ import javax.annotation.Resource;
 @RestController
 @Api(tags = "监测数据-登录日志管理")
 @RequestMapping("/monitor/logininfo")
-public class SysLoginInfoController implements LoginLogApis {
+public class SysLoginInfoController {
 
 
     @Resource
     private SysLoginInfoService sysLoginInfoService;
 
-    @Override
     @ApiOperation("日志分页查询" )
     @GetMapping("query-list")
     public JsonVO<PageDTO<SysLoginInfoDTO>> querySysLoginInfos( SysLoginInfoQuery query) {
@@ -37,7 +35,6 @@ public class SysLoginInfoController implements LoginLogApis {
     }
 
     @ApiOperation("添加登录日志")
-    @Override
     @PostMapping("add-logininfo")
     public JsonVO<Boolean> addSysLoginInfo(@RequestBody  SysLoginInfoDTO dto) {
         boolean result = sysLoginInfoService.add(dto);

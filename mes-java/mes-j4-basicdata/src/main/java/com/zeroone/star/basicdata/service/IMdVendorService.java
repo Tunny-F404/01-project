@@ -9,6 +9,7 @@ import com.zeroone.star.basicdata.entity.MdVendor;
 import com.zeroone.star.project.dto.j4.basicdata.VendorExcelSelectDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -37,4 +38,8 @@ public interface IMdVendorService extends IService<MdVendor> {
     MdVendor getByVendorId(Long vendorId);
 
     void deleteVendors(List<Integer> ids);
+
+    ResponseEntity<byte[]> downloadImportTemplate();
+
+    void importVendors(MultipartFile file);
 }

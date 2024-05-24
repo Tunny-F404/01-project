@@ -63,7 +63,7 @@ public class MdVendor implements Serializable {
     private String contact2Email;
     @ExcelProperty(value = "统一社会信用代码",index = 18)
     private String creditCode;
-    @ExcelProperty(value = "是否启用",index = 19)
+    @ExcelProperty(value = "是否启用Y/N",index = 19)
     private String enableFlag;
     //备注
     @ExcelIgnore
@@ -92,5 +92,6 @@ public class MdVendor implements Serializable {
     private String updateBy;
     //更新时间
     @ExcelIgnore
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 }
