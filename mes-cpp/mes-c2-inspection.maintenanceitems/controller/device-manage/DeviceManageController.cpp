@@ -117,7 +117,7 @@ Uint64JsonVO::Wrapper DeviceManageController::execExportProj(const DeviceManageI
 }
 
 
-Uint64JsonVO::Wrapper DeviceManageController::execAddProj(const DeviceManageBaseDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper DeviceManageController::execAddProj(const DeviceManageAddDTO::Wrapper& dto)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();

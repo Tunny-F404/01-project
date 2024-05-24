@@ -28,14 +28,14 @@ class DeviceManageIdDTO : public oatpp::DTO
 	DTO_INIT(DeviceManageIdDTO, DTO);
 
 	//项目ID
-	API_DTO_FIELD_DEFAULT(String, subjectId, ZH_WORDS_GETTER("device-manage.field.subjectId"));
+	API_DTO_FIELD_DEFAULT(String, subjectId, ZH_WORDS_GETTER("device-manage.field.subjectOprId"));
 
 };
 
 
-class DeviceManageBaseDTO : public oatpp::DTO
+class DeviceManageAddDTO : public oatpp::DTO
 {
-	DTO_INIT(DeviceManageBaseDTO, DTO);
+	DTO_INIT(DeviceManageAddDTO, DTO);
 
 	//项目编码
 	API_DTO_FIELD_DEFAULT(String, subjectCode, ZH_WORDS_GETTER("device-manage.field.subjectCode"));

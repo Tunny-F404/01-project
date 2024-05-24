@@ -46,7 +46,7 @@ uint64_t DeviceManageIdDAO::deleteById(const DeviceManageIdDO& uObj)
 
 }
 
-uint64_t DeviceManageDAO::insert(const DeviceManageBaseDO& iObj)
+uint64_t DeviceManageDAO::insert(const DeviceManageAddDO& iObj)
 {
 	string sql = "INSERT INTO `dv_subject` (`subject_code`, `subject_name`, `subject_type`, `subject_content`, `subject_standard`, `enable_flag`) VALUES (?, ?, ?, ?, ?, ?)";
 	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s", iObj.getSubjectCode(), iObj.getSubjectName(), iObj.getSubjectType(), iObj.getSubjectContent(), iObj.getSubjectStandard(), iObj.getEnableFlag());

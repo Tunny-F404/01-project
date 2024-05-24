@@ -38,7 +38,7 @@ public:
 	string creatExcel(const DeviceManageIdDTO::Wrapper& dto);
 
 	// ±£´æÊý¾Ý
-	uint64_t saveData(const DeviceManageBaseDTO::Wrapper& dto);
+	uint64_t saveData(const DeviceManageAddDTO::Wrapper& dto);
 
 };
 
