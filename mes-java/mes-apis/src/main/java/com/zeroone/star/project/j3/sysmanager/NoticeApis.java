@@ -3,7 +3,7 @@ package com.zeroone.star.project.j3.sysmanager;
 
 import com.zeroone.star.project.j3.dto.*;
 import com.zeroone.star.project.j3.query.NoticeQuery;
-import com.zeroone.star.project.j3.vo.NoticeListVo;
+import com.zeroone.star.project.j3.vo.NoticeListVO;
 import com.zeroone.star.project.vo.JsonVO;
 import java.util.List;
 
@@ -31,13 +31,13 @@ public interface NoticeApis {
      * @param dto 新增数据
      * @return 新增数据的唯一编号
      */
-    JsonVO<Long> updateNotice(UpdateNoticeDto dto);
+    JsonVO<Long> updateNotice(UpdateNoticeDTO dto);
     /**
      * 根据给定的公告获取对应的公告数据列表
      * @param query 查询条件对象
      * @return 对应的公告数据列表
      */
-    JsonVO<List<NoticeListVo>> queryNoticeListVosByCondition(NoticeQuery query);
+    JsonVO<List<NoticeListVO>> queryNoticeListVosByCondition(NoticeQuery query);
     /**
      * 批量删除公告(notices)
      * @param ids 数据ID集合

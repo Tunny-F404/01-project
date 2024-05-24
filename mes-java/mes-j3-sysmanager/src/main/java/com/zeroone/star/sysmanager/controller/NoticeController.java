@@ -3,7 +3,7 @@ package com.zeroone.star.sysmanager.controller;
 import com.zeroone.star.project.j3.dto.*;
 import com.zeroone.star.project.j3.query.NoticeQuery;
 import com.zeroone.star.project.j3.sysmanager.NoticeApis;
-import com.zeroone.star.project.j3.vo.NoticeListVo;
+import com.zeroone.star.project.j3.vo.NoticeListVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
@@ -41,7 +41,7 @@ public class NoticeController implements NoticeApis {
     @Override
     @PostMapping("/update-notice")
     @ApiOperation("更新公告")
-    public JsonVO<Long> updateNotice(UpdateNoticeDto dto) {
+    public JsonVO<Long> updateNotice(UpdateNoticeDTO dto) {
         //service.updateById(dto);
         return null;
     }
@@ -49,7 +49,7 @@ public class NoticeController implements NoticeApis {
     @Override
     @PostMapping("/query-noticeListVos-by-condition")
     @ApiOperation("查询公告")
-    public JsonVO<List<NoticeListVo>> queryNoticeListVosByCondition(NoticeQuery query) {
+    public JsonVO<List<NoticeListVO>> queryNoticeListVosByCondition(NoticeQuery query) {
         return null;
     }
 
