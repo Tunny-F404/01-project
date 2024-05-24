@@ -4,6 +4,7 @@ import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
 import com.zeroone.star.project.j2.sysmanagement.query.param.ParameterQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -15,10 +16,10 @@ import java.util.List;
  */
 public interface ParameterApis {
     // 删除配置
-    JsonVO<Integer> removeParameter(List<Integer> ids);
+    JsonVO<ResultStatus> removeParameterList(List<Integer> ids);
 
     // 刷新缓存
-    JsonVO<List<ParameterDTO>> queryParameter();
+    JsonVO<ResultStatus> refreshCache();
 
     // 导出配置
     ResponseEntity<byte[]> exportParameter();
@@ -26,7 +27,6 @@ public interface ParameterApis {
 
     JsonVO<ParameterDTO> addParam(ParameterDTO parameterDTO);
 
-    JsonVO<Integer> deleteById(Integer id);
 
     JsonVO<PageDTO<ParameterDTO>> queryAll(ParameterQuery parameterQuery);
 
