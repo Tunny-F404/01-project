@@ -4,8 +4,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.customer.entity.MdClient;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
+import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import lombok.SneakyThrows;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -44,4 +48,23 @@ public interface IMdClientService extends IService<MdClient> {
      * @Param id
      **/
     ClientDTO getById(Long id);
+    /**
+     * @param clientExportQuery 导出条件
+     * @return 导出结果
+     */
+    ResponseEntity<byte[]> queryClientExportByExcel(ClientExportQuery clientExportQuery);
+
+
+
+    /**
+     * @param customer 数据集
+     * @return 导入结果
+     */
+    JsonVO<String> importClientByExcel(MultipartFile customer);
+
+    /**
+     * @return 返回下载模板情况
+     */
+    ResponseEntity<byte[]> DownloadTemplate();
+
 }
