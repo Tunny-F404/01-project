@@ -108,14 +108,24 @@ public class ParameterController implements ParameterApis {
     @PostMapping("add")
     @ApiOperation("添加参数")
     public JsonVO<Integer> addParam(@RequestBody ParameterDTO parameterDTO){
-        return JsonVO.success(service.saveParameter(parameterDTO));
+        if(service.checkConfigKeyUnique(parameterDTO)) {
+            return JsonVO.success(service.saveParameter(parameterDTO));
+        }else {
+            return JsonVO.fail(0);
+        }
+
+
     }
 
     @Override
     @PostMapping("update")
     @ApiOperation("修改参数")
     public JsonVO<Integer> modifyParam(@RequestBody ParameterDTO parameterDTO){
-        return JsonVO.success(service.updateParameter(parameterDTO));
+        if(service.checkConfigKeyUnique(parameterDTO)) {
+            return JsonVO.success(service.updateParameter(parameterDTO));
+        }else {
+            return JsonVO.fail(0);
+        }
     }
 
 
