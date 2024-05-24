@@ -47,8 +47,8 @@ public interface LoginLogApis {
 
     /**
      * 添加登录日志信息
+     *
      * @param dto 登录日志信息对象
-     * @return
      */
     JsonVO<Boolean> addSysLoginInfo(SysLoginInfoDTO dto);
 }
