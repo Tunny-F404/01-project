@@ -23,7 +23,7 @@
 
 #include "PurchaseReceipt/GetReceiptController.h"
 
-#include "productioninvestigation/ProductionProcessController.h"
+
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
@@ -71,7 +71,7 @@ void Router::initRouter()
 	//#TIP :ϵͳ��չ·�ɶ��壬д���������
 	ROUTER_SIMPLE_BIND(GetReceiptController);
 	//#TIP :绯荤粺鎵╁睍璺敱瀹氫箟锛屽啓鍦ㄨ繖涓悗闈?
-	ROUTER_SIMPLE_BIND(ProductionProcessController);
+	
 	//#TIP :ϵͳ��չ·�ɶ��壬д���������
 	ROUTER_SIMPLE_BIND(AddWhStorageorderController);
 	ROUTER_SIMPLE_BIND(ModifyWhStorageorderController);
