@@ -2,6 +2,10 @@
 return:
  query-all: 
   summary: 查询所有供应商退货单
+ query-detail:
+  summary: 查询退货单据详细信息
+ add-detail:
+  summary: 新增单据详细信息
  modify-return:
   summary: 修改供应商退货单
  execute-return:
@@ -20,6 +24,8 @@ return:
   status: 单据状态
   action: 操作
   filename: 退货单文件名
+  remark: 备注
+  batchcode: 批次号
 
 material: 
  get:

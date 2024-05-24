@@ -48,6 +48,18 @@ class ReturnDTO : public oatpp::DTO
 };
 
 /**
+* 定义一个单据详情传输对象
+*/
+class ReturnDetailDTO : public ReturnDTO
+{
+	DTO_INIT(ReturnDetailDTO, ReturnDTO);
+	// 批次号
+	API_DTO_FIELD_DEFAULT(String, batchCode, ZH_WORDS_GETTER("return.fields.batchcode"));
+	// 备注
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("return.fields.remark"));
+};
+
+/**
  * 定义一个单据信息分页传输对象
  */
 class ReturnPageDTO : public PageDTO<ReturnDTO::Wrapper>

@@ -34,6 +34,14 @@ class ReturnJsonVO : public JsonVO<ReturnDTO::Wrapper>
 };
 
 /**
+* 定义一个单据详细信息显示JsonVO对象
+*/
+class ReturnDetailJsonVO : public JsonVO<ReturnDetailDTO::Wrapper>
+{
+	DTO_INIT(ReturnDetailJsonVO, JsonVO<ReturnDetailDTO::Wrapper>);
+};
+
+/**
  * 定义一个单据信息分页显示JsonVO对象，用于响应给客户端
  */
 class ReturnPageJsonVO : public JsonVO<ReturnPageDTO::Wrapper>
