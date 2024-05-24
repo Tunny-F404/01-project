@@ -30,7 +30,12 @@ class Dv_check_planDO
 	// 频率
 	CC_SYNTHESIZE(string, cycle_type, Cycle_type);
 	// 次数
-	CC_SYNTHESIZE(uint32_t, cycle_count, Cycle_count);
+	//CC_SYNTHESIZE(uint32_t, cycle_count, Cycle_count);
+protected: uint32_t cycle_count; public: uint32_t getCycle_count(void) const {
+	return cycle_count;
+}public: void setCycle_count(uint32_t var) {
+	cycle_count = var;
+};
 	// 状态
 	CC_SYNTHESIZE(string, status, Status);
 	// 备注 

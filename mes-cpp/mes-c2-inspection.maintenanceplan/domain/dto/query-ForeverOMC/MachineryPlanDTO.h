@@ -54,7 +54,7 @@ class MachineryPlanDTO : public oatpp::DTO
 	}
 
 	// 次数
-	DTO_FIELD(String, cycle_count);
+	DTO_FIELD(UInt32, cycle_count);
 	DTO_FIELD_INFO(cycle_count) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.cycle-count");
 	}
