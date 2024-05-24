@@ -8,6 +8,7 @@ import com.zeroone.star.project.j2.orgstructure.job.JobApis;
 import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,22 +54,22 @@ public class JobController implements JobApis {
 
     @Override
     @GetMapping("query-job-names")
-    @ApiOperation("获取岗位名称列表")
+    @ApiOperation(value = "获取岗位名称列表", notes = "获取所有岗位的名称列表")
     public JsonVO<List<String>> queryJobNames() {
         return null;
     }
 
     @Override
     @PostMapping("query-job-list")
-    @ApiOperation("获取岗位列表")
-    public JsonVO<List<JobVO>> queryJobList(@RequestBody JobQuery jobQuery) {
+    @ApiOperation(value = "获取岗位列表", notes = "通过提供查询条件获取岗位列表")
+    public JsonVO<List<JobVO>> queryJobList(@RequestBody @ApiParam(value = "岗位查询条件", required = true) JobQuery jobQuery) {
         return null;
     }
 
     @Override
     @GetMapping("query-job-detail")
-    @ApiOperation("获取指定岗位详情")
-    public JsonVO<JobVO> queryJobDetail(@RequestParam Long id) {
+    @ApiOperation(value = "获取指定岗位详情", notes = "通过提供岗位ID获取该岗位的详细信息")
+    public JsonVO<JobVO> queryJobDetail(@RequestParam @ApiParam(value = "岗位ID", required = true) Long id) {
         return null;
     }
 

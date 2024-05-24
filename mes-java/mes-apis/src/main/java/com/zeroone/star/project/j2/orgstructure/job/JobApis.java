@@ -31,12 +31,13 @@ public interface JobApis {
 
     //导出岗位文件
     ResponseEntity<byte[]> exportJob(String group, String storageId);
-    @ApiOperation("获取岗位名称列表")
+
+    //获取岗位名称列表
     JsonVO<List<String>> queryJobNames();
 
-    @ApiOperation("获取岗位列表")
+    //获取岗位列表
     JsonVO<List<JobVO>> queryJobList(JobQuery jobQuery);
 
-    @ApiOperation("获取指定岗位详情")
+    //获取指定岗位详情
     JsonVO<JobVO> queryJobDetail(Long id);
 }
