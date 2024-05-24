@@ -6,6 +6,7 @@ import com.zeroone.star.basicdata.entity.MdUnitMeasure;
 import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitUpdateDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -43,5 +44,7 @@ public interface IMdUnitMeasureService extends IService<MdUnitMeasure> {
      * @return 成功返回true,失败false
      */
     Boolean addUnit(UnitAddDTO data);
+
+    Boolean updateUnit(UnitUpdateDTO data);
 
 }

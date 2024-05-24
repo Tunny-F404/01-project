@@ -12,6 +12,7 @@ import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitUpdateDTO;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +20,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
@@ -105,6 +105,21 @@ public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper, M
             mdUnitMeasure.setCreateTime(LocalDateTime.now());
             mdUnitMeasure.setUpdateTime(LocalDateTime.now());
             return mdUnitMeasureMapper.insert(mdUnitMeasure) > 0;
+        } catch (Exception e) {
+            log.info("添加单位失败",e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean updateUnit(UnitUpdateDTO data) {
+        try {
+            UserDTO userDTO = userHolder.getCurrentUser();
+            MdUnitMeasure mdUnitMeasure = new MdUnitMeasure();
+            BeanUtil.copyProperties(data, mdUnitMeasure);
+            mdUnitMeasure.setUpdateBy(userDTO.getUsername());
+            mdUnitMeasure.setUpdateTime(LocalDateTime.now());
+            return mdUnitMeasureMapper.updateById(mdUnitMeasure) > 0;
         } catch (Exception e) {
             log.info("添加单位失败",e.getMessage());
             return false;

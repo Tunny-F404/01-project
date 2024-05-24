@@ -2,6 +2,7 @@ package com.zeroone.star.project.j4.basicdata;
 
 import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitUpdateDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 
@@ -41,5 +42,5 @@ public interface AccountUnitApis {
      * @param data 单位数据
      * @return 修改单位结果，成功或失败
      */
-    JsonVO updateUnit(UnitAddDTO data);
+    JsonVO updateUnit(UnitUpdateDTO data);
 }

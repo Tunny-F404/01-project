@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitUpdateDTO;
 import com.zeroone.star.project.j4.basicdata.AccountUnitApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -121,8 +122,8 @@ public class MdUnitMeasureController implements AccountUnitApis {
 
     @ApiOperation(value = "修改单位")
     @PostMapping("update-unit")
-    public JsonVO updateUnit(@Validated @RequestBody UnitAddDTO data) {
-//        iMdUnitMeasureService.updateUnit(data);
-        return JsonVO.success("删除成功");
+    public JsonVO updateUnit(@Validated @RequestBody UnitUpdateDTO data) {
+        if (iMdUnitMeasureService.updateUnit(data)) return JsonVO.success("修改成功");
+        else return JsonVO.fail("修改失败");
     }
 }
