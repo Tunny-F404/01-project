@@ -1,5 +1,6 @@
 package com.zeroone.star.message.config;
 
+
 import com.zeroone.star.project.config.swagger.SwaggerCore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

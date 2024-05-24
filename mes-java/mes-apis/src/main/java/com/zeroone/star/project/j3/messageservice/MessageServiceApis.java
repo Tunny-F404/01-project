@@ -18,4 +18,6 @@ public interface MessageServiceApis {
 
     JsonVO<List<Long>> modifyMessageStatus(Long id);
 
+
+
 }
