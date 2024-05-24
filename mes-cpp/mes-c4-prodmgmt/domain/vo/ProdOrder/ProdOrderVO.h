@@ -35,8 +35,8 @@ class ProdOrderAddJsonVO : public JsonVO<ProdOrderDTO::Wrapper> {
 /**
  * 分页显示生产任务列表JsonVO，用于响应给客户端的Json对象
  */
-class ProdOrderPageJsonVO : public JsonVO<ProdOrderDTO::Wrapper> {
-	DTO_INIT(ProdOrderPageJsonVO, JsonVO<ProdOrderDTO::Wrapper>);
+class ProdOrderPageJsonVO : public JsonVO<ProdOrderQueryDTO::Wrapper> {
+	DTO_INIT(ProdOrderPageJsonVO, JsonVO<ProdOrderQueryDTO::Wrapper>);
 };
 
 //显示生产任务列表树JsonVO
