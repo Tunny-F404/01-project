@@ -2,6 +2,7 @@ package com.zeroone.star.project.j6.product_management.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -15,6 +16,7 @@ import lombok.Data;
  * @version 1.0.0
  */
 @Data
+@Builder
 @ApiModel("修改关联供应商")
 public class SupplierDTO {
     @ApiModelProperty(value = "关联供应商id", example = "1")
