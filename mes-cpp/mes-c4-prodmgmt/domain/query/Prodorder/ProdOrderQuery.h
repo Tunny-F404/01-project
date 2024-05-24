@@ -47,11 +47,12 @@ class ProdOrderQuery : public PageQuery
 	API_DTO_FIELD_DEFAULT(String, end_time, ZH_WORDS_GETTER("prod.query.summary.endTime"));
 };
 
-class ProdOrderTreeQuery : public PageQuery, public TreeNode
+class ProdOrderTreeQuery : public ProdOrderQuery, public TreeNode
 {
 	// 定义初始化
-	DTO_INIT(ProdOrderTreeQuery, PageQuery);
+	DTO_INIT(ProdOrderTreeQuery, ProdOrderQuery);
 	
+	/*
 	// 任务名
 	API_DTO_FIELD_DEFAULT(String, task_name, ZH_WORDS_GETTER("prod.query.summary.taskName"));
 	// 工作站
@@ -62,6 +63,7 @@ class ProdOrderTreeQuery : public PageQuery, public TreeNode
 	API_DTO_FIELD_DEFAULT(String, start_time, ZH_WORDS_GETTER("prod.query.summary.startTime"));
 	// 结束时间
 	API_DTO_FIELD_DEFAULT(String, end_time, ZH_WORDS_GETTER("prod.query.summary.endTime"));
+	*/
 
 	// 子菜单
 	API_DTO_FIELD(List<ProdOrderTreeQuery::Wrapper>, children, ZH_WORDS_GETTER("prod.field.menusub"), false, {});
