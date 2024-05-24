@@ -1,3 +1,4 @@
+<<<<<<< c4
 addprodworkorder:
  workorder:
   workorder_id: 工单ID
@@ -44,3 +45,11 @@ bom:
   quantity: 预计使用量
  get:
   summary: 获取生产工单BOM列表
+  
+prodmgmt:
+ delete:
+  fields:
+   recordId: 生产工单的记录Id
+  describe:
+   name: 删除报工
+>>>>>>> 0a5e8ce96e83c190b08ba7b6f34edb5eb5ea8732
