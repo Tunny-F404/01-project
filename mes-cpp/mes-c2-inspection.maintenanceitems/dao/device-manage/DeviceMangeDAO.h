@@ -20,7 +20,7 @@
 #ifndef _DEVICEMANAGE_DAO_
 #define _DEVICEMANAGE_DAO_
 #include "BaseDAO.h"
-#include "../../domain/do/device-manage/DeviceManageDO.h"
+#include "../../domain/do/dv_subject/DeviceManageDO.h"
 
 /**
  * 示例表数据库操作实现
@@ -36,7 +36,7 @@ public:
 	list<DeviceManageDO> queryById(const DeviceManageIdDO& uObj);
 
 	// 插入数据
-	uint64_t insert(const DeviceManageBaseDO& iObj);
+	uint64_t insert(const DeviceManageAddDO& iObj);
 
 
 };

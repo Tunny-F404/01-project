@@ -52,7 +52,7 @@ public:
 
 	//新增接口描述和处理
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("device-manage.summary.add-proj"), addProj, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/device-manage/add-proj", addProj, BODY_DTO(DeviceManageBaseDTO::Wrapper, dto), execAddProj(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/device-manage/add-proj", addProj, BODY_DTO(DeviceManageAddDTO::Wrapper, dto), execAddProj(dto));
 
 
 
@@ -67,7 +67,7 @@ private:
 	Uint64JsonVO::Wrapper execExportProj(const DeviceManageIdDTO::Wrapper& dto);
 
 	//新增项目
-	Uint64JsonVO::Wrapper execAddProj(const DeviceManageBaseDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddProj(const DeviceManageAddDTO::Wrapper& dto);
 
 
 
