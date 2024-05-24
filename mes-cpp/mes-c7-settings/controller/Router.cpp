@@ -27,6 +27,8 @@
 #include "add-del-mod/AddDelModController.h"
 #include"warehouse-settings/MergeMenuController.h"
 
+
+
 #ifdef HTTP_SERVER_DEMO
 #include "add-del-mod/AddDelModController.h"
 #include "ws/WSController.h"
@@ -62,6 +64,7 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(GetAreaDetailsController);
 	ROUTER_SIMPLE_BIND(DetailsPageController);
 	ROUTER_SIMPLE_BIND(MergeMenuController);
+
 }
 
 #ifdef HTTP_SERVER_DEMO
