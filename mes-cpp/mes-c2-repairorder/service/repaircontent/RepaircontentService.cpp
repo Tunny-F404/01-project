@@ -39,9 +39,9 @@ RepaircontentPageDTO::Wrapper RepaircontentService::listAll(const RepaircontentQ
 	// 分页查询数据
 	pages->total = count;
 	pages->calcPages();
-	list<RepaircontentDO> result = dao.selectWithPage(query);
+	list<de_repair_lineDO> result = dao.selectWithPage(query);
 	// 将DO转换成DTO
-	for (RepaircontentDO sub : result)
+	for (de_repair_lineDO sub : result)
 	{
 		auto dto = RepaircontentDTO::createShared();
 		// 		dto->id = sub.getId();
@@ -58,7 +58,7 @@ RepaircontentPageDTO::Wrapper RepaircontentService::listAll(const RepaircontentQ
 uint64_t RepaircontentService::saveData(const RepaircontentDTO::Wrapper& dto)
 {
 	// 组装DO数据
-	RepaircontentDO data;
+	de_repair_lineDO data;
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
@@ -71,7 +71,7 @@ uint64_t RepaircontentService::saveData(const RepaircontentDTO::Wrapper& dto)
 bool RepaircontentService::updateData(const RepaircontentDTO::Wrapper& dto)
 {
 	// 组装DO数据
-	RepaircontentDO data;
+	de_repair_lineDO data;
 	// 	data.setId(dto->id.getValue(0));
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));

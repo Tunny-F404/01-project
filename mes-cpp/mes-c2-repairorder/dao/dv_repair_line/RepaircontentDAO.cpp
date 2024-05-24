@@ -49,7 +49,7 @@ uint64_t RepaircontentDAO::count(const RepaircontentQuery::Wrapper& query)
 	return sqlSession->executeQueryNumerical(sqlStr, params);
 }
 
-std::list<RepaircontentDO> RepaircontentDAO::selectWithPage(const RepaircontentQuery::Wrapper& query)
+std::list<de_repair_lineDO> RepaircontentDAO::selectWithPage(const RepaircontentQuery::Wrapper& query)
 {
 	stringstream sql;
 	sql << "SELECT subject_name,malfunction,malfunction_url,repair_des FROM dv_repair_line";
@@ -57,17 +57,17 @@ std::list<RepaircontentDO> RepaircontentDAO::selectWithPage(const RepaircontentQ
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	RepaircontentMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<RepaircontentDO, RepaircontentMapper>(sqlStr, mapper, params);
+	return sqlSession->executeQuery<de_repair_lineDO, RepaircontentMapper>(sqlStr, mapper, params);
 }
 
-std::list<RepaircontentDO> RepaircontentDAO::selectByName(const string& name)
+std::list<de_repair_lineDO> RepaircontentDAO::selectByName(const string& name)
 {
 	string sql = "SELECT subject_name,malfunction,malfunction_url,repair_des FROM dv_repair_line WHERE `name` LIKE CONCAT('%',?,'%')";
 	RepaircontentMapper mapper;
-	return sqlSession->executeQuery<RepaircontentDO, RepaircontentMapper>(sql, mapper, "%s", name);
+	return sqlSession->executeQuery<de_repair_lineDO, RepaircontentMapper>(sql, mapper, "%s", name);
 }
 
-uint64_t RepaircontentDAO::insert(const RepaircontentDO& iObj)
+uint64_t RepaircontentDAO::insert(const de_repair_lineDO& iObj)
 {
 	string sql = "INSERT INTO `dv_repair_line` (`subject_name`, `malfunction`, `malfunction_url`,`repair_des`) VALUES (?, ?, ?,?)";
 	return sqlSession->executeInsert(sql, "%s%s%s%s", iObj.getsubject_Name(), iObj.getMalfunction(),
@@ -75,7 +75,7 @@ uint64_t RepaircontentDAO::insert(const RepaircontentDO& iObj)
 }
 
 
-int RepaircontentDAO::update(const RepaircontentDO& uObj)
+int RepaircontentDAO::update(const de_repair_lineDO& uObj)
 {
 	string sql = "UPDATE `dv_repair_line` SET `getsubject_Name`=?, `getMalfunction`=?, `getMalfunction_url`=?,`getrepair_Des`=? WHERE `subject_id`=?";
 	return sqlSession->executeUpdate(sql, "%s%s%s%s%ull", uObj.getsubject_Name(), uObj.getMalfunction(),

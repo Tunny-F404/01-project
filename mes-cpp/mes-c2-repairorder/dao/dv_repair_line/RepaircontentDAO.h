@@ -32,13 +32,13 @@ public:
 	// 统计数据条数
 	uint64_t count(const RepaircontentQuery::Wrapper& query);
 	// 分页查询数据
-	list<RepaircontentDO> selectWithPage(const RepaircontentQuery::Wrapper& query);
+	list<de_repair_lineDO> selectWithPage(const RepaircontentQuery::Wrapper& query);
 	// 通过姓名查询数据
-	list<RepaircontentDO> selectByName(const string& name);
+	list<de_repair_lineDO> selectByName(const string& name);
 	// 插入数据
-	uint64_t insert(const RepaircontentDO& iObj);
+	uint64_t insert(const de_repair_lineDO& iObj);
 	// 修改数据
-	int update(const RepaircontentDO& uObj);
+	int update(const de_repair_lineDO& uObj);
 	// 通过ID删除数据
 	int deleteById(uint64_t id);
 };

@@ -26,12 +26,12 @@
 /**
  * Ê¾Àı±í×Ö¶ÎÆ¥ÅäÓ³Éä
  */
-class RepaircontentMapper : public Mapper<RepaircontentDO>
+class RepaircontentMapper : public Mapper<de_repair_lineDO>
 {
 public:
-	RepaircontentDO mapper(ResultSet* resultSet) const override
+	de_repair_lineDO mapper(ResultSet* resultSet) const override
 	{
-		RepaircontentDO data;
+		de_repair_lineDO data;
 		/*data.setId(resultSet->getUInt64(1));
 		data.setName(resultSet->getString(2));
 		data.setSex(resultSet->getString(3));
