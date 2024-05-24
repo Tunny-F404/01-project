@@ -99,7 +99,7 @@ public:
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
-		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+		API_DEF_ADD_RSP_JSON_WRAPPER(ProdOrderAddJsonVO);
 	}
 	// 3.2 定义新增接口处理
 	ENDPOINT(API_M_POST, "/ProdOrder/add", addProdOrder, BODY_DTO(ProdOrderDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
@@ -113,7 +113,8 @@ private:
 	// 3.3 分页查询列表树
 	ProdOrderPageJsonVO::Wrapper execQueryTreeProdOrder(const ProdOrderTreeQuery::Wrapper& query, const PayloadDTO& payload);
 	// 3.3 添加生产任务
-	Uint64JsonVO::Wrapper execAddProdOrder(const ProdOrderDTO::Wrapper& dto);
+	//Uint64JsonVO::Wrapper execAddProdOrder(const ProdOrderDTO::Wrapper& dto);
+	ProdOrderAddJsonVO::Wrapper execAddProdOrder(const ProdOrderDTO::Wrapper& dto);
 
 	// 3.3 演示修改数据
 	//Uint64JsonVO::Wrapper execModifyProdOrder(const ProdOrderDTO::Wrapper& dto);

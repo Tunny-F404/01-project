@@ -33,7 +33,7 @@ ProdOrderPageJsonVO::Wrapper ProdOrderController::execQueryTreeProdOrder(const P
 }
 
 
-Uint64JsonVO::Wrapper ProdOrderController::execAddProdOrder(const ProdOrderDTO::Wrapper& dto)
+ProdOrderAddJsonVO::Wrapper ProdOrderController::execAddProdOrder(const ProdOrderDTO::Wrapper& dto)
 {
 	return {};
 }
