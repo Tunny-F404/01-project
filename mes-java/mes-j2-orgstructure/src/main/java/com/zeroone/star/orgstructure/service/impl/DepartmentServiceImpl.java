@@ -58,15 +58,16 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
         Page<Department> page = new Page<>(query.getPageIndex(), query.getPageSize());
         //构建查询条件
         QueryWrapper<Department> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("dept_name",query.getDeptName());
-        queryWrapper.eq("order_num",query.getOrderNum());
-        queryWrapper.eq("status",query.getStatus());
-        queryWrapper.eq("create_by",query.getCreateTime());
+        //如果存在合法参数则添加条件
+        if(query.getDeptName() != null) queryWrapper.like("dept_name",query.getDeptName());
+        if(query.getOrderNum() != null)queryWrapper.eq("order_num",query.getOrderNum());
+        if(query.getStatus() >= 0)queryWrapper.eq("status",query.getStatus());
+        if(query.getCreateTime() != null)queryWrapper.eq("create_by",query.getCreateTime());
         //执行查询
         Page<Department> res = baseMapper.selectPage(page,queryWrapper);
         //将结果转化为DTO
         if(res == null) return null;//result为空表示查询失败
-        return PageDTO.create(res, src -> msDepartmentMapper.departmentOToDepartmentDTO(src));
+        return PageDTO.create(res, msDepartmentMapper::departmentOToDepartmentDTO);
     }
 
     //根据id获取指定部门所有信息
