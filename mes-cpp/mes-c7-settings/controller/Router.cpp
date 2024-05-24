@@ -19,8 +19,7 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include "storage_area/GetAreaDetailsController.h"
-
+#include"warehouse-settings/MergeMenuController.h"
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
@@ -52,7 +51,7 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(GetAreaDetailsController);
+	ROUTER_SIMPLE_BIND(MergeMenuController);
 }
 
 #ifdef HTTP_SERVER_DEMO

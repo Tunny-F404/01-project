@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2022/10/25 11:51:41
+ @Date: 2022/10/25 11:34:14
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,12 +17,22 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DO_INCLUDE_
-#define _DO_INCLUDE_
+#ifndef __ADRESSMERGEMENU_VO_
+#define  _ADRESSMERGEMENU_VO_
 
-#include "../../Macros.h"
-#include <string>
-#include <list>
-using namespace std;
+#include "../../GlobalInclude.h"
+#include "../../dto/warehouse-settings/WarehouseCascadeDTO.h"
 
-#endif // !_DO_INCLUDE_
+#include OATPP_CODEGEN_BEGIN(DTO)
+		
+/**
+ * 定义一个用户信息显示JsonVO对象，用于响应给客户端
+ */
+class MergeMenuJsonVO : public JsonVO<oatpp::List<WarehouseCascadeDTO::Wrapper>>
+{
+	DTO_INIT(MergeMenuJsonVO, JsonVO<oatpp::List<WarehouseCascadeDTO::Wrapper>>);
+};
+
+#include OATPP_CODEGEN_END(DTO)
+
+#endif // !_SAMPLE_VO_
