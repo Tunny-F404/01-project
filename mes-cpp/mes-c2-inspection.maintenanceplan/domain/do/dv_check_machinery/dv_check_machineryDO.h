@@ -12,7 +12,7 @@
 class Dv_check_machineryDO
 {
 	//流水号
-	CC_SYNTHESIZE(uint64_t, record_id, Plan_id);
+	CC_SYNTHESIZE(uint64_t, record_id, Record_id);
 	// 计划ID，
 	CC_SYNTHESIZE(uint64_t, plan_id, Plan_id);
 	//设备id
