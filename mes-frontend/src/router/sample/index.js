@@ -24,6 +24,11 @@ const routes = [
       {
         path: '/sample/pdfobject',
         component: () => import('@/views/sample/pdfobject/PdfObject.vue')
+      },
+      //表格组件
+      {
+        path: '/sample/table-list-use',
+        component: () => import('@/views/sample/table-list-use/table.vue')
       }
     ]
   }
