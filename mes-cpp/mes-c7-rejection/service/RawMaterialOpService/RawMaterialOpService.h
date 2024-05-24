@@ -21,7 +21,7 @@
 #define _RawMaterialOp_SERVICE_
 #include <list>
 #include "domain/dto/RawMaterialOp/RawMaterialOpDTO.h"
-#include "domain/query/RawMaterialOpQuery.h"
+#include "domain/query/RawMaterialOp/RawMaterialOpQuery.h"
 
 /**
  * 生产退料物料信息的服务接口
