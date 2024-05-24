@@ -28,25 +28,25 @@
 class DvMaintenRecordDO
 {
 	//记录ID
-	CC_SYNTHESIZE(uint64_t, recordId, RecordId);
+	CC_SYNTHESIZE(uint64_t, record_id, Record_Id);
 	//计划ID
-	CC_SYNTHESIZE(uint64_t, planId, PlanId);
+	CC_SYNTHESIZE(uint64_t, plan_id, Plan_Id);
 	//计划编码
-	CC_SYNTHESIZE(string, planCode, PlanCode);
+	CC_SYNTHESIZE(string, plan_code, Plan_Code);
 	//计划名称
-	CC_SYNTHESIZE(string, planName, PlanName);
+	CC_SYNTHESIZE(string, plan_name, Plan_Name);
 	//计划类型
-	CC_SYNTHESIZE(string, planType, PlanType);
+	CC_SYNTHESIZE(string, plan_type, Plan_Type);
 	//设备ID
-	CC_SYNTHESIZE(uint64_t, machineryId, MachineryId);
+	CC_SYNTHESIZE(uint64_t, machinery_id, Machinery_Id);
 	//设备编码
-	CC_SYNTHESIZE(string, machineryCode, MachineryCode);
+	CC_SYNTHESIZE(string, machinery_code, Machinery_Code);
 	//设备名称
-	CC_SYNTHESIZE(string, machineryName, MachineryName);
+	CC_SYNTHESIZE(string, machinery_name, Machinery_Name);
 	//品牌
-	CC_SYNTHESIZE(string, machineryBrand, MachineryBrand);
+	CC_SYNTHESIZE(string, machinery_brand, Machinery_Brand);
 	//规格型号
-	CC_SYNTHESIZE(string, machinerySpec, MachinerySpec);
+	CC_SYNTHESIZE(string, machinery_spec, Machinery_Spec);
 	//状态
 	CC_SYNTHESIZE(string, status, Status);
 	//备注
@@ -60,30 +60,30 @@ class DvMaintenRecordDO
 	//预留字段4
 	CC_SYNTHESIZE(uint64_t, attr4, Attr4);
 	//创建者
-	CC_SYNTHESIZE(string, createBy, CreateBy);
+	CC_SYNTHESIZE(string, create_by, Create_By);
 	//更新者
-	CC_SYNTHESIZE(string, updateBy, UpdateBy);
+	CC_SYNTHESIZE(string, update_by, Update_By);
 
 public:
 	DvMaintenRecordDO() {
-		recordId = 0;
-		planId = 0;
-		planCode = "";
-		planName = "";
-		planType = "";
-		machineryId = 0;
-		machineryCode = "";
-		machineryName = "";
-		machineryBrand = "";
-		machinerySpec = "";
+		record_id = 0;
+		plan_id = 0;
+		plan_code = "";
+		plan_name = "";
+		plan_type = "";
+		machinery_id = 0;
+		machinery_code = "";
+		machinery_name = "";
+		machinery_brand = "";
+		machinery_spec = "";
 		status = "";
 		remark = "";
 		attr1 = "";
 		attr2 = "";
 		attr3 = 0;
 		attr4 = 0;
-		createBy = "";
-		updateBy = "";
+		create_by = "";
+		update_by = "";
 	}
 };
 
