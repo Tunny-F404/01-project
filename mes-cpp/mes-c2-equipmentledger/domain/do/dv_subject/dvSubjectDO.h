@@ -19,7 +19,7 @@
 #ifndef _DVMACHINERYDO_H_
 #define _DVMACHINERYDO_H_
 
-class dvMachineryDO
+class dvSubjectDO
 {
 	// 项目ID
 	CC_SYNTHESIZE(uint64_t, subject_id, SubjectId)
@@ -35,8 +35,6 @@ class dvMachineryDO
 	CC_SYNTHESIZE(std::string, subject_standard, SubjectStandard)
 	// 是否启用
 	CC_SYNTHESIZE(char, enable_flag, EnableFlag)
-	// 设备状态
-	CC_SYNTHESIZE(std::string, status, Status)
 	// 备注
 	CC_SYNTHESIZE(std::string, remark, Remark)
 	// 预留字段 1 ~ 4
