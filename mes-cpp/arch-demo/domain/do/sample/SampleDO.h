@@ -26,9 +26,6 @@
  */
 class SampleDO
 {
-
-	//idÖ÷¼ü
-	
 	// ±àºÅ
 	CC_SYNTHESIZE(uint64_t, id, Id);
 	// ÐÕÃû
