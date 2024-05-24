@@ -3,10 +3,10 @@ package com.zeroone.star.sysmanagement.Constants;
 /**
  * @Author: 40斤
  * @CreateTime: 2024-05-22  22:50
- * @Description: TODO
+ * @Description: TODO ： 参数配置常量
  * @Version: 1.0
  */
-public class configConstants {
+public class configConstant {
     // 缓存configKey
     public static final String SYS_CONFIG_KEY = "sys_config:";
     // 系统内置 Y是

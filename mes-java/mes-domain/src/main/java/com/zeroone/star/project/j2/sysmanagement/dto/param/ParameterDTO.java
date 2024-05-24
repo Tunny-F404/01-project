@@ -18,7 +18,7 @@ import java.util.Date;
  */
 @Data
 @ApiOperation("参数操作传输数据对象")
-@ContentRowHeight(20)
+@ContentRowHeight(25)
 public class ParameterDTO {
     // 参数主键
     @ExcelProperty(value = "参数主键",index = 0)
