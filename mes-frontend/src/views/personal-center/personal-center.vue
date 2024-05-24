@@ -1,0 +1,161 @@
+<template>
+	<el-row :gutter="20">
+		<!-- 栏1 -->
+		<el-col :span="8">
+			<div class="grid-content ep-bg-purple">
+				<!-- 卡片1 -->
+				<el-card style="max-width: 480px">
+					<!-- 片头 -->
+					<template #header>
+						<div class="card-header">
+							<span>个人信息</span>
+						</div>
+					</template>
+					<!-- 内容 -->
+					<div class="demo-type">
+						<el-avatar> user </el-avatar>
+					</div>
+					<el-divider />
+					<el-row justify="space-between">
+						<span>用户名称</span>
+						<span>testuser</span>
+					</el-row>
+					<el-divider />
+					<el-row justify="space-between">
+						<span>手机号码</span>
+						<span>13131131131</span>
+					</el-row>
+					<el-divider />
+					<el-row justify="space-between">
+						<span>用户邮箱</span>
+						<span>111@luaman.com</span>
+					</el-row>
+					<el-divider />
+					<el-row>
+						<span>所属部门</span>
+						<span>*****</span>
+					</el-row>
+					<div>所属角色</div>
+					<p>创建日期 2023-11-20 21:19:01</p>
+				</el-card>
+			</div>
+		</el-col>
+		<el-col :span="16">
+			<div class="grid-content ep-bg-purple">
+				<el-card>
+					<template #header>
+						<div class="card-header">
+							<span>基本信息</span>
+						</div>
+					</template>
+					<!-- 基本资料/修改密码 -->
+					<el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+						<el-tab-pane label="基本资料" name="first">
+							<!-- 基本资料表单 -->
+							<el-form :model="infoform" label-width="80px" :inline="false" size="normal"
+								hide-required-asterisk="true">
+								<el-form-item label="用户名称">
+									<el-input v-model="infoform.nickName"></el-input>
+								</el-form-item>
+								<el-form-item label="手机号码">
+									<el-input v-model="infoform.phoneNum"></el-input>
+								</el-form-item>
+								<el-form-item label="邮箱">
+									<el-input v-model="infoform.email"></el-input>
+								</el-form-item>
+								<el-form-item label="性别">
+									<el-radio-group v-model="infoform.gender">
+										<el-radio value="male">男</el-radio>
+										<el-radio value="female">女</el-radio>
+									</el-radio-group>
+								</el-form-item>
+								<el-form-item>
+									<el-button type="primary" @click="onSubmit">保存</el-button>
+									<el-button type="danger">关闭</el-button>
+								</el-form-item>
+							</el-form>
+
+						</el-tab-pane>
+						<el-tab-pane label="修改密码" name="second">
+							<!-- 修改密码表单 -->
+							<el-form :model="passwd" label-width="80px" :inline="false" size="normal">
+								<el-form-item label="旧密码">
+									<el-input v-model="passwd.old"></el-input>
+								</el-form-item>
+								<el-form-item label="新密码">
+									<el-input v-model="passwd.new"></el-input>
+								</el-form-item>
+								<el-form-item label="确认密码">
+									<el-input v-model="passwd.confirm"></el-input>
+								</el-form-item>
+								<el-form-item>
+									<el-button type="primary" @click="onSubmit">保存</el-button>
+									<el-button type="danger">关闭</el-button>
+								</el-form-item>
+							</el-form>
+						</el-tab-pane>
+					</el-tabs>
+
+				</el-card>
+			</div>
+		</el-col>
+	</el-row>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+//tabs配置
+const activeName = ref('first')
+const handleClick = (tab, event) => {
+	console.log(tab, event)
+}
+
+//基本资料表单
+const infoform = ref({nickName:'',phoneNum:'',email:'',gender:'男'})
+const onSubmit = () => {
+	console.log('表单发送成功')
+}
+//修改密码表单
+const passwd = ref({
+	old:'',
+	new:'',
+	confirm:''
+})
+</script>
+
+<style scoped>
+/* layout样式 */
+.el-row {
+	margin-bottom: 20px;
+}
+
+.el-row:last-child {
+	margin-bottom: 0;
+}
+
+.el-col {
+	border-radius: 4px;
+}
+
+.grid-content {
+	border-radius: 4px;
+	min-height: 36px;
+}
+
+/* 头像样式 */
+.demo-type {
+	display: flex;
+}
+
+.demo-type>div {
+	flex: 1;
+	text-align: center;
+}
+
+.demo-type>div:not(:last-child) {
+	border-right: 1px solid var(--el-border-color);
+}
+
+/* 输入框 */
+</style>
