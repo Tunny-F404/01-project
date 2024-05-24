@@ -21,7 +21,7 @@ class Dv_check_planDO
 	CC_SYNTHESIZE(string, plan_code, Plan_code);
 	// 计划名称
 	CC_SYNTHESIZE(string, plan_name, Plan_name);
-	// 项目类型
+	// 计划类型
 	CC_SYNTHESIZE(string, plan_type, Plan_type);
 	// 开始时间
 	CC_SYNTHESIZE(string, start_date, Start_date);
