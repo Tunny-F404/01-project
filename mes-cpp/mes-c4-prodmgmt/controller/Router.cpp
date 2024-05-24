@@ -29,13 +29,14 @@
 #include "ws/WSController.h"
 #endif
 
-// Èç¹û¶¨ÒåÁË¹Ø±ÕSwaggerÎÄµµºê
+#include "../mes-c4-prodmgmt/controller/ProdWorkorder/ProdWorkorderController.h"
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¹Ø±ï¿½Swaggerï¿½Äµï¿½ï¿½ï¿½
 #ifdef CLOSE_SWAGGER_DOC
-// ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
+// ï¿½ò»¯°ó¶¨¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¶¨ï¿½ï¿½
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 router->addController(__CLASS__::createShared())
 #else
-// ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
+// ï¿½ò»¯°ó¶¨¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¶¨ï¿½ï¿½
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
@@ -52,7 +53,8 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
-	//#TIP :ÏµÍ³À©Õ¹Â·ÓÉ¶¨Òå£¬Ð´ÔÚÕâ¸öºóÃæ
+	//#TIP :ÏµÍ³ï¿½ï¿½Õ¹Â·ï¿½É¶ï¿½ï¿½å£¬Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	ROUTER_SIMPLE_BIND(ProdWorkorderController);
 	ROUTER_SIMPLE_BIND(RemoveWorkReportController);
 
 }
@@ -60,14 +62,14 @@ void Router::initRouter()
 #ifdef HTTP_SERVER_DEMO
 void Router::createSampleRouter()
 {
-	// °ó¶¨Ê¾Àý¿ØÖÆÆ÷
+	// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ROUTER_SIMPLE_BIND(SampleController);
-	// °ó¶¨ÓÃ»§¿ØÖÆÆ÷
+	// ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ROUTER_SIMPLE_BIND(UserController);
-	// °ó¶¨ÎÄ¼þ¿ØÖÆÆ÷
+	// ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ROUTER_SIMPLE_BIND(FileController);
 	
-	// °ó¶¨WebSocket¿ØÖÆÆ÷
+	// ï¿½ï¿½WebSocketï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	router->addController(WSContorller::createShared());
 }
 #endif
