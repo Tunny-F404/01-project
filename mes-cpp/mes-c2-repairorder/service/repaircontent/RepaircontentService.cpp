@@ -21,52 +21,52 @@
 #include "../../dao/dv_repair_line/RepaircontentDAO.h"
 #include "../../domain/do/dv_repair_line/RepaircontentDO.h"
 
-//RepaircontentPageDTO::Wrapper RepaircontentService::listAll(const RepaircontentQuery::Wrapper& query)
-//{
-//	// 构建返回对象
-//	auto pages = RepaircontentPageDTO::createShared();
-//	pages->pageIndex = query->pageIndex;
-//	pages->pageSize = query->pageSize;
-//
-//	// 查询数据总条数
-//	RepaircontentDAO dao;
-//	uint64_t count = dao.count(query);
-//	if (count <= 0)
-//	{
-//		return pages;
-//	}
-//
-//	// 分页查询数据
-//	pages->total = count;
-//	pages->calcPages();
-//	list<RepaircontentDO> result = dao.selectWithPage(query);
-//	// 将DO转换成DTO
-//	for (RepaircontentDO sub : result)
-//	{
-//		auto dto = RepaircontentDTO::createShared();
-//		// 		dto->id = sub.getId();
-//		// 		dto->name = sub.getName();
-//		// 		dto->sex = sub.getSex();
-//		// 		dto->age = sub.getAge();
-//		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, id, Id, name, Name, sex, Sex, age, Age)
-//			pages->addData(dto);
-//
-//	}
-//	return pages;
-//}
+RepaircontentPageDTO::Wrapper RepaircontentService::listAll(const RepaircontentQuery::Wrapper& query)
+{
+	// 构建返回对象
+	auto pages = RepaircontentPageDTO::createShared();
+	pages->pageIndex = query->pageIndex;
+	pages->pageSize = query->pageSize;
 
-//uint64_t SampleService::saveData(const SampleDTO::Wrapper& dto)
-//{
-//	// 组装DO数据
-//	SampleDO data;
-//	// 	data.setName(dto->name.getValue(""));
-//	// 	data.setSex(dto->sex.getValue(""));
-//	// 	data.setAge(dto->age.getValue(1));
-//	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Name, name, Sex, sex, Age, age)
-//		// 执行数据添加
-//		SampleDAO dao;
-//	return dao.insert(data);
-//}
+	// 查询数据总条数
+	RepaircontentDAO dao;
+	uint64_t count = dao.count(query);
+	if (count <= 0)
+	{
+		return pages;
+	}
+
+	// 分页查询数据
+	pages->total = count;
+	pages->calcPages();
+	list<RepaircontentDO> result = dao.selectWithPage(query);
+	// 将DO转换成DTO
+	for (RepaircontentDO sub : result)
+	{
+		auto dto = RepaircontentDTO::createShared();
+		// 		dto->id = sub.getId();
+		// 		dto->name = sub.getName();
+		// 		dto->sex = sub.getSex();
+		// 		dto->age = sub.getAge();
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, subject_name, subject_Name, malfunction, Malfunction, malfunction_url, Malfunction_url, repair_des, repair_Des)
+			pages->addData(dto);
+
+	}
+	return pages;
+}
+
+uint64_t RepaircontentService::saveData(const RepaircontentDTO::Wrapper& dto)
+{
+	// 组装DO数据
+	RepaircontentDO data;
+	// 	data.setName(dto->name.getValue(""));
+	// 	data.setSex(dto->sex.getValue(""));
+	// 	data.setAge(dto->age.getValue(1));
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, subject_Name, subject_name, Malfunction, malfunction, Malfunction_url, malfunction_url, repair_Des, repair_des)
+		// 执行数据添加
+		RepaircontentDAO dao;
+	return dao.insert(data);
+}
 
 bool RepaircontentService::updateData(const RepaircontentDTO::Wrapper& dto)
 {
@@ -77,14 +77,14 @@ bool RepaircontentService::updateData(const RepaircontentDTO::Wrapper& dto)
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, repair_Id, repair_id, subject_Id, subject_id, subject_Name, subject_name,
-		Malfunction, malfunction, Malfunction_url, malfunction_url, repair_Des, repair_des);
+		Malfunction, malfunction, Malfunction_url, malfunction_url, repair_Des, repair_des)
 		// 执行数据修改
 		RepaircontentDAO dao;
 	return dao.update(data) == 1;
 }
 
-//bool RepaircontentService::removeData(uint64_t id)
-//{
-//	RepaircontentDAO dao;
-//	return dao.deleteById(id) == 1;
-//}
+bool RepaircontentService::removeData(uint64_t id)
+{
+	RepaircontentDAO dao;
+	return dao.deleteById(id) == 1;
+}

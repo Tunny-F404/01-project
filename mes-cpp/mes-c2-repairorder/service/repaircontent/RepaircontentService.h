@@ -32,9 +32,9 @@ class RepaircontentService
 {
 public:
 	// 分页查询所有数据
-	//RepaircontentPageDTO::Wrapper listAll(const RepaircontentQuery::Wrapper& query);
+	RepaircontentPageDTO::Wrapper listAll(const RepaircontentQuery::Wrapper& query);
 	// 保存数据
-	//uint64_t saveData(const RepaircontentDTO::Wrapper& dto);
+	uint64_t saveData(const RepaircontentDTO::Wrapper& dto);
 	// 修改数据
 	bool updateData(const RepaircontentDTO::Wrapper& dto);
 	// 通过ID删除数据
