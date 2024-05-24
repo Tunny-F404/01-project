@@ -1,18 +1,31 @@
+/**
+
+	参考资料
+	https://juejin.cn/post/7043723576121229342
+*/
 {
 	"compilerOptions": {
 		"baseUrl": ".",
+		"moduleResolution": "node",
+		"target": "esnext",
+		"module": "esnext",
+		"useDefineForClassFields": true,
+		"strict": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
 		"lib": [
 			"ESNext",
 			"DOM"
 		],
 		"paths": {
 			"@/*": [
-				"./src/*"
+				"src/*"
 			]
 		},
 		"types": [
 			/** https://juejin.cn/post/7262322846252613693 */
 			"element-plus/global",
+			"vite/client",
 		],
 	},
 	/** https://www.typescriptlang.org/tsconfig#include */
@@ -22,7 +35,10 @@
 		"src/**/*.tsx",
 		"src/**/*.vue",
 		// 测试文件集
-		"tests/**/*.ts"
+		"tests/**/*.ts",
+		// 导入自动生成的类型声明文件
+		"auto-imports.d.ts",
+		"components.d.ts",
 	],
 	"exclude": [
 		"node_modules",
