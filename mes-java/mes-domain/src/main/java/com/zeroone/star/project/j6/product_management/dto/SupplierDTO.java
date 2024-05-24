@@ -2,8 +2,10 @@ package com.zeroone.star.project.j6.product_management.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -17,9 +19,11 @@ import lombok.Data;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel("修改关联供应商")
 public class SupplierDTO {
-    @ApiModelProperty(value = "关联供应商id", example = "1")
+    @ApiModelProperty(value = "关联供应商id", example = "1", required = true)
     private Long id;
     @ApiModelProperty(value = "供应商id", example = "1")
     private Long supplierId;

@@ -7,7 +7,9 @@ import com.zeroone.star.productManagement.mapper.MdProductSupplierMapper;
 import com.zeroone.star.productManagement.service.IMdProductSupplierService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j6.product_management.dto.ProductSupplierListDTO;
 import com.zeroone.star.project.j6.product_management.dto.SupplierDTO;
+import com.zeroone.star.project.j6.product_management.dto.SupplierListDTO;
 import com.zeroone.star.project.j6.product_management.query.SupplierListQuery;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,6 @@ public class MdProductSupplierServiceImpl extends ServiceImpl<MdProductSupplierM
     @Autowired
     private MsSupplierMapper msSupplierMapper;
 
-    // TODO List换成PageDTO
     @Override
     public PageDTO<SupplierDTO> querySupplierList(SupplierListQuery query) {
         Page<MdProductSupplier> page = new Page<>(query.getPageIndex(), query.getPageSize());
@@ -47,6 +48,47 @@ public class MdProductSupplierServiceImpl extends ServiceImpl<MdProductSupplierM
         page(page, queryWrapper);
 
         return PageDTO.create(page, msSupplierMapper::toDto);
+    }
+
+    @Override
+    public String addSupplierList(SupplierListDTO dto) {
+        Long productId = dto.getProductId();
+        List<MdProductSupplier> entities = dto.getSupplierIds().stream()
+                .map(id -> new MdProductSupplier(productId, id)).collect(Collectors.toList());
+
+        saveBatch(entities);
+
+        return "success";
+    }
+
+    @Override
+    public String updateSupplier(SupplierDTO dto) {
+        Long id = dto.getId();
+        if (id == null) {
+            throw new IllegalArgumentException("ID cannot be null");
+        }
+
+        MdProductSupplier entity = new MdProductSupplier();
+        entity.setId(id);
+        if (dto.getSupplierId() != null) {
+            entity.setSupplierId(dto.getSupplierId());
+        }
+        if (dto.getProductId() != null) {
+            entity.setProductId(dto.getProductId());
+        }
+
+        // Update the entity using MyBatis Plus's updateById method
+        boolean updated = updateById(entity);
+        return updated ? "success" : "failure";
+    }
+
+    @Override
+    public String deleteBatchSupplier(ProductSupplierListDTO dto) {
+        List<Long> productSupplierIds = dto.getProductSupplierIds();
+
+        removeByIds(productSupplierIds);
+
+        return "success";
     }
 }
 

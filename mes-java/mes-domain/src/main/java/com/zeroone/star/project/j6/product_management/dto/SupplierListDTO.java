@@ -19,7 +19,7 @@ import java.util.List;
 @Data
 @ApiModel("添加关联供应商（支持多项添加）")
 public class SupplierListDTO {
-    @ApiModelProperty(value = "供应商ids", example = "1, 2, 3", required = true)
+    @ApiModelProperty(value = "供应商ids", example = "[1, 2, 3]", required = true)
     private List<Long> supplierIds;
     @ApiModelProperty(value = "物料id", example = "1", required = true)
     private Long productId;

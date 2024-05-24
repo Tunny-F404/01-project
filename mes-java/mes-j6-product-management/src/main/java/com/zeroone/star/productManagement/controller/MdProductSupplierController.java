@@ -42,20 +42,20 @@ public class MdProductSupplierController implements SupplierApis {
     @ApiOperation(value = "添加关联供应商")
     @Override
     public JsonVO<String> addSupplierList(@RequestBody SupplierListDTO dto) {
-        return null;
+        return JsonVO.success(mdProductSupplierService.addSupplierList(dto));
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ApiOperation(value = "更新关联供应商")
     @Override
     public JsonVO<String> updateSupplier(SupplierDTO dto) {
-        return null;
+        return JsonVO.success(mdProductSupplierService.updateSupplier(dto));
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     @ApiOperation(value = "删除关联供应商")
     @Override
     public JsonVO<String> deleteBatchSupplier(ProductSupplierListDTO dto) {
-        return null;
+        return JsonVO.success(mdProductSupplierService.deleteBatchSupplier(dto));
     }
 }
