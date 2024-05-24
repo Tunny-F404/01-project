@@ -25,28 +25,28 @@ import java.util.List;
 @Api(tags = "班次接口")
 public class OrderController implements OrderApis {
     @GetMapping("/list")
-    @ApiOperation("查询排班id对应的班次列表")
+    @ApiOperation("获取班次列表（条件+分页）")
     @Override
     public JsonVO<PageDTO<ShiftPlanDTO>> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery) {
         return null;
     }
 
     @PostMapping("/add")
-    @ApiOperation("添加班次信息")
+    @ApiOperation("添加班次")
     @Override
     public JsonVO<Long> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto) {
         return null;
     }
 
     @PutMapping("/modify")
-    @ApiOperation("修改班次信息")
+    @ApiOperation("修改班次")
     @Override
     public JsonVO<Long> modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto) {
         return null;
     }
 
     @DeleteMapping("/remove")
-    @ApiOperation("删除班次信息")
+    @ApiOperation("删除班次（支持批量删除）")
     @Override
     public JsonVO<Long> removeShiftPlan(List<Long> shiftId) {
         return null;
