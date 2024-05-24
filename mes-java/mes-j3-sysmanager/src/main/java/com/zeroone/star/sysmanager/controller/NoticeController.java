@@ -37,21 +37,5 @@ public class NoticeController implements NoticeApis {
     public JsonVO<Integer> updateNotice(@RequestBody NoticeDTO noticeDTO) {
         return null;
     }
-    @ApiOperation("客户端登录")
-    @PostMapping("/login")
-    public LoginVO clientLogin(@ApiParam("登录信息") @RequestBody LoginDTO loginDTO) {
-        return null;
-    }
 
-    @ApiOperation("客户端退出")
-    @PostMapping("/logout")
-    public ResultStatus clientLogout(@ApiParam("退出信息") @RequestBody LogoutDTO logoutDTO) {
-        return null;
-    }
-
-    @ApiOperation("发送系统通知")
-    @PostMapping("/send-notice")
-    public ResultStatus sendNotice(@ApiParam("系统通知消息") @RequestBody SystemNotificationDTO systemNotificationDTO) {
-        return null;
-    }
 }

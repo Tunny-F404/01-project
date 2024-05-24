@@ -16,11 +16,7 @@ import com.zeroone.star.project.vo.login.LoginVO;
  */
 
 public interface NoticeApis {
-    LoginVO clientLogin(LoginDTO loginDTO);
 
-    ResultStatus clientLogout(LogoutDTO logoutDTO);
-
-    ResultStatus sendNotice(SystemNotificationDTO systemNotificationDTO);
     /**
      * 修改通知公告
      *
