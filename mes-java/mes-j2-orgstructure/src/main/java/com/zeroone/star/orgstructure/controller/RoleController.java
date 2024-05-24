@@ -25,8 +25,12 @@ import java.util.List;
 @Api(tags = "角色控制器")
 public class RoleController implements RoleApis {
     /**
+     *
      * 获取角色名称列表
+     * @author 天衍土豆
+     * @return
      */
+
     @GetMapping("query-roles")
     @ApiOperation("获取角色名称列表")
     public JsonVO<List<RoleDTO>> queryRoles() {
@@ -35,6 +39,8 @@ public class RoleController implements RoleApis {
 
     /**
      * 获取角色列表(条件+分页)
+     * @author 天衍土豆
+     * @return
      */
     @GetMapping("/query-page")
     @ApiOperation("获取角色列表(条件+分页)")
@@ -44,6 +50,8 @@ public class RoleController implements RoleApis {
 
     /**
      * 获取角色详情
+     * @author 天衍土豆
+     * @return
      */
     @GetMapping("query-role")
     @ApiOperation("获取角色详情")
@@ -53,6 +61,8 @@ public class RoleController implements RoleApis {
 
     /**
      * 设置数据权限
+     * @author 天衍土豆
+     * @return
      */
     @GetMapping("modify-role")
     @ApiOperation("设置数据权限")
