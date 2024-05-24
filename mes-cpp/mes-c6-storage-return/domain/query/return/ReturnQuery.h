@@ -26,21 +26,20 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 定义一个查询用户信息的数据传输模型
+ * 定义一个查询单据信息的数据传输模型
  */
 class ReturnQuery : public PageQuery
 {
 	// 定义初始化
 	DTO_INIT(ReturnQuery, PageQuery);
 	// 退货单编号
-	API_DTO_FIELD_DEFAULT(UInt64, returnId, ZH_WORDS_GETTER("return.fields.rtid"));
+	API_DTO_FIELD_DEFAULT(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"));
 	// 退货单名称
-	API_DTO_FIELD(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"), true, "01star");
+	API_DTO_FIELD_DEFAULT(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"));
 	// 采购单编号
-	API_DTO_FIELD_DEFAULT(UInt64, purchaseId, ZH_WORDS_GETTER("return.fields.rtid"));
+	API_DTO_FIELD_DEFAULT(String, purchaseId, ZH_WORDS_GETTER("return.fields.puid"));
 	// 供应商名称
-	API_DTO_FIELD(String, vendorName, ZH_WORDS_GETTER("return.fields.rtname"), true, "01star");
-
+	API_DTO_FIELD_DEFAULT(String, vendorName, ZH_WORDS_GETTER("return.fields.vename"));
 };
 
 /**
@@ -78,6 +77,5 @@ class ReturnAdd : public oatpp::DTO
 	// 备注
 	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("return.fields.remark"), false, " ");
 };
-
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_RETURNQUERY_H_

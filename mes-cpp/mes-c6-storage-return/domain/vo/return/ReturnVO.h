@@ -26,13 +26,12 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 定义一个单据信息显示JsonVO对象，用于响应给客户端
+ * 定义一个单据简要信息显示JsonVO对象，用于响应给客户端
  */
 class ReturnJsonVO : public JsonVO<ReturnDTO::Wrapper>
 {
 	DTO_INIT(ReturnJsonVO, JsonVO<ReturnDTO::Wrapper>);
 };
-
 /**
 * 定义一个单据详细信息显示JsonVO对象
 */
@@ -40,7 +39,6 @@ class ReturnDetailJsonVO : public JsonVO<ReturnDetailDTO::Wrapper>
 {
 	DTO_INIT(ReturnDetailJsonVO, JsonVO<ReturnDetailDTO::Wrapper>);
 };
-
 /**
  * 定义一个单据信息分页显示JsonVO对象，用于响应给客户端
  */
@@ -50,4 +48,4 @@ class ReturnPageJsonVO : public JsonVO<ReturnPageDTO::Wrapper>
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // _RETURNVO_H_
+#endif 
