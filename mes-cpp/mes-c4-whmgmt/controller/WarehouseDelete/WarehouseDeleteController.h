@@ -43,16 +43,16 @@ public:
         // 定义标题和返回类型以及授权支持
         API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("wm_item_recpt.delete.summary"), Uint64JsonVO::Wrapper);
         // 定义其他路径参数说明
-        API_DEF_ADD_PATH_PARAMS(UInt64, "recpt_id", ZH_WORDS_GETTER("wm_item_recpt.field.recpt_id"), 1, true);
+        API_DEF_ADD_PATH_PARAMS(oatpp::List<UInt64>, "recpt_id", ZH_WORDS_GETTER("wm_item_recpt.field.recpt_id"), oatpp::List<UInt64>({1,2,3}), true);
     }
     // 3.2 定义删除接口处理
-    API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/wm-item-recpt/{recpt_id}", removeWmItemRecpt, PATH(UInt64, recpt_id), execWarehouseDelete(recpt_id));
+    API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/wm-item-recpt/{recpt_id}", removeWmItemRecpt, PATH(oatpp::List<UInt64>, recpt_id), execWarehouseDelete(recpt_id));
 
 
 private:
 
     // 3.3 演示删除数据
-    Uint64JsonVO::Wrapper execWarehouseDelete(const UInt64& recpt_id);
+    Uint64JsonVO::Wrapper execWarehouseDelete(const oatpp::List<UInt64>& recpt_id);
 };
 
 // 0 取消API控制器使用宏
