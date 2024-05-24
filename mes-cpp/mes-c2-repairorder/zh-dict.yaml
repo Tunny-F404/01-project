@@ -26,6 +26,7 @@ repaircontent:
   source: 故障描述资源
   status: 维修情况
   id: 维修单id(唯一标识)
+  line_id: 行id
 repairorder:
  summary: 
   page_query_table: 维修单分页查询
