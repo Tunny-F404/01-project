@@ -2,15 +2,9 @@ package com.zeroone.star.project.j3.sysmanager;
 
 
 import com.zeroone.star.project.j3.dto.*;
-
 import com.zeroone.star.project.j3.query.NoticeQuery;
 import com.zeroone.star.project.j3.vo.NoticeListVo;
 import com.zeroone.star.project.vo.JsonVO;
-
-import com.zeroone.star.project.dto.login.LoginDTO;
-import com.zeroone.star.project.vo.ResultStatus;
-import com.zeroone.star.project.vo.login.LoginVO;
-
 import java.util.List;
 
 /**

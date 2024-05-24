@@ -5,28 +5,13 @@ import com.zeroone.star.project.j3.dto.InsertDictTypeDTO;
 import com.zeroone.star.project.j3.vo.DictDataNameVO;
 import com.zeroone.star.project.j3.vo.DictTypeNameVO;
 import com.zeroone.star.project.vo.JsonVO;
-
 import java.util.List;
-
 import com.zeroone.star.project.j3.dto.SysDictDataDTO;
-import com.zeroone.star.project.vo.JsonVO;
-
 import com.zeroone.star.project.j3.dto.dict.*;
 import com.zeroone.star.project.j3.query.dict.SysDictDataQuery;
 import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
-import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
-
 import com.zeroone.star.project.j3.query.dict.SysDictTypeModifyQuery;
-import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
-import com.zeroone.star.project.vo.JsonVO;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
 
 /**
  * 系统管理-字典管理相关接口

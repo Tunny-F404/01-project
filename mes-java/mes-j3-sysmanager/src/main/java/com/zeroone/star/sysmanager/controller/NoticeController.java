@@ -1,7 +1,6 @@
 package com.zeroone.star.sysmanager.controller;
 
 import com.zeroone.star.project.j3.dto.*;
-import com.zeroone.star.project.dto.login.LoginDTO;
 import com.zeroone.star.project.j3.query.NoticeQuery;
 import com.zeroone.star.project.j3.sysmanager.NoticeApis;
 import com.zeroone.star.project.j3.vo.NoticeListVo;
@@ -12,16 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PutMapping;
-import com.zeroone.star.project.vo.ResultStatus;
-import com.zeroone.star.project.vo.login.LoginVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @Api(tags = "通知公告")

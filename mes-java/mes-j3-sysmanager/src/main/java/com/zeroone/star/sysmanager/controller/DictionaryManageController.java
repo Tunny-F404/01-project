@@ -10,27 +10,13 @@ import com.zeroone.star.project.j3.sysmanager.DictionaryManageApis;
 import com.zeroone.star.project.j3.vo.DictDataNameVO;
 import com.zeroone.star.project.j3.vo.DictTypeNameVO;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.zeroone.star.project.vo.JsonVO;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import org.springframework.web.bind.annotation.*;
-import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
-import com.zeroone.star.project.vo.JsonVO;
-
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @RestController
 @RequestMapping("sys-manager/dictionary-manager")

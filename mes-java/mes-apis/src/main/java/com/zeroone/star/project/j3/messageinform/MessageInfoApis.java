@@ -6,7 +6,6 @@ import com.zeroone.star.project.j3.dto.SystemNotificationDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.project.vo.login.LoginVO;
-import springfox.documentation.spring.web.json.Json;
 
 /**
  * 消息通知相关接口
