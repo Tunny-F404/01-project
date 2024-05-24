@@ -6,7 +6,9 @@ import com.zeroone.star.sysmanagement.mapper.ParameterMapper;
 import com.zeroone.star.sysmanagement.service.ParameterService;
 import org.junit.runner.RunWith;
 import org.mapstruct.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -33,6 +35,9 @@ public class Test {
     @Resource
     ParameterService service;
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
     @org.junit.Test
     public void test01(){
         List<Integer> ids = Arrays.asList(1,2,3);
@@ -56,5 +61,11 @@ public class Test {
         parameterDTO.setCreateTime(new Date());
         int insert = service.saveParameter(parameterDTO);
         System.out.println(insert);
+    }
+
+    @org.junit.Test
+    public void testRedis(){
+        redisTemplate.opsForValue().set("test:key", "value");
+        System.out.println((String) redisTemplate.opsForValue().get("test:key"));
     }
 }

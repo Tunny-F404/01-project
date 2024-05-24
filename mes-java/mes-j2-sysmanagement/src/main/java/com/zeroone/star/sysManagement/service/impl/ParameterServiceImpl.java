@@ -1,12 +1,16 @@
 package com.zeroone.star.sysmanagement.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
 import com.zeroone.star.project.j2.sysmanagement.query.param.ParameterQuery;
+import com.zeroone.star.sysmanagement.cache.RedisCache;
+import com.zeroone.star.sysmanagement.constant.Constants;
 import com.zeroone.star.sysmanagement.entity.ParameterDO;
 import com.zeroone.star.sysmanagement.mapper.ParameterMapper;
 import com.zeroone.star.sysmanagement.service.ParameterService;
@@ -15,7 +19,10 @@ import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 interface MsParameterMapper{
@@ -39,6 +46,9 @@ interface MsParameterMapper{
 public class ParameterServiceImpl extends ServiceImpl<ParameterMapper, ParameterDO> implements ParameterService {
 
     @Resource
+    RedisCache redisCache;
+
+    @Resource
     ParameterMapper parameterMapper;
 
     @Resource
@@ -52,8 +62,13 @@ public class ParameterServiceImpl extends ServiceImpl<ParameterMapper, Parameter
     @Override
     public Integer saveParameter(ParameterDTO parameterDTO) {
         ParameterDO parameterDO = ms.paraDtoToDo(parameterDTO);
-        return parameterMapper.insert(parameterDO);
+        int row = parameterMapper.insert(parameterDO);
+        if(row > 0){
+            redisCache.setCacheObject(getCacheKey(parameterDTO.getConfigKey()), parameterDTO.getConfigValue());
+        }
+        return row;
     }
+
 
     @Override
     public PageDTO listAll(ParameterQuery condition) {
@@ -79,10 +94,47 @@ public class ParameterServiceImpl extends ServiceImpl<ParameterMapper, Parameter
         return  pageDTO;
     }
 
+
+    /**
+     * 更新参数配置
+     * @param parameterDTO
+     * @return 影响行数
+     */
     @Override
     public Integer updateParameter(ParameterDTO parameterDTO) {
-        // TODO 键名重复判断
+
         Integer row = parameterMapper.updateById(ms.paraDtoToDo(parameterDTO));
+        if(row > 0){
+            redisCache.setCacheObject(getCacheKey(parameterDTO.getConfigKey()), parameterDTO.getConfigValue());
+        }
         return row;
+    }
+
+    /**
+     * 检查键名是否唯一
+     * @param parameterDTO
+     * @return boolean
+     */
+    public boolean checkConfigKeyUnique(ParameterDTO parameterDTO){
+        // 获取当前DTO的id
+        Integer id = parameterDTO.getConfigId() == null ? -1 : parameterDTO.getConfigId();
+        // 根据key查询
+        QueryWrapper<ParameterDO> wrapper = new QueryWrapper<>();
+        wrapper.eq("config_key", parameterDTO.getConfigKey());
+        ParameterDO parameterDO = parameterMapper.selectOne(wrapper);
+        // 判断是否唯一
+        if(parameterDO != null && parameterDO.getConfigId() != parameterDTO.getConfigId()) return false;
+        return true;
+    }
+
+    /**
+     * 设置cache key
+     * copy by yuanma
+     * @param configKey 参数键
+     * @return 缓存键key
+     */
+    private String getCacheKey(String configKey)
+    {
+        return Constants.SYS_CONFIG_KEY + configKey;
     }
 }

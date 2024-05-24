@@ -26,4 +26,6 @@ public interface ParameterService extends IService<ParameterDO> {
 
     Integer updateParameter(ParameterDTO parameterDTO);
 
+    boolean checkConfigKeyUnique(ParameterDTO parameterDTO);
+
 }
