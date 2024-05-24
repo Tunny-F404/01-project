@@ -3,7 +3,7 @@
 #include "../DoInclude.h"
 
 /**
- * 示例数据库实体类
+ * 生产工序内容表
  */
 class ProProcessContentDO
 {

@@ -5,9 +5,9 @@
 #include "../DoInclude.h"
 
 /**
- * 示例数据库实体类
+ * 工艺组成表
  */
-//工艺组成表
+
 class ProRouteProcessDO
 {
 	// 记录ID

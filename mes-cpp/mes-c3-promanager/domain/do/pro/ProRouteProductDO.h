@@ -4,7 +4,7 @@
 #include "../DoInclude.h"
 
 /**
- * 示例数据库实体类
+ * 产品制程表
  */
 class ProRouteProductDO
 {
