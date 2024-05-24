@@ -1,0 +1,30 @@
+package com.zeroone.star.project.j2.orgstructure.dto.role;
+
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
+import lombok.Data;
+
+/**
+ * 描述：
+ *
+ * @author 0xu0
+ * @version 1.0.0
+ */
+@Data
+@ApiOperation("新增角色信息传输对象")
+public class RoleAddDto {
+    @ApiModelProperty(value = "角色名称",example = "经理")
+    private String roleName;
+    @ApiModelProperty(value = "角色权限字符串",example = "common")
+    private String roleKey;
+    @ApiModelProperty(value = "角色顺序(角色排列顺序)",example = "1")
+    private Integer roleSort;
+    @ApiModelProperty(value = "角色状态(0正常，1停用）",example = "0")
+    private String status;
+    @ApiModelProperty(value = "是否父子联动(0停用，1启用)",example = "1")
+    private byte menuCheckStrictly;
+    @ApiModelProperty(value = "菜单树选项是否关联显示（0是，1否）",example = "0")
+    private byte deptCheckStrictly;
+    @ApiModelProperty(value = "备注",example = "")
+    private String remark;
+}
