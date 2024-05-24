@@ -34,6 +34,10 @@
 #endif
 
 	// 濡傛灉瀹氫箟浜嗗叧闂璖wagger鏂囨。瀹?
+#include "controller/ProchAndStorage/MaterialsInfo/AddWhStorageorderController.h"
+#include "controller/ProchAndStorage/MaterialsInfo/ModifyWhStorageorderController.h"
+#include "controller/ProchAndStorage/MaterialsInfo/DeleteWhStorageorderController.h"
+// ��������˹ر�Swagger�ĵ���
 #ifdef CLOSE_SWAGGER_DOC
 // 绠€鍖栫粦瀹氭帶鍒跺櫒瀹忓畾涔?
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
@@ -68,6 +72,10 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(GetReceiptController);
 	//#TIP :绯荤粺鎵╁睍璺敱瀹氫箟锛屽啓鍦ㄨ繖涓悗闈?
 	ROUTER_SIMPLE_BIND(ProductionProcessController);
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	ROUTER_SIMPLE_BIND(AddWhStorageorderController);
+	ROUTER_SIMPLE_BIND(ModifyWhStorageorderController);
+	ROUTER_SIMPLE_BIND(DeleteWhStorageorderController);
 }
 
 #ifdef HTTP_SERVER_DEMO
