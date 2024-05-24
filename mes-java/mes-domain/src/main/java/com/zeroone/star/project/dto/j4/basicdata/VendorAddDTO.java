@@ -5,22 +5,21 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
 @ApiModel("添加供应商时传输数据的对象")
-public class VendorDTO {
-    @ApiModelProperty(value = "供应商ID", example = "1")
-    private Long vendorId;
-
-    @NotNull(message = "供应商编码不能为空")
+public class VendorAddDTO {
+    @NotBlank(message = "供应商编码不能为空")
     @Size(min = 1, max = 64, message = "供应商编码长度必须在1到64个字符之间")
     @ApiModelProperty(value = "供应商编码", example = "VEND1234")
     private String vendorCode;
 
-    @NotNull(message = "供应商名称不能为空")
+    @NotBlank(message = "供应商名称不能为空")
     @Size(min = 1, max = 255, message = "供应商名称长度必须在1到255个字符之间")
     @ApiModelProperty(value = "供应商名称", example = "超级供应商公司")
     private String vendorName;
@@ -93,6 +92,7 @@ public class VendorDTO {
     private String creditCode;
 
     @ApiModelProperty(value = "是否启用", example = "Y")
+    @Pattern(regexp = "[YN]", message = "启用状态只能为Y或N")
     private String enableFlag;
 
     @Size(max = 500, message = "备注长度不能超过500个字符")
@@ -112,20 +112,4 @@ public class VendorDTO {
 
     @ApiModelProperty(value = "预留字段4", example = "200")
     private Integer attr4;
-
-    @Size(max = 64, message = "创建者长度不能超过64个字符")
-    @ApiModelProperty(value = "创建者", example = "user123")
-    private String createBy;
-
-    @ApiModelProperty(value = "创建时间", example = "2024-05-20T08:30:00")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime createTime;
-
-    @Size(max = 64, message = "更新者长度不能超过64个字符")
-    @ApiModelProperty(value = "更新者", example = "user456")
-    private String updateBy;
-
-    @ApiModelProperty(value = "更新时间", example = "2024-05-21T08:30:00")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime updateTime;
 }

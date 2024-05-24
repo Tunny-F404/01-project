@@ -121,7 +121,7 @@ public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper, M
             mdUnitMeasure.setUpdateTime(LocalDateTime.now());
             return mdUnitMeasureMapper.updateById(mdUnitMeasure) > 0;
         } catch (Exception e) {
-            log.info("添加单位失败",e.getMessage());
+            log.info("修改单位失败",e.getMessage());
             return false;
         }
     }

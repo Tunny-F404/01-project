@@ -1,7 +1,8 @@
 package com.zeroone.star.project.j4.basicdata;
 
-import com.zeroone.star.project.dto.j4.basicdata.VendorDTO;
+import com.zeroone.star.project.dto.j4.basicdata.VendorAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.VendorExcelSelectDTO;
+import com.zeroone.star.project.dto.j4.basicdata.VendorModifyDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,7 +42,7 @@ public interface SupplierApis {
      * @param data 供应商数据
      * @return 添加供应商结果
      */
-    JsonVO addVendor(VendorDTO data);
+    JsonVO addVendor(VendorAddDTO data);
 
     /**
      * 修改供应商
@@ -49,6 +50,5 @@ public interface SupplierApis {
      * @param data 供应商数据
      * @return 修改供应商结果
      */
-    JsonVO updateVendor(VendorDTO data);
-
+    JsonVO updateVendor(VendorModifyDTO data);
 }

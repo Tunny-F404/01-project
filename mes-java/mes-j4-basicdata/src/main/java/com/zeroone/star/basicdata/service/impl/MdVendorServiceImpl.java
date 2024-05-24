@@ -1,7 +1,9 @@
 package com.zeroone.star.basicdata.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import com.alibaba.excel.EasyExcel;
+import com.zeroone.star.basicdata.entity.MdUnitMeasure;
 import com.zeroone.star.basicdata.entity.MdVendor;
 import com.zeroone.star.basicdata.mapper.MdVendorMapper;
 import com.zeroone.star.basicdata.service.IMdVendorService;
@@ -10,10 +12,15 @@ import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.components.easyexcel.ExcelReadListener;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.components.user.UserHolder;
-import com.zeroone.star.project.dto.j4.basicdata.VendorDTO;
 import com.zeroone.star.project.dto.j4.basicdata.VendorExcelSelectDTO;
 import com.zeroone.star.project.dto.j4.basicdata.VendorImportDTO;
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
+import com.zeroone.star.project.dto.j4.basicdata.VendorAddDTO;
+import com.zeroone.star.project.dto.j4.basicdata.VendorExcelSelectDTO;
+import com.zeroone.star.project.dto.j4.basicdata.VendorModifyDTO;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,6 +33,7 @@ import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -37,6 +45,7 @@ import java.util.List;
  * @since 2024-05-21
  */
 @Service
+@Slf4j
 public class MdVendorServiceImpl extends ServiceImpl<MdVendorMapper, MdVendor> implements IMdVendorService {
 
     @Resource
@@ -44,6 +53,7 @@ public class MdVendorServiceImpl extends ServiceImpl<MdVendorMapper, MdVendor> i
 
     @Resource
     private EasyExcelComponent excel;
+
     @Resource
     private UserHolder userHolder;
     /*
@@ -76,10 +86,20 @@ public class MdVendorServiceImpl extends ServiceImpl<MdVendorMapper, MdVendor> i
     }
 
     @Override
-    public int addVendor(VendorDTO data){
-        MdVendor mdVendor = new MdVendor();
-        BeanUtils.copyProperties(data, mdVendor);
-        return mdVendorMapper.insert(mdVendor);
+    public Boolean addVendor(VendorAddDTO data){
+        try {
+            UserDTO userDTO = userHolder.getCurrentUser();
+            MdVendor mdVendor = new MdVendor();
+            BeanUtil.copyProperties(data, mdVendor);
+            mdVendor.setCreateBy(userDTO.getUsername());
+            mdVendor.setUpdateBy(userDTO.getUsername());
+            mdVendor.setCreateTime(LocalDateTime.now());
+            mdVendor.setUpdateTime(LocalDateTime.now());
+            return mdVendorMapper.insert(mdVendor) > 0;
+        } catch (Exception e) {
+            log.info("添加供应商失败",e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -141,9 +161,17 @@ public class MdVendorServiceImpl extends ServiceImpl<MdVendorMapper, MdVendor> i
     }
 
 
-    public Integer updateVendor(VendorDTO data) {
-        MdVendor mdVendor = new MdVendor();
-        BeanUtils.copyProperties(data, mdVendor);
-        return mdVendorMapper.updateById(mdVendor);
+    public Boolean updateVendor(VendorModifyDTO data) {
+        try {
+            UserDTO userDTO = userHolder.getCurrentUser();
+            MdVendor mdVendor = new MdVendor();
+            BeanUtil.copyProperties(data, mdVendor);
+            mdVendor.setUpdateBy(userDTO.getUsername());
+            mdVendor.setUpdateTime(LocalDateTime.now());
+            return mdVendorMapper.updateById(mdVendor) > 0;
+        } catch (Exception e) {
+            log.info("修改失败",e.getMessage());
+            return false;
+        }
     }
 }

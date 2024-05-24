@@ -2,8 +2,9 @@ package com.zeroone.star.basicdata.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.basicdata.entity.MdVendor;
-import com.zeroone.star.project.dto.j4.basicdata.VendorDTO;
+import com.zeroone.star.project.dto.j4.basicdata.VendorAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.VendorExcelSelectDTO;
+import com.zeroone.star.project.dto.j4.basicdata.VendorModifyDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +28,7 @@ public interface IMdVendorService extends IService<MdVendor> {
 
     void deleteVendors(List<Integer> ids);
 
-    Integer updateVendor(VendorDTO data);
+    Boolean updateVendor(VendorModifyDTO data);
 
     /**
      * 添加vendor 信息
@@ -35,7 +36,7 @@ public interface IMdVendorService extends IService<MdVendor> {
      * @param data 供应商数据信息
      * @return 返回是否添加成功
      */
-    int addVendor(VendorDTO data);
+    Boolean addVendor(VendorAddDTO data);
 
     /*
     * 导出供应商

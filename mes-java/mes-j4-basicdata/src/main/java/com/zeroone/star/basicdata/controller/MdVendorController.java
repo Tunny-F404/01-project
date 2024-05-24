@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.basicdata.entity.MdVendor;
 import com.zeroone.star.basicdata.service.IMdVendorService;
-import com.zeroone.star.project.dto.j4.basicdata.VendorDTO;
+import com.zeroone.star.project.dto.j4.basicdata.VendorAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.VendorExcelSelectDTO;
+import com.zeroone.star.project.dto.j4.basicdata.VendorModifyDTO;
+import com.zeroone.star.project.j4.basicdata.SupplierApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -46,17 +48,19 @@ public class MdVendorController {
 
     @ApiOperation(value = "添加供应商")
     @PostMapping("add-vendor")
-    public JsonVO addVendor(@RequestBody VendorDTO data)
+    public JsonVO addVendor(@RequestBody VendorAddDTO data)
     {
-        iMdVendorService.addVendor(data);
-        return JsonVO.success("操作成功");
+        if (iMdVendorService.addVendor(data)) return JsonVO.success("添加成功");
+        else return JsonVO.fail("添加失败");
     }
 
-    @Override
-    public JsonVO updateVendor(VendorDTO data) {
-        iMdVendorService.updateVendor(data);
-        return JsonVO.success("操作成功");
+    @ApiOperation(value = "修改供应商信息")
+    @PostMapping("update-vendor")
+    public JsonVO updateVendor(VendorModifyDTO data) {
+        if (iMdVendorService.updateVendor(data)) return JsonVO.success("修改成功");
+        else return JsonVO.fail("修改失败");
     }
+
 
     /**
      * 供应商分页查询
