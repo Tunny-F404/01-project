@@ -30,21 +30,21 @@ public class GetShopSettingsDTO  extends PageDTO {
     private String enable_flag;
     @ApiModelProperty(value = "备注", example = "1")
     private String remark;
-    @ApiModelProperty(value = "预留字段1", example = "1")
-    private String attr1;
-    @ApiModelProperty(value = "预留字段2", example = "1")
-    private String attr2;
-    @ApiModelProperty(value = "预留字段3", example = "1")
-    private Integer attr3;
-    @ApiModelProperty(value = "预留字段4", example = "1")
-    private Integer attr4;
-    @ApiModelProperty(value = "创建者", example = "1")
-    private String create_by;
-    @ApiModelProperty(value = "创建时间", example = "2022-08-24 21：54：31")
-    private Date create_time;
-    @ApiModelProperty(value = "更新者", example = "1")
-    private String update_by;
-    @ApiModelProperty(value = "更新时间", example = "2022-08-24 21：54：31")
-    private Date update_time;
+//    @ApiModelProperty(value = "预留字段1", example = "1")
+//    private String attr1;
+//    @ApiModelProperty(value = "预留字段2", example = "1")
+//    private String attr2;
+//    @ApiModelProperty(value = "预留字段3", example = "1")
+//    private Integer attr3;
+//    @ApiModelProperty(value = "预留字段4", example = "1")
+//    private Integer attr4;
+//    @ApiModelProperty(value = "创建者", example = "1")
+//    private String create_by;
+//    @ApiModelProperty(value = "创建时间", example = "2022-08-24 21：54：31")
+//    private Date create_time;
+//    @ApiModelProperty(value = "更新者", example = "1")
+//    private String update_by;
+//    @ApiModelProperty(value = "更新时间", example = "2022-08-24 21：54：31")
+//    private Date update_time;
 }
 
