@@ -1,4 +1,5 @@
 /*
+>>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
@@ -22,11 +23,15 @@
 
 #include "prodmgmt/RemoveWorkReportController.h"
 
+#include "productionorder/ProductionOrderController.h"
+#include "productioninvestigation/ProductionProcessController.h"
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
 #include "file/FileController.h"
 #include "ws/WSController.h"
+<<<<<< < HEAD
+
 #endif
 
 
@@ -45,7 +50,7 @@ router->addController(__CLASS__::createShared())
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
 
-Router::Router(Endpoints* docEndpoints, HttpRouter* router)
+Router::Router(Endpoints * docEndpoints, HttpRouter * router)
 {
 	this->docEndpoints = docEndpoints;
 	this->router = router;
@@ -65,6 +70,9 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(ApprovalStage);
 	ROUTER_SIMPLE_BIND(ProWorkorderController);
 
+	//#TIP :绯荤粺鎵╁睍璺敱瀹氫箟锛屽啓鍦ㄨ繖涓悗闈?
+	ROUTER_SIMPLE_BIND(ProductionOrderController);
+	ROUTER_SIMPLE_BIND(ProductionProcessController);
 }
 
 #ifdef HTTP_SERVER_DEMO
@@ -79,6 +87,26 @@ void Router::createSampleRouter()
 	
 	// ��WebSocket������
 	router->addController(WSContorller::createShared());
+	<<<<<< < HEAD
+		// 缁戝畾绀轰緥鎺у埗鍣?
+		ROUTER_SIMPLE_BIND(SampleController);
+	// 缁戝畾鐢ㄦ埛鎺у埗鍣?
+	ROUTER_SIMPLE_BIND(UserController);
+	// 缁戝畾鏂囦欢鎺у埗鍣?
+	ROUTER_SIMPLE_BIND(FileController);
+
+	// 缁戝畾WebSocket鎺у埗鍣?
+	====== =
+		// 绑定示例控制器
+		ROUTER_SIMPLE_BIND(SampleController);
+	// 绑定用户控制器
+	ROUTER_SIMPLE_BIND(UserController);
+	// 绑定文件控制器
+	ROUTER_SIMPLE_BIND(FileController);
+
+	// 绑定WebSocket控制器
+	>>>>>> > 68ca23adf7d849ebe7f628a278360730cc296bae
+		router->addController(WSContorller::createShared());
 }
 #endif
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
@@ -23,6 +23,7 @@
 #include "../../Macros.h"
 #include <string>
 #include <list>
+
 using namespace std;
 
 #endif // !_DO_INCLUDE_
