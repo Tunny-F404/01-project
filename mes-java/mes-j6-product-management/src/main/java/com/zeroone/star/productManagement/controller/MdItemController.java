@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Controller
-@Api(tags = "MdItemsData-export-import")
+@Api(tags = "物料管理-导入,导出,导入模板")
 @RequestMapping("/mes/md/mditem")
 public class MdItemController implements MdItemApis {
     @Autowired
@@ -28,6 +28,7 @@ public class MdItemController implements MdItemApis {
     FastDfsClientComponent dfs;
     @Autowired
     IMdItemService iMdItemService;
+
     /**
      * 导出物料产品列表。
      *
@@ -36,10 +37,11 @@ public class MdItemController implements MdItemApis {
      */
     @PostMapping(value = "/export", produces = "application/octet-stream")
     @ApiOperation(value = "导出物料产品列表")
-    public ResponseEntity<byte[]> exportToExcel(MdItemQuery mdItemQuery){
+    public ResponseEntity<byte[]> exportToExcel(MdItemQuery mdItemQuery) {
         List<MdItem> items = iMdItemService.selectMdItemList(mdItemQuery);
         return iMdItemService.exportToExcel(items);
     }
+
     /**
      * 下载导入模板。
      *
@@ -50,16 +52,17 @@ public class MdItemController implements MdItemApis {
     public ResponseEntity<byte[]> downloadTemplate() {
         return iMdItemService.downloadTemplate();
     }
+
     /**
      * 导入物料产品数据。
      *
-     * @param file 包含物料产品数据的 Excel 文件
+     * @param file          包含物料产品数据的 Excel 文件
      * @param updateSupport 是否支持更新已存在的数据
      * @return 导入结果的 Json 对象
      */
     @ApiOperation("导入物料产品数据")
     @PostMapping("/importData")
-    public JsonVO<String> importFromExcel(MultipartFile file, boolean updateSupport){
+    public JsonVO<String> importFromExcel(MultipartFile file, boolean updateSupport) {
         return iMdItemService.importFromExcel(file, updateSupport);
     }
 

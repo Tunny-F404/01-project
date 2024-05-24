@@ -16,12 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
  * <p>
  * 描述：产品SOP控制器
  * </p>
+ *
  * @version 1.0.0
  */
-@Api("产品sop相关接口")
+@Api(tags = "产品sop相关接口")
 @RestController
 @RequestMapping("/product-management/sop")
-public class ProductSopController  implements ProductSopApis {
+public class ProductSopController implements ProductSopApis {
 
     @Autowired
     private IProductSopService ProductSopService;
@@ -64,6 +65,7 @@ public class ProductSopController  implements ProductSopApis {
         ProductSopService.deleteProductSopByIds(ids);
         return JsonVO.success("删除成功");
     }
+
     @Override
     @ApiOperation(value = "上传SOP文件")
     @PostMapping("/uploadFile")
