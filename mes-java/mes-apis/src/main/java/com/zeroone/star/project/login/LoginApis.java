@@ -2,6 +2,8 @@ package com.zeroone.star.project.login;
 
 import com.zeroone.star.project.dto.login.LoginDTO;
 import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
+import com.zeroone.star.project.j1.syslogin.vo.CurrentUserInfoVO;
+import com.zeroone.star.project.j1.syslogin.vo.CurrentUserMenuVO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.login.LoginVO;
 import com.zeroone.star.project.vo.login.MenuTreeVO;
@@ -37,7 +39,8 @@ public interface LoginApis {
      * 获取当前用户信息
      * @return 返回当前用户信息
      */
-    JsonVO<LoginVO> getCurrUser();
+    //JsonVO<LoginVO> getCurrUser();
+    JsonVO<CurrentUserInfoVO> getCurrUser(Integer userId);
 
     /**
      * 退出登录
@@ -50,5 +53,6 @@ public interface LoginApis {
      * @return 菜单数据
      * @throws Exception 异常信息
      */
-    JsonVO<List<MenuTreeVO>> getMenus() throws Exception;
+    JsonVO<List<CurrentUserMenuVO>> getMenus(Integer userId) throws Exception;
+    //JsonVO<List<MenuTreeVO>> getMenus() throws Exception;
 }

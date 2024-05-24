@@ -8,6 +8,8 @@ import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.constant.AuthConstant;
 import com.zeroone.star.project.dto.login.LoginDTO;
 import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
+import com.zeroone.star.project.j1.syslogin.vo.CurrentUserInfoVO;
+import com.zeroone.star.project.j1.syslogin.vo.CurrentUserMenuVO;
 import com.zeroone.star.project.login.LoginApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
@@ -36,7 +38,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("login")
-@Api(tags = "login")
+@Api(tags = "登录系统")
 public class LoginController implements LoginApis {
     @Resource
     OauthService oAuthService;
@@ -72,10 +74,18 @@ public class LoginController implements LoginApis {
         return oAuthService.postAccessToken(params);
     }
 
+    @ApiOperation(value = "退出登录")
+    @GetMapping("logout")
+    @Override
+    public JsonVO<String> logout() {
+        //TODO:登出逻辑，需要配合登录逻辑实现
+        return null;
+    }
+
     @ApiOperation(value = "获取当前用户")
     @GetMapping("current-user")
     @Override
-    public JsonVO<LoginVO> getCurrUser() {
+    public JsonVO<CurrentUserInfoVO> getCurrUser(Integer userId) {
         UserDTO currentUser;
         try {
             currentUser = userHolder.getCurrentUser();
@@ -86,18 +96,10 @@ public class LoginController implements LoginApis {
             return JsonVO.fail(null);
         } else {
             //TODO:这里需要根据业务逻辑接口，重新实现
-            LoginVO vo = new LoginVO();
+            CurrentUserInfoVO vo = new CurrentUserInfoVO();
             BeanUtil.copyProperties(currentUser, vo);
             return JsonVO.success(vo);
         }
-    }
-
-    @ApiOperation(value = "退出登录")
-    @GetMapping("logout")
-    @Override
-    public JsonVO<String> logout() {
-        //TODO:登出逻辑，需要配合登录逻辑实现
-        return null;
     }
 
     @Resource
@@ -106,12 +108,13 @@ public class LoginController implements LoginApis {
     @ApiOperation(value = "获取菜单")
     @GetMapping("get-menus")
     @Override
-    public JsonVO<List<MenuTreeVO>> getMenus() throws Exception {
-        //TODO:未实现根据实际数据库设计业务逻辑，下面逻辑属于示例逻辑
-        //1 获取当前用户
-        UserDTO currentUser = userHolder.getCurrentUser();
-        //2 获取当前用户拥有的菜单
-        List<MenuTreeVO> menus = menuService.listMenuByRoleName(currentUser.getRoles());
-        return JsonVO.success(menus);
+    public JsonVO<List<CurrentUserMenuVO>> getMenus(Integer userId) throws Exception {
+        return null;
+//        //TODO:未实现根据实际数据库设计业务逻辑，下面逻辑属于示例逻辑
+//        //1 获取当前用户
+//        UserDTO currentUser = userHolder.getCurrentUser();
+//        //2 获取当前用户拥有的菜单
+//        List<CurrentUserMenuVO> menus = menuService.listMenuByRoleName(currentUser.getRoles());
+//        return JsonVO.success(menus);
     }
 }

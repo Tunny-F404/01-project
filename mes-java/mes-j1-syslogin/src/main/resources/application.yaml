@@ -1,5 +1,0 @@
-server:
-  port: ${sp.syslogin}
-spring:
-  application:
-    name: ${sn.syslogin}

@@ -40,7 +40,6 @@
         <module>mes-gateway</module>
         <module>mes-oauth2</module>
         <module>mes-login</module>
-        <module>mes-j1-syslogin</module>
         <module>mes-j1-syshome</module>
         <module>mes-j1-mycenter</module>
         <module>mes-j1-orgstructure</module>
