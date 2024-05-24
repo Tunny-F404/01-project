@@ -1,8 +1,8 @@
 package com.zeroone.star.project.j6.product_management.query;
 
 import com.zeroone.star.project.query.PageQuery;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

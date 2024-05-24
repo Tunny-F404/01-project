@@ -40,7 +40,7 @@ public class BomDTO {
     @ApiModelProperty(value = "项目或产品", example = "PRODUCT", required = true)
     private String itemOrProduct;
     @ApiModelProperty(value = "使用比例", example = "1.7", required = true)
-    private Long quantity;
+    private Double quantity;
     @ApiModelProperty(value = "备注", example = "", required = false)
     private String remark;
     @ApiModelProperty(value = "单位", example = "pcs", required = true)

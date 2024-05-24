@@ -10,7 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @EnableSwagger2WebMvc
 public class SwaggerConfig {
     @Bean
-    Docket api() {
+    Docket Api() {
         return SwaggerCore.defaultDocketBuilder("客户管理模块", "com.zeroone.star.customer.controller","customer");
     }
 }

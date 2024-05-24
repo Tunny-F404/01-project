@@ -4,17 +4,19 @@ import com.zeroone.star.customer.service.IMdClientService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.ClientApis;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
-import com.zeroone.star.project.j6.customer.dto.ResultDTO;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
-import com.zeroone.star.project.j6.customer.query.CustomExportQuery;
+import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/md-client")
@@ -23,6 +25,7 @@ import java.util.List;
 public class MdClientController implements ClientApis {
     @Resource
     IMdClientService clientService;
+
 
     @ApiOperation(value = "新增客户")
     @PostMapping("/add")
@@ -59,24 +62,60 @@ public class MdClientController implements ClientApis {
         return JsonVO.success(clientService.getById(id));
     }
 
-    @GetMapping("query-queryCustomExport")
+
+
+
+
+    @GetMapping("/export/queryClientExport")
     @ApiOperation(value = "返回查询导出客户结果")
-    @Override
-    public JsonVO<ResultDTO> queryCustomExport(CustomExportQuery customExport) {
-        return null;
+    @ResponseBody
+    public ResponseEntity<byte[]> queryClientExportByExcel(
+            @RequestParam(required = false) List<Long> clientId,
+            @RequestParam(required = false) String customerCode,
+            @RequestParam(required = false) String customerEnglishName,
+            @RequestParam(required = false) String customerName,
+            @RequestParam(required = false) String customerSimpleName,
+            @RequestParam(required = false) Integer status // 使用Optional<Integer>作为status的类型
+    ) {
+        // 构造 ClientExportQuery 对象
+
+        ClientExportQuery clientExportQuery = new ClientExportQuery();
+
+        clientExportQuery.setCustomerCode(customerCode);
+        clientExportQuery.setCustomerEnglishName(customerEnglishName);
+        clientExportQuery.setCustomerName(customerName);
+        clientExportQuery.setCustomerSimpleName(customerSimpleName);
+        if(clientId != null && !clientId.isEmpty())
+            clientExportQuery.setClientId(clientId);
+
+        if(status != null )
+            clientExportQuery.setStatus(status); // 如果status为空，则设置为null
+
+        return queryClientExportByExcel(clientExportQuery);
     }
 
-    @PostMapping("/add-customers")
-    @ApiOperation(value = "添加客户")
-    @Override
-    public JsonVO<ResultDTO> addList(List customer) {
-        return null;
+
+    public ResponseEntity<byte[]> queryClientExportByExcel( ClientExportQuery clientExportQuery) {
+        return clientService.queryClientExportByExcel(clientExportQuery);
     }
 
-    @GetMapping("query-DownloadResult")
+
+
+
+    @GetMapping("/import/importTemplate")
     @ApiOperation(value = "下载模板结果")
+    @ResponseBody
     @Override
-    public JsonVO<ResultDTO> DownloadResult() {
-        return null;
+    public ResponseEntity<byte[]> DownloadTemplate() {
+        return clientService.DownloadTemplate();
     }
+
+    @PostMapping("/import/importClient")
+    @ApiOperation(value = "添加客户")
+    @ResponseBody
+    @Override
+    public JsonVO<String> importClientByExcel(MultipartFile customer) {
+        return clientService.importClientByExcel(customer);
+    }
+
 }
