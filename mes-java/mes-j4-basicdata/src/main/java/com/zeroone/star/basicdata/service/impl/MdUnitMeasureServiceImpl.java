@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.basicdata.service.IMdUnitMeasureService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -78,7 +79,7 @@ public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper,Md
      * @return
      */
     @Override
-    public List<MdUnitMeasure> selectMdUnitMeasureList(MdUnitMeasure mdUnitMeasure) {
+    public List<UnitMeasureDTO> selectMdUnitMeasureList(UnitMeasureDTO mdUnitMeasure) {
         return mdUnitMeasureMapper.selectMdUnitMeasureList(mdUnitMeasure);
     }
 }

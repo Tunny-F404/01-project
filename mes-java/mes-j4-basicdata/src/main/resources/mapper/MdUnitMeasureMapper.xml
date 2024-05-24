@@ -7,6 +7,7 @@
          #{id}
     </foreach>
     </delete>
+
     <select id="listUnitMeasure" resultType="com.zeroone.star.basicdata.entity.MdUnitMeasure"
             parameterType="com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO">
         select * from md_unit_measure
@@ -24,6 +25,7 @@
         <result property="primaryId"    column="primary_id"    />
         <result property="changeRate"    column="change_rate"    />
         <result property="enableFlag"    column="enable_flag"    />
+        <result property="remark"    column="remark"    />
         <result property="attr1"    column="attr1"    />
         <result property="attr2"    column="attr2"    />
         <result property="attr3"    column="attr3"    />

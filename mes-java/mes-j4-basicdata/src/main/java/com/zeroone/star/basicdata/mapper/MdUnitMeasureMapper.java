@@ -2,6 +2,7 @@ package com.zeroone.star.basicdata.mapper;
 
 import com.zeroone.star.basicdata.entity.MdUnitMeasure;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
 import org.apache.ibatis.annotations.Mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.basicdata.entity.MdUnitMeasure;
@@ -33,10 +34,11 @@ public interface MdUnitMeasureMapper extends BaseMapper<MdUnitMeasure> {
     * 根据条件查询单位数据
     * */
     List<MdUnitMeasure> listUnitMeasure(UnitExcelSelectDTO unitExcelSelectDTO);
+
     /**
      * 查询单位列表
-     * @param mdUnitMeasure
+     * @param unitMeasureDTO
      * @return
      */
-    List<MdUnitMeasure> selectMdUnitMeasureList(MdUnitMeasure mdUnitMeasure);
+    List<UnitMeasureDTO> selectMdUnitMeasureList(UnitMeasureDTO unitMeasureDTO);
 }
