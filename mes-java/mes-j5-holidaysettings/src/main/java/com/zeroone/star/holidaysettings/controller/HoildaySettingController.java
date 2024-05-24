@@ -32,7 +32,7 @@ public class HoildaySettingController implements HolidaySettingsApis {
     }
 
 
-    @PostMapping("/list")
+    @PostMapping("/set")
     @ApiOperation("设置节假日配置")
     @Override
     public JsonVO<ResultStatus> setHoliday(SettingHolidayQuery condition) {
