@@ -18,10 +18,20 @@
  * */
 #include "stdafx.h"
 #include "RepairorderController.h"
+#include "../../service/repairorder/RepairorderService.h"
+#include "../ApiDeclarativeServicesHelper.h"
 
+// 维修单分页查询数据
 RepairorderPageJsonVO::Wrapper RepairorderController::execQueryRepairorder(const RepairorderQuery::Wrapper& query)
 {
-    return RepairorderPageJsonVO::Wrapper();
+    // 定义一个Service
+    RepairorderService service;
+    // 查询数据
+    auto result = service.listAll(query);
+    // 响应结果
+    auto jvo = RepairorderPageJsonVO::createShared();
+    jvo->success(result);
+    return jvo;
 }
 
 RepairorderDetailsJsonVO::Wrapper RepairorderController::execQueryDetailsRepairorder(const RepairorderDetailsQuery::Wrapper& id)
