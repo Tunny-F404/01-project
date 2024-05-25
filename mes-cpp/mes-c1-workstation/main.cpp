@@ -44,14 +44,10 @@ bool getStartArg(int argc, char* argv[]) {
 	// 服务器端口
 	std::string serverPort = "8090";
 	// 数据库连接信息
+	std::string dbUsername = "root";
 	std::string dbPassword = "123456";
-<<<<<<< HEAD
 	std::string dbName = "ktgmes";
 	std::string dbHost = "192.168.88.131";
-=======
-	std::string dbName = "test";
-	std::string dbHost = "140.143.139.173";
->>>>>>> origin/c1-workstation-Hoowtph
 	int dbPort = 3306;
 	int dbMax = 5;
 #ifdef LINUX

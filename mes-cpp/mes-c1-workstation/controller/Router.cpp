@@ -1,21 +1,13 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-<<<<<<< HEAD
-<<<<<<< HEAD
 #include"controller/WorkStation/GetWorkStationListController.h"
 #include"controller/WorkStation/AddWorkStationController.h"
 #include"controller/WorkStation/ModifyWorkStationController.h"
 #include"controller/WorkStation/ExportWorkStationController.h"
-
-=======
 #include "humanresource/HumanResourceListController.h"
->>>>>>> origin/c1-workstation-chunyang
-=======
 #include "add-wf-for-ws/AddWorkFixtureForWorkStationController.h"
 #include "get-wf-for-ws/GetWorkFixtureForWorkStationController.h"
->>>>>>> origin/c1-workstation-Hoowtph
-
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
@@ -47,20 +39,15 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	ROUTER_SIMPLE_BIND(GetWorkStationListController); 
 	ROUTER_SIMPLE_BIND(AddWorkStationController);
 	ROUTER_SIMPLE_BIND(ModifyWorkStationController);
 	ROUTER_SIMPLE_BIND(ExportWorkStationController);
 	ROUTER_SIMPLE_BIND(ExportWorkStationController);
-=======
 	ROUTER_SIMPLE_BIND(HumanResourceListController);
->>>>>>> origin/c1-workstation-chunyang
-=======
 	ROUTER_SIMPLE_BIND(AddWorkFixtureForWorkStationController);
 	ROUTER_SIMPLE_BIND(GetWorkFixtureForWorkStationController);
->>>>>>> origin/c1-workstation-Hoowtph
 }
 
 #ifdef HTTP_SERVER_DEMO

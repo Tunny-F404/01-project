@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _GETWORKSTATIONLIST_CONTROLLER_H_
-#define _GETWORKSTATIONLIST_CONTROLLER_H_
+#ifndef _GETWORKSTATIONLISTCONTROLLER_H_
+#define _GETWORKSTATIONLISTCONTROLLER_H_
 
 #include "domain/vo/BaseJsonVO.h"
 #include "domain/GlobalInclude.h"
