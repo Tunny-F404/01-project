@@ -111,7 +111,7 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
         Page<MdClient> clientPage = new Page<>(query.getPageNum(), query.getPageSize());
         // 构建查询条件
         QueryWrapper<MdClient> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("clientName", query.getClientName());
+        queryWrapper.like("client_name", query.getClientName());
         // 查询客户列表数据
         Page<MdClient> clients = mdClientMapper.selectPage(clientPage, queryWrapper);
 

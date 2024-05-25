@@ -29,7 +29,7 @@ public class MdClientController implements ClientApis {
     @ApiOperation(value = "新增客户")
     @PostMapping("add-client")
     @Override
-    public JsonVO<String> addClient(@Validated @RequestBody ClientDTO client) {
+    public JsonVO<String> addClient(@RequestBody ClientDTO client) {
         boolean isAdded = clientService.addClient(client);
         if (isAdded) {
             return JsonVO.success(null);
@@ -49,10 +49,9 @@ public class MdClientController implements ClientApis {
     }
 
     @ApiOperation("更新客户")
-    @PutMapping("update-client/{id}")
+    @PutMapping("update-client")
     @Override
-    public JsonVO<String> updateClient(@PathVariable Long id, @Validated @RequestBody ClientUpdateDTO client) {
-        client.setClientId(id);
+    public JsonVO<String> updateClient(@RequestBody ClientUpdateDTO client) {
         boolean isUpdated = clientService.updateClient(client);
         if (isUpdated) {
             return JsonVO.success(null);
@@ -61,13 +60,10 @@ public class MdClientController implements ClientApis {
     }
 
     @ApiOperation("查询客户列表")
-    @GetMapping("query-all")
+    @PostMapping("query-all")
     @Override
     public JsonVO<PageDTO<ClientDTO>> queryAll(@RequestBody ClientQuery query) {
         PageDTO<ClientDTO> clients = clientService.listAll(query);
-        if (clients == null) {
-            return JsonVO.fail(null);
-        }
         return JsonVO.success(clients);
     }
 
@@ -76,9 +72,6 @@ public class MdClientController implements ClientApis {
     @Override
     public JsonVO<ClientDTO> queryById(@PathVariable Long id) {
         ClientDTO client = clientService.getById(id);
-        if (client == null) {
-            return JsonVO.fail(null);
-        }
         return JsonVO.success(client);
     }
 
