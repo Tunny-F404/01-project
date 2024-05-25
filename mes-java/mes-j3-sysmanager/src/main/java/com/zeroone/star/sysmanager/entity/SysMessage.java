@@ -11,6 +11,7 @@ import java.sql.Blob;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -28,7 +29,7 @@ import lombok.Setter;
 @Data
 @ApiModel
 @TableName("sys_message")
-public class SysMessage extends BaseEntity{
+public class SysMessage implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -116,26 +117,50 @@ public class SysMessage extends BaseEntity{
 
 
     /** 预留字段1 */
-    @ApiModelProperty(value = "预留字段1",example = "")
+    @ApiModelProperty(value = "预留字段1")
     @ExcelProperty(value = "预留字段1",index = 16)
     private String attr1;
 
     /** 预留字段2 */
-    @ApiModelProperty(value = "预留字段2",example = "")
+    @ApiModelProperty(value = "预留字段2")
     @ExcelProperty(value = "预留字段2",index = 17)
     private String attr2;
 
     /** 预留字段3 */
-    @ApiModelProperty(value = "预留字段3",example = "")
+    @ApiModelProperty(value = "预留字段3")
     @ExcelProperty(value = "预留字段3",index = 18)
     private Long attr3;
 
     /** 预留字段4 */
-    @ApiModelProperty(value = "预留字段4",example = "")
+    @ApiModelProperty(value = "预留字段4")
     @ExcelProperty(value = "预留字段4",index = 19)
     private Long attr4;
 
+    /**
+     * 创建者
+     */
+    @ApiModelProperty(value = "创建者")
+    private String createBy;
 
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "创建时间")
+    private LocalDateTime createTime;
 
+    /**
+     * 更新者
+     */
+    @ApiModelProperty(value = "更新者")
+    private String updateBy;
+
+    /**
+     * 更新时间
+     */
+    @ApiModelProperty(value = "更新时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
 
 }

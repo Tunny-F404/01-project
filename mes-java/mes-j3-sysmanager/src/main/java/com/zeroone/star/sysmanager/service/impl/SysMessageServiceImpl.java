@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -80,7 +81,7 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
             sysMessage.setMessageId(messageId + 1);
             sysMessage.setStatus("未读");
             sysMessage.setDeletedFlag("N");
-            sysMessage.setCreateTime();
+            sysMessage.setCreateTime(LocalDateTime.now());
 
             // 插入消息到数据库
             sysMessageMapper.insert(sysMessage);
@@ -118,7 +119,7 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
 //            sysMessage.setRecipientId();
 
             //添加 更改时间
-            sysMessage.setUpdateTime();
+            sysMessage.setUpdateTime(LocalDateTime.now());
 
             // 执行更新操作
             int updatedRows = sysMessageMapper.update(sysMessage, updateWrapper);
