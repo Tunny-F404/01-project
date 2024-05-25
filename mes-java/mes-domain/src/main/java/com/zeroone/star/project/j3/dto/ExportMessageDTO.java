@@ -12,7 +12,7 @@ import java.time.LocalDate;
  * ClassName:DfsExportDTO
  * Package:com.zeroone.star.project.j3.dto
  * Description:
- *      导出消息的DTO 专门提供给下载excel报表及导出dfs 暂时好像没有用上
+ *      导出该字段消息的DTO 专门提供给下载excel报表及导出dfs
  * @Author Chi池
  * @Create 2024/5/21  8:41
  * @Version 1.0
