@@ -74,46 +74,7 @@ void Router::initRouter()
 	//#TIP :绯荤粺鎵╁睍璺敱瀹氫箟锛屽啓鍦ㄨ繖涓悗闈?
 	ROUTER_SIMPLE_BIND(ProductionOrderController);
 	ROUTER_SIMPLE_BIND(ProductionProcessController);
-	//#TIP :ϵͳ��չ·�ɶ��壬д���������
-	createProdOrderRouter();
-}
-
-void Router::createProdOrderRouter()
-{
-	// ��ʾ��������
-	ROUTER_SIMPLE_BIND(SampleController);
-	// ���û�������
-	ROUTER_SIMPLE_BIND(UserController);
-	// ���ļ�������
-	ROUTER_SIMPLE_BIND(FileController);
-	
-	// ��WebSocket������
-	router->addController(WSContorller::createShared());
-	<<<<<< < HEAD
-		// 缁戝畾绀轰緥鎺у埗鍣?
-		ROUTER_SIMPLE_BIND(SampleController);
-	// 缁戝畾鐢ㄦ埛鎺у埗鍣?
-	ROUTER_SIMPLE_BIND(UserController);
-	// 缁戝畾鏂囦欢鎺у埗鍣?
-	ROUTER_SIMPLE_BIND(FileController);
-
-	// 缁戝畾WebSocket鎺у埗鍣?
-	====== =
-		// 绑定示例控制器
-		ROUTER_SIMPLE_BIND(SampleController);
-	// 绑定用户控制器
-	ROUTER_SIMPLE_BIND(UserController);
-	// 绑定文件控制器
-	ROUTER_SIMPLE_BIND(FileController);
-
-	// 绑定WebSocket控制器
-	>>>>>> > 68ca23adf7d849ebe7f628a278360730cc296bae
-		router->addController(WSContorller::createShared());
-}
-#endif
-
 	ROUTER_SIMPLE_BIND(ProdOrderController);
-
-	// ��WebSocket������
-	//router->addController(WSContorller::createShared());
 }
+
+
