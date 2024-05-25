@@ -1,6 +1,6 @@
 package com.zeroone.star.orgstructure.mapper;
 
-import com.zeroone.star.orgstructure.entity.SysUserPost;
+import com.zeroone.star.orgstructure.entity.UserAndPsotDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2024-05-22
  */
 @Mapper
-public interface SysUserPostMapper extends BaseMapper<SysUserPost> {
+public interface UserAndPostMapper extends BaseMapper<UserAndPsotDO> {
 
     @Select("select * from sys_user_post where post_id = #{id}")
     List<Long> selectBypostId(Long id);

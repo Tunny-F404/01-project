@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("sys_user_post")
-public class SysUserPost implements Serializable {
+public class UserAndPsotDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

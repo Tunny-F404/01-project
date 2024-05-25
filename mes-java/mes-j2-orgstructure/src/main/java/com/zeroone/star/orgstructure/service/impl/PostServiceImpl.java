@@ -3,19 +3,16 @@ package com.zeroone.star.orgstructure.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zeroone.star.orgstructure.entity.SysPost;
-import com.zeroone.star.orgstructure.entity.SysUserPost;
-import com.zeroone.star.orgstructure.mapper.SysPostMapper;
-import com.zeroone.star.orgstructure.mapper.SysUserMapper;
-import com.zeroone.star.orgstructure.mapper.SysUserPostMapper;
-import com.zeroone.star.orgstructure.service.ISysPostService;
+import com.zeroone.star.orgstructure.entity.PostDO;
+import com.zeroone.star.orgstructure.entity.UserAndPsotDO;
+import com.zeroone.star.orgstructure.mapper.PostMapper;
+import com.zeroone.star.orgstructure.mapper.UserMapper;
+import com.zeroone.star.orgstructure.mapper.UserAndPostMapper;
+import com.zeroone.star.orgstructure.service.PostService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.j2.orgstructure.dto.job.JobDTO;
-import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.login.LoginVO;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpHeaders;
@@ -23,11 +20,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInput;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -44,17 +39,17 @@ import java.util.UUID;
  */
 @Service
 @RequiredArgsConstructor
-public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> implements ISysPostService {
+public class PostServiceImpl extends ServiceImpl<PostMapper, PostDO> implements PostService {
 
 
     @Resource
-    private SysPostMapper sysPostMapper;
+    private PostMapper postMapper;
 
     @Resource
-    private SysUserPostMapper sysUserPostMapper;
+    private UserAndPostMapper userAndPostMapper;
 
     @Resource
-    private SysUserMapper sysUserMapper;
+    private UserMapper userMapper;
 
     @Resource
     private UserHolder userHolder;
@@ -70,10 +65,10 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     public boolean execSaveJob(JobDTO jobDTO) {
         try {
             // 复制属性
-            SysPost sysPost = BeanUtil.copyProperties(jobDTO, SysPost.class);
+            PostDO postDO = BeanUtil.copyProperties(jobDTO, PostDO.class);
 
             // 设置创建时间
-            sysPost.setCreateTime(LocalDateTime.now());
+            postDO.setCreateTime(LocalDateTime.now());
 
             // 获取当前登录人
             //TODO 获取当前登录人（暂时默认为defult）
@@ -81,13 +76,13 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
             currentUser = userHolder.getCurrentUser();
 
             if (currentUser != null) {
-                sysPost.setCreateBy(currentUser.getUsername());
+                postDO.setCreateBy(currentUser.getUsername());
             }else {
-                sysPost.setCreateBy("defult");
+                postDO.setCreateBy("defult");
             }
 
             // 保存sysPost
-            return save(sysPost);
+            return save(postDO);
         } catch (Exception e) {
             // 记录异常日志，或者根据需求进行其他处理
             e.printStackTrace();
@@ -110,18 +105,18 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
             HashMap<Long, List<Long>> map = new HashMap<Long, List<Long>>();
             // 先查询岗位下的用户
             for (Long id : ids) {
-                List<Long> userids = sysUserPostMapper.selectBypostId(id);
+                List<Long> userids = userAndPostMapper.selectBypostId(id);
                 map.put(id, userids);
             }
             //遍历map，删除岗位下的用户
             for (Long id : ids) {
                 List<Long> userids = map.get(id);
                 if (userids != null && !userids.isEmpty()) {
-                    sysUserMapper.deleteBatchIds(userids);
+                    userMapper.deleteBatchIds(userids);
                 }
             }
             //删除用户与岗位的关联关系
-            sysUserPostMapper.delete(new QueryWrapper<SysUserPost>().in("post_id", ids));
+            userAndPostMapper.delete(new QueryWrapper<UserAndPsotDO>().in("post_id", ids));
             // 删除岗位
             return removeByIds(Arrays.asList(ids));
         } catch (Exception e) {
@@ -141,24 +136,24 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     @Override
     public boolean execModifyJob(JobDTO jobDTO) {
         try {
-            SysPost sysPost = BeanUtil.copyProperties(jobDTO, SysPost.class);
+            PostDO postDO = BeanUtil.copyProperties(jobDTO, PostDO.class);
 
             // 设置更新时间
-            sysPost.setUpdateTime(LocalDateTime.now());
+            postDO.setUpdateTime(LocalDateTime.now());
 
             // 获取当前登录人
             //TODO 获取当前登录人（暂时默认为defult）
             UserDTO currentUser;
             currentUser = userHolder.getCurrentUser();
             if (currentUser != null) {
-                sysPost.setUpdateBy(currentUser.getUsername());
+                postDO.setUpdateBy(currentUser.getUsername());
             }else{
-                sysPost.setUpdateBy("defult");
+                postDO.setUpdateBy("defult");
             }
 
 
             // 更新sysPost
-            return updateById(sysPost);
+            return updateById(postDO);
         } catch (Exception e) {
             // 记录异常日志，或者根据需求进行其他处理
             e.printStackTrace();
@@ -177,9 +172,9 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     public ResponseEntity<byte[]> download() {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.select("post_id", "post_name", "post_code", "post_sort", "status", "remark");
-        List<SysPost> posts = sysPostMapper.selectList(queryWrapper);
+        List<PostDO> posts = postMapper.selectList(queryWrapper);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        EasyExcel.write(out, SysPost.class).sheet("岗位信息").doWrite(posts);
+        EasyExcel.write(out, PostDO.class).sheet("岗位信息").doWrite(posts);
         // 获取字节数组
         byte[] byteArray = out.toByteArray();
         String fileName = UUID.randomUUID().toString() + ".xlsx";

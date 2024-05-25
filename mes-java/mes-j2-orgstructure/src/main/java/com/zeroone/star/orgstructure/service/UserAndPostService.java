@@ -1,6 +1,6 @@
 package com.zeroone.star.orgstructure.service;
 
-import com.zeroone.star.orgstructure.entity.SysUserPost;
+import com.zeroone.star.orgstructure.entity.UserAndPsotDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author 爱吃猫的鱼
  * @since 2024-05-22
  */
-public interface ISysUserPostService extends IService<SysUserPost> {
+public interface UserAndPostService extends IService<UserAndPsotDO> {
 
 }

@@ -1,8 +1,8 @@
 package com.zeroone.star.orgstructure.service.impl;
 
-import com.zeroone.star.orgstructure.entity.SysUser;
-import com.zeroone.star.orgstructure.mapper.SysUserMapper;
-import com.zeroone.star.orgstructure.service.ISysUserService;
+import com.zeroone.star.orgstructure.entity.UserDO;
+import com.zeroone.star.orgstructure.mapper.UserMapper;
+import com.zeroone.star.orgstructure.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2024-05-22
  */
 @Service
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements UserService {
 
 }
