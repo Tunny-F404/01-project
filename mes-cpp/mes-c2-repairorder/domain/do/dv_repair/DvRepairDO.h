@@ -20,62 +20,62 @@
 #ifndef _DV_REPAIR_DO_
 #define _DV_REPAIR_DO_
 
-#include "DoInclude.h"
+#include "../DoInclude.h"
 
 /**
- * è®¾å¤‡ç»´ä¿®å• æ•°æ®åº“å®ä½“ç±»
+ * Éè±¸Î¬ĞŞµ¥ Êı¾İ¿âÊµÌåÀà
  */
 class DvRepairDO
 {
-    // ç»´ä¿®å•ID (ä¸»é”®)
-    CC_SYNTHESIZE(long long, repair_id, Repair_id);
-    // ç»´ä¿®å•ç¼–å·
+    // Î¬ĞŞµ¥ID (Ö÷¼ü)
+    CC_SYNTHESIZE(uint64_t, repair_id, Repair_id);
+    // Î¬ĞŞµ¥±àºÅ
     CC_SYNTHESIZE(string, repair_code, Repair_code);
-    // ç»´ä¿®å•åç§°
+    // Î¬ĞŞµ¥Ãû³Æ
     CC_SYNTHESIZE(string, repair_name, Repair_name);
-    // è®¾å¤‡ID
-    CC_SYNTHESIZE(long long, machinery_id, Machinery_id);
-    // è®¾å¤‡ç¼–ç 
+    // Éè±¸ID
+    CC_SYNTHESIZE(uint64_t, machinery_id, Machinery_id);
+    // Éè±¸±àÂë
     CC_SYNTHESIZE(string, machinery_code, Machinery_code);
-    // è®¾å¤‡åç§°
+    // Éè±¸Ãû³Æ
     CC_SYNTHESIZE(string, machinery_name, Machinery_name);
-    // å“ç‰Œ
+    // Æ·ÅÆ
     CC_SYNTHESIZE(string, machinery_brand, Machinery_brand);
-    // è§„æ ¼å‹å·
+    // ¹æ¸ñĞÍºÅ
     CC_SYNTHESIZE(string, machinery_spec, Machinery_spec);
-    // è®¾å¤‡ç±»å‹ID
-    CC_SYNTHESIZE(long long, machinery_type_id, Machinery_type_id);
-    // æŠ¥ä¿®æ—¥æœŸ
+    // Éè±¸ÀàĞÍID
+    CC_SYNTHESIZE(uint64_t, machinery_type_id, Machinery_type_id);
+    // ±¨ĞŞÈÕÆÚ
     CC_SYNTHESIZE(string, require_date, Require_date);
-    // ç»´ä¿®å®Œæˆæ—¥æœŸ
+    // Î¬ĞŞÍê³ÉÈÕÆÚ
     CC_SYNTHESIZE(string, finish_date, Finish_date);
-    // éªŒæ”¶æ—¥æœŸ
+    // ÑéÊÕÈÕÆÚ
     CC_SYNTHESIZE(string, confirm_date, Confirm_date);
-    // ç»´ä¿®ç»“æœ
+    // Î¬ĞŞ½á¹û
     CC_SYNTHESIZE(string, repair_result, Repair_result);
-    // ç»´ä¿®äººå‘˜
+    // Î¬ĞŞÈËÔ±
     CC_SYNTHESIZE(string, accepted_by, Accepted_by);
-    // éªŒæ”¶äººå‘˜
+    // ÑéÊÕÈËÔ±
     CC_SYNTHESIZE(string, confirm_by, Confirm_by);
-    // å•æ®çŠ¶æ€
+    // µ¥¾İ×´Ì¬
     CC_SYNTHESIZE(string, status, Status);
-    // å¤‡æ³¨
+    // ±¸×¢
     CC_SYNTHESIZE(string, remark, Remark);
-    // é¢„ç•™å­—æ®µ1
+    // Ô¤Áô×Ö¶Î1
     CC_SYNTHESIZE(string, attr1, Attr1);
-    // é¢„ç•™å­—æ®µ2
+    // Ô¤Áô×Ö¶Î2
     CC_SYNTHESIZE(string, attr2, Attr2);
-    // é¢„ç•™å­—æ®µ3
+    // Ô¤Áô×Ö¶Î3
     CC_SYNTHESIZE(int, attr3, Attr3);
-    // é¢„ç•™å­—æ®µ4
+    // Ô¤Áô×Ö¶Î4
     CC_SYNTHESIZE(int, attr4, Attr4);
-    // åˆ›å»ºè€…
+    // ´´½¨Õß
     CC_SYNTHESIZE(string, create_by, Create_by);
-    // åˆ›å»ºæ—¶é—´
+    // ´´½¨Ê±¼ä
     CC_SYNTHESIZE(string, create_time, Create_time);
-    // æ›´æ–°è€…
+    // ¸üĞÂÕß
     CC_SYNTHESIZE(string, update_by, Update_by);
-    // æ›´æ–°æ—¶é—´
+    // ¸üĞÂÊ±¼ä
     CC_SYNTHESIZE(string, update_time, Update_time);
 public:
     DvRepairDO() {

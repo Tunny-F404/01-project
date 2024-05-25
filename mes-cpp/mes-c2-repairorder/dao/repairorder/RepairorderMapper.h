@@ -31,7 +31,6 @@ class RepairorderMapper : public Mapper<DvRepairDO>
 public:
     DvRepairDO mapper(ResultSet* resultSet) const override
     {
-        // 注: 等待测试, 看看日期是什么
         // repair_id,repair_code,repair_name,machinery_id,machinery_code,machinery_name,machinery_brand,machinery_spec,machinery_type_id,require_date,finish_date,confirm_date,repair_result,accepted_by,confirm_by,status,remark,attr1,attr2,attr3,attr4,create_by,create_time,update_by,update_time
         DvRepairDO data;
         data.setRepair_id(resultSet->getUInt64(1));

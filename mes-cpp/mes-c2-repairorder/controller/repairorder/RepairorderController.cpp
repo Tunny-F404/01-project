@@ -34,9 +34,23 @@ RepairorderPageJsonVO::Wrapper RepairorderController::execQueryRepairorder(const
     return jvo;
 }
 
+// 维修单详情查询
 RepairorderDetailsJsonVO::Wrapper RepairorderController::execQueryDetailsRepairorder(const RepairorderDetailsQuery::Wrapper& id)
 {
-    return RepairorderDetailsJsonVO::Wrapper();
+    // 定义返回数据对象
+    auto jvo = RepairorderDetailsJsonVO::createShared();
+    // 参数校验
+    if (id->repairId <= 0) {
+        jvo->fail(RepairorderDetailsDTO::Wrapper());
+        return jvo;
+    }
+    // 定义一个Service
+    RepairorderService service;
+    // 执行数据查询
+    auto dto = service.getData(id);
+    jvo->success(dto);
+    // 响应结果
+    return jvo;
 }
 
 Uint64JsonVO::Wrapper RepairorderController::execAddRepairorder(const RepairorderDetailsDTO::Wrapper& dto)

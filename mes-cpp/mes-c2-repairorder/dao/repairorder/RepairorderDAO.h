@@ -22,6 +22,7 @@
 #include "BaseDAO.h"
 #include "../../domain/do/dv_repair/DvRepairDO.h"
 #include "../../domain/query/repairorder/RepairorderQuery.h"
+#include "../../domain/query/repairorder/RepairorderDetailsQuery.h"
 
 /**
  * 设备维修单表数据库操作实现
@@ -31,10 +32,11 @@ class RepairorderDAO : public BaseDAO
 public:
     // 统计数据条数
     uint64_t count(const RepairorderQuery::Wrapper& query);
+    uint64_t count(const RepairorderDetailsQuery::Wrapper& query);
     // 分页查询数据
     list<DvRepairDO> selectWithPage(const RepairorderQuery::Wrapper& query);
-    // 通过姓名查询数据
-    list<DvRepairDO> selectByName(const string& name);
+    // 通过id查询数据
+    list<DvRepairDO> selectById(const uint64_t& id);
     // 插入数据
     uint64_t insert(const DvRepairDO& iObj);
     // 修改数据

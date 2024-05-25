@@ -22,7 +22,10 @@
 #include <list>
 #include "domain/vo/repairorder/RepairorderVO.h" // !
 #include "domain/query/repairorder/RepairorderQuery.h"
+#include "domain/query/repairorder/RepairorderDetailsQuery.h"
 #include "domain/dto/repairorder/RepairorderDTO.h"
+#include "domain/dto/repairorder/RepairorderDetailsDTO.h"
+
 
 /**
  * 设备维修单查询服务实现
@@ -32,6 +35,8 @@ class RepairorderService
 public:
     // 分页查询所有数据
     RepairorderPageDTO::Wrapper listAll(const RepairorderQuery::Wrapper& query);
+    // 通过ID查询详细信息
+    RepairorderDetailsDTO::Wrapper getData(const RepairorderDetailsQuery::Wrapper& id);
     // 保存数据
     uint64_t saveData(const RepairorderDTO::Wrapper& dto);
     // 修改数据

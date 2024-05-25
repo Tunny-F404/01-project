@@ -30,8 +30,7 @@ RepairorderPageDTO::Wrapper RepairorderService::listAll(const RepairorderQuery::
     // 查询数据总条数
     RepairorderDAO dao;
     uint64_t count = dao.count(query);
-    if (count <= 0)
-    {
+    if (count <= 0) {
         return pages;
     }
 
@@ -40,8 +39,7 @@ RepairorderPageDTO::Wrapper RepairorderService::listAll(const RepairorderQuery::
     pages->calcPages();
     list<DvRepairDO> result = dao.selectWithPage(query);
     // 将DO转换成DTO
-    for (const DvRepairDO& sub : result)
-    {
+    for (const DvRepairDO& sub : result) {
         auto dto = RepairorderDTO::createShared();
         ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub,
             repairId, Repair_id,
@@ -59,5 +57,34 @@ RepairorderPageDTO::Wrapper RepairorderService::listAll(const RepairorderQuery::
             status, Status)
         pages->addData(dto);
     }
+    return pages;
+}
+
+RepairorderDetailsDTO::Wrapper RepairorderService::getData(const RepairorderDetailsQuery::Wrapper& id)
+{
+    // 构建返回对象
+    auto pages = RepairorderDetailsDTO::createShared();
+
+    // 查询数据总条数
+    RepairorderDAO dao;
+    uint64_t count = dao.count(id);
+    if (count <= 0) {
+        return pages;
+    }
+
+    list<DvRepairDO> result = dao.selectById(id->repairId);
+
+    for (const DvRepairDO& sub : result) {
+        ZO_STAR_DOMAIN_DO_TO_DTO(pages, sub,
+            repairId, Repair_id,
+            repairCode, Repair_code,
+            repairName, Repair_name,
+            machineryCode, Machinery_code,
+            machineryName, Machinery_name,
+            machineryBrand, Machinery_brand,
+            requireDate, Require_date,
+            remark, Remark)
+    }
+
     return pages;
 }

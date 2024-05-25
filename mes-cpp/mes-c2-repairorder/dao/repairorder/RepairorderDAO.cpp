@@ -21,7 +21,7 @@
 #include "RepairorderMapper.h"
 #include <sstream>
 
-// 定义条件解析宏，减少重复代码
+// 定义 分页查询 条件解析宏，减少重复代码
 #define REPAIRORDER_QUERY_PARSE(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \
@@ -50,11 +50,29 @@ if (query->status) { \
 	SQLPARAMS_PUSH(params, "s", std::string, query->status.getValue("")); \
 }
 
+// 定义 详细信息查询 条件解析宏，减少重复代码
+#define REPAIRORDER_DETAILS_QUERY_PARSE(query, sql) \
+SqlParams params; \
+sql<<" WHERE 1=1"; \
+if (query->repairId) { \
+	sql << " AND repair_id=?"; \
+	SQLPARAMS_PUSH(params, "ull", uint64_t, query->repairId.getValue(0)); \
+}
+
 uint64_t RepairorderDAO::count(const RepairorderQuery::Wrapper& query)
 {
     stringstream sql;
     sql << "SELECT COUNT(*) FROM dv_repair";
     REPAIRORDER_QUERY_PARSE(query, sql);
+    string sqlStr = sql.str();
+    return sqlSession->executeQueryNumerical(sqlStr, params);
+}
+
+uint64_t RepairorderDAO::count(const RepairorderDetailsQuery::Wrapper& query)
+{
+    stringstream sql;
+    sql << "SELECT COUNT(*) FROM dv_repair";
+    REPAIRORDER_DETAILS_QUERY_PARSE(query, sql);
     string sqlStr = sql.str();
     return sqlSession->executeQueryNumerical(sqlStr, params);
 }
@@ -70,9 +88,15 @@ list<DvRepairDO> RepairorderDAO::selectWithPage(const RepairorderQuery::Wrapper&
     return sqlSession->executeQuery<DvRepairDO, RepairorderMapper>(sqlStr, mapper, params);
 }
 
-list<DvRepairDO> RepairorderDAO::selectByName(const string& name)
+list<DvRepairDO> RepairorderDAO::selectById(const uint64_t& id)
 {
-    return list<DvRepairDO>();
+    stringstream sql;
+    SqlParams params;
+    sql << "SELECT repair_id,repair_code,repair_name,machinery_id,machinery_code,machinery_name,machinery_brand,machinery_spec,machinery_type_id,require_date,finish_date,confirm_date,repair_result,accepted_by,confirm_by,status,remark,attr1,attr2,attr3,attr4,create_by,create_time,update_by,update_time FROM dv_repair WHERE repair_id=?";
+    SQLPARAMS_PUSH(params, "ull", uint64_t, id);
+    RepairorderMapper mapper;
+    string sqlStr = sql.str();
+    return sqlSession->executeQuery<DvRepairDO, RepairorderMapper>(sqlStr, mapper, params);
 }
 
 uint64_t RepairorderDAO::insert(const DvRepairDO& iObj)
