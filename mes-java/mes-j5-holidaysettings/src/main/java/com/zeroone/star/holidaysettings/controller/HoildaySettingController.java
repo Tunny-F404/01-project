@@ -1,5 +1,6 @@
 package com.zeroone.star.holidaysettings.controller;
 
+import com.zeroone.star.holidaysettings.service.ICalHolidayService;
 import com.zeroone.star.project.j5.dto.holidaysetting.HolidaysListDTO;
 import com.zeroone.star.project.j5.holidaysettings.HolidaySettingsApis;
 import com.zeroone.star.project.j5.query.holidaysetting.SettingHolidayQuery;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @description: 节假日设置
@@ -24,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("calholiday")
 @Api(tags = "节假日设置")
 public class HoildaySettingController implements HolidaySettingsApis {
+    @Resource
+    ICalHolidayService calHolidayService;
+
     @GetMapping("/list")
     @ApiOperation("获取节假日配置")
     @Override
