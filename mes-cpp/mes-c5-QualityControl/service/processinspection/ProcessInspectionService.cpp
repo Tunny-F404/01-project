@@ -18,7 +18,7 @@
 */
 #include "stdafx.h"
 #include "ProcessInspectionService.h"
-#include "domain/dto/processinspection/ProcessinSpectionDTO.h"
+#include "../../domain/dto/processinspection/ProcessinSpectionDTO.h"
 #include "../../dao/processinspection/ProcessInspectionDAO.h"
 
 bool ProcessInspectionService::updateData(const ProcessinSpectionDTO::Wrapper& dto)
@@ -34,4 +34,10 @@ bool ProcessInspectionService::updateData(const ProcessinSpectionDTO::Wrapper& d
 	//SampleDAO dao;
 	//return dao.update(data) == 1;
 	return true;
+}
+
+ProcessinSpectionQueryPageDTO::Wrapper ProcessInspectionService::listAll(const ProcessinSpectionQuery::Wrapper& query)
+{
+	ProcessInspectionDAO dao;
+	return {};
 }

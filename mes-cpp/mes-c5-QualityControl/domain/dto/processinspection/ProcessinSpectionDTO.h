@@ -5,12 +5,10 @@
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
-/**
- * 过程检验DTO
- */
-class ProcessinSpectionDTO : public oatpp::DTO
+//分页查询的DTO
+class ProcessinSpectionQueryDTO : public oatpp::DTO
 {
-	DTO_INIT(ProcessinSpectionDTO, DTO);
+	DTO_INIT(ProcessinSpectionQueryDTO, DTO);
 	// 编号(唯一值)
 	DTO_FIELD(UInt64, id);
 	DTO_FIELD_INFO(id) {
@@ -21,11 +19,6 @@ class ProcessinSpectionDTO : public oatpp::DTO
 	DTO_FIELD_INFO(ipqc_code) {
 		info->description = ZH_WORDS_GETTER("processinspection.field.ipqc_code");
 	}
-	// 检验单名称
-	DTO_FIELD(String, ipqc_name);
-	DTO_FIELD_INFO(ipqc_name) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.ipqc_name");
-	}
 	// 检验类型
 	DTO_FIELD(String, ipqc_type);
 	DTO_FIELD_INFO(ipqc_type) {
@@ -35,21 +28,6 @@ class ProcessinSpectionDTO : public oatpp::DTO
 	DTO_FIELD(String, workorder_code);
 	DTO_FIELD_INFO(workorder_code) {
 		info->description = ZH_WORDS_GETTER("processinspection.field.workorder_code");
-	}
-	// 工单名称
-	DTO_FIELD(String, workorder_name);
-	DTO_FIELD_INFO(workorder_name) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.workorder_name");
-	}
-	// 工作站编号
-	DTO_FIELD(String, workstation_id);
-	DTO_FIELD_INFO(workstation_id) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.workstation_id");
-	}
-	// 工作站名称
-	DTO_FIELD(String, workstation_name);
-	DTO_FIELD_INFO(workstation_name) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.workstation_name");
 	}
 	// 产品物料编码
 	DTO_FIELD(String, item_code);
@@ -65,6 +43,64 @@ class ProcessinSpectionDTO : public oatpp::DTO
 	DTO_FIELD(String, specification);
 	DTO_FIELD_INFO(specification) {
 		info->description = ZH_WORDS_GETTER("processinspection.field.specification");
+	}
+	// 单位
+	DTO_FIELD(String, unit_of_measure);
+	DTO_FIELD_INFO(unit_of_measure) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.unit_of_measure");
+	}
+	// 检测数量
+	DTO_FIELD(Float64, quantity_check);
+	DTO_FIELD_INFO(quantity_check) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.quantity_check");
+	}
+	// 检测结果
+	DTO_FIELD(String, check_result);
+	DTO_FIELD_INFO(check_result) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.check_result");
+	}
+	// 检测日期
+	DTO_FIELD(String, inspect_date);
+	DTO_FIELD_INFO(inspect_date) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.inspect_date");
+	}
+	// 检测人员
+	DTO_FIELD(String, inspector);
+	DTO_FIELD_INFO(inspector) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.inspector");
+	}
+	// 单据状态
+	DTO_FIELD(String, status);
+	DTO_FIELD_INFO(status) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.status");
+	}
+};
+
+/**
+ * 过程检验DTO
+ */
+class ProcessinSpectionDTO : public ProcessinSpectionQueryDTO
+{
+	DTO_INIT(ProcessinSpectionDTO, DTO);
+	// 检验单名称
+	DTO_FIELD(String, ipqc_name);
+	DTO_FIELD_INFO(ipqc_name) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.ipqc_name");
+	}
+	// 工单名称
+	DTO_FIELD(String, workorder_name);
+	DTO_FIELD_INFO(workorder_name) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.workorder_name");
+	}
+	// 工作站编号
+	DTO_FIELD(String, workstation_id);
+	DTO_FIELD_INFO(workstation_id) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.workstation_id");
+	}
+	// 工作站名称
+	DTO_FIELD(String, workstation_name);
+	DTO_FIELD_INFO(workstation_name) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.workstation_name");
 	}
 	// 工序编码
 	DTO_FIELD(String, process_code);
@@ -85,16 +121,6 @@ class ProcessinSpectionDTO : public oatpp::DTO
 	DTO_FIELD(String, task_name);
 	DTO_FIELD_INFO(task_name) {
 		info->description = ZH_WORDS_GETTER("processinspection.field.task_name");
-	}
-	// 单位
-	DTO_FIELD(String, unit_of_measure);
-	DTO_FIELD_INFO(unit_of_measure) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.unit_of_measure");
-	}
-	// 检测数量
-	DTO_FIELD(Float64, quantity_check);
-	DTO_FIELD_INFO(quantity_check) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.quantity_check");
 	}
 	// 不合格数
 	DTO_FIELD(Float64, quantity_unqualified);
@@ -121,26 +147,6 @@ class ProcessinSpectionDTO : public oatpp::DTO
 	DTO_FIELD_INFO(min_quantity) {
 		info->description = ZH_WORDS_GETTER("processinspection.field.min_quantity");
 	}
-	// 检测日期
-	DTO_FIELD(String, inspect_date);
-	DTO_FIELD_INFO(inspect_date) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.inspect_date");
-	}
-	// 检测人员
-	DTO_FIELD(String, inspector);
-	DTO_FIELD_INFO(inspector) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.inspector");
-	}
-	// 检测结果
-	DTO_FIELD(String, check_result);
-	DTO_FIELD_INFO(check_result) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.check_result");
-	}
-	// 单据状态
-	DTO_FIELD(String, status);
-	DTO_FIELD_INFO(status) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.status");
-	}
 	// 备注
 	DTO_FIELD(String, remark);
 	DTO_FIELD_INFO(remark) {
@@ -154,6 +160,11 @@ class ProcessinSpectionDTO : public oatpp::DTO
 class ProcessinSpectionPageDTO : public PageDTO<ProcessinSpectionDTO::Wrapper>
 {
 	DTO_INIT(ProcessinSpectionPageDTO, PageDTO<ProcessinSpectionDTO::Wrapper>);
+};
+
+class ProcessinSpectionQueryPageDTO : public PageDTO<ProcessinSpectionQueryDTO::Wrapper>
+{
+	DTO_INIT(ProcessinSpectionQueryPageDTO, PageDTO<ProcessinSpectionQueryDTO::Wrapper>);
 };
 
 #include OATPP_CODEGEN_END(DTO)

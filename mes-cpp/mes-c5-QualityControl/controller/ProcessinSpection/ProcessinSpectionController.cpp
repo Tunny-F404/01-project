@@ -5,9 +5,17 @@
 #include "../ApiDeclarativeServicesHelper.h"
 #include "../../service/processinspection/ProcessInspectionService.h"
 
-ProcessinSpectionPageJsonVO::Wrapper ProcessinSpectionController::execProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
+ProcessinSpectionQueryPageJsonVO::Wrapper ProcessinSpectionController::execProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	return {};
+	ProcessInspectionService service;
+
+	auto result = service.listAll(query);
+
+	auto vo = ProcessinSpectionQueryPageJsonVO::createShared();
+
+	vo->success(result);
+
+	return vo;
 }
 
 Uint64JsonVO::Wrapper ProcessinSpectionController::execRemoveProcessinSpection(const List<UInt64>& ids)

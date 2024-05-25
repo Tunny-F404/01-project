@@ -21,10 +21,13 @@
 #define _PROCESSINSPECTION_SERVICE_
 #include "list"
 #include "domain/dto/processinspection/ProcessinSpectionDTO.h"
+#include "domain/query/processinspection/ProcessinSpectionQuery.h"
 class ProcessInspectionService
 {
 public:
 	//
 	bool updateData(const ProcessinSpectionDTO::Wrapper& dto);
+
+	ProcessinSpectionQueryPageDTO::Wrapper listAll(const ProcessinSpectionQuery::Wrapper& query);
 };
 #endif
