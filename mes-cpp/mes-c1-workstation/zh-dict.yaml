@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 workstation:
  fields:
   workstationId: 工作站ID
@@ -18,7 +17,6 @@ workstation:
   summary: 修改工作站
  export:
   summary: 导出工作站   
-=======
 post:
  query:
   summary: 获取岗位列表
@@ -33,5 +31,3 @@ post:
   summary: 新增一条岗位数据
     
   
-    
->>>>>>> origin/c1-workstation-chunyang
