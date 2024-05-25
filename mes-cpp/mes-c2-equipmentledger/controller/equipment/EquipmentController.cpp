@@ -67,7 +67,8 @@ Uint64JsonVO::Wrapper EquipmentController::execAddEquipment(const addEquipmentDT
 	EquipmentService service;
 	// 执行数据新增
 	uint64_t id = service.saveData(dto);
-	if (id > 0) {
+	if (id > 0) 
+	{
 		jvo->success(UInt64(id));
 	}
 	else
@@ -80,7 +81,34 @@ Uint64JsonVO::Wrapper EquipmentController::execAddEquipment(const addEquipmentDT
 
 Uint64JsonVO::Wrapper EquipmentController::executeModifyEquipment(const modifyEquipmentDTO::Wrapper& dto)
 {
-	auto res = Uint64JsonVO::createShared();
-	res->success(true);
-	return res;
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验
+	if (!dto->eId || !dto->eCode || !dto->eName || !dto->brand || !dto->tName || !dto->spec || !dto->workshopName || !dto->note)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->eId<0 || dto->eCode->empty() || dto->eName->empty() || dto->brand->empty() || dto->tName->empty() || dto->spec->empty() || dto->workshopName->empty() || dto->note->empty())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	EquipmentService service;
+	// 执行数据
+	uint64_t id = service.modifyData(dto);
+	if (id > 0)
+	{
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }

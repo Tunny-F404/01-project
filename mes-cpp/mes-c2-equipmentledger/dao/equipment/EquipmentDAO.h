@@ -43,9 +43,8 @@ public:
 	//通过车间名称获得车间ID
 	list<MdWorkshopDO> getWorkshopidByname(std::string name);
 	// 修改数据
-	//int update(const SampleDO& uObj);
-	// 通过ID删除数据
-	//int deleteById(uint64_t id);
+	int modify(const dvMachineryDO& iObj);
+	
 };
-#endif // !_SAMPLE_DAO_
+#endif // 
 

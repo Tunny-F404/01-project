@@ -33,10 +33,9 @@ public:
 	//新增设备
 	uint64_t saveData(const addEquipmentDTO::Wrapper& dto);
 	// 修改数据
-	//bool updateData(const SampleDTO::Wrapper& dto);
-	// 通过ID删除数据
-	//bool removeData(uint64_t id);
+	bool modifyData(const modifyEquipmentDTO::Wrapper& dto);
+	
 };
 
-#endif // !_SAMPLE_SERVICE_
+#endif // 
 

@@ -20,7 +20,9 @@ sql<<" WHERE 1=1"; \
 if (query->eId) { \
 	sql << " AND `machinery_id`=?"; \
 	SQLPARAMS_PUSH(params, "i", int, query->eId.getValue(0)); \
-} 
+}
+
+
 
 
 uint64_t EquipmentDAO::count(const EquipmentQuery::Wrapper& query)
@@ -66,6 +68,47 @@ list<MdWorkshopDO> EquipmentDAO::getWorkshopidByname(std::string name)
 	string sql = "SELECT workshop_id FROM md_workshop WHERE workshop_name= ? ";
 	WorkshopMapper mapper;
 	return sqlSession->executeQuery<MdWorkshopDO, WorkshopMapper>(sql, mapper, "%s", name);
+}
+
+int EquipmentDAO::modify(const dvMachineryDO& iObj)
+{
+
+
+
+	uint64_t machineryTypeId;
+	uint64_t WorkshopId;
+	list<dvMachineryTypeDO>s1 = getMachinerytypeidByname(iObj.getMachineryTypeName());
+	if (!s1.empty())
+	{
+		// 获取指向第一个元素的迭代器
+		list<dvMachineryTypeDO>::iterator it = s1.begin();
+		// 获取第一个 machinery_type_id
+		machineryTypeId = it->getMachineryTypeId();
+	}
+	else
+	{
+		RS_PARAMS_INVALID;
+		return 0;
+	}
+
+	list<MdWorkshopDO>s2 = getWorkshopidByname(iObj.getWorkshopName());
+	if (!s2.empty())
+	{
+		// 获取指向第一个元素的迭代器
+		list<MdWorkshopDO>::iterator it = s2.begin();
+		// 获取第一个 machinery_type_id
+		WorkshopId = it->getWorkshopId();
+	}
+	else
+	{
+		RS_PARAMS_INVALID;
+		return 0;
+	}
+
+
+
+	string sql = "UPDATE `dv_machinery` SET `machinery_code`=?, `machinery_name`=?, `machinery_brand`=?,`machinery_type_id`=?,`machinery_spec`=?,`workshop_id`=?,`remark`=? WHERE `machinery_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%i%s%i%s%i", iObj.getMachineryCode(), iObj.getMachineryName(), iObj.getMachineryBrand(), machineryTypeId, iObj.getMachinerySpec(), WorkshopId, iObj.getRemark(),iObj.getMachineryId());
 }
 
 uint64_t EquipmentDAO::insert(const dvMachineryDO& iObj)
