@@ -33,6 +33,7 @@
 <<<<<< < HEAD
 
 #endif
+#include "ProdOrder/ProdOrderController.h"
 
 
 
@@ -73,10 +74,11 @@ void Router::initRouter()
 	//#TIP :绯荤粺鎵╁睍璺敱瀹氫箟锛屽啓鍦ㄨ繖涓悗闈?
 	ROUTER_SIMPLE_BIND(ProductionOrderController);
 	ROUTER_SIMPLE_BIND(ProductionProcessController);
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	createProdOrderRouter();
 }
 
-#ifdef HTTP_SERVER_DEMO
-void Router::createSampleRouter()
+void Router::createProdOrderRouter()
 {
 	// ��ʾ��������
 	ROUTER_SIMPLE_BIND(SampleController);
@@ -110,3 +112,8 @@ void Router::createSampleRouter()
 }
 #endif
 
+	ROUTER_SIMPLE_BIND(ProdOrderController);
+
+	// ��WebSocket������
+	//router->addController(WSContorller::createShared());
+}
