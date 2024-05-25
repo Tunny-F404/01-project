@@ -2,7 +2,7 @@ const routes = [
   {
     path: '/un-1',
     name: 'UN1',
-    component: () => import('@/views/status/404.vue')
+    component: () => import('@/views/personal-center/personal-center.vue')
   },
   {
     path: '/un-2',
@@ -27,6 +27,11 @@ const routes = [
   {
     path: '/un-6',
     name: 'UN6',
+    component: () => import('@/views/status/403.vue')
+  },
+  {
+    path: '/un-7',
+    name: 'UN7',
     component: () => import('@/views/status/403.vue')
   }
 ]
