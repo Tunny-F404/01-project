@@ -1,10 +1,12 @@
 package com.zeroone.star.basicdata.controller;
-
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.basicdata.entity.MdUnitMeasure;
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.basicdata.service.IMdUnitMeasureService;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
 import lombok.extern.java.Log;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
@@ -39,7 +41,6 @@ public class MdUnitMeasureController implements AccountUnitApis {
     @Resource
     private IMdUnitMeasureService iMdUnitMeasureService;
 
-
     /*
      * 删除单位
      * */
@@ -64,6 +65,18 @@ public class MdUnitMeasureController implements AccountUnitApis {
     }
 
     /**
+     * 根据单位ID获取单位信息
+     * @param measureId
+     * @return
+     */
+    @ApiOperation(value = "根据单位ID获取单位信息")
+    @GetMapping(value = "{measureId}")
+    public JsonVO<MdUnitMeasure> getInfo(@PathVariable("measureId") Long measureId) {
+        MdUnitMeasure mdUnitMeasure = iMdUnitMeasureService.getById(measureId);
+        return JsonVO.success(mdUnitMeasure);
+    }
+
+    /**
      * 查询单位分页列表
      * @param unitMeasureDTO 单位测量模型，用于传递查询条件,如果为空，返回所有数据
      * @param pageIndex 请求的页码，默认开始为1
@@ -72,7 +85,7 @@ public class MdUnitMeasureController implements AccountUnitApis {
      */
     @GetMapping("/list")
     @ApiOperation("查询单位分页列表")
-    public JsonVO<PageDTO<UnitMeasureDTO>> list(UnitMeasureDTO unitMeasureDTO,
+    public JsonVO<PageDTO<UnitMeasureDTO>> list(@Validated UnitMeasureDTO unitMeasureDTO,
                                                 @RequestParam(defaultValue = "1") int pageIndex,
                                                 @RequestParam(defaultValue = "10") int pageSize) {
 
@@ -108,22 +121,28 @@ public class MdUnitMeasureController implements AccountUnitApis {
     }
 
     /**
-     * 添加单位信息
-     * 成功执行后返回添加成功的提示信息。
-     *
-     * @return 包含操作结果信息的JsonVO对象
+     * 添加单位
+     * @param unitMeasureDTO
+     * @return
      */
-    @ApiOperation(value = "添加单位")
-    @PostMapping("add-unit")
-    public JsonVO addUnit(@Validated @RequestBody UnitAddDTO data) {
-        if (iMdUnitMeasureService.addUnit(data)) return JsonVO.success("添加成功");
-        else return JsonVO.fail("添加失败");
+    @PostMapping("/add")
+    @ApiOperation("添加单位")
+    public JsonVO addUnitMeasure(@Validated UnitMeasureDTO unitMeasureDTO) {
+        iMdUnitMeasureService.addUnitMeasure(unitMeasureDTO);
+        return JsonVO.success("添加成功");
     }
 
-    @ApiOperation(value = "修改单位")
-    @PostMapping("update-unit")
-    public JsonVO updateUnit(@Validated @RequestBody UnitUpdateDTO data) {
-        if (iMdUnitMeasureService.updateUnit(data)) return JsonVO.success("修改成功");
-        else return JsonVO.fail("修改失败");
+    /**
+     * 修改单位
+     * 注意：修改单位时，需要传入主单位ID，如果主单位ID为空，则修改为非主单位
+     * @param unitMeasureDTO
+     * @return
+     */
+    @PostMapping("/modify")
+    @ApiOperation("修改单位")
+    public JsonVO modifyUnitMeasure(@Validated UnitMeasureDTO unitMeasureDTO){
+        iMdUnitMeasureService.modifyUnitMeasure(unitMeasureDTO);
+        return JsonVO.success("修改成功");
     }
+
 }
