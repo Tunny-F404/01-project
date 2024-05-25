@@ -17,19 +17,29 @@ public interface MyCenterApis {
 
     //@author 柱
     //修改个人信息
-    JsonVO<MyCenterQuery> modifyInfo(MyCenterQuery myCenterQuery);
+    JsonVO<MyCenterDTO> modifyInfo(MyCenterDTO myCenterDTO);
     //修改头像
-    JsonVO<String> modifyAvatar(String PattenUrl);
-    //修改手机
-    JsonVO<String> modifyPhone(String Phone);
-    //修改邮箱
-    JsonVO<String> modifyEmail(String Email);
-    //修改密码
-    JsonVO<String> modifyPassword(String Password);
+    JsonVO<MyCenterDTO> modifyAvatar(MyCenterDTO myCenterDTO);
 
+
+
+    //修改手机
+    JsonVO<MyCenterDTO> modifyPhone(MyCenterDTO myCenterDTO);
+    //修改邮箱
+    JsonVO<MyCenterDTO> modifyEmail(MyCenterDTO myCenterDTO);
+    //修改密码
+    JsonVO<MyCenterDTO> modifyPassword(MyCenterDTO myCenterDTO);
 
 
     //@author 白河夜船
+
+
+
+
+
+
+
+
     /**
      * 获取个人信息,ThreadLocal获取登录ID
      */
