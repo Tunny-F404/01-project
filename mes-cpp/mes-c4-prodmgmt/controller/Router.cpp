@@ -1,4 +1,5 @@
 /*
+>>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
@@ -20,25 +21,36 @@
 #include "Router.h"
 #include "ApiHelper.h"
 
+#include "prodmgmt/RemoveWorkReportController.h"
+
+#include "productionorder/ProductionOrderController.h"
+#include "productioninvestigation/ProductionProcessController.h"
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
 #include "file/FileController.h"
 #include "ws/WSController.h"
+<<<<<< < HEAD
+
 #endif
 
-// Èç¹û¶¨ÒåÁË¹Ø±ÕSwaggerÎÄµµºê
+
+
+#include "../mes-c4-prodmgmt/controller/ProdWorkorder/ProdWorkorderController.h"
+#include "../controller/ApprovalStage/ApprovalStage.h"
+#include "controller/ProdWorkorder/ProWorkorderController.h"
+
 #ifdef CLOSE_SWAGGER_DOC
-// ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
+// ï¿½ò»¯°ó¶¨¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¶¨ï¿½ï¿½
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 router->addController(__CLASS__::createShared())
 #else
-// ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
+// ï¿½ò»¯°ó¶¨¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¶¨ï¿½ï¿½
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
 
-Router::Router(Endpoints* docEndpoints, HttpRouter* router)
+Router::Router(Endpoints * docEndpoints, HttpRouter * router)
 {
 	this->docEndpoints = docEndpoints;
 	this->router = router;
@@ -50,21 +62,51 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
-	//#TIP :ÏµÍ³À©Õ¹Â·ÓÉ¶¨Òå£¬Ð´ÔÚÕâ¸öºóÃæ
 
+
+	//#TIP :ÏµÍ³ï¿½ï¿½Õ¹Â·ï¿½É¶ï¿½ï¿½å£¬Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	ROUTER_SIMPLE_BIND(ProdWorkorderController);
+	ROUTER_SIMPLE_BIND(RemoveWorkReportController);
+	ROUTER_SIMPLE_BIND(ApprovalStage);
+	ROUTER_SIMPLE_BIND(ProWorkorderController);
+
+	//#TIP :ç»¯è¤ç²ºéŽµâ•çç’ºîˆœæ•±ç€¹æ°«ç®Ÿé”›å±½å•“é¦ã„¨ç¹–æ¶“î„æ‚—é—ˆ?
+	ROUTER_SIMPLE_BIND(ProductionOrderController);
+	ROUTER_SIMPLE_BIND(ProductionProcessController);
 }
 
 #ifdef HTTP_SERVER_DEMO
 void Router::createSampleRouter()
 {
-	// °ó¶¨Ê¾Àý¿ØÖÆÆ÷
+	// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ROUTER_SIMPLE_BIND(SampleController);
-	// °ó¶¨ÓÃ»§¿ØÖÆÆ÷
+	// ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ROUTER_SIMPLE_BIND(UserController);
-	// °ó¶¨ÎÄ¼þ¿ØÖÆÆ÷
+	// ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ROUTER_SIMPLE_BIND(FileController);
 	
-	// °ó¶¨WebSocket¿ØÖÆÆ÷
+	// ï¿½ï¿½WebSocketï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	router->addController(WSContorller::createShared());
+	<<<<<< < HEAD
+		// ç¼æˆç•¾ç»€è½°ç·¥éŽºÑƒåŸ—é£?
+		ROUTER_SIMPLE_BIND(SampleController);
+	// ç¼æˆç•¾é¢ã„¦åŸ›éŽºÑƒåŸ—é£?
+	ROUTER_SIMPLE_BIND(UserController);
+	// ç¼æˆç•¾é‚å›¦æ¬¢éŽºÑƒåŸ—é£?
+	ROUTER_SIMPLE_BIND(FileController);
+
+	// ç¼æˆç•¾WebSocketéŽºÑƒåŸ—é£?
+	====== =
+		// ç»‘å®šç¤ºä¾‹æŽ§åˆ¶å™¨
+		ROUTER_SIMPLE_BIND(SampleController);
+	// ç»‘å®šç”¨æˆ·æŽ§åˆ¶å™¨
+	ROUTER_SIMPLE_BIND(UserController);
+	// ç»‘å®šæ–‡ä»¶æŽ§åˆ¶å™¨
+	ROUTER_SIMPLE_BIND(FileController);
+
+	// ç»‘å®šWebSocketæŽ§åˆ¶å™¨
+	>>>>>> > 68ca23adf7d849ebe7f628a278360730cc296bae
+		router->addController(WSContorller::createShared());
 }
 #endif
+
