@@ -65,7 +65,7 @@ public:
 		API_HANDLER_RESP_VO(execQueryProdOrder(userQuery, authObject->getPayload()));
 	}
 
-	///*
+	/*
 	// 3.1 定义查询生产任务列表树接口描述
 	ENDPOINT_INFO(queryTreeProdOrder) {
 		// 定义接口标题
@@ -91,6 +91,11 @@ public:
 		API_HANDLER_RESP_VO(execQueryTreeProdOrder(userQuery, authObject->getPayload()));
 	}
 	//*/
+
+	// 定义查询用户菜单接口端点描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("prod.getTree.summary"), queryTreeProdOrder, ProdOrderQueryTreeJsonVO::Wrapper);
+	// 定义查询用户菜单接口端点处理
+	API_HANDLER_ENDPOINT_NOPARAM_AUTH(API_M_GET, "/prodOrder/queryTree", queryTreeProdOrder, execQueryTreeProdOrder(authObject->getPayload()))
 	
 	// 3.1 定义新增接口描述
 	ENDPOINT_INFO(addProdOrder) {
@@ -111,7 +116,8 @@ private:
 	// 3.3 分页查询列表
 	ProdOrderPageJsonVO::Wrapper execQueryProdOrder(const ProdOrderQuery::Wrapper& query, const PayloadDTO& payload);
 	// 3.3 分页查询列表树
-	ProdOrderPageJsonVO::Wrapper execQueryTreeProdOrder(const ProdOrderTreeQuery::Wrapper& query, const PayloadDTO& payload);
+	//ProdOrderQueryTreeJsonVO::Wrapper execQueryTreeProdOrder(const ProdOrderTreeQuery::Wrapper& query, const PayloadDTO& payload);
+	ProdOrderQueryTreeJsonVO::Wrapper execQueryTreeProdOrder(const PayloadDTO& payload);
 	// 3.3 添加生产任务
 	//Uint64JsonVO::Wrapper execAddProdOrder(const ProdOrderDTO::Wrapper& dto);
 	ProdOrderAddJsonVO::Wrapper execAddProdOrder(const ProdOrderDTO::Wrapper& dto);

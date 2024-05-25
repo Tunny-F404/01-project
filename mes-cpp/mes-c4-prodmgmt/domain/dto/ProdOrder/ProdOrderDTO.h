@@ -93,7 +93,7 @@ class ProdOrderQueryDTO : public PageDTO<ProdOrderDTO::Wrapper>
 };
 
 /**
- * 示例菜单数据传输对象
+ * 查询生产任务列表树数据传输对象
  */
 class ProdOrderQueryTreeDTO : public PageDTO<ProdOrderDTO::Wrapper>, public TreeNode
 {

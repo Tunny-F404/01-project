@@ -38,7 +38,7 @@ class ProdOrderQueryDO
 	CC_SYNTHESIZE(string, end_time, End_time);
 public:
 	//ProdOrderMenuDO() {}
-	ProdOrderMenuDO() {
+	ProdOrderQueryDO() {
 		task_name = "";
 		workstation_name = "";
 		process_name = "";
@@ -48,10 +48,21 @@ public:
 };
 
 /**
- * 示例数据库实体类
+ * 查询列表树数据库实体类
  */
 class ProdOrderQueryTreeDO
 {
+	// 唯一编号
+	CC_SYNTHESIZE(string, id, Id);
+	// 节点文本描述
+	CC_SYNTHESIZE(string, text, Text);
+	// 节点文本描述
+	CC_SYNTHESIZE(string, icon, Icon);
+	// 路由
+	CC_SYNTHESIZE(string, href, Href);
+	// 父节点ID
+	CC_SYNTHESIZE(string, parentId, ParentId);
+
 	// 任务名
 	CC_SYNTHESIZE(string, task_name, Task_name);
 	// 工作站
@@ -63,9 +74,15 @@ class ProdOrderQueryTreeDO
 	// 结束时间
 	CC_SYNTHESIZE(string, end_time, End_time);
 public:
-	MenuDO() {}
-	MenuDO(string task_name, string workstation_name, string process_name, string start_time, string end_time)
+	ProdOrderQueryTreeDO() {}
+	ProdOrderQueryTreeDO(string task_name, string workstation_name, string process_name, string start_time, string end_time)
 	{
+		this->id = id;
+		this->text = text;
+		this->icon = icon;
+		this->href = href;
+		this->parentId = parentId;
+
 		this->task_name = task_name;
 		this->workstation_name = workstation_name;
 		this->process_name = process_name;
@@ -91,7 +108,7 @@ class ProdOrderAddDO
 	CC_SYNTHESIZE(string, end_time, End_time);
 public:
 	//ProdOrderMenuDO() {}
-	ProdOrderMenuDO() {
+	ProdOrderAddDO() {
 		task_name = "";
 		workstation_name = "";
 		process_name = "";
