@@ -40,6 +40,7 @@
 #include "../mes-c4-prodmgmt/controller/ProdWorkorder/ProdWorkorderController.h"
 #include "../controller/ApprovalStage/ApprovalStage.h"
 #include "controller/ProdWorkorder/ProWorkorderController.h"
+#include "ProduceWork/ProController.h"
 
 #ifdef CLOSE_SWAGGER_DOC
 // �򻯰󶨿������궨��
@@ -63,6 +64,8 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	ROUTER_SIMPLE_BIND(ProController);
 
 
 	//#TIP :ϵͳ��չ·�ɶ��壬д���������
