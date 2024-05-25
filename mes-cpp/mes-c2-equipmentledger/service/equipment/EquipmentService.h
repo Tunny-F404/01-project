@@ -30,7 +30,8 @@ public:
 	EquipmentPageDTO::Wrapper listAll(const EquipmentQuery::Wrapper& query);
 	// 获取设备详情
 	EquipmentDetailDTO::Wrapper getDetail(const EquipmentDetailQuery::Wrapper& query);
-	//uint64_t saveData(const SampleDTO::Wrapper& dto);
+	//新增设备
+	uint64_t saveData(const addEquipmentDTO::Wrapper& dto);
 	// 修改数据
 	//bool updateData(const SampleDTO::Wrapper& dto);
 	// 通过ID删除数据

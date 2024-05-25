@@ -22,6 +22,8 @@
 
 #include "Mapper.h"
 #include "../../domain/do/dv_machinery/dvMachineryDO.h"
+#include"../../domain/do/dv_machinery_type/dvMachineryTypeDO.h"
+#include"../../domain/do/md_workshop/md_workshopDO.h"
 
 /**
  * Ê¾Àý±í×Ö¶ÎÆ¥ÅäÓ³Éä
@@ -75,5 +77,31 @@ public:
 	}
 };
 
+class EquipmentTypeMapper : public Mapper<dvMachineryTypeDO>
+{
+public:
+	dvMachineryTypeDO mapper(ResultSet* resultSet) const override
+	{
+
+		dvMachineryTypeDO data;
+		data.setMachineryTypeId(resultSet->getUInt64(1));
+
+
+		return data;
+	}
+};
+
+class WorkshopMapper : public Mapper<MdWorkshopDO>
+{
+public:
+	MdWorkshopDO mapper(ResultSet* resultSet) const override
+	{
+
+		MdWorkshopDO data;
+		data.setWorkshopId(resultSet->getUInt64(1));
+
+		return data;
+	}
+};
 
 #endif // !_SAMPLE_MAPPER_

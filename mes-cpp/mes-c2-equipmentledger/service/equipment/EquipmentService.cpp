@@ -72,3 +72,19 @@ EquipmentDetailDTO::Wrapper EquipmentService::getDetail(const EquipmentDetailQue
 	return {};
 }
 
+uint64_t EquipmentService::saveData(const addEquipmentDTO::Wrapper& dto)
+{
+	// 组装DO数据
+	dvMachineryDO  data;
+	data.setMachineryCode(dto->eCode.getValue(""));
+	data.setMachineryName(dto->eName.getValue(""));
+	data.setMachineryBrand(dto->brand.getValue(""));
+	data.setMachineryTypeName(dto->tName.getValue(""));
+	data.setMachinerySpec(dto->spec.getValue(""));
+	data.setWorkshopName(dto->workshopName.getValue(""));
+	data.setRemark(dto->note.getValue(""));
+	
+	EquipmentDAO dao;
+	return dao.insert(data);
+}
+

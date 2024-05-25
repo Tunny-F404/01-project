@@ -22,6 +22,8 @@
 #include "BaseDAO.h"
 #include"../../domain/do/dv_machinery/dvMachineryDO.h"
 #include"../../domain/query/equipment/EquipmentQuery.h"
+#include"../../domain/do/dv_machinery_type/dvMachineryTypeDO.h"
+#include"../../domain/do/md_workshop/md_workshopDO.h"
 /**
  * 示例表数据库操作实现
  */
@@ -35,7 +37,11 @@ public:
 	// 通过设备ID查询数据
 	list<dvMachineryDO> selectWithId(const EquipmentDetailQuery::Wrapper& query);
 	// 插入数据
-	//uint64_t insert(const SampleDO& iObj);
+	uint64_t insert(const dvMachineryDO& iObj);
+	//通过设备类型名称获得设备类型ID
+	list<dvMachineryTypeDO> getMachinerytypeidByname(std::string name);
+	//通过车间名称获得车间ID
+	list<MdWorkshopDO> getWorkshopidByname(std::string name);
 	// 修改数据
 	//int update(const SampleDO& uObj);
 	// 通过ID删除数据
