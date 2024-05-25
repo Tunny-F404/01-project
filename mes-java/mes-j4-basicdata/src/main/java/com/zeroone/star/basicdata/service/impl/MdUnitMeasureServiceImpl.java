@@ -128,13 +128,14 @@ public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper,Md
         MdUnitMeasure unitMeasure = new MdUnitMeasure();
         // 属性拷贝
         BeanUtils.copyProperties(unitMeasureDTO, unitMeasure);
+        unitMeasure.setUpdateTime(DateTime.now().toLocalDateTime());
 
         // 构建更新条件
         UpdateWrapper<MdUnitMeasure> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("measure_id", unitMeasure.getMeasureId());
 
         // 执行数据库更新操作
-        update(unitMeasure, updateWrapper);
+        mdUnitMeasureMapper.update(unitMeasure, updateWrapper);
     }
 
 }
