@@ -72,10 +72,9 @@ int Dv_check_planDAO::update(const Dv_check_planDO& uObj)
 	string sql = "UPDATE `sample` SET `name`=?, `sex`=?, `age`=? WHERE `id`=?";
 	return sqlSession->executeUpdate(sql, "%s%s%i%ull", uObj.getName(), uObj.getSex(), uObj.getAge(), uObj.getId());
 }
-
+*/
 int Dv_check_planDAO::deleteById(uint64_t id)
 {
-	string sql = "DELETE FROM `sample` WHERE `id`=?";
+	string sql = "DELETE FROM `dv_check_plan` WHERE `id`=?";
 	return sqlSession->executeUpdate(sql, "%ull", id);
 }
-*/

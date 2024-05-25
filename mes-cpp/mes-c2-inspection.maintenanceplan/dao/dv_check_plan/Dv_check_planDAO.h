@@ -27,8 +27,9 @@ public:
 	uint64_t insert(const Dv_check_planDO& iObj);
 	// 修改数据
 	int update(const Dv_check_planDO& uObj);
+	*/
 	// 通过ID删除数据
 	int deleteById(uint64_t id);
-	*/
+	
 };
 #endif // !_DV__CHECK__PLAN_DAO_

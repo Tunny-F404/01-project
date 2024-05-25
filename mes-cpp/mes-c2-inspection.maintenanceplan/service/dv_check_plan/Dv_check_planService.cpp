@@ -81,10 +81,9 @@ bool SampleService::updateData(const MachineryPlanDTO::Wrapper& dto)
 	Dv_check_planDAO dao;
 	return dao.update(data) == 1;
 }
-
-bool SampleService::removeData(uint64_t id)
+*/
+bool Dv_check_planService::removeData(uint64_t id)
 {
 	Dv_check_planDAO dao;
 	return dao.deleteById(id) == 1;
 }
-*/
