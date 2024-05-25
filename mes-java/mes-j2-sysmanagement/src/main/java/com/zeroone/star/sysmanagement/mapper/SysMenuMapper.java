@@ -1,7 +1,7 @@
-package com.zeroone.star.com.zeroone.star.sysmanagement.mapper;
+package com.zeroone.star.sysmanagement.mapper;
 
-import com.zeroone.star.com.zeroone.star.sysmanagement.entity.SysMenuDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zeroone.star.sysmanagement.entity.SysMenuDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

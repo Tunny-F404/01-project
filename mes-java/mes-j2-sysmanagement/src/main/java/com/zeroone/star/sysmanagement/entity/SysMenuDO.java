@@ -1,4 +1,4 @@
-package com.zeroone.star.com.zeroone.star.sysmanagement.entity;
+package com.zeroone.star.sysmanagement.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
