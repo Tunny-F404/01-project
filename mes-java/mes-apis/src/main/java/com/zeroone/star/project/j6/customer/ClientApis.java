@@ -2,6 +2,7 @@ package com.zeroone.star.project.j6.customer;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
+import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.dto.ResultDTO;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.j6.customer.query.CustomExportQuery;
@@ -17,7 +18,7 @@ public interface ClientApis {
     JsonVO<String> deleteClient(List<Long> ids);
 
     // 修改客户信息
-    JsonVO<String> updateClient(ClientDTO client);
+    JsonVO<String> updateClient(Long id, ClientUpdateDTO client);
 
     // 查询所有客户信息
     JsonVO<PageDTO<ClientDTO>> queryAll(ClientQuery query);

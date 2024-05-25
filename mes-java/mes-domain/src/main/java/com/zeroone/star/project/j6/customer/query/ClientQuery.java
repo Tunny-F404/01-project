@@ -43,5 +43,17 @@ public class ClientQuery {
     @ApiModelProperty(value = "是否启用", example = "是")
     private String enableFlag;
 
+    /**
+     * 当前页码
+     */
+    @ApiModelProperty(value = "当前页码", example = "1")
+    private int pageNum;
+
+    /**
+     * 每页记录数
+     */
+    @ApiModelProperty(value = "每页记录数", example = "10")
+    private int pageSize;
+
 
 }
