@@ -19,13 +19,13 @@ public interface MenuApis {
     //添加菜单
     JsonVO<MenuDTO> addMenu(MenuDTO menuDTO);
 
-
     //删除菜单
-
     JsonVO<String> removeMenu(int menu_id);
 
     //修改菜单
     JsonVO<String> modifyMenu(MenuDTO menuDTO);
+
+
 
     //获取资源名称树
     JsonVO<TreeNode<String>> getResourceNameTree();

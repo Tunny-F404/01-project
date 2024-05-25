@@ -1,4 +1,4 @@
-package com.zeroone.star.sysmanagement.config;
+package com.zeroone.star.com.zeroone.star.sysmanagement.config;
 
 import com.zeroone.star.project.config.swagger.SwaggerCore;
 import org.springframework.context.annotation.Bean;

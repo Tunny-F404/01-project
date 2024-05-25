@@ -1,4 +1,4 @@
-package com.zeroone.star.sysmanagement.controller;
+package com.zeroone.star.com.zeroone.star.sysmanagement.controller;
 
 import cn.hutool.core.date.DateTime;
 
