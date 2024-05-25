@@ -11,8 +11,10 @@ import com.zeroone.star.basicdata.mapper.MdUnitMeasureMapper;
 import com.zeroone.star.basicdata.service.IMdUnitMeasureService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.components.user.UserHolder;
+import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitUpdateDTO;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -99,17 +101,20 @@ public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper, M
      * 该方法通过接收一个单位测量DTO（数据传输对象），将其复制到一个对应的实体对象中，
      * 然后将这个实体对象插入到数据库中。
      *
-     * @param unitMeasureDTO 单位测量的DTO，包含了需要添加到数据库中的单位测量信息。
+     * @param unitAddDTO 单位测量的DTO，包含了需要添加到数据库中的单位测量信息。
      */
     @Override
-    public void addUnitMeasure(UnitMeasureDTO unitMeasureDTO) {
+    public void addUnitMeasure(UnitAddDTO unitAddDTO) {
         // 检查DTO是否为空
-        if (unitMeasureDTO == null) {
+        if (unitAddDTO == null) {
             throw new IllegalArgumentException("UnitMeasureDTO cannot be null");
         }
 
         // 将DTO对象复制到实体对象中
-        MdUnitMeasure unitMeasure = BeanUtil.copyProperties(unitMeasureDTO, MdUnitMeasure.class);
+        MdUnitMeasure unitMeasure = BeanUtil.copyProperties(unitAddDTO, MdUnitMeasure.class);
+        // 设置创建时间和更新时间
+        unitMeasure.setCreateTime(DateTime.now().toLocalDateTime());
+        unitMeasure.setUpdateTime(DateTime.now().toLocalDateTime());
 
         // 对实体对象进行非空检查，确保主要字段不为空
         if (StringUtils.isBlank(unitMeasure.getMeasureCode()) || StringUtils.isBlank(unitMeasure.getMeasureName())) {
@@ -124,15 +129,16 @@ public class MdUnitMeasureServiceImpl extends ServiceImpl<MdUnitMeasureMapper, M
     /**
      * 修改单位度量信息。
      *
-     * @param unitMeasureDTO 单位度量数据传输对象，包含了需要更新的单位度量信息。
+     * @param unitUpdateDTO 单位度量数据传输对象，包含了需要更新的单位度量信息。
      * @throws ServiceException 当更新操作失败时抛出，封装了更新过程中的任何异常信息。
      */
     @Override
-    public void modifyUnitMeasure(UnitMeasureDTO unitMeasureDTO){
+    public void modifyUnitMeasure(UnitUpdateDTO unitUpdateDTO){
         // 实体对象初始化，用于后续的数据更新操作
         MdUnitMeasure unitMeasure = new MdUnitMeasure();
         // 属性拷贝
-        BeanUtils.copyProperties(unitMeasureDTO, unitMeasure);
+        BeanUtils.copyProperties(unitUpdateDTO, unitMeasure);
+        // 设置更新时间
         unitMeasure.setUpdateTime(DateTime.now().toLocalDateTime());
 
         // 构建更新条件

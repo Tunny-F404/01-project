@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.basicdata.entity.MdUnitMeasure;
 import com.zeroone.star.basicdata.service.IMdUnitMeasureService;
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitUpdateDTO;
 import com.zeroone.star.project.j4.basicdata.AccountUnitApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -58,6 +60,7 @@ public class MdUnitMeasureController implements AccountUnitApis{
         ResponseEntity<byte[]> responseEntity = iMdUnitMeasureService.exportUnitMeasure(unitExcelSelectDTO);
         return responseEntity;
     }
+
 
     /**
      * 根据单位ID获取单位信息
@@ -117,26 +120,26 @@ public class MdUnitMeasureController implements AccountUnitApis{
 
     /**
      * 添加单位
-     * @param unitMeasureDTO
+     * @param unitAddDTO 添加单位DTO
      * @return
      */
     @PostMapping("/add")
     @ApiOperation("添加单位")
-    public JsonVO addUnitMeasure(@Validated UnitMeasureDTO unitMeasureDTO) {
-        iMdUnitMeasureService.addUnitMeasure(unitMeasureDTO);
+    public JsonVO addUnitMeasure(@Validated UnitAddDTO unitAddDTO) {
+        iMdUnitMeasureService.addUnitMeasure(unitAddDTO);
         return JsonVO.success("添加成功");
     }
 
     /**
      * 修改单位
      * 注意：修改单位时，需要传入主单位ID，如果主单位ID为空，则修改为非主单位
-     * @param unitMeasureDTO
+     * @param unitUpdateDTO 更新单位DTO
      * @return
      */
     @PostMapping("/modify")
     @ApiOperation("修改单位")
-    public JsonVO modifyUnitMeasure(@Validated UnitMeasureDTO unitMeasureDTO){
-        iMdUnitMeasureService.modifyUnitMeasure(unitMeasureDTO);
+    public JsonVO modifyUnitMeasure(@Validated UnitUpdateDTO unitUpdateDTO){
+        iMdUnitMeasureService.modifyUnitMeasure(unitUpdateDTO);
         return JsonVO.success("修改成功");
     }
 

@@ -1,9 +1,12 @@
 package com.zeroone.star.project.j4.basicdata;
 
+import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitUpdateDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
@@ -31,15 +34,15 @@ public interface AccountUnitApis {
     /**
      * 添加单位
      * @author ：左某
-     * @param data 单位数据
+     * @param unitAddDTO 单位新增数据
      * @return 添加单位结果，成功或失败
      */
-    JsonVO addUnitMeasure(UnitMeasureDTO data);
+    JsonVO addUnitMeasure(UnitAddDTO unitAddDTO) ;
     /**
      * 修改单位
      * @author ：左某
-     * @param data 单位数据
+     * @param unitUpdateDTO 单位更新数据
      * @return 修改单位结果，成功或失败
      */
-    JsonVO modifyUnitMeasure(UnitMeasureDTO data);
+    JsonVO modifyUnitMeasure(UnitUpdateDTO unitUpdateDTO);
 }

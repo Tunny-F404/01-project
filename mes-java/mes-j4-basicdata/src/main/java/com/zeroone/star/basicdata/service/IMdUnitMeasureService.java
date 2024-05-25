@@ -3,8 +3,10 @@ package com.zeroone.star.basicdata.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.basicdata.entity.MdUnitMeasure;
+import com.zeroone.star.project.dto.j4.basicdata.UnitAddDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitExcelSelectDTO;
 import com.zeroone.star.project.dto.j4.basicdata.UnitMeasureDTO;
+import com.zeroone.star.project.dto.j4.basicdata.UnitUpdateDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -37,13 +39,13 @@ public interface IMdUnitMeasureService extends IService<MdUnitMeasure> {
 
     /**
      * 添加单位
-     * @param unitMeasureDTO
+     * @param unitAddDTO
      */
-    void addUnitMeasure(UnitMeasureDTO unitMeasureDTO);
+    void addUnitMeasure(UnitAddDTO unitAddDTO);
 
     /**
      * 修改单位
-     * @param unitMeasureDTO
+     * @param unitUpdateDTO
      */
-    void modifyUnitMeasure(UnitMeasureDTO unitMeasureDTO);
+    void modifyUnitMeasure(UnitUpdateDTO unitUpdateDTO);
 }
