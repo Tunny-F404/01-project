@@ -19,11 +19,15 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+<<<<<<< HEAD
 #include"controller/WorkStation/GetWorkStationListController.h"
 #include"controller/WorkStation/AddWorkStationController.h"
 #include"controller/WorkStation/ModifyWorkStationController.h"
 #include"controller/WorkStation/ExportWorkStationController.h"
 
+=======
+#include "humanresource/HumanResourceListController.h"
+>>>>>>> origin/c1-workstation-chunyang
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -56,11 +60,15 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
+<<<<<<< HEAD
 	ROUTER_SIMPLE_BIND(GetWorkStationListController); 
 	ROUTER_SIMPLE_BIND(AddWorkStationController);
 	ROUTER_SIMPLE_BIND(ModifyWorkStationController);
 	ROUTER_SIMPLE_BIND(ExportWorkStationController);
 	ROUTER_SIMPLE_BIND(ExportWorkStationController);
+=======
+	ROUTER_SIMPLE_BIND(HumanResourceListController);
+>>>>>>> origin/c1-workstation-chunyang
 }
 
 #ifdef HTTP_SERVER_DEMO
