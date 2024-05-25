@@ -15,9 +15,7 @@ receipt:
   query2: 获取单据详情
 
   
-sample:
-...
-...
+
 productionorder:
  query:
   summary: 生产工单
