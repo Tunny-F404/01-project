@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2023/09/18 15:01:29
+ @Date: 2022/10/26 23:47:08
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,35 +17,34 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _FILEDTO_H_
-#define _FILEDTO_H_
+#ifndef _USERVO_H_
+#define _USERVO_H_
 
 #include "../../GlobalInclude.h"
+#include "../../dto/FeedBack/FeedBackDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * editor图片信息传输数据对象
+ * 定义一个报工显示JsonVO对象，用于响应给客户端
  */
-class EditorImageDTO : public oatpp::DTO
+class FeedBackJsonVO : public JsonVO<oatpp::List<FeedBackDTO::Wrapper>>
 {
-	DTO_INIT(EditorImageDTO, DTO);
-	// 图片src
-	API_DTO_FIELD(String, url, ZH_WORDS_GETTER("file.field.img-url"), true, {});
-	// 图片文字描述
-	API_DTO_FIELD_DEFAULT(String, alt, ZH_WORDS_GETTER("file.field.img-alt"));
-	// 图片链接地址
-	API_DTO_FIELD_DEFAULT(String, href, ZH_WORDS_GETTER("file.field.img-href"));
-public:
-	EditorImageDTO() {}
-	EditorImageDTO(String url, String alt = "", String href = "")
+	DTO_INIT(FeedBackJsonVO, JsonVO<oatpp::List<FeedBackDTO::Wrapper>>);
+	FeedBackJsonVO()
 	{
-		this->url = url;
-		this->alt = alt;
-		this->href = href;
+		this->data = {};
 	}
 };
 
-#include OATPP_CODEGEN_END(DTO)
+/**
+ * 定义一个报工分页显示JsonVO对象，用于响应给客户端
+ */
+class FeedBackPageJsonVO : public JsonVO<oatpp::List<FeedBackPageDTO::Wrapper>>
+{
+	DTO_INIT(FeedBackPageJsonVO, JsonVO<oatpp::List<FeedBackPageDTO::Wrapper>>);
 
-#endif // !_FILEDTO_H_
+};
+
+#include OATPP_CODEGEN_END(DTO)
+#endif // _USERVO_H_

@@ -1,5 +1,34 @@
-FeedBack:
+prod:
   field:
-   type : "��������"
-
-   
+    feedback_type : "报工类型"
+    workstation_name : "工作站名称"
+    workorder_code : "生产工单编号"
+    item_code : "产品物料编码"
+    item_name :  "产品物料名"
+    specification : "规格型号"
+    quantity_feedback : "报工数量"
+    user_name : "报工人"
+    feedback_time : "报工时间"
+    record_user : "审核人"
+    status : "状态"
+    startTime : "开始时间"
+    endTime : "结束时间"
+    processName : "工序"
+    id: "任务ID"
+  query:
+    summary:
+      feedbackType: "报工类型"
+      workstationName: "工作站"
+      workorderCode: "生产工单编号"
+      itemCode: "产品物料编码"
+      itemName: "产品物料名"
+      specification: "规格型号"
+      feedbackQuantity: "报工数量"
+      userName: "报工人"
+      feedbackTime: "报工时间"
+      recordUser: "审核人"
+      status: "状态"
+  put:
+   summary: "修改一条生产任务"
+  delete:
+   summary: "删除一条生产任务"

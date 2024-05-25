@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2023/09/18 15:01:29
+ @Date: 2022/10/25 11:34:14
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,35 +17,28 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _FILEDTO_H_
-#define _FILEDTO_H_
+#ifndef _SAMPLE_VO_
+#define _SAMPLE_VO_
 
 #include "../../GlobalInclude.h"
+#include "../../dto/ProdTask/ProdTaskDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * editor图片信息传输数据对象
+ * 示例显示JsonVO，用于响应给客户端的Json对象
  */
-class EditorImageDTO : public oatpp::DTO
-{
-	DTO_INIT(EditorImageDTO, DTO);
-	// 图片src
-	API_DTO_FIELD(String, url, ZH_WORDS_GETTER("file.field.img-url"), true, {});
-	// 图片文字描述
-	API_DTO_FIELD_DEFAULT(String, alt, ZH_WORDS_GETTER("file.field.img-alt"));
-	// 图片链接地址
-	API_DTO_FIELD_DEFAULT(String, href, ZH_WORDS_GETTER("file.field.img-href"));
-public:
-	EditorImageDTO() {}
-	EditorImageDTO(String url, String alt = "", String href = "")
-	{
-		this->url = url;
-		this->alt = alt;
-		this->href = href;
-	}
+class ProdTaskModifyJsonVO : public JsonVO<ProdTaskModifyDTO::Wrapper> {
+	DTO_INIT(ProdTaskModifyJsonVO, JsonVO<ProdTaskModifyDTO::Wrapper>);
+};
+
+/**
+ * 示例分页显示JsonVO，用于响应给客户端的Json对象
+ */
+class ProdTaskRemoveJsonVO : public JsonVO<ProdTaskRemoveDTO::Wrapper> {
+	DTO_INIT(ProdTaskRemoveJsonVO, JsonVO<ProdTaskRemoveDTO::Wrapper>);
 };
 
 #include OATPP_CODEGEN_END(DTO)
 
-#endif // !_FILEDTO_H_
+#endif // !_SAMPLE_VO_
