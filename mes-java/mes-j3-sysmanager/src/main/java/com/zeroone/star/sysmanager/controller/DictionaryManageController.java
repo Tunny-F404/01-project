@@ -120,7 +120,8 @@ public class DictionaryManageController implements DictionaryManageApis {
     @GetMapping("query-dictTypeNames")
     @Override
     public JsonVO<List<DictTypeNameVO>> queryDictTypeNames() {
-        return null;
+        List<DictTypeNameVO> dictTypeNameVOS = sysDictTypeService.listDictTypeName();
+        return JsonVO.success(dictTypeNameVOS);
     }
 
     @Override

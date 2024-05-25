@@ -1,8 +1,11 @@
 package com.zeroone.star.sysmanager.service;
 
 import com.zeroone.star.project.j3.dto.InsertDictTypeDTO;
+import com.zeroone.star.project.j3.vo.DictTypeNameVO;
 import com.zeroone.star.sysmanager.entity.SysDictType;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysDictTypeService extends IService<SysDictType> {
     Long saveDictType(InsertDictTypeDTO dto);
+
+    List<DictTypeNameVO> listDictTypeName();
 }
