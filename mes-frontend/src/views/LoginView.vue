@@ -16,13 +16,13 @@
     <router-link to="/sample">进入示例演示页面</router-link>
   </el-card>
   <!-- 验证码组件 -->
-  <Verify
+  <!-- <Verify
     mode="pop"
     :captchaType="captchaType"
     :imgSize="{ width: '400px', height: '200px' }"
     ref="verify"
     @success="handleSuccess"
-  ></Verify>
+  ></Verify> -->
 </template>
 
 <script setup>
