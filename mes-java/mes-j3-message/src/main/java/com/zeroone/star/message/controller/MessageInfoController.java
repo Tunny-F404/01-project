@@ -1,5 +1,6 @@
 package com.zeroone.star.message.controller;
 
+import com.zeroone.star.message.service.ISysMessageService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j3.dto.MessageDTO;
 import com.zeroone.star.project.j3.messageinform.MessageInfoApis;
@@ -10,22 +11,27 @@ import com.zeroone.star.project.j3.vo.UnreadMessageVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Api(tags = "消息通知")
 @Controller
 @RequestMapping("/message-info")
+@ResponseBody
 public class MessageInfoController implements MessageInfoApis {
+
+    @Autowired
+    private ISysMessageService messageService;
+
     @Override
     @PostMapping("/delete-messages")
     @ApiOperation("删除消息")
-    public JsonVO<List<Long>> removeMessages(List<Long> ids) {
-        return null;
+    public JsonVO<List<Long>> removeMessages(@RequestBody List<Long> ids) {
+        List<Long> data = messageService.removeMessages(ids);
+        return JsonVO.success(data);
     }
 
     @Override
