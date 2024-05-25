@@ -1,6 +1,5 @@
 package com.zeroone.star.orgstructure.service.impl;
 
-import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.orgstructure.entity.Department;
@@ -9,15 +8,42 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.j2.orgstructure.query.dept.DepartmentQuery;
-import com.zeroone.star.project.vo.JsonVO;
-import org.apache.commons.lang.enums.Enum;
+import com.zeroone.star.project.j2.orgstructure.vo.DepartmentTreeVO;
+import com.zeroone.star.project.utils.tree.TreeNode;
+import com.zeroone.star.project.utils.tree.TreeNodeMapper;
+import com.zeroone.star.project.utils.tree.TreeUtils;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.management.Query;
 import java.time.LocalDateTime;
-import java.util.EnumMap;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <p>
+ * Tree转化器
+ * </p>
+ *
+ * @author cq
+ * @since 2024-05-22
+ */
+class DepartmentTreeNodeMapper implements TreeNodeMapper<Department>{
+
+    @Override
+    public TreeNode objectMapper(Department department){
+        DepartmentTreeVO treenode = new DepartmentTreeVO();
+        treenode.setTnId(department.getDeptId().toString());
+        if(department.getParentId() == null){//如果父亲id不存在
+            treenode.setTnPid((null));//设置空父亲
+        } else {
+            treenode.setTnPid(department.getParentId().toString());
+        }
+        treenode.setDeptName(department.getDeptName());
+        return  treenode;
+    }
+}
+
 
 /**
  * <p>
@@ -50,6 +76,32 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
 
     @Resource
     MsDepartmentMapper msDepartmentMapper;
+
+    @Override
+    public List<DepartmentTreeVO> getDepartmentNameTree(DepartmentQuery query){
+        //定义数据容器
+        List<Department> departments = new ArrayList<>();
+        String name = "s";
+        Integer id = 1;
+//        Department root = new Department();
+//        if(name != "" && name.isEmpty() == false){
+//
+//        }
+        Department t = baseMapper.selectById(id);
+        QueryWrapper<Department> departmentQueryWrapper = new QueryWrapper<>();
+        int k = 100;
+        while(k-- > 0){//最多查询100层
+            departmentQueryWrapper.eq("parent_id",query.getParentId());
+            List<Department> tDepartments = baseMapper.selectList(departmentQueryWrapper);
+            if(tDepartments != null && !tDepartments.isEmpty()){
+                departments.addAll(tDepartments);
+            } else{
+                break;
+            }
+        }
+        return TreeUtils.listToTree(departments,new DepartmentTreeNodeMapper());
+    }
+
 
     //获取部门列表
     @Override

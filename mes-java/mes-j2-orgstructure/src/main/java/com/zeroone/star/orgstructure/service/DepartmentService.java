@@ -5,8 +5,11 @@ import com.zeroone.star.orgstructure.entity.Department;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.j2.orgstructure.query.dept.DepartmentQuery;
+import com.zeroone.star.project.j2.orgstructure.vo.DepartmentTreeVO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.dto.PageDTO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,8 +22,16 @@ import com.zeroone.star.project.dto.PageDTO;
 public interface DepartmentService extends IService<Department> {
 
     /**
-     * 获取部门列表
+     * 获取部门名称树
      * @param
+     * @return
+     */
+    List<DepartmentTreeVO> getDepartmentNameTree(DepartmentQuery query);
+
+
+    /**
+     * 获取部门列表
+     * @param query
      * @return
      */
     PageDTO<DepartmentDTO> getDepartmentList(DepartmentQuery query);

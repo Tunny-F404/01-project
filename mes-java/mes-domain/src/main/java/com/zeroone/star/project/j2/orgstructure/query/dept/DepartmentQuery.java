@@ -30,11 +30,11 @@ public class DepartmentQuery {
 
     //部门Id
     @ApiModelProperty(value = "部门Id",example = "1")
-    private String deptId;
+    private Integer deptId;
 
     //父部门id
     @ApiModelProperty(value = "父部门id",example = "2")
-    private String parentId;
+    private Integer parentId;
 
     //部门名称
     @ApiModelProperty(value = "部门名称",example = "部门1")
