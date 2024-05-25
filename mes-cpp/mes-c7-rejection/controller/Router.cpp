@@ -20,12 +20,18 @@
 #include "Router.h"
 #include "ApiHelper.h"
 #include "RawMaterialOp/RawMaterialOpController.h"
+<<<<<<< HEAD
+=======
+#include "rejection/RejectController.h"
+
+>>>>>>> eacdd621b46186346b0bdd7de60075b87f3672c3
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
 #include "file/FileController.h"
 #include "ws/WSController.h"
 #endif
+#include "material-information/MaterialInformationController.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -51,7 +57,14 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
+<<<<<<< HEAD
 	ROUTER_SIMPLE_BIND(RawMaterialOpController);
+=======
+	ROUTER_SIMPLE_BIND(MaterialInformationController);
+	ROUTER_SIMPLE_BIND(RejectController);
+	ROUTER_SIMPLE_BIND(RawMaterialOpController);
+
+>>>>>>> eacdd621b46186346b0bdd7de60075b87f3672c3
 }
 
 #ifdef HTTP_SERVER_DEMO
