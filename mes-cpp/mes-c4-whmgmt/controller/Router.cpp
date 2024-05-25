@@ -20,6 +20,10 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include"controller/purchasereceiving/AddListController.h"
+#include"controller/purchasereceiving/ModifyListController.h"
+#include"controller/purchasereceiving/information/GetListController.h"
+
 
 #include "PurchaseReceipt/GetReceiptController.h"
 
@@ -76,6 +80,12 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(AddWhStorageorderController);
 	ROUTER_SIMPLE_BIND(ModifyWhStorageorderController);
 	ROUTER_SIMPLE_BIND(DeleteWhStorageorderController);
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	ROUTER_SIMPLE_BIND(ModifyListController);
+	ROUTER_SIMPLE_BIND(AddListController);
+	ROUTER_SIMPLE_BIND(GetListController);
+
+	
 }
 
 #ifdef HTTP_SERVER_DEMO

@@ -4,7 +4,7 @@
 架构使用示例项目。
 
 ## 目录结构说明
-> `arch-demo`
+> `arch-whmgmt`
 >
 > > `conf` -- Windows平台需要的配置文件
 > >
