@@ -8,6 +8,13 @@ import './assets/main.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // 添加了图标
 
+// 定义特性标志
+/* 解决__VUE_PROD_HYDRATION_MISMATCH_DETAILS__警告
+/ 禁用对hydration不匹配的详细警告2。 */
+window.__VUE_PROD_DEVTOOLS__ = false;
+window.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false;
+
+
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
