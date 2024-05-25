@@ -51,7 +51,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "warehouseAreaName", ZH_WORDS_GETTER("warehouse-area.field.name"),"default name",false);
 	}
 	// 1.2 定义查询接口处理:路由到URL/warehouseArea找到queryWarehouseArea端点,产生查询请求queryParams
-	ENDPOINT(API_M_GET, "/warehouseArea", queryWarehouseArea, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/warehouseArea-settings/query-warehouseArea", queryWarehouseArea, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为WarehouseAreaQuery领域模型
 		API_HANDLER_QUERY_PARAM(query, WarehouseAreaQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -68,7 +68,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 2.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/warehouseArea", addWarehouseArea, BODY_DTO(warehouseAreaListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/warehouseArea-settings/add-warehouseArea", addWarehouseArea, BODY_DTO(warehouseAreaListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddWarehouseArea(dto));
 	}
@@ -76,7 +76,7 @@ public:
 	// 3.1 定义修改库区接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("warehouse-area.put.summary"), modifyWarehouseArea, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改库区接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/warehouseArea", modifyWarehouseArea, BODY_DTO(warehouseAreaListDTO::Wrapper, dto), execModifyWarehouseArea(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/warehouseArea-settings/modify-warehouseArea", modifyWarehouseArea, BODY_DTO(warehouseAreaListDTO::Wrapper, dto), execModifyWarehouseArea(dto));
 
 	// 4.1 定义删除接口描述
 	ENDPOINT_INFO(removeWarehouseArea) {
@@ -86,7 +86,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "area_id", ZH_WORDS_GETTER("warehouse-area.field.id"), 1, true);
 	}
 	// 4.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/sample/{area_id}", removeWarehouseArea, PATH(UInt64, area_id), execRemoveWarehouseArea(area_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/warehouseArea-settings/del-warehouseArea-by/{area_id}", removeWarehouseArea, PATH(UInt64, area_id), execRemoveWarehouseArea(area_id));
 private:
 	// 1.3 分页查询数据
 	warehouseAreaPageJsonVO::Wrapper execQueryWarehouseArea(const WarehouseAreaQuery::Wrapper& query, const PayloadDTO& payload);

@@ -65,12 +65,12 @@ public:
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("sample.post.summary"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
-		// 定义响应参数格式
+		// 定义响应参数格式:即返回给前端的结果为json形式
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理:新增数据类型SampleDTO::Wrapper,名为dto(id,name,age,sex)
 	ENDPOINT(API_M_POST, "/sample", addSample, BODY_DTO(SampleDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-		// 呼叫执行函数响应结果
+		// 呼叫执行函数响应结果:将新增数据封装到dto中传给处理函数
 		API_HANDLER_RESP_VO(execAddSample(dto));
 	}
 
