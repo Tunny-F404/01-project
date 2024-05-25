@@ -1,6 +1,7 @@
 
 <script setup >
-import  tableFrame  from '@/table/table-list.vue'
+import  tableFrame  from '@/components/table-list-use/table-text.vue' 
+import popUp from '@/components/table-list-use/table-components/pop-up.vue'
 import {ref} from 'vue'
 
 //没有中文国际化
@@ -13,12 +14,16 @@ const tableList=ref([{
 }
 ]) 
 
+//dialog联系到表格弹窗
+const dialog=ref()
+
+
 //定义请求参数,后期完善
 const parms=ref({
     pagenum:1,//页数
     pagesize: 5,//当前每页面大小
     state:'成功',//状态
-    classfiy:'员工'
+    classfiy:'时间'
 })
 const getPageList=()=>{
 
@@ -46,6 +51,7 @@ const onSortChannel=()=>{
 }
 const onEditchannel=(row,$index)=>{
     //编辑
+    dialog.value.open({row})
     console.log(row);
 }
 const onDelChannel=(row,$index)=>{
@@ -55,19 +61,26 @@ const onDelChannel=(row,$index)=>{
 const onSubmit=()=>{
     console.log("查询提交");
 }
-
+//添加
+const onAddChannel = () => {
+  dialog.value.open({})
+}
 </script>
 
 
 <template>
-    <div>
         <!--分类，页面只有基本的表现，没有实现数据绑定-->
         <tableFrame title="实验表格">
     <template #extra>
         <!-- 具名插槽例子实现 -->
-      <el-button @click="onSortChannel">排序顺序 
+      <el-button @click="onSortChannel">排序顺序    
         <el-icon :size="20">
     <Sort /><!--排序图标-->
+        </el-icon>
+    </el-button>
+    <el-button @click="onAddChannel">添加    
+        <el-icon :size="20">
+    <Plus /><!--排序图标-->
         </el-icon>
     </el-button>
     </template>
@@ -77,7 +90,7 @@ const onSubmit=()=>{
   <el-form-item label="表格分类：" padding="50px">
     <!--label是用户看，value是收集给后台的-->
     <el-select v-model="parms.classfiy">
-        <el-option label="按活动" value="001"> </el-option>
+        <el-option label="按产品" value="001"> </el-option>
         <el-option label="按时间" value="002"> </el-option>
     </el-select>
   </el-form-item>
@@ -119,7 +132,6 @@ const onSubmit=()=>{
     </template>
    </el-table-column>
     </el-table>
-<!--分页,有eslint语法检查，怕改出毛病，没有改-->
 <el-pagination
       v-model:current-page="parms.pagenum"
       v-model:page-size="parms.pagesize"
@@ -138,9 +150,8 @@ const onSubmit=()=>{
         <el-empty description="没有数据"></el-empty>
     </template>
         </tableFrame>
-
-
-    </div>
+<!--引入的弹窗-->
+        <pop-Up ref="dialog"> </pop-Up>
 </template>
 
 
