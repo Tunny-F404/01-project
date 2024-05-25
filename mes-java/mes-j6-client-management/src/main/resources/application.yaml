@@ -3,3 +3,5 @@ server:
 spring:
   application:
     name: ${sn.customer}
+fastdfs:
+  nginx-servers: ${fastdfs.nginx-servers}

@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zeroone.star.customer.mapper.MdClientMapper">
+    <select id="selectMdClientList" resultType="com.zeroone.star.customer.entity.MdClient">
+        SELECT * FROM md_client
+        WHERE 1=1
 
+            <if test="customerCode != null and customerCode != ''">
+                AND client_code = #{customerCode}
+            </if>
+            <if test="customerName != null and customerName != ''">
+                AND client_name = #{customerName}
+            </if>
+            <if test="customerEnglishName != null and customerEnglishName != ''">
+                AND client_en = #{customerEnglishName}
+            </if>
+            <if test="customerSimpleName != null and customerSimpleName != ''">
+                AND client_nick = #{customerSimpleName}
+            </if>
+<!--        <if test="clientId != null and clientId.size() > 0">-->
+<!--            AND (client_id = #{clientId, typeHandler=org.apache.ibatis.type.ListTypeHandler} OR client_id IN (SELECT client_id FROM md_client WHERE find_in_set(#{clientId, typeHandler=org.apache.ibatis.type.ListTypeHandler}, ancestors)))-->
+<!--        </if>-->
+
+
+
+
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j6.product_management;
 
 import com.zeroone.star.project.j6.product_management.query.MdItemQuery;
+import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,15 +13,15 @@ public interface MdItemApis {
      */
     ResponseEntity<byte[]> exportToExcel(MdItemQuery mdItemQuery);
     /**
-     * 下载导入模板
-     * @return 导入模板文件内容
+     * 下载模板
+     * @return 模板文件内容
      */
-    ResponseEntity<byte[]> exportTemplate();
+    ResponseEntity<byte[]> downloadTemplate();
     /**
      * 导入物料产品数据
      * @param file Excel 文件
      * @param updateSupport 是否更新已经存在的用户数据
      * @return 导入结果
      */
-    ResponseEntity<String> importFromExcel(MultipartFile file, boolean updateSupport);
+    JsonVO<String> importFromExcel(MultipartFile file, boolean updateSupport);
 }

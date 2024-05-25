@@ -16,9 +16,6 @@ public class MdItemQuery {
     @ApiModelProperty(value = "产品物料名称")
     private String itemName;
 
-    @ApiModelProperty(value = "当前页码", example = "1")
-    private Integer page;
-
-    @ApiModelProperty(value = "每页大小", example = "10")
-    private Integer size;
+    @ApiModelProperty(value = "产品物料分类ID")
+    private int itemTypeId;
 }

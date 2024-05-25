@@ -19,6 +19,6 @@ import java.util.List;
 @Data
 @ApiModel("删除关联供应商（支持批量删除）")
 public class ProductSupplierListDTO {
-    @ApiModelProperty(value = "关联供应商ids", example = "1, 2, 3", required = true)
+    @ApiModelProperty(value = "关联供应商ids", example = "[1, 2, 3]", required = true)
     private List<Long> productSupplierIds;
 }

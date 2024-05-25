@@ -3,10 +3,11 @@ package com.zeroone.star.project.j6.customer;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
-import com.zeroone.star.project.j6.customer.dto.ResultDTO;
+import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
-import com.zeroone.star.project.j6.customer.query.CustomExportQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
 import java.util.List;
@@ -28,19 +29,22 @@ public interface ClientApis {
     JsonVO<ClientDTO> queryById(@Min(value = 1, message = "id的最小值为1") Long id);
 
     /**
-     * @param customExport 导出条件
+     * @param clientExportQueryExport 导出条件
+     * @param
      * @return 导出结果
      */
-    JsonVO<ResultDTO> queryCustomExport(CustomExportQuery customExport);
+    ResponseEntity<byte[]> queryClientExportByExcel(ClientExportQuery clientExportQueryExport);
 
     /**
      * @param customer 数据集
      * @return 导入结果
      */
-    JsonVO<ResultDTO> addList(List customer);
+    JsonVO<String> importClientByExcel(MultipartFile customer);
+
 
     /**
      * @return 返回下载模板情况
      */
-    JsonVO<ResultDTO> DownloadResult();
+    ResponseEntity<byte[]> DownloadTemplate();
+
 }

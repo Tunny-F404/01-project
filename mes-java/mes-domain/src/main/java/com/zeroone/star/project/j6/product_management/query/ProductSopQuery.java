@@ -1,8 +1,8 @@
 package com.zeroone.star.project.j6.product_management.query;
 
 import com.zeroone.star.project.query.PageQuery;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,8 +16,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @ApiModel("产品SOP查询对象")
 public class ProductSopQuery extends PageQuery {
-    @ApiModelProperty(value = "物料产品ID", example = "1001")
-    private Long itemId;
+    @ApiModelProperty(value = "排列顺序", example = "1")
+    private Integer orderNum;
 
     @ApiModelProperty(value = "工序编号", example = "PROC-001")
     private String processCode;

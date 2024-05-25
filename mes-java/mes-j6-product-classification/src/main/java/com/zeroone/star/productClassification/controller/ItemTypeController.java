@@ -1,5 +1,6 @@
 package com.zeroone.star.productClassification.controller;
 
+import com.zeroone.star.project.j6.product_classification.ItemTypeApis;
 import com.zeroone.star.project.j6.product_classification.dto.ItemTypeDTO;
 import com.zeroone.star.project.j6.product_classification.query.ItemTypeQuery;
 import com.zeroone.star.project.vo.JsonVO;
@@ -14,42 +15,47 @@ import java.util.List;
 @Api(tags = "物料产品分类管理")
 @RestController
 @RequestMapping("/mes/md/itemtype")
-public class ItemTypeController {
+public class ItemTypeController implements ItemTypeApis {
     @ApiOperation("查询分类列表")
     @GetMapping("/list")
-    public JsonVO<List<ItemTypeDTO>> list(@ApiParam(value = "查询条件") ItemTypeQuery itemTypeQuery){
+    @Override
+    public JsonVO<List<ItemTypeDTO>> queryItemTypeList(@ApiParam(value = "查询条件") ItemTypeQuery itemTypeQuery) {
         return null;
     }
 
     @ApiOperation("查询分类详情")
     @GetMapping(value = "/{itemTypeId}")
-    public JsonVO<ItemTypeDTO> getInfo(@ApiParam(value = "分类ID") @PathVariable Long itemTypeId){
+    @Override
+    public JsonVO<ItemTypeDTO> getItemType(@ApiParam(value = "分类ID") @PathVariable Long itemTypeId) {
         return null;
     }
 
     @ApiOperation("获取树形结构数据")
     @GetMapping("/treeselect")
-    public JsonVO<List<ItemTypeDTO>> treeSelect(@ApiParam(value = "查询条件") ItemTypeQuery itemTypeQuery){
+    @Override
+    public JsonVO<List<ItemTypeDTO>> treeSelect(@ApiParam(value = "查询条件") ItemTypeQuery itemTypeQuery) {
         return null;
     }
 
     @ApiOperation("新增物料产品分类")
     @PostMapping
-    public JsonVO<Void> add(@ApiParam(value = "物料分类信息") @Validated @RequestBody ItemTypeDTO itemTypeDto){
+    @Override
+    public JsonVO<Void> addItemType(@ApiParam(value = "物料分类信息") @Validated @RequestBody ItemTypeDTO itemTypeDTO) {
         return null;
     }
 
     @ApiOperation("更新物料产品分类")
     @PutMapping
-    public JsonVO<Void> update(@ApiParam(value = "物料分类信息") @Validated @RequestBody ItemTypeDTO itemTypeDto){
+    @Override
+    public JsonVO<Void> updateItemType(@ApiParam(value = "物料分类信息") @Validated @RequestBody ItemTypeDTO itemTypeDTO) {
         return null;
     }
 
     @ApiOperation("删除物料产品分类")
     @DeleteMapping("/{itemTypeId}")
-    public JsonVO<Void> del(@ApiParam(value = "分类ID") @PathVariable Long itemTypeId){
+    @Override
+    public JsonVO<Void> deleteItemType(@ApiParam(value = "分类ID") @PathVariable Long itemTypeId) {
         return null;
-
     }
 
 }
