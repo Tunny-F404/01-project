@@ -124,8 +124,8 @@ public class SysOperLogController {
         return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
     @ApiOperation( value = "分页获取日志")
-    @PostMapping ("/page")
-    public JsonVO<PageDTO<OperationLogVO>> getOperationLogPage(@RequestBody OperationLogQuery query) {
+    @GetMapping  ("/page")
+    public JsonVO<PageDTO<OperationLogVO>> getOperationLogPage( OperationLogQuery query) {
         if (query == null){
             throw new RuntimeException("参数不能为空");
         }
