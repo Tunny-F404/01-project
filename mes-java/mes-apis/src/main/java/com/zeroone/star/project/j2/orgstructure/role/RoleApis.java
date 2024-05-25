@@ -1,6 +1,9 @@
 package com.zeroone.star.project.j2.orgstructure.role;
 
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
@@ -41,32 +44,32 @@ public interface RoleApis {
      * @return
      */
 
-    public JsonVO<RoleDTO> addRole( RoleDTO roleDTO);
+    public JsonVO<Integer> addRole(RoleAddDto roleDTO);
     /***
      * 修改角色状态（角色页面，有个开关符号，控制停用和启用）
      * @author 0xu0
-     * @param status
+     * @param roleStatusModifyDto
      * @return
      */
 
-    public JsonVO<String> modifyRoleStatus( String status);
+    public JsonVO<Integer> modifyRoleStatus(RoleStatusModifyDto roleStatusModifyDto);
 
 
     /**
      * 删除角色，支持批量删除
      * @author 0xu0
-     * @param id
+     * @param ids
      * @return
      */
 
-    public JsonVO<Long[]> deleteRoles( Long[] id);
+    public JsonVO<List<String>> deleteRoles(List<String> ids);
     /**
      * 修改角色信息
      * @param roleDTO
      * @return
      */
 
-    public JsonVO<RoleDTO> modifyRoleInfo( RoleDTO roleDTO);
+    public JsonVO<Integer> modifyRoleInfo(RoleModifyDto roleDTO);
 
     /*
      * 获取角色分配用户列表（条件+分页）

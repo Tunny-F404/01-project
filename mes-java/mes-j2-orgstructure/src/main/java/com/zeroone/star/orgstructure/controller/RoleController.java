@@ -1,15 +1,21 @@
 package com.zeroone.star.orgstructure.controller;
 
 
+import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
+import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,6 +30,8 @@ import java.util.List;
 @RequestMapping("/orgstructure/role")
 @Api(tags = "角色控制器")
 public class RoleController implements RoleApis {
+    @Resource
+    private RoleService roleServiceImpl;
     /**
      * 获取角色名称列表
      */
@@ -67,33 +75,43 @@ public class RoleController implements RoleApis {
      */
     @PostMapping("add-Role")
     @ApiOperation("添加角色")
-    public JsonVO<RoleDTO> addRole(@RequestBody RoleDTO roleDTO){
-        return JsonVO.success(roleDTO);
+    public JsonVO<Integer> addRole(RoleAddDto roleDTO) {
+        Integer add = roleServiceImpl.addRole(roleDTO);
+        if (add > 0) {
+            return JsonVO.success(add);
+        }
+        return JsonVO.fail(add);
     }
-
     /***
      * 修改角色状态（角色页面，有个开关符号，控制停用和启用）
      * @author 0xu0
-     * @param status
+     * @param roleStatusModifyDto
      * @return
      */
     @PostMapping("modify-RoleStatus")
     @ApiOperation("修改角色状态")
-    public JsonVO<String> modifyRoleStatus(@RequestParam String status){
-        return JsonVO.success(status);
+    public JsonVO<Integer> modifyRoleStatus(RoleStatusModifyDto roleStatusModifyDto){
+        Integer modify = roleServiceImpl.modifyRoleStatus(roleStatusModifyDto);
+        if(modify>0){
+            return JsonVO.success(modify);
+        }
+        return JsonVO.fail(modify);
     }
 
 
     /**
      * 删除角色，支持批量删除
      * @author 0xu0
-     * @param id
+     * @param ids
      * @return
      */
     @DeleteMapping("delete-Roles")
     @ApiOperation("删除角色")
-    public JsonVO<Long[]> deleteRoles(@RequestParam Long[] id){
-        return JsonVO.success(id);
+    public JsonVO<List<String>> deleteRoles(@RequestParam List<String> ids){
+        if(roleServiceImpl.deleteRoles(ids)>0){
+            return JsonVO.success(ids);
+        }
+        return JsonVO.fail(ids);
     }
 
     /**
@@ -103,8 +121,13 @@ public class RoleController implements RoleApis {
      */
     @PostMapping("modify-RoleInfo")
     @ApiOperation("修改角色信息")
-    public JsonVO<RoleDTO> modifyRoleInfo(@RequestBody RoleDTO roleDTO){
-        return JsonVO.success(roleDTO);
+    public JsonVO<Integer> modifyRoleInfo(RoleModifyDto roleDTO){
+        Integer info = roleServiceImpl.modifyRoleInfo(roleDTO);
+        System.out.println(info);
+        if(info>0){
+            return JsonVO.success(info);
+        }
+        return JsonVO.fail(info);
     }
 
     @Override
