@@ -19,7 +19,7 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include "test/TestController.h"
+#include "warehouseArea/warehouseAreaController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -52,8 +52,7 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-	// 绑定示例控制器
-	ROUTER_SIMPLE_BIND(TestController);
+	ROUTER_SIMPLE_BIND(warehouseAreaController);
 }
 
 #ifdef HTTP_SERVER_DEMO
