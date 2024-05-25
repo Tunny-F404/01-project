@@ -5,3 +5,15 @@ warehouseAreaPageJsonVO::Wrapper warehouseAreaController::execQueryWarehouseArea
 {
 	return {};
 }
+Uint64JsonVO::Wrapper warehouseAreaController::execAddWarehouseArea(const warehouseAreaListDTO::Wrapper& dto)
+{
+	return {};
+}
+Uint64JsonVO::Wrapper warehouseAreaController::execModifyWarehouseArea(const warehouseAreaListDTO::Wrapper& dto)
+{
+	return {};
+}
+Uint64JsonVO::Wrapper warehouseAreaController::execRemoveWarehouseArea(const UInt64& id)
+{
+	return {};
+}
