@@ -1,4 +1,4 @@
-package com.zeroone.star.sysmanagement.config;
+package com.zeroone.star.com.zeroone.star.sysmanagement.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

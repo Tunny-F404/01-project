@@ -16,14 +16,16 @@ import java.util.List;
  */
 
 public interface MenuApis {
-    //添加资源
-    JsonVO<MenuDTO> addResource(MenuDTO resourceDTO);
+    //添加菜单
+    JsonVO<MenuDTO> addMenu(MenuDTO menuDTO);
 
-    //删除资源
-    JsonVO<Integer> removeResource(String id);
+    //删除菜单
+    JsonVO<String> removeMenu(int menu_id);
 
-    //修改资源
-    JsonVO<Integer> modifyResource(MenuDTO resourceDTO);
+    //修改菜单
+    JsonVO<String> modifyMenu(MenuDTO menuDTO);
+
+
 
     //获取资源名称树
     JsonVO<TreeNode<String>> getResourceNameTree();

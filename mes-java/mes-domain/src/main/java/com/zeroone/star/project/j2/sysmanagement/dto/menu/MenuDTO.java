@@ -16,33 +16,33 @@ import java.util.Date;
 @ApiOperation("系统管理数据对象")
 public class MenuDTO {
 
-    //资源id
-    @ApiModelProperty(value = "资源id",example = "1")
+    //菜单ID
+    @ApiModelProperty(value = "菜单ID",example = "1")
     private String menu_id;
 
 
-    //资源名称
-    @ApiModelProperty(value = "资源名称",example = "部门管理")
+    //菜单名称
+    @ApiModelProperty(value = "菜单名称",example = "部门管理")
     private String menu_name;
 
-    //父级id
-    @ApiModelProperty(value = "父级id",example = "1")
-    private Integer parent_id;
+    //父菜单ID
+    @ApiModelProperty(value = "父级ID",example = "1")
+    private String parent_id;
 
-    //顺序
-    @ApiModelProperty(value = "顺序",example = "1")
+    //显示顺序
+    @ApiModelProperty(value = "显示顺序",example = "1")
     private Integer order_num;
 
-    //资源路径
-    @ApiModelProperty(value = "资源路径",example = "ip")
+    //路由地址
+    @ApiModelProperty(value = "路由地址",example = "ip")
     private String path;
 
     //组件路径
     @ApiModelProperty(value = "组件路径",example = "ip")
     private String component;
 
-    //查询参数
-    @ApiModelProperty(value = "查询参数",example = "ip")
+    //路由参数
+    @ApiModelProperty(value = "路由参数",example = "ip")
     private String query;
 
     //是否外链
@@ -57,8 +57,8 @@ public class MenuDTO {
     @ApiModelProperty(value = "菜单类型",example = "目录")
     private String menu_type;
 
-    //visible
-    @ApiModelProperty(value = "visible",example = "0")
+    //菜单状态
+    @ApiModelProperty(value = "菜单状态",example = "0")
     private char visible;
 
     //菜单状态
@@ -69,11 +69,11 @@ public class MenuDTO {
     @ApiModelProperty(value = "权限标识",example = "0")
     private String perms;
 
-    //图标
-    @ApiModelProperty(value = "图标",example = "0")
+    //菜单图标
+    @ApiModelProperty(value = "菜单图标",example = "0")
     private String icon;
 
-    //创建人
+    //创建着
     @ApiModelProperty(value = "创建人",example = "0")
     private String create_by;
 
@@ -81,11 +81,15 @@ public class MenuDTO {
     @ApiModelProperty(value = "创建时间",example = "0")
     private Date create_time;
 
-    //修改人
-    @ApiModelProperty(value = "修改人",example = "0")
+    //更新者
+    @ApiModelProperty(value = "更新者人",example = "0")
     private String update_by;
 
-    //修改时间
-    @ApiModelProperty(value = "修改时间",example = "0")
+    //更新时间
+    @ApiModelProperty(value = "更新时间",example = "0")
     private Date update_time;
+
+    //备注
+    @ApiModelProperty(value = "备注",example = "0")
+    private String remark;
 }
