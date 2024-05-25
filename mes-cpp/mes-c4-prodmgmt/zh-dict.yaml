@@ -15,3 +15,34 @@
    feedback_time: 报工时间
    record_id: 记录id
    quantity_uncheck: 待检测质量
+ moren:
+   workstation_name: 默认工作站名称
+   feedback_type: 自行报工
+   workorder_code: 默认生产工单编号
+   item_code: 默认产品物料编码
+   item_name: 默认产品物料名称
+   user_name: 默认报工人
+   record_user: 默认记录人
+   status: "默认状态 0正常 1停用" 
+   specification: 默认规格型号
+   quantity_feedback: 默认报工数量
+   feedback_time: 默认报工时间
+   record_id: 默认记录id
+   quantity_uncheck: 待检测质量
+ add:
+   text: 增加功能
+   feedback_type: 报工类型
+   feedback_code: 生产工单
+   task_code: 生产任务
+   product_code: 产号编码
+   product_name: 产品名称
+   unit_of_measure: 单位
+   product_spc: 规格类型
+   quantity_feedback: 报工数量
+   quantity_uncheck: 待检测数量
+   feedback_time: 报工时间
+   remark: 备注
+   nick_nameA: 报工人
+   nick_nameB: 审核人
+ xg:
+    test: 修改功能  

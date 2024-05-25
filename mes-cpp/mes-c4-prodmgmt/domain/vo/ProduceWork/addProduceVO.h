@@ -1,8 +1,9 @@
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2022/10/25 10:58:42
+ @Date: 2023/09/18 14:46:10
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,20 +17,23 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#include "stdafx.h"
-#include "ProController.h"
+#ifndef _ADDPROEVO_H_
+#define _ADDPROEVO_H_
 
-ProduceTableJsonVO::Wrapper ProController::execPworkTable(const PworkQery::Wrapper& query)
-{
-	return ProduceTableJsonVO::Wrapper();
-}
+#include "../../GlobalInclude.h"
+#include "../../dto/ProduceWork/PworkDTO.h"
 
-Uint64JsonVO::Wrapper ProController::execAddtTable(const PworkTableDTO::Wrapper& dto)
+#include OATPP_CODEGEN_BEGIN(DTO)
+
+/**
+ * 定义一个列表显示生产报工
+ */
+class addProduceJsonVO : public JsonVO<AddPworkTableDTO::Wrapper>
 {
-	return Uint64JsonVO::Wrapper();
-}
-//
-Uint64JsonVO::Wrapper ProController::execModifySample(const treansformProduceDTO::Wrapper& dto)
-{
-	return Uint64JsonVO::Wrapper();
-}
+	DTO_INIT(addProduceJsonVO, JsonVO<AddPworkTableDTO::Wrapper>);
+
+};
+
+#include OATPP_CODEGEN_END(DTO)
+
+#endif // !_PROEVO_H_
