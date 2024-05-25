@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 workstation:
  fields:
   workstationId: 工作站ID
@@ -31,3 +32,14 @@ post:
   summary: 新增一条岗位数据
     
   
+=======
+wf_for_ws:
+ fields:
+  typename: 类型名称
+  account: 数量
+ post:
+  summary: 添加资源
+ get:
+  summary: 获得资源
+daoju: 刀具
+>>>>>>> origin/c1-workstation-Hoowtph

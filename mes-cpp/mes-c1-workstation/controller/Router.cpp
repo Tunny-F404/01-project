@@ -1,24 +1,7 @@
-/*
- Copyright Zero One Star. All rights reserved.
-
- @Author: awei
- @Date: 2022/12/03 14:58:34
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
-	  https://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
-*/
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include"controller/WorkStation/GetWorkStationListController.h"
 #include"controller/WorkStation/AddWorkStationController.h"
@@ -28,6 +11,10 @@
 =======
 #include "humanresource/HumanResourceListController.h"
 >>>>>>> origin/c1-workstation-chunyang
+=======
+#include "add-wf-for-ws/AddWorkFixtureForWorkStationController.h"
+#include "get-wf-for-ws/GetWorkFixtureForWorkStationController.h"
+>>>>>>> origin/c1-workstation-Hoowtph
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -61,6 +48,7 @@ void Router::initRouter()
 
 	//#TIP :系统扩展路由定义，写在这个后面
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ROUTER_SIMPLE_BIND(GetWorkStationListController); 
 	ROUTER_SIMPLE_BIND(AddWorkStationController);
 	ROUTER_SIMPLE_BIND(ModifyWorkStationController);
@@ -69,6 +57,10 @@ void Router::initRouter()
 =======
 	ROUTER_SIMPLE_BIND(HumanResourceListController);
 >>>>>>> origin/c1-workstation-chunyang
+=======
+	ROUTER_SIMPLE_BIND(AddWorkFixtureForWorkStationController);
+	ROUTER_SIMPLE_BIND(GetWorkFixtureForWorkStationController);
+>>>>>>> origin/c1-workstation-Hoowtph
 }
 
 #ifdef HTTP_SERVER_DEMO
@@ -80,7 +72,7 @@ void Router::createSampleRouter()
 	ROUTER_SIMPLE_BIND(UserController);
 	// 绑定文件控制器
 	ROUTER_SIMPLE_BIND(FileController);
-	
+
 	// 绑定WebSocket控制器
 	router->addController(WSContorller::createShared());
 }
