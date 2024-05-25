@@ -1,6 +1,6 @@
 package com.zeroone.star.login.controller;
 
-import cn.hutool.core.bean.BeanUtil;
+import com.zeroone.star.login.service.CurrUserInfoService;
 import com.zeroone.star.login.service.IMenuService;
 import com.zeroone.star.login.service.OauthService;
 import com.zeroone.star.project.components.user.UserDTO;
@@ -9,11 +9,9 @@ import com.zeroone.star.project.constant.AuthConstant;
 import com.zeroone.star.project.dto.login.LoginDTO;
 import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
 import com.zeroone.star.project.j1.syslogin.vo.CurrentUserInfoVO;
-import com.zeroone.star.project.j1.syslogin.vo.CurrentUserMenuVO;
 import com.zeroone.star.project.login.LoginApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
-import com.zeroone.star.project.vo.login.LoginVO;
 import com.zeroone.star.project.vo.login.MenuTreeVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -82,6 +80,12 @@ public class LoginController implements LoginApis {
         return null;
     }
 
+
+    /**
+     * 作者： j1小组--照
+     */
+    @Resource
+    CurrUserInfoService currUserInfoService;
     @ApiOperation(value = "获取当前用户")
     @GetMapping("current-user")
     @Override
@@ -95,26 +99,20 @@ public class LoginController implements LoginApis {
         if (currentUser == null) {
             return JsonVO.fail(null);
         } else {
-            //TODO:这里需要根据业务逻辑接口，重新实现
-            CurrentUserInfoVO vo = new CurrentUserInfoVO();
-            BeanUtil.copyProperties(currentUser, vo);
-            return JsonVO.success(vo);
+            CurrentUserInfoVO currentUserInfo = currUserInfoService.getCurrentUserInfo(currentUser);
+            return JsonVO.success(currentUserInfo);
         }
     }
-
     @Resource
     IMenuService menuService;
-
     @ApiOperation(value = "获取菜单")
     @GetMapping("get-menus")
     @Override
-    public JsonVO<List<CurrentUserMenuVO>> getMenus(Integer userId) throws Exception {
-        return null;
-//        //TODO:未实现根据实际数据库设计业务逻辑，下面逻辑属于示例逻辑
-//        //1 获取当前用户
-//        UserDTO currentUser = userHolder.getCurrentUser();
-//        //2 获取当前用户拥有的菜单
-//        List<CurrentUserMenuVO> menus = menuService.listMenuByRoleName(currentUser.getRoles());
-//        return JsonVO.success(menus);
+    public JsonVO<List<MenuTreeVO>> getMenus() throws Exception {
+        //获取当前用户
+        UserDTO currentUser = userHolder.getCurrentUser();
+        //获取当前用户拥有的菜单
+        List<MenuTreeVO> menus = menuService.listMenuByRoleName(currentUser.getRoles());
+        return JsonVO.success(menus);
     }
 }

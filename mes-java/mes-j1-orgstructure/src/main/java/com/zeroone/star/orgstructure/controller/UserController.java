@@ -1,5 +1,6 @@
 package com.zeroone.star.orgstructure.controller;
 
+import com.zeroone.star.orgstructure.service.serviceImpl.ServiceImpl;
 import com.zeroone.star.project.j1.orgstructure.dto.PageDTO;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.zeroone.star.project.j1.orgstructure.dto.user.*;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,6 +26,9 @@ import java.util.List;
 @RequestMapping("/user")
 @Api(tags = "用户管理")
 public class UserController implements UserApis {
+    @Resource
+    ServiceImpl service;
+
     @Override
     @GetMapping("/query-user-table")
     @ApiOperation("查询用户列表")
@@ -39,23 +44,30 @@ public class UserController implements UserApis {
     }
 
 
-@PutMapping("setUserStatus")
+    @PutMapping("setUserStatus")
 	@ApiOperation("设置用户状态")
 	@Override
-	public JsonVO setUserStatus(UpdateUserStatusDTO userDTO) {
-		return null;
+	public JsonVO setUserStatus(UpdateUserStatusDTO userIdStatus) {
+        int flag = service.UpdateUserStatus(userIdStatus);
+        if (flag == 1) {
+            return JsonVO.success("恭喜！设置用户状态成功！");
+        }
+        return JsonVO.fail("抱歉！设置用户状态失败！");
 	}
-
 	@PutMapping("resetUserPassword")
 	@ApiOperation("重置用户密码")
 	@Override
-	public JsonVO resetUserPassword() {
-		return null;
+	public JsonVO resetUserPassword(Integer userId) {
+        int flag = service.UpdateUserPassword(userId);
+        if (flag == 1) {
+            return JsonVO.success("恭喜！重置用户密码成功！");
+        }
+        return JsonVO.fail("抱歉！重置用户密码失败！");
 	}
 
 
 
-@GetMapping("query-role-table")
+    @GetMapping("query-role-table")
     @ApiOperation(value = "查询角色列表")
     @Override
     public JsonVO<PageDTO<UserDTO>> queryRoleList(UserQuery userQuery){

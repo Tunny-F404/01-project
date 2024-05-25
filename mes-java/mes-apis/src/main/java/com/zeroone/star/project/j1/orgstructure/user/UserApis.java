@@ -31,12 +31,12 @@ public interface UserApis {
 	/**
 	 * 设置用户状态
 	 */
-	public JsonVO setUserStatus(UpdateUserStatusDTO userDTO);
+	public JsonVO setUserStatus(UpdateUserStatusDTO userIdStatus);
 
 	/**
 	 * 重置用户密码
 	 */
-	public JsonVO resetUserPassword();
+	public JsonVO resetUserPassword(Integer userId);
 
 
 /**
