@@ -18,15 +18,15 @@ if (query->pname) { \
 } \
 if (query->prname) { \
 	sql << " AND prname=?"; \
-	SQLPARAMS_PUSH(params, "s", int, query->prname.getValue("")); \
+	SQLPARAMS_PUSH(params, "s", std::string, query->prname.getValue("")); \
 }\
 if (query->pdate) {\
 		sql << " AND pdate=?"; \
-		SQLPARAMS_PUSH(params, "s", int, query->pdate.getValue("")); \
+		SQLPARAMS_PUSH(params, "s", std::string, query->pdate.getValue("")); \
 }\
 if (query->pstatus) {\
 		sql << " AND pstatus=?"; \
-		SQLPARAMS_PUSH(params, "s", int, query->pstatus.getValue("")); \
+		SQLPARAMS_PUSH(params, "s", std::string, query->pstatus.getValue("")); \
 }\
 
 uint64_t ProductTableDAO::count(const ProductQuery::Wrapper & query)
