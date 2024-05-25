@@ -12,6 +12,13 @@
 class MachineryListQuery : public PageQuery
 {
 	DTO_INIT(MachineryListQuery, PageQuery);
+
+	// 计划ID
+	DTO_FIELD(UInt64, plan_id);
+	DTO_FIELD_INFO(plan_id) {
+		info->description = ZH_WORDS_GETTER("machinery-list.field.plan-code");
+	}
+
 };
 
 #include OATPP_CODEGEN_END(DTO)

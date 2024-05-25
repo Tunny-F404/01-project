@@ -34,6 +34,8 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(MachineryListPageJsonVO);
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
+		// 定义其他参数描述
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "plan_id", ZH_WORDS_GETTER("machinery-list.field.plan-id"), 207, true);
 	}
 	// 定义查询设备清单列表接口处理
 	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-list", queryMachineryList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -77,7 +79,7 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(MachineryPlanDetailsJsonVO);
 		// 定义其他参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "plan_id", ZH_WORDS_GETTER("machinery-plan.field.plan-id"), "207", true);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "plan_id", ZH_WORDS_GETTER("machinery-plan.field.plan-id"), 207, true);
 	}
 	// 定义查询设备清单列表接口处理
 	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-plan-details", queryMachineryPlanDetails, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -97,6 +99,8 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(MachinerySubjectPageJsonVO);
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
+		// 定义其他参数描述
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "plan_id", ZH_WORDS_GETTER("machinery-subject.field.plan-id"), 207, true);
 	}
 	// 定义查询点检/保养项目列表接口处理
 	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-subject", queryMachinerySubject, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
