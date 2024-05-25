@@ -58,7 +58,7 @@ Approval:
   draft: 草稿
   remark: 状态
   name: 审批相关
-  submi: 审批中
+  submi: 提交审批
   passed: 审批通过
   denied: 审批不通过
 

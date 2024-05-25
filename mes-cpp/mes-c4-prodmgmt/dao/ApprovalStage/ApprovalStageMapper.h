@@ -8,7 +8,7 @@
 /**
  * ÉóÅú×´Ì¬×Ö¶ÎÆ¥ÅäÓ³Éä
  */
-class SampleMapper : public Mapper<ApprovalStageDO>
+class ApprovalStageMapper : public Mapper<ApprovalStageDO>
 {
 public:
 	ApprovalStageDO mapper(ResultSet* resultSet) const override
