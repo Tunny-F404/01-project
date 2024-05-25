@@ -28,7 +28,7 @@ public class RoleListDTO {
 
 
     //角色权限字符串
-    @ApiModelProperty(value = "角色权限字符串", example = "1")
+    @ApiModelProperty(value = "角色权限字符串", example = "admin")
     private String roleKey;
 
     //显示顺序

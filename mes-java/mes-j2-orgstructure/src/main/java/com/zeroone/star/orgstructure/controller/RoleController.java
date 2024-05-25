@@ -1,16 +1,17 @@
 package com.zeroone.star.orgstructure.controller;
 
 
+import com.zeroone.star.orgstructure.service.IRoleService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleListDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RolePermissionsDTO;
-import com.zeroone.star.project.j2.orgstructure.query.role.RoleQuery;
 import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,18 +30,21 @@ import java.util.List;
 @RequestMapping("/orgstructure/role")
 @Api(tags = "角色控制器")
 public class RoleController implements RoleApis {
+
+    @Autowired
+    private IRoleService roleService;
     /**
      *
      * 获取角色名称列表
      * @author 天衍土豆
      * @return
      */
-
     @Override
     @GetMapping("query-roles")
     @ApiOperation("获取角色名称列表")
     public JsonVO<List<RoleListDTO>> queryRoles() {
-        return JsonVO.success(new ArrayList<RoleListDTO>());
+        List<RoleListDTO> result = roleService.listRoles();
+        return JsonVO.success(result);
     }
 
     /**
@@ -52,7 +56,8 @@ public class RoleController implements RoleApis {
     @GetMapping ("/query-page")
     @ApiOperation("获取角色列表(条件+分页)")
     public JsonVO<PageDTO<RoleListDTO>> queryRolePage(RoleConditionQuery condition) {
-        return JsonVO.success(new PageDTO<RoleListDTO>());
+        PageDTO<RoleListDTO> result = roleService.listPageRoles(condition);
+        return JsonVO.success(result);
     }
 
     /**
@@ -66,8 +71,6 @@ public class RoleController implements RoleApis {
     public JsonVO<RoleDTO> queryRole(@RequestParam Integer id) {
         return JsonVO.success(new RoleDTO());
     }
-
-
 
     /**
      * 设置数据权限回显

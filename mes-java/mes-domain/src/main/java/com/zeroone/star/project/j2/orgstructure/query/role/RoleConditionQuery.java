@@ -25,7 +25,7 @@ public class RoleConditionQuery extends PageQuery {
 
 
     //角色权限字符串
-    @ApiModelProperty(value = "角色权限字符串",example = "1")
+    @ApiModelProperty(value = "角色权限字符串",example = "admin")
     private String roleKey;
 
 
@@ -39,7 +39,7 @@ public class RoleConditionQuery extends PageQuery {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private String startTime;
 
-    @ApiModelProperty(value = "结束时间",example = "2022-04-07 00:29:31")
+    @ApiModelProperty(value = "结束时间",example = "2022-04-07")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private String endTime;
 
