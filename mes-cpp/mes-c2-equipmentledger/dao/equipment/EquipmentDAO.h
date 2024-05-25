@@ -21,7 +21,7 @@
 #define _EQUIPMENT_DAO_
 #include "BaseDAO.h"
 #include"../../domain/do/dv_machinery/dvMachineryDO.h"
-#include"../../domain/query/equipment/EquipmentQuery.h
+#include"../../domain/query/equipment/EquipmentQuery.h"
 /**
  * 示例表数据库操作实现
  */
@@ -32,8 +32,8 @@ public:
 	uint64_t count(const EquipmentQuery::Wrapper& query);
 	// 分页查询数据
 	list<dvMachineryDO> selectWithPage(const EquipmentQuery::Wrapper& query);
-	// 通过姓名查询数据
-	//list<SampleDO> selectByName(const string& name);
+	// 通过设备ID查询数据
+	list<dvMachineryDO> selectWithId(const EquipmentDetailQuery::Wrapper& query);
 	// 插入数据
 	//uint64_t insert(const SampleDO& iObj);
 	// 修改数据

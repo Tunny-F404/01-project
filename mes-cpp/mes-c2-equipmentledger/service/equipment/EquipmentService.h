@@ -22,13 +22,14 @@
 #define _EQUIPMENT_SERVICE_
 
 #include"../../domain/dto/equipment/EquipmentDTO.h"
-#include"../../domain/query/equipment/EquipmentQuery.h
+#include"../../domain/query/equipment/EquipmentQuery.h"
 class EquipmentService
 {
 public:
 	// 分页查询所有数据
 	EquipmentPageDTO::Wrapper listAll(const EquipmentQuery::Wrapper& query);
-	// 保存数据
+	// 获取设备详情
+	EquipmentDetailDTO::Wrapper getDetail(const EquipmentDetailQuery::Wrapper& query);
 	//uint64_t saveData(const SampleDTO::Wrapper& dto);
 	// 修改数据
 	//bool updateData(const SampleDTO::Wrapper& dto);

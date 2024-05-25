@@ -2,6 +2,7 @@
 #include "EquipmentService.h"
 #include"../../dao/equipment/EquipmentDAO.h"
 #include"../../domain/do/dv_machinery/dvMachineryDO.h"
+#include"../../domain/dto/equipment/EquipmentDTO.h"
 EquipmentPageDTO::Wrapper EquipmentService::listAll(const EquipmentQuery::Wrapper& query)
 {
 	// 构建返回对象
@@ -25,14 +26,49 @@ EquipmentPageDTO::Wrapper EquipmentService::listAll(const EquipmentQuery::Wrappe
 	// 将DO转换成DTO
 	for (dvMachineryDO sub : result)
 	{
-		auto dto = SampleDTO::createShared();
-		// 		dto->id = sub.getId();
-		// 		dto->name = sub.getName();
-		// 		dto->sex = sub.getSex();
-		// 		dto->age = sub.getAge();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, id, Id, name, Name, sex, Sex, age, Age)
+		auto dto = EquipmentDTO::createShared();
+		dto->eId = sub.getMachineryId();
+		dto->eCode = sub.getMachineryCode();
+		dto->eName = sub.getMachineryName();
+		dto->brand = sub.getMachineryBrand();
+		dto->spec = sub.getMachinerySpec();
+		dto->workshopId = sub.getWorkshopId();
+		dto->workshopCode = sub.getWorkshopCode();
+		dto->workshopName = sub.getWorkshopName();
+		dto->status = sub.getStatus();
+		dto->createtime = sub.getCreateTime();
 			pages->addData(dto);
 
 	}
 	return pages;
 }
+
+EquipmentDetailDTO::Wrapper EquipmentService::getDetail(const EquipmentDetailQuery::Wrapper& query)
+{
+	auto one = EquipmentDetailDTO::createShared();
+	EquipmentDAO dao;
+	//查询数据
+	list<dvMachineryDO> result = dao.selectWithId(query);
+	
+	// 将DO转换成DTO
+	for (dvMachineryDO sub : result)
+	{
+		auto dto = EquipmentDetailDTO::createShared();
+		dto->eId = sub.getMachineryId();
+		dto->eCode = sub.getMachineryCode();
+		dto->eName = sub.getMachineryName();
+		dto->brand = sub.getMachineryBrand();
+		dto->tId = sub.getMachineryTypeId();
+		dto->tCode = sub.getMachineryTypeCode();
+		dto->tName = sub.getMachineryTypeName();
+		dto->spec = sub.getMachinerySpec();
+		dto->workshopId = sub.getWorkshopId();
+		dto->workshopCode = sub.getWorkshopCode();
+		dto->workshopName = sub.getWorkshopName();
+		dto->note = sub.getRemark();
+		
+		return dto;
+	}
+	return {};
+}
+

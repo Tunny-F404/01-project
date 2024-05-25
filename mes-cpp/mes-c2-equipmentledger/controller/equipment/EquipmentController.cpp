@@ -19,29 +19,30 @@
 
 #include "stdafx.h"
 #include "EquipmentController.h"
+#include"service/equipment/EquipmentService.h"
 
 EquipmentPageJsonVO::Wrapper EquipmentController::execEquipment(const EquipmentQuery::Wrapper& query)
 {
-	return {};
+	// 定义一个Service
+	EquipmentService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = EquipmentPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 EquipmentDetailJsonVO::Wrapper EquipmentController::execEquipmentDetail(const EquipmentDetailQuery::Wrapper& query)
 {
-	auto res = EquipmentDetailJsonVO::createShared();
-	auto equipmentDetail = EquipmentDetailDTO::createShared();
-	
-	equipmentDetail->eCode = "123";
-	equipmentDetail->brand = "123";
-	equipmentDetail->createtime = "2014";
-	equipmentDetail->eId = 1;
-	equipmentDetail->eName = "123";
-	equipmentDetail->note = "123";
-	equipmentDetail->spec = "123";
-	equipmentDetail->status = "123";
-	equipmentDetail->tName = "123";
-	
-	res->success(equipmentDetail);
-	return res;
+	// 定义一个Service
+	EquipmentService service;
+	// 查询数据
+	auto result = service.getDetail(query);
+	// 响应结果
+	auto jvo = EquipmentDetailJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 Uint64JsonVO::Wrapper EquipmentController::execAddEquipment(const addEquipmentDTO::Wrapper& dto)
