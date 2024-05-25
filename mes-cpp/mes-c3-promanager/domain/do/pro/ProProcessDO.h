@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _PRO_PROCESS_
-#define _PRO_PROCESS_
+#ifndef _PRO_PROCESS_DO_
+#define _PRO_PROCESS_DO_
 
 #include "../../Macros.h"
 #include <string>
