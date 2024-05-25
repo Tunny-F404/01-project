@@ -17,6 +17,7 @@ public class ClientUpdateDTO {
      */
     @ApiModelProperty(value = "客户ID", example = "1")
     private Long clientId;
+
     /**
      * 客户编码
      */
