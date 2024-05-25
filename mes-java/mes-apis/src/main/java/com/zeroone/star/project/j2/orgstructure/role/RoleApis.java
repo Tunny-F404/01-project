@@ -51,7 +51,7 @@ public interface RoleApis {
      * 设置数据权限
      * @author 天衍土豆
      */
-    public JsonVO<List<RoleDTO>> modifyRole(RolePermissionsQuery rolePermissionsQuery);
+    public JsonVO<String> modifyRole(RolePermissionsQuery rolePermissionsQuery);
 
     /**
      * 添加角色

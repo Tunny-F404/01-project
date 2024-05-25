@@ -115,6 +115,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
     public int updatePermissions(RolePermissionsQuery rolePermissionsQuery) {
         RoleDO roleDO= new RoleDO();
         BeanUtils.copyProperties(rolePermissionsQuery,roleDO);
+        roleDO.setUpdateTime(LocalDateTime.now());
         int rows = baseMapper.updateById(roleDO);
         return rows;
     }

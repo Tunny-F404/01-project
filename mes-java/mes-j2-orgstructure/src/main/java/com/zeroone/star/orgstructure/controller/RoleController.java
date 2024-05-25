@@ -94,12 +94,12 @@ public class RoleController implements RoleApis {
     @Override
     @PutMapping("modify-role")
     @ApiOperation("设置数据权限")
-    public JsonVO modifyRole(@RequestBody RolePermissionsQuery rolePermissionsQuery) {
+    public JsonVO<String> modifyRole(@RequestBody RolePermissionsQuery rolePermissionsQuery) {
         int i = roleService.updatePermissions(rolePermissionsQuery);
         if (i<0){
             return JsonVO.fail("修改失败");
         }
-        return JsonVO.success(null);
+        return JsonVO.success("修改成功");
     }
     /**
      * 添加角色
