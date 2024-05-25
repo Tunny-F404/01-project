@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "../../GlobalInclude.h"
-#include "../../dto/WorkFixtureDTO/WorkFixtureDTO.h"
+#include "../../dto/WorkFixture/WorkFixtureDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 

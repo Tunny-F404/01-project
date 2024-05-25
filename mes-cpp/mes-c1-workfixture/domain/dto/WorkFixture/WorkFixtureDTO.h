@@ -20,11 +20,11 @@ class WorkFixtureTableDTO : public oatpp::DTO
 	// 型号
 	API_DTO_FIELD(String, spec, ZH_WORDS_GETTER("workfixture.fields.spec"), false, "");
 	// 工装夹具类型ID
-	API_DTO_FIELD(Int64, toolTypeId, ZH_WORDS_GETTER("workfixture.fields.type.id"), true, 1);
+	API_DTO_FIELD(Int64, toolTypeId, ZH_WORDS_GETTER("workfixture.type..fields.id"), true, 1);
 	// 工装夹具类型编号
-	API_DTO_FIELD(String, toolTypeCode, ZH_WORDS_GETTER("workfixture.fields.type.code"), true, "");
+	API_DTO_FIELD(String, toolTypeCode, ZH_WORDS_GETTER("workfixture.type.fields.code"), true, "");
 	// 工装夹具类型名称
-	API_DTO_FIELD(String, toolTypeName, ZH_WORDS_GETTER("workfixture.fields.type.name"), true, "");
+	API_DTO_FIELD(String, toolTypeName, ZH_WORDS_GETTER("workfixture.type.fields.name"), true, "");
 	// 数量（库存）
 	API_DTO_FIELD(Int32, quantity, ZH_WORDS_GETTER("workfixture.fields.quantity"), true, 0);
 };
@@ -48,9 +48,9 @@ class WorkFixtureDetailDTO : public WorkFixtureTableDTO
 	// 保养维护类型
 	API_DTO_FIELD(String, maintenType, ZH_WORDS_GETTER("workfixture.fields.mtype"), false, "");
 	// 下次保养周期
-	API_DTO_FIELD(Int32, nextMaintenPeriod, ZH_WORDS_GETTER("workfixture.fields.mperiod"), false, 0);
+	API_DTO_FIELD(Int32, nextMaintenPeriod, ZH_WORDS_GETTER("workfixture.fields.nmperiod"), false, 0);
 	// 下次保养日期
-	API_DTO_FIELD(String, nextMaintenDate, ZH_WORDS_GETTER("workfixture.fields.mdate"), false, "");
+	API_DTO_FIELD(String, nextMaintenDate, ZH_WORDS_GETTER("workfixture.fields.nmdate"), false, "");
 	// 状态
 	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("workfixture.fields.status"), false, "");
 	// 备注

@@ -14,8 +14,10 @@ class WorkFixtureQuery : public PageQuery
 	API_DTO_FIELD_DEFAULT(String, toolCode, ZH_WORDS_GETTER("workfixture.fields.code"));
 	// 工装夹具名称
 	API_DTO_FIELD_DEFAULT(String, toolName, ZH_WORDS_GETTER("workfixture.fields.name"));
-	// 工装夹具类型
-	API_DTO_FIELD_DEFAULT(String, toolType, ZH_WORDS_GETTER("workfixture.fields.type"));
+	// 工装夹具类型ID，编码，名称
+	API_DTO_FIELD_DEFAULT(String, toolTypeId, ZH_WORDS_GETTER("workfixture.type.fields.id"));
+	API_DTO_FIELD_DEFAULT(String, toolTypeCode, ZH_WORDS_GETTER("workfixture.type.fields.code"));
+	API_DTO_FIELD_DEFAULT(String, toolTypeName, ZH_WORDS_GETTER("workfixture.type.fields.name"));
 	// 品牌
 	API_DTO_FIELD_DEFAULT(String, brand, ZH_WORDS_GETTER("workfixture.fields.brand"));
 	// 型号
