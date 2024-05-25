@@ -19,8 +19,12 @@ class WorkFixtureTableDTO : public oatpp::DTO
 	API_DTO_FIELD(String, brand, ZH_WORDS_GETTER("workfixture.fields.brand"), false, "");
 	// 型号
 	API_DTO_FIELD(String, spec, ZH_WORDS_GETTER("workfixture.fields.spec"), false, "");
-	// 工装夹具类型
-	API_DTO_FIELD(String, toolType, ZH_WORDS_GETTER("workfixture.fields.type"), true, "");
+	// 工装夹具类型ID
+	API_DTO_FIELD(Int64, toolTypeId, ZH_WORDS_GETTER("workfixture.fields.type.id"), true, 1);
+	// 工装夹具类型编号
+	API_DTO_FIELD(String, toolTypeCode, ZH_WORDS_GETTER("workfixture.fields.type.code"), true, "");
+	// 工装夹具类型名称
+	API_DTO_FIELD(String, toolTypeName, ZH_WORDS_GETTER("workfixture.fields.type.name"), true, "");
 	// 数量（库存）
 	API_DTO_FIELD(Int32, quantity, ZH_WORDS_GETTER("workfixture.fields.quantity"), true, 0);
 };

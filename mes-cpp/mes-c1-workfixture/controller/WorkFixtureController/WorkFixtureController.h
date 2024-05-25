@@ -26,7 +26,9 @@ public:
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(String, "toolCode", ZH_WORDS_GETTER("workfixture.fields.code"), "", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "toolName", ZH_WORDS_GETTER("workfixture.fields.name"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "toolType", ZH_WORDS_GETTER("workfixture.fields.type"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(Int64, "toolTypeId", ZH_WORDS_GETTER("workfixture.fields.type.id"), 1, false);
+		API_DEF_ADD_QUERY_PARAMS(String, "toolTypeCode", ZH_WORDS_GETTER("workfixture.fields.type.code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "toolTypeName", ZH_WORDS_GETTER("workfixture.fields.type.name"), "", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "brand", ZH_WORDS_GETTER("workfixture.fields.brand"), "", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "spec", ZH_WORDS_GETTER("workfixture.fields.spec"), "", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("workfixture.fields.status"), "", false);
@@ -57,7 +59,9 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 		API_DEF_ADD_PATH_PARAMS(String, "toolCode", ZH_WORDS_GETTER("workfixture.fields.code"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "toolName", ZH_WORDS_GETTER("workfixture.fields.name"), "", false);
-		API_DEF_ADD_PATH_PARAMS(String, "toolType", ZH_WORDS_GETTER("workfixture.fields.type"), "", false);
+		API_DEF_ADD_PATH_PARAMS(Int64, "toolTypeId", ZH_WORDS_GETTER("workfixture.fields.type.id"), 1, false);
+		API_DEF_ADD_PATH_PARAMS(String, "toolTypeCode", ZH_WORDS_GETTER("workfixture.fields.type.code"), "", false);
+		API_DEF_ADD_PATH_PARAMS(String, "toolTypeName", ZH_WORDS_GETTER("workfixture.fields.type.name"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "brand", ZH_WORDS_GETTER("workfixture.fields.brand"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "spec", ZH_WORDS_GETTER("workfixture.fields.spec"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "status", ZH_WORDS_GETTER("workfixture.fields.status"), "", false);
@@ -81,7 +85,9 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 		API_DEF_ADD_PATH_PARAMS(String, "toolCode", ZH_WORDS_GETTER("workfixture.fields.code"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "toolName", ZH_WORDS_GETTER("workfixture.fields.name"), "", false);
-		API_DEF_ADD_PATH_PARAMS(String, "toolType", ZH_WORDS_GETTER("workfixture.fields.type"), "", false);
+		API_DEF_ADD_PATH_PARAMS(Int64, "toolTypeId", ZH_WORDS_GETTER("workfixture.fields.type.id"), 1, false);
+		API_DEF_ADD_PATH_PARAMS(String, "toolTypeCode", ZH_WORDS_GETTER("workfixture.fields.type.code"), "", false);
+		API_DEF_ADD_PATH_PARAMS(String, "toolTypeName", ZH_WORDS_GETTER("workfixture.fields.type.name"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "brand", ZH_WORDS_GETTER("workfixture.fields.brand"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "spec", ZH_WORDS_GETTER("workfixture.fields.spec"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "status", ZH_WORDS_GETTER("workfixture.fields.status"), "", false);
@@ -111,7 +117,9 @@ public:
 		// 定义其他查询参数描述
 		API_DEF_ADD_PATH_PARAMS(String, "toolCode", ZH_WORDS_GETTER("workfixture.fields.code"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "toolName", ZH_WORDS_GETTER("workfixture.fields.name"), "", false);
-		API_DEF_ADD_PATH_PARAMS(String, "toolType", ZH_WORDS_GETTER("workfixture.fields.type"), "", false);
+		API_DEF_ADD_PATH_PARAMS(Int64, "toolTypeId", ZH_WORDS_GETTER("workfixture.fields.type.id"), 1, false);
+		API_DEF_ADD_PATH_PARAMS(String, "toolTypeCode", ZH_WORDS_GETTER("workfixture.fields.type.code"), "", false);
+		API_DEF_ADD_PATH_PARAMS(String, "toolTypeName", ZH_WORDS_GETTER("workfixture.fields.type.name"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "brand", ZH_WORDS_GETTER("workfixture.fields.brand"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "spec", ZH_WORDS_GETTER("workfixture.fields.spec"), "", false);
 		API_DEF_ADD_PATH_PARAMS(String, "status", ZH_WORDS_GETTER("workfixture.fields.status"), "", false);
