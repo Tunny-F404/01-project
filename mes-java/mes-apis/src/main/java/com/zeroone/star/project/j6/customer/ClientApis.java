@@ -8,6 +8,7 @@ import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.j6.customer.query.CustomExportQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 public interface ClientApis {
@@ -24,7 +25,7 @@ public interface ClientApis {
     JsonVO<PageDTO<ClientDTO>> queryAll(ClientQuery query);
 
     // 根据id查询客户
-    JsonVO<ClientDTO> queryById(Long id);
+    JsonVO<ClientDTO> queryById(@Min(value = 1, message = "id的最小值为1") Long id);
 
     /**
      * @param customExport 导出条件

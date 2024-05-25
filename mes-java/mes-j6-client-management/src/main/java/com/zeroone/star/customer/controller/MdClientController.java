@@ -75,7 +75,7 @@ public class MdClientController implements ClientApis {
     @ApiOperation("根据ID查询客户")
     @GetMapping("query-one/{id}")
     @Override
-    public JsonVO<ClientDTO> queryById(@Min(value = 1, message = "id的最小值为1") @PathVariable Long id) {
+    public JsonVO<ClientDTO> queryById(@PathVariable Long id) {
         ClientDTO client = clientService.getById(id);
         if (client == null) {
             return JsonVO.fail(null);
