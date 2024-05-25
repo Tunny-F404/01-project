@@ -18,18 +18,18 @@
  limitations under the License.
 */
 #ifndef _EQUIPMENTTYPETREEVO_H_
-#define _EQUIPMENTTYPETREEVO_H__H_
-#include "../../GlobalInclude.h"
-#include "../../dto/user/MenuDTO.h"
+#define _EQUIPMENTTYPETREEVO_H_
+#include "../GlobalInclude.h"
+#include "../dto/EquipmentTypeDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 定义一个示例菜单显示JsonVO对象，用于响应给前端
+ * 定义一个设备类型显示JsonVO对象，用于响应给前端
  */
-class EquipmentTypeTreeVO : public JsonVO<List<MenuDTO::Wrapper>>
+class EquipmentTypeTreeVO : public JsonVO<List<EquipmentTypeDTO::Wrapper>>
 {
-	DTO_INIT(EquipmentTypeTreeVO, JsonVO<List<MenuDTO::Wrapper>>);
+	DTO_INIT(EquipmentTypeTreeVO, JsonVO<List<EquipmentTypeDTO::Wrapper>>);
 public:
 	// 在构造函数中实例化data列表
 	EquipmentTypeTreeVO() {

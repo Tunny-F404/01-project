@@ -20,7 +20,7 @@
 #ifndef _EQUIPMENTTYPEDTO_H_
 #define _EQUIPMENTTYPEDTO_H_
 
-#include "../../GlobalInclude.h"
+#include "../GlobalInclude.h"
 #include "tree/TreeNode.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
@@ -31,18 +31,20 @@
 class EquipmentTypeDTO : public oatpp::DTO, public TreeNode
 {
 	DTO_INIT(EquipmentTypeDTO, DTO);
-	// 菜单名称
-	API_DTO_FIELD_DEFAULT(String, text, ZH_WORDS_GETTER("user.field.menuname"));
-	// 图标名称
-	API_DTO_FIELD_DEFAULT(String, icon, ZH_WORDS_GETTER("user.field.menuicon"));
-	// 路由地址
-	API_DTO_FIELD_DEFAULT(String, href, ZH_WORDS_GETTER("user.field.menuhref"));
-	// 子菜单
-	API_DTO_FIELD(List<MenuDTO::Wrapper>, children, ZH_WORDS_GETTER("user.field.menusub"), false, {});
+	// 设备类型编码
+	API_DTO_FIELD_DEFAULT(String, equipmentTypeCode, ZH_WORDS_GETTER("equipment.equipmentDto.equipmentTypeCode"));
+	// 设备类型名称
+	API_DTO_FIELD_DEFAULT(String, equipmentTypeName, ZH_WORDS_GETTER("equipment.equipmentDto.equipmentTypeName"));
+	// 是否启用
+	API_DTO_FIELD(Int32, isUse, ZH_WORDS_GETTER("equipment.equipmentDto.isUse"),  false, 0);
+	// 备注
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("equipment.equipmentDto.remark"));
+	// 子设备列表
+	API_DTO_FIELD(List<EquipmentTypeDTO::Wrapper>, children, ZH_WORDS_GETTER("equipment.equipmentDto.child"), false, {});
 public:
 	void addChild(shared_ptr<TreeNode> child) override
 	{
-		children->push_back(Wrapper(dynamic_pointer_cast<MenuDTO>(child), Wrapper::Class::getType()));
+		children->push_back(Wrapper(dynamic_pointer_cast<EquipmentTypeDTO>(child), Wrapper::Class::getType()));
 	}
 };
 

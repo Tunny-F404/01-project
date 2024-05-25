@@ -22,6 +22,7 @@
 
 #include "ApiHelper.h"
 #include "ServerInfo.h"
+#include "../../domain/vo/EquipmentTypeTreeVO.h"
 
 
 // 0 定义API控制器使用宏
@@ -75,25 +76,15 @@ public:
 		return createResponse(Status::CODE_200, "OK");
 	}
 	
-	//获取设备类型名称树
-	// 3.1 定义查询接口描述
-	ENDPOINT_INFO(getEquipmentTypeTree) {
-		auto udef =
-			//定义接口标题
-			API_DEF_ADD_TITLE(ZH_WORDS_GETTER("equipment.getEquipmentPage.summary"));
-		    //定义分页描述
-			API_DEF_ADD_PAGE_PARAMS();
-			//定义响应描述
-			API_DEF_ADD_RSP_JSON(StringJsonVO);
+	// 定义查询设备类型名称列表接口端点描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("equipment.getEquipmentTypeTree.summary"), getEquipmentTypeTree, EquipmentTypeTreeVO::Wrapper);
+	// 定义查询设备类型名称列表接口端点处理
+	API_HANDLER_ENDPOINT_NOPARAM_AUTH(API_M_GET, "/equipment/getEquipmentTypeTree", getEquipmentTypeTree, executeGetEquipmentTypeTree(authObject->getPayload()))
 
-	ENDPOINT(API_M_GET, "/equipment/getEquipmentTypeTree", getEquipmentTypeTree,executeGetEquipmentTypeTree(authObject->getPayload())){
-	}
-	
-	}
 private:
 	//StringJsonVO::Wrapper execteGetEquipmentPage(const PageQuery::Wrapper& query)
 	//获取设备类型名称树
-	MenuJsonVO::Wrapper executeGetEquipmentTypeTree(const PayloadDTO& payload);
+	EquipmentTypeTreeVO::Wrapper executeGetEquipmentTypeTree(const PayloadDTO& payload);
 };
 
 // 0 取消API控制器使用宏
