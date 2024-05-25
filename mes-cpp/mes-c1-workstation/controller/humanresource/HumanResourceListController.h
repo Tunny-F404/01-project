@@ -89,7 +89,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "recordid", ZH_WORDS_GETTER("post.fields.recordid"), 1, true);
 	}
 	// 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/humanresource/modify-hunmanresource", removeHumanResource, PATH(UInt64, id), execRemoveHumanResource(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/humanresource/remove-hunmanresource", removeHumanResource, PATH(UInt64, id), execRemoveHumanResource(id));
 
 
 
