@@ -61,6 +61,18 @@ public class MdUnitMeasureController {
     }
 
     /**
+     * 根据单位ID获取单位信息
+     * @param measureId
+     * @return
+     */
+    @ApiOperation(value = "根据单位ID获取单位信息")
+    @GetMapping(value = "{measureId}")
+    public JsonVO<MdUnitMeasure> getInfo(@PathVariable("measureId") Long measureId) {
+        MdUnitMeasure mdUnitMeasure = iMdUnitMeasureService.getById(measureId);
+        return JsonVO.success(mdUnitMeasure);
+    }
+
+    /**
      * 查询单位分页列表
      * @param unitMeasureDTO 单位测量模型，用于传递查询条件,如果为空，返回所有数据
      * @param pageIndex 请求的页码，默认开始为1
