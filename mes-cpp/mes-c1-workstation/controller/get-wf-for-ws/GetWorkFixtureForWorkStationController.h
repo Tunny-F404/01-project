@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 
 #ifndef _GETWORKSTATIONLIST_CONTROLLER_H_
 #define _GETWORKSTATIONLIST_CONTROLLER_H_
