@@ -18,7 +18,7 @@ import java.util.List;
  * @author qwert
  * @version 1.0.0
  */
-public interface OrderApis {
+public interface ShiftApis {
     /**
      * 根据排班计划id来查询班次计划列表
      * @param shiftPlanQuery 排班计划id，具体的排班计划表的id，

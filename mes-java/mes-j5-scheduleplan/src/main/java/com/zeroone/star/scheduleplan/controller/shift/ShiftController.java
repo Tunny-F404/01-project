@@ -5,7 +5,7 @@ import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanAddDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanModifyDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
-import com.zeroone.star.project.j5.scheduleplan.shift.OrderApis;
+import com.zeroone.star.project.j5.scheduleplan.shift.ShiftApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.scheduleplan.service.ICalShiftService;
 import io.swagger.annotations.Api;
@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("sch-manage/sch-plan/order")
 @Api(tags = "班次接口")
-public class OrderController implements OrderApis {
+public class ShiftController implements ShiftApis {
     @Resource
     ICalShiftService calShiftService;
     @GetMapping("/list")
