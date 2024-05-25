@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.9",
+    "@vueuse/core": "^10.9.0",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^0.27.2",
@@ -29,15 +30,18 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
+    "@types/lodash": "^4.17.4",
+    "@types/lodash-es": "^4.17.12",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/eslint-config-prettier": "^7.0.0",
     "eslint": "9.3.0",
     "eslint-plugin-vue": "^9.3.0",
     "less": "^4.2.0",
-    "prettier": "^2.7.1",
+    "prettier": "^3.2.5",
     "sass": "^1.54.9",
-    "unplugin-auto-import": "^0.11.2",
-    "unplugin-vue-components": "^0.22.7",
+    "typescript": "^5.4.5",
+    "unplugin-auto-import": "^0.11.5",
+    "unplugin-vue-components": "^0.22.12",
     "vite": "^3.0.9",
     "vite-plugin-html": "^3.2.0"
   }
