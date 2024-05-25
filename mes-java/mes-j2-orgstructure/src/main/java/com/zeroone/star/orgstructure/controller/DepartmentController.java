@@ -53,35 +53,34 @@ public class DepartmentController  implements DepartmentApis {
     @Override
     @PostMapping("add-department")
     @ApiOperation("新增部门")
-    public JsonVO<String> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
-        int i = departmentService.saveDepartment(departmentDTO);
-        if (i == 0) {
-            return JsonVO.fail("新增部门失败");
+    public JsonVO<Long> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
+        int info = departmentService.execSaveDepartment(departmentDTO);
+        if (info == 0) {
+            return null;
         }
-        return JsonVO.success("新增部门成功");
-
+        return JsonVO.success(departmentDTO.getDeptId());
     }
 
     @Override
     @PostMapping("modify-department")
     @ApiOperation("修改部门")
-        public JsonVO<String> modifyDepartment(@RequestBody DepartmentDTO departmentDTO) {
-        int i = departmentService.updateDepartment(departmentDTO);
-        if (i == 0) {
-            return JsonVO.fail("修改部门失败");
+        public JsonVO<Integer> modifyDepartment(@RequestBody DepartmentDTO departmentDTO) {
+        int info = departmentService.execUpdateDepartment(departmentDTO);
+        if (info == 0) {
+            return JsonVO.fail(0);
         }
-        return JsonVO.success("修改部门成功");
+        return JsonVO.success(1);
     }
 
     @Override
     @DeleteMapping("remove-department")
     @ApiOperation("删除部门")
-    public JsonVO<String> removeDepartment(int id) {
-        int i = departmentService.removeDepartment(id);
-        if (i == 0) {
-            return JsonVO.fail("删除部门失败");
+    public JsonVO<Integer> removeDepartment(@RequestParam Long[] ids) {
+        int info = departmentService.execRemoveDepartment(ids);
+        if (info == 0) {
+            return JsonVO.fail(0);
         }
-        return JsonVO.success("删除部门成功");
+        return JsonVO.success(1);
     }
 
 

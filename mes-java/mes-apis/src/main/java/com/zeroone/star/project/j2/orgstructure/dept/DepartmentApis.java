@@ -23,13 +23,13 @@ public interface DepartmentApis {
 
 
     //新增部门
-    JsonVO<String> addDepartment(DepartmentDTO departmentDTO);
+    JsonVO<Long> addDepartment(DepartmentDTO departmentDTO);
 
     //修改部门
-    JsonVO<String> modifyDepartment(DepartmentDTO departmentDTO);
+    JsonVO<Integer> modifyDepartment(DepartmentDTO departmentDTO);
 
     //删除部门
-    JsonVO<String> removeDepartment(int id);
+    JsonVO<Integer> removeDepartment(Long[] ids);
 
 
 

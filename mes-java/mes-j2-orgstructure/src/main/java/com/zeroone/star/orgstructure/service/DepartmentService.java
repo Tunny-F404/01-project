@@ -16,23 +16,24 @@ public interface DepartmentService extends IService<DepartmentDO> {
 
     /**
      * 新增部门
+     *
      * @param departmentDTO
      * @return
      */
-        int saveDepartment(DepartmentDTO departmentDTO);
+        Integer execSaveDepartment(DepartmentDTO departmentDTO);
 
     /**
      * 修改部门
      * @param departmentDTO
      * @return
      */
-    int updateDepartment(DepartmentDTO departmentDTO);
+    Integer execUpdateDepartment(DepartmentDTO departmentDTO);
 
     /**
      * 删除部门
-     * @param id
+     * @param ids
      * @return
      */
-    int removeDepartment(int id);
+    Integer execRemoveDepartment(Long[] ids);
 
 }

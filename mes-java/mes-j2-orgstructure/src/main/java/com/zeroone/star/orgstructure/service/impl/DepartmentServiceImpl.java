@@ -7,9 +7,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -40,32 +42,52 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
     MsDepartmentMapper msDepartmentMapper;
 
     @Override
-    public int saveDepartment(DepartmentDTO departmentDTO) {
+    public Integer execSaveDepartment(DepartmentDTO departmentDTO) {
         DepartmentDO departmentDO = msDepartmentMapper.departmentDTOToDepartment(departmentDTO);
-        departmentDO.setCreateTime(LocalDateTime.now());
-        return baseMapper.insert(departmentDO);
+        QueryWrapper<DepartmentDO> wrapper = new QueryWrapper<>();
+        wrapper.eq("dept_name", departmentDO.getDeptName());
+        wrapper.eq("parent_id", departmentDO.getParentId());
+        if (baseMapper.selectList(wrapper) != null) {
+            departmentDO.setCreateTime(LocalDateTime.now());
+            int insert = baseMapper.insert(departmentDO);
+            departmentDTO.setDeptId(departmentDO.getDeptId());
+            return insert;
+        }
+        return null;
+
+    }
+    @Override
+    public Integer execUpdateDepartment(DepartmentDTO departmentDTO) {
+        //判断仓库是否存在
+        QueryWrapper<DepartmentDO> wrapper = new QueryWrapper<>();
+        wrapper.eq("dept_id", departmentDTO.getDeptId());
+        List<DepartmentDO> departmentDOS = baseMapper.selectList(wrapper);
+        if(departmentDOS.size() > 0){
+            DepartmentDO departmentDO = msDepartmentMapper.departmentDTOToDepartment(departmentDTO);
+            departmentDO.setUpdateTime(LocalDateTime.now());
+            return baseMapper.updateById(departmentDO);
+        }
+        return 0;
     }
 
     @Override
-    public int updateDepartment(DepartmentDTO departmentDTO) {
-        DepartmentDO departmentDO = msDepartmentMapper.departmentDTOToDepartment(departmentDTO);
-        departmentDO.setUpdateTime(LocalDateTime.now());
-        return baseMapper.updateById(departmentDO);
-    }
-
-    @Override
-    public int removeDepartment(int id) {
-        //查询所有parentId为id的部门
-        QueryWrapper<DepartmentDO> objectQueryWrapper = new QueryWrapper<>();
-        objectQueryWrapper.eq("parent_id", id);
-        List<DepartmentDO> departmentDOS = baseMapper.selectList(objectQueryWrapper);
-        if (departmentDOS.size() != 0) {
-            //删除父id为id的部门
-            for (DepartmentDO departmentDO : departmentDOS) {
-                baseMapper.deleteById(departmentDO.getDeptId());
+    @Transactional
+    public Integer execRemoveDepartment(Long[] ids) {
+        //遍历每一个要删除的部门
+        for(Long id : ids ){
+            //查询所有parentId为id的部门
+            QueryWrapper<DepartmentDO> wrapper = new QueryWrapper<>();
+            wrapper.eq("parent_id", id);
+            List<DepartmentDO> departmentDOS = baseMapper.selectList(wrapper);
+            if (departmentDOS.size() != 0) {
+                //删除父id为id的部门
+                for (DepartmentDO departmentDO : departmentDOS) {
+                    baseMapper.deleteById(departmentDO.getDeptId());
+                }
             }
         }
-        return baseMapper.deleteById(id);
+
+        return baseMapper.deleteBatchIds(Arrays.asList(ids));
     }
 
     }
