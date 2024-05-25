@@ -2,8 +2,8 @@
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: awei
- @Date: 2022/10/25 11:08:56
+ @Author: hejianwei
+ @Date: 2024/05/24 11:04:56
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,30 +17,29 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DEVICEMANAGE_SERVICE_
-#define _DEVICEMANAGE_SERVICE_
+#ifndef _SAMPLE_SERVICE_
+#define _SAMPLE_SERVICE_
 #include <list>
-#include "../../domain/dto/device-manage/DeviceManageDTO.h"
+#include "../../domain/vo/repaircontent/RepaircontentVO.h"
+#include "../../domain/query/repaircontent/RepaircontentQuery.h"
+#include "../../domain/dto/repaircontent/RepaircontentDTO.h"
+#include "../../domain/dto/repaircontent/DeleteMultiRepaircontentDTO.h"
 
 /**
  * 示例服务实现，演示基础的示例服务实现
  */
-class DeviceManageService
+class RepaircontentService
 {
 public:
-	// 修改数据
-	bool updateData(const DeviceManageDTO::Wrapper& dto);
-
-	// 通过ID删除数据
-	bool removeData(const DeviceManageIdDTO::Wrapper& dto);
-
-	//生成ecxcel
-	string creatExcel(const DeviceManageIdDTO::Wrapper& dto);
-
+	// 分页查询所有数据
+	RepaircontentPageDTO::Wrapper listAll(const RepaircontentQuery::Wrapper& query);
 	// 保存数据
-	uint64_t saveData(const DeviceManageAddDTO::Wrapper& dto);
-
+	uint64_t saveData(const RepaircontentDTO::Wrapper& dto);
+	// 修改数据
+	bool updateData(const RepaircontentDTO::Wrapper& dto);
+	// 通过ID删除数据
+	bool removeData(uint64_t id);
 };
 
-#endif // !_DEVICEMANAGE_SERVICE_
+#endif // !_SAMPLE_SERVICE_
 

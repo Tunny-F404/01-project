@@ -2,8 +2,8 @@
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: awei
- @Date: 2022/10/25 11:08:56
+ @Author: hejianwei
+ @Date: 2024/05/24 10:56:55
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,30 +17,27 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DEVICEMANAGE_SERVICE_
-#define _DEVICEMANAGE_SERVICE_
-#include <list>
-#include "../../domain/dto/device-manage/DeviceManageDTO.h"
+#ifndef _REPAIRCONTENT_MAPPER_
+#define _REPAIRCONTENT_MAPPER_
+
+#include "Mapper.h"
+#include "../../domain/do/dv_repair_line/RepaircontentDO.h"
 
 /**
- * 示例服务实现，演示基础的示例服务实现
+ * 示例表字段匹配映射
  */
-class DeviceManageService
+class RepaircontentMapper : public Mapper<de_repair_lineDO>
 {
 public:
-	// 修改数据
-	bool updateData(const DeviceManageDTO::Wrapper& dto);
-
-	// 通过ID删除数据
-	bool removeData(const DeviceManageIdDTO::Wrapper& dto);
-
-	//生成ecxcel
-	string creatExcel(const DeviceManageIdDTO::Wrapper& dto);
-
-	// 保存数据
-	uint64_t saveData(const DeviceManageAddDTO::Wrapper& dto);
-
+	de_repair_lineDO mapper(ResultSet* resultSet) const override
+	{
+		de_repair_lineDO data;
+		/*data.setId(resultSet->getUInt64(1));
+		data.setName(resultSet->getString(2));
+		data.setSex(resultSet->getString(3));
+		data.setAge(resultSet->getInt(4));*/
+		return data;
+	}
 };
 
-#endif // !_DEVICEMANAGE_SERVICE_
-
+#endif // !_REPAIRCONTENT_MAPPER_

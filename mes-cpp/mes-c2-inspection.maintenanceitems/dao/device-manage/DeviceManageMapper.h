@@ -21,7 +21,7 @@
 #define _DEVICEMANAGE_MAPPER_
 
 #include "Mapper.h"
-#include "../../domain/do/device-manage/DeviceManageDO.h"
+#include "../../domain/do/dv_subject/DeviceManageDO.h"
 
 /**
  * Ê¾Àý±í×Ö¶ÎÆ¥ÅäÓ³Éä
@@ -39,12 +39,12 @@ public:
 	}
 };
 
-class DeviceManageBaseMapper : public Mapper<DeviceManageBaseDO>
+class DeviceManageAddMapper : public Mapper<DeviceManageAddDO>
 {
 public:
-	DeviceManageBaseDO mapper(ResultSet* resultSet) const override
+	DeviceManageAddDO mapper(ResultSet* resultSet) const override
 	{
-		DeviceManageBaseDO data;
+		DeviceManageAddDO data;
 		data.setSubjectCode(resultSet->getString(1));
 		data.setSubjectName(resultSet->getString(2));
 		data.setSubjectType(resultSet->getString(3));
