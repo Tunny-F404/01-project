@@ -112,7 +112,8 @@ public class DictionaryManageController implements DictionaryManageApis {
     @GetMapping("query-dictDateNames-by-dictType")
     @Override
     public JsonVO<List<DictDataNameVO>> queryDictDataNamesByDictType(@NotBlank(message = "字典类型不能为空") String dictType) {
-        return null;
+        List<DictDataNameVO> dictDataNameVOS = sysDictDataService.listDictDataNameByDictType(dictType);
+        return JsonVO.success(dictDataNameVOS);
     }
 
     @ApiOperation(value = "获取字典名称列表")
