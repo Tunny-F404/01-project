@@ -11,3 +11,13 @@ Uint64JsonVO::Wrapper HumanResourceListController::execAddHumanResourceList(cons
 	return Uint64JsonVO::Wrapper();
 	//return {};
 }
+
+Uint64JsonVO::Wrapper HumanResourceListController::execModifyHumanResource(const HumanResourceModifyDTO::Wrapper& dto)
+{
+	return Uint64JsonVO::Wrapper();
+}
+
+Uint64JsonVO::Wrapper HumanResourceListController::execRemoveHumanResource(const UInt64& id)
+{
+	return Uint64JsonVO::Wrapper();
+}

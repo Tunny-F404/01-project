@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _GETWORKSTATIONLIST_DTO_H_
-#define _GETWORKSTATIONLIST_DTO_H_
+#ifndef _GETWORKSTATIONLISTDTO_H_
+#define _GETWORKSTATIONLISTDTO_H_
 
 #include "../../GlobalInclude.h"
 

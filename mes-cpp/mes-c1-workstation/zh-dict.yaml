@@ -29,6 +29,12 @@ post:
   workstationid: 工作站id
  add:
   summary: 新增一条岗位数据
+modify:
+ summary: 修改岗位列表
+remove:
+ summary: 删除岗位列表
+  
+    
 wf_for_ws:
  fields:
   typename: 类型名称
