@@ -12,12 +12,16 @@ import lombok.Data;
 @ApiOperation("资源详情")
 public class ResourceDetailsVO {
 
+    //菜单ID
+    @ApiModelProperty(value = "菜单ID",example = "1")
+    private String menu_id;
+
     //资源名称
     @ApiModelProperty(value = "资源名称",example = "部门管理")
     private String menu_name;
 
-    //父级id
-    @ApiModelProperty(value = "父级id",example = "1")
+    //父级ID
+    @ApiModelProperty(value = "父级ID",example = "1")
     private Integer parent_id;
 
     //顺序

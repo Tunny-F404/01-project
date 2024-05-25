@@ -12,10 +12,17 @@ import lombok.Data;
 @Data
 @ApiOperation("资源数据对象")
 public class ResourceVO {
+    //菜单ID
+    @ApiModelProperty(value = "菜单ID",example = "1")
+    private String menu_id;
 
     //菜单名称
     @ApiModelProperty(value = "菜单名称",example = "基础数据")
     private String menu_name;
+
+    //父级ID
+    @ApiModelProperty(value = "父级ID",example = "1")
+    private Integer parent_id;
 
     //图标
     @ApiModelProperty(value = "图标",example = "0")

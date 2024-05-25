@@ -1,8 +1,14 @@
 package com.zeroone.star.sysmanagement.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zeroone.star.project.j2.sysmanagement.vo.ResourceDetailsVO;
+import com.zeroone.star.project.j2.sysmanagement.vo.ResourceTreeVO;
+import com.zeroone.star.project.j2.sysmanagement.vo.ResourceVO;
 import com.zeroone.star.sysmanagement.entity.SysMenuDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +21,15 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysMenuMapper extends BaseMapper<SysMenuDO> {
 
+    @Select("select menu_id,menu_name,parent_id from sys_menu")
+    List<ResourceTreeVO> getResourceNameTree();
+
+    @Select("select menu_id,menu_name,parent_id,icon,order_num,perms,component,status,create_time from sys_menu " +
+            "where status = #{status} and " +
+            "menu_name like concat('%', #{menuName}, '%')")
+    List<ResourceVO> getResourceListByCondition(String menuName, Integer status);
+
+    @Select("select menu_id,menu_name,parent_id,order_num,path,is_frame,menu_type,visible,status,icon from sys_menu " +
+            "where menu_id = #{menu_id}")
+    ResourceDetailsVO getResourceDetailsByMenuId(Integer menu_id);
 }

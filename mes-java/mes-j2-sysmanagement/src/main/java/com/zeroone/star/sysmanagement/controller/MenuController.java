@@ -1,10 +1,10 @@
 package com.zeroone.star.sysmanagement.controller;
 
-import cn.hutool.core.lang.tree.TreeNode;
-import com.zeroone.star.project.j2.sysmanagement.menu.MenuApis;
 import com.zeroone.star.project.j2.sysmanagement.dto.menu.MenuDTO;
+import com.zeroone.star.project.j2.sysmanagement.menu.MenuApis;
 import com.zeroone.star.project.j2.sysmanagement.query.menu.MenuConditionQuery;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceDetailsVO;
+import com.zeroone.star.project.j2.sysmanagement.vo.ResourceTreeVO;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceVO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanagement.service.MenuService;
@@ -13,7 +13,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,23 +64,27 @@ public class MenuController implements MenuApis {
     @GetMapping("/get-resource-name-tree")
     @ApiOperation("获取资源名称树")
     @Override
-    public JsonVO<TreeNode<String>> getResourceNameTree() {
-        return null;
+    public JsonVO<List<ResourceTreeVO>> getResourceNameTree() {
+        List<ResourceTreeVO> list = menuService.getResourceNameTree();
+        return JsonVO.success(list);
     }
 
     @PostMapping("/get-resource-list")
     @ApiOperation("根据条件获取资源列表")
     @Override
     public JsonVO<List<ResourceVO>> getResourceListByCondition(@RequestBody MenuConditionQuery menuConditionQuery) {
-        List<ResourceVO> list = new ArrayList<>();
+        String menuName = menuConditionQuery.getMenuName();
+        Integer status = menuConditionQuery.getStatus();
+        List<ResourceVO> list = menuService.getResourceListByCondition(menuName, status);
         return JsonVO.success(list);
     }
 
-    @GetMapping("/get-resource-details/{path}")
+    @GetMapping("/get-resource-details/{menu_id}")
     @ApiOperation("获取资源详情")
     @Override
-    public JsonVO<ResourceDetailsVO> getResourceDetails(@PathVariable String path) {
-        return null;
+    public JsonVO<ResourceDetailsVO> getResourceDetails(@PathVariable Integer menu_id) {
+        ResourceDetailsVO resourceDetailsVO = menuService.getResourceDetailsByMenuId(menu_id);
+        return JsonVO.success(resourceDetailsVO);
     }
 
     public boolean getMenu_id() {

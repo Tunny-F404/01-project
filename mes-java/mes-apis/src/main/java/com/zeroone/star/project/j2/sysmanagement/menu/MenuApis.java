@@ -1,9 +1,9 @@
 package com.zeroone.star.project.j2.sysmanagement.menu;
 
-import cn.hutool.core.lang.tree.TreeNode;
 import com.zeroone.star.project.j2.sysmanagement.dto.menu.MenuDTO;
 import com.zeroone.star.project.j2.sysmanagement.query.menu.MenuConditionQuery;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceDetailsVO;
+import com.zeroone.star.project.j2.sysmanagement.vo.ResourceTreeVO;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceVO;
 import com.zeroone.star.project.vo.JsonVO;
 
@@ -28,11 +28,11 @@ public interface MenuApis {
 
 
     //获取资源名称树
-    JsonVO<TreeNode<String>> getResourceNameTree();
+    JsonVO<List<ResourceTreeVO>> getResourceNameTree();
 
     //根据条件获取资源列表
     JsonVO<List<ResourceVO>> getResourceListByCondition(MenuConditionQuery menuConditionQuery);
 
-    //根据资源路径获取资源详情
-    JsonVO<ResourceDetailsVO> getResourceDetails(String path);
+    //根据资源ID获取资源详情
+    JsonVO<ResourceDetailsVO> getResourceDetails(Integer menu_id);
 }
