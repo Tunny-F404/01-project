@@ -15,5 +15,14 @@ public:
 	// 分页查询所有数据
 	ProductPageDTO::Wrapper listAll(const ProductQuery::Wrapper& query);
 };
+/**
+ * 生产领料详情的服务操作
+ */
+class ProductDetailService
+{
+public:
+	// 查询单个数据
+	ProductDetailDTO::Wrapper listONE(const ProductDetailQuery::Wrapper& query);
+};
 
 #endif

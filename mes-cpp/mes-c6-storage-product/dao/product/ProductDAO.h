@@ -23,10 +23,7 @@ public:
 class ProductDetailDAO : public BaseDAO
 {
 public:
-	// 统计数据条数
-	uint64_t count(const ProductDetailQuery::Wrapper& query);
-	// 分页查询数据
-	list<ProductDetailDO> selectWithPage(const ProductDetailQuery::Wrapper& query);
-
+	// 查询数据
+	list<ProductDetailDO> selectWithDetail(const ProductDetailQuery::Wrapper& query);
 };
 #endif

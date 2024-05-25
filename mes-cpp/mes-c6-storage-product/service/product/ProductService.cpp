@@ -30,3 +30,17 @@ ProductPageDTO::Wrapper ProductTableService::listAll(const ProductQuery::Wrapper
 	}
 	return pages;
 }
+
+//ProductDetailDTO::Wrapper ProductDetailService::listONE(const ProductDetailQuery::Wrapper& query){
+		//auto pages = ProductDetailDTO::createShared();
+		//ProductDetailDAO dao;
+		//list<ProductDetailDO> result = dao.selectWithDetail(query);
+		//// 将DO转换成DTO
+		//for (ProductDetailDO sub : result)
+		//{
+		//	auto dto = ProductDetailDTO::createShared();
+		//	ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, pid, Pid, pnum, Pnum, pname, Pname, plist, Plist, pcnum, Pcnum, pcname, Pcname, pdate, Pdate, pstatus, Pstatus,prname,Prname,premark,Premark)
+		//		pages->addData(dto);//报错
+		//}
+		//return pages;
+	//}
