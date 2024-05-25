@@ -1,7 +1,5 @@
 package com.zeroone.star.orgstructure.entity;
 
-import com.alibaba.excel.annotation.ExcelIgnore;
-import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -14,7 +12,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * 岗位信息表
+ * 用户信息表
  * </p>
  *
  * @author 爱吃猫的鱼
@@ -22,71 +20,106 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("sys_post")
-public class SysPost implements Serializable {
+@TableName("sys_user")
+public class UserDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 岗位ID
+     * 用户ID
      */
-    @ExcelProperty(value = "岗位序号", index = 0)
-    @TableId(value = "post_id", type = IdType.AUTO)
-    private Long postId;
+    @TableId(value = "user_id", type = IdType.AUTO)
+    private Long userId;
 
     /**
-     * 岗位编码
+     * 部门ID
      */
-    @ExcelProperty(value = "岗位编码", index = 1)
-    private String postCode;
+    private Long deptId;
 
     /**
-     * 岗位名称
+     * 用户账号
      */
-    @ExcelProperty(value = "岗位名称", index = 2)
-    private String postName;
+    private String userName;
 
     /**
-     * 显示顺序
+     * 用户昵称
      */
-    @ExcelProperty(value = "岗位顺序", index = 3)
-    private Integer postSort;
+    private String nickName;
 
     /**
-     * 状态（0正常 1停用）
+     * 用户类型（00系统用户）
      */
-    @ExcelProperty(value = "岗位状态", index = 4)
+    private String userType;
+
+    /**
+     * 用户邮箱
+     */
+    private String email;
+
+    /**
+     * 手机号码
+     */
+    private String phonenumber;
+
+    /**
+     * 用户性别（0男 1女 2未知）
+     */
+    private String sex;
+
+    /**
+     * 头像地址
+     */
+    private String avatar;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**
+     * 帐号状态（0正常 1停用）
+     */
     private String status;
+
+    /**
+     * 删除标志（0代表存在 2代表删除）
+     */
+    private String delFlag;
+
+    /**
+     * 最后登录IP
+     */
+    private String loginIp;
+
+    /**
+     * 最后登录时间
+     */
+    private LocalDateTime loginDate;
 
     /**
      * 创建者
      */
-    @ExcelIgnore
     private String createBy;
 
     /**
      * 创建时间
      */
-    @ExcelIgnore
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     /**
      * 更新者
      */
-    @ExcelIgnore
     private String updateBy;
 
     /**
      * 更新时间
      */
-    @ExcelIgnore
     private LocalDateTime updateTime;
 
     /**
      * 备注
      */
-    @ExcelProperty(value = "备注", index = 5)
     private String remark;
 
 

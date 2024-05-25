@@ -1,6 +1,6 @@
 package com.zeroone.star.orgstructure.service;
 
-import com.zeroone.star.orgstructure.entity.SysPost;
+import com.zeroone.star.orgstructure.entity.PostDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.orgstructure.dto.job.JobDTO;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
  * @author 爱吃猫的鱼
  * @since 2024-05-22
  */
-public interface ISysPostService extends IService<SysPost> {
+public interface PostService extends IService<PostDO> {
 
     boolean execSaveJob(JobDTO jobDTO);
 
