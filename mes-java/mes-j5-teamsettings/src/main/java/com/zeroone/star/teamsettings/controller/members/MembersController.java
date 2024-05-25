@@ -5,6 +5,7 @@ import com.zeroone.star.project.j5.dto.teamsettings.MemberDTO;
 import com.zeroone.star.project.j5.query.teamsettings.MemberQuery;
 import com.zeroone.star.project.j5.teamsettings.members.MembersApis;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.teamsettings.service.ICalTeamMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -29,6 +31,8 @@ import java.util.List;
 @Api(tags = "项目组成员接口")
 @Validated
 public class MembersController implements MembersApis {
+    @Resource
+    ICalTeamMemberService calTeamMemberService;
     @ApiOperation(value = "获取班组成员列表（条件 + 分页）")
     @GetMapping("query-all")
     @Override

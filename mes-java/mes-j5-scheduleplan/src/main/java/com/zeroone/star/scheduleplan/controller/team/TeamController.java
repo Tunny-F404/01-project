@@ -7,9 +7,12 @@ import com.zeroone.star.project.j5.query.scheduleplan.planteam.PlanTeamQuery;
 import com.zeroone.star.project.j5.scheduleplan.team.TeamApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
+import com.zeroone.star.scheduleplan.service.IPlanTeamService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -22,7 +25,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("sch-manage/sch-plan/team")
 @Api(tags = "班组接口")
 public class TeamController implements TeamApis {
-
+        @Resource
+        IPlanTeamService planTeamService;
         @GetMapping("/list")
         @ApiOperation("获取关联班组列表(条件+分页)")
         @Override

@@ -9,12 +9,14 @@ import com.zeroone.star.project.j5.scheduleplan.SchedulePlanApis;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
+import javax.annotation.Resource;
 import javax.validation.constraints.Min;
 
 /**
@@ -28,6 +30,8 @@ import javax.validation.constraints.Min;
 @RequestMapping("sch-manage/sch-plan")
 @Api(tags = "排班计划接口")
 public class SchedulePlanController implements SchedulePlanApis {
+    @Resource
+    ICalPlanService calPlanService;
     @GetMapping("/query-all")
     @ApiOperation("获取计划列表（条件+分页）")
     public JsonVO<PageDTO<PlanListVO>> queryPlanList(@Validated PlanPageQuery condition) {

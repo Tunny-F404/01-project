@@ -6,12 +6,14 @@ import com.zeroone.star.project.j5.dto.teamsettings.TeamDTO;
 import com.zeroone.star.project.j5.query.teamsettings.TeamQuery;
 import com.zeroone.star.project.j5.teamsettings.TeamSettingsApis;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.teamsettings.service.ICalTeamService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 
+import javax.annotation.Resource;
 import javax.validation.constraints.Min;
 import java.util.List;
 
@@ -29,6 +31,8 @@ import java.util.List;
 @Api(tags = "班组设置接口")
 @Validated
 public class TeamSettingsController implements TeamSettingsApis {
+    @Resource
+    ICalTeamService calTeamService;
     @ApiOperation(value = "获取班组列表（条件 + 分页）")
     @GetMapping("query-all")
     @Override

@@ -15,8 +15,8 @@ import lombok.Setter;
  * 排班计划表
  * </p>
  *
- * @author linglan
- * @since 2024-05-22
+ * @author interstellar
+ * @since 2024-05-25
  */
 @Getter
 @Setter
