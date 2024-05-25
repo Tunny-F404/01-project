@@ -4,6 +4,7 @@ import com.zeroone.star.customer.service.IMdClientService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.ClientApis;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
+import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.vo.JsonVO;
@@ -18,49 +19,68 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/md-client")
+@RequestMapping("md-clients")
 @Api(tags = "客户管理")
 @Validated
 public class MdClientController implements ClientApis {
     @Resource
     IMdClientService clientService;
 
-
     @ApiOperation(value = "新增客户")
-    @PostMapping("/add")
+    @PostMapping("add-client")
     @Override
-    public JsonVO<String> addClient(@RequestBody ClientDTO client) {
-        return null;
+    public JsonVO<String> addClient(@Validated @RequestBody ClientDTO client) {
+        boolean isAdded = clientService.addClient(client);
+        if (isAdded) {
+            return JsonVO.success(null);
+        }
+        return JsonVO.fail(null);
     }
 
     @ApiOperation("删除客户")
-    @DeleteMapping
+    @DeleteMapping("delete-clients")
     @Override
     public JsonVO<String> deleteClient(@RequestBody List<Long> ids) {
-        return null;
+        boolean isDeleted = clientService.deleteClient(ids);
+        if (isDeleted) {
+            return JsonVO.success(null);
+        }
+        return JsonVO.fail(null);
     }
 
     @ApiOperation("更新客户")
-    @PutMapping
+    @PutMapping("update-client/{id}")
     @Override
-    public JsonVO<String> updateClient(@RequestBody ClientDTO client) {
-        return null;
+    public JsonVO<String> updateClient(@PathVariable Long id, @Validated @RequestBody ClientUpdateDTO client) {
+        client.setClientId(id);
+        boolean isUpdated = clientService.updateClient(client);
+        if (isUpdated) {
+            return JsonVO.success(null);
+        }
+        return JsonVO.fail(null);
     }
 
     @ApiOperation("查询客户列表")
-    @GetMapping("/all")
+    @GetMapping("query-all")
     @Override
     public JsonVO<PageDTO<ClientDTO>> queryAll(@RequestBody ClientQuery query) {
-        return JsonVO.success(clientService.listAll(query));
+        PageDTO<ClientDTO> clients = clientService.listAll(query);
+        if (clients == null) {
+            return JsonVO.fail(null);
+        }
+        return JsonVO.success(clients);
     }
 
     @ApiOperation("根据ID查询客户")
-    @GetMapping("/{id}")
+    @GetMapping("query-one/{id}")
     @Override
     public JsonVO<ClientDTO> queryById(@PathVariable Long id) {
-        return JsonVO.success(clientService.getById(id));
+        ClientDTO client = clientService.getById(id);
+        if (client == null) {
+            return JsonVO.fail(null);
+        }
+        return JsonVO.success(client);
     }
-
 
     @GetMapping("/export/queryClientExport")
     @ApiOperation(value = "导出客户")

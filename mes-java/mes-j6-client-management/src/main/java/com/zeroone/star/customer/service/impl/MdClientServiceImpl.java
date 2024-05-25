@@ -1,9 +1,8 @@
 package com.zeroone.star.customer.service.impl;
 
 import cn.hutool.core.date.DateTime;
-
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.customer.entity.MdClient;
 import com.zeroone.star.customer.mapper.MdClientMapper;
@@ -14,13 +13,12 @@ import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
+import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
-import com.zeroone.star.project.j6.product_management.query.MdItemQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import lombok.SneakyThrows;
 import lombok.val;
-import org.apache.commons.lang.StringUtils;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,95 +30,129 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "Spring")
-interface MsClientMapper {
+@Mapper(componentModel = "spring")
+interface msClientMapper {
     /**
      * @return com.zeroone.star.project.j6.customer.dto.clientDTO
      * @Description 将MdClient对象转换为clientDTO对象
-     * @Date 13:40 2024/5/20
-     * @Param [client]
      **/
     ClientDTO clientToClientDTO(MdClient client);
+
+    /**
+     * @return com.zeroone.star.customer.entity.MdClient
+     * @Description 将clientDTO对象转换为MdClient对象
+     **/
+    MdClient clientDTOToMdClient(ClientDTO clientDTO);
+
+    /**
+     * @return com.zeroone.star.customer.entity.MdClient
+     * @Description 将clientUpdateDTO对象转换为MdClient对象
+     **/
+    MdClient clientUpdateDTOToMdClient(ClientUpdateDTO clientUpdateDTO);
 }
 
 @Service
 @Transactional
 public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> implements IMdClientService {
 
-
-
     @Autowired
-    EasyExcelComponent  easyExcelComponent;
-
+    EasyExcelComponent easyExcelComponent;
     @Autowired
     FastDfsClientComponent dfs;
-
-
-     QueryWrapper<MdClient> queryWrapper;
-
-    @Autowired
-    private MdClientMapper mdClientMapper;
-
-
     @Value("${fastdfs.nginx-servers}")
     String urlPrefix;
-
+    QueryWrapper<MdClient> queryWrapper;
+    @Resource
+    private MdClientMapper mdClientMapper;
+    @Resource
+    private msClientMapper msClientMapper;
 
     @Override
-    public JsonVO<String> addClient(ClientDTO client) {
-        return null;
+    public boolean addClient(ClientDTO client) {
+        // 将ClientDTO对象转换为DO
+        MdClient mdClient = msClientMapper.clientDTOToMdClient(client);
+
+        // 保存到数据库并返回操作结果
+        return mdClientMapper.insert(mdClient) > 0;
+
     }
 
     @Override
-    public JsonVO<String> deleteClient(List<Long> ids) {
-        return null;
+    public boolean deleteClient(List<Long> ids) {
+        // (批量)删除客户数据
+        return mdClientMapper.deleteBatchIds(ids) > 0;
     }
 
     @Override
-    public JsonVO<String> updateClient(ClientDTO client) {
-        return null;
+    public boolean updateClient(ClientUpdateDTO client) {
+        // 查询客户是否存在
+        MdClient existingClient = mdClientMapper.selectById(client.getClientId());
+        if (existingClient == null) {
+            return false;
+        }
+
+        // 将DTO对象转换为DO
+        MdClient updatedClient = msClientMapper.clientUpdateDTOToMdClient(client);
+
+        // 更新数据库中的客户信息
+        return mdClientMapper.updateById(updatedClient) > 0;
     }
+
 
     @Override
     public PageDTO<ClientDTO> listAll(ClientQuery query) {
-        return null;
+        // 构造分页对象
+        Page<MdClient> clientPage = new Page<>(query.getPageNum(), query.getPageSize());
+        // 构建查询条件
+        QueryWrapper<MdClient> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("clientName", query.getClientName());
+        // 查询客户列表数据
+        Page<MdClient> clients = mdClientMapper.selectPage(clientPage, queryWrapper);
+
+        // 返回封装分页信息和客户列表数据的PageDTO对象
+        return PageDTO.create(clients, client -> msClientMapper.clientToClientDTO(client));
     }
 
     @Override
     public ClientDTO getById(Long id) {
-        return null;
-    }
+        // 根据id查询数据库中的客户信息
+        MdClient mdClient = mdClientMapper.selectById(id);
 
+        // 将客户信息转换为DTO对象并返回
+        return msClientMapper.clientToClientDTO(mdClient);
+    }
 
 
     @SneakyThrows
     @Override
-    public ResponseEntity<byte[]> queryClientExportByExcel( ClientExportQuery clientExportQuery) {
+    public ResponseEntity<byte[]> queryClientExportByExcel(ClientExportQuery clientExportQuery) {
 
-        List<MdClient> list =  mdClientMapper.selectMdClientList(clientExportQuery);
-        if(list == null || list.isEmpty()){
+        List<MdClient> list = mdClientMapper.selectMdClientList(clientExportQuery);
+        if (list == null || list.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         // 构建一个输出流
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         // 导出数据到输出流
-        easyExcelComponent.export("客户列表", out, MdClient.class,list);
+        easyExcelComponent.export("客户列表", out, MdClient.class, list);
         // 获取字节数据
         byte[] bytes = out.toByteArray();
         out.close();
         //构建相应头
         HttpHeaders headers = new HttpHeaders();
-        String filename ="clients-"+ DateTime.now().toString("yyyyMMddHHmmss")+".xlsx";
+        String filename = "clients-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
         headers.setContentDispositionFormData("attachment", filename);
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         //放回客户端
         return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
+
     @SneakyThrows
     @Override
     public JsonVO<String> importClientByExcel(MultipartFile customer) {
@@ -161,7 +193,7 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
     }
 
     //初始化参考客户模板
-    private MdClient initMdClient(){
+    private MdClient initMdClient() {
         MdClient mdClient = new MdClient();
         mdClient.setClientId(null);
         mdClient.setClientCode("");
@@ -196,7 +228,6 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
     }
 
 
-
     @SneakyThrows
     @Override
     public ResponseEntity<byte[]> DownloadTemplate() {
@@ -206,7 +237,7 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         // 导出数据到输出流
-        easyExcelComponent.export("客户列表", out, MdClient.class,mdClients);
+        easyExcelComponent.export("客户列表", out, MdClient.class, mdClients);
         // 获取字节数据
         byte[] bytes = out.toByteArray();
         out.close();
