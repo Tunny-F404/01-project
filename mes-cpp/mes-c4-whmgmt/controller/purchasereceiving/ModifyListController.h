@@ -21,8 +21,8 @@
 #define _MODIFYLIST_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/dto/setpro/ModifyListDTO.h"
-#include "domain/vo/setpro/ModifyListVO.h"
+#include "domain/dto/purchasereceiving/ModifyListDTO.h"
+#include "domain/vo/purchasereceiving/ModifyListVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -41,7 +41,7 @@ public:
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("modifylist.put.summary"), ModifyList, Uint64JsonVO::Wrapper);
 	
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/setpro/modifylist", ModifyList, BODY_DTO(ModifyListDTO::Wrapper, dto), execmodifylist(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/purchasereceiving/modifylist", ModifyList, BODY_DTO(ModifyListDTO::Wrapper, dto), execmodifylist(dto));
 
 private:
 	// 3.3 演示修改数据

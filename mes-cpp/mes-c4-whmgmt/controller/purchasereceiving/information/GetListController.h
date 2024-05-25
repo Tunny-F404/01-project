@@ -22,8 +22,8 @@
 
 #include "domain/vo/BaseJsonVO.h"
 #include "domain/query/information/GetListQuery.h"
-#include "domain/dto/information/GetListDTO.h"
-#include "domain/vo/information/GetListVO.h"
+#include "domain/dto/purchasereceiving/information/GetListDTO.h"
+#include "domain/vo/purchasereceiving/information/GetListVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -52,16 +52,12 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "sex", ZH_WORDS_GETTER("getlist.field.sex"), "N", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/information/getlist", GetListQuery, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "purchasereceiving/information/getlist", GetListQuery, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, GetListQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQuerySample(userQuery, authObject->getPayload()));
 	}
-
-
-	
-
 private:
 	// 3.3 演示分页查询数据
 	GetListPageJsonVO::Wrapper execQuerySample(const GetListQuery::Wrapper& query, const PayloadDTO& payload);

@@ -19,7 +19,7 @@
 */
 #ifndef _GETLIST_DTO_
 #define _GETLIST_DTO_
-#include "../../GlobalInclude.h"
+#include "../../../GlobalInclude.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
@@ -30,25 +30,23 @@ class GetListDTO : public oatpp::DTO
 {
 	DTO_INIT(GetListDTO, DTO);
 
-	//领料单编号
-//	API_DTO_FIELD_DEFAULT(String, issuecode, ZH_WORDS_GETTER("addlist.field.issuecode"));
 
-	//领料单编号
-	DTO_FIELD(String, issuecode);
-	DTO_FIELD_INFO(issuecode) {
-		info->description = ZH_WORDS_GETTER("getlist.field.issuecode");
+	//入库单编号
+	DTO_FIELD(String, recptcode);
+	DTO_FIELD_INFO(recptcode) {
+		info->description = ZH_WORDS_GETTER("getlist.field.recptcode");
 	}
-	//领料单名称
-	API_DTO_FIELD_DEFAULT(String, issuename, ZH_WORDS_GETTER("getlist.field.issuename"));
+	//入库单名称
+	API_DTO_FIELD_DEFAULT(String, recptname, ZH_WORDS_GETTER("getlist.field.recptname"));
 
-	//仓库名称
-	API_DTO_FIELD_DEFAULT(String, warehousename, ZH_WORDS_GETTER("getlist.field.warehousename"));
+	//供应商名称
+	API_DTO_FIELD_DEFAULT(String, vendorname, ZH_WORDS_GETTER("getlist.field.vendorname"));
 
-	//领料日期
-	API_DTO_FIELD_DEFAULT(String, issuedate, ZH_WORDS_GETTER("getlist.field.issuedate"));
+	//入库日期
+	API_DTO_FIELD_DEFAULT(String, recptdate, ZH_WORDS_GETTER("getlist.field.recptdate"));
 
-	//单据状态
-	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("getlist.field.status"));
+	//订单编号
+	API_DTO_FIELD_DEFAULT(String, pocode, ZH_WORDS_GETTER("getlist.field.pocode"));
 
 
 };

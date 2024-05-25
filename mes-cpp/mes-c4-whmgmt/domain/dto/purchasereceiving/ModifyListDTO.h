@@ -30,27 +30,33 @@ class ModifyListDTO : public oatpp::DTO
 {
 	DTO_INIT(ModifyListDTO, DTO);
 
-	//领料单编号
-//	API_DTO_FIELD_DEFAULT(String, issuecode, ZH_WORDS_GETTER("addlist.field.issuecode"));
 
-	//领料单编号
-	DTO_FIELD(String, issuecode);
-	DTO_FIELD_INFO(issuecode) {
-		info->description = ZH_WORDS_GETTER("modifylist.field.issuecode");
+	//入库单编号
+	DTO_FIELD(String, recptcode);
+	DTO_FIELD_INFO(recptcode) {
+		info->description = ZH_WORDS_GETTER("modifylist.field.recptcode");
 	}
-	//领料单名称
-	API_DTO_FIELD_DEFAULT(String, issuename, ZH_WORDS_GETTER("modifylist.field.issuename"));
+	//入库单名称
+	API_DTO_FIELD_DEFAULT(String, recptname, ZH_WORDS_GETTER("modifylist.field.recptname"));
 
-	//生产单id
-	API_DTO_FIELD_DEFAULT(UInt64, workorderid, ZH_WORDS_GETTER("modifylist.field.workorderid"));
+	//入库日期
+	API_DTO_FIELD_DEFAULT(String, recptdate, ZH_WORDS_GETTER("modifylist.field.recptdate"));
 
-	//客id
-	API_DTO_FIELD_DEFAULT(UInt64, clientid, ZH_WORDS_GETTER("modifylist.field.clientid"));
+	//采购订单号
+	API_DTO_FIELD_DEFAULT(UInt64, pocode, ZH_WORDS_GETTER("modifylist.field.pocode"));
 
-	//客户名称
-	API_DTO_FIELD_DEFAULT(String, clientname, ZH_WORDS_GETTER("modifylist.field.clientname"));
+	//单据状态
+	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("modifylist.field.status"));
+
+	//供应商
+	API_DTO_FIELD_DEFAULT(String, vendorid, ZH_WORDS_GETTER("modifylist.field.vendorid"));
 
 
+	//入库仓库
+	API_DTO_FIELD_DEFAULT(String, warehousename, ZH_WORDS_GETTER("modifylist.field.warehousename"));
+
+	//备注
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("modifylist.field.remark"));
 };
 
 

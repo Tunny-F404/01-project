@@ -17,28 +17,28 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _GETLIST_VO_
-#define _GETLIST_VO_
+#ifndef _ADDLIST_VO_
+#define _ADDLIST_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/information/GetListDTO.h"
+#include "../../dto/purchasereceiving/AddListDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
  * 示例显示JsonVO，用于响应给客户端的Json对象
  */
-class getlistjsonvo : public JsonVO<GetListDTO::Wrapper> {
-	DTO_INIT(getlistjsonvo, JsonVO<GetListDTO::Wrapper>);
+class addlistJsonVO : public JsonVO<AddListDTO::Wrapper> {
+	DTO_INIT(addlistJsonVO, JsonVO<AddListDTO::Wrapper>);
 };
 
 /**
  * 示例分页显示JsonVO，用于响应给客户端的Json对象
  */
-class GetListPageJsonVO : public JsonVO<GetListPageDTO::Wrapper> {
-	DTO_INIT(GetListPageJsonVO, JsonVO<GetListPageDTO::Wrapper>);
+class AddListPageJsonVO : public JsonVO<AddListDTO::Wrapper> {
+	DTO_INIT(AddListPageJsonVO, JsonVO<AddListDTO::Wrapper>);
 };
+
 #include OATPP_CODEGEN_END(DTO)
 
 #endif // !_SAMPLE_VO_
-

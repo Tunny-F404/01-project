@@ -1,29 +1,34 @@
 addlist:
  field:
-  issuecode: 领料单编号
-  issuename: 领料单名称
-  workorderid: 生产单id
-  clientid: 客id
-  clientname: 客户名称
+  recptcode: 入库单编号
+  recptname: 入库单名称
+  recptdate: 入库日期
+  pocode: 采购订单号
+  status: 单据状态
+  vendorid: 供应商
+  warehousename: 入库仓库
+  remark: 备注
  post:
   summary: 添加单据
 modifylist:
  field:
-  issuecode: 领料单编号
-  issuename: 领料单名称
-  workorderid: 生产单id
-  clientid: 客id
-  clientname: 客户名称
+  recptcode: 入库单编号
+  recptname: 入库单名称
+  recptdate: 入库日期
+  pocode: 采购订单号
+  status: 单据状态
+  vendorid: 供应商
+  warehousename: 入库仓库
+  remark: 备注
  put:
   summary: 修改单据
 getlist:
  field:
-  issuecode: 领料单编号
-  issuename: 领料单名称
-  warehousename: 仓库名称
-  issuedate: 领料日期
-  status: 单据状态
+  recptcode: 入库单编码
+  recptname: 入库单名称
+  vendorname: 供应商名称
+  recptdate: 入库日期
+  pocode: 订单编号
  get:
   summary: 分页查询数据
-
   

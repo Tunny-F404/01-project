@@ -19,9 +19,9 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include"controller/setpro/AddListController.h"
-#include"controller/setpro/ModifyListController.h"
-#include"controller/information/GetListController.h"
+#include"controller/purchasereceiving/AddListController.h"
+#include"controller/purchasereceiving/ModifyListController.h"
+#include"controller/purchasereceiving/information/GetListController.h"
 
 
 #ifdef HTTP_SERVER_DEMO

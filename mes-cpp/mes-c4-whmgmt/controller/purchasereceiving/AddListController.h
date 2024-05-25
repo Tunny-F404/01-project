@@ -21,8 +21,8 @@
 #define _SAMPLE_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/dto/setpro/AddListDTO.h"
-#include "domain/vo/setpro/AddListVO.h"
+#include "domain/dto/purchasereceiving/AddListDTO.h"
+#include "domain/vo/purchasereceiving/AddListVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -48,14 +48,16 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/setpro/addlist", addList, BODY_DTO(AddListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/purchasereceiving/addlist", addList, BODY_DTO(AddListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddList(dto));
 	}
 
+	
 private:
 	// 3.3 演示新增数据
 	Uint64JsonVO::Wrapper execAddList(const AddListDTO::Wrapper& dto);
+	
 	
 };
 

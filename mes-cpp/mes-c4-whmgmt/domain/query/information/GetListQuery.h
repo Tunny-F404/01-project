@@ -32,16 +32,24 @@ class GetListQuery : public PageQuery
 {
 	DTO_INIT(GetListQuery, PageQuery);
 
-    ////领料单编号
-	DTO_FIELD(String, issuecode);
-	DTO_FIELD_INFO(issuecode) {
-		info->description = ZH_WORDS_GETTER("getlist.field.issuecode");
-	}
-	//领料单名称
-	API_DTO_FIELD_DEFAULT(String, issuename, ZH_WORDS_GETTER("getlist.field.issuename"));
 
-	//仓库名称
-	API_DTO_FIELD_DEFAULT(String, warehousename, ZH_WORDS_GETTER("getlist.field.warehousename"));
+	//入库单编号
+	DTO_FIELD(String, recptcode);
+	DTO_FIELD_INFO(recptcode) {
+		info->description = ZH_WORDS_GETTER("getlist.field.recptcode");
+	}
+	//入库单名称
+	API_DTO_FIELD_DEFAULT(String, recptname, ZH_WORDS_GETTER("getlist.field.recptname"));
+
+	//供应商名称
+	API_DTO_FIELD_DEFAULT(String, vendorname, ZH_WORDS_GETTER("getlist.field.vendorname"));
+
+	//入库日期
+	API_DTO_FIELD_DEFAULT(String, recptdate, ZH_WORDS_GETTER("getlist.field.recptdate"));
+
+	//订单编号（未找到）
+	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("getlist.field.status"));
+
 };
 
 #include OATPP_CODEGEN_END(DTO)
