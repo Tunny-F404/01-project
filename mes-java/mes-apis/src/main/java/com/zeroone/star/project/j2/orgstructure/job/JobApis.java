@@ -30,7 +30,7 @@ public interface JobApis {
     ResultStatus modifyJob(JobDTO jobDTO);
 
     //导出岗位文件
-    ResponseEntity<byte[]> exportJob(String group, String storageId);
+    ResponseEntity<byte[]> exportJob();
     @ApiOperation("获取岗位名称列表")
     JsonVO<List<String>> queryJobNames();
 

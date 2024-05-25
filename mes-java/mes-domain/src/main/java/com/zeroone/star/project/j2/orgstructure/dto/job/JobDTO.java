@@ -27,14 +27,6 @@ public class JobDTO {
     @ApiModelProperty(value = "状态",example = "1")
     String status;
 
-    @ApiModelProperty(value = "创建人",example = "1")
-    String createBy;
-
-    @ApiModelProperty(value = "创建时间",example = "2024-05-17")
-    String createTime;
-
-    @ApiModelProperty(value = "更新时间",example = "2024-05-17")
-    String updateTime;
 
     @ApiModelProperty(value = "备注",example = "1")
     String remark;
