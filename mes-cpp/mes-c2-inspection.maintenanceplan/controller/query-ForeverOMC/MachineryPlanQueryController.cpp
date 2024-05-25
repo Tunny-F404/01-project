@@ -1,10 +1,19 @@
 #include "stdafx.h"
 #include "MachineryPlanQueryController.h"
 #include "../../service/query-ForeverOMC/MachineryPlanService.h"
+#include "../../service/query-ForeverOMC/MachineryListService.h"
+#include "../../service/query-ForeverOMC/MachinerySubjectService.h"
 
 MachineryListPageJsonVO::Wrapper MachineryPlanQueryController::execQueryMachineryList(const MachineryListQuery::Wrapper& query)
 {
-	return {};
+	// 定义一个Service
+	MachineryListService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = MachineryListPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 MachineryPlanPageJsonVO::Wrapper MachineryPlanQueryController::execQueryMachineryPlan(const MachineryPlanQuery::Wrapper& query)
@@ -33,5 +42,12 @@ MachineryPlanDetailsJsonVO::Wrapper MachineryPlanQueryController::execQueryMachi
 
 MachinerySubjectPageJsonVO::Wrapper MachineryPlanQueryController::execQueryMachinerySubject(const MachinerySubjectQuery::Wrapper& query)
 {
-	return {};
+	// 定义一个Service
+	MachinerySubjectService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = MachinerySubjectPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }

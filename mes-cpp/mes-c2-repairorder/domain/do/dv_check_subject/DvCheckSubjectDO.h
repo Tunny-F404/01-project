@@ -20,7 +20,7 @@
 #ifndef _DV_CHECK_SUBJECT_
 #define _DV_CHECK_SUBJECT_
 
-#include "DoInclude.h"
+#include "../DoInclude.h"
 
 /**
  * 点检项目 数据库实体类
