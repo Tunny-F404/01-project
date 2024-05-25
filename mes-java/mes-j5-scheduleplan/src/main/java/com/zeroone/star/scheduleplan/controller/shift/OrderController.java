@@ -1,11 +1,11 @@
-package com.zeroone.star.scheduleplan.controller.order;
+package com.zeroone.star.scheduleplan.controller.shift;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanAddDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanModifyDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
-import com.zeroone.star.project.j5.scheduleplan.order.OrderApis;
+import com.zeroone.star.project.j5.scheduleplan.shift.OrderApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.scheduleplan.service.ICalShiftService;
 import io.swagger.annotations.Api;

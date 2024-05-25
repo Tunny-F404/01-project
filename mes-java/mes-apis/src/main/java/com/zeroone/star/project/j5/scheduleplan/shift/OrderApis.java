@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.scheduleplan.order;
+package com.zeroone.star.project.j5.scheduleplan.shift;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanAddDTO;
