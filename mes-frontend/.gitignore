@@ -18,8 +18,11 @@ coverage
 /cypress/screenshots/
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
+
+# 在我们前端项目中 很重视该配置。所以不应该忽略该配置
+# .vscode/*
+# !.vscode/extensions.json
+
 .idea
 *.suo
 *.ntvs*
@@ -30,4 +33,8 @@ coverage
 # Compile
 auto-imports.d.ts
 components.d.ts
+node_modules
+
+# 忽略自动生成的依赖锁文件 不提供包管理器的依赖锁文件
+pnpm-lock.yaml
 package-lock.json

@@ -5,6 +5,7 @@ import { Setting } from '@element-plus/icons-vue'
 import { User } from '@element-plus/icons-vue'
 import { Tickets } from '@element-plus/icons-vue'
 import { UploadFilled } from '@element-plus/icons-vue'
+import { Folder } from '@element-plus/icons-vue'
 
 export default (app) => {
   app.component('IconMenu', Menu)
@@ -12,4 +13,5 @@ export default (app) => {
   app.component('IconUser', User)
   app.component('IconTickets', Tickets)
   app.component('IconUpload', UploadFilled)
+  app.component('IconFolder', Folder)
 }
