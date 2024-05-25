@@ -88,3 +88,44 @@ RepairorderDetailsDTO::Wrapper RepairorderService::getData(const RepairorderDeta
 
     return pages;
 }
+
+uint64_t RepairorderService::saveData(const RepairorderDetailsDTO::Wrapper& dto)
+{
+    DvRepairDO data;
+    ZO_STAR_DOMAIN_DTO_TO_DO(data, dto,
+        Repair_code, repairCode,
+        Repair_name, repairName,
+        Machinery_id, machineryId,
+        Machinery_code, machineryCode,
+        Machinery_name, machineryName,
+        Machinery_brand, machineryBrand,
+        Machinery_type_id, machineryTypeId,
+        Require_date, requireDate,
+        Remark, remark)
+    RepairorderDAO dao;
+    return dao.insert(data);
+}
+
+bool RepairorderService::updateData(const RepairorderDetailsDTO::Wrapper& dto)
+{
+    DvRepairDO data;
+    ZO_STAR_DOMAIN_DTO_TO_DO(data, dto,
+        Repair_id, repairId,
+        Repair_code, repairCode,
+        Repair_name, repairName,
+        Machinery_id, machineryId,
+        Machinery_code, machineryCode,
+        Machinery_name, machineryName,
+        Machinery_brand, machineryBrand,
+        Machinery_type_id, machineryTypeId,
+        Require_date, requireDate,
+        Remark, remark)
+    RepairorderDAO dao;
+    return dao.update(data) == 1;
+}
+
+bool RepairorderService::removeData(uint64_t id)
+{
+    RepairorderDAO dao;
+    return dao.deleteById(id) == 1;
+}

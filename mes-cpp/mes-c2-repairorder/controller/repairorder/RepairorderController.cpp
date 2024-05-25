@@ -53,17 +53,78 @@ RepairorderDetailsJsonVO::Wrapper RepairorderController::execQueryDetailsRepairo
     return jvo;
 }
 
+// 添加维修单
 Uint64JsonVO::Wrapper RepairorderController::execAddRepairorder(const RepairorderDetailsDTO::Wrapper& dto)
 {
-    return Uint64JsonVO::Wrapper();
+    // 定义返回数据对象
+    auto jvo = Uint64JsonVO::createShared();
+
+    // 非空校验
+    if (!dto->repairCode ||
+        !dto->machineryBrand ||
+        !dto->machineryCode ||
+        !dto->machineryName ||
+        !dto->requireDate) {
+        jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+        return jvo;
+    }
+
+    // 定义一个Service
+    RepairorderService service;
+    // 执行数据新增
+    uint64_t res = service.saveData(dto);
+    if (res > 0) {
+        jvo->success(res);
+    } else {
+        jvo->fail(res);
+    }
+    // 响应结果
+    return jvo;
 }
 
+// 修改维修单
 Uint64JsonVO::Wrapper RepairorderController::execModifyRepairorder(const RepairorderDetailsDTO::Wrapper& dto)
 {
-    return Uint64JsonVO::Wrapper();
+    // 定义返回数据对象
+    auto jvo = Uint64JsonVO::createShared();
+
+    // 非空校验
+    if (!dto->repairCode ||
+        !dto->machineryBrand ||
+        !dto->machineryCode ||
+        !dto->machineryName ||
+        !dto->requireDate) {
+        jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+        return jvo;
+    }
+
+    // 定义一个Service
+    RepairorderService service;
+    // 执行数据新增
+    if (service.updateData(dto)) {
+        jvo->success(dto->repairId);
+    } else {
+        jvo->fail(dto->repairId);
+    }
+    // 响应结果
+    return jvo;
 }
 
+// 删除维修单
 Uint64JsonVO::Wrapper RepairorderController::execRemoveRepairorder(const DeleteMultipleRepairersDTO::Wrapper& id)
 {
-    return Uint64JsonVO::Wrapper();
+    // 定义返回数据对象
+    auto jvo = Uint64JsonVO::createShared();
+
+    uint64_t cnt = 0; // 执行成功计数
+    // 定义一个Service
+    RepairorderService service;
+    for (const UInt64& it : *id->repairIdList) { // 不用校验, 失败不管 (隐藏字段, 一般不会有问题)
+        if (it > 0) {
+            cnt += service.removeData(it);
+        }
+    }
+    jvo->success(cnt);
+    // 响应结果
+    return jvo;
 }

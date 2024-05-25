@@ -101,15 +101,37 @@ list<DvRepairDO> RepairorderDAO::selectById(const uint64_t& id)
 
 uint64_t RepairorderDAO::insert(const DvRepairDO& iObj)
 {
-    return 0;
+    string sql = "INSERT INTO `dv_repair` (`repair_code`, `repair_name`, `machinery_id`, `machinery_code`, `machinery_name`, `machinery_brand`, `machinery_type_id`, `require_date`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    return sqlSession->executeInsert(sql, "%s%s%ull%s%s%s%ull%dt%s",
+        iObj.getRepair_code(),
+        iObj.getRepair_name(),
+        iObj.getMachinery_id(),
+        iObj.getMachinery_code(),
+        iObj.getMachinery_name(),
+        iObj.getMachinery_brand(),
+        iObj.getMachinery_type_id(),
+        iObj.getRequire_date(),
+        iObj.getRemark());
 }
 
 int RepairorderDAO::update(const DvRepairDO& uObj)
 {
-    return 0;
+    string sql = "UPDATE `dv_repair` SET `repair_code`=?, `repair_name`=?, `machinery_id`=?, `machinery_code`=?, `machinery_name`=?, `machinery_brand`=?, `machinery_type_id`=?, `require_date`=?, `remark`=? WHERE `repair_id`=?";
+    return sqlSession->executeUpdate(sql, "%s%s%ull%s%s%s%ull%dt%s%ull",
+        uObj.getRepair_code(),
+        uObj.getRepair_name(),
+        uObj.getMachinery_id(),
+        uObj.getMachinery_code(),
+        uObj.getMachinery_name(),
+        uObj.getMachinery_brand(),
+        uObj.getMachinery_type_id(),
+        uObj.getRequire_date(),
+        uObj.getRemark(),
+        uObj.getRepair_id());
 }
 
 int RepairorderDAO::deleteById(uint64_t id)
 {
-    return 0;
+    string sql = "DELETE FROM `dv_repair` WHERE `repair_id`=?";
+    return sqlSession->executeUpdate(sql, "%ull", id);
 }
