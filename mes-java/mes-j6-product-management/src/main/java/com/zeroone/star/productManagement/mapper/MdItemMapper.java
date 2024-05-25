@@ -23,4 +23,10 @@ public interface MdItemMapper extends BaseMapper<MdItem> {
      * @return 列表
      */
     List<MdItem> selectMdItemList(MdItemQuery mdItemQuery);
+
+    MdItem checkItemCodeUnique(MdItem mdItem);
+
+    void insertMdItem(MdItem mdItem);
+
+    void updateMdItem(MdItem mdItem);
 }
