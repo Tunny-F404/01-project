@@ -1,4 +1,4 @@
-package com.zeroone.star.com.zeroone.star.sysmanagement.service.impl;
+package com.zeroone.star.sysmanagement.service.impl;
 
 import com.zeroone.star.com.zeroone.star.sysmanagement.entity.SysMenuDO;
 import com.zeroone.star.project.j2.sysmanagement.dto.menu.MenuDTO;

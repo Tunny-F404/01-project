@@ -1,4 +1,4 @@
-package com.zeroone.star.com.zeroone.star.sysmanagement.service;
+package com.zeroone.star.sysmanagement.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.com.zeroone.star.sysmanagement.entity.SysMenuDO;

@@ -1,4 +1,4 @@
-package com.zeroone.star.com.zeroone.star.sysmanagement.controller;
+package com.zeroone.star.sysmanagement.controller;
 
 import cn.hutool.core.lang.tree.TreeNode;
 import com.zeroone.star.project.j2.sysmanagement.menu.MenuApis;
@@ -7,7 +7,7 @@ import com.zeroone.star.project.j2.sysmanagement.query.menu.MenuConditionQuery;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceDetailsVO;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceVO;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.com.zeroone.star.sysmanagement.service.MenuService;
+import com.zeroone.star.sysmanagement.service.MenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +25,8 @@ import java.util.List;
 @RequestMapping("sys")
 @Api(tags = "菜单管理控制器")
 public class MenuController implements MenuApis {
-
     @Resource
-    private MenuService menuService;
+    MenuService menuService;
     private boolean menu_id;
 
     @PostMapping("add-resource")
