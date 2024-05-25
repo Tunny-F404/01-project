@@ -7,6 +7,7 @@ import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleListDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RolePermissionsDTO;
+import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
 import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -69,7 +70,8 @@ public class RoleController implements RoleApis {
     @GetMapping("query-role")
     @ApiOperation("获取角色详情")
     public JsonVO<RoleDTO> queryRole(@RequestParam Integer id) {
-        return JsonVO.success(new RoleDTO());
+        RoleDTO result = roleService.getById(id);
+        return JsonVO.success(result);
     }
 
     /**
@@ -79,7 +81,8 @@ public class RoleController implements RoleApis {
     @GetMapping("query-role-Permissions")
     @ApiOperation("设置数据权限回显")
     public JsonVO<RolePermissionsDTO> queryRolePermissions(Integer id) {
-        return JsonVO.success(new RolePermissionsDTO());
+        RolePermissionsDTO result = roleService.getPermissions(id);
+        return JsonVO.success(result);
     }
 
 
@@ -91,7 +94,11 @@ public class RoleController implements RoleApis {
     @Override
     @PutMapping("modify-role")
     @ApiOperation("设置数据权限")
-    public JsonVO<List<RoleDTO>> modifyRole(@RequestParam Integer id) {
+    public JsonVO modifyRole(@RequestBody RolePermissionsQuery rolePermissionsQuery) {
+        int i = roleService.updatePermissions(rolePermissionsQuery);
+        if (i<0){
+            return JsonVO.fail("修改失败");
+        }
         return JsonVO.success(null);
     }
     /**

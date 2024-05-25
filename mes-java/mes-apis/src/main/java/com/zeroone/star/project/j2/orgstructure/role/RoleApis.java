@@ -5,6 +5,7 @@ import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleListDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RolePermissionsDTO;
+import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
 import com.zeroone.star.project.j2.orgstructure.query.role.RoleQuery;
 import com.zeroone.star.project.query.PageQuery;
 import com.zeroone.star.project.vo.JsonVO;
@@ -50,7 +51,7 @@ public interface RoleApis {
      * 设置数据权限
      * @author 天衍土豆
      */
-    public JsonVO<List<RoleDTO>> modifyRole(Integer id);
+    public JsonVO<List<RoleDTO>> modifyRole(RolePermissionsQuery rolePermissionsQuery);
 
     /**
      * 添加角色

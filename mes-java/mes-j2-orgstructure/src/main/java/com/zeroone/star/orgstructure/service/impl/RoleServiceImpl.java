@@ -12,9 +12,11 @@ import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleListDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RolePermissionsDTO;
 import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
+import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.mapstruct.Mapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,9 +35,11 @@ interface MsRoleMapper {
      * @param roleDO
      * @return
      */
-    RoleListDTO roleDOToRoleDTO(RoleDO roleDO);
+    RoleListDTO roleDOToRoleListDTO(RoleDO roleDO);
+    RoleDTO roleDOToRoleDTO(RoleDO roleDO);
+    RolePermissionsDTO roleDOTORolePermissionsDTO(RoleDO roleDO);
 
-    List<RoleListDTO> roleDOToRoleDTOList(List<RoleDO> roleDOList);
+    List<RoleListDTO> roleDOToRoleListDTO(List<RoleDO> roleDOList);
 }
 
 /**
@@ -63,7 +67,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
     public List<RoleListDTO> listRoles() {
         log.info("查询全部列表");
         List<RoleDO> result = baseMapper.selectList(null);
-        return msRoleMapper.roleDOToRoleDTOList(result);
+        return msRoleMapper.roleDOToRoleListDTO(result);
     }
 
     @Override
@@ -87,21 +91,31 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
 
         //执行查询
         Page<RoleDO> result = baseMapper.selectPage(page, queryWrapper);
-        return PageDTO.create(result, src -> msRoleMapper.roleDOToRoleDTO(src));
+        return PageDTO.create(result, src -> msRoleMapper.roleDOToRoleListDTO(src));
     }
 
+    /**
+     * 根据id查询角色详情
+     * @param id
+     * @return
+     */
     @Override
     public RoleDTO getById(Integer id) {
-        return null;
+        RoleDO result = baseMapper.selectById(id);
+        return msRoleMapper.roleDOToRoleDTO(result);
     }
 
     @Override
     public RolePermissionsDTO getPermissions(Integer id) {
-        return null;
+        RoleDO result = baseMapper.selectById(id);
+        return msRoleMapper.roleDOTORolePermissionsDTO(result);
     }
 
     @Override
-    public RolePermissionsDTO updatePermissions(Integer id) {
-        return null;
+    public int updatePermissions(RolePermissionsQuery rolePermissionsQuery) {
+        RoleDO roleDO= new RoleDO();
+        BeanUtils.copyProperties(rolePermissionsQuery,roleDO);
+        int rows = baseMapper.updateById(roleDO);
+        return rows;
     }
 }

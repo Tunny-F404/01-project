@@ -8,6 +8,7 @@ import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleListDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RolePermissionsDTO;
 import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
+import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public interface IRoleService extends IService<RoleDO> {
 
     RolePermissionsDTO getPermissions (Integer id);
 
-    RolePermissionsDTO updatePermissions (Integer id);
+    int updatePermissions (RolePermissionsQuery rolePermissionsQuery);
 
 
 }
