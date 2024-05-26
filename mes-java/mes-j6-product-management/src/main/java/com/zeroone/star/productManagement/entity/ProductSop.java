@@ -6,19 +6,53 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
+
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("md_product_sop")
-public class ProductSop {
-    private Long sopId;  // SOP的唯一标识符
-    private Long itemId; // 产品项目的唯一标识符
-    private Integer orderNum; // SOP的顺序号
-    private Long processId; // 流程的唯一标识符
-    private String processCode; // 流程的代码
-    private String processName; // 流程的名称
-    private String sopTitle; // SOP的标题
-    private String sopDescription; // SOP的描述
-    private String sopUrl; // SOP的链接地址
+public class ProductSop implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @TableId(value = "sop_id", type = IdType.AUTO)
+    private Long sopId;
+
+    private Long itemId;
+
+    private Integer orderNum;
+
+    private Long processId;
+
+    private String processCode;
+
+    private String processName;
+
+    private String sopTitle;
+
+    private String sopDescription;
+
+    private String sopUrl;
+
+    private String remark;
+
+    private String attr1;
+
+    private String attr2;
+
+    private Integer attr3;
+
+    private Integer attr4;
+
+    private String createBy;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    private String updateBy;
+
+    private LocalDateTime updateTime;
+
 }
