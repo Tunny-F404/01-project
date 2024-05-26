@@ -32,5 +32,7 @@ public:
 	list<ProcessinSpectionDO> select(const ProcessinSpectionQuery::Wrapper& query);
 
 	uint64_t count(const ProcessinSpectionQuery::Wrapper& query);
+
+	bool deleteById(uint64_t id);
 };
 #endif // !_SAMPLE_DAO_

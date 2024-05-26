@@ -41,24 +41,31 @@ ProcessinSpectionQueryPageDTO::Wrapper ProcessInspectionService::listAll(const P
 	ProcessInspectionDAO dao;
 
 	auto result = ProcessinSpectionQueryPageDTO::createShared();
-
+	//设置分页参数
 	result->pageIndex = query->pageIndex;
 	result->pageSize = query->pageSize;
-
+	//查看数据是否存在
 	auto count = dao.count(query);
-
+	//不存在返回空
 	if (count < 1)
 		return result;
-
+	//计算所有数据要分多少页
 	result->total = count;
 	result->calcPages();
-
+	//查询
 	auto dos = dao.select(query);
-
+	//把list<do>装到QueryPageDTO中
 	for (auto x : dos) {
 		auto dto = ProcessinSpectionQueryDTO::createShared();
 		ZO_STAR_DOMAIN_DO_TO_DTO(dto, x, id, Id, ipqc_code, Ipqc_Code, ipqc_type, Ipqc_Type, workorder_code, Workorder_Code, item_code, Item_Code, item_name, Item_Name, specification, Specification, unit_of_measure, Unit_Of_Measure, quantity_check, Quantity_Check, check_result, Check_Result, inspect_date, Inspect_Date, inspector, Inspector, status, Status_Order);
 		result->addData(dto);
 	}
 	return result;
+}
+
+bool ProcessInspectionService::remove(uint64_t id)
+{
+	ProcessInspectionDAO dao;
+
+	return dao.deleteById(id);
 }

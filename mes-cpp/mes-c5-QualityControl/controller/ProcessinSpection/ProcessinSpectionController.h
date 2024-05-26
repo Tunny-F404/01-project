@@ -47,7 +47,7 @@ public:
 	}
 
 	// 3.1 定义删除接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.delete.summary"), removeProcessinSpection, Uint64JsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.delete.summary"), removeProcessinSpection, oatpp::List<Uint64JsonVO::Wrapper>);
 	// 3.2 定义删除接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/process-inspection/remove", removeProcessinSpection, BODY_DTO(oatpp::List<UInt64>, ids), execRemoveProcessinSpection(ids));
 	
@@ -100,7 +100,7 @@ private:
 	// 3.3 演示分页查询数据
 	ProcessinSpectionQueryPageJsonVO::Wrapper execProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload);
 	
-	Uint64JsonVO::Wrapper execRemoveProcessinSpection(const oatpp::List<UInt64>& ids);
+	oatpp::List<Uint64JsonVO::Wrapper> execRemoveProcessinSpection(const oatpp::List<UInt64>& ids);
 
 	StringJsonVO::Wrapper execExportProcessinSpection(const oatpp::List<UInt64>& ids);
 

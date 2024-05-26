@@ -35,8 +35,21 @@ if (query->ipqc_type) { \
 } \
 if (query->workorder_code) { \
 	sql << " AND workorder_code=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->workorder_code.getValue(0)); \
+	SQLPARAMS_PUSH(params, "s", std::string, query->workorder_code.getValue("")); \
+}\
+if (query->item_code) { \
+	sql << " AND item_code=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->item_code.getValue("")); \
+}\
+if (query->item_name) { \
+	sql << " AND item_name=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->item_name.getValue("")); \
+}\
+if (query->check_result) { \
+	sql << " AND check_result=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->check_result.getValue("")); \
 }
+
 
 int ProcessInspectionDAO::update(const ProcessinSpectionDO& uObj)
 {
@@ -58,6 +71,16 @@ list<ProcessinSpectionDO> ProcessInspectionDAO::select(const ProcessinSpectionQu
 
 uint64_t ProcessInspectionDAO::count(const ProcessinSpectionQuery::Wrapper& query)
 {
-	return 1;
+	stringstream sql;
+	sql << "SELECT COUNT(*) FROM qc_ipqc";
+	PROCESSINSPECTION_TERAM_PARSE(query, sql);
+	string str = sql.str();
+	return sqlSession->executeQueryNumerical(str, params);
+}
+
+bool ProcessInspectionDAO::deleteById(uint64_t id)
+{
+	string sql = "delete from `qc_ipqc` where `ipqc_id`=?";
+	return sqlSession->executeUpdate(sql, "%ull", id);
 }
 

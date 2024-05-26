@@ -9,19 +9,39 @@
 ProcessinSpectionQueryPageJsonVO::Wrapper ProcessinSpectionController::execProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
 {
 	ProcessInspectionService service;
-
+	//执行查询
 	auto result = service.listAll(query);
-
 	auto vo = ProcessinSpectionQueryPageJsonVO::createShared();
-
+	//把QueryPageDTO装到vo中
 	vo->success(result);
-
 	return vo;
 }
 
-Uint64JsonVO::Wrapper ProcessinSpectionController::execRemoveProcessinSpection(const List<UInt64>& ids)
+oatpp::List<Uint64JsonVO::Wrapper> ProcessinSpectionController::execRemoveProcessinSpection(const List<UInt64>& ids)
 {
-	return Uint64JsonVO::Wrapper();
+	oatpp::List<Uint64JsonVO::Wrapper> ans = oatpp::List<Uint64JsonVO::Wrapper>::createShared();
+	ProcessInspectionService service;
+	//查询是否每一个id都符合,符合的查询,
+	for (auto i = ids->begin(); i != ids->end(); ++i) {
+		auto result = Uint64JsonVO::createShared();
+		auto x = (*i).getValue(0);
+		//参数错误
+		if (x < 0 || !x) {
+			result->init(UInt64(-1), RS_PARAMS_INVALID);
+		}
+		else {
+			//删除失败
+			if (!service.remove(x)) {
+				result->init(x, RS_FAIL);
+			}
+			else {
+				//删除成功
+				result->init(x, RS_SUCCESS);
+			}
+		}
+		ans->push_back(result);
+	}
+	return ans;
 }
 
 StringJsonVO::Wrapper ProcessinSpectionController::execExportProcessinSpection(const oatpp::List<UInt64>& ids)

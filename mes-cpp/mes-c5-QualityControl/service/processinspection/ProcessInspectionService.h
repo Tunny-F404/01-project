@@ -22,6 +22,7 @@
 #include "list"
 #include "domain/dto/processinspection/ProcessinSpectionDTO.h"
 #include "domain/query/processinspection/ProcessinSpectionQuery.h"
+#include "Macros.h"
 class ProcessInspectionService
 {
 public:
@@ -29,5 +30,7 @@ public:
 	bool updateData(const ProcessinSpectionDTO::Wrapper& dto);
 
 	ProcessinSpectionQueryPageDTO::Wrapper listAll(const ProcessinSpectionQuery::Wrapper& query);
+
+	bool remove(uint64_t id);
 };
 #endif
