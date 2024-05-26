@@ -75,41 +75,14 @@ public class MdClientController implements ClientApis {
         return JsonVO.success(client);
     }
 
-    @GetMapping("/export/queryClientExport")
-    @ApiOperation(value = "导出客户")
+    @PostMapping(value = "/export/queryClientExport", produces = "application/octet-stream")
     @ResponseBody
-    public ResponseEntity<byte[]> queryClientExportByExcel(
-            @RequestParam(required = false) List<Long> clientId,
-            @RequestParam(required = false) String customerCode,
-            @RequestParam(required = false) String customerEnglishName,
-            @RequestParam(required = false) String customerName,
-            @RequestParam(required = false) String customerSimpleName,
-            @RequestParam(required = false) Integer status // 使用Optional<Integer>作为status的类型
-    ) {
-        // 构造 ClientExportQuery 对象
-
-        ClientExportQuery clientExportQuery = new ClientExportQuery();
-
-        clientExportQuery.setCustomerCode(customerCode);
-        clientExportQuery.setCustomerEnglishName(customerEnglishName);
-        clientExportQuery.setCustomerName(customerName);
-        clientExportQuery.setCustomerSimpleName(customerSimpleName);
-        if (clientId != null && !clientId.isEmpty())
-            clientExportQuery.setClientId(clientId);
-
-        if (status != null)
-            clientExportQuery.setStatus(status); // 如果status为空，则设置为null
-
-        return queryClientExportByExcel(clientExportQuery);
-    }
-
-
+    @ApiOperation(value = "导出客户")
     public ResponseEntity<byte[]> queryClientExportByExcel(ClientExportQuery clientExportQuery) {
         return clientService.queryClientExportByExcel(clientExportQuery);
     }
 
-
-    @GetMapping("/import/importTemplate")
+    @PostMapping(value = "/import/importTemplate", produces = "application/octet-stream")
     @ApiOperation(value = "下载导入客户的模板")
     @ResponseBody
     @Override

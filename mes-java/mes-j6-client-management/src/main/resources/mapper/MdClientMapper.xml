@@ -5,23 +5,24 @@
         SELECT * FROM md_client
         WHERE 1=1
 
-            <if test="customerCode != null and customerCode != ''">
-                AND client_code = #{customerCode}
-            </if>
-            <if test="customerName != null and customerName != ''">
-                AND client_name = #{customerName}
-            </if>
-            <if test="customerEnglishName != null and customerEnglishName != ''">
-                AND client_en = #{customerEnglishName}
-            </if>
-            <if test="customerSimpleName != null and customerSimpleName != ''">
-                AND client_nick = #{customerSimpleName}
-            </if>
-<!--        <if test="clientId != null and clientId.size() > 0">-->
-<!--            AND (client_id = #{clientId, typeHandler=org.apache.ibatis.type.ListTypeHandler} OR client_id IN (SELECT client_id FROM md_client WHERE find_in_set(#{clientId, typeHandler=org.apache.ibatis.type.ListTypeHandler}, ancestors)))-->
-<!--        </if>-->
+        <if test="customerCode != null and customerCode != ''">
+            AND client_code = #{customerCode}
+        </if>
+        <if test="customerName != null and customerName != ''">
+            AND client_name = #{customerName}
+        </if>
+        <if test="customerEnglishName != null and customerEnglishName != ''">
+            AND client_en = #{customerEnglishName}
+        </if>
+        <if test="customerSimpleName != null and customerSimpleName != ''">
+            AND client_nick = #{customerSimpleName}
+        </if>
+
+        <if test="clientId != null and clientId.size() > 0">
+            AND (client_id = #{clientId} OR client_id in (select client_id from md_client where find_in_set(#{clientId},ancestors)))
 
 
+        </if>
 
 
     </select>
