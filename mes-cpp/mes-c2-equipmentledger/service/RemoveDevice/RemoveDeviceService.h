@@ -2,7 +2,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: 。好
- @Date: 2024/05/18 20:16:53
+ @Date: 2024/05/26 9:23:17
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,29 +16,19 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
+#ifndef _REMOVEDEVICESERVICE_H_
+#define _REMOVEDEVICESERVICE_H_
 
-#include "stdafx.h"
-#include "RemoveDeviceController.h"
-#include "service/RemoveDevice/RemoveDeviceService.h"
+#include "domain/dto/RemoveDeviceDTO.h"
 
-BooleanJsonVO::Wrapper RemoveDeviceController::execRemoveDevice(const RemoveDeviceListDTO::Wrapper& dto)
+/**
+ * 删除设备业务逻辑层
+ * 负责人：。好
+ */
+class RemoveDeviceService
 {
-	// 定义返回结果
-	auto res = BooleanJsonVO::createShared();
+public:
+	bool removeDevice(const RemoveDeviceListDTO::Wrapper& listDto);
+};
 
-	// 数据校验
-	if (dto->item->empty()) {
-		res->init(false, ResultStatus(u8"删除列表为空"));
-		return res;
-	}
-
-	// 调用service层
-	RemoveDeviceService service;
-	auto flag = service.removeDevice(dto);
-	 
-	if (flag) // 删除成功
-		res->success(flag);
-	else
-		res->fail(flag);
-	return res;
-}
+#endif // !_REMOVEDEVICESERVICE_H_

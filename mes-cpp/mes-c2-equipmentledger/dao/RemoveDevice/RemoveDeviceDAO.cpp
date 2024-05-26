@@ -1,8 +1,9 @@
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
  @Author: 。好
- @Date: 2024/05/18 20:16:53
+ @Date: 2024/05/26 9:39:36
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -18,27 +19,11 @@
 */
 
 #include "stdafx.h"
-#include "RemoveDeviceController.h"
-#include "service/RemoveDevice/RemoveDeviceService.h"
+#include "RemoveDeviceDAO.h"
 
-BooleanJsonVO::Wrapper RemoveDeviceController::execRemoveDevice(const RemoveDeviceListDTO::Wrapper& dto)
+bool RemoveDeviceDAO::removeDeviceOne(const std::string code)
 {
-	// 定义返回结果
-	auto res = BooleanJsonVO::createShared();
-
-	// 数据校验
-	if (dto->item->empty()) {
-		res->init(false, ResultStatus(u8"删除列表为空"));
-		return res;
-	}
-
-	// 调用service层
-	RemoveDeviceService service;
-	auto flag = service.removeDevice(dto);
-	 
-	if (flag) // 删除成功
-		res->success(flag);
-	else
-		res->fail(flag);
-	return res;
+	// 只涉及到一个数据库实体字段，所以不需要mapper
+	std::string sql = "DELETE FROM `dv_machinery` WHERE `machinery_code`=?";
+	return sqlSession->executeUpdate(sql, "%s", code) == true;
 }
