@@ -1,4 +1,5 @@
 /*
+>>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
@@ -19,26 +20,47 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include"controller/purchasereceiving/AddListController.h"
+#include"controller/purchasereceiving/ModifyListController.h"
+#include"controller/purchasereceiving/information/GetListController.h"
+
+
+#include "PurchaseReceipt/GetReceiptController.h"
+
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
 #include "file/FileController.h"
 #include "ws/WSController.h"
+<<<<<< < HEAD
+
 #endif
 
-// ��������˹ر�Swagger�ĵ���
+	// 濡傛灉瀹氫箟浜嗗叧闂璖wagger鏂囨。瀹?
+#include "controller/ProchAndStorage/MaterialsInfo/AddWhStorageorderController.h"
+#include "controller/ProchAndStorage/MaterialsInfo/ModifyWhStorageorderController.h"
+#include "controller/ProchAndStorage/MaterialsInfo/DeleteWhStorageorderController.h"
+// ��������˹ر�Swagger�ĵ���
 #ifdef CLOSE_SWAGGER_DOC
-// �򻯰󶨿������궨��
+// 绠€鍖栫粦瀹氭帶鍒跺櫒瀹忓畾涔?
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 router->addController(__CLASS__::createShared())
 #else
-// �򻯰󶨿������궨��
+#endif
+
+// 如果定义了关闭Swagger文档宏
+#ifdef CLOSE_SWAGGER_DOC
+// 简化绑定控制器宏定义
+#define ROUTER_SIMPLE_BIND(__CLASS__) \
+router->addController(__CLASS__::createShared())
+#else
+// 简化绑定控制器宏定义
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
 
-Router::Router(Endpoints* docEndpoints, HttpRouter* router)
+Router::Router(Endpoints * docEndpoints, HttpRouter * router)
 {
 	this->docEndpoints = docEndpoints;
 	this->router = router;
@@ -50,21 +72,44 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
-	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	ROUTER_SIMPLE_BIND(GetReceiptController);
+	//#TIP :绯荤粺鎵╁睍璺敱瀹氫箟锛屽啓鍦ㄨ繖涓悗闈?
+	
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	ROUTER_SIMPLE_BIND(AddWhStorageorderController);
+	ROUTER_SIMPLE_BIND(ModifyWhStorageorderController);
+	ROUTER_SIMPLE_BIND(DeleteWhStorageorderController);
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	ROUTER_SIMPLE_BIND(ModifyListController);
+	ROUTER_SIMPLE_BIND(AddListController);
+	ROUTER_SIMPLE_BIND(GetListController);
 
+	
 }
 
 #ifdef HTTP_SERVER_DEMO
 void Router::createSampleRouter()
 {
-	// ��ʾ��������
-	ROUTER_SIMPLE_BIND(SampleController);
-	// ���û�������
+	<<<<<< < HEAD
+		// 缁戝畾绀轰緥鎺у埗鍣?
+		ROUTER_SIMPLE_BIND(SampleController);
+	// 缁戝畾鐢ㄦ埛鎺у埗鍣?
 	ROUTER_SIMPLE_BIND(UserController);
-	// ���ļ�������
+	// 缁戝畾鏂囦欢鎺у埗鍣?
 	ROUTER_SIMPLE_BIND(FileController);
-	
-	// ��WebSocket������
-	router->addController(WSContorller::createShared());
+
+	// 缁戝畾WebSocket鎺у埗鍣?
+	====== =
+		// 绑定示例控制器
+		ROUTER_SIMPLE_BIND(SampleController);
+	// 绑定用户控制器
+	ROUTER_SIMPLE_BIND(UserController);
+	// 绑定文件控制器
+	ROUTER_SIMPLE_BIND(FileController);
+
+	// 绑定WebSocket控制器
+	>>>>>> > 68ca23adf7d849ebe7f628a278360730cc296bae
+		router->addController(WSContorller::createShared());
 }
 #endif
