@@ -26,7 +26,7 @@ public interface DepartmentService extends IService<Department> {
      * @param
      * @return
      */
-    List<DepartmentTreeVO> getDepartmentNameTree(DepartmentQuery query);
+    List<DepartmentTreeVO> getDepartmentNameTree(String name);
 
 
     /**

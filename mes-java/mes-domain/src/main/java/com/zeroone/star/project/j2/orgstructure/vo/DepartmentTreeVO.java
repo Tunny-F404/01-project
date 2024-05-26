@@ -12,13 +12,13 @@ import java.util.List;
 public class DepartmentTreeVO extends TreeNode{
     @ApiModelProperty(value = "部门id",example = "1")
     private Integer id;
-    @ApiModelProperty(value = "父部门id",example = "1")
+    @ApiModelProperty(value = "父部门id",example = "0")
     private Integer fId;
     @ApiModelProperty(value = "部门名称",example = "研发部门")
     private String deptName;
 
     @ApiModelProperty(value = "节点包含的子节点")
-    private List<DepartmentTreeVO> getChildren(){
+    public List<DepartmentTreeVO> getChildren(){
         return childrenElementTrans();
     }
 }

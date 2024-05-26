@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zeroone.star.orgstructure.mapper.DepartmentMapper">
+    <resultMap id="DeptMap" type="com.zeroone.star.orgstructure.entity.Department">
+        <id column="dept_id" jdbcType = "VARCHAR" property="deptId" />
+        <result column="parent_id" jdbcType = "VARCHAR" property="parentId" />
+        <result column="dept_name" jdbcType = "VARCHAR" property="deptName" />
+    </resultMap>
+    <select id="selectByName" resultMap="DeptMap">
+        SELECT dept_id,parent_id,dept_name FROM sys_dept WHERE parent_id = (SELECT dept_id FROM sys_dept WHERE dept_id=#{id}) ORDER BY order_num
+    </select>
 
+    <select id="selectByNameOne" resultMap="DeptMap">
+        SELECT dept_id,parent_id,dept_name FROM sys_dept WHERE dept_name=#{name} ORDER BY order_num
+    </select>
 </mapper>
