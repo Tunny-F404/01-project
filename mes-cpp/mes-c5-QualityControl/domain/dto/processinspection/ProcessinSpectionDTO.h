@@ -93,11 +93,6 @@ class ProcessinSpectionDTO : public ProcessinSpectionQueryDTO
 		info->description = ZH_WORDS_GETTER("processinspection.field.workorder_name");
 	}
 	// 工作站编号
-	DTO_FIELD(String, workstation_id);
-	DTO_FIELD_INFO(workstation_id) {
-		info->description = ZH_WORDS_GETTER("processinspection.field.workstation_id");
-	}
-	// 工作站编码
 	DTO_FIELD(String, workstation_code);
 	DTO_FIELD_INFO(workstation_code) {
 		info->description = ZH_WORDS_GETTER("processinspection.field.workstation_code");

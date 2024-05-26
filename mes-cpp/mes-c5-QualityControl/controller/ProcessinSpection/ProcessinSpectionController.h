@@ -39,7 +39,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "check_result", ZH_WORDS_GETTER("processinspection.field.check_result"), "", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/ProcessinSpection", queryProcessinSpection, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/process-inspection/query-by-page", queryProcessinSpection, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ProcessinSpectionQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -49,12 +49,12 @@ public:
 	// 3.1 定义删除接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.delete.summary"), removeProcessinSpection, Uint64JsonVO::Wrapper);
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ProcessinSpection/remove", removeProcessinSpection, BODY_DTO(oatpp::List<UInt64>, ids), execRemoveProcessinSpection(ids));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/process-inspection/remove", removeProcessinSpection, BODY_DTO(oatpp::List<UInt64>, ids), execRemoveProcessinSpection(ids));
 	
 	// 3.1 定义导出接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.export.summary"), exportProcessinSpection, StringJsonVO::Wrapper);
 	// 3.2 定义导出接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/ProcessinSpection/export", exportProcessinSpection, BODY_DTO(oatpp::List<UInt64>, ids), execExportProcessinSpection(ids));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/process-inspection/export", exportProcessinSpection, BODY_DTO(oatpp::List<UInt64>, ids), execExportProcessinSpection(ids));
 
 	// 获取过程检验详情
 	ENDPOINT_INFO(queryGetInspectionDetails) {
