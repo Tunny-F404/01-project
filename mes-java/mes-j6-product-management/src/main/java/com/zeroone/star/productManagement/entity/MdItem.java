@@ -67,7 +67,7 @@ public class MdItem implements Serializable {
     @ExcelProperty("最大库存量")
     private Double maxStock;
 
-    @ExcelIgnore
+    @ExcelProperty("备注")
     private String remark;
 
     @ExcelIgnore

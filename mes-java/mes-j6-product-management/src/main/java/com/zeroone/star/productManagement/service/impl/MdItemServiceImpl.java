@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -147,12 +149,17 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
         // excel同步读取数据
         try {
             items = EasyExcel.read(new BufferedInputStream(file.getInputStream())).head(MdItem.class).sheet().doReadSync();
+            if (items == null || items.isEmpty()) {
+                failureNameMsg.append("导入的物料数据不能为空！");
+                return JsonVO.create(null, ResultStatus.FAIL.getCode(), failureMsg.toString());
+            }
         }catch (IOException e) {
             e.printStackTrace();
         }
 
         for (MdItem mdItem : items)
         {
+            validateMdItem(mdItem);
             try{
                 //是否存在
                 MdItem  m = mdItemMapper.checkItemCodeUnique(mdItem);
@@ -191,7 +198,7 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @param mdItem 产品物料信息
      * @return 结果
      */
-    public void insertMdItem(MdItem mdItem) throws Exception {
+    private void insertMdItem(MdItem mdItem) throws Exception {
         UserDTO userDTO  = userHolder.getCurrentUser();
         mdItem.setCreateBy(userDTO.getUsername());
         mdItem.setCreateTime(DateTime.now().toLocalDateTime());
@@ -204,10 +211,14 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @param mdItem 产品物料信息
      * @return 结果
      */
-    public void updateMdItem(MdItem mdItem) throws Exception {
+    private void updateMdItem(MdItem mdItem) throws Exception {
         UserDTO userDTO  = userHolder.getCurrentUser();
         mdItem.setUpdateBy(userDTO.getUsername());
         mdItem.setUpdateTime(DateTime.now().toLocalDateTime());
         mdItemMapper.updateMdItem(mdItem);
+    }
+
+    private void validateMdItem(@Valid @NotNull MdItem mdItem) {
+        // 此方法仅用于触发验证
     }
 }
