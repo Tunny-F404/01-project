@@ -1,7 +1,10 @@
 {
   "name": "project-frontend",
   "version": "1.0.0",
+  "packageManager": "pnpm@8.15.8",
   "scripts": {
+    "git:fetch": "git fetch -p",
+    "corepack:pnpm": "corepack enable && corepack install",
     "dev": "vite --open",
     "build": "vite build",
     "preview": "vite preview --port 4173",
@@ -13,7 +16,7 @@
     "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^0.27.2",
     "crypto-js": "^4.1.1",
-    "element-plus": "^2.7.3",
+    "element-plus": "^2.2.17",
     "pdfobject": "^2.2.12",
     "pinia": "^2.0.21",
     "qs": "^6.11.0",
@@ -27,7 +30,7 @@
     "@rushstack/eslint-patch": "^1.1.4",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/eslint-config-prettier": "^7.0.0",
-    "eslint": "8.22.0",
+    "eslint": "9.3.0",
     "eslint-plugin-vue": "^9.3.0",
     "prettier": "^2.7.1",
     "sass": "^1.54.9",
