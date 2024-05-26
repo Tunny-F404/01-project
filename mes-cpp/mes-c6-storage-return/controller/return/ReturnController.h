@@ -131,7 +131,7 @@ public:
 	// 定义导出单据接口描述
 	ENDPOINT_INFO(downloadFile) {
 		API_DEF_ADD_COMMON(ZH_WORDS_GETTER("return.download-return.summary"), Void);
-		API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("return.fields.filename"), "file/C6RyanTest.jpg", true);
+		API_DEF_ADD_QUERY_PARAMS(String, "code", ZH_WORDS_GETTER("return.fields.filename"), "1", true);
 	}
 	// 定义导出单据接口处理
 	ENDPOINT(API_M_GET, "/return/download", downloadFile, QUERY(String, code)) {

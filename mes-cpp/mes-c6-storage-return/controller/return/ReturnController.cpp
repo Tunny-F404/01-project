@@ -116,10 +116,10 @@ Uint64JsonVO::Wrapper ReturnController::execRemoveReturn(const String& code)
 	return jvo;
 }
 // 导出单据
-std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse> ReturnController::execDownloadFile(const String& filename)
+std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse> ReturnController::execDownloadFile(const String& code)
 {
 	// 构建文件全路径 // 相对路径无法加载
-	std::string fullPath = "C:/Users/RHY/Desktop/C6/zero-one-08mes/mes-cpp/mes-c6-storage-return/public/static/" + URIUtil::urlDecode(filename.getValue(""));
+	std::string fullPath = "C:/Users/RHY/Desktop/C6/zero-one-08mes/mes-cpp/mes-c6-storage-return/public/static/file/C6RyanTest.jpg" ;
 	// 读取文件
 	auto fstring = String::loadFromFile(fullPath.c_str());
 
@@ -134,7 +134,7 @@ std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse> Return
 	auto response = createResponse(Status::CODE_200, fstring);
 
 	// 设置响应头信息
-	response->putHeader("Content-Disposition", "attachment; filename=" + filename.getValue(""));
+	response->putHeader("Content-Disposition", "attachment; code=" + code.getValue(""));
 
 	// 影响成功结果
 	return response;
