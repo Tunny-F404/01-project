@@ -11,6 +11,6 @@
     </select>
 
     <select id="selectByNameOne" resultMap="DeptMap">
-        SELECT dept_id,parent_id,dept_name FROM sys_dept WHERE dept_name=#{name} ORDER BY order_num
+        SELECT dept_id,parent_id,dept_name FROM sys_dept WHERE dept_name LIKE CONCAT('%',#{name},'%')ORDER BY order_num
     </select>
 </mapper>
