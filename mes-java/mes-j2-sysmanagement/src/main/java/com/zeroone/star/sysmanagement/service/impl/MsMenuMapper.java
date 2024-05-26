@@ -1,7 +1,7 @@
 package com.zeroone.star.sysmanagement.service.impl;
 
 import com.zeroone.star.project.j2.sysmanagement.dto.menu.MenuDTO;
-import com.zeroone.star.sysmanagement.entity.SysMenuDO;
+import com.zeroone.star.sysmanagement.entity.MenuDO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
@@ -14,6 +14,6 @@ public interface MsMenuMapper {
      * @throws
      * @since 1.0
      */
-    SysMenuDO menuToMenuDTO(MenuDTO menuDTO);
+    MenuDO menuToMenuDTO(MenuDTO menuDTO);
 
 }

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceDetailsVO;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceTreeVO;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceVO;
-import com.zeroone.star.sysmanagement.entity.SysMenuDO;
+import com.zeroone.star.sysmanagement.entity.MenuDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2024-05-25
  */
 @Mapper
-public interface SysMenuMapper extends BaseMapper<SysMenuDO> {
+public interface MenuMapper extends BaseMapper<MenuDO> {
 
     @Select("select menu_id,menu_name,parent_id from sys_menu")
     List<ResourceTreeVO> getResourceNameTree();
