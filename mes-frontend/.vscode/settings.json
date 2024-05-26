@@ -1,0 +1,10 @@
+{
+	// 参考资料 https://github.com/mhutchie/vscode-git-graph/blob/develop/README.md
+	"git-graph.customBranchGlobPatterns": [
+		{
+			"name": "f1小组分支",
+			// 参考资料 https://stackoverflow.com/questions/45439796/globbing-in-git-log-to-show-certain-branches
+			"glob": "*f1*"
+		}
+	]
+}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # `zero-one-mes`
 
 **MES相关概念参考：**
@@ -237,3 +238,12 @@ https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#requirem
 
 想了解更多关于计算机方向选择、学习建议等相关信息，可以关注[**01星球B站主页~**](https://space.bilibili.com/1653229811?spm_id_from=333.1007.0.0)
 
+=======
+# Vue 3 + Vite
+
+This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+
+## Recommended IDE Setup
+
+- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+>>>>>>> 050fbe2 (f1-table-海山了)
