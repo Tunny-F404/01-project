@@ -91,6 +91,22 @@ public:
 	}
 };
 
+class EquipmentTypeDetailMapper : public Mapper<dvMachineryTypeDO>
+{
+public:
+	dvMachineryTypeDO mapper(ResultSet* resultSet) const override
+	{
+
+		dvMachineryTypeDO data;
+		data.setMachineryTypeId(resultSet->getUInt64(1));
+		data.setMachineryTypeCode(resultSet->getString(2));
+		data.setMachineryTypeName(resultSet->getString(3));
+
+
+		return data;
+	}
+};
+
 class WorkshopMapper : public Mapper<MdWorkshopDO>
 {
 public:
@@ -100,6 +116,20 @@ public:
 		MdWorkshopDO data;
 		data.setWorkshopId(resultSet->getUInt64(1));
 
+		return data;
+	}
+};
+
+class WorkshopdetailMapper : public Mapper<MdWorkshopDO>
+{
+public:
+	MdWorkshopDO mapper(ResultSet* resultSet) const override
+	{
+
+		MdWorkshopDO data;
+		data.setWorkshopId(resultSet->getUInt64(1));
+		data.setWorkshopCode(resultSet->getString(2));
+		data.setWorkshopName(resultSet->getString(3));
 		return data;
 	}
 };

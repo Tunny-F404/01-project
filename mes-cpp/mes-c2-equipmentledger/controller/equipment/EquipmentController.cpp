@@ -57,7 +57,7 @@ Uint64JsonVO::Wrapper EquipmentController::execAddEquipment(const addEquipmentDT
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->eCode->empty() || dto->eName->empty() || dto->brand->empty() || dto->tName->empty() || dto->spec->empty() || dto->workshopName->empty() || dto->note->empty())
+	if (dto->eCode->empty() || dto->eName->empty()  || dto->tName->empty() || dto->workshopName->empty() )
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -91,7 +91,7 @@ Uint64JsonVO::Wrapper EquipmentController::executeModifyEquipment(const modifyEq
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->eId<0 || dto->eCode->empty() || dto->eName->empty() || dto->brand->empty() || dto->tName->empty() || dto->spec->empty() || dto->workshopName->empty() || dto->note->empty())
+	if (dto->eId<0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;

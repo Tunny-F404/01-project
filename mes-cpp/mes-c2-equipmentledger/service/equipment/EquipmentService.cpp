@@ -3,6 +3,7 @@
 #include"../../dao/equipment/EquipmentDAO.h"
 #include"../../domain/do/dv_machinery/dvMachineryDO.h"
 #include"../../domain/dto/equipment/EquipmentDTO.h"
+#include"../../domain/do/md_workshop/md_workshopDO.h"
 EquipmentPageDTO::Wrapper EquipmentService::listAll(const EquipmentQuery::Wrapper& query)
 {
 	// 构建返回对象
@@ -26,15 +27,20 @@ EquipmentPageDTO::Wrapper EquipmentService::listAll(const EquipmentQuery::Wrappe
 	// 将DO转换成DTO
 	for (dvMachineryDO sub : result)
 	{
+		list<MdWorkshopDO> path= dao.getWorkshopByid(sub.getWorkshopId());
 		auto dto = EquipmentDTO::createShared();
+		if (!path.empty())
+		{
+			auto it = path.begin();
+			dto->workshopCode = it->getWorkshopCode();
+			dto->workshopName = it->getWorkshopName();
+		}
 		dto->eId = sub.getMachineryId();
 		dto->eCode = sub.getMachineryCode();
 		dto->eName = sub.getMachineryName();
 		dto->brand = sub.getMachineryBrand();
 		dto->spec = sub.getMachinerySpec();
 		dto->workshopId = sub.getWorkshopId();
-		dto->workshopCode = sub.getWorkshopCode();
-		dto->workshopName = sub.getWorkshopName();
 		dto->status = sub.getStatus();
 		dto->createtime = sub.getCreateTime();
 			pages->addData(dto);
@@ -53,18 +59,33 @@ EquipmentDetailDTO::Wrapper EquipmentService::getDetail(const EquipmentDetailQue
 	// 将DO转换成DTO
 	for (dvMachineryDO sub : result)
 	{
+
 		auto dto = EquipmentDetailDTO::createShared();
+
+		list<MdWorkshopDO> path = dao.getWorkshopByid(sub.getWorkshopId());
+		if (!path.empty())
+		{
+			auto it = path.begin();
+			dto->workshopCode = it->getWorkshopCode();
+			dto->workshopName = it->getWorkshopName();
+		}
+
+		list<dvMachineryTypeDO>path1 = dao.getMachinerytypeByid(sub.getMachineryTypeId());
+		if (!path1.empty())
+		{
+			auto it = path1.begin();
+			dto->tCode = it->getMachineryTypeCode();
+			dto->tName = it->getMachineryTypeName();
+		}
+
+
 		dto->eId = sub.getMachineryId();
 		dto->eCode = sub.getMachineryCode();
 		dto->eName = sub.getMachineryName();
 		dto->brand = sub.getMachineryBrand();
 		dto->tId = sub.getMachineryTypeId();
-		dto->tCode = sub.getMachineryTypeCode();
-		dto->tName = sub.getMachineryTypeName();
 		dto->spec = sub.getMachinerySpec();
 		dto->workshopId = sub.getWorkshopId();
-		dto->workshopCode = sub.getWorkshopCode();
-		dto->workshopName = sub.getWorkshopName();
 		dto->note = sub.getRemark();
 		
 		return dto;

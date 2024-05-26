@@ -44,6 +44,10 @@ public:
 	list<MdWorkshopDO> getWorkshopidByname(std::string name);
 	// 修改数据
 	int modify(const dvMachineryDO& iObj);
+	//根据车间ID获取详情
+	list<MdWorkshopDO> getWorkshopByid(std::int64_t id);
+	//根据设备类型ID获取详情
+	list<dvMachineryTypeDO> getMachinerytypeByid(std::int64_t id);
 	
 };
 #endif // 

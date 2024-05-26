@@ -73,14 +73,12 @@ list<MdWorkshopDO> EquipmentDAO::getWorkshopidByname(std::string name)
 int EquipmentDAO::modify(const dvMachineryDO& iObj)
 {
 
-
-
-	uint64_t machineryTypeId;
 	uint64_t WorkshopId;
+	uint64_t machineryTypeId;
 	list<dvMachineryTypeDO>s1 = getMachinerytypeidByname(iObj.getMachineryTypeName());
 	if (!s1.empty())
 	{
-		// 获取指向第一个元素的迭代器
+		 //获取指向第一个元素的迭代器
 		list<dvMachineryTypeDO>::iterator it = s1.begin();
 		// 获取第一个 machinery_type_id
 		machineryTypeId = it->getMachineryTypeId();
@@ -109,6 +107,20 @@ int EquipmentDAO::modify(const dvMachineryDO& iObj)
 
 	string sql = "UPDATE `dv_machinery` SET `machinery_code`=?, `machinery_name`=?, `machinery_brand`=?,`machinery_type_id`=?,`machinery_spec`=?,`workshop_id`=?,`remark`=? WHERE `machinery_id`=?";
 	return sqlSession->executeUpdate(sql, "%s%s%s%i%s%i%s%i", iObj.getMachineryCode(), iObj.getMachineryName(), iObj.getMachineryBrand(), machineryTypeId, iObj.getMachinerySpec(), WorkshopId, iObj.getRemark(),iObj.getMachineryId());
+}
+
+list<MdWorkshopDO> EquipmentDAO::getWorkshopByid(std::int64_t id)
+{
+	string sql = "SELECT workshop_id,workshop_code,workshop_name FROM md_workshop WHERE workshop_id= ? ";
+	WorkshopdetailMapper mapper;
+	return sqlSession->executeQuery<MdWorkshopDO, WorkshopdetailMapper>(sql, mapper, "%i", id);
+}
+
+list<dvMachineryTypeDO> EquipmentDAO::getMachinerytypeByid(std::int64_t id)
+{
+	string sql = "SELECT machinery_type_id,machinery_type_code,machinery_type_name FROM dv_machinery_type WHERE machinery_type_id= ? ";
+	EquipmentTypeDetailMapper mapper;
+	return sqlSession->executeQuery<dvMachineryTypeDO, EquipmentTypeDetailMapper>(sql, mapper, "%i", id);
 }
 
 uint64_t EquipmentDAO::insert(const dvMachineryDO& iObj)
