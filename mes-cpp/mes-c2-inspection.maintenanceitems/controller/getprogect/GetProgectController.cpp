@@ -19,10 +19,19 @@
 
 #include "stdafx.h"
 #include "GetProgectController.h"
+#include "../../service/getprogect/GetProgectService.h"
+#include "GetProgectController.h"
 
 GetProgectPageJsonVO::Wrapper GetProgectController::execGetProgect(const GetProgectQuery::Wrapper& query)
 {
-	return {};
+	// 定义一个Service
+	GetProgectService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = SamplePageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 GetProgectDetailJsonVO::Wrapper GetProgectController::execProgectDetail(const GetProgectDetailQuery::Wrapper& query)
