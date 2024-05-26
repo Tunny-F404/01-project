@@ -32,3 +32,5 @@ prod:
    summary: "修改一条生产任务"
   delete:
    summary: "删除一条生产任务"
+  get:
+   summary: "获取报工列表"  

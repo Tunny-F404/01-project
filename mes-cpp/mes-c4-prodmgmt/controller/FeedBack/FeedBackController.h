@@ -44,7 +44,7 @@ public:
 	// 3.1 定义查询接口描述
 	ENDPOINT_INFO(queryFeedBackTable) {
 		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("prod.query.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("prod.get.summary"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
@@ -66,7 +66,7 @@ public:
 
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/feedback/query-feedback-table", queryFeedBackTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/query-feedback-table", queryFeedBackTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, FeedBackQuery, queryParams);
 		// 呼叫执行函数响应结果
