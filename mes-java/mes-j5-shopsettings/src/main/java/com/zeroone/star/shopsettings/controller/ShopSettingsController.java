@@ -49,38 +49,41 @@ public class ShopSettingsController implements ShopSettingsApis {
     }
     /**
      * 更新车间信息
+     *
      * @param shopsettingsDTO
      * @return
      */
     @Override
     @PutMapping("/update-shopsetting")
     @ApiOperation("更新车间信息")
-    public JsonVO<GetShopSettingsDTO> updateShopSeetingController(
+    public JsonVO<Integer> updateShopSeetingController(
             @ApiParam("车间DTO")@RequestBody GetShopSettingsDTO shopsettingsDTO) {
         shopsettingsService.Update(shopsettingsDTO);
         return null;
     }
     /**
      * 新增车间信息
+     *
      * @param shopsettingsDTO
      * @return
      */
     @PutMapping("/sava-shopsetting")
     @Override
     @ApiOperation("新增车间信息")
-    public JsonVO<GetShopSettingsDTO> saveShopSeetingController(
+    public JsonVO<Integer> saveShopSeetingController(
             @ApiParam("车间DTO")@RequestBody GetShopSettingsDTO shopsettingsDTO) {
         return null;
     }
     /**
      * 删除或批量删除车间信息
+     *
      * @param ids
      * @return
      */
     @DeleteMapping("/delete-shopsettings")
     @Override
     @ApiOperation("删除或批量删除车间信息")
-    public JsonVO<GetShopSettingsDTO> deleteShopSeetingController(
+    public JsonVO<Integer> deleteShopSeetingController(
             @ApiParam("车间id")@RequestParam List<Long> ids) {
         return null;
     }

@@ -32,19 +32,19 @@ public interface ShopSettingsApis {
      * @param shopsettingsDTO
      * @return
      */
-    JsonVO<GetShopSettingsDTO> updateShopSeetingController(GetShopSettingsDTO shopsettingsDTO);
+    JsonVO<Integer> updateShopSeetingController(GetShopSettingsDTO shopsettingsDTO);
     /**
      * 新增车间信息
      * @param shopsettingsDTO
      * @return
      */
-    JsonVO<GetShopSettingsDTO> saveShopSeetingController(GetShopSettingsDTO shopsettingsDTO);
+    JsonVO<Integer> saveShopSeetingController(GetShopSettingsDTO shopsettingsDTO);
     /**
      * 删除或批量删除车间信息
      * @param ids
      * @return
      */
-    JsonVO<GetShopSettingsDTO> deleteShopSeetingController(List<Long> ids );
+    JsonVO<Integer> deleteShopSeetingController(List<Long> ids );
     /**
      * 获取车间名称列表
      * @param shopsettingsDTO

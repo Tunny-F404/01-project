@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetShopSettingsDTO  extends PageDTO {
+public class GetShopSettingsDTO {
 
     @ApiModelProperty(value = "车间id", example = "1")
     private Long workshop_id;
