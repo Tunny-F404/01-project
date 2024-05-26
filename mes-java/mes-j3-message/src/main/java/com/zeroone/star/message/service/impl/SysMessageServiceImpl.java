@@ -7,7 +7,6 @@ import com.zeroone.star.message.service.ISysMessageService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.j3.dto.SysMessageDTO;
 import com.zeroone.star.project.j3.query.MessageQuery;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -75,7 +74,18 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
 
     @Override
     public List<Long> modifyMessage(Long id) {
-        return null;
+        SysMessage sysMessage = baseMapper.selectById(id);
+        if(sysMessage == null){
+            return new ArrayList<>();
+        }
+        if(sysMessage.getStatus().equals("已读")){
+            sysMessage.setStatus("未读");
+        } else{
+            sysMessage.setStatus("已读");
+        }
+        baseMapper.updateById(sysMessage);
+        List<Long> list = new ArrayList<>();
+        list.add(id);
+        return list;
     }
-
 }

@@ -46,7 +46,7 @@ public class MessageInfoController implements MessageInfoApis {
     @Override
     @PostMapping("/modify-message")
     @ApiOperation("修改消息状态")
-    public JsonVO<List<Long>> modifyMessageStatus(Long id) {
+    public JsonVO<List<Long>> modifyMessageStatus(@RequestBody Long id) {
         List<Long> data = messageService.modifyMessage(id);
         return !data.isEmpty() ? JsonVO.success(data) : JsonVO.fail(data);
     }
