@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _PRODORDER_CONTROLLER_
-#define _PRODORDER_CONTROLLER_
+#ifndef _PRODORDER1_CONTROLLER_
+#define _PRODORDER1_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
 #include "domain/dto/ProdTask/ProdTaskDTO.h"
@@ -63,4 +63,4 @@ private:
 
 // 0 取消API控制器使用宏
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
-#endif // _PRODORDER_CONTROLLER
+#endif // _PRODORDER1_CONTROLLER

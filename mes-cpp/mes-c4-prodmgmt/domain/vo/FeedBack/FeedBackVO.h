@@ -17,10 +17,9 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _USERVO_H_
-#define _USERVO_H_
+#ifndef _FEEDBACKVO_H_
+#define _FEEDBACKVO_H_
 
-#include "../../GlobalInclude.h"
 #include "../../dto/FeedBack/FeedBackDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
@@ -47,4 +46,4 @@ class FeedBackPageJsonVO : public JsonVO<oatpp::List<FeedBackPageDTO::Wrapper>>
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // _USERVO_H_
+#endif // _FEEDBACKVO_H_

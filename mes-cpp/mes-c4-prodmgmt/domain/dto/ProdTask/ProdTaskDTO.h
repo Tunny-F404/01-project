@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _PRODORDER_DTO_
-#define _PRODORDER_DTO_
+#ifndef _PRODORDER1_DTO_
+#define _PRODORDER1_DTO_
 #include "../../GlobalInclude.h"
 
 
@@ -94,4 +94,4 @@ class ProdTaskRemoveDTO : public oatpp::DTO
 };
 	
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_PRODORDER_DTO_
+#endif // !_PRODORDER1_DTO_

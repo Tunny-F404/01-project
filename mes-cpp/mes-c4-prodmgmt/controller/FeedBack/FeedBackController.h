@@ -21,9 +21,7 @@
 #ifndef _FEEDBACKCONTROLLER_
 #define _FEEDBACKCONTROLLER_
 
-#include "domain/vo/BaseJsonVO.h"
 #include "domain/query/FeedBack/FeedBackQuery.h"
-#include "domain/dto/FeedBack/FeedBackDTO.h"
 #include "domain/vo/FeedBack/FeedBackVO.h"
 
 // 0 定义API控制器使用宏

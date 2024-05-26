@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _SAMPLE_QUERY_
-#define _SAMPLE_QUERY_
+#ifndef _FEEDBACK_QUERY_
+#define _FEEDBACK_QUERY_
 
 #include "../../GlobalInclude.h"
 #include "domain/query/PageQuery.h"
@@ -56,4 +56,4 @@ class FeedBackQuery : public PageQuery
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_SAMPLE_QUERY_
+#endif // !_FEEDBACK_QUERY_

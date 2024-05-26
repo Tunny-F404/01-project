@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _SAMPLE_DTO_
-#define _SAMPLE_DTO_
+#ifndef _FEEDBACK_DTO_
+#define _FEEDBACK_DTO_
 #include "../../GlobalInclude.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
@@ -150,4 +150,4 @@ class FeedBackPageDTO : public PageDTO<FeedBackDTO::Wrapper>
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_SAMPLE_DTO_
+#endif // !_FEEDBACK_DTO_
