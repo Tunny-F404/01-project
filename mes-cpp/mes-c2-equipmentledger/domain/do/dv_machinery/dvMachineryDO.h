@@ -19,6 +19,8 @@
 #ifndef _DVMACHINERYDO_H_
 #define _DVMACHINERYDO_H_
 
+#include "../DoInclude.h";
+
 class dvMachineryDO
 {
 	// 设备ID
@@ -40,7 +42,7 @@ class dvMachineryDO
 	// 所属车间ID
 	CC_SYNTHESIZE(uint64_t, workshop_id, WorkshopId)
 	// 所属车间编码
-	CC_SYNTHESIZE(std::string workshop_code, WorkshopCode)
+	CC_SYNTHESIZE(std::string, workshop_code, WorkshopCode)
 	// 设备名称
 	CC_SYNTHESIZE(std::string, workshop_name, WorkshopName)
 	// 设备状态
