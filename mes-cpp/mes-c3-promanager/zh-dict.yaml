@@ -108,6 +108,7 @@ RelatePro:
   ModRelatePro: 修改关联产品
   ProMaterial: 获取产品制程物料BOM表
  DTO:
+  record_id: 记录ID
   item_id: 产品物料ID
   item_code: 产品物料编码
   item_name: 产品物料名称

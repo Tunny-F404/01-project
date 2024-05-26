@@ -12,9 +12,10 @@
 class ProductMaterialDTO : public oatpp::DTO
 {
 	DTO_INIT(ProductMaterialDTO, DTO);
-
+	// 记录id
+	API_DTO_FIELD(UInt64, record_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.record_id"), true, 1);
 	// 物料编码
-	API_DTO_FIELD(UInt64, item_code, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"), true, 1);
+	API_DTO_FIELD(String, item_code, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"), true, "");
 	// 物料名称
 	API_DTO_FIELD(String, item_name, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_name"), true, "01star");
 	// 物料单位
