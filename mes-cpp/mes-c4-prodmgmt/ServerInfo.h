@@ -29,7 +29,7 @@ class ServerInfo
 private:
 	// 成员初始化
 	void init() {
-		this->dbPort = 3306;
+		this->dbPort = 3333;
 		this->dbMax = 25;
 		// 加载中文词典
 		zhDictNode = YAML::LoadFile("zh-dict.yaml");

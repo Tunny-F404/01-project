@@ -41,6 +41,8 @@
 #include "../controller/ApprovalStage/ApprovalStage.h"
 #include "controller/ProdWorkorder/ProWorkorderController.h"
 #include "ProduceWork/ProController.h"
+#include "FeedBack/FeedBackController.h"
+#include "../mes-c4-prodmgmt/controller/ProdTask/ProdTaskController.h"
 
 #ifdef CLOSE_SWAGGER_DOC
 // �򻯰󶨿������궨��
@@ -78,6 +80,9 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(ProductionOrderController);
 	ROUTER_SIMPLE_BIND(ProductionProcessController);
 	ROUTER_SIMPLE_BIND(ProdOrderController);
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	ROUTER_SIMPLE_BIND(FeedBackController);
+	ROUTER_SIMPLE_BIND(ProdTaskController);
 }
 
 
