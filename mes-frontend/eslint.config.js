@@ -88,6 +88,15 @@ export default antfu(
 		rules: {
 			"no-console": "off",
 			"style/semi": ["error", "never"],
+
+			/** @see https://www.jianshu.com/p/1c92f4fda107 */
+			indent: [
+				"warn",
+				2,
+				{
+					ignoredNodes: ["TemplateLiteral"],
+				},
+			],
 		},
 	},
 
