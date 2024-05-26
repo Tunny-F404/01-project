@@ -37,6 +37,6 @@ productionprocess:
  query:
   summary: 生产排查
   fields:
-   process_name: 工序名称
-   process_id:  工序ID
-   process_code: 工序编号  
+    process_name: 工序名称
+    process_id:  工序ID
+    process_code: 工序编号  

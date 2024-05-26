@@ -26,6 +26,7 @@
  */
 class ProWorkOrderBomDO
 {
+	CC_SYNTHESIZE(string, workorder_code, workOrderCode);
 	CC_SYNTHESIZE(string, item_code, itemCode);
 	CC_SYNTHESIZE(string, item_name, itemName);
 	CC_SYNTHESIZE(string, item_spc, itemSpc);
@@ -36,6 +37,7 @@ class ProWorkOrderBomDO
 	CC_SYNTHESIZE(int, workorder_id, workOrderId);
 public:
 	ProWorkOrderBomDO() {
+		workorder_code = "";
 		item_code = "";
 		item_name = "";
 		item_spc = "";

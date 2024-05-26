@@ -30,8 +30,6 @@ class ProductionProcessDTO : public oatpp::DTO
 {
 	DTO_INIT(ProductionProcessDTO, DTO);
 	API_DTO_FIELD(String, processName, ZH_WORDS_GETTER("productionprocess.query.fields.process_name"), true, "");
-	API_DTO_FIELD(Int32, processId, ZH_WORDS_GETTER("productionprocess.query.fields.process_id"), true,0);
-	API_DTO_FIELD(String, processCode, ZH_WORDS_GETTER("productionprocess.query.fields.process_code"), true, "");
 };
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_PROCESS_DTO_

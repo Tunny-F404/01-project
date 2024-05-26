@@ -31,6 +31,7 @@
 class ExportBomOrderQuery : public PageQuery
 {
 	DTO_INIT(ExportBomOrderQuery, PageQuery);
+	API_DTO_FIELD_DEFAULT(String, WorkOrderCode, ZH_WORDS_GETTER("productionorder.query.fields.workroder_code"));
 	API_DTO_FIELD_DEFAULT(Int32, workOrderId, ZH_WORDS_GETTER("productionorder.query.fields.workorder_id"));
 	API_DTO_FIELD_DEFAULT(Int32, itemId, ZH_WORDS_GETTER("productionorder.query.fields.item_id"));
 	API_DTO_FIELD_DEFAULT(String, itemCode, ZH_WORDS_GETTER("productionorder.query.fields.item_code"));

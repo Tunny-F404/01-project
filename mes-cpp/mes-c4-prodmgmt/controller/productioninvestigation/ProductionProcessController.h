@@ -47,10 +47,11 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "itemCode", ZH_WORDS_GETTER("productionorder.query.fields.item_code"),"",false);
-		API_DEF_ADD_QUERY_PARAMS(String, "itemName", ZH_WORDS_GETTER("productionorder.query.fields.item_name"),"",false);
-		API_DEF_ADD_QUERY_PARAMS(String, "productName", ZH_WORDS_GETTER("productionorder.query.fields.product_name"),"",false);
-		API_DEF_ADD_QUERY_PARAMS(String, "productCode", ZH_WORDS_GETTER("productionorder.query.fields.product_code"),"",false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workOrderCode", ZH_WORDS_GETTER("productionorder.query.fields.workorder_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workOrderName", ZH_WORDS_GETTER("productionorder.query.fields.workorder_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(Int32, "workOrderId", ZH_WORDS_GETTER("productionorder.query.fields.workorder_id"), 0, false);
+		API_DEF_ADD_QUERY_PARAMS(Int32, "processId", ZH_WORDS_GETTER("productionprocess.query.fields.process_id"), 0, false);
+		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("productionprocess.query.fields.process_name"), "", false);
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/productionprocess/query-production-process", productionProcess,QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
