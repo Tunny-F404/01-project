@@ -49,6 +49,27 @@ public:
 		return data;
 	}
 };
+
+class EquipmentSampleMapper : public Mapper<dvMachineryDO>
+{
+public:
+	dvMachineryDO mapper(ResultSet* resultSet) const override
+	{
+		dvMachineryDO data;
+		data.setMachineryId(resultSet->getUInt64(1));
+		data.setMachineryCode(resultSet->getString(2));
+		data.setMachineryName(resultSet->getString(3));
+		data.setMachineryBrand(resultSet->getString(4));
+		data.setMachineryTypeId(resultSet->getUInt64(5));
+		data.setMachinerySpec(resultSet->getString(6));
+		data.setWorkshopId(resultSet->getUInt64(7));
+		data.setRemark(resultSet->getString(8));
+
+
+		return data;
+	}
+};
+
 class EquipmentDetailMapper : public Mapper<dvMachineryDO>
 {
 public:

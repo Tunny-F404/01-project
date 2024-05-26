@@ -43,11 +43,13 @@ public:
 	//通过车间名称获得车间ID
 	list<MdWorkshopDO> getWorkshopidByname(std::string name);
 	// 修改数据
-	int modify(const dvMachineryDO& iObj);
+	int modify( dvMachineryDO iObj);
 	//根据车间ID获取详情
 	list<MdWorkshopDO> getWorkshopByid(std::int64_t id);
 	//根据设备类型ID获取详情
 	list<dvMachineryTypeDO> getMachinerytypeByid(std::int64_t id);
+	//根据设备ID获取详情
+	list<dvMachineryDO> getMachineryByid(std::int64_t id);
 	
 };
 #endif // 

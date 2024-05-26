@@ -89,6 +89,7 @@ EquipmentDetailDTO::Wrapper EquipmentService::getDetail(const EquipmentDetailQue
 		dto->note = sub.getRemark();
 		
 		return dto;
+		
 	}
 	return {};
 }
