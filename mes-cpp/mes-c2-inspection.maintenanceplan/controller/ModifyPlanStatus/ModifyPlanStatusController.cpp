@@ -12,6 +12,11 @@ ModifyPlanStatusJsonVo::Wrapper ModifyPlanStatusController::execModifyPlanStatus
 		jvo->init(dto, RS_PARAMS_INVALID);
 		return jvo;
 	}
+	if (!dto->status)
+	{
+		jvo->init(dto, RS_PARAMS_INVALID);
+		return jvo;
+	}
 	// 定义一个Service
 	ModifyPlanStatusService service;
 	// 执行数据修改
