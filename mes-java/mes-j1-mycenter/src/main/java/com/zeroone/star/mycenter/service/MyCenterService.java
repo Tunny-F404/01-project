@@ -39,7 +39,7 @@ public class MyCenterService  {
     public MyCenterDTO updateInfo(MyCenterDTO myCenterDTO) {
         int id = myCenterDTO.getUser_id();
         myCenterMapper.updateInfo(myCenterDTO);
-        return mapStructMyCenterMapper.MyCenterDTOToSysUserDO(myCenterMapper.selectUser(id));
+        return mapStructMyCenterMapper.INSTANCE.SysUserDOToMyCenterDTO(myCenterMapper.selectUser(id));
     }
 
 
@@ -52,21 +52,21 @@ public class MyCenterService  {
         myCenterDTO.setAvatar(result.getGroup()+"/"+ result.getStorageId());
 
         myCenterMapper.updateAvatar(myCenterDTO);
-        return mapStructMyCenterMapper.MyCenterDTOToSysUserDO(myCenterMapper.selectUser(id));
+        return mapStructMyCenterMapper.INSTANCE.SysUserDOToMyCenterDTO(myCenterMapper.selectUser(id));
     }
 
 
     public MyCenterDTO updatePhone(MyCenterDTO myCenterDTO) {
         int id = myCenterDTO.getUser_id();
         myCenterMapper.updatePhone(myCenterDTO);
-        return mapStructMyCenterMapper.MyCenterDTOToSysUserDO(myCenterMapper.selectUser(id));
+        return mapStructMyCenterMapper.INSTANCE.SysUserDOToMyCenterDTO(myCenterMapper.selectUser(id));
     }
 
 
     public MyCenterDTO updateEmail(MyCenterDTO myCenterDTO) {
         int id = myCenterDTO.getUser_id();
         myCenterMapper.updateEmail(myCenterDTO);
-        return mapStructMyCenterMapper.MyCenterDTOToSysUserDO(myCenterMapper.selectUser(id));
+        return mapStructMyCenterMapper.INSTANCE.SysUserDOToMyCenterDTO(myCenterMapper.selectUser(id));
     }
 
 
@@ -74,7 +74,7 @@ public class MyCenterService  {
         int id = myCenterDTO.getUser_id();
         myCenterDTO.setPassword(passwordEncoder.encode(myCenterDTO.getPassword()));
         myCenterMapper.updatePassword(myCenterDTO);
-        return mapStructMyCenterMapper.MyCenterDTOToSysUserDO(myCenterMapper.selectUser(id));
+        return mapStructMyCenterMapper.INSTANCE.SysUserDOToMyCenterDTO(myCenterMapper.selectUser(id));
     }
 
 

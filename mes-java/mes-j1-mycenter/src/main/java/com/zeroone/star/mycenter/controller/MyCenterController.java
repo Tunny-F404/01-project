@@ -47,6 +47,9 @@ public class MyCenterController implements MyCenterApis {
         try{
             myCenterDTO.setUpdate_time(LocalDateTime.now());
             MyCenterDTO updateDTO = myCenterService.updateInfo(myCenterDTO);
+            updateDTO.setUpdate_time(LocalDateTime.now());
+            updateDTO.setUser_id(myCenterDTO.getUser_id());
+            updateDTO.setNick_name(myCenterDTO.getNick_name());
             return JsonVO.success(updateDTO);
         }catch (Exception e){
             e.printStackTrace();
@@ -63,6 +66,9 @@ public class MyCenterController implements MyCenterApis {
         try {
             myCenterDTO.setUpdate_time(LocalDateTime.now());
             MyCenterDTO updateDTO = myCenterService.updateAvatar(myCenterDTO);
+            updateDTO.setUpdate_time(LocalDateTime.now());
+            updateDTO.setUser_id(myCenterDTO.getUser_id());
+            updateDTO.setNick_name(myCenterDTO.getNick_name());
             return JsonVO.success(updateDTO);
         }catch (Exception e){
             myCenterDTO.setFail_msg("修改头像时发生错误");
@@ -84,6 +90,9 @@ public class MyCenterController implements MyCenterApis {
             }
 
             MyCenterDTO updateDTO = myCenterService.updatePhone(myCenterDTO);
+            updateDTO.setUpdate_time(LocalDateTime.now());
+            updateDTO.setUser_id(myCenterDTO.getUser_id());
+            updateDTO.setNick_name(myCenterDTO.getNick_name());
             return JsonVO.success(updateDTO);
         }catch(Exception e){
             myCenterDTO.setFail_msg("修改手机时发生错误");
@@ -105,6 +114,9 @@ public class MyCenterController implements MyCenterApis {
                 return JsonVO.fail(myCenterDTO);
             }
             MyCenterDTO updateDTO = myCenterService.updateEmail(myCenterDTO);
+            updateDTO.setUpdate_time(LocalDateTime.now());
+            updateDTO.setUser_id(myCenterDTO.getUser_id());
+            updateDTO.setNick_name(myCenterDTO.getNick_name());
             return JsonVO.success(updateDTO);
         }catch (Exception e){
             myCenterDTO.setFail_msg("修改邮箱时发生错误");
@@ -124,6 +136,9 @@ public class MyCenterController implements MyCenterApis {
                 return JsonVO.fail(myCenterDTO);
             }
             MyCenterDTO updateDTO = myCenterService.updatePassword(myCenterDTO);
+            updateDTO.setUpdate_time(LocalDateTime.now());
+            updateDTO.setUser_id(myCenterDTO.getUser_id());
+            updateDTO.setNick_name(myCenterDTO.getNick_name());
             return JsonVO.success(updateDTO);
         }catch (Exception e){
             myCenterDTO.setFail_msg("修改密码时发生错误");

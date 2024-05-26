@@ -19,9 +19,6 @@ public class MyCenterDTO {
     @ApiModelProperty(value = "头像url",example = "a/b/c/1.jpg")
     private String avatar;
 
-    @ApiModelProperty(value = "头像文件",example = "111.jpg")
-    private MultipartFile image;
-
     //用户昵称
     @ApiModelProperty(value = "昵称",example = "zhangsan")
     private String nick_name;
@@ -38,22 +35,25 @@ public class MyCenterDTO {
     @ApiModelProperty(value = "性别",example = "男")
     private char sex;
 
-    //错误原因
-    @ApiModelProperty(value = "错误信息",example = "格式不正确")
-    private String fail_msg;
-
     //更新时间
     @ApiModelProperty(value = "更新时间",example = "2023-11-20 21:19:01")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime update_time;
 
+    //id
+    @ApiModelProperty(value = "id",example = "1324")
+    private int user_id;
+
     //密码
     @ApiModelProperty(value = "密码",example = "123456")
     private String password;
 
-    //id
-    @ApiModelProperty(value = "id",example = "1324")
-    private int user_id;
+    //错误原因
+    @ApiModelProperty(value = "错误信息",example = "格式不正确")
+    private String fail_msg;
+
+    @ApiModelProperty(value = "头像文件",example = "111.jpg")
+    private MultipartFile image;
 
 
 }

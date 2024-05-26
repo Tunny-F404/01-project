@@ -10,5 +10,5 @@ import org.springframework.stereotype.Component;
 public interface MapStructMyCenterMapper {
     MapStructMyCenterMapper INSTANCE = Mappers.getMapper(MapStructMyCenterMapper.class);
 
-    MyCenterDTO MyCenterDTOToSysUserDO(sysUserDO DO);
+    MyCenterDTO SysUserDOToMyCenterDTO(sysUserDO DO);
 }
