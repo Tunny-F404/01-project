@@ -1,5 +1,4 @@
 #pragma once
-
 /*
  Copyright Zero One Star. All rights reserved.
 
@@ -23,6 +22,7 @@
 #include "BaseDAO.h"
 #include "../../domain/do/processinspection/processinspectionDO.h"
 #include "../../domain/query/processinspection/ProcessinSpectionQuery.h"
+
 class ProcessInspectionDAO : public BaseDAO
 {
 public:
@@ -30,5 +30,7 @@ public:
 	int update(const ProcessinSpectionDO& uObj);
 
 	list<ProcessinSpectionDO> select(const ProcessinSpectionQuery::Wrapper& query);
+
+	uint64_t count(const ProcessinSpectionQuery::Wrapper& query);
 };
 #endif // !_SAMPLE_DAO_

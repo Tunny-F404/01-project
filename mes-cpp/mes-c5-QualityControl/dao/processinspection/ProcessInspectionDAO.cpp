@@ -1,4 +1,3 @@
-#include "ProcessInspectionDAO.h"
 /*
  Copyright Zero One Star. All rights reserved.
 
@@ -19,7 +18,25 @@
 */
 #include "stdafx.h"
 #include "ProcessInspectionDAO.h"
+#include "ProcessinSpectionMapper.h"
 #include <sstream>
+
+//定义条件解析宏，减少重复代码
+#define PROCESSINSPECTION_TERAM_PARSE(query, sql) \
+SqlParams params; \
+sql<<" WHERE 1=1"; \
+if (query->ipqc_code) { \
+	sql << " AND `ipqc_code`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->ipqc_code.getValue("")); \
+} \
+if (query->ipqc_type) { \
+	sql << " AND ipqc_type=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->ipqc_type.getValue("")); \
+} \
+if (query->workorder_code) { \
+	sql << " AND workorder_code=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->workorder_code.getValue(0)); \
+}
 
 int ProcessInspectionDAO::update(const ProcessinSpectionDO& uObj)
 {
@@ -30,6 +47,17 @@ int ProcessInspectionDAO::update(const ProcessinSpectionDO& uObj)
 
 list<ProcessinSpectionDO> ProcessInspectionDAO::select(const ProcessinSpectionQuery::Wrapper& query)
 {
-	return {};
+	stringstream sql;
+	sql << "SELECT ipqc_id,ipqc_code,ipqc_type,workorder_code,item_code, item_name, specification, unit_of_measure,quantity_check, check_result, inspect_date, inspector,`status` from qc_ipqc";
+	PROCESSINSPECTION_TERAM_PARSE(query, sql);
+	sql << " LIMIT " << ((query->pageIndex-1) * query->pageSize) << "," << query->pageSize;
+	ProcessinSpectionQueryMapper mapper;
+	string str = sql.str();
+	return sqlSession->executeQuery<ProcessinSpectionDO, ProcessinSpectionQueryMapper>(str, mapper,params);
+}
+
+uint64_t ProcessInspectionDAO::count(const ProcessinSpectionQuery::Wrapper& query)
+{
+	return 1;
 }
 

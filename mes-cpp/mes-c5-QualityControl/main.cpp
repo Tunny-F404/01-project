@@ -31,7 +31,7 @@
 // 是否是发布Swagger文档包
 #ifndef _RELEASE_DOC_
 // 查看Swagger文档的时候不需要连接数据库，解开下面的注释关闭启动连接数据库
-#define _RELEASE_DOC_
+//#define _RELEASE_DOC_
 #endif
 
 /**

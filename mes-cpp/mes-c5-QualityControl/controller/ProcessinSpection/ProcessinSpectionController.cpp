@@ -4,6 +4,7 @@
 //#include "../ApiDeclarativeServicesHelper.h"
 #include "../ApiDeclarativeServicesHelper.h"
 #include "../../service/processinspection/ProcessInspectionService.h"
+#include "../../dao/processinspection/ProcessInspectionDAO.h"
 
 ProcessinSpectionQueryPageJsonVO::Wrapper ProcessinSpectionController::execProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
 {

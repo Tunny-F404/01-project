@@ -39,5 +39,26 @@ bool ProcessInspectionService::updateData(const ProcessinSpectionDTO::Wrapper& d
 ProcessinSpectionQueryPageDTO::Wrapper ProcessInspectionService::listAll(const ProcessinSpectionQuery::Wrapper& query)
 {
 	ProcessInspectionDAO dao;
-	return {};
+
+	auto result = ProcessinSpectionQueryPageDTO::createShared();
+
+	result->pageIndex = query->pageIndex;
+	result->pageSize = query->pageSize;
+
+	auto count = dao.count(query);
+
+	if (count < 1)
+		return result;
+
+	result->total = count;
+	result->calcPages();
+
+	auto dos = dao.select(query);
+
+	for (auto x : dos) {
+		auto dto = ProcessinSpectionQueryDTO::createShared();
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, x, id, Id, ipqc_code, Ipqc_Code, ipqc_type, Ipqc_Type, workorder_code, Workorder_Code, item_code, Item_Code, item_name, Item_Name, specification, Specification, unit_of_measure, Unit_Of_Measure, quantity_check, Quantity_Check, check_result, Check_Result, inspect_date, Inspect_Date, inspector, Inspector, status, Status_Order);
+		result->addData(dto);
+	}
+	return result;
 }

@@ -21,6 +21,7 @@ processinspection:
   workorder_code: 工单编号
   workorder_name: 工单名称
   workstation_id: 工作站编号
+  workstation_code: 工作站编码
   workstation_name: 工作站名称
   item_code: 产品物料编码
   item_name: 产品物料名称

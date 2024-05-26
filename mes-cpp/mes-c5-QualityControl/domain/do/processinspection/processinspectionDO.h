@@ -60,7 +60,7 @@ class ProcessinSpectionDO {
 
 public:
 	ProcessinSpectionDO() {
-		//ipqc_id = 0;
+		id = 0;
 		ipqc_code = "";
 		ipqc_name = "";
 		ipqc_type = "";
