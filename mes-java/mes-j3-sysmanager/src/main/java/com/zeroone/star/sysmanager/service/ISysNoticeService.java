@@ -1,5 +1,6 @@
 package com.zeroone.star.sysmanager.service;
 
+import com.zeroone.star.project.j3.dto.NoticeDTO;
 import com.zeroone.star.sysmanager.entity.SysNotice;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-05-24
  */
 public interface ISysNoticeService extends IService<SysNotice> {
-
+    /**
+     * 修改通知公告
+     *
+     * @param noticeDTO
+     * @return
+     */
+    void updateNotice(NoticeDTO noticeDTO);
 }

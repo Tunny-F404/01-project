@@ -5,6 +5,8 @@ import com.zeroone.star.project.j3.dto.*;
 import com.zeroone.star.project.j3.query.NoticeQuery;
 import com.zeroone.star.project.j3.vo.NoticeListVO;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
+
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ public interface NoticeApis {
      * @param noticeDTO
      * @return
      */
-    JsonVO<Integer> updateNotice(NoticeDTO noticeDTO);
+    JsonVO<ResultStatus> updateNotice(NoticeDTO noticeDTO);
     /**
      * 新增公告(notice)
      * @param dto 新增数据

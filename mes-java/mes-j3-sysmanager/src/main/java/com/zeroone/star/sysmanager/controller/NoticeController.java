@@ -5,6 +5,8 @@ import com.zeroone.star.project.j3.query.NoticeQuery;
 import com.zeroone.star.project.j3.sysmanager.NoticeApis;
 import com.zeroone.star.project.j3.vo.NoticeListVO;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
+import com.zeroone.star.sysmanager.service.ISysNoticeService;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,7 @@ import java.util.List;
 @Controller
 @RequestMapping("sys-manager/notice")
 public class NoticeController implements NoticeApis {
+    private ISysNoticeService noticeService;
     /**
      * 修改通知公告
      *
@@ -26,11 +29,10 @@ public class NoticeController implements NoticeApis {
      */
     @PutMapping("/update")
     @ApiOperation(value = "修改通知公告")
-    public JsonVO<Integer> updateNotice(@RequestBody NoticeDTO noticeDTO) {
-        return null;
+    public JsonVO<ResultStatus> updateNotice(@RequestBody NoticeDTO noticeDTO) {
+        noticeService.updateNotice(noticeDTO);
+        return JsonVO.success(ResultStatus.SUCCESS);
     }
-
-
     @Override
     @PostMapping("/add-notice")
     @ApiOperation("添加公告")

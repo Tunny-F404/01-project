@@ -4,12 +4,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(value = "消息分页查询对象")
+@Getter
 public class NewsPageQuery extends PageQuery implements Serializable  {
 
     @ApiModelProperty(value = "消息类型",example = "WARNING")
@@ -26,8 +28,6 @@ public class NewsPageQuery extends PageQuery implements Serializable  {
 
     @ApiModelProperty(value = "状态",example = "UNREAD")
     private String status;
-
-
 }
 
 

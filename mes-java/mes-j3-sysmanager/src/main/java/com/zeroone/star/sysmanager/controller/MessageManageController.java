@@ -8,6 +8,7 @@ import com.zeroone.star.project.j3.dto.SysAddMessageDTO;
 import com.zeroone.star.project.j3.dto.SysUpdateMessageDTO;
 import com.zeroone.star.project.j3.sysmanager.MessageManageApis;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.sysmanager.service.ISysMessageService;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ import java.util.List;
 @RequestMapping("sys-manager/message-manager")
 @ResponseBody
 public class MessageManageController implements MessageManageApis {
-
+    private ISysMessageService messageManageService;
     /**
      * 获取消息详情
      * @param id
@@ -35,7 +36,8 @@ public class MessageManageController implements MessageManageApis {
     @GetMapping("/news/{id}")
     @ApiOperation(value = "消息详情")
     public JsonVO<NewsVO> getNewsById(@PathVariable Long id) {
-        return null;
+        NewsVO newsVO =messageManageService.getNewsById(id);
+        return JsonVO.success(newsVO);
     }
 
     /**
@@ -46,9 +48,9 @@ public class MessageManageController implements MessageManageApis {
     @GetMapping("/news/list")
     @ApiOperation(value = "消息列表")
     public JsonVO<PageDTO<NewsPageVO>> queryNewsList(@RequestBody NewsPageQuery newsPageQuery) {
-        return null;
+        PageDTO<NewsPageVO> page= messageManageService.queryNewsList(newsPageQuery);
+        return JsonVO.success(page);
     }
-
 
     /**
      * 添加消息
