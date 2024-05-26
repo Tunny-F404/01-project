@@ -43,3 +43,7 @@ target
 
 # Maven ignore
 .flattened-pom.xml
+
+# Ignore specific configuration files
+/code-generator/src/main/resources/database.properties
+/mes-common/src/main/resources/config/bootstrap-dev.properties
