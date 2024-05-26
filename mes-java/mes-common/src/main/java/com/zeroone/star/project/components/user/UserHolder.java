@@ -27,6 +27,7 @@ public class UserHolder {
 
     /**
      * 从请求头中获取用户信息
+     *
      * @return 用户信息
      * @throws Exception 解析失败抛出异常
      */
