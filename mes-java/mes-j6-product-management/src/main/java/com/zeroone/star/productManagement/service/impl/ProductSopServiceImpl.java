@@ -69,7 +69,6 @@ public class ProductSopServiceImpl extends ServiceImpl<ProductSopMapper, Product
     @Override
     @SneakyThrows
     @ResponseBody
-    @PostMapping("upload")
     @ApiOperation(value = "上传文件")
     public String uploadFile(MultipartFile file) {
         try {
