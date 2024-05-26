@@ -37,7 +37,7 @@ public: // 定义接口
 		// 定义接口描述标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("equipmentledger.download-template.summary"));
 		// 定义响应参数格式
-		API_DEF_ADD_RSP_JSON_WRAPPER(BooleanJsonVO);
+		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
 	}
 	// 定义接口执行
 	ENDPOINT(API_M_GET, "/equipment-ledger/download-template", downloadTemplate) {
@@ -46,7 +46,7 @@ public: // 定义接口
 	}
 
 private: // 定义接口执行函数
-	BooleanJsonVO::Wrapper execDownloadTemplate();
+	StringJsonVO::Wrapper execDownloadTemplate();
 };
 
 #include OATPP_CODEGEN_END(ApiController)

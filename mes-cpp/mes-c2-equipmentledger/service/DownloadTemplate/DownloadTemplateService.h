@@ -1,8 +1,9 @@
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
  @Author: 。好
- @Date: 2024/05/19 15:17:42
+ @Date: 2024/05/26 21:30:08
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,20 +17,19 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#include "stdafx.h"
-#include "DownloadTemplate.h"
-#include "service/DownloadTemplate/DownloadTemplateService.h"
+#ifndef _DOWNLOADTEMPLATESERVICE_H_
+#define _DOWNLOADTEMPLATESERVICE_H_
 
-StringJsonVO::Wrapper DownloadTemplateController::
-	execDownloadTemplate()
+#include <string>
+
+/**
+ * 下载导入模板
+ * 负责人：。好
+ */
+class DownloadTemplateService
 {
-	auto res = StringJsonVO::createShared();
+public:
+	std::string download();
+};
 
-	DownloadTemplateService service;
-	auto url = service.download();
-	if (url != "")
-		res->success(url);
-	else
-		res->fail("");
-	return res;
-}
+#endif // !_DOWNLOADTEMPLATESERVICE_H_
