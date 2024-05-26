@@ -94,6 +94,10 @@ const menus = reactive([
 	{
 		path: '/sample/search-bar',
 		text: '搜索栏演示页'
+	},
+	{
+		path: '/sample/public-form',
+		text: '表单演示页'
 	}
 ])
 </script>

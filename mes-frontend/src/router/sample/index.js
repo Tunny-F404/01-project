@@ -30,6 +30,12 @@ const routes = [
 			{
 				path: '/sample/search-bar',
 				component: () => import('@/views/sample/search-bar/search-bar-page.vue')
+			},
+			// 表单弹窗演示页
+			{
+				path: '/sample/public-form',
+				component: () =>
+					import('@/views/sample/public-form/public-form-page.vue')
 			}
 		]
 	}
