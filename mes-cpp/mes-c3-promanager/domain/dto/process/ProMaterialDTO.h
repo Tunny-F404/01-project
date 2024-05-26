@@ -22,8 +22,10 @@ class ProductMaterialDTO : public oatpp::DTO
 	API_DTO_FIELD(String, unit_of_measure, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.unit_of_measure"), true, "g");
 	// 规格型号
 	API_DTO_FIELD(String, specification, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.specification"), true, "null");
+	// 使用比例
+	API_DTO_FIELD(Float32, quantity, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.quantity"), true, 0.1);
 	// 备注
-	API_DTO_FIELD(String, RPmodels, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.RPmodels"), false, "null");
+	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.RPmodels"), false, "null");
 };
 /**
  * 获取产品制程物料BOM列表传输对象

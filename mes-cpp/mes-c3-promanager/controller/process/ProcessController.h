@@ -120,7 +120,7 @@ public:
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("process.delete.summary1"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete-process/{id}", removeProcess, QUERY(List<UInt64>, id), execRemoveProcess(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete-process/{id}", removeProcess, BODY_DTO(List<UInt64>, id), execRemoveProcess(id));
 
 	// 7 工艺导出
 	ENDPOINT_INFO(queryProcess) {

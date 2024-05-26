@@ -22,7 +22,7 @@ class AddRelateProDTO : public oatpp::DTO
 	// 规格型号
 	API_DTO_FIELD(String, specification, ZH_WORDS_GETTER("RelatePro.DTO.specification"), true, "null");
 	// 备注
-	API_DTO_FIELD(String, RPmodels, ZH_WORDS_GETTER("RelatePro.DTO.RPmodels"), false, "");
+	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("RelatePro.DTO.RPmodels"), false, "");
 };
 
 /**

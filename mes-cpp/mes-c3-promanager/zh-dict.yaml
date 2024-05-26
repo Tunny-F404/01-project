@@ -115,12 +115,13 @@ RelatePro:
   unit_of_measure: 产品物料单位
   specification: 产品规格型号
   RPmodels: 备注
-  Ratio_of_materials_used: 用料比例
+  #Ratio_of_materials_used: 用料比例
  ProMaterialDTO:
   item_id: 物料ID
   item_code: 物料编码
   item_name: 物料名称
   unit_of_measure: 物料单位
   specification: 规格型号
+  quantity: 用料比例
   RPmodels: 备注
-  Ratio_of_materials_used: 用料比例
+  #Ratio_of_materials_used: 用料比例
