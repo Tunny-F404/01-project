@@ -74,8 +74,14 @@
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
         <aliyun.sms.version>2.0.24</aliyun.sms.version>
         <easypdf.version>2.12.2</easypdf.version>
+<!--        <redis.version>6.2.7</redis.version>-->
     </properties>
     <dependencies>
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
         <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>

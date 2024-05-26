@@ -4,12 +4,12 @@ import com.zeroone.star.project.dto.login.LoginDTO;
 import com.zeroone.star.project.j3.dto.LogoutDTO;
 import com.zeroone.star.project.j3.dto.SystemNotificationDTO;
 import com.zeroone.star.project.j3.query.SmsQuery;
+import com.zeroone.star.project.j3.vo.LoginVO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.components.mail.MailMessage;
 import com.zeroone.star.project.vo.ResultStatus;
-import com.zeroone.star.project.vo.login.LoginVO;
 
-import java.util.List;
+
 
 /**
  * 消息服务相关接口
