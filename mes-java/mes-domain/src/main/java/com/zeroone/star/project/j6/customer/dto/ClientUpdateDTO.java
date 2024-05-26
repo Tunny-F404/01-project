@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author 小鱼
  * @Description 客户更新数据传输对象
@@ -21,12 +23,14 @@ public class ClientUpdateDTO {
     /**
      * 客户编码
      */
+    @NotBlank(message = "客户编码不能为空")
     @ApiModelProperty(value = "客户编码", example = "10001")
     private String clientCode;
 
     /**
      * 客户名称
      */
+    @NotBlank(message = "客户名称不能为空")
     @ApiModelProperty(value =  "客户名称", example = "张三")
     private String clientName;
 
@@ -129,6 +133,7 @@ public class ClientUpdateDTO {
     /**
      * 是否启用
      */
+    @NotBlank(message = "是否启用不能为空")
     @ApiModelProperty(value = "是否启用")
     private String enableFlag;
 

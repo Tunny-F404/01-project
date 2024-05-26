@@ -4,6 +4,7 @@ import com.zeroone.star.customer.service.IMdClientService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.ClientApis;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
+import com.zeroone.star.project.j6.customer.dto.ClientPageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
@@ -69,8 +70,8 @@ public class MdClientController implements ClientApis {
     @ApiOperation("查询客户列表")
     @PostMapping("query-all")
     @Override
-    public JsonVO<PageDTO<ClientDTO>> queryAll(@RequestBody ClientQuery query) {
-        PageDTO<ClientDTO> clients = clientService.listAll(query);
+    public JsonVO<PageDTO<ClientPageDTO>> queryAll(@RequestBody ClientQuery query) {
+        PageDTO<ClientPageDTO> clients = clientService.listAll(query);
         return JsonVO.success(clients);
     }
 

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.customer.entity.MdClient;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
+import com.zeroone.star.project.j6.customer.dto.ClientPageDTO;
 import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
@@ -40,7 +41,7 @@ public interface IMdClientService extends IService<MdClient> {
      * @Description 分页查询客户数据
      * @Param query 查询条件
      **/
-    PageDTO<ClientDTO> listAll(ClientQuery query);
+    PageDTO<ClientPageDTO> listAll(ClientQuery query);
 
     /**
      * @return 查询结果

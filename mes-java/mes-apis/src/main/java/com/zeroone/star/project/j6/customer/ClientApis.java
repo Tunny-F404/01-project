@@ -2,6 +2,7 @@ package com.zeroone.star.project.j6.customer;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
+import com.zeroone.star.project.j6.customer.dto.ClientPageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
@@ -25,7 +26,7 @@ public interface ClientApis {
     JsonVO<String> updateClient(@Validated ClientUpdateDTO client);
 
     // 查询所有客户信息
-    JsonVO<PageDTO<ClientDTO>> queryAll(ClientQuery query);
+    JsonVO<PageDTO<ClientPageDTO>> queryAll(ClientQuery query);
 
     // 根据id查询客户
     JsonVO<ClientDTO> queryById(@Min(value = 1, message = "id的最小值为1") Long id);

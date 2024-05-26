@@ -13,6 +13,7 @@ import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
+import com.zeroone.star.project.j6.customer.dto.ClientPageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
@@ -54,6 +55,13 @@ interface msClientMapper {
      * @Description 将clientUpdateDTO对象转换为MdClient对象
      **/
     MdClient clientUpdateDTOToMdClient(ClientUpdateDTO clientUpdateDTO);
+
+    /**
+     * @return com.zeroone.star.project.j6.customer.dto.ClientPageDTO
+     * @Description 将MdClient对象转换为clientPageDTO对象
+     **/
+    ClientPageDTO clientToClientPageDTO(MdClient client);
+
 }
 
 @Service
@@ -144,17 +152,43 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
 
 
     @Override
-    public PageDTO<ClientDTO> listAll(ClientQuery query) {
+    public PageDTO<ClientPageDTO> listAll(ClientQuery query) {
         // 构造分页对象
         Page<MdClient> clientPage = new Page<>(query.getPageNum(), query.getPageSize());
+
         // 构建查询条件
         QueryWrapper<MdClient> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("client_name", query.getClientName());
+
+        // 根据客户名称进行模糊查询
+        if (query.getClientName() != null && !query.getClientName().isEmpty()) {
+            queryWrapper.like("client_name", query.getClientName());
+        }
+
+        // 根据客户编码查询客户
+        if (query.getClientCode() != null && !query.getClientCode().isEmpty()) {
+            queryWrapper.eq("client_code", query.getClientCode());
+        }
+
+        // 根据客户简称查询客户
+        if (query.getClientNick() != null && !query.getClientNick().isEmpty()) {
+            queryWrapper.eq("client_nick", query.getClientNick());
+        }
+
+        // 根据客户英文名称查询客户
+        if (query.getClientEn() != null && !query.getClientEn().isEmpty()) {
+            queryWrapper.eq("client_en", query.getClientEn());
+        }
+
+        // 根据客户是否启用查询客户
+        if (query.getEnableFlag() != null && !query.getEnableFlag().isEmpty()) {
+            queryWrapper.eq("enable_flag", query.getEnableFlag());
+        }
+
         // 查询客户列表数据
         Page<MdClient> clients = mdClientMapper.selectPage(clientPage, queryWrapper);
 
         // 返回封装分页信息和客户列表数据的PageDTO对象
-        return PageDTO.create(clients, client -> msClientMapper.clientToClientDTO(client));
+        return PageDTO.create(clients, client -> msClientMapper.clientToClientPageDTO(client));
     }
 
     @Override
