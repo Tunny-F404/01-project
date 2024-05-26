@@ -15,10 +15,10 @@ return:
  download-return:
   summary: 导出供应商退货单
  fields: 
-  rtid: 退货单编号
+  rtcode: 退货单编号
   rtname: 退货单名称 
-  puid: 采购订单编号 
-  veid: 供应商编码
+  pucode: 采购订单编号 
+  vecode: 供应商编码
   vename: 供应商名称 
   rtdate: 退货日期 
   status: 单据状态

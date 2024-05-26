@@ -27,21 +27,21 @@
 class ReturnDO
 {
 	// 退货单编号
-	CC_SYNTHESIZE(uint64_t, returnId, returnid);
+	CC_SYNTHESIZE(string, returnCode, returncode);
 	// 退货单名称
 	CC_SYNTHESIZE(string, returnName, returnnmame);
 	// 采购单编号
-	CC_SYNTHESIZE(uint64_t, purchaseId, purchaseId);
+	CC_SYNTHESIZE(string, purchaseCode, purchasecode);
 	// 供应商编码
-	CC_SYNTHESIZE(uint64_t, vendorCode, vendorcode);
+	CC_SYNTHESIZE(string, vendorCode, vendorcode);
 	// 供应商名称
 	CC_SYNTHESIZE(string, vendorName, vendorname);
 
 public:
 	ReturnDO() {
-		returnId = 0;
+		returnCode = "0";
 		returnName = "returnName";
-		purchaseId = 1;
+		purchaseCode = 1;
 		vendorCode = 2;
 		vendorName = "vendorName";
 	}

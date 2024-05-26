@@ -27,7 +27,7 @@ Uint64JsonVO::Wrapper ReturnController::execAddDetail(const ReturnAdd::Wrapper& 
 	return {};
 }
 // 修改单据
-Uint64JsonVO::Wrapper ReturnController::executeModifyReturn(const ReturnDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ReturnController::execModifyReturn(const ReturnDTO::Wrapper& dto)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -54,16 +54,16 @@ Uint64JsonVO::Wrapper ReturnController::executeModifyReturn(const ReturnDTO::Wra
 }
 
 // 执行单据
-Uint64JsonVO::Wrapper ReturnController::executeExecuteReturn(const UInt64& id)
+Uint64JsonVO::Wrapper ReturnController::execExecuteReturn(const String& code)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!id || id <= 0)
+	/*if (!id || id <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
-	}
+	}*/
 	// 定义一个Service
 	ReturnService service;
 	// 在数据库中执行退货操作
@@ -71,26 +71,26 @@ Uint64JsonVO::Wrapper ReturnController::executeExecuteReturn(const UInt64& id)
 
 	if (true)
 	{
-		jvo->success(id);
+		jvo->success(1);
 	}
 	else
 	{
-		jvo->fail(id);
+		jvo->fail(2);
 	}
 	// 响应结果
 	return jvo;
 }
 // 删除单据
-Uint64JsonVO::Wrapper ReturnController::executeRemoveReturn(const UInt64& id)
+Uint64JsonVO::Wrapper ReturnController::execRemoveReturn(const String& code)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!id || id <= 0)
+	/*if (!id || id <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
-	}
+	}*/
 	// 定义一个Service
 	ReturnService service;
 
@@ -106,17 +106,17 @@ Uint64JsonVO::Wrapper ReturnController::executeRemoveReturn(const UInt64& id)
 	// if (service.removeData(id.getValue(0))) 
 	if (true)
 	{
-		jvo->success(id);
+		jvo->success(1);
 	}
 	else
 	{
-		jvo->fail(id);
+		jvo->fail(2);
 	}
 	// 响应结果
 	return jvo;
 }
 // 导出单据
-std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse> ReturnController::executeDownloadFile(const String& filename)
+std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse> ReturnController::execDownloadFile(const String& filename)
 {
 	// 构建文件全路径 // 相对路径无法加载
 	std::string fullPath = "C:/Users/RHY/Desktop/C6/zero-one-08mes/mes-cpp/mes-c6-storage-return/public/static/" + URIUtil::urlDecode(filename.getValue(""));
