@@ -30,7 +30,6 @@ public class DictionaryManageController implements DictionaryManageApis {
         return null;
     }
 
-
     @Override
     @ApiOperation(value = "(批量)删除字典")
     @DeleteMapping("remove/remove/delete/delete-dict-type/{dictListIds}")
