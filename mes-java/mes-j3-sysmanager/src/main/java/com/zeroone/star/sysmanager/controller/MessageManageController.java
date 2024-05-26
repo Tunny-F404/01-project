@@ -62,7 +62,6 @@ public class MessageManageController implements MessageManageApis {
     @ApiOperation(value = "添加消息")
     public JsonVO<String> addMessage(@RequestBody SysAddMessageDTO sysAddMessageDTO) {
         return null;
-
     }
 
     /**
