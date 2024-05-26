@@ -50,6 +50,6 @@ public interface ShopSettingsApis {
      * @param shopsettingsDTO
      * @return
      */
-    JsonVO<GetShopSettingsDTO> getShopSeetingNameController(GetShopSettingsDTO shopsettingsDTO);
+    JsonVO<List<String>> getShopSeetingNameController(GetShopSettingsDTO shopsettingsDTO);
 
 }

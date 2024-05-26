@@ -89,13 +89,14 @@ public class ShopSettingsController implements ShopSettingsApis {
     }
     /**
      * 获取车间名称列表
+     *
      * @param shopsettingsDTO
      * @return
      */
     @GetMapping("/get-shopsettings-name")
     @Override
     @ApiOperation("获取车间名称列表")
-    public JsonVO<GetShopSettingsDTO> getShopSeetingNameController(
+    public JsonVO<List<String>> getShopSeetingNameController(
             @ApiParam("车间DTO")@RequestBody GetShopSettingsDTO shopsettingsDTO) {
         return null;
     }
