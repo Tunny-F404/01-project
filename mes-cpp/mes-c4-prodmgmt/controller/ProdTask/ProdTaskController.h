@@ -36,16 +36,16 @@ class ProdTaskController : public oatpp::web::server::api::ApiController // 1 继
 	API_ACCESS_DECLARE(ProdTaskController);
 public:
 	// 3.1 定义修改接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("prod.put.summary"), modifyProdTask, Uint64JsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("prod1.put.summary"), modifyProdTask, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodtask-modify", modifyProdTask, BODY_DTO(ProdTaskModifyDTO::Wrapper, dto), execModifyProdTask(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeProdTask) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("prod.delete.summary"), Uint64JsonVO::Wrapper);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("prod1.delete.summary"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("sample.field.id"), 1, true);
+		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("prod1.field.id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/prodtask-delete/{id}", removeProdTask, PATH(UInt64, id), execRemoveProdTask(id));
@@ -63,4 +63,4 @@ private:
 
 // 0 取消API控制器使用宏
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
-#endif // _PRODORDER_CONTROLLER_
+#endif // _PRODORDER_CONTROLLER

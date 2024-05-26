@@ -1,4 +1,4 @@
-prod:
+prod1:
   field:
     feedback_type : "报工类型"
     workstation_name : "工作站名称"

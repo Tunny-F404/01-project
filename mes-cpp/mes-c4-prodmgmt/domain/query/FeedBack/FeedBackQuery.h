@@ -32,27 +32,27 @@ class FeedBackQuery : public PageQuery
 {
 	DTO_INIT(FeedBackQuery, PageQuery);
 	// 报工类型
-	API_DTO_FIELD_DEFAULT(String, feedbackType, ZH_WORDS_GETTER("prod.query.summary.feedbackType"));
+	API_DTO_FIELD_DEFAULT(String, feedbackType, ZH_WORDS_GETTER("prod1.query.summary.feedbackType"));
 	// 工作站
-	API_DTO_FIELD_DEFAULT(String, workstationName, ZH_WORDS_GETTER("prod.query.summary.workstationName"));
+	API_DTO_FIELD_DEFAULT(String, workstationName, ZH_WORDS_GETTER("prod1.query.summary.workstationName"));
 	// 生产工单编号
-	API_DTO_FIELD_DEFAULT(String, workorderCode, ZH_WORDS_GETTER("prod.query.summary.workorderCode"));
+	API_DTO_FIELD_DEFAULT(String, workorderCode, ZH_WORDS_GETTER("prod1.query.summary.workorderCode"));
 	// 产品物料编码
-	API_DTO_FIELD_DEFAULT(String, itemCode, ZH_WORDS_GETTER("prod.query.summary.itemCode"));
+	API_DTO_FIELD_DEFAULT(String, itemCode, ZH_WORDS_GETTER("prod1.query.summary.itemCode"));
 	// 产品物料名
-	API_DTO_FIELD_DEFAULT(String, itemName, ZH_WORDS_GETTER("prod.query.summary.itemName"));
+	API_DTO_FIELD_DEFAULT(String, itemName, ZH_WORDS_GETTER("prod1.query.summary.itemName"));
 	// 规格型号
-	API_DTO_FIELD_DEFAULT(String, specification, ZH_WORDS_GETTER("prod.query.summary.specification"));
+	API_DTO_FIELD_DEFAULT(String, specification, ZH_WORDS_GETTER("prod1.query.summary.specification"));
 	// 报工数量
-	API_DTO_FIELD_DEFAULT(Int32, feedbackQuantity, ZH_WORDS_GETTER("prod.query.summary.feedbackQuantity"));
+	API_DTO_FIELD_DEFAULT(Int32, feedbackQuantity, ZH_WORDS_GETTER("prod1.query.summary.feedbackQuantity"));
 	// 报工人
-	API_DTO_FIELD_DEFAULT(String, userName, ZH_WORDS_GETTER("prod.query.summary.userName"));
+	API_DTO_FIELD_DEFAULT(String, userName, ZH_WORDS_GETTER("prod1.query.summary.userName"));
 	// 报工时间
-	API_DTO_FIELD_DEFAULT(String, feedbackTime, ZH_WORDS_GETTER("prod.query.summary.feedbackTime"));
+	API_DTO_FIELD_DEFAULT(String, feedbackTime, ZH_WORDS_GETTER("prod1.query.summary.feedbackTime"));
 	// 审核人
-	API_DTO_FIELD_DEFAULT(String, recordUser, ZH_WORDS_GETTER("prod.query.summary.recordUser"));
+	API_DTO_FIELD_DEFAULT(String, recordUser, ZH_WORDS_GETTER("prod1.query.summary.recordUser"));
 	// 状态
-	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("prod.query.summary.status"));
+	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("prod1.query.summary.status"));
 };
 
 #include OATPP_CODEGEN_END(DTO)
