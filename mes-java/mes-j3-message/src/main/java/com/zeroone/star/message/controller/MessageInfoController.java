@@ -2,7 +2,8 @@ package com.zeroone.star.message.controller;
 
 import com.zeroone.star.message.service.ISysMessageService;
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j3.dto.MessageDTO;
+import com.zeroone.star.project.j3.dto.SysMessageDTO;
+import com.zeroone.star.project.j3.dto.SysUpdateMessageDTO;
 import com.zeroone.star.project.j3.messageinform.MessageInfoApis;
 import com.zeroone.star.project.j3.query.MessageQuery;
 import com.zeroone.star.project.j3.query.NewsPageQuery;
@@ -31,21 +32,23 @@ public class MessageInfoController implements MessageInfoApis {
     @ApiOperation("删除消息")
     public JsonVO<List<Long>> removeMessages(@RequestBody List<Long> ids) {
         List<Long> data = messageService.removeMessages(ids);
-        return JsonVO.success(data);
+        return !data.isEmpty() ? JsonVO.success(data) : JsonVO.fail(data);
     }
 
     @Override
     @GetMapping("/query-messages")
     @ApiOperation(("查询消息"))
-    public JsonVO<List<MessageDTO>> queryMessage(MessageQuery query) {
-        return null;
+    public JsonVO<List<SysMessageDTO>> queryMessage(@RequestBody MessageQuery query) {
+        List<SysMessageDTO> data = messageService.queryMessage(query);
+        return JsonVO.success(data);
     }
 
     @Override
     @PostMapping("/modify-message")
     @ApiOperation("修改消息状态")
     public JsonVO<List<Long>> modifyMessageStatus(Long id) {
-        return null;
+        List<Long> data = messageService.modifyMessage(id);
+        return !data.isEmpty() ? JsonVO.success(data) : JsonVO.fail(data);
     }
 
     /**
