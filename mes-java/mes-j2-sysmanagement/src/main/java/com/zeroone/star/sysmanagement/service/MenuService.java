@@ -6,12 +6,12 @@ import com.zeroone.star.project.j2.sysmanagement.dto.menu.MenuDTO;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceDetailsVO;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceTreeVO;
 import com.zeroone.star.project.j2.sysmanagement.vo.ResourceVO;
-import com.zeroone.star.sysmanagement.entity.SysMenuDO;
+import com.zeroone.star.sysmanagement.entity.MenuDO;
 
 import java.util.List;
 
 
-public interface MenuService extends IService<SysMenuDO> {
+public interface MenuService extends IService<MenuDO> {
 
     // 新增菜单
     int addMenu(MenuDTO menuDTO);
