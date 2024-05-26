@@ -7,6 +7,7 @@ import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanModifyDTO
 import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
 import com.zeroone.star.project.j5.scheduleplan.shift.ShiftApis;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.scheduleplan.service.ICalShiftService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,6 +40,9 @@ public class ShiftController implements ShiftApis {
     @ApiOperation("添加班次")
     @Override
     public JsonVO<Long> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto) {
+        if(shiftPlanAddDto.getShiftName()==null){
+            return JsonVO.fail(null);
+        }
         return null;
     }
 
@@ -55,4 +59,18 @@ public class ShiftController implements ShiftApis {
     public JsonVO<Long> removeShiftPlan(List<Long> shiftId) {
         return null;
     }
+
+//    @PostMapping("/add")
+//        @ApiOperation("添加班次")
+//        @Override
+//        public JsonVO<ResultStatus> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto) {
+//            if(shiftPlanAddDto.getShiftName()==null){
+//                return JsonVO.fail(ResultStatus.FAIL);
+//            }
+//            Long addId = calShiftService.addShiftPlan(shiftPlanAddDto);
+//            if(addId != null){
+//                return JsonVO.success(ResultStatus.SUCCESS);
+//            }
+//            return JsonVO.success(ResultStatus.FAIL);
+//        }
 }
