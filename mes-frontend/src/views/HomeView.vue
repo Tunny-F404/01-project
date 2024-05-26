@@ -5,26 +5,15 @@
         <!-- 侧边栏菜单 -->
         <div class="menu-wrap">
           <el-scrollbar max-height="100vh">
-            <el-menu
-              default-active="/home"
-              class="el-menu-vertical-demo"
-              active-text-color="#409EFF"
-              text-color="#fff"
-              background-color="#545c64"
-              unique-opened
-              router
-            >
+            <el-menu default-active="/home" class="el-menu-vertical-demo" active-text-color="#409EFF" text-color="#fff"
+              background-color="#545c64" unique-opened router>
               <el-menu-item index="/home">
                 <el-icon>
                   <icon-menu />
                 </el-icon>
                 <span>首页</span>
               </el-menu-item>
-              <el-sub-menu
-                v-for="item in menus"
-                :key="item.id"
-                :index="item.id + ''"
-              >
+              <el-sub-menu v-for="item in menus" :key="item.id" :index="item.id + ''">
                 <template #title>
                   <el-icon>
                     <component :is="item.icon" />
@@ -32,11 +21,7 @@
                   <span>{{ item.text }}</span>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item
-                    v-for="i in item.children"
-                    :key="i.id"
-                    :index="i.href"
-                  >
+                  <el-menu-item v-for="i in item.children" :key="i.id" :index="i.href">
                     <el-icon>
                       <component :is="i.icon" />
                     </el-icon>
@@ -51,6 +36,16 @@
       <el-container>
         <!-- 导航栏 -->
         <el-header>
+          <div class="breadcrumb">
+            <el-breadcrumb :separator-icon="ArrowRight">
+              <el-breadcrumb-item :to="{ path: '/dashboard' }">homepage</el-breadcrumb-item>
+              <el-breadcrumb-item>
+                <a href="/">promotion management</a>
+              </el-breadcrumb-item>
+              <el-breadcrumb-item>promotion list</el-breadcrumb-item>
+              <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+            </el-breadcrumb>
+          </div>
           <div class="header-nav">{{ userInfo }}</div>
         </el-header>
         <el-main>
@@ -90,6 +85,14 @@
   display: flex;
   justify-content: space-between;
   padding: 0;
+  
+  .breadcrumb {
+    padding: 20px;
+    background-color: #6c777f;
+    width: 100%;
+    color: #f8f8f8;
+    text-align: left;
+  }
   .header-nav {
     padding: 20px;
     background-color: #6c777f;
@@ -103,6 +106,7 @@
 <script setup>
 import { ref } from 'vue'
 import { userStore } from '../stores/user'
+import { ArrowRight } from '@element-plus/icons-vue'
 const store = userStore()
 
 // 用户信息提示
