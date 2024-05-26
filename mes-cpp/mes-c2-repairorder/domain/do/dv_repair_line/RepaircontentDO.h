@@ -24,7 +24,7 @@
 /**
  * dv_repaircontent_line数据库实体类
  */
-class de_repair_lineDO
+class dv_repair_lineDO
 {
 	// 行id
 	CC_SYNTHESIZE(uint64_t, line_id, line_Id);
@@ -66,10 +66,10 @@ class de_repair_lineDO
 	CC_SYNTHESIZE(string, update_time, Update_time);
 	
 public:
-	de_repair_lineDO() {
-		line_id = 1;
-		repair_id = 1;
-		subject_id = 1;
+	dv_repair_lineDO() {
+		line_id = 0;
+		repair_id = 0;
+		subject_id = 0;
 		subject_code = "";
 		subject_name = "";
 		subject_type = "";

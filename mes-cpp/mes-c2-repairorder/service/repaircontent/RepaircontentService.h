@@ -33,6 +33,8 @@ class RepaircontentService
 public:
 	// 分页查询所有数据
 	RepaircontentPageDTO::Wrapper listAll(const RepaircontentQuery::Wrapper& query);
+	//通过项目名称获取数据
+	RepaircontentDTO::Wrapper getData(const RepaircontentQuery::Wrapper& id);
 	// 保存数据
 	uint64_t saveData(const RepaircontentDTO::Wrapper& dto);
 	// 修改数据

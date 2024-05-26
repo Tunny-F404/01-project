@@ -23,51 +23,54 @@
 
 #include "../../domain\query\repaircontent\RepaircontentQuery.h"
 
+using namespace std;
+
 //定义条件解析宏，减少重复代码
 #define REPAIRCONTENT_TERAM_PARSE(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \
-if (query->line_id) { \
-	sql << " AND `line_id`=?"; \
-	SQLPARAMS_PUSH(params, "s", uint64_t, query->line_id.getValue(1)); \
+if (query->subject_name) { \
+	sql << " AND `subject_name`=?"; \
+	SQLPARAMS_PUSH(params, "s", string, query->subject_name.getValue("")); \
 } \
 if (query->repair_id) { \
 	sql << " AND repair_id=?"; \
-	SQLPARAMS_PUSH(params, "s", uint64_t, query->repair_id.getValue(1)); \
-} \
-if (query->subject_id) { \
-	sql << " AND subject_id=?"; \
-	SQLPARAMS_PUSH(params, "i", uint64_t, query->subject_id.getValue(1)); \
+	SQLPARAMS_PUSH(params, "ull", uint64_t, query->repair_id.getValue(1)); \
 }
+
 
 uint64_t RepaircontentDAO::count(const RepaircontentQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT COUNT(subject_id) FROM dv_repair_line";
+	sql << "SELECT COUNT(*) FROM dv_repair_line";
 	REPAIRCONTENT_TERAM_PARSE(query, sql);
 	string sqlStr = sql.str();
 	return sqlSession->executeQueryNumerical(sqlStr, params);
 }
 
-std::list<de_repair_lineDO> RepaircontentDAO::selectWithPage(const RepaircontentQuery::Wrapper& query)
+std::list<dv_repair_lineDO> RepaircontentDAO::selectWithPage(const RepaircontentQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT subject_name,malfunction,malfunction_url,repair_des FROM dv_repair_line";
+	sql << "SELECT subject_name,malfunction,malfunction_url,repair_des,subject_code,subject_type,subject_content,create_by,create_time,update_by,update_time FROM dv_repair_line";
 	REPAIRCONTENT_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	RepaircontentMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<de_repair_lineDO, RepaircontentMapper>(sqlStr, mapper, params);
+	return sqlSession->executeQuery<dv_repair_lineDO, RepaircontentMapper>(sqlStr, mapper, params);
 }
 
-std::list<de_repair_lineDO> RepaircontentDAO::selectByName(const string& name)
+std::list<dv_repair_lineDO> RepaircontentDAO::selectByName(const string& name)
 {
-	string sql = "SELECT subject_name,malfunction,malfunction_url,repair_des FROM dv_repair_line WHERE `name` LIKE CONCAT('%',?,'%')";
+	stringstream sql;
+	SqlParams params;
+	sql << "SELECT subject_name,malfunction,malfunction_url,repair_des,subject_code,subject_type,subject_content FROM dv_repair_line WHERE `name` LIKE CONCAT('%',?,'%')";
+	SQLPARAMS_PUSH(params, "s", string, name);
 	RepaircontentMapper mapper;
-	return sqlSession->executeQuery<de_repair_lineDO, RepaircontentMapper>(sql, mapper, "%s", name);
+	string sqlStr = sql.str();
+	return sqlSession->executeQuery<dv_repair_lineDO, RepaircontentMapper>(sqlStr, mapper, params);
 }
 
-uint64_t RepaircontentDAO::insert(const de_repair_lineDO& iObj)
+uint64_t RepaircontentDAO::insert(const dv_repair_lineDO& iObj)
 {
 	string sql = "INSERT INTO `dv_repair_line` (`subject_name`, `malfunction`, `malfunction_url`,`repair_des`) VALUES (?, ?, ?,?)";
 	return sqlSession->executeInsert(sql, "%s%s%s%s", iObj.getsubject_Name(), iObj.getMalfunction(),
@@ -75,7 +78,7 @@ uint64_t RepaircontentDAO::insert(const de_repair_lineDO& iObj)
 }
 
 
-int RepaircontentDAO::update(const de_repair_lineDO& uObj)
+int RepaircontentDAO::update(const dv_repair_lineDO& uObj)
 {
 	string sql = "UPDATE `dv_repair_line` SET `getsubject_Name`=?, `getMalfunction`=?, `getMalfunction_url`=?,`getrepair_Des`=? WHERE `subject_id`=?";
 	return sqlSession->executeUpdate(sql, "%s%s%s%s%ull", uObj.getsubject_Name(), uObj.getMalfunction(),

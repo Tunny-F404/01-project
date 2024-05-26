@@ -26,16 +26,24 @@
 /**
  * Ê¾Àı±í×Ö¶ÎÆ¥ÅäÓ³Éä
  */
-class RepaircontentMapper : public Mapper<de_repair_lineDO>
+class RepaircontentMapper : public Mapper<dv_repair_lineDO>
 {
 public:
-	de_repair_lineDO mapper(ResultSet* resultSet) const override
+	dv_repair_lineDO mapper(ResultSet* resultSet) const override
 	{
-		de_repair_lineDO data;
-		/*data.setId(resultSet->getUInt64(1));
-		data.setName(resultSet->getString(2));
-		data.setSex(resultSet->getString(3));
-		data.setAge(resultSet->getInt(4));*/
+		dv_repair_lineDO data;
+		data.setsubject_Name(resultSet->getString(1));
+		data.setMalfunction(resultSet->getString(2));
+		data.setMalfunction_url(resultSet->getString(3));
+		data.setrepair_Des(resultSet->getString(4));
+		data.setsubject_Code(resultSet->getString(5));
+		data.setsubject_Type(resultSet->getString(6));
+		data.setsubject_Content(resultSet->getString(7));
+		data.setCreate_by(resultSet->getString(8));
+		data.setCreate_time(resultSet->getString(9));
+		data.setUpdate_by(resultSet->getString(10));
+		data.setUpdate_time(resultSet->getString(11));
+
 		return data;
 	}
 };
