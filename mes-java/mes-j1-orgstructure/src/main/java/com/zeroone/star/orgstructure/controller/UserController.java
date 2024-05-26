@@ -11,11 +11,13 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
  * <p>版权：&copy;01星球</p>
  * <p>地址：01星球总部</p>
+ *
  * @author Tme
  * @version 1.0.0
  */
@@ -27,8 +29,9 @@ public class UserController implements UserApis {
     @Override
     @GetMapping("/query-user-table")
     @ApiOperation("查询用户列表")
-    public JsonVO<List<UserDTO>> queryUserList(UserQuery userQuery) {
-        return null;
+    public JsonVO<List<UserDTO>> queryUserList(@Valid UserQuery userQuery) {
+        System.out.println(userQuery.getUserName());
+        return JsonVO.success(null);
     }
 
     @Override
@@ -39,48 +42,48 @@ public class UserController implements UserApis {
     }
 
 
-@PutMapping("setUserStatus")
-	@ApiOperation("设置用户状态")
-	@Override
-	public JsonVO setUserStatus(UpdateUserStatusDTO userDTO) {
-		return null;
-	}
-
-	@PutMapping("resetUserPassword")
-	@ApiOperation("重置用户密码")
-	@Override
-	public JsonVO resetUserPassword() {
-		return null;
-	}
-
-
-
-@GetMapping("query-role-table")
-    @ApiOperation(value = "查询角色列表")
+    @PutMapping("setUserStatus")
+    @ApiOperation("设置用户状态")
     @Override
-    public JsonVO<PageDTO<UserDTO>> queryRoleList(UserQuery userQuery){
+    public JsonVO setUserStatus(UpdateUserStatusDTO userDTO) {
         return null;
     }
+
+    @PutMapping("resetUserPassword")
+    @ApiOperation("重置用户密码")
+    @Override
+    public JsonVO resetUserPassword() {
+        return null;
+    }
+
+
+    @GetMapping("query-role-table")
+    @ApiOperation(value = "查询角色列表")
+    @Override
+    public JsonVO<PageDTO<UserDTO>> queryRoleList(UserQuery userQuery) {
+        return null;
+    }
+
     @GetMapping("query-user-role-table")
     @ApiOperation(value = "查询用户分配角色列表")
     @Override
     public JsonVO<PageDTO<UserDTO>> queryUserRoleList(String UserName) {
         return null;
     }
+
     @PutMapping("modify-add-role")
     @ApiOperation(value = "添加角色")
     @Override
     public JsonVO<UserDTO> modifyAddRole(UserQuery userQuery) {
         return null;
     }
+
     @PutMapping("modify-delete-role")
     @ApiOperation(value = "取消角色")
     @Override
     public JsonVO<UserDTO> modifyDeleteRole(UserQuery userQuery) {
         return null;
-
     }
-
 
 
     @PostMapping("add-user")
