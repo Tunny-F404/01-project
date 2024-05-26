@@ -81,15 +81,13 @@ public class LoginController implements LoginApis {
     }
 
 
-    /**
-     * 作者： j1小组--照
-     */
+
     @Resource
     CurrUserInfoService currUserInfoService;
     @ApiOperation(value = "获取当前用户")
     @GetMapping("current-user")
     @Override
-    public JsonVO<CurrentUserInfoVO> getCurrUser(Integer userId) {
+    public JsonVO<CurrentUserInfoVO> getCurrUser() { //UserHolder包含当前用户ID了，所以不用传入ID
         UserDTO currentUser;
         try {
             currentUser = userHolder.getCurrentUser();

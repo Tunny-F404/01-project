@@ -15,7 +15,7 @@ public interface CurrUserMapper extends BaseMapper {
 	 * @return
 	 */
 	//查询用户信息
-	@Select("select avatar,user_name,phonenumber,email from sys_user where user_id=#{userId}")
+	@Select("select avatar,user_name,phonenumber,email,nick_name,sex,create_time from sys_user where user_id=#{userId}")
 	UserDO selectUser(Integer userId);
 	//查询用户部门信息
 	DeptDO selectDept(int userId);

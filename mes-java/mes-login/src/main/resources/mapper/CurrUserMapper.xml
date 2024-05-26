@@ -10,7 +10,7 @@
     </select>
     <!--角色-->
     <select id="selectRole" resultType="com.zeroone.star.login.entity.RoleDO">
-        select r.role_name,r.create_time
+        select r.role_name
         from sys_user as u
                  left join sys_user_role as ur on u.user_id = ur.user_id
                  left join sys_role as r on ur.role_id = r.role_id
@@ -25,7 +25,7 @@
         where u.user_id = #{useId};
     </select>
 
-    <!--菜单,学长已经实现-->
+    <!--菜单,已在别处经实现-->
     <!--<select id="selectMenu" resultType="com.zeroone.star.login.entity.MenuDO">
         select m.menu_id,m.menu_name,m.icon,m.path,m.parent_id
         from sys_user as u

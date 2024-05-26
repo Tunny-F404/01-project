@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j1.syslogin.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.zeroone.star.project.j1.syslogin.vo.currUserInfovo.RoleVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,6 +21,12 @@ public class CurrentUserInfoVO {
 	public String phonenumber;
 	@ApiModelProperty(value = "邮箱")
 	public String email;
+	@ApiModelProperty(value = "用户昵称")
+	public String nickName;
+	@ApiModelProperty(value = "性别")
+	public String sex;
+	@ApiModelProperty(value = "用户创建时间")
+	public String createTime;
 
 	// 用户所属部门
 	@ApiModelProperty(value = "所属部门")

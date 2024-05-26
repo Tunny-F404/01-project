@@ -7,8 +7,10 @@ import lombok.Data;
 @Data
 @ApiModel("角色信息-role")
 public class RoleVO {
+
 	@ApiModelProperty(value = "所属角色")
 	public String roleName;
-	@ApiModelProperty(value = "创建时间")
-	public String createTime;
+
+	/*@ApiModelProperty(value = "角色创建时间")
+	public String createTime;*/
 }

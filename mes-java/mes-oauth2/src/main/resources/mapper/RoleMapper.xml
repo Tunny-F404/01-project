@@ -8,9 +8,22 @@
         <result column="description" jdbcType="VARCHAR" property="description" />
     </resultMap>
     <select id="selectByUserId" resultMap="BaseResultMap">
-      select id,`name`,keyword,description from role where id in (select role_id from user_role where user_id=#{userId})
+        select id, `name`, keyword, description
+        from role
+        where id in
+              (select role_id
+               from user_role
+               where user_id = #{userId})
     </select>
     <select id="selectByMenuPath" resultMap="BaseResultMap">
-      select id,keyword from role where id in (select role_id from role_menu where menu_id=(select id from menu where link_url=#{path}))
+        select id, keyword
+        from role
+        where id in
+              (select role_id
+               from role_menu
+               where menu_id =
+                     (select id
+                      from menu
+                      where link_url = #{path}))
     </select>
 </mapper>

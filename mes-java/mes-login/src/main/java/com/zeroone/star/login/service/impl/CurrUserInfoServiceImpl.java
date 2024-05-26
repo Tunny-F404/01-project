@@ -36,6 +36,9 @@ public class CurrUserInfoServiceImpl implements CurrUserInfoService {
 			currentUserInfoVO.setUser_name(user.getUserName());
 			currentUserInfoVO.setPhonenumber(user.getPhoneNumber());
 			currentUserInfoVO.setEmail(user.getEmail());
+			currentUserInfoVO.setNickName(user.getNickName());
+			currentUserInfoVO.setSex(user.getSex());
+			currentUserInfoVO.setCreateTime(user.getCreateTime());
 		}
 		//封装部门信息
 		if (dept != null) {
