@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,17 +19,24 @@ import java.time.LocalDateTime;
 @ApiOperation(value = "部门查询对象")
 public class DepartmentQuery {
 
+    //页码
+    @Min(value = 1,message = "页码不能小于1")
+    @ApiModelProperty(value = "查询页码",example = "1")
+    private long pageIndex;
+    //数据条数
+    @Min(value = 1,message = "数据条数不能小于1")
+    @ApiModelProperty(value = "查询数据条数",example = "10")
+    private long pageSize;
+
     //部门Id
     @ApiModelProperty(value = "部门Id",example = "1")
-    private String deptId;
+    private Integer deptId;
 
     //父部门id
-    @NotBlank(message = "父部门id不能为空")
     @ApiModelProperty(value = "父部门id",example = "2")
-    private String parentId;
+    private Integer parentId;
 
     //部门名称
-    @NotBlank(message = "部门名称不能为空")
     @ApiModelProperty(value = "部门名称",example = "部门1")
     private String deptName;
 
@@ -37,10 +45,7 @@ public class DepartmentQuery {
     private int status;
 
     //显示顺序
-    @NotBlank(message = "显示顺序不能为空")
-    private int orderNum;
-
-
+    private Integer orderNum;
 
     //创建时间
     @ApiModelProperty(value = "创建时间",example = "2024-05-17")

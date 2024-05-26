@@ -1,6 +1,6 @@
 package com.zeroone.star.orgstructure.service;
 
-import com.zeroone.star.orgstructure.entity.DepartmentDO;
+import com.zeroone.star.orgstructure.entity.Department;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 
@@ -12,11 +12,33 @@ import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
  * @author 宵夜
  * @since 2024-05-22
  */
-public interface DepartmentService extends IService<DepartmentDO> {
+public interface DepartmentService extends IService<Department> {
+
+    /**
+     * 获取部门名称树
+     * @param
+     * @return
+     */
+    List<DepartmentTreeVO> getDepartmentNameTree(DepartmentQuery query);
+
+
+    /**
+     * 获取部门列表
+     * @param query
+     * @return
+     */
+    PageDTO<DepartmentDTO> getDepartmentList(DepartmentQuery query);
+
+    /**
+     * 获取获知指定部门详情
+     * @param id
+     * @return
+     */
+    DepartmentDTO getDepartmentDetail(int id);
+
 
     /**
      * 新增部门
-     *
      * @param departmentDTO
      * @return
      */
