@@ -1,5 +1,6 @@
 package com.zeroone.star.sysmanager.controller;
 
+import cn.hutool.core.date.DateTime;
 import com.zeroone.star.project.j3.dto.InsertDictTypeDTO;
 import com.zeroone.star.project.j3.dto.SysDictDataDTO;
 import com.zeroone.star.project.j3.dto.dict.*;
@@ -10,8 +11,14 @@ import com.zeroone.star.project.j3.sysmanager.DictionaryManageApis;
 import com.zeroone.star.project.j3.vo.DictDataNameVO;
 import com.zeroone.star.project.j3.vo.DictTypeNameVO;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.sysmanager.service.ISysDictTypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.http.ResponseEntity;
@@ -23,18 +30,22 @@ import javax.validation.constraints.NotBlank;
 @Api(tags = "字典管理")
 @Validated
 public class DictionaryManageController implements DictionaryManageApis {
+
+    @Autowired
+    ISysDictTypeService sysDictTypeService;
+
     @Override
     @ApiOperation(value = "编辑修改字典")
     @PutMapping("modify/update/upate/edit-dict-type")
-    public JsonVO<Void> editDictType(@RequestBody SysDictTypeModifyQuery sysDictTypeModifyQuery) {
-        return null;
+    public JsonVO<Integer> editDictType(@RequestBody SysDictTypeModifyQuery sysDictTypeModifyQuery) {
+        return JsonVO.success(sysDictTypeService.editDictType(sysDictTypeModifyQuery));
     }
 
     @Override
     @ApiOperation(value = "(批量)删除字典")
     @DeleteMapping("remove/remove/delete/delete-dict-type/{dictListIds}")
-    public JsonVO<Void> deleteDictType(@PathVariable Long[] dictListIds) {
-        return null;
+    public JsonVO<Integer> deleteDictType(@PathVariable Long[] dictListIds) {
+        return JsonVO.success(sysDictTypeService.deleteDictType(dictListIds));
     }
 
     @GetMapping("/type/list")
@@ -116,14 +127,21 @@ public class DictionaryManageController implements DictionaryManageApis {
     @Override
     @ApiOperation(value = "导出字典成excel")
     @PostMapping("export-dict-type")
-    public JsonVO<Void> exportDictType(@RequestBody SysDictTypeQuery sysDictTypeQuery) {
-        return null;
+    public ResponseEntity<byte[]> exportDictType(@RequestBody SysDictTypeQuery sysDictTypeQuery) {
+        // 构建响应头
+        HttpHeaders headers = new HttpHeaders();
+        String filename = "report-" + DateTime.now().toString("yyyyMMddHHmmssS") + ".xlsx";
+        headers.setContentDispositionFormData("attachment", filename);
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        // 响应文件给客户端
+        byte[] bytes = sysDictTypeService.exportDictType(sysDictTypeQuery);
+        return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
 
     @Override
     @ApiOperation(value = "刷新字典缓存")
     @DeleteMapping("refresh-cache")
     public JsonVO<Void> refreshCache() {
-        return null;
+        return JsonVO.success(sysDictTypeService.refreshCache());
     }
 }
