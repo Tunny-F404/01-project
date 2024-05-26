@@ -9,6 +9,7 @@ import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.j2.orgstructure.query.dept.DepartmentQuery;
 import com.zeroone.star.project.j2.orgstructure.vo.DepartmentTreeVO;
+import com.zeroone.star.project.j2.orgstructure.vo.QueryDepartmentTreeVO;
 import com.zeroone.star.project.utils.tree.TreeNode;
 import com.zeroone.star.project.utils.tree.TreeNodeMapper;
 import com.zeroone.star.project.utils.tree.TreeUtils;
@@ -131,21 +132,24 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
 
     //获取部门列表
     @Override
-    public PageDTO<DepartmentDTO> getDepartmentList(DepartmentQuery query) {
-        //构建列表查询对象(DO)
-        Page<Department> page = new Page<>(query.getPageIndex(), query.getPageSize());
-        //构建查询条件
-        QueryWrapper<Department> queryWrapper = new QueryWrapper<>();
-        //如果存在合法参数则添加条件
-        if (query.getDeptName() != null) queryWrapper.like("dept_name", query.getDeptName());
-        if (query.getOrderNum() != null) queryWrapper.eq("order_num", query.getOrderNum());
-        if (query.getStatus() >= 0) queryWrapper.eq("status", query.getStatus());
-        if (query.getCreateTime() != null) queryWrapper.eq("create_by", query.getCreateTime());
-        //执行查询
-        Page<Department> res = baseMapper.selectPage(page, queryWrapper);
-        //将结果转化为DTO
-        if (res == null) return null;//result为空表示查询失败
-        return PageDTO.create(res, msDepartmentMapper::departmentOToDepartmentDTO);
+    public List<QueryDepartmentTreeVO> getDepartmentList(DepartmentQuery query) {
+
+        return new ArrayList<QueryDepartmentTreeVO>();
+        
+//        //构建列表查询对象(DO)
+//        List<Department> page = new ArrayList<>();
+//        //构建查询条件
+//        QueryWrapper<Department> queryWrapper = new QueryWrapper<>();
+//        //如果存在合法参数则添加条件
+//        if (query.getDeptName() != null) queryWrapper.like("dept_name", query.getDeptName());
+//        if (query.getOrderNum() >= 0) queryWrapper.eq("order_num", query.getOrderNum());
+//        if (query.getStatus() >= 0) queryWrapper.eq("status", query.getStatus());
+//        if (query.getCreateTime() != null) queryWrapper.eq("create_by", query.getCreateTime());
+////        //执行查询
+////        Page<Department> res = baseMapper.selectPage(page, queryWrapper);
+////        //将结果转化为DTO
+////        if (res == null) return null;//result为空表示查询失败
+////        return PageDTO.create(res, msDepartmentMapper::departmentOToDepartmentDTO);
     }
 
     //根据id获取指定部门所有信息

@@ -7,6 +7,7 @@ import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.j2.orgstructure.query.dept.DepartmentQuery;
 import com.zeroone.star.project.j2.orgstructure.vo.DepartmentTreeVO;
+import com.zeroone.star.project.j2.orgstructure.vo.QueryDepartmentTreeVO;
 import com.zeroone.star.project.vo.JsonVO;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface DepartmentApis {
     JsonVO<List<DepartmentTreeVO>> getDepartmentNameTree(DepartmentQuery query);
 
     //获取部门列表(条件)
-    JsonVO<PageDTO<DepartmentDTO>> getDepartmentList(DepartmentQuery departmentQuery);
+    JsonVO<List<QueryDepartmentTreeVO>> getDepartmentList(DepartmentQuery departmentQuery);
 
     //获取部门详情
     JsonVO<DepartmentDTO> getDepartmentDetail(int id);

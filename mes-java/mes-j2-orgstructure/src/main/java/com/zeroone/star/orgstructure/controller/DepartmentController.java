@@ -7,6 +7,7 @@ import com.zeroone.star.project.j2.orgstructure.dept.DepartmentApis;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.j2.orgstructure.query.dept.DepartmentQuery;
 import com.zeroone.star.project.j2.orgstructure.vo.DepartmentTreeVO;
+import com.zeroone.star.project.j2.orgstructure.vo.QueryDepartmentTreeVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,8 +45,8 @@ public class DepartmentController implements DepartmentApis {
     @Override
     @GetMapping("get-department-list")
     @ApiOperation("获取部门列表(条件)")
-    public JsonVO<PageDTO<DepartmentDTO>> getDepartmentList(@Validated DepartmentQuery departmentQuery) {
-        PageDTO<DepartmentDTO> pageDTO = departmentService.getDepartmentList(departmentQuery);
+    public JsonVO<List<QueryDepartmentTreeVO>> getDepartmentList(DepartmentQuery departmentQuery) {
+        List<QueryDepartmentTreeVO> pageDTO = departmentService.getDepartmentList(departmentQuery);
         if (pageDTO == null) return JsonVO.fail(pageDTO);
         return JsonVO.success(pageDTO);
     }
