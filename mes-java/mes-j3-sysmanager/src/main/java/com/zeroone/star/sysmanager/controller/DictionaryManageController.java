@@ -10,12 +10,15 @@ import com.zeroone.star.project.j3.sysmanager.DictionaryManageApis;
 import com.zeroone.star.project.j3.vo.DictDataNameVO;
 import com.zeroone.star.project.j3.vo.DictTypeNameVO;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.sysmanager.service.ISysDictDataService;
+import com.zeroone.star.sysmanager.service.ISysDictTypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
 
 @RestController
@@ -23,6 +26,13 @@ import javax.validation.constraints.NotBlank;
 @Api(tags = "字典管理")
 @Validated
 public class DictionaryManageController implements DictionaryManageApis {
+
+    @Resource
+    ISysDictTypeService sysDictTypeService;
+
+    @Resource
+    ISysDictDataService sysDictDataService;
+
     @Override
     @ApiOperation(value = "编辑修改字典")
     @PutMapping("modify/update/upate/edit-dict-type")
@@ -89,21 +99,29 @@ public class DictionaryManageController implements DictionaryManageApis {
     @PostMapping("add-dictType")
     @Override
     public JsonVO<Long> addDictType(@RequestBody InsertDictTypeDTO dto) {
-        return null;
+
+        //调用DictDate服务添加新的字典类别(dictType是unique列)
+        Long result = sysDictTypeService.saveDictType(dto);
+        if(result!=null){
+            return JsonVO.success(result);
+        }
+        return JsonVO.fail(null);
     }
 
     @ApiOperation(value = "根据字典类型获取字典数据名称列表")
     @GetMapping("query-dictDateNames-by-dictType")
     @Override
     public JsonVO<List<DictDataNameVO>> queryDictDataNamesByDictType(@NotBlank(message = "字典类型不能为空") String dictType) {
-        return null;
+        List<DictDataNameVO> dictDataNameVOS = sysDictDataService.listDictDataNameByDictType(dictType);
+        return JsonVO.success(dictDataNameVOS);
     }
 
     @ApiOperation(value = "获取字典名称列表")
     @GetMapping("query-dictTypeNames")
     @Override
     public JsonVO<List<DictTypeNameVO>> queryDictTypeNames() {
-        return null;
+        List<DictTypeNameVO> dictTypeNameVOS = sysDictTypeService.listDictTypeName();
+        return JsonVO.success(dictTypeNameVOS);
     }
 
     @Override

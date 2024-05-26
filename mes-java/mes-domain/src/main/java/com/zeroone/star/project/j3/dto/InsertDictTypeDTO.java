@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +25,7 @@ public class InsertDictTypeDTO {
 
     @ApiModelProperty(value = "状态（0正常 1停用）", example = "0")
     @NotBlank(message = "新增字典时, 状态不能为空")
+    @Pattern(regexp = "0|1", message = "状态只能是0或1")
     private String status;
 
     @ApiModelProperty(value = "备注", example = "此处写字典类型相关备注")
