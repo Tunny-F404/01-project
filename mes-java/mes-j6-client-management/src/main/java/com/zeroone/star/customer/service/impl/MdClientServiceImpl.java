@@ -20,7 +20,6 @@ import com.zeroone.star.project.vo.JsonVO;
 import lombok.SneakyThrows;
 import lombok.val;
 import org.mapstruct.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -61,10 +60,11 @@ interface msClientMapper {
 @Transactional
 public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> implements IMdClientService {
 
-    @Autowired
+    @Resource
     EasyExcelComponent easyExcelComponent;
-    @Autowired
+    @Resource
     FastDfsClientComponent dfs;
+
     @Value("${fastdfs.nginx-servers}")
     String urlPrefix;
     QueryWrapper<MdClient> queryWrapper;
@@ -74,12 +74,31 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
     private msClientMapper msClientMapper;
 
     @Override
-    public boolean addClient(ClientDTO client) {
+    public int addClient(ClientDTO client) {
         // 将ClientDTO对象转换为DO
         MdClient mdClient = msClientMapper.clientDTOToMdClient(client);
 
+        // 判断客户名称是否存在
+        QueryWrapper<MdClient> nameQueryWrapper = new QueryWrapper<>();
+        nameQueryWrapper.eq("client_name", client.getClientName());
+        MdClient existingNameClient = mdClientMapper.selectOne(nameQueryWrapper);
+
+        // 判断客户编码是否存在
+        QueryWrapper<MdClient> codeQueryWrapper = new QueryWrapper<>();
+        codeQueryWrapper.eq("client_code", client.getClientCode());
+        MdClient existingCodeClient = mdClientMapper.selectOne(codeQueryWrapper);
+
+        // 如果已存在同名客户，亦或是客户编码已存在，则不执行添加操作
+        if (existingNameClient != null && existingCodeClient != null) {
+            return 23;
+        }else if (existingNameClient != null) {
+            return 2;
+        } else if (existingCodeClient != null) {
+            return 3;
+        }
+
         // 保存到数据库并返回操作结果
-        return mdClientMapper.insert(mdClient) > 0;
+        return mdClientMapper.insert(mdClient);
 
     }
 
@@ -90,18 +109,37 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
     }
 
     @Override
-    public boolean updateClient(ClientUpdateDTO client) {
+    public int updateClient(ClientUpdateDTO client) {
         // 查询客户是否存在
         MdClient existingClient = mdClientMapper.selectById(client.getClientId());
         if (existingClient == null) {
-            return false;
+            return 0;
+        }
+
+        // 判断客户名称是否存在（排除当前客户）
+        QueryWrapper<MdClient> nameQueryWrapper = new QueryWrapper<>();
+        nameQueryWrapper.eq("client_name", client.getClientName()).ne("client_id", client.getClientId());
+        MdClient existingNameClient = mdClientMapper.selectOne(nameQueryWrapper);
+
+        // 判断客户编码是否存在（排除当前客户）
+        QueryWrapper<MdClient> codeQueryWrapper = new QueryWrapper<>();
+        codeQueryWrapper.eq("client_code", client.getClientCode()).ne("client_id", client.getClientId());
+        MdClient existingCodeClient = mdClientMapper.selectOne(codeQueryWrapper);
+
+        // 如果已存在同名客户或同编码客户，则不执行修改操作
+        if (existingNameClient != null && existingCodeClient != null) {
+            return 23;
+        } else if (existingNameClient != null) {
+            return 2;
+        } else if (existingCodeClient != null) {
+            return 3;
         }
 
         // 将DTO对象转换为DO
         MdClient updatedClient = msClientMapper.clientUpdateDTOToMdClient(client);
 
         // 更新数据库中的客户信息
-        return mdClientMapper.updateById(updatedClient) > 0;
+        return mdClientMapper.updateById(updatedClient);
     }
 
 

@@ -8,7 +8,6 @@ import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.vo.JsonVO;
-import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +19,7 @@ public interface IMdClientService extends IService<MdClient> {
      * @Description 新增客户业务流程
      * @Param clientDTO [client]
      **/
-    boolean addClient(ClientDTO client);
+    int addClient(ClientDTO client);
 
     /**
      * @return com.zeroone.star.project.vo.JsonVO<java.lang.String>
@@ -34,7 +33,7 @@ public interface IMdClientService extends IService<MdClient> {
      * @Description 更新客户
      * @Param clientDTO [client]
      **/
-    boolean updateClient(ClientUpdateDTO client);
+    int updateClient(ClientUpdateDTO client);
 
     /**
      * @return 查询结果

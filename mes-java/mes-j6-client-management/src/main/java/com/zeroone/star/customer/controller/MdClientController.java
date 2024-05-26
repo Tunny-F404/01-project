@@ -26,15 +26,25 @@ public class MdClientController implements ClientApis {
     @Resource
     IMdClientService clientService;
 
+    private JsonVO<String> getStringJsonVO(int isOperated) {
+        if (isOperated == 1) {
+            return JsonVO.success(null);
+        } else if (isOperated == 2) {
+            return JsonVO.create(null, 9999, "客户名称已存在");
+        } else if(isOperated == 3) {
+            return JsonVO.create(null, 9999, "客户编码已存在");
+        } else if (isOperated == 23) {
+            return JsonVO.create(null, 9999, "客户编码和名称均已存在");
+        }
+        return JsonVO.fail(null);
+    }
+
     @ApiOperation(value = "新增客户")
     @PostMapping("add-client")
     @Override
     public JsonVO<String> addClient(@RequestBody ClientDTO client) {
-        boolean isAdded = clientService.addClient(client);
-        if (isAdded) {
-            return JsonVO.success(null);
-        }
-        return JsonVO.fail(null);
+        int isAdded = clientService.addClient(client);
+        return getStringJsonVO(isAdded);
     }
 
     @ApiOperation("删除客户")
@@ -52,11 +62,8 @@ public class MdClientController implements ClientApis {
     @PutMapping("update-client")
     @Override
     public JsonVO<String> updateClient(@RequestBody ClientUpdateDTO client) {
-        boolean isUpdated = clientService.updateClient(client);
-        if (isUpdated) {
-            return JsonVO.success(null);
-        }
-        return JsonVO.fail(null);
+        int isUpdated = clientService.updateClient(client);
+        return getStringJsonVO(isUpdated);
     }
 
     @ApiOperation("查询客户列表")
