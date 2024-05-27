@@ -4,8 +4,9 @@ import com.zeroone.star.project.utils.tree.TreeNode;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ import java.util.List;
  * @author cq
  * @version 1.0.0
  */
+@Getter
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class QueryDepartmentTreeVO  extends TreeNode {
@@ -29,9 +31,9 @@ public class QueryDepartmentTreeVO  extends TreeNode {
     @ApiModelProperty(value = "排序",example = "1")
     private Integer orderNum;
     @ApiModelProperty(value = "状态",example = "0")
-    private Integer status;
+    private String status;
     @ApiModelProperty(value = "创建时间",example = "2022-04-7 00:29:30")
-    private LocalTime createTime;
+    private LocalDateTime createTime;
 
     @ApiModelProperty(value = "节点包含的子节点")
     public List<QueryDepartmentTreeVO> getChildren(){

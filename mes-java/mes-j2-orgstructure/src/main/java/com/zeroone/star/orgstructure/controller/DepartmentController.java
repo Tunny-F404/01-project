@@ -46,9 +46,9 @@ public class DepartmentController implements DepartmentApis {
     @GetMapping("get-department-list")
     @ApiOperation("获取部门列表(条件)")
     public JsonVO<List<QueryDepartmentTreeVO>> getDepartmentList(DepartmentQuery departmentQuery) {
-        List<QueryDepartmentTreeVO> pageDTO = departmentService.getDepartmentList(departmentQuery);
-        if (pageDTO == null) return JsonVO.fail(pageDTO);
-        return JsonVO.success(pageDTO);
+        List<QueryDepartmentTreeVO> res = departmentService.getDepartmentList(departmentQuery);
+        if (res == null) return JsonVO.fail(res);
+        return JsonVO.success(res);
     }
 
     @Override
