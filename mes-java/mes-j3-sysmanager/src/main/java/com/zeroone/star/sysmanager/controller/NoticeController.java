@@ -8,6 +8,7 @@ import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.sysmanager.service.ISysNoticeService;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import java.util.List;
 @Controller
 @RequestMapping("sys-manager/notice")
 public class NoticeController implements NoticeApis {
+    @Autowired
     private ISysNoticeService noticeService;
     /**
      * 修改通知公告
