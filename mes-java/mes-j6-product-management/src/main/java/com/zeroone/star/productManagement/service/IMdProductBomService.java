@@ -37,7 +37,7 @@ public interface IMdProductBomService extends IService<MdProductBom> {
      * @param ids bomId列表
      * @return 是否全部删除成功
      */
-    boolean deleteProductBomByIds(List<Long> ids);
+    boolean deleteProductBomByIds(Long[] ids);
 
     /**
      * 根据 ItemId 进行分页查询

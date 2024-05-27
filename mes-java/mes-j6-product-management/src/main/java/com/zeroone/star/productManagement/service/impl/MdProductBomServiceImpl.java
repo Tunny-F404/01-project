@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.product_management.dto.BomDTO;
 import com.zeroone.star.project.j6.product_management.query.BomQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +19,8 @@ import static com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO.*;
 
 @org.mapstruct.Mapper(componentModel = "spring")
 interface MsProductBomMapper{
+    MdProductBom bomDTOToMdProductBom(BomDTO dto);
+
     BomDTO mdProductBomToBomDTO(MdProductBom mdProductBom);
 }
 
@@ -35,21 +38,25 @@ public class MdProductBomServiceImpl extends ServiceImpl<MdProductBomMapper, MdP
     @Resource
     MsProductBomMapper msProductBomMapper;
 
+    @Autowired
+    private MdProductBomMapper mdProductBomMapper;
+
     @Override
     public boolean insertProductBom(BomDTO dto) {
-
-        return false;
+        int result = mdProductBomMapper.insertProductBom(dto);
+        return result > 0;
     }
 
     @Override
     public boolean updateProductBom(BomDTO dto) {
-        return false;
+        int result = mdProductBomMapper.updateProductBom(dto);
+        return result > 0;
     }
 
     @Override
-    public boolean deleteProductBomByIds(List<Long> ids) {
-
-        return false;
+    public boolean deleteProductBomByIds(Long[] ids) {
+        int result = mdProductBomMapper.deleteProductBom(ids);
+        return result > 0;
     }
 
     @Override

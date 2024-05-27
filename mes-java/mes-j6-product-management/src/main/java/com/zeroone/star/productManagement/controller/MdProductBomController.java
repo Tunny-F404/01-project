@@ -8,12 +8,10 @@ import com.zeroone.star.project.j6.product_management.BomApis;
 import com.zeroone.star.project.j6.product_management.dto.BomDTO;
 import com.zeroone.star.project.j6.product_management.query.BomQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +24,8 @@ import java.util.List;
  * @since 2024-05-27
  */
 @RestController
-@RequestMapping("/productManagement/md-product-bom")
+@RequestMapping("/product-management/bom")
+@Api(tags = "BOM部分相关接口")
 public class MdProductBomController implements BomApis {
     @Autowired
     IMdProductBomService iMdProductBomService;
@@ -37,24 +36,31 @@ public class MdProductBomController implements BomApis {
     public JsonVO<PageDTO<BomDTO>> queryBomList(BomQuery query){
         return JsonVO.success(iMdProductBomService.selectProductBomsPageByItemId(query));
     }
-    @GetMapping("/add")
+    @PostMapping("/add")
     @ApiOperation(value = "新增bom数据")
     @Override
-    public JsonVO<Long> addBom(BomDTO dto) {
-
-        return null;
+    public JsonVO<String> addBom(BomDTO dto) {
+        if(iMdProductBomService.insertProductBom(dto)){
+            return JsonVO.success("添加成功");
+        }
+        return JsonVO.fail("添加失败");
     }
-    @GetMapping("/update")
+    @PutMapping("/update")
     @ApiOperation(value = "修改bom数据")
     @Override
-    public JsonVO<Long> updateBom(BomDTO dto) {
-        return null;
+    public JsonVO<String> updateBom(BomDTO dto) {
+        if (iMdProductBomService.updateProductBom(dto)) {
+            return JsonVO.success("修改成功");
+        }
+        return JsonVO.fail("修改失败");
     }
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     @ApiOperation(value = "删除bom数据")
     @Override
-    public JsonVO<Long> deleteBOM(List<Long> bomIds) {
-        return null;
-    }
+    public JsonVO<String> deleteBOM(Long[] bomIds) {
+        if (iMdProductBomService.deleteProductBomByIds(bomIds)) {
+            return JsonVO.success("删除成功");
+        }
+        return JsonVO.fail("删除失败");    }
 }
 

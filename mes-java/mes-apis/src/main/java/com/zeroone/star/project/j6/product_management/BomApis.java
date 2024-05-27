@@ -19,7 +19,7 @@ import java.util.List;
  */
 public interface BomApis {
     JsonVO<PageDTO<BomDTO>> queryBomList(BomQuery query);
-    JsonVO<Long> addBom(BomDTO dto);
-    JsonVO<Long> updateBom(BomDTO dto);
-    JsonVO<Long> deleteBOM(List<Long> bomIds);
+    JsonVO<String> addBom(BomDTO dto);
+    JsonVO<String> updateBom(BomDTO dto);
+    JsonVO<String> deleteBOM(Long[] bomIds);
 }
