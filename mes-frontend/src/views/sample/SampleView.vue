@@ -94,6 +94,10 @@ const menus = reactive([
 	{
 		path: '/sample/search-bar',
 		text: '搜索栏演示页'
+	},
+	{
+		path: '/sample/material-classification',
+		text: '物料产品分类演示页'
 	}
 ])
 </script>
