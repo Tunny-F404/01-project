@@ -1,7 +1,17 @@
 package com.zeroone.star.sysmanager.service;
 
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j3.dto.dict.SysDictDataDetailDTO;
+import com.zeroone.star.project.j3.dto.dict.SysDictDataExportDTO;
+import com.zeroone.star.project.j3.dto.dict.SysDictDataListDTO;
+import com.zeroone.star.project.j3.query.dict.SysDictDataQuery;
+import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanager.entity.SysDictData;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.http.ResponseEntity;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * <p>
@@ -13,4 +23,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysDictDataService extends IService<SysDictData> {
 
+    public JsonVO<PageDTO<SysDictDataListDTO>> listDictData(SysDictDataQuery dictDataQuery);
+
+    public ResponseEntity<byte[]> exportDictData(SysDictDataExportDTO sysDictDataExportDTO) ;
+
+    public JsonVO<SysDictDataDetailDTO> getDictData(Long dictCode);
 }
