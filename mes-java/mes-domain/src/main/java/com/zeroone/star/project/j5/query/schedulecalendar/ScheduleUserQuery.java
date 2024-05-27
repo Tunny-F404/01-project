@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
 /**
  * @description: 根据人员id获取指定班组排班计划
@@ -23,6 +24,6 @@ public class ScheduleUserQuery {
     private String userId;
 
     @ApiModelProperty(value = "日期", example = "2024-05-22")
-    private String date;
+    private LocalDate date;
 
 }

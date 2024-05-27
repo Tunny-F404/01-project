@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
 /**
  * @description: 设置节假日配置的数据对象
@@ -28,6 +29,6 @@ public class SettingHolidayQuery {
 
     @NotBlank(message = "被修改的日期不能为空")
     @ApiModelProperty(value = "被修改的日期", example = "2023-05-01")
-    private String theDay;
+    private LocalDate theDay;
 
 }
