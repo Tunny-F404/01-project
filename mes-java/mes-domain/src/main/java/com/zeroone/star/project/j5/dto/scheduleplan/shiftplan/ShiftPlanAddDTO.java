@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -25,7 +26,7 @@ public class ShiftPlanAddDTO {
     @ApiModelProperty(value="班次名称", example="白班")
     private String shiftName;
     @ApiModelProperty(value="开始时间", example="8:00")
-    private LocalTime startTime;
+    private String startTime;
     @ApiModelProperty(value="结束时间", example="16:00")
-    private LocalTime endTime;
+    private String endTime;
 }
