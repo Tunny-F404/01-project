@@ -1,12 +1,13 @@
 package com.zeroone.star.orgstructure.service;
 
-
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.orgstructure.entity.DepartmentDO;
-import com.zeroone.star.project.dto.PageDTO;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.j2.orgstructure.query.dept.DepartmentQuery;
 import com.zeroone.star.project.j2.orgstructure.vo.DepartmentTreeVO;
+import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.dto.PageDTO;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
  * @author 宵夜
  * @since 2024-05-22
  */
-public interface DepartmentService extends IService<DepartmentDO> {
+public interface DepartmentService extends IService<Department> {
 
     /**
      * 获取部门名称树
@@ -33,7 +34,7 @@ public interface DepartmentService extends IService<DepartmentDO> {
      * @param query
      * @return
      */
-    PageDTO<DepartmentDTO> getDepartmentList(DepartmentQuery query);
+    List<QueryDepartmentTreeVO> getDepartmentList(DepartmentQuery query);
 
     /**
      * 获取获知指定部门详情

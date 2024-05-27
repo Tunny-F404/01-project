@@ -19,15 +19,6 @@ import java.time.LocalDateTime;
 @ApiOperation(value = "部门查询对象")
 public class DepartmentQuery {
 
-    //页码
-    @Min(value = 1,message = "页码不能小于1")
-    @ApiModelProperty(value = "查询页码",example = "1")
-    private long pageIndex;
-    //数据条数
-    @Min(value = 1,message = "数据条数不能小于1")
-    @ApiModelProperty(value = "查询数据条数",example = "10")
-    private long pageSize;
-
     //部门Id
     @ApiModelProperty(value = "部门Id",example = "1")
     private Integer deptId;
@@ -42,9 +33,10 @@ public class DepartmentQuery {
 
     //部门状态 0正常 1停用
     @ApiModelProperty(value = "部门状态",example = "1")
-    private int status;
+    private Integer status;
 
     //显示顺序
+    @ApiModelProperty(value = "排序",example = "1")
     private Integer orderNum;
 
     //创建时间
