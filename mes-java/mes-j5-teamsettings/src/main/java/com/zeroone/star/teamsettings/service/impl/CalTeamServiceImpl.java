@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 interface MsTeamMapper {
@@ -25,6 +26,18 @@ interface MsTeamMapper {
      */
     TeamDTO teamToTeamDTO(CalTeam calTeam);
 
+    /**
+     * 班组DTO转实体类
+     * @param teamDTO 班组DTO
+     * @return 班组实体类
+     */
+    CalTeam teamDTOToTeam(TeamDTO teamDTO);
+
+    /**
+     * 添加班组DTO转实体类
+     * @param addTeamDTO
+     * @return
+     */
     CalTeam addTeamDTOToTeam(AddTeamDTO addTeamDTO);
 }
 
@@ -38,6 +51,11 @@ interface MsTeamMapper {
  */
 @Service
 public class CalTeamServiceImpl extends ServiceImpl<CalTeamMapper, CalTeam> implements ICalTeamService {
+    @Override
+    public boolean removeTeam(List<Long> ids) {
+        return baseMapper.deleteBatchIds(ids) > 0;
+    }
+
     @Resource
     MsTeamMapper msTeamMapper;
 
@@ -74,7 +92,17 @@ public class CalTeamServiceImpl extends ServiceImpl<CalTeamMapper, CalTeam> impl
 
     @Override
     public boolean modifyTeam(TeamDTO condition) {
-        return false;
+        // 查询是否存在
+        CalTeam existCalTeam = baseMapper.selectById(condition.getTeamId());
+        if (existCalTeam == null) {
+            return false;
+        }
+
+        // DTO 转 DO
+        CalTeam calTeam = msTeamMapper.teamDTOToTeam(condition);
+
+        // 更新数据库信息
+        return baseMapper.updateById(calTeam) > 0;
     }
 
     @Override

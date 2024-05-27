@@ -66,14 +66,14 @@ public class TeamSettingsController implements TeamSettingsApis {
     @PutMapping("modify-team")
     @Override
     public JsonVO<Integer> modifyTeam(@Validated TeamDTO teamDTO) {
-        return null;
+        return calTeamService.modifyTeam(teamDTO) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
     @ApiOperation(value = "删除班组")
     @DeleteMapping("delete-team")
     @Override
     public JsonVO<Integer> removeTeam(@Validated List<Long> ids) {
-        return null;
+        return calTeamService.removeTeam(ids) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
     @ApiOperation(value = "导出班组")

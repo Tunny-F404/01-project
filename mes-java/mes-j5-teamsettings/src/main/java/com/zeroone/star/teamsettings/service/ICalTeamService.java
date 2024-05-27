@@ -8,6 +8,8 @@ import com.zeroone.star.teamsettings.entity.CalTeam;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 /**
  * <p>
  * 班组表 服务类
@@ -44,6 +46,13 @@ public interface ICalTeamService extends IService<CalTeam> {
      * @return 修改结果
      */
      boolean modifyTeam(TeamDTO condition);
+
+    /**
+     * author interstellar
+     * @param ids 条件
+     * @return 删除结果
+     */
+     boolean removeTeam(List<Long> ids);
 
     /**
      * author interstellar
