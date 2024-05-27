@@ -24,15 +24,13 @@
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 /**
- * 定义一个修改信息的数据传输DTO
+ * 定义一个新增数据的数据传输DTO
  */
 class AddReturnDTO : public oatpp::DTO
 {
 	DTO_INIT(AddReturnDTO, DTO);
-	// 行ID
-	API_DTO_FIELD_DEFAULT(String, lineid, ZH_WORDS_GETTER("material.lineid"));
 	// 退货单ID
-	API_DTO_FIELD_DEFAULT(String, rtid, ZH_WORDS_GETTER("material.rtid"));
+	API_DTO_FIELD_DEFAULT(UInt64, rtid, ZH_WORDS_GETTER("material.rtid"));
 	// 退货单编号
 	API_DTO_FIELD_DEFAULT(String, rtcode, ZH_WORDS_GETTER("material.rtcode"));
 	// 退货单名称
@@ -52,6 +50,41 @@ class AddReturnDTO : public oatpp::DTO
 	// 备注
 	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("material.remark"));
 
+};
+/**
+ * 定义一个修改数据的数据传输DTO
+ */
+class ModifyReturnDTO :public AddReturnDTO
+{
+	DTO_INIT(ModifyReturnDTO, DTO);
+	// 行ID
+	API_DTO_FIELD_DEFAULT(UInt64, lineid, ZH_WORDS_GETTER("material.lineid"));
+	// 产品物料编码
+	API_DTO_FIELD_DEFAULT(String, itemcode, ZH_WORDS_GETTER("material.itemcode"));
+	// 产品物料名称
+	API_DTO_FIELD_DEFAULT(String, itemname, ZH_WORDS_GETTER("material.itemname"));
+	// 退货数量
+	API_DTO_FIELD_DEFAULT(Float64, quantityrted, ZH_WORDS_GETTER("material.quantityrted"));
+	// 规格型号
+	API_DTO_FIELD_DEFAULT(String, specification, ZH_WORDS_GETTER("material.specification"));
+	// 单位
+	API_DTO_FIELD_DEFAULT(String, unitofmeasure, ZH_WORDS_GETTER("material.unitofmeasure"));
+	// 批次号
+	API_DTO_FIELD_DEFAULT(String, batchcode, ZH_WORDS_GETTER("material.batchcode"));
+	// 仓库ID
+	API_DTO_FIELD_DEFAULT(UInt64, warehouseid, ZH_WORDS_GETTER("material.warehouseid"));
+	// 仓库名称
+	API_DTO_FIELD_DEFAULT(String, warehousename, ZH_WORDS_GETTER("material.warehousename"));
+	// 库区ID
+	API_DTO_FIELD_DEFAULT(UInt64, locationid, ZH_WORDS_GETTER("material.locationid"));
+	// 库区名称
+	API_DTO_FIELD_DEFAULT(String, locationname, ZH_WORDS_GETTER("material.locationname"));
+	// 库位ID
+	API_DTO_FIELD_DEFAULT(UInt64, areaid, ZH_WORDS_GETTER("material.areaid"));
+	// 库位名称
+	API_DTO_FIELD_DEFAULT(String, areaname, ZH_WORDS_GETTER("material.areaname"));
+	// 备注
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("material.remark"));
 };
 
 

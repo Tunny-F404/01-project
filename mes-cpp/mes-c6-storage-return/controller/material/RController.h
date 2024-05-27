@@ -82,7 +82,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("material.alter.summary"), modifyReturnline, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/alter/returnline", modifyReturnline, BODY_DTO(AddReturnDTO::Wrapper, dto), execModifyReturnline(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/alter/returnline", modifyReturnline, BODY_DTO(ModifyReturnDTO::Wrapper, dto), execModifyReturnline(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeReturnline) {
@@ -97,7 +97,7 @@ public:
 private:
 	GetReturnListPageJsonVO::Wrapper execQueryList(const GetReturnListQuery::Wrapper& query);
 	Uint64JsonVO::Wrapper execAddReturnLine(const AddReturnDTO::Wrapper& dto);
-	Uint64JsonVO::Wrapper execModifyReturnline(const AddReturnDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyReturnline(const ModifyReturnDTO::Wrapper& dto);
 	Uint64JsonVO::Wrapper execRemoveReturnline(const UInt64& lineid);
 };
 
