@@ -56,7 +56,7 @@ public class ShiftController implements ShiftApis {
         ResultStatus status = calShiftService.modifyShiftPlan(shiftPlanModifyDto);
 
         //业务层返回修改信息
-        return JsonVO.success(ResultStatus.SUCCESS);
+        return JsonVO.success(status);
     }
 
     @DeleteMapping("/remove/{shiftIds}")
