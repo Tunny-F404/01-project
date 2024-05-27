@@ -14,8 +14,8 @@ public:
 	ApprovalStageDO mapper(ResultSet* resultSet) const override
 	{
 		ApprovalStageDO data;
-		data.setrecord_id(resultSet->getUInt64(1));
-		data.setstatus(resultSet->getString(2));
+		data.setc_record_id(resultSet->getUInt64(1));
+		data.setc_status(resultSet->getString(2));
 		return data;
 	}
 };
