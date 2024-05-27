@@ -33,13 +33,13 @@ import java.util.List;
  * @author cq
  * @since 2024-05-22
  */
-class DepartmentTreeNodeMapper implements TreeNodeMapper<Department> {
-    private List<Integer> mRoot ;//根节点id
+class DepartmentTreeNodeMapper implements TreeNodeMapper<DepartmentDO> {
+    private List<Long> mRoot ;//根节点id
 
     public DepartmentTreeNodeMapper(){//无参构造 不使用
 
     }
-    public DepartmentTreeNodeMapper(List<Integer> root){//有参构造使用有参构造确认root节点
+    public DepartmentTreeNodeMapper(List<Long> root){//有参构造使用有参构造确认root节点
         mRoot = root;//浅拷贝没有问题，只需要拿出值判断
     }
 
@@ -58,8 +58,8 @@ class DepartmentTreeNodeMapper implements TreeNodeMapper<Department> {
         return treenode;
     }
 
-    public boolean isRootId(Integer id){
-        for (Integer node:mRoot){
+    public boolean isRootId(Long id){
+        for (Long node:mRoot){
             if(node.equals(id))
                 return true;
         }
@@ -78,24 +78,6 @@ class DepartmentTreeNodeMapper implements TreeNodeMapper<Department> {
  * @since 2024-05-22
  */
 
-@Mapper(componentModel = "spring")
-interface MsDepartmentMapper {
-    /**
-     * 将department转换为departmentDTO
-     *
-     * @param department
-     * @return
-     */
-    DepartmentDTO departmentOToDepartmentDTO(Department department);
-
-    /**
-     * 将department转换为departmentDTO
-     *
-     * @param departmentDTO
-     * @return
-     */
-    Department departmentDTOToDepartment(DepartmentDTO departmentDTO);
-}
 
 
 @Service
@@ -119,7 +101,7 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
             root.add(node.getDeptId());
         }
         for (int i = 0; i < ids.size(); i++) {
-            List<DepartmentDO> tDept = baseMapper.selectByIds(ids.get(i));
+            List<DepartmentDO> tDept = baseMapper.selectByIds(Math.toIntExact(ids.get(i)));
             if (tDept != null && !tDept.isEmpty()){
                 departments.addAll(tDept);
                 for (DepartmentDO node : tDept) {//将查询到的部门加入到ids中待查寻它的子部门
@@ -135,27 +117,27 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
     @Override
     public List<QueryDepartmentTreeVO> getDepartmentList(DepartmentQuery query) {
         //定义数据容器
-        List<Department> departments = new ArrayList<>();
-        List<Department> t = baseMapper.selectByQueryOne(
+        List<DepartmentDO> departments = new ArrayList<>();
+        List<DepartmentDO> t = baseMapper.selectByQueryOne(
                 query.getDeptName(),
                 query.getStatus(),
                 query.getOrderNum(),
                 query.getCreateTime()
             );//查询的部门本体(相当于root) 可能查询到同名的部门
         departments.addAll(t);
-        List<Integer> ids = new ArrayList<>();
-        for (Department root : departments) {//查询到多个部门 全部加入待查寻集中
+        List<Long> ids = new ArrayList<>();
+        for (DepartmentDO root : departments) {//查询到多个部门 全部加入待查寻集中
             ids.add(root.getDeptId());
         }
-        List<Integer> root = new ArrayList<>();//根节点id
-        for (Department node : departments) {//深拷贝
+        List<Long> root = new ArrayList<>();//根节点id
+        for (DepartmentDO node : departments) {//深拷贝
             root.add(node.getDeptId());
         }
         for (int i = 0; i < ids.size(); i++) {
-            List<Department> tDept = baseMapper.selectByQueryIds(ids.get(i));
+            List<DepartmentDO> tDept = baseMapper.selectByQueryIds(Math.toIntExact(ids.get(i)));
             if (tDept != null && !tDept.isEmpty()){
                 departments.addAll(tDept);
-                for (Department node : tDept) {//将查询到的部门加入到ids中待查寻它的子部门
+                for (DepartmentDO node : tDept) {//将查询到的部门加入到ids中待查寻它的子部门
                     ids.add(node.getDeptId());
                 }
             }

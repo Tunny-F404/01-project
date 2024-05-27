@@ -17,30 +17,30 @@ import java.util.List;
  * @since 2024-05-22
  */
 @Mapper
-public interface DepartmentMapper extends BaseMapper<Department> {
+public interface DepartmentMapper extends BaseMapper<DepartmentDO> {
     /**
      *
      * @param ids 部门名称
      * @return 返回列表
      */
-    List<DepartmentDO> selectByName(Long ids);
+    List<DepartmentDO> selectByIds(Integer ids);
     /**
      * 返回查询条件的实体(root)
      * @param name 部门名称
      * @return 返回列表
      */
     List<DepartmentDO> selectByNameOne(String name);
-
     /**
      *
-     * @param id,  name,  status,  orderNum,  parentId 查询条件体
+     * @param deptName,  status,  orderNum,  parentId 查询条件体
      * @return 返回列表
      */
-    List<DepartmentDO> selectByQueryOne(String deptName, Integer orderNum, Integer status, LocalDateTime time);
+    List<DepartmentDO> selectByQueryOne(String deptName,Integer orderNum, Integer status,LocalDateTime time);
     /**
      * 返回查询条件的实体(root)
      * @param ids 部门名称
      * @return 返回列表
      */
-    List<DepartmentDO> selectByQueryIds(Long[] ids);
+    List<DepartmentDO> selectByQueryIds(Integer ids);
+
 }

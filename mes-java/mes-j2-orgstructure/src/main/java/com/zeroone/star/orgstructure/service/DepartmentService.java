@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.j2.orgstructure.query.dept.DepartmentQuery;
 import com.zeroone.star.project.j2.orgstructure.vo.DepartmentTreeVO;
+import com.zeroone.star.project.j2.orgstructure.vo.QueryDepartmentTreeVO;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.dto.PageDTO;
 
@@ -19,7 +20,7 @@ import java.util.List;
  * @author 宵夜
  * @since 2024-05-22
  */
-public interface DepartmentService extends IService<Department> {
+public interface DepartmentService extends IService<DepartmentDO> {
 
     /**
      * 获取部门名称树
