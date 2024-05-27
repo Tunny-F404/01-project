@@ -10,6 +10,7 @@ import com.zeroone.star.project.j3.sysmanager.MessageManageApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanager.service.ISysMessageService;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.zeroone.star.project.j3.vo.NewsPageVO;
@@ -27,6 +28,7 @@ import java.util.List;
 @RequestMapping("sys-manager/message-manager")
 @ResponseBody
 public class MessageManageController implements MessageManageApis {
+    @Autowired
     private ISysMessageService messageManageService;
     /**
      * 获取消息详情

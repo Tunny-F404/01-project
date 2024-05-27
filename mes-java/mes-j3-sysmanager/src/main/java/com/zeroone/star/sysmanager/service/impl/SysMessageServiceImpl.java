@@ -61,17 +61,22 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
     public PageDTO<NewsPageVO> queryNewsList(NewsPageQuery newsPageQuery) {
         //准备分页条件
         Page<SysMessage> page = new Page<>(newsPageQuery.getPageIndex(), newsPageQuery.getPageSize());
+        String messageLevel = newsPageQuery.getMessageLevel();
+        String messageType = newsPageQuery.getMessageType();
+        String status = newsPageQuery.getStatus();
+        String senderNick = newsPageQuery.getSenderNick();
+        String receiverNick = newsPageQuery.getReceiverNick();
         //排序条件
         page.addOrder(new OrderItem("create_time", true));
         page.addOrder(new OrderItem("update_time", true));
-        page.addOrder(new OrderItem("id", true));
+        page.addOrder(new OrderItem("message_id", true));
         //准备分页条件
         Page<SysMessage> p = lambdaQuery()
-                .eq(SysMessage::getMessageType, newsPageQuery.getMessageType())
-                .eq(SysMessage::getMessageLevel, newsPageQuery.getMessageLevel())
-                .eq(SysMessage::getStatus, newsPageQuery.getStatus())
-                .like(SysMessage::getSenderNick, newsPageQuery.getSenderNick())
-                .like(SysMessage::getRecipientNick, newsPageQuery.getReceiverNick())
+                .eq(messageType!=null,SysMessage::getMessageType, messageType)
+                .eq(messageLevel!=null,SysMessage::getMessageLevel, messageLevel)
+                .eq(status!=null,SysMessage::getStatus, status)
+                .like(senderNick!=null,SysMessage::getSenderNick, senderNick)
+                .like(receiverNick!=null,SysMessage::getRecipientNick, receiverNick)
                 .page(page);
 
         //封装返回结果
