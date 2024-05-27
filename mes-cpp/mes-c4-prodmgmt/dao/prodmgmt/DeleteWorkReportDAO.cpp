@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "DeleteWorkReportDAO.h"
-#include <sstream>
 
 
 int DeleteWorkReportDAO::deleteById(uint64_t id)
