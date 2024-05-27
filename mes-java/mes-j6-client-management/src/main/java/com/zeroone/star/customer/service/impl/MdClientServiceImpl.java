@@ -188,7 +188,7 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
                 if (!mdClientMapper.checkMdClientCodeUnique(mdClient.getClientCode())) {
                     mdClientMapper.insert(mdClient);
                 } else {
-                    mdClientMapper.updateByClientCode(mdClient.getClientCode(), mdClient);
+                    mdClientMapper.update(mdClient);
                 }
                 successNum++;
             } catch (Exception e) {

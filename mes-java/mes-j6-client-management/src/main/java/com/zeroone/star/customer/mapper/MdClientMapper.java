@@ -13,5 +13,5 @@ import java.util.List;
 public interface MdClientMapper extends BaseMapper<MdClient> {
 
     boolean checkMdClientCodeUnique(String code);
-    boolean updateByClientCode(String clientCode,MdClient mdClient);
+    boolean update(MdClient mdClient);
 }
