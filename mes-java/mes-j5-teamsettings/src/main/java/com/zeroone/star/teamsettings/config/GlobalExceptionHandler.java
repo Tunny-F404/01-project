@@ -1,4 +1,4 @@
-package com.zeroone.star.sample.config;
+package com.zeroone.star.teamsettings.config;
 
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;

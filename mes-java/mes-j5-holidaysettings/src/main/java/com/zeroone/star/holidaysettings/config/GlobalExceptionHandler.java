@@ -1,4 +1,4 @@
-package com.zeroone.star.sample.config;
+package com.zeroone.star.holidaysettings.config;
 
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;

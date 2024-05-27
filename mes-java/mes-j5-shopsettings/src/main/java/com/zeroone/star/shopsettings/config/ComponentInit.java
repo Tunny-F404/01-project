@@ -1,4 +1,4 @@
-package com.zeroone.star.sample.config;
+package com.zeroone.star.shopsettings.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
