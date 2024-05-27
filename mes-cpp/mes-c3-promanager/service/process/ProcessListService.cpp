@@ -72,3 +72,20 @@ uint64_t ProcessListService::saveProcessAdd(const ProcessAddDTO::Wrapper& dto)
 	ProcessDAO dao;
 	return dao.insert(data);
 }
+/**
+ * 修改工艺的service
+ */
+bool ProcessListService::updateData(const ProcessDTO::Wrapper& dto)
+{
+	// 组装DO数据
+	ProRouteDO data;
+	/*data.setRouteCode(dto->routeCode.getValue({})); 
+	data.setRouteName(dto->routeName.getValue({})); 
+	data.setRouteDesc(dto->routeDesc.getValue({})); 
+	data.setEnableFlag(dto->enableFlag.getValue({})); 
+	data.setRemark(dto->remark.getValue({})); 
+	data.setRouteId(dto->routeId.getValue({}));*/
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, RouteCode, routeCode, RouteName, routeName, RouteDesc, routeDesc, EnableFlag, enableFlag, Remark, remark, RouteId, routeId)
+	ProcessDAO dao;
+	return dao.update(data) == 1;
+}

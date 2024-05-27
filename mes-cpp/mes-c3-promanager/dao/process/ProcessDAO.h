@@ -19,6 +19,8 @@ public:
 	list<ProRouteDO> selectById(const ProcessDetailQuery::Wrapper& query);
 	// 添加工艺
 	uint64_t insert(const ProRouteDO& iObj);
+	// 修改工艺
+	int update(const ProRouteDO& uObj);
 	
 };
 #endif // !_SAMPLE_DAO_

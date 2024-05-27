@@ -18,6 +18,8 @@ public:
 	ProcessDTO::Wrapper getById(const ProcessDetailQuery::Wrapper& query);
 	// 添加工艺 保存数据
 	uint64_t saveProcessAdd(const ProcessAddDTO::Wrapper& dto);
+	// 修改工艺
+	bool updateData(const ProcessDTO::Wrapper& dto);
 };
 
 #endif // !_SAMPLE_SERVICE_

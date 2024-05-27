@@ -64,9 +64,27 @@ Uint64JsonVO::Wrapper ProcessController::execAddProcess(const ProcessAddDTO::Wra
 }
 
 // 4 修改工艺
-Uint64JsonVO::Wrapper ProcessController::execModifyBasicProcess(const ProcessAddDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProcessController::execModifyBasicProcess(const ProcessDTO::Wrapper& dto)
 {
+	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->routeId || dto->routeId <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ProcessListService service;
+	// 执行数据修改
+	if (service.updateData(dto)) {
+		jvo->success(dto->routeId);
+	}
+	else
+	{
+		jvo->fail(dto->routeId);
+	}
+	// 响应结果
 	return jvo;
 }
 

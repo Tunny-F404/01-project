@@ -91,7 +91,7 @@ public:
 
 	// 4 修改工艺
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("process.put.summary1"), modifyProcess, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-process", modifyProcess, BODY_DTO(ProcessAddDTO::Wrapper, dto), execModifyBasicProcess(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-process", modifyProcess, BODY_DTO(ProcessDTO::Wrapper, dto), execModifyBasicProcess(dto));
 
 	// 5 获取工艺关联产品列表
 	ENDPOINT_INFO(queryCorrProduct) {
@@ -296,7 +296,7 @@ private:
 	// 3 添加工艺流程
 	Uint64JsonVO::Wrapper execAddProcess(const ProcessAddDTO::Wrapper& dto);
 	// 4 修改工艺基础数据
-	Uint64JsonVO::Wrapper execModifyBasicProcess(const ProcessAddDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyBasicProcess(const ProcessDTO::Wrapper& dto);
 	// 5 获取工艺关联产品列表
 	ProductsPageJsonVO::Wrapper execQueryProducts(const ProcessProductsQuery::Wrapper& query);
 	// 6 删除组成工序（支持批量删除）

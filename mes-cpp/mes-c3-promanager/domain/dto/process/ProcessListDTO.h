@@ -46,7 +46,7 @@ class ProcessDTO : public ProcessAddDTO
 	DTO_INIT(ProcessDTO, ProcessAddDTO);
 
 	// Î¨Ò»±êÊ¶
-	DTO_FIELD(UInt32, routeId);
+	DTO_FIELD(UInt64, routeId);
 	DTO_FIELD_INFO(routeId) {
 		info->description = ZH_WORDS_GETTER("process.field.id");
 	}

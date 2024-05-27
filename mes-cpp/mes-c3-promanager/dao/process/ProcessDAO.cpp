@@ -61,3 +61,9 @@ uint64_t ProcessDAO::insert(const ProRouteDO& iObj)
 	string sql = "INSERT INTO `pro_route` (`route_code`, `route_name`, `route_desc`, `enable_flag`, `remark`) VALUES (?, ?, ?, ?, ?)";
 	return sqlSession->executeInsert(sql, "%s%s%s%s%s", iObj.getRouteCode(), iObj.getRouteName(), iObj.getRouteDesc(), iObj.getEnableFlag(), iObj.getRemark());
 }
+// ÐÞ¸Ä¹¤ÒÕ
+int ProcessDAO::update(const ProRouteDO& iObj)
+{
+	string sql = "UPDATE `pro_route` SET `route_code`=?, `route_name`=?, `route_desc`=?, `enable_flag`=?, `remark`=? WHERE `route_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%ull", iObj.getRouteCode(), iObj.getRouteName(), iObj.getRouteDesc(), iObj.getEnableFlag(), iObj.getRemark(), iObj.getRouteId());
+}
