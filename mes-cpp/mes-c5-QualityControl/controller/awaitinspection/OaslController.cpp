@@ -4,5 +4,5 @@
 
 OaslPageJsonVO::Wrapper OaslController::execQuerySample(const OaslQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	return {};
+	return OaslPageJsonVO::Wrapper();
 }

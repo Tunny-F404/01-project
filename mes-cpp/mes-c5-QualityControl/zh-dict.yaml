@@ -157,7 +157,7 @@ templatedetectitem:
   update_time: 更新时间
 Pending_inspection:
  get:
-  summary: 获取待检列表
+  summary: 获取待检任务列表
  fields:
   code: 单据编码
   material: 物料名称
