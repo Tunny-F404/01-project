@@ -2,6 +2,7 @@ package com.zeroone.star.project.j3.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  */
 @Data
 @ApiModel
+@Builder
 public class UnreadMessageVO {
 
     @ApiModelProperty("未读消息列表")

@@ -1,5 +1,7 @@
 package com.zeroone.star.message.controller;
 
+import com.zeroone.star.message.entity.SysMessage;
+import com.zeroone.star.message.service.ISysMessageService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j3.dto.MessageDTO;
 import com.zeroone.star.project.j3.messageinform.MessageInfoApis;
@@ -10,6 +12,9 @@ import com.zeroone.star.project.j3.vo.UnreadMessageVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +26,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/message-info")
 public class MessageInfoController implements MessageInfoApis {
+
+    private static final Logger log = LoggerFactory.getLogger(MessageInfoController.class);
+    @Autowired
+    private ISysMessageService iSysMessageService;
+
     @Override
     @PostMapping("/delete-messages")
     @ApiOperation("删除消息")
@@ -49,8 +59,10 @@ public class MessageInfoController implements MessageInfoApis {
      */
     @GetMapping("/query-page")
     @ApiOperation("获取消息列表")
-    public JsonVO<PageDTO<SysMessageVO>> PageQuerySysMessage(NewsPageQuery newsPageQuery) {
-        return null;
+    public JsonVO<PageDTO<SysMessage>> PageQuerySysMessage(NewsPageQuery newsPageQuery) {
+        log.info("获取消息通知列表：{}", newsPageQuery);
+        PageDTO<SysMessage> pageDTO = iSysMessageService.pageQuery(newsPageQuery);
+        return JsonVO.success(pageDTO);
     }
 
 
@@ -61,7 +73,9 @@ public class MessageInfoController implements MessageInfoApis {
     @GetMapping("/unread-message")
     @ApiOperation("获取最新未读消息列表")
     public JsonVO<UnreadMessageVO> listUnreadMessage() {
-        return null;
+        // 获取最新未读消息列表
+        UnreadMessageVO unreadMessageVO = iSysMessageService.getUnreadMessage();
+        return JsonVO.success(unreadMessageVO);
     }
 
 
