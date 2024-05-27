@@ -24,6 +24,19 @@
 /**
  * 示例数据库实体类
  */
+\
+
+class GetProgectIdDO
+{
+	//项目ID
+	CC_SYNTHESIZE(string, subjectId, SubjectId);
+
+public:
+	GetProgectIdDO() {
+		subjectId = "";
+	}
+};
+
 class GetProgectListAllDO
 {
 	// 项目编码
@@ -35,7 +48,7 @@ class GetProgectListAllDO
 	// 项目类型
 	CC_SYNTHESIZE(string, subjectType, SubjectType);
 public:
-	SampleDO() {
+	GetProgectListAllDO() {
 		subjectCode = "";
 		subjectName = "";
 		subjectType = "";
@@ -44,6 +57,9 @@ public:
 
 class GetProgectListSomeDO
 {
+	//项目ID
+	CC_SYNTHESIZE(string, subjectId, SubjectId);
+
 	// 项目编码
 	CC_SYNTHESIZE(string, subjectCode, SubjectCode);
 
@@ -62,7 +78,8 @@ class GetProgectListSomeDO
 	//是否启用
 	CC_SYNTHESIZE(string, enableFlag, EnableFlag);
 public:
-	DeviceManageAddDO() {
+	GetProgectListSomeDO() {
+		subjectId= "";
 		subjectCode = "";
 		subjectName = "";
 		subjectType = "";
@@ -74,4 +91,4 @@ public:
 
 };
 
-#endif // !_SAMPLE_DO_
+#endif // !_GETPROGECT_DO_

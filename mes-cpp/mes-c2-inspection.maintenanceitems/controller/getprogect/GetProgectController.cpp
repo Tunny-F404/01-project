@@ -21,20 +21,31 @@
 #include "GetProgectController.h"
 #include "../../service/getprogect/GetProgectService.h"
 #include "GetProgectController.h"
+#include "../ApiDeclarativeServicesHelper.h"
 
 GetProgectPageJsonVO::Wrapper GetProgectController::execGetProgect(const GetProgectQuery::Wrapper& query)
 {
+	
 	// 定义一个Service
 	GetProgectService service;
 	// 查询数据
 	auto result = service.listAll(query);
 	// 响应结果
-	auto jvo = SamplePageJsonVO::createShared();
+	auto jvo = GetProgectPageJsonVO::createShared();
 	jvo->success(result);
 	return jvo;
 }
 
 GetProgectDetailJsonVO::Wrapper GetProgectController::execProgectDetail(const GetProgectDetailQuery::Wrapper& query)
 {
-	return {};
+
+	// 定义一个Service
+	GetProgectService service;
+	// 查询数据
+	auto result = service.listSome(query);
+	// 响应结果
+	auto jvo = GetProgectDetailJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
+

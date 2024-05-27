@@ -38,7 +38,7 @@ GetProgectDTO::Wrapper GetProgectService::listAll(const GetProgectQuery::Wrapper
 	pages->pageSize = query->pageSize;
 
 	// 查询数据总条数
-	SampleDAO dao;
+	GetProgectDAO dao;
 	uint64_t count = dao.count(query);
 	if (count <= 0)
 	{
@@ -48,11 +48,11 @@ GetProgectDTO::Wrapper GetProgectService::listAll(const GetProgectQuery::Wrapper
 	// 分页查询数据
 	pages->total = count;
 	pages->calcPages();
-	list<SampleDO> result = dao.selectWithPage(query);
+	list<GetProgectListAllDO> result = dao.selectWithPage(query);
 	// 将DO转换成DTO
-	for (SampleDO sub : result)
+	for (GetProgectListAllDO sub : result)
 	{
-		auto dto = SampleDTO::createShared();
+		auto dto = GetProgectListAllDO::createShared();
 		// 		dto->id = sub.getId();
 		// 		dto->name = sub.getName();
 		// 		dto->sex = sub.getSex();
@@ -64,35 +64,3 @@ GetProgectDTO::Wrapper GetProgectService::listAll(const GetProgectQuery::Wrapper
 	return pages;
 }
 
-uint64_t SampleService::saveData(const SampleDTO::Wrapper& dto)
-{
-	// 组装DO数据
-	SampleDO data;
-	// 	data.setName(dto->name.getValue(""));
-	// 	data.setSex(dto->sex.getValue(""));
-	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Name, name, Sex, sex, Age, age)
-		// 执行数据添加
-		SampleDAO dao;
-	return dao.insert(data);
-}
-
-bool SampleService::updateData(const SampleDTO::Wrapper& dto)
-{
-	// 组装DO数据
-	SampleDO data;
-	// 	data.setId(dto->id.getValue(0));
-	// 	data.setName(dto->name.getValue(""));
-	// 	data.setSex(dto->sex.getValue(""));
-	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Name, name, Sex, sex, Age, age, Id, id)
-		// 执行数据修改
-		SampleDAO dao;
-	return dao.update(data) == 1;
-}
-
-bool SampleService::removeData(uint64_t id)
-{
-	SampleDAO dao;
-	return dao.deleteById(id) == 1;
-}

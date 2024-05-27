@@ -40,18 +40,26 @@ if (query->age) { \
 
 
 
-std::list<GetProgectDO> GetProgectDAO::selectWithPage(const GetProgectQuery::Wrapper& query)
+std::list<GetProgectListAllDO> GetProgectDAO::selectWithPage(const GetProgectQuery::Wrapper & query)
 {
-	string sql = "SELECT subject_code,subject_type,subject_content,subject_standard,enable_flag FROM dv_subject WHERE subject_code in(" + uObj.getSubjectId() + ") AND subject_name in(" + uObj.getSubjectId() + ") AND subject_type in(" + uObj.getSubjectId() + ")";
-	GetProgectListSomeMapper mapper;
-	return sqlSession->executeQuery<GetProgectDO, GetProgectListSomeMapper>(sql, mapper);
+	//string sql = "SELECT subject_code,subject_type,subject_content,subject_standard,enable_flag FROM dv_subject WHERE subject_code in(" + uObj.getSubjectCode() + ") AND subject_name in(" + uObj.getSubjectName() + ") AND subject_type in(" + uObj.getSubjectType() + ")";
+	//GetProgectListSomeMapper mapper;
+	//return sqlSession->executeQuery<GetProgectListAllDO, GetProgectListSomeMapper>(sql, mapper);
+
+	stringstream sql;
+	sql << "SELECT subject_code,subject_type,subject_content,subject_standard,enable_flag FROM dv_subject";
+	SAMPLE_TERAM_PARSE(query, sql);
+	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
+	GetProgectMapper mapper;
+	string sqlStr = sql.str();
+	return sqlSession->executeQuery<SampleDO, SampleMapper>(sqlStr, mapper, params);
 }
 
-std::list<GetProgectDO> GetProgectDAO::selectById(const string& subjectCode)
+std::list<GetProgectListSomeDO> GetProgectDAO::selectById(const GetProgectListSomeDO& uObj)
 {
 	string sql = "SELECT subject_code,subject_name,subject_type,subject_content,subject_standard,enable_flag FROM dv_subject WHERE subject_id in(" + uObj.getSubjectId() + ")";
 	GetProgectListSomeMapper mapper;
-	return sqlSession->executeQuery<GetProgectDO, GetProgectListSomeMapper>(sql, mapper);
+	return sqlSession->executeQuery<GetProgectListSomeDO, GetProgectListSomeMapper>(sql, mapper);
 
 }
 

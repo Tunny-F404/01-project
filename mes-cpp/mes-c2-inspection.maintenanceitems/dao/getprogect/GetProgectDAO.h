@@ -21,7 +21,7 @@
 #define _GETPROGECT_DAO_
 #include "BaseDAO.h"
 #include "../../domain/do/dv_subject/GetProgectDO.h"
-#include "../../domain/query/sample/SampleQuery.h"
+#include "../../domain/query/getprogect/GetProgectQuery.h"
 
 /**
  * 示例表数据库操作实现
@@ -29,11 +29,12 @@
 class GetProgectDAO : public BaseDAO
 {
 public:
-
+	// 统计数据条数
+	uint64_t count(const GetProgectQuery::Wrapper& query);
 	// 分页查询数据
-	list<GetProgectDO> selectWithPage(const GetProgectQuery::Wrapper& query);
+	list<GetProgectListAllDO> selectWithPage(const GetProgectQuery::Wrapper& query);
 	// 通过姓名查询数据
-	list<GetProgectDO> selectById(const string& subjectCode);
+	list<GetProgectListSomeDO> selectById(const GetProgectListSomeDO& uObj);
 
 
 
