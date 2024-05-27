@@ -35,7 +35,8 @@ public class HoildaySettingController implements HolidaySettingsApis {
     @ApiOperation("获取节假日配置")
     @Override
     public JsonVO<HolidaysListDTO> listHoliday(ListHolidayQuery condition) {
-        return null;
+        HolidaysListDTO holidaysListDTO = calHolidayService.getList(condition);
+        return JsonVO.success(holidaysListDTO);
     }
 
 

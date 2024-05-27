@@ -2,6 +2,10 @@ package com.zeroone.star.holidaysettings.service;
 
 import com.zeroone.star.holidaysettings.entity.CalHoliday;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zeroone.star.project.j5.dto.holidaysetting.HolidaysListDTO;
+import com.zeroone.star.project.j5.query.holidaysetting.ListHolidayQuery;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-05-25
  */
 public interface ICalHolidayService extends IService<CalHoliday> {
+    public HolidaysListDTO getList(ListHolidayQuery condition);
 
 }

@@ -1,8 +1,10 @@
 package com.zeroone.star.project.j5.query.holidaysetting;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
@@ -28,6 +30,7 @@ public class SettingHolidayQuery {
     private String HolidayType;
 
     @NotBlank(message = "被修改的日期不能为空")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @ApiModelProperty(value = "被修改的日期", example = "2023-05-01")
     private LocalDate theDay;
 
