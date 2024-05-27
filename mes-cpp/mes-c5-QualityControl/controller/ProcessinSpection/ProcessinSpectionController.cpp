@@ -3,8 +3,11 @@
 #include "../ApiDeclarativeServicesHelper.h"
 #include "../../service/processinspection/ProcessInspectionService.h"
 #include "../../dao/processinspection/ProcessInspectionDAO.h"
+#include "Macros.h"
+#include "ExcelComponent.h"
+#include "gtest/gtest.h"
 
-ProcessinSpectionQueryPageJsonVO::Wrapper ProcessinSpectionController::execProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
+ProcessinSpectionQueryPageJsonVO::Wrapper ProcessinSpectionController::execQueryProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
 {
 	ProcessInspectionService service;
 	//执行查询
@@ -43,9 +46,106 @@ Uint64JsonVO::Wrapper ProcessinSpectionController::execRemoveProcessinSpection(c
 	return result;
 }
 
-StringJsonVO::Wrapper ProcessinSpectionController::execExportProcessinSpection(const oatpp::List<UInt64>& ids)
+StringJsonVO::Wrapper ProcessinSpectionController::execExportProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	return StringJsonVO::Wrapper();
+	ExcelComponent excel;
+	ProcessInspectionService service;
+	//获取数据
+	auto result = service.listAllExort(query);
+	vector<vector<std::string>> data;
+	stringstream ss;
+	//读取数据
+	for (auto i = result.begin(); i != result.end();++i) {
+		auto x = *i;
+		vector<std::string> row;
+		ss.clear();
+		ss << x.getId();
+		row.push_back(ss.str());
+
+		ss.str("");
+		ss << x.getIpqc_Code();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getIpqc_Type();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getWorkorder_Code();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getItem_Code();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getItem_Name();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getSpecification();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getUnit_Of_Measure();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getQuantity_Check();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getCheck_Result();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getInspect_Date();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getInspector();
+		row.push_back(ss.str());
+		ss.str("");
+
+		ss.str("");
+		ss << x.getStatus_Order();
+		row.push_back(ss.str());
+		ss.str("");
+
+		data.push_back(row);
+	}
+	std::string fileName = TEST_EXCEL_FN;
+	// 中文词典
+	std::string sheetName = TEST_EXCEL_SN;
+	// 插入表头
+	data.insert(data.begin(), {
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h1"),
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h2"),
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h3") ,
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h4") ,
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h5") ,
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h6"),
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h7"),
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h8"),
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h9"),
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h10"),
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h11"),
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h12"),
+		ZH_WORDS_GETTER("excel.ProcessInspection.header.h13")
+		});
+	excel.writeVectorToFile(fileName, sheetName,data);
+
+	return {};
 }
 
 ProcessinSpectionJsonVO::Wrapper ProcessinSpectionController::execQueryInspectionDetails(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)

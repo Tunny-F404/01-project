@@ -69,3 +69,16 @@ bool ProcessInspectionService::remove(uint64_t id)
 
 	return dao.deleteById(id);
 }
+
+list<ProcessinSpectionDO> ProcessInspectionService::listAllExort(const ProcessinSpectionQuery::Wrapper& query)
+{
+	ProcessInspectionDAO dao;
+	//查看数据是否存在
+	auto count = dao.count(query);
+	//不存在返回空
+	if (count < 1)
+		return {};
+	//查询所有数据
+	auto dos = dao.select(query);
+	return dos;
+}

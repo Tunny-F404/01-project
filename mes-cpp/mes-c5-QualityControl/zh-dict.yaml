@@ -173,3 +173,23 @@ detectionitemsettings:
   summary: 删除检测项（支持批量删除）
  export:
   summary: 导出检测项
+excel:
+ sheet:
+  s1: 数据表1
+  s2: 数据表2
+  s3: 数据表3
+ ProcessInspection: 
+  header:
+   h1: 检验单ID
+   h2: 检验单编号
+   h3: 检验类型
+   h4: 工单编码
+   h5: 产品物料编码
+   h6: 产品物料名称
+   h7: 规格型号
+   h8: 单位
+   h9: 检测数量
+   h10: 检测结果
+   h11: 检测日期
+   h12: 检测人员
+   h13: 单据状态
