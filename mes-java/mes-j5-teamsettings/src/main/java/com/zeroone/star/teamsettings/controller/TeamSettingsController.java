@@ -46,7 +46,8 @@ public class TeamSettingsController implements TeamSettingsApis {
 
     @Override
     public JsonVO<TeamDTO> queryTeamDetails(Long teamId) {
-        return null;
+        TeamDTO teamDetails = calTeamService.queryTeamDetails(teamId);
+        return teamDetails != null ? JsonVO.success(teamDetails) : JsonVO.fail(null);
     }
 
     @ApiOperation(value = "获取班组详情")
@@ -72,7 +73,7 @@ public class TeamSettingsController implements TeamSettingsApis {
     @ApiOperation(value = "删除班组")
     @DeleteMapping("delete-team")
     @Override
-    public JsonVO<Integer> removeTeam(@Validated List<Long> ids) {
+    public JsonVO<Integer> removeTeam(@RequestBody List<Long> ids) {
         return calTeamService.removeTeam(ids) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 

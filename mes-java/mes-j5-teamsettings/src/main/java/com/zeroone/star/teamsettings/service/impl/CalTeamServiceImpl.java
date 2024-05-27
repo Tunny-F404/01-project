@@ -78,7 +78,10 @@ public class CalTeamServiceImpl extends ServiceImpl<CalTeamMapper, CalTeam> impl
 
     @Override
     public TeamDTO queryTeamDetails(Long teamId) {
-        return null;
+        // 将数据查询出
+        CalTeam calTeam = baseMapper.selectById(teamId);
+        // 转为DTO并返回
+        return msTeamMapper.teamToTeamDTO(calTeam);
     }
 
     @Override
