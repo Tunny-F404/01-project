@@ -20,11 +20,11 @@ public class DepartmentDTO {
 
     //部门Id
     @ApiModelProperty(value = "部门Id",example = "宵夜部")
-    private Long deptId;
+    private Integer deptId;
 
     //父部门id
     @ApiModelProperty(value = "父部门id",example = "2",required = true)
-    private Long parentId;
+    private Integer parentId;
 
     //部门名称
     @ApiModelProperty(value = "部门名称",example = "部门1",required = true)
@@ -32,11 +32,11 @@ public class DepartmentDTO {
 
     //部门状态 0正常 1停用
     @ApiModelProperty(value = "部门状态",example = "0")
-    private int status;
+    private String status;
 
     //显示顺序
    @ApiModelProperty(value = "显示顺序",example = "0",required = true)
-    private int orderNum;
+    private Integer orderNum;
 
     @ApiModelProperty(value = "部门电话",example = "123456")
     private String phone;

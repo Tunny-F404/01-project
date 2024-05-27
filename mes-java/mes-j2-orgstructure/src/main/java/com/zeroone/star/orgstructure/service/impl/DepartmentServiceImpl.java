@@ -2,7 +2,6 @@ package com.zeroone.star.orgstructure.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zeroone.star.orgstructure.entity.Department;
 import com.zeroone.star.orgstructure.entity.DepartmentDO;
 import com.zeroone.star.orgstructure.service.DepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,13 +14,14 @@ import com.zeroone.star.project.utils.tree.TreeNodeMapper;
 import com.zeroone.star.project.utils.tree.TreeUtils;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
 
 /**
  * <p>
@@ -67,14 +67,7 @@ class DepartmentTreeNodeMapper implements TreeNodeMapper<DepartmentDO> {
 }
 
 
-/**
- * <p>
- * 部门表 服务实现类
- * </p>
- *
- * @author 宵夜
- * @since 2024-05-22
- */
+
 
 @Mapper(componentModel = "spring")
 interface MsDepartmentMapper {
@@ -92,7 +85,14 @@ interface MsDepartmentMapper {
     DepartmentDO departmentDTOToDepartment(DepartmentDTO departmentDTO);
 }
 
-
+/**
+ * <p>
+ * 部门表 服务实现类
+ * </p>
+ *
+ * @author 宵夜
+ * @since 2024-05-22
+ */
 @Service
 public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstructure.mapper.DepartmentMapper, DepartmentDO> implements DepartmentService {
 
@@ -100,7 +100,7 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
     MsDepartmentMapper msDepartmentMapper;
 
     @Override
-    public List<DepartmentTreeVO> getDepartmentNameTree(DepartmentQuery query){
+    public List<DepartmentTreeVO> getDepartmentNameTree(String name){
         //定义数据容器
         List<DepartmentDO> departments = new ArrayList<>();
         List<DepartmentDO> t = baseMapper.selectByNameOne(name);//查询的部门本体(相当于root) 可能查询到同名的部门
@@ -130,9 +130,9 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
     @Override
     public PageDTO<DepartmentDTO> getDepartmentList(DepartmentQuery query) {
         //构建列表查询对象(DO)
-        Page<Department> page = new Page<>(query.getPageIndex(), query.getPageSize());
+        Page<DepartmentDO> page = new Page<>(query.getPageIndex(), query.getPageSize());
         //构建查询条件
-        QueryWrapper<Department> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<DepartmentDO> queryWrapper = new QueryWrapper<>();
         //如果存在合法参数则添加条件
         if (query.getDeptName() != null) queryWrapper.like("dept_name", query.getDeptName());
         if (query.getOrderNum() != null) queryWrapper.eq("order_num", query.getOrderNum());
