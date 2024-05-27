@@ -12,6 +12,7 @@ bool ApprovalStageService::submitForApproval(const ApprovalStageDTO::Wrapper& dt
 	 	//data.setSex(dto->sex.getValue(""));
 	 	//data.setAge(dto->age.getValue(1));
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto,c_record_id, record_id, c_status, status);
+	//cout << data.getc_record_id() << endl;
 		// 执行数据修改
 	ApprovalStageDAO dao;
 	return dao.SubmitForApproval(data) == 1;
