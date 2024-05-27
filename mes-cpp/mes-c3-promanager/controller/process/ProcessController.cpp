@@ -2,6 +2,7 @@
 #include "ProcessController.h"
 #include "../../service/process/ProcessListService.h"
 #include "../../service/process/ProcessProductsService.h"
+#include "../../service/process/ComProService.h"
 #include "../ApiDeclarativeServicesHelper.h"
 
 // 1 查询工艺列表
@@ -102,10 +103,34 @@ ProductsPageJsonVO::Wrapper ProcessController::execQueryProducts(const ProcessPr
 	return jvo;
 }
 
-// 6 删除工艺
+// 6 删除组成工序
 Uint64JsonVO::Wrapper ProcessController::execRemoveProcess(const List<UInt64>& id)
 {
+	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
+
+	list<uint64_t> data;
+	for (auto p = id->begin(); p != id->end(); ++p) {
+		//数据校验
+		if (!*p || *p <= 0)
+		{
+			jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+			return jvo;
+		}
+		data.emplace_back(*p);
+	}
+	// 定义一个Service
+	ComProService service;
+	// 执行数据删除
+	int res = service.removeData(data);
+	if (res) {
+		jvo->success(res);
+	}
+	else
+	{
+		jvo->fail(res);
+	}
+	// 响应结果
 	return jvo;
 }
 

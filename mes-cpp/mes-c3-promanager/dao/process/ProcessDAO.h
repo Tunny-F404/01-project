@@ -21,6 +21,8 @@ public:
 	uint64_t insert(const ProRouteDO& iObj);
 	// 修改工艺
 	int update(const ProRouteDO& uObj);
+	// 通过ID删除组成工序
+	int deleteById(list<uint64_t> id);
 	
 };
 #endif // !_SAMPLE_DAO_

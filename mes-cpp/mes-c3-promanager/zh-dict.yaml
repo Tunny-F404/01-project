@@ -33,7 +33,7 @@ process:
   summary1: 修改工艺
   summary2: 修改产品制程BOM
  delete:
-  summary1: 删除工艺
+  summary1: 删除组成工序
   summary2: 删除产品制程物料BOM
  get_field:
   summary: 导出工艺

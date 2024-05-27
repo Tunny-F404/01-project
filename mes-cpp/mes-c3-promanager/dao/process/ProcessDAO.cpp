@@ -67,3 +67,21 @@ int ProcessDAO::update(const ProRouteDO& iObj)
 	string sql = "UPDATE `pro_route` SET `route_code`=?, `route_name`=?, `route_desc`=?, `enable_flag`=?, `remark`=? WHERE `route_id`=?";
 	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%ull", iObj.getRouteCode(), iObj.getRouteName(), iObj.getRouteDesc(), iObj.getEnableFlag(), iObj.getRemark(), iObj.getRouteId());
 }
+
+int ProcessDAO::deleteById(list<uint64_t> id)
+{
+	stringstream sql;
+	sql << "DELETE FROM `pro_route_process` WHERE `process_id` in (";
+	auto p = id.begin();
+	//第一个单独处理
+	sql << to_string(*p);
+	++p;
+	for (; p != id.end(); ++p) {
+		if (*p) {
+			sql << "," << to_string(*p);
+		}
+	}
+	sql << ")";
+	string sqlStr = sql.str();
+	return sqlSession->executeUpdate(sqlStr);
+}
