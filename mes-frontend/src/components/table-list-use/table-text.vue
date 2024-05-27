@@ -11,15 +11,15 @@ defineProps({
 
 <template>
   <el-card class="page-container">
-    <template #header>//插槽,头部，表明表格数据内容
+    <template #header><!--插槽,头部，表明表格数据内容-->
       <div class="header">
         <span>{{ title }}</span>
         <div class="extra">
-          <slot name="extra"></slot>//具名插槽
+          <slot name="extra"></slot><!-- //具名插槽-->  
         </div>
       </div>
     </template>
-    <slot></slot>//默认插槽，内容页
+    <slot></slot><!--//默认插槽，内容页-->  
   </el-card>
 </template>
 
