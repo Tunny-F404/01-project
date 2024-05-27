@@ -36,20 +36,16 @@ public class ShiftController implements ShiftApis {
         return null;
     }
 
-    @PostMapping("/add")
-    @ApiOperation("添加班次")
-    @Override
-    public JsonVO<Long> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto) {
-        if(shiftPlanAddDto.getShiftName()==null){
-            return JsonVO.fail(null);
-        }
-        return null;
-    }
-
     @PutMapping("/modify")
     @ApiOperation("修改班次")
     @Override
-    public JsonVO<Long> modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto) {
+    public JsonVO<ResultStatus> modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto) {
+        //判断shiftId是否为空
+
+        //不为空，业务层修改数据
+        ResultStatus status = calShiftService.modifyShiftPlan(shiftPlanModifyDto);
+
+        //业务层返回修改信息
         return null;
     }
 
@@ -60,17 +56,21 @@ public class ShiftController implements ShiftApis {
         return null;
     }
 
-//    @PostMapping("/add")
-//        @ApiOperation("添加班次")
-//        @Override
-//        public JsonVO<ResultStatus> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto) {
-//            if(shiftPlanAddDto.getShiftName()==null){
-//                return JsonVO.fail(ResultStatus.FAIL);
-//            }
-//            Long addId = calShiftService.addShiftPlan(shiftPlanAddDto);
-//            if(addId != null){
-//                return JsonVO.success(ResultStatus.SUCCESS);
-//            }
-//            return JsonVO.success(ResultStatus.FAIL);
-//        }
+    @PostMapping("/add")
+        @ApiOperation("添加班次")
+        @Override
+        public JsonVO<ResultStatus> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto) {
+        System.out.println(shiftPlanAddDto);
+            if(shiftPlanAddDto.getShiftName() == null){
+                return JsonVO.fail(ResultStatus.FAIL);
+            } else {
+//                Long newShiftId = calShiftService.addShiftPlan(shiftPlanAddDto);
+                Long newShiftId = 1L;
+                if(newShiftId != null){
+                    return JsonVO.success(ResultStatus.SUCCESS);
+                }
+                return JsonVO.success(ResultStatus.FAIL);
+            }
+
+        }
 }

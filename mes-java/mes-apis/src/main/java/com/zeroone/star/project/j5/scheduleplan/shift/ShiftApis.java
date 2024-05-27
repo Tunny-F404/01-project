@@ -6,6 +6,7 @@ import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanModifyDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
 
 import java.util.List;
 
@@ -28,17 +29,18 @@ public interface ShiftApis {
 
     /**
      * 新增班次计划
+     *
      * @param shiftPlanAddDto 新增班次计划数据
-     * @return  新增数据的唯一编号
+     * @return 新增数据的唯一编号
      */
-    JsonVO<Long> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto);
+    JsonVO<ResultStatus> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto);
 
     /**
      * 更新班次计划
      * @param shiftPlanModifyDto 更新班次计划数据
      * @return  修改的行数
      */
-    JsonVO<Long> modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto);
+    JsonVO<ResultStatus> modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto);
 
     /**
      * 删除排班计划v1
