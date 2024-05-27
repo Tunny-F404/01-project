@@ -59,7 +59,7 @@ public class TeamSettingsController implements TeamSettingsApis {
     @PostMapping("add-team")
     @Override
     public JsonVO<Integer> addTeam(@Validated AddTeamDTO condition) {
-        return null;
+        return calTeamService.addTeam(condition) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
     @ApiOperation(value = "修改班组")

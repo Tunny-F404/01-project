@@ -24,6 +24,8 @@ interface MsTeamMapper {
      * @return 班组DTO
      */
     TeamDTO teamToTeamDTO(CalTeam calTeam);
+
+    CalTeam addTeamDTOToTeam(AddTeamDTO addTeamDTO);
 }
 
 /**
@@ -38,6 +40,7 @@ interface MsTeamMapper {
 public class CalTeamServiceImpl extends ServiceImpl<CalTeamMapper, CalTeam> implements ICalTeamService {
     @Resource
     MsTeamMapper msTeamMapper;
+
 
     @Override
     public PageDTO<TeamDTO> listAll(TeamQuery condition) {
@@ -62,7 +65,11 @@ public class CalTeamServiceImpl extends ServiceImpl<CalTeamMapper, CalTeam> impl
 
     @Override
     public boolean addTeam(AddTeamDTO condition) {
-        return false;
+        // DTO 转为 DO
+        CalTeam calTeam = msTeamMapper.addTeamDTOToTeam(condition);
+
+        // 保存到数据库并返回结果
+        return baseMapper.insert(calTeam) > 0;
     }
 
     @Override
