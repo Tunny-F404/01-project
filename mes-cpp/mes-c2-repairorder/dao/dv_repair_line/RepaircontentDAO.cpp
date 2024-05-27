@@ -63,7 +63,7 @@ std::list<dv_repair_lineDO> RepaircontentDAO::selectByName(const string& name)
 {
 	stringstream sql;
 	SqlParams params;
-	sql << "SELECT subject_name,malfunction,malfunction_url,repair_des,subject_code,subject_type,subject_content FROM dv_repair_line WHERE `name` LIKE CONCAT('%',?,'%')";
+	sql << "SELECT subject_name,malfunction,malfunction_url,repair_des,subject_code,subject_type,subject_content,create_by,create_time,update_by,update_time FROM dv_repair_line WHERE `subject_name` LIKE CONCAT('%',?,'%')";
 	SQLPARAMS_PUSH(params, "s", string, name);
 	RepaircontentMapper mapper;
 	string sqlStr = sql.str();
@@ -72,21 +72,47 @@ std::list<dv_repair_lineDO> RepaircontentDAO::selectByName(const string& name)
 
 uint64_t RepaircontentDAO::insert(const dv_repair_lineDO& iObj)
 {
-	string sql = "INSERT INTO `dv_repair_line` (`subject_name`, `malfunction`, `malfunction_url`,`repair_des`) VALUES (?, ?, ?,?)";
-	return sqlSession->executeInsert(sql, "%s%s%s%s", iObj.getsubject_Name(), iObj.getMalfunction(),
-		iObj.getMalfunction_url(), iObj.getrepair_Des());
+	string sql = "INSERT INTO `dv_repair_line` (`line_id`,`repair_id`,`subject_id`,`subject_name`, `malfunction`, `malfunction_url`,`repair_des`,`subject_code`,`subject_type`,`subject_content`,`create_by`,`create_time`,`update_by`,`update_time`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	return sqlSession->executeInsert(sql, "%ull%ull%ull%s%s%s%s%s%s%s%s%dt%s%dt",
+		iObj.getline_Id(),
+		iObj.getrepair_Id(),
+		iObj.getsubject_Id(),
+		iObj.getsubject_Name(), 
+		iObj.getMalfunction(),
+		iObj.getMalfunction_url(), 
+		iObj.getrepair_Des(),
+		iObj.getsubject_Code(),
+		iObj.getsubject_Type(),
+		iObj.getsubject_Content(),
+		iObj.getCreate_by(),
+		iObj.getCreate_time(),
+		iObj.getUpdate_by(),
+		iObj.getUpdate_time()
+	);
 }
+
 
 
 int RepaircontentDAO::update(const dv_repair_lineDO& uObj)
 {
-	string sql = "UPDATE `dv_repair_line` SET `getsubject_Name`=?, `getMalfunction`=?, `getMalfunction_url`=?,`getrepair_Des`=? WHERE `subject_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%ull", uObj.getsubject_Name(), uObj.getMalfunction(),
- uObj.getMalfunction_url(), uObj.getrepair_Des(), uObj.getsubject_Id());
+	string sql = "UPDATE `dv_repair_line` SET `subject_Name`=?, `Malfunction`=?, `Malfunction_url`=?,`repair_Des`=?,`subject_Code`=?,`subject_Type`=?,`subject_Content`=?,`Update_by`=?,`Update_time`=?  WHERE `subject_id`=? AND `repair_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%dt%ull%ull", 
+		uObj.getsubject_Name(), 
+		uObj.getMalfunction(),
+		uObj.getMalfunction_url(), 
+		uObj.getrepair_Des(), 
+		uObj.getsubject_Code(),
+		uObj.getsubject_Type(),
+		uObj.getsubject_Content(),
+		uObj.getUpdate_by(),
+		uObj.getUpdate_time(),
+		uObj.getsubject_Id(),
+		uObj.getrepair_Id()
+	);
 }
 
-int RepaircontentDAO::deleteById(uint64_t id)
+int RepaircontentDAO::deleteById(uint64_t id,string name)
 {
-	string sql = "DELETE FROM `dv_repair_line` WHERE `subject_id`=?";
-	return sqlSession->executeUpdate(sql, "%ull", id);
+	string sql = "DELETE FROM `dv_repair_line` WHERE `repair_id`=? AND `subject_name`=?";
+	return sqlSession->executeUpdate(sql, "%ull%s", id,name);
 }

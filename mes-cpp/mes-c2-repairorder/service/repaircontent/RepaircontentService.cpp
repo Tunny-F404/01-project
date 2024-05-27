@@ -44,11 +44,8 @@ RepaircontentPageDTO::Wrapper RepaircontentService::listAll(const RepaircontentQ
 	for (dv_repair_lineDO sub : result)
 	{
 		auto dto = RepaircontentDTO::createShared();
-		// 		dto->id = sub.getId();
-		// 		dto->name = sub.getName();
-		// 		dto->sex = sub.getSex();
-		// 		dto->age = sub.getAge();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, subject_name, subject_Name, 
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, 
+			subject_name, subject_Name, 
 			malfunction, Malfunction, 
 			malfunction_url,Malfunction_url, 
 			repair_des, repair_Des,
@@ -101,25 +98,49 @@ uint64_t RepaircontentService::saveData(const RepaircontentDTO::Wrapper& dto)
 {
 	// 组装DO数据
 	dv_repair_lineDO data;
-	// 	data.setName(dto->name.getValue(""));
-	// 	data.setSex(dto->sex.getValue(""));
-	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, subject_Name, subject_name, Malfunction, malfunction, Malfunction_url, malfunction_url, repair_Des, repair_des)
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto,
+		line_Id,line_id,
+		repair_Id,repair_id,
+		subject_Id,subject_id,
+		subject_Name, subject_name, 
+		Malfunction, malfunction, 
+		Malfunction_url, malfunction_url, 
+		repair_Des, repair_des,
+		subject_Code,subject_code,
+		subject_Type,subject_type,
+		subject_Content,subject_content,
+		Create_by,create_by,
+		Create_time,create_time,
+		Update_by,update_by,
+		Update_time,update_time
+	)
 		// 执行数据添加
 		RepaircontentDAO dao;
 	return dao.insert(data);
 }
 
-bool RepaircontentService::updateData(const RepaircontentDTO::Wrapper& dto)
+bool RepaircontentService::updateData(const ModifyRepaircontentDTO::Wrapper& dto)
 {
 	dv_repair_lineDO data;
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, subject_Name, subject_name, Malfunction, malfunction, Malfunction_url, malfunction_url, repair_Des, repair_des)
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, 
+		subject_Name, subject_name, 
+		Malfunction, malfunction, 
+		Malfunction_url, malfunction_url, 
+		repair_Des, repair_des,
+		subject_Code, subject_code,
+		subject_Type,subject_type,
+		subject_Content,subject_content,
+		Update_by,update_by,
+		Update_time,update_time,
+		subject_Id,subject_id,
+		repair_Id,repair_id
+		)
 		RepaircontentDAO dao;
 	return dao.update(data) == 1;
 }
 
-bool RepaircontentService::removeData(uint64_t id)
+bool RepaircontentService::removeData(uint64_t id,string name)
 {
 	RepaircontentDAO dao;
-	return dao.deleteById(id) == 1;
+	return dao.deleteById(id,name) == 1;
 }

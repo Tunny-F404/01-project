@@ -59,6 +59,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const Repair
 
 	 //非空校验
 	if (!dto->repair_id ||
+		!dto->subject_id ||
 		!dto->subject_name ||
 		!dto->malfunction ||
 		!dto->malfunction_url ||
@@ -67,7 +68,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const Repair
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->repair_id < 0 || dto->subject_name->empty() || dto->malfunction->empty())
+	if (dto->repair_id < 0 || dto->subject_id<0 || dto->subject_name->empty() || dto->malfunction->empty())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -78,25 +79,28 @@ Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const Repair
 	// 执行数据新增
 	uint64_t res = service.saveData(dto);
 	if (res > 0) {
-		jvo->success(UInt64(res));
+		jvo->success(res);
 	}
 	else {
-		jvo->fail(UInt64(res));
+		jvo->fail(res);
 	}
 	// 响应结果
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const RepaircontentDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const ModifyRepaircontentDTO::Wrapper& dto)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 
 	// 非空校验
-	if (!dto->subject_name ||
+	if (!dto->subject_id ||
+		!dto->repair_id ||
+		!dto->subject_name ||
 		!dto->repair_des ||
 		!dto->malfunction ||
-		!dto->malfunction_url) {
+		!dto->malfunction_url)
+	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
@@ -112,11 +116,24 @@ Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const Rep
 	}
 	// 响应结果
 	return jvo;
+
+
 }
 
-StringJsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& subject_nameList)
+Uint64JsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& id)
 {
-	//...
-	return StringJsonVO::Wrapper();
+	auto jvo = Uint64JsonVO::createShared();
+
+	uint64_t cnt = 0; // 执行成功计数
+	// 定义一个Service
+	RepaircontentService service;
+	for (const String& it : *id->subject_nameList) { // 不用校验, 失败不管 (隐藏字段, 一般不会有问题)
+		if (it) {
+			cnt += service.removeData(*id->repair_id,it);
+		}
+	}
+	jvo->success(cnt);
+	// 响应结果
+	return jvo;
 }
 

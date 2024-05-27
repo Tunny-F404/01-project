@@ -68,8 +68,8 @@ class dv_repair_lineDO
 public:
 	dv_repair_lineDO() {
 		line_id = 0;
-		repair_id = 0;
-		subject_id = 0;
+		repair_id = 1;
+		subject_id = 1;
 		subject_code = "";
 		subject_name = "";
 		subject_type = "";

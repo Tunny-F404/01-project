@@ -88,7 +88,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 修改维修单 接口处理
-	ENDPOINT(API_M_PUT, "/repaircontent/modify-repaircontent", modifyRepaircontent, BODY_DTO(RepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_PUT, "/repaircontent/modify-repaircontent", modifyRepaircontent, BODY_DTO(ModifyRepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execModifyRepaircontent(dto));
 	}
@@ -118,9 +118,9 @@ private:
 	// 3.3 添加维修单内容
 	Uint64JsonVO::Wrapper execAddRepaircontent(const RepaircontentDTO::Wrapper& dto);
 	// 3.3 修改维修单内容
-	Uint64JsonVO::Wrapper execModifyRepaircontent(const RepaircontentDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyRepaircontent(const ModifyRepaircontentDTO::Wrapper& dto);
 	// 3.3 删除维修单内容
-	StringJsonVO::Wrapper execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& subject_nameList);
+	Uint64JsonVO::Wrapper execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& id);
 };
 
 // 0 取消API控制器使用宏
