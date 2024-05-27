@@ -11,28 +11,28 @@ class ProcessProductsDTO : public oatpp::DTO
 	DTO_INIT(ProcessProductsDTO, DTO);
 
 	// 唯一标识
-	DTO_FIELD(UInt32, routeid);
+	DTO_FIELD(UInt64, routeid);
 	DTO_FIELD_INFO(routeid) {
 		info->description = ZH_WORDS_GETTER("product.field.routeid");
 	}
 	// 产品物料编码
-	DTO_FIELD(String, id);
-	DTO_FIELD_INFO(id) {
+	DTO_FIELD(String, item_code);
+	DTO_FIELD_INFO(item_code) {
 		info->description = ZH_WORDS_GETTER("product.field.id");
 	}
 	// 产品物料名称
-	DTO_FIELD(String, name);
-	DTO_FIELD_INFO(name) {
+	DTO_FIELD(String, item_name);
+	DTO_FIELD_INFO(item_name) {
 		info->description = ZH_WORDS_GETTER("product.field.name");
 	}
 	// 规格型号
-	DTO_FIELD(String, size);
-	DTO_FIELD_INFO(size) {
+	DTO_FIELD(String, specification);
+	DTO_FIELD_INFO(specification) {
 		info->description = ZH_WORDS_GETTER("product.field.size");
 	}
 	// 单位
-	DTO_FIELD(String, unit);
-	DTO_FIELD_INFO(unit) {
+	DTO_FIELD(String, unit_of_measure);
+	DTO_FIELD_INFO(unit_of_measure) {
 		info->description = ZH_WORDS_GETTER("product.field.unit");
 	}
 

@@ -99,7 +99,7 @@ set:
 
 product:
  field:
-  id: 产品物料编码
+  id: 工艺路线id
   name: 产品物料名称
   size: 规格型号
   unit: 单位

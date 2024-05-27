@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ProcessController.h"
 #include "../../service/process/ProcessListService.h"
+#include "../../service/process/ProcessProductsService.h"
 #include "../ApiDeclarativeServicesHelper.h"
 
 // 1 查询工艺列表
@@ -91,7 +92,14 @@ Uint64JsonVO::Wrapper ProcessController::execModifyBasicProcess(const ProcessDTO
 // 5 获取工艺关联产品列表（条件+分页）
 ProductsPageJsonVO::Wrapper ProcessController::execQueryProducts(const ProcessProductsQuery::Wrapper& query)
 {
-	return {};
+	// 定义一个Service
+	ProcessProductsService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = ProductsPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 // 6 删除工艺

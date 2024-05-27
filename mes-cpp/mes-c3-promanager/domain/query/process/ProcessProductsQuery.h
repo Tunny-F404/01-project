@@ -31,10 +31,10 @@
 class ProcessProductsQuery : public PageQuery
 {
 	DTO_INIT(ProcessProductsQuery, PageQuery);
-	// 产品物料编码
-	DTO_FIELD(String, id);
-	DTO_FIELD_INFO(id) {
-		info->description = ZH_WORDS_GETTER("product.field.id");
+	// 工艺路线id
+	DTO_FIELD(String, routeid);
+	DTO_FIELD_INFO(routeid) {
+		info->description = ZH_WORDS_GETTER("product.field.routeid");
 	}
 };
 
