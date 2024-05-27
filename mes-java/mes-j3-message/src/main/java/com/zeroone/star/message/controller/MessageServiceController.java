@@ -67,8 +67,8 @@ public class MessageServiceController implements MessageServiceApis {
      */
     @ApiOperation("客户端退出")
     @PostMapping("/logout")
-    public JsonVO<ResultStatus> clientLogout(@ApiParam("退出信息") @RequestBody LogoutDTO logoutDTO) {
-        return null;
+    public ResultStatus clientLogout(@ApiParam("退出信息") @RequestBody LogoutDTO logoutDTO) {
+        return iSysMessageService.logout(logoutDTO);
     }
 
     /**

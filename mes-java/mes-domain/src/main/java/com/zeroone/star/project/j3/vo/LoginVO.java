@@ -1,5 +1,6 @@
 package com.zeroone.star.project.j3.vo;
 
+import com.zeroone.star.project.j3.dto.Session;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,4 +22,7 @@ public class LoginVO {
 
     @ApiModelProperty(value = "用户角色列表", example = "['ADMIN','MANAGER']")
     private List<String> roles;
+
+    @ApiModelProperty(value = "客户会话", example = "xxxxxx")
+    private Session session;
 }

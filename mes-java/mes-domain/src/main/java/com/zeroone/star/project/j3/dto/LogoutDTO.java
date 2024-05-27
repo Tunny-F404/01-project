@@ -8,8 +8,8 @@ import lombok.Data;
 @ApiModel("用户退出数据")
 public class LogoutDTO {
     /**
-     * 用户会话Token
+     * 用户ID
      */
-    @ApiModelProperty(value = "用户会话Token", example = "XXDSADSAAFASD", required = true)
-    private String token;
+    @ApiModelProperty(value = "用户ID", example = "XXDSADSAAFASD", required = true)
+    private String userId;
 }

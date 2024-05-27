@@ -1,6 +1,7 @@
 package com.zeroone.star.message.entity;
 
 import cn.hutool.core.date.DateTime;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Setter
 @TableName("sys_user")
 public class User {
+    @TableId
     private Long userId;
     private Long deptId;
     private String userName;

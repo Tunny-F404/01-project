@@ -33,7 +33,7 @@ public interface MessageServiceApis {
 
     JsonVO<LoginVO> clientLogin(LoginDTO loginDTO);
 
-    JsonVO<ResultStatus> clientLogout(LogoutDTO logoutDTO);
+    ResultStatus clientLogout(LogoutDTO logoutDTO);
 
     JsonVO<ResultStatus> sendNotice(SystemNotificationDTO systemNotificationDTO);
 
