@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j6.product_management;
 
 
+import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.product_management.dto.ProductSupplierListDTO;
 import com.zeroone.star.project.j6.product_management.dto.SupplierDTO;
 import com.zeroone.star.project.j6.product_management.dto.SupplierListDTO;
@@ -20,7 +21,7 @@ import java.util.List;
  * @version 1.0.0
  */
 public interface SupplierApis {
-    JsonVO<List<SupplierDTO>> querySupplierList(SupplierListQuery query);
+    JsonVO<PageDTO<SupplierDTO>> querySupplierList(SupplierListQuery query);
     JsonVO<String> addSupplierList(SupplierListDTO dto);
     JsonVO<String> updateSupplier(SupplierDTO dto);
     JsonVO<String> deleteBatchSupplier(ProductSupplierListDTO dto);

@@ -12,5 +12,6 @@ import java.util.List;
 @Mapper
 public interface MdClientMapper extends BaseMapper<MdClient> {
 
-    List<MdClient> selectMdClientList(ClientExportQuery clientExportQuery);
+    boolean checkMdClientCodeUnique(String code);
+    boolean updateByClientCode(String clientCode,MdClient mdClient);
 }

@@ -5,6 +5,7 @@ import com.zeroone.star.customer.entity.MdClient;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
 import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
+import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import lombok.SneakyThrows;
@@ -19,21 +20,21 @@ public interface IMdClientService extends IService<MdClient> {
      * @Description 新增客户业务流程
      * @Param clientDTO [client]
      **/
-    JsonVO<String> addClient(ClientDTO client);
+    boolean addClient(ClientDTO client);
 
     /**
      * @return com.zeroone.star.project.vo.JsonVO<java.lang.String>
      * @Description 删除客户业务流程
      * @Param List<Long> [ids]
      **/
-    JsonVO<String> deleteClient(List<Long> ids);
+    boolean deleteClient(List<Long> ids);
 
     /**
      * @return com.zeroone.star.project.vo.JsonVO<com.zeroone.star.project.j6.customer.dto.ClientDTO>
      * @Description 更新客户
      * @Param clientDTO [client]
      **/
-    JsonVO<String> updateClient(ClientDTO client);
+    boolean updateClient(ClientUpdateDTO client);
 
     /**
      * @return 查询结果
@@ -52,9 +53,7 @@ public interface IMdClientService extends IService<MdClient> {
      * @param clientExportQuery 导出条件
      * @return 导出结果
      */
-    ResponseEntity<byte[]> queryClientExportByExcel(ClientExportQuery clientExportQuery);
-
-
+    ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids);
 
     /**
      * @param customer 数据集

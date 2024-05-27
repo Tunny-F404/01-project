@@ -5,6 +5,7 @@ import com.zeroone.star.productManagement.entity.ProductSop;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.product_management.dto.ProductSopDTO;
 import com.zeroone.star.project.j6.product_management.query.ProductSopQuery;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -40,5 +41,9 @@ public interface IProductSopService extends IService<ProductSop> {
      * @param ids 需要删除的产品SOP主键
      */
     void deleteProductSopByIds(Long[] ids);
+    // 新增方法用于处理文件上传逻辑
+    String uploadFile(MultipartFile file);
+
+
 
 }

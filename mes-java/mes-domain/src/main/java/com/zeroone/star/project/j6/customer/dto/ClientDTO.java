@@ -3,6 +3,15 @@ package com.zeroone.star.project.j6.customer.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import javax.validation.constraints.NotBlank;
+
+
+/**
+ * @Author 小鱼
+ * @Description 客户数据传输对象
+ * @Date 13:20 2024/5/20
+ **/
+
 
 @Data
 @ApiModel("客户数据传输对象")
@@ -10,13 +19,15 @@ public class ClientDTO {
     /**
      * 客户编码
      */
+    @NotBlank(message = "客户编码不能为空")
     @ApiModelProperty(value = "客户编码", example = "10001")
     private String clientCode;
 
     /**
      * 客户名称
      */
-    @ApiModelProperty(value = "客户名称", example = "张三")
+    @NotBlank(message = "客户名称不能为空")
+    @ApiModelProperty(value =  "客户名称", example = "张三")
     private String clientName;
 
     /**

@@ -7,18 +7,31 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.productManagement.entity.ProductSop;
 import com.zeroone.star.productManagement.mapper.ProductSopMapper;
 import com.zeroone.star.productManagement.service.IProductSopService;
+import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
+import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.product_management.dto.ProductSopDTO;
 import com.zeroone.star.project.j6.product_management.query.ProductSopQuery;
+import io.swagger.annotations.ApiOperation;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.util.List;
+
 @Service
 public class ProductSopServiceImpl extends ServiceImpl<ProductSopMapper, ProductSop> implements IProductSopService {
     @Autowired
     private ProductSopMapper ProductSopMapper;
-
+    @Resource
+    FastDfsClientComponent dfs;
+    @Value("${fastdfs.nginx-servers}")
+    String urlPrefix;
     @Override
     public PageDTO<ProductSopDTO> selectProductSopPage(ProductSopQuery query) {
         //构建分页条件对象
@@ -53,4 +66,23 @@ public class ProductSopServiceImpl extends ServiceImpl<ProductSopMapper, Product
     public void deleteProductSopByIds(Long[] ids) {
         ProductSopMapper.deleteProductSopByIds(ids);
 }
+    @Override
+    @SneakyThrows
+    @ResponseBody
+    @PostMapping("upload")
+    @ApiOperation(value = "上传文件")
+    public String uploadFile(MultipartFile file) {
+        try {
+            String filename = file.getOriginalFilename();
+            assert filename != null;
+            String suffix = filename.substring(filename.lastIndexOf(".") + 1);
+            FastDfsFileInfo result = dfs.uploadFile(file.getBytes(), suffix);
+            if (result != null) {
+                return dfs.fetchUrl(result, "http://" + urlPrefix, true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
