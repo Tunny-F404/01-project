@@ -129,8 +129,9 @@ public class ClientDTO {
     /**
      * 是否启用
      */
+    @NotBlank(message = "是否启用不能为空")
     @ApiModelProperty(value = "是否启用", example = "是")
-    private String enableFlag;
+    private String enableFlag = "是";
 
     /**
      * 备注
