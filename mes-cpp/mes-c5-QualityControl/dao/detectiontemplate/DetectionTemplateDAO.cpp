@@ -62,8 +62,6 @@ uint64_t DetectionTemplateDAO::insert(const DetectionTemplateDO& iObj)
 
 bool DetectionTemplateDAO::update(const DetectionTemplateDO& iObj)
 {
-	//string sql = "UPDATE `qc_template` SET `template_code`=?,`template_name`=?,`qc_types`=?,`enable_flag`=?,`remark`=? WHERE `template_id`=?";
-	//return sqlSession->executeUpdate(sql, "%s%s%s%s%s%ull", iObj.getItem_Code(), iObj.getTemplate_Name(), iObj.getQc_Types(), iObj.getEnable_Flag(), iObj.getRemark(), iObj.getTemplate_Id());
 	string sql = "UPDATE `qc_template` SET `template_code`=?,`template_name`=?,`qc_types`=?,`enable_flag`=?,`remark`=? WHERE `template_id`=?";
 	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%ull", iObj.getTemplate_Code(),iObj.getTemplate_Name(),iObj.getQc_Types(),iObj.getEnable_Flag(),iObj.getRemark(), iObj.getTemplate_Id());
 }
