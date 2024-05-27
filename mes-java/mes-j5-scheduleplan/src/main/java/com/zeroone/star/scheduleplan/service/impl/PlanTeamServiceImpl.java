@@ -3,6 +3,7 @@ package com.zeroone.star.scheduleplan.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.planteam.AddPlanTeamDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.planteam.PlanTeamDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.planteam.PlanTeamQuery;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -31,6 +32,13 @@ interface MsCalPlanTeamMapper {
      * @return 转换后的结果
      */
     PlanTeamDTO calPlanTeamToPlanTeamDTO(CalPlanTeam calPlanTeam);
+
+    /**
+     * 将 AddPlanTeamDTO 转换成 CalPlanTeam
+     * @param addPlanTeamDTO dto对象
+     * @return 转换后的结果
+     */
+    CalPlanTeam addPlanTeamDTOToCalPlanTeam(AddPlanTeamDTO addPlanTeamDTO);
 }
 
 /**
@@ -44,7 +52,7 @@ interface MsCalPlanTeamMapper {
 public class PlanTeamServiceImpl extends ServiceImpl<CalPlanTeamMapper, CalPlanTeam> implements IPlanTeamService {
 
     @Resource
-    MsCalPlanTeamMapper msSampleMapper;
+    MsCalPlanTeamMapper msCalPlanTeamMapper;
 
     @Override
     public PageDTO<PlanTeamDTO> listAll(PlanTeamQuery query) {
@@ -56,40 +64,18 @@ public class PlanTeamServiceImpl extends ServiceImpl<CalPlanTeamMapper, CalPlanT
         // 执行分页查询
         Page<CalPlanTeam> result = baseMapper.selectPage(page, wrapper);
         // 结果转换成DTO
-        return PageDTO.create(result, src -> msSampleMapper.calPlanTeamToPlanTeamDTO(src));
+        return PageDTO.create(result, src -> msCalPlanTeamMapper.calPlanTeamToPlanTeamDTO(src));
     }
 
     @Override
-    public PlanTeamDTO getById(int id) {
-        CalPlanTeam calPlanTeam = baseMapper.selectById(id);
-        if (calPlanTeam != null) {
-            return msSampleMapper.calPlanTeamToPlanTeamDTO(calPlanTeam);
-        }
-        return null;
+    public Integer addPlanTeam(AddPlanTeamDTO addPlanTeamDTO) {
+        int res = baseMapper.insert(msCalPlanTeamMapper.addPlanTeamDTOToCalPlanTeam(addPlanTeamDTO));
+        return res > 0 ? 1 : 0;
     }
 
-//    @Resource
-//    SeataFeignService sfs;
-//    int number = 1;
-
-//    @GlobalTransactional
-//    @Override
-//    public int testSeata() {
-//        // 在执行远程服务操作
-//        int row = sfs.testTrans();
-//        if (row != 1) {
-//            throw new RuntimeException("远程服务保存失败");
-//        }
-//        // 先执行本服务数据操作
-//        Sample sample = new Sample();
-//        sample.setAge(11);
-//        sample.setSex("女");
-//        sample.setName("小明");
-//        if (number % 2 == 0) {
-//            baseMapper.insert(sample);
-//            return 1;
-//        }
-//        number++;
-//        throw new RuntimeException("当前服务保存失败");
-//    }
+    @Override
+    public Integer deletePlanTeam(Integer recordId) {
+        int res = baseMapper.deleteById(recordId);
+        return res > 0 ? 1 : 0;
+    }
 }

@@ -27,13 +27,13 @@ public interface TeamApis {
      * @param addPlanTeamDTO 添加关联班组参数
      * @return 结果
      */
-    JsonVO<ResultStatus> addPlanTeam(AddPlanTeamDTO addPlanTeamDTO);
+    JsonVO<Integer> addPlanTeam(AddPlanTeamDTO addPlanTeamDTO);
 
     /**
      * 删除关联班组
      * @param recordId 流水号, 对应数据库record_id
      * @return 结果
      */
-    JsonVO<ResultStatus> deletePlanTeam(Integer recordId);
+    JsonVO<Integer> deletePlanTeam(Integer recordId);
 
 }
