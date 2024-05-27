@@ -34,13 +34,11 @@ public class ShiftController implements ShiftApis {
     @Override
     public JsonVO<PageDTO<ShiftPlanDTO>> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery) {
 //         TODO　查询班次列表业务处理
-        //数据能正常传递到后端
-//        System.out.println(shiftPlanQuery.getPageIndex());
-//        System.out.println(shiftPlanQuery.getPlanId());
-//        System.out.println(shiftPlanQuery.getPageSize());
-//        System.out.println(shiftPlanQuery.getClass());
         PageDTO<ShiftPlanDTO> pageDTO = calShiftService.queryShiftPlanByPlanId(shiftPlanQuery);
-        return JsonVO.success(pageDTO);
+        if(pageDTO != null){
+            return JsonVO.success(pageDTO);
+        }
+        return JsonVO.fail(null);
 //        return null;
     }
 
