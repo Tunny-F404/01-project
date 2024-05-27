@@ -14,10 +14,14 @@
 class Dv_check_planDAO : public BaseDAO
 {
 public:
+	/*
 	// 统计数据条数
 	uint64_t count(const MachineryPlanQuery::Wrapper& query);
 	// 分页查询数据
 	list<Dv_check_planDO> selectWithPage(const MachineryPlanQuery::Wrapper& query);
+	uint64_t Dv_check_planDAO::count(const MachineryPlanDetailsQuery::Wrapper& query);
+	*/
+
 	// 通过姓名查询数据
 	// list<Dv_check_planDO> selectByName(const string& name);
 	
@@ -30,6 +34,10 @@ public:
 	*/
 	// 通过ID删除数据
 	int deleteById(uint64_t id);
+	//---为了进行删除的辅助查询，重载一下用用
+
+	std::list<Dv_check_planDO> Dv_check_planDAO::selectWithPage(const MachineryPlanDetailsQuery::Wrapper& query);
+
 	
 };
 #endif // !_DV__CHECK__PLAN_DAO_

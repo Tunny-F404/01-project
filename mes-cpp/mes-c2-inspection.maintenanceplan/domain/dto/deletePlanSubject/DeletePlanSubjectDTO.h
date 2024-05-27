@@ -51,10 +51,10 @@ class DeletePlanSubjectOneToManyDTO :public ListDTO<oatpp::String>
 //----------------abf，扩充，删除操作对单表应该知道表名和主键【进入页面时就给表名，勾选就给主键，发送就开始操作
 
 /*用于只有一个主键的表（id）*/
-class DeleteTableUniqueDTO :public ListDTO<oatpp::UInt64>
+class DeleteTableUniqueDTO :public ListDTO<oatpp::Int64>
 {
 	//List
-	DTO_INIT(DeleteTableUniqueDTO, ListDTO<oatpp::UInt64>)
+	DTO_INIT(DeleteTableUniqueDTO, ListDTO<oatpp::Int64>)
 	//表名
 	//API_DTO_FIELD_DEFAULT(String,tableName , ZH_WORDS_GETTER("planSubject.deleteTemplate.DESC.tableName"));
 };
@@ -73,21 +73,110 @@ class DeleteTableSharedDTO :public ListDTO<oatpp::UInt64>
 
 };
 
+//删除计划的机器
 class DeleteMachinerDTO :public DeleteTableSharedDTO
 {
 	DTO_INIT(DeleteMachinerDTO, DeleteTableSharedDTO)
 };
 
+//删除计划的项目
 class DeleteSubjectDTO :public DeleteTableSharedDTO
 {
 	DTO_INIT(DeleteSubjectDTO, DeleteTableSharedDTO)
 };
 
 /*删除点检/保养计划*/
-class DeletePlanTDO :public DeleteTableUniqueDTO
+class DeletePlanDTO :public DeleteTableUniqueDTO
 {
-	DTO_INIT(DeletePlanTDO, DeleteTableUniqueDTO)
+	DTO_INIT(DeletePlanDTO, DeleteTableUniqueDTO)
 };
+
+//为了删除点检/保养计划记录的辅助查询
+
+/**
+* 点检/保养计划列表传输对象
+*/
+class DeletePlanQueryDTO : public oatpp::DTO
+{
+	DTO_INIT(DeletePlanQueryDTO, DTO);
+
+	// 计划ID
+	DTO_FIELD(UInt64, plan_id);
+	DTO_FIELD_INFO(plan_id) {
+		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-id");
+	}
+	// 计划编码
+	DTO_FIELD(String, plan_code);
+	DTO_FIELD_INFO(plan_code) {
+		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-code");
+	}
+	// 计划名称
+	DTO_FIELD(String, plan_name);
+	DTO_FIELD_INFO(plan_name) {
+		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-name");
+	}
+};
+
+//
+///**
+//* 点检/保养计划列表分页传输对象
+//*/
+//
+//class MachineryPlanPageDTO : public PageDTO<MachineryPlanDTO::Wrapper>
+//{
+//	DTO_INIT(MachineryPlanPageDTO, PageDTO<MachineryPlanDTO::Wrapper>);
+//};
+//
+////template <class T>
+//class MachineryPlanDetailsDTO : public MachineryPlanDTO
+//{
+//	DTO_INIT(MachineryPlanDetailsDTO, MachineryPlanDTO);
+//
+//	// 备注
+//	DTO_FIELD(String, remark);
+//	DTO_FIELD_INFO(remark) {
+//		info->description = ZH_WORDS_GETTER("machinery-plan.field.remark");
+//	}
+//	//---abf扩展
+//
+//	/**
+//	 * 数据的总条数
+//	 */
+//	DTO_FIELD(Int64, total) = 9;
+//	DTO_FIELD_INFO(total) {
+//		info->required = true;
+//#ifndef LINUX
+//		info->description = u8"数据的总条数";
+//#else
+//		info->description = "total";
+//#endif
+//	}
+//
+//	/**
+//	 * 当前页数据列表
+//	 */
+//	DTO_FIELD(List<MachineryPlanDTO::Wrapper>, rows) = {};
+//	DTO_FIELD_INFO(rows) {
+//#ifndef LINUX
+//		info->description = u8"当前页数据列表";
+//#else
+//		info->description = "page data list";
+//#endif
+//	}
+//
+//	MachineryPlanDetailsDTO() {
+//		this->total = v_int64(0);
+//	}
+//	// 初始化所有内容
+//	void initAll(Int64 total, List<MachineryPlanDTO::Wrapper> rows) {
+//		this->total = total;
+//		this->rows = rows;
+//	}
+//	void addData(MachineryPlanDTO::Wrapper one) {
+//		this->rows->push_back(one);
+//	}
+//};
+
 
 #include OATPP_CODEGEN_END(DTO)
 //one - to - many

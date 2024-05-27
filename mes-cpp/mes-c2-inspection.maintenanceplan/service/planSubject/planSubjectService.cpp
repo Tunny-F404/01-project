@@ -1,8 +1,17 @@
 #include "stdafx.h"
-#include "PlanSubjectService.h"
-#include "../../dao/planSubject/PlanSubjectDAO.h"
-#include <domain/do/planSubject/PlanSubjectDO.h>
+//#include "PlanSubjectService.h"
+//#include "../../dao/planSubject/PlanSubjectDAO.h"
+//#include <domain/do/planSubject/PlanSubjectDO.h>
 
+//删除plan
+//返回值
+#include "../../domain/dto/deletePlanSubject/DeletePlanSubjectDTO.h"
+//输入值
+#include "../../domain/query/deletePlanSubject/DeletePlanSubjectQuery.h"
+//作用域
+#include "../../service/dv_check_plan/Dv_check_planService.h"
+//DAO
+#include "../../dao/dv_check_plan/Dv_check_planDAO.h"
 
 
 //PlanSubjectDetailPageDTO::Wrapper PlanSubjectService::listAll(const PlanSubjectQuery::Wrapper& query)
@@ -73,31 +82,24 @@
 //}
 
 
-PlanSubjectDetailPageDTO::Wrapper PlanSubjectService::listAll(const PlanSubjectQuery::Wrapper& query)
+DeletePlanQueryDTO::Wrapper Dv_check_planService::listAll(const DeletePlanQuery::Wrapper& query)
 {
 	// 构建返回对象
-	auto pages = PlanSubjectDetailPageDTO::createShared();
+	auto pages = DeletePlanQueryDTO::createShared();
 	
-	pages->pageIndex = query->pageIndex;
-	pages->pageSize = query->pageSize;
+
 	
 	// 查询数据总条数
-	PlanSubjectDAO dao;
-	uint64_t count = dao.count(query);
-	if (count <= 0)
-	{
-		return pages;
-	}
-	
+	Dv_check_planDAO dao;
+
 	// 分页查询数据
-	pages->total = count;
-	pages->calcPages();
-	list<PlanSubjectTableDO> result = dao.selectWithPage(query);
+
+	list<Dv_check_planDO> result = dao.selectWithPage(query);
 	// 将DO转换成DTO
 	
-	for (PlanSubjectTableDO sub : result)
+	for (Dv_check_planDO sub : result)
 	{
-		auto dto = PlanSubjectTableDTO::createShared();
+		auto dto = DeletePlanQueryDTO::createShared();
 		// 		dto->id = sub.getId();
 		// 		dto->name = sub.getName();
 		// 		dto->sex = sub.getSex();
@@ -152,3 +154,5 @@ PlanSubjectDetailPageDTO::Wrapper PlanSubjectService::listAll(const PlanSubjectQ
 //	PlanSubjectDAO dao;
 //	return dao.deleteById(id) == 1;
 //}
+
+
