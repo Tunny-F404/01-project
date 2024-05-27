@@ -11,17 +11,17 @@ public:
 	MaterialProductsDO mapper(ResultSet* resultSet) const override
 	{
 		MaterialProductsDO data;
-		data.settemplateId(resultSet->getUInt64(1));
-		data.setitemCode(resultSet->getUInt64(2));
-		data.setitemName(resultSet->getString(3));
+		data.setrecord_id(resultSet->getUInt64(1));
+		data.setitem_code(resultSet->getString(2));
+		data.setitem_name(resultSet->getString(3));
 		data.setspecification(resultSet->getString(4));
-		data.setunitOfmeasure(resultSet->getString(5));
-		data.setquantityCheck(resultSet->getString(6));
-		data.setcrRate(resultSet->getString(7));
-		data.setmajRate(resultSet->getString(8));
-		data.setminRate(resultSet->getString(9));
-		data.setremark(resultSet->getString(11));
-		data.setcreateTime(resultSet->getString(12));
+		data.setunit_of_measure(resultSet->getString(5));
+		data.setquantity_check(resultSet->getUInt64(6));
+		data.setquantity_unqualified(resultSet->getUInt64(7));
+		data.setcr_rate(resultSet->getDouble(8));
+		data.setmaj_rate(resultSet->getDouble(9));
+		data.setmin_rate(resultSet->getDouble(11));
+		data.setremark(resultSet->getString(12));
 		return data;
 	}
 };

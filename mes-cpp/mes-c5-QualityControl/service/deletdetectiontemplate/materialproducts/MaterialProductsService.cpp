@@ -32,7 +32,18 @@ uint64_t MaterialProductsService::saveMaterialProducts(const MaterialProductsDTO
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, templateId, templateId, itemCode, itemCode, itemName, itemName)
+	data.setrecord_id(dto->record_id.getValue(1));
+	data.setitem_code(dto->item_code.getValue(""));
+	data.setitem_name(dto->item_name.getValue(""));
+	data.setspecification(dto->specification.getValue(""));
+	data.setunit_of_measure(dto->unit_of_measure.getValue(""));
+	data.setquantity_check(dto->quantity_check.getValue(6));
+	data.setquantity_unqualified(dto->quantity_unqualified.getValue(7));
+	data.setcr_rate(dto->cr_rate.getValue(8));
+	data.setmaj_rate(dto->maj_rate.getValue(9));
+	data.setmin_rate(dto->min_rate.getValue(11));
+	data.setremark(dto->remark.getValue(""));
+	/*ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, templateId, templateId, itemCode, itemCode, itemName, itemName)*/
 	// 执行数据添加
 	MaterialProductsDAO dao;
 	return dao.insertMaterialProducts(data);
@@ -46,14 +57,25 @@ bool MaterialProductsService::updateMaterialProducts(const MaterialProductsDTO::
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, templateId, templateId, itemCode, itemCode, itemName, itemName)
+	data.setrecord_id(dto->record_id.getValue(1));
+	data.setitem_code(dto->item_code.getValue(""));
+	data.setitem_name(dto->item_name.getValue(""));
+	data.setspecification(dto->specification.getValue(""));
+	data.setunit_of_measure(dto->unit_of_measure.getValue(""));
+	data.setquantity_check(dto->quantity_check.getValue(6));
+	data.setquantity_unqualified(dto->quantity_unqualified.getValue(7));
+	data.setcr_rate(dto->cr_rate.getValue(8));
+	data.setmaj_rate(dto->maj_rate.getValue(9));
+	data.setmin_rate(dto->min_rate.getValue(11));
+	data.setremark(dto->remark.getValue(""));
+	/*ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, templateId, templateId, itemCode, itemCode, itemName, itemName)*/
 	// 执行数据修改
 	MaterialProductsDAO dao;
 	return dao.updateMaterialProducts(data) == 1;
 }
 
-bool MaterialProductsService::deleteByRecordId(uint64_t templateId)
+bool MaterialProductsService::deleteByRecordId(uint64_t record_id)
 {
 	MaterialProductsDAO dao;
-	return dao.deleteByRecordId(templateId) == 1;
+	return dao.deleteByRecordId(record_id) == 1;
 }

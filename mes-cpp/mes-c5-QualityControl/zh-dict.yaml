@@ -107,6 +107,7 @@ materialproducts:
  delete:
   summary: 删除数据
  field:
+  record_id: 记录id（主键）
   template_id: 检测模板ID
   item_id: 产品物料ID
   item_code: 产品物料编码
@@ -114,6 +115,7 @@ materialproducts:
   specification: 规格型号
   unit_of_measure: 单位
   quantity_check: 最低检测数
+  quantity_unqualified: 最大不合格数
   cr_rate: 最大致命缺陷率
   maj_rate: 最大严重缺陷率
   min_rate:  最大轻微缺陷率
@@ -122,7 +124,6 @@ materialproducts:
   attr2: 预留字段2
   attr3: 预留字段3
   attr4: 预留字段4
-  createtime: 创建时间
 templatedetectitem:
  get:
   summary: 检测模板检测项分页查询

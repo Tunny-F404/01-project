@@ -33,7 +33,7 @@ public:
 	
 	bool MaterialProductsService::updateMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
 	
-	bool MaterialProductsService::deleteByRecordId(uint64_t id);
+	bool MaterialProductsService::deleteByRecordId(uint64_t record_id);
 };
 
 #endif // !_SAMPLE_SERVICE_
