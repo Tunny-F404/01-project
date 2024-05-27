@@ -5,6 +5,8 @@ import com.zeroone.star.project.j6.customer.dto.ClientDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientPageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
+import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
+import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +34,11 @@ public interface ClientApis {
     JsonVO<ClientDTO> queryById(@Min(value = 1, message = "id的最小值为1") Long id);
 
     /**
-     * @param clientExportQueryExport 导出条件
+     * @param id 导出条件
      * @param
      * @return 导出结果
      */
-    ResponseEntity<byte[]> queryClientExportByExcel(ClientExportQuery clientExportQueryExport);
+    ResponseEntity<byte[]> queryClientExportByExcel(List<Long> id);
 
     /**
      * @param customer 数据集

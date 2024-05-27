@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.customer.entity.MdClient;
+import com.zeroone.star.customer.entity.MdClientExcel;
 import com.zeroone.star.customer.mapper.MdClientMapper;
 import com.zeroone.star.customer.service.IMdClientService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
@@ -19,6 +20,7 @@ import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
 import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
 import lombok.SneakyThrows;
 import lombok.val;
 import org.mapstruct.Mapper;
@@ -31,9 +33,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.io.BufferedInputStream;
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -203,68 +208,83 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
     }
 
 
-    @SneakyThrows
     @Override
-    public ResponseEntity<byte[]> queryClientExportByExcel(ClientExportQuery clientExportQuery) {
+    public ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids) {
+        List<MdClient> list = new ArrayList<>();
+        for (Long id : ids) {
+            MdClient mdClient = mdClientMapper.selectById(id);
+            if (mdClient != null) {
+                list.add(mdClient);
+            }
+        }
 
-        List<MdClient> list = mdClientMapper.selectMdClientList(clientExportQuery);
-        if (list == null || list.isEmpty()) {
+        if (list.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        // 构建一个输出流
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        // 导出数据到输出流
-        easyExcelComponent.export("客户列表", out, MdClient.class, list);
-        // 获取字节数据
+
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            easyExcelComponent.export("客户列表", out, MdClient.class, list);
         byte[] bytes = out.toByteArray();
-        out.close();
-        //构建相应头
         HttpHeaders headers = new HttpHeaders();
-        String filename = "clients-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
+            String filename = "clients-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
         headers.setContentDispositionFormData("attachment", filename);
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        //放回客户端
         return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
+        } catch (IOException e) {
+            // 处理异常并返回错误信息
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(("导出Excel文件时发生错误：" + e.getMessage()).getBytes());
+    }
     }
 
-    @SneakyThrows
+
     @Override
     public JsonVO<String> importClientByExcel(MultipartFile customer) {
+        List<MdClient> mdClients;
+        int successNum = 0;
+        int failureNum = 0;
+        StringBuilder successMsg = new StringBuilder();
+        StringBuilder failureMsg = new StringBuilder();
+        StringBuilder failureNameMsg = new StringBuilder();
 
-        List<MdClient> mdClients = new ArrayList<>();
-        // excel同步读取数据
-        mdClients = EasyExcel.read(new BufferedInputStream(customer.getInputStream())).head(MdClient.class).sheet().doReadSync();
-        if (mdClients != null && !mdClients.isEmpty()) {
-            val clientIds = mdClients.stream()
-                    .map(MdClient::getClientId)
-                    .collect(Collectors.toList());
-
-            QueryWrapper<MdClient> queryWrapper = new QueryWrapper<>();
-            queryWrapper.in("client_id", clientIds);
-            List<MdClient> existingClients = baseMapper.selectList(queryWrapper);
-
-            if (existingClients != null && !existingClients.isEmpty()) {
-                mdClients.removeAll(existingClients);
-            }
-
-            if (!mdClients.isEmpty()) {
-                for (MdClient client : mdClients) {
-                    mdClientMapper.insert(client);
-                }
-            }
-
-            return JsonVO.success("上传成功");
+        try (BufferedInputStream inputStream = new BufferedInputStream(customer.getInputStream())) {
+            mdClients = EasyExcel.read(inputStream).head(MdClient.class).sheet().doReadSync();
+        } catch (IOException e) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "读取Excel文件失败");
         }
 
-        return JsonVO.fail("上传失败");
+        if (mdClients == null || mdClients.isEmpty()) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "Excel文件中无数据");
+            }
+
+        for (MdClient mdClient : mdClients) {
+            try {
+                if (!mdClientMapper.checkMdClientCodeUnique(mdClient.getClientCode())) {
+                    mdClientMapper.insert(mdClient);
+                } else {
+                    mdClientMapper.updateByClientCode(mdClient.getClientCode(), mdClient);
+                }
+                successNum++;
+            } catch (Exception e) {
+                failureNum++;
+                failureNameMsg.append(failureNum).append("、").append(mdClient.getClientCode()).append(";");
+            }
+        }
+
+        if (failureNum > 0) {
+            failureMsg.append("成功导入").append(successNum).append("条数据，共").append(failureNum).append("条数据格式不正确，错误如下：").append(failureNameMsg);
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), failureMsg.toString());
+        } else {
+            successMsg.append("导入成功！共 ").append(successNum).append(" 条");
+            return JsonVO.create(null, ResultStatus.SUCCESS.getCode(), successMsg.toString());
+    }
     }
 
     //初始化参考客户模板
-    private MdClient initMdClient() {
-        MdClient mdClient = new MdClient();
-        mdClient.setClientId(null);
-        mdClient.setClientCode("");
-        mdClient.setClientName("Example Client"); // 添加这一行，给客户名称赋值
+    @PostConstruct
+    public MdClientExcel initMdClient(){
+        MdClientExcel mdClient = new MdClientExcel();
+        mdClient.setClientCode("必填");
+        mdClient.setClientName("必填"); // 添加这一行，给客户名称赋值
         mdClient.setClientNick("");
         mdClient.setClientEn("");
         mdClient.setClientDes("");
@@ -298,13 +318,13 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
     @SneakyThrows
     @Override
     public ResponseEntity<byte[]> DownloadTemplate() {
-        List<MdClient> mdClients = new ArrayList<>();
+        List<MdClientExcel> mdClients = new ArrayList<>();
         mdClients.add(initMdClient());
         // 构建一个输出流
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         // 导出数据到输出流
-        easyExcelComponent.export("客户列表", out, MdClient.class, mdClients);
+        easyExcelComponent.export("客户列表", out, MdClientExcel.class, mdClients);
         // 获取字节数据
         byte[] bytes = out.toByteArray();
         out.close();

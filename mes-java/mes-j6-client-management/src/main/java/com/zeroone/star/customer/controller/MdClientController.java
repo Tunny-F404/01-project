@@ -1,12 +1,12 @@
 package com.zeroone.star.customer.controller;
 
+
 import com.zeroone.star.customer.service.IMdClientService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.ClientApis;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientPageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
-import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -32,7 +32,7 @@ public class MdClientController implements ClientApis {
             return JsonVO.success(null);
         } else if (isOperated == 2) {
             return JsonVO.create(null, 9999, "客户名称已存在");
-        } else if(isOperated == 3) {
+        } else if (isOperated == 3) {
             return JsonVO.create(null, 9999, "客户编码已存在");
         } else if (isOperated == 23) {
             return JsonVO.create(null, 9999, "客户编码和名称均已存在");
@@ -47,6 +47,7 @@ public class MdClientController implements ClientApis {
         int isAdded = clientService.addClient(client);
         return getStringJsonVO(isAdded);
     }
+
 
     @ApiOperation("删除客户")
     @DeleteMapping("delete-clients")
@@ -67,6 +68,7 @@ public class MdClientController implements ClientApis {
         return getStringJsonVO(isUpdated);
     }
 
+
     @ApiOperation("查询客户列表")
     @PostMapping("query-all")
     @Override
@@ -74,6 +76,7 @@ public class MdClientController implements ClientApis {
         PageDTO<ClientPageDTO> clients = clientService.listAll(query);
         return JsonVO.success(clients);
     }
+
 
     @ApiOperation("根据ID查询客户")
     @GetMapping("query-one/{id}")
@@ -83,24 +86,23 @@ public class MdClientController implements ClientApis {
         return JsonVO.success(client);
     }
 
-    @PostMapping(value = "/export/queryClientExport", produces = "application/octet-stream")
-    @ResponseBody
+
+    @PostMapping(value = "/export/queryClientExport", produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     @ApiOperation(value = "导出客户")
-    public ResponseEntity<byte[]> queryClientExportByExcel(ClientExportQuery clientExportQuery) {
-        return clientService.queryClientExportByExcel(clientExportQuery);
+    public ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids) {
+        return clientService.queryClientExportByExcel(ids);
     }
 
-    @PostMapping(value = "/import/importTemplate", produces = "application/octet-stream")
+    @PostMapping(value = "/import/importTemplate", produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     @ApiOperation(value = "下载导入客户的模板")
-    @ResponseBody
     @Override
     public ResponseEntity<byte[]> DownloadTemplate() {
         return clientService.DownloadTemplate();
     }
 
+
     @PostMapping("/import/importClient")
     @ApiOperation(value = "导入客户")
-    @ResponseBody
     @Override
     public JsonVO<String> importClientByExcel(MultipartFile customer) {
         return clientService.importClientByExcel(customer);
