@@ -36,9 +36,9 @@ class MaintenancePlanDo
 	// 计划类型
 	CC_SYNTHESIZE(string, type, Type);
 	// 频率类型
-	CC_SYNTHESIZE(string, circletype, Circletype);
+	CC_SYNTHESIZE(string, cycletype, Cycletype);
 	// 频率次数
-	CC_SYNTHESIZE(string, circlecount, Circlecount);
+	CC_SYNTHESIZE(string, cyclecount, Cyclecount);
 	// 计划开始时间
 	CC_SYNTHESIZE(string, startdate, Startdate);
 	// 计划结束时间
@@ -53,8 +53,8 @@ public:
 		code = "";
 		name = "";
 		type = "";
-		circletype = "";
-		circlecount = "";
+		cycletype = "";
+		cyclecount = "";
 		startdate = "";
 		enddate = "";
 		//status = "";
