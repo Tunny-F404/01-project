@@ -34,7 +34,7 @@ public interface RoleService {
      */
 
     @ApiOperation("修改角色状态")
-    public Integer modifyRoleStatus(RoleStatusModifyDto roleStatusModifyDto);
+    public Integer modifyRoleStatus(RoleStatusModifyDto roleStatusModifyDto) throws Exception;
 
     /**
      * 删除角色，支持批量删除
@@ -53,6 +53,6 @@ public interface RoleService {
      */
 
     @ApiOperation("修改角色信息")
-    public Integer modifyRoleInfo(RoleModifyDto roleDTO);
+    public Integer modifyRoleInfo(RoleModifyDto roleDTO) throws Exception;
 
 }

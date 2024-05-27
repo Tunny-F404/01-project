@@ -41,6 +41,7 @@ public class RoleDTO {
     private Boolean menuCheckStrictly;
 
     @ApiModelProperty(value = "角色ID（主键，可自增）", example = "")
+    @TableId(type =IdType.AUTO)
     private long roleId;
     @ApiModelProperty(value = "角色状态(0启动，1停用）", example = "0")
     @Pattern(regexp = "0|1", message = "角色状态只能是0或1")
