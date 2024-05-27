@@ -39,7 +39,6 @@ public:
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.export.summary"));
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
-		API_DEF_ADD_PAGE_PARAMS();
 		API_DEF_ADD_QUERY_PARAMS(String, "processCode", ZH_WORDS_GETTER("set.field.code"), "R1126", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("set.field.name"), "111", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("set.field.flag"), "Y", false);

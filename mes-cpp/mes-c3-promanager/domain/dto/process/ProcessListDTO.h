@@ -12,8 +12,6 @@ class ProcessAddDTO : public oatpp::DTO
 {
 	DTO_INIT(ProcessAddDTO, DTO);
 
-protected:
-
 	// 路线编号
 	DTO_FIELD(String, routeCode);
 	DTO_FIELD_INFO(routeCode) {
@@ -25,8 +23,8 @@ protected:
 		info->description = ZH_WORDS_GETTER("process.field.name");
 	}
 	// 路线说明
-	DTO_FIELD(String, routedesc);
-	DTO_FIELD_INFO(routedesc) {
+	DTO_FIELD(String, routeDesc);
+	DTO_FIELD_INFO(routeDesc) {
 		info->description = ZH_WORDS_GETTER("process.field.desc");
 	}
 	// 是否启用
@@ -48,8 +46,8 @@ class ProcessDTO : public ProcessAddDTO
 	DTO_INIT(ProcessDTO, ProcessAddDTO);
 
 	// 唯一标识
-	DTO_FIELD(UInt32, routeid);
-	DTO_FIELD_INFO(routeid) {
+	DTO_FIELD(UInt32, routeId);
+	DTO_FIELD_INFO(routeId) {
 		info->description = ZH_WORDS_GETTER("process.field.id");
 	}
 

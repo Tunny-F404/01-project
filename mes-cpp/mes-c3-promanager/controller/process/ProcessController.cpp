@@ -1,22 +1,65 @@
 #include "stdafx.h"
 #include "ProcessController.h"
+#include "../../service/process/ProcessListService.h"
+#include "../ApiDeclarativeServicesHelper.h"
 
 // 1 查询工艺列表
 ProcessListJsonVO::Wrapper ProcessController::execQueryProcessList(const ProcessListQuery::Wrapper& query)
 {
-	return {};
+	// 定义一个Service
+	ProcessListService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = ProcessListJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 // 2 查询工艺详情
 ProcessDetailJsonVO::Wrapper ProcessController::execQueryProcessDetail(const ProcessDetailQuery::Wrapper& query)
 {
-	return {};
+	// 定义一个Service
+	ProcessListService service;
+	// 查询数据
+	auto result = service.getById(query);
+	// 响应结果
+	auto jvo = ProcessDetailJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 // 3 添加工艺
 Uint64JsonVO::Wrapper ProcessController::execAddProcess(const ProcessAddDTO::Wrapper& dto)
 {
+	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	//非空校验
+	if (!dto->routeCode || !dto->routeName || !dto->enableFlag)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->routeCode->empty() || dto->routeName->empty())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	//定义一个Service
+	ProcessListService service;
+	//执行数据新增
+	uint64_t id = service.saveProcessAdd(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
 	return jvo;
 }
 

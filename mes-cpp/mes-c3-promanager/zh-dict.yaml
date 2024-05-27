@@ -128,3 +128,13 @@ RelatePro:
   quantity: 用料比例
   RPmodels: 备注
   #Ratio_of_materials_used: 用料比例
+excel:
+ sheet:
+  s1: 生产工序数据
+  s2: 数据表2
+ header:
+  h1: 工序编码
+  h2: 工序名称
+  h3: 工艺要求
+  h4: 是否启用
+  h5: 表头5

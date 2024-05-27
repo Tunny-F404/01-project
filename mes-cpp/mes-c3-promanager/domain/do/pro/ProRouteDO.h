@@ -9,7 +9,7 @@
 class ProRouteDO
 {
 	// 工艺路线ID
-	CC_SYNTHESIZE(string, routeid, RouteId);
+	CC_SYNTHESIZE(uint64_t, routeid, RouteId);
 	// 工艺路线编号
 	CC_SYNTHESIZE(string, routecode, RouteCode);
 	// 工艺路线名称
@@ -22,7 +22,7 @@ class ProRouteDO
 	CC_SYNTHESIZE(string, remark, Remark);
 public:
 	ProRouteDO() {
-		routeid = "";
+		routeid = 0;
 		routecode = "";
 		routename = "";
 		routedesc = "";

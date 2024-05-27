@@ -51,6 +51,6 @@ public:
 		remark = "";
 	}
 
-}
+};
 
 #endif // !_PRO_PROCESS_
