@@ -1,7 +1,7 @@
 package com.zeroone.star.orgstructure.controller;
 
+import com.zeroone.star.orgstructure.service.UserService;
 import com.zeroone.star.project.j1.orgstructure.dto.PageDTO;
-import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.zeroone.star.project.j1.orgstructure.dto.user.*;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
 import com.zeroone.star.project.j1.orgstructure.user.UserApis;
@@ -9,6 +9,7 @@ import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,11 +27,15 @@ import java.util.List;
 @RequestMapping("/user")
 @Api(tags = "用户管理")
 public class UserController implements UserApis {
+    @Autowired
+    private UserService userService;
+
     @Override
     @GetMapping("/query-user-table")
     @ApiOperation("查询用户列表")
     public JsonVO<List<UserDTO>> queryUserList(@Valid UserQuery userQuery) {
         System.out.println(userQuery.getUserName());
+        userService.queryUserList(userQuery);
         return JsonVO.success(null);
     }
 
