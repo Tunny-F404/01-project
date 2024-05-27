@@ -3,7 +3,11 @@ package com.zeroone.star.orgstructure.service;
 import com.zeroone.star.orgstructure.entity.PostDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j2.orgstructure.dto.job.JobDTO;
+import com.zeroone.star.project.j2.orgstructure.query.job.JobQuery;
+import com.zeroone.star.project.vo.JobVO;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 /**
  * <p>
@@ -22,4 +26,10 @@ public interface PostService extends IService<PostDO> {
     boolean execModifyJob(JobDTO jobDTO);
 
     ResponseEntity<byte[]> download();
+
+    List<String> getJobNames();
+
+    List<JobVO> getJobList(JobQuery jobQuery);
+
+    JobVO getJobDetail(Long id);
 }

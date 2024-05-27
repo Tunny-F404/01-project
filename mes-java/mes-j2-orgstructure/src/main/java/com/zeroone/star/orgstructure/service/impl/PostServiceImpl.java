@@ -13,6 +13,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.j2.orgstructure.dto.job.JobDTO;
+import com.zeroone.star.project.j2.orgstructure.query.job.JobQuery;
+import com.zeroone.star.project.vo.JobVO;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +30,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -183,5 +186,44 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, PostDO> implements 
         httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         // 返回响应
         return ResponseEntity.ok().headers(httpHeaders).body(byteArray);
+    }
+
+    @Override
+    public List<String> getJobNames() {
+        QueryWrapper<PostDO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("post_name");
+        List<PostDO> postList = postMapper.selectList(queryWrapper);
+        return postList.stream().map(PostDO::getPostName).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<JobVO> getJobList(JobQuery jobQuery) {
+        QueryWrapper<PostDO> queryWrapper = new QueryWrapper<>();
+        if (jobQuery.getPostId() != null) {
+            queryWrapper.eq("post_id", jobQuery.getPostId());
+        }
+        if (jobQuery.getPostCode() != null) {
+            queryWrapper.eq("post_code", jobQuery.getPostCode());
+        }
+        if (jobQuery.getPostName() != null) {
+            queryWrapper.like("post_name", jobQuery.getPostName());
+        }
+        if (jobQuery.getPostSort() != null) {
+            queryWrapper.eq("post_sort", jobQuery.getPostSort());
+        }
+        if (jobQuery.getStatus() != null) {
+            queryWrapper.eq("status", jobQuery.getStatus());
+        }
+        List<PostDO> postList = postMapper.selectList(queryWrapper);
+        return postList.stream().map(postDO -> BeanUtil.copyProperties(postDO, JobVO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public JobVO getJobDetail(Long id) {
+        PostDO postDO = postMapper.selectById(id);
+        if (postDO == null) {
+            return null;
+        }
+        return BeanUtil.copyProperties(postDO, JobVO.class);
     }
 }
