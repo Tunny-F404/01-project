@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,7 +35,7 @@ public class CalHoliday implements Serializable {
     /**
      * 日期
      */
-    private LocalDateTime theDay;
+    private LocalDate theDay;
 
     /**
      * 日期类型

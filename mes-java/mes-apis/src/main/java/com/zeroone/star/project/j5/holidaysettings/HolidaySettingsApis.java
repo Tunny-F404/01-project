@@ -1,10 +1,13 @@
 package com.zeroone.star.project.j5.holidaysettings;
 
+import com.zeroone.star.project.j5.dto.holidaysetting.HolidayDTO;
 import com.zeroone.star.project.j5.dto.holidaysetting.HolidaysListDTO;
 import com.zeroone.star.project.j5.query.holidaysetting.ListHolidayQuery;
 import com.zeroone.star.project.j5.query.holidaysetting.SettingHolidayQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,7 +23,7 @@ public interface HolidaySettingsApis {
      * 获取节假日配置
      * @return 返回节假日配置列表
      */
-    public JsonVO<HolidaysListDTO> listHoliday(ListHolidayQuery condition);
+    public JsonVO<List<HolidayDTO>> listHoliday(ListHolidayQuery condition);
 
     /**
      * 设置节假日配置

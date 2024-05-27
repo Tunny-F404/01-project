@@ -1,6 +1,7 @@
 package com.zeroone.star.holidaysettings.controller;
 
 import com.zeroone.star.holidaysettings.service.ICalHolidayService;
+import com.zeroone.star.project.j5.dto.holidaysetting.HolidayDTO;
 import com.zeroone.star.project.j5.dto.holidaysetting.HolidaysListDTO;
 import com.zeroone.star.project.j5.holidaysettings.HolidaySettingsApis;
 import com.zeroone.star.project.j5.query.holidaysetting.ListHolidayQuery;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @description: 节假日设置
@@ -34,8 +36,8 @@ public class HoildaySettingController implements HolidaySettingsApis {
     @GetMapping("/list")
     @ApiOperation("获取节假日配置")
     @Override
-    public JsonVO<HolidaysListDTO> listHoliday(ListHolidayQuery condition) {
-        HolidaysListDTO holidaysListDTO = calHolidayService.getList(condition);
+    public JsonVO<List<HolidayDTO>> listHoliday(ListHolidayQuery condition) {
+        List<HolidayDTO> holidaysListDTO = calHolidayService.getList(condition);
         return JsonVO.success(holidaysListDTO);
     }
 
@@ -44,7 +46,10 @@ public class HoildaySettingController implements HolidaySettingsApis {
     @ApiOperation("设置节假日配置")
     @Override
     public JsonVO<ResultStatus> setHoliday(SettingHolidayQuery condition) {
-        return null;
+        calHolidayService.setHoliday(condition);
+        return JsonVO.success(ResultStatus.SUCCESS);
+
+
     }
 
 }

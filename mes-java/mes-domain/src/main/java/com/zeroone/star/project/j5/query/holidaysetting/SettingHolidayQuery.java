@@ -21,9 +21,9 @@ import java.time.LocalDate;
 @Data
 @ApiModel("设置节假日配置 查询对象")
 public class SettingHolidayQuery {
-    @NotBlank(message = "更新时间不能为空")
-    @ApiModelProperty(value = "更新时间（时间戳/毫秒）", example = "1716218590183")
-    private String updateTime;
+//    @NotBlank(message = "更新时间不能为空")
+//    @ApiModelProperty(value = "更新时间（时间戳/毫秒）", example = "1716218590183")
+//    private String updateTime;
 
     @NotBlank(message = "修改后的日期类型不能为空")
     @ApiModelProperty(value = "日期类型", example = "HOLIDAY")
@@ -31,6 +31,7 @@ public class SettingHolidayQuery {
 
     @NotBlank(message = "被修改的日期不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "被修改的日期", example = "2023-05-01")
     private LocalDate theDay;
 
