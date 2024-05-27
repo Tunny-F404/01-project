@@ -37,7 +37,11 @@ public class TeamSettingsController implements TeamSettingsApis {
     @GetMapping("query-all")
     @Override
     public JsonVO<PageDTO<TeamDTO>> queryTeamList(@Validated TeamQuery condition) {
-        return null;
+        PageDTO<TeamDTO> teams = calTeamService.listAll(condition);
+        if (teams != null) {
+            return JsonVO.success(teams);
+        }
+        return JsonVO.fail(null);
     }
 
     @Override
