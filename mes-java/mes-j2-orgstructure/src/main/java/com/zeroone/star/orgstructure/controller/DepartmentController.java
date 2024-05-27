@@ -13,7 +13,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,7 +64,7 @@ public class DepartmentController  implements DepartmentApis {
     @Override
     @PostMapping("add-department")
     @ApiOperation("新增部门")
-    public JsonVO<Long> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
+    public JsonVO<Integer> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
         int info = departmentService.execSaveDepartment(departmentDTO);
         if (info == 0) {
             return null;

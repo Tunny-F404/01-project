@@ -1,8 +1,6 @@
 package com.zeroone.star.project.j2.orgstructure.dept;
 
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.dept.DepartmentDTO;
 import com.zeroone.star.project.j2.orgstructure.query.dept.DepartmentQuery;
@@ -30,7 +28,7 @@ public interface DepartmentApis {
 
 
     //新增部门
-    JsonVO<Long> addDepartment(DepartmentDTO departmentDTO);
+    JsonVO<Integer> addDepartment(DepartmentDTO departmentDTO);
 
     //修改部门
     JsonVO<Integer> modifyDepartment(DepartmentDTO departmentDTO);
