@@ -22,6 +22,7 @@
 #include <list>
 #include "domain/dto/materialinformation/MaterialInformationDTO.h"
 #include "domain/query/materialinformation/MaterialInformationQuery.h"
+#include "domain/do/materialinformation/MaterialinformationDO.h"
 
 /**
  * 生产退料物料信息的服务接口
@@ -32,6 +33,11 @@ public:
 	
 	// 保存数据
 	uint64_t saveData(const MaterialInformationDTO::Wrapper& dto);
+	// 修改数据
+	bool updateData(const MaterialInformationDTO::Wrapper& dto);
+	// 通过ID删除数据
+	bool removeData(uint64_t id);
+
 
 	// 分页查询所有数据
 	MaterialInformationPageDTO::Wrapper listAll(const MaterialInformationQuery::Wrapper& query);

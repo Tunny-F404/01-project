@@ -48,10 +48,6 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(MaterialInformationPageJsonVO);
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
-		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "id", ZH_WORDS_GETTER("materialinformation.field.id"), "RT20221115001", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "order", ZH_WORDS_GETTER("materialinformation.field.order"), "MO10023110", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "warehouse", ZH_WORDS_GETTER("materialinformation.field.warehouse"), "N", false);
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/materialinformation", queryMaterialInformation, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {

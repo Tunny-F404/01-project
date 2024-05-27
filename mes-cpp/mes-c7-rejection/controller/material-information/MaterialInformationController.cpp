@@ -27,13 +27,16 @@ Uint64JsonVO::Wrapper MaterialInformationController::execAddMaterialInformation(
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if (!dto->id || !dto->order || !dto->name || !dto->warehouse)
+	if (!dto->rt_id || !dto->rt_code)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->id->empty() || dto->order->empty())
+	std::istringstream iss(dto->rt_date);
+	std::tm tm = {};
+	iss >> std::get_time(&tm, "%Y-%m-%d");
+	if (dto->rt_code->empty() || iss.fail())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -58,6 +61,32 @@ Uint64JsonVO::Wrapper MaterialInformationController::execModifyMaterialInformati
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->rt_id || !dto->rt_code)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	std::istringstream iss(dto->rt_date);
+	std::tm tm = {};
+	iss >> std::get_time(&tm, "%Y-%m-%d");
+	if (dto->rt_code->empty() || iss.fail())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	MaterialInformationService service;
+	// 执行数据修改
+	if (service.updateData(dto)) {
+		jvo->success(dto->rt_id);
+	}
+	else
+	{
+		jvo->fail(dto->rt_id);
+	}
+	// 响应结果
 	return jvo;
 }
 
@@ -75,5 +104,24 @@ MaterialInformationPageJsonVO::Wrapper MaterialInformationController::execQueryS
 
 Uint64JsonVO::Wrapper MaterialInformationController::execRemoveMaterialInformation(const UInt64& id)
 {
-	return Uint64JsonVO::Wrapper();
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!id || id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	MaterialInformationService service;
+	// 执行数据删除
+	if (service.removeData(id.getValue(0))) {
+		jvo->success(id);
+	}
+	else
+	{
+		jvo->fail(id);
+	}
+	// 响应结果
+	return jvo;
 }
