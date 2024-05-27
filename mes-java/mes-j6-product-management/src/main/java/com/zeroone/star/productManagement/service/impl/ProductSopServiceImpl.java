@@ -28,6 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+
 /**
  * StopWord对应MapStruct映射接口
  */
@@ -40,9 +42,7 @@ interface  MsProductSopMapper{
      * @param sop 待转换DO
      * @return 转换结果
      */
-    static ProductSopDTO ProductSopToProductSopDTO(ProductSop sop) {
-        return null;
-    }
+     ProductSopDTO ProductSopToProductSopDTO(ProductSop sop);
 }
 @Service
 public class ProductSopServiceImpl extends ServiceImpl<ProductSopMapper, ProductSop> implements IProductSopService {
@@ -54,19 +54,20 @@ public class ProductSopServiceImpl extends ServiceImpl<ProductSopMapper, Product
     String urlPrefix;
     @Resource
     private UserHolder userHolder;
+    @Resource
+    MsProductSopMapper msProductSopMapper;
     @Override
     public PageDTO<ProductSopDTO> selectProductSopPage(ProductSopQuery query) {
         //构建分页条件对象
         Page<ProductSop> page = new Page<>(query.getPageIndex(),query.getPageSize());
         //构建查询条件
         QueryWrapper<ProductSop> queryWrapper = new QueryWrapper<>();
-        if (query.getItemId()>0) {
-            queryWrapper.like("title",query.getItemId());
+        if (Objects.nonNull(query.getItemId()) && query.getItemId() > 0) {
+            queryWrapper.like("item_id", query.getItemId());
         }
         //执行查询
-        page= baseMapper.selectPage(page,queryWrapper);
         Page<ProductSop> result = baseMapper.selectPage(page, queryWrapper);
-        return PageDTO.create(result, MsProductSopMapper::ProductSopToProductSopDTO);
+        return PageDTO.create(result, msProductSopMapper::ProductSopToProductSopDTO);
     }
 
     @Override
