@@ -1,5 +1,6 @@
 package com.zeroone.star.orgstructure.service.impl;
 
+import cn.hutool.core.lang.func.Func1;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.orgstructure.entity.DepartmentDO;
@@ -32,12 +33,12 @@ import java.util.List;
  * @since 2024-05-22
  */
 class DepartmentTreeNodeMapper implements TreeNodeMapper<DepartmentDO> {
-    private List<Integer> mRoot ;//根节点id
+    private List<Long> mRoot ;//根节点id
 
     public DepartmentTreeNodeMapper(){//无参构造 不使用
 
     }
-    public DepartmentTreeNodeMapper(List<Integer> root){//有参构造使用有参构造确认root节点
+    public DepartmentTreeNodeMapper(List<Long> root){//有参构造使用有参构造确认root节点
         mRoot = root;//浅拷贝没有问题，只需要拿出值判断
     }
 
@@ -51,13 +52,13 @@ class DepartmentTreeNodeMapper implements TreeNodeMapper<DepartmentDO> {
             treenode.setTnPid(department.getParentId().toString());
         }
         treenode.setDeptName(department.getDeptName());
-        treenode.setId(department.getDeptId());
-        treenode.setFId(department.getParentId());
+        treenode.setId(Math.toIntExact(department.getDeptId()));
+        treenode.setFId(Math.toIntExact(department.getParentId()));
         return treenode;
     }
 
-    public boolean isRootId(Integer id){
-        for (Integer node:mRoot){
+    public boolean isRootId(Long id){
+        for (Long node:mRoot){
             if(node.equals(id))
                 return true;
         }
@@ -87,11 +88,11 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
         List<DepartmentDO> departments = new ArrayList<>();
         List<DepartmentDO> t = baseMapper.selectByNameOne(name);//查询的部门本体(相当于root) 可能查询到同名的部门
         departments.addAll(t);
-        List<Integer> ids = new ArrayList<>();
+        List<Long> ids = new ArrayList<>();
         for (DepartmentDO root : departments) {//查询到多个名字相同的部门 全部加入待查寻集中
             ids.add(root.getDeptId());
         }
-        List<Integer> root = new ArrayList<>();//根节点id
+        List<Long> root = new ArrayList<>();//根节点id
         for (DepartmentDO node : departments) {//深拷贝
             root.add(node.getDeptId());
         }
@@ -129,7 +130,7 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
 
     //根据id获取指定部门所有信息
     @Override
-    public DepartmentDTO getDepartmentDetail(int id) {
+    public DepartmentDTO getDepartmentDetail(Long id) {
         //执行查询
         DepartmentDO department = baseMapper.selectById(id);
         if(department != null){

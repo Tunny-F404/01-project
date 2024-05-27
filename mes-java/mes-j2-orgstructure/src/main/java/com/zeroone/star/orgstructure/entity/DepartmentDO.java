@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,8 +22,7 @@ import lombok.Setter;
  * @author 宵夜
  * @since 2024-05-22
  */
-@Getter
-@Setter
+@Data
 @TableName("sys_dept")
 public class DepartmentDO implements Serializable {
 
@@ -32,12 +32,12 @@ public class DepartmentDO implements Serializable {
      * 部门id
      */
     @TableId(value = "dept_id", type = IdType.AUTO)
-    private Integer deptId;
+    private Long deptId;
 
     /**
      * 父部门id
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 祖级列表

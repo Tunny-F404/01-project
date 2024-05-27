@@ -23,12 +23,12 @@ public interface DepartmentApis {
     JsonVO<PageDTO<DepartmentDTO>> getDepartmentList(DepartmentQuery departmentQuery);
 
     //获取部门详情
-    JsonVO<DepartmentDTO> getDepartmentDetail(int id);
+    JsonVO<DepartmentDTO> getDepartmentDetail(Long id);
 
 
 
     //新增部门
-    JsonVO<Integer> addDepartment(DepartmentDTO departmentDTO);
+    JsonVO<Long> addDepartment(DepartmentDTO departmentDTO);
 
     //修改部门
     JsonVO<Integer> modifyDepartment(DepartmentDTO departmentDTO);

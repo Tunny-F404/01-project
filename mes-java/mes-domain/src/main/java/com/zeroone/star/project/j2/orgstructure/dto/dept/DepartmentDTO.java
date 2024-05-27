@@ -20,11 +20,11 @@ public class DepartmentDTO {
 
     //部门Id
     @ApiModelProperty(value = "部门Id",example = "宵夜部")
-    private Integer deptId;
+    private Long deptId;
 
     //父部门id
     @ApiModelProperty(value = "父部门id",example = "2",required = true)
-    private Integer parentId;
+    private Long parentId;
 
     //部门名称
     @ApiModelProperty(value = "部门名称",example = "部门1",required = true)

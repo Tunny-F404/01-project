@@ -40,7 +40,7 @@ public interface DepartmentService extends IService<DepartmentDO> {
      * @param id
      * @return
      */
-    DepartmentDTO getDepartmentDetail(int id);
+    DepartmentDTO getDepartmentDetail(Long id);
 
 
     /**

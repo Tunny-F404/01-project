@@ -51,7 +51,7 @@ public class DepartmentController  implements DepartmentApis {
     @Override
     @GetMapping("get-department-detail")
     @ApiOperation("获知指定部门详情")
-    public JsonVO<DepartmentDTO> getDepartmentDetail(int id) {
+    public JsonVO<DepartmentDTO> getDepartmentDetail(Long id) {
         //查询
         DepartmentDTO departmentDTO = departmentService.getDepartmentDetail(id);
         if (departmentDTO == null) {
@@ -64,7 +64,7 @@ public class DepartmentController  implements DepartmentApis {
     @Override
     @PostMapping("add-department")
     @ApiOperation("新增部门")
-    public JsonVO<Integer> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
+    public JsonVO<Long> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
         int info = departmentService.execSaveDepartment(departmentDTO);
         if (info == 0) {
             return null;

@@ -22,7 +22,7 @@ public interface DepartmentMapper extends BaseMapper<DepartmentDO> {
      * @param ids 部门名称
      * @return 返回列表
      */
-    List<DepartmentDO> selectByName(Integer ids);
+    List<DepartmentDO> selectByName(Long ids);
     /**
      * 返回查询条件的实体(root)
      * @param name 部门名称
