@@ -22,7 +22,9 @@
 
 #include "ApiHelper.h"
 #include "ServerInfo.h"
-#include "../../domain/vo/EquipmentTypeTreeVO.h"
+#include "../../domain/vo/equipment/EquipmentTypeTreeVO.h"
+#include "../../domain/query/equipment/EquipmentQuery.h"
+#include "../../domain/vo/equipment/EquipmentVO.h"
 
 
 // 0 ¶¨ÒåAPI¿ØÖÆÆ÷Ê¹ÓÃºê
@@ -36,55 +38,40 @@ class EquipmentController : public oatpp::web::server::api::ApiController // 1 ¼
 	// 2 ¶¨Òå¿ØÖÆÆ÷·ÃÎÊÈë¿Ú
 	API_ACCESS_DECLARE(EquipmentController);
 	// 3 ¶¨Òå½Ó¿Ú
-public:
-	//²éÑ¯ÇëÇó(Path´«²Î)
-	// 	// 3.1 ¶¨Òå²éÑ¯½Ó¿ÚÃèÊö
-	ENDPOINT_INFO(getEquipmentById) {
-		auto udef =
-			//¶¨Òå½Ó¿Ú±êÌâ
-			API_DEF_ADD_TITLE(ZH_WORDS_GETTER("equipment.getEquipmentById.summary"));
-		//¶¨Òå½Ó¿Ú²ÎÊı
-		API_DEF_ADD_PATH_PARAMS(
-			Int64,
-			"equipmentId", ZH_WORDS_GETTER("equipment.params.equipmentId.desc"),
-			1,
-			true);
+public:	
+	// ¶¨Òå²éÑ¯Éè±¸ÀàĞÍÃû³ÆÁĞ±íÊ÷½Ó¿Ú¶ËµãÃèÊö
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("equipment.getEquipmentTypeTree.summary"), getEquipmentTypeTree, EquipmentTypeTreeVO::Wrapper);
+	// ¶¨Òå²éÑ¯Éè±¸ÀàĞÍÃû³ÆÁĞ±íÊ÷½Ó¿Ú¶Ëµã´¦Àí
+	API_HANDLER_ENDPOINT_NOPARAM_AUTH(API_M_GET, "/equipment/getEquipmentTypeTree", getEquipmentTypeTree, executeGetEquipmentTypeTree(authObject->getPayload()));
+
+	//»ñÈ¡Éè±¸ÁĞ±í(Ìõ¼ş + ·ÖÒ³)
+		// 3.1 ¶¨Òå²éÑ¯½Ó¿ÚÃèÊö
+	ENDPOINT_INFO(getEquipmentList) {
+		// ¶¨Òå½Ó¿Ú±êÌâ
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("equipment.getEquipmentList.summary"));
+		// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+		API_DEF_ADD_AUTH();
+		// ¶¨ÒåÏìÓ¦²ÎÊı¸ñÊ½
+		API_DEF_ADD_RSP_JSON_WRAPPER(EquipmentPageVO);
+		// ¶¨Òå·ÖÒ³²éÑ¯²ÎÊıÃèÊö
+		API_DEF_ADD_PAGE_PARAMS();
+		// ¶¨ÒåÆäËû²éÑ¯²ÎÊıÃèÊö
+		API_DEF_ADD_QUERY_PARAMS(String, "equimentCode", ZH_WORDS_GETTER("equipmentQuery.equimentCode"), "M0024", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "equimentName", ZH_WORDS_GETTER("equipmentQuery.equimentName"), "²âÊÔÈËÔ±", false);
 	}
 	// 3.2 ¶¨Òå²éÑ¯½Ó¿Ú´¦Àí
-	ENDPOINT("GET", "/equipment/{equipmentId}", getEquipmentById,PATH(Int64, equipmentId))
-	{
-		OATPP_LOGD("²âÊÔ´òÓ¡", "equipmentId=%d", equipmentId.getValue(0));
-		return createResponse(Status::CODE_200, "OK");
+	ENDPOINT(API_M_GET, "/equipment/getEquipmentList", getEquipmentList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// ½âÎö²éÑ¯²ÎÊıÎªQueryÁìÓòÄ£ĞÍ
+		API_HANDLER_QUERY_PARAM(equipmentQuery, EquipmentQuery, queryParams);
+		// ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+		API_HANDLER_RESP_VO(execGetEquipmentList(equipmentQuery, authObject->getPayload()));
 	}
-
-	//²éÑ¯ÇëÇó(Query´«²Î)
-	// 3.1 ¶¨Òå²éÑ¯½Ó¿ÚÃèÊö
-	ENDPOINT_INFO(getEquipment) {
-		auto udef =
-			//¶¨Òå½Ó¿Ú±êÌâ
-			API_DEF_ADD_TITLE(ZH_WORDS_GETTER("equipment.getEquipment.summary"));
-		//¶¨Òå½Ó¿Ú²ÎÊı
-		API_DEF_ADD_QUERY_PARAMS(
-			Int32,
-			"equipmentId", ZH_WORDS_GETTER("equipment.params.equipmentId.desc"),
-			1,
-			true);
-	}
-	ENDPOINT("GET", "/equipment/getEquipment", getEquipment, QUERY(Int32, equipmentId))
-	{
-		OATPP_LOGD("²âÊÔ´òÓ¡", "equipmentId=%d", equipmentId.getValue(0));
-		return createResponse(Status::CODE_200, "OK");
-	}
-	
-	// ¶¨Òå²éÑ¯Éè±¸ÀàĞÍÃû³ÆÁĞ±í½Ó¿Ú¶ËµãÃèÊö
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("equipment.getEquipmentTypeTree.summary"), getEquipmentTypeTree, EquipmentTypeTreeVO::Wrapper);
-	// ¶¨Òå²éÑ¯Éè±¸ÀàĞÍÃû³ÆÁĞ±í½Ó¿Ú¶Ëµã´¦Àí
-	API_HANDLER_ENDPOINT_NOPARAM_AUTH(API_M_GET, "/equipment/getEquipmentTypeTree", getEquipmentTypeTree, executeGetEquipmentTypeTree(authObject->getPayload()))
 
 private:
-	//StringJsonVO::Wrapper execteGetEquipmentPage(const PageQuery::Wrapper& query)
 	//»ñÈ¡Éè±¸ÀàĞÍÃû³ÆÊ÷
 	EquipmentTypeTreeVO::Wrapper executeGetEquipmentTypeTree(const PayloadDTO& payload);
+	// 3.3 Éè±¸·ÖÒ³²éÑ¯Êı¾İ
+	EquipmentPageVO::Wrapper execGetEquipmentList(const EquipmentQuery::Wrapper& query, const PayloadDTO& payload);
 };
 
 // 0 È¡ÏûAPI¿ØÖÆÆ÷Ê¹ÓÃºê

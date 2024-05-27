@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2023/02/16 17:02:58
+ @Date: 2022/10/25 11:08:56
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,26 +17,22 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _EQUIPMENTTYPETREEVO_H_
-#define _EQUIPMENTTYPETREEVO_H_
-#include "../GlobalInclude.h"
-#include "../dto/EquipmentTypeDTO.h"
-
-#include OATPP_CODEGEN_BEGIN(DTO)
+#ifndef _EQUIPMENT_SERVICE_
+#define _EQUIPMENT_SERVICE_
+#include <list>
+#include "domain/vo/equipment/EquipmentVO.h"
+#include "domain/query/equipment/EquipmentQuery.h"
+#include "domain/dto/equipment/EquipmentDTO.h"
 
 /**
- * 定义一个设备类型显示JsonVO对象，用于响应给前端
+ * 示例服务实现，演示基础的示例服务实现
  */
-class EquipmentTypeTreeVO : public JsonVO<List<EquipmentTypeDTO::Wrapper>>
+class EquipmentService
 {
-	DTO_INIT(EquipmentTypeTreeVO, JsonVO<List<EquipmentTypeDTO::Wrapper>>);
 public:
-	// 在构造函数中实例化data列表
-	EquipmentTypeTreeVO() {
-		this->data = {};
-	}
+	// 分页查询所有数据
+	EquipmentPageDTO::Wrapper listAll(const EquipmentQuery::Wrapper& query);
 };
 
-#include OATPP_CODEGEN_END(DTO)
+#endif // !_EQUIPMENT_SERVICE_
 
-#endif // !EquipmentTypeTreeVO

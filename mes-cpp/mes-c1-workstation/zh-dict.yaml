@@ -7,13 +7,27 @@ equipment:
   summary: 获取设备列表(条件 + 分页)
  getEquipmentTypeTree:
   summary: 获取设备类型名称树
+ getEquipmentList:
+  summary: 获取设备列表(条件 + 分页) 
  params:
   equipmentId:
    desc: 设备id
    default: 1
- equipmentDto:
-  equipmentTypeCode: 设备类型编码   
-  equipmentTypeName: 设备类型名称
-  isUse: 是否启动
+ equipmentTypeTreeDto:
+  machineryTypeId: 设备id
+  machineryTypeCode: 设备类型编码   
+  machineryTypeName: 设备类型名称
+  enableFlag: 是否启动
   remark: 备注
+  parentTypeId: 父id
   child: 子设备类型名称列表
+ equipmentQuery:
+  equimentCode: 设备编码  
+  equimentName: 设备名称
+ equipmentDto:
+  equipmentCode: 设备编码  
+  equipmentName: 设备名称
+  brand: 品牌
+  specificationsAndModels: 规格型号
+  equipmentStatus: 设备状态
+  createTime: 创建时间

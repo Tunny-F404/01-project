@@ -20,27 +20,31 @@
 #ifndef _EQUIPMENTTYPEDTO_H_
 #define _EQUIPMENTTYPEDTO_H_
 
-#include "../GlobalInclude.h"
+#include "../../GlobalInclude.h"
 #include "tree/TreeNode.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 示例菜单数据传输对象
+ * 示例设备数据传输对象
  */
 class EquipmentTypeDTO : public oatpp::DTO, public TreeNode
 {
 	DTO_INIT(EquipmentTypeDTO, DTO);
+	// 设备类型id
+	API_DTO_FIELD_DEFAULT(Int64, machineryTypeId, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.machineryTypeId"));
 	// 设备类型编码
-	API_DTO_FIELD_DEFAULT(String, equipmentTypeCode, ZH_WORDS_GETTER("equipment.equipmentDto.equipmentTypeCode"));
+	API_DTO_FIELD_DEFAULT(String, machineryTypeCode, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.machineryTypeCode"));
 	// 设备类型名称
-	API_DTO_FIELD_DEFAULT(String, equipmentTypeName, ZH_WORDS_GETTER("equipment.equipmentDto.equipmentTypeName"));
+	API_DTO_FIELD_DEFAULT(String, machineryTypeName, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.machineryTypeName"));
 	// 是否启用
-	API_DTO_FIELD(Int32, isUse, ZH_WORDS_GETTER("equipment.equipmentDto.isUse"),  false, 0);
+	API_DTO_FIELD(Int32, enableFlag, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.enableFlag"),  false, 0);
 	// 备注
-	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("equipment.equipmentDto.remark"));
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.remark"));
+	// 设备类型父id
+	API_DTO_FIELD_DEFAULT(Int64, parentTypeId, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.parentTypeId"));
 	// 子设备列表
-	API_DTO_FIELD(List<EquipmentTypeDTO::Wrapper>, children, ZH_WORDS_GETTER("equipment.equipmentDto.child"), false, {});
+	API_DTO_FIELD(List<EquipmentTypeDTO::Wrapper>, children, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.child"), false, {});
 public:
 	void addChild(shared_ptr<TreeNode> child) override
 	{
