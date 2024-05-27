@@ -33,59 +33,40 @@ public class ShiftController implements ShiftApis {
     @ApiOperation("获取班次列表（条件+分页）")
     @Override
     public JsonVO<PageDTO<ShiftPlanDTO>> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery) {
-//         TODO　查询班次列表业务处理
+        // 查询班次列表业务处理
         PageDTO<ShiftPlanDTO> pageDTO = calShiftService.queryShiftPlanByPlanId(shiftPlanQuery);
         if(pageDTO != null){
             return JsonVO.success(pageDTO);
         }
         return JsonVO.fail(null);
-//        return null;
     }
 
     @PutMapping("/modify")
     @ApiOperation("修改班次")
     @Override
-    public JsonVO<ResultStatus> modifyShiftPlan(@RequestBody ShiftPlanModifyDTO shiftPlanModifyDto) {
-        //判断planId是否为空
-        if(shiftPlanModifyDto.getPlanId() == null){
-            return JsonVO.fail(null);
-        }
-        //TODO 修改班次业务
-        ResultStatus status = calShiftService.modifyShiftPlan(shiftPlanModifyDto);
-
+    public JsonVO<Integer> modifyShiftPlan(@RequestBody ShiftPlanModifyDTO shiftPlanModifyDto) {
+        //修改班次业务
+        int updateRow = calShiftService.modifyShiftPlan(shiftPlanModifyDto);
         //业务层返回修改信息
-        return JsonVO.success(status);
+        return JsonVO.success(updateRow);
     }
 
     @DeleteMapping("/remove/{shiftIds}")
     @ApiOperation("删除班次（支持批量删除）")
     @Override
-    public JsonVO<Long> removeShiftPlan(@PathVariable List<Long> shiftIds) {
+    public JsonVO<Integer> removeShiftPlan(@PathVariable List<Long> shiftIds) {
         shiftIds.forEach(System.out::println);
         // TODO 删除班次业务操作
-        return JsonVO.success(1L);
+        return JsonVO.success(1);
     }
 
     @PostMapping("/add")
     @ApiOperation("添加班次")
     @Override
-    public JsonVO<ResultStatus> addShiftPlan(@RequestBody ShiftPlanAddDTO shiftPlanAddDto) {
-        System.out.println(shiftPlanAddDto);
-
-        // TODO 执行新增业务处理操作
-        ResultStatus status = calShiftService.addShiftPlan(shiftPlanAddDto);
-
+    public JsonVO<Integer> addShiftPlan(@RequestBody ShiftPlanAddDTO shiftPlanAddDto) {
+        //执行新增业务处理操作
+        int addRow = calShiftService.addShiftPlan(shiftPlanAddDto);
         //返回操作结果
-        return JsonVO.success(status);
-    //            if(shiftPlanAddDto.getShiftName() == null){
-    //                return JsonVO.fail(ResultStatus.FAIL);
-    //            } else {
-    ////                Long newShiftId = calShiftService.addShiftPlan(shiftPlanAddDto);
-    //                Long newShiftId = 1L;
-    //                if(newShiftId != null){
-    //                    return JsonVO.success(ResultStatus.SUCCESS);
-    //                }
-    //                return JsonVO.success(ResultStatus.FAIL);
-    //            }
+        return JsonVO.success(addRow);
         }
 }

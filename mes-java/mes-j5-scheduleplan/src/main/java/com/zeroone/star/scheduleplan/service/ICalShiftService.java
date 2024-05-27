@@ -5,7 +5,6 @@ import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanAddDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanModifyDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
-import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.scheduleplan.entity.CalShift;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -19,9 +18,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICalShiftService extends IService<CalShift> {
 
-    ResultStatus addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto);
+    int addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto);
 
-    ResultStatus modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto);
+    int modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto);
 
     PageDTO<ShiftPlanDTO> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery);
 }

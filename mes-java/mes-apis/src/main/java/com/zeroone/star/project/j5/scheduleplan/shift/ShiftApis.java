@@ -33,19 +33,19 @@ public interface ShiftApis {
      * @param shiftPlanAddDto 新增班次计划数据
      * @return 新增数据的唯一编号
      */
-    JsonVO<ResultStatus> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto);
+    JsonVO<Integer> addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto);
 
     /**
      * 更新班次计划
      * @param shiftPlanModifyDto 更新班次计划数据
      * @return  修改的行数
      */
-    JsonVO<ResultStatus> modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto);
+    JsonVO<Integer> modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto);
 
     /**
      * 删除排班计划v1
      * @param shiftId 排班计划id
      * @return  修改的行数
      */
-    JsonVO<Long> removeShiftPlan(List<Long> shiftId);
+    JsonVO<Integer> removeShiftPlan(List<Long> shiftId);
 }
