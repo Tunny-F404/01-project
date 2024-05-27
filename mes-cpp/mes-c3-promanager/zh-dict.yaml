@@ -93,6 +93,9 @@ set:
  export:
   summary: 导出工序
   summary1: 导出工序步骤
+ delete:
+  summary1: 删除工序步骤
+  summary2: 删除工序
 
 product:
  field:

@@ -146,16 +146,16 @@ public:
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	ENDPOINT(API_M_POST, "/set/modifystep-set", modifystepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_PUT, "/set/modifystep-set", modifystepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_RESP_VO(execModifyStepSet(dto));
 	}
 	// 10 删除工序步骤
 	ENDPOINT_INFO(deletestepSet) {
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.modify.summary2"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.delete.summary1"));
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	ENDPOINT(API_M_POST, "/set/delete-process-step", deletestepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_DEL, "/set/delete-process-step", deletestepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_RESP_VO(execDeleteStepSet(dto));
 	}
 	// 11 导出工序步骤
@@ -174,11 +174,11 @@ public:
 	}
 	// 12 删除工序
 	ENDPOINT_INFO(DeleteSet) {
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.add.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.delete.summary2"));
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	ENDPOINT(API_M_POST, "/set/delete-process", DeleteSet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_DEL, "/set/delete-process", DeleteSet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_RESP_VO(execDeleteSet(dto));
 	}
 private:
