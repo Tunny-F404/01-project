@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,36 +33,33 @@ public class DepartmentController  implements DepartmentApis {
     @Override
     @GetMapping("get-department-tree")
     @ApiOperation("获取部门名称树")
-    public JsonVO<List<DepartmentTreeVO>> getDepartmentNameTree(DepartmentQuery departmentQuery)  {
+    public JsonVO<List<DepartmentTreeVO>> getDepartmentNameTree(DepartmentQuery departmentQuery) {
         //获取部门名称
-        DepartmentDTO departmentDTO = new DepartmentDTO();
-        return null;
+        List<DepartmentTreeVO> res = departmentService.getDepartmentNameTree(departmentQuery.getDeptName());
+        if (res == null || res.isEmpty()) return JsonVO.fail(res);
+        return JsonVO.success(res);
     }
+
     @Override
     @GetMapping("get-department-list")
     @ApiOperation("获取部门列表(条件)")
     public JsonVO<PageDTO<DepartmentDTO>> getDepartmentList(@Validated DepartmentQuery departmentQuery) {
         PageDTO<DepartmentDTO> pageDTO = departmentService.getDepartmentList(departmentQuery);
-        if(pageDTO == null) return JsonVO.fail(pageDTO);
+        if (pageDTO == null) return JsonVO.fail(pageDTO);
         return JsonVO.success(pageDTO);
     }
 
     @Override
     @GetMapping("get-department-detail")
     @ApiOperation("获知指定部门详情")
-    public JsonVO<DepartmentDTO> getDepartmentDetail(int id){
+    public JsonVO<DepartmentDTO> getDepartmentDetail(int id) {
         //查询
         DepartmentDTO departmentDTO = departmentService.getDepartmentDetail(id);
         if (departmentDTO == null) {
             return JsonVO.fail(departmentDTO);//不存在该部门
         }
-        return  JsonVO.success(departmentDTO);
+        return JsonVO.success(departmentDTO);
     }
-
-
-
-
-
 
 
     @Override

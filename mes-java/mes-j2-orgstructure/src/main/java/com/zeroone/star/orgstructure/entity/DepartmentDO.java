@@ -7,6 +7,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,12 +32,12 @@ public class DepartmentDO implements Serializable {
      * 部门id
      */
     @TableId(value = "dept_id", type = IdType.AUTO)
-    private Long deptId;
+    private Integer deptId;
 
     /**
      * 父部门id
      */
-    private Long parentId;
+    private Integer parentId;
 
     /**
      * 祖级列表
@@ -96,6 +99,5 @@ public class DepartmentDO implements Serializable {
      * 更新时间
      */
     private LocalDateTime updateTime;
-
 
 }

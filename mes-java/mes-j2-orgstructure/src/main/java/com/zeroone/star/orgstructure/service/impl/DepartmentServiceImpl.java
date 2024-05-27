@@ -2,6 +2,7 @@ package com.zeroone.star.orgstructure.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zeroone.star.orgstructure.entity.Department;
 import com.zeroone.star.orgstructure.entity.DepartmentDO;
 import com.zeroone.star.orgstructure.service.DepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -14,14 +15,13 @@ import com.zeroone.star.project.utils.tree.TreeNodeMapper;
 import com.zeroone.star.project.utils.tree.TreeUtils;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -32,19 +32,38 @@ import java.util.List;
  * @since 2024-05-22
  */
 class DepartmentTreeNodeMapper implements TreeNodeMapper<DepartmentDO> {
+    private List<Integer> mRoot ;//根节点id
+
+    public DepartmentTreeNodeMapper(){//无参构造 不使用
+
+    }
+    public DepartmentTreeNodeMapper(List<Integer> root){//有参构造使用有参构造确认root节点
+        mRoot = root;//浅拷贝没有问题，只需要拿出值判断
+    }
 
     @Override
     public TreeNode objectMapper(DepartmentDO department){
         DepartmentTreeVO treenode = new DepartmentTreeVO();
         treenode.setTnId(department.getDeptId().toString());
-        if(department.getParentId() == null){//如果父亲id不存在
+        if (department.getParentId() == null || isRootId(department.getDeptId())) {//如果父亲id不存在
             treenode.setTnPid((null));//设置空父亲
         } else {
             treenode.setTnPid(department.getParentId().toString());
         }
         treenode.setDeptName(department.getDeptName());
-        return  treenode;
+        treenode.setId(department.getDeptId());
+        treenode.setFId(department.getParentId());
+        return treenode;
     }
+
+    public boolean isRootId(Integer id){
+        for (Integer node:mRoot){
+            if(node.equals(id))
+                return true;
+        }
+        return false;
+    }
+
 }
 
 
@@ -66,8 +85,7 @@ interface MsDepartmentMapper {
      */
     DepartmentDTO departmentOToDepartmentDTO(DepartmentDO department);
     /**
-     * 将departmentDTO转换为department
-     *
+     * 将department转换为departmentDTO
      * @param departmentDTO
      * @return
      */
@@ -85,25 +103,26 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
     public List<DepartmentTreeVO> getDepartmentNameTree(DepartmentQuery query){
         //定义数据容器
         List<DepartmentDO> departments = new ArrayList<>();
-        String name = "s";
-        Integer id = 1;
-//        Department root = new Department();
-//        if(name != "" && name.isEmpty() == false){
-//
-//        }
-        DepartmentDO t = baseMapper.selectById(id);
-        QueryWrapper<DepartmentDO> departmentQueryWrapper = new QueryWrapper<>();
-        int k = 100;
-        while(k-- > 0){//最多查询100层
-            departmentQueryWrapper.eq("parent_id",query.getParentId());
-            List<DepartmentDO> tDepartments = baseMapper.selectList(departmentQueryWrapper);
-            if(tDepartments != null && !tDepartments.isEmpty()){
-                departments.addAll(tDepartments);
-            } else{
-                break;
+        List<DepartmentDO> t = baseMapper.selectByNameOne(name);//查询的部门本体(相当于root) 可能查询到同名的部门
+        departments.addAll(t);
+        List<Integer> ids = new ArrayList<>();
+        for (DepartmentDO root : departments) {//查询到多个名字相同的部门 全部加入待查寻集中
+            ids.add(root.getDeptId());
+        }
+        List<Integer> root = new ArrayList<>();//根节点id
+        for (DepartmentDO node : departments) {//深拷贝
+            root.add(node.getDeptId());
+        }
+        for (int i = 0; i < ids.size(); i++) {
+            List<DepartmentDO> tDept = baseMapper.selectByName(ids.get(i));
+            if (tDept != null && !tDept.isEmpty()){
+                departments.addAll(tDept);
+                for (DepartmentDO node : tDept) {//将查询到的部门加入到ids中待查寻它的子部门
+                    ids.add(node.getDeptId());
+                }
             }
         }
-        return TreeUtils.listToTree(departments,new DepartmentTreeNodeMapper());
+        return TreeUtils.listToTree(departments, new DepartmentTreeNodeMapper(root));
     }
 
 
@@ -111,14 +130,14 @@ public class DepartmentServiceImpl extends ServiceImpl<com.zeroone.star.orgstruc
     @Override
     public PageDTO<DepartmentDTO> getDepartmentList(DepartmentQuery query) {
         //构建列表查询对象(DO)
-        Page<DepartmentDO> page = new Page<>(query.getPageIndex(), query.getPageSize());
+        Page<Department> page = new Page<>(query.getPageIndex(), query.getPageSize());
         //构建查询条件
-        QueryWrapper<DepartmentDO> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<Department> queryWrapper = new QueryWrapper<>();
         //如果存在合法参数则添加条件
-        if(query.getDeptName() != null) queryWrapper.like("dept_name",query.getDeptName());
-        if(query.getOrderNum() != null)queryWrapper.eq("order_num",query.getOrderNum());
-        if(query.getStatus() >= 0)queryWrapper.eq("status",query.getStatus());
-        if(query.getCreateTime() != null)queryWrapper.eq("create_by",query.getCreateTime());
+        if (query.getDeptName() != null) queryWrapper.like("dept_name", query.getDeptName());
+        if (query.getOrderNum() != null) queryWrapper.eq("order_num", query.getOrderNum());
+        if (query.getStatus() >= 0) queryWrapper.eq("status", query.getStatus());
+        if (query.getCreateTime() != null) queryWrapper.eq("create_by", query.getCreateTime());
         //执行查询
         Page<DepartmentDO> res = baseMapper.selectPage(page,queryWrapper);
         //将结果转化为DTO
