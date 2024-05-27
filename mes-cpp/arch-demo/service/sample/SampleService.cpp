@@ -19,25 +19,25 @@
 #include "stdafx.h"
 #include "SampleService.h"
 #include "../../dao/sample/SampleDAO.h"
-
+//根据给定的分页查询对象返回查询对应的结果,类型为分页传输对象DTO
 SamplePageDTO::Wrapper SampleService::listAll(const SampleQuery::Wrapper& query)
 {
 	// 构建返回对象
 	auto pages = SamplePageDTO::createShared();
-	pages->pageIndex = query->pageIndex;
+	pages->pageIndex = query->pageIndex;//提取query里包含的查询哪一页、每页的大小
 	pages->pageSize = query->pageSize;
 
-	// 查询数据总条数
+	// 查询sample表里符合query记录的总条数
 	SampleDAO dao;
 	uint64_t count = dao.count(query);
-	if (count <= 0)
+	if (count <= 0)//表里没有符合query的数据
 	{
 		return pages;
 	}
 
 	// 分页查询数据
-	pages->total = count;
-	pages->calcPages();
+	pages->total = count;//记录符合query的数据个数
+	pages->calcPages();//根据每页大小pagesize计算一共有多少页
 	list<SampleDO> result = dao.selectWithPage(query);
 	// 将DO转换成DTO
 	for (SampleDO sub : result)
