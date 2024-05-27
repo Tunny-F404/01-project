@@ -3,6 +3,7 @@ package com.zeroone.star.orgstructure.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.orgstructure.entity.DepartmentDO;
+import com.zeroone.star.orgstructure.parameterMapstruct.MsDepartmentMapper;
 import com.zeroone.star.orgstructure.service.DepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.dto.PageDTO;
@@ -12,7 +13,6 @@ import com.zeroone.star.project.j2.orgstructure.vo.DepartmentTreeVO;
 import com.zeroone.star.project.utils.tree.TreeNode;
 import com.zeroone.star.project.utils.tree.TreeNodeMapper;
 import com.zeroone.star.project.utils.tree.TreeUtils;
-import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,24 +66,6 @@ class DepartmentTreeNodeMapper implements TreeNodeMapper<DepartmentDO> {
 
 }
 
-
-
-
-@Mapper(componentModel = "spring")
-interface MsDepartmentMapper {
-    /**
-     * 将department转换为departmentDTO
-     * @param department
-     * @return
-     */
-    DepartmentDTO departmentOToDepartmentDTO(DepartmentDO department);
-    /**
-     * 将department转换为departmentDTO
-     * @param departmentDTO
-     * @return
-     */
-    DepartmentDO departmentDTOToDepartment(DepartmentDTO departmentDTO);
-}
 
 /**
  * <p>
