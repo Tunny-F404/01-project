@@ -20,7 +20,7 @@
 #ifndef _REPAIRCONTENT_DO_
 #define _REPAIRCONTENT_DO_
 #include "../DoInclude.h"
-
+#include "../../../../mes-c2-equipmentledger/domain/do/dv_subject/dvSubjectDO.h"
 /**
  * dv_repaircontent_line数据库实体类
  */

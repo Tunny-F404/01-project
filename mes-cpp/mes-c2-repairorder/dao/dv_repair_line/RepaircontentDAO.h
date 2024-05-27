@@ -33,8 +33,12 @@ public:
 	uint64_t count(const RepaircontentQuery::Wrapper& query);
 	// 分页查询数据
 	list<dv_repair_lineDO> selectWithPage(const RepaircontentQuery::Wrapper& query);
-	// 通过姓名查询数据
+	// 通过项目名称查询数据---条件分页
 	list<dv_repair_lineDO> selectByName(const string& name);
+
+	// 通过项目名称查询数据--
+	list<dvSubjectDO> selectSubject_Name(const string& name);
+
 	// 插入数据
 	uint64_t insert(const dv_repair_lineDO& iObj);
 	// 修改数据

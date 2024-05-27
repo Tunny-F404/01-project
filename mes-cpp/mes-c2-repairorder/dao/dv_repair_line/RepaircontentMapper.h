@@ -22,6 +22,7 @@
 
 #include "Mapper.h"
 #include "../../domain/do/dv_repair_line/RepaircontentDO.h"
+#include "../../../mes-c2-equipmentledger/domain/do/dv_subject/dvSubjectDO.h"
 
 /**
  * Ê¾Àý±í×Ö¶ÎÆ¥ÅäÓ³Éä
@@ -44,6 +45,23 @@ public:
 		data.setUpdate_by(resultSet->getString(10));
 		data.setUpdate_time(resultSet->getString(11));
 
+		return data;
+	}
+};
+
+//string sql = "SELECT subject_id,subject_code,subject_type,subject_content,subject_standard FROM dv_subject WHERE subject_name= ? ";
+//data.setsubject_Id(resultSet->getString(1));
+class AddRepaircontentMapper : public Mapper<dvSubjectDO>
+{
+public:
+	dvSubjectDO mapper(ResultSet* resultSet) const override
+	{
+		dvSubjectDO data;
+		data.setSubjectId(resultSet->getUInt64(1));
+		data.setSubjectCode(resultSet->getString(2));
+		data.setSubjectType(resultSet->getString(3));
+		data.setSubjectContent(resultSet->getString(4));
+		data.setSubjectStandard(resultSet->getString(5));
 		return data;
 	}
 };

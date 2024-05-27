@@ -27,7 +27,7 @@ RepaircontentPageDTO::Wrapper RepaircontentService::listAll(const RepaircontentQ
 	auto pages = RepaircontentPageDTO::createShared();
 	pages->pageIndex = query->pageIndex;
 	pages->pageSize = query->pageSize;
-
+	
 	// 查询数据总条数
 	RepaircontentDAO dao;
 	uint64_t count = dao.count(query);
@@ -94,25 +94,16 @@ RepaircontentDTO::Wrapper RepaircontentService::getData(const RepaircontentQuery
 	return pages;
 }
 
-uint64_t RepaircontentService::saveData(const RepaircontentDTO::Wrapper& dto)
+uint64_t RepaircontentService::saveData(const AddRepaircontentDTO::Wrapper& dto)
 {
 	// 组装DO数据
 	dv_repair_lineDO data;
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto,
-		line_Id,line_id,
 		repair_Id,repair_id,
-		subject_Id,subject_id,
 		subject_Name, subject_name, 
 		Malfunction, malfunction, 
 		Malfunction_url, malfunction_url, 
-		repair_Des, repair_des,
-		subject_Code,subject_code,
-		subject_Type,subject_type,
-		subject_Content,subject_content,
-		Create_by,create_by,
-		Create_time,create_time,
-		Update_by,update_by,
-		Update_time,update_time
+		repair_Des, repair_des
 	)
 		// 执行数据添加
 		RepaircontentDAO dao;

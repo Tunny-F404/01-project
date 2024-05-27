@@ -53,13 +53,12 @@ RepaircontentJsonVO::Wrapper RepaircontentController::execDetailsRepaircontent(c
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const RepaircontentDTO::Wrapper& dto) {
+Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const AddRepaircontentDTO::Wrapper& dto) {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 
 	 //非空校验
-	if (!dto->repair_id ||
-		!dto->subject_id ||
+	if (!dto->repair_id || 
 		!dto->subject_name ||
 		!dto->malfunction ||
 		!dto->malfunction_url ||
@@ -68,7 +67,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const Repair
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->repair_id < 0 || dto->subject_id<0 || dto->subject_name->empty() || dto->malfunction->empty())
+	if (dto->repair_id < 0 || dto->subject_name->empty() || dto->malfunction->empty())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
