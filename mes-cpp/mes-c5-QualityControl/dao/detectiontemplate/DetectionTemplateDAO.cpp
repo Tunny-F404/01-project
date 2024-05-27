@@ -1,5 +1,5 @@
-//#include "stdafx.h"
-//#include "DetectionTemplateDAO.h"
+#include "stdafx.h"
+#include "DetectionTemplateDAO.h"
 //#include "DetectionTemplateMapper.h"
 //#include <sstream>
 //
@@ -28,11 +28,11 @@
 //	SQLPARAMS_PUSH(params, "s", std::string, query->enable_flag.getValue("")); \
 //}
 //
-//int DetectionTemplateDAO::deleteById(uint64_t id)
-//{
-//	string sql = "DELETE FROM `qc_template` WHERE `id`=?";
-//	return sqlSession->executeUpdate(sql, "%ull", id);
-//}
+int DetectionTemplateDAO::deleteBydetectiontemplateId(uint64_t template_id)
+{
+	string sql = "DELETE FROM `qc_template` WHERE `template_id`=?";
+	return sqlSession->executeUpdate(sql, "%ull", template_id);
+}
 //
 //uint64_t DetectionTemplateDAO::count(const DetectionTemplateQuery::Wrapper& query) {
 //	stringstream sql;

@@ -25,14 +25,15 @@ public:
 	// 3.2 定义修改接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/DetectionTemplate/modify", modifyDetectionTemplate, BODY_DTO(DetectionTemplateDTO::Wrapper, dto), execModifyDetectionTemplate(dto));
 
-	ENDPOINT_INFO(removeSample) {
+	//定义删除检测模板接口描述
+	ENDPOINT_INFO(removeDetectionTemplate) {
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("detection_template.delete.summary"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("detection_template.fields.id"), 1, true);
+		API_DEF_ADD_PATH_PARAMS(UInt64, "template_id", ZH_WORDS_GETTER("detection_template.fields.id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/template/{id}", removeSample, PATH(UInt64, id), execRemoveSample(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/detectiontemplate/delete/{template_id}", removeDetectionTemplate, PATH(UInt64, template_id), execRemoveDetectionTemplate(template_id));
 
 	ENDPOINT_INFO(queryDetectionTemplateList) {
 		// 定义接口标题
@@ -95,7 +96,8 @@ public:
 private:
 	Uint64JsonVO::Wrapper execModifyDetectionTemplate(const DetectionTemplateDTO::Wrapper& dto);
 
-	Uint64JsonVO::Wrapper execRemoveSample(const UInt64& id);
+	//删除检测模板
+	Uint64JsonVO::Wrapper execRemoveDetectionTemplate(const UInt64& template_id);
 
 	DetectionTemplatePageJsonVO::Wrapper execQueryDetectionTemplateList(const DetectionTemplateQuery::Wrapper& query, const PayloadDTO& payload);
 	// 新增数据
