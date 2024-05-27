@@ -38,7 +38,7 @@ class GetListController : public oatpp::web::server::api::ApiController // 1 ¼Ì³
 	// 3 ¶¨Òå½Ó¿Ú
 public:
 	// 3.1 ¶¨Òå²éÑ¯½Ó¿ÚÃèÊö
-	ENDPOINT_INFO(GetListQuery) {
+	ENDPOINT_INFO(getListQuery) {
 		// ¶¨Òå½Ó¿Ú±êÌâ
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("getlist.get.summary"));
 		// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
@@ -52,7 +52,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "sex", ZH_WORDS_GETTER("getlist.field.sex"), "N", false);
 	}
 	// 3.2 ¶¨Òå²éÑ¯½Ó¿Ú´¦Àí
-	ENDPOINT(API_M_GET, "purchasereceiving/information/getlist", GetListQuery, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "purchasereceiving/information/getlist", getListQuery, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// ½âÎö²éÑ¯²ÎÊıÎªQueryÁìÓòÄ£ĞÍ
 		API_HANDLER_QUERY_PARAM(userQuery, GetListQuery, queryParams);
 		// ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û

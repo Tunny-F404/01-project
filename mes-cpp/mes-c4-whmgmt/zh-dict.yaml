@@ -15,9 +15,6 @@ receipt:
   query2: 获取单据详情
 
   
-sample:
-...
-...
 productionorder:
  query:
   summary: 生产工单
@@ -62,6 +59,7 @@ productionprocess:
     process_code: 工序编号  
 whstorageorder:
  field:
+  item_id: 物料ID
   item_code: 物料编码
   item_name: 物料名称
   unit_of_measure: 单位

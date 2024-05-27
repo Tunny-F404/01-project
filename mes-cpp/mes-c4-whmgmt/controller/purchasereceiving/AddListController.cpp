@@ -2,5 +2,5 @@
 
 Uint64JsonVO::Wrapper AddListController::execAddList(const AddListDTO::Wrapper& dto)
 {
-	return {};
+	return Uint64JsonVO::Wrapper();
 }

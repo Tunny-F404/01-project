@@ -15,19 +15,16 @@ class ModifyWhStorageorderController :public oatpp::web::server::api::ApiControl
 	// 3 定义接口
 public:
 	// 3.1 定义修改接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("whstorageorder.modify.summary"), modifyWhStorageorder, ModifyWhStorageorderVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("whstorageorder.modify.summary"), modifyWhStorageorder, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProchAndStorage/MaterialsInfo", modifyWhStorageorder, BODY_DTO(ModifyWhStorageorderDTO::Wrapper, dto), execModifyWhStorageorder(dto));
 
 	
 private://定义接口执行函数
 	//演示新增数据
-	ModifyWhStorageorderVO::Wrapper execModifyWhStorageorder(const ModifyWhStorageorderDTO::Wrapper& dto);
-
+	Uint64JsonVO::Wrapper execModifyWhStorageorder(const ModifyWhStorageorderDTO::Wrapper& dto);
 
 };
 
-
-
-
+#include OATPP_CODEGEN_END(ApiController)
 #endif // !_MODIFYWHSTORAGEORDERCONTROLLER_H_

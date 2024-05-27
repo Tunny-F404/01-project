@@ -2,6 +2,7 @@
 #ifndef _ADDWHSTORAGEORDERCONTROLLER_H_
 #define _ADDWHSTORAGEORDERCONTROLLER_H_
 
+#include "domain/vo/BaseJsonVO.h"
 #include "../../../domain/vo/ProchAndStorage/MaterialsInfo/AddWhStorageorderVO.h"
 #include "../../../domain/dto/ProchAndStorage/MaterialsInfo/AddWhStorageorderDTO.h"
 //0 定义API控制器使用宏
@@ -20,7 +21,7 @@ public:
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
-		API_DEF_ADD_RSP_JSON_WRAPPER(AddWhStorageorderVO);
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	//3.2 定义新增接口处理
 	ENDPOINT(API_M_POST, "/ProchAndStorage/MaterialsInfo", addWhStorageorder, BODY_DTO(AddWhStorageorderDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
@@ -29,7 +30,7 @@ public:
 	}
 private://定义接口执行函数
 	//演示新增数据
-	AddWhStorageorderVO::Wrapper execAddWhStorageorder(const AddWhStorageorderDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddWhStorageorder(const AddWhStorageorderDTO::Wrapper& dto);
 
 };
 // 0 取消API控制器使用宏

@@ -80,7 +80,7 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(AddWhStorageorderController);
 	ROUTER_SIMPLE_BIND(ModifyWhStorageorderController);
 	ROUTER_SIMPLE_BIND(DeleteWhStorageorderController);
-	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	////#TIP :ϵͳ��չ·�ɶ��壬д���������
 	ROUTER_SIMPLE_BIND(ModifyListController);
 	ROUTER_SIMPLE_BIND(AddListController);
 	ROUTER_SIMPLE_BIND(GetListController);

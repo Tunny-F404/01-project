@@ -7,6 +7,10 @@
 #include "../../DoInclude.h"
 class AddWhStorageorderDO
 {
+	//行ID line_id bigint
+	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
+	//产品物料ID item_id bigint
+	CC_SYNTHESIZE(uint64_t, item_id, Item_id);
 	//物料编码 item_code varchar
 	CC_SYNTHESIZE(string, item_code, Item_code);
 	//物料名称 item_name varchar
@@ -32,6 +36,7 @@ class AddWhStorageorderDO
 
 public:
 	AddWhStorageorderDO() {
+		line_id = 0;
 		item_code = "";
 		item_name = "";
 		unit_of_measure = "";

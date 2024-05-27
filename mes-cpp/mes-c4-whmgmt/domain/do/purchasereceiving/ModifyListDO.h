@@ -26,8 +26,8 @@
  */
 class ModifyListDO
 {
-	// 领单编号
-	CC_SYNTHESIZE(, id, Id);
+	// 领单编号 
+	CC_SYNTHESIZE(string, id, Id);
 	// 姓名
 	CC_SYNTHESIZE(string, name, Name);
 	// 性别

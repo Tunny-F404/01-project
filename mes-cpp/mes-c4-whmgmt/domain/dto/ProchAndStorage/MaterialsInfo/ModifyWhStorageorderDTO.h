@@ -12,6 +12,8 @@
 class ModifyWhStorageorderDTO : public oatpp::DTO
 {
 	DTO_INIT(ModifyWhStorageorderDTO, DTO);
+	//行ID line_id bigint
+	API_DTO_FIELD_DEFAULT(UInt64, line_id, ZH_WORDS_GETTER("whstorageorder.field.line_id"));
 	//物料编码 item_code varchar
 	API_DTO_FIELD_DEFAULT(String, item_code, ZH_WORDS_GETTER("whstorageorder.field.item_code"));
 	//物料名称 item_name varchar
