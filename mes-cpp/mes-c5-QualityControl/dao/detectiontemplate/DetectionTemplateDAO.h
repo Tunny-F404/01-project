@@ -11,13 +11,15 @@ class DetectionTemplateDAO : public BaseDAO
 {
 public:
 
-	// 通过ID删除数据
-	//int deleteById(uint64_t id);
-	// 统计检测模板数据条数
+	 //通过ID删除数据
+	int deleteById(uint64_t id);
+	 //统计检测模板数据条数
 	uint64_t count(const DetectionTemplateQuery::Wrapper& query);
-	// 检测模板列表函数, 分页查询数据
-	//list<DetectionTemplateDO> selectTemplateListWithPage(const DetectionTemplateQuery::Wrapper& query);
-	// 插入数据
-	//uint64_t insert(const DetectionTemplateDO& iObj);
+	 //检测模板列表函数, 分页查询数据
+	list<DetectionTemplateDO> selectTemplateListWithPage(const DetectionTemplateQuery::Wrapper& query);
+	 //插入数据
+	uint64_t insert(const DetectionTemplateDO& iObj);
+	//修改数据
+	bool update(const DetectionTemplateDO& iObj);
 };
 #endif // !_Ddt_DAO_

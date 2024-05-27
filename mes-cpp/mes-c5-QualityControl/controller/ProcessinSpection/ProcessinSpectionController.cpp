@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "ProcessinSpectionController.h"
-//#include "../../service/sample/SampleService.h"
-//#include "../ApiDeclarativeServicesHelper.h"
 #include "../ApiDeclarativeServicesHelper.h"
 #include "../../service/processinspection/ProcessInspectionService.h"
 #include "../../dao/processinspection/ProcessInspectionDAO.h"
@@ -17,31 +15,32 @@ ProcessinSpectionQueryPageJsonVO::Wrapper ProcessinSpectionController::execProce
 	return vo;
 }
 
-oatpp::List<Uint64JsonVO::Wrapper> ProcessinSpectionController::execRemoveProcessinSpection(const List<UInt64>& ids)
+Uint64JsonVO::Wrapper ProcessinSpectionController::execRemoveProcessinSpection(const List<UInt64>& ids)
 {
-	oatpp::List<Uint64JsonVO::Wrapper> ans = oatpp::List<Uint64JsonVO::Wrapper>::createShared();
 	ProcessInspectionService service;
 	//查询是否每一个id都符合,符合的查询,
+	int flag = 0;
+	auto result = Uint64JsonVO::createShared();
 	for (auto i = ids->begin(); i != ids->end(); ++i) {
-		auto result = Uint64JsonVO::createShared();
 		auto x = (*i).getValue(0);
 		//参数错误
 		if (x < 0 || !x) {
-			result->init(UInt64(-1), RS_PARAMS_INVALID);
+			if(!flag)
+				result->init(UInt64(-1), RS_PARAMS_INVALID);
+			flag = 1;
 		}
 		else {
 			//删除失败
 			if (!service.remove(x)) {
-				result->init(x, RS_FAIL);
-			}
-			else {
-				//删除成功
-				result->init(x, RS_SUCCESS);
+				if (!flag)
+					result->init(UInt64(-1), RS_FAIL);
+				flag = 1;
 			}
 		}
-		ans->push_back(result);
 	}
-	return ans;
+	if(!flag)
+		result->init(UInt64(1), RS_SUCCESS);
+	return result;
 }
 
 StringJsonVO::Wrapper ProcessinSpectionController::execExportProcessinSpection(const oatpp::List<UInt64>& ids)

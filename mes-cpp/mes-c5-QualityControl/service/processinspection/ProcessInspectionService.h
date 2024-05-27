@@ -30,7 +30,9 @@ public:
 	bool updateData(const ProcessinSpectionDTO::Wrapper& dto);
 
 	ProcessinSpectionQueryPageDTO::Wrapper listAll(const ProcessinSpectionQuery::Wrapper& query);
-
+	//ÓÃidÉ¾³ý¼ÇÂ¼
 	bool remove(uint64_t id);
+
+
 };
 #endif

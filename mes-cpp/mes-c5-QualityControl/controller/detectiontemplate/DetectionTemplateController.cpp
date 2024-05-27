@@ -4,7 +4,19 @@
 #include "../../service/deletdetectiontemplate/DetectionTemplateService.h"
 
 Uint64JsonVO::Wrapper DetectionTemplateController::execModifyDetectionTemplate(const DetectionTemplateDTO::Wrapper& dto) {
-	return {};
+	auto result = Uint64JsonVO::createShared();
+	if (dto->template_id < 0 || !dto->template_id) {
+		result->init(UInt64(-1), RS_PARAMS_INVALID);
+		return result;
+	}
+	DetectionTemplateService service;
+	if (!service.update(dto)) {
+		result->init(UInt64(-1), RS_FAIL);
+	}
+	else {
+		result->init(UInt64(1), RS_SUCCESS);
+	}
+	return result;
 }
 
 Uint64JsonVO::Wrapper DetectionTemplateController::execRemoveSample(const UInt64& id)
