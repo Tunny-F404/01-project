@@ -52,7 +52,7 @@ public class ProductSop implements Serializable {
     private LocalDateTime createTime;
 
     private String updateBy;
-
+    @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime updateTime;
 
 }

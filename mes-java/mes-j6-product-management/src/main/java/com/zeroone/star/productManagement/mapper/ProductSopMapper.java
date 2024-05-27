@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.productManagement.entity.ProductSop;
 import com.zeroone.star.project.j6.product_management.dto.ProductSopDTO;
 import com.zeroone.star.project.j6.product_management.query.ProductSopQuery;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 @Mapper
@@ -15,30 +15,23 @@ public interface ProductSopMapper extends BaseMapper<ProductSop> {
      * @return 查询结果
      */
     List<ProductSopDTO> selectProductSopPage(ProductSopQuery query);
-
-    /**
-     * 通过ID查询产品SOP
-     * @param id 编号
-     * @return 查询结果
-     */
+    @Select("SELECT * FROM md_product_sop WHERE sop_id = #{id}")
     ProductSopDTO selectProductSopById(Long id);
 
-    /**
-     * 新增产品SOP
-     * @param dto 产品SOP
-     */
+    @Insert("INSERT INTO md_product_sop (sop_id, item_id, ...) VALUES (#{sopId}, #{itemId}, ...)")
     void insertProductSop(ProductSopDTO dto);
 
-    /**
-     * 修改产品SOP
-     * @param dto 产品SOP
-     */
+    @Update("UPDATE md_product_sop SET item_id=#{itemId}, ... WHERE sop_id=#{sopId}")
     void updateProductSop(ProductSopDTO dto);
 
-    /**
-     * 批量删除产品SOP
-     * @param ids 需要删除的产品SOP主键
-     */
+
+    @Delete({"<script>",
+            "DELETE FROM md_product_sop WHERE sop_id IN",
+            "<foreach item='sopId' index='index' collection='array' open='(' separator=',' close=')'>",
+            "#{sopId}",
+            "</foreach>",
+            "</script>"})
     void deleteProductSopByIds(Long[] ids);
+
 
 }

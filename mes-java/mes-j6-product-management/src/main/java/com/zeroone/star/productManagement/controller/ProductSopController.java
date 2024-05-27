@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
+import java.util.Arrays;
 
 /**
  * <p>
@@ -61,9 +62,9 @@ public class ProductSopController implements ProductSopApis {
     public JsonVO<String> edit(@RequestBody ProductSopDTO dto) {
         boolean count = ProductSopService.updateProductSop(dto);
         if (count) {
-            return JsonVO.success("添加成功");
+            return JsonVO.success("修改成功");
         }
-        return JsonVO.fail("添加失败");
+        return JsonVO.fail("修改失败");
     }
 
     @Override
@@ -89,7 +90,5 @@ public class ProductSopController implements ProductSopApis {
             return JsonVO.fail("文件上传失败");
         }
     }
-
-
 }
 
