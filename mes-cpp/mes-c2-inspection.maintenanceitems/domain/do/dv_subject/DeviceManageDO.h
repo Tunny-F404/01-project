@@ -36,7 +36,7 @@ public:
 	}
 };
 
-class DeviceManageBaseDO
+class DeviceManageAddDO
 {
 	// 项目编码
 	CC_SYNTHESIZE(string, subjectCode, SubjectCode);
@@ -56,7 +56,7 @@ class DeviceManageBaseDO
 	//是否启用
 	CC_SYNTHESIZE(string, enableFlag, EnableFlag);
 public:
-	DeviceManageBaseDO() {
+	DeviceManageAddDO() {
 		subjectCode = "";
 		subjectName = "";
 		subjectType = "";

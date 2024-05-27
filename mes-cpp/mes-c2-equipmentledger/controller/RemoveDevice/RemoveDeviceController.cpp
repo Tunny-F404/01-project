@@ -20,7 +20,7 @@
 #include "stdafx.h"
 #include "RemoveDeviceController.h"
 
-BooleanJsonVO::Wrapper RemoveDeviceController::execRemoveDevice(const RemoveDeviceDTO::Wrapper& dto)
+BooleanJsonVO::Wrapper RemoveDeviceController::execRemoveDevice(const RemoveDeviceListDTO::Wrapper& dto)
 {
 	// 定义返回结果
 	auto res = BooleanJsonVO::createShared();

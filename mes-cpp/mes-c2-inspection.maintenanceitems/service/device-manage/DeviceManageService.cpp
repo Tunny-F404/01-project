@@ -105,10 +105,10 @@ bool DeviceManageService::removeData(const DeviceManageIdDTO::Wrapper& dto)
 	return dao.deleteById(data) >= 1;
 }
 
-uint64_t DeviceManageService::saveData(const DeviceManageBaseDTO::Wrapper& dto)
+uint64_t DeviceManageService::saveData(const DeviceManageAddDTO::Wrapper& dto)
 {
 	// 组装DO数据
-	DeviceManageBaseDO data;
+	DeviceManageAddDO data;
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
