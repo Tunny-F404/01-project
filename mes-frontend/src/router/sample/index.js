@@ -35,6 +35,12 @@ const routes = [
 			{
 				path: '/sample/search-bar',
 				component: () => import('@/views/sample/search-bar/search-bar-page.vue')
+			},
+			//基础数据客户管理演示页
+			{
+				path: '/sample/basedata',
+				component: () => import('@/views/sample/basedata/Clientdemo2.vue')
+				// Clientdemo2
 			}
 		]
 	}
