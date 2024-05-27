@@ -28,19 +28,19 @@ public interface IProductSopService extends IService<ProductSop> {
      * 新增产品SOP
      * @param dto 产品SOP
      */
-    void insertProductSop(ProductSopDTO dto);
+    boolean insertProductSop(ProductSopDTO dto);
 
     /**
      * 修改产品SOP
      * @param dto 产品SOP
      */
-    void updateProductSop(ProductSopDTO dto);
+    boolean updateProductSop(ProductSopDTO dto);
 
     /**
      * 批量删除产品SOP
      * @param ids 需要删除的产品SOP主键
      */
-    void deleteProductSopByIds(Long[] ids);
+    boolean deleteProductSopByIds(Long[] ids);
     // 新增方法用于处理文件上传逻辑
     String uploadFile(MultipartFile file);
 

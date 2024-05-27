@@ -27,7 +27,6 @@ public interface ProductSopApis {
      * @param query 查询条件
      * @return 查询结果
      */
-    @ApiOperation("查询产品SOP列表")
     JsonVO<PageDTO<ProductSopDTO>> queryAll(ProductSopQuery query);
 
     /**
@@ -35,14 +34,12 @@ public interface ProductSopApis {
      * @param id 编号
      * @return 查询结果
      */
-    @ApiOperation("通过ID查询产品SOP")
     JsonVO<ProductSopDTO> queryById(Long id);
     /**
      * 新增产品SOP
      * @param dto 产品SOP传输对象
      * @return 操作结果
      */
-    @ApiOperation("新增产品SOP")
     JsonVO<String> add(ProductSopDTO dto);
 
     /**
@@ -50,7 +47,6 @@ public interface ProductSopApis {
      * @param dto 产品SOP传输对象
      * @return 操作结果
      */
-    @ApiOperation("修改产品SOP")
     JsonVO<String> edit(ProductSopDTO dto);
 
     /**
@@ -58,10 +54,7 @@ public interface ProductSopApis {
      * @param ids 产品SOP ID数组
      * @return 操作结果
      */
-    @ApiOperation("删除产品SOP")
     JsonVO<String> remove(Long[] ids);
 
-    @ApiOperation(value = "上传SOP文件")
-    @PostMapping("/uploadFile")
-    JsonVO<String> uploadFile(@RequestParam("file") MultipartFile file);
+    JsonVO<String> uploadFile(MultipartFile file);
 }

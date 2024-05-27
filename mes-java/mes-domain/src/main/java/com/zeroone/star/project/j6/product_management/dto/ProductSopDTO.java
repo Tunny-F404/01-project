@@ -12,6 +12,10 @@ import lombok.Data;
 @Data
 @ApiModel("产品SOP传输数据对象")
 public class ProductSopDTO {
+    @ApiModelProperty(value = "记录id", example = "288")
+    private Long sopId;
+    @ApiModelProperty(value = "物料产品id", example = "288")
+    private Long itemId;
     @ApiModelProperty(value = "标题", example = "装配SOP")
     private String sopTitle;
     @ApiModelProperty(value = "排列顺序", example = "1")
