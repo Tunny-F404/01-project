@@ -11,6 +11,8 @@
 /*
 * 获取点检保养计划详情
 */
+
+//dv_check_plan的，删除前，辅助查询query
 class DeletePlanQuery : public oatpp::DTO
 {
 	DTO_INIT(DeletePlanQuery, DTO);
@@ -66,6 +68,28 @@ public:
 		this->plan_id = id;
 	}
 };
+
+//dv_check_plan的，删除前，辅助查询query
+class DeletePlanSubjectQuery : public oatpp::DTO
+{
+	DTO_INIT(DeletePlanSubjectQuery, DTO);
+
+	// 只用流水号去查询，而且是单个流水号
+	DTO_FIELD(Int64, record_id);
+	DTO_FIELD_INFO(record_id)
+	{
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.recordId");
+	}
+
+	//abf为了改值加入的函数方法
+public:
+	void setRecord_id(Int64 id)
+	{
+		this->record_id = id;
+	}
+};
+
+
 
 #include OATPP_CODEGEN_END(DTO)
 #endif // 

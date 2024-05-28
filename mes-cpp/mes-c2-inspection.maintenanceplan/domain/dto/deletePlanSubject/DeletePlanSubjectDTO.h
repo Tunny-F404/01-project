@@ -60,29 +60,38 @@ class DeleteTableUniqueDTO :public ListDTO<oatpp::Int64>
 };
 
 /*用于联表，有主次双主键（id，idList）*/
-class DeleteTableSharedDTO :public ListDTO<oatpp::UInt64>
+class DeleteTableSharedDTO :public ListDTO<oatpp::Int64>
 {
 	//List（从属表的主键序列）
-	DTO_INIT(DeleteTableSharedDTO, ListDTO<oatpp::UInt64>)
+	DTO_INIT(DeleteTableSharedDTO, ListDTO<oatpp::Int64>)
 	//从属表的表名称
 	//API_DTO_FIELD_DEFAULT(String, tableNameSec, ZH_WORDS_GETTER("deleteTemplate.DESC.tableNameSec"));
 	//keyPri主表主键
-	API_DTO_FIELD_DEFAULT(UInt64, keyPri, ZH_WORDS_GETTER("deleteTemplate.DESC.keyPri"));
+	API_DTO_FIELD_DEFAULT(Int64, keyPri, ZH_WORDS_GETTER("deleteTemplate.DESC.keyPri"));
 	//主表的表名称
 	//API_DTO_FIELD_DEFAULT(String, tableNamePri, ZH_WORDS_GETTER("deleteTemplate.DESC.tableNamePri"));
 
 };
 
 //删除计划的机器
-class DeleteMachinerDTO :public DeleteTableSharedDTO
+//class DeleteMachinerDTO :public DeleteTableSharedDTO
+//{
+//	DTO_INIT(DeleteMachinerDTO, DeleteTableSharedDTO)
+//};
+class DeleteMachinerDTO :public DeleteTableUniqueDTO
 {
-	DTO_INIT(DeleteMachinerDTO, DeleteTableSharedDTO)
+	DTO_INIT(DeleteMachinerDTO, DeleteTableUniqueDTO)
 };
 
+
 //删除计划的项目
-class DeleteSubjectDTO :public DeleteTableSharedDTO
+//class DeleteSubjectDTO :public DeleteTableSharedDTO
+//{
+//	DTO_INIT(DeleteSubjectDTO, DeleteTableSharedDTO)
+//};
+class DeleteSubjectDTO :public DeleteTableUniqueDTO
 {
-	DTO_INIT(DeleteSubjectDTO, DeleteTableSharedDTO)
+	DTO_INIT(DeleteSubjectDTO, DeleteTableUniqueDTO)
 };
 
 /*删除点检/保养计划*/
@@ -96,6 +105,7 @@ class DeletePlanDTO :public DeleteTableUniqueDTO
 /**
 * 点检/保养计划列表传输对象
 */
+//该DTO用于辅助删除dv_check_plan表的查询
 class DeletePlanQueryDTO : public oatpp::DTO
 {
 	DTO_INIT(DeletePlanQueryDTO, DTO);
@@ -116,6 +126,39 @@ class DeletePlanQueryDTO : public oatpp::DTO
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-name");
 	}
 };
+
+//该DTO用于辅助删除dv_check_subject表的查询
+class DeletePlanSubjectQueryDTO : public oatpp::DTO
+{
+	DTO_INIT(DeletePlanSubjectQueryDTO, DTO);
+
+	// 1、流水号
+	DTO_FIELD(Int64, record_id);
+	DTO_FIELD_INFO(record_id) {
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.recordId");
+	}
+	// 2、计划ID
+	DTO_FIELD(Int64, plan_id);
+	DTO_FIELD_INFO(plan_id) {
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.planId");
+	}
+	/// 3、项目id
+	DTO_FIELD(Int64, subject_id);
+	DTO_FIELD_INFO(subject_id) {
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.subjectId");
+	}
+	// 4、项目编码
+	DTO_FIELD(String, subject_code);
+	DTO_FIELD_INFO(subject_code) {
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.subjectCode");
+	}
+	// 5、项目名称
+	DTO_FIELD(String, subject_name);
+	DTO_FIELD_INFO(subject_name) {
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.subjectName");
+	}
+};
+
 
 //
 ///**

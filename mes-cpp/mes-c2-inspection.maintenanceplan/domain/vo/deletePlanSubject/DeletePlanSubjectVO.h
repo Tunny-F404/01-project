@@ -12,6 +12,10 @@
 class DeletePlanQueryJsonVO : public JsonVO<DeletePlanQueryDTO::Wrapper> {
 	DTO_INIT(DeletePlanQueryJsonVO, JsonVO<DeletePlanQueryDTO::Wrapper>);
 };
+
+class DeletePlanSubjectQueryJsonVO : public JsonVO<DeletePlanSubjectQueryDTO::Wrapper> {
+	DTO_INIT(DeletePlanSubjectQueryJsonVO, JsonVO<DeletePlanSubjectQueryDTO::Wrapper>);
+};
 #include OATPP_CODEGEN_END(DTO)
 
 #endif // !_MACHINERY_PLAN_VO_

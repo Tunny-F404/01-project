@@ -2,8 +2,8 @@
 /*
 * 
 */
-#ifndef _SAMPLE_SERVICE_
-#define _SAMPLE_SERVICE_
+#ifndef _DV__CHECK__SUBJECTSERVICE_SERVICE_
+#define _DV__CHECK__SUBJECTSERVICE_SERVICE_
 #include <list>
 //#include "domain/vo/sample/SampleVO.h"
 //#include "domain/query/sample/SampleQuery.h"

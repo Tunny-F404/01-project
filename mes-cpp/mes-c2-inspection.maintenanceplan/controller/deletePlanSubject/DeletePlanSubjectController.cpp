@@ -2,6 +2,7 @@
 #include "DeletePlanSubjectController.h"
 //扩查询来辅助
 #include "../mes-c2-inspection.maintenanceplan/service/dv_check_plan/Dv_check_planService.h"
+#include "../mes-c2-inspection.maintenanceplan/service/dv_check_subject/Dv_check_subjectService.h"
 #include "../../domain/query/deletePlanSubject/DeletePlanSubjectQuery.h"
 
 BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanMachiner(const DeleteMachinerDTO::Wrapper& dto)
@@ -9,11 +10,72 @@ BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanMachiner(const
 	return BooleanJsonVO::Wrapper();
 }
 
+bool allKeyExistIsCheckSubject(const DeletePlanSubjectQuery::Wrapper& query)
+{
+	Dv_check_subjectService service;
+	// 查询数据
+	DeletePlanSubjectQueryDTO::Wrapper result = service.listAll(query);
+	// 响应结果
+	auto jvo = DeletePlanSubjectQueryJsonVO::createShared();
+	jvo->success(result);
+	auto jvoData = jvo->data;
+	auto record_idJvoData = jvoData->record_id;
+	auto tq001 = query->record_id;
+
+	if (record_idJvoData != nullptr)
+	{
+		cout << "数据表存在待删除id：" << tq001 << endl;
+		return true;
+	}
+	else
+	{
+		cout << "数据表没有待删除id：" << tq001 << endl;
+		return false;
+	}
+}
+
 BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanSubject(const DeleteSubjectDTO::Wrapper& dto)
 {
+	auto jvo = BooleanJsonVO::createShared();
+	auto dtoItem = dto->item;
+	auto itemList = dtoItem.get();
 
+	for (std::list<oatpp::Int64>::iterator it = itemList->begin(); it != itemList->end(); ++it)
+	{
+		std::cout << *it << " ";//此处的*it大概能被当做id去使用
+		if (!(*it) || (*it) <= 0)
+		{
+			jvo->init(Boolean(false), RS_PARAMS_INVALID);//失败返回参数异常
+			return jvo;
 
-	return BooleanJsonVO::Wrapper();
+		}
+	}cout << endl;
+
+	//2、暂时不上锁
+
+	//3、存在性检测
+	for (std::list<oatpp::Int64>::iterator it = itemList->begin(); it != itemList->end(); ++it)
+	{
+		auto query_delete_subject = DeletePlanSubjectQuery::createShared();
+		query_delete_subject->setRecord_id(*it);
+		if (allKeyExistIsCheckSubject(query_delete_subject) == false)
+		{
+			jvo->init(Boolean(false), RS_FAIL);
+			return jvo;
+		}
+	}
+	//4、删除
+
+	for (std::list<oatpp::Int64>::iterator it = itemList->begin(); it != itemList->end(); ++it)
+	{
+
+		// 定义一个Service
+		Dv_check_subjectService service;
+		// 执行数据删除
+		service.dv_check_subjectRemoveData((*it).getValue(0));
+	}
+	jvo->init(Boolean(true), RS_SUCCESS);
+	return jvo;
 }
 
 bool idExistIs(const DeletePlanQuery::Wrapper& query)
@@ -104,8 +166,9 @@ BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlan(const DeleteP
 
 		// 定义一个Service
 		Dv_check_planService service;
-		service.dv_check_machineryRemoveDataIDP((*it).getValue(0));
-		service.dv_check_subjectRemoveDataIDP((*it).getValue(0));
+		//注释了连表操作
+		//service.dv_check_machineryRemoveDataIDP((*it).getValue(0));
+		//service.dv_check_subjectRemoveDataIDP((*it).getValue(0));
 		// 执行数据删除
 		service.dv_check_planRemoveData((*it).getValue(0));
 	}
@@ -144,6 +207,13 @@ DeletePlanQueryJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanQuery(
 		cout << "查找的id不存在" << endl;
 	}
 	return jvo;
+}
+
+
+
+bool allKeyExistIsCheckMachinery()
+{
+	return true;
 }
 
 

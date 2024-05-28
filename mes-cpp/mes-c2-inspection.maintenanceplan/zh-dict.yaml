@@ -147,4 +147,12 @@ maintenance:
   startdate: 计划开始时间
   enddata: 计划结束时间
   remark: 备注
+
+deleteQuery:
+ planSubject:
+  recordId: 流水号
+  planId: 计划id
+  subjectId: 项目id
+  subjectCode: 项目编码
+  subjectName: 项目名称
    

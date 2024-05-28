@@ -51,7 +51,10 @@ public: // 定义接口
 	//API_DEF_ENDPOINT_INFO(ZH_WORDS_GETTER("machinery-plan.query-details.summary"), deletePlanQuery, DeletePlanQueryJsonVO::Wrapper)
 	//API_HANDLER_ENDPOINT(API_M_GET, "/device-manage/delete-plan", deletePlanQuery, BODY_DTO(DeletePlanQuery::Wrapper, dto), execDeletePlanQuery(dto))
 
-	//--------另一种描述
+	//----↑以上是开放的接口
+	//--------↓另一种描述，以下是测试的辅助接口测试
+	
+	//1、测试plan表的删除前查询
 	// 定义点检/保养设备计划列表接口描述
 	ENDPOINT_INFO(deletePlanQuery) {
 	// 定义接口标题
@@ -143,6 +146,9 @@ public: // 定义接口
 
 
 	}
+
+	// 2、dv_check_subject删除辅助查询
+	
 
 	//// 定义点检/保养设备计划列表接口描述
 	//ENDPOINT_INFO(deletePlanQuery)
