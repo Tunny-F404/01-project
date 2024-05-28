@@ -45,6 +45,8 @@ class DvMaintenRecordDO
 	CC_SYNTHESIZE(string, machinery_name, Machinery_Name);
 	//品牌
 	CC_SYNTHESIZE(string, machinery_brand, Machinery_Brand);
+	//保养时间
+	CC_SYNTHESIZE(string, mainten_time, Mainten_Time);
 	//规格型号
 	CC_SYNTHESIZE(string, machinery_spec, Machinery_Spec);
 	//状态
@@ -61,8 +63,12 @@ class DvMaintenRecordDO
 	CC_SYNTHESIZE(uint64_t, attr4, Attr4);
 	//创建者
 	CC_SYNTHESIZE(string, create_by, Create_By);
+	//创建时间
+	CC_SYNTHESIZE(string, create_time, Create_Time);
 	//更新者
 	CC_SYNTHESIZE(string, update_by, Update_By);
+	//更新时间
+	CC_SYNTHESIZE(string, update_time, Update_Time);
 
 public:
 	DvMaintenRecordDO() {
