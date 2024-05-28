@@ -5,9 +5,6 @@ import com.zeroone.star.scheduleplan.entity.CalTeam;
 import com.zeroone.star.scheduleplan.mapper.CalTeamMapper;
 import com.zeroone.star.scheduleplan.service.ICalTeamService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zeroone.star.scheduleplan.entity.CalTeam;
-import com.zeroone.star.scheduleplan.mapper.CalTeamMapper;
-import com.zeroone.star.scheduleplan.service.ICalTeamService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

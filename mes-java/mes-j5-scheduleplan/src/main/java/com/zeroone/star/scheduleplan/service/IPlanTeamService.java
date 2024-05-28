@@ -1,7 +1,6 @@
 package com.zeroone.star.scheduleplan.service;
 
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j5.dto.scheduleplan.planteam.AddPlanTeamDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.planteam.PlanTeamDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.planteam.AddPlanTeamQuery;
 import com.zeroone.star.project.j5.query.scheduleplan.planteam.PlanTeamQuery;
@@ -39,10 +38,4 @@ public interface IPlanTeamService extends IService<CalPlanTeam> {
      * @return 删除结果: 0-失败, 1-成功
      */
     Integer deletePlanTeam(Long recordId);
-
-    /**
-     * 测试seata声明式服务调用
-     * @return 执行结果
-     */
-//    int testSeata();
 }

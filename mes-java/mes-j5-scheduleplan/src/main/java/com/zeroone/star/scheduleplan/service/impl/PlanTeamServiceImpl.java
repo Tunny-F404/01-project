@@ -11,7 +11,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.scheduleplan.entity.CalPlanTeam;
 import com.zeroone.star.scheduleplan.entity.CalTeam;
 import com.zeroone.star.scheduleplan.mapper.CalPlanTeamMapper;
-import com.zeroone.star.scheduleplan.mapper.CalTeamMapper;
 import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import com.zeroone.star.scheduleplan.service.ICalTeamService;
 import com.zeroone.star.scheduleplan.service.IPlanTeamService;

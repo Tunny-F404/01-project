@@ -1,25 +1,20 @@
 package com.zeroone.star.scheduleplan.controller.team;
 
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j5.dto.scheduleplan.planteam.AddPlanTeamDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.planteam.PlanTeamDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.planteam.AddPlanTeamQuery;
 import com.zeroone.star.project.j5.query.scheduleplan.planteam.PlanTeamQuery;
 import com.zeroone.star.project.j5.scheduleplan.team.TeamApis;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.scheduleplan.service.IPlanTeamService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

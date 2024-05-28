@@ -1,12 +1,10 @@
 package com.zeroone.star.project.j5.scheduleplan.team;
 
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j5.dto.scheduleplan.planteam.AddPlanTeamDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.planteam.PlanTeamDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.planteam.AddPlanTeamQuery;
 import com.zeroone.star.project.j5.query.scheduleplan.planteam.PlanTeamQuery;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.RequestBody;
 
