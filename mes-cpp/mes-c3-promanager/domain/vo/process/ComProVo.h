@@ -35,23 +35,7 @@ class ProJsonVO : public JsonVO<ComProPageDTO::Wrapper>
 	DTO_INIT(ProJsonVO, JsonVO<ComProPageDTO::Wrapper>);
 };
 
-/**
- * 修改组成工序
- */
-class ModifyJsonVO : public JsonVO<ModifyProDTO::Wrapper>
-{
-	//初始化
-	DTO_INIT(ModifyJsonVO, JsonVO<ModifyProDTO::Wrapper>);
-};
 
-/**
- * 新增组成工序
- */
-class NewProcessVO : public JsonVO<NewProcessDTO::Wrapper>
-{
-	//初始化
-	DTO_INIT(NewProcessVO, JsonVO<NewProcessDTO::Wrapper>);
-};
 
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_PROJOSNVO_H_

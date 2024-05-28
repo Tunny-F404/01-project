@@ -47,6 +47,7 @@ class ProRouteProductBomDO
 	// 用料比例
 	CC_SYNTHESIZE(double, quantity, Quantity);
 	// 备注
+	CC_SYNTHESIZE(string, remark, Remark);
 public:
 	ProRouteProductBomDO() {
 		record_id = 0;

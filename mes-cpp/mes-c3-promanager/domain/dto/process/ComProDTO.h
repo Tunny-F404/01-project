@@ -21,7 +21,6 @@
 #define _COMPRODTO_H_
 
 #include "../../GlobalInclude.h"
-#include "domain/dto/process/ProcessListDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 

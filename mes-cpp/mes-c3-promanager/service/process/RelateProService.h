@@ -1,0 +1,22 @@
+#pragma once
+#ifndef _RELATEPRO_SERVICE_
+#define _RELATEPRO_SERVICE_
+#include <list>
+
+#include "domain/dto/process/relateproDTO.h"
+
+
+/**
+ * 关联产品添加+修改服务实现，演示基础的示例服务实现
+ */
+class RelateProService
+{
+public:
+	// 保存数据
+	uint64_t saveData(const AddRelateProDTO::Wrapper& dto);
+	// 修改数据
+	bool updateData(const ModRelateProDTO::Wrapper& dto);
+};
+
+#endif // !_RELATEPRO_SERVICE_
+

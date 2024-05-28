@@ -159,7 +159,7 @@ public:
 	}
 	// 11 导出工序步骤
 	ENDPOINT_INFO(SetStepExport) {
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.export.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.export.summary1"));
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
 		API_DEF_ADD_PAGE_PARAMS();

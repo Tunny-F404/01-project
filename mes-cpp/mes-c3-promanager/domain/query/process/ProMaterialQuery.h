@@ -13,7 +13,7 @@
 class ProMaterialQuery : public PageQuery
 {
 	DTO_INIT(ProMaterialQuery, PageQuery);
-	API_DTO_FIELD_DEFAULT(UInt64, item_code, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"));
+	API_DTO_FIELD_DEFAULT(String, item_code, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"));
 	API_DTO_FIELD_DEFAULT(String, item_name, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_name"));
 };
 

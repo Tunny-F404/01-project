@@ -122,7 +122,7 @@ public:
 	}
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete-process/{id}", removeProcess, BODY_DTO(List<UInt64>, id), execRemoveProcess(id));
 
-	// 7 工艺导出
+	// 7 导出工艺
 	ENDPOINT_INFO(queryProcess) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.get_field.summary"));

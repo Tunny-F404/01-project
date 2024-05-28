@@ -14,7 +14,7 @@ class AddRelateProDTO : public oatpp::DTO
 	DTO_INIT(AddRelateProDTO, DTO);
 
 	// 产品物料编码
-	API_DTO_FIELD(UInt64, item_code, ZH_WORDS_GETTER("RelatePro.DTO.item_code"), true, 1);
+	API_DTO_FIELD(String, item_code, ZH_WORDS_GETTER("RelatePro.DTO.item_code"), true, "1");
 	// 产品物料名称
 	API_DTO_FIELD(String, item_name, ZH_WORDS_GETTER("RelatePro.DTO.item_name"), true, "01star");
 	// 产品物料单位
@@ -33,6 +33,8 @@ class ModRelateProDTO : public AddRelateProDTO
 	DTO_INIT(ModRelateProDTO, AddRelateProDTO);
 
 	// 用料比例
-	API_DTO_FIELD(String, Ratio_of_materials_used, ZH_WORDS_GETTER("RelatePro.DTO.Ratio_of_materials_used"), true, "0:0");
+	//API_DTO_FIELD(String, Ratio_of_materials_used, ZH_WORDS_GETTER("RelatePro.DTO.Ratio_of_materials_used"), true, "0:0");
+	//记录ID
+	API_DTO_FIELD(UInt64, record_id, ZH_WORDS_GETTER("RelatePro.DTO.record_id"), true, 1);
 };
 #endif // !_RELATEPRO_DTO_

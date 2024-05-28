@@ -3,6 +3,9 @@
 #include "../../service/process/ProcessListService.h"
 #include "../../service/process/ProcessProductsService.h"
 #include "../../service/process/ComProService.h"
+#include "../../service/process/RelateProService.h"
+#include "../../service/process/ProMaterialService.h"
+//#include "declarative/ProMaterialApiClient.h"
 #include "../ApiDeclarativeServicesHelper.h"
 
 // 1 查询工艺列表
@@ -158,17 +161,72 @@ Uint64JsonVO::Wrapper ProcessController::execModifyProcess(const ModifyProDTO::W
 // 11 添加工艺关联产品
 Uint64JsonVO::Wrapper ProcessController::execAddRelatePro(const AddRelateProDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验
+	if (!dto->item_code || !dto->item_name || !dto->unit_of_measure || !dto->specification)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->item_code->empty() || dto->item_name->empty() || dto->unit_of_measure->empty() || dto->specification->empty())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	RelateProService service;
+	// 执行数据新增
+	uint64_t id = service.saveData(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }
 // 12 修改工艺关联产品
 Uint64JsonVO::Wrapper ProcessController::execModifyRelatePro(const ModRelateProDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->record_id || dto->record_id <= 0 || !dto->item_code || !dto->item_name || !dto->unit_of_measure ||
+		!dto->specification)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	RelateProService service;
+	// 执行数据修改
+	if (service.updateData(dto)) {
+		jvo->success(dto->record_id);
+	}
+	else
+	{
+		jvo->fail(dto->record_id);
+	}
+	// 响应结果
+	return jvo;
 }
 // 13 获取产品制程物料BOM列表
 ProMaterialPageJsonVO::Wrapper ProcessController::execQueryProMaterial(const ProMaterialQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	return {};
+	// 定义一个Service
+	ProMaterialService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = ProMaterialPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 // 14 删除工艺流程
 Uint64JsonVO::Wrapper ProcessController::execRemoveProRoute(const UInt64& id)

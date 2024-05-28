@@ -1,7 +1,7 @@
 process:
  route:
-  delete1: 删除一条工艺流程
-  delete2: 删除一个工艺关联产品
+  delete1: 删除工艺流程
+  delete2: 删除工艺关联产品
   output: 导出工艺关联产品
   id: 工艺流程编号
   corproductid: 工艺关联产品编号

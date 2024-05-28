@@ -37,15 +37,17 @@ class ProMaterialDTO : public oatpp::DTO
 	// 物料ID
 	API_DTO_FIELD(UInt64, item_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_id"), true, 1);
 	// 物料编码
-	API_DTO_FIELD(UInt64, item_code, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"), true, 1);
+	API_DTO_FIELD(String, item_code, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"), true, "");
 	// 物料名称
 	API_DTO_FIELD(String, item_name, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_name"), true, "01star");
 	// 物料单位
 	API_DTO_FIELD(String, unit_of_measure, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.unit_of_measure"), true, "g");
 	// 规格型号
 	API_DTO_FIELD(String, specification, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.specification"), true, "null");
+	//使用比例
+	API_DTO_FIELD(Float32, quantity, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.quantity"), true, 0.0);
 	// 备注
-	API_DTO_FIELD(String, RPmodels, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.RPmodels"), false,"null");
+	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.RPmodels"), false, "null");
 };
 
 
