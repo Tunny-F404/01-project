@@ -6,6 +6,10 @@ import com.zeroone.star.project.j3.dto.SysMessageDTO;
 import com.zeroone.star.project.j3.query.MessageQuery;
 
 import java.util.List;
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j3.query.NewsPageQuery;
+import com.zeroone.star.project.j3.vo.SysMessageVO;
+import com.zeroone.star.project.j3.vo.UnreadMessageVO;
 
 /**
  * <p>
@@ -23,4 +27,17 @@ public interface ISysMessageService extends IService<SysMessage> {
     List<SysMessageDTO> queryMessage(MessageQuery query);
 
     List<Long> modifyMessage(Long id);
+    /**
+     * 获取消息通知列表（条件＋分页）
+     * @param newsPageQuery
+     * @return
+     */
+    PageDTO<SysMessage> pageQuery(NewsPageQuery newsPageQuery);
+
+    /**
+     * 获取最新未读消息列表
+     * @return
+     */
+    UnreadMessageVO getUnreadMessage();
+
 }
