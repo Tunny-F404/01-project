@@ -1,7 +1,7 @@
 server:
-  port: ${sp.sample}
+  port: ${sp.customer}
 spring:
   application:
-    name: ${sn.sample}
+    name: ${sn.customer}
 fastdfs:
   nginx-servers: ${fastdfs.nginx-servers}

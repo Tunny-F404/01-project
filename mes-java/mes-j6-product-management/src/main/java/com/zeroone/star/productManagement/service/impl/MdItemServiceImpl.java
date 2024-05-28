@@ -7,8 +7,11 @@ import com.zeroone.star.productManagement.mapper.MdItemMapper;
 import com.zeroone.star.productManagement.service.IMdItemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.j6.product_management.query.MdItemQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -37,6 +42,8 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
     private MdItemMapper mdItemMapper;
     @Autowired
     EasyExcelComponent excel;
+    @Resource
+    UserHolder userHolder;
 
     /**
      * 根据条件查询物料列表
@@ -79,19 +86,20 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * 初始化产品物料模板
      * @return MdItem对象
      */
+    @PostConstruct
     private MdItem initTemplate() {
         MdItem item = new MdItem();
         item.setItemId(null);
-        item.setItemCode("");
-        item.setItemName("");
+        item.setItemCode("NOT NULL");
+        item.setItemName("NOT NULL");
         item.setSpecification("");
-        item.setUnitOfMeasure("");
-        item.setItemOrProduct("");
+        item.setUnitOfMeasure("NOT NULL");
+        item.setItemOrProduct("NOT NULL");
         item.setItemTypeId(null);
         item.setItemTypeCode("");
         item.setItemTypeName("");
-        item.setEnableFlag("");
-        item.setSafeStockFlag("");
+        item.setEnableFlag("NOT NULL");
+        item.setSafeStockFlag("NOT NULL");
         item.setMinStock(null);
         item.setMaxStock(null);
         item.setRemark("");
@@ -130,20 +138,76 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
 
     public JsonVO<String> importFromExcel(MultipartFile file, boolean updateSupport) {
         List<MdItem> items = new ArrayList<>();
+        int successNum = 0;
+        int failureNum = 0;
+        StringBuilder successMsg = new StringBuilder();
+        StringBuilder failureMsg = new StringBuilder();
+        StringBuilder failureNameMsg = new StringBuilder();
+
         // excel同步读取数据
         try {
             items = EasyExcel.read(new BufferedInputStream(file.getInputStream())).head(MdItem.class).sheet().doReadSync();
-        } catch (Exception e) {
+        }catch (IOException e) {
             e.printStackTrace();
         }
-//        // 根据需求执行插入或更新操作
-//        if (updateSupport) {
-//            updateOrInsertData(items);
-//        } else {
-//            insertItems(items);
-//        }
-        return null;
+
+        for (MdItem mdItem : items)
+        {
+            try{
+                //是否存在
+                MdItem  m = mdItemMapper.checkItemCodeUnique(mdItem);
+                if(m == null){
+                    insertMdItem(mdItem);
+                    successNum++;
+                }else if (updateSupport){
+                    updateMdItem(mdItem);
+                    successNum++;
+                }else {//数据已存在但不支持更新
+                    failureNum++;
+                    failureNameMsg.append(failureNum).append("、").append(mdItem.getItemName());
+                }
+            }catch (Exception e){
+                failureNum++;
+                failureNameMsg.append(failureNum).append("、").append(mdItem.getItemName());
+            }
+        }
+
+        if (failureNum > 0)
+        {
+            failureMsg.insert(0, "成功导入" + successNum + " 条数据，");
+            failureMsg.append("共 ").append(failureNum).append(" 条数据格式不正确，错误如下：");
+            failureMsg.append(failureNameMsg);
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), failureMsg.toString());
+        } else
+        {
+            successMsg.insert(0, "导入成功！共 " + successNum + " 条");
+        }
+        return JsonVO.create(null, ResultStatus.SUCCESS.getCode(), successMsg.toString());
     }
 
+    /**
+     * 新增产品物料信息
+     *
+     * @param mdItem 产品物料信息
+     * @return 结果
+     */
+    public void insertMdItem(MdItem mdItem) throws Exception {
+        UserDTO userDTO  = userHolder.getCurrentUser();
+        mdItem.setCreateBy(userDTO.getUsername());
+        mdItem.setCreateTime(DateTime.now().toLocalDateTime());
+        mdItemMapper.insertMdItem(mdItem);
+    }
 
+    /**
+     * 修改产品物料信息
+     *
+     * @param mdItem 产品物料信息
+     * @return 结果
+     */
+    public void updateMdItem(MdItem mdItem) throws Exception {
+        UserDTO userDTO  = userHolder.getCurrentUser();
+        mdItem.setUpdateBy(userDTO.getUsername());
+        mdItem.setUpdateTime(DateTime.now().toLocalDateTime());
+        mdItemMapper.updateMdItem(mdItem);
+    }
 }
