@@ -29,10 +29,10 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(AreaPageJsonVO);
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
-		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "area_code", ZH_WORDS_GETTER("storagearea.fields.areacode"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "area_name", ZH_WORDS_GETTER("storagearea.fields.areaname"), "", false);
+		// 定义其他查询参数描述	
 		API_DEF_ADD_QUERY_PARAMS(Int64, "location_id", ZH_WORDS_GETTER("storagearea.fields.locationId"), 1, true);
+		API_DEF_ADD_QUERY_PARAMS(String, "area_code", ZH_WORDS_GETTER("storagearea.fields.areacode"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "area_name", ZH_WORDS_GETTER("storagearea.fields.areaname"), "", false);	
 		API_DEF_ADD_QUERY_PARAMS(Int32, "position_x", ZH_WORDS_GETTER("storagearea.fields.positionx"), 0, false);
 		API_DEF_ADD_QUERY_PARAMS(Int32, "position_y", ZH_WORDS_GETTER("storagearea.fields.positiony"), 0, false);
 		API_DEF_ADD_QUERY_PARAMS(Int32, "position_z", ZH_WORDS_GETTER("storagearea.fields.positionz"), 0, false);
@@ -58,13 +58,13 @@ public:
 	// 3.2 定义新增接口处理
 	ENDPOINT(API_M_POST, "/storagearea/add-area", addArea, BODY_DTO(AreaDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execAddArea(dto));
+		API_HANDLER_RESP_VO(execAddArea(dto, authObject->getPayload()));
 	}
 
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("storagearea.modify.update"), modifyArea, Uint64JsonVO::Wrapper)
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/storagearea/modify-area", modifyArea, BODY_DTO(AreaDTO::Wrapper, dto), execModifyArea(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/storagearea/modify-area", modifyArea, BODY_DTO(AreaDTO::Wrapper, dto), execModifyArea(dto, authObject->getPayload()));
 
 	// 3.1 定义删除接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("storagearea.remove.delete"), removeArea, Uint64JsonVO::Wrapper)
@@ -75,11 +75,11 @@ private:
 	// 3.3 演示分页查询数据
 	AreaPageJsonVO::Wrapper execQueryArea(const AreaQuery::Wrapper& query, const PayloadDTO& payload);
 	// 3.3 演示新增数据
-	Uint64JsonVO::Wrapper execAddArea(const AreaDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddArea(const AreaDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 3.3 演示修改数据
-	Uint64JsonVO::Wrapper execModifyArea(const AreaDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyArea(const AreaDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 3.3 演示删除数据
-	Uint64JsonVO::Wrapper execRemoveArea( const List<Int32>& idsdto);
+	Uint64JsonVO::Wrapper execRemoveArea( const oatpp::List<Int32>& idsdto);
 };
 
 #include OATPP_CODEGEN_END(ApiController)

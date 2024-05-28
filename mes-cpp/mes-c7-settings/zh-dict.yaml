@@ -17,7 +17,7 @@ storagearea:
   areacode: 库位编码
   areaname: 库位名称
   locationId: 库区ID
-  positionx: 库位位置X
+  positionx: 库位位置x
   positiony: '库位位置y'
   positionz: '库位位置z'
   enableFlag: '是否启用'
