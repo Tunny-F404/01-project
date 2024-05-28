@@ -12,7 +12,7 @@ class MachineryPlanDTO : public oatpp::DTO
 	DTO_INIT(MachineryPlanDTO, DTO);
 
 	// 计划ID
-	DTO_FIELD(UInt64, plan_id);
+	DTO_FIELD(UInt32, plan_id);
 	DTO_FIELD_INFO(plan_id) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.plan-id");
 	}
@@ -54,7 +54,7 @@ class MachineryPlanDTO : public oatpp::DTO
 	}
 
 	// 次数
-	DTO_FIELD(String, cycle_count);
+	DTO_FIELD(UInt32, cycle_count);
 	DTO_FIELD_INFO(cycle_count) {
 		info->description = ZH_WORDS_GETTER("machinery-plan.field.cycle-count");
 	}
