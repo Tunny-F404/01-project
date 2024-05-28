@@ -26,7 +26,7 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 定义一个列表显示生产报工
+ * 定义一个列表添加生产报工
  */
 class ProduceTableJsonVO : public JsonVO<PworkTableDTO::Wrapper>
 {

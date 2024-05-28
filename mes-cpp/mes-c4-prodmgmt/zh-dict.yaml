@@ -163,6 +163,8 @@ prod:
   summary: 使用声明式服务查询一条生产任务
  query-all:
   summary: 使用声明式服务查询多条生产任务
+
+ #以下字典为尛孩子使用，大家不要动哦！
 ProduceWork:
  query:
   summary: 获取报工详情查询
@@ -180,6 +182,7 @@ ProduceWork:
    feedback_time: 报工时间
    record_id: 记录id
    quantity_uncheck: 待检测质量
+   record_nick: 审核人
  moren:
    workstation_name: 默认工作站名称
    feedback_type: 自行报工

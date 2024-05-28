@@ -31,6 +31,10 @@
 #include "domain/dto/ProduceWork/treansformProduceDTO.h"
 #include "domain/vo/ProduceWork/treansformProduceVO.h"
 
+/*
+开发人员：尛孩子
+*/
+
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
@@ -90,7 +94,7 @@ public:
 		// 3.1 定义修改接口描述
 		API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("ProduceWork.xg.test"), modifySample, Uint64JsonVO::Wrapper);
 		// 3.2 定义修改接口处理
-		API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProduceWork/query-Pwork-table", modifySample, BODY_DTO(treansformProduceDTO::Wrapper, dto), execModifySample(dto));
+		API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProduceWork/query-Pwork-table", modifySample, BODY_DTO(treansformProduceDTO::Wrapper, dto), execModifyTable(dto));
 
 
 
@@ -102,7 +106,7 @@ private:// 定义接口执行函数
 	Uint64JsonVO::Wrapper execAddtTable(const PworkTableDTO::Wrapper& dto);
 
 	// 3.3 演示修改数据
-	Uint64JsonVO::Wrapper execModifySample(const treansformProduceDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyTable(const treansformProduceDTO::Wrapper& dto);
 };
 
 // 0 取消API控制器使用宏

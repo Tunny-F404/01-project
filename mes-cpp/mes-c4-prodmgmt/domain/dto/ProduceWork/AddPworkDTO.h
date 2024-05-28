@@ -62,7 +62,7 @@ class AddPworkTableDTO : public oatpp::DTO
 	API_DTO_FIELD(String, nick_name, ZH_WORDS_GETTER("ProduceWork.add.nick_nameA"), true, "无");
 
 	//审核人
-	//API_DTO_FIELD_DEFAULT(String,nick_name , ZH_WORDS_GETTER("ProduceWork.add.nick_nameB"));
+	API_DTO_FIELD_DEFAULT(String, record_nick, ZH_WORDS_GETTER("ProduceWork.add.nick_nameB"));
 
 	//报工时间
 	API_DTO_FIELD_DEFAULT(String, feedback_time, ZH_WORDS_GETTER("ProduceWork.add.feedback_time"));

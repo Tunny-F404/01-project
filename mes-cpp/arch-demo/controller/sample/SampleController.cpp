@@ -39,13 +39,17 @@ Uint64JsonVO::Wrapper SampleController::execAddSample(const SampleDTO::Wrapper& 
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if (!dto->age || !dto->name || !dto->sex)
+	if (!dto->feedback_type || !dto->feedback_code || !dto->task_code || !dto->product_code
+		|| !dto->product_name || !dto->unit_of_measure || !dto->product_spc || !dto->quantity_feedback 
+		|| !dto->quantity_uncheck || !dto->nick_name || !dto->record_nick || !dto->feedback_time || !dto->remark)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->age < 0 || dto->name->empty() || dto->sex->empty())
+	if (dto->feedback_type->empty() || dto->feedback_code->empty() || dto->task_code->empty() || dto->product_code->empty() ||
+		dto->product_name->empty() || dto->unit_of_measure->empty() || dto->product_spc->empty() || dto->quantity_feedback->empty() ||
+		dto->quantity_uncheck->empty() || dto->nick_name->empty() || dto->record_nick->empty() || dto->feedback_time->empty() || dto->remark->empty())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
