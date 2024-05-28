@@ -55,9 +55,9 @@ class IndexDO
 	CC_SYNTHESIZE(string, update_time, Update_time);
 public:
 	IndexDO() {
-		line_id = -1;
-		iqc_id = -1;
-		index_id = -1;
+		line_id = 0;
+		iqc_id = 0;
+		index_id = 0;
 		index_code = "";
 		index_name = "";
 		index_type = "";
@@ -85,4 +85,55 @@ public:
 };
 
 
+class DefectDO
+{
+	//缺陷ID
+	CC_SYNTHESIZE(uint64_t, record_id, Record_id);
+	//来料检验单ID
+	CC_SYNTHESIZE(uint64_t, iqc_id, Iqc_id);
+	//来料检验单行ID
+	CC_SYNTHESIZE(uint64_t, line_id, line_id);
+	//缺陷描述
+	CC_SYNTHESIZE(string, defect_name, defect_name);
+	//缺陷等级
+	CC_SYNTHESIZE(string, defect_level, defect_level);
+	//缺陷数量
+	CC_SYNTHESIZE(int, defect_quantity, defect_quantity);
+	//备注
+	CC_SYNTHESIZE(string, remark, Remark);
+	//预留字段1
+	CC_SYNTHESIZE(string, attr1, Attr1);
+	//预留字段2
+	CC_SYNTHESIZE(string, attr2, Attr2);
+	//预留字段3
+	CC_SYNTHESIZE(int, attr3, Attr3);
+	//预留字段4
+	CC_SYNTHESIZE(int, attr4, Attr4);
+	//创建者
+	CC_SYNTHESIZE(string, create_by, Create_by);
+	//创建时间
+	CC_SYNTHESIZE(string, create_time, Create_time);
+	//更新者
+	CC_SYNTHESIZE(string, update_by, Update_by);
+	//更新时间
+	CC_SYNTHESIZE(string, update_time, Update_time);
+public:
+	DefectDO() {
+		record_id = 0;
+		iqc_id = 0;
+		line_id = 0;
+		defect_name = "";
+		defect_level = "";
+		defect_quantity = 0;
+		remark = "";
+		attr1 = "";
+		attr2 = "";
+		attr3 = 0;
+		attr4 = 0;
+		create_by = "";
+		create_time = "";
+		update_by = "";
+		update_time = "";
+	}
+};
 #endif // !_SINGLE_DO_
