@@ -81,5 +81,5 @@ std::list<dvSubjectDO> GetProgectDAO::selectById(uint64_t id)
 {
 	string sql = "SELECT subject_code,subject_name,subject_type,subject_content,subject_standard,enable_flag  FROM dv_subject WHERE `subject_id`=?";
 	GetProgectIdMapper mapper;
-	return sqlSession->executeQuery<dvSubjectDO, GetProgectIdMapper>(sql, mapper, "%s", id);
+	return sqlSession->executeQuery<dvSubjectDO, GetProgectIdMapper>(sql, mapper, "%ull", id);
 }

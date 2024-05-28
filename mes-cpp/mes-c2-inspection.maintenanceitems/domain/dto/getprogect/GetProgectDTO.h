@@ -67,8 +67,11 @@ class GetProgectPageDTO : public PageDTO< GetProgectDTO::Wrapper>
 class GetProgectDetailDTO : public GetProgectDTO
 {
 	DTO_INIT(GetProgectDetailDTO, GetProgectDTO);
-	//项目名称
-	API_DTO_FIELD(String, pName, ZH_WORDS_GETTER("project.fields.pname"), true, "QQQQQ");
+	//项目Id
+	DTO_FIELD(UInt64, pId);
+	DTO_FIELD_INFO(pId) {
+		info->description = ZH_WORDS_GETTER("get-project.fields.pid");
+	}
 };
 
 

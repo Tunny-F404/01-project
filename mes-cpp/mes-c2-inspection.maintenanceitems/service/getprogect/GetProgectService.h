@@ -30,11 +30,11 @@ class GetProgectService
 {
 public:
 	// 分页查询所有数据
-	GetProgectDTO::Wrapper listAll(const GetProgectQuery::Wrapper& query);
+	GetProgectPageDTO::Wrapper listAll(const GetProgectQuery::Wrapper& query);
 
 	// 通过ID查询项目详情
 	//bool listSome(const GetProgectDTO::Wrapper& dto);
-	GetProgectDTO::Wrapper listSome(const uint64_t id);
+	GetProgectDetailDTO::Wrapper listSome(const uint64_t id);
 };
 
 #endif // !_GETPROGECT_SERVICE_

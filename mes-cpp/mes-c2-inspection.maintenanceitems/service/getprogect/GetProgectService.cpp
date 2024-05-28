@@ -30,7 +30,7 @@
 	bool listSome(const GetProgectDTO::Wrapper& dto);
 */
 
-GetProgectDTO::Wrapper GetProgectService::listAll(const GetProgectQuery::Wrapper& query)
+GetProgectPageDTO::Wrapper GetProgectService::listAll(const GetProgectQuery::Wrapper& query)
 {
 	// 构建返回对象
 	auto pages = GetProgectPageDTO::createShared();
@@ -54,22 +54,24 @@ GetProgectDTO::Wrapper GetProgectService::listAll(const GetProgectQuery::Wrapper
 	{
 		auto dto = GetProgectDTO::createShared();
 		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, pCode, SubjectCode, pType, SubjectType, pContent, SubjectContent, standard, SubjectStandard, enable, EnableFlag, note, Remark)
-			pages->addData(dto);
+		pages->addData(dto);
 
 	}
 	return pages;
 }
 
 //GetProgectDTO::Wrapper listSome(const uint64_t id);
-GetProgectDTO::Wrapper GetProgectService::listSome(uint64_t id){
-	auto pages = GetProgectPageDTO::createShared();
+GetProgectDetailDTO::Wrapper GetProgectService::listSome(uint64_t id){
+	auto pages = GetProgectDetailDTO::createShared();
 	GetProgectDAO dao;
 	list<dvSubjectDO> result = dao.selectById(id);
 	for (dvSubjectDO sub : result)
 	{
-		auto dto = GetProgectDTO::createShared();
+		auto dto = GetProgectDetailDTO::createShared();
 		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, pId, SubjectId);
-		pages->addData(dto);
+		//pages->addData(dto);
+		return dto;
+
 	}
-	return pages;
+	//return pages;
 }

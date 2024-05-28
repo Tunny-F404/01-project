@@ -32,7 +32,7 @@ GetProgectPageJsonVO::Wrapper GetProgectController::execGetProgect(const GetProg
 	auto result = service.listAll(query);
 	// 响应结果
 	auto jvo = GetProgectPageJsonVO::createShared();
-	jvo->success(result);
+	jvo->success(result);/////////////////result GetProgectPageDTO jvo GetProgectPageJsonVO
 	return jvo;
 }
 
@@ -45,7 +45,7 @@ GetProgectDetailJsonVO::Wrapper GetProgectController::execProgectDetail(const Ge
 	auto result = service.listSome(query->pId);
 	// 响应结果
 	auto jvo = GetProgectDetailJsonVO::createShared();
-	jvo->success(result);
+	jvo->success(result);///////////////result GetProgectDetailDTO jvo GetProgectDetailJsonVO
 	return jvo;
 }
 
