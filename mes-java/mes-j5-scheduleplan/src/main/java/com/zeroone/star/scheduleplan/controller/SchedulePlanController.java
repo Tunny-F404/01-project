@@ -68,7 +68,7 @@ public class SchedulePlanController implements SchedulePlanApis {
     @ApiOperation(value = "修改计划状态")
     @PutMapping("modify-plans-status")
     @Override
-    public JsonVO<Integer> modifySchPlanStatus(SchPlanDTO schPlanDTO) {
+    public JsonVO<Integer> modifySchPlanStatus(PlanDTO planDTO) {
         return null;
     }
 
