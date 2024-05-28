@@ -1,9 +1,11 @@
 package com.zeroone.star.orgstructure.service;
 
+import com.zeroone.star.orgstructure.entity.UserRoleDO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -57,13 +59,6 @@ public interface RoleService {
 
 
 
-
-    /**
-     * 取消授权用户角色
-     *
-     */
-    public int deleteAuthUser();
-
     /**
      * 批量取消授权用户角色
      *
@@ -72,4 +67,13 @@ public interface RoleService {
      * @return 结果
      */
     public int deleteAuthUsers(Long roleId, Long[] userIds);
+
+    /*
+    * 批量选择授权用户角色
+    * */
+    public int insertAuthUsers(Long roleId, Long[] userIds);
+
+
+
+    public ResponseEntity<byte[]> downloadExcel();
 }

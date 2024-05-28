@@ -1,6 +1,7 @@
 package com.zeroone.star.orgstructure.controller;
 
 
+import com.zeroone.star.orgstructure.entity.UserRoleDO;
 import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.dto.PageDTO;
@@ -17,8 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.management.relation.Role;
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 /**
@@ -35,8 +34,6 @@ import java.util.List;
 public class RoleController implements RoleApis {
     @Resource
     private RoleService roleServiceImpl;
-    @Resource
-    private EasyExcelComponent excel;
 
     /**
      * 获取角色名称列表
@@ -141,33 +138,16 @@ public class RoleController implements RoleApis {
         return JsonVO.fail(info);
     }
 
-    /*@Override
-    public JsonVO<List<RoleDTO>> queryAllocatedList(RoleDTO roleDTO, PageDTO<RoleDTO> pageDTO) {
-        return null;
-    }
-
-    @Override
-    public JsonVO<RoleDTO> addAuth(Long roleId, Long[] userIds) {
-        return null;
-    }
-
-    @Override
-    public JsonVO<List<RoleDTO>> cancelAuthUser(Long roleId, Long[] userIds) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<byte[]> export() {
-        return null;
-    }*/
     /*
      * 获取角色分配用户列表（条件+分页）
      * */
     @GetMapping("query-allocate-role")
     @ApiOperation("获取角色分配用户列表（条件+分页）")
-    public JsonVO<List<RoleDTO>> queryAllocatedList(@RequestBody RoleDTO roleDTO, @RequestBody PageDTO<RoleDTO> pageDTO) {
+    public JsonVO<List<RoleDTO>> queryAllocatedList(@RequestParam Long roleId) {
+        /*roleServiceImpl.getUsersByRole(roleId);*/
         return JsonVO.success(null);
     }
+
 
     /*
      * 添加授权
@@ -175,6 +155,7 @@ public class RoleController implements RoleApis {
     @PutMapping("addAuth")
     @ApiOperation("添加授权")
     public JsonVO<RoleDTO> addAuth(@RequestParam Long roleId, @RequestParam Long[] userIds) {
+        roleServiceImpl.insertAuthUsers(roleId, userIds);
         return JsonVO.success(null);
     }
 
@@ -182,21 +163,19 @@ public class RoleController implements RoleApis {
      * 取消授权（支持批量）
      * */
     @DeleteMapping("cancel")
-    @ApiOperation("取消授权")
-    public JsonVO<List<RoleDTO>> cancelAuthUser(@RequestParam Long roleId, @RequestParam Long[] userIds) {
-        return JsonVO.success(null);
+    @ApiOperation("批量取消授权")
+    public JsonVO<Integer> cancelAuthUsers(@RequestParam Long roleId, @RequestParam Long[] userIds) {
+        Integer result = roleServiceImpl.deleteAuthUsers(roleId, userIds);
+        return result > 0 ? JsonVO.success(result) : JsonVO.fail(result);
     }
 
     /*
      * 导出角色
      * */
-    @PostMapping("export")
+    @GetMapping(value = "export")
     @ApiOperation("导出角色")
     public ResponseEntity<byte[]> export() {
-
-        /*ByteArrayOutputStream out = new ByteArrayOutputStream();
-        excel.export("角色列表",out, RoleDTO.class,);*/
-        return new ResponseEntity<>(null, null);
+        return roleServiceImpl.downloadExcel();
     }
 
 }
