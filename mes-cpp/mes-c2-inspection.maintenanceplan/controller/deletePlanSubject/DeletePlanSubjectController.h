@@ -56,6 +56,7 @@ public: // 定义接口
 	
 	//1、测试plan表的删除前查询
 	// 定义点检/保养设备计划列表接口描述
+	/*
 	ENDPOINT_INFO(deletePlanQuery) {
 	// 定义接口标题
 	API_DEF_ADD_TITLE(ZH_WORDS_GETTER("deleteOP.summary.planDelete"));
@@ -146,6 +147,7 @@ public: // 定义接口
 
 
 	}
+	*/
 
 	// 2、dv_check_subject删除辅助查询
 	

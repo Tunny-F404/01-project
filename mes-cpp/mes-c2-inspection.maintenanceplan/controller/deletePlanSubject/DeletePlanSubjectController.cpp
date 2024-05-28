@@ -3,11 +3,74 @@
 //扩查询来辅助
 #include "../mes-c2-inspection.maintenanceplan/service/dv_check_plan/Dv_check_planService.h"
 #include "../mes-c2-inspection.maintenanceplan/service/dv_check_subject/Dv_check_subjectService.h"
+#include "../mes-c2-inspection.maintenanceplan/service/dv_check_machinery/Dv_check_machineryService.h"
 #include "../../domain/query/deletePlanSubject/DeletePlanSubjectQuery.h"
 
+bool allKeyExistIsCheckMachinery(const DeletePlanMachineryQuery::Wrapper& query)
+{
+	Dv_check_machineryService service;
+	// 查询数据
+	DeletePlanMachineryQueryDTO::Wrapper result = service.listAll(query);
+	// 响应结果
+	auto jvo = DeletePlanMachineryQueryJsonVO::createShared();
+	jvo->success(result);
+	auto jvoData = jvo->data;
+	auto record_idJvoData = jvoData->record_id;
+	auto tq001 = query->record_id;
+
+	if (record_idJvoData != nullptr)
+	{
+		cout << "数据表存在待删除id：" << tq001 << endl;
+		return true;
+	}
+	else
+	{
+		cout << "数据表没有待删除id：" << tq001 << endl;
+		return false;
+	}
+}
 BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanMachiner(const DeleteMachinerDTO::Wrapper& dto)
 {
-	return BooleanJsonVO::Wrapper();
+	auto jvo = BooleanJsonVO::createShared();
+	auto dtoItem = dto->item;
+	auto itemList = dtoItem.get();
+
+	for (std::list<oatpp::Int64>::iterator it = itemList->begin(); it != itemList->end(); ++it)
+	{
+		std::cout << *it << " ";//此处的*it大概能被当做id去使用
+		if (!(*it) || (*it) <= 0)
+		{
+			jvo->init(Boolean(false), RS_PARAMS_INVALID);//失败返回参数异常
+			return jvo;
+
+		}
+	}cout << endl;
+
+	//2、暂时不上锁
+
+	//3、存在性检测
+	for (std::list<oatpp::Int64>::iterator it = itemList->begin(); it != itemList->end(); ++it)
+	{
+		auto query_delete_machinery = DeletePlanMachineryQuery::createShared();
+		query_delete_machinery->setRecord_id(*it);
+		if (allKeyExistIsCheckMachinery(query_delete_machinery) == false)
+		{
+			jvo->init(Boolean(false), RS_FAIL);
+			return jvo;
+		}
+	}
+	//4、删除
+
+	for (std::list<oatpp::Int64>::iterator it = itemList->begin(); it != itemList->end(); ++it)
+	{
+
+		// 定义一个Service
+		Dv_check_machineryService service;
+		// 执行数据删除
+		service.dv_check_machineryRemoveData((*it).getValue(0));
+	}
+	jvo->init(Boolean(true), RS_SUCCESS);
+	return jvo;
 }
 
 bool allKeyExistIsCheckSubject(const DeletePlanSubjectQuery::Wrapper& query)
@@ -211,10 +274,7 @@ DeletePlanQueryJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanQuery(
 
 
 
-bool allKeyExistIsCheckMachinery()
-{
-	return true;
-}
+
 
 
 

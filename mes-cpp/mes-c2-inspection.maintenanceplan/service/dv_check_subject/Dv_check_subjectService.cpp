@@ -1,6 +1,4 @@
 #include "stdafx.h"
-
-
 //删除plan
 //返回值
 #include "../../domain/dto/deletePlanSubject/DeletePlanSubjectDTO.h"
@@ -10,10 +8,6 @@
 #include "../../service/dv_check_subject/Dv_check_subjectService.h"
 //DAO，DO在DAO里面包含过了
 #include "../../dao/dv_check_subject/Dv_check_subjectDAO.h"
-
-
-
-
 
 DeletePlanSubjectQueryDTO::Wrapper Dv_check_subjectService::listAll(const DeletePlanSubjectQuery::Wrapper& query)
 {
@@ -35,7 +29,6 @@ DeletePlanSubjectQueryDTO::Wrapper Dv_check_subjectService::listAll(const Delete
 	}
 	return pages;
 }
-
 
 bool Dv_check_subjectService::dv_check_subjectRemoveData(int64_t id)
 {

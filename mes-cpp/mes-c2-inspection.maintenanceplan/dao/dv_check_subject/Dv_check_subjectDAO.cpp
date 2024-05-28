@@ -10,7 +10,7 @@
 //---正式开始
 
 //先定义一个简化的宏
-#define SAMPLE_TERAM_PARSE_ID_DELETE_PLAN(query, sql) \
+#define SAMPLE_TERAM_PARSE_ID_DELETE_PLAN_SUBJECT(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \
 if (query->record_id) { \
@@ -24,7 +24,7 @@ std::list<DvCheckSubjectDO> Dv_check_subjectDAO::selectWithPage(const DeletePlan
 	stringstream sql;
 	//sql << "SELECT record_id,plan_id,subject_id,subject_code,subject_name FROM dv_check_subject";
 	sql << "SELECT * FROM dv_check_subject";
-	SAMPLE_TERAM_PARSE_ID_DELETE_PLAN(query, sql);
+	SAMPLE_TERAM_PARSE_ID_DELETE_PLAN_SUBJECT(query, sql);
 	Dv_check_subjectDeleteMapper mapper;
 	string sqlStr = sql.str();
 	return sqlSession->executeQuery<DvCheckSubjectDO, Dv_check_subjectDeleteMapper>(sqlStr, mapper, params);

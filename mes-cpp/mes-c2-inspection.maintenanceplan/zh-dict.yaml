@@ -155,4 +155,7 @@ deleteQuery:
   subjectId: 项目id
   subjectCode: 项目编码
   subjectName: 项目名称
+  machineryId: 项目id
+  machineryCode: 项目编码
+  machineryName: 项目名称
    

@@ -69,13 +69,13 @@ void Router::initRouter()
 	//ROUTER_SIMPLE_BIND(PlanSubjectController);//测试项，abf，暂时注释
 	ROUTER_SIMPLE_BIND(DeletePlanSubjectController);
 	//#TIP :系统扩展路由定义，写在这个后面
-	//ROUTER_SIMPLE_BIND(ExportPlanController);
-	//ROUTER_SIMPLE_BIND(DeviceListController);
-	//ROUTER_SIMPLE_BIND(MaintainProjController);
-	//ROUTER_SIMPLE_BIND(PlanSubjectController);
+	ROUTER_SIMPLE_BIND(ExportPlanController);
+	ROUTER_SIMPLE_BIND(DeviceListController);
+	ROUTER_SIMPLE_BIND(MaintainProjController);
+	ROUTER_SIMPLE_BIND(PlanSubjectController);
 	ROUTER_SIMPLE_BIND(MachineryPlanQueryController);
-	//ROUTER_SIMPLE_BIND(ModifyPlanController);
-	//ROUTER_SIMPLE_BIND(ModifyPlanStatusController);
+	ROUTER_SIMPLE_BIND(ModifyPlanController);
+	ROUTER_SIMPLE_BIND(ModifyPlanStatusController);
 
 
 }

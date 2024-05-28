@@ -159,6 +159,37 @@ class DeletePlanSubjectQueryDTO : public oatpp::DTO
 	}
 };
 
+//该DTO用于辅助删除dv_check_machinery表的查询
+class DeletePlanMachineryQueryDTO : public oatpp::DTO
+{
+	DTO_INIT(DeletePlanMachineryQueryDTO, DTO);
+
+	// 1、流水号
+	DTO_FIELD(UInt64, record_id);
+	DTO_FIELD_INFO(record_id) {
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.recordId");
+	}
+	// 2、计划ID
+	DTO_FIELD(UInt64, plan_id);
+	DTO_FIELD_INFO(plan_id) {
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.planId");
+	}
+	/// 3、设备id
+	DTO_FIELD(UInt64, machinery_id);
+	DTO_FIELD_INFO(machinery_id) {
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.machineryId");
+	}
+	// 4、设备编码
+	DTO_FIELD(String, machinery_code);
+	DTO_FIELD_INFO(machinery_code) {
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.machineryCode");
+	}
+	// 5、设备名称
+	DTO_FIELD(String, machinery_name);
+	DTO_FIELD_INFO(machinery_name) {
+		info->description = ZH_WORDS_GETTER("deleteQuery.planSubject.machineryName");
+	}
+};
 
 //
 ///**
