@@ -1,6 +1,6 @@
 package com.zeroone.star.project.j3.sysmanager;
 
-
+import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j3.dto.InsertDictTypeDTO;
 import com.zeroone.star.project.j3.vo.DictDataNameVO;
 import com.zeroone.star.project.j3.vo.DictTypeNameVO;
@@ -9,12 +9,20 @@ import java.util.List;
 import com.zeroone.star.project.j3.dto.SysDictDataDTO;
 import com.zeroone.star.project.j3.dto.dict.*;
 import com.zeroone.star.project.j3.query.dict.SysDictDataQuery;
+import com.zeroone.star.project.j3.query.dict.SysDictTypeModifyQuery;
 import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
+import com.zeroone.star.project.j3.vo.DictDataNameVO;
+import com.zeroone.star.project.j3.vo.DictTypeNameVO;
+import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 import com.zeroone.star.project.j3.query.dict.SysDictTypeModifyQuery;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 系统管理-字典管理相关接口
@@ -43,7 +51,7 @@ public interface DictionaryManageApis {
      * @param dto 新增数据
      * @return 新增数据的唯一编号
      */
-    JsonVO<Long> addDictType(@Validated InsertDictTypeDTO dto);
+    JsonVO<Long> addDictType(InsertDictTypeDTO dto);
 
     /**
      * 根据给定的字典类型获取对应的字典数据名称列表
@@ -77,20 +85,23 @@ public interface DictionaryManageApis {
      * 字典类型接口
      */
     // 查询字典类型列表
-    JsonVO<List<SysDictTypeListDTO>> listDictType(SysDictTypeQuery dictTypeQuery);
+    JsonVO<PageDTO<SysDictTypeListDTO>> listDictType(@Valid SysDictTypeQuery dictTypeQuery);
 
     // 查询字典类型详情
-    JsonVO<SysDictTypeDetailDTO> getDictType(Long dictId);
 
-    ResponseEntity<byte[]> exportDictType(SysDictTypeExportDTO sysDictTypeExportDTO);
+    JsonVO<SysDictTypeDetailDTO> getDictType(@NotNull(message = "不能为空") Long dictId);
+
+
+    ResponseEntity<byte[]> exportDictData(@Valid SysDictDataExportDTO sysDictDataExportDTO);
 
 
     /**
      *  字典数据接口
      */
     // 查询字典数据列表
-    JsonVO<List<SysDictDataListDTO>> listDictData(SysDictDataQuery dictDataQuery);
+    JsonVO<PageDTO<SysDictDataListDTO>> listDictData(@Valid SysDictDataQuery dictDataQuery);
 
     // 查询字典数据详情
-    JsonVO<SysDictDataDetailDTO> getDictData(Long dictCode);
+
+    JsonVO<SysDictDataDetailDTO> getDictData(@NotNull(message = "不能为空") Long dictCode);
 }

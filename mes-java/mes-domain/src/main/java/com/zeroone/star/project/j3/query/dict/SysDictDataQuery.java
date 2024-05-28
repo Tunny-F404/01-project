@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -21,6 +23,7 @@ public class SysDictDataQuery extends PageQuery implements Serializable {
     @ApiModelProperty(value = "字典标签", example = "男")
     private String dictLabel;
 
+    @NotBlank(message = "字典名称不能为空")
     @ApiModelProperty(value = "字典名称", example = "sys_user_sex")
     private String dictType;
 
