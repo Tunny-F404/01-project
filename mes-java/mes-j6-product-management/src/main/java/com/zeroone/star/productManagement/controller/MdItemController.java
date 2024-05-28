@@ -1,5 +1,6 @@
 package com.zeroone.star.productManagement.controller;
 
+import com.zeroone.star.productManagement.entity.ExportMdItem;
 import com.zeroone.star.productManagement.entity.MdItem;
 import com.zeroone.star.productManagement.service.IMdItemService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
@@ -37,7 +38,7 @@ public class MdItemController implements MdItemApis {
     @PostMapping(value = "/export", produces = "application/octet-stream")
     @ApiOperation(value = "导出物料产品列表")
     public ResponseEntity<byte[]> exportToExcel(MdItemQuery mdItemQuery){
-        List<MdItem> items = iMdItemService.selectMdItemList(mdItemQuery);
+        List<ExportMdItem> items = iMdItemService.selectMdItemList(mdItemQuery);
         return iMdItemService.exportToExcel(items);
     }
     /**

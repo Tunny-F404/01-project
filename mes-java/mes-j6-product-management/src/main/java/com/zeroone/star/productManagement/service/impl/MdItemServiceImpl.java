@@ -2,6 +2,7 @@ package com.zeroone.star.productManagement.service.impl;
 
 import cn.hutool.core.date.DateTime;
 import com.alibaba.excel.EasyExcel;
+import com.zeroone.star.productManagement.entity.ExportMdItem;
 import com.zeroone.star.productManagement.entity.MdItem;
 import com.zeroone.star.productManagement.mapper.MdItemMapper;
 import com.zeroone.star.productManagement.service.IMdItemService;
@@ -52,7 +53,7 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @param mdItemQuery 查询条件
      * @return 物料列表
      */
-    public List<MdItem> selectMdItemList(MdItemQuery mdItemQuery) {
+    public List<ExportMdItem> selectMdItemList(MdItemQuery mdItemQuery) {
 
         return mdItemMapper.selectMdItemList(mdItemQuery);
     }
@@ -62,12 +63,12 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @param items 物料数据
      * @return 返回响应
      */
-    public ResponseEntity<byte[]> exportToExcel(List<MdItem> items) {
+    public ResponseEntity<byte[]> exportToExcel(List<ExportMdItem> items) {
         try {
             // 构建一个输出流
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             // 导出数据到输出流
-            excel.export("物料产品列表", out, MdItem.class, items);
+            excel.export("物料产品列表", out, ExportMdItem.class, items);
             // 获取字节数据
             byte[] bytes = out.toByteArray();
             out.close();
@@ -92,16 +93,16 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
     private MdItem initTemplate() {
         MdItem item = new MdItem();
         item.setItemId(null);
-        item.setItemCode("NOT NULL");
-        item.setItemName("NOT NULL");
+        item.setItemCode("必填");
+        item.setItemName("必填");
         item.setSpecification("");
-        item.setUnitOfMeasure("NOT NULL");
-        item.setItemOrProduct("NOT NULL");
+        item.setUnitOfMeasure("必填");
+        item.setItemOrProduct("必填");
         item.setItemTypeId(null);
         item.setItemTypeCode("");
         item.setItemTypeName("");
-        item.setEnableFlag("NOT NULL");
-        item.setSafeStockFlag("NOT NULL");
+        item.setEnableFlag("必填");
+        item.setSafeStockFlag("必填");
         item.setMinStock(null);
         item.setMaxStock(null);
         item.setRemark("");
@@ -198,9 +199,9 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @return 结果
      */
     private void insertMdItem(MdItem mdItem) throws Exception {
-//        UserDTO userDTO  = userHolder.getCurrentUser();
-//        mdItem.setCreateBy(userDTO.getUsername());
-//        mdItem.setCreateTime(DateTime.now().toLocalDateTime());
+        UserDTO userDTO  = userHolder.getCurrentUser();
+        mdItem.setCreateBy(userDTO.getUsername());
+        mdItem.setCreateTime(DateTime.now().toLocalDateTime());
         mdItemMapper.insertMdItem(mdItem);
     }
 
@@ -211,9 +212,9 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @return 结果
      */
     private void updateMdItem(MdItem mdItem) throws Exception {
-//        UserDTO userDTO  = userHolder.getCurrentUser();
-//        mdItem.setUpdateBy(userDTO.getUsername());
-//        mdItem.setUpdateTime(DateTime.now().toLocalDateTime());
+        UserDTO userDTO  = userHolder.getCurrentUser();
+        mdItem.setUpdateBy(userDTO.getUsername());
+        mdItem.setUpdateTime(DateTime.now().toLocalDateTime());
         mdItemMapper.updateMdItem(mdItem);
     }
 

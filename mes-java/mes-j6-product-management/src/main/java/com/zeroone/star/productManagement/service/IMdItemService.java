@@ -1,6 +1,7 @@
 package com.zeroone.star.productManagement.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zeroone.star.productManagement.entity.ExportMdItem;
 import com.zeroone.star.productManagement.entity.MdItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j6.product_management.query.MdItemQuery;
@@ -19,9 +20,9 @@ import java.util.List;
  * @since 2024-05-20
  */
 public interface IMdItemService extends IService<MdItem> {
-    List<MdItem> selectMdItemList(MdItemQuery query);
+    List<ExportMdItem> selectMdItemList(MdItemQuery query);
 
-    ResponseEntity<byte[]> exportToExcel(List<MdItem> items);
+    ResponseEntity<byte[]> exportToExcel(List<ExportMdItem> items);
 
     ResponseEntity<byte[]> downloadTemplate();
 
