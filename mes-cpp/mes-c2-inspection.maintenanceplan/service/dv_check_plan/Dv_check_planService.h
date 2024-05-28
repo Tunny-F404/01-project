@@ -34,6 +34,9 @@ public:
 
 	//ÕýÊ½µÄ
 	DeletePlanQueryDTO::Wrapper Dv_check_planService::listAll(const DeletePlanQuery::Wrapper& query);
+	bool dv_check_planRemoveData(int64_t id);
+	bool dv_check_machineryRemoveDataIDP(int64_t idp);
+	bool dv_check_subjectRemoveDataIDP(int64_t idp);
 };
 
 #endif // !_SAMPLE_SERVICE_

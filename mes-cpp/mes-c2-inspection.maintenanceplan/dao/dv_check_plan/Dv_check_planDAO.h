@@ -6,7 +6,9 @@
 #define _DV__CHECK__PLAN_DAO_
 #include "BaseDAO.h"
 #include "../../domain/do/dv_check_plan/Dv_check_planDO.h"
-#include "../../domain/query/query-ForeverOMC/MachineryPlanQuery.h"
+//#include "../../domain/query/query-ForeverOMC/MachineryPlanQuery.h"
+
+#include "../../domain/query/deletePlanSubject/DeletePlanSubjectQuery.h"
 
 /**
  * 示例表数据库操作实现
@@ -33,10 +35,12 @@ public:
 	int update(const Dv_check_planDO& uObj);
 	*/
 	// 通过ID删除数据
-	int deleteById(uint64_t id);
+	int dv_check_planDeleteById(int64_t id);
+	int dv_check_machineryDeleteByIdPlan(int64_t idp);
+	int dv_check_subjectDeleteByIdPlan(int64_t idp);
 	//---为了进行删除的辅助查询，重载一下用用
 
-	std::list<Dv_check_planDO> Dv_check_planDAO::selectWithPage(const MachineryPlanDetailsQuery::Wrapper& query);
+	std::list<Dv_check_planDO> Dv_check_planDAO::selectWithPage(const DeletePlanQuery::Wrapper& query);
 
 	
 };

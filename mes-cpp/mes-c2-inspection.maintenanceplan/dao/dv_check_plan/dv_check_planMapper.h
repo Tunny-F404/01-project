@@ -46,4 +46,21 @@ public:
 	}
 };
 
+
+class Dv_check_planDeleteMapper : public Mapper<Dv_check_planDO>
+{
+public:
+	Dv_check_planDO mapper(ResultSet* resultSet) const override
+	{
+		Dv_check_planDO data;
+		data.setPlan_id(resultSet->getUInt64(1));
+		data.setPlan_code(resultSet->getString(2));
+		data.setPlan_name(resultSet->getString(3));
+		//data.set(resultSet->getString());
+		//data.setSex(resultSet->getString(3));
+		//data.setAge(resultSet->getInt(4));
+		return data;
+	}
+};
+
 #endif // !_DV__CHECK__PLAN_MAPPER_
