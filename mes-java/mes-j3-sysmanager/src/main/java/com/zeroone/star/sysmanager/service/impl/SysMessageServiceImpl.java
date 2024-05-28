@@ -65,8 +65,17 @@ interface MsMessageMapper {
 @Service
 public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMessage> implements ISysMessageService {
 
-    @Autowired
-    private SysMessageMapper sysMessageMapper;
+    @Resource
+    SysMessageMapper sysMessageMapper;
+
+    @Resource
+    MsMessageMapper msMessageMapper;
+
+    @Resource
+    SysUserMapper sysUserMapper;
+
+    @Resource
+    UserHolder userHolder;
 
     /**
      * 获取消息详情
@@ -132,18 +141,6 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
     }
 
 
-
-    @Resource
-    SysMessageMapper sysMessageMapper;
-
-    @Resource
-    MsMessageMapper msMessageMapper;
-
-    @Resource
-    SysUserMapper sysUserMapper;
-
-    @Resource
-    UserHolder userHolder;
 
 
 

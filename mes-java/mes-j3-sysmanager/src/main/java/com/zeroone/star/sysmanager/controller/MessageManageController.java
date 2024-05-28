@@ -67,7 +67,7 @@ public class MessageManageController implements MessageManageApis {
     @GetMapping("/news/{id}")
     @ApiOperation(value = "消息详情")
     public JsonVO<NewsVO> getNewsById(@PathVariable Long id) {
-        NewsVO newsVO =messageManageService.getNewsById(id);
+        NewsVO newsVO =ISysMessageService.getNewsById(id);
         return JsonVO.success(newsVO);
     }
 
@@ -79,7 +79,7 @@ public class MessageManageController implements MessageManageApis {
     @GetMapping("/news/list")
     @ApiOperation(value = "消息列表")
     public JsonVO<PageDTO<NewsPageVO>> queryNewsList(@RequestBody NewsPageQuery newsPageQuery) {
-        PageDTO<NewsPageVO> page= messageManageService.queryNewsList(newsPageQuery);
+        PageDTO<NewsPageVO> page= ISysMessageService.queryNewsList(newsPageQuery);
         return JsonVO.success(page);
     }
 
