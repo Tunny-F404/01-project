@@ -1,5 +1,6 @@
 package com.zeroone.star.scheduleplan.service;
 
+import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.vo.JsonVO;
@@ -30,7 +31,7 @@ public interface ICalPlanService extends IService<CalPlan> {
      * @param condition  修改状态模型
      * @author sailing
      */
-    boolean  modifySchPlanStatus(SchPlanDTO condition);
+    boolean  modifySchPlanStatus(PlanDTO condition);
 
     /**
      * 导出排班计划

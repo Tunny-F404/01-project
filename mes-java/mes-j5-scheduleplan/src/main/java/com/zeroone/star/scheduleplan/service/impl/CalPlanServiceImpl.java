@@ -2,13 +2,8 @@ package com.zeroone.star.scheduleplan.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
-import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
-import com.zeroone.star.project.j5.dto.teamsettings.AddTeamDTO;
-import com.zeroone.star.project.j5.dto.teamsettings.TeamDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
-import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.scheduleplan.entity.CalPlan;
-import com.zeroone.star.scheduleplan.entity.CalTeam;
 import com.zeroone.star.scheduleplan.mapper.CalPlanMapper;
 import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import org.mapstruct.Mapper;
@@ -30,6 +25,7 @@ import java.util.List;
 interface MsPlanMapper {
     /**
      * 实体类转DTO
+     *
      * @param calPlan 计划do对象
      * @return 计划dto对象
      */
@@ -37,16 +33,18 @@ interface MsPlanMapper {
 
     /**
      * 计划DTO转实体类
+     *
      * @param planDTO
      * @return
      */
-    CalPlan  PlanDTOToplan( PlanDTO planDTO);
+    CalPlan PlanDTOToplan(PlanDTO planDTO);
 }
+
 @Service
 public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> implements ICalPlanService {
 
     @Resource
-    CalPlanMapper calPlanMapper;
+    MsPlanMapper msPlanMapper;
 
     /**
      * 删除排班计划(可批量删除)
@@ -55,19 +53,21 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
      */
     @Override
     public boolean removeSchPlan(List<Long> rems) {
-        return calPlanMapper.deleteBatchIds(rems)>0;
+        return baseMapper.deleteBatchIds(rems) > 0;
     }
 
     @Override
-    public boolean modifySchPlanStatus(SchPlanDTO condition) {
+    public boolean modifySchPlanStatus(PlanDTO condition) {
         //1.查询当前数据是否存在
         CalPlan modifyPlan = baseMapper.selectById(condition.getPlanId());
         //2.数据不存在,修改失败,返回false
-        if (modifyPlan==null){
+        if (modifyPlan == null) {
             return false;
         }
         //3.存在则执行修改操作---将DTO转为DO
-return false;
+        CalPlan calPlan = msPlanMapper.PlanDTOToplan(condition);
+
+        return baseMapper.updateById(calPlan) > 0;
     }
 
     @Override
