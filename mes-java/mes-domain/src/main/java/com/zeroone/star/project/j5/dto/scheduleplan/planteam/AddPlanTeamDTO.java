@@ -33,6 +33,6 @@ public class AddPlanTeamDTO {
     private String teamName;
     @ApiModelProperty(value = "创建时间", example = "2022-08-21 15:59:35")
     private LocalDateTime createTime;
-    @ApiModelProperty(value = "备注", example = "")
+    @ApiModelProperty(value = "备注")
     private String remark;
 }

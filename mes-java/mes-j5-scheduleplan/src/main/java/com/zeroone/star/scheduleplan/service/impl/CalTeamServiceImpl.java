@@ -33,7 +33,7 @@ public class CalTeamServiceImpl extends ServiceImpl<CalTeamMapper, CalTeam> impl
         List<CalTeam> calTeams = baseMapper.selectList(queryWrapper);
 
         // 将列表转换为HashMap
-        HashMap<Long, CalTeam> calTeamMap = new HashMap<>();
+        HashMap<Long, CalTeam> calTeamMap = new HashMap<>(Math.max((int) (distinctCount / .75f) + 1, 16));
         for (CalTeam calTeam : calTeams) {
             calTeamMap.put(calTeam.getTeamId(), calTeam);
         }
