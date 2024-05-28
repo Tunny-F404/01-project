@@ -17,6 +17,7 @@
  limitations under the License.
 */
 #include "stdafx.h"
+#include "oatpp/core/data/mapping/ObjectMapper.hpp"
 #include "DeviceManageService.h"
 #include "../../dao/device-manage/DeviceMangeDAO.h"
 #include "../lib-common/include/ExcelComponent.h"
@@ -26,11 +27,14 @@
 
 bool DeviceManageService::updateData(const DeviceManageDTO::Wrapper& dto)
 {
+
+
 	// 组装DO数据
 	DeviceManageDO data;
 
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, SubjectId, subjectId, SubjectCode, subjectCode, SubjectName, subjectName, 
 		SubjectType, subjectType, SubjectContent, subjectContent, SubjectStandard, subjectStandard, EnableFlag, enableFlag);
+
 
 	// 执行数据修改
 	DeviceManageDAO dao;
