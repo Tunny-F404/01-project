@@ -10,7 +10,7 @@ public interface ItemTypeApis {
     JsonVO<List<ItemTypeDTO>> queryItemTypeList(ItemTypeQuery query);
     JsonVO<ItemTypeDTO> getItemType(Long itemTypeId);
     JsonVO<List<ItemTypeDTO>> treeSelect(ItemTypeQuery itemTypeQuery);
-    JsonVO<Void> addItemType(ItemTypeDTO itemTypeDTO);
-    JsonVO<Void> updateItemType(ItemTypeDTO itemTypeDTO);
-    JsonVO<Void> deleteItemType(Long itemTypeId);
+    JsonVO<String> addItemType(ItemTypeDTO itemTypeDTO);
+    JsonVO<String> updateItemType(ItemTypeDTO itemTypeDTO);
+    JsonVO<String> deleteItemType(Long itemTypeId);
 }
