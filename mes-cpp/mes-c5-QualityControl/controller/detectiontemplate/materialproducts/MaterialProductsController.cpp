@@ -41,7 +41,7 @@ Uint64JsonVO::Wrapper MaterialProductsController::execModifyMaterialProducts(con
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!dto->templateId || dto->templateId <= 0)
+	if (!dto->record_id || dto->record_id <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -50,22 +50,22 @@ Uint64JsonVO::Wrapper MaterialProductsController::execModifyMaterialProducts(con
 	MaterialProductsService service;
 	// 执行数据修改
 	if (service.updateMaterialProducts(dto)) {
-		jvo->success(dto->templateId);
+		jvo->success(dto->record_id);
 	}
 	else
 	{
-		jvo->fail(dto->templateId);
+		jvo->fail(dto->record_id);
 	}
 	// 响应结果
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper MaterialProductsController::execRemoveMaterialProduct(const UInt64& templateId)
+Uint64JsonVO::Wrapper MaterialProductsController::execRemoveMaterialProduct(const UInt64& record_id)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!templateId || templateId <= 0)
+	if (!record_id || record_id <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -73,12 +73,12 @@ Uint64JsonVO::Wrapper MaterialProductsController::execRemoveMaterialProduct(cons
 	// 定义一个Service
 	MaterialProductsService service;
 	// 执行数据删除
-	if (service.deleteByRecordId(templateId.getValue(0))) {
-		jvo->success(templateId);
+	if (service.deleteByRecordId(record_id.getValue(0))) {
+		jvo->success(record_id);
 	}
 	else
 	{
-		jvo->fail(templateId);
+		jvo->fail(record_id);
 	}
 	// 响应结果
 	return jvo;
@@ -90,13 +90,13 @@ Uint64JsonVO::Wrapper MaterialProductsController::execAddMaterialProducts(const 
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if (!dto->templateId || !dto->itemCode || !dto->itemName)
+	if (!dto->record_id || !dto->item_code || !dto->item_name)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->templateId < 0 || dto->itemName->empty())
+	if (dto->record_id < 0 || dto->item_name->empty())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -105,13 +105,13 @@ Uint64JsonVO::Wrapper MaterialProductsController::execAddMaterialProducts(const 
 	// 定义一个Service
 	MaterialProductsService service;
 	// 执行数据新增
-	uint64_t templateId = service.saveMaterialProducts(dto);
-	if (templateId > 0) {
-		jvo->success(UInt64(templateId));
+	uint64_t record_id = service.saveMaterialProducts(dto);
+	if (record_id > 0) {
+		jvo->success(UInt64(record_id));
 	}
 	else
 	{
-		jvo->fail(UInt64(templateId));
+		jvo->fail(UInt64(record_id));
 	}
 	//响应结果
 	return jvo;

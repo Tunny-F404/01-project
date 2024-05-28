@@ -8,60 +8,63 @@
 class MaterialProductsDTO : public oatpp::DTO
 {
 	DTO_INIT(MaterialProductsDTO, DTO);
-	// 物料编号
-	DTO_FIELD(UInt64, templateId);
-	DTO_FIELD_INFO(templateId) {
-		info->description = ZH_WORDS_GETTER("MaterialProducts.field.templateId");
+	// 记录ID
+	DTO_FIELD(UInt64, record_id);
+	DTO_FIELD_INFO(record_id) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.record_id");
 	}
-	// 模板编码
-	DTO_FIELD(Int32, itemCode);
-	DTO_FIELD_INFO(itemCode) {
-		info->description = ZH_WORDS_GETTER("MaterialProducts.field.itemCode");
+	// 产品物料编码
+	DTO_FIELD(String, item_code);
+	DTO_FIELD_INFO(item_code) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.item_code");
 	}
-	// 模板名称
-	DTO_FIELD(String, itemName);
-	DTO_FIELD_INFO(itemName) {
-		info->description = ZH_WORDS_GETTER("MaterialProducts.field.itemName");
+	// 产品物料名称
+	DTO_FIELD(String, item_name);
+	DTO_FIELD_INFO(item_name) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.item_name");
 	}
-	// 模板规格
+	// 规格型号
 	DTO_FIELD(String, specification);
 	DTO_FIELD_INFO(specification) {
 		info->description = ZH_WORDS_GETTER("MaterialProducts.field.specification");
 	}
+	
 	// 单位
-	DTO_FIELD(String, unitOfmeasure);
-	DTO_FIELD_INFO(unitOfmeasure) {
-		info->description = ZH_WORDS_GETTER("MaterialProducts.field.unitOfmeasure");
+	DTO_FIELD(String, unit_of_measure);
+	DTO_FIELD_INFO(unit_of_measure) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.unit_of_measure");
 	}
-	// 数量检测
-	DTO_FIELD(String, quantityCheck);
-	DTO_FIELD_INFO(quantityCheck) {
-		info->description = ZH_WORDS_GETTER("MaterialProducts.field.quantityCheck");
+
+	// 最低检测数
+	DTO_FIELD(UInt64, quantity_check);
+	DTO_FIELD_INFO(quantity_check) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.quantity_check");
 	}
-	// 致命缺陷数量
-	DTO_FIELD(String, crRate);
-	DTO_FIELD_INFO(crRate) {
-		info->description = ZH_WORDS_GETTER("MaterialProducts.field.crRate");
+
+	// 最大不合格数
+	DTO_FIELD(UInt64, quantity_unqualified);
+	DTO_FIELD_INFO(quantity_unqualified) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.quantity_unqualified");
 	}
-	// 严重缺陷数量
-	DTO_FIELD(String, majRate);
-	DTO_FIELD_INFO(majRate) {
-		info->description = ZH_WORDS_GETTER("MaterialProducts.field.majRate");
+	// 最大致命缺陷率
+	DTO_FIELD(Float64, cr_rate);
+	DTO_FIELD_INFO(cr_rate) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.cr_rate");
 	}
-	// 轻微缺陷数量
-	DTO_FIELD(String, minRate);
-	DTO_FIELD_INFO(minRate) {
-		info->description = ZH_WORDS_GETTER("MaterialProducts.field.minRate");
+	// 最大严重缺陷率
+	DTO_FIELD(Float64, maj_rate);
+	DTO_FIELD_INFO(maj_rate) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.maj_rate");
+	}
+	// 最大轻微缺陷率
+	DTO_FIELD(Float64, min_rate);
+	DTO_FIELD_INFO(min_rate) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.min_rate");
 	}
 	// 备注
 	DTO_FIELD(String, remark);
 	DTO_FIELD_INFO(remark) {
 		info->description = ZH_WORDS_GETTER("MaterialProducts.field.remark");
-	}
-	// 创建时间
-	DTO_FIELD(String, createTime);
-	DTO_FIELD_INFO(createTime) {
-		info->description = ZH_WORDS_GETTER("MaterialProducts.field.createTime");
 	}
 
 };
