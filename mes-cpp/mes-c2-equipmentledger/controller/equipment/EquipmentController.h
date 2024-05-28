@@ -67,8 +67,8 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(EquipmentDetailJsonVO);
 		// 定义其他查询参数描述
 		
-		//设备编码
-		API_DEF_ADD_QUERY_PARAMS(String, "eId", ZH_WORDS_GETTER("equipment.fields.id"), "english", true);
+		//设备ID
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "eId", ZH_WORDS_GETTER("equipment.fields.id"),1, true);
 	}
 	// 2 定义设备详情查询接口处理
 	ENDPOINT(API_M_GET, "/equipment-ledger/query-detail", queryEquipmentDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {

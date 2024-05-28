@@ -19,41 +19,96 @@
 
 #include "stdafx.h"
 #include "EquipmentController.h"
+#include"service/equipment/EquipmentService.h"
 
 EquipmentPageJsonVO::Wrapper EquipmentController::execEquipment(const EquipmentQuery::Wrapper& query)
 {
-	return {};
+	// 定义一个Service
+	EquipmentService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = EquipmentPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 EquipmentDetailJsonVO::Wrapper EquipmentController::execEquipmentDetail(const EquipmentDetailQuery::Wrapper& query)
 {
-	auto res = EquipmentDetailJsonVO::createShared();
-	auto equipmentDetail = EquipmentDetailDTO::createShared();
-	
-	equipmentDetail->eCode = "123";
-	equipmentDetail->brand = "123";
-	equipmentDetail->createtime = "2014";
-	equipmentDetail->eId = 1;
-	equipmentDetail->eName = "123";
-	equipmentDetail->note = "123";
-	equipmentDetail->spec = "123";
-	equipmentDetail->status = "123";
-	equipmentDetail->tName = "123";
-	
-	res->success(equipmentDetail);
-	return res;
+	// 定义一个Service
+	EquipmentService service;
+	// 查询数据
+	auto result = service.getDetail(query);
+	// 响应结果
+	auto jvo = EquipmentDetailJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 Uint64JsonVO::Wrapper EquipmentController::execAddEquipment(const addEquipmentDTO::Wrapper& dto)
 {
-	auto res = Uint64JsonVO::createShared();
-	res->success(true);
-	return res;
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验
+	if (!dto->eCode || !dto->eName || !dto->brand || !dto->tName || !dto->spec || !dto->workshopName|| !dto->note)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->eCode->empty() || dto->eName->empty()  || dto->tName->empty() || dto->workshopName->empty() )
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	EquipmentService service;
+	// 执行数据新增
+	uint64_t id = service.saveData(dto);
+	if (id > 0) 
+	{
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }
 
 Uint64JsonVO::Wrapper EquipmentController::executeModifyEquipment(const modifyEquipmentDTO::Wrapper& dto)
 {
-	auto res = Uint64JsonVO::createShared();
-	res->success(true);
-	return res;
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验
+	if (!dto->eId || !dto->eCode || !dto->eName || !dto->brand || !dto->tName || !dto->spec || !dto->workshopName || !dto->note)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->eId<0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	EquipmentService service;
+	// 执行数据
+	uint64_t id = service.modifyData(dto);
+	if (id > 0)
+	{
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }

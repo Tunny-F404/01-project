@@ -46,7 +46,7 @@ class EquipmentDetailQuery : public  oatpp::DTO
 {
 	DTO_INIT(EquipmentDetailQuery, DTO);
 	//Ö÷¼ü
-	API_DTO_FIELD_DEFAULT(String, eId, ZH_WORDS_GETTER("equipment.fields.id"));
+	API_DTO_FIELD_DEFAULT(UInt64, eId, ZH_WORDS_GETTER("equipment.fields.id"));
 	
 };
 

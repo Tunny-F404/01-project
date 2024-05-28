@@ -79,16 +79,31 @@ class addEquipmentDTO :public oatpp::DTO
 /**
 * 定义一个设备详情传输对象
 */
-class EquipmentDetailDTO : public EquipmentDTO
+class EquipmentDetailDTO : public oatpp::DTO
 {
-	DTO_INIT(EquipmentDetailDTO, EquipmentDTO);
+	DTO_INIT(EquipmentDetailDTO, DTO);
+	//设备ID
+	API_DTO_FIELD(UInt64, eId, ZH_WORDS_GETTER("equipment.fields.id"), true, 1);
+	//设备编码
+	API_DTO_FIELD(String, eCode, ZH_WORDS_GETTER("equipment.fields.ecode"), true, "01star");
+	//设备名称
+	API_DTO_FIELD(String, eName, ZH_WORDS_GETTER("equipment.fields.ename"), true, "QQQQQ");
+	//品牌
+	API_DTO_FIELD(String, brand, ZH_WORDS_GETTER("equipment.fields.brand"), true, "QW");
+	//规格型号
+	API_DTO_FIELD(String, spec, ZH_WORDS_GETTER("equipment.fields.spec"), true, "Q1001");
+	//所属车间ID
+	API_DTO_FIELD(UInt64, workshopId, ZH_WORDS_GETTER("equipment.fields.workshopid"), true, 2);
+	//所属车间编码
+	API_DTO_FIELD(String, workshopCode, ZH_WORDS_GETTER("equipment.fields.workshopcode"), true, "w1");
+	//所属车间名称
+	API_DTO_FIELD(String, workshopName, ZH_WORDS_GETTER("equipment.fields.workshopname"), true, "w1");
 	//设备类型Id
-	API_DTO_FIELD(String, tId, ZH_WORDS_GETTER("equipment.fields.tid"), true, "0001");
+	API_DTO_FIELD(UInt64, tId, ZH_WORDS_GETTER("equipment.fields.tid"), true, 1);
 	//设备类型编码
 	API_DTO_FIELD(String, tCode, ZH_WORDS_GETTER("equipment.fields.tcode"), true, "0001");
 	//设备类型名称
 	API_DTO_FIELD(String, tName, ZH_WORDS_GETTER("equipment.fields.tname"), true, "0001");
-
 	//备注
 	API_DTO_FIELD(String, note, ZH_WORDS_GETTER("equipment.fields.note"), true, "sucess");
 };
