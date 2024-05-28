@@ -42,3 +42,4 @@ productionprocess:
     process_code: 工序编号
     item_code: 物料编号
     route_id: 工艺路线ID
+    next_process_code: 下一个工序编号
