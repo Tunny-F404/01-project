@@ -22,7 +22,7 @@ public class ShiftPlanAddDTO {
     @ApiModelProperty(value="计划id", example = "1")
     private Long planId;
     @ApiModelProperty(value="班次序号", example="2")
-    private Long orderNum;
+    private Integer orderNum;
     @ApiModelProperty(value="班次名称", example="白班")
     private String shiftName;
     @ApiModelProperty(value="开始时间", example="8:00")

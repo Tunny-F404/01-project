@@ -8,9 +8,9 @@ import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanAddDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanModifyDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
-import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.zeroone.star.scheduleplan.entity.CalShift;
+import com.zeroone.star.scheduleplan.mapper.CalPlanMapper;
 import com.zeroone.star.scheduleplan.mapper.CalShiftMapper;
 import com.zeroone.star.scheduleplan.service.ICalShiftService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -18,6 +18,7 @@ import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -57,51 +58,71 @@ public class CalShiftServiceImpl extends ServiceImpl<CalShiftMapper, CalShift> i
 
     @Resource
     msCalShiftPlanMapper msCalShiftPlanMapper;
+    @Resource
+    CalPlanMapper calPlanMapper;
     @Override
     public int addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto) {
-        //查找数据库当前planId
-        //CalPlan existingCalPlan = baseMapper.selectById(shiftPlanAddDto.getPlanId());
-        //System.out.println(existingCalPlan);
+        //根据planId查找calPlan表
+        CalPlan existingCalPlan = calPlanMapper.selectById(shiftPlanAddDto.getPlanId());
+        System.out.println("查询calPlan表");
+        System.out.println(existingCalPlan);
 
-        //1、判断新添加的序号是否存在
-        //if(existingCalPlan != null){
-        //    return ResultStatus.FAIL;
-        //}
+        //根据shiftId查找calShift表shiftList
+        List<CalShift> calShiftList = baseMapper.selectList(new QueryWrapper<CalShift>().eq("plan_id", shiftPlanAddDto.getPlanId()));
+        System.out.println("查询calShiftList");
+        System.out.println(calShiftList);
 
-        //shiftType=SINGLE && count>0 返回错误提示：轮班方式为 白班 时只能有一个班次！
+        //排班计划的种类
+        String shiftType = null;
+        //统计calShiftList的数量
+        int count = calShiftList.size();
 
-        //shiftType=SHIFT_TWO && count>1 返回错误提示：轮班方式为 两班倒 时只能有两个班次！
+        //1、判断查询对象是否存在
+        if(existingCalPlan == null){
+            System.out.println("排班计划为空，无法添加");
+        } else {
+            //查询calPlan表的shiftType
+            shiftType = existingCalPlan.getShiftType();
+        }
 
-        //shiftType=SHIFT_THREE && count>2 返回错误提示：轮班方式为 三班倒 时只能有三个班次！
+        //2、判断排班计划的排班种类是否为空
+        // 2.1、判断shiftType是否与count数量对应
+        if(shiftType == null){
+            System.out.println("排班种类为空，无法添加");
+        }else if (shiftType.equals("SINGLE") && count>0){
+            System.out.println("轮班方式为 白班 时只能有一个班次！");
+        } else if (shiftType.equals("SHIFT_TWO") && count>1){
+            System.out.println("轮班方式为 两班倒 时只能有两个班次！");
+        } else if (shiftType.equals("SHIFT_THREE") && count>2){
+            System.out.println("轮班方式为 三班倒 时只能有三个班次！");
+        }
 
-        //2、判断是否重复
-        System.out.println(baseMapper.selectList(new QueryWrapper<CalShift>().eq("plan_id", shiftPlanAddDto.getPlanId())));
-        //序号不存在，且没有达到上限，新添加数据
-//        CalShift calShift = msCalShiftPlanMapper.addShiftPlanToShiftPlan(shiftPlanAddDto);
-//        //返回修改的行数
-//        return baseMapper.insert(calShift);
+        //3、判断添加的orderNum是否在对应calPlan下已经存在
+        boolean orderNumExisting = false;
+        for(CalShift calShift : calShiftList){
+            if(calShift.getOrderNum().equals(shiftPlanAddDto.getOrderNum())) {
+                orderNumExisting = true;
+                break;
+            }
+        }
+
+        //添加数据
+        if(!orderNumExisting){
+            //执行添加数据
+            CalShift calShift = msCalShiftPlanMapper.addShiftPlanToShiftPlan(shiftPlanAddDto);
+            return baseMapper.insert(calShift);
+        }
         return 0;
-
     }
 
     @Override
     public int modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto) {
-        //查询shiftId（班次id）
-//        CalShift existingCalShift = baseMapper.selectById(shiftPlanModifyDto.getShiftId());
-//        System.out.println("existingCalShift"+existingCalShift);
-
         //修改数据
         CalShift calShift = msCalShiftPlanMapper.modifyShiftPlanToShiftPlan(shiftPlanModifyDto);
-//        System.out.println("calShift"+calShift);
-//
-//        return baseMapper.updateById(calShift);
         UpdateWrapper<CalShift> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("shift_id", calShift.getShiftId())
-                .eq("plan_id", calShift.getPlanId())
-                .set("order_num", calShift.getOrderNum())
-                .set("shift_name", calShift.getShiftName())
-                .set("start_time", calShift.getStartTime())
-                .set("end_time", calShift.getEndTime());
+                .eq("plan_id", calShift.getPlanId());
+        //返回修改的行数
         return baseMapper.update(calShift, updateWrapper);
     }
 
@@ -111,7 +132,7 @@ public class CalShiftServiceImpl extends ServiceImpl<CalShiftMapper, CalShift> i
         QueryWrapper<CalShift> wrapper = new QueryWrapper<>();
         wrapper.eq("plan_id", shiftPlanQuery.getPlanId());
         Page<CalShift> result = baseMapper.selectPage(page, wrapper);
-
+        // 返回封装后的pageDTO
         return PageDTO.create(result, msCalShiftPlanMapper::shiftPlanToShiftPlanDTO);
     }
 }
