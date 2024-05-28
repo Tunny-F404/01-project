@@ -88,7 +88,7 @@ public class MdClientController implements ClientApis {
     }
 
 
-    @GetMapping(value = "/export/queryClientExport", produces = "application/octet-stream")
+      @GetMapping(value = "/export/queryClientExport", produces = "application/octet-stream")
     @ApiOperation(value = "导出客户")
     public ResponseEntity<byte[]> queryClientExportByExcel(@RequestParam(value="ids",required=true)List<Long> ids) {
         try {
@@ -97,6 +97,7 @@ public class MdClientController implements ClientApis {
             throw new RuntimeException(e);
         }
     }
+    
     @GetMapping(value = "/import/importTemplate", produces = "application/octet-stream")
     @ApiOperation(value = "下载导入客户的模板")
     @Override
