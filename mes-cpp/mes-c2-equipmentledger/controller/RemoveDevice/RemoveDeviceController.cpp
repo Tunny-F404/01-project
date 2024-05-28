@@ -19,24 +19,26 @@
 
 #include "stdafx.h"
 #include "RemoveDeviceController.h"
+#include "service/RemoveDevice/RemoveDeviceService.h"
 
 BooleanJsonVO::Wrapper RemoveDeviceController::execRemoveDevice(const RemoveDeviceListDTO::Wrapper& dto)
 {
 	// 定义返回结果
 	auto res = BooleanJsonVO::createShared();
 
-	// 调用service层
-	/**
-	 * 	auto flag = service.removeDevice(dto);
-	 *
-	 *
-	 *	if (flag) // 删除成功
-	 *	res->success(flag);
-	 *	else
-	 *	res->fail(flag);
-	 */
+	// 数据校验
+	if (dto->item->empty()) {
+		res->init(false, ResultStatus(u8"删除列表为空"));
+		return res;
+	}
 
-	// 我这里先直接返回成功
-	res->success(true);
+	// 调用service层
+	RemoveDeviceService service;
+	auto flag = service.removeDevice(dto);
+	 
+	if (flag) // 删除成功
+		res->success(flag);
+	else
+		res->fail(flag);
 	return res;
 }

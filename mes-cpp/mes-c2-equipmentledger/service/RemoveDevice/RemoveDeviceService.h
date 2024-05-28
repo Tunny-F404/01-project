@@ -2,7 +2,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: 。好
- @Date: 2024/05/19 13:48:18
+ @Date: 2024/05/26 9:23:17
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,22 +16,19 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#include "stdafx.h"
-#include "ExportDeviceController.h"
-#include "domain/query/ExportDeviceQuery.h"
-#include "service/ExportDevice/ExportDeviceService.h"
+#ifndef _REMOVEDEVICESERVICE_H_
+#define _REMOVEDEVICESERVICE_H_
 
-StringJsonVO::Wrapper ExportDeviceController::
-	execExportDevice(const ExportDeviceQuery::Wrapper& query)
+#include "domain/dto/RemoveDeviceDTO.h"
+
+/**
+ * 删除设备业务逻辑层
+ * 负责人：。好
+ */
+class RemoveDeviceService
 {
-	auto res = StringJsonVO::createShared();
-	
-	ExportDeviceService service;
-	auto url = service.exportDevice(query);
+public:
+	bool removeDevice(const RemoveDeviceListDTO::Wrapper& listDto);
+};
 
-	if (url != "")
-		res->success(url);
-	else
-		res->fail("");
-	return res;
-}
+#endif // !_REMOVEDEVICESERVICE_H_

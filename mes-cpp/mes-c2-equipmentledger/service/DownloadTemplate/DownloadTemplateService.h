@@ -1,8 +1,9 @@
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
  @Author: 。好
- @Date: 2024/05/19 13:48:18
+ @Date: 2024/05/26 21:30:08
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,22 +17,19 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#include "stdafx.h"
-#include "ExportDeviceController.h"
-#include "domain/query/ExportDeviceQuery.h"
-#include "service/ExportDevice/ExportDeviceService.h"
+#ifndef _DOWNLOADTEMPLATESERVICE_H_
+#define _DOWNLOADTEMPLATESERVICE_H_
 
-StringJsonVO::Wrapper ExportDeviceController::
-	execExportDevice(const ExportDeviceQuery::Wrapper& query)
+#include <string>
+
+/**
+ * 下载导入模板
+ * 负责人：。好
+ */
+class DownloadTemplateService
 {
-	auto res = StringJsonVO::createShared();
-	
-	ExportDeviceService service;
-	auto url = service.exportDevice(query);
+public:
+	std::string download();
+};
 
-	if (url != "")
-		res->success(url);
-	else
-		res->fail("");
-	return res;
-}
+#endif // !_DOWNLOADTEMPLATESERVICE_H_

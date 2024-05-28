@@ -1,8 +1,9 @@
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
  @Author: 。好
- @Date: 2024/05/19 13:48:18
+ @Date: 2024/05/26 9:39:36
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,22 +17,13 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
+
 #include "stdafx.h"
-#include "ExportDeviceController.h"
-#include "domain/query/ExportDeviceQuery.h"
-#include "service/ExportDevice/ExportDeviceService.h"
+#include "RemoveDeviceDAO.h"
 
-StringJsonVO::Wrapper ExportDeviceController::
-	execExportDevice(const ExportDeviceQuery::Wrapper& query)
+bool RemoveDeviceDAO::removeDeviceOne(const std::string code)
 {
-	auto res = StringJsonVO::createShared();
-	
-	ExportDeviceService service;
-	auto url = service.exportDevice(query);
-
-	if (url != "")
-		res->success(url);
-	else
-		res->fail("");
-	return res;
+	// 只涉及到一个数据库实体字段，所以不需要mapper
+	std::string sql = "DELETE FROM `dv_machinery` WHERE `machinery_code`=?";
+	return sqlSession->executeUpdate(sql, "%s", code) == true;
 }

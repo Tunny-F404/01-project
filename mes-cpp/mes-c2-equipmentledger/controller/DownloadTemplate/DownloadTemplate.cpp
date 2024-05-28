@@ -18,12 +18,18 @@
 */
 #include "stdafx.h"
 #include "DownloadTemplate.h"
+#include "service/DownloadTemplate/DownloadTemplateService.h"
 
-BooleanJsonVO::Wrapper DownloadTemplateController::
+StringJsonVO::Wrapper DownloadTemplateController::
 	execDownloadTemplate()
 {
-	auto res = BooleanJsonVO::createShared();
+	auto res = StringJsonVO::createShared();
 
-	res->success(true);
+	DownloadTemplateService service;
+	auto url = service.download();
+	if (url != "")
+		res->success(url);
+	else
+		res->fail("");
 	return res;
 }
