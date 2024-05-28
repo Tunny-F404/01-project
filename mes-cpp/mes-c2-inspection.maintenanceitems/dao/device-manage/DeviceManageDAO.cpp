@@ -23,7 +23,7 @@
 
 uint64_t DeviceManageDAO::update(const DeviceManageDO& uObj)
 {
-	string sql = "UPDATE `dv_subject` SET `subject_code`=?, `subject_name`=?, `subject_type`=?, `subject_content`=?, `subject_standard`=?, `enable_flag`=? WHERE `subject_id`=?";
+	string sql = "UPDATE `dv_subject` SET `subject_code`=?, `subject_name`=?, `subject_type`=?, `subject_content`=?, `subject_standard`=?, `enable_flag`=?, `update_time`=NOW() WHERE `subject_id`=?";
 	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s", uObj.getSubjectCode(), uObj.getSubjectName(), uObj.getSubjectType(), uObj.getSubjectContent(), uObj.getSubjectStandard(), 
 		uObj.getEnableFlag(), uObj.getSubjectId());
 
@@ -48,7 +48,7 @@ uint64_t DeviceManageIdDAO::deleteById(const DeviceManageIdDO& uObj)
 
 uint64_t DeviceManageDAO::insert(const DeviceManageAddDO& iObj)
 {
-	string sql = "INSERT INTO `dv_subject` (`subject_code`, `subject_name`, `subject_type`, `subject_content`, `subject_standard`, `enable_flag`) VALUES (?, ?, ?, ?, ?, ?)";
+	string sql = "INSERT INTO `dv_subject` (`subject_code`, `subject_name`, `subject_type`, `subject_content`, `subject_standard`, `enable_flag`, `create_time`) VALUES (?, ?, ?, ?, ?, ?, NOW())";
 	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s", iObj.getSubjectCode(), iObj.getSubjectName(), iObj.getSubjectType(), iObj.getSubjectContent(), iObj.getSubjectStandard(), iObj.getEnableFlag());
 }
 

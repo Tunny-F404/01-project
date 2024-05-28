@@ -24,6 +24,10 @@
 
 Uint64JsonVO::Wrapper DeviceManageController::execModifyProj(const DeviceManageDTO::Wrapper& dto)
 {
+
+	
+
+
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
@@ -33,7 +37,7 @@ Uint64JsonVO::Wrapper DeviceManageController::execModifyProj(const DeviceManageD
 		return jvo;
 	}
 
-	if (std::strcmp(dto->subjectType->c_str(), "CHECK") != 0 || !std::strcmp(dto->subjectType->c_str(), "MAINTEN") != 0)
+	if (std::strcmp(dto->subjectType->c_str(), "CHECK") != 0 && std::strcmp(dto->subjectType->c_str(), "MAINTEN") != 0)
 	{
 		jvo->init(UInt64(-1), ResultStatus(u8"subjectType only support 'CHECK' or 'MAINTEN'", 9995));
 		return jvo;
@@ -129,7 +133,7 @@ Uint64JsonVO::Wrapper DeviceManageController::execAddProj(const DeviceManageAddD
 		return jvo;
 	}
 
-	if (std::strcmp(dto->subjectType->c_str(), "CHECK") != 0 || !std::strcmp(dto->subjectType->c_str(), "MAINTEN") != 0)
+	if (std::strcmp(dto->subjectType->c_str(), "CHECK") != 0 && std::strcmp(dto->subjectType->c_str(), "MAINTEN") != 0)
 	{
 		jvo->init(UInt64(-1), ResultStatus(u8"subjectType only support 'CHECK' or 'MAINTEN'", 9995));
 		return jvo;
