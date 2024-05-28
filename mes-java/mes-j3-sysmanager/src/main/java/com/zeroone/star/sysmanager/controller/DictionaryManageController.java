@@ -71,7 +71,9 @@ public class DictionaryManageController implements DictionaryManageApis {
     @PostMapping("/data/export")
     @ApiOperation("导出字典数据列表（excel）")
     @Override
-    public ResponseEntity<byte[]> exportDictData(@RequestBody(required = false) SysDictDataExportDTO sysDictDataExportDTO) {
+    public ResponseEntity<byte[]> exportDictData(@RequestBody
+                                                 @Valid
+                                                 SysDictDataExportDTO sysDictDataExportDTO) {
         return sysDictDataService.exportDictData(sysDictDataExportDTO);
     }
 

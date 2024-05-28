@@ -1,6 +1,7 @@
 package com.zeroone.star.sysmanager.service.impl;
 
 import cn.hutool.core.date.DateTime;
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -89,7 +90,7 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
             return new ResponseEntity<>(excel.toByteArray(), headers, HttpStatus.OK);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

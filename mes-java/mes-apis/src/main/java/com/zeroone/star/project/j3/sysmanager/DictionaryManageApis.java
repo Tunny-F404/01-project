@@ -12,6 +12,7 @@ import com.zeroone.star.project.j3.vo.DictDataNameVO;
 import com.zeroone.star.project.j3.vo.DictTypeNameVO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -84,7 +85,7 @@ public interface DictionaryManageApis {
     // 查询字典类型详情
     JsonVO<SysDictTypeDetailDTO> getDictType(@NotNull(message = "不能为空") Long dictId);
 
-    ResponseEntity<byte[]> exportDictData(SysDictDataExportDTO sysDictDataExportDTO);
+    ResponseEntity<byte[]> exportDictData(@Valid SysDictDataExportDTO sysDictDataExportDTO);
 
 
     /**
