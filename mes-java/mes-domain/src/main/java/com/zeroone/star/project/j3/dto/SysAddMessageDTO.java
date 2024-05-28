@@ -23,7 +23,7 @@ public class SysAddMessageDTO {
     private String messageLevel;
 
     /** 接收人昵称 */
-    @ApiModelProperty(value = "接收人昵称",example = "w(ﾟДﾟ)w")
+    @ApiModelProperty(value = "接收人昵称",example = "这是接收人的昵称")
     private String recipientNick;
 
     /** 标题 */

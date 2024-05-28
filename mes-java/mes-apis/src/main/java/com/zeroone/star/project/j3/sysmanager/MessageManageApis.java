@@ -69,14 +69,14 @@ public interface MessageManageApis {
 
 
     /**
-     * 根据id筛选导出对应Excel
+     * 根据指定信息筛选导出对应Excel
      * @return 报表
      */
     public ResponseEntity<byte[]> downloadMessageExcel(ExportConditionMessageDTO exportConditionMessageDTO);
 
 
     /**
-     * 根据id筛选数据导出到dfs
+     * 根据指定信息筛选数据导出到dfs
      * @return dfs连接
      */
     public JsonVO<String> exportMessageToDfs(ExportConditionMessageDTO exportConditionMessageDTO);

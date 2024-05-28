@@ -1,5 +1,12 @@
 package com.zeroone.star.sysmanager.controller;
 
+import cn.hutool.core.date.DateTime;
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.util.StringUtils;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
+import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
+import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
 import com.zeroone.star.project.j3.dto.PageDTO;
 import com.zeroone.star.project.j3.query.NewsPageQuery;
 import com.zeroone.star.project.j3.dto.ExportConditionMessageDTO;
@@ -9,7 +16,13 @@ import com.zeroone.star.project.j3.dto.SysUpdateMessageDTO;
 import com.zeroone.star.project.j3.sysmanager.MessageManageApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanager.service.ISysMessageService;
+import com.zeroone.star.sysmanager.entity.SysMessage;
+import com.zeroone.star.sysmanager.service.ISysMessageService;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.zeroone.star.project.j3.vo.NewsPageVO;
@@ -20,14 +33,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(tags = "消息管理")
 @RestController
 @RequestMapping("sys-manager/message-manager")
 @ResponseBody
 public class MessageManageController implements MessageManageApis {
-    private ISysMessageService messageManageService;
+
+    @Resource
+    EasyExcelComponent excel;
+
+    @Resource
+    FastDfsClientComponent dfs;
+
+    @Value("${fastdfs.nginx-servers}")
+    String urlPrefix;
+
+    @Resource
+    ISysMessageService ISysMessageService;
+
+
     /**
      * 获取消息详情
      * @param id
@@ -52,6 +83,7 @@ public class MessageManageController implements MessageManageApis {
         return JsonVO.success(page);
     }
 
+
     /**
      * 添加消息
      * @param sysAddMessageDTO 消息实体
@@ -61,7 +93,8 @@ public class MessageManageController implements MessageManageApis {
     @Override
     @ApiOperation(value = "添加消息")
     public JsonVO<String> addMessage(@RequestBody SysAddMessageDTO sysAddMessageDTO) {
-        return null;
+        return ISysMessageService.saveMessage(sysAddMessageDTO);
+
     }
 
     /**
@@ -73,7 +106,7 @@ public class MessageManageController implements MessageManageApis {
     @Override
     @ApiOperation(value = "修改消息")
     public JsonVO<String> modifyMessage(@RequestBody SysUpdateMessageDTO sysUpdateMessageDTO) {
-        return null;
+        return ISysMessageService.updateMessageById(sysUpdateMessageDTO);
     }
 
     /**
@@ -83,9 +116,13 @@ public class MessageManageController implements MessageManageApis {
      */
     @DeleteMapping("remove-by-messageIds")
     @Override
-    @ApiOperation(value = "删除消息根据id")
+    @ApiOperation(value = "删除消息根据id(单独删除和批量都支持)")
     public JsonVO<String> removeMessageByMessageIds(@RequestParam String messageIds) {
-        return null;
+
+        //转换字符串id 为集合
+        List<Long> messageIdsList = StringIdToList(messageIds);
+
+        return ISysMessageService.removeMessageByIds(messageIdsList);
     }
 
     /**
@@ -95,7 +132,14 @@ public class MessageManageController implements MessageManageApis {
      */
     public List<Long> StringIdToList(String messageIds){
 
-        return null;
+        List<Long> messageIdsList = new ArrayList<>();
+
+        String[] strs = messageIds.split(",");
+        for (String str:strs){
+            messageIdsList.add(Long.parseLong(str));
+        }
+
+        return messageIdsList;
     }
 
     /**
@@ -105,7 +149,49 @@ public class MessageManageController implements MessageManageApis {
      */
     public List<ExportMessageDTO> dataConversion(ExportConditionMessageDTO exportConditionMessageDTO){
 
-        return null;
+        LambdaQueryWrapper<SysMessage> queryWrapper = new LambdaQueryWrapper<>();
+        //根据传递参数判断是否要进行数据库查询操作
+        if (exportConditionMessageDTO.getMessageType() != null && !StringUtils.isBlank(exportConditionMessageDTO.getMessageType())) {
+            StringUtils.isBlank(null);
+        }
+        if (exportConditionMessageDTO.getMessageLevel() !=null  && !StringUtils.isBlank(exportConditionMessageDTO.getMessageLevel())){
+            queryWrapper.eq(SysMessage::getMessageLevel,exportConditionMessageDTO.getMessageLevel());
+        }
+        if (exportConditionMessageDTO.getSenderNick() !=null  && !StringUtils.isBlank(exportConditionMessageDTO.getSenderNick())){
+            queryWrapper.eq(SysMessage::getSenderName,exportConditionMessageDTO.getSenderNick());
+        }
+        if (exportConditionMessageDTO.getRecipientNick() !=null  && !StringUtils.isBlank(exportConditionMessageDTO.getRecipientNick())){
+            queryWrapper.eq(SysMessage::getRecipientNick,exportConditionMessageDTO.getRecipientNick());
+        }
+        if (exportConditionMessageDTO.getStatus() !=null  && !StringUtils.isBlank(exportConditionMessageDTO.getStatus())){
+            queryWrapper.eq(SysMessage::getStatus,exportConditionMessageDTO.getStatus());
+        }
+
+        List<SysMessage> messages = ISysMessageService.getBaseMapper().selectList(queryWrapper);
+
+
+        // 转换数据到 DTO
+
+        List<ExportMessageDTO> exportList = messages.stream().map(message -> {
+            ExportMessageDTO dto = new ExportMessageDTO();
+            dto.setMessageType(message.getMessageType());
+            dto.setMessageLevel(message.getMessageLevel());
+            dto.setMessageTitle(message.getMessageTitle());
+            dto.setMessageContent(message.getMessageContent());
+            dto.setSenderId(message.getSenderId());
+            dto.setSenderName(message.getSenderName());
+            dto.setSenderNick(message.getSenderNick());
+            dto.setRecipientId(message.getRecipientId());
+            dto.setRecipientName(message.getRecipientName());
+            dto.setRecipientNick(message.getRecipientNick());
+            dto.setProcessTime(message.getProcessTime());
+            dto.setCallBack(message.getCallBack());
+            dto.setStatus(message.getStatus());
+            dto.setDeletedFlag(message.getDeletedFlag());
+            return dto;
+        }).collect(Collectors.toList());
+
+        return exportList;
     }
 
     /**
@@ -116,7 +202,22 @@ public class MessageManageController implements MessageManageApis {
     @GetMapping(value = "download-messageAll", produces = "application/octet-stream")
     @ApiOperation(value = "下载全部数据到Excel")
     public ResponseEntity<byte[]> downloadMessageExcelALL() {
-        return null;
+        // 构建一个输出流
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        // 导出数据到输出流 这块转换了数据到DTO
+        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(new ExportConditionMessageDTO()));
+        // 获取字节数据
+        byte[] bytes = out.toByteArray();
+        out.close();
+
+        // 构建响应头
+        HttpHeaders headers = new HttpHeaders();
+        String filename = "report-" + DateTime.now().toString("yyyyMMddHHmmssS") + ".xlsx";
+        headers.setContentDispositionFormData("attachment", filename);
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        // 响应文件给客户端
+        return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
 
     /**
@@ -128,7 +229,22 @@ public class MessageManageController implements MessageManageApis {
     @GetMapping(value = "export-messageAll-dfs")
     @ApiOperation(value = "导出全部数据到dfs")
     public JsonVO<String> exportMessageToDfsALL() {
-        return null;
+        // 构建一个输出流
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        // 导出数据到输出流
+        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(new ExportConditionMessageDTO()));
+
+        // 获取字节数据
+        byte[] bytes = out.toByteArray();
+        out.close();
+
+        // 上传文件到文件服务器
+        FastDfsFileInfo result = dfs.uploadFile(bytes, ".xlsx");
+        if (result != null) {
+            return JsonVO.success(dfs.fetchUrl(result, "http://" + urlPrefix, true));
+        }
+        return JsonVO.fail(null);
     }
 
 
@@ -138,9 +254,26 @@ public class MessageManageController implements MessageManageApis {
      */
     @SneakyThrows
     @PostMapping(value = "download-message", produces = "application/octet-stream")
-    @ApiOperation(value = "根据id筛选下载Excel")
+    @ApiOperation(value = "根据指定信息筛选下载Excel")
     public ResponseEntity<byte[]> downloadMessageExcel(@RequestBody ExportConditionMessageDTO exportConditionMessageDTO) {
-        return null;
+
+        // 构建一个输出流
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+
+        // 导出数据到输出流
+        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(exportConditionMessageDTO));
+        // 获取字节数据
+        byte[] bytes = out.toByteArray();
+        out.close();
+
+        // 构建响应头
+        HttpHeaders headers = new HttpHeaders();
+        String filename = "report-" + DateTime.now().toString("yyyyMMddHHmmssS") + ".xlsx";
+        headers.setContentDispositionFormData("attachment", filename);
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        // 响应文件给客户端
+        return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
 
     /**
@@ -150,8 +283,25 @@ public class MessageManageController implements MessageManageApis {
     @SneakyThrows
     @ResponseBody
     @PostMapping(value = "export-message-dfs")
-    @ApiOperation(value = "根据id筛选导出到dfs")
+    @ApiOperation(value = "根据指定信息筛选导出到dfs")
     public JsonVO<String> exportMessageToDfs(@RequestBody ExportConditionMessageDTO exportConditionMessageDTO) {
-        return null;
+
+
+        // 构建一个输出流
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        // 导出数据到输出流
+        EasyExcel.write(out, ExportMessageDTO.class).sheet("导出").doWrite(dataConversion(exportConditionMessageDTO));
+
+        // 获取字节数据
+        byte[] bytes = out.toByteArray();
+        out.close();
+
+        // 上传文件到文件服务器
+        FastDfsFileInfo result = dfs.uploadFile(bytes, ".xlsx");
+        if (result != null) {
+            return JsonVO.success(dfs.fetchUrl(result, "http://" + urlPrefix, true));
+        }
+        return JsonVO.fail(null);
     }
 }
