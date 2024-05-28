@@ -66,7 +66,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "warehouse_id", ZH_WORDS_GETTER("add-del-mod.controller.delete.warehouse_id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/warehouse-settings/del-warehouse-by-id", removeWarehouse, PATH(UInt64, warehouse_id), execRemoveWarehouse(warehouse_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/warehouse-settings/del-warehouse/{warehouse_id}", removeWarehouse, PATH(UInt64, warehouse_id), execRemoveWarehouse(warehouse_id));
 
 private:
 	// 3.3 演示新增数据
