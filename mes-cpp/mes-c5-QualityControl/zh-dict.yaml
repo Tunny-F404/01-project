@@ -179,6 +179,7 @@ excel:
   s2: 数据表2
   s3: 数据表3
  ProcessInspection: 
+  path: ./public/excel/ExportProcessInspection.xlsx
   header:
    h1: 检验单ID
    h2: 检验单编号

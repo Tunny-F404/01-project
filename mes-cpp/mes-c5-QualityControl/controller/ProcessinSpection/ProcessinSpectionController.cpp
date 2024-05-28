@@ -6,6 +6,8 @@
 #include "Macros.h"
 #include "ExcelComponent.h"
 #include "gtest/gtest.h"
+#include "FastDfsClient.h"
+#include "../include/NacosClient.h"
 
 ProcessinSpectionQueryPageJsonVO::Wrapper ProcessinSpectionController::execQueryProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
 {
@@ -124,9 +126,9 @@ StringJsonVO::Wrapper ProcessinSpectionController::execExportProcessinSpection(c
 
 		data.push_back(row);
 	}
-	std::string fileName = TEST_EXCEL_FN;
+	std::string fileName = ZH_WORDS_GETTER("excel.ProcessInspection.path");
 	// 中文词典
-	std::string sheetName = TEST_EXCEL_SN;
+	std::string sheetName = ZH_WORDS_GETTER("excel.sheet.s1");
 	// 插入表头
 	data.insert(data.begin(), {
 		ZH_WORDS_GETTER("excel.ProcessInspection.header.h1"),
@@ -143,9 +145,31 @@ StringJsonVO::Wrapper ProcessinSpectionController::execExportProcessinSpection(c
 		ZH_WORDS_GETTER("excel.ProcessInspection.header.h12"),
 		ZH_WORDS_GETTER("excel.ProcessInspection.header.h13")
 		});
+	//创建excel
 	excel.writeVectorToFile(fileName, sheetName,data);
-
-	return {};
+	//创建文件服务器对象,并拼接url前缀
+	ZO_CREATE_DFS_CLIENT_URL(dfs, urlPrefix);
+	//后缀名长度
+	auto pos = fileName.rfind(".");
+	string suffix = "";
+	//有后缀名
+	if (pos != string::npos) {
+		suffix = fileName.substr(pos + 1);
+	}
+	//上传文件
+	auto downloadUrl=dfs.uploadFile(fileName);
+	downloadUrl = urlPrefix + downloadUrl;
+	auto ans = StringJsonVO::createShared();
+	//只有前缀,上传失败
+	if (downloadUrl== urlPrefix) {
+		ans->init("error", RS_FAIL);
+	}
+	else {
+		ans->init(downloadUrl, RS_SUCCESS);
+	}
+	//删除本地文件
+	std::remove(fileName.c_str());
+	return ans;
 }
 
 ProcessinSpectionJsonVO::Wrapper ProcessinSpectionController::execQueryInspectionDetails(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
