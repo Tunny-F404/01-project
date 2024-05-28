@@ -59,8 +59,15 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
     }
 
     @Override
-    public boolean modifySchPlanStatus(SchPlanDTO schPlanDTO) {
-        return false;
+    public boolean modifySchPlanStatus(SchPlanDTO condition) {
+        //1.查询当前数据是否存在
+        CalPlan modifyPlan = baseMapper.selectById(condition.getPlanId());
+        //2.数据不存在,修改失败,返回false
+        if (modifyPlan==null){
+            return false;
+        }
+        //3.存在则执行修改操作---将DTO转为DO
+return false;
     }
 
     @Override

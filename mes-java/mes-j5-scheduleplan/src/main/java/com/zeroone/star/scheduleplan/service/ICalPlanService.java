@@ -27,10 +27,10 @@ public interface ICalPlanService extends IService<CalPlan> {
 
     /**
      * 修改计划状态
-     * @param schPlanDTO  修改状态模型
+     * @param condition  修改状态模型
      * @author sailing
      */
-    boolean  modifySchPlanStatus(SchPlanDTO schPlanDTO);
+    boolean  modifySchPlanStatus(SchPlanDTO condition);
 
     /**
      * 导出排班计划
