@@ -3,13 +3,23 @@ import {ref} from 'vue'
 const dialogVisible=ref(false)
 //定义表单内容，现在有点bug,
 //1,判断不了是修改还是增加组件，两个的判断条件我这没有写好
-//2,本来的信息错误弹窗不知道为何有bug,弹出标签
+const formRef=ref()
+
 const formModel=ref({
     classify:'',
     product:'',
     sure:'',
     time:''
 })
+
+//提交
+const onSubmit= async()=>{
+ await formRef.value.validate()
+ //中间要补充调用哪一个，根据接口的不同，如编辑和增加
+ ElMessage.success('成功')
+ dialogVisible.value = false
+ 
+}
 
 const open=(row)=>{
     console.log(row);
@@ -19,13 +29,13 @@ const open=(row)=>{
 //规则由接口文档来定，这里只供参考
 const rules = {
     classify: [
-    { required: true, message: '请输入分类名称', trigger: 'blur' },
+    { required: true, message: '分类名必须是 1-10 位的非空字符', trigger: 'blur' },
     {
       pattern: /^\S{1,10}$/,message: '分类名必须是 1-10 位的非空字符',  trigger: 'blur'
     }
   ],
   product: [
-    { required: true, message: '请输入产品物料', trigger: 'blur' },
+    { required: true, message: '产品名必须是 1-10的非空字符', trigger: 'blur' },
     {
       pattern: /^\S{1,10}$/,
       message: '产品名必须是 1-10的非空字符',
@@ -33,7 +43,7 @@ const rules = {
     }
   ],
   time:[
-  { required: true, message: '请输入产品物料', trigger: 'blur' },
+  { required: true, message: '请输入产品时间', trigger: 'blur' },
     {
       pattern: /^[0-9]{1,4}.[0-9]{1,2}.[0-9]{1,2}$/,
       message: '时间必须是 xxxx.xx.xx的非空字符',
@@ -53,6 +63,7 @@ defineExpose({
     width="500"> 
   <!--:before-close="handleClose"//这个属性加上去要二次取消才可以-->
     <el-form 
+    ref="formRef"
     :model="formModel"
     :rules="rules"
      label-width='100px' 
@@ -85,7 +96,7 @@ defineExpose({
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="dialogVisible = false">取消按钮</el-button>
-        <el-button type="primary" @click="dialogVisible = false">
+        <el-button type="primary" @click="onSubmit">
           确定按钮
         </el-button>
       </div>
