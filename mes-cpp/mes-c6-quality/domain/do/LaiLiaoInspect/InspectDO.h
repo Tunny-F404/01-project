@@ -3,12 +3,15 @@
 #define _INSPECT_DO_
 #include "../DoInclude.h"
 
+
+
 /**
  * 来料检验列表数据库实体类
  */
 class InspectDO
 {
-	// 数据库表行id
+	
+	// 来料检验单id
 	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
 	// 来料检验单编号
 	CC_SYNTHESIZE(string, code, Code);
@@ -16,6 +19,14 @@ class InspectDO
 	CC_SYNTHESIZE(string, name, Name);
 	//检验模板ID
 	CC_SYNTHESIZE(uint64_t, template_id, Template_id);
+	//来源单据ID
+	CC_SYNTHESIZE(uint64_t, source_doc_id, Source_doc_id);
+	// 来源单据类型 
+	CC_SYNTHESIZE(string, source_doc_type, Source_doc_type);
+	// 来源单据编号
+	CC_SYNTHESIZE(string, source_doc_code, Source_doc_code);
+	// 来源单据行ID
+	CC_SYNTHESIZE(uint64_t, source_line_id, Source_line_id);
 	//供应商ID
 	CC_SYNTHESIZE(uint64_t, vendor_id, Vendor_id);
 	//供应商编码
@@ -26,16 +37,38 @@ class InspectDO
 	CC_SYNTHESIZE(string, vd_nick, Vd_nick);
 	//供应商批次号
 	CC_SYNTHESIZE(string, vd_batch, Vd_batch);
+	//产品物料ID
+	CC_SYNTHESIZE(uint64_t, item_id, Item_id);
 	//产品物料编码
 	CC_SYNTHESIZE(string, item_code, Item_code);
 	//产品物料名称
 	CC_SYNTHESIZE(string, item_name, Item_name);
+	//规格型号
+	CC_SYNTHESIZE(string, specification, Specification);
+	//单位
+	CC_SYNTHESIZE(string, unit_of_measure, Unit_of_measure);
+	// 最低检测数
+	CC_SYNTHESIZE(int, quantity_min_check, Quantity_min_check);
+	// 最大不合格数
+	CC_SYNTHESIZE(int, quantity_max_unqualified, Quantity_max_unqualified);
 	//接收数量
-	CC_SYNTHESIZE(long long, quantity_recived, Quantity_recived);
+	CC_SYNTHESIZE(double, quantity_recived, Quantity_recived);
 	//检测数量
 	CC_SYNTHESIZE(long long, quantity_check, Quantity_check);
 	//不合格数
 	CC_SYNTHESIZE(long long, quantity_unqualified, Quantity_unqualified);
+	//致命缺陷率
+	CC_SYNTHESIZE(double, maj_rate, Maj_rate);
+	//严重缺陷率
+	CC_SYNTHESIZE(double, cr_rate, Cr_rate);
+	//轻微缺陷率
+	CC_SYNTHESIZE(double, min_rate, Min_rate);
+	//致命缺陷数量
+	CC_SYNTHESIZE(long long, cr_quantity, Cr_quantity);
+	//严重缺陷数量
+	CC_SYNTHESIZE(long long, maj_quantity, Maj_quantity);
+	//轻微缺陷数量
+	CC_SYNTHESIZE(long long, min_quantity, Min_quantity);
 	//检测结果
 	CC_SYNTHESIZE(string, check_result, Check_result);
 	//来料日期
@@ -46,6 +79,16 @@ class InspectDO
 	CC_SYNTHESIZE(string, inspector, Inspector);
 	//单据状态
 	CC_SYNTHESIZE(string, list_status, List_status);
+	//备注
+	CC_SYNTHESIZE(string, remark, Remark);
+	//预留字段1
+	//预留字段2
+	//预留字段3
+	//预留字段4
+	//创建者
+	//创建时间
+	//更新者
+	//更新时间
 
 public:
 	InspectDO() {
@@ -68,34 +111,6 @@ public:
 		inspect_date = "";
 		inspector = "";
 		list_status = "";
-	}
-};
-
-
-/**
- * 来料检验详情数据库实体类
- */
-class Inspect_detailDO :public InspectDO
-{
-	//单位
-	CC_SYNTHESIZE(string, unit_of_measure, Unit_of_measure);
-	//致命缺陷率
-	CC_SYNTHESIZE(double, maj_rate, Maj_rate);
-	//严重缺陷率
-	CC_SYNTHESIZE(double, cr_rate, Cr_rate);
-	//轻微缺陷率
-	CC_SYNTHESIZE(double, min_rate, Min_rate);
-	//致命缺陷数量
-	CC_SYNTHESIZE(long long, cr_quantity, Cr_quantity);
-	//严重缺陷数量
-	CC_SYNTHESIZE(long long, maj_quantity, Maj_quantity);
-	//轻微缺陷数量
-	CC_SYNTHESIZE(long long, min_quantity, Min_quantity);
-	//备注
-	CC_SYNTHESIZE(string, remark, Remark);
-
-public:
-	InspectDO() {
 		unit_of_measure = "";
 		maj_rate = 0;
 		cr_rate = 0;
@@ -107,7 +122,19 @@ public:
 	}
 };
 
-class Inspect_tableDO :public Inspect_detailDO
+
+/**
+ * 来料检验详情数据库实体类
+ */
+class Inspect_detailDO :public InspectDO
+{
+public:
+	Inspect_detailDO() {
+		
+	}
+};
+
+class Inspect_tableDO :public InspectDO
 {
 
 };

@@ -5,15 +5,15 @@
 
 InspectPageJsonVO::Wrapper InspectController::execQueryInspect(const InspectQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	//// 定义一个Service
-	//InspectService service;
-	//// 查询数据
-	//auto result = service.listAll(query);
-	//// 响应结果
-	//auto jvo = InspectPageJsonVO::createShared();
-	//jvo->success(result);
-	//return jvo;
-	return {};
+	// 定义一个Service
+	InspectService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = InspectPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
+
 }
 Inspect_detailPageJsonVO::Wrapper InspectController::execQueryInspect_detail(const Inspect_detailQuery::Wrapper& query, const PayloadDTO& payload)
 {
