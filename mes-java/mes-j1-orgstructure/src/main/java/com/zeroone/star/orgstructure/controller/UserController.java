@@ -34,9 +34,8 @@ public class UserController implements UserApis {
     @GetMapping("/query-user-table")
     @ApiOperation("查询用户列表")
     public JsonVO<List<UserDTO>> queryUserList(@Valid UserQuery userQuery) {
-        System.out.println(userQuery.getUserName());
-        userService.queryUserList(userQuery);
-        return JsonVO.success(null);
+        List<UserDTO> userDTOS = userService.queryUserList(userQuery);
+        return JsonVO.success(userDTOS);
     }
 
     @Override

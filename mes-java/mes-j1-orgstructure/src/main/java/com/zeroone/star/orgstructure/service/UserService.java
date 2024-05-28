@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,12 +27,13 @@ public class UserService {
 
     public List<UserDTO> queryUserList(UserQuery userQuery)
     {
-        List<SysUserDO> list = null;
-
+        List<SysUserDO> sysUserDOS = null;
+        //日期全局转换格式
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         //构建分页对象
         IPage<SysUserDO> page = new Page<>(userQuery.getPageIndex(), userQuery.getPageSize());
 
-        //构建查询对象
+        //构建用户表wrapper对象
         QueryWrapper<SysUserDO> queryWrapper = new QueryWrapper<>();
 
         //将query对象所有属性插入 使用lambda，避免字符串魔法值
@@ -51,12 +53,10 @@ public class UserService {
         if(userQuery.getBeginDate() != null && userQuery.getEndDate() != null)
         {
             //将userQuery的String日期转换为LocalDatetime类型
-            LocalDateTime begin = LocalDateTime.parse(userQuery.getBeginDate() + "T00:00:00");
-            LocalDateTime end = LocalDateTime.parse(userQuery.getEndDate() + "T23:59:59");
-            System.out.println(begin);
-            System.out.println(end);
-            queryWrapper.lambda().ge(SysUserDO::getCreateTime, begin)//用户创建时间范围查询
-                .le(SysUserDO::getCreateTime, end);
+            LocalDateTime begin = LocalDateTime.parse(userQuery.getBeginDate() + " 00:00:00", dtf);
+            LocalDateTime end = LocalDateTime.parse(userQuery.getEndDate() + " 23:59:59", dtf);
+
+            queryWrapper.lambda().between(SysUserDO::getCreateTime, begin, end);//用户创建时间范围查询
         }
         //判断部门名称是否为空
         if (userQuery.getDept() != null)
@@ -70,8 +70,31 @@ public class UserService {
         }
 
         userMapper.selectPage(page, queryWrapper);
-        list = page.getRecords();
+        sysUserDOS = page.getRecords();
 
-        return null;
+        List<UserDTO> userDTOS = new ArrayList<>();
+        for(int i = 0; i < sysUserDOS.size(); i++)
+        {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setPageIndex(userQuery.getPageIndex());
+            userDTO.setPageSize(userQuery.getPageSize());
+
+            userDTO.setUserId(sysUserDOS.get(i).getUserId());
+            userDTO.setUserName(sysUserDOS.get(i).getUserName());
+            userDTO.setNickName(sysUserDOS.get(i).getNickName());
+
+            //设置部门名称
+            SysDeptDO deptDO = deptMapper.selectById(sysUserDOS.get(i).getDeptId());
+            if(deptDO != null)
+            {
+                userDTO.setDept(deptDO.getDeptName());
+            }
+
+            userDTO.setPhonenumber(sysUserDOS.get(i).getPhonenumber());
+            userDTO.setStatus(sysUserDOS.get(i).getStatus());
+            userDTO.setCreateTime(sysUserDOS.get(i).getCreateTime().format(dtf));
+            userDTOS.add(userDTO);
+        }
+        return userDTOS;
     }
 }
