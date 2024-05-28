@@ -172,6 +172,5 @@ add_subdirectory ("arch-demo")
 
 # 添加删除检测模块
 
-add_subdirectory ("c5-processinspection-yuhui")
 add_subdirectory("mes-c5-QualityControl")
 add_subdirectory("mes-c5-WarehouseManagement")
