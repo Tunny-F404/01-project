@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,9 +21,9 @@ public class CompleteUserDTO extends UserDTO {
     @ApiModelProperty(value = "性别(0:男 1:女 2:未知)", example = "0")
     private String sex;
     @ApiModelProperty(value = "担任的岗位列表")
-    private List<String> post;
+    private List<String> post = new ArrayList<>();
     @ApiModelProperty(value = "属于的角色列表")
-    private List<String> rule;
+    private List<String> rule = new ArrayList<>();
     @ApiModelProperty(value = "对于用户的备注", example = "老板的私生子")
     private String commit;
 }

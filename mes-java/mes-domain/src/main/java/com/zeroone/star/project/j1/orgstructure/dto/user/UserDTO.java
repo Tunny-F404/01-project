@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>版权：&copy;01星球</p>
@@ -17,16 +18,10 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @ApiModel("用户列表数据模型")
 public class UserDTO {
-    //页码
-    @Min(value = 1,message = "页码不能小于1")
-    @ApiModelProperty(value = "查询页码",example = "1")
-    private long pageIndex;
-    //数据条数
-    @Min(value = 1,message = "数据条数不能小于1")
-    @ApiModelProperty(value = "查询数据条数",example = "10")
-    private long pageSize;
-    @NotEmpty(message = "用户ID不能为空")
-    @ApiModelProperty(value = "用户ID", example = "1")
+
+    @Min(value = 1, message = "用户id至少为1")
+    @NotNull(message = "用户id必须存在")
+    @ApiModelProperty(value = "用户ID",required = true,example = "1")
     private Long userId;
     @ApiModelProperty(value = "用户名称", example = "admin")
     private String userName;
