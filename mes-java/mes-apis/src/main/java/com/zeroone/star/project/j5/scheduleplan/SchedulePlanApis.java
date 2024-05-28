@@ -11,6 +11,8 @@ import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 /**
  * <p>
  * 描述：排班计划接口
@@ -60,7 +62,7 @@ public interface SchedulePlanApis {
      * @param rems 删除数据的id集合
      *  @author sailing
      */
-    JsonVO<Integer> removeSchPlan(Long[] rems);
+    JsonVO<Integer> removeSchPlan(List<Long> rems);
 
     /**
      * 修改计划状态

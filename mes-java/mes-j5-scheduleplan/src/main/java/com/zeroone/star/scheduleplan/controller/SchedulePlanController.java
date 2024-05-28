@@ -18,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.Min;
+import java.util.List;
 
 /**
  * <p>
@@ -59,7 +60,7 @@ public class SchedulePlanController implements SchedulePlanApis {
     @ApiOperation(value = "删除排班计划(可批量删除)")
     @DeleteMapping("delete-schedule-plan")
     @Override
-    public JsonVO<Integer> removeSchPlan(Long[] rems) {
+    public JsonVO<Integer> removeSchPlan(List<Long> rems) {
         return null;
     }
 
