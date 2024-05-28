@@ -1,5 +1,7 @@
 package com.zeroone.star.sysmanager.service;
 
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.j3.dto.SysDictDataDTO;
 import com.zeroone.star.sysmanager.entity.SysDictData;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysDictDataService extends IService<SysDictData> {
 
+    Integer saveDictData(SysDictDataDTO sysDictDataDTO, UserDTO currentUser);
 }

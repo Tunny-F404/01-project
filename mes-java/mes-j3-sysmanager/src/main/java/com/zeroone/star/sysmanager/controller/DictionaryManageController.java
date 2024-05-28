@@ -1,5 +1,7 @@
 package com.zeroone.star.sysmanager.controller;
 
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.j3.dto.InsertDictTypeDTO;
 import com.zeroone.star.project.j3.dto.SysDictDataDTO;
 import com.zeroone.star.project.j3.dto.dict.*;
@@ -10,12 +12,16 @@ import com.zeroone.star.project.j3.sysmanager.DictionaryManageApis;
 import com.zeroone.star.project.j3.vo.DictDataNameVO;
 import com.zeroone.star.project.j3.vo.DictTypeNameVO;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
+import com.zeroone.star.sysmanager.service.ISysDictDataService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.http.ResponseEntity;
+
 import java.util.List;
+import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
 
 @RestController
@@ -23,6 +29,11 @@ import javax.validation.constraints.NotBlank;
 @Api(tags = "字典管理")
 @Validated
 public class DictionaryManageController implements DictionaryManageApis {
+    @Resource
+    private ISysDictDataService sysDictDataService;
+    @Resource
+    private UserHolder userHolder;
+
     @Override
     @ApiOperation(value = "编辑修改字典")
     @PutMapping("modify/update/upate/edit-dict-type")
@@ -71,11 +82,19 @@ public class DictionaryManageController implements DictionaryManageApis {
     public JsonVO<SysDictDataDetailDTO> getDictData(@PathVariable Long dictCode) {
         return null;
     }
+
     @Override
     @ApiOperation(value = "新增字典数据接口")
     @PostMapping("add-dict-data")
     public JsonVO<Integer> addDictData(@RequestBody SysDictDataDTO sysDictDataDTO) {
-        return null;
+        UserDTO currentUser;
+        try {
+            currentUser = userHolder.getCurrentUser();
+        } catch (Exception e) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), ResultStatus.FAIL.getMessage());
+        }
+        Integer data = sysDictDataService.saveDictData(sysDictDataDTO, currentUser);
+        return JsonVO.success(data);
     }
 
     @Override
@@ -95,7 +114,7 @@ public class DictionaryManageController implements DictionaryManageApis {
     @ApiOperation(value = "根据字典类型获取字典数据名称列表")
     @GetMapping("query-dictDateNames-by-dictType")
     @Override
-    public JsonVO<List<DictDataNameVO>> queryDictDataNamesByDictType(@NotBlank(message = "字典类型不能为空") String dictType) {
+    public JsonVO<List<DictDataNameVO>> queryDictDataNamesByDictType(/*@NotBlank(message = "字典类型不能为空")*/ String dictType) {
         return null;
     }
 
