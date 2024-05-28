@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -18,7 +19,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @ApiModel("添加关联班组模型")
 public class AddPlanTeamDTO {
-    @NotBlank(message = "班组编号不能为空")
+    @NotNull(message = "班组编号不能为空")
     @Min(value = 1, message = "班组ID不能小于1")
     @ApiModelProperty(value = "班组ID", example = "1")
     private Long teamId;
@@ -28,7 +29,7 @@ public class AddPlanTeamDTO {
     @NotBlank(message = "班组名称不能为空")
     @ApiModelProperty(value = "班组名称", example = "风塔2组")
     private String teamName;
-    @NotBlank(message = "计划ID不能为空")
+    @NotNull(message = "计划ID不能为空")
     @Min(value = 1, message = "计划ID不能小于1")
     @ApiModelProperty(value = "计划ID", example = "0")
     private Long planId;

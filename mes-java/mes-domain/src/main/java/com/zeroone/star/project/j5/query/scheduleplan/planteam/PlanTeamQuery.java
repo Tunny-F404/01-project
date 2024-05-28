@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -23,7 +23,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @ApiModel("查询关联班组对象")
 public class PlanTeamQuery extends PageQuery {
-    @NotBlank(message = "计划ID不能为空")
+    @NotNull(message = "计划ID不能为空")
     @Min(value = 1, message = "计划ID不能小于1")
     @ApiModelProperty(value = "计划ID", example = "0")
     private Long planId;

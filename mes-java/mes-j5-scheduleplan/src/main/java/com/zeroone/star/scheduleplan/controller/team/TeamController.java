@@ -39,16 +39,18 @@ public class TeamController implements TeamApis {
         @PostMapping("/add")
         @ApiOperation("添加关联班组(支持多项添加)")
         @Override
-        public JsonVO<Integer> addPlanTeam(@Validated AddPlanTeamDTO addPlanTeamDTO) {
+        public JsonVO<Integer> addPlanTeam(@Validated List<AddPlanTeamDTO> addPlanTeamDTO) {
                 Integer res = planTeamService.addPlanTeam(addPlanTeamDTO);
                 return res == 1 ? JsonVO.success(res) : JsonVO.fail(res);
         }
 
-        @DeleteMapping("/delete")
-        @ApiOperation("删除关联班组")
-        @Override
-        public JsonVO<Integer> deletePlanTeam(@Min(value = 1, message = "id最小值为1") Integer recordId) {
+        public JsonVO<Integer> deletePlanTeam(Integer recordId) {
                 Integer res = planTeamService.deletePlanTeam(recordId);
                 return res == 1 ? JsonVO.success(res) : JsonVO.fail(res);
+        }
+        @DeleteMapping("/delete")
+        @ApiOperation("删除关联班组")
+        public JsonVO<Integer> deletePlanTeamValidated(@Min(value = 1, message = "id最小值为1") Integer recordId) {
+                return deletePlanTeam(recordId);
         }
 }
