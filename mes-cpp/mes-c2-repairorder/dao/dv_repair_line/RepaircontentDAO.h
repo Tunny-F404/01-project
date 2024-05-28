@@ -44,6 +44,6 @@ public:
 	// 修改数据
 	int update(const dv_repair_lineDO& uObj);
 	// 通过ID删除数据
-	int deleteById(uint64_t id,string name);
+	int deleteById(uint64_t id);
 };
 #endif // !_REPAIRCONTENT_DAO_

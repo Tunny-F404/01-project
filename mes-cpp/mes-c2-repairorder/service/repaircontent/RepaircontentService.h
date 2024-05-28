@@ -40,7 +40,7 @@ public:
 	// 修改数据
 	bool updateData(const ModifyRepaircontentDTO::Wrapper& dto);
 	// 通过ID删除数据
-	bool removeData(uint64_t id, string name);
+	bool removeData(uint64_t id);
 };
 
 #endif // !_SAMPLE_SERVICE_

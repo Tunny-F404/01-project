@@ -108,24 +108,18 @@ uint64_t RepaircontentDAO::insert(const dv_repair_lineDO& iObj)
 
 int RepaircontentDAO::update(const dv_repair_lineDO& uObj)
 {
-	string sql = "UPDATE `dv_repair_line` SET `subject_Name`=?, `Malfunction`=?, `Malfunction_url`=?,`repair_Des`=?,`subject_Code`=?,`subject_Type`=?,`subject_Content`=?,`Update_by`=?,`Update_time`=?  WHERE `subject_id`=? AND `repair_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%dt%ull%ull", 
+	string sql = "UPDATE `dv_repair_line` SET `subject_Name`=?, `Malfunction`=?, `Malfunction_url`=?,`repair_Des`=? WHERE `line_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%ull", 
 		uObj.getsubject_Name(), 
 		uObj.getMalfunction(),
 		uObj.getMalfunction_url(), 
 		uObj.getrepair_Des(), 
-		uObj.getsubject_Code(),
-		uObj.getsubject_Type(),
-		uObj.getsubject_Content(),
-		uObj.getUpdate_by(),
-		uObj.getUpdate_time(),
-		uObj.getsubject_Id(),
-		uObj.getrepair_Id()
+		uObj.getline_Id()
 	);
 }
 
-int RepaircontentDAO::deleteById(uint64_t id,string name)
+int RepaircontentDAO::deleteById(uint64_t id)
 {
-	string sql = "DELETE FROM `dv_repair_line` WHERE `repair_id`=? AND `subject_name`=?";
-	return sqlSession->executeUpdate(sql, "%ull%s", id,name);
+	string sql = "DELETE FROM `dv_repair_line` WHERE `line_id`=?";
+	return sqlSession->executeUpdate(sql, "%ull", id);
 }

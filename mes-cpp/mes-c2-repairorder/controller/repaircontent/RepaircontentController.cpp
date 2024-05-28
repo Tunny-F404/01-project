@@ -93,8 +93,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const Mod
 	auto jvo = Uint64JsonVO::createShared();
 
 	// 非空校验
-	if (!dto->subject_id ||
-		!dto->repair_id ||
+	if ( !dto->line_id ||
 		!dto->subject_name ||
 		!dto->repair_des ||
 		!dto->malfunction ||
@@ -108,10 +107,10 @@ Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const Mod
 	RepaircontentService service;
 	// 执行数据新增
 	if (service.updateData(dto)) {
-		jvo->success(dto->repair_id);
+		jvo->success(dto->line_id);
 	}
 	else {
-		jvo->fail(dto->repair_id);
+		jvo->fail(dto->line_id);
 	}
 	// 响应结果
 	return jvo;
@@ -126,9 +125,9 @@ Uint64JsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const Del
 	uint64_t cnt = 0; // 执行成功计数
 	// 定义一个Service
 	RepaircontentService service;
-	for (const String& it : *id->subject_nameList) { // 不用校验, 失败不管 (隐藏字段, 一般不会有问题)
+	for (const uint64_t& it : *id->line_idList) { // 不用校验, 失败不管 (隐藏字段, 一般不会有问题)
 		if (it) {
-			cnt += service.removeData(*id->repair_id,it);
+			cnt += service.removeData(it);
 		}
 	}
 	jvo->success(cnt);

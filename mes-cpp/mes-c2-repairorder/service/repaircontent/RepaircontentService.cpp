@@ -118,20 +118,14 @@ bool RepaircontentService::updateData(const ModifyRepaircontentDTO::Wrapper& dto
 		Malfunction, malfunction, 
 		Malfunction_url, malfunction_url, 
 		repair_Des, repair_des,
-		subject_Code, subject_code,
-		subject_Type,subject_type,
-		subject_Content,subject_content,
-		Update_by,update_by,
-		Update_time,update_time,
-		subject_Id,subject_id,
-		repair_Id,repair_id
+		line_Id,line_id
 		)
 		RepaircontentDAO dao;
 	return dao.update(data) == 1;
 }
 
-bool RepaircontentService::removeData(uint64_t id,string name)
+bool RepaircontentService::removeData(uint64_t id)
 {
 	RepaircontentDAO dao;
-	return dao.deleteById(id,name) == 1;
+	return dao.deleteById(id) == 1;
 }

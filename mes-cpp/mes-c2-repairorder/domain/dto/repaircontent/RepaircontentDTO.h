@@ -89,10 +89,9 @@ class AddRepaircontentDTO : public oatpp::DTO
 class ModifyRepaircontentDTO : public oatpp::DTO
 {
 	DTO_INIT(ModifyRepaircontentDTO, DTO);
-	//维修单id唯一标识(隐藏的)
-	API_DTO_FIELD(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.field.repair_id"), true, 1);
-	//项目id
-	API_DTO_FIELD(UInt64, subject_id, ZH_WORDS_GETTER("repaircontent.field.subject_id"), true, 1);
+
+	//行id(主键)
+	API_DTO_FIELD(UInt64, line_id, ZH_WORDS_GETTER("repaircontent.field.line_id"), true, 1);
 	//项目名称
 	API_DTO_FIELD(String, subject_name, ZH_WORDS_GETTER("repaircontent.field.subject_name"), true, "");
 	//故障描述
@@ -101,16 +100,6 @@ class ModifyRepaircontentDTO : public oatpp::DTO
 	API_DTO_FIELD(String, malfunction_url, ZH_WORDS_GETTER("repaircontent.field.malfunction_url"), true, "");
 	//维修情况
 	API_DTO_FIELD(String, repair_des, ZH_WORDS_GETTER("repaircontent.field.repair_des"), true, "");
-	//项目编码
-	API_DTO_FIELD(String, subject_code, ZH_WORDS_GETTER("repaircontent.field.subject_code"), true, "");
-	//项目类型
-	API_DTO_FIELD(String, subject_type, ZH_WORDS_GETTER("repaircontent.field.subject_type"), true, "");
-	//项目内容
-	API_DTO_FIELD(String, subject_content, ZH_WORDS_GETTER("repaircontent.field.subject_content"), true, "");
-	//更新者
-	API_DTO_FIELD(String, update_by, ZH_WORDS_GETTER("repaircontent.field.update_by"), true, "");
-	//更新时间
-	API_DTO_FIELD(String, update_time, ZH_WORDS_GETTER("repaircontent.field.update_time"), true, "");
 
 };
 
