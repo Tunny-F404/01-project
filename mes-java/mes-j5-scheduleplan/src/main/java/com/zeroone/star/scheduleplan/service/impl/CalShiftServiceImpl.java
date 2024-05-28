@@ -88,6 +88,7 @@ public class CalShiftServiceImpl extends ServiceImpl<CalShiftMapper, CalShift> i
 
         //查询calPlan表的shiftType
         String shiftType = existingCalPlan.getShiftType();
+        System.out.println(shiftType);
 
         //2、判断排班计划的排班种类是否为空
         // 2.1、判断shiftType是否与count数量对应
@@ -110,6 +111,13 @@ public class CalShiftServiceImpl extends ServiceImpl<CalShiftMapper, CalShift> i
 
         //执行添加数据
         CalShift calShift = msCalShiftPlanMapper.addShiftPlanToShiftPlan(shiftPlanAddDto);
+
+//        更新planCount数量
+//        if(updateCalPlanShiftCount(calShift.getPlanId()) < 1){
+//            throw new RuntimeException("更新班次数量失败");
+//        }
+
+        //调用更新
         return baseMapper.insert(calShift);
     }
 
@@ -126,14 +134,15 @@ public class CalShiftServiceImpl extends ServiceImpl<CalShiftMapper, CalShift> i
 
     @Override
     public int removeShiftPlan(List<Long> shiftIds) {
-        int totalDeleted = 0;
+        int deletedRow = 0;
         for(Long shiftId : shiftIds){
-            int deleteRow = baseMapper.delete(new QueryWrapper<CalShift>().eq("shift_id", shiftId));
-            if(deleteRow < 1){
+            int changeRow = baseMapper.delete(new QueryWrapper<CalShift>().eq("shift_id", shiftId));
+            if(changeRow < 1){
                 throw new RuntimeException("删除失败");
             }
-            totalDeleted += deleteRow;
+            deletedRow += changeRow;
         }
-        return totalDeleted;
+        return deletedRow;
     }
+
 }
