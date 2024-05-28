@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @Api(tags = "消息服务")
 @RequestMapping("/message-service")
+@ResponseBody
 public class MessageServiceController implements MessageServiceApis {
 
     /**
