@@ -29,10 +29,6 @@ import java.util.List;
 @ResponseBody
 public class MessageInfoController implements MessageInfoApis {
 
-    @Autowired
-    private ISysMessageService messageService;
-
-
     private static final Logger log = LoggerFactory.getLogger(MessageInfoController.class);
     @Autowired
     private ISysMessageService iSysMessageService;
@@ -41,7 +37,7 @@ public class MessageInfoController implements MessageInfoApis {
     @PostMapping("/delete-messages")
     @ApiOperation("删除消息")
     public JsonVO<List<Long>> removeMessages(@RequestBody List<Long> ids) {
-        List<Long> data = messageService.removeMessages(ids);
+        List<Long> data = iSysMessageService.removeMessages(ids);
         return !data.isEmpty() ? JsonVO.success(data) : JsonVO.fail(data);
     }
 
@@ -49,7 +45,7 @@ public class MessageInfoController implements MessageInfoApis {
     @GetMapping("/query-messages")
     @ApiOperation(("查询消息"))
     public JsonVO<List<SysMessageDTO>> queryMessage(@RequestBody MessageQuery query) {
-        List<SysMessageDTO> data = messageService.queryMessage(query);
+        List<SysMessageDTO> data = iSysMessageService.queryMessage(query);
         return JsonVO.success(data);
     }
 
@@ -57,7 +53,7 @@ public class MessageInfoController implements MessageInfoApis {
     @PostMapping("/modify-message")
     @ApiOperation("修改消息状态")
     public JsonVO<List<Long>> modifyMessageStatus(@RequestBody Long id) {
-        List<Long> data = messageService.modifyMessage(id);
+        List<Long> data = iSysMessageService.modifyMessage(id);
         return !data.isEmpty() ? JsonVO.success(data) : JsonVO.fail(data);
     }
 

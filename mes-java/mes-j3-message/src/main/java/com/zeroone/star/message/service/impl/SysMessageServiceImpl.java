@@ -14,16 +14,12 @@ import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j3.query.NewsPageQuery;
 import com.zeroone.star.project.j3.vo.SysMessageVO;
 import com.zeroone.star.project.j3.vo.UnreadMessageVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
