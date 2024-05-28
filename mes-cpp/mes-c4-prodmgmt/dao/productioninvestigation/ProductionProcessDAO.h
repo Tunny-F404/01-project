@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: amie
- @Date: 2022/10/25 11:52:32
+ @Date: 2022/10/25 14:23:49
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,22 +17,20 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _PROTASK_DO_
-#define _PROTASK_DO_
-#include "../DoInclude.h"
-
+#ifndef _PROCESS_DAO_
+#define _PROCESS_DAO_
+#include "BaseDAO.h"
+#include "../../domain/do/pro_process/ProProcessDO.h"
+#include "../../domain/query/productioninvestigation/ProductionProcessQuery.h"
 /**
- * 示例数据库实体类
+ * 示例表数据库操作实现
  */
-class ProTaskDO
+class ProductionProcessDAO : public BaseDAO
 {
-	CC_SYNTHESIZE(string, workorder_code, workOrderCode);
-	CC_SYNTHESIZE(int, process_id, processId);
 public:
-	ProTaskDO() {
-		workorder_code = "";
-		process_id = 0;
-	}
+	// 统计数据条数
+	uint64_t count(const ProductionProcessQuery::Wrapper& query);
+	// 通过工单编号查询
+	list<ProProcessDO> query_by_workordercode(const ProductionProcessQuery::Wrapper& query);
 };
-
-#endif // !_PEOTASK_DO_
+#endif // !_PROCESS_DAO_

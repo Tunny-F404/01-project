@@ -38,7 +38,4 @@ class ExportBomOrderJsonVO : public JsonVO<ExportBomOrderDTO::Wrapper> {
 class ExportBomOrderPageJsonVO : public JsonVO<ExportBomOrderPageDTO::Wrapper> {
 	DTO_INIT(ExportBomOrderPageJsonVO, JsonVO<ExportBomOrderPageDTO::Wrapper>);
 };
-
-#include OATPP_CODEGEN_END(DTO)
-
 #endif // !_BOM_VO_

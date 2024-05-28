@@ -35,7 +35,6 @@ public:
 	// 分页查询数据
 	list<ProWorkOrderDO> selectWithPage(const ExportOrderQuery::Wrapper& query);
 };
-#endif // !_ORDER_DAO_
 class ProWorkOrderBomDAO : public BaseDAO
 {
 public:
@@ -44,3 +43,4 @@ public:
 	// 分页查询数据
 	list<ProWorkOrderBomDO> selectWithPage(const ExportBomOrderQuery::Wrapper& query);
 };
+#endif // !_ORDER_DAO_

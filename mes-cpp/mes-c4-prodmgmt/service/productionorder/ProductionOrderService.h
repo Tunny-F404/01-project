@@ -17,8 +17,9 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _SAMPLE_SERVICE_
-#define _SAMPLE_SERVICE_
+#ifndef _ORDER_SERVICE_
+#define _ORDER_SERVICE_
+
 #include <list>
 #include "domain/vo/productionorder/ExportOrderVO.h"
 #include "domain/query/productionorder/ExportOrderQuery.h"
@@ -35,11 +36,10 @@ public:
 	// 分页查询所有数据
 	ExportOrderPageDTO::Wrapper listAll(const ExportOrderQuery::Wrapper& query);
 };
- 
-#endif // !_SAMPLE_SERVICE_
 class ProductionBomOrderService
 {
 public:
 	// 通过工单编号分页查询所有数据
 	ExportBomOrderPageDTO::Wrapper listAll(const ExportBomOrderQuery::Wrapper& query);
 };
+#endif // !_ORDER_SERVICE_

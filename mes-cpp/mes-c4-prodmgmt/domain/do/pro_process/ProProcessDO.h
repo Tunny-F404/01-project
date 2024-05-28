@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _ProProcess_DO_
-#define _ProProcess_DO_
+#ifndef _PROPROCESS_DO_
+#define _PROPROCESS_DO_
 #include "../DoInclude.h"
 
 /**
@@ -26,7 +26,7 @@
  */
 class ProProcessDO
 {
-	CC_SYNTHESIZE(string,process_name, processName);
+	CC_SYNTHESIZE(string, process_name, processName);
 	CC_SYNTHESIZE(int, process_id, processId);
 public:
 	ProProcessDO() {
@@ -35,4 +35,4 @@ public:
 	}
 };
 
-#endif // !_ProProcess_DO_
+#endif // !_PROPROCESS_DO_
