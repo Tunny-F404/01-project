@@ -35,10 +35,10 @@ public:
 	list<warehouseAreaDO> selectWithPage(const WarehouseAreaQuery::Wrapper& query);
 	//// 通过姓名查询数据
 	//list<SampleDO> selectByName(const string& name);
-	//// 插入数据
-	//uint64_t insert(const SampleDO& iObj);
-	//// 修改数据
-	//int update(const SampleDO& uObj);
+	// 插入数据
+	uint64_t insert(const warehouseAreaDO& iObj);
+	// 修改数据
+	int update(const warehouseAreaDO& uObj);
 	//// 通过ID删除数据
 	//int deleteById(uint64_t id);
 };

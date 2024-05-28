@@ -49,3 +49,30 @@ warehousePageDTO::Wrapper warehouseAreaService::listAll(const WarehouseAreaQuery
 	}
 	return pages;
 }
+
+uint64_t warehouseAreaService::saveData(const warehouseAreaListDTO::Wrapper& dto)
+{
+	// 组装DO数据
+	warehouseAreaDO data;
+	// 	data.setName(dto->name.getValue(""));
+	// 	data.setSex(dto->sex.getValue(""));
+	// 	data.setAge(dto->age.getValue(1));
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, AreaId, area_id, AreaCode, area_code, AreaName, area_name, Area, area, Remark, remark)
+	// 执行数据添加
+	warehouseAreaDAO dao;
+	return dao.insert(data);
+}
+
+bool warehouseAreaService::updateData(const warehouseAreaListDTO::Wrapper& dto)
+{
+	// 组装DO数据
+	warehouseAreaDO data;
+	// 	data.setId(dto->id.getValue(0));
+	// 	data.setName(dto->name.getValue(""));
+	// 	data.setSex(dto->sex.getValue(""));
+	// 	data.setAge(dto->age.getValue(1));
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, AreaId, area_id, AreaCode, area_code, AreaName, area_name, Area, area, Remark, remark)
+		// 执行数据修改
+	warehouseAreaDAO dao;
+	return dao.update(data) == 1;
+}

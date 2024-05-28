@@ -32,13 +32,61 @@ warehouseAreaPageJsonVO::Wrapper warehouseAreaController::execQueryWarehouseArea
 	jvo->success(result);
 	return jvo;
 }
+//添加库区--问题在于dto只包含area_id area_code area_name area remark,没有仓库ID(需由上一个仓库界面的调用口提供)
 Uint64JsonVO::Wrapper warehouseAreaController::execAddWarehouseArea(const warehouseAreaListDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验:编码和名称
+	if (!dto->area_code || !dto->area_name||!dto->area_id)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->area_code->empty() || dto->area_name->empty())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	warehouseAreaService service;
+	// 执行数据新增
+	uint64_t id = service.saveData(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }
 Uint64JsonVO::Wrapper warehouseAreaController::execModifyWarehouseArea(const warehouseAreaListDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->area_id || dto->area_id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	warehouseAreaService service;
+	// 执行数据修改
+	if (service.updateData(dto)) {
+		jvo->success(dto->area_id);
+	}
+	else
+	{
+		jvo->fail(dto->area_id);
+	}
+	// 响应结果
+	return jvo;
 }
 Uint64JsonVO::Wrapper warehouseAreaController::execRemoveWarehouseArea(const UInt64& id)
 {
