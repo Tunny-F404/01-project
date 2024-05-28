@@ -40,7 +40,7 @@ class warehouseAreaListDTO : public oatpp::DTO
 	////备注
 	//API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("warehouse-area.field.remark"));
 	//使用demo/sample里的定义方式
-	//唯一标识
+	//库区编号
 	DTO_FIELD(UInt64, area_id);
 	DTO_FIELD_INFO(area_id){ info->description = ZH_WORDS_GETTER("warehouse.field.id"); }
 	//编码

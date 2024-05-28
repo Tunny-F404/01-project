@@ -19,7 +19,7 @@
 #include "stdafx.h"
 #include "SampleService.h"
 #include "../../dao/sample/SampleDAO.h"
-//根据给定的分页查询对象返回查询对应的结果,类型为分页传输对象DTO
+//根据给定的query返回查询对应的结果,类型为分页传输对象DTO
 SamplePageDTO::Wrapper SampleService::listAll(const SampleQuery::Wrapper& query)
 {
 	// 构建返回对象
@@ -35,7 +35,7 @@ SamplePageDTO::Wrapper SampleService::listAll(const SampleQuery::Wrapper& query)
 		return pages;
 	}
 
-	// 分页查询数据
+	// 找到指定页的查询数据
 	pages->total = count;//记录符合query的数据个数
 	pages->calcPages();//根据每页大小pagesize计算一共有多少页
 	list<SampleDO> result = dao.selectWithPage(query);
@@ -47,7 +47,7 @@ SamplePageDTO::Wrapper SampleService::listAll(const SampleQuery::Wrapper& query)
 // 		dto->name = sub.getName();
 // 		dto->sex = sub.getSex();
 // 		dto->age = sub.getAge();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, id, Id, name, Name, sex, Sex, age, Age)
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, id, Id, name, Name, sex, Sex, age, Age)//将DO类型的sub数据传到dto上:dto.id=sub.getId(),dto.name=sub.getName,dto.sex=sub.getSex...
 		pages->addData(dto);
 		
 	}

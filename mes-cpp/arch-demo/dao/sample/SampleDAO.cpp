@@ -42,7 +42,7 @@ uint64_t SampleDAO::count(const SampleQuery::Wrapper & query)
 {
 	stringstream sql;
 	sql << "SELECT COUNT(*) FROM sample";
-	SAMPLE_TERAM_PARSE(query, sql);
+	SAMPLE_TERAM_PARSE(query, sql);//将query里的条件加入到sql语句里(query的name sex age)
 	string sqlStr = sql.str();
 	return sqlSession->executeQueryNumerical(sqlStr, params);
 }
