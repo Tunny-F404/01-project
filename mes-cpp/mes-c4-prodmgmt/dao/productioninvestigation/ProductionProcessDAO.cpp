@@ -19,32 +19,34 @@
 uint64_t ProductionProcessDAO::count(const ProductionProcessQuery::Wrapper& query)
 {
 	string sql;
-	if (query->workOrderCode)
+	if (query->itemCode)
 	{
-		sql = "SELECT COUNT(*) FROM from pro_process as p join pro_task as t on p.process_id = t.process_id where t.workorder_code = ?";
-		return sqlSession->executeQueryNumerical(sql, "%s", query->workOrderCode.getValue(""));
+		sql = "SELECT COUNT(*) FROM pro_route_process as p1 join pro_route_product as p2 on p1.route_id = p2.route_id where p2.item_code = ? ";
+		return sqlSession->executeQueryNumerical(sql, "%s", query->itemCode.getValue(""));
 	}
 	else
 	{
-		sql = "SELECT COUNT(*) FROM pro_process";
+		sql = "SELECT COUNT(*) FROM pro_process ";
 	}
 	return sqlSession->executeQueryNumerical(sql);
 }
-list<ProProcessDO> ProductionProcessDAO::query_by_workordercode(const ProductionProcessQuery::Wrapper& query)
+list<ProRouteProcessDO> ProductionProcessDAO::query_by_workordercode(const ProductionProcessQuery::Wrapper& query)
 {
 	stringstream sql;
-	if (query->workOrderCode)
+	if (query->itemCode)
 	{
-		sql << "select p.process_name from pro_process as p join pro_task as t on p.process_id = t.process_id where t.workorder_code = ? order by p.process_id";
+		sql << "select p1.process_name from pro_route_process as p1 join pro_route_product as p2 on p1.route_id = p2.route_id where p2.item_code = ? order by p1.process_id  ";
+		sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 		ProProcessDOMapper mapper;
 		string sqlStr = sql.str();
-		return sqlSession->executeQuery<ProProcessDO, ProProcessDOMapper>(sqlStr, mapper, "%s", query->workOrderCode.getValue(""));
+		return sqlSession->executeQuery<ProRouteProcessDO, ProProcessDOMapper>(sqlStr, mapper, "%s", query->itemCode.getValue(""));
 	}
 	else
 	{
-		sql << "SELECT process_name FROM pro_process by process_id";
+		sql << "SELECT process_name FROM pro_process order by process_id ";
 	}
+	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	ProProcessDOMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<ProProcessDO, ProProcessDOMapper>(sqlStr, mapper);
+	return sqlSession->executeQuery<ProRouteProcessDO, ProProcessDOMapper>(sqlStr, mapper);
 }

@@ -20,7 +20,7 @@
 #ifndef _PROCESS_DAO_
 #define _PROCESS_DAO_
 #include "BaseDAO.h"
-#include "../../domain/do/pro_process/ProProcessDO.h"
+#include "../../domain/do/pro_route_process/ProRouteProcessDO.h"
 #include "../../domain/query/productioninvestigation/ProductionProcessQuery.h"
 /**
  * 示例表数据库操作实现
@@ -31,6 +31,6 @@ public:
 	// 统计数据条数
 	uint64_t count(const ProductionProcessQuery::Wrapper& query);
 	// 通过工单编号查询
-	list<ProProcessDO> query_by_workordercode(const ProductionProcessQuery::Wrapper& query);
+	list<ProRouteProcessDO> query_by_workordercode(const ProductionProcessQuery::Wrapper& query);
 };
 #endif // !_PROCESS_DAO_

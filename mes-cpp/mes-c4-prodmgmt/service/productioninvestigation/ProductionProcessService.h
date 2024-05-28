@@ -30,6 +30,6 @@ class ProductionProcessService
 {
 public:
 	// 查询数据
-	ProductionProcessDTO::Wrapper listAll(const ProductionProcessQuery::Wrapper& query);
+	ProductionProcessPageDTO::Wrapper listAll(const ProductionProcessQuery::Wrapper& query);
 };
 #endif // !_PROCESS_SERVICE_

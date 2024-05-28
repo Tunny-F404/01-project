@@ -39,4 +39,6 @@ productionprocess:
   fields:
     process_name: 工序名称
     process_id:  工序ID
-    process_code: 工序编号  
+    process_code: 工序编号
+    item_code: 物料编号
+    route_id: 工艺路线ID

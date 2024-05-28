@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: amie
- @Date: 2022/10/25 11:36:29
+ @Date: 2022/10/25 11:52:32
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,21 +17,22 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _PROCESS_QUERY_
-#define _PROCESS_QUERY_
-
-#include "../../GlobalInclude.h"
-#include "domain/query/PageQuery.h"
-#include OATPP_CODEGEN_BEGIN(DTO)
+#ifndef _ROUTE_DO_
+#define _ROUTE_DO_
+#include "../DoInclude.h"
 
 /**
- * 
+ * 示例数据库实体类
  */
-class ProductionProcessQuery : public PageQuery 
+class ProRouteProductDO
 {
-	DTO_INIT(ProductionProcessQuery, PageQuery);
-	API_DTO_FIELD_DEFAULT(String, itemCode, ZH_WORDS_GETTER("productionprocess.query.fields.item_code"));
-};
+	CC_SYNTHESIZE(string, item_code, itemCode);
+	CC_SYNTHESIZE(int, route_id, routeId);
+public:
+	ProRouteProductDO()
+	{
+		item_code = "";
+		route_id = 0;
+	}
 
-#include OATPP_CODEGEN_END(DTO)
-#endif // !_PROCESS_QUERY_
+#endif // !_ROUTE_DO_

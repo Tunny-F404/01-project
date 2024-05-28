@@ -21,30 +21,18 @@
 #define _PROCESS_MAPPER_
 
 #include "Mapper.h"
-#include "../../domain/do/pro_process/ProProcessDO.h"
-#include "../../domain/do/pro_task/ProTaskDO.h"
+#include "../../domain/do/pro_route_process/ProRouteProcessDO.h"
 /**
  * 示例表字段匹配映射
  */
-class ProTaskDOMapper :public Mapper<ProTaskDO>
+class ProProcessDOMapper :public Mapper<ProRouteProcessDO>
 {
 public:
-	ProTaskDO mapper(ResultSet* resultSet)const override
+	ProRouteProcessDO mapper(ResultSet* resultSet)const override
 	{
-		ProTaskDO data;
-		data.setworkOrderCode(resultSet->getString(1));
-		data.setprocessId(resultSet->getInt(2));
-	}
-};
-
-class ProProcessDOMapper :public Mapper<ProProcessDO>
-{
-public:
-	ProProcessDO mapper(ResultSet* resultSet)const override
-	{
-		ProProcessDO data;
-		data.setprocessId(resultSet->getInt(1));
-		data.setprocessName(resultSet->getString(2));
+		ProRouteProcessDO data;
+		data.setprocessName(resultSet->getString(1));
+		return data;
 	}
 };
 #endif // !_PROCESS_MAPPER_

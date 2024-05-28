@@ -47,7 +47,7 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "workOrderCode", ZH_WORDS_GETTER("productionorder.query.fields.workorder_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "itemCode", ZH_WORDS_GETTER("productionprocess.query.fields.item_code"), "", false);
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/productionprocess/query-production-process", productionProcess,QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -58,7 +58,7 @@ public:
 	}
 private:
 	// 3.3 演示分页查询数据
-	ProductionProcessJsonVO::Wrapper execQueryProcess(const ProductionProcessQuery::Wrapper& query);
+	ProductionProcessPageJsonVO::Wrapper execQueryProcess(const ProductionProcessQuery::Wrapper& query);
 };
 
 // 0 取消API控制器使用宏

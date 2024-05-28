@@ -24,12 +24,14 @@
 /**
  * 示例数据库实体类
  */
-class ProProcessDO
+class ProRouteProcessDO
 {
+	CC_SYNTHESIZE(int, route_id, routeId);
 	CC_SYNTHESIZE(string, process_name, processName);
 	CC_SYNTHESIZE(int, process_id, processId);
 public:
-	ProProcessDO() {
+	ProRouteProcessDO() {
+		route_id = 0;
 		process_id = 0;
 		process_name = "";
 	}

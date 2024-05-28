@@ -19,24 +19,29 @@
 #include "stdafx.h"
 #include "ProductionProcessService.h"
 #include "../../dao/productioninvestigation/ProductionProcessDAO.h"
-ProductionProcessDTO::Wrapper ProductionProcessService::listAll(const ProductionProcessQuery::Wrapper& query)
+ProductionProcessPageDTO::Wrapper ProductionProcessService::listAll(const ProductionProcessQuery::Wrapper& query)
 {
 	// 构建返回对象
-	auto res = ProductionProcessDTO::createShared();
+	auto pages = ProductionProcessPageDTO::createShared();
 	// 查询数据总条数
+	pages->pageIndex = query->pageIndex;
+	pages->pageSize = query->pageSize;
 	ProductionProcessDAO dao;
 	uint64_t count = dao.count(query);
 	if (count <= 0)
 	{
-		return res;
+		return pages;
 	}
-	list<ProProcessDO> result = dao.query_by_workordercode(query);
+	// 分页查询数据
+	pages->total = count;
+	pages->calcPages();
+	list<ProRouteProcessDO> result = dao.query_by_workordercode(query);
 	// 将DO转换成DTO
-	for (ProProcessDO sub : result)
+	for (ProRouteProcessDO sub : result)
 	{
 		auto dto = ProductionProcessDTO::createShared();
-		dto->processName = sub.getprocessName();
-		res->addData(dto);
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, processName,processName);
+		pages->addData(dto);
 	}
-	return res;
+	return pages;
 }
