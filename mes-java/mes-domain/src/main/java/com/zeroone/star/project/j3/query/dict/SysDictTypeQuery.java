@@ -5,6 +5,7 @@ import com.zeroone.star.project.j3.query.PageQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -30,10 +31,11 @@ public class SysDictTypeQuery extends PageQuery implements Serializable {
     @ApiModelProperty(value = "状态(0正常 1停用)", example = "0")
     private String status;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建开始时间", example = "2022-04-07 00:29:32")
     private Date createBeginTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建结束时间", example = "2022-04-07 00:29:32")
     private Date createEndTime;
 }

@@ -1,23 +1,22 @@
 package com.zeroone.star.project.j3.sysmanager;
 
 
-import com.zeroone.star.project.j3.dto.InsertDictTypeDTO;
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j3.vo.DictDataNameVO;
-import com.zeroone.star.project.j3.vo.DictTypeNameVO;
-import com.zeroone.star.project.vo.JsonVO;
-import java.util.List;
+import com.zeroone.star.project.j3.dto.InsertDictTypeDTO;
 import com.zeroone.star.project.j3.dto.SysDictDataDTO;
 import com.zeroone.star.project.j3.dto.dict.*;
 import com.zeroone.star.project.j3.query.dict.SysDictDataQuery;
-import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
-import org.springframework.http.ResponseEntity;
 import com.zeroone.star.project.j3.query.dict.SysDictTypeModifyQuery;
+import com.zeroone.star.project.j3.query.dict.SysDictTypeQuery;
+import com.zeroone.star.project.j3.vo.DictDataNameVO;
+import com.zeroone.star.project.j3.vo.DictTypeNameVO;
+import com.zeroone.star.project.vo.JsonVO;
+import org.springframework.http.ResponseEntity;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 系统管理-字典管理相关接口
@@ -80,7 +79,7 @@ public interface DictionaryManageApis {
      * 字典类型接口
      */
     // 查询字典类型列表
-    JsonVO<PageDTO<SysDictTypeListDTO>> listDictType(SysDictTypeQuery dictTypeQuery);
+    JsonVO<PageDTO<SysDictTypeListDTO>> listDictType(@Valid SysDictTypeQuery dictTypeQuery);
 
     // 查询字典类型详情
     JsonVO<SysDictTypeDetailDTO> getDictType(@NotNull(message = "不能为空") Long dictId);
@@ -92,7 +91,7 @@ public interface DictionaryManageApis {
      *  字典数据接口
      */
     // 查询字典数据列表
-    JsonVO<PageDTO<SysDictDataListDTO>> listDictData(SysDictDataQuery dictDataQuery);
+    JsonVO<PageDTO<SysDictDataListDTO>> listDictData(@Valid SysDictDataQuery dictDataQuery);
 
     // 查询字典数据详情
     JsonVO<SysDictDataDetailDTO> getDictData(@NotNull(message = "不能为空") Long dictCode);

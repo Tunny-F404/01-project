@@ -20,7 +20,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -56,7 +55,7 @@ public class DictionaryManageController implements DictionaryManageApis {
     @GetMapping("/type/list")
     @ApiOperation("获取字典类型列表")
     @Override
-    public JsonVO<PageDTO<SysDictTypeListDTO>> listDictType(SysDictTypeQuery dictTypeQuery) {
+    public JsonVO<PageDTO<SysDictTypeListDTO>> listDictType(@Valid SysDictTypeQuery dictTypeQuery) {
         return sysDictTypeService.listDictType(dictTypeQuery);
     }
 
@@ -72,7 +71,7 @@ public class DictionaryManageController implements DictionaryManageApis {
     @PostMapping("/data/export")
     @ApiOperation("导出字典数据列表（excel）")
     @Override
-    public ResponseEntity<byte[]> exportDictData(@RequestBody SysDictDataExportDTO sysDictDataExportDTO) {
+    public ResponseEntity<byte[]> exportDictData(@RequestBody(required = false) SysDictDataExportDTO sysDictDataExportDTO) {
         return sysDictDataService.exportDictData(sysDictDataExportDTO);
     }
 

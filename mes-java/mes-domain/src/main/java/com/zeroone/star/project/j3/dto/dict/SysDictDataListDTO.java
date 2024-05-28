@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -42,7 +43,7 @@ public class SysDictDataListDTO implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间", example = "2022-04-07 00:29:32")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @ApiModelProperty(value = "备注", example = "用户性别列表")
     private String remark;
