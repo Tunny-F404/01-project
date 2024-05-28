@@ -26,14 +26,12 @@
  */
 class ProProcessDO
 {
-	CC_SYNTHESIZE(string, process_code, processCode);
-	CC_SYNTHESIZE(string,process_name, processName);
+	CC_SYNTHESIZE(int, workorder_id, processName);
 	CC_SYNTHESIZE(int, process_id, processId);
 public:
 	ProProcessDO() {
 		process_id = 0;
-		process_name = "";
-		process_code = "";
+		workorder_id=0;
 	}
 };
 

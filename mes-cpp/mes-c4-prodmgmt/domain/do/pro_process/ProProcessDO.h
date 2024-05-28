@@ -2,8 +2,8 @@
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: awei
- @Date: 2022/10/25 11:36:29
+ @Author: amie
+ @Date: 2022/10/25 11:52:32
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,22 +17,22 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _BOM_QUERY_
-#define _BOM_QUERY_
-
-#include "../../GlobalInclude.h"
-#include "domain/query/PageQuery.h"
-
-#include OATPP_CODEGEN_BEGIN(DTO)
+#ifndef _ProProcess_DO_
+#define _ProProcess_DO_
+#include "../DoInclude.h"
 
 /**
- * 示例分页查询对象
+ * 示例数据库实体类
  */
-class ExportBomOrderQuery : public PageQuery
+class ProProcessDO
 {
-	DTO_INIT(ExportBomOrderQuery, PageQuery);
-	API_DTO_FIELD_DEFAULT(String, workOrderCode, ZH_WORDS_GETTER("productionorder.query.fields.workroder_code"));
+	CC_SYNTHESIZE(string,process_name, processName);
+	CC_SYNTHESIZE(int, process_id, processId);
+public:
+	ProProcessDO() {
+		process_id = 0;
+		process_name = "";
+	}
 };
 
-#include OATPP_CODEGEN_END(DTO)
-#endif // !_BOM_QUERY_
+#endif // !_ProProcess_DO_

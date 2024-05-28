@@ -40,7 +40,7 @@ class ProWorkOrderDO
 	CC_SYNTHESIZE(double, quantity, pQuantity);
 	CC_SYNTHESIZE(double, quantity_produced, quantityProduced);
 	CC_SYNTHESIZE(double, quantity_changed, quantityChanged);
-	CC_SYNTHESIZE(double, quantity_scheduled, quantitySchedule);
+	CC_SYNTHESIZE(double, quantity_scheduled, quantityScheduled);
 	CC_SYNTHESIZE(int, client_id, clientId);
 	CC_SYNTHESIZE(string, client_code, clientCode);
 	CC_SYNTHESIZE(string, client_name, clientName);
@@ -49,7 +49,7 @@ class ProWorkOrderDO
 	CC_SYNTHESIZE(string, vendor_name, vendorName);
 	CC_SYNTHESIZE(string, finish_date, finishDate);
 	CC_SYNTHESIZE(string, request_date, requestDate);
-	CC_SYNTHESIZE(string, status, ostatus);
+	CC_SYNTHESIZE(string, status, status);
 public:
 	ProWorkOrderDO() {
 		workorder_code = "";
