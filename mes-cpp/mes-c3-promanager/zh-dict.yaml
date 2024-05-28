@@ -54,7 +54,7 @@ pro:
   proName: 工序名称
   proCode: 工序编码
   key_flag: 关键工序
-  kype: 与下一段工序的关系
+  type: 与下一段工序的关系
   check: 质检
   preTime: 准备时间
   sufTime: 等待时间

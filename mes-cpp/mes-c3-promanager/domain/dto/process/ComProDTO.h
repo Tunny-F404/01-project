@@ -46,13 +46,13 @@ class ComProListDTO : public oatpp::DTO
 	//下一道的工序关系
 	API_DTO_FIELD_DEFAULT(String, link_type, ZH_WORDS_GETTER("pro.fields.type"), false, "01star");
 	//是否质检
-	API_DTO_FIELD_DEFAULT(String, is_check, ZH_WORDS_GETTER("Pro.fields.Check"), true, "No");
+	API_DTO_FIELD_DEFAULT(String, is_check, ZH_WORDS_GETTER("pro.fields.check"), true, "No");
 	//准备时间
-	API_DTO_FIELD(Int32, default_pre_time, ZH_WORDS_GETTER("Pro.fields.PreTime"), false, 0);
+	API_DTO_FIELD(Int32, default_pre_time, ZH_WORDS_GETTER("pro.fields.preTime"), false, 0);
 	//等待时间
-	API_DTO_FIELD(Int32, default_suf_time, ZH_WORDS_GETTER("Pro.fields.SufTime"), false, 0);
+	API_DTO_FIELD(Int32, default_suf_time, ZH_WORDS_GETTER("pro.fields.sufTime"), false, 0);
 	//甘特图颜色
-	API_DTO_FIELD(String, color_code, ZH_WORDS_GETTER("Pro.fields.Color"), false, "red");
+	API_DTO_FIELD(String, color_code, ZH_WORDS_GETTER("pro.fields.color"), false, "red");
 
 };
 
@@ -72,7 +72,7 @@ class ModifyProDTO : public ComProListDTO
 	//初始化
 	DTO_INIT(ModifyProDTO, ComProListDTO);
 	//备注
-	API_DTO_FIELD(String, Remark, ZH_WORDS_GETTER("Pro.fields.Remark"), false, "");
+	API_DTO_FIELD(String, Remark, ZH_WORDS_GETTER("pro.fields.remark"), false, "");
 };
 /*
 新增组成工序
