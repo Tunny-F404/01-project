@@ -61,3 +61,9 @@ int warehouseAreaDAO::update(const warehouseAreaDO& uObj)
 	string sql = "UPDATE `wm_storage_location` SET `location_code`=?, `location_name`=?, `area`=?, `remark`=? WHERE `location_id`=?";
 	return sqlSession->executeUpdate(sql, "%s%s%i%s%ull", uObj.getAreaCode(), uObj.getAreaName(), uObj.getArea(), uObj.getRemark(), uObj.getAreaId());
 }
+
+int warehouseAreaDAO::deleteById(uint64_t id)
+{
+	string sql = "DELETE FROM `wm_storage_location` WHERE `location_id`=?";
+	return sqlSession->executeUpdate(sql, "%ull", id);
+}

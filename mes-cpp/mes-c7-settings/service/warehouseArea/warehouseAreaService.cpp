@@ -76,3 +76,9 @@ bool warehouseAreaService::updateData(const warehouseAreaListDTO::Wrapper& dto)
 	warehouseAreaDAO dao;
 	return dao.update(data) == 1;
 }
+
+bool warehouseAreaService::removeData(uint64_t id)
+{
+	warehouseAreaDAO dao;
+	return dao.deleteById(id) == 1;
+}

@@ -54,7 +54,7 @@ SamplePageDTO::Wrapper SampleService::listAll(const SampleQuery::Wrapper& query)
 	return pages;
 }
 
-uint64_t SampleService::saveData(const SampleDTO::Wrapper& dto)
+uint64_t SampleService::saveData(const SampleDTO::Wrapper& dto)//注意dto还包含id但是并没有用到！
 {
 	// 组装DO数据
 	SampleDO data;

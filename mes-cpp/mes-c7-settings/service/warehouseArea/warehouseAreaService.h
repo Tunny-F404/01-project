@@ -37,7 +37,7 @@ public:
 	// 修改数据
 	bool updateData(const warehouseAreaListDTO::Wrapper& dto);
 	// 通过ID删除数据
-	//bool removeData(uint64_t id);
+	bool removeData(uint64_t id);
 };
 
 #endif // !_WAREHOUSE_AREA_SERVICE_
