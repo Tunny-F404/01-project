@@ -58,10 +58,11 @@
             <el-icon size="25">
               <FullScreen />
             </el-icon>
-            <router-link to="/user/profile"><el-text style="display: inline-flex; color: #f8f8f8;" size="large">{{
-                userInfo }}</el-text></router-link>
+            <router-link to="/user/profile">
+              <el-text style="color: #f8f8f8; font-size: large; font-size: 25px;" >{{ userInfo }}</el-text>
+            </router-link>
           </div>
-        </el-header>
+        </el-header> 
         <el-main>
           <!-- 布局路由 -->
           <router-view />
@@ -107,13 +108,15 @@
     color: #f8f8f8;
     text-align: left;
   }
+  // 右侧常用导航功能
   .header-nav {
     padding: 20px;
     background-color: #6c777f;
     width: 100%;
     color: #f8f8f8;
-    text-align: right;
-
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     .el-icon{
       margin-right: 5px;
     }

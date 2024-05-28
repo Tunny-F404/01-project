@@ -9,7 +9,7 @@ let testMenus = [
     children: [
       {
         id: 2,
-        text: '个人中心',
+        text: '物料产品分类',
         href: '/un-1',
         icon: 'IconSetting',
         pid: 1
