@@ -159,7 +159,6 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
 
         for (MdItem mdItem : items)
         {
-            validateMdItem(mdItem);
             try{
                 //是否存在
                 MdItem  m = mdItemMapper.checkItemCodeUnique(mdItem);
@@ -199,9 +198,9 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @return 结果
      */
     private void insertMdItem(MdItem mdItem) throws Exception {
-        UserDTO userDTO  = userHolder.getCurrentUser();
-        mdItem.setCreateBy(userDTO.getUsername());
-        mdItem.setCreateTime(DateTime.now().toLocalDateTime());
+//        UserDTO userDTO  = userHolder.getCurrentUser();
+//        mdItem.setCreateBy(userDTO.getUsername());
+//        mdItem.setCreateTime(DateTime.now().toLocalDateTime());
         mdItemMapper.insertMdItem(mdItem);
     }
 
@@ -212,13 +211,10 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @return 结果
      */
     private void updateMdItem(MdItem mdItem) throws Exception {
-        UserDTO userDTO  = userHolder.getCurrentUser();
-        mdItem.setUpdateBy(userDTO.getUsername());
-        mdItem.setUpdateTime(DateTime.now().toLocalDateTime());
+//        UserDTO userDTO  = userHolder.getCurrentUser();
+//        mdItem.setUpdateBy(userDTO.getUsername());
+//        mdItem.setUpdateTime(DateTime.now().toLocalDateTime());
         mdItemMapper.updateMdItem(mdItem);
     }
 
-    private void validateMdItem(@Valid @NotNull MdItem mdItem) {
-        // 此方法仅用于触发验证
-    }
 }
