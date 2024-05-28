@@ -45,7 +45,7 @@ public class SysNotice implements Serializable {
     /**
      * 公告内容
      */
-    private Blob noticeContent;
+    private String noticeContent;
 
     /**
      * 公告状态（0正常 1关闭）
