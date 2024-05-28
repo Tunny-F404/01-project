@@ -101,7 +101,14 @@ public class DictionaryManageController implements DictionaryManageApis {
     @ApiOperation(value = "修改字典数据接口")
     @PutMapping("modify-dict-data")
     public JsonVO<Integer> modifyDictData(@RequestBody SysDictDataDTO sysDictDataDTO) {
-        return null;
+        UserDTO currentUser;
+        try {
+            currentUser = userHolder.getCurrentUser();
+        } catch (Exception e) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), ResultStatus.FAIL.getMessage());
+        }
+        Integer data = sysDictDataService.updateDictData(sysDictDataDTO, currentUser);
+        return JsonVO.success(data);
     }
 
     @ApiOperation(value = "新增字典类别")
