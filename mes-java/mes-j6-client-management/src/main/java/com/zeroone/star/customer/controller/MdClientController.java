@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -89,10 +90,13 @@ public class MdClientController implements ClientApis {
 
     @GetMapping(value = "/export/queryClientExport", produces = "application/octet-stream")
     @ApiOperation(value = "导出客户")
-    public ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids) {
-        return clientService.queryClientExportByExcel(ids);
+    public ResponseEntity<byte[]> queryClientExportByExcel(@RequestParam(value="ids",required=true)List<Long> ids) {
+        try {
+            return clientService.queryClientExportByExcel(ids);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
     @GetMapping(value = "/import/importTemplate", produces = "application/octet-stream")
     @ApiOperation(value = "下载导入客户的模板")
     @Override

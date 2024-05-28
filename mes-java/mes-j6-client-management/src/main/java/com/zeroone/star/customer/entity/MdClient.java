@@ -1,5 +1,7 @@
 package com.zeroone.star.customer.entity;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,148 +19,93 @@ public class MdClient implements Serializable {
     /**
      * 客户ID
      */
+    @ExcelProperty("客户id")
     @TableId(value = "client_id", type = IdType.AUTO)
     private Long clientId;
 
-    /**
-     * 客户编码
-     */
+    @ExcelProperty("客户编码")
     private String clientCode;
 
-    /**
-     * 客户名称
-     */
+    @ExcelProperty("客户名称")
     private String clientName;
 
-    /**
-     * 客户简称
-     */
+    @ExcelProperty("客户简称")
     private String clientNick;
 
-    /**
-     * 客户英文名称
-     */
+    @ExcelProperty("客户英文名称")
     private String clientEn;
 
-    /**
-     * 客户简介
-     */
+    @ExcelProperty("客户简介")
     private String clientDes;
 
-    /**
-     * 客户LOGO地址
-     */
+    @ExcelProperty("客户LOGO地址")
     private String clientLogo;
 
-    /**
-     * 客户类型
-     */
+    @ExcelProperty("客户类型")
     private String clientType;
 
-    /**
-     * 客户地址
-     */
+    @ExcelProperty("客户地址")
     private String address;
 
-    /**
-     * 客户官网地址
-     */
+    @ExcelProperty("客户官网地址")
     private String website;
 
-    /**
-     * 客户邮箱地址
-     */
+    @ExcelProperty("客户邮箱地址")
     private String email;
 
-    /**
-     * 客户电话
-     */
+    @ExcelProperty("客户电话")
     private String tel;
 
-    /**
-     * 联系人1
-     */
+    @ExcelProperty("联系人1")
     private String contact1;
 
-    /**
-     * 联系人1-电话
-     */
+    @ExcelProperty("联系人1-电话")
     private String contact1Tel;
 
-    /**
-     * 联系人1-邮箱
-     */
+    @ExcelProperty("联系人1-邮箱")
     private String contact1Email;
 
-    /**
-     * 联系人2
-     */
+    @ExcelProperty("联系人2")
     private String contact2;
 
-    /**
-     * 联系人2-电话
-     */
+    @ExcelProperty("联系人2-电话")
     private String contact2Tel;
 
-    /**
-     * 联系人2-邮箱
-     */
+    @ExcelProperty("联系人2-邮箱")
     private String contact2Email;
 
-    /**
-     * 统一社会信用代码
-     */
+    @ExcelProperty("统一社会信用代码")
     private String creditCode;
 
-    /**
-     * 是否启用
-     */
+    @ExcelProperty("是否启用")
     private String enableFlag;
 
-    /**
-     * 备注
-     */
+    @ExcelProperty("备注")
     private String remark;
 
-    /**
-     * 预留字段1
-     */
+    @ExcelProperty("预留字段1")
     private String attr1;
 
-    /**
-     * 预留字段2
-     */
+    @ExcelProperty("预留字段2")
     private String attr2;
 
-    /**
-     * 预留字段3
-     */
+    @ExcelProperty("预留字段3")
     private Integer attr3;
 
-    /**
-     * 预留字段4
-     */
+    @ExcelProperty("预留字段4")
     private Integer attr4;
 
-    /**
-     * 创建者
-     */
+    @ExcelIgnore
     private String createBy;
 
-    /**
-     * 创建时间
-     */
     @TableField(fill = FieldFill.INSERT)
+    @ExcelIgnore
     private LocalDateTime createTime;
 
-    /**
-     * 更新者
-     */
+    @ExcelIgnore
     private String updateBy;
 
-    /**
-     * 更新时间
-     */
+    @ExcelIgnore
     private LocalDateTime updateTime;
 
 

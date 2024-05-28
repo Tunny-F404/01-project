@@ -10,19 +10,17 @@ import com.zeroone.star.customer.entity.MdClientExcel;
 import com.zeroone.star.customer.mapper.MdClientMapper;
 import com.zeroone.star.customer.service.IMdClientService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
-import com.zeroone.star.project.components.easyexcel.ExcelReadListener;
+
 import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
-import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientPageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
-import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
 import lombok.SneakyThrows;
-import lombok.val;
+
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -36,12 +34,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.BufferedInputStream;
-import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Mapper(componentModel = "spring")
 interface msClientMapper {
@@ -207,9 +204,9 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
         return msClientMapper.clientToClientDTO(mdClient);
     }
 
-
+    @SneakyThrows
     @Override
-    public ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids) {
+    public ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids)  {
         List<MdClient> clientList = new ArrayList<>();
         for (Long id : ids) {
             MdClient mdClient = mdClientMapper.selectById(id);
@@ -218,24 +215,30 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
             }
         }
 
+        // 判断客户列表是否为空
         if (clientList.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            // 返回无可导出数据的提示
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("没有可导出的客户数据".getBytes());
         }
 
-        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-            easyExcelComponent.export("客户列表", outputStream, MdClient.class, clientList);
-            byte[] bytes = outputStream.toByteArray();
-            HttpHeaders headers = new HttpHeaders();
-            String filename = "clients-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
-            headers.setContentDispositionFormData("attachment", filename);
-            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-            return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        // 导出数据到输出流
+        easyExcelComponent.export("客户列表", out, MdClient.class, clientList);
+        // 获取字节数据
+        byte[] bytes = out.toByteArray();
+        try {
+            out.close();
         } catch (IOException e) {
-            // 记录日志并返回错误信息
-            log.error("导出Excel文件时发生错误", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(("导出Excel文件时发生错误：" + e.getMessage()).getBytes());
+            // 处理关闭流时的异常
+            e.printStackTrace();
         }
+        HttpHeaders headers = new HttpHeaders();
+        String filename = "report-" + DateTime.now().toString("yyyyMMddHHmmssS") + ".xlsx";
+        headers.setContentDispositionFormData("attachment", filename);
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        // 响应文件给客户端
+        return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
 
 
@@ -365,11 +368,8 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
         HttpHeaders headers = new HttpHeaders();
         String filename = "report-" + DateTime.now().toString("yyyyMMddHHmmssS") + ".xlsx";
         headers.setContentDispositionFormData("attachment", filename);
-        headers.setContentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         // 响应文件给客户端
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentLength(bytes.length)
-                .body(bytes);
+        return new ResponseEntity<>(bytes,headers,HttpStatus.CREATED);
     }
 }

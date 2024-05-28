@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import java.io.IOException;
 import java.util.List;
 
 public interface ClientApis {
@@ -38,7 +39,7 @@ public interface ClientApis {
      * @param
      * @return 导出结果
      */
-    ResponseEntity<byte[]> queryClientExportByExcel(List<Long> id);
+    ResponseEntity<byte[]> queryClientExportByExcel(List<Long> id) throws IOException;
 
     /**
      * @param customer 数据集
