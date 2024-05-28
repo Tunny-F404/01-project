@@ -10,7 +10,6 @@
  */
 class InspectDO
 {
-	
 	// 来料检验单id
 	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
 	// 来料检验单编号
@@ -82,43 +81,66 @@ class InspectDO
 	//备注
 	CC_SYNTHESIZE(string, remark, Remark);
 	//预留字段1
+	CC_SYNTHESIZE(string, attr1, Attr1);
 	//预留字段2
+	CC_SYNTHESIZE(string, attr2, Attr2);
 	//预留字段3
+	CC_SYNTHESIZE(int, attr3, Attr3);
 	//预留字段4
+	CC_SYNTHESIZE(int, attr4, Attr4);
 	//创建者
+	CC_SYNTHESIZE(string, create_by, Create_by);
 	//创建时间
+	CC_SYNTHESIZE(string, create_time, Create_time);
 	//更新者
+	CC_SYNTHESIZE(string, update_by, Update_by);
 	//更新时间
-
+	CC_SYNTHESIZE(string, update_time, Update_time);
 public:
 	InspectDO() {
 		line_id = 0;
 		code = "";
 		name = "";
 		template_id = 0;
+		source_doc_id = 0;
+		source_doc_type = "";
+		source_doc_code = "";
+		source_line_id = 0;
 		vendor_id = 0;
 		vendor_code = "";
 		vendor_name = "";
 		vd_nick = "";
 		vd_batch = "";
+		item_id = 0;
 		item_code = "";
 		item_name = "";
+		specification = "";
+		unit_of_measure = "";
+		quantity_min_check = 0;
+		quantity_max_unqualified = 0;
 		quantity_recived = 0;
 		quantity_check = 0;
 		quantity_unqualified = 0;
-		check_result = "";
-		recive_date = "";
-		inspect_date = "";
-		inspector = "";
-		list_status = "";
-		unit_of_measure = "";
 		maj_rate = 0;
 		cr_rate = 0;
 		min_rate = 0;
 		cr_quantity = 0;
 		maj_quantity = 0;
 		min_quantity = 0;
+		check_result = "";
+		recive_date = "";
+		inspect_date = "";
+		inspector = "";
+		list_status = "";
 		remark = "";
+		attr1 = "";
+		attr2 = "";
+		attr3 = 0;
+		attr4 = 0;
+		create_by = "";
+		create_time = "";
+		update_by = "";
+		update_time = "";
 	}
 };
 
