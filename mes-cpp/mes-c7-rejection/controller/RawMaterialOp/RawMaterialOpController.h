@@ -5,13 +5,13 @@
 #include "domain/vo/BaseJsonVO.h"
 #include "ServerInfo.h"
 #include "domain/dto/RawMaterialOp/RawMaterialOpDTO.h"
-<<<<<<< HEAD
-#include "domain/query/RawMaterialOpQuery.h"
+
+#include "domain/query/RawMaterialOp/RawMaterialOpQuery.h"
 #include "domain/vo/RawMaterialOp/RawMaterialOpVO.h"
 //=======
 #include "domain/query/RawMaterialOp/RawMaterialOpQuery.h"
 #include "domain/vo/RawMaterialOp/RawMaterialOpVO.h"
->>>>>>> eacdd621b46186346b0bdd7de60075b87f3672c3
+
 #include "ExcelComponent.h"
 
 //#include "ApiHelper.h"

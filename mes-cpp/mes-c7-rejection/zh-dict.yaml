@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 materialinformation:
  get:
   summary: 分页查询示例数据
@@ -17,7 +15,6 @@ materialinformation:
   date: 退料日期
   common: 备注
  
->>>>>>> eacdd621b46186346b0bdd7de60075b87f3672c3
 RawMaterialOp:
  get:
   summary: 生产退料单据列表导出
@@ -38,9 +35,7 @@ RawMaterialOp:
   download: 
    summary: 退料单据导出
    filename: 导出文件名称和格式
-<<<<<<< HEAD
- 
-=======
+
  reject: 
  fields:
   rt_code: 退料单编号
@@ -65,4 +60,4 @@ RawMaterialOp:
   location_code: 库区编码
   area_id: 库位id
   area_code: 库位编码
->>>>>>> eacdd621b46186346b0bdd7de60075b87f3672c3
+
