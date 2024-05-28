@@ -1,5 +1,0 @@
-server:
-  port: ${sp.customer}
-spring:
-  application:
-    name: ${sn.customer}

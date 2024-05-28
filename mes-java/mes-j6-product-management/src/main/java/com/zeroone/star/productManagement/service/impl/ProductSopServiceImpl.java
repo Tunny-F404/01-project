@@ -9,11 +9,15 @@ import com.zeroone.star.productManagement.mapper.ProductSopMapper;
 import com.zeroone.star.productManagement.service.IProductSopService;
 import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.product_management.dto.ProductSopDTO;
 import com.zeroone.star.project.j6.product_management.query.ProductSopQuery;
+import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.SneakyThrows;
+import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,8 +26,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
-
+/**
+ * StopWord对应MapStruct映射接口
+ */
+@Mapper(componentModel = "spring")
+interface  MsProductSopMapper{
+    /**
+     * 查询停用词
+     * 将实体类DO转换为dto
+     *
+     * @param sop 待转换DO
+     * @return 转换结果
+     */
+    static ProductSopDTO ProductSopToProductSopDTO(ProductSop sop) {
+        return null;
+    }
+}
 @Service
 public class ProductSopServiceImpl extends ServiceImpl<ProductSopMapper, ProductSop> implements IProductSopService {
     @Autowired
@@ -32,19 +52,21 @@ public class ProductSopServiceImpl extends ServiceImpl<ProductSopMapper, Product
     FastDfsClientComponent dfs;
     @Value("${fastdfs.nginx-servers}")
     String urlPrefix;
+    @Resource
+    private UserHolder userHolder;
     @Override
     public PageDTO<ProductSopDTO> selectProductSopPage(ProductSopQuery query) {
         //构建分页条件对象
-        Page page = new Page<>(query.getPageIndex(),query.getPageSize());
+        Page<ProductSop> page = new Page<>(query.getPageIndex(),query.getPageSize());
         //构建查询条件
         QueryWrapper<ProductSop> queryWrapper = new QueryWrapper<>();
-        if (StringUtils.isNotBlank(query.getSopTitle())) {
-            queryWrapper.like("title",query.getSopTitle());
+        if (query.getItemId()>0) {
+            queryWrapper.like("title",query.getItemId());
         }
         //执行查询
         page= baseMapper.selectPage(page,queryWrapper);
-        PageDTO<ProductSopDTO> sop = PageDTO.create(page);
-        return sop;
+        Page<ProductSop> result = baseMapper.selectPage(page, queryWrapper);
+        return PageDTO.create(result, MsProductSopMapper::ProductSopToProductSopDTO);
     }
 
     @Override
@@ -53,23 +75,63 @@ public class ProductSopServiceImpl extends ServiceImpl<ProductSopMapper, Product
     }
 
     @Override
-    public void insertProductSop(ProductSopDTO dto) {
-        ProductSopMapper.insertProductSop(dto);
+    public boolean insertProductSop(ProductSopDTO dto) {
+        UserDTO currentUser = null;
+        try {
+            currentUser = userHolder.getCurrentUser();
+        } catch (Exception e) {
+            log.error("解析用户失败！！！",e);
+        }
+        if (dto == null || dto.getSopTitle() == null||selectProductSopById(dto.getSopId()) != null) {
+            return false;
+        }else {
+            ProductSop sop =new ProductSop();
+            sop.setSopId(dto.getSopId());
+            sop.setItemId(dto.getItemId());
+            sop.setSopTitle(dto.getSopTitle());
+            sop.setOrderNum(dto.getOrderNum());
+            sop.setSopDescription(dto.getSopDescription());
+            sop.setProcessId(dto.getProcessId());
+            sop.setCreateBy(currentUser != null ? currentUser.getUsername() : "unknown");
+            sop.setCreateTime(LocalDateTime.now());
+            return save(sop);
+        }
     }
 
     @Override
-    public void updateProductSop(ProductSopDTO dto) {
-        ProductSopMapper.updateProductSop(dto);
+    public boolean updateProductSop(ProductSopDTO dto) {
+        UserDTO currentUser = null;
+        try {
+            currentUser = userHolder.getCurrentUser();
+        } catch (Exception e) {
+            log.error("解析用户失败！！！");
+        }
+        //数据封装
+        ProductSop sop =new ProductSop();
+        sop.setSopId(dto.getSopId());
+        sop.setItemId(dto.getItemId());
+        sop.setSopTitle(dto.getSopTitle());
+        sop.setOrderNum(dto.getOrderNum());
+        sop.setSopDescription(dto.getSopDescription());
+        sop.setProcessId(dto.getProcessId());
+        sop.setUpdateTime(LocalDateTime.now());
+        sop.setUpdateBy(currentUser != null ? currentUser.getUsername() : "unknown");
+        boolean success  = ProductSopMapper.updateById(sop)>0;
+        if (success) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void deleteProductSopByIds(Long[] ids) {
+    public boolean deleteProductSopByIds(Long[] ids) {
         ProductSopMapper.deleteProductSopByIds(ids);
+        return true;
+
 }
     @Override
     @SneakyThrows
     @ResponseBody
-    @PostMapping("upload")
     @ApiOperation(value = "上传文件")
     public String uploadFile(MultipartFile file) {
         try {

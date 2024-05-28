@@ -1,11 +1,12 @@
 package com.zeroone.star.customer.controller;
 
+
 import com.zeroone.star.customer.service.IMdClientService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.ClientApis;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
+import com.zeroone.star.project.j6.customer.dto.ClientPageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
-import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -26,16 +27,27 @@ public class MdClientController implements ClientApis {
     @Resource
     IMdClientService clientService;
 
-    @ApiOperation(value = "新增客户")
-    @PostMapping("add-client")
-    @Override
-    public JsonVO<String> addClient(@Validated @RequestBody ClientDTO client) {
-        boolean isAdded = clientService.addClient(client);
-        if (isAdded) {
+    private JsonVO<String> getStringJsonVO(int isOperated) {
+        if (isOperated == 1) {
             return JsonVO.success(null);
+        } else if (isOperated == 2) {
+            return JsonVO.create(null, 9999, "客户名称已存在");
+        } else if (isOperated == 3) {
+            return JsonVO.create(null, 9999, "客户编码已存在");
+        } else if (isOperated == 23) {
+            return JsonVO.create(null, 9999, "客户编码和名称均已存在");
         }
         return JsonVO.fail(null);
     }
+
+    @ApiOperation(value = "新增客户")
+    @PostMapping("add-client")
+    @Override
+    public JsonVO<String> addClient(@RequestBody ClientDTO client) {
+        int isAdded = clientService.addClient(client);
+        return getStringJsonVO(isAdded);
+    }
+
 
     @ApiOperation("删除客户")
     @DeleteMapping("delete-clients")
@@ -49,46 +61,39 @@ public class MdClientController implements ClientApis {
     }
 
     @ApiOperation("更新客户")
-    @PutMapping("update-client/{id}")
+    @PutMapping("update-client")
     @Override
-    public JsonVO<String> updateClient(@PathVariable Long id, @Validated @RequestBody ClientUpdateDTO client) {
-        client.setClientId(id);
-        boolean isUpdated = clientService.updateClient(client);
-        if (isUpdated) {
-            return JsonVO.success(null);
-        }
-        return JsonVO.fail(null);
+    public JsonVO<String> updateClient(@RequestBody ClientUpdateDTO client) {
+        int isUpdated = clientService.updateClient(client);
+        return getStringJsonVO(isUpdated);
     }
 
+
     @ApiOperation("查询客户列表")
-    @GetMapping("query-all")
+    @PostMapping("query-all")
     @Override
-    public JsonVO<PageDTO<ClientDTO>> queryAll(@RequestBody ClientQuery query) {
-        PageDTO<ClientDTO> clients = clientService.listAll(query);
-        if (clients == null) {
-            return JsonVO.fail(null);
-        }
+    public JsonVO<PageDTO<ClientPageDTO>> queryAll(@RequestBody ClientQuery query) {
+        PageDTO<ClientPageDTO> clients = clientService.listAll(query);
         return JsonVO.success(clients);
     }
+
 
     @ApiOperation("根据ID查询客户")
     @GetMapping("query-one/{id}")
     @Override
     public JsonVO<ClientDTO> queryById(@PathVariable Long id) {
         ClientDTO client = clientService.getById(id);
-        if (client == null) {
-            return JsonVO.fail(null);
-        }
         return JsonVO.success(client);
     }
 
-    @PostMapping(value = "/export/queryClientExport", produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+
+    @GetMapping(value = "/export/queryClientExport", produces = "application/octet-stream")
     @ApiOperation(value = "导出客户")
-    public ResponseEntity<byte[]> queryClientExportByExcel( List<Long> ids) {
+    public ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids) {
         return clientService.queryClientExportByExcel(ids);
     }
 
-    @PostMapping(value = "/import/importTemplate", produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    @GetMapping(value = "/import/importTemplate", produces = "application/octet-stream")
     @ApiOperation(value = "下载导入客户的模板")
     @Override
     public ResponseEntity<byte[]> DownloadTemplate() {

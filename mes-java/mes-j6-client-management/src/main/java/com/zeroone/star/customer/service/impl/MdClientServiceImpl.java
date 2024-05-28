@@ -15,14 +15,15 @@ import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientDTO;
+import com.zeroone.star.project.j6.customer.dto.ClientPageDTO;
 import com.zeroone.star.project.j6.customer.dto.ClientUpdateDTO;
+import com.zeroone.star.project.j6.customer.query.ClientExportQuery;
 import com.zeroone.star.project.j6.customer.query.ClientQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
 import lombok.SneakyThrows;
 import lombok.val;
 import org.mapstruct.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.BufferedInputStream;
+import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,16 +62,24 @@ interface msClientMapper {
      * @Description 将clientUpdateDTO对象转换为MdClient对象
      **/
     MdClient clientUpdateDTOToMdClient(ClientUpdateDTO clientUpdateDTO);
+
+    /**
+     * @return com.zeroone.star.project.j6.customer.dto.ClientPageDTO
+     * @Description 将MdClient对象转换为clientPageDTO对象
+     **/
+    ClientPageDTO clientToClientPageDTO(MdClient client);
+
 }
 
 @Service
 @Transactional
 public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> implements IMdClientService {
 
-    @Autowired
+    @Resource
     EasyExcelComponent easyExcelComponent;
-    @Autowired
+    @Resource
     FastDfsClientComponent dfs;
+
     @Value("${fastdfs.nginx-servers}")
     String urlPrefix;
     QueryWrapper<MdClient> queryWrapper;
@@ -79,12 +89,31 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
     private msClientMapper msClientMapper;
 
     @Override
-    public boolean addClient(ClientDTO client) {
+    public int addClient(ClientDTO client) {
         // 将ClientDTO对象转换为DO
         MdClient mdClient = msClientMapper.clientDTOToMdClient(client);
 
+        // 判断客户名称是否存在
+        QueryWrapper<MdClient> nameQueryWrapper = new QueryWrapper<>();
+        nameQueryWrapper.eq("client_name", client.getClientName());
+        MdClient existingNameClient = mdClientMapper.selectOne(nameQueryWrapper);
+
+        // 判断客户编码是否存在
+        QueryWrapper<MdClient> codeQueryWrapper = new QueryWrapper<>();
+        codeQueryWrapper.eq("client_code", client.getClientCode());
+        MdClient existingCodeClient = mdClientMapper.selectOne(codeQueryWrapper);
+
+        // 如果已存在同名客户，亦或是客户编码已存在，则不执行添加操作
+        if (existingNameClient != null && existingCodeClient != null) {
+            return 23;
+        }else if (existingNameClient != null) {
+            return 2;
+        } else if (existingCodeClient != null) {
+            return 3;
+        }
+
         // 保存到数据库并返回操作结果
-        return mdClientMapper.insert(mdClient) > 0;
+        return mdClientMapper.insert(mdClient);
 
     }
 
@@ -95,33 +124,78 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
     }
 
     @Override
-    public boolean updateClient(ClientUpdateDTO client) {
+    public int updateClient(ClientUpdateDTO client) {
         // 查询客户是否存在
         MdClient existingClient = mdClientMapper.selectById(client.getClientId());
         if (existingClient == null) {
-            return false;
+            return 0;
+        }
+
+        // 判断客户名称是否存在（排除当前客户）
+        QueryWrapper<MdClient> nameQueryWrapper = new QueryWrapper<>();
+        nameQueryWrapper.eq("client_name", client.getClientName()).ne("client_id", client.getClientId());
+        MdClient existingNameClient = mdClientMapper.selectOne(nameQueryWrapper);
+
+        // 判断客户编码是否存在（排除当前客户）
+        QueryWrapper<MdClient> codeQueryWrapper = new QueryWrapper<>();
+        codeQueryWrapper.eq("client_code", client.getClientCode()).ne("client_id", client.getClientId());
+        MdClient existingCodeClient = mdClientMapper.selectOne(codeQueryWrapper);
+
+        // 如果已存在同名客户或同编码客户，则不执行修改操作
+        if (existingNameClient != null && existingCodeClient != null) {
+            return 23;
+        } else if (existingNameClient != null) {
+            return 2;
+        } else if (existingCodeClient != null) {
+            return 3;
         }
 
         // 将DTO对象转换为DO
         MdClient updatedClient = msClientMapper.clientUpdateDTOToMdClient(client);
 
         // 更新数据库中的客户信息
-        return mdClientMapper.updateById(updatedClient) > 0;
+        return mdClientMapper.updateById(updatedClient);
     }
 
 
     @Override
-    public PageDTO<ClientDTO> listAll(ClientQuery query) {
+    public PageDTO<ClientPageDTO> listAll(ClientQuery query) {
         // 构造分页对象
         Page<MdClient> clientPage = new Page<>(query.getPageNum(), query.getPageSize());
+
         // 构建查询条件
         QueryWrapper<MdClient> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("clientName", query.getClientName());
+
+        // 根据客户名称进行模糊查询
+        if (query.getClientName() != null && !query.getClientName().isEmpty()) {
+            queryWrapper.like("client_name", query.getClientName());
+        }
+
+        // 根据客户编码查询客户
+        if (query.getClientCode() != null && !query.getClientCode().isEmpty()) {
+            queryWrapper.eq("client_code", query.getClientCode());
+        }
+
+        // 根据客户简称查询客户
+        if (query.getClientNick() != null && !query.getClientNick().isEmpty()) {
+            queryWrapper.eq("client_nick", query.getClientNick());
+        }
+
+        // 根据客户英文名称查询客户
+        if (query.getClientEn() != null && !query.getClientEn().isEmpty()) {
+            queryWrapper.eq("client_en", query.getClientEn());
+        }
+
+        // 根据客户是否启用查询客户
+        if (query.getEnableFlag() != null && !query.getEnableFlag().isEmpty()) {
+            queryWrapper.eq("enable_flag", query.getEnableFlag());
+        }
+
         // 查询客户列表数据
         Page<MdClient> clients = mdClientMapper.selectPage(clientPage, queryWrapper);
 
         // 返回封装分页信息和客户列表数据的PageDTO对象
-        return PageDTO.create(clients, client -> msClientMapper.clientToClientDTO(client));
+        return PageDTO.create(clients, client -> msClientMapper.clientToClientPageDTO(client));
     }
 
     @Override
@@ -134,32 +208,33 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
     }
 
 
-
     @Override
     public ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids) {
-        List<MdClient> list = new ArrayList<>();
+        List<MdClient> clientList = new ArrayList<>();
         for (Long id : ids) {
             MdClient mdClient = mdClientMapper.selectById(id);
             if (mdClient != null) {
-                list.add(mdClient);
+                clientList.add(mdClient);
             }
         }
 
-        if (list.isEmpty()) {
+        if (clientList.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-            easyExcelComponent.export("客户列表", out, MdClient.class, list);
-            byte[] bytes = out.toByteArray();
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            easyExcelComponent.export("客户列表", outputStream, MdClient.class, clientList);
+            byte[] bytes = outputStream.toByteArray();
             HttpHeaders headers = new HttpHeaders();
             String filename = "clients-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
             headers.setContentDispositionFormData("attachment", filename);
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
         } catch (IOException e) {
-            // 处理异常并返回错误信息
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(("导出Excel文件时发生错误：" + e.getMessage()).getBytes());
+            // 记录日志并返回错误信息
+            log.error("导出Excel文件时发生错误", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(("导出Excel文件时发生错误：" + e.getMessage()).getBytes());
         }
     }
 
@@ -173,9 +248,17 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
         StringBuilder failureMsg = new StringBuilder();
         StringBuilder failureNameMsg = new StringBuilder();
 
+        // 验证文件类型
+        String contentType = customer.getContentType();
+        if (!"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet".equals(contentType)) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "不支持的文件类型");
+        }
+
         try (BufferedInputStream inputStream = new BufferedInputStream(customer.getInputStream())) {
             mdClients = EasyExcel.read(inputStream).head(MdClient.class).sheet().doReadSync();
         } catch (IOException e) {
+            // 记录异常信息到日志
+            log.error("读取Excel文件失败", e);
             return JsonVO.create(null, ResultStatus.FAIL.getCode(), "读取Excel文件失败");
         }
 
@@ -185,13 +268,21 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
 
         for (MdClient mdClient : mdClients) {
             try {
-                if (!mdClientMapper.checkMdClientCodeUnique(mdClient.getClientCode())) {
-                    mdClientMapper.insert(mdClient);
+                // 对数据进行进一步校验和清洗
+                if (isValid(mdClient)) {
+                    if (!mdClientMapper.checkMdClientCodeUnique(mdClient.getClientCode())) {
+                        mdClientMapper.insert(mdClient);
+                    } else {
+                        mdClientMapper.update(mdClient);
+                    }
+                    successNum++;
                 } else {
-                    mdClientMapper.update(mdClient);
+                    failureNum++;
+                    failureNameMsg.append(failureNum).append("、").append(mdClient.getClientCode()).append(";");
                 }
-                successNum++;
             } catch (Exception e) {
+                // 记录异常信息到日志
+                log.error("导入数据出现异常", e);
                 failureNum++;
                 failureNameMsg.append(failureNum).append("、").append(mdClient.getClientCode()).append(";");
             }
@@ -205,6 +296,17 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
             return JsonVO.create(null, ResultStatus.SUCCESS.getCode(), successMsg.toString());
         }
     }
+    // 数据校验方法完善示例
+    private boolean isValid(MdClient mdClient) {
+        if (mdClient.getClientCode() == null || mdClient.getClientCode().isEmpty()) {
+            return false; // 客户代码不能为空
+        }
+        if (mdClient.getClientName() == null || mdClient.getClientName().isEmpty()) {
+            return false; // 客户名称不能为空
+        }
+        return true;
+    }
+
 
     //初始化参考客户模板
     @PostConstruct
@@ -254,14 +356,20 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
         easyExcelComponent.export("客户列表", out, MdClientExcel.class, mdClients);
         // 获取字节数据
         byte[] bytes = out.toByteArray();
-        out.close();
-        // 构建响应头
+        try {
+            out.close();
+        } catch (IOException e) {
+            // 处理关闭流时的异常
+            e.printStackTrace();
+        }
         HttpHeaders headers = new HttpHeaders();
-        String filename = "client-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
+        String filename = "report-" + DateTime.now().toString("yyyyMMddHHmmssS") + ".xlsx";
         headers.setContentDispositionFormData("attachment", filename);
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
         // 响应文件给客户端
-        return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
-
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(bytes.length)
+                .body(bytes);
     }
 }
