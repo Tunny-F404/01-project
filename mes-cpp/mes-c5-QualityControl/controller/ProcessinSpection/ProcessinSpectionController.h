@@ -8,6 +8,9 @@
 #include "../../domain/dto/ProcessinSpection/ProcessinSpectionDTO.h"
 #include "../../domain/vo/ProcessinSpection/ProcessinSpectionVO.h"
 
+#define TEST_EXCEL_FN "./public/excel/1.xlsx"
+#define TEST_EXCEL_SN ZH_WORDS_GETTER("excel.sheet.s1")
+
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
@@ -27,7 +30,7 @@ public:
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
-		API_DEF_ADD_RSP_JSON_WRAPPER(ProcessinSpectionPageJsonVO);
+		API_DEF_ADD_RSP_JSON_WRAPPER(ProcessinSpectionQueryPageJsonVO);
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
@@ -39,22 +42,41 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "check_result", ZH_WORDS_GETTER("processinspection.field.check_result"), "", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/ProcessinSpection", queryProcessinSpection, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/process-inspection/query-by-page", queryProcessinSpection, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ProcessinSpectionQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execProcessinSpection(userQuery, authObject->getPayload()));
+		API_HANDLER_RESP_VO(execQueryProcessinSpection(userQuery, authObject->getPayload()));
 	}
 
 	// 3.1 定义删除接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.delete.summary"), removeProcessinSpection, Uint64JsonVO::Wrapper);
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ProcessinSpection/remove", removeProcessinSpection, BODY_DTO(oatpp::List<UInt64>, ids), execRemoveProcessinSpection(ids));
-	
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/process-inspection/remove", removeProcessinSpection, BODY_DTO(oatpp::List<UInt64>, ids), execRemoveProcessinSpection(ids));
+
 	// 3.1 定义导出接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.export.summary"), exportProcessinSpection, StringJsonVO::Wrapper);
-	// 3.2 定义导出接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/ProcessinSpection/export", exportProcessinSpection, BODY_DTO(oatpp::List<UInt64>, ids), execExportProcessinSpection(ids));
+	ENDPOINT_INFO(exportProcessinSpection) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("processinspection.export.summary"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
+		// 定义其他查询参数描述
+		API_DEF_ADD_QUERY_PARAMS(String, "ipqc_code", ZH_WORDS_GETTER("processinspection.field.ipqc_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "ipqc_type", ZH_WORDS_GETTER("processinspection.field.ipqc_type"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workorder_code", ZH_WORDS_GETTER("processinspection.field.workorder_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "item_code", ZH_WORDS_GETTER("processinspection.field.item_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "item_name", ZH_WORDS_GETTER("processinspection.field.item_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "check_result", ZH_WORDS_GETTER("processinspection.field.check_result"), "", false);
+	}
+	// 3.2 定义查询接口处理
+	ENDPOINT(API_M_GET, "/process-inspection/export", exportProcessinSpection, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(userQuery, ProcessinSpectionQuery, queryParams);
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execExportProcessinSpection(userQuery, authObject->getPayload()));
+	}
 
 	// 获取过程检验详情
 	ENDPOINT_INFO(queryGetInspectionDetails) {
@@ -98,11 +120,11 @@ public:
 
 private:
 	// 3.3 演示分页查询数据
-	ProcessinSpectionPageJsonVO::Wrapper execProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload);
+	ProcessinSpectionQueryPageJsonVO::Wrapper execQueryProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload);
 	
 	Uint64JsonVO::Wrapper execRemoveProcessinSpection(const oatpp::List<UInt64>& ids);
 
-	StringJsonVO::Wrapper execExportProcessinSpection(const oatpp::List<UInt64>& ids);
+	StringJsonVO::Wrapper execExportProcessinSpection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload);
 
 	ProcessinSpectionJsonVO::Wrapper execQueryInspectionDetails(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload);
 

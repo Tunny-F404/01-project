@@ -21,10 +21,19 @@
 #define _PROCESSINSPECTION_SERVICE_
 #include "list"
 #include "domain/dto/processinspection/ProcessinSpectionDTO.h"
+#include "domain/query/processinspection/ProcessinSpectionQuery.h"
+#include "domain/do/processinspection/processinspectionDO.h"
+#include "Macros.h"
 class ProcessInspectionService
 {
 public:
 	//
 	bool updateData(const ProcessinSpectionDTO::Wrapper& dto);
+	//分页查询
+	ProcessinSpectionQueryPageDTO::Wrapper listAll(const ProcessinSpectionQuery::Wrapper& query);
+	//用id删除记录
+	bool remove(uint64_t id);
+	//导出表需要的数据
+	list<ProcessinSpectionDO> listAllExort(const ProcessinSpectionQuery::Wrapper& query);
 };
 #endif
