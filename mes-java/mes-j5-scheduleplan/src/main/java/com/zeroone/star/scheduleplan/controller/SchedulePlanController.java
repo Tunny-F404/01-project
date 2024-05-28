@@ -61,7 +61,7 @@ public class SchedulePlanController implements SchedulePlanApis {
     @DeleteMapping("delete-schedule-plan")
     @Override
     public JsonVO<Integer> removeSchPlan(List<Long> rems) {
-        return null;
+        return calPlanService.removeSchPlan(rems)?JsonVO.success(1):JsonVO.fail(0);
     }
 
 
@@ -69,7 +69,7 @@ public class SchedulePlanController implements SchedulePlanApis {
     @PutMapping("modify-plans-status")
     @Override
     public JsonVO<Integer> modifySchPlanStatus(PlanDTO planDTO) {
-        return null;
+        return calPlanService.modifySchPlanStatus(planDTO)?JsonVO.success(1):JsonVO.fail(0);
     }
 
 
