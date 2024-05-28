@@ -29,12 +29,12 @@ public class BomDTO {
     @ApiModelProperty(value = "BOM物料规格", example = "M16", required = true)
     private String bomItemSpec;
 
-    @ApiModelProperty(value = "创建人", example = "", required = true)
+    @ApiModelProperty(value = "创建人", example = "aaa", required = true)
     private String createBy;
     @ApiModelProperty(value = "创建时间", example = "2024-05-20 09:41:55", required = true)
-    private DateTime createTime;
+    private String createTime;
     @ApiModelProperty(value = "是否使用", example = "Y", required = true)
-    private Boolean enableFlag;
+    private String enableFlag;
     @ApiModelProperty(value = "物料/产品分类id", example = "507", required = true)
     private Long itemId;
     @ApiModelProperty(value = "项目或产品", example = "PRODUCT", required = true)
@@ -45,7 +45,7 @@ public class BomDTO {
     private String remark;
     @ApiModelProperty(value = "单位", example = "pcs", required = true)
     private String unitOfMeasure;
-    @ApiModelProperty(value = "更新人", example = "", required = true)
+    @ApiModelProperty(value = "更新人", example = "bbb", required = true)
     private String updateBy;
     @ApiModelProperty(value = "更新时间", example = "2024-05-21 07:31:24", required = true)
     private String updateTime;
