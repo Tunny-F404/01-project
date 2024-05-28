@@ -8,6 +8,7 @@ import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanAddDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanModifyDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
+import com.zeroone.star.scheduleplan.config.GlobalExceptionHandler;
 import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.zeroone.star.scheduleplan.entity.CalShift;
 import com.zeroone.star.scheduleplan.mapper.CalPlanMapper;
@@ -60,59 +61,57 @@ public class CalShiftServiceImpl extends ServiceImpl<CalShiftMapper, CalShift> i
     msCalShiftPlanMapper msCalShiftPlanMapper;
     @Resource
     CalPlanMapper calPlanMapper;
+
+    @Override
+    public PageDTO<ShiftPlanDTO> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery) {
+        Page<CalShift> page = new Page<>(shiftPlanQuery.getPageIndex(), shiftPlanQuery.getPageSize());
+        QueryWrapper<CalShift> wrapper = new QueryWrapper<>();
+        wrapper.eq("plan_id", shiftPlanQuery.getPlanId());
+        Page<CalShift> result = baseMapper.selectPage(page, wrapper);
+        // 返回封装后的pageDTO
+        return PageDTO.create(result, msCalShiftPlanMapper::shiftPlanToShiftPlanDTO);
+    }
+
     @Override
     public int addShiftPlan(ShiftPlanAddDTO shiftPlanAddDto) {
         //根据planId查找calPlan表
         CalPlan existingCalPlan = calPlanMapper.selectById(shiftPlanAddDto.getPlanId());
-        System.out.println("查询calPlan表");
-        System.out.println(existingCalPlan);
-
         //根据shiftId查找calShift表shiftList
         List<CalShift> calShiftList = baseMapper.selectList(new QueryWrapper<CalShift>().eq("plan_id", shiftPlanAddDto.getPlanId()));
-        System.out.println("查询calShiftList");
-        System.out.println(calShiftList);
 
-        //排班计划的种类
-        String shiftType = null;
         //统计calShiftList的数量
         int count = calShiftList.size();
 
         //1、判断查询对象是否存在
         if(existingCalPlan == null){
-            System.out.println("排班计划为空，无法添加");
-        } else {
-            //查询calPlan表的shiftType
-            shiftType = existingCalPlan.getShiftType();
+            throw new RuntimeException("排班计划为空，无法添加");
         }
+
+        //查询calPlan表的shiftType
+        String shiftType = existingCalPlan.getShiftType();
 
         //2、判断排班计划的排班种类是否为空
         // 2.1、判断shiftType是否与count数量对应
         if(shiftType == null){
-            System.out.println("排班种类为空，无法添加");
+            throw new RuntimeException("排班种类为空，无法添加");
         }else if (shiftType.equals("SINGLE") && count>0){
-            System.out.println("轮班方式为 白班 时只能有一个班次！");
+            throw new RuntimeException("轮班方式为 白班 时只能有一个班次！");
         } else if (shiftType.equals("SHIFT_TWO") && count>1){
-            System.out.println("轮班方式为 两班倒 时只能有两个班次！");
+            throw new RuntimeException("轮班方式为 两班倒 时只能有两个班次！");
         } else if (shiftType.equals("SHIFT_THREE") && count>2){
-            System.out.println("轮班方式为 三班倒 时只能有三个班次！");
+            throw new RuntimeException("轮班方式为 三班倒 时只能有三个班次！");
         }
 
         //3、判断添加的orderNum是否在对应calPlan下已经存在
-        boolean orderNumExisting = false;
         for(CalShift calShift : calShiftList){
             if(calShift.getOrderNum().equals(shiftPlanAddDto.getOrderNum())) {
-                orderNumExisting = true;
-                break;
+                throw new RuntimeException("班次序号已存在，请更换编号");
             }
         }
 
-        //添加数据
-        if(!orderNumExisting){
-            //执行添加数据
-            CalShift calShift = msCalShiftPlanMapper.addShiftPlanToShiftPlan(shiftPlanAddDto);
-            return baseMapper.insert(calShift);
-        }
-        return 0;
+        //执行添加数据
+        CalShift calShift = msCalShiftPlanMapper.addShiftPlanToShiftPlan(shiftPlanAddDto);
+        return baseMapper.insert(calShift);
     }
 
     @Override
@@ -127,12 +126,15 @@ public class CalShiftServiceImpl extends ServiceImpl<CalShiftMapper, CalShift> i
     }
 
     @Override
-    public PageDTO<ShiftPlanDTO> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery) {
-        Page<CalShift> page = new Page<>(shiftPlanQuery.getPageIndex(), shiftPlanQuery.getPageSize());
-        QueryWrapper<CalShift> wrapper = new QueryWrapper<>();
-        wrapper.eq("plan_id", shiftPlanQuery.getPlanId());
-        Page<CalShift> result = baseMapper.selectPage(page, wrapper);
-        // 返回封装后的pageDTO
-        return PageDTO.create(result, msCalShiftPlanMapper::shiftPlanToShiftPlanDTO);
+    public int removeShiftPlan(List<Long> shiftIds) {
+        int totalDeleted = 0;
+        for(Long shiftId : shiftIds){
+            int deleteRow = baseMapper.delete(new QueryWrapper<CalShift>().eq("shift_id", shiftId));
+            if(deleteRow < 1){
+                throw new RuntimeException("删除失败");
+            }
+            totalDeleted += deleteRow;
+        }
+        return totalDeleted;
     }
 }

@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.json.Json;
 import java.util.List;
 
 /**
@@ -48,16 +49,16 @@ public class ShiftController implements ShiftApis {
         //修改班次业务
         int updateRow = calShiftService.modifyShiftPlan(shiftPlanModifyDto);
         //业务层返回修改信息
-        return JsonVO.success(updateRow);
+        return updateRow > 0 ? JsonVO.success(updateRow) : JsonVO.fail(null);
     }
 
     @DeleteMapping("/remove/{shiftIds}")
     @ApiOperation("删除班次（支持批量删除）")
     @Override
     public JsonVO<Integer> removeShiftPlan(@PathVariable List<Long> shiftIds) {
-        shiftIds.forEach(System.out::println);
-        // TODO 删除班次业务操作
-        return JsonVO.success(1);
+        int deleteRow = calShiftService.removeShiftPlan(shiftIds);
+        //返回操作结果
+        return deleteRow > 0 ? JsonVO.success(deleteRow) : JsonVO.fail(null);
     }
 
     @PostMapping("/add")
@@ -66,7 +67,8 @@ public class ShiftController implements ShiftApis {
     public JsonVO<Integer> addShiftPlan(@RequestBody ShiftPlanAddDTO shiftPlanAddDto) {
         //执行新增业务处理操作
         int addRow = calShiftService.addShiftPlan(shiftPlanAddDto);
+
         //返回操作结果
-        return JsonVO.success(addRow);
+        return addRow > 0 ? JsonVO.success(addRow) : JsonVO.fail(null);
         }
 }

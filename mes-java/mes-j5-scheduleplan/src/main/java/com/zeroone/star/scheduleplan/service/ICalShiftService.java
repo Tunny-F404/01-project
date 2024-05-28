@@ -8,6 +8,8 @@ import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
 import com.zeroone.star.scheduleplan.entity.CalShift;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 计划班次表 服务类
@@ -23,4 +25,6 @@ public interface ICalShiftService extends IService<CalShift> {
     int modifyShiftPlan(ShiftPlanModifyDTO shiftPlanModifyDto);
 
     PageDTO<ShiftPlanDTO> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery);
+
+    int removeShiftPlan(List<Long> shiftIds);
 }
