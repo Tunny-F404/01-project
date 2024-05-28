@@ -43,7 +43,7 @@ public class ExportMdItem implements Serializable {
     @ExcelProperty("单位")
     private String unitOfMeasure;
 
-    @ExcelProperty("物料/产品标识")
+    @ExcelProperty("物料/产品分类")
     private String itemOrProduct;
 
     @ExcelProperty("物料类型ID")
