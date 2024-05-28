@@ -2,7 +2,7 @@ const routes = [
   {
     path: '/un-1',
     name: 'UN1',
-    component: () => import('@/views/personal-center/personal-center.vue')
+    component: () => import('@/views/status/404.vue')
   },
   {
     path: '/un-2',

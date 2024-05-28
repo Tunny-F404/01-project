@@ -24,11 +24,11 @@ const routes = [
 			{
 				path: '/sample/pdfobject',
 				component: () => import('@/views/sample/pdfobject/PdfObject.vue')
-      },
-      //表格组件
-      {
-        path: '/sample/table-list-use',
-        component: () => import('@/views/sample/table-list-use/table.vue')
+      		},
+      		//表格组件
+      		{
+        		path: '/sample/table-list-use',
+        		component: () => import('@/views/sample/table-list-use/table.vue')
 			},
 
 			// 搜索栏演示页
@@ -39,8 +39,7 @@ const routes = [
 			// 表单弹窗演示页
 			{
 				path: '/sample/public-form',
-				component: () =>
-					import('@/views/sample/public-form/public-form-page.vue')
+				component: () =>import('@/views/sample/public-form/public-form-page.vue')
 			}
 		]
 	}

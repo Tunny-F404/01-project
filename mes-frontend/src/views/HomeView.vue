@@ -36,6 +36,7 @@
       <el-container>
         <!-- 导航栏 -->
         <el-header>
+          <!-- 面包屑功能未完成 -->
           <div class="breadcrumb">
             <el-breadcrumb :separator-icon="ArrowRight">
               <el-breadcrumb-item :to="{ path: '/dashboard' }">homepage</el-breadcrumb-item>
@@ -46,7 +47,20 @@
               <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
-          <div class="header-nav">{{ userInfo }}</div>
+          <!-- 右侧快捷功能+用户中心 -->
+          <div class="header-nav">
+            <el-icon size="25">
+              <Search />
+            </el-icon>
+            <el-icon size="25">
+              <QuestionFilled />
+            </el-icon>
+            <el-icon size="25">
+              <FullScreen />
+            </el-icon>
+            <router-link to="/user/profile"><el-text style="display: inline-flex; color: #f8f8f8;" size="large">{{
+                userInfo }}</el-text></router-link>
+          </div>
         </el-header>
         <el-main>
           <!-- 布局路由 -->
@@ -99,8 +113,13 @@
     width: 100%;
     color: #f8f8f8;
     text-align: right;
+
+    .el-icon{
+      margin-right: 5px;
+    }
   }
 }
+
 </style>
 
 <script setup>
@@ -111,7 +130,7 @@ const store = userStore()
 
 // 用户信息提示
 const userInfo = ref(
-  '欢迎用户：' + (store.getUser === null ? '游客' : store.getUser.username)
+  '' + (store.getUser === null ? '游客' : store.getUser.username)
 )
 
 // 菜单数据
