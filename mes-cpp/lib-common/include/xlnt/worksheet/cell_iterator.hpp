@@ -203,8 +203,7 @@ public:
     /// <summary>
     /// Constructs a cell_iterator from a worksheet, range, and iteration settings.
     /// </summary>
-    const_cell_iterator(worksheet ws, const cell_reference &start_cell,
-        const range_reference &limits, major_order order, bool skip_null, bool wrap);
+    const_cell_iterator(worksheet ws, const cell_reference &start_cell, const range_reference &limits, major_order order, bool skip_null, bool wrap);
 
     /// <summary>
     /// Constructs a const_cell_iterator as a copy of an existing cell_iterator.

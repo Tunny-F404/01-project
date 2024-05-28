@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _RawMaterialOp_QUERY_
-#define _RawMaterialOp_QUERY_
+#ifndef _RAWMATERIALOP_QUERY_
+#define _RAWMATERIALOP_QUERY_
 
 #include "../../GlobalInclude.h"
 #include "domain/query/PageQuery.h"
