@@ -66,10 +66,10 @@ public interface SchedulePlanApis {
 
     /**
      * 修改计划状态
-     * @param schPlanDTO  修改状态模型
+     * @param planDTO  修改状态模型
      * @author sailing
      */
-    JsonVO<Integer>  modifySchPlanStatus(SchPlanDTO schPlanDTO);
+    JsonVO<Integer>  modifySchPlanStatus(PlanDTO planDTO);
 
     /**
      * 导出排班计划
