@@ -23,43 +23,43 @@
 #include "DoInclude.h"
 
 /**
- * ç‚¹æ£€é¡¹ç›® æ•°æ®åº“å®ä½“ç±»
+ * µã¼ìÏîÄ¿ Êı¾İ¿âÊµÌåÀà
  */
 class DvCheckSubjectDO
 {
-    // æµæ°´å· (ä¸»é”®)
+    // Á÷Ë®ºÅ (Ö÷¼ü)
     CC_SYNTHESIZE(long long, record_id, Record_id);
-    // è®¡åˆ’ID
+    // ¼Æ»®ID
     CC_SYNTHESIZE(long long, plan_id, Plan_id);
-    // è®¾å¤‡ID
+    // Éè±¸ID
     CC_SYNTHESIZE(long long, subject_id, Subject_id);
-    // é¡¹ç›®ç¼–ç 
+    // ÏîÄ¿±àÂë
     CC_SYNTHESIZE(string, subject_code, Subject_code);
-    // é¡¹ç›®åç§°
+    // ÏîÄ¿Ãû³Æ
     CC_SYNTHESIZE(string, subject_name, Subject_name);
-    // é¡¹ç›®ç±»å‹
+    // ÏîÄ¿ÀàĞÍ
     CC_SYNTHESIZE(string, subject_type, Subject_type);
-    // é¡¹ç›®å†…å®¹
+    // ÏîÄ¿ÄÚÈİ
     CC_SYNTHESIZE(string, subject_content, Subject_content);
-    // æ ‡å‡†
+    // ±ê×¼
     CC_SYNTHESIZE(string, subject_standard, Subject_standard);
-    // å¤‡æ³¨
+    // ±¸×¢
     CC_SYNTHESIZE(string, remark, Remark);
-    // é¢„ç•™å­—æ®µ1
+    // Ô¤Áô×Ö¶Î1
     CC_SYNTHESIZE(string, attr1, Attr1);
-    // é¢„ç•™å­—æ®µ2
+    // Ô¤Áô×Ö¶Î2
     CC_SYNTHESIZE(string, attr2, Attr2);
-    // é¢„ç•™å­—æ®µ3
+    // Ô¤Áô×Ö¶Î3
     CC_SYNTHESIZE(int, attr3, Attr3);
-    // é¢„ç•™å­—æ®µ4
+    // Ô¤Áô×Ö¶Î4
     CC_SYNTHESIZE(int, attr4, Attr4);
-    // åˆ›å»ºè€…
+    // ´´½¨Õß
     CC_SYNTHESIZE(string, create_by, Create_by);
-    // åˆ›å»ºæ—¶é—´
+    // ´´½¨Ê±¼ä
     CC_SYNTHESIZE(string, create_time, Create_time);
-    // æ›´æ–°è€…
+    // ¸üĞÂÕß
     CC_SYNTHESIZE(string, update_by, Update_by);
-    // æ›´æ–°æ—¶é—´
+    // ¸üĞÂÊ±¼ä
     CC_SYNTHESIZE(string, update_time, Update_time);
 public:
     DvCheckSubjectDO() {
