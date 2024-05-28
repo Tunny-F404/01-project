@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -51,6 +53,11 @@ public class ItemType {
      * 启用标识
      */
     private String enableFlag;
+
+    /**
+     * 子分类列表
+     */
+    private List<ItemType> children = new ArrayList<ItemType>();
 
     /**
      * 备注
