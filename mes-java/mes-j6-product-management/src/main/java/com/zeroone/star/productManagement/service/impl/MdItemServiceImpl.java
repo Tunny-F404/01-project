@@ -161,6 +161,8 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
         for (MdItem mdItem : items)
         {
             try{
+                //验证数据
+                validationData(mdItem);
                 //是否存在
                 MdItem  m = mdItemMapper.checkItemCodeUnique(mdItem);
                 if(m == null){
@@ -216,6 +218,32 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
         mdItem.setUpdateBy(userDTO.getUsername());
         mdItem.setUpdateTime(DateTime.now().toLocalDateTime());
         mdItemMapper.updateMdItem(mdItem);
+    }
+
+    private void validationData(MdItem mdItem) {
+        if (mdItem.getItemCode() == null || mdItem.getItemCode().isEmpty()) {
+            throw new IllegalArgumentException("物料编码是必填项。");
+        }
+
+        if (mdItem.getItemName() == null || mdItem.getItemName().isEmpty()) {
+            throw new IllegalArgumentException("物料名称是必填项。");
+        }
+
+        if (mdItem.getUnitOfMeasure() == null || mdItem.getUnitOfMeasure().isEmpty()) {
+            throw new IllegalArgumentException("计量单位是必填项。");
+        }
+
+        if (mdItem.getItemOrProduct() == null || mdItem.getItemOrProduct().isEmpty()) {
+            throw new IllegalArgumentException("物料或产品是必填项。");
+        }
+
+        if (mdItem.getEnableFlag() == null || mdItem.getEnableFlag().isEmpty()) {
+            throw new IllegalArgumentException("启用标志是必填项。");
+        }
+
+        if (mdItem.getSafeStockFlag() == null || mdItem.getSafeStockFlag().isEmpty()) {
+            throw new IllegalArgumentException("安全库存标志是必填项。");
+        }
     }
 
 }
