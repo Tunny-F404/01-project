@@ -1,28 +1,26 @@
 <!-- 登录页面 -->
 <template>
-	<el-card class="box-card">
-		<el-form :model="formData" status-icon label-width="60px">
-			<el-form-item label="账号" prop="username">
-				<el-input v-model="formData.username"></el-input>
-			</el-form-item>
-			<el-form-item label="密码" prop="password">
-				<el-input v-model="formData.password" type="password"></el-input>
-			</el-form-item>
-			<el-form-item>
-				<el-button type="primary" @click="submitForm()">登录</el-button>
-			</el-form-item>
-		</el-form>
-		<!-- TODO[TEST_CODE]: 测试代码后期发布需要删除 -->
-		<router-link to="/sample">进入示例演示页面</router-link>
-	</el-card>
-	<!-- 验证码组件 -->
-	<Verify
-		mode="pop"
-		:captchaType="captchaType"
-		:imgSize="{ width: '400px', height: '200px' }"
-		ref="verify"
-		@success="handleSuccess"
-	></Verify>
+	<div class="login-container">
+		<el-card class="box-card" shadow="always">
+			<h1 class="login-h1">零壹MES</h1>
+			<el-form :model="formData" status-icon label-width="60px" class="login-form">
+				<el-form-item label="账号" prop="username">
+					<el-input v-model="formData.username"></el-input>
+				</el-form-item>
+				<el-form-item label="密码" prop="password">
+					<el-input v-model="formData.password" type="password"></el-input>
+				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" @click="submitForm()" class="login-button">登录</el-button>
+				</el-form-item>
+			</el-form>
+			<!-- TODO[TEST_CODE]: 测试代码后期发布需要删除 -->
+			<router-link to="/sample">进入示例演示页面</router-link>
+		</el-card>
+		<!-- 验证码组件 -->
+		<Verify mode="pop" :captchaType="captchaType" :imgSize="{ width: '400px', height: '200px' }" ref="verify"
+			@success="handleSuccess"></Verify>
+	</div>
 </template>
 
 <script setup>
@@ -126,9 +124,47 @@ function handleSuccess(res) {
 </script>
 
 <style>
+ body {
+ 	margin: 0;
+ 	font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+ }
 .box-card {
 	width: 480px;
 	margin: 50px auto;
 	padding: 20px;
+background:rgba(255, 255, 255, 0.5) 
+}
+.login-container{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+background-image: url('./img/login.jpg');
+	background-size: cover;
+
+}
+.login-form{
+	
+		display: flex;
+		flex-direction: column;
+		padding: 40px;
+		text-align: center;
+		position: relative;
+		z-index: 100;
+		background: inherit;
+		border-radius: 18px;
+		overflow: hidden;
+		/* 隐藏多余的模糊效果*/
+	
+}
+.login-button{
+	width: 270px
+}
+.login-h1 {
+	font-weight: bold;
+	margin: 0;
+	color: burlywood;
+	left: 140px
 }
 </style>
