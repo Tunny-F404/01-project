@@ -87,13 +87,13 @@ public class MdClientController implements ClientApis {
     }
 
 
-    @PostMapping(value = "/export/queryClientExport", produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    @GetMapping(value = "/export/queryClientExport", produces = "application/octet-stream")
     @ApiOperation(value = "导出客户")
     public ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids) {
         return clientService.queryClientExportByExcel(ids);
     }
 
-    @PostMapping(value = "/import/importTemplate", produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    @GetMapping(value = "/import/importTemplate", produces = "application/octet-stream")
     @ApiOperation(value = "下载导入客户的模板")
     @Override
     public ResponseEntity<byte[]> DownloadTemplate() {

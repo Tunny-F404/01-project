@@ -210,30 +210,32 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
 
     @Override
     public ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids) {
-        List<MdClient> list = new ArrayList<>();
+        List<MdClient> clientList = new ArrayList<>();
         for (Long id : ids) {
             MdClient mdClient = mdClientMapper.selectById(id);
             if (mdClient != null) {
-                list.add(mdClient);
+                clientList.add(mdClient);
             }
         }
 
-        if (list.isEmpty()) {
+        if (clientList.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-            easyExcelComponent.export("客户列表", out, MdClient.class, list);
-        byte[] bytes = out.toByteArray();
-        HttpHeaders headers = new HttpHeaders();
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            easyExcelComponent.export("客户列表", outputStream, MdClient.class, clientList);
+            byte[] bytes = outputStream.toByteArray();
+            HttpHeaders headers = new HttpHeaders();
             String filename = "clients-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
-        headers.setContentDispositionFormData("attachment", filename);
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
+            headers.setContentDispositionFormData("attachment", filename);
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
         } catch (IOException e) {
-            // 处理异常并返回错误信息
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(("导出Excel文件时发生错误：" + e.getMessage()).getBytes());
-    }
+            // 记录日志并返回错误信息
+            log.error("导出Excel文件时发生错误", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(("导出Excel文件时发生错误：" + e.getMessage()).getBytes());
+        }
     }
 
 
@@ -246,25 +248,41 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
         StringBuilder failureMsg = new StringBuilder();
         StringBuilder failureNameMsg = new StringBuilder();
 
+        // 验证文件类型
+        String contentType = customer.getContentType();
+        if (!"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet".equals(contentType)) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "不支持的文件类型");
+        }
+
         try (BufferedInputStream inputStream = new BufferedInputStream(customer.getInputStream())) {
             mdClients = EasyExcel.read(inputStream).head(MdClient.class).sheet().doReadSync();
         } catch (IOException e) {
+            // 记录异常信息到日志
+            log.error("读取Excel文件失败", e);
             return JsonVO.create(null, ResultStatus.FAIL.getCode(), "读取Excel文件失败");
         }
 
         if (mdClients == null || mdClients.isEmpty()) {
             return JsonVO.create(null, ResultStatus.FAIL.getCode(), "Excel文件中无数据");
-            }
+        }
 
         for (MdClient mdClient : mdClients) {
             try {
-                if (!mdClientMapper.checkMdClientCodeUnique(mdClient.getClientCode())) {
-                    mdClientMapper.insert(mdClient);
+                // 对数据进行进一步校验和清洗
+                if (isValid(mdClient)) {
+                    if (!mdClientMapper.checkMdClientCodeUnique(mdClient.getClientCode())) {
+                        mdClientMapper.insert(mdClient);
+                    } else {
+                        mdClientMapper.update(mdClient);
+                    }
+                    successNum++;
                 } else {
-                    mdClientMapper.updateByClientCode(mdClient.getClientCode(), mdClient);
+                    failureNum++;
+                    failureNameMsg.append(failureNum).append("、").append(mdClient.getClientCode()).append(";");
                 }
-                successNum++;
             } catch (Exception e) {
+                // 记录异常信息到日志
+                log.error("导入数据出现异常", e);
                 failureNum++;
                 failureNameMsg.append(failureNum).append("、").append(mdClient.getClientCode()).append(";");
             }
@@ -276,8 +294,19 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
         } else {
             successMsg.append("导入成功！共 ").append(successNum).append(" 条");
             return JsonVO.create(null, ResultStatus.SUCCESS.getCode(), successMsg.toString());
+        }
     }
+    // 数据校验方法完善示例
+    private boolean isValid(MdClient mdClient) {
+        if (mdClient.getClientCode() == null || mdClient.getClientCode().isEmpty()) {
+            return false; // 客户代码不能为空
+        }
+        if (mdClient.getClientName() == null || mdClient.getClientName().isEmpty()) {
+            return false; // 客户名称不能为空
+        }
+        return true;
     }
+
 
     //初始化参考客户模板
     @PostConstruct
@@ -327,14 +356,20 @@ public class MdClientServiceImpl extends ServiceImpl<MdClientMapper, MdClient> i
         easyExcelComponent.export("客户列表", out, MdClientExcel.class, mdClients);
         // 获取字节数据
         byte[] bytes = out.toByteArray();
-        out.close();
-        // 构建响应头
+        try {
+            out.close();
+        } catch (IOException e) {
+            // 处理关闭流时的异常
+            e.printStackTrace();
+        }
         HttpHeaders headers = new HttpHeaders();
-        String filename = "client-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
+        String filename = "report-" + DateTime.now().toString("yyyyMMddHHmmssS") + ".xlsx";
         headers.setContentDispositionFormData("attachment", filename);
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
         // 响应文件给客户端
-        return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
-
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(bytes.length)
+                .body(bytes);
     }
 }
