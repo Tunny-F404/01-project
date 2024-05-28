@@ -28,7 +28,7 @@ if (query->specification) { \
 
 int MaterialProductsDAO::updateMaterialProducts(const MaterialProductsDO& uObj)
 {
-	string sql = "UPDATE `qc_template_product` SET item_name=? WHERE template_id=?";
+	string sql = "UPDATE `qc_template_product` SET item_name=? WHERE record_id=?";
 	return sqlSession->executeUpdate(sql, "%s%ull", uObj.getitem_name(), uObj.getrecord_id());
 }
 
