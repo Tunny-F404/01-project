@@ -33,7 +33,8 @@ public:
 	GetProgectDTO::Wrapper listAll(const GetProgectQuery::Wrapper& query);
 
 	// 通过ID查询项目详情
-	bool listSome(const GetProgectDTO::Wrapper& dto);
+	//bool listSome(const GetProgectDTO::Wrapper& dto);
+	GetProgectDTO::Wrapper listSome(const uint64_t id);
 };
 
 #endif // !_GETPROGECT_SERVICE_

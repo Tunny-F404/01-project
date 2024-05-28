@@ -21,18 +21,18 @@
 #define _GETPROGECT_MAPPER_
 
 #include "Mapper.h"
-#include "../../domain/do/dv_subject/GetProgectDO.h"
+#include "../../../mes-c2-equipmentledger/domain/do/dv_subject/dvSubjectDO.h"
 
 /**
  * Ê¾Àý±í×Ö¶ÎÆ¥ÅäÓ³Éä
  */
 
-class GetProgectListAllMapper : public Mapper<GetProgectListAllDO>
+class GetProgectListAllMapper : public Mapper<dvSubjectDO>
 {
 public:
-	GetProgectListAllDO mapper(ResultSet* resultSet) const override
+	dvSubjectDO mapper(ResultSet* resultSet) const override
 	{
-		GetProgectListAllDO data;
+		dvSubjectDO data;
 		data.setSubjectCode(resultSet->getString(1));
 		data.setSubjectName(resultSet->getString(2));
 		data.setSubjectType(resultSet->getString(3));
@@ -40,18 +40,13 @@ public:
 	}
 };
 
-class GetProgectListSomeMapper : public Mapper<GetProgectListSomeDO>
+class GetProgectIdMapper : public Mapper<dvSubjectDO>
 {
 public:
-	GetProgectListSomeDO mapper(ResultSet* resultSet) const override
+	dvSubjectDO mapper(ResultSet* resultSet) const override
 	{
-		GetProgectListSomeDO data;
-		data.setSubjectCode(resultSet->getString(1));
-		data.setSubjectName(resultSet->getString(2));
-		data.setSubjectType(resultSet->getString(3));
-		data.setSubjectContent(resultSet->getString(4));
-		data.setSubjectStandard(resultSet->getString(5));
-		data.setEnableFlag(resultSet->getString(6));
+		dvSubjectDO data;
+		data.setSubjectId(resultSet->getUInt64(1));
 		return data;
 	}
 };

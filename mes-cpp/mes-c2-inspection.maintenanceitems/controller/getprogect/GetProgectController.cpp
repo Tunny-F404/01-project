@@ -36,13 +36,13 @@ GetProgectPageJsonVO::Wrapper GetProgectController::execGetProgect(const GetProg
 	return jvo;
 }
 
-GetProgectDetailJsonVO::Wrapper GetProgectController::execProgectDetail(const GetProgectDetailQuery::Wrapper& query)
+GetProgectDetailJsonVO::Wrapper GetProgectController::execProgectDetail(const GetProgectDetailQuery::Wrapper& query)//uint64_t与UInt64
 {
 
 	// 定义一个Service
 	GetProgectService service;
 	// 查询数据
-	auto result = service.listSome(query);
+	auto result = service.listSome(query->pId);
 	// 响应结果
 	auto jvo = GetProgectDetailJsonVO::createShared();
 	jvo->success(result);

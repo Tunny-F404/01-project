@@ -27,7 +27,7 @@
 	GetProgectDTO::Wrapper listAll(const GetProgectQuery::Wrapper& query);
 
 	// 通过ID查询项目详情
-	bool listsome(const GetProgectDTO::Wrapper& dto);
+	bool listSome(const GetProgectDTO::Wrapper& dto);
 */
 
 GetProgectDTO::Wrapper GetProgectService::listAll(const GetProgectQuery::Wrapper& query)
@@ -48,19 +48,28 @@ GetProgectDTO::Wrapper GetProgectService::listAll(const GetProgectQuery::Wrapper
 	// 分页查询数据
 	pages->total = count;
 	pages->calcPages();
-	list<GetProgectListAllDO> result = dao.selectWithPage(query);
+	list<dvSubjectDO> result = dao.selectWithPage(query);
 	// 将DO转换成DTO
-	for (GetProgectListAllDO sub : result)
+	for (dvSubjectDO sub : result)
 	{
-		auto dto = GetProgectListAllDO::createShared();
-		// 		dto->id = sub.getId();
-		// 		dto->name = sub.getName();
-		// 		dto->sex = sub.getSex();
-		// 		dto->age = sub.getAge();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, id, Id, name, Name, sex, Sex, age, Age)
+		auto dto = GetProgectDTO::createShared();
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, pCode, SubjectCode, pType, SubjectType, pContent, SubjectContent, standard, SubjectStandard, enable, EnableFlag, note, Remark)
 			pages->addData(dto);
 
 	}
 	return pages;
 }
 
+//GetProgectDTO::Wrapper listSome(const uint64_t id);
+GetProgectDTO::Wrapper GetProgectService::listSome(uint64_t id){
+	auto pages = GetProgectPageDTO::createShared();
+	GetProgectDAO dao;
+	list<dvSubjectDO> result = dao.selectById(id);
+	for (dvSubjectDO sub : result)
+	{
+		auto dto = GetProgectDTO::createShared();
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, pId, SubjectId);
+		pages->addData(dto);
+	}
+	return pages;
+}

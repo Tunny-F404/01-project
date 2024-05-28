@@ -24,8 +24,8 @@
 /**
  * 示例数据库实体类
  */
-\
 
+//通过id查询数据库 项目详情
 class GetProgectIdDO
 {
 	//项目ID
@@ -37,6 +37,7 @@ public:
 	}
 };
 
+//项目分页查询
 class GetProgectListAllDO
 {
 	// 项目编码
@@ -77,6 +78,9 @@ class GetProgectListSomeDO
 
 	//是否启用
 	CC_SYNTHESIZE(string, enableFlag, EnableFlag);
+
+	//备注
+	CC_SYNTHESIZE(string, remark, Remark);
 public:
 	GetProgectListSomeDO() {
 		subjectId= "";

@@ -25,41 +25,61 @@
 #define SAMPLE_TERAM_PARSE(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \
-if (query->name) { \
-	sql << " AND `name`=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->name.getValue("")); \
+if (query->pCode) { \
+	sql << " AND pCode=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->pCode.getValue("")); \
 } \
-if (query->sex) { \
-	sql << " AND sex=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->sex.getValue("")); \
+if (query->pName) { \
+	sql << " AND `pName`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->pName.getValue("")); \
 } \
-if (query->age) { \
-	sql << " AND age=?"; \
-	SQLPARAMS_PUSH(params, "i", int, query->age.getValue(0)); \
+if (query->pType) { \
+	sql << " AND pType=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->pType.getValue("")); \
 }
 
+uint64_t GetProgectDAO::count(const GetProgectQuery::Wrapper & query)
+{
+	stringstream sql;
+	sql << "SELECT COUNT(*) FROM dv_subject";
+	//SAMPLE_TERAM_PARSE(query, sql);
+	SqlParams params;
+	sql << " WHERE 1=1";
+	if (query->pName) {
+		sql << " AND `pName`=?";
+		SQLPARAMS_PUSH(params, "s", std::string, query->pName.getValue(""));
+	}
+	string sqlStr = sql.str();
+	return sqlSession->executeQueryNumerical(sqlStr, params);
+}
 
-
-std::list<GetProgectListAllDO> GetProgectDAO::selectWithPage(const GetProgectQuery::Wrapper & query)
+std::list<dvSubjectDO> GetProgectDAO::selectWithPage(const GetProgectQuery::Wrapper & query)
 {
 	//string sql = "SELECT subject_code,subject_type,subject_content,subject_standard,enable_flag FROM dv_subject WHERE subject_code in(" + uObj.getSubjectCode() + ") AND subject_name in(" + uObj.getSubjectName() + ") AND subject_type in(" + uObj.getSubjectType() + ")";
 	//GetProgectListSomeMapper mapper;
 	//return sqlSession->executeQuery<GetProgectListAllDO, GetProgectListSomeMapper>(sql, mapper);
 
 	stringstream sql;
-	sql << "SELECT subject_code,subject_type,subject_content,subject_standard,enable_flag FROM dv_subject";
+	sql << "SELECT subject_code,subject_type,subject_content,subject_standard,enable_flag,remark FROM dv_subject";
 	SAMPLE_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
-	GetProgectMapper mapper;
+	GetProgectListAllMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<SampleDO, SampleMapper>(sqlStr, mapper, params);
+	return sqlSession->executeQuery<dvSubjectDO, GetProgectListAllMapper>(sqlStr, mapper, params);
 }
 
-std::list<GetProgectListSomeDO> GetProgectDAO::selectById(const GetProgectListSomeDO& uObj)
+//std::list<dvSubjectDO> GetProgectDAO::selectById(uint64_t id)
+////std::list<GetProgectIdDO> GetProgectDAO::selectById(const string& pId)
+//{
+//	std::string str = std::to_string(id);
+//	string sql = "SELECT subject_code,subject_name,subject_type,subject_content,subject_standard,enable_flag  FROM dv_subject WHERE `subject_id`=?";
+//	GetProgectIdMapper mapper;
+//	return sqlSession->executeQuery<dvSubjectDO, GetProgectIdMapper>(sql, mapper, "%s", str);
+//}
+std::list<dvSubjectDO> GetProgectDAO::selectById(uint64_t id)
+//std::list<GetProgectIdDO> GetProgectDAO::selectById(const string& pId)
 {
-	string sql = "SELECT subject_code,subject_name,subject_type,subject_content,subject_standard,enable_flag FROM dv_subject WHERE subject_id in(" + uObj.getSubjectId() + ")";
-	GetProgectListSomeMapper mapper;
-	return sqlSession->executeQuery<GetProgectListSomeDO, GetProgectListSomeMapper>(sql, mapper);
-
+	string sql = "SELECT subject_code,subject_name,subject_type,subject_content,subject_standard,enable_flag  FROM dv_subject WHERE `subject_id`=?";
+	GetProgectIdMapper mapper;
+	return sqlSession->executeQuery<dvSubjectDO, GetProgectIdMapper>(sql, mapper, "%s", id);
 }
-

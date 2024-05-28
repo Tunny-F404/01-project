@@ -20,7 +20,7 @@
 #ifndef _GETPROGECT_DAO_
 #define _GETPROGECT_DAO_
 #include "BaseDAO.h"
-#include "../../domain/do/dv_subject/GetProgectDO.h"
+#include "../../../mes-c2-equipmentledger/domain/do/dv_subject/dvSubjectDO.h"
 #include "../../domain/query/getprogect/GetProgectQuery.h"
 
 /**
@@ -32,10 +32,12 @@ public:
 	// 统计数据条数
 	uint64_t count(const GetProgectQuery::Wrapper& query);
 	// 分页查询数据
-	list<GetProgectListAllDO> selectWithPage(const GetProgectQuery::Wrapper& query);
-	// 通过姓名查询数据
-	list<GetProgectListSomeDO> selectById(const GetProgectListSomeDO& uObj);
-
+	list<dvSubjectDO> selectWithPage(const GetProgectQuery::Wrapper& query);
+	
+	// 通过id查询数据
+	list<dvSubjectDO> selectById(uint64_t id);
+	// 通过id查询数据
+	//list<GetProgectIdDO> selectById(const string& pId);
 
 
 };
