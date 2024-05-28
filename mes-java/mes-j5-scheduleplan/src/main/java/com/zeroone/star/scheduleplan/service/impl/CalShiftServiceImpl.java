@@ -8,7 +8,6 @@ import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanAddDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanModifyDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
-import com.zeroone.star.scheduleplan.config.GlobalExceptionHandler;
 import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.zeroone.star.scheduleplan.entity.CalShift;
 import com.zeroone.star.scheduleplan.mapper.CalPlanMapper;

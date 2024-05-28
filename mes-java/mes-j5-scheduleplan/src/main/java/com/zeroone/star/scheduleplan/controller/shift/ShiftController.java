@@ -7,14 +7,13 @@ import com.zeroone.star.project.j5.dto.scheduleplan.shiftplan.ShiftPlanModifyDTO
 import com.zeroone.star.project.j5.query.scheduleplan.shiftplan.ShiftPlanQuery;
 import com.zeroone.star.project.j5.scheduleplan.shift.ShiftApis;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.scheduleplan.service.ICalShiftService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.json.Json;
 import java.util.List;
 
 /**
@@ -33,7 +32,7 @@ public class ShiftController implements ShiftApis {
     @GetMapping("/list")
     @ApiOperation("获取班次列表（条件+分页）")
     @Override
-    public JsonVO<PageDTO<ShiftPlanDTO>> queryShiftPlanByPlanId(ShiftPlanQuery shiftPlanQuery) {
+    public JsonVO<PageDTO<ShiftPlanDTO>> queryShiftPlanByPlanId(@Validated ShiftPlanQuery shiftPlanQuery) {
         // 查询班次列表业务处理
         PageDTO<ShiftPlanDTO> pageDTO = calShiftService.queryShiftPlanByPlanId(shiftPlanQuery);
         if(pageDTO != null){
@@ -45,7 +44,7 @@ public class ShiftController implements ShiftApis {
     @PutMapping("/modify")
     @ApiOperation("修改班次")
     @Override
-    public JsonVO<Integer> modifyShiftPlan(@RequestBody ShiftPlanModifyDTO shiftPlanModifyDto) {
+    public JsonVO<Integer> modifyShiftPlan(@Validated @RequestBody ShiftPlanModifyDTO shiftPlanModifyDto) {
         //修改班次业务
         int updateRow = calShiftService.modifyShiftPlan(shiftPlanModifyDto);
         //业务层返回修改信息
@@ -64,7 +63,7 @@ public class ShiftController implements ShiftApis {
     @PostMapping("/add")
     @ApiOperation("添加班次")
     @Override
-    public JsonVO<Integer> addShiftPlan(@RequestBody ShiftPlanAddDTO shiftPlanAddDto) {
+    public JsonVO<Integer> addShiftPlan(@Validated @RequestBody ShiftPlanAddDTO shiftPlanAddDto) {
         //执行新增业务处理操作
         int addRow = calShiftService.addShiftPlan(shiftPlanAddDto);
 

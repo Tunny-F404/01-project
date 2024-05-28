@@ -1,11 +1,9 @@
 package com.zeroone.star.project.j5.dto.scheduleplan.shiftplan;
 
-import com.zeroone.star.project.dto.PageDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 /**
  * <p>
  * 描述：班次计划查询结果Dto
