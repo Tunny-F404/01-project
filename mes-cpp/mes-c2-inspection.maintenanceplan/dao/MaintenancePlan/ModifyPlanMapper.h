@@ -37,8 +37,8 @@ public:
 		data.setCode(resultSet->getString(2));
 		data.setName(resultSet->getString(3));
 		data.setType(resultSet->getString(4));
-		data.setCircletype(resultSet->getString(7));
-		data.setCirclecount(resultSet->getString(8));
+		data.setCycletype(resultSet->getString(7));
+		data.setCyclecount(resultSet->getString(8));
 		data.setStartdate(resultSet->getString(5));
 		data.setEnddate(resultSet->getString(6));
 		//data.setStatus(resultSet->getString(9));

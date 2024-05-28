@@ -12,6 +12,12 @@ MaintenancePlanJsonVo::Wrapper ModifyPlanController::execModifyPlan(const Mainte
 		jvo->init(dto, RS_PARAMS_INVALID);
 		return jvo;
 	}
+	if (!dto->code || !dto->name || !dto->type || !dto->cyclecount || !dto->cycletype )
+	{
+		jvo->init(dto, RS_PARAMS_INVALID);
+		return jvo;
+	}
+	
 	// 定义一个Service
 	ModifyPlanService service;
 	// 执行数据修改

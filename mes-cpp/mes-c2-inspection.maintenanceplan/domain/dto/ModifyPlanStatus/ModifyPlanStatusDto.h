@@ -32,9 +32,9 @@ class ModifyPlanStatusDto : public oatpp::DTO
 {
 	DTO_INIT(ModifyPlanStatusDto, DTO);
 	//计划ID
-	API_DTO_FIELD(UInt64, id, ZH_WORDS_GETTER("maintenance.fields.planid"), false, 1);
+	API_DTO_FIELD(UInt64, id, ZH_WORDS_GETTER("maintenance.fields.planid"), true, 1);
 	//计划状态（停用或启用，可修改）
-	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("modifyplanstatus.fields.status01"), false, "PREPARE");
+	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("modifyplanstatus.fields.status"), true, "PREPARE");
 };
 
 #include OATPP_CODEGEN_END(DTO)

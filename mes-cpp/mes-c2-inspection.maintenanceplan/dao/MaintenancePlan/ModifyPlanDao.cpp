@@ -22,26 +22,26 @@
 #include "../../domain/dto/MaintenancePlan/MaintenancePlanDto.h"
 #include <sstream>
 
-//定义条件解析宏，减少重复代码
-#define SAMPLE_TERAM_PARSE(query, sql) \
-SqlParams params; \
-sql<<" WHERE 1=1"; \
-if (query->name) { \
-	sql << " AND `name`=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->name.getValue("")); \
-} \
-if (query->sex) { \
-	sql << " AND sex=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->sex.getValue("")); \
-} \
-if (query->age) { \
-	sql << " AND age=?"; \
-	SQLPARAMS_PUSH(params, "i", int, query->age.getValue(0)); \
-}
+////定义条件解析宏，减少重复代码
+//#define SAMPLE_TERAM_PARSE(query, sql) \
+//SqlParams params; \
+//sql<<" WHERE 1=1"; \
+//if (query->name) { \
+//	sql << " AND `name`=?"; \
+//	SQLPARAMS_PUSH(params, "s", std::string, query->name.getValue("")); \
+//} \
+//if (query->sex) { \
+//	sql << " AND sex=?"; \
+//	SQLPARAMS_PUSH(params, "s", std::string, query->sex.getValue("")); \
+//} \
+//if (query->age) { \
+//	sql << " AND age=?"; \
+//	SQLPARAMS_PUSH(params, "i", int, query->age.getValue(0)); \
+//}
 
 
 int ModifyPlanDao::update(const MaintenancePlanDo& uObj)
 {
-	string sql = "UPDATE `dv_check_plan` SET `plan_code`=?, `plan_name`=?, `plan_type`=?,`circle_type`=?,`circle_count`=?,`start_date`=?,`end_date`=?,`remark`=? WHERE `plan_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%ull", uObj.getCode(), uObj.getName(), uObj.getType(), uObj.getCircletype(), uObj.getCirclecount(), uObj.getStartdate(), uObj.getEnddate(), uObj.getRemark(), uObj.getId());
+	string sql = "UPDATE `dv_check_plan` SET `plan_code`=?, `plan_name`=?, `plan_type`=?,`cycle_type`=?,`cycle_count`=?,`start_date`=?,`end_date`=?,`remark`=? WHERE `plan_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%ull", uObj.getCode(), uObj.getName(), uObj.getType(), uObj.getCycletype(), uObj.getCyclecount(), uObj.getStartdate(), uObj.getEnddate(), uObj.getRemark(), uObj.getId());
 }
