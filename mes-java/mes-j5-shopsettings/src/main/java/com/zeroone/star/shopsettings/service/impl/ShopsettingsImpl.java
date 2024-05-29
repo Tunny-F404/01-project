@@ -10,6 +10,7 @@ import com.zeroone.star.shopsettings.entity.WorkShop;
 import com.zeroone.star.shopsettings.mapper.WorkShopMapper;
 import com.zeroone.star.shopsettings.service.ShopsettingsService;
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,6 +25,7 @@ interface msWorkShopMapper{
     GetShopSettingsDTO workShopToGetShopSettingsDTO(WorkShop workShop);
 }
 
+@Service
 public class ShopsettingsImpl extends ServiceImpl<WorkShopMapper, WorkShop> implements ShopsettingsService {
 
     @Resource
@@ -48,6 +50,7 @@ public class ShopsettingsImpl extends ServiceImpl<WorkShopMapper, WorkShop> impl
     //获取车间详细信息
     @Override
     public GetShopSettingsDTO getShopSettingsInfoByWorkShopId(Long workShopId) {
+        System.out.println(workShopId);
         WorkShop workShop = baseMapper.selectById(workShopId);
         return msWorkShopMapper.workShopToGetShopSettingsDTO(workShop);
     }

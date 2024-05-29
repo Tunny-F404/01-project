@@ -12,15 +12,17 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Api(tags = "车间管理")
 @RestController
 @RequestMapping("ShopSettings")
 public class ShopSettingsController implements ShopSettingsApis {
-    @Autowired(required = false)
+//    @Autowired(required = false)
+//    ShopsettingsService shopsettingsService;
+    @Resource
     ShopsettingsService shopsettingsService;
-
 
     @Override
     @ApiOperation("获取车间管理列表（条件+分页）")
@@ -35,9 +37,11 @@ public class ShopSettingsController implements ShopSettingsApis {
 
     @Override
     @ApiOperation("获取车间详情")
-    @GetMapping("/query-id")
-    public JsonVO<GetShopSettingsDTO> getShopSettingsInfoByWorkShopId(Long workShopId) {
+    @GetMapping("/query/{workShopId}")
+    public JsonVO<GetShopSettingsDTO> getShopSettingsInfoByWorkShopId(@PathVariable Long workShopId) {
         GetShopSettingsDTO getShopSettingsDTO = shopsettingsService.getShopSettingsInfoByWorkShopId(workShopId);
+
+
         return getShopSettingsDTO != null ? JsonVO.success(getShopSettingsDTO) : JsonVO.fail(null);
     }
 
@@ -46,7 +50,7 @@ public class ShopSettingsController implements ShopSettingsApis {
     @GetMapping("/query-name-list")
     public JsonVO<List<String>> getShopSettingNameList() {
         List<String> shopSettingsNameList = shopsettingsService.getShopSettingNameList();
-        return shopSettingsNameList.size() > 0 ? JsonVO.success(shopSettingsNameList) : JsonVO.fail(null);
+        return !shopSettingsNameList.isEmpty() ? JsonVO.success(shopSettingsNameList) : JsonVO.fail(null);
     }
 
 
