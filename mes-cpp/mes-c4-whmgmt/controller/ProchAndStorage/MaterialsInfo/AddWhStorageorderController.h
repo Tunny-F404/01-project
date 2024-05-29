@@ -3,8 +3,8 @@
 #define _ADDWHSTORAGEORDERCONTROLLER_H_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "../../../domain/vo/ProchAndStorage/MaterialsInfo/AddWhStorageorderVO.h"
-#include "../../../domain/dto/ProchAndStorage/MaterialsInfo/AddWhStorageorderDTO.h"
+#include "domain/vo/ProchAndStorage/MaterialsInfo/AddWhStorageorderVO.h"
+#include "domain/dto/ProchAndStorage/MaterialsInfo/AddWhStorageorderDTO.h"
 //0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController)   //<- Begin Codegen
 

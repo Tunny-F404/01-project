@@ -62,16 +62,37 @@ whstorageorder:
   item_id: 物料ID
   item_code: 物料编码
   item_name: 物料名称
+  specification: 规格型号
   unit_of_measure: 单位
   quantity_recived: 入库数量
   batch_code: 入库批次号
   expire_date: 有效期
-  warehouse_name: 入库仓库
+  warehouse_id: 仓库ID
+  warehouse_code: 仓库编码
+  warehouse_name: 仓库名称
+  location_id: 库区ID
+  location_code: 库区编码
+  location_name: 库区名称
+  area_id: 库位ID
+  area_code: 库位编码
+  area_name: 库位名称
   iqc_check: 是否检验
   iqc_code: 来料检验单编码
   iqc_id: 来料检验单ID
   remark: 备注
   line_id: 行ID
+ default: 
+  item_code: IF2022082437
+  item_name: PCB颗粒
+  specification: 黑色
+  unit_of_measure: g
+  warehouse_code: WH155
+  warehouse_name: 原料仓
+  location_code: L039
+  location_name: 注塑原料区
+  area_code: A0029
+  area_name: 默认库位
+  iqc_check: N
  add: 
   summary: 添加入库单行
  modify:
