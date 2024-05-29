@@ -76,79 +76,85 @@ const onAddChannel = () => {
 
     <!-- 原本是template #extra -->
     <!-- <template #extra> -->
-      <!-- 修改为 -->
-      <slot name="extra">
-        
-        <!-- 具名插槽例子实现 -->
-        <el-button @click="onSortChannel">排序顺序
-          <el-icon :size="20">
-            <Sort /><!--排序图标-->
-          </el-icon>
-        </el-button>
-        <el-button @click="onAddChannel">添加
-          <el-icon :size="20">
-            <Plus /><!--排序图标-->
-          </el-icon>
-        </el-button>
+    <!-- 修改为 -->
+    <slot name="extra">
+
+      <!-- 具名插槽例子实现 -->
+      <el-button @click="onSortChannel">排序顺序
+        <el-icon :size="20">
+          <Sort /><!--排序图标-->
+        </el-icon>
+      </el-button>
+      <el-button @click="onAddChannel">添加
+        <el-icon :size="20">
+          <Plus /><!--排序图标-->
+        </el-icon>
+      </el-button>
 
 
 
 
 
-      </slot>
+    </slot>
 
-      <!--表单区域-->
-      <el-form :inline="true" class="demo-form-inline">
-        <el-form-item label="表格分类：" padding="50px">
-          <!--label是用户看，value是收集给后台的-->
-          <el-select v-model="parms.classfiy">
-            <el-option label="按产品" value="001"> </el-option>
-            <el-option label="按时间" value="002"> </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="parms.state"><!--后台标记状态-->
-            <el-option label="正常" value="正常"></el-option>
-            <el-option label="失败" value="失败"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
-        </el-form-item>
-      </el-form>
+    <!--表单区域-->
+    <el-form :inline="true" class="demo-form-inline">
+      <el-form-item label="表格分类：" padding="50px">
+        <!--label是用户看，value是收集给后台的-->
+        <el-select v-model="parms.classfiy">
+          <el-option label="按产品" value="001"> </el-option>
+          <el-option label="按时间" value="002"> </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="状态">
+        <el-select v-model="parms.state"><!--后台标记状态-->
+          <el-option label="正常" value="正常"></el-option>
+          <el-option label="失败" value="失败"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">查询</el-button>
+      </el-form-item>
+    </el-form>
 
-      <!--表格区-->
-      <el-table :data="tableList" style="width: 100%">
-        <el-table-column prop="classify" label="分类" width="100"></el-table-column>
-        <el-table-column type="index" label="排序" width="50"></el-table-column>
-        <el-table-column prop="product" label="物料/产品" width="150"></el-table-column>
-        <el-table-column prop="sure" label="是否启用"></el-table-column>
-        <el-table-column prop="time" label="创建时间"></el-table-column>
-        <el-table-column label="操作">
-          <!-- row是当前一行数据 index是下标-->
-          <template #default="{row,$index}">
-            <el-button @click="onEditchannel(row,$index)" circle type="primary">
-              <el-icon :size="20">
-                <Edit /><!--修改图标-->
-              </el-icon>
-            </el-button>
-            <el-button @click="onDelChannel(row,$index)" type="danger" circle>
-              <el-icon>
-                <Delete /><!--删除图标-->
-              </el-icon>
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination v-model:current-page="parms.pagenum" v-model:page-size="parms.pagesize" :page-sizes="[2, 3, 5, 10]"
-        :background="true" layout="total, sizes, prev, pager, next, jumper" :total="11" @size-change="onSizeChange"
-        @current-change="OnCurrentChange" style="margin-top:20px;justify-content: flex-end;" />
-      <!---->
+    <!--表格区-->
+    <el-table :data="tableList" style="width: 100%">
+      <el-table-column prop="classify" label="分类" width="100"></el-table-column>
+      <el-table-column type="index" label="排序" width="50"></el-table-column>
+      <el-table-column prop="product" label="物料/产品" width="150"></el-table-column>
+      <el-table-column prop="sure" label="是否启用"></el-table-column>
+      <el-table-column prop="time" label="创建时间"></el-table-column>
+      <el-table-column label="操作">
+        <!-- row是当前一行数据 index是下标-->
 
-      <!--空处理-->
-      <template #empty>
-        <el-empty description="没有数据"></el-empty>
-      </template>
+
+        <!-- 这插槽没修 -->
+        <template #default="{row,$index}">
+          <el-button @click="onEditchannel(row,$index)" circle type="primary">
+            <el-icon :size="20">
+              <Edit /><!--修改图标-->
+            </el-icon>
+          </el-button>
+          <el-button @click="onDelChannel(row,$index)" type="danger" circle>
+            <el-icon>
+              <Delete /><!--删除图标-->
+            </el-icon>
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-pagination v-model:current-page="parms.pagenum" v-model:page-size="parms.pagesize" :page-sizes="[2, 3, 5, 10]"
+      :background="true" layout="total, sizes, prev, pager, next, jumper" :total="11" @size-change="onSizeChange"
+      @current-change="OnCurrentChange" style="margin-top:20px;justify-content: flex-end;" />
+    <!---->
+
+    <!--空处理-->
+
+    <!-- 原本是template #empty -->
+    <!-- <template #empty> -->
+    <slot name="empty">
+      <el-empty description="没有数据"></el-empty>
+    </slot>
   </tableFrame>
   <!--引入的弹窗-->
   <pop-Up ref="dialog"> </pop-Up>

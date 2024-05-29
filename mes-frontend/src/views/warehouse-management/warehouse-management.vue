@@ -4,24 +4,24 @@
 
 
     <div class="app-container">
-        <el-form size="small" :inline="true" label-width="68px">
-            <el-form-item label="仓库编码">
-                <el-input placeholder="请输入仓库编码" />
-            </el-form-item>
-            <el-form-item label="仓库名称">
-                <el-input placeholder="请输入仓库名称" />
-            </el-form-item>
-
-            <el-form-item>
-                <el-button type="primary" icon="el-icon-search" size="small" @click="handleQuery">搜索</el-button>
-                <el-button icon="el-icon-refresh" size="small" @click="resetQuery">重置</el-button>
-            </el-form-item>
-
-        </el-form>
 
 
         <TableTrue #extra>
-<h1>111231323144</h1>
+            <el-form size="small" :inline="true" label-width="68px">
+                <el-form-item label="仓库编码">
+                    <el-input placeholder="请输入仓库编码" />
+                </el-form-item>
+                <el-form-item label="仓库名称">
+                    <el-input placeholder="请输入仓库名称" />
+                </el-form-item>
+
+                <el-form-item>
+                    <el-button type="primary" icon="el-icon-search" size="small" @click="handleQuery">搜索</el-button>
+                    <el-button icon="el-icon-refresh" size="small" @click="resetQuery">重置</el-button>
+                </el-form-item>
+
+            </el-form>
+
         </TableTrue>
 
 
