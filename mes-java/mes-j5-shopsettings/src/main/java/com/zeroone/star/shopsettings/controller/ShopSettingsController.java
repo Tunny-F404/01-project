@@ -5,11 +5,9 @@ import com.zeroone.star.project.j5.dto.shopsettings.GetShopSettingsDTO;
 import com.zeroone.star.project.j5.query.shopsettings.ShopSettingsQuery;
 import com.zeroone.star.project.j5.shopsettings.ShopSettingsApis;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.shopsettings.service.ShopsettingsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,8 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("ShopSettings")
 public class ShopSettingsController implements ShopSettingsApis {
-//    @Autowired(required = false)
-//    ShopsettingsService shopsettingsService;
+    
     @Resource
     ShopsettingsService shopsettingsService;
 
@@ -67,7 +64,6 @@ public class ShopSettingsController implements ShopSettingsApis {
     @ApiOperation("更新车间信息")
     public JsonVO<Integer> updateShopSeetingController(
             @ApiParam("车间DTO")@RequestBody GetShopSettingsDTO shopsettingsDTO) {
-        shopsettingsService.Update(shopsettingsDTO);
         return null;
     }
     /**
