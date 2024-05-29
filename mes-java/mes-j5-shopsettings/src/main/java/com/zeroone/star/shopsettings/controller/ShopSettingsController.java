@@ -141,7 +141,7 @@ public class ShopSettingsController implements ShopSettingsApis {
 
     @Override
     @ApiOperation("删除车间（支持批量删除）")
-    @DeleteMapping("/delete-shopsettings")
+    @DeleteMapping("/delete/{workshopIds}")
     public JsonVO<Integer> removeWorkshop(List<Long> workshopIds) {
         return null;
     }
