@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j5.VO.schedulecalendar;
+package com.zeroone.star.project.j5.vo.schedulecalendar;
 
 /**
  * @projectName: mes-java
