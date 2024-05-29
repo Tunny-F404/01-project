@@ -1,21 +1,19 @@
 package com.zeroone.star.orgstructure.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zeroone.star.orgstructure.entity.RoleDo;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zeroone.star.orgstructure.entity.RoleDO;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 描述：对Role表增删改
+ * <p>
+ * 角色信息表 Mapper 接口
+ * </p>
  *
- * @author 0xu0
- * @version 1.0.0
+ * @author 天衍土豆
+ * @since 2024-05-24
  */
 @Mapper
-public interface RoleMapper extends BaseMapper<RoleDo> {
-
+public interface RoleMapper extends BaseMapper<RoleDO> {
 
 }

@@ -1,24 +1,15 @@
 package com.zeroone.star.orgstructure.controller;
 
 
-import com.zeroone.star.orgstructure.service.RoleService;
-import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -32,158 +23,140 @@ import java.util.List;
 @RestController
 @RequestMapping("/orgstructure/role")
 @Api(tags = "角色控制器")
-@Validated//参数校验的,RoleApis上也有-0xu0
 public class RoleController implements RoleApis {
-    @Resource
-    private RoleService roleServiceImpl;
-
     /**
+     *
      * 获取角色名称列表
+     * @author 天衍土豆
+     * @return
      */
+    @Override
     @GetMapping("query-roles")
     @ApiOperation("获取角色名称列表")
-    public JsonVO<List<RoleDTO>> queryRoles() {
-        return JsonVO.success(null);
+    public JsonVO<List<RoleListDTO>> queryRoles() {
+        List<RoleListDTO> result = roleService.listRoles();
+        return JsonVO.success(result);
     }
 
     /**
      * 获取角色列表(条件+分页)
+     * @author 天衍土豆
+     * @return
      */
-    @GetMapping("/query-page")
+    @Override
+    @GetMapping ("/query-page")
     @ApiOperation("获取角色列表(条件+分页)")
-    public JsonVO<List<RoleDTO>> queryRolePage(@RequestBody RoleDTO condition, @RequestBody PageDTO<RoleDTO> pageDTO) {
-        return JsonVO.success(null);
+    public JsonVO<PageDTO<RoleListDTO>> queryRolePage(RoleConditionQuery condition) {
+        PageDTO<RoleListDTO> result = roleService.listPageRoles(condition);
+        return JsonVO.success(result);
     }
 
     /**
      * 获取角色详情
+     * @author 天衍土豆
+     * @return
      */
+    @Override
     @GetMapping("query-role")
     @ApiOperation("获取角色详情")
     public JsonVO<RoleDTO> queryRole(@RequestParam Integer id) {
-        return JsonVO.success(null);
+        RoleDTO result = roleService.getById(id);
+        return JsonVO.success(result);
     }
+
+    /**
+     * 设置数据权限回显
+     */
+    @Override
+    @GetMapping("query-role-Permissions")
+    @ApiOperation("设置数据权限回显")
+    public JsonVO<RolePermissionsDTO> queryRolePermissions(Integer id) {
+        RolePermissionsDTO result = roleService.getPermissions(id);
+        return JsonVO.success(result);
+    }
+
 
     /**
      * 设置数据权限
+     * @author 天衍土豆
+     * @return
      */
-    @GetMapping("modify-role")
+    @Override
+    @PutMapping("modify-role")
     @ApiOperation("设置数据权限")
-    public JsonVO<List<RoleDTO>> modifyRole(@RequestParam Integer id) {
-        return JsonVO.success(null);
+    public JsonVO<String> modifyRole(@RequestBody RolePermissionsQuery rolePermissionsQuery) {
+        int i = roleService.updatePermissions(rolePermissionsQuery);
+        if (i<0){
+            return JsonVO.fail("修改失败");
+        }
+        return JsonVO.success("修改成功");
     }
-
     /**
      * 添加角色
-     *
+     * @author 0xu0
      * @param roleDTO
      * @return
-     * @author 0xu0
      */
     @PostMapping("add-Role")
     @ApiOperation("添加角色")
-    public JsonVO<Integer> addRole(@RequestBody @Valid RoleAddDto roleDTO) {
-        Integer add = roleServiceImpl.addRole(roleDTO);
-        if (add > 0) {
-            return JsonVO.success(add);
-        }
-        return JsonVO.fail(-1);
+    public JsonVO<RoleDTO> addRole(@RequestBody RoleDTO roleDTO){
+        return JsonVO.success(roleDTO);
     }
 
     /***
      * 修改角色状态（角色页面，有个开关符号，控制停用和启用）
      * @author 0xu0
-     * @param roleStatusModifyDto
+     * @param status
      * @return
      */
     @PostMapping("modify-RoleStatus")
     @ApiOperation("修改角色状态")
-    public JsonVO<Integer> modifyRoleStatus(@RequestBody @Valid RoleStatusModifyDto roleStatusModifyDto){
-        Integer modify = null;
-        try {
-            modify = roleServiceImpl.modifyRoleStatus(roleStatusModifyDto);
-            return JsonVO.success(modify);
-        } catch (Exception e) {
-            return JsonVO.fail(-1);
-        }
-//        if(modify>0){
-//            return JsonVO.success(modify);
-//        }
-//        return JsonVO.fail(modify);
+    public JsonVO<String> modifyRoleStatus(@RequestParam String status){
+        return JsonVO.success(status);
     }
 
 
     /**
      * 删除角色，支持批量删除
-     *
-     * @param ids
-     * @return
      * @author 0xu0
+     * @param id
+     * @return
      */
     @DeleteMapping("delete-Roles")
     @ApiOperation("删除角色")
-    public JsonVO<List<String>> deleteRoles(@RequestParam List<String> ids) {
-        if (roleServiceImpl.deleteRoles(ids) > 0) {
-            return JsonVO.success(ids);
-        }
-        return JsonVO.fail(ids);
+    public JsonVO<Long[]> deleteRoles(@RequestParam Long[] id){
+        return JsonVO.success(id);
     }
 
     /**
      * 修改角色信息
-     *
      * @param roleDTO
      * @return
      */
     @PostMapping("modify-RoleInfo")
     @ApiOperation("修改角色信息")
-    public JsonVO<Integer> modifyRoleInfo(RoleModifyDto roleDTO) {
-        Integer info = roleServiceImpl.modifyRoleInfo(roleDTO);
-        System.out.println(info);
-        if (info > 0) {
-            return JsonVO.success(info);
-        }
-        return JsonVO.fail(info);
+    public JsonVO<RoleDTO> modifyRoleInfo(@RequestBody RoleDTO roleDTO){
+        return JsonVO.success(roleDTO);
     }
 
-    /*
-     * 获取角色分配用户列表（条件+分页）
-     * */
-    @GetMapping("query-allocate-role")
-    @ApiOperation("获取角色分配用户列表（条件+分页）")
-    public JsonVO<List<RoleDTO>> queryAllocatedList(@RequestParam Long roleId) {
-        /*roleServiceImpl.getUsersByRole(roleId);*/
-        return JsonVO.success(null);
+    @Override
+    public JsonVO<List<RoleDTO>> queryAllocatedList(RoleDTO roleDTO, PageDTO<RoleDTO> pageDTO) {
+        return null;
     }
 
-
-    /*
-     * 添加授权
-     * */
-    @PutMapping("addAuth")
-    @ApiOperation("添加授权")
-    public JsonVO<RoleDTO> addAuth(@RequestParam Long roleId, @RequestParam Long[] userIds) {
-        roleServiceImpl.insertAuthUsers(roleId, userIds);
-        return JsonVO.success(null);
+    @Override
+    public JsonVO<RoleDTO> addAuth(Long roleId, Long[] userIds) {
+        return null;
     }
 
-    /*
-     * 取消授权（支持批量）
-     * */
-    @DeleteMapping("cancel")
-    @ApiOperation("批量取消授权")
-    public JsonVO<Integer> cancelAuthUsers(@RequestParam Long roleId, @RequestParam Long[] userIds) {
-        Integer result = roleServiceImpl.deleteAuthUsers(roleId, userIds);
-        return result > 0 ? JsonVO.success(result) : JsonVO.fail(result);
+    @Override
+    public JsonVO<List<RoleDTO>> cancelAuthUser(Long roleId, Long[] userIds) {
+        return null;
     }
 
-    /*
-     * 导出角色
-     * */
-    @GetMapping(value = "export")
-    @ApiOperation("导出角色")
+    @Override
     public ResponseEntity<byte[]> export() {
-        return roleServiceImpl.downloadExcel();
+        return null;
     }
 
 }
