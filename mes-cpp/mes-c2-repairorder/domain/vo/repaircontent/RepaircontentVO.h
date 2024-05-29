@@ -28,8 +28,8 @@
 /**
  * 维修内容显示JsonVO，用于响应给客户端的Json对象
  */
-class RepaircontentJsonVO : public JsonVO<RepaircontentPageDTO::Wrapper> {
-	DTO_INIT(RepaircontentJsonVO, JsonVO<RepaircontentPageDTO::Wrapper>);
+class RepaircontentJsonVO : public JsonVO<RepaircontentDTO::Wrapper> {
+	DTO_INIT(RepaircontentJsonVO, JsonVO<RepaircontentDTO::Wrapper>);
 };
 
 /**

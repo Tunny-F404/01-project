@@ -18,14 +18,13 @@ repaircontent:
   subject_type: 项目类型
   subject_content: 项目内容
   subject_standard: 标准
+  create_by: 创建者
+  create_time: 创建时间
+  update_by: 更新者
+  update_time: 更新时间
   remark: 备注
   attr1: 预留字段(string)
   attr2: 预留字段(int)
-  name: 项目名称
-  instance: 故障描述
-  source: 故障描述资源
-  status: 维修情况
-  id: 维修单id(唯一标识)
   line_id: 行id
 repairorder:
  summary: 

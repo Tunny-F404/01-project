@@ -18,35 +18,120 @@
 */
 #include "stdafx.h"
 #include "RepaircontentController.h"
-//#include "../../service/sample/SampleService.h"
+#include "../../service/repaircontent/RepaircontentService.h"
 #include "../ApiDeclarativeServicesHelper.h"
 
-RepaircontentJsonVO::Wrapper RepaircontentController::execQueryRepaircontent(const RepaircontentQuery::Wrapper& id)
+RepaircontentPageJsonVO::Wrapper RepaircontentController::execQueryRepaircontent(const RepaircontentQuery::Wrapper& query)
 {
 	//...
-	return RepaircontentJsonVO::Wrapper();
+	// 定义一个Service
+	RepaircontentService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = RepaircontentPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 RepaircontentJsonVO::Wrapper RepaircontentController::execDetailsRepaircontent(const RepaircontentQuery::Wrapper& id)
 {
 	//...
-	return RepaircontentJsonVO::Wrapper();
+	// 定义返回数据对象
+	auto jvo = RepaircontentJsonVO::createShared();
+	// 参数校验
+	if (id->repair_id <= 0) {
+		jvo->fail(RepaircontentDTO::Wrapper());
+		return jvo;
+	}
+	// 定义一个Service
+	RepaircontentService service;
+	// 执行数据查询
+	auto dto = service.getData(id);
+	jvo->success(dto);
+	// 响应结果
+	return jvo;
 }
 
 Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const AddRepaircontentDTO::Wrapper& dto) {
-	//...
-	return Uint64JsonVO::Wrapper();
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+
+	 //非空校验
+	if (!dto->repair_id || 
+		!dto->subject_name ||
+		!dto->malfunction ||
+		!dto->malfunction_url ||
+		!dto->repair_des) {
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->repair_id < 0 || dto->subject_name->empty() || dto->malfunction->empty())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	RepaircontentService service;
+	// 执行数据新增
+	uint64_t res = service.saveData(dto);
+	if (res > 0) {
+		jvo->success(res);
+	}
+	else {
+		jvo->fail(res);
+	}
+	// 响应结果
+	return jvo;
 }
 
 Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const ModifyRepaircontentDTO::Wrapper& dto)
 {
-	//...
-	return Uint64JsonVO::Wrapper();
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+
+	// 非空校验
+	if ( !dto->line_id ||
+		!dto->subject_name ||
+		!dto->repair_des ||
+		!dto->malfunction ||
+		!dto->malfunction_url)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	RepaircontentService service;
+	// 执行数据新增
+	if (service.updateData(dto)) {
+		jvo->success(dto->line_id);
+	}
+	else {
+		jvo->fail(dto->line_id);
+	}
+	// 响应结果
+	return jvo;
+
+
 }
 
-StringJsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& subject_nameList)
+Uint64JsonVO::Wrapper RepaircontentController::execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& id)
 {
-	//...
-	return StringJsonVO::Wrapper();
+	auto jvo = Uint64JsonVO::createShared();
+
+	uint64_t cnt = 0; // 执行成功计数
+	// 定义一个Service
+	RepaircontentService service;
+	for (const uint64_t& it : *id->line_idList) { // 不用校验, 失败不管 (隐藏字段, 一般不会有问题)
+		if (it) {
+			cnt += service.removeData(it);
+		}
+	}
+	jvo->success(cnt);
+	// 响应结果
+	return jvo;
 }
 
