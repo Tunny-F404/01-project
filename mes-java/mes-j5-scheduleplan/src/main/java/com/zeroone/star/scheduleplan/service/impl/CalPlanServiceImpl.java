@@ -1,7 +1,6 @@
 package com.zeroone.star.scheduleplan.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
 import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.zeroone.star.scheduleplan.mapper.CalPlanMapper;
@@ -9,8 +8,10 @@ import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Mapper(componentModel = "spring")
-interface MsTeamMapper {
+interface MsPlanMapper {
 
 
     /**
@@ -18,7 +19,7 @@ interface MsTeamMapper {
      * @param calPlan 计划实体类
      * @return 计划DTO
      */
-    PlanDTO planDTOToPlan(CalPlan calPlan);
+    PlanVO planToPlanVO(CalPlan calPlan);
 
 
 }
@@ -33,13 +34,20 @@ interface MsTeamMapper {
 @Service
 public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> implements ICalPlanService {
 
-    /**
-     *
-     * @param planId
-     * @return 详情
-     */
+    @Resource
+    MsPlanMapper msPlanMapper;
+
     @Override
     public PlanVO queryPlanDetails(Long planId) {
-        return null;
+        CalPlan calPlan = baseMapper.selectById(planId);
+        return msPlanMapper.planToPlanVO(calPlan);
     }
+
+//    @Override
+//    public TeamDTO queryTeamDetails(Long teamId) {
+//        // 将数据查询出
+//        CalTeam calTeam = baseMapper.selectById(teamId);
+//        // 转为DTO并返回
+//        return msTeamMapper.teamToTeamDTO(calTeam);
+//    }
 }
