@@ -67,21 +67,27 @@ public class JobController implements JobApis {
     @GetMapping("query-job-names")
     @ApiOperation("获取岗位名称列表")
     public JsonVO<List<String>> queryJobNames() {
-        return null;
+        List<String> jobNames = sysPostService.getJobNames();
+        return JsonVO.success(jobNames);
     }
 
     @Override
     @PostMapping("query-job-list")
     @ApiOperation("获取岗位列表")
     public JsonVO<List<JobVO>> queryJobList(@RequestBody JobQuery jobQuery) {
-        return null;
+        List<JobVO> jobList = sysPostService.getJobList(jobQuery);
+        return JsonVO.success(jobList);
     }
 
     @Override
     @GetMapping("query-job-detail")
     @ApiOperation("获取指定岗位详情")
     public JsonVO<JobVO> queryJobDetail(@RequestParam Long id) {
-        return null;
+        JobVO jobDetail = sysPostService.getJobDetail(id);
+        if (jobDetail == null) {
+            return JsonVO.fail(null);
+        }
+        return JsonVO.success(jobDetail);
     }
 
 
