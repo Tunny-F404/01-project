@@ -32,10 +32,15 @@ class GetProgectListAllMapper : public Mapper<dvSubjectDO>
 public:
 	dvSubjectDO mapper(ResultSet* resultSet) const override
 	{
+		//subject_id,subject_code,subject_type,subject_content,subject_standard,enable_flag,remark
 		dvSubjectDO data;
-		data.setSubjectCode(resultSet->getString(1));
-		data.setSubjectName(resultSet->getString(2));
+		data.setSubjectId(resultSet->getUInt64(1));
+		data.setSubjectCode(resultSet->getString(2));
 		data.setSubjectType(resultSet->getString(3));
+		data.setSubjectContent(resultSet->getString(4));
+		data.setSubjectStandard(resultSet->getString(5));
+		data.setEnableFlag(resultSet->getString(6));
+		data.setRemark(resultSet->getString(7));
 		return data;
 	}
 };
@@ -47,8 +52,14 @@ public:
 	{
 		dvSubjectDO data;
 		data.setSubjectId(resultSet->getUInt64(1));
+		data.setSubjectCode(resultSet->getString(2));
+		data.setSubjectName(resultSet->getString(3));
+		data.setSubjectType(resultSet->getString(4));
+		data.setSubjectContent(resultSet->getString(5));
+		data.setSubjectStandard(resultSet->getString(6));
+		data.setEnableFlag(resultSet->getString(7));
 		return data;
 	}
-};
+};//pId, SubjectId,pCode, SubjectCode, pName, SubjectName, pType, SubjectType, pContent, SubjectContent, standard, SubjectStandard, enable, EnableFlag)
 
 #endif // !_GETPROGECT_MAPPER_

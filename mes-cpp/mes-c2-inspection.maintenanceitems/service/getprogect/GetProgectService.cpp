@@ -53,7 +53,7 @@ GetProgectPageDTO::Wrapper GetProgectService::listAll(const GetProgectQuery::Wra
 	for (dvSubjectDO sub : result)
 	{
 		auto dto = GetProgectDTO::createShared();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, pCode, SubjectCode, pType, SubjectType, pContent, SubjectContent, standard, SubjectStandard, enable, EnableFlag, note, Remark)
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub,pId, SubjectId, pCode, SubjectCode, pType, SubjectType, pContent, SubjectContent, standard, SubjectStandard, enable, EnableFlag, note, Remark)
 		pages->addData(dto);
 
 	}
@@ -68,10 +68,10 @@ GetProgectDetailDTO::Wrapper GetProgectService::listSome(const GetProgectDetailQ
 	for (dvSubjectDO sub : result)
 	{
 		auto dto = GetProgectDetailDTO::createShared();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, pId, SubjectId);
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, pId, SubjectId,pCode, SubjectCode, pName, SubjectName, pType, SubjectType, pContent, SubjectContent, standard, SubjectStandard, enable, EnableFlag)
 		//pages->addData(dto);
 		return dto;
 	}
 	return {};
 	//return pages;
-}
+}/*subjectId,subjectCode,subjectName,subjectType,subjectContent,subjectStandard,enableFlag*/
