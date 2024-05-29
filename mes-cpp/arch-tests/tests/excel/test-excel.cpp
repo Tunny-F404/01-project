@@ -31,6 +31,7 @@ using namespace std;
  * 如果需要写中文，通过yaml配置文件的方式书写中文
  */
 #define TEST_EXCEL_FN "./public/excel/1.xlsx"
+//D:\CodeLamp\C++\c4-prodmgmt-amie\mes-cpp\out\build\x64-Debug\arch-tests\bin\public\excel
 #define TEST_EXCEL_SN ZH_WORDS_GETTER("excel.sheet.s1")
 
 TEST(ExcelTest, TestWrite) {

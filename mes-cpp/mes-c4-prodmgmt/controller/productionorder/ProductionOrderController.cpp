@@ -32,6 +32,7 @@ ExportOrderPageJsonVO::Wrapper ProductionOrderController::execQueryOrder(const E
 }
 ExportBomOrderPageJsonVO::Wrapper ProductionOrderController::execQueryBomOrderbyWorkCode(const ExportBomOrderQuery::Wrapper& query)
 {
+
 	// 定义一个Service
 	ProductionBomOrderService service;
 	// 查询数据
