@@ -25,10 +25,13 @@ public interface ParameterApis {
     ResponseEntity<byte[]> exportParameter();
 
 
-    JsonVO<ParameterDTO> addParam(ParameterDTO parameterDTO);
+    JsonVO<Integer> addParam(ParameterDTO parameterDTO);
+
 
 
     JsonVO<PageDTO<ParameterDTO>> queryAll(ParameterQuery parameterQuery);
+
+    JsonVO<Integer> modifyParam(ParameterDTO parameterDTO);
 
 
 
