@@ -1,6 +1,7 @@
 <script setup >
 import  tableFrame  from '@/components/table-list-use/table-text.vue' 
 import popUp from '@/components/table-list-use/table-components/pop-up.vue'
+import request  from '@/apis/request.js'//加入请求
 import {ref} from 'vue'
 
 //没有中文国际化
@@ -16,7 +17,9 @@ const tableList=ref([{
 //dialog联系到表格弹窗
 const dialog=ref()
 
-
+//定义总条数
+const total=ref(0)
+const loading=ref(false)//loading状态
 //定义请求参数,后期完善
 const parms=ref({
     pagenum:1,//页数
@@ -24,9 +27,16 @@ const parms=ref({
     state:'成功',//状态
     classfiy:'时间'
 })
-const getPageList=()=>{
-
+const getPageList= async ()=>{
+  loading.value=true
+  //里面改接口，可以加个try-catch
+  // const res= await request(request.GET,'/basicdata/md-unit-measure/list',null,JSON)
+  // tableList.value=res.data.rows.data
+  // parms.value.pagenum=res.data.pageIndex
+  // parms.value.pagesize=res.data.pageSize
+  loading.value=false
 }
+getPageList()//进来就加载一遍
 //处理分页逻辑
 //改变大小
 const onSizeChange=(size)=>{
@@ -78,7 +88,7 @@ const onAddChannel = () => {
 <template>
         <!--分类，页面只有基本的表现，没有实现数据绑定-->
         <tableFrame title="实验表格">
-    <template #extra>
+    <slot name=#extra>
         <!-- 具名插槽例子实现 -->
       <el-button @click="onSortChannel">排序顺序    
         <el-icon :size="20">
@@ -90,7 +100,7 @@ const onAddChannel = () => {
     <Plus /><!--排序图标-->
         </el-icon>
     </el-button>
-    </template>
+    </slot>
 
     <!--表单区域-->
     <el-form :inline="true"  class="demo-form-inline">
@@ -113,7 +123,7 @@ const onAddChannel = () => {
 </el-form>
 
 <!--表格区-->
-    <el-table  :data="tableList" style="width: 100%">
+    <el-table  :data="tableList" style="width: 100%" v-loading="loading">
    <el-table-column prop="classify" label="分类" width="100"></el-table-column>
    <el-table-column type="index" label="排序" width="50"></el-table-column>
    <el-table-column prop="product" label="物料/产品" width="150"></el-table-column>
@@ -129,7 +139,7 @@ const onAddChannel = () => {
     <Edit /><!--修改图标-->
         </el-icon>
 </el-button>
-        <el-button @click="onDelChannel(row,$index)" 
+        <el-button @click="onDelChannel(row,$index) " 
         type="danger"
          circle>
          <el-icon>
@@ -153,9 +163,9 @@ const onAddChannel = () => {
 <!---->
 
 <!--空处理-->
-    <template #empty>
+    <slot  name=#empty>
         <el-empty description="没有数据"></el-empty>
-    </template>
+    </slot>
         </tableFrame>
 <!--引入的弹窗-->
         <pop-Up ref="dialog"> </pop-Up>

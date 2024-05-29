@@ -12,7 +12,7 @@ const routes = [
 	{
 		path: '/un-3',
 		name: 'UN3',
-		component: () => import('@/views/status/404.vue')
+		component: () => import('@/views/sample/basic-data/unit-of-account.vue')
 	},
 	{
 		path: '/un-4',
