@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @ApiModel("用户传输对象")
 public class MyCenterQuery {
+
     @ApiModelProperty(value = "头像url",example = "111.jpg")
     private String ParttenUrl;
 
