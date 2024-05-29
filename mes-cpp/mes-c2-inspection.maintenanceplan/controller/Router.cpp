@@ -39,7 +39,7 @@
 
 
 
-#include "deletePlanSubject/DeletePlanSubject.h"
+#include "../controller/deletePlanSubject/DeletePlanSubjectController.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC

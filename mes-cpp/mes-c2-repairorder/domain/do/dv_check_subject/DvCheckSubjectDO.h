@@ -19,6 +19,8 @@
  * */
 #ifndef _DV_CHECK_SUBJECT_
 #define _DV_CHECK_SUBJECT_
+
+#include "../DoInclude.h"
 #include "../DoInclude.h"
 
  /**
