@@ -45,6 +45,11 @@ const routes = [
 				path: '/sample/unit-account',
 				component: () => import('@/views/sample/basic-data/unit-of-account.vue')
 			},
+			 // 车间设置
+			 {
+				path: '/sample/workshop-settings',
+				component: () => import('@/views/sample/workshop/WorkshopSettings.vue')
+			},
 			//工艺流程
 			{
 				path: '/sample/process-flow',
@@ -54,7 +59,7 @@ const routes = [
 			{
 				path: '/sample/public-form',
 				component: () =>import('@/views/sample/public-form/public-form-page.vue')
-			  }
+			    }
 		]
 	}
 ]
