@@ -19,7 +19,7 @@
 #ifndef _DVMACHINERYDO_H_
 #define _DVMACHINERYDO_H_
 
-#include "../DoInclude.h";
+#include "../DoInclude.h"
 
 class dvSubjectDO
 {

@@ -18,12 +18,34 @@
 */
 #include "stdafx.h"
 #include "MaintainProjController.h"
-//#include "../../service/device-manage/DeviceManageService.h"
+
 #include "../ApiDeclarativeServicesHelper.h"
+#include"../mes-c2-inspection.maintenanceplan/service/AddProject/AddprojectService.h"
 
 Uint64JsonVO::Wrapper MaintainProjController::execAddProj(const MaintainProjDTO::Wrapper& dto)
 {
+	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->planId||!dto->machineryId)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return  jvo;
+	}
+
+	// 定义一个Service
+	AddprojectService service;
+	uint64_t id = service.saveData(dto);
+	if (id > 0)
+	{
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
 	return jvo;
 }
+
 

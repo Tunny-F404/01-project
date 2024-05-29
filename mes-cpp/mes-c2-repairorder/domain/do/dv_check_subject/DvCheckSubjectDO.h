@@ -19,12 +19,11 @@
  * */
 #ifndef _DV_CHECK_SUBJECT_
 #define _DV_CHECK_SUBJECT_
-
 #include "../DoInclude.h"
 
-/**
- * 点检项目 数据库实体类
- */
+ /**
+  * 点检项目 数据库实体类
+  */
 class DvCheckSubjectDO
 {
     // 流水号 (主键)
@@ -61,6 +60,7 @@ class DvCheckSubjectDO
     CC_SYNTHESIZE(string, update_by, Update_by);
     // 更新时间
     CC_SYNTHESIZE(string, update_time, Update_time);
+
 public:
     DvCheckSubjectDO() {
         record_id = 0;
