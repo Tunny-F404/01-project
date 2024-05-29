@@ -19,7 +19,7 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-//#include "repaircontent/RepaircontentController.h"
+#include "repaircontent/RepaircontentController.h"
 
 #include "repairorder/RepairorderController.h"
 
@@ -55,7 +55,7 @@ void Router::initRouter()
 
 	//#TIP :系统扩展路由定义，写在这个后面
     ROUTER_SIMPLE_BIND(RepairorderController);
-	//ROUTER_SIMPLE_BIND(RepaircontentController);
+	ROUTER_SIMPLE_BIND(RepaircontentController);
 }
 
 #ifdef HTTP_SERVER_DEMO
