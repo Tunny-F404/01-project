@@ -47,7 +47,7 @@ DefectPageDTO::Wrapper DefectService::listAll(const QcDefectQuery::Wrapper& quer
 		//	    dto->defect_name = sub.getDefectName();
 		// 		dto->sex = sub.getSex();
 		// 		dto->age = sub.getAge();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, defect_name, DefectName, index_type, IndexType, defect_level, DefectLevel)
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, defect_code, DefectCode, defect_name, DefectName, index_type, IndexType, defect_level, DefectLevel)
 			pages->addData(dto);
 
 	}

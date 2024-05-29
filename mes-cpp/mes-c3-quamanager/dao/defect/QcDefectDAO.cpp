@@ -35,13 +35,13 @@ if (query->index_type) { \
 } \
 if (query->defect_level) { \
 	sql << " AND defect_level=?"; \
-	SQLPARAMS_PUSH(params, "i", std::string, query->defect_level.getValue("")); \
+	SQLPARAMS_PUSH(params, "s", std::string, query->defect_level.getValue("")); \
 }
 
 uint64_t QcDefectDAO::count(const QcDefectQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT COUNT(*) FROM sample";
+	sql << "SELECT COUNT(*) FROM qc_defect";
 	SAMPLE_TERAM_PARSE(query, sql);
 	string sqlStr = sql.str();
 	return sqlSession->executeQueryNumerical(sqlStr, params);
@@ -50,7 +50,7 @@ uint64_t QcDefectDAO::count(const QcDefectQuery::Wrapper& query)
 std::list<QcDefectDO> QcDefectDAO::selectWithPage(const QcDefectQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT defect_name,defect_type,defect_level FROM qc_defect";
+	sql << "SELECT defect_code,defect_name,index_type,defect_level FROM qc_defect";
 	SAMPLE_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	QcDefectMapper mapper;
