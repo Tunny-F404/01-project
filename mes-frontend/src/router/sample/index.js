@@ -44,7 +44,12 @@ const routes = [
 			{
 				path: '/sample/unit-account',
 				component: () => import('@/views/sample/basic-data/unit-of-account.vue')
-			}
+			},
+			 // 车间设置
+			 {
+				path: '/sample/workshop-settings',
+				component: () => import('@/views/sample/workshop/WorkshopSettings.vue')
+			  }
 		]
 	}
 ]
