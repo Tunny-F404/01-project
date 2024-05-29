@@ -23,6 +23,8 @@
 #include "domain/vo/detectiontemplate/materialproductsVO.h"
 #include "domain/query/detectiontemplate/materialproductsQuery.h"
 #include "domain/dto/detectiontemplate/materialproductsDTO.h"
+#include <oatpp/web/client/ApiClient.hpp>
+
 class MaterialProductsService
 {
 public:
@@ -32,8 +34,10 @@ public:
 	uint64_t MaterialProductsService::saveMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
 	
 	bool MaterialProductsService::updateMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
+
 	
-	bool MaterialProductsService::deleteByRecordId(uint64_t record_id);
+	
+	bool  MaterialProductsService::deleteByRecordId(const oatpp::List<oatpp::UInt64>& record_id);
 };
 
 #endif // !_SAMPLE_SERVICE_

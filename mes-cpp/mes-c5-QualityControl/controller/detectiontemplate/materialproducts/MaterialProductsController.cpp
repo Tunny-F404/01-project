@@ -60,29 +60,38 @@ Uint64JsonVO::Wrapper MaterialProductsController::execModifyMaterialProducts(con
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper MaterialProductsController::execRemoveMaterialProduct(const UInt64& record_id)
+Uint64JsonVO::Wrapper MaterialProductsController::execRemoveMaterialProduct(const oatpp::List<oatpp::UInt64>& record_ids)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
+
 	// 参数校验
-	if (!record_id || record_id <= 0)
-	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+	if (record_ids->empty()) {
+		jvo->init(oatpp::UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
+
 	// 定义一个Service
 	MaterialProductsService service;
+
 	// 执行数据删除
-	if (service.deleteByRecordId(record_id.getValue(0))) {
-		jvo->success(record_id);
+	if (service.deleteByRecordId(record_ids)) {
+		
+			jvo->init(oatpp::UInt64(1), RS_SUCCESS);  // 假设 success 方法能够处理单个 id
+			return jvo;
 	}
-	else
-	{
-		jvo->fail(record_id);
+	else {
+		
+			jvo->init(oatpp::UInt64(1), RS_FAIL);  // 假设 fail 方法能够处理单个 id
+		
 	}
+
 	// 响应结果
 	return jvo;
 }
+	
+
+
 
 Uint64JsonVO::Wrapper MaterialProductsController::execAddMaterialProducts(const MaterialProductsDTO::Wrapper& dto)
 {

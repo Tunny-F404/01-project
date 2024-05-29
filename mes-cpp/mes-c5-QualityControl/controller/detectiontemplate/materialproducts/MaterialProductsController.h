@@ -85,10 +85,10 @@ public: // 定义接口
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("materialproducts.delete.summary"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "record_id", ZH_WORDS_GETTER("materialproducts.field.record_id"), 1, true);
+		/*API_DEF_ADD_PATH_PARAMS(UInt64, "record_id", ZH_WORDS_GETTER("materialproducts.field.record_id"), 1, true);*/
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/qc/delete-template-materialproducts/{record_id}", removeMaterialProducts, PATH(UInt64, record_id), execRemoveMaterialProduct(record_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/qc/delete-template-materialproducts/{record_id}", removeMaterialProducts, BODY_DTO(oatpp::List<oatpp::UInt64>, record_id), execRemoveMaterialProduct(record_id));
 
 	// 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("materialproducts.put.summary"), modifyMaterialProducts, Uint64JsonVO::Wrapper);
@@ -103,7 +103,7 @@ private: // 定义接口的执行函数
 	MaterialProductsJsonVO::Wrapper execMaterialProducts(const MaterialProductsQuery::Wrapper& query, const PayloadDTO& payload);
 
 	Uint64JsonVO::Wrapper MaterialProductsController::execModifyMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
-	Uint64JsonVO::Wrapper MaterialProductsController::execRemoveMaterialProduct(const UInt64& record_id);
+	Uint64JsonVO::Wrapper MaterialProductsController::execRemoveMaterialProduct(const oatpp::List<oatpp::UInt64>& record_ids);
 	Uint64JsonVO::Wrapper MaterialProductsController::execAddMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
 };
 
