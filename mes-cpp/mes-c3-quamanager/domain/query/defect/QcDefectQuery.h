@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _SAMPLE_QUERY_
-#define _SAMPLE_QUERY_
+#ifndef _QC_DEFECT_QUERY_
+#define _QC_DEFECT_QUERY_
 
 #include "../../GlobalInclude.h"
 #include "domain/query/PageQuery.h"
@@ -28,9 +28,14 @@
 /**
  * 示例分页查询对象
  */
-class DefectQuery : public PageQuery
+class QcDefectQuery : public PageQuery
 {
-	DTO_INIT(DefectQuery, PageQuery);
+	DTO_INIT(QcDefectQuery, PageQuery);
+	// 缺陷描述
+	DTO_FIELD(String, defect_code);
+	DTO_FIELD_INFO(defect_code) {
+		info->description = ZH_WORDS_GETTER("defect.field.defect_code");
+	}
 	// 缺陷描述
 	DTO_FIELD(String, defect_name);
 	DTO_FIELD_INFO(defect_name) {

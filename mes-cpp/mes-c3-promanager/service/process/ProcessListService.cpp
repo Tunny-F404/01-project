@@ -89,3 +89,28 @@ bool ProcessListService::updateData(const ProcessDTO::Wrapper& dto)
 	ProcessDAO dao;
 	return dao.update(data) == 1;
 }
+/**
+* 导出工艺
+*/
+list<ProcessAddDTO::Wrapper> ProcessListService::listAllForProcess(const ProcessListQuery::Wrapper& query)
+{
+	// 构建返回对象
+	list<ProcessAddDTO::Wrapper> data;
+
+	// 查询数据总条数
+	ProcessDAO dao;
+	list<ProRouteDO> result = dao.selectWithProcessExport(query);
+
+	// 将DO转换成DTO
+	for (ProRouteDO sub : result)
+	{
+		auto dto = ProcessAddDTO::createShared();
+		dto->routeCode = sub.getRouteCode();
+		dto->routeName = sub.getRouteName();
+		dto->routeDesc = sub.getRouteDesc();
+		dto->enableFlag = sub.getEnableFlag();
+		//ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, routeCode, RouteCode, routedesc, RouteDesc, enableflag, EnableFlag, remark, Remark)
+		data.emplace_back(dto);
+	}
+	return data;
+}

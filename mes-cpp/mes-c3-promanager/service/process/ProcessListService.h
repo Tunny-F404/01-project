@@ -20,6 +20,8 @@ public:
 	uint64_t saveProcessAdd(const ProcessAddDTO::Wrapper& dto);
 	// 修改工艺
 	bool updateData(const ProcessDTO::Wrapper& dto);
+	// 导出工艺 查询数据
+	list<ProcessAddDTO::Wrapper> listAllForProcess(const ProcessListQuery::Wrapper& query);
 };
 
 #endif // !_SAMPLE_SERVICE_

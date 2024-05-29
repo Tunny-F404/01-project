@@ -30,6 +30,10 @@ class DefectDTO : public oatpp::DTO
 {
 	DTO_INIT(DefectDTO, DTO);
 	// 编号
+	DTO_FIELD(String, defect_code);
+	DTO_FIELD_INFO(defect_code) {
+		info->description = ZH_WORDS_GETTER("defect.field.defect_code");
+	}
 	// 缺陷描述
 	DTO_FIELD(String, defect_name);
 	DTO_FIELD_INFO(defect_name) {
@@ -46,6 +50,7 @@ class DefectDTO : public oatpp::DTO
 		info->description = ZH_WORDS_GETTER("defect.field.defect_level");
 	}
 };
+
 
 /**
  * 示例分页传输对象

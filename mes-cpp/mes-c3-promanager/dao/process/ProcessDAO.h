@@ -23,6 +23,8 @@ public:
 	int update(const ProRouteDO& uObj);
 	// 通过ID删除组成工序
 	int deleteById(list<uint64_t> id);
+	// 导出工艺
+	list<ProRouteDO> selectWithProcessExport(const ProcessListQuery::Wrapper& query);
 	
 };
 #endif // !_SAMPLE_DAO_

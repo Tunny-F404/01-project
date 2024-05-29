@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ProcessDAO.h"
 #include "ProcessMapper.h"
+#include "ProcessListMapper.h"
 #include <sstream>
 
 //定义条件解析宏，减少重复代码
@@ -84,4 +85,14 @@ int ProcessDAO::deleteById(list<uint64_t> id)
 	sql << ")";
 	string sqlStr = sql.str();
 	return sqlSession->executeUpdate(sqlStr);
+}
+//导出工艺
+list<ProRouteDO> ProcessDAO::selectWithProcessExport(const ProcessListQuery::Wrapper& query)
+{
+	stringstream sql;
+	sql << "SELECT route_code,route_name,route_desc,enable_flag FROM pro_route";
+	SAMPLE_TERAM_PARSE(query, sql);
+	ProcessListMapper mapper;
+	string sqlStr = sql.str();
+	return sqlSession->executeQuery<ProRouteDO, ProcessListMapper>(sqlStr, mapper, params);
 }

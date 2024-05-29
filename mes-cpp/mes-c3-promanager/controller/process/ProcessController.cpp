@@ -5,8 +5,17 @@
 #include "../../service/process/ComProService.h"
 #include "../../service/process/RelateProService.h"
 #include "../../service/process/ProMaterialService.h"
+
+
 //#include "declarative/ProMaterialApiClient.h"
 #include "../ApiDeclarativeServicesHelper.h"
+#include "Macros.h"
+#include "ExcelComponent.h"
+
+// 注意：用到FastDfs的地方都要在最后在导入DFS的头文件
+#include "ServerInfo.h"
+#include "NacosClient.h"
+#include "FastDfsClient.h"
 
 // 1 查询工艺列表
 ProcessListJsonVO::Wrapper ProcessController::execQueryProcessList(const ProcessListQuery::Wrapper& query)
@@ -138,9 +147,62 @@ Uint64JsonVO::Wrapper ProcessController::execRemoveProcess(const List<UInt64>& i
 }
 
 //7 工艺导出
-StringJsonVO::Wrapper ProcessController::execQueryProcess(const ProcessQuery::Wrapper& query)
+StringJsonVO::Wrapper ProcessController::execQueryProcess(const ProcessListQuery::Wrapper& query)
 {
+	// 定义一个Service
+	ProcessListService service;
+	// 查询数据
+	list<ProcessAddDTO::Wrapper> result = service.listAllForProcess(query);
+	std::vector<std::vector<std::string>> data;
+
+	// DTO数据转换为vector
+	for (auto sub : result) {
+		std::vector<std::string> tmp;
+		tmp.emplace_back(sub->routeCode);
+		tmp.emplace_back(sub->routeName);
+		tmp.emplace_back(sub->routeDesc);
+		tmp.emplace_back(sub->enableFlag);
+		data.emplace_back(tmp);
+	}
+
+	// 插入表头
+	data.insert(data.begin(), {
+		ZH_WORDS_GETTER("excel.header.h5"),
+		ZH_WORDS_GETTER("excel.header.h6"),
+		ZH_WORDS_GETTER("excel.header.h7"),
+		ZH_WORDS_GETTER("excel.header.h8"),
+		});
+
+	// 保存到文件
+	std::string fileName = "./public/excel/process.xlsx";
+	std::string sheetName = ZH_WORDS_GETTER("excel.sheet.s2");
+	ExcelComponent excel;
+	excel.writeVectorToFile(fileName, sheetName, data);
+	std::string filename = "";
+	filename = "./public/excel/process.xlsx";
+	// 创建一个fastdfs对象及前缀
+	ZO_CREATE_DFS_CLIENT_URL(dfs, urlPrefix);
+	// 获取文件后缀名
+	string suffix = "";
+	size_t pos = filename.rfind(".");
+	if (pos != string::npos)
+	{
+		suffix = filename.substr(pos + 1);
+	}
+	// 上传文件
+	string downloadUrl = dfs.uploadFile(filename);
+	downloadUrl = urlPrefix + downloadUrl;
+	OATPP_LOGD("Multipart", "download url='%s'", downloadUrl.c_str());
+
+	// 响应结果
 	auto jvo = StringJsonVO::createShared();
+	if (downloadUrl != "") {
+		jvo->success(downloadUrl);
+	}
+	else {
+		jvo->fail(downloadUrl);
+	}
+
 	return jvo;
 }
 //8 获取组成工序列表

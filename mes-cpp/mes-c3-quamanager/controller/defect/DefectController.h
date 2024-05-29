@@ -3,7 +3,7 @@
 #define _DEFECT_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/query/defect/DefectQuery.h"
+#include "domain/query/defect/QcDefectQuery.h"
 #include "domain/dto/defect/DefectDTO.h"
 #include "domain/vo/defect/DefectVO.h"
 
@@ -37,7 +37,7 @@ public:
 	}
 	ENDPOINT(API_M_GET, "/defect/get-list", queryDefect, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(userQuery, DefectQuery, queryParams);
+		API_HANDLER_QUERY_PARAM(userQuery, QcDefectQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryDefect(userQuery, authObject->getPayload()));
 	}
@@ -91,7 +91,7 @@ public:
 	}
 private:
 	// 1 获取缺陷列表（条件+分页）
-	DefectPageJsonVO::Wrapper execQueryDefect(const DefectQuery::Wrapper& query, const PayloadDTO& payload);
+	DefectPageJsonVO::Wrapper execQueryDefect(const QcDefectQuery::Wrapper& query, const PayloadDTO& payload);
 	// 2 添加缺陷
 	Uint64JsonVO::Wrapper execAddDefect(const DefectDTO::Wrapper& dto);
 	// 3 修改缺陷

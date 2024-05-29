@@ -122,7 +122,7 @@ public:
 	}
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete-process/{id}", removeProcess, BODY_DTO(List<UInt64>, id), execRemoveProcess(id));
 
-	// 7 导出工艺
+	// 7 工艺导出
 	ENDPOINT_INFO(queryProcess) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.get_field.summary"));
@@ -131,15 +131,15 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
 		// 定义分页查询参数描述
-		API_DEF_ADD_PAGE_PARAMS();
+		//API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "code", ZH_WORDS_GETTER("process.field.route_code"), "R1121", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "name", ZH_WORDS_GETTER("process.field.route_name"), ZH_WORDS_GETTER("process.field.example"), false);
-		API_DEF_ADD_QUERY_PARAMS(String, "flag", ZH_WORDS_GETTER("process.field.enable_flag"), "Y", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "routeCode", ZH_WORDS_GETTER("process.field.route_code"), "R1121", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "routeName", ZH_WORDS_GETTER("process.field.route_name"), ZH_WORDS_GETTER("process.field.example"), false);
+		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("process.field.enable_flag"), "Y", false);
 	}
 	ENDPOINT(API_M_POST, "/set/export-process", queryProcess, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(userQuery, ProcessQuery, queryParams);
+		API_HANDLER_QUERY_PARAM(userQuery, ProcessListQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryProcess(userQuery));
 	}
@@ -302,7 +302,7 @@ private:
 	// 6 删除组成工序（支持批量删除）
 	Uint64JsonVO::Wrapper execRemoveProcess(const List<UInt64>& id);
 	// 7 工艺导出
-	StringJsonVO::Wrapper execQueryProcess(const ProcessQuery::Wrapper& query);
+	StringJsonVO::Wrapper execQueryProcess(const ProcessListQuery::Wrapper& query);
 	// 8 获取组成工序列表
 	ProJsonVO::Wrapper execProTable(const ProQuery::Wrapper& query);
 	// 9 添加组成工序
