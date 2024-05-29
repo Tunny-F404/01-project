@@ -19,13 +19,35 @@
 
 #include "stdafx.h"
 #include "GetProgectController.h"
+#include "../../service/getprogect/GetProgectService.h"
+#include "GetProgectController.h"
+#include "../ApiDeclarativeServicesHelper.h"
 
 GetProgectPageJsonVO::Wrapper GetProgectController::execGetProgect(const GetProgectQuery::Wrapper& query)
 {
-	return {};
+	
+	// 定义一个Service
+	GetProgectService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = GetProgectPageJsonVO::createShared();
+	jvo->success(result);/////////////////result GetProgectPageDTO jvo GetProgectPageJsonVO
+	return jvo;
 }
 
-GetProgectDetailJsonVO::Wrapper GetProgectController::execProgectDetail(const GetProgectDetailQuery::Wrapper& query)
+GetProgectDetailJsonVO::Wrapper GetProgectController::execProgectDetail(const GetProgectDetailQuery::Wrapper& query)//uint64_t与UInt64
 {
-	return {};
+
+	// 定义一个Service
+	GetProgectService service;
+	// 查询数据
+	uint64_t id = query->pId;
+	auto result = service.listSome(query);
+	// 响应结果
+	auto jvo = GetProgectDetailJsonVO::createShared();
+	jvo->success(result);///////////////result GetProgectDetailDTO jvo GetProgectDetailJsonVO
+	
+	return jvo;
 }
+

@@ -32,7 +32,7 @@ class GetProgectController : public oatpp::web::server::api::ApiController
 	// 添加访问定义
 	API_ACCESS_DECLARE(GetProgectController);
 public:
-	// 1 定义项目列表查询接口描述
+	// 1.1 定义项目列表查询接口描述
 	ENDPOINT_INFO(queryProgectList) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("project.summary"));
@@ -51,7 +51,7 @@ public:
 		//项目类型
 		API_DEF_ADD_QUERY_PARAMS(String, "pType", ZH_WORDS_GETTER("project.fields.ptype"), "QW",false);
 	}
-	// 1 定义项目列表查询接口处理
+	// 1.2 定义项目列表查询接口处理
 	ENDPOINT(API_M_GET, "/progect/query-progectList", queryProgectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, GetProgectQuery, queryParams);
@@ -59,7 +59,7 @@ public:
 		API_HANDLER_RESP_VO(execGetProgect(query));
 	}
 
-	// 2 定义项目详情查询接口描述
+	// 2.1 定义项目详情查询接口描述
 	ENDPOINT_INFO(queryProgectDetail) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("project.summary1"));
@@ -72,7 +72,7 @@ public:
 		//设备编码
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "pId", ZH_WORDS_GETTER("project.fields.pid"), 1, true);
 	}
-	// 2 定义设备详情查询接口处理
+	// 2.2 定义设备详情查询接口处理
 	ENDPOINT(API_M_GET, "/progect/query-progectdetail", queryProgectDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, GetProgectDetailQuery, queryParams);

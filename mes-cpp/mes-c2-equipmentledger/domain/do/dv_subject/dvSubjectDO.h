@@ -36,7 +36,7 @@ class dvSubjectDO
 	// 项目标准
 	CC_SYNTHESIZE(std::string, subject_standard, SubjectStandard)
 	// 是否启用
-	CC_SYNTHESIZE(char, enable_flag, EnableFlag)
+	CC_SYNTHESIZE(std::string, enable_flag, EnableFlag)
 	// 备注
 	CC_SYNTHESIZE(std::string, remark, Remark)
 	// 预留字段 1 ~ 4

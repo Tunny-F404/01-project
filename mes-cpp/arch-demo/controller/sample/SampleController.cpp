@@ -29,7 +29,7 @@ SamplePageJsonVO::Wrapper SampleController::execQuerySample(const SampleQuery::W
 	auto result = service.listAll(query);
 	// ÏìÓ¦½á¹û
 	auto jvo = SamplePageJsonVO::createShared();
-	jvo->success(result);
+	jvo->success(result);//result SamplePageDTO 
 	return jvo;
 }
 
