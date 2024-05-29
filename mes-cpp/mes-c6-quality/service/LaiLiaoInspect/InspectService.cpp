@@ -27,10 +27,9 @@ InspectPageDTO::Wrapper InspectService::listAll(const InspectQuery::Wrapper& que
 	for (InspectDO sub : result)
 	{
 		auto dto = InspectDTO::createShared();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, line_id, Line_id, code, Code, name, Name, template_id, Template_id, vendor_id, Vendor_id, vendor_code, Vendor_code, vendor_name, Vendor_name, vd_nick, Vd_nick, vd_batch, Vd_batch, item_code, Item_code, item_name, Item_name);
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, line_id, Line_id, code, Code, name, Name, template_id, Template_id, vendor_id, Vendor_id, vendor_code, Vendor_code, vendor_name, Vendor_name, vendor_nick, Vendor_nick, vendor_batch, Vendor_batch, item_code, Item_code, item_name, Item_name);
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, quantity_recived, Quantity_recived, quantity_check, Quantity_check, quantity_unqualified, Quantity_unqualified, check_result, Check_result, recive_date, Recive_date, inspect_date, Inspect_date, inspector, Inspector, list_status, List_status);
 		pages->addData(dto);
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, quantity_recived, Quantity_recived, quantity_check, Quantity_check, quantity_unqualified, Quantity_unqualified, check_result, Check_result, recive_date, Recive_date, inspect_date, Inspect_date, inspector, Inspector, list_status, List_status)
-			pages->addData(dto);
 	}
 	return pages;
 }
@@ -56,7 +55,7 @@ Inspect_detailPageDTO::Wrapper InspectService::list_detailAll(const Inspect_deta
 	pages->calcPages();
 	list<Inspect_detailDO> result = dao.selectWithPage(query);
 	// ½«DO×ª»»³ÉDTO
-	for (InspectDO sub : result)
+	for (Inspect_detailDO sub : result)
 	{
 		auto dto = Inspect_detailDTO::createShared();
 		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, line_id, Line_id, code, Code, name, Name, template_id, Template_id, vendor_id, Vendor_id, vendor_code, Vendor_code, vendor_name, Vendor_name, vd_nick, Vd_nick, vd_batch, Vd_batch, item_code, Item_code, item_name, Item_name, quantity_recived, Quantity_recived, quantity_check, Quantity_check, quantity_unqualified, Quantity_unqualified, check_result, Check_result, recive_date, Recive_date, inspect_date, Inspect_date, inspector, Inspector, list_status, List_status)

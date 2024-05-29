@@ -33,9 +33,9 @@ class InspectDO
 	//供应商名称
 	CC_SYNTHESIZE(string, vendor_name, Vendor_name);
 	// 供应商简称
-	CC_SYNTHESIZE(string, vd_nick, Vd_nick);
+	CC_SYNTHESIZE(string, vendor_nick, Vendor_nick);
 	//供应商批次号
-	CC_SYNTHESIZE(string, vd_batch, Vd_batch);
+	CC_SYNTHESIZE(string, vendor_batch, Vendor_batch);
 	//产品物料ID
 	CC_SYNTHESIZE(uint64_t, item_id, Item_id);
 	//产品物料编码
@@ -109,8 +109,8 @@ public:
 		vendor_id = 0;
 		vendor_code = "";
 		vendor_name = "";
-		vd_nick = "";
-		vd_batch = "";
+		vendor_nick = "";
+		vendor_batch = "";
 		item_id = 0;
 		item_code = "";
 		item_name = "";

@@ -11,8 +11,43 @@ sql<<" WHERE 1=1"; \
 if (query->code) { \
 	sql << " AND `code`=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->code.getValue("")); \
-} 
-
+} ;\
+if (query->vendor_code) { \
+	sql << " AND `vendor_code`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->vendor_code.getValue("")); \
+} ;\
+if (query->vendor_name) { \
+	sql << " AND `vendor_name`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->vendor_name.getValue("")); \
+} ;\
+if (query->vd_batch) { \
+	sql << " AND `vd_batch`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->vd_batch.getValue("")); \
+} ;\
+if (query->item_code) { \
+	sql << " AND `item_code`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->item_code.getValue("")); \
+} ;\
+if (query->item_name) { \
+	sql << " AND `item_name`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->item_name.getValue("")); \
+} ;\
+if (query->check_result) { \
+	sql << " AND `check_result`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->check_result.getValue("")); \
+} ;\
+if (query->recive_date) { \
+	sql << " AND `recive_date`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->recive_date.getValue("")); \
+} ;\
+if (query->inspect_date) { \
+	sql << " AND `inspect_date`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->inspect_date.getValue("")); \
+} ;\
+if (query->inspector) { \
+	sql << " AND `inspector`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->inspector.getValue("")); \
+} ;\
 
 uint64_t InspectDAO::count(const InspectQuery::Wrapper& query)
 {
@@ -23,10 +58,11 @@ uint64_t InspectDAO::count(const InspectQuery::Wrapper& query)
 	return sqlSession->executeQueryNumerical(sqlStr, params);
 }
 
+//分页查询列表
 std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT line_id,code,name,template_id,vendor_id,vendor_code,vendor_name,vendor_nick,vendor_batch,item_code,item_name,quantity_recived,quantity_check,quantity_unqualified,check_result,recive_date,inspect_date,inspector,list_status FROM  wm_issue_line";
+	sql << "SELECT line_id,code,name,template_id,vendor_id,vendor_code,vendor_name,vendor_nick,vendor_batch,item_code,item_name,quantity_recived,quantity_check,quantity_unqualified,check_result,recive_date,inspect_date,inspector,list_status FROM  qc_iqc";
 	SAMPLE_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	InspectMapper mapper;
@@ -34,27 +70,36 @@ std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& que
 	return sqlSession->executeQuery<InspectDO, InspectMapper>(sqlStr, mapper, params);
 }
 
+
 uint64_t InspectDAO::insert(const InspectDO& iObj)
 {
-	string sql = "INSERT INTO `wm_issue_line` ( `issue_id`,`item_id`,`item_code`,`item_name`, `specification`, `unit_of_measure`,`quantity_issued`,`batch_code`,`warehouse_name`,`location_name`,`area_name`,`remark` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	return sqlSession->executeInsert(sql, "%ull%ull%s%s%s%s%d%s%s%s%s%s",
-		iObj.getIssue_id(),
-		iObj.getItem_id(),
+	string sql = "INSERT INTO `qc_iqc` ( `line_id`,`code`,`name`,`template_id`, `vendor_id`, `vendor_code`,`vendor_name`,`vendor_nick`,`vendor_batch`,`item_code`,`item_name` ,`quantity_recived`,`quantity_check`,`quantity_unqualified`,`check_result`,`recive_date`,`inspect_date`,`inspector`,`list_status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,)";
+	return sqlSession->executeInsert(sql, "%ull%s%s%ull%ull%s%s%s%s%s%s%i%i%i%s%s%s%s%s",
+		iObj.getLine_id(),
+		iObj.getCode(),
+		iObj.getName(),
+		iObj.getTemplate_id(),
+		iObj.getVendor_id(),
+		iObj.getVendor_code(),
+		iObj.getVendor_name(),
+		iObj.getVendor_nick(),
+		iObj.getVendor_batch(),
 		iObj.getItem_code(),
 		iObj.getItem_name(),
-		iObj.getSpecification(),
-		iObj.getUnit_of_measure(),
-		iObj.getQuantity_issued(),
-		iObj.getBatch_code(),
-		iObj.getWarehouse_name(),
-		iObj.getLocation_name(),
-		iObj.getArea_name(),
-		iObj.getRemark());
+		iObj.getQuantity_recived(),
+		iObj.getQuantity_check(),
+		iObj.getQuantity_unqualified(),
+		iObj.getCheck_result(),
+		iObj.getRecive_date(),
+		iObj.getInspect_date(),
+		iObj.getInspector(),
+		iObj.getList_status()
+	);
 }
 
 int InspectDAO::update(const InspectDO& uObj)
 {
-	string sql = "UPDATE `wm_issue_line` SET `issue_id` = ?, `item_id` = ?, `item_code`= ?, `item_name`= ?, `specification`= ? , `unit_of_measure`= ?, `quantity_issued`= ?, `batch_code`= ?, `warehouse_name`= ?, `location_name`= ?, `area_name`= ?, `remark`= ? WHERE `line_id` = ?;";
+	string sql = "UPDATE `qc_iqc` SET `code` = ?, `name`= ?, `template_id`= ?, `source_doc_id`= ? , `source_doc_type`= ?, `quantity_issued`= ?, `batch_code`= ?, `warehouse_name`= ?, `location_name`= ?, `area_name`= ?, `remark`= ? WHERE `line_id` = ?;";
 	return sqlSession->executeUpdate(sql, "%ull%ull%s%s%s%s%d%s%s%s%s%s%ull",
 		uObj.getIssue_id(),
 		uObj.getItem_id(),
@@ -69,10 +114,11 @@ int InspectDAO::update(const InspectDO& uObj)
 		uObj.getArea_name(),
 		uObj.getRemark(),
 		uObj.getLine_id());
+		
 }
 
 int InspectDAO::deleteById(uint64_t id)
 {
-	string sql = "DELETE FROM `wm_issue_line` WHERE `line_id`=?";
+	string sql = "DELETE FROM `qc_iqc` WHERE `line_id`=?";
 	return sqlSession->executeUpdate(sql, "%ull", id);
 }
