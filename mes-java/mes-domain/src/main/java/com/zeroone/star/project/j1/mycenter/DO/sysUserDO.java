@@ -1,20 +1,18 @@
-package com.zeroone.star.project.j1.mycenter.dto;
+package com.zeroone.star.project.j1.mycenter.DO;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.zeroone.star.project.j1.mycenter.DO.sysUserDO;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
 @Data
-@ApiModel("用户传输对象")
-public class MyCenterDTO {
+@ApiModel("数据对象")
+@TableName("sys_user")
+public class sysUserDO {
     //用户头像
     @ApiModelProperty(value = "头像url",example = "a/b/c/1.jpg")
     private String avatar;
@@ -47,13 +45,4 @@ public class MyCenterDTO {
     //密码
     @ApiModelProperty(value = "密码",example = "123456")
     private String password;
-
-    //错误原因
-    @ApiModelProperty(value = "错误信息",example = "格式不正确")
-    private String fail_msg;
-
-    @ApiModelProperty(value = "头像文件",example = "111.jpg")
-    private MultipartFile image;
-
-
 }
