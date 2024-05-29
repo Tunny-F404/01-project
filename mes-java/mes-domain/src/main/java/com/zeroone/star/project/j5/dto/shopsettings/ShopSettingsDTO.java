@@ -12,22 +12,20 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class GetShopSettingsDTO {
+public class ShopSettingsDTO {
 
     @ApiModelProperty(value = "车间id", example = "1")
-    private Long workshop_id;
+    private Long workshopId;
     @ApiModelProperty(value = "车间编码", example = "WS001")
-    private String workshop_code;
+    private String workshopCode;
     @ApiModelProperty(value = "车间名称", example = "五金车间")
-    private String workshop_name;
+    private String workshopName;
     @ApiModelProperty(value = "面积", example = "0")
     private Double area;
     @ApiModelProperty(value = "负责人", example = "翔君")
     private String charge;
     @ApiModelProperty(value = "是否启用", example = "Y")
-    private String enable_flag;
+    private String enableFlag;
     @ApiModelProperty(value = "备注", example = "1")
     private String remark;
 //    @ApiModelProperty(value = "预留字段1", example = "1")

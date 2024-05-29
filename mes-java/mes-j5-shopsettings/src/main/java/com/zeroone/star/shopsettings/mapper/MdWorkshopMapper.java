@@ -3,6 +3,9 @@ package com.zeroone.star.shopsettings.mapper;
 import com.zeroone.star.shopsettings.entity.MdWorkshop;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +17,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface MdWorkshopMapper extends BaseMapper<MdWorkshop> {
-
+    @Select("select workshop_name from md_workshop")
+    List<String> queryMdWorkshopNameList();
 }
