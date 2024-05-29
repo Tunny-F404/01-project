@@ -11,6 +11,7 @@ import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface IMdClientService extends IService<MdClient> {
@@ -53,7 +54,7 @@ public interface IMdClientService extends IService<MdClient> {
      * @param ids 导出条件
      * @return 导出结果
      */
-    ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids);
+    ResponseEntity<byte[]> queryClientExportByExcel(List<Long> ids) throws IOException;
 
     /**
      * @param customer 数据集
