@@ -67,3 +67,12 @@ uint64_t DefectService::insert(const DefectDTO::Wrapper& dto)
 	QcDefectDAO dao;
 	return dao.insert(data);
 }
+uint64_t DefectService::remove(const std::string ids)
+{
+	return QcDefectDAO().remove(ids);
+}
+
+uint64_t DefectService::modify(const DefectModifyDTO::Wrapper& dto)
+{
+	return QcDefectDAO().modify(dto);
+}

@@ -21,6 +21,7 @@
 #define _QC_DEFECT_SERVICE_
 #include <list>
 #include "domain/vo/defect/DefectVO.h"
+#include "domain/dto/defect/DefectModifyDTO.h"
 #include "domain/query/defect/QcDefectQuery.h"
 #include "domain/dto/defect/DefectDTO.h"
 
@@ -34,6 +35,10 @@ public:
 	DefectPageDTO::Wrapper listAll(const QcDefectQuery::Wrapper& query);
 	// 插入数据
 	uint64_t insert(const DefectDTO::Wrapper& dto);
+	// 删除数据
+	uint64_t remove(const std::string ids);
+	// 修改数据
+	uint64_t modify(const DefectModifyDTO::Wrapper& dto);
 };
 
 #endif // !_DEFECT_SERVICE_

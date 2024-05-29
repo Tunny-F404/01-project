@@ -20,9 +20,10 @@
 #ifndef _QC_DEFECT_DAO_
 #define _QC_DEFECT_DAO_
 #include "BaseDAO.h"
-#include "../../domain/do/qc/QcDefectDO.h"
-#include "../../domain/query/defect/QcDefectQuery.h"
-
+#include "domain/do/qc/QcDefectDO.h"
+#include "domain/dto/defect/DefectModifyDTO.h"
+#include "domain/query/defect/QcDefectExportQuery.h"
+#include "domain/query/defect/QcDefectQuery.h"
 /**
  * 示例表数据库操作实现
  */
@@ -41,5 +42,9 @@ public:
 	list<QcDefectDO> selectByLevel(const string& Level);
 	// 插入数据
 	uint64_t insert(const QcDefectDO& iObj);
+	// 删除数据
+	uint64_t remove(const string& ids);
+	// 更新数据
+	uint64_t modify(const DefectModifyDTO::Wrapper& dto);
 };
 #endif // !_QC_DEFECT_DAO_

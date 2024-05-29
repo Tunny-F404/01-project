@@ -2,12 +2,11 @@
 #ifndef _DEFECT_CONTROLLER_
 #define _DEFECT_CONTROLLER_
 
-#include "domain/vo/BaseJsonVO.h"
-#include "domain/query/defect/QcDefectQuery.h"
 #include "domain/dto/defect/DefectDTO.h"
+#include "domain/dto/defect/DefectModifyDTO.h"
+#include "domain/query/defect/QcDefectQuery.h"
+#include "domain/vo/BaseJsonVO.h"
 #include "domain/vo/defect/DefectVO.h"
-
-#include "domain/dto/defect/DefectUpdateDTO.h"
 
 // 0 ¶¨ÒåAPI¿ØÖÆÆ÷Ê¹ÓÃºê
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -58,32 +57,32 @@ public:
 
 	// 3 ÐÞ¸ÄÈ±ÏÝ
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("defect.modify.summary"), modifyDefect, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(                   //
-		API_M_PUT,                               //
-		"/defect/modify-defect",              //
-		modifyDefect,                            //
-		BODY_DTO(DefectUpdateDTO::Wrapper, dto), //
-		execModifyDefect(dto)                    //
+	API_HANDLER_ENDPOINT_AUTH(					 //
+		API_M_PUT,								 //
+		"/defect/modify-defect",				 //
+		modifyDefect,							 //
+		BODY_DTO(DefectModifyDTO::Wrapper, dto), //
+		execModifyDefect(dto)					 //
 	);
 
 	// 4 É¾³ýÈ±ÏÝ
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("defect.remove.summary"), removeDefect, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(                   //
-		API_M_DEL,                               //
-		"/defect/remove-defect/{removeList}", //
-		removeDefect,                            //
-		PATH(String, removeList),                //
-		execRemoveDefect(removeList)             //
+	API_HANDLER_ENDPOINT_AUTH(			   //
+		API_M_DEL,						   //
+		"/defect/remove-defect/{id-list}", //
+		removeDefect,					   //
+		PATH(String, ids, "id-list"),	   //
+		execRemoveDefect(ids)			   //
 	);
 	// µ¼³öÈ±ÏÝ
 	ENDPOINT_INFO(exportDefect)
 	{
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("defect.export.summary"), Void);
 	}
-	ENDPOINT(                                               //
-		API_M_POST,                                         //
-		"/defect/export-defect",                         //
-		exportDefect,                                       //
+	ENDPOINT(												//
+		API_M_POST,											//
+		"/defect/export-defect",							//
+		exportDefect,										//
 		REQUEST(std::shared_ptr<IncomingRequest>, request), //
 		API_HANDLER_AUTH_PARAME)
 	{
@@ -95,9 +94,9 @@ private:
 	// 2 Ìí¼ÓÈ±ÏÝ
 	Uint64JsonVO::Wrapper execAddDefect(const DefectDTO::Wrapper& dto);
 	// 3 ÐÞ¸ÄÈ±ÏÝ
-	Uint64JsonVO::Wrapper execModifyDefect(const DefectUpdateDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyDefect(const DefectModifyDTO::Wrapper& dto);
 	// 4 É¾³ýÈ±ÏÝ
-	Uint64JsonVO::Wrapper execRemoveDefect(const String& removeList);
+	Uint64JsonVO::Wrapper execRemoveDefect(const String& ids);
 	// 5 µ¼³öÈ±ÏÝ¡¢
 	std::shared_ptr<OutgoingResponse> execExportDefect(std::shared_ptr<IncomingRequest> request);
 };

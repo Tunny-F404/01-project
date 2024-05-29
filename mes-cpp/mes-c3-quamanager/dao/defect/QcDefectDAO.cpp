@@ -84,3 +84,20 @@ uint64_t QcDefectDAO::insert(const QcDefectDO& iObj)
 	string sql = "INSERT INTO `qc_defect` (`defect_code`, `defect_name`, `index_type`, `defect_level`) VALUES (?, ?, ?, ?)";
 	return sqlSession->executeInsert(sql, "%s%s%s%s", iObj.getDefectCode(), iObj.getDefectName(), iObj.getIndexType(), iObj.getDefectLevel());
 }
+uint64_t QcDefectDAO::remove(const string& ids)
+{
+	string sql = "DELETE FROM `qc_defect` WHERE `defect_id` IN (" + ids + ")";
+	return sqlSession->executeUpdate(sql);
+}
+
+uint64_t QcDefectDAO::modify(const DefectModifyDTO::Wrapper& dto)
+{
+	const string sql = "UPDATE `qc_defect` SET `defect_name`=?, `index_type`=?, `defect_level`=?, `update_time`=? WHERE `defect_id`=?";
+	return sqlSession->executeUpdate(sql,                            //
+		"%s%s%s%s%ll",                  //
+		dto->defect_name.getValue({}),  //
+		dto->index_type.getValue({}),   //
+		dto->defect_level.getValue({}), //
+		dto->update_time.getValue({}),  //
+		dto->defect_id.getValue({}));
+}
