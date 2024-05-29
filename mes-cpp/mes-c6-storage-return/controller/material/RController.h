@@ -22,11 +22,11 @@
 #define _GETRETURNLISTCONTROLLER_H_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/query/material/GetReturnListQuery.h"
-#include "domain/dto/material/GetReturnListDTO.h"
-#include "domain/vo/material/GetReturnListVO.h"
+#include "domain/query/Inspect/GetReturnListQuery.h"
+#include "domain/dto/Inspect/GetReturnListDTO.h"
+#include "domain/vo/Inspect/GetReturnListVO.h"
 
-#include "domain/dto/material/AddReturnDTO.h"
+#include "domain/dto/Inspect/AddReturnDTO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -43,7 +43,7 @@ public:
 	// 3.1 定义查询接口描述
 	ENDPOINT_INFO(returnlist) {
 		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("material.get.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("Inspect.get.summary"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
@@ -51,10 +51,10 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "rtcode", ZH_WORDS_GETTER("material.rtcode"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "rtname", ZH_WORDS_GETTER("material.rtname"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "pocode", ZH_WORDS_GETTER("material.pocode"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "vendorname", ZH_WORDS_GETTER("material.vendorname"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "rtcode", ZH_WORDS_GETTER("Inspect.rtcode"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "rtname", ZH_WORDS_GETTER("Inspect.rtname"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "pocode", ZH_WORDS_GETTER("Inspect.pocode"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "vendorname", ZH_WORDS_GETTER("Inspect.vendorname"), "", false);
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/get/returnlist", returnlist, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -67,7 +67,7 @@ public:
 	// 3.1 定义新增接口描述
 	ENDPOINT_INFO(addreturnline) {
 		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("material.add.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("Inspect.add.summary"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
@@ -80,16 +80,16 @@ public:
 	}
 
 	// 3.1 定义修改接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("material.alter.summary"), modifyReturnline, Uint64JsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("Inspect.alter.summary"), modifyReturnline, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/alter/returnline", modifyReturnline, BODY_DTO(AddReturnDTO::Wrapper, dto), execModifyReturnline(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeReturnline) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("material.delete.summary"), Uint64JsonVO::Wrapper);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("Inspect.delete.summary"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "lineid", ZH_WORDS_GETTER("material.lineid"), 1, true);
+		API_DEF_ADD_PATH_PARAMS(UInt64, "lineid", ZH_WORDS_GETTER("Inspect.lineid"), 1, true);
 	}
 	// 3.2 定义删除接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/delete/{id}", removeReturnline, PATH(UInt64, lineid), execRemoveReturnline(lineid));
