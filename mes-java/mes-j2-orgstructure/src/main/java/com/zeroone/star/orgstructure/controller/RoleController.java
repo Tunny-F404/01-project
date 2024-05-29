@@ -13,9 +13,11 @@ import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -29,6 +31,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/orgstructure/role")
 @Api(tags = "角色控制器")
+@Validated//参数校验的,RoleApis上也有-0xu0
 public class RoleController implements RoleApis {
     @Resource
     private RoleService roleServiceImpl;
@@ -75,12 +78,12 @@ public class RoleController implements RoleApis {
      */
     @PostMapping("add-Role")
     @ApiOperation("添加角色")
-    public JsonVO<Integer> addRole(RoleAddDto roleDTO) {
+    public JsonVO<Integer> addRole(@RequestBody @Valid RoleAddDto roleDTO) {
         Integer add = roleServiceImpl.addRole(roleDTO);
         if (add > 0) {
             return JsonVO.success(add);
         }
-        return JsonVO.fail(add);
+        return JsonVO.fail(-1);
     }
     /***
      * 修改角色状态（角色页面，有个开关符号，控制停用和启用）
@@ -90,12 +93,18 @@ public class RoleController implements RoleApis {
      */
     @PostMapping("modify-RoleStatus")
     @ApiOperation("修改角色状态")
-    public JsonVO<Integer> modifyRoleStatus(RoleStatusModifyDto roleStatusModifyDto){
-        Integer modify = roleServiceImpl.modifyRoleStatus(roleStatusModifyDto);
-        if(modify>0){
+    public JsonVO<Integer> modifyRoleStatus(@RequestBody @Valid RoleStatusModifyDto roleStatusModifyDto){
+        Integer modify = null;
+        try {
+            modify = roleServiceImpl.modifyRoleStatus(roleStatusModifyDto);
             return JsonVO.success(modify);
+        } catch (Exception e) {
+            return JsonVO.fail(-1);
         }
-        return JsonVO.fail(modify);
+//        if(modify>0){
+//            return JsonVO.success(modify);
+//        }
+//        return JsonVO.fail(modify);
     }
 
 
@@ -121,13 +130,18 @@ public class RoleController implements RoleApis {
      */
     @PostMapping("modify-RoleInfo")
     @ApiOperation("修改角色信息")
-    public JsonVO<Integer> modifyRoleInfo(RoleModifyDto roleDTO){
-        Integer info = roleServiceImpl.modifyRoleInfo(roleDTO);
-        System.out.println(info);
-        if(info>0){
+    public JsonVO<Integer> modifyRoleInfo(@RequestBody @Valid RoleModifyDto roleDTO){
+        Integer info = null;
+        try {
+            info = roleServiceImpl.modifyRoleInfo(roleDTO);
             return JsonVO.success(info);
+        } catch (Exception e) {
+           return JsonVO.fail(-1);
         }
-        return JsonVO.fail(info);
+//        if(info>0){
+//            return JsonVO.success(info);
+//        }
+//        return JsonVO.fail(info);
     }
 
     @Override

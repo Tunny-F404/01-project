@@ -7,7 +7,10 @@ import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -16,6 +19,7 @@ import java.util.List;
  * @author 0xu0、天衍土豆 迷
  * @version 1.0.0
  */
+@Validated
 public interface RoleApis {
 
     public JsonVO<List<RoleDTO>> queryRoles();
@@ -44,7 +48,7 @@ public interface RoleApis {
      * @return
      */
 
-    public JsonVO<Integer> addRole(RoleAddDto roleDTO);
+    public JsonVO<Integer> addRole(@RequestBody @Valid RoleAddDto roleDTO);
     /***
      * 修改角色状态（角色页面，有个开关符号，控制停用和启用）
      * @author 0xu0
@@ -52,7 +56,7 @@ public interface RoleApis {
      * @return
      */
 
-    public JsonVO<Integer> modifyRoleStatus(RoleStatusModifyDto roleStatusModifyDto);
+    public JsonVO<Integer> modifyRoleStatus( @RequestBody @Valid RoleStatusModifyDto roleStatusModifyDto);
 
 
     /**
@@ -69,7 +73,7 @@ public interface RoleApis {
      * @return
      */
 
-    public JsonVO<Integer> modifyRoleInfo(RoleModifyDto roleDTO);
+    public JsonVO<Integer> modifyRoleInfo(@RequestBody @Valid RoleModifyDto roleDTO);
 
     /*
      * 获取角色分配用户列表（条件+分页）
