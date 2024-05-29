@@ -1,5 +1,8 @@
 package com.zeroone.star.sysmanagement.service;
 
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
+import com.zeroone.star.project.j2.sysmanagement.query.param.ParameterQuery;
 import com.zeroone.star.sysmanagement.entity.ParameterDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +14,11 @@ import java.util.List;
  * 参数配置表 服务类
  * </p>
  *
- * @author sishijin
+ * @author kino
  * @since 2024-05-22
  */
 public interface ParameterService extends IService<ParameterDO> {
+
 
     /**
      * @description: 刷新缓存
@@ -39,5 +43,16 @@ public interface ParameterService extends IService<ParameterDO> {
      * @param: []
      **/
     ResponseEntity<byte[]> exportParameter();
+
+
+
+
+    Integer saveParameter(ParameterDTO parameterDTO);
+
+    PageDTO listAll(ParameterQuery condition);
+
+    Integer updateParameter(ParameterDTO parameterDTO);
+
+    boolean checkConfigKeyUnique(ParameterDTO parameterDTO);
 
 }

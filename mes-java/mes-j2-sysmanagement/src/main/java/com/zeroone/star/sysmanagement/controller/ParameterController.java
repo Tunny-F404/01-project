@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,13 +27,13 @@ import java.util.List;
 public class ParameterController implements ParameterApis {
 
     @Resource
-    private ParameterService sysConfigService;
+    private ParameterService parameterService;
 
     @Override
     @DeleteMapping("remove-parameter/{ids}")
     @ApiOperation("删除参数")
     public JsonVO<ResultStatus> removeParameterList(@PathVariable List<Integer> ids) {
-        sysConfigService.removeParameterList(ids);
+        parameterService.removeParameterList(ids);
         return JsonVO.success(ResultStatus.SUCCESS);
     }
 
@@ -40,7 +41,7 @@ public class ParameterController implements ParameterApis {
     @ApiOperation("刷新缓存")
     @Override
     public JsonVO<ResultStatus> refreshCache() {
-        sysConfigService.refreshCache();
+        parameterService.refreshCache();
         return JsonVO.success(ResultStatus.SUCCESS);
     }
 
@@ -49,23 +50,42 @@ public class ParameterController implements ParameterApis {
     @SneakyThrows
     @Override
     public ResponseEntity<byte[]> exportParameter() {
-        return sysConfigService.exportParameter();
+        return parameterService.exportParameter();
     }
+
 
 
     @Override
     @PostMapping("add")
     @ApiOperation("添加参数")
-    public JsonVO<ParameterDTO> addParam(@RequestBody ParameterDTO parameterDTO){
-        return JsonVO.success(parameterDTO);
+    public JsonVO<Integer> addParam(@Validated @RequestBody ParameterDTO parameterDTO){
+        if(parameterService.checkConfigKeyUnique(parameterDTO)) {
+            return JsonVO.success(parameterService.saveParameter(parameterDTO));
+        }else {
+            return JsonVO.fail(0);
+        }
+
+
+    }
+
+    @Override
+    @PostMapping("update")
+    @ApiOperation("修改参数")
+    public JsonVO<Integer> modifyParam(@RequestBody ParameterDTO parameterDTO){
+        if(parameterService.checkConfigKeyUnique(parameterDTO)) {
+            return JsonVO.success(parameterService.updateParameter(parameterDTO));
+        }else {
+            return JsonVO.fail(0);
+        }
     }
 
 
+
     @Override
-    @GetMapping("query-all")
-    @ApiOperation("查询所有参数")
+    @GetMapping("list")
+    @ApiOperation("查询参数列表")
     public JsonVO<PageDTO<ParameterDTO>> queryAll(ParameterQuery parameterQuery) {
-        PageDTO<ParameterDTO> pageDTO = new PageDTO<ParameterDTO>();
-        return JsonVO.success(pageDTO);
+
+        return JsonVO.success(parameterService.listAll(parameterQuery));
     }
 }

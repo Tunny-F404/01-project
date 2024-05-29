@@ -7,20 +7,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
-import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
  * 参数配置表
  * </p>
  *
- * @author sishijin
+ * @author kino
  * @since 2024-05-22
  */
-@Data
+@Getter
+@Setter
 @TableName("sys_config")
 public class ParameterDO implements Serializable {
 
@@ -40,13 +41,11 @@ public class ParameterDO implements Serializable {
     /**
      * 参数键名
      */
-    @NotBlank(message = "参数键名不能为空")
     private String configKey;
 
     /**
      * 参数键值
      */
-    @NotBlank(message = "参数键值不能为空")
     private String configValue;
 
     /**
@@ -63,7 +62,7 @@ public class ParameterDO implements Serializable {
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新者
@@ -73,7 +72,7 @@ public class ParameterDO implements Serializable {
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 备注

@@ -9,10 +9,12 @@ import org.apache.ibatis.annotations.Mapper;
  * 参数配置表 Mapper 接口
  * </p>
  *
- * @author sishijin
+ * @author kino
  * @since 2024-05-22
  */
 @Mapper
 public interface ParameterMapper extends BaseMapper<ParameterDO> {
+
+
 
 }

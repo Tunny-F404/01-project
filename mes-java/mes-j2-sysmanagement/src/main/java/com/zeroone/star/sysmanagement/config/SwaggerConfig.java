@@ -17,13 +17,8 @@ public class SwaggerConfig {
 
     @Bean
     Docket sysManagementApis() {
-<<<<<<<< HEAD:mes-java/mes-j2-sysmanagement/src/main/java/com/zeroone/star/sysmanagement/config/SwaggerConfig.java
-        return SwaggerCore.defaultDocketBuilder("系统管理模块","com.zeroone.star.sysmanagement.controller","sysmanagent");
-    }
-========
         return SwaggerCore.defaultDocketBuilder("系统管理模块","com.zeroone.star.sysmanagement.controller","sysmanagement");
 }
->>>>>>>> origin/j2-parameter-kino:mes-java/mes-j2-sysmanagement/src/main/java/com/zeroone/star/sysManagement/config/SwaggerConfig.java
 
 
 }
