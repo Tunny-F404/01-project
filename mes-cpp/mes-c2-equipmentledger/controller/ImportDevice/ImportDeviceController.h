@@ -23,6 +23,7 @@
 #include "ApiHelper.h"
 #include "Macros.h"
 #include "domain/vo/ImportDeviceJsonVO.h"
+#include "domain/dto/ImportDeviceDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(ApiController)
 
@@ -67,7 +68,7 @@ private: // 定义接口执行函数
 
 	// 上传文件到服务器，要确保文件格式扩展名正确，文件内容不为空，并返回文件路径到前端
 	StringJsonVO::Wrapper execUploadFile(std::shared_ptr<IncomingRequest> request);
-	// 将确认好的文件导入到数据库中
+	// 将根据文件路径将确认好的文件导入到数据库中
 	ImportDeviceJsonVO::Wrapper execImportDevice(String filename);
 };
 

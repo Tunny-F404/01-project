@@ -18,6 +18,7 @@
 */
 #include "stdafx.h"
 #include "ImportDeviceController.h"
+#include "service/ImportDevice/ImportDeviceService.h"
 
 StringJsonVO::Wrapper ImportDeviceController::
 	execUploadFile(std::shared_ptr<IncomingRequest> request)
@@ -28,7 +29,8 @@ StringJsonVO::Wrapper ImportDeviceController::
 	 * 调用service层，将文件保存到服务器
 	 */
 	
-	std::string path = "/home/user";
+	ImportDeviceService service;
+	auto path = service.uploadDeviceFile(request);
 	if (path != "")
 		res->success(path);
 	else
@@ -41,10 +43,18 @@ ImportDeviceJsonVO::Wrapper ImportDeviceController::
 {
 	auto res = ImportDeviceJsonVO::createShared();
 
-	auto dto = ImportDeviceDTO::createShared();
-	dto->success_count = 666;
-	dto->fail_count = 999;
+	ImportDeviceService service;
 
-	res->success(dto);
+	if (filename != "") {
+		auto dto = service.importDevice(filename);
+		if (dto->fail_count == -1)
+			res->fail(dto);
+		else
+			res->success(dto);
+	}
+	else {
+		res->fail(ImportDeviceDTO::Wrapper{});
+	}
+	
 	return res;
 }
