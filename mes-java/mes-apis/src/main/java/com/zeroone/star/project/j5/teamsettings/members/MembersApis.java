@@ -22,7 +22,7 @@ public interface MembersApis {
      * @param condition 查询条件
      * @return 查询结果
      */
-    JsonVO<PageDTO<MemberDTO>> queryMember(MemberQuery condition);
+    JsonVO<PageDTO<MemberDTO>> queryMembers(MemberQuery condition);
 
     /**
      * 多项添加班组成员

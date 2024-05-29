@@ -5,6 +5,7 @@ import com.zeroone.star.project.j5.dto.teamsettings.MemberDTO;
 import com.zeroone.star.project.j5.query.teamsettings.MemberQuery;
 import com.zeroone.star.project.j5.teamsettings.members.MembersApis;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.teamsettings.service.ICalTeamMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,25 +37,45 @@ public class MembersController implements MembersApis {
     @ApiOperation(value = "获取班组成员列表（条件 + 分页）")
     @GetMapping("query-all")
     @Override
-    public JsonVO<PageDTO<MemberDTO>> queryMember(MemberQuery condition) {
-        return null;
+    public JsonVO<PageDTO<MemberDTO>> queryMembers(MemberQuery condition) {
+        try {
+            PageDTO<MemberDTO> result = calTeamMemberService.queryMembers(condition);
+            return JsonVO.success(result);
+        } catch (Exception e) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "Failed to query members: " + e.getMessage());
+        }
     }
     @ApiOperation(value = "添加班组成员")
     @PostMapping("add-member")
     @Override
     public JsonVO<Void> addMembers(List<MemberDTO> memberDTOList) {
-        return null;
+        try {
+            calTeamMemberService.addMembers(memberDTOList);
+            return JsonVO.success(null);
+        } catch (Exception e) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "Failed to add members: " + e.getMessage());
+        }
     }
     @ApiOperation(value = "删除班组成员")
     @PostMapping("delete-member")
     @Override
     public JsonVO<Void> deleteMembers(List<Integer> memberIds) {
-        return null;
+        try {
+            calTeamMemberService.deleteMembers(memberIds);
+            return JsonVO.success(null);
+        } catch (Exception e) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "Failed to delete members: " + e.getMessage());
+        }
     }
     @ApiOperation(value = "导出班组成员")
     @GetMapping("export-member")
     @Override
-    public JsonVO<byte[]> exportMembers(MemberQuery condition) {
-        return null;
+    public JsonVO<byte[]> exportMembers(MemberQuery condition){
+    try {
+        byte[] data = calTeamMemberService.exportMembers(condition);
+        return JsonVO.success(data);
+    } catch (Exception e) {
+        return JsonVO.create(null, ResultStatus.FAIL.getCode(), "Failed to export members: " + e.getMessage());
     }
+}
 }
