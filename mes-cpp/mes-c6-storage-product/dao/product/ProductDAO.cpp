@@ -8,25 +8,25 @@
 #define SAMPLE_TERAM_PARSE(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \
-if (query->pnum) { \
-	sql << " AND `pnum`=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->pnum.getValue("")); \
+if (query->issue_code) { \
+	sql << " AND `issue_code`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->issue_code.getValue("")); \
 } \
-if (query->pname) { \
-	sql << " AND pname=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->pname.getValue("")); \
+if (query->issue_name) { \
+	sql << " AND issue_name=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->issue_name.getValue("")); \
 } \
-if (query->prname) { \
-	sql << " AND prname=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->prname.getValue("")); \
+if (query->warehouse_name) { \
+	sql << " AND warehouse_name=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->warehouse_name.getValue("")); \
 }\
-if (query->pdate) {\
-		sql << " AND pdate=?"; \
-		SQLPARAMS_PUSH(params, "s", std::string, query->pdate.getValue("")); \
+if (query->issue_date) {\
+		sql << " AND issue_date=?"; \
+		SQLPARAMS_PUSH(params, "s", std::string, query->issue_date.getValue("")); \
 }\
-if (query->pstatus) {\
-		sql << " AND pstatus=?"; \
-		SQLPARAMS_PUSH(params, "s", std::string, query->pstatus.getValue("")); \
+if (query->status) {\
+		sql << " AND status=?"; \
+		SQLPARAMS_PUSH(params, "s", std::string, query->status.getValue("")); \
 }\
 
 uint64_t ProductTableDAO::count(const ProductQuery::Wrapper & query)

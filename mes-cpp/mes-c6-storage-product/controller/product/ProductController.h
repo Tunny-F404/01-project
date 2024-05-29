@@ -23,11 +23,11 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProductTableJsonVO);
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "pnum", ZH_WORDS_GETTER("product.fields.pnum"), "ISSUE20221115004", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "pname", ZH_WORDS_GETTER("product.fields.pname"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "prname", ZH_WORDS_GETTER("product.fields.prname"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "pdate", ZH_WORDS_GETTER("product.fields.pdate"), "2022-11-15 00:00:00", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "pstatus", ZH_WORDS_GETTER("product.fields.pstatus"), "FINISHED", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "issue_code", ZH_WORDS_GETTER("product.fields.issue_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "issue_name", ZH_WORDS_GETTER("product.fields.issue_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "warehouse_name", ZH_WORDS_GETTER("product.fields.warehouse_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "issue_date", ZH_WORDS_GETTER("product.fields.issue_date"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("product.fields.status"), "", false);
 
 	}
 	// 3.2 定义查询接口处理
@@ -47,7 +47,7 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProductDetailJsonVO);
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "pnum", ZH_WORDS_GETTER("product.fields.pnum"), "ISSUE20221115004", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "issue_code", ZH_WORDS_GETTER("product.fields.issue_code"), "", false);
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/product/query-product-detail", queryProductDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
