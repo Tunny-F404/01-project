@@ -35,7 +35,7 @@ public:
 	list<dvSubjectDO> selectWithPage(const GetProgectQuery::Wrapper& query);
 	
 	// 通过id查询数据
-	list<dvSubjectDO> selectById(uint64_t id);
+	list<dvSubjectDO> selectById(const GetProgectDetailQuery::Wrapper& query);
 	// 通过id查询数据
 	//list<GetProgectIdDO> selectById(const string& pId);
 

@@ -64,9 +64,9 @@ class GetProgectPageDTO : public PageDTO< GetProgectDTO::Wrapper>
 /**
 * 定义一个设备详情传输对象
 */
-class GetProgectDetailDTO : public GetProgectDTO
+class GetProgectDetailDTO : public PageDTO< GetProgectDTO::Wrapper>
 {
-	DTO_INIT(GetProgectDetailDTO, GetProgectDTO);
+	DTO_INIT(GetProgectDetailDTO, PageDTO< GetProgectDTO::Wrapper>);
 	//项目Id
 	DTO_FIELD(UInt64, pId);
 	DTO_FIELD_INFO(pId) {

@@ -42,10 +42,12 @@ GetProgectDetailJsonVO::Wrapper GetProgectController::execProgectDetail(const Ge
 	// 定义一个Service
 	GetProgectService service;
 	// 查询数据
-	auto result = service.listSome(query->pId);
+	uint64_t id = query->pId;
+	auto result = service.listSome(query);
 	// 响应结果
 	auto jvo = GetProgectDetailJsonVO::createShared();
 	jvo->success(result);///////////////result GetProgectDetailDTO jvo GetProgectDetailJsonVO
+	
 	return jvo;
 }
 

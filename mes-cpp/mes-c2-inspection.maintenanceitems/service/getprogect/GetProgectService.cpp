@@ -61,17 +61,17 @@ GetProgectPageDTO::Wrapper GetProgectService::listAll(const GetProgectQuery::Wra
 }
 
 //GetProgectDTO::Wrapper listSome(const uint64_t id);
-GetProgectDetailDTO::Wrapper GetProgectService::listSome(uint64_t id){
+GetProgectDetailDTO::Wrapper GetProgectService::listSome(const GetProgectDetailQuery::Wrapper& query){
 	auto pages = GetProgectDetailDTO::createShared();
 	GetProgectDAO dao;
-	list<dvSubjectDO> result = dao.selectById(id);
+	list<dvSubjectDO> result = dao.selectById(query);
 	for (dvSubjectDO sub : result)
 	{
 		auto dto = GetProgectDetailDTO::createShared();
 		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, pId, SubjectId);
 		//pages->addData(dto);
 		return dto;
-
 	}
+	return {};
 	//return pages;
 }
