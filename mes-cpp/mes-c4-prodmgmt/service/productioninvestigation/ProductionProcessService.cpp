@@ -37,11 +37,54 @@ ProductionProcessPageDTO::Wrapper ProductionProcessService::listAll(const Produc
 	pages->calcPages();
 	list<ProRouteProcessDO> result = dao.query_by_workordercode(query);
 	// 将DO转换成DTO
+	map<string,string> m;
+	map<string, string>m1;
+	bool flag = false;
 	for (ProRouteProcessDO sub : result)
 	{
-		auto dto = ProductionProcessDTO::createShared();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, processName,processName);
-		pages->addData(dto);
+		if (query->itemCode)
+		{
+			m[sub.getnextProcessName()] = sub.getprocessName();
+			m1[sub.getprocessName()] = sub.getnextProcessName();
+			flag = true;
+		}
+		else
+		{
+			auto dto = ProductionProcessDTO::createShared();
+			dto->processName =sub.getprocessName();
+			pages->addData(dto);
+		}
+	}
+	if (flag)
+	{
+		string start;
+		list<string>processList;
+		for (auto it : m)
+		{
+			string s = it.second;
+			if (m.find(s) == m.end())
+			{
+				start = s;
+				break;
+			}
+		}
+		string s = m1[start];
+		processList.push_back(start);
+		while (s != "")
+		{
+			processList.push_back(s);
+			string t = s;
+			s.clear();
+			s = m1[t];
+			t.clear();
+		}
+		processList.pop_back();
+		for (auto it : processList)
+		{
+			auto dto = ProductionProcessDTO::createShared();
+			dto->processName = it;
+			pages->addData(dto);
+		}
 	}
 	return pages;
 }

@@ -26,7 +26,7 @@ uint64_t ProductionProcessDAO::count(const ProductionProcessQuery::Wrapper& quer
 	}
 	else
 	{
-		sql = "SELECT COUNT(*) FROM pro_process ";
+		sql = "SELECT COUNT(*) FROM pro_route_process ";
 	}
 	return sqlSession->executeQueryNumerical(sql);
 }
@@ -35,7 +35,7 @@ list<ProRouteProcessDO> ProductionProcessDAO::query_by_workordercode(const Produ
 	stringstream sql;
 	if (query->itemCode)
 	{
-		sql << "select p1.process_name from pro_route_process as p1 join pro_route_product as p2 on p1.route_id = p2.route_id where p2.item_code = ? order by p1.process_id  ";
+		sql << "select p1.process_name, p1.next_process_name from pro_route_process as p1 join pro_route_product as p2 on p1.route_id = p2.route_id where p2.item_code = ? ";
 		sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 		ProProcessDOMapper mapper;
 		string sqlStr = sql.str();
@@ -43,7 +43,7 @@ list<ProRouteProcessDO> ProductionProcessDAO::query_by_workordercode(const Produ
 	}
 	else
 	{
-		sql << "SELECT process_name FROM pro_process order by process_id ";
+		sql << "SELECT process_name,next_process_name FROM pro_route_process order by record_id ";
 	}
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	ProProcessDOMapper mapper;

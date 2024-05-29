@@ -32,6 +32,7 @@ public:
 	{
 		ProRouteProcessDO data;
 		data.setprocessName(resultSet->getString(1));
+		data.setnextProcessName(resultSet->getString(2));
 		return data;
 	}
 };
