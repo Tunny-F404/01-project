@@ -2,9 +2,12 @@ package com.zeroone.star.scheduleplan.service;
 
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.planteam.PlanTeamDTO;
+import com.zeroone.star.project.j5.query.scheduleplan.planteam.AddPlanTeamQuery;
 import com.zeroone.star.project.j5.query.scheduleplan.planteam.PlanTeamQuery;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.scheduleplan.entity.CalPlanTeam;
+
+import java.util.List;
 
 /**
  * <p>
@@ -23,15 +26,16 @@ public interface IPlanTeamService extends IService<CalPlanTeam> {
     PageDTO<PlanTeamDTO> listAll(PlanTeamQuery query);
 
     /**
-     * 通过Id查询数据
-     * @param id ID
-     * @return 查询结果
+     * 添加关联班组(支持多项添加)
+     * @param addPlanTeamQueries 添加关联班组参数
+     * @return 结果: 0-失败, 1-成功
      */
-    PlanTeamDTO getById(int id);
+    Integer addPlanTeam(List<AddPlanTeamQuery> addPlanTeamQueries);
 
     /**
-     * 测试seata声明式服务调用
-     * @return 执行结果
+     * 通过recordId删除关联班组数据
+     * @param recordId ID\流水号
+     * @return 删除结果: 0-失败, 1-成功
      */
-//    int testSeata();
+    Integer deletePlanTeam(Long recordId);
 }
