@@ -35,13 +35,15 @@ public class SchedulePlanController implements SchedulePlanApis {
     @GetMapping("/query-all")
     @ApiOperation("获取计划列表（条件+分页）")
     public JsonVO<PageDTO<PlanListVO>> queryPlanList(@Validated PlanPageQuery condition) {
+
         return null;
     }
 
     @GetMapping("query-by-id")
     @ApiOperation("获取计划详情")
     public JsonVO<PlanVO> queryPlanDetails(@Min(value = 1,message = "planId最小值为1") @RequestParam Long planId) {
-        return null;
+        PlanVO planDetails = calPlanService.queryPlanDetails(planId);
+        return planDetails != null ? JsonVO.success(planDetails) : JsonVO.fail(null);
     }
 
     @ApiOperation("添加计划")

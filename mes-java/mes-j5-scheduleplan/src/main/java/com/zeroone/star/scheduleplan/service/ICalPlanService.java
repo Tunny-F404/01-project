@@ -1,5 +1,6 @@
 package com.zeroone.star.scheduleplan.service;
 
+import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
 import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICalPlanService extends IService<CalPlan> {
 
+    /**
+     *
+     * @param planId
+     * @return 计划详情
+     */
+    PlanVO queryPlanDetails(Long planId);
 }
