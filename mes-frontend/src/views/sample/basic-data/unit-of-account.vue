@@ -6,10 +6,22 @@ import {ref} from 'vue'
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整
 const tableList=ref([{
-    "classify":"金属",
-    "product":'螺丝',
-    "sure":"正常",
-    "time":"2024.5.22"
+    "account":"车",
+    "simply":"C",
+    "enable":"true",
+    "time":"2024.4.1"
+},
+{
+    "account":"顿",
+    "simply":"T",
+    "enable":"true",
+    "time":"2024.3.1"
+},
+{
+    "account":"千克",
+    "simply":"KG",
+    "enable":"false",
+    "time":"2024.2.1"
 }
 ]) 
 
@@ -55,7 +67,7 @@ const onEditchannel=(row,$index)=>{
 }
 const onDelChannel=async (row)=>{
     //删除
-    await ElMessageBox.confirm('你确认要删除该分类么', '温馨提示', {
+    await ElMessageBox.confirm('你确认要删除该单位么', '温馨提示', {
     type: 'warning',
     confirmButtonText: '确认',
     cancelButtonText: '取消'
@@ -77,17 +89,17 @@ const onAddChannel = () => {
 
 <template>
         <!--分类，页面只有基本的表现，没有实现数据绑定-->
-        <tableFrame title="实验表格">
+        <tableFrame title="计算单位">
     <template #extra>
         <!-- 具名插槽例子实现 -->
-      <el-button @click="onSortChannel">排序顺序    
+      <el-button @click="onSortChannel">导出数据    
         <el-icon :size="20">
-    <Sort /><!--排序图标-->
+    <UploadFilled /><!--排序图标-->
         </el-icon>
     </el-button>
     <el-button @click="onAddChannel">添加    
         <el-icon :size="20">
-    <Plus /><!--排序图标-->
+    <Plus /><!--添加图标-->
         </el-icon>
     </el-button>
     </template>
@@ -96,15 +108,15 @@ const onAddChannel = () => {
     <el-form :inline="true"  class="demo-form-inline">
   <el-form-item label="表格分类：" padding="50px">
     <!--label是用户看，value是收集给后台的-->
-    <el-select v-model="parms.classfiy">
-        <el-option label="按产品" value="001"> </el-option>
+    <el-select v-model="parms.account">
+        <el-option label="按名字" value="001"> </el-option>
         <el-option label="按时间" value="002"> </el-option>
     </el-select>
   </el-form-item>
-  <el-form-item label="状态" >
+  <el-form-item label="启用状态" >
     <el-select v-model="parms.state"><!--后台标记状态-->
-      <el-option label="正常" value="正常"></el-option>
-      <el-option label="失败" value="失败"></el-option>
+      <el-option label="正常" value="true"></el-option>
+      <el-option label="失败" value="false"></el-option>
     </el-select>
   </el-form-item>
   <el-form-item>
@@ -114,10 +126,10 @@ const onAddChannel = () => {
 
 <!--表格区-->
     <el-table  :data="tableList" style="width: 100%">
-   <el-table-column prop="classify" label="分类" width="100"></el-table-column>
-   <el-table-column type="index" label="排序" width="50"></el-table-column>
-   <el-table-column prop="product" label="物料/产品" width="150"></el-table-column>
-   <el-table-column prop="sure"  label="是否启用" ></el-table-column>
+  <el-table-column type="index" label="序号" width="100"></el-table-column>
+   <el-table-column prop="account" label="单位" width="100"></el-table-column>
+   <el-table-column prop="simply" label="简写" width="150"></el-table-column>
+   <el-table-column prop="enable"  label="是否启用" ></el-table-column>
    <el-table-column  prop="time"   label="创建时间" ></el-table-column>
    <el-table-column label="操作" >
     <!-- row是当前一行数据 index是下标-->
