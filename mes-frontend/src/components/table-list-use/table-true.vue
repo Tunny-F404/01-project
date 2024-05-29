@@ -151,7 +151,7 @@ const onAddChannel = () => {
     <!--空处理-->
 
     <!-- 原本是template #empty -->
-    <!-- <template #empty> -->
+    <!-- <template #extra> -->
     <slot name="empty">
       <el-empty description="没有数据"></el-empty>
     </slot>
