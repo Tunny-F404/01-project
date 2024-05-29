@@ -17,8 +17,8 @@ public class FacilityDTO {
     @ApiModelProperty(value = "运行数量",example = "1880")
     private long facilityRun;
     @ApiModelProperty(value = "待机数量",example = "18480")
-    private long facilityAwait;
+    private long facilityWait;
     @ApiModelProperty(value = "故障数量",example = "19520")
-    private long facilityFault;
+    private long facilityStop;
 
 }

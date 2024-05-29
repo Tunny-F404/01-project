@@ -1,19 +1,28 @@
-package com.zeroone.star.project.j1.syshome.dto.production;
+package com.zeroone.star.syshome.entity;
 
-import io.swagger.annotations.ApiModel;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 描述：生产进度查询模型
- * @author twelve
- * @version 1.0.0
+ * <p>
+ * 生产进度数据实体类
+ * </p>
+ *
  */
-@Data
-@ApiModel("生产进度查询对象")
-public class ProductionDTO {
+@Getter
+@Setter
+@TableName("pro_task")
+public class Production implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @ApiModelProperty(value = "订单编号",example = "ZL2050100240")
     private String workorderId;
     @ApiModelProperty(value = "客户编号",example = "C1880")
@@ -28,5 +37,4 @@ public class ProductionDTO {
     private Double quantity;
     @ApiModelProperty(value = "交货日期",example = "2024-05-04 18:25")
     private Date endTime;
-
 }

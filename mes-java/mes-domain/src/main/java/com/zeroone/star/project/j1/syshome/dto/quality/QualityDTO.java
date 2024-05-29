@@ -15,5 +15,5 @@ public class QualityDTO {
     @ApiModelProperty(value = "缺陷描述",example = "外观缺陷")
     private String defectName;
     @ApiModelProperty(value = "缺陷数量",example = "856")
-    private Integer defectNumber;
+    private Integer defectQuantity;
 }

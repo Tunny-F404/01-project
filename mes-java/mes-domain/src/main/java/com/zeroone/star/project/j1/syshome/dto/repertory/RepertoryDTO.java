@@ -13,7 +13,7 @@ import lombok.Data;
 @ApiModel("库存统计查询对象")
 public class RepertoryDTO {
     @ApiModelProperty(value = "产品名称",example = "衣柜")
-    private String productName;
-    @ApiModelProperty(value = "产品数量",example = "886")
-    private Integer productNum;
+    private String itemName;
+    @ApiModelProperty(value = "在库数量",example = "886")
+    private Integer quantityOnhand;
 }

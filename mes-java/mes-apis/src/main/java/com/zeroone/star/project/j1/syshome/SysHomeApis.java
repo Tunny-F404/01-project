@@ -32,7 +32,7 @@ public interface SysHomeApis {
      * @param id 编号
      * @return 查询结果
      */
-    JsonVO<List<RepertoryDTO>> queryRepertory(String id);
+    JsonVO<List<RepertoryDTO>> queryRepertory(Long id);
     /**
      * 设备查询
      * @param
