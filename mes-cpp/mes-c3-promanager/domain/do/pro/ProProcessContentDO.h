@@ -8,10 +8,32 @@
 class ProProcessContentDO
 {
 	// 内容说明
-	CC_SYNTHESIZE(uint64_t, content, Content);
+	CC_SYNTHESIZE(string, contenttext, ContentText);
+	//备注
+	CC_SYNTHESIZE(string, remark, Remark);
+	//顺序编号
+	CC_SYNTHESIZE(int, ordernum, OrderNum);
+	//工序ID
+	CC_SYNTHESIZE(uint64_t, processid, ProcessId);
+	//内容ID
+	CC_SYNTHESIZE(uint64_t, contentid, ContentId);
+	//辅助设备
+	CC_SYNTHESIZE(string, device, Device);
+	//辅助材料
+	CC_SYNTHESIZE(string, material, Material);
+	//材料URL
+	CC_SYNTHESIZE(string, docurl, DocUrl);
 public:
 	ProProcessContentDO() {
-		content = "";
+		contenttext = "";
+		remark = "";
+		docurl = "";
+		material = "";
+		device = "";
+		contentid = 229;
+		processid = 283;
+		ordernum = 1;
+
 	}
 };
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SetController.h"
 #include "../../service/set/ProcessExportService.h"
+#include "../../service/set/SetService.h"
 #include "Macros.h"
 #include "ExcelComponent.h"
 
@@ -97,24 +98,106 @@ StringJsonVO::Wrapper SetController::execProcessExport(const ProcessExportQuery:
 
 	return jvo;
 }
-// 2 添加工艺
+// 2 添加工序
 Uint64JsonVO::Wrapper SetController::execAddSet(const SetProAddTableDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验
+	if (!dto->processCode || !dto->processName || !dto->enableFlag)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->processCode->empty() || dto->processName->empty() || dto->enableFlag->empty())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	SetService service;
+	// 执行数据新增
+	uint64_t id = service.saveData(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
+
 }
-// 3 修改工艺
+// 3 修改工序
 Uint64JsonVO::Wrapper SetController::execModifySet(const SetProAddTableDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->processId || dto->processId <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	SetService service;
+	// 执行数据修改
+	if (service.updateData(dto)) {
+		jvo->success(dto->processId);
+	}
+	else
+	{
+		jvo->fail(dto->processId);
+	}
+	// 响应结果
+	return jvo;
 }
-// 4 获取工艺步骤列表
+// 4 获取工序步骤列表
 SetProListPageJsonVO::Wrapper SetController::execQuerySet(const SetProListQuery::Wrapper& query, const PayloadDTO& payload) {
-	return {};
+	// 定义一个Service
+	SetService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = SetProListPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 // 5 添加工序步骤
 Uint64JsonVO::Wrapper SetController::execAddStepSet(const SetProListDTO::Wrapper& dto)
 {
-	return {};
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验
+	if (!dto->contentId || !dto->processId)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->contentId < 0 || dto->processId < 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	SetService service;
+	// 执行数据新增
+	uint64_t id = service.saveStepData(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }
 // 6 获取工序列表
 ProListJsonVO::Wrapper SetController::execQueryProList(const ProListQuery::Wrapper& query)

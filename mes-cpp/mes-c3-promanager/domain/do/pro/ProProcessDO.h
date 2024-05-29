@@ -24,12 +24,10 @@
 #include <string>
 #include <list>
 using namespace std;
-//  生产工序表
-
 class ProProcessDO
 {
 	//生产工序ID
-	CC_SYNTHESIZE(string, processid, ProcessId);
+	CC_SYNTHESIZE(uint64_t, processid, ProcessId);
 	//生产工序编号
 	CC_SYNTHESIZE(string, processcode, ProcessCode);
 	//生产工序名称
@@ -43,7 +41,7 @@ class ProProcessDO
 
 public:
 	ProProcessDO() {
-		processid = "";
+		processid = 1;
 		processcode = "";
 		processname = "";
 		attention = "";
