@@ -2,16 +2,14 @@ package com.zeroone.star.productManagement.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.productManagement.entity.MdItem;
 import com.zeroone.star.productManagement.mapper.ProductMapper;
 import com.zeroone.star.productManagement.service.IProductService;
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.dto.ProductDTO;
-import com.zeroone.star.project.query.ProductQuery;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zeroone.star.project.j6.product_management.dto.ProductDTO;
+import com.zeroone.star.project.j6.product_management.query.ProductQuery;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
