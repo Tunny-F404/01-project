@@ -1,20 +1,10 @@
 // @ts-check
 import antfu from "@antfu/eslint-config";
-import gitignore from "eslint-config-flat-gitignore";
-import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const compat = new FlatCompat({
-	recommendedConfig: js.configs.recommended,
-});
 
 export default antfu(
 	{
-		// Enable stylistic formatting rules
-		// stylistic: true,
-
 		// Or customize the stylistic rules
 		stylistic: {
 			indent: 2, // 4, or 'tab'
@@ -33,10 +23,7 @@ export default antfu(
 			/**
 			 * @see https://eslint.org/docs/latest/use/configure/migration-guide#importing-plugins-and-custom-parsers
 			 */
-			overrides: {
-				"jsdoc/require-description": "error",
-				"jsdoc/check-values": "error",
-			},
+			overrides: { "jsdoc/require-description": "error", "jsdoc/check-values": "error" },
 		},
 
 		// Disable jsonc and yaml support
@@ -72,38 +59,18 @@ export default antfu(
 		},
 	},
 
-	// Legacy config
-	...compat.config({
-		extends: ["eslint:recommended"],
-	}),
-
-	/** https://github.com/antfu/eslint-config-flat-gitignore */
-	gitignore({
-		root: true,
-		strict: false,
-		files: [".gitignore", ".eslintignore"],
-	}),
-
 	{
 		rules: {
 			"no-console": "off",
-			"style/semi": ["error", "never"],
-
-			/** @see https://www.jianshu.com/p/1c92f4fda107 */
-			indent: [
-				"warn",
-				2,
-				{
-					ignoredNodes: ["TemplateLiteral"],
-				},
-			],
+			// 设置为总是警告
+			// "style/semi": ["warn", "always"],
 		},
 	},
 
 	{
 		rules: {
 			"prettier/prettier": [
-				"off",
+				"error",
 				{
 					usePrettierrc: true,
 				},
@@ -111,6 +78,6 @@ export default antfu(
 		},
 	},
 
-	eslintPluginPrettierRecommended,
 	eslintConfigPrettier,
+	eslintPluginPrettierRecommended,
 );
