@@ -1,17 +1,13 @@
 package com.zeroone.star.orgstructure.controller;
 
 
-import com.zeroone.star.orgstructure.entity.UserRoleDO;
+import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.orgstructure.service.RoleService;
-import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
+import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.role.*;
 import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
@@ -143,9 +139,16 @@ public class RoleController implements RoleApis {
      * */
     @GetMapping("query-allocate-role")
     @ApiOperation("获取角色分配用户列表（条件+分页）")
-    public JsonVO<List<RoleDTO>> queryAllocatedList(@RequestParam Long roleId) {
-        /*roleServiceImpl.getUsersByRole(roleId);*/
-        return JsonVO.success(null);
+    public JsonVO<List<UserRoleDTO>> queryAllocatedList(@RequestParam Long roleId,
+                                                    @RequestParam int page,
+                                                    @RequestParam int size) {
+        int offset = (page - 1) * size;
+        List<UserRoleDTO> users = roleServiceImpl.getUsersByRoleId(roleId, offset, size);
+        if (users != null && !users.isEmpty()) {
+            return JsonVO.success(users);
+        } else {
+            return JsonVO.fail(null);
+        }
     }
 
 
@@ -155,8 +158,8 @@ public class RoleController implements RoleApis {
     @PutMapping("addAuth")
     @ApiOperation("添加授权")
     public JsonVO<RoleDTO> addAuth(@RequestParam Long roleId, @RequestParam Long[] userIds) {
-        roleServiceImpl.insertAuthUsers(roleId, userIds);
-        return JsonVO.success(null);
+        Integer result = roleServiceImpl.insertAuthUsers(roleId, userIds);
+        return result > 0 ? JsonVO.success(null) : JsonVO.fail(null);
     }
 
     /*

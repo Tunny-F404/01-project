@@ -2,20 +2,21 @@ package com.zeroone.star.orgstructure.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.nacos.shaded.io.grpc.Internal;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.zeroone.star.orgstructure.entity.PostDO;
 import com.zeroone.star.orgstructure.entity.RoleDo;
+import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.orgstructure.entity.UserRoleDO;
 import com.zeroone.star.orgstructure.mapper.RoleMapper;
+import com.zeroone.star.orgstructure.UserConvertMapper;
 import com.zeroone.star.orgstructure.mapper.UserRoleMapper;
 import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
+/*import com.zeroone.star.project.components.user.UserDTO;*/
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
+import com.zeroone.star.project.j2.orgstructure.dto.role.UserRoleDTO;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +31,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * 描述：Role 角色服务接口
@@ -47,6 +48,8 @@ public class RoleServiceImpl implements RoleService {
     UserRoleMapper userRoleMapper;
     @Resource
     EasyExcelComponent excel;
+    @Resource
+    private UserConvertMapper userConvertMapper;
 
     /**
      * 添加角色
@@ -117,6 +120,17 @@ public class RoleServiceImpl implements RoleService {
         //设置创建者，时间
         roleDo.setUpdateTime(new Date());
         return roleMapper.update(roleDo, updateRoleInfo);
+    }
+
+
+    /*
+    * 查找该角色所分配的用户
+    * */
+    public List<UserRoleDTO> getUsersByRoleId(Long roleId, int offset, int limit) {
+        List<UserDO> userDOList = userRoleMapper.getUsersByRoleId(roleId, offset, limit);
+        return userDOList.stream()
+                .map(userConvertMapper::userDOToUserDTO)
+                .collect(Collectors.toList());
     }
 
     /*

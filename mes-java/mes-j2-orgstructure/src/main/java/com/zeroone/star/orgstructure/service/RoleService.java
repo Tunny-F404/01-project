@@ -1,9 +1,12 @@
 package com.zeroone.star.orgstructure.service;
 
+import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.orgstructure.entity.UserRoleDO;
+import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
+import com.zeroone.star.project.j2.orgstructure.dto.role.UserRoleDTO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +23,10 @@ import java.util.List;
 public interface RoleService {
     /**
      * 添加角色
-     * @author 0xu0
+     *
      * @param roleDTO
      * @return
+     * @author 0xu0
      */
 
     @ApiOperation("添加角色")
@@ -40,9 +44,10 @@ public interface RoleService {
 
     /**
      * 删除角色，支持批量删除
-     * @author 0xu0
+     *
      * @param ids
      * @return
+     * @author 0xu0
      */
 
     @ApiOperation("删除角色")
@@ -50,6 +55,7 @@ public interface RoleService {
 
     /**
      * 修改角色信息
+     *
      * @param roleDTO
      * @return
      */
@@ -59,21 +65,28 @@ public interface RoleService {
 
 
 
+    /*
+     * 查找该角色所分配的用户
+     * */
+    public List<UserRoleDTO> getUsersByRoleId(Long roleId, int offset, int limit);
+
     /**
      * 批量取消授权用户角色
      *
-     * @param roleId 角色ID
+     * @param roleId  角色ID
      * @param userIds 需要取消授权的用户数据ID
      * @return 结果
      */
     public int deleteAuthUsers(Long roleId, Long[] userIds);
 
     /*
-    * 批量选择授权用户角色
-    * */
+     * 批量选择授权用户角色
+     * */
     public int insertAuthUsers(Long roleId, Long[] userIds);
 
 
-
+    /*
+     * 导出角色
+     * */
     public ResponseEntity<byte[]> downloadExcel();
 }
