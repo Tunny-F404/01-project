@@ -14,19 +14,27 @@ import java.util.List;
  * @version 1.0.0
  */
 public interface ShopSettingsApis {
-    //获取车间管理列表（条件+分页）
+
     /**
      * 获取车间管理列表（条件+分页）
-     * @param ShopSettingscondition
-     * @return
+     * @param ShopSettingsCondition 查询条件
+     * @return  车间列表
      */
-    JsonVO<PageDTO<GetShopSettingsDTO>> getShopSeetingController(ShopSettingsQuery ShopSettingscondition);
+    JsonVO<PageDTO<GetShopSettingsDTO>> getShopSettingsList(ShopSettingsQuery ShopSettingsCondition);
+
     /**
      * 获取车间详情
-     * @param GetShopSettingsDTO
-     * @return
+     * @param workShopId 车间号
+     * @return 车间详细信息
      */
-    JsonVO<GetShopSettingsDTO> getShopSeetingALLController(GetShopSettingsDTO GetShopSettingsDTO);
+    JsonVO<GetShopSettingsDTO> getShopSettingsInfoByWorkShopId(Long workShopId);
+
+    /**
+     * 获取车间名称列表
+     * @return 名称列表
+     */
+    JsonVO<List<String>> getShopSettingNameList();
+
     /**
      * 更新车间信息
      * @param shopsettingsDTO
@@ -45,11 +53,6 @@ public interface ShopSettingsApis {
      * @return
      */
     JsonVO<Integer> deleteShopSeetingController(List<Long> ids );
-    /**
-     * 获取车间名称列表
-     * @param shopsettingsDTO
-     * @return
-     */
-    JsonVO<List<String>> getShopSeetingNameController(GetShopSettingsDTO shopsettingsDTO);
+
 
 }

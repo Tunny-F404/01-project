@@ -20,33 +20,38 @@ import java.util.List;
 public class ShopSettingsController implements ShopSettingsApis {
     @Autowired(required = false)
     ShopsettingsService shopsettingsService;
-    /**
-     * 获取车间管理列表（条件+分页）
-     * @param ShopSettingscondition
-     * @return
-     */
-    @GetMapping("/query-by")
+
+
     @Override
     @ApiOperation("获取车间管理列表（条件+分页）")
-    public JsonVO<PageDTO<GetShopSettingsDTO>> getShopSeetingController(
-            @ApiParam("查询条件") @RequestBody ShopSettingsQuery ShopSettingscondition) {
-
-
-        return null;
+    @GetMapping("/query-list")
+    public JsonVO<PageDTO<GetShopSettingsDTO>> getShopSettingsList(ShopSettingsQuery shopSettingsQuery) {
+        PageDTO<GetShopSettingsDTO> pageDTO = shopsettingsService.getShopSettingsList(shopSettingsQuery);
+        if(pageDTO != null){
+            return JsonVO.success(pageDTO);
+        }
+        return JsonVO.fail(null);
     }
-    /**
-     * 获取车间详情
-     * @param GetShopSettingsDTO
-     * @return
-     */
+
     @Override
-    @GetMapping("/get-shopsetting")
     @ApiOperation("获取车间详情")
-    public JsonVO<GetShopSettingsDTO> getShopSeetingALLController(
-            @ApiParam("车间DTO")@RequestBody GetShopSettingsDTO GetShopSettingsDTO) {
-
-        return null;
+    @GetMapping("/query-id")
+    public JsonVO<GetShopSettingsDTO> getShopSettingsInfoByWorkShopId(Long workShopId) {
+        GetShopSettingsDTO getShopSettingsDTO = shopsettingsService.getShopSettingsInfoByWorkShopId(workShopId);
+        return getShopSettingsDTO != null ? JsonVO.success(getShopSettingsDTO) : JsonVO.fail(null);
     }
+
+    @Override
+    @ApiOperation("获取车间名称列表")
+    @GetMapping("/query-name-list")
+    public JsonVO<List<String>> getShopSettingNameList() {
+        List<String> shopSettingsNameList = shopsettingsService.getShopSettingNameList();
+        return shopSettingsNameList.size() > 0 ? JsonVO.success(shopSettingsNameList) : JsonVO.fail(null);
+    }
+
+
+
+
     /**
      * 更新车间信息
      *
@@ -87,19 +92,7 @@ public class ShopSettingsController implements ShopSettingsApis {
             @ApiParam("车间id")@RequestParam List<Long> ids) {
         return null;
     }
-    /**
-     * 获取车间名称列表
-     *
-     * @param shopsettingsDTO
-     * @return
-     */
-    @GetMapping("/get-shopsettings-name")
-    @Override
-    @ApiOperation("获取车间名称列表")
-    public JsonVO<List<String>> getShopSeetingNameController(
-            @ApiParam("车间DTO")@RequestBody GetShopSettingsDTO shopsettingsDTO) {
-        return null;
-    }
+
 
 
 }
