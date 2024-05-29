@@ -6,7 +6,10 @@ import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.vo.JsonVO;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -78,17 +81,23 @@ public interface RoleApis {
     /*
      * 获取角色分配用户列表（条件+分页）
      * */
-    public JsonVO<List<RoleDTO>> queryAllocatedList(RoleDTO roleDTO, PageDTO<RoleDTO> pageDTO);
+    public JsonVO<List<RoleDTO>> queryAllocatedList(Long roleId);
 
     /*
      * 添加授权
      * */
     public JsonVO<RoleDTO> addAuth(Long roleId, Long[] userIds);
 
+
     /*
-     * 取消授权（支持批量）
+    * 取消授权
+    * */
+    //public JsonVO<Integer> cancelAuthUser(RoleDTO roleDTO);
+
+    /*
+     * 批量取消授权（支持批量）
      * */
-    public JsonVO<List<RoleDTO>> cancelAuthUser(Long roleId,Long[] userIds);
+    public JsonVO<Integer> cancelAuthUsers(Long roleId, Long[] userIds);
 
     /*
      * 导出角色

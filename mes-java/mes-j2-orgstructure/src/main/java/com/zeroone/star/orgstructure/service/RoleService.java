@@ -1,9 +1,11 @@
 package com.zeroone.star.orgstructure.service;
 
+import com.zeroone.star.orgstructure.entity.UserRoleDO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -55,4 +57,23 @@ public interface RoleService {
     @ApiOperation("修改角色信息")
     public Integer modifyRoleInfo(RoleModifyDto roleDTO) throws Exception;
 
+
+
+    /**
+     * 批量取消授权用户角色
+     *
+     * @param roleId 角色ID
+     * @param userIds 需要取消授权的用户数据ID
+     * @return 结果
+     */
+    public int deleteAuthUsers(Long roleId, Long[] userIds);
+
+    /*
+    * 批量选择授权用户角色
+    * */
+    public int insertAuthUsers(Long roleId, Long[] userIds);
+
+
+
+    public ResponseEntity<byte[]> downloadExcel();
 }

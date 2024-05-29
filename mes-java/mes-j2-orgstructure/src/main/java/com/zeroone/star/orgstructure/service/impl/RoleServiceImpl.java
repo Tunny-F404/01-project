@@ -1,24 +1,40 @@
 package com.zeroone.star.orgstructure.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DateTime;
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.nacos.shaded.io.grpc.Internal;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.zeroone.star.orgstructure.entity.PostDO;
 import com.zeroone.star.orgstructure.entity.RoleDo;
+import com.zeroone.star.orgstructure.entity.UserRoleDO;
 import com.zeroone.star.orgstructure.mapper.RoleMapper;
+import com.zeroone.star.orgstructure.mapper.UserRoleMapper;
 import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.components.user.UserHolder;
+import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.annotation.Resource;
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 描述：Role 角色服务接口
@@ -33,6 +49,10 @@ public class RoleServiceImpl implements RoleService {
     RoleMapper roleMapper;
     @Resource
     UserHolder userHolder;
+    @Resource
+    UserRoleMapper userRoleMapper;
+    @Resource
+    EasyExcelComponent excel;
 
     /**
      * 添加角色
@@ -80,7 +100,7 @@ public class RoleServiceImpl implements RoleService {
         roleDo.setUpdateTime(new Date());
         //返回修改的主键值
         int update = roleMapper.update(roleDo, updateRoleStatus);
-        if(update>0){
+        if (update > 0) {
             return update;
         }
         return 0;
@@ -116,6 +136,51 @@ public class RoleServiceImpl implements RoleService {
         roleDo.setUpdateTime(new Date());
         //返回修改的主键值
         return roleMapper.update(roleDo, updateRoleInfo);
+    }
+
+    /*
+     * 取消授权
+     * */
+    @Override
+    public int deleteAuthUsers(Long roleId, Long[] userIds) {
+        return userRoleMapper.deleteUserRoleInfos(roleId, userIds);
+    }
+
+    /*
+     * 批量添加用户授权
+     * */
+    @Override
+    public int insertAuthUsers(Long roleId, Long[] userIds) {
+        // 新增用户与角色管理
+        List<UserRoleDO> list = new ArrayList<>();
+        for (Long userId : userIds) {
+            UserRoleDO ur = new UserRoleDO();
+            ur.setUserId(userId);
+            ur.setRoleId(roleId);
+            list.add(ur);
+        }
+        return userRoleMapper.batchUserRole(list);
+    }
+
+
+    @SneakyThrows
+    @Override
+    public ResponseEntity<byte[]> downloadExcel() {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.select("role_id", "role_name", "role_key", "role_sort", "data_scope", "status");
+        List<RoleDo> roles = roleMapper.selectList(queryWrapper);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        excel.export("role", out, RoleDo.class, roles);
+        byte[] bytes = out.toByteArray();
+        out.close();
+        HttpHeaders headers = new HttpHeaders();
+        String filename = "report-" + DateTime.now().toString("yyyyHHddHHmmssS") + ".xlsx";
+        headers.setContentDispositionFormData("attachment", filename);
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+/*
+        headers.setContentType(MediaType.valueOf("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+*/
+        return new ResponseEntity<>(bytes, headers, HttpStatus.CREATED);
     }
 
 }
