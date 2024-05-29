@@ -18,4 +18,6 @@ public interface ISysDictDataService extends IService<SysDictData> {
     Integer saveDictData(SysDictDataDTO sysDictDataDTO, UserDTO currentUser);
 
     Integer updateDictData(SysDictDataDTO sysDictDataDTO, UserDTO currentUser);
+
+    void removeDictData(Long[] dictCodes);
 }
