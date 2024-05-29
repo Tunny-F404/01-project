@@ -57,7 +57,7 @@ uint64_t warehouseAreaService::saveData(const warehouseAreaListDTO::Wrapper& dto
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, AreaId, area_id, AreaCode, area_code, AreaName, area_name, Area, area, Remark, remark)
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, AreaId, area_id, AreaCode, area_code, AreaName, area_name, WarehouseId, warehouse_id, Area, area, Remark, remark)
 	// 执行数据添加
 	warehouseAreaDAO dao;
 	return dao.insert(data);
@@ -71,7 +71,7 @@ bool warehouseAreaService::updateData(const warehouseAreaListDTO::Wrapper& dto)
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, AreaId, area_id, AreaCode, area_code, AreaName, area_name, Area, area, Remark, remark)
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, AreaId, area_id, AreaCode, area_code, AreaName, area_name, WarehouseId, warehouse_id, Area, area, Remark, remark)
 		// 执行数据修改
 	warehouseAreaDAO dao;
 	return dao.update(data) == 1;

@@ -26,12 +26,14 @@
  */
 class warehouseAreaDO
 {
-	//库区编号
+	//库区ID
 	CC_SYNTHESIZE(uint64_t, area_id, AreaId);//定义属性area_id,类型为uint64_t,并且定义getAreaId()返回area_id
 	//库区编码
 	CC_SYNTHESIZE(string, area_code, AreaCode);
 	//库区名称
 	CC_SYNTHESIZE(string, area_name, AreaName);
+	//仓库ID
+	CC_SYNTHESIZE(uint64_t, warehouse_id, WarehouseId);
 	//库区面积
 	CC_SYNTHESIZE(uint32_t, area, Area);
 	//备注

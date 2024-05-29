@@ -29,32 +29,34 @@
 class warehouseAreaListDTO : public oatpp::DTO
 {
 	DTO_INIT(warehouseAreaListDTO, DTO);
-	////唯一标识
-	//API_DTO_FIELD(UInt64,area_id, ZH_WORDS_GETTER("warehouse-area.field.id"),true,1)
-	////编码,必填项
-	//API_DTO_FIELD(String, area_code, ZH_WORDS_GETTER("warehouse-area.field.code"), true, "000");//可带默认值31:03
-	////名称
-	//API_DTO_FIELD(String, area_name, ZH_WORDS_GETTER("warehouse-area.field.name"), true,"default name");
-	////面积
-	//API_DTO_FIELD_DEFAULT(Int32, area, ZH_WORDS_GETTER("warehouse-area.field.area"));
-	////备注
-	//API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("warehouse-area.field.remark"));
-	//使用demo/sample里的定义方式
-	//库区编号
-	DTO_FIELD(UInt64, area_id);
-	DTO_FIELD_INFO(area_id){ info->description = ZH_WORDS_GETTER("warehouse.field.id"); }
-	//编码
-	DTO_FIELD(String, area_code);
-	DTO_FIELD_INFO(area_code) { info->description = ZH_WORDS_GETTER("warehouse.field.code"); }
-	//名称
-	DTO_FIELD(String, area_name);
-	DTO_FIELD_INFO(area_name) { info->description = ZH_WORDS_GETTER("warehouse.field.name"); }
+	//库区ID-必填
+	API_DTO_FIELD(UInt64,area_id, ZH_WORDS_GETTER("warehouse-area.field.id"),true,1)
+	//编码-必填
+	API_DTO_FIELD(String, area_code, ZH_WORDS_GETTER("warehouse-area.field.code"), true, "default code");
+	//名称-必填
+	API_DTO_FIELD(String, area_name, ZH_WORDS_GETTER("warehouse-area.field.name"), true,"default name");
+	//关联的仓库ID-必填
+	API_DTO_FIELD(UInt64, warehouse_id, ZH_WORDS_GETTER("warehouse-area.field.warehouse-id"), true, 1);
 	//面积
-	DTO_FIELD(Int32, area);
-	DTO_FIELD_INFO(area) { info->description = ZH_WORDS_GETTER("warehouse.field.area"); }
+	API_DTO_FIELD_DEFAULT(Int32, area, ZH_WORDS_GETTER("warehouse-area.field.area"));
 	//备注
-	DTO_FIELD(String, remark);
-	DTO_FIELD_INFO(remark) { info->description = ZH_WORDS_GETTER("warehouse.field.remark"); }
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("warehouse-area.field.remark"));
+	////使用demo/sample里的定义方式
+	////库区编号
+	//DTO_FIELD(UInt64, area_id);
+	//DTO_FIELD_INFO(area_id){ info->description = ZH_WORDS_GETTER("warehouse.field.id"); }
+	////编码
+	//DTO_FIELD(String, area_code);
+	//DTO_FIELD_INFO(area_code) { info->description = ZH_WORDS_GETTER("warehouse.field.code"); }
+	////名称
+	//DTO_FIELD(String, area_name);
+	//DTO_FIELD_INFO(area_name) { info->description = ZH_WORDS_GETTER("warehouse.field.name"); }
+	////面积
+	//DTO_FIELD(Int32, area);
+	//DTO_FIELD_INFO(area) { info->description = ZH_WORDS_GETTER("warehouse.field.area"); }
+	////备注
+	//DTO_FIELD(String, remark);
+	//DTO_FIELD_INFO(remark) { info->description = ZH_WORDS_GETTER("warehouse.field.remark"); }
 };
 /**
  * 库区分页传输对象
@@ -63,5 +65,15 @@ class warehousePageDTO : public PageDTO<warehouseAreaListDTO::Wrapper>
 {
 	DTO_INIT(warehousePageDTO, PageDTO<warehouseAreaListDTO::Wrapper>);
 };
+
+/**
+ * 用于删除库区时传输多个库区id
+ */
+//class deleteIdsDTO :public oatpp::DTO
+//{
+//	DTO_INIT(deleteIdsDTO, DTO);
+//	//库区ID列表:至少要传一个id
+//	API_DTO_FIELD(list<UInt64>, area_ids, ZH_WORDS_GETTER("warehouse-area.field.id"),true, std::list<UInt64>{1})
+//};
 #include OATPP_CODEGEN_END(DTO)
 #endif // 

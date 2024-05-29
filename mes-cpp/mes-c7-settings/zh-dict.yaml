@@ -6,10 +6,11 @@ warehouse-area:
  put:
   summary: 修改一条库区数据
  delete:
-  summary: 删除一条库区数据
+  summary: 删除库区数据(可批量删除)
  field:
-  id: 库区标识
+  id: 库区ID
   code: 库区编码
   name: 库区名称
+  warehouse-id: 仓库ID
   area: 面积
   remark: 备注

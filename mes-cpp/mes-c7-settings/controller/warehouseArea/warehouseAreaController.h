@@ -55,7 +55,7 @@ public:
 		// 解析查询参数为WarehouseAreaQuery领域模型
 		API_HANDLER_QUERY_PARAM(query, WarehouseAreaQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execQueryWarehouseArea(query, authObject->getPayload()));
+		API_HANDLER_RESP_VO(execQueryWarehouseArea(query));
 	}
 
 	//2.1定义新增库区接口描述
@@ -67,7 +67,7 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	// 2.2 定义新增接口处理
+	// 2.2 定义新增接口处理 注意！！！！！这里虽然传了库区id,但具体实现没有传入库区id,而是按照数据库自增方式生成库区id
 	ENDPOINT(API_M_POST, "/warehouseArea-settings/add-warehouseArea", addWarehouseArea, BODY_DTO(warehouseAreaListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddWarehouseArea(dto));
@@ -78,24 +78,33 @@ public:
 	// 3.2 定义修改库区接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/warehouseArea-settings/modify-warehouseArea", modifyWarehouseArea, BODY_DTO(warehouseAreaListDTO::Wrapper, dto), execModifyWarehouseArea(dto));
 
+	//// 4.1 定义删除接口描述
+	//ENDPOINT_INFO(removeWarehouseArea) {
+	//	// 定义标题和返回类型以及授权支持
+	//	API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("warehouse-area.delete.summary"), Uint64JsonVO::Wrapper);
+	//	// 定义其他路径参数说明:注意此处参数名要与DTO里的属于对应,默认值=1,require=true
+	//	API_DEF_ADD_PATH_PARAMS(UInt64, "area_id", ZH_WORDS_GETTER("warehouse-area.field.id"), 1, true);
+	//}
+	//// 4.2 定义删除接口处理
+	//API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/warehouseArea-settings/del-warehouseArea-by/{area_id}", removeWarehouseArea, PATH(UInt64, area_id), execRemoveWarehouseArea(area_id));
 	// 4.1 定义删除接口描述
 	ENDPOINT_INFO(removeWarehouseArea) {
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("warehouse-area.delete.summary"), Uint64JsonVO::Wrapper);
-		// 定义其他路径参数说明:注意此处参数名要与DTO里的属于对应,默认值=1,require=true
-		API_DEF_ADD_PATH_PARAMS(UInt64, "area_id", ZH_WORDS_GETTER("warehouse-area.field.id"), 1, true);
 	}
 	// 4.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/warehouseArea-settings/del-warehouseArea-by/{area_id}", removeWarehouseArea, PATH(UInt64, area_id), execRemoveWarehouseArea(area_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/warehouseArea-settings/del-warehouseArea-by-id", removeWarehouseArea, BODY_DTO(List<UInt64>,ids), execRemoveWarehouseArea(ids));
+
+	
 private:
 	// 1.3 分页查询数据
-	warehouseAreaPageJsonVO::Wrapper execQueryWarehouseArea(const WarehouseAreaQuery::Wrapper& query, const PayloadDTO& payload);
+	warehouseAreaPageJsonVO::Wrapper execQueryWarehouseArea(const WarehouseAreaQuery::Wrapper& query);
 	// 2.3新增库区数据
 	Uint64JsonVO::Wrapper execAddWarehouseArea(const warehouseAreaListDTO::Wrapper& dto);
 	// 3.3修改库区数据
 	Uint64JsonVO::Wrapper execModifyWarehouseArea(const warehouseAreaListDTO::Wrapper& dto);
 	// 4.3删除库区数据
-	Uint64JsonVO::Wrapper execRemoveWarehouseArea(const UInt64& id);
+	Uint64JsonVO::Wrapper execRemoveWarehouseArea(const List<UInt64>& ids);
 };
 
 // 0 取消API控制器使用宏

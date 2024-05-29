@@ -49,17 +49,17 @@ std::list<warehouseAreaDO> warehouseAreaDAO::selectWithPage(const WarehouseAreaQ
 	string sqlStr = sql.str();
 	return sqlSession->executeQuery<warehouseAreaDO, warehouseAreaMapper>(sqlStr, mapper, params);
 }
-//！！！！！！！！！！！！临时做法是先给warehouse_id提供一个默认值0，等日后再修改！！！！！！！！！！！！！！！！！！！
+
 uint64_t warehouseAreaDAO::insert(const warehouseAreaDO& iObj)
 {
 	string sql = "INSERT INTO `wm_storage_location` (`location_code`, `location_name`, `area`, `remark`, `warehouse_id`) VALUES (?, ?, ?, ?, ?)";
-	return sqlSession->executeInsert(sql, "%s%s%i%s%ull", iObj.getAreaCode(), iObj.getAreaName(), iObj.getArea(), iObj.getRemark(),0);
+	return sqlSession->executeInsert(sql, "%s%s%i%s%ull", iObj.getAreaCode(), iObj.getAreaName(), iObj.getArea(), iObj.getRemark(), iObj.getWarehouseId());
 }
 
 int warehouseAreaDAO::update(const warehouseAreaDO& uObj)
 {
-	string sql = "UPDATE `wm_storage_location` SET `location_code`=?, `location_name`=?, `area`=?, `remark`=? WHERE `location_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%i%s%ull", uObj.getAreaCode(), uObj.getAreaName(), uObj.getArea(), uObj.getRemark(), uObj.getAreaId());
+	string sql = "UPDATE `wm_storage_location` SET `location_code`=?, `location_name`=?, `area`=?, `remark`=?, `warehouse_id`=? WHERE `location_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%i%s%ull%ull", uObj.getAreaCode(), uObj.getAreaName(), uObj.getArea(), uObj.getRemark(), uObj.getWarehouseId(), uObj.getAreaId());
 }
 
 int warehouseAreaDAO::deleteById(uint64_t id)
