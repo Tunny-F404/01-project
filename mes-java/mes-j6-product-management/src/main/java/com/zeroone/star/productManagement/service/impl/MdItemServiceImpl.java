@@ -2,6 +2,7 @@ package com.zeroone.star.productManagement.service.impl;
 
 import cn.hutool.core.date.DateTime;
 import com.alibaba.excel.EasyExcel;
+import com.zeroone.star.productManagement.entity.ExportMdItem;
 import com.zeroone.star.productManagement.entity.MdItem;
 import com.zeroone.star.productManagement.mapper.MdItemMapper;
 import com.zeroone.star.productManagement.service.IMdItemService;
@@ -22,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -50,7 +53,7 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @param mdItemQuery 查询条件
      * @return 物料列表
      */
-    public List<MdItem> selectMdItemList(MdItemQuery mdItemQuery) {
+    public List<ExportMdItem> selectMdItemList(MdItemQuery mdItemQuery) {
 
         return mdItemMapper.selectMdItemList(mdItemQuery);
     }
@@ -60,12 +63,12 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @param items 物料数据
      * @return 返回响应
      */
-    public ResponseEntity<byte[]> exportToExcel(List<MdItem> items) {
+    public ResponseEntity<byte[]> exportToExcel(List<ExportMdItem> items) {
         try {
             // 构建一个输出流
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             // 导出数据到输出流
-            excel.export("物料产品列表", out, MdItem.class, items);
+            excel.export("物料产品列表", out, ExportMdItem.class, items);
             // 获取字节数据
             byte[] bytes = out.toByteArray();
             out.close();
@@ -90,16 +93,16 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
     private MdItem initTemplate() {
         MdItem item = new MdItem();
         item.setItemId(null);
-        item.setItemCode("NOT NULL");
-        item.setItemName("NOT NULL");
+        item.setItemCode("必填");
+        item.setItemName("必填");
         item.setSpecification("");
-        item.setUnitOfMeasure("NOT NULL");
-        item.setItemOrProduct("NOT NULL");
+        item.setUnitOfMeasure("必填");
+        item.setItemOrProduct("必填");
         item.setItemTypeId(null);
         item.setItemTypeCode("");
         item.setItemTypeName("");
-        item.setEnableFlag("NOT NULL");
-        item.setSafeStockFlag("NOT NULL");
+        item.setEnableFlag("必填");
+        item.setSafeStockFlag("必填");
         item.setMinStock(null);
         item.setMaxStock(null);
         item.setRemark("");
@@ -147,6 +150,10 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
         // excel同步读取数据
         try {
             items = EasyExcel.read(new BufferedInputStream(file.getInputStream())).head(MdItem.class).sheet().doReadSync();
+            if (items == null || items.isEmpty()) {
+                failureNameMsg.append("导入的物料数据不能为空！");
+                return JsonVO.create(null, ResultStatus.FAIL.getCode(), failureMsg.toString());
+            }
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -154,6 +161,8 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
         for (MdItem mdItem : items)
         {
             try{
+                //验证数据
+                validationData(mdItem);
                 //是否存在
                 MdItem  m = mdItemMapper.checkItemCodeUnique(mdItem);
                 if(m == null){
@@ -191,7 +200,7 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @param mdItem 产品物料信息
      * @return 结果
      */
-    public void insertMdItem(MdItem mdItem) throws Exception {
+    private void insertMdItem(MdItem mdItem) throws Exception {
         UserDTO userDTO  = userHolder.getCurrentUser();
         mdItem.setCreateBy(userDTO.getUsername());
         mdItem.setCreateTime(DateTime.now().toLocalDateTime());
@@ -204,10 +213,37 @@ public class MdItemServiceImpl extends ServiceImpl<MdItemMapper, MdItem> impleme
      * @param mdItem 产品物料信息
      * @return 结果
      */
-    public void updateMdItem(MdItem mdItem) throws Exception {
+    private void updateMdItem(MdItem mdItem) throws Exception {
         UserDTO userDTO  = userHolder.getCurrentUser();
         mdItem.setUpdateBy(userDTO.getUsername());
         mdItem.setUpdateTime(DateTime.now().toLocalDateTime());
         mdItemMapper.updateMdItem(mdItem);
     }
+
+    private void validationData(MdItem mdItem) {
+        if (mdItem.getItemCode() == null || mdItem.getItemCode().isEmpty()) {
+            throw new IllegalArgumentException("物料编码是必填项。");
+        }
+
+        if (mdItem.getItemName() == null || mdItem.getItemName().isEmpty()) {
+            throw new IllegalArgumentException("物料名称是必填项。");
+        }
+
+        if (mdItem.getUnitOfMeasure() == null || mdItem.getUnitOfMeasure().isEmpty()) {
+            throw new IllegalArgumentException("计量单位是必填项。");
+        }
+
+        if (mdItem.getItemOrProduct() == null || mdItem.getItemOrProduct().isEmpty()) {
+            throw new IllegalArgumentException("物料或产品是必填项。");
+        }
+
+        if (mdItem.getEnableFlag() == null || mdItem.getEnableFlag().isEmpty()) {
+            throw new IllegalArgumentException("启用标志是必填项。");
+        }
+
+        if (mdItem.getSafeStockFlag() == null || mdItem.getSafeStockFlag().isEmpty()) {
+            throw new IllegalArgumentException("安全库存标志是必填项。");
+        }
+    }
+
 }

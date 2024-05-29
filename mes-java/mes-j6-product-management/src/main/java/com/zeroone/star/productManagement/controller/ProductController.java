@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController implements ProductManageApis {
 
     @GetMapping("/list")
-    @ApiOperation(value = "查询关联供应商列表")
+    @ApiOperation(value = "获取产品列表")
     @Override
     public JsonVO<PageDTO<ProductDTO>> queryAll(ProductQuery query) {
         return null;
@@ -30,21 +30,21 @@ public class ProductController implements ProductManageApis {
     }
 
     @PostMapping("/update")
-    @ApiOperation(value = "查询关联供应商列表")
+    @ApiOperation(value = "更新产品")
     @Override
     public JsonVO<String> updateProduct(ProductDTO dto) {
         return null;
     }
 
     @PostMapping("/add")
-    @ApiOperation(value = "查询关联供应商列表")
+    @ApiOperation(value = "新增产品")
     @Override
     public JsonVO<String> addProduct(ProductDTO dto) {
         return null;
     }
 
     @GetMapping("/one")
-    @ApiOperation(value = "查询关联供应商列表")
+    @ApiOperation(value = "id查询产品")
     @Override
     public JsonVO<ProductDTO> queryByID(Long id) {
         return null;

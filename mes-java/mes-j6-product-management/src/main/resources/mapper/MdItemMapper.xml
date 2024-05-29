@@ -33,7 +33,7 @@
         where item_code = #{itemCode}
     </update>
 
-    <select id="selectMdItemList" parameterType="com.zeroone.star.project.j6.product_management.query.MdItemQuery" resultType="com.zeroone.star.productManagement.entity.MdItem">
+    <select id="selectMdItemList" parameterType="com.zeroone.star.project.j6.product_management.query.MdItemQuery" resultType="com.zeroone.star.productManagement.entity.ExportMdItem">
         select item_id, item_code, item_name, specification, unit_of_measure, item_or_product,
         item_type_id,item_type_code,item_type_name,enable_flag,safe_stock_flag,min_stock,max_stock, create_by, create_time, remark
         from md_item

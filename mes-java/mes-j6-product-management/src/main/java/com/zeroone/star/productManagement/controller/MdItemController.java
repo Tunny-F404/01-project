@@ -1,6 +1,6 @@
 package com.zeroone.star.productManagement.controller;
 
-import com.zeroone.star.productManagement.entity.MdItem;
+import com.zeroone.star.productManagement.entity.ExportMdItem;
 import com.zeroone.star.productManagement.service.IMdItemService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@Api(tags = "物料管理-导入,导出,导入模板")
+@Api(tags = "产品导入,导出")
 @RequestMapping("/mes/md/mditem")
 public class MdItemController implements MdItemApis {
     @Autowired
@@ -38,7 +38,7 @@ public class MdItemController implements MdItemApis {
     @PostMapping(value = "/export", produces = "application/octet-stream")
     @ApiOperation(value = "导出物料产品列表")
     public ResponseEntity<byte[]> exportToExcel(MdItemQuery mdItemQuery) {
-        List<MdItem> items = iMdItemService.selectMdItemList(mdItemQuery);
+        List<ExportMdItem> items = iMdItemService.selectMdItemList(mdItemQuery);
         return iMdItemService.exportToExcel(items);
     }
 

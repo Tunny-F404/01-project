@@ -1,5 +1,6 @@
 package com.zeroone.star.productManagement.mapper;
 
+import com.zeroone.star.productManagement.entity.ExportMdItem;
 import com.zeroone.star.productManagement.entity.MdItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.project.j6.product_management.query.MdItemQuery;
@@ -22,7 +23,7 @@ public interface MdItemMapper extends BaseMapper<MdItem> {
      * @param mdItemQuery 查询条件
      * @return 列表
      */
-    List<MdItem> selectMdItemList(MdItemQuery mdItemQuery);
+    List<ExportMdItem> selectMdItemList(MdItemQuery mdItemQuery);
 
     MdItem checkItemCodeUnique(MdItem mdItem);
 

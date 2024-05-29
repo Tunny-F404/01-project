@@ -23,11 +23,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("md_item")
-public class MdItem implements Serializable {
+public class ExportMdItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ExcelIgnore
+    @ExcelProperty("物料ID")
     @TableId(value = "item_id", type = IdType.AUTO)
     private Long itemId;
 
@@ -82,17 +82,17 @@ public class MdItem implements Serializable {
     @ExcelIgnore
     private Integer attr4;
 
-    @ExcelIgnore
+    @ExcelProperty("创建者")
     private String createBy;
 
     @TableField(fill = FieldFill.INSERT)
-    @ExcelIgnore
+    @ExcelProperty("创建时间")
     private LocalDateTime createTime;
 
-    @ExcelIgnore
+    @ExcelProperty("更新者")
     private String updateBy;
 
-    @ExcelIgnore
+    @ExcelProperty("更新时间")
     private LocalDateTime updateTime;
 
 
