@@ -8,20 +8,20 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zeroone.star.orgstructure.entity.PostDO;
-import com.zeroone.star.orgstructure.entity.RoleDo;
-import com.zeroone.star.orgstructure.entity.UserRoleDO;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zeroone.star.orgstructure.entity.RoleDO;
+import com.zeroone.star.orgstructure.entity.RoleDO;
+import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.orgstructure.mapper.RoleMapper;
-import com.zeroone.star.orgstructure.mapper.UserRoleMapper;
+import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
+import com.zeroone.star.project.j2.orgstructure.dto.role.*;
+import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
+import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -35,15 +35,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.zeroone.star.orgstructure.mapper.UserRoleMapper;
 
-import javax.annotation.Resource;
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * role对应的MapStructMapper接口
@@ -71,7 +71,7 @@ interface MsRoleMapper {
  */
 @Service
 @Slf4j
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements RoleService {
 
     @Autowired
     RoleMapper roleMapper;
@@ -84,6 +84,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Resource
     private MsRoleMapper msRoleMapper;
+
+    @Resource
+    private UserConvertMapper userConvertMapper;
 
     /**
      * 查询全部角色列表
@@ -157,7 +160,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public Integer addRole(@RequestBody RoleAddDto roleDTO) {
-        RoleDo roleDo = new RoleDo();
+        RoleDO roleDO = new RoleDO();
         System.out.println(roleDTO.toString());
         //复制给Do
         BeanUtil.copyProperties(roleDTO, roleDo, true);

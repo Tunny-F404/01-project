@@ -3,10 +3,10 @@ package com.zeroone.star.orgstructure.service;
 import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.project.components.user.UserDTO;
 
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.UserRoleDTO;
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.role.*;
+import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
+import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,4 +86,15 @@ public interface RoleService {
      * 导出角色
      * */
     public ResponseEntity<byte[]> downloadExcel();
+
+
+    List<RoleListDTO> listRoles();
+
+    PageDTO<RoleListDTO> listPageRoles(RoleConditionQuery condition);
+
+    RoleDTO getById(Integer id);
+
+    RolePermissionsDTO getPermissions (Integer id);
+
+    int updatePermissions (RolePermissionsQuery rolePermissionsQuery);
 }
