@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2022/10/25 14:23:49
+ @Date: 2022/10/25 14:21:55
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,21 +17,23 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _EQUIPMENT_DAO_
-#define _EQUIPMENT_DAO_
-#include "BaseDAO.h"
+#ifndef _SAMPLE_MAPPER_
+#define _SAMPLE_MAPPER_
+
+#include "Mapper.h"
 #include "../../domain/do/equipment/EquipmentDO.h"
-#include "../../domain/query/equipment/EquipmentQuery.h"
 
 /**
- * 示例表数据库操作实现
+ * 示例表字段匹配映射
  */
-class EquipmentDAO : public BaseDAO
+class EquipmentMapper : public Mapper<EquipmentDO>
 {
 public:
-	// 统计数据条数
-	uint64_t count(const EquipmentQuery::Wrapper& query);
-	// 分页查询数据
-	list<EquipmentDO> selectWithPage(const EquipmentQuery::Wrapper& query);
+	EquipmentDO mapper(ResultSet* resultSet) const override
+	{
+		EquipmentDO data;
+		return data;
+	}
 };
-#endif // !_EQUIPMENT_DAO_
+
+#endif // !_SAMPLE_MAPPER_
