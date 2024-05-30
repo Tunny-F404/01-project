@@ -7,13 +7,9 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.j3.dto.SysDictDataDTO;
 import com.zeroone.star.project.j3.vo.DictDataNameVO;
-import cn.hutool.core.date.DateTime;
-import com.alibaba.excel.EasyExcel;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
-import com.zeroone.star.project.components.poi.ExcelComponent;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j3.dto.dict.SysDictDataDetailDTO;
 import com.zeroone.star.project.j3.dto.dict.SysDictDataExportDTO;
@@ -21,7 +17,6 @@ import com.zeroone.star.project.j3.dto.dict.SysDictDataListDTO;
 import com.zeroone.star.project.j3.query.dict.SysDictDataQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanager.entity.SysDictData;
-import com.zeroone.star.sysmanager.entity.SysDictType;
 import com.zeroone.star.sysmanager.mapper.SysDictDataMapper;
 import com.zeroone.star.sysmanager.service.ISysDictDataService;
 import org.mapstruct.Mapper;
@@ -40,16 +35,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * <p>

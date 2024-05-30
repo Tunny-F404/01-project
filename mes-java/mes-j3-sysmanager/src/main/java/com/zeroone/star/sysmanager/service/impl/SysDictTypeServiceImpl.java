@@ -1,10 +1,8 @@
 package com.zeroone.star.sysmanager.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zeroone.star.project.j3.dto.InsertDictTypeDTO;
 import com.zeroone.star.project.j3.vo.DictTypeNameVO;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.dto.PageDTO;
