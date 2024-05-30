@@ -95,15 +95,18 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
             if (planlist.isEmpty()) {
                 return ResponseEntity.notFound().build();
             }
+            //输出流，用于将数据写入到一个字节数组中,捕获 EasyExcel 导出操作生成的Excel文件的字节数据
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             EasyExcelComponent easyExcelComponent = new EasyExcelComponent();
             try {
-                //使用easyExcelComponent的export方法将clientList中的数据导出到Excel文件中
+                //使用easyExcelComponent的export方法将clientList中的数据导出到输出流中
                 easyExcelComponent.export("计划列表", os, CalPlan.class, planlist);
                 byte[] bytes = os.toByteArray();
                 String filename = "scheduleplans-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
                 HttpHeaders header = new HttpHeaders();
+                //指定响应体应该如何被处理,"attachment" 表示响应体应该被下载为一个文件
                 header.setContentDispositionFormData("attachment", filename);
+               // 设置响应头，指示响应体是一个二进制流，通常用于文件下载。
                 header.setContentType(MediaType.APPLICATION_OCTET_STREAM);
                 return new ResponseEntity<>(bytes, header, HttpStatus.CREATED);
             } catch (IOException e) {
