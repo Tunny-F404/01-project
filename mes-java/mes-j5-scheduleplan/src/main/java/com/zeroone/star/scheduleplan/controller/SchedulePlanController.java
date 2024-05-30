@@ -13,8 +13,8 @@ import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.Min;
@@ -49,7 +49,7 @@ public class SchedulePlanController implements SchedulePlanApis {
     @ApiOperation("添加计划")
     @PostMapping("add-plan")
     public JsonVO<Integer> addPlan(AddPlanDTO condition) {
-        return null;
+        return calPlanService.addPlan(condition) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
     @ApiOperation("修改计划")

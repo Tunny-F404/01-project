@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
@@ -18,20 +19,26 @@ import javax.annotation.Resource;
 @Mapper(componentModel = "spring")
 interface MsPlanMapper {
 
-
     /**
      * 计划实体类转计划详情VO
      * @param calPlan 计划实体类
-     * @return 计划详情VO
+     * @return PlanVO 计划详情VO
      */
     PlanVO planToPlanVO(CalPlan calPlan);
 
     /**
      * 计划实体类转计划列表VO
      * @param calPlan 计划实体类
-     * @return 计划列表VO
+     * @return PlanListVO 计划列表VO
      */
     PlanListVO planToPlanListVO(CalPlan calPlan);
+
+    /**
+     * 添加计划DTO转计划实体类
+     * @param addPlanDTO
+     * @return CalPlan 计划实体类
+     */
+    CalPlan addPlanDTOToPlan(AddPlanDTO addPlanDTO);
 
 }
 /**
@@ -72,11 +79,17 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
         return msPlanMapper.planToPlanVO(calPlan);
     }
 
+
+    @Override
+    public boolean addPlan(AddPlanDTO condition) {
+        CalPlan plan = msPlanMapper.addPlanDTOToPlan(condition);
+        return baseMapper.insert(plan) > 0;
+    }
 //    @Override
-//    public TeamDTO queryTeamDetails(Long teamId) {
-//        // 将数据查询出
-//        CalTeam calTeam = baseMapper.selectById(teamId);
-//        // 转为DTO并返回
-//        return msTeamMapper.teamToTeamDTO(calTeam);
+//    public boolean addPlan(AddPlanDTO condition) {
+//        CalPlan plan = msPlanMapper.addPlanDTOToPlan(condition);
+//        return baseMapper.insert(plan) > 0;//判断插入条数是否大于0
 //    }
+
+
 }
