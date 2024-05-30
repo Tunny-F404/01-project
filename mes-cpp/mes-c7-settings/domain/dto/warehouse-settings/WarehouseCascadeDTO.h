@@ -45,5 +45,5 @@ public:
 	}
 };
 
-#include OATPP_CODEGEN_END(DTO)
+#include OATPP_CODEGEN_END(DTO) 
 #endif // !_WAREHOUSECASCADEDTO_

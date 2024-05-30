@@ -35,7 +35,7 @@ class GetAllDetailsDTO : public oatpp::DTO
 		info->description = ZH_WORDS_GETTER("warehouse.field.warehouse_id");
 	}
 	// ²Ö¿â±àÂë
-	DTO_FIELD(UInt64, warehouse_code);
+	DTO_FIELD(String, warehouse_code);
 	DTO_FIELD_INFO(warehouse_code) {
 		info->description = ZH_WORDS_GETTER("warehouse.field.warehouse_code");
 	}
@@ -63,26 +63,6 @@ class GetAllDetailsDTO : public oatpp::DTO
 	DTO_FIELD(String, remark);
 	DTO_FIELD_INFO(remark) {
 		info->description = ZH_WORDS_GETTER("warehouse.field.remark");
-	}
-	// Ô¤Áô×Ö¶Î1
-	DTO_FIELD(String, attr1);
-	DTO_FIELD_INFO(attr1) {
-		info->description = ZH_WORDS_GETTER("warehouse.field.attr1");
-	}
-	// Ô¤Áô×Ö¶Î2
-	DTO_FIELD(String, attr2);
-	DTO_FIELD_INFO(attr2) {
-		info->description = ZH_WORDS_GETTER("warehouse.field.attr2");
-	}
-	// Ô¤Áô×Ö¶Î3
-	DTO_FIELD(UInt64, attr3);
-	DTO_FIELD_INFO(attr3) {
-		info->description = ZH_WORDS_GETTER("warehouse.field.attr3");
-	}
-	// Ô¤Áô×Ö¶Î4
-	DTO_FIELD(UInt64, attr4);
-	DTO_FIELD_INFO(attr4) {
-		info->description = ZH_WORDS_GETTER("warehouse.field.attr4");
 	}
 	// ´´½¨Õß
 	DTO_FIELD(String, create_by);

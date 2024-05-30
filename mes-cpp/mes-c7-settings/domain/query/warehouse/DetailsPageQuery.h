@@ -31,7 +31,7 @@ class DetailsPageQuery : public PageQuery
 {
 	DTO_INIT(DetailsPageQuery, PageQuery);
 	// ²Ö¿â±àÂë
-	DTO_FIELD(UInt64, warehouse_code);
+	DTO_FIELD(String, warehouse_code);
 	DTO_FIELD_INFO(warehouse_code) {
 		info->description = ZH_WORDS_GETTER("warehouse.field. warehouse_code");
 	}

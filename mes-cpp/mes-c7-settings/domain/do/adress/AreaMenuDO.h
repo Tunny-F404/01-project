@@ -27,11 +27,11 @@
 class AreaMenuDO
 {
 	// 唯一编号
-	CC_SYNTHESIZE(uint64_t, area_id, Area_id);
+	CC_SYNTHESIZE(string, area_id, Area_id);
 	// 库位编码
 	CC_SYNTHESIZE(string,area_code,Area_code);
 	//库位名称
-	/ CC_SYNTHESIZE(string, area_name, Area_name);
+	CC_SYNTHESIZE(string, area_name, Area_name);
 	// 所在库区id
 	CC_SYNTHESIZE(string,location_id,Location_id);
 	//// 面积
@@ -41,7 +41,7 @@ class AreaMenuDO
 
 public:
 	AreaMenuDO() {}
-	AreaMenuDO(uint64_t area_id, string area_code, string area_name, string location_id)
+	AreaMenuDO(string area_id, string area_code, string area_name, string location_id)
 	{
 		this->area_id = area_id;
 		this->area_code =area_code;
