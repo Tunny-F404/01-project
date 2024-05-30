@@ -30,6 +30,6 @@ public interface HolidaySettingsApis {
      * @param condition
      * @return 返回状态码
      */
-    public JsonVO<ResultStatus> setHoliday(SettingHolidayQuery condition);
+    public JsonVO<Boolean> setHoliday(SettingHolidayQuery condition);
 
 }

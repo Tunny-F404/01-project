@@ -45,9 +45,9 @@ public class HoildaySettingController implements HolidaySettingsApis {
     @PostMapping("/set")
     @ApiOperation("设置节假日配置")
     @Override
-    public JsonVO<ResultStatus> setHoliday(SettingHolidayQuery condition) {
+    public JsonVO<Boolean> setHoliday(SettingHolidayQuery condition) {
         calHolidayService.setHoliday(condition);
-        return JsonVO.success(ResultStatus.SUCCESS);
+        return JsonVO.success(true);
 
 
     }

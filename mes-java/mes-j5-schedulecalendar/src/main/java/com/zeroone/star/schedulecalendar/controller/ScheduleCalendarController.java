@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @description: 排班日历 查询
@@ -36,26 +37,26 @@ public class ScheduleCalendarController implements ScheduleCalendarApis {
     @GetMapping("/list-by-type")
     @ApiOperation("获取指定班组类型排班计划")
     @Override
-    public JsonVO<ScheduleCalendarDTO> listScheduleByType(ScheduleTypeQuery condition) {
+    public JsonVO<List<ScheduleCalendarDTO>> listScheduleByType(ScheduleTypeQuery condition) {
 
-        calTeamshiftService.listSchedule(condition);
-        return  JsonVO.success(null);
+        List<ScheduleCalendarDTO> scheduleCalendarDTOList = calTeamshiftService.listSchedule(condition);
+        return  JsonVO.success(scheduleCalendarDTOList);
     }
     @GetMapping("/list-by-team")
     @ApiOperation("获取指定班组排班计划")
     @Override
-    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleTeamQuery condition) {
+    public JsonVO<List<ScheduleCalendarDTO>> listScheduleByTeam(ScheduleTeamQuery condition) {
 
-        calTeamshiftService.listSchedule(condition);
-        return null;
+        List<ScheduleCalendarDTO> scheduleCalendarDTOList = calTeamshiftService.listSchedule(condition);
+        return JsonVO.success(scheduleCalendarDTOList);
     }
     @GetMapping("/list-by-user")
     @ApiOperation("获取指定人员排班计划")
     @Override
-    public JsonVO<ScheduleCalendarDTO> listScheduleByTeam(ScheduleUserQuery condition) {
+    public JsonVO<List<ScheduleCalendarDTO>> listScheduleByTeam(ScheduleUserQuery condition) {
 
-        calTeamshiftService.listSchedule(condition);
-        return null;
+        List<ScheduleCalendarDTO> scheduleCalendarDTOList = calTeamshiftService.listSchedule(condition);
+        return JsonVO.success(scheduleCalendarDTOList);
     }
 
 
