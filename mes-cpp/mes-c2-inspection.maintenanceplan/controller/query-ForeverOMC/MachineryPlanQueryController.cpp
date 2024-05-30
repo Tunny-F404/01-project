@@ -19,7 +19,7 @@ MachineryListPageJsonVO::Wrapper MachineryPlanQueryController::execQueryMachiner
 
 MachineryPlanPageJsonVO::Wrapper MachineryPlanQueryController::execQueryMachineryPlan(const MachineryPlanQuery::Wrapper& query)
 {
-	return {};
+	
 	////以上是原本内容，暂时注释，以下是abf的测试
 	//// 定义一个Service
 	//int a = 0;
