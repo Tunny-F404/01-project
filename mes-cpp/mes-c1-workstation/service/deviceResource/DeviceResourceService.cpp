@@ -20,39 +20,21 @@
 #include "DeviceResourceService.h"
 #include "../../dao/deviceResource/DeviceResourceDAO.h"
 
-EquipmentPageDTO::Wrapper EquipmentService::listAll(const EquipmentQuery::Wrapper& query)
+oatpp::List<DeviceResourceDTO::Wrapper> DeviceResourceService::listAll()
 {
 	// 构建返回对象
-	auto pages = EquipmentPageDTO::createShared();
-	pages->pageIndex = query->pageIndex;
-	pages->pageSize = query->pageSize;
+	auto listDeviceDTO = oatpp::List<DeviceResourceDTO::Wrapper>::createShared();
 
-	// 查询数据总条数
-	EquipmentDAO dao;
-	uint64_t count = dao.count(query);
-	if (count <= 0)
-	{
-		return pages;
-	}
-
-	// 分页查询数据
-	pages->total = count;
-	pages->calcPages();
-	list<EquipmentDO> result = dao.selectWithPage(query);
+	DeviceResourceDAO dao;
+	list<DeviceResourceDO> result = dao.selectWithList();
 	// 将DO转换成DTO
-	for (EquipmentDO sub : result)
+	for (DeviceResourceDO sub : result)
 	{
-		auto dto = EquipmentDTO::createShared();
-		// 		dto->id = sub.getId();
-		// 		dto->name = sub.getName();
-		// 		dto->sex = sub.getSex();
-		// 		dto->age = sub.getAge();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, equipmentCode, EquipmentCode, equipmentName, EquipmentName, brand, Brand,
-			specificationsAndModels, SpecificationsAndModels, equipmentStatus, EquipmentStatus, createTime, CreateTime)
-			pages->addData(dto);
-
+		auto dto = DeviceResourceDTO::createShared();
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, equipmentCode, EquipmentCode)
+			listDeviceDTO->push_back(dto);
 	}
-	return pages;
+	return listDeviceDTO;
 }
 
 

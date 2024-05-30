@@ -25,12 +25,12 @@
 /**
  * 示例表数据库操作实现
  */
-class EquipmentDAO : public BaseDAO
+class DeviceResourceDAO : public BaseDAO
 {
 public:
 	// 统计数据条数
-	uint64_t count(const EquipmentQuery::Wrapper& query);
+	//uint64_t count(const EquipmentQuery::Wrapper& query);
 	// 分页查询数据
-	list<EquipmentDO> selectWithPage(const EquipmentQuery::Wrapper& query);
+	list<DeviceResourceDO> selectWithList();
 };
 #endif // !_SAMPLE_DAO_

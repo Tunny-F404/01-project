@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2022/10/25 11:08:56
+ @Date: 2022/10/25 11:52:32
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,21 +17,27 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DEVICE_RESOURCE_SERVICE_
-#define _DEVICE_RESOURCE_SERVICE_
-#include <list>
-#include "domain/vo/deviceResource/DeviceResourceVO.h"
-#include "domain/dto/deviceResource/DeviceResourceDTO.h"
+#ifndef _DEVICE_RESOURCE_DO_
+#define _DEVICE_RESOURCE_DO_
+#include "../DoInclude.h"
 
 /**
- * 设备资源服务接口
+ * 示例数据库实体类
  */
-class DeviceResourceService
+class DeviceResourceDO
 {
+	// 设备编码
+	CC_SYNTHESIZE(string, equipmentCode, EquipmentCode);
+	// 设备名称
+	CC_SYNTHESIZE(string, equipmentName, EquipmentName);
+	//数量
+	CC_SYNTHESIZE(string, count, count);
 public:
-	// 直接查集合
-	oatpp::List<DeviceResourceDTO::Wrapper> listAll();
+	DeviceResourceDO() {
+		equipmentCode = "";
+		equipmentName = "";
+		count = "";
+	}
 };
 
-#endif // !_EQUIPMENT_SERVICE_
-
+#endif // !_EQUIPMENT_DO_

@@ -1,4 +1,4 @@
-pragma once
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
@@ -17,23 +17,21 @@ pragma once
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DEVICE_RESOURCE_CONTROLLER_
-#define _DEVICE_RESOURCE_CONTROLLER_
+#ifndef _DEVICERESOURCE_CONTROLLER_
+#define _DEVICERESOURCE_CONTROLLER_
 
 #include "ApiHelper.h"
 #include "ServerInfo.h"
-#include "../../domain/vo/equipment/EquipmentTypeTreeVO.h"
-#include "../../domain/query/equipment/EquipmentQuery.h"
-#include "../../domain/vo/deviceResource/DeviceResourcetVO.h"
+#include "../../domain/vo/deviceResource/DeviceResourceVO.h"
 
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
 /**
- * 示例控制器，演示基础接口的使用
+ * 设备资源控制器，演示基础接口的使用
  */
-	class DeviceResourceController : public oatpp::web::server::api::ApiController // 1 继承控制器
+class DeviceResourceController : public oatpp::web::server::api::ApiController // 1 继承控制器
 {
 	// 2 定义控制器访问入口
 	API_ACCESS_DECLARE(DeviceResourceController);
@@ -50,21 +48,18 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(DeviceResourcePageVO);
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
-		// 定义其他查询参数描述
-		//API_DEF_ADD_QUERY_PARAMS(String, "equimentCode", ZH_WORDS_GETTER("equipmentQuery.equimentCode"), "M0024", false);
-		//API_DEF_ADD_QUERY_PARAMS(String, "equimentName", ZH_WORDS_GETTER("equipmentQuery.equimentName"), "测试人员", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/deviceResource/getDeviceResourcetList", getDeviceResourcetList, null, API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/deviceResource/getDeviceResourcetList", getDeviceResourcetList, API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		//API_HANDLER_QUERY_PARAM(equipmentQuery, EquipmentQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(executGetDeviceResourcetList(null, authObject->getPayload()));
+		API_HANDLER_RESP_VO(execGetDeviceResourceList(authObject->getPayload()));
 	}
 
 private:
-	// 3.3 设备资源分页查询数据
-	DeviceResourcePageVO::Wrapper executGetDeviceResourcetList( const PayloadDTO& payload);
+	// 3.3 设备资源查询列表数据
+	DeviceResourcePageVO::Wrapper execGetDeviceResourceList( const PayloadDTO& payload);
 };
 
 // 0 取消API控制器使用宏

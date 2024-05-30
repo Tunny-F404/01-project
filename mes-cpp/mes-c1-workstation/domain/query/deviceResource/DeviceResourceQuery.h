@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2022/10/25 11:08:56
+ @Date: 2022/10/25 11:36:29
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,21 +17,21 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DEVICE_RESOURCE_SERVICE_
-#define _DEVICE_RESOURCE_SERVICE_
-#include <list>
-#include "domain/vo/deviceResource/DeviceResourceVO.h"
-#include "domain/dto/deviceResource/DeviceResourceDTO.h"
+#ifndef _DEVICE_RESOURCE_QUERY_
+#define _DEVICE_RESOURCE_QUERY_
+
+#include "../../GlobalInclude.h"
+#include "domain/query/PageQuery.h"
+
+#include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 设备资源服务接口
+ * 设备分页查询对象
  */
-class DeviceResourceService
+class DeviceResourceQuery : public PageQuery
 {
-public:
-	// 直接查集合
-	oatpp::List<DeviceResourceDTO::Wrapper> listAll();
+	DTO_INIT(DeviceResourceQuery, PageQuery);
 };
 
-#endif // !_EQUIPMENT_SERVICE_
-
+#include OATPP_CODEGEN_END(DTO)
+#endif // !_DEVICE_RESOURCE_QUERY_

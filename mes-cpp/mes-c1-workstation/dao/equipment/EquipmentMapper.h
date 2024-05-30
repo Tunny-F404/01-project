@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _SAMPLE_MAPPER_
-#define _SAMPLE_MAPPER_
+#ifndef _EQUIPMENT_MAPPER_
+#define _EQUIPMENT_MAPPER_
 
 #include "Mapper.h"
 #include "../../domain/do/equipment/EquipmentDO.h"
@@ -36,4 +36,4 @@ public:
 	}
 };
 
-#endif // !_SAMPLE_MAPPER_
+#endif // !_EQUIPMENT_MAPPER_

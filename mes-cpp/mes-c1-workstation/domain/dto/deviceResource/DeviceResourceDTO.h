@@ -48,7 +48,7 @@ class DeviceResourceDTO : public oatpp::DTO
 };
 
 /**
- * 示例分页传输对象
+ * 设备资源分页传输对象
  */
 class DeviceResourcePageDTO : public PageDTO<DeviceResourceDTO::Wrapper>
 {
