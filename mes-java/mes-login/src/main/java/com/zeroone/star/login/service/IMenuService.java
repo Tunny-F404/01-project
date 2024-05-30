@@ -2,6 +2,7 @@ package com.zeroone.star.login.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.login.entity.Menu;
+import com.zeroone.star.login.entity.MenuDO;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.vo.login.MenuTreeVO;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * </p>
  * @author 阿伟
  */
-public interface IMenuService extends IService<Menu> {
+public interface IMenuService extends IService<MenuDO> {
     /**
      * 通过角色名称获取，菜单资源
      * @param roleNames 角色名称

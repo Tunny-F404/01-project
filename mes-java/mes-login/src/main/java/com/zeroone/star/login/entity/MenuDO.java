@@ -13,17 +13,17 @@ import lombok.Data;
 @TableName("sys_menu")
 public class MenuDO {
 	//菜单ID
-	@TableId(value = "menu_id",type = IdType.AUTO)
-	private Long menu_id;
+	@TableId(value = "menu_id")
+	private Long menuId;
 	//菜单名称
 	@TableField(value = "menu_name")
-	private String menu_name;
+	private String menuName;
 	//父菜单ID
 	@TableField(value = "parent_id")
-	private Long parent_id;
+	private Long parentId;
 	//显示顺序
 	@TableField(value = "order_num")
-	private Integer order_num;
+	private Integer orderNum;
 	//路由地址
 	@TableField(value = "path")
 	private String path;
@@ -35,13 +35,13 @@ public class MenuDO {
 	private String query;
 	//是否为外链（0是 1否）
 	@TableField(value = "is_frame")
-	private Integer is_frame;
+	private Integer isFrame;
 	//是否缓存（0缓存 1不缓存）
 	@TableField(value = "is_cache")
-	private Integer is_cache;
+	private Integer isCache;
 	//菜单类型（M目录 C菜单 F按钮）
 	@TableField(value = "menu_type")
-	private String menu_type;
+	private String menuType;
 	//菜单状态（0显示 1隐藏）
 	@TableField(value = "visible")
 	private String visible;
@@ -56,14 +56,14 @@ public class MenuDO {
 	private String icon;
 	//创建者
 	@TableField(value = "create_by")
-	private String create_by;
+	private String createBy;
 	//创建时间
 	@TableField(value = "create_time")
-	private String create_time;
+	private String createTime;
 	//更新者
 	@TableField(value = "update_by")
-	private String update_by;
+	private String updateBy;
 	//更新时间
 	@TableField(value = "update_time")
-	private String update_time;
+	private String updateTime;
 }

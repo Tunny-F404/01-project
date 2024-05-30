@@ -1,6 +1,7 @@
 package com.zeroone.star.project.j1.syslogin.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.zeroone.star.project.j1.syslogin.vo.currUserInfovo.PostVO;
 import com.zeroone.star.project.j1.syslogin.vo.currUserInfovo.RoleVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -38,9 +39,13 @@ public class CurrentUserInfoVO {
 
 	// 岗位名称
 	@ApiModelProperty(value = "岗位名称")
-	public String post_name;
+	public List<PostVO> postInfo = new ArrayList<>();
 
 	public void setRoleInfo(RoleVO roleVO) {
 		this.roleInfo.add(roleVO);
+	}
+
+	public void setPost(PostVO postVO) {
+		this.postInfo.add(postVO);
 	}
 }

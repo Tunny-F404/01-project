@@ -9,5 +9,5 @@ import lombok.Data;
 public class PostVO {
 
 	@ApiModelProperty(value = "岗位名称")
-	public String post_name;
+	public String postName;
 }

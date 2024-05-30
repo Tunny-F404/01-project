@@ -8,6 +8,7 @@ import com.zeroone.star.login.mapper.CurrUserMapper;
 import com.zeroone.star.login.service.CurrUserInfoService;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.j1.syslogin.vo.CurrentUserInfoVO;
+import com.zeroone.star.project.j1.syslogin.vo.currUserInfovo.PostVO;
 import com.zeroone.star.project.j1.syslogin.vo.currUserInfovo.RoleVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class CurrUserInfoServiceImpl implements CurrUserInfoService {
 		UserDO user = currUserMapper.selectUser(userId);                            //用户信息
 		DeptDO dept = currUserMapper.selectDept(userId);           				    //部门信息
 		List<RoleDO> roleDOList = currUserMapper.selectRole(userId);				//角色信息
-		PostDO post = currUserMapper.selectPost(userId);                            //岗位信息
+		List<PostDO> postDOList = currUserMapper.selectPost(userId);                //岗位信息
 		//封装当前用户信息
 		if (user != null) {
 			currentUserInfoVO.setAvatar(user.getAvatar());
@@ -45,17 +46,22 @@ public class CurrUserInfoServiceImpl implements CurrUserInfoService {
 			currentUserInfoVO.setDept_name(dept.getDeptName());
 		}
 		//封装角色信息
-		RoleVO roleVO = new RoleVO();
 		if (roleDOList.size() != 0) {
 			for (RoleDO roleDO : roleDOList){
+				RoleVO roleVO = new RoleVO();
 				BeanUtils.copyProperties(roleDO,roleVO);
 				currentUserInfoVO.setRoleInfo(roleVO);
 			}
 		}
 		//封装岗位信息
-		if (post != null) {
-			currentUserInfoVO.setPost_name(post.getPostName());
+		PostVO postVO = new PostVO();
+		if (postDOList.size() != 0){
+			for (PostDO postDO : postDOList){
+				BeanUtils.copyProperties(postDO,postVO);
+				currentUserInfoVO.setPost(postVO);
+			}
 		}
+
 		return currentUserInfoVO;
 	}
 }

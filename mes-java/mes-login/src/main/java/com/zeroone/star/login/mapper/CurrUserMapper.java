@@ -22,12 +22,6 @@ public interface CurrUserMapper extends BaseMapper {
 	//查询用户角色信息
 	List<RoleDO> selectRole(int userId);
 	//查询用户岗位信息
-	PostDO selectPost(Integer userId);
+	List<PostDO> selectPost(Integer userId);
 
-	/**
-	 * 当前用户菜单--学长已经实现
-	 * @param userId
-	 * @return
-	 */
-	/*List<MenuDO> selectMenu(int userId);*/
 }

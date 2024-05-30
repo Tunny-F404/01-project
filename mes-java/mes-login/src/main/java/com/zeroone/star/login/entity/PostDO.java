@@ -20,7 +20,7 @@ public class PostDO {
 	private String postCode;
 	// 岗位名称
 	@TableField(value = "post_name")
-	private String postName;
+	public String postName;
 	// 显示顺序
 	@TableField(value = "post_sort")
 	private Integer postSort;
