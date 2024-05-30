@@ -2,22 +2,31 @@ package com.zeroone.star.orgstructure.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
+import com.alibaba.cloud.commons.lang.StringUtils;
+import com.zeroone.star.orgstructure.entity.RoleDO;
+import com.zeroone.star.orgstructure.mapper.UserConvertMapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.zeroone.star.orgstructure.entity.RoleDo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.orgstructure.entity.UserRoleDO;
 import com.zeroone.star.orgstructure.mapper.RoleMapper;
-import com.zeroone.star.orgstructure.UserConvertMapper;
 import com.zeroone.star.orgstructure.mapper.UserRoleMapper;
 import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
-/*import com.zeroone.star.project.components.user.UserDTO;*/
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;
-import com.zeroone.star.project.j2.orgstructure.dto.role.UserRoleDTO;
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
+import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.role.*;
+import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
+import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import net.sf.cglib.core.Local;
+import org.mapstruct.Mapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -150,13 +159,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
      * @author 0xu0
      */
     @Override
-    public Integer addRole(@RequestBody RoleAddDto roleDTO) {
-        RoleDO roleDO = new RoleDO();
+    public Long addRole(@RequestBody RoleAddDto roleDTO) {
+        RoleDO roleDo = new RoleDO();
         System.out.println(roleDTO.toString());
         //复制给Do
         BeanUtil.copyProperties(roleDTO, roleDo, true);
         //设置创建者，时间
-        roleDo.setCreateTime(new Date());
+        roleDo.setCreateTime(LocalDateTime.now());
         roleDo.setDelFlag("0");//伪删除标志，0表示存在2表示删除
         UserDTO currentUser = null;
         try {
@@ -166,7 +175,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
         }
         roleDo.setCreateBy(currentUser.getUsername());
         roleMapper.insert(roleDo);
-        Integer roleId = roleDo.getRoleId();
+        Long roleId = roleDo.getRoleId();
         return roleId;
     }
 
@@ -179,13 +188,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
     public Integer modifyRoleStatus(@RequestBody RoleStatusModifyDto roleStatusModifyDto) throws Exception {
         UpdateWrapper updateRoleStatus = new UpdateWrapper();
         updateRoleStatus.eq("role_id", roleStatusModifyDto.getRoleId());
-        RoleDo roleDo = new RoleDo();
+       RoleDO roleDo = new RoleDO();
         //复制给Do
         BeanUtil.copyProperties(roleStatusModifyDto, roleDo, true);
         //设置创建者，时间
         UserDTO currentUser = userHolder.getCurrentUser();
         roleDo.setUpdateBy(currentUser.getUsername());
-        roleDo.setUpdateTime(new Date());
+        roleDo.setUpdateTime(LocalDateTime.now());
         //返回修改的主键值
         int update = roleMapper.update(roleDo, updateRoleStatus);
         if (update > 0) {
@@ -215,13 +224,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
     public Integer modifyRoleInfo(@RequestBody RoleModifyDto roleDTO) throws Exception {
         UpdateWrapper updateRoleInfo = new UpdateWrapper();
         updateRoleInfo.eq("role_id", roleDTO.getRoleId());
-        RoleDo roleDo = new RoleDo();
+        RoleDO roleDo = new RoleDO();
         //复制给Do
         BeanUtil.copyProperties(roleDTO, roleDo, true);
         //设置创建者，时间
         UserDTO currentUser = userHolder.getCurrentUser();
         roleDo.setUpdateBy(currentUser.getUsername());
-        roleDo.setUpdateTime(new Date());
+        roleDo.setUpdateTime(LocalDateTime.now());
         //返回修改的主键值
         return roleMapper.update(roleDo, updateRoleInfo);
     }
@@ -267,9 +276,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
     public ResponseEntity<byte[]> downloadExcel() {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.select("role_id", "role_name", "role_key", "role_sort", "data_scope", "status");
-        List<RoleDo> roles = roleMapper.selectList(queryWrapper);
+        List<RoleDO> roles = roleMapper.selectList(queryWrapper);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        excel.export("role", out, RoleDo.class, roles);
+        excel.export("role", out, RoleDO.class, roles);
         byte[] bytes = out.toByteArray();
         out.close();
         HttpHeaders headers = new HttpHeaders();

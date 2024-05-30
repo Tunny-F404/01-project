@@ -9,13 +9,8 @@ import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleListDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RolePermissionsDTO;
 import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
-import com.zeroone.star.project.j2.orgstructure.query.role.RoleQuery;
-import com.zeroone.star.project.query.PageQuery;
 import com.zeroone.star.project.vo.JsonVO;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -65,13 +60,14 @@ public interface RoleApis {
 
     /**
      * 添加角色
-     * @author 0xu0
+     *
      * @param roleDTO
      * @return
      * @author 0xu0
+     * @author 0xu0
      */
 
-    public JsonVO<Integer> addRole(@RequestBody @Valid RoleAddDto roleDTO);
+    public JsonVO<Long> addRole(@RequestBody @Valid RoleAddDto roleDTO);
     /***
      * 修改角色状态（角色页面，有个开关符号，控制停用和启用）
      * @author 0xu0

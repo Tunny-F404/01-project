@@ -29,7 +29,7 @@ public interface RoleService {
      */
 
     @ApiOperation("添加角色")
-    public Integer addRole(RoleAddDto roleDTO);
+    public Long addRole(RoleAddDto roleDTO);
 
     /***
      * 修改角色状态（角色页面，有个开关符号，控制停用和启用）

@@ -1,9 +1,7 @@
 package com.zeroone.star.orgstructure.controller;
 
 
-import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.orgstructure.service.RoleService;
-import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.*;
@@ -11,13 +9,13 @@ import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
 import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
 import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -106,39 +104,56 @@ public class RoleController implements RoleApis {
     }
     /**
      * 添加角色
-     * @author 0xu0
+     *
      * @param roleDTO
      * @return
+     * @author 0xu0
      */
     @PostMapping("add-Role")
     @ApiOperation("添加角色")
-    public JsonVO<RoleDTO> addRole(@RequestBody RoleDTO roleDTO){
-        return JsonVO.success(roleDTO);
+    public JsonVO<Long> addRole(@RequestBody @Valid RoleAddDto roleDTO) {
+        Long add = roleService.addRole(roleDTO);
+        if (add > 0) {
+            return JsonVO.success(add);
+        }
+        return JsonVO.fail(-1l);
     }
-
     /***
      * 修改角色状态（角色页面，有个开关符号，控制停用和启用）
      * @author 0xu0
-     * @param status
+     * @param roleStatusModifyDto
      * @return
      */
     @PostMapping("modify-RoleStatus")
     @ApiOperation("修改角色状态")
-    public JsonVO<String> modifyRoleStatus(@RequestParam String status){
-        return JsonVO.success(status);
+    public JsonVO<Integer> modifyRoleStatus(@RequestBody @Valid RoleStatusModifyDto roleStatusModifyDto){
+        Integer modify = null;
+        try {
+            modify = roleService.modifyRoleStatus(roleStatusModifyDto);
+            return JsonVO.success(modify);
+        } catch (Exception e) {
+            return JsonVO.fail(-1);
+        }
+//        if(modify>0){
+//            return JsonVO.success(modify);
+//        }
+//        return JsonVO.fail(modify);
     }
 
 
     /**
      * 删除角色，支持批量删除
      * @author 0xu0
-     * @param id
+     * @param ids
      * @return
      */
     @DeleteMapping("delete-Roles")
     @ApiOperation("删除角色")
-    public JsonVO<Long[]> deleteRoles(@RequestParam Long[] id){
-        return JsonVO.success(id);
+    public JsonVO<List<String>> deleteRoles(@RequestParam List<String> ids){
+        if(roleService.deleteRoles(ids)>0){
+            return JsonVO.success(ids);
+        }
+        return JsonVO.fail(ids);
     }
 
     /**
@@ -148,10 +163,19 @@ public class RoleController implements RoleApis {
      */
     @PostMapping("modify-RoleInfo")
     @ApiOperation("修改角色信息")
-    public JsonVO<RoleDTO> modifyRoleInfo(@RequestBody RoleDTO roleDTO){
-        return JsonVO.success(roleDTO);
+    public JsonVO<Integer> modifyRoleInfo(@RequestBody @Valid RoleModifyDto roleDTO){
+        Integer info = null;
+        try {
+            info = roleService.modifyRoleInfo(roleDTO);
+            return JsonVO.success(info);
+        } catch (Exception e) {
+            return JsonVO.fail(-1);
+        }
+//        if(info>0){
+//            return JsonVO.success(info);
+//        }
+//        return JsonVO.fail(info);
     }
-
     /*
      * 获取角色分配用户列表（条件+分页）
      * */
@@ -173,6 +197,7 @@ public class RoleController implements RoleApis {
     /*
      * 添加授权
      * */
+    @Override
     @PutMapping("addAuth")
     @ApiOperation("添加授权")
     public JsonVO<RoleDTO> addAuth(@RequestParam Long roleId, @RequestParam Long[] userIds) {
@@ -183,6 +208,7 @@ public class RoleController implements RoleApis {
     /*
      * 取消授权（支持批量）
      * */
+    @Override
     @DeleteMapping("cancel")
     @ApiOperation("批量取消授权")
     public JsonVO<Integer> cancelAuthUsers(@RequestParam Long roleId, @RequestParam Long[] userIds) {
@@ -193,6 +219,7 @@ public class RoleController implements RoleApis {
     /*
      * 导出角色
      * */
+    @Override
     @GetMapping(value = "export")
     @ApiOperation("导出角色")
     public ResponseEntity<byte[]> export() {
