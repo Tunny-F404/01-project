@@ -17,13 +17,6 @@ import java.util.List;
  * @since 2024-05-29
  */
 public interface IMdWorkshopService extends IService<MdWorkshop> {
-//    void Update(ShopSettingsDTO shopsettingsDTO);
-
-//    PageDTO<ShopSettingsDTO> getShopSettingsList(ShopSettingsQuery shopSettingsQuery);
-//
-//    ShopSettingsDTO getShopSettingsInfoByWorkShopId(Long workShopId);
-//
-//    List<String> getShopSettingNameList();
 
     PageDTO<ShopSettingsDTO> queryWorkshopList(ShopSettingsQuery shopSettingsQuery);
 
