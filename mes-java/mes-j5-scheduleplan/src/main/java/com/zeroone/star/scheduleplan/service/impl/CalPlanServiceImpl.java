@@ -1,16 +1,23 @@
 package com.zeroone.star.scheduleplan.service.impl;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
-import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.zeroone.star.scheduleplan.mapper.CalPlanMapper;
 import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import org.mapstruct.Mapper;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -74,7 +81,38 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
     }
 
     @Override
-    public ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition) {
+    public ResponseEntity<byte[]> exportSchPlan(List<Long> ids) {
+        //导出计划数据列表
+        List<CalPlan> planlist = new ArrayList<>();
+        //从导出id列表中依次取出id进行查询数据
+        for (Long id : ids) {
+            CalPlan plan = planMapper.selectById(id);
+            //查出数据不为空则将其加入数据列表
+            if (plan != null) {
+                planlist.add(plan);
+            }
+            //如果导出后没有数据->返回一个404 Not Found的HTTP响应
+            if (planlist.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            EasyExcelComponent easyExcelComponent = new EasyExcelComponent();
+            try {
+                //使用easyExcelComponent的export方法将clientList中的数据导出到Excel文件中
+                easyExcelComponent.export("计划列表", os, CalPlan.class, planlist);
+                byte[] bytes = os.toByteArray();
+                String filename = "scheduleplans-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
+                HttpHeaders header = new HttpHeaders();
+                header.setContentDispositionFormData("attachment", filename);
+                header.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+                return new ResponseEntity<>(bytes, header, HttpStatus.CREATED);
+            } catch (IOException e) {
+                // 记录日志并返回错误信息
+                log.error("导出Excel文件时发生错误", e);
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(("导出Excel文件时发生错误：" + e.getMessage()).getBytes());
+            }
+        }
         return null;
     }
 
