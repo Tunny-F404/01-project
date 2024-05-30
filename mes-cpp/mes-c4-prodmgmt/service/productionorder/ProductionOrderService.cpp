@@ -21,8 +21,8 @@
 #include "../../dao/productionorder/ProductionOrderDAO.h"
 #include "Macros.h"
 #include "ExcelComponent.h"
-
 #define TEST_EXCEL_SN ZH_WORDS_GETTER("productionorder.excel.sheet.s2")
+#include "FastDfsClient.h"
 ExportOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportOrderQuery::Wrapper& query)
 {
 	std::vector<std::vector<std::string>> data;
@@ -59,34 +59,40 @@ ExportOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportOrderQue
 		row.push_back(sub.getorderSource());
 		row.push_back(sub.getsourceCode());
 		ss.clear();
-		ss << sub.getproductId();
+		ss << to_string(sub.getproductId());
 		row.push_back(ss.str());
+		ss.str("");
 		row.push_back(sub.getproductCode());
 		row.push_back(sub.getproductName());
 		row.push_back(sub.getproductSpc());
 		row.push_back(sub.getunitOfMeasure());
 		row.push_back(sub.getbatchCode());
 		ss.clear();
-		ss << sub.getpQuantity();
+		ss <<to_string(sub.getpQuantity());
 		row.push_back(ss.str());
+		ss.str("");
 		data.push_back(row);
 		ss.clear();
-		ss << sub.getquantityProduced();
+		ss <<to_string( sub.getquantityProduced());
 		row.push_back(ss.str());
+		ss.str("");
 		ss.clear();
-		ss << sub.getquantityChanged();
+		ss << to_string(sub.getquantityChanged());
 		row.push_back(ss.str());
+		ss.str("");
 		ss.clear();
-		ss << sub.getquantityScheduled();
+		ss << to_string(sub.getquantityScheduled());
 		row.push_back(ss.str());
+		ss.str("");
 		ss.clear();
-		ss << sub.getclientId();
+		ss << to_string(sub.getclientId());
 		row.push_back(ss.str());
 		row.push_back(sub.getclientCode());
 		row.push_back(sub.getclientName());
 		ss.clear();
-		ss << sub.getvendorId();
+		ss << to_string(sub.getvendorId());
 		row.push_back(ss.str());
+		ss.str("");
 		row.push_back(sub.getvendorCode());
 		row.push_back(sub.getvendorName());
 		row.push_back(sub.getfinishDate());
@@ -96,35 +102,37 @@ ExportOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportOrderQue
 	}
 	// 插入表头
 	data.insert(data.begin(), {
-		ZH_WORDS_GETTER("excel.header.h1") ,
-		ZH_WORDS_GETTER("excel.header.h2") ,
-		ZH_WORDS_GETTER("excel.header.h3") ,
-		ZH_WORDS_GETTER("excel.header.h4") ,
-		ZH_WORDS_GETTER("excel.header.h5") ,
-		ZH_WORDS_GETTER("excel.header.h6") ,
-		ZH_WORDS_GETTER("excel.header.h7") ,
-		ZH_WORDS_GETTER("excel.header.h8") ,
-		ZH_WORDS_GETTER("excel.header.h9") ,
-		ZH_WORDS_GETTER("excel.header.h10") ,
-		ZH_WORDS_GETTER("excel.header.h11") ,
-		ZH_WORDS_GETTER("excel.header.h12") ,
-		ZH_WORDS_GETTER("excel.header.h13") ,
-		ZH_WORDS_GETTER("excel.header.h14") ,
-		ZH_WORDS_GETTER("excel.header.h15") ,
-		ZH_WORDS_GETTER("excel.header.h16") ,
-		ZH_WORDS_GETTER("excel.header.h17") ,
-		ZH_WORDS_GETTER("excel.header.h18") ,
-		ZH_WORDS_GETTER("excel.header.h19") ,
-		ZH_WORDS_GETTER("excel.header.h20") ,
-		ZH_WORDS_GETTER("excel.header.h21") ,
-		ZH_WORDS_GETTER("excel.header.h22") ,
-		ZH_WORDS_GETTER("excel.header.h23") ,
-		ZH_WORDS_GETTER("excel.header.h24") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h1") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h2") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h3") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h4") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h5") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h6") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h7") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h8") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h9") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h10") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h11") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h12") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h13") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h14") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h15") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h16") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h17") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h18") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h19") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h20") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h21") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h22") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h23") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h24") ,
 		});
 	excel.writeVectorToFile(fileName, sheetName, data);
+	FastDfsClient f("192.168.46.128", 22122);
+	f.uploadFile("./public/excel/workorder.xlsx");
 	return pages;
 }
-ExportBomOrderPageDTO::Wrapper ProductionBomOrderService::listAll(const ExportBomOrderQuery::Wrapper& query)
+ExportBomOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportBomOrderQuery::Wrapper& query)
 {
 	std::vector<std::vector<std::string>> data;
 	stringstream ss;
@@ -155,31 +163,34 @@ ExportBomOrderPageDTO::Wrapper ProductionBomOrderService::listAll(const ExportBo
 		pages->addData(dto);
 		std::vector<std::string> row;
 		ss.clear();
-		ss<<sub.getworkOrderId();
+		ss<<to_string(sub.getworkOrderId());
 		row.push_back(ss.str());
+		ss.str("");
 		ss.clear();
-		ss << sub.getitemId();
+		ss << to_string(sub.getitemId());
 		row.push_back(ss.str());
+		ss.str("");
 		row.push_back(sub.getitemCode());
 		row.push_back(sub.getitemName());
 		row.push_back(sub.getitemSpc());
 		row.push_back(sub.getunitOfMeasure());
 		row.push_back(sub.getitemOrProduct());
 		ss.clear();
-		ss << sub.getbQuantity();
+		ss << to_string(sub.getbQuantity());
 		row.push_back(ss.str());
+		ss.str("");
 		data.push_back(row);
 	}
 	// 插入表头
 	data.insert(data.begin(), {
-		ZH_WORDS_GETTER("excel.header.h25") ,
-		ZH_WORDS_GETTER("excel.header.h26") ,
-		ZH_WORDS_GETTER("excel.header.h27") ,
-		ZH_WORDS_GETTER("excel.header.h28") ,
-		ZH_WORDS_GETTER("excel.header.h29") ,
-		ZH_WORDS_GETTER("excel.header.h30") ,
-		ZH_WORDS_GETTER("excel.header.h31") ,
-		ZH_WORDS_GETTER("excel.header.h32") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h25") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h26") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h27") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h28") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h29") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h30") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h31") ,
+		ZH_WORDS_GETTER("productionorder.excel.header.h32") ,
 		});
 	excel.writeVectorToFile(fileName, sheetName, data);
 	return pages;

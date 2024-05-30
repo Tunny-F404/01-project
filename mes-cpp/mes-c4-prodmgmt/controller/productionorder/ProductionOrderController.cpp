@@ -34,7 +34,7 @@ ExportBomOrderPageJsonVO::Wrapper ProductionOrderController::execQueryBomOrderby
 {
 
 	// 定义一个Service
-	ProductionBomOrderService service;
+	ProductionOrderService service;
 	// 查询数据
 	auto result = service.listAll(query);
 	auto jvo = ExportBomOrderPageJsonVO::createShared();

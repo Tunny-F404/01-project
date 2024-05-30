@@ -71,7 +71,7 @@ uint64_t ProWorkOrderDAO::count(const ExportOrderQuery::Wrapper& query)
 std::list<ProWorkOrderDO> ProWorkOrderDAO::selectWithPage(const ExportOrderQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT workorder_code,workorder_name,workorder_type,order_source,source_code,product_id,product_code,product_name,product_spc,unit_of_measure,batch_code,quantity,quantity_produced,quantity_changed,quantity_scheduled,client_id,client_code,client_name,vendor_id,vendor_code,vendor_name,finish_date,request_date,status FROM pro_workorder";
+	sql << "SELECT workorder_code,workorder_name,workorder_type,order_source,source_code,product_id,product_code,product_name,product_spc,unit_of_measure,batch_code,quantity,quantity_produced,quantity_changed,quantity_scheduled,client_id,client_code,client_name,vendor_id,vendor_code,vendor_name,DATE_FORMAT(finish_date, '%Y-%m-%d'),DATE_FORMAT(request_date, '%Y-%m-%d'),status FROM pro_workorder";
 	ORDER_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	ProWorkOrderMapper mapper;

@@ -35,11 +35,6 @@ class ProductionOrderService
 public:
 	// 分页查询所有数据
 	ExportOrderPageDTO::Wrapper listAll(const ExportOrderQuery::Wrapper& query);
-};
-class ProductionBomOrderService
-{
-public:
-	// 通过工单编号分页查询所有数据
 	ExportBomOrderPageDTO::Wrapper listAll(const ExportBomOrderQuery::Wrapper& query);
 };
 #endif // !_ORDER_SERVICE_
