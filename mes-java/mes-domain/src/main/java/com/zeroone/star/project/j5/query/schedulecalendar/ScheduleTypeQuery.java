@@ -17,12 +17,9 @@ import java.time.LocalDate;
  **/
 @Data
 @ApiModel("获取指定班组排班计划")
-public class ScheduleTypeQuery {
+public class ScheduleTypeQuery extends ScheduleDate{
     @NotBlank(message = "班组类型不能为空")
     @ApiModelProperty(value = "班组类型", example = "201")
     private String teamId;
-
-    @ApiModelProperty(value = "日期", example = "2024-05-22")
-    private LocalDate date;
 
 }

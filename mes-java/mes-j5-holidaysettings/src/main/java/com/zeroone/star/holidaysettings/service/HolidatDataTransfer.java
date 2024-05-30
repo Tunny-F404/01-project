@@ -1,10 +1,8 @@
 package com.zeroone.star.holidaysettings.service;
 
-//import org.apache.ibatis.annotations.Mapper;
 import com.zeroone.star.holidaysettings.entity.CalHoliday;
 import com.zeroone.star.project.j5.dto.holidaysetting.HolidayDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

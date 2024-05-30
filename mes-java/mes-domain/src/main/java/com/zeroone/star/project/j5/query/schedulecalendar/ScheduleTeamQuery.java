@@ -18,12 +18,11 @@ import java.time.LocalDate;
 
 @Data
 @ApiModel("获取指定班组类型排班计划")
-public class ScheduleTeamQuery {
+public class ScheduleTeamQuery extends ScheduleDate{
     @NotBlank(message = "查询类型不能为空")
     @ApiModelProperty(value = "分类类型", example = "CNC")
     private String calendarType;
 
-    @ApiModelProperty(value = "日期", example = "2024-05-22")
-    private LocalDate date;
+
 
 }

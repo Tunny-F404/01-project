@@ -18,12 +18,9 @@ import java.time.LocalDate;
 
 @Data
 @ApiModel("获取指定人员排班计划")
-public class ScheduleUserQuery {
+public class ScheduleUserQuery extends ScheduleDate{
     @NotBlank(message = "人员id不能为空")
     @ApiModelProperty(value = "人员id", example = "341")
     private String userId;
-
-    @ApiModelProperty(value = "日期", example = "2024-05-22")
-    private LocalDate date;
 
 }

@@ -23,8 +23,8 @@ import java.util.List;
 public class ScheduleCalendarDTO {
         @ApiModelProperty(value = "日期", example = "2024-05-22")
         private LocalDate theDay;
-        @ApiModelProperty(value = "班次名称", example = "SINGLE")
-        private String shiftType;
+//        @ApiModelProperty(value = "班次名称", example = "SINGLE")
+//        private String shiftType;
         @ApiModelProperty(value = "排班情况 列表")
         private List<TeamShifts> teamShifts;
 }
