@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -38,34 +39,44 @@ public class MdWorkshopServiceImpl extends ServiceImpl<MdWorkshopMapper, MdWorks
     @Resource
     msMdWorkshopMapper msMdWorkshopMapper;
 
-//    @Override
-//    public void Update(GetShopSettingsDTO shopsettingsDTO) {
-//
-//    }
     //获取车间数据列表
     @Override
     public PageDTO<ShopSettingsDTO> queryWorkshopList(ShopSettingsQuery shopSettingsQuery) {
         Page<MdWorkshop> mdWorkshopPage = new Page<>(shopSettingsQuery.getPageIndex(),shopSettingsQuery.getPageSize());
-        QueryWrapper<MdWorkshop> wrapper = new QueryWrapper<MdWorkshop>()
-                .eq("MdWorkshop_code", shopSettingsQuery.getWorkshopCode())
-                .eq("work_name", shopSettingsQuery.getWorkshopName());
+        QueryWrapper<MdWorkshop> wrapper = new QueryWrapper<>();
+        if(shopSettingsQuery.getWorkshopCode() != null){
+            wrapper.eq("workshop_code", shopSettingsQuery.getWorkshopCode());
+        }
+        if(shopSettingsQuery.getWorkshopName() != null){
+            wrapper.eq("workshop_name", shopSettingsQuery.getWorkshopName());
+        }
+        //执行分页查询
         Page<MdWorkshop> result = baseMapper.selectPage(mdWorkshopPage, wrapper);
+        //返回dto数据
         return PageDTO.create(result, msMdWorkshopMapper::mdWorkshopToShopSettingsDTO);
     }
 
     //获取车间详细信息
     @Override
     public ShopSettingsDTO queryWorkshopInfo(Long workShopId) {
-        System.out.println(workShopId);
-        MdWorkshop MdWorkshop = baseMapper.selectById(workShopId);
-        return msMdWorkshopMapper.mdWorkshopToShopSettingsDTO(MdWorkshop);
+        //根据workshopId查询车间信息
+        MdWorkshop mdWorkshop = baseMapper.selectById(workShopId);
+        if(mdWorkshop == null){
+            throw new RuntimeException("查询结果为空");
+        }
+        //返回查询车间详细信息
+        return msMdWorkshopMapper.mdWorkshopToShopSettingsDTO(mdWorkshop);
     }
 
     //获取车间名称列表
     @Override
     public List<String> queryWorkshopNameList() {
+        //查询车间名称列表
         List<String> shopSettingNameList = baseMapper.queryMdWorkshopNameList();
-        System.out.println(shopSettingNameList);
-        return shopSettingNameList;
+        if(shopSettingNameList == null){
+            throw new RuntimeException("查询车间名称列表为空");
+        }
+         //去重并返回车间名称列表
+        return shopSettingNameList.stream().distinct().collect(Collectors.toList());
     }
 }

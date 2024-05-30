@@ -11,6 +11,7 @@ import com.zeroone.star.shopsettings.service.IMdWorkshopService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -27,7 +28,7 @@ public class ShopSettingsController implements ShopSettingsApis {
     @Override
     @ApiOperation("获取车间管理列表（条件+分页）")
     @GetMapping("/query-list")
-    public JsonVO<PageDTO<ShopSettingsDTO>> queryWorkshopList(ShopSettingsQuery shopSettingsQuery) {
+    public JsonVO<PageDTO<ShopSettingsDTO>> queryWorkshopList(@Validated ShopSettingsQuery shopSettingsQuery) {
         PageDTO<ShopSettingsDTO> pageDTO = mdWorkshopService.queryWorkshopList(shopSettingsQuery);
         if(pageDTO != null){
             return JsonVO.success(pageDTO);
@@ -38,7 +39,7 @@ public class ShopSettingsController implements ShopSettingsApis {
     @Override
     @ApiOperation("获取车间详情")
     @GetMapping("/query/{workShopId}")
-    public JsonVO<ShopSettingsDTO> queryWorkshopInfo(Long workShopId) {
+    public JsonVO<ShopSettingsDTO> queryWorkshopInfo(@PathVariable Long workShopId) {
         ShopSettingsDTO getShopSettingsDTO = mdWorkshopService.queryWorkshopInfo(workShopId);
         return getShopSettingsDTO != null ? JsonVO.success(getShopSettingsDTO) : JsonVO.fail(null);
     }
