@@ -49,7 +49,10 @@ public class UserController implements UserApis {
     @ApiOperation(value = "修改用户")
     @Override
     public JsonVO<String> modifyUser(@RequestBody UpdateUserDTO updateUserDTO) {
-        if (StringUtils.isNotEmpty(updateUserDTO.getPhonenumber())
+        if(!userService.checkUser(updateUserDTO.getUserId())){
+            return JsonVO.fail("修改用户失败，该用户不存在");
+        }
+        else if (StringUtils.isNotEmpty(updateUserDTO.getPhonenumber())
                 && userService.checkPhoneUnique(updateUserDTO.getUserId(), updateUserDTO.getPhonenumber()) > 0)
         {
             return JsonVO.fail("修改用户失败，手机号码已存在");

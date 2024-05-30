@@ -180,4 +180,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         queryWrapper.eq(User::getEmail, email);
         return userMapper.selectCount(queryWrapper);
     }
+
+    @Override
+    public boolean checkUser(Long userId) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUserId, userId);
+        User user = userMapper.selectOne(queryWrapper);
+        return user != null;
+    }
 }
