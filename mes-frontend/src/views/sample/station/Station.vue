@@ -127,8 +127,6 @@ export default {
       activeIndex: '1',
       workstationCode: '',
       workstationName: '',
-      selectedWorkshop: '',
-      selectedOrder: '',
       pageSize: 6,
       currentPage: 1,
       workshops: [
@@ -184,14 +182,7 @@ export default {
     if (filters.workstationName && !item.name.includes(filters.workstationName)) {
       return false;
     }
-    // 根据车间名称进行过滤
-    if (filters.selectedWorkshop && item.workshop !== filters.selectedWorkshop) {
-      return false;
-    }
-    // 根据工序进行过滤
-    if (filters.selectedOrder && item.order !== filters.selectedOrder) {
-      return false;
-    }
+   
     return true; // 如果都符合过滤条件，则返回 true
   });
 

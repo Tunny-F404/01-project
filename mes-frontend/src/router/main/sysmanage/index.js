@@ -1,3 +1,4 @@
+
 const routes = [
   {
     path: '/un-1',
@@ -32,8 +33,8 @@ const routes = [
   {
     path: '/un-7',
     name: 'UN7',
-    component: () => import('@/views/status/403.vue')
-  }
+    component: () => import('@/views/sample/station/Station.vue')
+  },
 ]
 
 export default routes
