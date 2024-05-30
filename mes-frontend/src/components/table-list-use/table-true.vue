@@ -1,4 +1,3 @@
-
 <script setup >
 import  tableFrame  from '@/components/table-list-use/table-text.vue' 
 import popUp from '@/components/table-list-use/table-components/pop-up.vue'
@@ -54,9 +53,17 @@ const onEditchannel=(row,$index)=>{
     dialog.value.open({row})
     console.log(row);
 }
-const onDelChannel=(row,$index)=>{
+const onDelChannel=async (row)=>{
     //删除
-    console.log(row);
+    await ElMessageBox.confirm('你确认要删除该分类么', '温馨提示', {
+    type: 'warning',
+    confirmButtonText: '确认',
+    cancelButtonText: '取消'
+  })
+  ElMessage.success('删除成功')
+    console.log(row)
+    //删除后再渲染数据
+    getPageList()
 }
 const onSubmit=()=>{
     console.log("查询提交");
