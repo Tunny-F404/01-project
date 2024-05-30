@@ -74,26 +74,26 @@
 
 <style lang="scss" scoped>
 .sec-container {
-  height: 100vh;
+	height: 100vh;
 }
 .el-aside {
-  background-color: #545c64;
-  .menu-wrap {
-    height: 100vh;
-    width: 220px;
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
+	background-color: #545c64;
+	.menu-wrap {
+		height: 100vh;
+		width: 220px;
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
 }
 .el-menu {
-  border: 0;
+	border: 0;
 }
 .el-menu-item-group .el-menu-item {
-  text-indent: 1.5em;
+	text-indent: 1.5em;
 }
 .el-main {
-  padding: 20px;
+	padding: 20px;
 }
 .el-header {
   background-color: #fff;
