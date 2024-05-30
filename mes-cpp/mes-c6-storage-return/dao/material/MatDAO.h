@@ -37,6 +37,8 @@ public:
 	list<MatlistDO> selectByName1(const string& name);
 	// 插入数据
 	uint64_t insert1(const MatlistDO& iObj);
+	// 插入数据
+	uint64_t insert2(const MatlineDO& iObj);
 	// 修改数据
 	int update1(const MatlistDO& uObj);
 	// 通过ID删除数据

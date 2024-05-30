@@ -8,19 +8,19 @@
 SqlParams params; \
 sql<<" WHERE 1=1"; \
 if (query->rtcode) { \
-	sql << " AND `rtcode`=?"; \
+	sql << " AND `rt_code`=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->rtcode.getValue("")); \
 } \
 if (query->rtname) { \
-	sql << " AND rtname=?"; \
+	sql << " AND rt_name=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->rtname.getValue("")); \
 } \
 if (query->pocode) { \
-	sql << " AND pocode=?"; \
+	sql << " AND po_code=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->pocode.getValue("")); \
 } \
 if (query->vendorname) { \
-	sql << " AND vendorname=?"; \
+	sql << " AND vendor_name=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->vendorname.getValue("")); \
 }
 uint64_t MatDAO::count1(const GetReturnListQuery::Wrapper& query)
@@ -35,7 +35,7 @@ uint64_t MatDAO::count1(const GetReturnListQuery::Wrapper& query)
 list<MatlistDO> MatDAO::selectWithPage1(const GetReturnListQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT rtcode,rtname,pocode,vendorcode,vendorname,rtdate,statuss FROM wm_rt_vendor";
+	sql << "SELECT rt_code,rt_name,po_code,vendor_code,vendor_name,rt_date,statuss FROM wm_rt_vendor";
 	SAMPLE_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	MatlistMapper mapper;
@@ -50,10 +50,19 @@ list<MatlistDO> MatDAO::selectByName1(const string& name)
 
 uint64_t MatDAO::insert1(const MatlistDO& iObj)
 {
-	string sql = "INSERT INTO `wm_rt_vendor` (`rtcode`, `rtname`, `pocode`,`vendorname`, `batchcode`, `rtdate`, `statuss`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	string sql = "INSERT INTO `wm_rt_vendor` (`rt_code`, `rt_name`, `po_code`,`vendor_name`, `batch_code`, `rt_date`, `statuss`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s%s%s", iObj.getRtcode(), iObj.getRtname(), iObj.getPocode(),
 		iObj.getVendorname(), iObj.getBatchcode(), iObj.getRtdate(),
 		iObj.getStatuss(), iObj.getRemark());
+}
+
+uint64_t MatDAO::insert2(const MatlineDO& iObj)
+{
+	string sql = "INSERT INTO `wm_rt_vendor_line` (`item_code`, `item_name`, `quantity_rted`,`specification`, `unit_of_measure`, `batch_code`, `warehouse_name`, `location_name`,`area_name`,`remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	return sqlSession->executeInsert(sql, "%s%s%d%s%s%s%s%s%s%s", iObj.getItemcode(), iObj.getItemname(), iObj.getQuantityrted(),
+		iObj.getSpecification(), iObj.getUnitofmeasure(), iObj.getBatchcode(),
+		iObj.getWarehousename(), iObj.getLocationname(), iObj.getAreaname(),
+		iObj.getRemark());
 }
 
 int MatDAO::update1(const MatlistDO& uObj)

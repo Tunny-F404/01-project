@@ -1,10 +1,19 @@
 #include "stdafx.h"
 #include "RController.h"
+#include "../../service/material/MatService.h"
+#include "../ApiDeclarativeServicesHelper.h"
 
 GetReturnListPageJsonVO::Wrapper RController::execQueryList(const GetReturnListQuery::Wrapper& query)
 {
 
-	return GetReturnListPageJsonVO::Wrapper();
+	// 定义一个Service
+	MatService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = GetReturnListPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 Uint64JsonVO::Wrapper RController::execAddReturnLine(const AddReturnDTO::Wrapper& dto)
@@ -24,7 +33,20 @@ Uint64JsonVO::Wrapper RController::execAddReturnLine(const AddReturnDTO::Wrapper
 		//jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		//return jvo;
 	//}
-	return Uint64JsonVO::Wrapper();
+
+	// 定义一个Service
+	MatService service;
+	// 执行数据新增
+	uint64_t id = service.saveData(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }
 
 Uint64JsonVO::Wrapper RController::execModifyReturnline(const ModifyReturnDTO::Wrapper& dto)
@@ -37,7 +59,18 @@ Uint64JsonVO::Wrapper RController::execModifyReturnline(const ModifyReturnDTO::W
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	return Uint64JsonVO::Wrapper();
+	// 定义一个Service
+	MatService service;
+	// 执行数据修改
+	if (service.updateData(dto)) {
+		jvo->success(dto->rtid);
+	}
+	else
+	{
+		jvo->fail(dto->rtid);
+	}
+	// 响应结果
+	return jvo;
 }
 
 Uint64JsonVO::Wrapper RController::execRemoveReturnline(const UInt64& lineid)
@@ -50,5 +83,16 @@ Uint64JsonVO::Wrapper RController::execRemoveReturnline(const UInt64& lineid)
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	return Uint64JsonVO::Wrapper();
+	// 定义一个Service
+	MatService service;
+	// 执行数据删除
+	if (service.removeData(lineid.getValue(0))) {
+		jvo->success(lineid);
+	}
+	else
+	{
+		jvo->fail(lineid);
+	}
+	// 响应结果
+	return jvo;
 }

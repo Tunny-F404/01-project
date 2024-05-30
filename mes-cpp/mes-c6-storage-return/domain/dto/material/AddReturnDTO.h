@@ -46,7 +46,7 @@ class AddReturnDTO : public oatpp::DTO
 	// 退货日期
 	API_DTO_FIELD_DEFAULT(String, rtdate, ZH_WORDS_GETTER("material.rtdate"));
 	// 单据状态
-	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("material.status"));
+	API_DTO_FIELD_DEFAULT(String, statuss, ZH_WORDS_GETTER("material.status"));
 	// 备注
 	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("material.remark"));
 
