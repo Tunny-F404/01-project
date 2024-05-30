@@ -1,8 +1,11 @@
-<script setup>
+<script setup lang="ts">
+import { ref } from "vue";
+
 import tableFrame from "@/components/table-list-use/table-text.vue";
 import popUp from "@/components/table-list-use/table-components/pop-up.vue";
 import request from "@/apis/request.js";
-import { ref } from "vue";
+
+// defineOptions();
 
 const multipleSelection=ref([])
 //没有中文国际化
@@ -80,6 +83,7 @@ const onSizeChange = (size) => {
 	const Data = { pageSize: "parms.pagesize" };
 	getPageList(Date);
 };
+
 //改变页数
 const onCurrentChange = (page) => {
 	// console.log('页面变化了',page);
@@ -90,36 +94,33 @@ const onCurrentChange = (page) => {
 };
 
 // const tableList=ref([])
-const onSortChannel=()=>{
-    console.log("排序");
-}
-const onEditchannel=(row,$index)=>{
-    //编辑
-    dialog.value.open({row})
-    console.log(row);
-}
-const onDelChannel=async (row)=>{
-    //删除
-    await ElMessageBox.confirm('你确认要删除该单位么', '温馨提示', {
-    type: 'warning',
-    confirmButtonText: '确认',
-    cancelButtonText: '取消'
-  })
-  try {
-  const res=await Request.request(Request.DELETE,'/basicdata/md-unit-measure/delete-by-measureIds',{measureIds:row.data.primaryId},null)
- } catch (error) {
-  console.log('错误或者超时');
- } 
- if(res.code===200){
-    ElMessage.success('删除成功')
- }
-    //删除后再渲染数据
-    getPageList()
-}
-const onSubmit=()=>{
-  getPageList(myInput)
-    console.log("查询提交");
-}
+const onSortChannel = () => {
+	console.log("排序");
+};
+
+const onEditchannel = (row, $index) => {
+	//编辑
+	dialog.value.open({ row });
+	console.log(row);
+};
+
+const onDelChannel = async (row) => {
+	//删除
+	await ElMessageBox.confirm("你确认要删除该单位么", "温馨提示", {
+		type: "warning",
+		confirmButtonText: "确认",
+		cancelButtonText: "取消",
+	});
+	ElMessage.success("删除成功");
+	console.log(row);
+	//删除后再渲染数据
+	getPageList();
+};
+
+const onSubmit = () => {
+	console.log("查询提交");
+};
+
 //添加
 const onAddChannel = () => {
   dialog.value.open({})
@@ -227,17 +228,19 @@ const  handleSelectionChange=(val)=> {
 			<el-empty description="没有数据"></el-empty>
 		</template>
 	</tableFrame>
+
 	<!--引入的弹窗-->
 	<pop-Up ref="dialog"> </pop-Up>
 </template>
 
 <style lang="scss" scoped>
-.demo-form-inline{
-    .el-input {
-  --el-input-width: 220px;
+.demo-form-inline {
+	.el-input {
+		--el-input-width: 220px;
+	}
+
+	.el-select {
+		--el-select-width: 220px;
+	}
 }
-.el-select {
-  --el-select-width: 220px;
-}
-} 
 </style>
