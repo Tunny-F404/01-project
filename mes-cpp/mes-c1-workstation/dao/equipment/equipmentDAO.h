@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _SAMPLE_DAO_
-#define _SAMPLE_DAO_
+#ifndef _EQUIPMENT_DAO_
+#define _EQUIPMENT_DAO_
 #include "BaseDAO.h"
 #include "../../domain/do/equipment/EquipmentDO.h"
 #include "../../domain/query/equipment/EquipmentQuery.h"
@@ -34,4 +34,4 @@ public:
 	// 分页查询数据
 	list<EquipmentDO> selectWithPage(const EquipmentQuery::Wrapper& query);
 };
-#endif // !_SAMPLE_DAO_
+#endif // !_EQUIPMENT_DAO_

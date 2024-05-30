@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2022/10/25 11:08:56
+ @Date: 2022/10/25 14:21:55
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,21 +17,23 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _DEVICE_RESOURCE_SERVICE_
-#define _DEVICE_RESOURCE_SERVICE_
-#include <list>
-#include "domain/vo/deviceResource/DeviceResourceVO.h"
-#include "domain/dto/deviceResource/DeviceResourceDTO.h"
+#ifndef _DEVICE_RESOURCE_MAPPER_
+#define _DEVICE_RESOURCE_MAPPER_
+
+#include "Mapper.h"
+#include "../../domain/do/deviceResource/DeviceResourceDO.h"
 
 /**
- * 设备资源服务接口
+ * 设备资源表字段匹配映射
  */
-class DeviceResourceService
+class DeviceResourceMapper : public Mapper<DeviceResourceDO>
 {
 public:
-	// 直接查集合
-	oatpp::List<DeviceResourceDTO::Wrapper> listAll();
+	DeviceResourceDO mapper(ResultSet* resultSet) const override
+	{
+		DeviceResourceDO data;
+		return data;
+	}
 };
 
-#endif // !_EQUIPMENT_SERVICE_
-
+#endif // !_EQUIPMENT_MAPPER_

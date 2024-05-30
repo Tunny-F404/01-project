@@ -22,7 +22,7 @@
 
 #ifdef HTTP_SERVER_DEM
 #endif
-#include "equipment/resource/ResourceController.h"
+#include "deviceResource/DeviceResourceController.h"
 #include "equipment/EquipmentController.h"
 
 // 如果定义了关闭Swagger文档宏

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "DeviceResourceController.h"
+#include "domain/do/deviceResource/DeviceResourceDO.h"
 #include "service/deviceResource/DeviceResourceService.h"
 
 
