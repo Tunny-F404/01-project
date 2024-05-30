@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ProWorkorderController.h"
-
+#include "../mes-c4-prodmgmt/service/ProdWorkorder/ProdWorkorderService.h"
 
 
 ModifyProWorkorderJsonVO::Wrapper ProWorkorderController::execModifyProWorkdorder(const ModifyProWorkorderDTO::Wrapper& dto)
@@ -8,18 +8,76 @@ ModifyProWorkorderJsonVO::Wrapper ProWorkorderController::execModifyProWorkdorde
 	return {};
 }
 
-DeleteProWorkorderJsonVO::Wrapper ProWorkorderController::execRemoveProWorkorder(const UInt64& id)
+Uint64JsonVO::Wrapper ProWorkorderController::execRemoveProWorkorder(const UInt64& id)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!id || id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ProdWorkorderService service;
+	// 执行数据删除
+	if (service.removeData(id.getValue(0))) {
+		jvo->success(id);
+	}
+	else
+	{
+		jvo->fail(id);
+	}
+	// 响应结果
+	return jvo;
 }
 
-ConfirmProWorkorderJsonVO::Wrapper ProWorkorderController::execConfirmProWorkorder(const UInt64& workorderId)
+Uint64JsonVO::Wrapper ProWorkorderController::execConfirmProWorkorder(const UInt64& workorderId)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!workorderId || workorderId <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ProdWorkorderService service;
+	
+	if (service.confirmData(workorderId.getValue(0))) {
+		jvo->success(workorderId);
+	}
+	else
+	{
+		jvo->fail(workorderId);
+	}
+	// 响应结果
+	return jvo;
+	
 }
 
-CompleteProWorkorderJsonVO::Wrapper ProWorkorderController::execCompleteProWorkorder(const UInt64& workorderId)
+Uint64JsonVO::Wrapper ProWorkorderController::execCompleteProWorkorder(const UInt64& workorderId)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!workorderId || workorderId <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ProdWorkorderService service;
+	// 执行数据删除
+	if (service.completeData(workorderId.getValue(0))) {
+		jvo->success(workorderId);
+	}
+	else
+	{
+		jvo->fail(workorderId);
+	}
+	// 响应结果
+	return jvo;
 }
 
