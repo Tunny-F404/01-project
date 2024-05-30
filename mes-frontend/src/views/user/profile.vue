@@ -12,9 +12,11 @@
 						</div>
 					</template>
 					<!-- 内容 -->
-					<div class="demo-type">
-						<el-avatar> user </el-avatar>
-					</div>
+					<el-row justify="space-between">
+						<div class="demo-type">
+							<el-avatar> user </el-avatar>
+						</div>
+					</el-row>
 					<el-divider />
 					<el-row justify="space-between">
 						<span>用户名称</span>
@@ -114,7 +116,12 @@ const handleClick = (tab, event) => {
 }
 
 //基本资料表单
-const infoform = ref({nickName:'',phoneNum:'',email:'',gender:'男'})
+const infoform = ref({
+	nickName:'',
+	phoneNum:'',
+	email:'',
+	gender:'男'
+})
 const onSubmit = () => {
 	console.log('表单发送成功')
 }

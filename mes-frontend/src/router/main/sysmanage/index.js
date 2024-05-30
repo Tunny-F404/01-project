@@ -7,17 +7,17 @@ const routes = [
 	{
 		path: '/un-2',
 		name: 'UN2',
-		component: () => import('@/views/status/403.vue')
+		component: () => import('@/views/')
 	},
 	{
 		path: '/un-3',
 		name: 'UN3',
-		component: () => import('@/views/status/404.vue')
+		component: () => import('@/views/sample/basic-data/unit-of-account.vue')
 	},
 	{
 		path: '/un-4',
 		name: 'UN4',
-		component: () => import('@/views/status/403.vue')
+		component: () => import('@/views/sample/basedata/Clientdemo2.vue')
 	},
 	{
 		path: '/un-5',
@@ -27,12 +27,12 @@ const routes = [
 	{
 		path: '/un-6',
 		name: 'UN6',
-		component: () => import('@/views/status/403.vue')
+		component: () => import('@/views/sample/workshop/WorkshopSettings.vue')
 	},
 	{
 		path: '/un-7',
 		name: 'UN7',
-		component: () => import('@/views/status/403.vue')
+		component: () => import('@/views/status/404.vue')
   },
   // 仓库管理页面
   {

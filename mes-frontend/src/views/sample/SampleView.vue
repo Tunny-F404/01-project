@@ -96,6 +96,10 @@ const menus = reactive([
 		text: '搜索栏演示页'
 	},
 	{
+		path: '/sample/material-classification',
+		text: '物料产品分类演示页'
+	},
+	{
 		path: '/sample/table-list-use',
 		text: '表格演示'
 	},
@@ -106,6 +110,10 @@ const menus = reactive([
 	{
 		path: '/sample/unit-account',
 		text: '计算单位演示页'
+	},
+	{
+		path: '/sample/basedata',
+		text: '客户管理演示页'
 	},
 ])
 </script>

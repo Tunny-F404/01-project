@@ -44,7 +44,22 @@ const routes = [
 			{
 				path: '/sample/unit-account',
 				component: () => import('@/views/sample/basic-data/unit-of-account.vue')
-			}
+			},
+			 // 车间设置
+			 {
+				path: '/sample/workshop-settings',
+				component: () => import('@/views/sample/workshop/WorkshopSettings.vue')
+			},
+			//工艺流程
+			{
+				path: '/sample/process-flow',
+				component: () => import('@/views/sample/process-flow/ProcessFlow.vue')
+			},
+			// 表单弹窗演示页
+			{
+				path: '/sample/public-form',
+				component: () =>import('@/views/sample/public-form/public-form-page.vue')
+			    }
 		]
 	}
 ]
