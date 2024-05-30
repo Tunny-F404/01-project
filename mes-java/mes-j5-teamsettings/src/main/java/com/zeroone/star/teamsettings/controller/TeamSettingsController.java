@@ -37,12 +37,17 @@ public class TeamSettingsController implements TeamSettingsApis {
     @GetMapping("query-all")
     @Override
     public JsonVO<PageDTO<TeamDTO>> queryTeamList(@Validated TeamQuery condition) {
-        return null;
+        PageDTO<TeamDTO> teams = calTeamService.listAll(condition);
+        if (teams != null) {
+            return JsonVO.success(teams);
+        }
+        return JsonVO.fail(null);
     }
 
     @Override
     public JsonVO<TeamDTO> queryTeamDetails(Long teamId) {
-        return null;
+        TeamDTO teamDetails = calTeamService.queryTeamDetails(teamId);
+        return teamDetails != null ? JsonVO.success(teamDetails) : JsonVO.fail(null);
     }
 
     @ApiOperation(value = "获取班组详情")
@@ -55,21 +60,21 @@ public class TeamSettingsController implements TeamSettingsApis {
     @PostMapping("add-team")
     @Override
     public JsonVO<Integer> addTeam(@Validated AddTeamDTO condition) {
-        return null;
+        return calTeamService.addTeam(condition) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
     @ApiOperation(value = "修改班组")
     @PutMapping("modify-team")
     @Override
     public JsonVO<Integer> modifyTeam(@Validated TeamDTO teamDTO) {
-        return null;
+        return calTeamService.modifyTeam(teamDTO) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
     @ApiOperation(value = "删除班组")
     @DeleteMapping("delete-team")
     @Override
-    public JsonVO<Integer> removeTeam(@Validated List<Long> ids) {
-        return null;
+    public JsonVO<Integer> removeTeam(@RequestBody List<Long> ids) {
+        return calTeamService.removeTeam(ids) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
     @ApiOperation(value = "导出班组")

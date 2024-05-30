@@ -1,11 +1,15 @@
 package com.zeroone.star.project.j5.scheduleplan.team;
 
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j5.dto.scheduleplan.planteam.AddPlanTeamDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.planteam.PlanTeamDTO;
+import com.zeroone.star.project.j5.query.scheduleplan.planteam.AddPlanTeamQuery;
 import com.zeroone.star.project.j5.query.scheduleplan.planteam.PlanTeamQuery;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.ResultStatus;
+import io.swagger.annotations.ApiParam;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -24,16 +28,16 @@ public interface TeamApis {
 
     /**
      * 添加关联班组
-     * @param addPlanTeamDTO 添加关联班组参数
+     * @param addPlanTeamQueries 添加关联班组参数
      * @return 结果
      */
-    JsonVO<ResultStatus> addPlanTeam(AddPlanTeamDTO addPlanTeamDTO);
+    JsonVO<Integer> addPlanTeam(@ApiParam(value = "Array of plan teams to add", required = true, allowMultiple = true) @RequestBody @Valid List<AddPlanTeamQuery> addPlanTeamQueries);
 
     /**
      * 删除关联班组
      * @param recordId 流水号, 对应数据库record_id
      * @return 结果
      */
-    JsonVO<ResultStatus> deletePlanTeam(Integer recordId);
+    JsonVO<Integer> deletePlanTeam(Long recordId);
 
 }
