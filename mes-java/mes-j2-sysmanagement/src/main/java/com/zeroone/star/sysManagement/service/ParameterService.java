@@ -5,6 +5,7 @@ import com.zeroone.star.project.j2.sysmanagement.dto.param.ParameterDTO;
 import com.zeroone.star.project.j2.sysmanagement.query.param.ParameterQuery;
 import com.zeroone.star.sysmanagement.entity.ParameterDO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -18,7 +19,33 @@ import java.util.List;
  */
 public interface ParameterService extends IService<ParameterDO> {
 
-    Integer removeParameters(List<Integer> ids);
+
+    /**
+     * @description: 刷新缓存
+     * @author: 40斤
+     * @date: 2024/5/22 22:29
+     * @param: []
+     **/
+    void refreshCache();
+
+    /**
+     * @description: 批量删除参数
+     * @author: 40斤
+     * @date: 2024/5/22 22:29
+     * @param: [ids]
+     **/
+    void removeParameterList(List<Integer> ids);
+
+    /**
+     * @description: 导出参数（excel表）
+     * @author: 40斤
+     * @date: 2024/5/22 22:29
+     * @param: []
+     **/
+    ResponseEntity<byte[]> exportParameter();
+
+
+
 
     Integer saveParameter(ParameterDTO parameterDTO);
 
