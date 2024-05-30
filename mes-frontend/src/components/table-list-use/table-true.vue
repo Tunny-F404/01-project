@@ -7,15 +7,16 @@ import request from "@/apis/request.js"; //加入请求
 
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整
-const tableList=ref([{
-    "classify":"金属",
-    "product":'螺丝',
-    "sure":"正常",
-    "time":"2024.5.22"
-}
-]) 
+const tableList = ref([
+	{
+		classify: "金属",
+		product: "螺丝",
+		sure: "正常",
+		time: "2024.5.22",
+	},
+]);
 
-const multipleSelection=ref([])
+const multipleSelection = ref([]);
 //dialog联系到表格弹窗
 const dialog = ref();
 
@@ -23,22 +24,22 @@ const dialog = ref();
 const total = ref(0);
 const loading = ref(false); //loading状态
 //定义请求参数,后期完善
-const parms=ref({
-    pagenum:1,//页数
-    pagesize: 5,//当前每页面大小
-    state:'成功',//状态
-    classfiy:'时间'
-})
-const getPageList= async ()=>{
-  loading.value=true
-  //里面改接口，可以加个try-catch
-  // const res= await Request.request('GET','/basicdata/md-unit-measure/list',null)
-  // tableList.value=res.data.rows.data
-  // parms.value.pagenum=res.data.pageIndex
-  // parms.value.pagesize=res.data.pageSize
-  loading.value=false
-}
-getPageList()//进来就加载一遍
+const parms = ref({
+	pagenum: 1, //页数
+	pagesize: 5, //当前每页面大小
+	state: "成功", //状态
+	classfiy: "时间",
+});
+const getPageList = async () => {
+	loading.value = true;
+	//里面改接口，可以加个try-catch
+	// const res= await Request.request('GET','/basicdata/md-unit-measure/list',null)
+	// tableList.value=res.data.rows.data
+	// parms.value.pagenum=res.data.pageIndex
+	// parms.value.pagesize=res.data.pageSize
+	loading.value = false;
+};
+getPageList(); //进来就加载一遍
 //处理分页逻辑
 //改变大小
 const onSizeChange = (size) => {
@@ -82,30 +83,28 @@ const onSubmit = () => {
 };
 //添加
 const onAddChannel = () => {
-  dialog.value.open({})
-}
+	dialog.value.open({});
+};
 //选择组件
-const  handleSelectionChange=(val)=> {
-        this.multipleSelection = val;
-      }
+const handleSelectionChange = (val) => {
+	this.multipleSelection = val;
+};
 </script>
 
 <template>
-        <!--分类，页面只有基本的表现，没有实现数据绑定-->
-        <tableFrame title="实验表格">
-    <slot name="extra">
-        <!-- 具名插槽例子实现 -->
-      <el-button @click="onSortChannel">排序顺序    
-        <el-icon :size="20">
-    <Sort /><!--排序图标-->
-        </el-icon>
-    </el-button>
-    <el-button @click="onAddChannel">添加    
-        <el-icon :size="20">
-    <Plus /><!--排序图标-->
-        </el-icon>
-    </el-button>
-    </slot>
+	<!--分类，页面只有基本的表现，没有实现数据绑定-->
+	<tableFrame title="实验表格">
+		<slot name="extra">
+			<!-- 具名插槽例子实现 -->
+			<el-button @click="onSortChannel"
+				>排序顺序
+				<el-icon :size="20"> <Sort /><!--排序图标--> </el-icon>
+			</el-button>
+			<el-button @click="onAddChannel"
+				>添加
+				<el-icon :size="20"> <Plus /><!--排序图标--> </el-icon>
+			</el-button>
+		</slot>
 
 		<!--表单区域-->
 		<el-form :inline="true" class="demo-form-inline">
@@ -128,48 +127,44 @@ const  handleSelectionChange=(val)=> {
 			</el-form-item>
 		</el-form>
 
-<!--表格区-->
-    <el-table  :data="tableList" style="width: 100%" v-loading="loading"
-    @selection-change="handleSelectionChange"
-    ref="multipleTable">
-    <el-table-column type="selection" width="55" />
-   <el-table-column prop="classify" label="分类" width="100"></el-table-column>
-   <el-table-column type="index" label="排序" width="50"></el-table-column>
-   <el-table-column prop="product" label="物料/产品" width="150"></el-table-column>
-   <el-table-column prop="sure"  label="是否启用" ></el-table-column>
-   <el-table-column  prop="time"   label="创建时间" ></el-table-column>
-   <el-table-column label="操作" >
-    <!-- row是当前一行数据 index是下标-->
-    <template #default="{row,$index}">
-        <el-button @click="onEditchannel(row,$index)" 
-         circle
-        type="primary">
-        <el-icon :size="20">
-    <Edit /><!--修改图标-->
-        </el-icon>
-</el-button>
-        <el-button @click="onDelChannel(row,$index) " 
-        type="danger"
-         circle>
-         <el-icon>
-    <Delete /><!--删除图标-->
-       </el-icon>
-        </el-button>
-    </template>
-   </el-table-column>
-    </el-table>
-<el-pagination
-      v-model:current-page="parms.pagenum"
-      v-model:page-size="parms.pagesize"
-      :page-sizes="[2, 3, 5, 10]"
-      :background="true"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="11"
-      @size-change="onSizeChange"
-      @current-change="OnCurrentChange"
-      style="margin-top:20px;justify-content: flex-end;"
-    />
-<!---->
+		<!--表格区-->
+		<el-table
+			:data="tableList"
+			style="width: 100%"
+			v-loading="loading"
+			@selection-change="handleSelectionChange"
+			ref="multipleTable"
+		>
+			<el-table-column type="selection" width="55" />
+			<el-table-column prop="classify" label="分类" width="100"></el-table-column>
+			<el-table-column type="index" label="排序" width="50"></el-table-column>
+			<el-table-column prop="product" label="物料/产品" width="150"></el-table-column>
+			<el-table-column prop="sure" label="是否启用"></el-table-column>
+			<el-table-column prop="time" label="创建时间"></el-table-column>
+			<el-table-column label="操作">
+				<!-- row是当前一行数据 index是下标-->
+				<template #default="{ row, $index }">
+					<el-button @click="onEditchannel(row, $index)" circle type="primary">
+						<el-icon :size="20"> <Edit /><!--修改图标--> </el-icon>
+					</el-button>
+					<el-button @click="onDelChannel(row, $index)" type="danger" circle>
+						<el-icon> <Delete /><!--删除图标--> </el-icon>
+					</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
+		<el-pagination
+			v-model:current-page="parms.pagenum"
+			v-model:page-size="parms.pagesize"
+			:page-sizes="[2, 3, 5, 10]"
+			:background="true"
+			layout="total, sizes, prev, pager, next, jumper"
+			:total="11"
+			@size-change="onSizeChange"
+			@current-change="OnCurrentChange"
+			style="margin-top: 20px; justify-content: flex-end"
+		/>
+		<!---->
 
 		<!--空处理-->
 		<slot name="#empty">
@@ -181,12 +176,12 @@ const  handleSelectionChange=(val)=> {
 </template>
 
 <style lang="scss" scoped>
-.demo-form-inline{
-    .el-input {
-  --el-input-width: 220px;
+.demo-form-inline {
+	.el-input {
+		--el-input-width: 220px;
+	}
+	.el-select {
+		--el-select-width: 220px;
+	}
 }
-.el-select {
-  --el-select-width: 220px;
-}
-} 
 </style>
