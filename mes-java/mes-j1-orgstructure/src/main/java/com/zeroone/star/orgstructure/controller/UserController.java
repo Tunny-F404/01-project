@@ -1,6 +1,6 @@
 package com.zeroone.star.orgstructure.controller;
 
-import com.zeroone.star.orgstructure.service.impl.UserServiceImpl;
+import com.zeroone.star.orgstructure.service.impl.UserQueryServiceImpl;
 import com.zeroone.star.project.j1.orgstructure.dto.PageDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.*;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
@@ -28,7 +28,7 @@ import java.util.List;
 @Api(tags = "用户管理")
 public class UserController implements UserApis {
     @Autowired
-    private UserServiceImpl userServiceImpl;
+    private UserQueryServiceImpl userServiceImpl;
 
     @Override
     @GetMapping("/query-user-table")
@@ -46,6 +46,10 @@ public class UserController implements UserApis {
         CompleteUserDTO completeUserDTO = userServiceImpl.queryUser(userDTO);
         return JsonVO.success(completeUserDTO);
     }
+
+
+
+
 
 
     @PutMapping("setUserStatus")

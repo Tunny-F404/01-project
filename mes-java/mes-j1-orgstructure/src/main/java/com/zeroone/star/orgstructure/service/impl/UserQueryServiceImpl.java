@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.orgstructure.entity.*;
 import com.zeroone.star.orgstructure.mapper.*;
-import com.zeroone.star.orgstructure.service.UserService;
+import com.zeroone.star.orgstructure.service.UserQueryService;
 import com.zeroone.star.project.j1.orgstructure.dto.user.CompleteUserDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UserDTO;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
@@ -22,7 +22,7 @@ import java.util.List;
  * @author Tme
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserQueryServiceImpl implements UserQueryService {
 
     //日期全局转换格式
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
