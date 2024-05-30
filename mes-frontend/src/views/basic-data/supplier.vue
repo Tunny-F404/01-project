@@ -3,36 +3,34 @@
 		<el-col :span="7">
 			<div class="grid-content ep-bg-purple">
 				<label>
-					<el-text class="mx-1" size="small">供应商编码&nbsp;&nbsp;</el-text><el-input size="small" v-model="input"
-						style="width: 180px" placeholder="&nbsp;&nbsp;请输入供应商编码" />
+					<el-text class="mx-1" size="small">供应商编码&nbsp;&nbsp;</el-text
+					><el-input size="small" v-model="input" style="width: 180px" placeholder="&nbsp;&nbsp;请输入供应商编码" />
 				</label>
 			</div>
 		</el-col>
 		<el-col :span="7">
 			<div class="grid-content ep-bg-purple">
 				<label>
-					<el-text class="mx-1" size="small">供应商名称&nbsp;&nbsp;</el-text><el-input v-model="input" size="small"
-						style="width: 180px" placeholder="&nbsp;&nbsp;请输入供应商名称" />
+					<el-text class="mx-1" size="small">供应商名称&nbsp;&nbsp;</el-text
+					><el-input v-model="input" size="small" style="width: 180px" placeholder="&nbsp;&nbsp;请输入供应商名称" />
 				</label>
 			</div>
 		</el-col>
 		<el-col :span="7">
 			<div class="grid-content ep-bg-purple">
 				<label>
-					<el-text class="mx-1" size="small">供应商简称&nbsp;&nbsp;</el-text><el-input size="small" v-model="input"
-						style="width: 180px" placeholder="&nbsp;&nbsp;请输入供应商简称" />
+					<el-text class="mx-1" size="small">供应商简称&nbsp;&nbsp;</el-text
+					><el-input size="small" v-model="input" style="width: 180px" placeholder="&nbsp;&nbsp;请输入供应商简称" />
 				</label>
 			</div>
 		</el-col>
-
-
 	</el-row>
 	<el-row>
 		<el-col :span="7">
 			<div class="grid-content ep-bg-purple">
 				<label>
-					<el-text class="mx-1" size="small">&nbsp;&nbsp;&nbsp;英文名称</el-text> <el-input size="small"
-						v-model="input" style="width: 180px" placeholder="&nbsp;&nbsp;请输入供应商英文名称" />
+					<el-text class="mx-1" size="small">&nbsp;&nbsp;&nbsp;英文名称</el-text>
+					<el-input size="small" v-model="input" style="width: 180px" placeholder="&nbsp;&nbsp;请输入供应商英文名称" />
 				</label>
 			</div>
 		</el-col>
@@ -67,24 +65,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-
-const value = ref('')
+const value = ref("");
 
 const options = [
 	{
-		value: 'Option1',
-		label: '是',
+		value: "Option1",
+		label: "是",
 	},
 	{
-		value: 'Option2',
-		label: '否',
-	}
-]
-const input = ref('')
+		value: "Option2",
+		label: "否",
+	},
+];
+const input = ref("");
 </script>
-
 
 <style scoped>
 #is {

@@ -1,11 +1,11 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
 
-import App from './App.vue'
-import router from './router'
-import 'element-plus/dist/index.css'
-import './assets/main.css'
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import App from "./App.vue";
+import router from "./router";
+import "element-plus/dist/index.css";
+import "./assets/main.css";
+import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 // 添加了图标
 
 // 定义特性标志
@@ -14,20 +14,19 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // window.__VUE_PROD_DEVTOOLS__ = false;
 // window.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false;
 
-
-const app = createApp(App)
+const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-    app.component(key, component)
-  }
+	app.component(key, component);
+}
 //注册全局图标
-app.use(createPinia())
-app.use(router)
-app.mount('#app')
+app.use(createPinia());
+app.use(router);
+app.mount("#app");
 
 // 安装HTTP中间件
-import installHttp from './plugins/http'
-installHttp(router)
+import installHttp from "./plugins/http";
+installHttp(router);
 
 // 安装ElIcon
-import installElIcon from './plugins/el-icon'
-installElIcon(app)
+import installElIcon from "./plugins/el-icon";
+installElIcon(app);

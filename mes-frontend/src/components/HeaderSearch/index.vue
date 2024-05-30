@@ -1,10 +1,6 @@
 <template>
 	<div :class="{ show: show }" class="header-search">
-		<svg-icon
-			class-name="search-icon"
-			icon-class="search"
-			@click.stop="click"
-		/>
+		<svg-icon class-name="search-icon" icon-class="search" @click.stop="click" />
 		<el-select
 			ref="headerSearchSelect"
 			v-model="search"
@@ -27,76 +23,76 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch, onMounted, computed, nextTick } from 'vue'
-import Fuse from 'fuse.js'
-import path from 'path'
-import store from '@/store'
-import { router } from '@/router'
+import { ref, reactive, watch, onMounted, computed, nextTick } from "vue";
+import Fuse from "fuse.js";
+import path from "path";
+import store from "@/store";
+import { router } from "@/router";
 
-const search = ref('')
-const options = reactive([])
-const searchPool = reactive([])
-const show = ref(false)
-let fuse = null
-const headerSearchSelect = ref(null)
+const search = ref("");
+const options = reactive([]);
+const searchPool = reactive([]);
+const show = ref(false);
+let fuse = null;
+const headerSearchSelect = ref(null);
 
 const routes = computed(() => {
-	return store.getters.permission_routes
-})
+	return store.getters.permission_routes;
+});
 
 watch(routes, () => {
-	searchPool.value = generateRoutes(routes.value)
-})
+	searchPool.value = generateRoutes(routes.value);
+});
 
 watch(searchPool, (list) => {
-	initFuse(list)
-})
+	initFuse(list);
+});
 
 watch(show, (value) => {
 	if (value) {
-		document.body.addEventListener('click', close)
+		document.body.addEventListener("click", close);
 	} else {
-		document.body.removeEventListener('click', close)
+		document.body.removeEventListener("click", close);
 	}
-})
+});
 
 onMounted(() => {
-	searchPool.value = generateRoutes(routes.value)
-})
+	searchPool.value = generateRoutes(routes.value);
+});
 
 const click = () => {
-	show.value = !show.value
+	show.value = !show.value;
 	if (show.value) {
-		headerSearchSelect.value && headerSearchSelect.value.focus()
+		headerSearchSelect.value && headerSearchSelect.value.focus();
 	}
-}
+};
 
 const close = () => {
-	headerSearchSelect.value && headerSearchSelect.value.blur()
-	options.value = []
-	show.value = false
-}
+	headerSearchSelect.value && headerSearchSelect.value.blur();
+	options.value = [];
+	show.value = false;
+};
 
 const change = (val) => {
-	const path = val.path
-	const query = val.query
+	const path = val.path;
+	const query = val.query;
 	if (ishttp(val.path)) {
-		const pindex = path.indexOf('http')
-		window.open(path.substr(pindex, path.length), '_blank')
+		const pindex = path.indexOf("http");
+		window.open(path.substr(pindex, path.length), "_blank");
 	} else {
 		if (query) {
-			router.push({ path: path, query: JSON.parse(query) })
+			router.push({ path: path, query: JSON.parse(query) });
 		} else {
-			router.push(path)
+			router.push(path);
 		}
 	}
-	search.value = ''
-	options.value = []
+	search.value = "";
+	options.value = [];
 
 	nextTick(() => {
-		show.value = false
-	})
-}
+		show.value = false;
+	});
+};
 
 const initFuse = (list) => {
 	fuse = new Fuse(list, {
@@ -107,65 +103,63 @@ const initFuse = (list) => {
 		minMatchCharLength: 1,
 		keys: [
 			{
-				name: 'title',
-				weight: 0.7
+				name: "title",
+				weight: 0.7,
 			},
 			{
-				name: 'path',
-				weight: 0.3
-			}
-		]
-	})
-}
+				name: "path",
+				weight: 0.3,
+			},
+		],
+	});
+};
 
-const generateRoutes = (routes, basePath = '/', prefixTitle = []) => {
-	let res = []
+const generateRoutes = (routes, basePath = "/", prefixTitle = []) => {
+	let res = [];
 
 	for (const router of routes) {
 		if (router.hidden) {
-			continue
+			continue;
 		}
 
 		const data = {
-			path: !ishttp(router.path)
-				? path.resolve(basePath, router.path)
-				: router.path,
-			title: [...prefixTitle]
-		}
+			path: !ishttp(router.path) ? path.resolve(basePath, router.path) : router.path,
+			title: [...prefixTitle],
+		};
 
 		if (router.meta && router.meta.title) {
-			data.title = [...data.title, router.meta.title]
+			data.title = [...data.title, router.meta.title];
 
-			if (router.redirect !== 'noRedirect') {
-				res.push(data)
+			if (router.redirect !== "noRedirect") {
+				res.push(data);
 			}
 		}
 
 		if (router.query) {
-			data.query = router.query
+			data.query = router.query;
 		}
 
 		if (router.children) {
-			const tempRoutes = generateRoutes(router.children, data.path, data.title)
+			const tempRoutes = generateRoutes(router.children, data.path, data.title);
 			if (tempRoutes.length >= 1) {
-				res = [...res, ...tempRoutes]
+				res = [...res, ...tempRoutes];
 			}
 		}
 	}
-	return res
-}
+	return res;
+};
 
 const querySearch = (query) => {
-	if (query !== '') {
-		options.value = fuse.search(query)
+	if (query !== "") {
+		options.value = fuse.search(query);
 	} else {
-		options.value = []
+		options.value = [];
 	}
-}
+};
 
 const ishttp = (url) => {
-	return url.indexOf('http://') !== -1 || url.indexOf('https://') !== -1
-}
+	return url.indexOf("http://") !== -1 || url.indexOf("https://") !== -1;
+};
 </script>
 
 <style lang="scss" scoped>
