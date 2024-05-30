@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j1.orgstructure.entity;
+package com.zeroone.star.orgstructure.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
