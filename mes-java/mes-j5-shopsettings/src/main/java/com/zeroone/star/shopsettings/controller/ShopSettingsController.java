@@ -85,7 +85,9 @@ public class ShopSettingsController implements ShopSettingsApis {
     @ApiOperation("删除或批量删除车间信息")
     public JsonVO<Integer> deleteShopSeetingController(
             @ApiParam("车间id")@RequestParam List<Long> ids) {
-        return null;
+        int deleteRow = shopsettingsService.removeshopsettings(ids);
+        //返回操作结果
+        return deleteRow > 0 ? JsonVO.success(deleteRow) : JsonVO.fail(null);
     }
     /**
      * 获取车间名称列表
