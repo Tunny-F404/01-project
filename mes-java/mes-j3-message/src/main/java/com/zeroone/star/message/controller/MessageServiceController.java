@@ -78,8 +78,8 @@ public class MessageServiceController implements MessageServiceApis {
      */
     @ApiOperation("发送系统通知")
     @PostMapping("/send-notice")
-    public JsonVO<ResultStatus> sendNotice(@ApiParam("系统通知消息") @RequestBody SystemNotificationDTO systemNotificationDTO) {
-        return null;
+    public ResultStatus sendNotice(@ApiParam("系统通知消息") @RequestBody SystemNotificationDTO systemNotificationDTO) {
+        return iSysMessageService.sendNotice(systemNotificationDTO);
     }
 }
 

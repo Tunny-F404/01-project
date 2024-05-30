@@ -16,9 +16,13 @@ import com.zeroone.star.project.j3.vo.LoginResultVO;
 
 import com.zeroone.star.project.j3.vo.LoginVO;
 import com.zeroone.star.project.vo.ResultStatus;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.time.Instant;
 import java.util.Optional;
 
@@ -38,6 +42,15 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
 
     @Autowired
     private SessionService sessionService;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Resource
+    private RocketMQTemplate rocketMQTemplate;
+
+    @Value("${system-notice-topic}")
+    private String systemNotice;
 
     @Override
     public LoginResultVO login(LoginDTO loginDTO) {
@@ -80,6 +93,14 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
 
     @Override
     public ResultStatus sendNotice(SystemNotificationDTO systemNotificationDTO) {
-        return null;
+        // 消息验证
+        try {
+            rocketMQTemplate.asyncSend(systemNotice, systemNotificationDTO, null, 30000);
+            return ResultStatus.SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return ResultStatus.FAIL;
+        }
     }
 }

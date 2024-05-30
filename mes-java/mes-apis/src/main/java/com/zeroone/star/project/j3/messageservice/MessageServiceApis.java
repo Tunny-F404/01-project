@@ -35,7 +35,7 @@ public interface MessageServiceApis {
 
     ResultStatus clientLogout(LogoutDTO logoutDTO);
 
-    JsonVO<ResultStatus> sendNotice(SystemNotificationDTO systemNotificationDTO);
+    ResultStatus sendNotice(SystemNotificationDTO systemNotificationDTO);
 
 
 }
