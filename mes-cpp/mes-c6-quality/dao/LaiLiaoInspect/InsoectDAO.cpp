@@ -85,10 +85,10 @@ Inspect_detailDO InspectDAO::selectWithID(const int & line_id)
 
 //新增检验表
 uint64_t InspectDAO::insert(const InspectDO& iObj)
-{
-	string sql = "INSERT INTO `qc_iqc` ( `line_id`,`code`,`name`,`template_id`, `vendor_id`, `vendor_code`,`vendor_name`,`vendor_nick`,`vendor_batch`,`item_code`,`item_name` ,`quantity_recived`,`quantity_check`,`quantity_unqualified`,`check_result`,`recive_date`,`inspect_date`,`inspector`,`list_status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,)";
+{                                  //`line_id`,
+	string sql = "INSERT INTO `qc_iqc` ( `code`,`name`,`template_id`, `vendor_id`, `vendor_code`,`vendor_name`,`vendor_nick`,`vendor_batch`,`item_code`,`item_name` ,`quantity_recived`,`quantity_check`,`quantity_unqualified`,`check_result`,`recive_date`,`inspect_date`,`inspector`,`list_status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,)";
 	return sqlSession->executeInsert(sql, "%ull%s%s%ull%ull%s%s%s%s%s%s%i%i%i%s%s%s%s%s",
-		iObj.getLine_id(),
+		//iObj.getLine_id(),
 		iObj.getCode(),
 		iObj.getName(),
 		iObj.getTemplate_id(),

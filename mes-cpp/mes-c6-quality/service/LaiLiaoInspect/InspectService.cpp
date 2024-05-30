@@ -49,15 +49,15 @@ Inspect_detailDTO::Wrapper InspectService::list_detailone(const int& line_id)
 	return dto;
 }
 
-//uint64_t InspectService::saveData(const InspectDTO::Wrapper& dto)
-//{
-//	// 组装DO数据
-//	InspectDO data;
-//	ZO_STAR_DOMAIN_DTO_TO_DO(data,dto,Code,code,  Name, name,  Template_id, template_id,  Vendor_id, vendor_id,  Vendor_code, vendor_code,  Vendor_name, vendor_name,  Vendor_nick, vendor_nick,  Vendor_batch, vendor_batch,  Item_code, item_code,  Item_name, item_name,  Quantity_recived, quantity_recived,  Quantity_check, quantity_check,  Quantity_unqualified, quantity_unqualified,  Check_result, check_result,  Recive_date, recive_date,  Inspect_date, inspect_date,  Inspector, inspector, List_status, list_status);
-//		// 执行数据添加
-//		InspectDAO dao;
-//	return dao.insert(data);
-//}
+uint64_t InspectService::saveData(const InspectDTO::Wrapper& dto)
+{
+	// 组装DO数据
+	InspectDO data;
+	ZO_STAR_DOMAIN_DTO_TO_DO(data,dto,Code,code,  Name, name,  Template_id, template_id,  Vendor_id, vendor_id,  Vendor_code, vendor_code,  Vendor_name, vendor_name,  Vendor_nick, vendor_nick,  Vendor_batch, vendor_batch,  Item_code, item_code,  Item_name, item_name,  Quantity_recived, quantity_recived,  Quantity_check, quantity_check,  Quantity_unqualified, quantity_unqualified,  Check_result, check_result,  Recive_date, recive_date,  Inspect_date, inspect_date,  Inspector, inspector, List_status, list_status);
+		// 执行数据添加
+		InspectDAO dao;
+	return dao.insert(data);
+}
 //
 //bool InspectService::updateData(const InspectDTO::Wrapper& dto)
 //{
