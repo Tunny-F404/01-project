@@ -7,6 +7,7 @@ import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.zeroone.star.scheduleplan.mapper.CalPlanMapper;
 import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import org.mapstruct.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,6 @@ interface MsPlanMapper {
 
 @Service
 public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> implements ICalPlanService {
-@Resource
 
     @Resource
     MsPlanMapper msPlanMapper;
@@ -77,10 +77,5 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
         return null;
     }
 
-    public static void main(String[] args) {
-        CalPlanServiceImpl service=new CalPlanServiceImpl();
-        List<Long> l=new ArrayList<>();
-        l.add((long)5);
-        service.removeSchPlan(l);
-    }
+
 }
