@@ -21,6 +21,7 @@
 #define _COMPRODTO_H_
 
 #include "../../GlobalInclude.h"
+#include "domain/dto/process/ProcessListDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
@@ -32,20 +33,20 @@ class ComProListDTO : public oatpp::DTO
 	//初始化
 	DTO_INIT(ComProListDTO, DTO);
 	//字段	
-	//唯一标识
+	//工序id
 	API_DTO_FIELD_DEFAULT(UInt64, process_id, ZH_WORDS_GETTER("pro.fields.proId"));
 	//工序编码
 	API_DTO_FIELD_DEFAULT(String, process_code, ZH_WORDS_GETTER("pro.fields.proCode"));
 	//工序名称
 	API_DTO_FIELD_DEFAULT(String, process_name, ZH_WORDS_GETTER("pro.fields.proName"));
 	//是否为关键工序
-	API_DTO_FIELD_DEFAULT(String, key_flag, ZH_WORDS_GETTER("pro.fields.key_flag"), true, "No");
+	API_DTO_FIELD_DEFAULT(String, key_flag, ZH_WORDS_GETTER("pro.fields.key_flag"), true, "N");
 	//下一道工序
 	API_DTO_FIELD_DEFAULT(String, next_process_name, ZH_WORDS_GETTER("pro.fields.proName"), false, "01star");
 	//下一道的工序关系
-	API_DTO_FIELD_DEFAULT(String, link_type, ZH_WORDS_GETTER("pro.fields.type"), false, "01star");
+	API_DTO_FIELD_DEFAULT(String, link_type, ZH_WORDS_GETTER("pro.fields.type"), false, "SS");
 	//是否质检
-	API_DTO_FIELD_DEFAULT(String, is_check, ZH_WORDS_GETTER("pro.fields.check"), true, "No");
+	API_DTO_FIELD_DEFAULT(String, is_check, ZH_WORDS_GETTER("pro.fields.check"), true, "N");
 	//准备时间
 	API_DTO_FIELD(Int32, default_pre_time, ZH_WORDS_GETTER("pro.fields.preTime"), false, 0);
 	//等待时间
@@ -61,6 +62,8 @@ class ComProListDTO : public oatpp::DTO
 class ComProPageDTO : public PageDTO<ComProListDTO::Wrapper>
 {
 	DTO_INIT(ComProPageDTO, PageDTO<ComProListDTO::Wrapper>);
+	//字段	
+
 };
 
 /*
@@ -70,17 +73,25 @@ class ModifyProDTO : public ComProListDTO
 {
 	//初始化
 	DTO_INIT(ModifyProDTO, ComProListDTO);
+	//记录id
+	API_DTO_FIELD(UInt64, record_id, ZH_WORDS_GETTER("pro.fields.record_id"), false, 1);
 	//备注
 	API_DTO_FIELD(String, Remark, ZH_WORDS_GETTER("pro.fields.remark"), false, "");
 };
 /*
 新增组成工序
 */
-class NewProcessDTO : public ModifyProDTO
+class NewProcessDTO : public ComProListDTO
 {
 	//初始化
-	DTO_INIT(NewProcessDTO, ModifyProDTO);
+	DTO_INIT(NewProcessDTO, ComProListDTO);
 	//字段
+	//工艺路线id
+	API_DTO_FIELD_DEFAULT(UInt64, route_id, ZH_WORDS_GETTER("pro.fields.routeId"));
+	//下一道工序id
+	API_DTO_FIELD_DEFAULT(UInt64, nextprocess_id, ZH_WORDS_GETTER("pro.fields.nextprocess_id"));
+	//备注
+	API_DTO_FIELD(String, Remark, ZH_WORDS_GETTER("pro.fields.remark"), false, "");
 };
 
 #include OATPP_CODEGEN_END(DTO)

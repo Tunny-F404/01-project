@@ -51,6 +51,9 @@ pro:
   summary: 新增组成工序
  fields:
   proId: 序号
+  record_id: 记录id
+  routeId: 工艺id
+  nextprocess_id: 下一道工序id
   proName: 工序名称
   proCode: 工序编码
   key_flag: 关键工序

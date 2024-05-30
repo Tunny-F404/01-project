@@ -205,21 +205,80 @@ StringJsonVO::Wrapper ProcessController::execQueryProcess(const ProcessListQuery
 
 	return jvo;
 }
+
 //8 获取组成工序列表
 ProJsonVO::Wrapper ProcessController::execProTable(const ProQuery::Wrapper& query)
 {
-	return ProJsonVO::Wrapper();
+	// 定义一个Service
+	ComProService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = ProJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
+
 //9 添加组成工序
 Uint64JsonVO::Wrapper ProcessController::execaddComProcess(const NewProcessDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验
+	if (!dto->process_code || !dto->process_name || !dto->key_flag || !dto->is_check)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->process_code->empty() || dto->process_name->empty() || dto->key_flag->empty() || dto->is_check->empty())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	ComProService service;
+	// 执行数据新增
+	uint64_t id = service.saveData(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }
+
 //10 修改组成工序
 Uint64JsonVO::Wrapper ProcessController::execModifyProcess(const ModifyProDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->record_id || dto->record_id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	ComProService service;
+	// 执行数据修改
+	if (service.updateData(dto)) {
+		jvo->success(dto->process_id);
+	}
+	else
+	{
+		jvo->fail(dto->process_id);
+	}
+	// 响应结果
+	return jvo;
 }
+
 // 11 添加工艺关联产品
 Uint64JsonVO::Wrapper ProcessController::execAddRelatePro(const AddRelateProDTO::Wrapper& dto)
 {
@@ -253,6 +312,7 @@ Uint64JsonVO::Wrapper ProcessController::execAddRelatePro(const AddRelateProDTO:
 	//响应结果
 	return jvo;
 }
+
 // 12 修改工艺关联产品
 Uint64JsonVO::Wrapper ProcessController::execModifyRelatePro(const ModRelateProDTO::Wrapper& dto)
 {
@@ -278,6 +338,7 @@ Uint64JsonVO::Wrapper ProcessController::execModifyRelatePro(const ModRelateProD
 	// 响应结果
 	return jvo;
 }
+
 // 13 获取产品制程物料BOM列表
 ProMaterialPageJsonVO::Wrapper ProcessController::execQueryProMaterial(const ProMaterialQuery::Wrapper& query, const PayloadDTO& payload)
 {
@@ -290,6 +351,7 @@ ProMaterialPageJsonVO::Wrapper ProcessController::execQueryProMaterial(const Pro
 	jvo->success(result);
 	return jvo;
 }
+
 // 14 删除工艺流程
 Uint64JsonVO::Wrapper ProcessController::execRemoveProRoute(const UInt64& id)
 {

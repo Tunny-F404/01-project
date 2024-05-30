@@ -31,9 +31,9 @@ class ProRouteProcessDO
 	//与下一道工序关系
 	CC_SYNTHESIZE(string, linktype, LinkType);
 	//准备时间
-	CC_SYNTHESIZE(int, defaultpretime, DefaultPreTime);
+	CC_SYNTHESIZE(int32_t, defaultpretime, DefaultPreTime);
 	//等待时间
-	CC_SYNTHESIZE(string, defaultsuftime, DefaultSufTime);
+	CC_SYNTHESIZE(int32_t, defaultsuftime, DefaultSufTime);
 	//甘特图显示颜色
 	CC_SYNTHESIZE(string, colorcode, ColorCode);
 	//关键工序
