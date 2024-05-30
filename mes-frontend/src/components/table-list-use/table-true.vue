@@ -1,8 +1,9 @@
 <script setup>
+import { ref } from "vue";
+
 import tableFrame from "@/components/table-list-use/table-text.vue";
 import popUp from "@/components/table-list-use/table-components/pop-up.vue";
 import request from "@/apis/request.js"; //加入请求
-import { ref } from "vue";
 
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整

@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from "vue";
+
 const dialogVisible = ref(false);
-//定义表单内容，现在有点bug,
-//1,判断不了是修改还是增加组件，两个的判断条件我这没有写好
+// 定义表单内容，现在有点bug,
+// 1,判断不了是修改还是增加组件，两个的判断条件我这没有写好
 const formRef = ref();
 
 const formModel = ref({
@@ -12,20 +13,20 @@ const formModel = ref({
 	time: "",
 });
 
-//提交
-const onSubmit = async () => {
+// 提交
+async function onSubmit() {
 	await formRef.value.validate();
-	//中间要补充调用哪一个，根据接口的不同，如编辑和增加
+	// 中间要补充调用哪一个，根据接口的不同，如编辑和增加
 	ElMessage.success("成功");
 	dialogVisible.value = false;
-};
+}
 
-const open = (row) => {
+function open(row) {
 	console.log(row);
 	dialogVisible.value = true;
 	formModel.value = { ...row };
-};
-//规则由接口文档来定，这里只供参考
+}
+// 规则由接口文档来定，这里只供参考
 const rules = {
 	classify: [
 		{ required: true, message: "分类名必须是 1-10 位的非空字符", trigger: "blur" },
@@ -46,20 +47,20 @@ const rules = {
 	time: [
 		{ required: true, message: "请输入产品时间", trigger: "blur" },
 		{
-			pattern: /^[0-9]{1,4}.[0-9]{1,2}.[0-9]{1,2}$/,
+			pattern: /^\d{1,4}.\d{1,2}.\d{1,2}$/,
 			message: "时间必须是 xxxx.xx.xx的非空字符",
 			trigger: "blur",
 		},
 	],
 };
 defineExpose({
-	open, //对外暴露的方法
+	open, // 对外暴露的方法
 });
 </script>
 
 <template>
 	<el-dialog v-model="dialogVisible" :title="formModel.sure !== undefined ? '添加分类' : '编辑分类'" width="500">
-		<!--:before-close="handleClose"//这个属性加上去要二次取消才可以-->
+		<!-- :before-close="handleClose"//这个属性加上去要二次取消才可以 -->
 		<el-form ref="formRef" :model="formModel" :rules="rules" label-width="100px" style="padding-right: 30px">
 			<el-form-item label="分类名称" prop="classify">
 				<el-input v-model="formModel.classify" placeholder="请输入分类名称"></el-input>
