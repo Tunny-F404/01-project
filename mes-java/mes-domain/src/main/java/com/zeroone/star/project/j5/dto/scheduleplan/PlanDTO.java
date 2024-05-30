@@ -3,6 +3,7 @@ package com.zeroone.star.project.j5.dto.scheduleplan;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,9 +35,11 @@ public class PlanDTO {
     private String calendarType;
 
     @ApiModelProperty(value = "开始日期", example = "2023-01-01")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // 指定日期格式
     private LocalDate startDate;
 
     @ApiModelProperty(value = "结束日期", example = "2023-12-31")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // 指定日期格式
     private LocalDate endDate;
 
     @ApiModelProperty(value = "轮班方式", example = "白班")

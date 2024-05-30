@@ -3,7 +3,6 @@ package com.zeroone.star.scheduleplan.controller;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
-import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.j5.scheduleplan.SchedulePlanApis;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
@@ -13,8 +12,8 @@ import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.Min;
@@ -24,6 +23,7 @@ import java.util.List;
  * <p>
  * 描述：排班计划控制器
  * </p>
+ *
  * @author interstellar
  * @version 1.0.0
  */
@@ -33,6 +33,7 @@ import java.util.List;
 public class SchedulePlanController implements SchedulePlanApis {
     @Resource
     ICalPlanService calPlanService;
+
     @GetMapping("/query-all")
     @ApiOperation("获取计划列表（条件+分页）")
     public JsonVO<PageDTO<PlanListVO>> queryPlanList(@Validated PlanPageQuery condition) {
@@ -41,7 +42,7 @@ public class SchedulePlanController implements SchedulePlanApis {
 
     @GetMapping("query-by-id")
     @ApiOperation("获取计划详情")
-    public JsonVO<PlanVO> queryPlanDetails(@Min(value = 1,message = "planId最小值为1") @RequestParam Long planId) {
+    public JsonVO<PlanVO> queryPlanDetails(@Min(value = 1, message = "planId最小值为1") @RequestParam Long planId) {
         return null;
     }
 
@@ -60,8 +61,8 @@ public class SchedulePlanController implements SchedulePlanApis {
     @ApiOperation(value = "删除排班计划(可批量删除)")
     @DeleteMapping("delete-schedule-plan")
     @Override
-    public JsonVO<Integer> removeSchPlan(List<Long> rems) {
-        return calPlanService.removeSchPlan(rems)?JsonVO.success(1):JsonVO.fail(0);
+    public JsonVO<Integer> removeSchPlan(@RequestBody List<Long> rems) {
+        return calPlanService.removeSchPlan(rems) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
 
@@ -69,7 +70,7 @@ public class SchedulePlanController implements SchedulePlanApis {
     @PutMapping("modify-plans-status")
     @Override
     public JsonVO<Integer> modifySchPlanStatus(PlanDTO planDTO) {
-        return calPlanService.modifySchPlanStatus(planDTO)?JsonVO.success(1):JsonVO.fail(0);
+        return calPlanService.modifySchPlanStatus(planDTO) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
 
