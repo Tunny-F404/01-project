@@ -150,10 +150,7 @@ public:
  */
 class Inspect_detailDO :public InspectDO
 {
-public:
-	Inspect_detailDO() {
-		
-	}
+
 };
 
 class Inspect_tableDO :public InspectDO

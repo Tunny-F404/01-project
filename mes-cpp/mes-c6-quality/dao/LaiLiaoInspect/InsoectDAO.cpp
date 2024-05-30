@@ -62,7 +62,7 @@ uint64_t InspectDAO::count(const InspectQuery::Wrapper& query)
 std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT line_id,code,name,template_id,vendor_id,vendor_code,vendor_name,vendor_nick,vendor_batch,item_code,item_name,quantity_recived,quantity_check,quantity_unqualified,check_result,recive_date,inspect_date,inspector,list_status FROM  qc_iqc";
+	sql << "SELECT line_id,code,name,template_id,vendor_name,vendor_nick,vendor_batch,item_code,item_name,quantity_recived,quantity_check,quantity_unqualified,check_result,recive_date,inspect_date,inspector,list_status FROM  qc_iqc";
 	SAMPLE_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	InspectMapper mapper;
@@ -70,15 +70,15 @@ std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& que
 	return sqlSession->executeQuery<InspectDO, InspectMapper>(sqlStr, mapper, params);
 }
 
-std::list<Inspect_detailDO> InspectDAO::selectWith(const Inspect_detailQuery::Wrapper& query)
+Inspect_detailDO InspectDAO::selectWith(const Inspect_detailQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT line_id,code,name,template_id,vendor_id,vendor_code,vendor_name,vendor_nick,vendor_batch,item_code,item_name,quantity_recived,quantity_check,quantity_unqualified,check_result,recive_date,inspect_date,inspector,list_status FROM  qc_iqc";
+	sql << "SELECT line_id FROM  qc_iqc";
 	SAMPLE_TERAM_PARSE(query, sql);
 	InspectMapper mapper;
 	string sqlStr = sql.str();
 	return sqlSession->executeQuery<Inspect_detailDO, InspectMapper>(sqlStr, mapper, params);
-
+}
 
 //新增检验表
 uint64_t InspectDAO::insert(const InspectDO& iObj)
@@ -107,34 +107,34 @@ uint64_t InspectDAO::insert(const InspectDO& iObj)
 	);
 }
 
-//修改检验表
-int InspectDAO::update(const InspectDO& uObj)
-{
-	string sql = "UPDATE `qc_iqc` SET `code` = ?, `name`= ?, `template_id`= ?, `vendor_id`= ? , `vendor_code`= ?, `vendor_name`= ?, `vendor_nick`= ?, `vendor_batch`= ?, `item_code`= ?, `item_name`= ?, `quantity_recived`= ? ,`quantity_check`=?,`quantity_unqualified`=?,`check_result`=?,`recive_date`=?,`inspect_date`=?,`inspector`=?,`list_status`=? WHERE `line_id` = ?;";
-	return sqlSession->executeUpdate(sql, "%ull%ull%s%s%s%s%d%s%s%s%s%s%ull",
-		uObj.getCode(),
-		uObj.getName(),
-		uObj.getTemplate_id(),
-		uObj.getVendor_id(),
-		uObj.getVendor_code(),
-		uObj.getVendor_name(),
-		uObj.getVendor_nick(),
-		uObj.getVendor_batch(),
-		uObj.getItem_code(),
-		uObj.getItem_name(),
-		uObj.getQuantity_recived(),
-		uObj.getQuantity_check(),
-		uObj.getQuantity_unqualified(),
-		uObj.getCheck_result(),
-		uObj.getRecive_date(),
-		uObj.getInspect_date(),
-		uObj.getInspector(),
-		uObj.getList_status(),
-		uObj.getLine_id());
-}
-
-int InspectDAO::deleteById(uint64_t id)
-{
-	string sql = "DELETE FROM `qc_iqc` WHERE `line_id`=?";
-	return sqlSession->executeUpdate(sql, "%ull", id);
-}
+////修改检验表
+//int InspectDAO::update(const InspectDO& uObj)
+//{
+//	string sql = "UPDATE `qc_iqc` SET `code` = ?, `name`= ?, `template_id`= ?, `vendor_id`= ? , `vendor_code`= ?, `vendor_name`= ?, `vendor_nick`= ?, `vendor_batch`= ?, `item_code`= ?, `item_name`= ?, `quantity_recived`= ? ,`quantity_check`=?,`quantity_unqualified`=?,`check_result`=?,`recive_date`=?,`inspect_date`=?,`inspector`=?,`list_status`=? WHERE `line_id` = ?;";
+//	return sqlSession->executeUpdate(sql, "%ull%ull%s%s%s%s%d%s%s%s%s%s%ull",
+//		uObj.getCode(),
+//		uObj.getName(),
+//		uObj.getTemplate_id(),
+//		uObj.getVendor_id(),
+//		uObj.getVendor_code(),
+//		uObj.getVendor_name(),
+//		uObj.getVendor_nick(),
+//		uObj.getVendor_batch(),
+//		uObj.getItem_code(),
+//		uObj.getItem_name(),
+//		uObj.getQuantity_recived(),
+//		uObj.getQuantity_check(),
+//		uObj.getQuantity_unqualified(),
+//		uObj.getCheck_result(),
+//		uObj.getRecive_date(),
+//		uObj.getInspect_date(),
+//		uObj.getInspector(),
+//		uObj.getList_status(),
+//		uObj.getLine_id());
+//}
+//
+//int InspectDAO::deleteById(uint64_t id)
+//{
+//	string sql = "DELETE FROM `qc_iqc` WHERE `line_id`=?";
+//	return sqlSession->executeUpdate(sql, "%ull", id);
+//}
