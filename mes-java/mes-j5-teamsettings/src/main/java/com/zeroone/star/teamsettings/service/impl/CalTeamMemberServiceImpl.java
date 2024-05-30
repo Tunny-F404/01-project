@@ -15,6 +15,39 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring")
+interface MsTeamMemberMapper {
+    /**
+     * 成员实体类转DTO
+     * @param calTeamMember 成员实体类
+     * @return 成员DTO
+     */
+    MemberDTO memberToMemberDTO(CalTeamMember calTeamMember);
+
+    /**
+     * 成员DTO转实体类
+     * @param memberDTO 成员DTO
+     * @return 成员实体类
+     */
+    CalTeamMember memberDTOToMember(MemberDTO memberDTO);
+
+    /**
+     * 成员DTO列表转实体类列表
+     * @param memberDTOList 成员DTO列表
+     * @return 成员实体类列表
+     */
+    List<CalTeamMember> memberDTOListToMemberList(List<MemberDTO> memberDTOList);
+
+    /**
+     * 成员实体类列表转DTO列表
+     * @param calTeamMemberList 成员实体类列表
+     * @return 成员DTO列表
+     */
+    List<MemberDTO> memberListToMemberDTOList(List<CalTeamMember> calTeamMemberList);
+}
+
 
 /**
  * <p>
