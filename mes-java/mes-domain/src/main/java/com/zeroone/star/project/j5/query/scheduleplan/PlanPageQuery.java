@@ -22,11 +22,11 @@ import java.time.LocalDate;
 @ApiModel("查询排班计划数据对象")
 public class PlanPageQuery extends PageQuery {
 
-    @ApiModelProperty(value = "班组类型",example = "机加工")
-    private String teamType;
+    @ApiModelProperty(value = "班组类型",example = "ZS")
+    private String calendarType;
 
     @ApiModelProperty(value = "计划编号",example = "PLAN20240511")
-    private String planNumber;
+    private String planCode;
 
     @ApiModelProperty(value = "计划名称",example = "PlanA")
     private String planName;

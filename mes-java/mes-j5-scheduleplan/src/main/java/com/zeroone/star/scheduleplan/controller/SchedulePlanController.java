@@ -35,8 +35,8 @@ public class SchedulePlanController implements SchedulePlanApis {
     @GetMapping("/query-all")
     @ApiOperation("获取计划列表（条件+分页）")
     public JsonVO<PageDTO<PlanListVO>> queryPlanList(@Validated PlanPageQuery condition) {
-
-        return null;
+        PageDTO<PlanListVO> planList =  calPlanService.queryPlanList(condition);
+        return planList != null ? JsonVO.success(planList) : JsonVO.fail(null);
     }
 
     @GetMapping("query-by-id")
