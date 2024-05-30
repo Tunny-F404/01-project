@@ -3,6 +3,7 @@ package com.zeroone.star.scheduleplan.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
@@ -42,4 +43,11 @@ public interface ICalPlanService extends IService<CalPlan> {
      * @return 添加结果
      */
     boolean addPlan(AddPlanDTO condition);
+
+    /**
+     * 修改计划
+     * @param planDTO 修改数据
+     * @return 修改结果
+     */
+    boolean modifyPlan(PlanDTO planDTO);
 }

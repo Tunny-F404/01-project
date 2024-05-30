@@ -23,18 +23,18 @@ public class AddPlanDTO {
     @ApiModelProperty(value = "计划编号", example = "PL12345")
     private String planCode;
 
-    @ApiModelProperty(value = "计划名称", example = "年度计划")
+    @ApiModelProperty(value = "计划名称", example = "PlanA")
     private String planName;
 
     @ApiModelProperty(value = "班组类型", example = "CNC")
     private String calendarType;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    @ApiModelProperty(value = "开始日期", example = "2023-01-01")
+    @ApiModelProperty(value = "开始日期", example = "2023-01-01T12:00:00")
     private LocalDateTime startDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    @ApiModelProperty(value = "结束日期", example = "2023-12-31")
+    @ApiModelProperty(value = "结束日期", example = "2023-12-31T20:00:00")
     private LocalDateTime endDate;
 
     @ApiModelProperty(value = "轮班方式", example = "白班")

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
@@ -40,6 +41,12 @@ interface MsPlanMapper {
      */
     CalPlan addPlanDTOToPlan(AddPlanDTO addPlanDTO);
 
+    /**
+     * 计划DTO转计划实体类
+     * @param planDTO
+     * @return CalPlan 计划实体类
+     */
+    CalPlan PlanDTOToPlan(PlanDTO planDTO);
 }
 /**
  * <p>
@@ -85,11 +92,17 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
         CalPlan plan = msPlanMapper.addPlanDTOToPlan(condition);
         return baseMapper.insert(plan) > 0;
     }
-//    @Override
-//    public boolean addPlan(AddPlanDTO condition) {
-//        CalPlan plan = msPlanMapper.addPlanDTOToPlan(condition);
-//        return baseMapper.insert(plan) > 0;//判断插入条数是否大于0
-//    }
+
+    @Override
+    public boolean modifyPlan(PlanDTO planDTO) {
+        CalPlan calPlan = baseMapper.selectById(planDTO.getPlanId());
+        if(calPlan == null){
+            return false;
+        }
+        CalPlan plan = msPlanMapper.PlanDTOToPlan(planDTO);
+        int rows = baseMapper.updateById(plan);
+        return rows > 0;
+    }
 
 
 }

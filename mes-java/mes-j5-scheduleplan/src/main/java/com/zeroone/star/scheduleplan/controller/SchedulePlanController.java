@@ -53,9 +53,9 @@ public class SchedulePlanController implements SchedulePlanApis {
     }
 
     @ApiOperation("修改计划")
-    @PutMapping("modify-team")
-    public JsonVO<Integer> modifyTeam(PlanDTO planDTO) {
-        return null;
+    @PutMapping("modify-plan")
+    public JsonVO<Integer> modifyPlan(PlanDTO planDTO) {
+        return calPlanService.modifyPlan(planDTO) ? JsonVO.success(1):JsonVO.fail(0);
     }
 
     @ApiOperation(value = "删除排班计划(可批量删除)")
