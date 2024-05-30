@@ -129,7 +129,9 @@ ExportOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportOrderQue
 		});
 	excel.writeVectorToFile(fileName, sheetName, data);
 	FastDfsClient f("192.168.46.128", 22122);
-	f.uploadFile("./public/excel/workorder.xlsx");
+	string t=f.uploadFile("./public/excel/workorder.xlsx");
+	string save = "D:/BaiduNetdiskDownload";
+	f.downloadFile(t, &save);
 	return pages;
 }
 ExportBomOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportBomOrderQuery::Wrapper& query)
@@ -193,5 +195,9 @@ ExportBomOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportBomOr
 		ZH_WORDS_GETTER("productionorder.excel.header.h32") ,
 		});
 	excel.writeVectorToFile(fileName, sheetName, data);
+	FastDfsClient f("192.168.46.128", 22122);
+	string t = f.uploadFile("./public/excel/workorderbom.xlsx");
+	string save = "D:/BaiduNetdiskDownload";
+	f.downloadFile(t, &save);
 	return pages;
 }
