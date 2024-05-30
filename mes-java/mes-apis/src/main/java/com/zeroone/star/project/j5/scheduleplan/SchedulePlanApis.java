@@ -53,7 +53,7 @@ public interface SchedulePlanApis {
      * @author brickbreaker
      * @return 修改结果
      */
-    JsonVO<Integer> modifyTeam(PlanDTO planDTO);
+    JsonVO<Integer> modifyPlan(PlanDTO planDTO);
 
     /**
      * 删除排版计划(可批量删除)

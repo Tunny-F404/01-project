@@ -13,8 +13,8 @@ import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.Min;
@@ -35,25 +35,27 @@ public class SchedulePlanController implements SchedulePlanApis {
     @GetMapping("/query-all")
     @ApiOperation("获取计划列表（条件+分页）")
     public JsonVO<PageDTO<PlanListVO>> queryPlanList(@Validated PlanPageQuery condition) {
-        return null;
+        PageDTO<PlanListVO> planList =  calPlanService.queryPlanList(condition);
+        return planList != null ? JsonVO.success(planList) : JsonVO.fail(null);
     }
 
     @GetMapping("query-by-id")
     @ApiOperation("获取计划详情")
     public JsonVO<PlanVO> queryPlanDetails(@Min(value = 1,message = "planId最小值为1") @RequestParam Long planId) {
-        return null;
+        PlanVO planDetails = calPlanService.queryPlanDetails(planId);
+        return planDetails != null ? JsonVO.success(planDetails) : JsonVO.fail(null);
     }
 
     @ApiOperation("添加计划")
     @PostMapping("add-plan")
     public JsonVO<Integer> addPlan(AddPlanDTO condition) {
-        return null;
+        return calPlanService.addPlan(condition) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
     @ApiOperation("修改计划")
-    @PutMapping("modify-team")
-    public JsonVO<Integer> modifyTeam(PlanDTO planDTO) {
-        return null;
+    @PutMapping("modify-plan")
+    public JsonVO<Integer> modifyPlan(PlanDTO planDTO) {
+        return calPlanService.modifyPlan(planDTO) ? JsonVO.success(1):JsonVO.fail(0);
     }
 
     @ApiOperation(value = "删除排班计划(可批量删除)")
