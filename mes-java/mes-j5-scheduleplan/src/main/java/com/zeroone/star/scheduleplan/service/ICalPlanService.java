@@ -39,6 +39,7 @@ public interface ICalPlanService extends IService<CalPlan> {
 
     /**
      * 添加计划
+     * @author brickbreaker
      * @param condition 添加条件
      * @return 添加结果
      */
@@ -46,6 +47,7 @@ public interface ICalPlanService extends IService<CalPlan> {
 
     /**
      * 修改计划
+     * @author brickbreaker
      * @param planDTO 修改数据
      * @return 修改结果
      */
