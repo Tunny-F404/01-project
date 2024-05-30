@@ -1,4 +1,4 @@
-pragma once
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
@@ -22,9 +22,8 @@ pragma once
 
 #include "ApiHelper.h"
 #include "ServerInfo.h"
-#include "../../domain/vo/equipment/EquipmentTypeTreeVO.h"
-#include "../../domain/query/equipment/EquipmentQuery.h"
-#include "../../domain/vo/deviceResource/DeviceResourcetVO.h"
+#include "../../domain/query/deviceResource/DeviceResourceQuery.h"
+#include "../../domain/vo/deviceResource/DeviceResourceVO.h"
 
 
 // 0 定义API控制器使用宏
@@ -55,16 +54,16 @@ public:
 		//API_DEF_ADD_QUERY_PARAMS(String, "equimentName", ZH_WORDS_GETTER("equipmentQuery.equimentName"), "测试人员", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/deviceResource/getDeviceResourcetList", getDeviceResourcetList, null, API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/deviceResource/getDeviceResourcetList", getDeviceResourcetList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
-		//API_HANDLER_QUERY_PARAM(equipmentQuery, EquipmentQuery, queryParams);
+		API_HANDLER_QUERY_PARAM(deviceResourceQuery, DeviceResourceQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(executGetDeviceResourcetList(null, authObject->getPayload()));
 	}
 
 private:
 	// 3.3 设备资源分页查询数据
-	DeviceResourcePageVO::Wrapper executGetDeviceResourcetList( const PayloadDTO& payload);
+	DeviceResourcePageVO::Wrapper execGetDeviceResourceList(const DeviceResourceQuery::Wrapper& query, const PayloadDTO& payload);
 };
 
 // 0 取消API控制器使用宏
