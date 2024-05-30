@@ -1,3 +1,50 @@
+equipment:
+ getEquipmentById:
+  summary: 根据设备id获取设备(Path参数)
+ getEquipment:
+  summary: 根据设备id获取设备(Query参数)
+ getEquipmentPage:
+  summary: 获取设备列表(条件 + 分页)
+ getEquipmentTypeTree:
+  summary: 获取设备类型名称树
+ getEquipmentList:
+  summary: 获取设备列表(条件 + 分页) 
+ params:
+  equipmentId:
+   desc: 设备id
+   default: 1
+ equipmentTypeTreeDto:
+  machineryTypeId: 设备id
+  machineryTypeCode: 设备类型编码   
+  machineryTypeName: 设备类型名称
+  enableFlag: 是否启动
+  remark: 备注
+  parentTypeId: 父id
+  child: 子设备类型名称列表
+ equipmentQuery:
+  equimentCode: 设备编码  
+  equimentName: 设备名称
+ equipmentDto:
+  equipmentCode: 设备编码  
+  equipmentName: 设备名称
+  brand: 品牌
+  specificationsAndModels: 规格型号
+  equipmentStatus: 设备状态
+  createTime: 创建时间
+deviceResource:
+ getDeviceResourcetList:
+  summary: 获取资源列表(条件 + 分页)
+ addDeviceResource:
+  summary: 添加资源
+ modifyDeviceResource:
+  summary: 修改资源
+ deleteDeviceResource:
+  summary: 删除资源
+ deviceResourceDTO:
+  deviceResourceId: 设备资源id
+  equipmentCode: 设备编号
+  equipmentName: 设备名称
+  count: 数量
 workstation:
  fields:
   workstationId: 工作站ID
