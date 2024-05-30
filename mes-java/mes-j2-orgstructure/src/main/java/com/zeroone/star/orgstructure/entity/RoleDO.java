@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,8 +20,7 @@ import javax.validation.constraints.Pattern;
  * @author 天衍土豆
  * @since 2024-05-24
  */
-@Getter
-@Setter
+@Data
 @TableName("sys_role")
 public class RoleDO implements Serializable {
 
