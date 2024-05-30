@@ -38,4 +38,6 @@ public interface ISysDictDataService extends IService<SysDictData> {
     public ResponseEntity<byte[]> exportDictData(SysDictDataExportDTO sysDictDataExportDTO) ;
 
     public JsonVO<SysDictDataDetailDTO> getDictData(Long dictCode);
+
+    void removeDictData(Long[] dictCodes);
 }

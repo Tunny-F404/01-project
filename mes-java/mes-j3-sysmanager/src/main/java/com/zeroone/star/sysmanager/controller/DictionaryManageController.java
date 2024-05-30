@@ -113,7 +113,7 @@ public class DictionaryManageController implements DictionaryManageApis {
         try {
             currentUser = userHolder.getCurrentUser();
         } catch (Exception e) {
-            return JsonVO.create(null, ResultStatus.FAIL.getCode(), ResultStatus.FAIL.getMessage());
+            return JsonVO.create(null, ResultStatus.UNAUTHORIZED.getCode(), ResultStatus.UNAUTHORIZED.getMessage());
         }
         Integer data = sysDictDataService.saveDictData(sysDictDataDTO, currentUser);
         return JsonVO.success(data);
@@ -127,7 +127,7 @@ public class DictionaryManageController implements DictionaryManageApis {
         try {
             currentUser = userHolder.getCurrentUser();
         } catch (Exception e) {
-            return JsonVO.create(null, ResultStatus.FAIL.getCode(), ResultStatus.FAIL.getMessage());
+            return JsonVO.create(null, ResultStatus.UNAUTHORIZED.getCode(), ResultStatus.UNAUTHORIZED.getMessage());
         }
         Integer data = sysDictDataService.updateDictData(sysDictDataDTO, currentUser);
         return JsonVO.success(data);
@@ -168,7 +168,8 @@ public class DictionaryManageController implements DictionaryManageApis {
     @ApiOperation(value = "删除字典数据接口")
     @DeleteMapping("remove-dict-data/{dictCodes}")
     public JsonVO<Void> removeDictData(@PathVariable Long[] dictCodes) {
-        return null;
+        sysDictDataService.removeDictData(dictCodes);
+        return JsonVO.success(null);
     }
 
     @Override

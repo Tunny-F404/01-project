@@ -32,13 +32,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
@@ -123,7 +127,7 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
             wrapper.eq(SysDictData::getDictType, sysDictDataDTO.getDictType());
             List<SysDictData> sysDictDataCacheList = baseMapper.selectList(wrapper);
             //存入redis,key为sys_dict:字典类型
-            redisTemplate.opsForValue().set("sys_dict:"+sysDictDataDTO.getDictType(), sysDictDataCacheList);
+            redisTemplate.opsForValue().set("sys_dict:"+sysDictDataDTO.getDictType(), sysDictDataCacheList, 24, TimeUnit.HOURS);
         }else{
             throw new RuntimeException("新增字典数据失败");
         }
@@ -153,11 +157,33 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
             wrapper.eq(SysDictData::getDictType, sysDictDataDTO.getDictType());
             List<SysDictData> sysDictDataCacheList = baseMapper.selectList(wrapper);
             //存入redis,key为sys_dict:字典类型
-            redisTemplate.opsForValue().set("sys_dict:"+sysDictDataDTO.getDictType(), sysDictDataCacheList);
+            redisTemplate.opsForValue().set("sys_dict:"+sysDictDataDTO.getDictType(), sysDictDataCacheList, 24, TimeUnit.HOURS);
         }else{
             throw new RuntimeException("修改字典数据失败");
         }
         return row;
+    }
+
+    @Transactional
+    @Override
+    public void removeDictData(Long[] dictCodes) {
+        //查询要删除的字典数据列表对应的字典类型名列表
+        LambdaQueryWrapper<SysDictData> wrapper = new LambdaQueryWrapper<>();
+        wrapper.select(SysDictData::getDictType)
+                .in(SysDictData::getDictCode,Arrays.asList(dictCodes));
+        List<String> dictTypeNameList = baseMapper.selectList(wrapper).stream()
+                .map(SysDictData::getDictType)
+                .distinct()
+                .collect(Collectors.toList());
+        //删除字典数据
+        baseMapper.deleteBatchIds(Arrays.asList(dictCodes));
+        //根据字典类型名列表更新缓存
+        for (String dictTypeName : dictTypeNameList){
+            LambdaQueryWrapper<SysDictData> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.eq(SysDictData::getDictType, dictTypeName);
+            List<SysDictData> dictDataCacheList = baseMapper.selectList(queryWrapper);
+            redisTemplate.opsForValue().set("sys_dict:"+dictTypeName, dictDataCacheList, 24, TimeUnit.HOURS);
+        }
     }
 
     @Override
