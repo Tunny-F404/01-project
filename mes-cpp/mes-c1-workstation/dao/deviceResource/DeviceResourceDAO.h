@@ -21,6 +21,7 @@
 #define _DEVICE_RESOURCE_DAO_
 #include "BaseDAO.h"
 #include "../../domain/do/deviceResource/DeviceResourceDO.h"
+#include "../../domain/query/deviceResource/DeviceResourceQuery.h"
 
 /**
  * 示例表数据库操作实现
@@ -29,8 +30,14 @@ class DeviceResourceDAO : public BaseDAO
 {
 public:
 	// 统计数据条数
-	//uint64_t count(const EquipmentQuery::Wrapper& query);
+	uint64_t count(const DeviceResourceQuery::Wrapper& query);
 	// 分页查询数据
-	list<DeviceResourceDO> selectWithList();
+	list<DeviceResourceDO> selectWithPage(const DeviceResourceQuery::Wrapper& query);
+	// 插入数据
+	uint64_t insert(const DeviceResourceDO& iObj);
+	// 修改数据
+	int update(const DeviceResourceDO& uObj);
+	// 通过ID删除数据
+	int deleteById(uint64_t deviceResourceId);
 };
-#endif // !_SAMPLE_DAO_
+#endif // !_DEVICE_RESOURCE_DAO_

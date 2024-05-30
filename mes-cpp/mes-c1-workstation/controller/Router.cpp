@@ -50,7 +50,7 @@ void Router::initRouter()
 
 	//#TIP :系统扩展路由定义，写在这个后面
 		// 绑定示例控制器
-	//ROUTER_SIMPLE_BIND(ResourceController);
+	ROUTER_SIMPLE_BIND(DeviceResourceController);
 	ROUTER_SIMPLE_BIND(EquipmentController);
 }
 

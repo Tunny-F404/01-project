@@ -30,6 +30,11 @@
 class DeviceResourceDTO : public oatpp::DTO
 {
 	DTO_INIT(DeviceResourceDTO, DTO);
+	// 设备资源id
+	DTO_FIELD(UInt64, deviceResourceId);
+	DTO_FIELD_INFO(deviceResourceId) {
+		info->description = ZH_WORDS_GETTER("deviceResource.deviceResourceDTO.deviceResourceId");
+	}
 	// 设备编号
 	DTO_FIELD(String, equipmentCode);
 	DTO_FIELD_INFO(equipmentCode) {

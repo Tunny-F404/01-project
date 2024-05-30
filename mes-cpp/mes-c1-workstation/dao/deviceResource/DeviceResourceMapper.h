@@ -36,4 +36,4 @@ public:
 	}
 };
 
-#endif // !_EQUIPMENT_MAPPER_
+#endif // !_DEVICE_RESOURCE_MAPPER_

@@ -26,18 +26,20 @@
  */
 class DeviceResourceDO
 {
+	//设备资源id
+	CC_SYNTHESIZE(int, deviceResourceId, DeviceResourceId);
 	// 设备编码
 	CC_SYNTHESIZE(string, equipmentCode, EquipmentCode);
 	// 设备名称
 	CC_SYNTHESIZE(string, equipmentName, EquipmentName);
 	//数量
-	CC_SYNTHESIZE(string, count, count);
+	CC_SYNTHESIZE(int, count, Count);
 public:
 	DeviceResourceDO() {
 		equipmentCode = "";
 		equipmentName = "";
-		count = "";
+		count = 0;
 	}
 };
 
-#endif // !_EQUIPMENT_DO_
+#endif // !_DEVICE_RESOURCE_DO_

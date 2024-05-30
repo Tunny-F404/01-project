@@ -34,7 +34,14 @@ equipment:
 deviceResource:
  getDeviceResourcetList:
   summary: 获取资源列表(条件 + 分页)
+ addDeviceResource:
+  summary: 添加资源
+ modifyDeviceResource:
+  summary: 修改资源
+ deleteDeviceResource:
+  summary: 删除资源
  deviceResourceDTO:
+  deviceResourceId: 设备资源id
   equipmentCode: 设备编号
   equipmentName: 设备名称
   count: 数量

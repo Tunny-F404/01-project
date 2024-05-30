@@ -28,13 +28,31 @@ sql<<" WHERE 1=1"; \
 } 
 
 
-std::list<DeviceResourceDO> DeviceResourceDAO::selectWithList()
+std::list<DeviceResourceDO> DeviceResourceDAO::selectWithPage(const DeviceResourceQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT machinery_id,machinery_code,machinery_name FROM dv_machinery";
+	sql << "SELECT machinery_id,machinery_code,machinery_name,count FROM dv_machinery";
 	//EQUIPMENT_TERAM_PARSE(query, sql);
-	//sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
+	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	DeviceResourceMapper mapper;
 	string sqlStr = sql.str();
 	return sqlSession->executeQuery<DeviceResourceDO, DeviceResourceMapper>(sqlStr, mapper);
+}
+
+uint64_t DeviceResourceDAO::insert(const DeviceResourceDO& iObj)
+{
+	string sql = "INSERT INTO `dv_machinery` (`machinery_code`, `machinery_name`, `count`) VALUES (?, ?, ?)";
+	return sqlSession->executeInsert(sql, "%s%s%i", iObj.getEquipmentCode(), iObj.getEquipmentName(), iObj.getCount());
+}
+
+int DeviceResourceDAO::update(const DeviceResourceDO& uObj)
+{
+	string sql = "UPDATE `dv_machinery` SET `machinery_code`=?, `machinery_name`=?, `count`=? WHERE `id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%i%ull", uObj.getEquipmentCode(), uObj.getEquipmentName(), uObj.getCount(), uObj.getDeviceResourceId());
+}
+
+int DeviceResourceDAO::deleteById(uint64_t deviceResourceId)
+{
+	string sql = "DELETE FROM `dv_machinery` WHERE `id`=?";
+	return sqlSession->executeUpdate(sql, "%ull", deviceResourceId);
 }

@@ -22,6 +22,7 @@
 #include <list>
 #include "domain/vo/deviceResource/DeviceResourceVO.h"
 #include "domain/dto/deviceResource/DeviceResourceDTO.h"
+#include "domain/query/deviceResource/DeviceResourceQuery.h"
 
 /**
  * 设备资源服务接口
@@ -29,8 +30,14 @@
 class DeviceResourceService
 {
 public:
-	// 直接查集合
-	oatpp::List<DeviceResourceDTO::Wrapper> listAll();
+	// 分页查询所有数据
+	DeviceResourcePageDTO::Wrapper listAll(const DeviceResourceQuery::Wrapper& query);
+	// 保存数据
+	uint64_t saveData(const DeviceResourceDTO::Wrapper& dto);
+	// 修改数据
+	bool updateData(const DeviceResourceDTO::Wrapper& dto);
+	// 通过ID删除数据
+	bool deleteData(uint64_t deviceResourceId);
 };
 
 #endif // !_EQUIPMENT_SERVICE_

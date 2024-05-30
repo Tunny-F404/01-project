@@ -22,6 +22,7 @@
 
 #include "ApiHelper.h"
 #include "ServerInfo.h"
+#include "domain/vo/BaseJsonVO.h"
 #include "../../domain/query/deviceResource/DeviceResourceQuery.h"
 #include "../../domain/vo/deviceResource/DeviceResourceVO.h"
 
@@ -55,14 +56,48 @@ public:
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(deviceResourceQuery, DeviceResourceQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execGetDeviceResourceList(authObject->getPayload()));
+		API_HANDLER_RESP_VO(execGetDeviceResourceList(deviceResourceQuery,authObject->getPayload()));
 	}
+
+	// 3.1 定义新增接口描述
+	ENDPOINT_INFO(addDeviceResource) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("deviceResource.addDeviceResource.summary"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+	}
+	// 3.2 定义新增接口处理
+	ENDPOINT(API_M_POST, "/deviceResource/addDeviceResource", addDeviceResource, BODY_DTO(DeviceResourceDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execAddDeviceResource(dto));
+	}
+	// 3.1 定义修改接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("deviceResource.modifyDeviceResource.summary"), modifyDeviceResource, Uint64JsonVO::Wrapper);
+	// 3.2 定义修改接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/deviceResource/modifyDeviceResource", modifyDeviceResource, BODY_DTO(DeviceResourceDTO::Wrapper, dto), execModifyDeviceResource(dto));
+	// 3.1 定义删除接口描述
+	ENDPOINT_INFO(deleteDeviceResource) {
+		// 定义标题和返回类型以及授权支持
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("deviceResource.deleteDeviceResource.summary"), Uint64JsonVO::Wrapper);
+		// 定义其他路径参数说明
+		API_DEF_ADD_PATH_PARAMS(UInt64, "deviceResourceId", ZH_WORDS_GETTER("deviceResource.deviceResourceDTO.deviceResourceId"), 1, true);
+	}
+	// 3.2 定义删除接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/deviceResource/{deviceResourceId}", deleteDeviceResource, PATH(UInt64, deviceResourceId), execDeleteDeviceResource(deviceResourceId));
 
 private:
 	// 3.3 设备资源分页查询数据
 	DeviceResourcePageVO::Wrapper execGetDeviceResourceList(const DeviceResourceQuery::Wrapper& query, const PayloadDTO& payload);
-};
+	// 3.3 设备资源新增数据
+	Uint64JsonVO::Wrapper execAddDeviceResource(const DeviceResourceDTO::Wrapper& dto);
+	// 3.3 设备资源修改数据
+	Uint64JsonVO::Wrapper execModifyDeviceResource(const DeviceResourceDTO::Wrapper& dto);
+	// 3.3 设备资源删除数据
+	Uint64JsonVO::Wrapper execDeleteDeviceResource(const UInt64& deviceResourceId);
+};	
 
 // 0 取消API控制器使用宏
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
-#endif // EquipmentController
+#endif // _DEVICERESOURCE_CONTROLLER_
