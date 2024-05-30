@@ -81,7 +81,7 @@ uint64_t ComProDAO::insert(const ProRouteProcessDO& iObj)
 		`is_check`,`default_pre_time`,`default_suf_time`,`color_code`,`remark`)				\
 		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	return sqlSession->executeInsert(sql, "%ull%ull%ull%s%s%s%s%s%s%i%i%s%s", 
-		iObj.getRecordId(), iObj.getProcessId(), iObj.getNextProcessId(), iObj.getProcessCode(), 
+		iObj.getRouteId(), iObj.getProcessId(), iObj.getNextProcessId(), iObj.getProcessCode(), 
 		iObj.getProcessName(), iObj.getKeyFlag(), iObj.getNextProcessName(), iObj.getLinkType(),
 		iObj.getIsCheck(), iObj.getDefaultPreTime(), iObj.getDefaultSufTime(), iObj.getColorCode(), iObj.getRemark());
 }

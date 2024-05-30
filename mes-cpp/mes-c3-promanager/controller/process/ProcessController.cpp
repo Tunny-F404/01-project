@@ -5,7 +5,7 @@
 #include "../../service/process/ComProService.h"
 #include "../../service/process/RelateProService.h"
 #include "../../service/process/ProMaterialService.h"
-
+#include "../../service/process/ProcessBOMService.h"
 
 //#include "declarative/ProMaterialApiClient.h"
 #include "../ApiDeclarativeServicesHelper.h"
@@ -269,11 +269,11 @@ Uint64JsonVO::Wrapper ProcessController::execModifyProcess(const ModifyProDTO::W
 	ComProService service;
 	// 执行数据修改
 	if (service.updateData(dto)) {
-		jvo->success(dto->process_id);
+		jvo->success(dto->record_id);
 	}
 	else
 	{
-		jvo->fail(dto->process_id);
+		jvo->fail(dto->record_id);
 	}
 	// 响应结果
 	return jvo;
@@ -371,16 +371,78 @@ StringJsonVO::Wrapper ProcessController::execOutputRouteProduct(const outputRout
 Uint64JsonVO::Wrapper ProcessController::execRemoveProcessBOM(const UInt64& id)
 {
 	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!id || id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ProcessBOMService service;
+	// 执行数据删除
+	if (service.removeBOM(id)) {
+		jvo->success(id);
+	}
+	else
+	{
+		jvo->fail(id);
+	}
 	return jvo;
 }
 // 18 添加产品制程物料BOM
 Uint64JsonVO::Wrapper ProcessController::execAddProductMaterial(const ProductMaterialDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验
+	if (!dto->record_id || !dto->item_name || !dto->unit_of_measure || !dto->quantity)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->record_id < 0 || dto->item_name->empty())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	ProcessBOMService service;
+	// 执行数据新增
+	uint64_t id = service.saveBOM(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }
 // 19 修改产品制程物料BOM
-Uint64JsonVO::Wrapper ProcessController::execModifyProductMaterial(const ProductMaterialDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProcessController::execModifyProductMaterial(const ProductModefyMaterialDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->record_id || !dto->item_name || !dto->unit_of_measure || !dto->quantity)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ProcessBOMService service;
+	// 执行数据修改
+	if (service.updateBOM(dto)) {
+		jvo->success(dto->record_id);
+	}
+	else
+	{
+		jvo->fail(dto->record_id);
+	}
+	// 响应结果
+	return jvo;
 }
-

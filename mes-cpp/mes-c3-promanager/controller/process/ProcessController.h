@@ -266,7 +266,7 @@ public:
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("process.delete.summary2"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.field.BOMid"), 1, true);
+		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.field.record_id"), 1, true);
 	}
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete/{id}", removeProcessBOM, PATH(UInt64, id), execRemoveProcessBOM(id));
 
@@ -286,7 +286,7 @@ public:
 
 	// 19 修改产品制程BOM
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("process.put.summary2"), modifyProductMaterial, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-productmaterial", modifyProductMaterial, BODY_DTO(ProductMaterialDTO::Wrapper, dto), execModifyProductMaterial(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-productmaterial", modifyProductMaterial, BODY_DTO(ProductModefyMaterialDTO::Wrapper, dto), execModifyProductMaterial(dto));
 
 private:
 	// 1 获取工艺列表数据
@@ -326,7 +326,7 @@ private:
 	// 18 添加产品制程物料BOM
 	Uint64JsonVO::Wrapper execAddProductMaterial(const ProductMaterialDTO::Wrapper& dto);
 	// 19 修改产品制程物料BOM
-	Uint64JsonVO::Wrapper execModifyProductMaterial(const ProductMaterialDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyProductMaterial(const ProductModefyMaterialDTO::Wrapper& dto);
 };
 
 // 0 取消API控制器使用宏
