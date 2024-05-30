@@ -1,6 +1,6 @@
 package com.zeroone.star.orgstructure.controller;
 
-import com.zeroone.star.orgstructure.service.PostService;
+import com.zeroone.star.orgstructure.service.JobService;
 import com.zeroone.star.project.j2.orgstructure.dto.job.JobDTO;
 import com.zeroone.star.project.j2.orgstructure.query.job.JobQuery;
 import com.zeroone.star.project.vo.JobVO;
@@ -30,12 +30,12 @@ import java.util.List;
 public class JobController implements JobApis {
 
     @Resource
-    private PostService sysPostService;
+    private JobService sysJobService;
     @Override
     @PostMapping("add-post")
     @ApiOperation("新增岗位")
     public ResultStatus addJob(@RequestBody JobDTO jobDTO) {
-        boolean issave = sysPostService.execSaveJob(jobDTO);
+        boolean issave = sysJobService.execSaveJob(jobDTO);
         return issave ? ResultStatus.SUCCESS : ResultStatus.FAIL;
     }
 
@@ -43,7 +43,7 @@ public class JobController implements JobApis {
     @DeleteMapping("remove-post")
     @ApiOperation("删除岗位")
     public ResultStatus removeJob(@RequestParam Long[] ids) {
-        boolean isdelete = sysPostService.execRemoveJob(ids);
+        boolean isdelete = sysJobService.execRemoveJob(ids);
         return isdelete ? ResultStatus.SUCCESS : ResultStatus.FAIL;
     }
 
@@ -51,7 +51,7 @@ public class JobController implements JobApis {
     @PostMapping("modify-post")
     @ApiOperation("修改岗位")
     public ResultStatus modifyJob(@RequestBody JobDTO jobDTO) {
-        boolean ismodify = sysPostService.execModifyJob(jobDTO);
+        boolean ismodify = sysJobService.execModifyJob(jobDTO);
         return ismodify ? ResultStatus.SUCCESS : ResultStatus.FAIL;
     }
 
@@ -60,14 +60,14 @@ public class JobController implements JobApis {
     @GetMapping("export-post")
     @ApiOperation("导出岗位")
     public ResponseEntity<byte[]> exportJob() {
-        return sysPostService.download();
+        return sysJobService.download();
     }
 
     @Override
     @GetMapping("query-job-names")
     @ApiOperation("获取岗位名称列表")
     public JsonVO<List<String>> queryJobNames() {
-        List<String> jobNames = sysPostService.getJobNames();
+        List<String> jobNames = sysJobService.getJobNames();
         return JsonVO.success(jobNames);
     }
 
@@ -75,7 +75,7 @@ public class JobController implements JobApis {
     @PostMapping("query-job-list")
     @ApiOperation("获取岗位列表")
     public JsonVO<List<JobVO>> queryJobList(@RequestBody JobQuery jobQuery) {
-        List<JobVO> jobList = sysPostService.getJobList(jobQuery);
+        List<JobVO> jobList = sysJobService.getJobList(jobQuery);
         return JsonVO.success(jobList);
     }
 
@@ -83,7 +83,7 @@ public class JobController implements JobApis {
     @GetMapping("query-job-detail")
     @ApiOperation("获取指定岗位详情")
     public JsonVO<JobVO> queryJobDetail(@RequestParam Long id) {
-        JobVO jobDetail = sysPostService.getJobDetail(id);
+        JobVO jobDetail = sysJobService.getJobDetail(id);
         if (jobDetail == null) {
             return JsonVO.fail(null);
         }

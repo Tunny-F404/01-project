@@ -5,10 +5,10 @@ import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zeroone.star.orgstructure.entity.PostDO;
 import com.zeroone.star.orgstructure.entity.UserAndPsotDO;
-import com.zeroone.star.orgstructure.mapper.PostMapper;
+import com.zeroone.star.orgstructure.mapper.JobMapper;
 import com.zeroone.star.orgstructure.mapper.UserMapper;
 import com.zeroone.star.orgstructure.mapper.UserAndPostMapper;
-import com.zeroone.star.orgstructure.service.PostService;
+import com.zeroone.star.orgstructure.service.JobService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.components.user.UserHolder;
@@ -42,11 +42,11 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class PostServiceImpl extends ServiceImpl<PostMapper, PostDO> implements PostService {
+public class JobServiceImpl extends ServiceImpl<JobMapper, PostDO> implements JobService {
 
 
     @Resource
-    private PostMapper postMapper;
+    private JobMapper jobMapper;
 
     @Resource
     private UserAndPostMapper userAndPostMapper;
@@ -175,7 +175,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, PostDO> implements 
     public ResponseEntity<byte[]> download() {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.select("post_id", "post_name", "post_code", "post_sort", "status", "remark");
-        List<PostDO> posts = postMapper.selectList(queryWrapper);
+        List<PostDO> posts = jobMapper.selectList(queryWrapper);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         EasyExcel.write(out, PostDO.class).sheet("岗位信息").doWrite(posts);
         // 获取字节数组
@@ -192,7 +192,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, PostDO> implements 
     public List<String> getJobNames() {
         QueryWrapper<PostDO> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("post_name");
-        List<PostDO> postList = postMapper.selectList(queryWrapper);
+        List<PostDO> postList = jobMapper.selectList(queryWrapper);
         return postList.stream().map(PostDO::getPostName).collect(Collectors.toList());
     }
 
@@ -214,13 +214,13 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, PostDO> implements 
         if (jobQuery.getStatus() != null) {
             queryWrapper.eq("status", jobQuery.getStatus());
         }
-        List<PostDO> postList = postMapper.selectList(queryWrapper);
+        List<PostDO> postList = jobMapper.selectList(queryWrapper);
         return postList.stream().map(postDO -> BeanUtil.copyProperties(postDO, JobVO.class)).collect(Collectors.toList());
     }
 
     @Override
     public JobVO getJobDetail(Long id) {
-        PostDO postDO = postMapper.selectById(id);
+        PostDO postDO = jobMapper.selectById(id);
         if (postDO == null) {
             return null;
         }

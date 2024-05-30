@@ -1,6 +1,6 @@
 package com.zeroone.star.orgstructure.service;
 
-import com.zeroone.star.orgstructure.entity.UserRoleDO;
+
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleAddDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleModifyDto;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleStatusModifyDto;

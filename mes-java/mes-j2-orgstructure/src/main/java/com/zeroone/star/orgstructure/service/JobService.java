@@ -17,7 +17,7 @@ import java.util.List;
  * @author 爱吃猫的鱼
  * @since 2024-05-22
  */
-public interface PostService extends IService<PostDO> {
+public interface JobService extends IService<PostDO> {
 
     boolean execSaveJob(JobDTO jobDTO);
 

@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-05-22
  */
 @Mapper
-public interface PostMapper extends BaseMapper<PostDO> {
+public interface JobMapper extends BaseMapper<PostDO> {
 
 }
