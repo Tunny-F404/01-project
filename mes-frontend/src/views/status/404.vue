@@ -140,7 +140,7 @@ html,
 	}
 
 	.star:before {
-		content: '';
+		content: "";
 		width: 6px;
 		height: 6px;
 		border-radius: 50%;
@@ -153,7 +153,7 @@ html,
 	}
 
 	.star:after {
-		content: '';
+		content: "";
 		width: 8px;
 		height: 8px;
 		border-radius: 50%;
@@ -227,37 +227,25 @@ html,
 		height: 80px;
 		position: absolute !important;
 		z-index: 3;
-		background: -webkit-linear-gradient(
-			left,
-			#e3e8eb 0%,
-			#e3e8eb 50%,
-			#fbfdfa 50%,
-			#fbfdfa 100%
-		);
+		background: -webkit-linear-gradient(left, #e3e8eb 0%, #e3e8eb 50%, #fbfdfa 50%, #fbfdfa 100%);
 		border-radius: 50%;
 		top: 34px;
 		left: calc(50% - 47.5px);
 	}
 
 	.head:after {
-		content: '';
+		content: "";
 		width: 60px;
 		height: 50px;
 		position: absolute !important;
 		top: calc(50% - 25px);
 		left: calc(50% - 30px);
-		background: -webkit-linear-gradient(
-			top,
-			#15aece 0%,
-			#15aece 50%,
-			#0391bf 50%,
-			#0391bf 100%
-		);
+		background: -webkit-linear-gradient(top, #15aece 0%, #15aece 50%, #0391bf 50%, #0391bf 100%);
 		border-radius: 15px;
 	}
 
 	.head:before {
-		content: '';
+		content: "";
 		width: 12px;
 		height: 25px;
 		position: absolute !important;
@@ -277,13 +265,7 @@ html,
 		border-radius: 40px / 20px;
 		top: 105px;
 		left: calc(50% - 41px);
-		background: -webkit-linear-gradient(
-			left,
-			#e3e8eb 0%,
-			#e3e8eb 50%,
-			#fbfdfa 50%,
-			#fbfdfa 100%
-		);
+		background: -webkit-linear-gradient(left, #e3e8eb 0%, #e3e8eb 50%, #fbfdfa 50%, #fbfdfa 100%);
 	}
 
 	.panel {
@@ -296,7 +278,7 @@ html,
 	}
 
 	.panel:before {
-		content: '';
+		content: "";
 		width: 30px;
 		height: 5px;
 		position: absolute !important;
@@ -309,7 +291,7 @@ html,
 	}
 
 	.panel:after {
-		content: '';
+		content: "";
 		width: 8px;
 		height: 8px;
 		position: absolute !important;
@@ -342,7 +324,7 @@ html,
 
 	.arm-left:before,
 	.arm-right:before {
-		content: '';
+		content: "";
 		width: 30px;
 		height: 70px;
 		position: absolute !important;
@@ -363,7 +345,7 @@ html,
 
 	.arm-left:after,
 	.arm-right:after {
-		content: '';
+		content: "";
 		width: 30px;
 		height: 10px;
 		position: absolute !important;
@@ -402,7 +384,7 @@ html,
 
 	.leg-left:before,
 	.leg-right:before {
-		content: '';
+		content: "";
 		width: 50px;
 		height: 25px;
 		position: absolute !important;

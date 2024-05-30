@@ -1,19 +1,9 @@
 <template>
 	<div class="form-public">
 		<!-- element plus 组件 -->
-		<el-form
-			:model="formData"
-			label-width="auto"
-			:rules="formRules"
-			ref="formRef"
-		>
+		<el-form :model="formData" label-width="auto" :rules="formRules" ref="formRef">
 			<!-- 循环配置项得到 -->
-			<el-form-item
-				v-for="obj of formSet"
-				:key="obj.propName"
-				:label="obj.text"
-				:prop="obj.propName"
-			>
+			<el-form-item v-for="obj of formSet" :key="obj.propName" :label="obj.text" :prop="obj.propName">
 				<!-- 输入框展示 -->
 				<el-input
 					v-if="obj.showType === 'input'"
@@ -61,10 +51,7 @@
 				>
 					<el-checkbox
 						v-for="optionObj of obj.optionListSet.optionsList"
-						:key="
-							optionObj[obj.optionListSet.valueProp] ||
-							optionObj[obj.optionListSet.labelProp]
-						"
+						:key="optionObj[obj.optionListSet.valueProp] || optionObj[obj.optionListSet.labelProp]"
 						:label="optionObj[obj.optionListSet.labelProp]"
 						:value="optionObj[obj.optionListSet.valueProp]"
 						:disabled="optionObj[obj.optionListSet.disabledProp]"
@@ -81,10 +68,7 @@
 				>
 					<el-radio
 						v-for="optionObj of obj.optionListSet.optionsList"
-						:key="
-							optionObj[obj.optionListSet.valueProp] ||
-							optionObj[obj.optionListSet.labelProp]
-						"
+						:key="optionObj[obj.optionListSet.valueProp] || optionObj[obj.optionListSet.labelProp]"
 						:value="optionObj[obj.optionListSet.valueProp]"
 						:disabled="optionObj[obj.optionListSet.disabledProp]"
 					>
@@ -106,9 +90,9 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref } from "vue";
 
-let model = defineModel({})
+let model = defineModel({});
 
 // 获取父组件传来的参数
 let props = defineProps({
@@ -116,60 +100,60 @@ let props = defineProps({
 	formSet: {
 		type: Object,
 		default() {
-			return {}
-		}
+			return {};
+		},
 	},
 	// 表单数据存储对象
 	formData: {
 		type: Object,
 		default() {
-			return {}
-		}
+			return {};
+		},
 	},
 	// 表单校验规则配置项
 	formRules: {
 		type: Object,
 		default() {
-			return {}
-		}
-	}
-})
+			return {};
+		},
+	},
+});
 // 将父组件传来的参数解构到变量中 供本组件使用
-let { formSet, formData } = props
+let { formSet, formData } = props;
 // 将数据存储对象的地址进行转存 并将转存后的地址直接用于本组件的各表单项双向绑定值处(不能直接使用父组件中传来的对象地址的原因是 有时直接使用并修改里面的属性值 es-lint会报错)
 // 这样用户对表单的修改 就会直接同步到父组件内的数据存储对象中去 前端不需要再做额外的传值处理 nice
-formData = reactive(formData) // 使用reactive包裹已经是代理对象的对象时 只会返回代理对象的原地址
+formData = reactive(formData); // 使用reactive包裹已经是代理对象的对象时 只会返回代理对象的原地址
 
 // 获取表单实例
-const formRef = ref(formData)
+const formRef = ref(formData);
 
 // 表单的校验方法 会在父组件中被调用
 const checkForm = () => {
 	return new Promise((resolve, reject) => {
-		;(async () => {
+		(async () => {
 			if (!formRef.value) {
-				reject(false)
-				return
+				reject(false);
+				return;
 			}
 			// 调用element plus表单组件自带的校验方法
 			await formRef.value.validate((valid) => {
 				if (valid) {
-					resolve(true)
+					resolve(true);
 				} else {
-					reject(false)
+					reject(false);
 				}
-			})
-		})()
-	})
-}
+			});
+		})();
+	});
+};
 
 // 重置表单 会在父组件中被调用
 const resetForm = () => {
 	if (!formRef.value) {
-		return
+		return;
 	}
-	formRef.value.resetFields()
-}
+	formRef.value.resetFields();
+};
 </script>
 
 <style lang="scss" scoped>
