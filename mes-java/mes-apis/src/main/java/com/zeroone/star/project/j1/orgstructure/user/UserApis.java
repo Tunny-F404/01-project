@@ -84,6 +84,6 @@ public interface UserApis {
      * @param userIds 用户ID
      * @return 返回信息
      */
-    JsonVO<String> removeUser(Long[] userIds);
+    JsonVO<String> removeUser(List<Long> userIds);
 
 }

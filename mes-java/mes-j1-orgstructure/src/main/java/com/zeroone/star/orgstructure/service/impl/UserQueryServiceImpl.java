@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.orgstructure.entity.*;
 import com.zeroone.star.orgstructure.mapper.*;
-import com.zeroone.star.orgstructure.service.UserQueryService;
+import com.zeroone.star.orgstructure.service.IUserQueryService;
 import com.zeroone.star.project.j1.orgstructure.dto.user.CompleteUserDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UserDTO;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
@@ -22,21 +22,21 @@ import java.util.List;
  * @author Tme
  */
 @Service
-public class UserQueryServiceImpl implements UserQueryService {
+public class UserQueryServiceImpl implements IUserQueryService {
 
     //日期全局转换格式
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Autowired
-    private UserMapper userMapper;
+    private SysUserMapper sysUserMapper;
     @Autowired
     private DeptMapper deptMapper;
     @Autowired
-    private UserPostMapper userPostMapper;
+    private SysUserPostMapper sysUserPostMapper;
     @Autowired
     private PostMapper postMapper;
     @Autowired
-    private UserRoleMapper userRoleMapper;
+    private SysUserRoleMapper sysUserRoleMapper;
     @Autowired
     private RoleMapper roleMapper;
 
@@ -87,7 +87,7 @@ public class UserQueryServiceImpl implements UserQueryService {
             queryWrapper.lambda().eq(SysUserDO::getDeptId, deptDO.getDeptId());//用户部门id精确查询
         }
 
-        userMapper.selectPage(page, queryWrapper);
+        sysUserMapper.selectPage(page, queryWrapper);
         sysUserDOS = page.getRecords();
 
         List<UserDTO> userDTOS = new ArrayList<>();
@@ -128,7 +128,7 @@ public class UserQueryServiceImpl implements UserQueryService {
         //构建结果对象
         CompleteUserDTO completeUserDTO = new CompleteUserDTO();
         //查询用户表信息
-        SysUserDO sysUserDO = userMapper.selectById(userDTO.getUserId());
+        SysUserDO sysUserDO = sysUserMapper.selectById(userDTO.getUserId());
 
         //填充属性
         completeUserDTO.setUserId(sysUserDO.getUserId());
@@ -168,7 +168,7 @@ public class UserQueryServiceImpl implements UserQueryService {
         QueryWrapper<SysUserPostDO> sysUserPostDOQueryWrapper = new QueryWrapper<>();
         //构造查询wrapper 通过userid查询postid
         sysUserPostDOQueryWrapper.lambda().eq(SysUserPostDO::getUserId, userDTO.getUserId());
-        List<SysUserPostDO> sysUserPostDOS = userPostMapper.selectList(sysUserPostDOQueryWrapper);
+        List<SysUserPostDO> sysUserPostDOS = sysUserPostMapper.selectList(sysUserPostDOQueryWrapper);
 
         if(sysUserPostDOS != null)
         {
@@ -188,7 +188,7 @@ public class UserQueryServiceImpl implements UserQueryService {
         QueryWrapper<SysUserRoleDO> sysUserRoleDOQueryWrapper = new QueryWrapper<>();
         //通过用户id查询用户的角色名称
         sysUserRoleDOQueryWrapper.lambda().eq(SysUserRoleDO::getUserId, completeUserDTO.getUserId());
-        List<SysUserRoleDO> sysUserRoleDOS = userRoleMapper.selectList(sysUserRoleDOQueryWrapper);
+        List<SysUserRoleDO> sysUserRoleDOS = sysUserRoleMapper.selectList(sysUserRoleDOQueryWrapper);
         if(sysUserRoleDOS != null)
         {
             for(int i = 0; i < sysUserRoleDOS.size(); i++)

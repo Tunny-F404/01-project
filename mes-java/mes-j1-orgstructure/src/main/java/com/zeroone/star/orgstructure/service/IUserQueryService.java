@@ -10,7 +10,7 @@ import java.util.List;
  * 用户信息的Service接口
  * @author Tme
  */
-public interface UserQueryService {
+public interface IUserQueryService {
     /**
      * 获取用户列表
      * @param userQuery
