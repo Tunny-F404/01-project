@@ -31,6 +31,11 @@
 class MergeMenuJsonVO : public JsonVO<oatpp::List<WarehouseCascadeDTO::Wrapper>>
 {
 	DTO_INIT(MergeMenuJsonVO, JsonVO<oatpp::List<WarehouseCascadeDTO::Wrapper>>);
+public:
+	MergeMenuJsonVO()
+	{
+		this->data = {};
+	}
 };
 
 #include OATPP_CODEGEN_END(DTO)

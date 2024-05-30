@@ -24,14 +24,14 @@
 /**
  * 测试菜单数据库实体
  */
-class AreaMenuDO
+class LocationMenuDO
 {
 	// 唯一编号
-	CC_SYNTHESIZE(uint64_t, location_id, Location_id);
+	CC_SYNTHESIZE(string, location_id, Location_id);
 	// 库区编码
 	CC_SYNTHESIZE(string, location_code, Location_code);
 	//库区名称
-	/ CC_SYNTHESIZE(string, location_name, Location_name);
+	CC_SYNTHESIZE(string, location_name, Location_name);
 	// 所在仓库id
 	CC_SYNTHESIZE(string, warehouse_id, Warehouse_id);
 	//// 面积
@@ -40,12 +40,12 @@ class AreaMenuDO
 	//CC_SYNTHESIZE(double_t, max_loa, Max_loa);
 
 public:
-	AreaMenuDO() {}
-	AreaMenuDO(uint64_t location_id, string location_code, string location_name, string warehouse_id)
+	LocationMenuDO() {}
+	LocationMenuDO(string location_id, string location_code, string location_name, string warehouse_id)
 	{
 		this->location_id =location_id;
 		this->location_code = location_code;
-		this.location_name = location_name;
+		this->location_name = location_name;
 		this->warehouse_id = warehouse_id;
 	}
 };

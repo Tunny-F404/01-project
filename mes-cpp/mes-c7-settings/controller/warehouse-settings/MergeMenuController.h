@@ -37,7 +37,8 @@ class MergeMenuController : public oatpp::web::server::api::ApiController // 1 ¼
 {
 	// Ìí¼Ó·ÃÎÊ¶¨Òå
 	API_ACCESS_DECLARE(MergeMenuController);
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("user.query-menu.summary"), queryMergeMenu, MergeMenuJsonVO::Wrapper);
+public:
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("storagearea.query-menu.summary"), queryMergeMenu, MergeMenuJsonVO::Wrapper);
 	API_HANDLER_ENDPOINT_NOPARAM_AUTH(API_M_GET, "/warehouse-settings/AdressMargeMenu", queryMergeMenu, executeQueryMergeMenu(authObject->getPayload()))
 private:
 	MergeMenuJsonVO::Wrapper executeQueryMergeMenu(const PayloadDTO& payload);

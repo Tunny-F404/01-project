@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2023/02/17 16:25:30
+ @Date: 2022/10/25 11:08:56
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,31 +17,22 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _WAREHOUSEMENUDO_H_
-#define _WAREHOUSEMENUDO_H_
+#ifndef _DETAILSPAGE_SERVICE_
+#define  _DETAILSPAGE_SERVICE_
+#include <list>
+#include "domain/vo/warehouse/DetailsPageVO.h"
+#include "domain/query/warehouse/DetailsPageQuery.h"
+#include "domain/dto/warehouse/DetailsPageDTO.h"
 
-#include "../DoInclude.h"
 /**
- * 测试菜单数据库实体
+ * 示例服务实现，演示基础的示例服务实现
  */
-class WarehouseMenuDO
+class DetailsPageService
 {
-	// 唯一编号
-	CC_SYNTHESIZE(string, warehouse_id, Warehouse_id);
-	// 仓库编码
-	CC_SYNTHESIZE(string, warehouse_code, Warehouse_code);
-	//仓库名称
-	 CC_SYNTHESIZE(string, warehouse_name, Warehouse_name);
-
 public:
-	WarehouseMenuDO() {}
-	WarehouseMenuDO(string warehouse_id, string warehouse_code, string warehouse_name)
-	{
-		this->warehouse_id = warehouse_id;
-		this->warehouse_code = warehouse_code;
-		this->warehouse_name = warehouse_name;
-
-	}
+	// 分页查询所有数据
+	DetailsPageDTO::Wrapper listAll(const DetailsPageQuery::Wrapper& query);
 };
 
-#endif // !_SAMPLEMENUDO_H_
+#endif // !_SAMPLE_SERVICE_
+

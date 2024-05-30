@@ -30,7 +30,7 @@ class DetailsDTO : public oatpp::DTO
 {
 	DTO_INIT(DetailsDTO, DTO);
 	// ²Ö¿â±àÂë
-	DTO_FIELD(UInt64, warehouse_code);
+	DTO_FIELD(String, warehouse_code);
 	DTO_FIELD_INFO(warehouse_code) {
 		info->description = ZH_WORDS_GETTER("warehouse.field.warehouse_code");
 	}
