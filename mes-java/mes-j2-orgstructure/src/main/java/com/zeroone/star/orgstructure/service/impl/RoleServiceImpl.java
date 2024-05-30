@@ -8,7 +8,7 @@ import com.zeroone.star.orgstructure.entity.RoleDo;
 import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.orgstructure.entity.UserRoleDO;
 import com.zeroone.star.orgstructure.mapper.RoleMapper;
-import com.zeroone.star.orgstructure.UserConvertMapper;
+import com.zeroone.star.orgstructure.mapper.UserConvertMapper;
 import com.zeroone.star.orgstructure.mapper.UserRoleMapper;
 import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
