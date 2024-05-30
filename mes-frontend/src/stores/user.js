@@ -141,6 +141,50 @@ let testMenus = [
         pid: 3
       }
     ]
+  },
+  //仓库管理侧边栏
+  //views/warehouse-management
+  {
+    id: 4,
+    text: '仓库管理',
+    icon: 'Management',
+    children: [
+      {
+        id: 2,
+        text: '仓库管理',
+        href: '/un-31',
+        icon: 'Management',
+        pid: 4
+      },
+      {
+        id: 3,
+        text: '仓库管理2',
+        href: '/un-32',
+        icon: 'Management',
+        pid: 4
+      },
+      {
+        id: 4,
+        text: '仓库管理3',
+        href: '/un-33',
+        icon: 'Management',
+        pid: 4
+      },
+      {
+        id: 5,
+        text: '仓库管理4',
+        href: '/un-34',
+        icon: 'Management',
+        pid: 4
+      },
+      {
+        id: 6,
+        text: '订单管理5',
+        href: '/un-35',
+        icon: 'Management',
+        pid: 4
+      }
+    ]
   }
 ]
 
