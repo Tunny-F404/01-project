@@ -19,4 +19,6 @@ public interface IUserService extends IService<User> {
     public Long checkPhoneUnique(Long userId, String phoneNumber);
 
     public Long checkEmailUnique(Long userId, String email);
+
+    boolean checkUser(Long userId);
 }
