@@ -120,13 +120,14 @@ public class UserController implements UserApis {
         return null;
     }
 
+
+
     @PutMapping("resetUserPassword")
     @ApiOperation("重置用户密码")
     @Override
-    public JsonVO resetUserPassword() {
+    public JsonVO resetUserPassword(Integer userId) {
         return null;
     }
-
 
     @GetMapping("query-role-table")
     @ApiOperation(value = "查询角色列表")
