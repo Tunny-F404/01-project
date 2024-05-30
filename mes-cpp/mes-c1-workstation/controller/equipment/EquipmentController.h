@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _EQUIPMENTCONTROLLER_
-#define _EQUIPMENTCONTROLLER_
+#ifndef _EQUIPMENT_CONTROLLER_
+#define _EQUIPMENT_CONTROLLER_
 
 #include "ApiHelper.h"
 #include "ServerInfo.h"
