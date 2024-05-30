@@ -63,6 +63,7 @@ public class ShopSettingsController implements ShopSettingsApis {
     @ApiOperation("添加车间")
     @PutMapping("/add")
     public JsonVO<Integer> addWorkshop(AddShopSettingsDTO addShopSettingsDTO) {
+        System.out.println("apple");
         return null;
     }
 
