@@ -6,6 +6,7 @@ import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.teamsettings.MemberDTO;
 import com.zeroone.star.project.j5.query.teamsettings.MemberQuery;
 import com.zeroone.star.project.query.PageQuery;
+import com.zeroone.star.teamsettings.entity.CalTeam;
 import com.zeroone.star.teamsettings.entity.CalTeamMember;
 import com.zeroone.star.teamsettings.mapper.CalTeamMemberMapper;
 import com.zeroone.star.teamsettings.service.ICalTeamMemberService;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.mapstruct.Mapper;
+
+import javax.annotation.Resource;
 
 @Mapper(componentModel = "spring")
 interface MsTeamMemberMapper {
@@ -60,25 +63,25 @@ interface MsTeamMemberMapper {
 @Service
 public class CalTeamMemberServiceImpl extends ServiceImpl<CalTeamMemberMapper, CalTeamMember> implements ICalTeamMemberService {
 
+    @Resource
+    private MsTeamMemberMapper msTeamMemberMapper;
+
     @Override
     public PageDTO<MemberDTO> queryMembers(MemberQuery condition) {
         Page<CalTeamMember> page = new Page<>(condition.getPageIndex(), condition.getPageSize());
-        QueryWrapper<CalTeamMember> queryWrapper = new QueryWrapper<>();
-        // 根据需要添加查询条件
+        QueryWrapper<CalTeamMember> wrapper = new QueryWrapper<>();
+        wrapper.lambda()
+                .like(condition.getUsername() != null, CalTeamMember::getUserName, condition.getUsername())
+                .like(condition.getDeptId() != null, CalTeamMember::getTeamId, condition.getDeptId())
+                .like(condition.getPhonenumber() != null, CalTeamMember::getTel, condition.getPhonenumber());
 
-        Page<CalTeamMember> resultPage = this.page(page, queryWrapper);
-        return PageDTO.create(resultPage, MemberDTO.class);
+        Page<CalTeamMember> result = baseMapper.selectPage(page, wrapper);
+        return PageDTO.create(result,  msTeamMemberMapper::memberToMemberDTO);
     }
 
     @Override
     public void addMembers(List<MemberDTO> memberDTOList) {
-        List<CalTeamMember> members = memberDTOList.stream()
-                .map(dto -> {
-                    CalTeamMember entity = new CalTeamMember();
-                    BeanUtils.copyProperties(dto, entity);
-                    return entity;
-                }).collect(Collectors.toList());
-
+        List<CalTeamMember> members = msTeamMemberMapper.memberDTOListToMemberList(memberDTOList);
         this.saveBatch(members);
     }
 
@@ -93,17 +96,12 @@ public class CalTeamMemberServiceImpl extends ServiceImpl<CalTeamMemberMapper, C
         // 根据需要添加查询条件
 
         List<CalTeamMember> members = this.list(queryWrapper);
-        // 转换为 DTO
-        List<MemberDTO> memberDTOList = members.stream()
-                .map(entity -> {
-                    MemberDTO dto = new MemberDTO();
-                    BeanUtils.copyProperties(entity, dto);
-                    return dto;
-                }).collect(Collectors.toList());
+        List<MemberDTO> memberDTOList = msTeamMemberMapper.memberListToMemberDTOList(members);
 
         // 假设你有一个方法可以将 DTO 列表转换为字节数组（如 CSV 或 Excel）
         return convertToByteArray(memberDTOList);
     }
+
     private byte[] convertToByteArray(List<MemberDTO> memberDTOList) {
         // 实现将 DTO 列表转换为字节数组的逻辑（如 CSV 或 Excel）
         // 这是一个占位符，需要实际实现
