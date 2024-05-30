@@ -19,7 +19,6 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include "add-mj/AddController.h"
 #include "ModifyPlan/ModifyPlanController.h"
 #include "ModifyPlanStatus/ModifyPlanStatusController.h"
 
@@ -36,8 +35,8 @@
 #include"query-ForeverOMC/MachineryPlanQueryController.h"
 #include "../controller/device-list/DeviceListController.h"
 #include "../controller/maintain-proj/MaintainProjController.h"
-
-
+#include"./adddevice/AddDeviceController.h"
+#include "addplan/AddPlanController.h"
 
 #include "../controller/deletePlanSubject/DeletePlanSubjectController.h"
 
@@ -65,18 +64,19 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(AddController);
+	//ROUTER_SIMPLE_BIND(AddController);
 	//ROUTER_SIMPLE_BIND(PlanSubjectController);//测试项，abf，暂时注释
+	ROUTER_SIMPLE_BIND(AddPlanController);
 	ROUTER_SIMPLE_BIND(DeletePlanSubjectController);
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(ExportPlanController);
-	ROUTER_SIMPLE_BIND(DeviceListController);
+	//ROUTER_SIMPLE_BIND(DeviceListController);
 	ROUTER_SIMPLE_BIND(MaintainProjController);
-	ROUTER_SIMPLE_BIND(PlanSubjectController);
+	//ROUTER_SIMPLE_BIND(PlanSubjectController);
 	ROUTER_SIMPLE_BIND(MachineryPlanQueryController);
 	ROUTER_SIMPLE_BIND(ModifyPlanController);
 	ROUTER_SIMPLE_BIND(ModifyPlanStatusController);
-
+	ROUTER_SIMPLE_BIND(AddDeviceController);
 
 }
 
