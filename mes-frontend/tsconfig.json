@@ -3,6 +3,8 @@
 	https://juejin.cn/post/7043723576121229342
 */
 {
+	// 集成基础配置
+	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
 		"baseUrl": ".",
 		"target": "ES2020",
@@ -37,7 +39,8 @@
 		"types": [
 			/** https://juejin.cn/post/7262322846252613693 */
 			"element-plus/global",
-			"vite/client"
+			"vite/client",
+			"node",
 		]
 	},
 	/** https://www.typescriptlang.org/tsconfig#include */
@@ -46,7 +49,8 @@
 		"src/**/*.d.ts",
 		"src/**/*.tsx",
 		"src/**/*.vue",
-		"typings",
+		"src",
+		// "typings",
 		// 测试文件集
 		"tests/**/*.ts",
 		// 导入自动生成的类型声明文件
