@@ -70,6 +70,14 @@ std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& que
 	return sqlSession->executeQuery<InspectDO, InspectMapper>(sqlStr, mapper, params);
 }
 
+std::list<Inspect_detailDO> InspectDAO::selectWith(const Inspect_detailQuery::Wrapper& query)
+{
+	stringstream sql;
+	sql << "SELECT line_id,code,name,template_id,vendor_id,vendor_code,vendor_name,vendor_nick,vendor_batch,item_code,item_name,quantity_recived,quantity_check,quantity_unqualified,check_result,recive_date,inspect_date,inspector,list_status FROM  qc_iqc";
+	SAMPLE_TERAM_PARSE(query, sql);
+	InspectMapper mapper;
+	string sqlStr = sql.str();
+	return sqlSession->executeQuery<Inspect_detailDO, InspectMapper>(sqlStr, mapper, params);
 
 
 //新增检验表

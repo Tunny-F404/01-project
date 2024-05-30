@@ -38,20 +38,15 @@ InspectPageDTO::Wrapper InspectService::listAll(const InspectQuery::Wrapper& que
 Inspect_detailDTO::Wrapper InspectService::list_detailAll(const Inspect_detailQuery::Wrapper& query)
 {
 	// 构建返回对象
-	auto one = Inspect_detailDTO::createShared();
-
 
 	// 查询数据总条数
 	Inspect_detailDAO dao;
-	list<Inspect_detailDO> result = dao.selectWithID(query);
+	Inspect_detailDO result = dao.selectWithID(query);
 	// 将DO转换成DTO
-	for (Inspect_detailDO sub : result)
-	{
+
 		auto dto = Inspect_detailDTO::createShared();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, line_id, Line_id, code, Code, name, Name, template_id, Template_id, vendor_id, Vendor_id, vendor_code, Vendor_code, vendor_name, Vendor_name, vd_nick, Vd_nick, vd_batch, Vd_batch, item_code, Item_code, item_name, Item_name, quantity_recived, Quantity_recived, quantity_check, Quantity_check, quantity_unqualified, Quantity_unqualified, check_result, Check_result, recive_date, Recive_date, inspect_date, Inspect_date, inspector, Inspector, list_status, List_status)
-			one->addData(dto);
-	}
-	return one;
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, result, line_id, Line_id, code, Code, name, Name, template_id, Template_id, vendor_id, Vendor_id, vendor_code, Vendor_code, vendor_name, Vendor_name, vd_nick, Vd_nick, vd_batch, Vd_batch, item_code, Item_code, item_name, Item_name, quantity_recived, Quantity_recived, quantity_check, Quantity_check, quantity_unqualified, Quantity_unqualified, check_result, Check_result, recive_date, Recive_date, inspect_date, Inspect_date, inspector, Inspector, list_status, List_status)
+	return dto;
 }
 
 uint64_t InspectService::saveData(const InspectDTO::Wrapper& dto)
