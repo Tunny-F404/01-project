@@ -13,7 +13,7 @@
 		"corepack:pnpm": "corepack enable && corepack install",
 		"git:fetch": "git fetch -p",
 		"dev": "vite --open",
-		"build": "vite build",
+		"build": "vue-tsc && vite build",
 		"preview": "vite preview --port 4173",
 		"lint:eslint": "eslint . --fix",
 		"format:prettier": "prettier --write ."
@@ -44,7 +44,8 @@
 		"@rushstack/eslint-patch": "^1.10.3",
 		"@types/lodash": "^4.17.4",
 		"@types/lodash-es": "^4.17.12",
-		"@vitejs/plugin-vue": "^3.0.3",
+		"@types/node": "^20.12.13",
+		"@vitejs/plugin-vue": "^5.0.4",
 		"@vue/eslint-config-prettier": "^7.0.0",
 		"eslint": "^9.3.0",
 		"eslint-config-flat-gitignore": "^0.1.5",
@@ -57,9 +58,10 @@
 		"prettier": "^3.2.5",
 		"sass": "^1.54.9",
 		"typescript": "^5.4.5",
-		"unplugin-auto-import": "^0.11.5",
+		"unplugin-auto-import": "^0.17.6",
 		"unplugin-vue-components": "^0.22.12",
 		"vite": "^5.2.11",
-		"vite-plugin-html": "^3.2.0"
+		"vite-plugin-html": "^3.2.0",
+		"vue-tsc": "^2.0.19"
 	}
 }

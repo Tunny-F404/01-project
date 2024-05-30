@@ -1,22 +1,39 @@
 /**
-
 	参考资料
 	https://juejin.cn/post/7043723576121229342
 */
 {
 	"compilerOptions": {
 		"baseUrl": ".",
-		"moduleResolution": "node",
-		"target": "esnext",
-		"module": "esnext",
+		"target": "ES2020",
 		"useDefineForClassFields": true,
-		"strict": true,
-		"resolveJsonModule": true,
+		"module": "ESNext",
 		"esModuleInterop": true,
-		"lib": ["ESNext", "DOM"],
+		// Web 应用需要 DOM 环境
+		"lib": [
+			"ESNext",
+			"ES2020",
+			"DOM",
+			"DOM.Iterable"
+		],
 		"paths": {
-			"@/*": ["src/*"]
+			"@/*": [
+				"src/*"
+			]
 		},
+		"skipLibCheck": true,
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "preserve",
+		/* Linting */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
 		"types": [
 			/** https://juejin.cn/post/7262322846252613693 */
 			"element-plus/global",
@@ -29,11 +46,20 @@
 		"src/**/*.d.ts",
 		"src/**/*.tsx",
 		"src/**/*.vue",
+		"typings",
 		// 测试文件集
 		"tests/**/*.ts",
 		// 导入自动生成的类型声明文件
 		"auto-imports.d.ts",
-		"components.d.ts"
+		"components.d.ts",
 	],
-	"exclude": ["node_modules", "dist"]
+	"exclude": [
+		"node_modules",
+		"dist"
+	],
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
 }

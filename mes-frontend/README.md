@@ -62,5 +62,5 @@ npm run lint
 - `index.html`：程序入口页面
 - `package.json`：第三方`JS`库管理配置文件
 - `README.md`：项目自述文件
-- `vite.config.js`：`Vite`构建工具配置文件
+- `vite.config.ts`：`Vite`构建工具配置文件
 - `start.sh`：`Linux`下面的启动脚本
