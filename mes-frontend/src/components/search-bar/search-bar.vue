@@ -1,7 +1,7 @@
 <script lang="ts" setup generic="DataType extends Record<string, unknown>">
 import { ref, computed, watch } from 'vue'
 
-import { ElForm, ElInput, ElSelect, ElOption } from 'element-plus'
+import { ElForm, ElInput, ElSelect, ElOption } from "element-plus"
 
 type ElInputPropsType = InstanceType<typeof ElInput>['props']
 
