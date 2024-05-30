@@ -49,8 +49,7 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
     @Resource
     private RocketMQTemplate rocketMQTemplate;
 
-    @Value("${system-notice-topic}")
-    private String systemNotice;
+    private final String systemNoticeTopic = "system-notice-topic";
 
     @Override
     public LoginResultVO login(LoginDTO loginDTO) {
@@ -95,7 +94,7 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
     public ResultStatus sendNotice(SystemNotificationDTO systemNotificationDTO) {
         // 消息验证
         try {
-            rocketMQTemplate.asyncSend(systemNotice, systemNotificationDTO, null, 30000);
+            rocketMQTemplate.asyncSend(systemNoticeTopic, systemNotificationDTO, null, 30000);
             return ResultStatus.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();

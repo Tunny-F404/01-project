@@ -7,12 +7,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @ApiModel("系统消息数据")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SystemNotificationDTO {
+public class SystemNotificationDTO implements Serializable {
 
     /**
      * 通知ID
