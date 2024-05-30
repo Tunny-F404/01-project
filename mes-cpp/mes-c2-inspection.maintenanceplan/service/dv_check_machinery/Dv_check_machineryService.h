@@ -16,7 +16,7 @@ class Dv_check_machineryService
 {
 public:
 	//正式的，删除操作
-	DeletePlanMachineryQueryDTO::Wrapper Dv_check_machineryService::listAll(const DeletePlanMachineryQuery::Wrapper& query);
+	DeletePlanMachineryQueryDTO::Wrapper listAll(const DeletePlanMachineryQuery::Wrapper& query);
 	bool dv_check_machineryRemoveData(int64_t id);
 };
 

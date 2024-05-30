@@ -18,9 +18,8 @@
 */
 #include "stdafx.h"
 #include "ModifyPlanStatusServer.h"
-#include "../../dao/ModifyPlanStatus/ModifyPlanStatusDAO.h"
-#include "../../domain/do/ModifyPlanStatus/ModifyPlanStatusDO.h"
-
+#include "../../dao/ModifyPlanStatus/ModifyPlanStatusDao.h"
+#include"./domain/do/ModifyPlanStatus/ModifyPlanStatusDo.h"
 
 bool ModifyPlanStatusService::updateData(const ModifyPlanStatusDto::Wrapper& dto)
 {

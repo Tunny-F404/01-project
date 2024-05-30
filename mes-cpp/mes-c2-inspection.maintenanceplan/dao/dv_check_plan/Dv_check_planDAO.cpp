@@ -3,8 +3,9 @@
 */
 #include "stdafx.h"
 #include "Dv_check_planDAO.h"
-#include "Dv_check_planMapper.h"
+#include "dv_check_planMapper.h"
 #include <sstream>
+#include"./dao/dv_check_plan/Dv_check_planDAO.h"
 
 //定义条件解析宏，减少重复代码
 //abf：这个应该是在组合sql语句的宏，对于查询条件，有输入就放AND一并去查询

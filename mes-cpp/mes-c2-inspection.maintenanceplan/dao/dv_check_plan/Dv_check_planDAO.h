@@ -5,7 +5,7 @@
 #ifndef _DV__CHECK__PLAN_DAO_
 #define _DV__CHECK__PLAN_DAO_
 #include "BaseDAO.h"
-#include "../../domain/do/dv_check_plan/Dv_check_planDO.h"
+#include "../../domain/do/dv_check_plan/dv_check_planDO.h"
 //#include "../../domain/query/query-ForeverOMC/MachineryPlanQuery.h"
 
 #include "../../domain/query/deletePlanSubject/DeletePlanSubjectQuery.h"
@@ -40,7 +40,7 @@ public:
 	int dv_check_subjectDeleteByIdPlan(int64_t idp);
 	//---为了进行删除的辅助查询，重载一下用用
 
-	std::list<Dv_check_planDO> Dv_check_planDAO::selectWithPage(const DeletePlanQuery::Wrapper& query);
+	std::list<Dv_check_planDO> selectWithPage(const DeletePlanQuery::Wrapper& query);
 
 	
 };

@@ -2,7 +2,7 @@
 #define _MACHINERY_SUBJECT_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/query-ForeverOMC/machinerySubjectDTO.h"
+#include "../../dto/query-ForeverOMC/MachinerySubjectDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 

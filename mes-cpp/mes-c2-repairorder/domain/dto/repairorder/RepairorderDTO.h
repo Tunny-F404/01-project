@@ -31,7 +31,7 @@ class RepairorderDTO : public oatpp::DTO
     DTO_INIT(RepairorderDTO, DTO);
 
     // 维修单ID(唯一标识)
-    API_DTO_FIELD(UInt64, repairId, ZH_WORDS_GETTER("repairorder.query.fields.repair_id"), true, 0ULL);
+    API_DTO_FIELD(UInt64, repairId, ZH_WORDS_GETTER("repairorder.query.fields.repair_id"), true, 1);
     
     // 维修单编号
     API_DTO_FIELD(String, repairCode, ZH_WORDS_GETTER("repairorder.query.fields.repair_code"), true, "");
@@ -40,7 +40,7 @@ class RepairorderDTO : public oatpp::DTO
     API_DTO_FIELD(String, repairName, ZH_WORDS_GETTER("repairorder.query.fields.repair_name"), true, "");
     
     // 设备ID
-    API_DTO_FIELD(UInt64, machineryId, ZH_WORDS_GETTER("repairorder.query.fields.machinery_id"), true, 0ULL);
+    API_DTO_FIELD(UInt64, machineryId, ZH_WORDS_GETTER("repairorder.query.fields.machinery_id"), true, 1);
 
     // 设备编码
     API_DTO_FIELD(String, machineryCode, ZH_WORDS_GETTER("repairorder.query.fields.machinery_code"), true, "");

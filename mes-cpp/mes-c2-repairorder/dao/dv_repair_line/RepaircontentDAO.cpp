@@ -21,7 +21,7 @@
 #include "RepaircontentMapper.h"
 #include <sstream>
 
-#include "../../domain\query\repaircontent\RepaircontentQuery.h"
+#include"./domain/query/repaircontent/RepaircontentQuery.h"
 
 using namespace std;
 

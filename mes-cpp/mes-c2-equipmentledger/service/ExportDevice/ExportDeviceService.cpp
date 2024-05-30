@@ -27,9 +27,9 @@
 // 导入需要用到的组件
 #include "NacosClient.h"
 #include "ExcelComponent.h"
-#include "FastdfsClient.h"
+#include "./FastDfsClient.h"
 #include "gtest/gtest.h"
-#include "SimpleDateTimeFormat.h";
+#include "SimpleDateTimeFormat.h"
 #include "CharsetConvertHepler.h"
 
 std::string ExportDeviceService::exportDevice(const ExportDeviceQuery::Wrapper& query)

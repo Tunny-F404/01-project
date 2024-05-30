@@ -33,13 +33,13 @@ class RepaircontentQuery : public PageQuery
 	DTO_INIT(RepaircontentQuery, PageQuery);
 	
 	//行id
-	API_DTO_FIELD_DEFAULT(UInt64, line_id, ZH_WORDS_GETTER("repaircontent.query.field.line_id"), true, 0LLU);
+	API_DTO_FIELD(UInt64, line_id, ZH_WORDS_GETTER("repaircontent.query.field.line_id"), true, 1);
 	// 维修单ID(唯一标识)
-	API_DTO_FIELD_DEFAULT(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.query.field.repair_id"), true, 0LLU);
+	API_DTO_FIELD(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.query.field.repair_id"), true, 1);
 	//项目名称
-	API_DTO_FIELD_DEFAULT(String, subject_name, ZH_WORDS_GETTER("repaircontent.query.field.repair_name"), true, 0LLU);
+	API_DTO_FIELD(String, subject_name, ZH_WORDS_GETTER("repaircontent.query.field.repair_name"), true, "0LLU");
 	//项目id
-	API_DTO_FIELD_DEFAULT(UInt64, subject_id, ZH_WORDS_GETTER("repaircontent.query.field.subject_id"), true, 0LLU);
+	API_DTO_FIELD(UInt64, subject_id, ZH_WORDS_GETTER("repaircontent.query.field.subject_id"), true, 2);
 
 };
 

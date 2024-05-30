@@ -18,8 +18,8 @@
 */
 #include "stdafx.h"
 #include "ModifyPlanServer.h"
-#include "../../dao/MaintenancePlan/ModifyPlanDAO.h"
-#include "../../domain/do/MaintenancePlan/MaintenancePlanDO.h"
+#include"./dao/MaintenancePlan/ModifyPlanDao.h"
+#include"./domain/do/MaintenancePlan/MaintenancePlanDo.h"
 
 
 bool ModifyPlanService::updateData(const MaintenancePlanDto::Wrapper& dto)

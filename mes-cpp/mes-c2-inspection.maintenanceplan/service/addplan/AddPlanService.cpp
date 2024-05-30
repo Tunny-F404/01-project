@@ -18,8 +18,7 @@
 */
 #include "stdafx.h"
 #include "AddPlanService.h"
-#include "../../dao/addplan/AddPlanDAO.h"
-
+#include"./dao/AddPlan/AddPlanDAO.h"
 
 uint64_t AddPlanService::saveData(const AddPlanDTO::Wrapper& dto)
 {

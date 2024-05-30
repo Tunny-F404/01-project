@@ -32,7 +32,7 @@ class RepairorderDetailsQuery : public oatpp::DTO
     DTO_INIT(RepairorderDetailsQuery, DTO);
 
     // 维修单ID(唯一标识)
-    API_DTO_FIELD_DEFAULT(UInt64, repairId, ZH_WORDS_GETTER("repairorder.query.fields.repair_id"), true, 0LLU);
+    API_DTO_FIELD(UInt64, repairId, ZH_WORDS_GETTER("repairorder.query.fields.repair_id"), true, 1);
 };
 
 #include OATPP_CODEGEN_END(DTO)

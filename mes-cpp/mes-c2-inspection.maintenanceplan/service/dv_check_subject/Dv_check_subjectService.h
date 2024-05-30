@@ -18,7 +18,7 @@ public:
 
 
 	//ÕýÊ½µÄ
-	DeletePlanSubjectQueryDTO::Wrapper Dv_check_subjectService::listAll(const DeletePlanSubjectQuery::Wrapper& query);
+	DeletePlanSubjectQueryDTO::Wrapper listAll(const DeletePlanSubjectQuery::Wrapper& query);
 	bool dv_check_subjectRemoveData(int64_t id);
 };
 

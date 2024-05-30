@@ -17,6 +17,6 @@ public:
 	// 通过ID删除数据
 	int dv_check_machineryDeleteById(int64_t id);
 	//---为了进行删除的辅助查询，重载一下用用
-	std::list<Dv_check_machineryDO> Dv_check_machineryDAO::selectWithPage(const DeletePlanMachineryQuery::Wrapper& query);
+	std::list<Dv_check_machineryDO> selectWithPage(const DeletePlanMachineryQuery::Wrapper& query);
 };
 #endif // !_DV__CHECK__MACHINERY_DAO_

@@ -20,12 +20,12 @@ bool allKeyExistIsCheckMachinery(const DeletePlanMachineryQuery::Wrapper& query)
 
 	if (record_idJvoData != nullptr)
 	{
-		cout << "数据表存在待删除id：" << tq001 << endl;
+		//cout << "数据表存在待删除id：" << tq001 << endl;
 		return true;
 	}
 	else
 	{
-		cout << "数据表没有待删除id：" << tq001 << endl;
+		//cout << "数据表没有待删除id：" << tq001 << endl;
 		return false;
 	}
 }
@@ -37,14 +37,14 @@ BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanMachiner(const
 
 	for (std::list<oatpp::Int64>::iterator it = itemList->begin(); it != itemList->end(); ++it)
 	{
-		std::cout << *it << " ";//此处的*it大概能被当做id去使用
+		//std::cout << *it << " ";//此处的*it大概能被当做id去使用
 		if (!(*it) || (*it) <= 0)
 		{
 			jvo->init(Boolean(false), RS_PARAMS_INVALID);//失败返回参数异常
 			return jvo;
 
 		}
-	}cout << endl;
+	}//cout << endl;
 
 	//2、暂时不上锁
 
@@ -87,12 +87,12 @@ bool allKeyExistIsCheckSubject(const DeletePlanSubjectQuery::Wrapper& query)
 
 	if (record_idJvoData != nullptr)
 	{
-		cout << "数据表存在待删除id：" << tq001 << endl;
+		//cout << "数据表存在待删除id：" << tq001 << endl;
 		return true;
 	}
 	else
 	{
-		cout << "数据表没有待删除id：" << tq001 << endl;
+		//cout << "数据表没有待删除id：" << tq001 << endl;
 		return false;
 	}
 }
@@ -105,14 +105,14 @@ BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanSubject(const 
 
 	for (std::list<oatpp::Int64>::iterator it = itemList->begin(); it != itemList->end(); ++it)
 	{
-		std::cout << *it << " ";//此处的*it大概能被当做id去使用
+		//std::cout << *it << " ";//此处的*it大概能被当做id去使用
 		if (!(*it) || (*it) <= 0)
 		{
 			jvo->init(Boolean(false), RS_PARAMS_INVALID);//失败返回参数异常
 			return jvo;
 
 		}
-	}cout << endl;
+	}//cout << endl;
 
 	//2、暂时不上锁
 
@@ -165,12 +165,12 @@ bool idExistIs(const DeletePlanQuery::Wrapper& query)
 	//这个可用
 	if (plan_idJvoData != nullptr)
 	{
-		cout << "数据表存在待删除id：" << tq001 << endl;
+		//cout << "数据表存在待删除id：" << tq001 << endl;
 		return true;
 	}
 	else
 	{
-		cout << "数据表没有待删除id：" << tq001 << endl;
+		//cout << "数据表没有待删除id：" << tq001 << endl;
 		return false;
 	}
 }
@@ -195,13 +195,13 @@ BooleanJsonVO::Wrapper DeletePlanSubjectController::execDeletePlan(const DeleteP
 	//遍历list进行参数校验，1、范围检测。  2、存在性检测。
 	for (std::list<oatpp::Int64>::iterator it = idList->begin(); it != idList->end(); ++it)
 	{
-		std::cout << *it << " ";//此处的*it大概能被当做id去使用
+		//std::cout << *it << " ";//此处的*it大概能被当做id去使用
 		if (!(*it) || (*it) <= 0)
 		{
 			jvo->init(Boolean(false), RS_PARAMS_INVALID);//失败返回参数异常
 			return jvo;
 		}
-	}cout << endl;
+	}//cout << endl;
 
 	//3、检查，查询
 	//auto nums = idList->size();
@@ -263,11 +263,12 @@ DeletePlanQueryJsonVO::Wrapper DeletePlanSubjectController::execDeletePlanQuery(
 	//这个可用
 
 	if (test003 != nullptr)
-		cout << "输入的id和查找到的id一致，存在" << endl;
+		;
+		//cout << "输入的id和查找到的id一致，存在" << endl;
 	else
 	{
 		//jvo->init
-		cout << "查找的id不存在" << endl;
+		//cout << "查找的id不存在" << endl;
 	}
 	return jvo;
 }

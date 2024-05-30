@@ -6,7 +6,7 @@
 #define _DV__CHECK__PLAN_MAPPER_
 
 #include "Mapper.h"
-#include "../../domain/do/dv_check_plan/Dv_check_planDO.h"
+#include "../../domain/do/dv_check_plan/dv_check_planDO.h"
 
 /**
  * dv_check_plan±Ì£¨◊÷∂Œ∆•≈‰”≥…‰

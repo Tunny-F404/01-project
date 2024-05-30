@@ -9,7 +9,7 @@
 //DAO，DO在DAO里面包含过了
 #include "../../dao/dv_check_machinery/Dv_check_machineryDAO.h"
 
-DeletePlanMachineryQueryDTO::Wrapper Dv_check_machineryService::listAll(const DeletePlanMachineryQuery::Wrapper& query)
+DeletePlanMachineryQueryDTO::Wrapper Dv_check_machineryService:: listAll(const DeletePlanMachineryQuery::Wrapper& query)
 {
 	// 构建返回对象
 	auto pages = DeletePlanMachineryQueryDTO::createShared();

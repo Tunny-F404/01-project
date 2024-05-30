@@ -73,7 +73,7 @@ public:
         // 定义响应参数格式
         API_DEF_ADD_RSP_JSON_WRAPPER(RepairorderDetailsJsonVO);
         // 定义其他查询参数描述
-        API_DEF_ADD_QUERY_PARAMS(UInt64, "repairId", ZH_WORDS_GETTER("repairorder.query.fields.repair_id"), 0ULL, true); // 维修单编号
+        API_DEF_ADD_QUERY_PARAMS(UInt64, "repairId", ZH_WORDS_GETTER("repairorder.query.fields.repair_id"), 2, true); // 维修单编号
     }
     // 维修单详情查询 接口处理
     ENDPOINT(API_M_GET, "/repairorder/query-details-by-id", queryDetailsRepairorder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {

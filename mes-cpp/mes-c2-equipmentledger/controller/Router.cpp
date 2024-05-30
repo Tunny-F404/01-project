@@ -28,7 +28,7 @@
 #include "ws/WSController.h"
 #endif
 
-#include "Equipment/EquipmentController.h"
+#include "equipment/EquipmentController.h"
 #include "RemoveDevice/RemoveDeviceController.h"
 #include "ExportDevice/ExportDeviceController.h"
 #include "ImportDevice/ImportDeviceController.h"

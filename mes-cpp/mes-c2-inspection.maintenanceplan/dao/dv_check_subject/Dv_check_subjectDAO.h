@@ -17,6 +17,6 @@ public:
 	// 通过ID删除数据
 	int dv_check_subjectDeleteById(int64_t id);
 	//---为了进行删除的辅助查询，重载一下用用
-	std::list<DvCheckSubjectDO> Dv_check_subjectDAO::selectWithPage(const DeletePlanSubjectQuery::Wrapper& query);
+	std::list<DvCheckSubjectDO> selectWithPage(const DeletePlanSubjectQuery::Wrapper& query);
 };
 #endif // !_DV__CHECK__SUBJECT_DAO_
