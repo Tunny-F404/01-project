@@ -3,32 +3,35 @@
 		<!-- 栏1 -->
 		<el-col :span="8">
 			<div class="grid-content ep-bg-purple">
-				<!-- 卡片1 -->
+				<!-- 用户信息栏 -->
 				<el-card style="max-width: 480px">
-					<!-- 片头 -->
 					<template #header>
 						<div class="card-header">
 							<span>个人信息</span>
 						</div>
 					</template>
-					<!-- 内容 -->
-					<div class="demo-type">
-						<el-avatar> user </el-avatar>
-					</div>
+					<!-- 用户信息展示 -->
+					<el-row justify="center">
+						<div class="demo-type">
+							<el-avatar :size="100" fit="cover" @error="false" :src="url" ><img
+								src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
+							</el-avatar>
+						</div>
+					</el-row>
 					<el-divider />
 					<el-row justify="space-between">
 						<span>用户名称</span>
-						<span>testuser</span>
+						<span>{{ infoform.nickName }}</span>
 					</el-row>
 					<el-divider />
 					<el-row justify="space-between">
 						<span>手机号码</span>
-						<span>13131131131</span>
+						<span>{{ infoform.phoneNum }}</span>
 					</el-row>
 					<el-divider />
 					<el-row justify="space-between">
 						<span>用户邮箱</span>
-						<span>111@luaman.com</span>
+						<span>{{ infoform.email }}</span>
 					</el-row>
 					<el-divider />
 					<span>所属部门</span>
@@ -76,8 +79,8 @@
 									<el-button type="danger">关闭</el-button>
 								</el-form-item>
 							</el-form>
-
 						</el-tab-pane>
+
 						<el-tab-pane label="修改密码" name="second">
 							<!-- 修改密码表单 -->
 							<el-form :model="passwd" label-width="80px" :inline="false" size="normal">
@@ -114,16 +117,24 @@ const handleClick = (tab, event) => {
 }
 
 //基本资料表单
-const infoform = ref({nickName:'',phoneNum:'',email:'',gender:'男'})
+const infoform = ref({
+	nickName:'',
+	phoneNum:'',
+	email:'',
+	gender:'男'
+})
 const onSubmit = () => {
 	console.log('表单发送成功')
 }
+
 //修改密码表单
 const passwd = ref({
 	old:'',
 	new:'',
 	confirm:''
 })
+
+const url =ref('')
 </script>
 
 <style scoped>
