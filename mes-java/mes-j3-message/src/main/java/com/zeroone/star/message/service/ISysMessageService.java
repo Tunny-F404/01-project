@@ -1,13 +1,16 @@
 package com.zeroone.star.message.service;
 
+import com.alibaba.nacos.api.exception.NacosException;
 import com.zeroone.star.message.entity.SysMessage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zeroone.star.project.j3.dto.SysMessageDTO;
 import com.zeroone.star.project.j3.query.MessageQuery;
 
 import java.util.List;
+import com.zeroone.star.project.components.sms.aliyun.SmsResult;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j3.query.NewsPageQuery;
+import com.zeroone.star.project.j3.query.SmsQuery;
 import com.zeroone.star.project.j3.vo.SysMessageVO;
 import com.zeroone.star.project.j3.vo.UnreadMessageVO;
 
@@ -40,4 +43,10 @@ public interface ISysMessageService extends IService<SysMessage> {
      */
     UnreadMessageVO getUnreadMessage();
 
+    /**
+     * 发送短信消息
+     * @param smsQuery
+     * @return
+     */
+    SmsResult sendSms(SmsQuery smsQuery);
 }

@@ -1,8 +1,12 @@
 package com.zeroone.star.message.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.alibaba.nacos.api.config.ConfigService;
+import com.alibaba.nacos.api.exception.NacosException;
+import com.alibaba.nacos.client.config.NacosConfigService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zeroone.star.message.config.NacosConfigUtil;
 import com.zeroone.star.message.entity.SysMessage;
 import com.zeroone.star.message.mapper.SysMessageMapper;
 import com.zeroone.star.message.service.ISysMessageService;
@@ -10,16 +14,22 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.j3.dto.SysMessageDTO;
 import com.zeroone.star.project.j3.query.MessageQuery;
 import org.springframework.beans.BeanUtils;
+import com.zeroone.star.project.components.sms.aliyun.SmsComponent;
+import com.zeroone.star.project.components.sms.aliyun.SmsResult;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j3.query.NewsPageQuery;
+import com.zeroone.star.project.j3.query.SmsQuery;
 import com.zeroone.star.project.j3.vo.SysMessageVO;
 import com.zeroone.star.project.j3.vo.UnreadMessageVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.annotation.Resource;
+import java.util.*;
 
 /**
  * <p>
@@ -97,6 +107,8 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
     }
     @Autowired
     private SysMessageMapper sysMessageMapper;
+    @Resource
+    private SmsComponent smsComponent;
 
     /**
      * 获取消息通知列表（条件+分页）
@@ -170,5 +182,31 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
         return UnreadMessageVO.builder()
                 .unreadMessage(list)
                 .build();
+    }
+
+    @Value("${nacos.addr}")
+    private String nacosServerAddr;
+
+    /**
+     * 发送短信消息
+     * @param smsQuery
+     * @return
+     */
+    @Override
+    public SmsResult sendSms(SmsQuery smsQuery) {
+        String phone = smsQuery.getPhone();
+        String code = smsQuery.getCode();
+        String mesType = smsQuery.getMesType();
+        NacosConfigUtil nacosConfigUtil = null;
+        try {
+            nacosConfigUtil = new NacosConfigUtil(nacosServerAddr);
+            String signName = nacosConfigUtil.getConfig(mesType + ".signName", "DEFAULT_GROUP", 5000);
+            String templateCode = nacosConfigUtil.getConfig(mesType + ".templateCode", "DEFAULT_GROUP", 5000);
+            Map<String, String> params = new HashMap<>();
+            params.put("code", code);
+            return smsComponent.sendSms(phone, signName, templateCode, params);
+        } catch (NacosException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
