@@ -42,7 +42,7 @@ if(WIN32)
 endif()
 
 # 编译可执行文件
-add_executable (${appName} ${SC_FILES} "domain/query/TestQuery.h" "controller/productioninvestigation/ProductionProcessController.cpp" "controller/productioninvestigation/ProductionProcessController.h" "domain/dto/productioninvestigation/ProductionProcessDTO.h" "domain/query/productioninvestigation/ProductionProcessQuery.h" "domain/vo/productioninvestigation/ProductionProcessVO.h" "dao/productionorder/ProductionOrderDAO.cpp" "dao/productionorder/ProductionOrderMapper.h" "service/productionorder/ProductionOrderService.h" "service/productionorder/ProductionOrderService.cpp" "dao/productioninvestigation/ProductionProcessDAO.cpp" "dao/productioninvestigation/ProductionProcessMapper.h" "service/productioninvestigation/ProductionProcessService.h" "service/productioninvestigation/ProductionProcessService.cpp")
+add_executable (${appName} ${SC_FILES} "domain/query/TestQuery.h" "controller/productioninvestigation/ProductionProcessController.cpp" "controller/productioninvestigation/ProductionProcessController.h" "domain/dto/productioninvestigation/ProductionProcessDTO.h" "domain/query/productioninvestigation/ProductionProcessQuery.h" "domain/vo/productioninvestigation/ProductionProcessVO.h" "dao/productionorder/ProductionOrderDAO.cpp" "dao/productionorder/ProductionOrderMapper.h"  "service/productionorder/ProductionOrderService.cpp" "dao/productioninvestigation/ProductionProcessDAO.cpp" "dao/productioninvestigation/ProductionProcessMapper.h" "service/productioninvestigation/ProductionProcessService.h" "service/productioninvestigation/ProductionProcessService.cpp")
 
 # 给架构示例项目添加特有的宏
 if(${IS_ARCH_DEMO})

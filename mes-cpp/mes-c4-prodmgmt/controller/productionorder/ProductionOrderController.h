@@ -87,8 +87,8 @@ public:
 	}
 private:
 	// 3.3 演示分页查询数据
-	ExportOrderPageJsonVO::Wrapper execQueryOrder(const ExportOrderQuery::Wrapper& query);
-	ExportBomOrderPageJsonVO::Wrapper execQueryBomOrderbyWorkCode(const ExportBomOrderQuery::Wrapper& query);
+	StringJsonVO::Wrapper execQueryOrder(const ExportOrderQuery::Wrapper& query);
+	StringJsonVO::Wrapper execQueryBomOrderbyWorkCode(const ExportBomOrderQuery::Wrapper& query);
 };
 
 // 0 取消API控制器使用宏

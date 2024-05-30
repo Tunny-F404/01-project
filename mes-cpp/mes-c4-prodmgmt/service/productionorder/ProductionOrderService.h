@@ -27,6 +27,7 @@
 #include "domain/vo/productionorder/ExportBomOrderVO.h"
 #include "domain/query/productionorder/ExportBomOrderQuery.h"
 #include "domain/dto/productionorder/ExportBomOrderDTO.h"
+#include "../../lib-oatpp/include/domain/vo/BaseJsonVO.h"
 /**
  * 示例服务实现，演示基础的示例服务实现
  */
@@ -34,7 +35,7 @@ class ProductionOrderService
 {
 public:
 	// 分页查询所有数据
-	ExportOrderPageDTO::Wrapper listAll(const ExportOrderQuery::Wrapper& query);
-	ExportBomOrderPageDTO::Wrapper listAll(const ExportBomOrderQuery::Wrapper& query);
+	string listAll(const ExportOrderQuery::Wrapper& query);
+	string listAll(const ExportBomOrderQuery::Wrapper& query);
 };
 #endif // !_ORDER_SERVICE_

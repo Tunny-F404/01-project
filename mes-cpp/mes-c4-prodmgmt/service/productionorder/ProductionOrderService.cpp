@@ -23,8 +23,9 @@
 #include "ExcelComponent.h"
 #define TEST_EXCEL_SN ZH_WORDS_GETTER("productionorder.excel.sheet.s2")
 #include "FastDfsClient.h"
-ExportOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportOrderQuery::Wrapper& query)
+string ProductionOrderService::listAll(const ExportOrderQuery::Wrapper& query)
 {
+	string save = "./public/excel";
 	std::vector<std::vector<std::string>> data;
 	stringstream ss;
 	std::string fileName = "./public/excel/workorder.xlsx";
@@ -39,7 +40,7 @@ ExportOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportOrderQue
 	uint64_t count = dao.count(query);
 	if (count <= 0)
 	{
-		return pages;
+		return "";
 	}
 	// 分页查询数据
 	pages->total = count;
@@ -50,7 +51,7 @@ ExportOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportOrderQue
 	{
 		auto dto = ExportOrderDTO::createShared();
 		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, workOrderCode, workOrderCode, workOrderName, workOrderName, workOrderType, workOrderType, orderSource, orderSource, sourceCode, sourceCode, productId, productId, productCode, productCode, productName, productName, productSpc, productSpc, unitOfMeasure, unitOfMeasure, batchCode, batchCode, pQuantity, pQuantity, quantityProduced, quantityProduced, quantityChanged, quantityChanged, quantityScheduled, quantityScheduled);
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub,clientId, clientId, clientCode, clientCode, clientName,clientName, vendorId, vendorId, vendorCode,vendorCode, vendorName, vendorName, finishDate, finishDate, requestDate, requestDate,status,status);
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, clientId, clientId, clientCode, clientCode, clientName, clientName, vendorId, vendorId, vendorCode, vendorCode, vendorName, vendorName, finishDate, finishDate, requestDate, requestDate, status, status);
 		pages->addData(dto);
 		std::vector<std::string> row;
 		row.push_back(sub.getworkOrderCode());
@@ -68,12 +69,12 @@ ExportOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportOrderQue
 		row.push_back(sub.getunitOfMeasure());
 		row.push_back(sub.getbatchCode());
 		ss.clear();
-		ss <<to_string(sub.getpQuantity());
+		ss << to_string(sub.getpQuantity());
 		row.push_back(ss.str());
 		ss.str("");
 		data.push_back(row);
 		ss.clear();
-		ss <<to_string( sub.getquantityProduced());
+		ss << to_string(sub.getquantityProduced());
 		row.push_back(ss.str());
 		ss.str("");
 		ss.clear();
@@ -129,12 +130,16 @@ ExportOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportOrderQue
 		});
 	excel.writeVectorToFile(fileName, sheetName, data);
 	FastDfsClient f("192.168.46.128", 22122);
-	string t=f.uploadFile("./public/excel/workorder.xlsx");
-	string save = "D:/BaiduNetdiskDownload";
+	string t = f.uploadFile("./public/excel/workorder.xlsx");
 	f.downloadFile(t, &save);
-	return pages;
+	/*ResultStatus rs(save);
+	StringJsonVO stringJson;
+	stringJson.setStatus(rs);
+	stringJson.init(save, rs);
+	stringJson.success(save);*/
+	return save;
 }
-ExportBomOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportBomOrderQuery::Wrapper& query)
+string ProductionOrderService::listAll(const ExportBomOrderQuery::Wrapper& query)
 {
 	std::vector<std::vector<std::string>> data;
 	stringstream ss;
@@ -151,7 +156,7 @@ ExportBomOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportBomOr
 	uint64_t count = dao.count(query);
 	if (count <= 0)
 	{
-		return pages;
+		return "";
 	}
 	// 分页查询数据
 	pages->total = count;
@@ -197,7 +202,7 @@ ExportBomOrderPageDTO::Wrapper ProductionOrderService::listAll(const ExportBomOr
 	excel.writeVectorToFile(fileName, sheetName, data);
 	FastDfsClient f("192.168.46.128", 22122);
 	string t = f.uploadFile("./public/excel/workorderbom.xlsx");
-	string save = "D:/BaiduNetdiskDownload";
+	string save = "./public/excel";
 	f.downloadFile(t, &save);
-	return pages;
+	return save;
 }

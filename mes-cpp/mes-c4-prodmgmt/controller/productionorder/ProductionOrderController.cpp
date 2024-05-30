@@ -19,25 +19,34 @@
 #include "stdafx.h"
 #include "ProductionOrderController.h"
 #include "../../service/productionorder/ProductionOrderService.h"
-ExportOrderPageJsonVO::Wrapper ProductionOrderController::execQueryOrder(const ExportOrderQuery::Wrapper& query)
+StringJsonVO::Wrapper ProductionOrderController::execQueryOrder(const ExportOrderQuery::Wrapper& query)
 {
 	// 定义一个Service
 	ProductionOrderService service;
 	// 查询数据
 	auto result = service.listAll(query);
-	// 响应结果
-	auto jvo = ExportOrderPageJsonVO::createShared();
-	jvo->success(result);
+	auto jvo =StringJsonVO::createShared();
+	string mes = "The file was downloaded successfully";
+	string data = "The address of the downloaded file: " + result;
+	ResultStatus rs(data);
+	jvo->setStatus(rs);
+	jvo->success(data);
+	jvo->message = mes;
 	return jvo;
 }
-ExportBomOrderPageJsonVO::Wrapper ProductionOrderController::execQueryBomOrderbyWorkCode(const ExportBomOrderQuery::Wrapper& query)
+StringJsonVO::Wrapper ProductionOrderController::execQueryBomOrderbyWorkCode(const ExportBomOrderQuery::Wrapper& query)
 {
 
 	// 定义一个Service
 	ProductionOrderService service;
 	// 查询数据
 	auto result = service.listAll(query);
-	auto jvo = ExportBomOrderPageJsonVO::createShared();
-	jvo->success(result);
+	auto jvo = StringJsonVO::createShared();
+	string mes = "The file was downloaded successfully";
+	string data = "The address of the downloaded file: " + result;
+	ResultStatus rs(data);
+	jvo->setStatus(rs);
+	jvo->success(data);
+	jvo->message = mes;
 	return jvo;
 }
