@@ -23,7 +23,7 @@ public interface MessageServiceApis {
      * 发送短信消息
      * @return
      */
-    JsonVO<SmsResult> sendOneSms(SmsQuery smsQuery);
+   // JsonVO<SmsResult> sendOneSms(SmsQuery smsQuery);
 
 
     /**
@@ -31,7 +31,7 @@ public interface MessageServiceApis {
      * @param mailDTO 邮件信息
      * @return
      */
-    JsonVO<MailMessage> sendMail(MailDTO mailDTO);
+//    JsonVO<MailMessage> sendMail(MailDTO mailDTO);
 
     JsonVO<LoginVO> clientLogin(LoginDTO loginDTO);
 

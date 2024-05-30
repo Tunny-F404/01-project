@@ -105,8 +105,8 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
     }
     @Autowired
     private SysMessageMapper sysMessageMapper;
-    @Resource
-    private SmsComponent smsComponent;
+//    @Resource
+//    private SmsComponent smsComponent;
 
     /**
      * 获取消息通知列表（条件+分页）
@@ -182,29 +182,29 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
                 .build();
     }
 
-    @Value("${nacos.addr}")
-    private String nacosServerAddr;
+//    @Value("${nacos.addr}")
+//    private String nacosServerAddr;
 
     /**
      * 发送短信消息
      * @param smsQuery
      * @return
      */
-    @Override
-    public SmsResult sendSms(SmsQuery smsQuery) {
-        String phone = smsQuery.getPhone();
-        String code = smsQuery.getCode();
-        String mesType = smsQuery.getMesType();
-        NacosConfigUtil nacosConfigUtil = null;
-        try {
-            nacosConfigUtil = new NacosConfigUtil(nacosServerAddr);
-            String signName = nacosConfigUtil.getConfig(mesType + ".signName", "DEFAULT_GROUP", 5000);
-            String templateCode = nacosConfigUtil.getConfig(mesType + ".templateCode", "DEFAULT_GROUP", 5000);
-            Map<String, String> params = new HashMap<>();
-            params.put("code", code);
-            return smsComponent.sendSms(phone, signName, templateCode, params);
-        } catch (NacosException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    @Override
+//    public SmsResult sendSms(SmsQuery smsQuery) {
+//        String phone = smsQuery.getPhone();
+//        String code = smsQuery.getCode();
+//        String mesType = smsQuery.getMesType();
+//        NacosConfigUtil nacosConfigUtil = null;
+//        try {
+//            nacosConfigUtil = new NacosConfigUtil(nacosServerAddr);
+//            String signName = nacosConfigUtil.getConfig(mesType + ".signName", "DEFAULT_GROUP", 5000);
+//            String templateCode = nacosConfigUtil.getConfig(mesType + ".templateCode", "DEFAULT_GROUP", 5000);
+//            Map<String, String> params = new HashMap<>();
+//            params.put("code", code);
+//            return smsComponent.sendSms(phone, signName, templateCode, params);
+//        } catch (NacosException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

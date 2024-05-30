@@ -46,5 +46,5 @@ public interface ISysMessageService extends IService<SysMessage> {
      * @param smsQuery
      * @return
      */
-    SmsResult sendSms(SmsQuery smsQuery);
+//    SmsResult sendSms(SmsQuery smsQuery);
 }
