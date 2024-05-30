@@ -8,6 +8,7 @@ import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.zeroone.star.scheduleplan.mapper.CalPlanMapper;
 import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import org.mapstruct.Mapper;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,8 +26,6 @@ import java.util.List;
  * 排班计划表 服务实现类
  * </p>
  *
- * @author interstellar
- * @since 2024-05-25
  */
 @Mapper(componentModel = "spring")
 interface MsPlanMapper {
