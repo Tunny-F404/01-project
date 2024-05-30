@@ -16,6 +16,18 @@ class MaterialProductsQuery : public PageQuery
 	DTO_FIELD_INFO(record_id) {
 		info->description = ZH_WORDS_GETTER("MaterialProducts.field.record_id");
 	}
+
+	// 产品检测模板ID
+	DTO_FIELD(UInt64, template_id);
+	DTO_FIELD_INFO(template_id) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.template_id");
+	}
+
+	// 产品物料ID
+	DTO_FIELD(UInt64, item_id);
+	DTO_FIELD_INFO(item_id) {
+		info->description = ZH_WORDS_GETTER("MaterialProducts.field.item_id");
+	}
 	// 产品物料编码
 	DTO_FIELD(String, item_code);
 	DTO_FIELD_INFO(item_code) {
@@ -32,7 +44,7 @@ class MaterialProductsQuery : public PageQuery
 		info->description = ZH_WORDS_GETTER("MaterialProducts.field.specification");
 	}
 	// 最低检测数
-	DTO_FIELD(UInt64, quantity_check);
+	DTO_FIELD(UInt32, quantity_check);
 	DTO_FIELD_INFO(quantity_check) {
 		info->description = ZH_WORDS_GETTER("MaterialProducts.field.quantity_check");
 	}
@@ -42,7 +54,7 @@ class MaterialProductsQuery : public PageQuery
 		info->description = ZH_WORDS_GETTER("MaterialProducts.field.unit_of_measure");
 	}
 	// 最大不合格数
-	DTO_FIELD(UInt64, quantity_unqualified);
+	DTO_FIELD(UInt32, quantity_unqualified);
 	DTO_FIELD_INFO(quantity_unqualified) {
 		info->description = ZH_WORDS_GETTER("MaterialProducts.field.quantity_unqualified");
 	}

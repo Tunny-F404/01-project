@@ -10,7 +10,8 @@ class MaterialProductsDO
 {
 
 	CC_SYNTHESIZE(uint64_t, record_id, record_id);
-
+	CC_SYNTHESIZE(int64_t, template_id, template_id);
+	CC_SYNTHESIZE(int64_t, item_id, item_id);
 
 	CC_SYNTHESIZE(string, item_code, item_code);
 

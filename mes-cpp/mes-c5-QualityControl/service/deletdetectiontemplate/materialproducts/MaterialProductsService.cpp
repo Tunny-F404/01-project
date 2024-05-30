@@ -74,8 +74,16 @@ bool MaterialProductsService::updateMaterialProducts(const MaterialProductsDTO::
 	return dao.updateMaterialProducts(data) == 1;
 }
 
-bool MaterialProductsService::deleteByRecordId(uint64_t record_id)
+bool MaterialProductsService::deleteByRecordId(const oatpp::List<oatpp::UInt64>& record_ids)
 {
+	if (record_ids->empty()) {
+		return false; 
+	}
+
 	MaterialProductsDAO dao;
-	return dao.deleteByRecordId(record_id) == 1;
+	int result = dao.deleteByRecordId(record_ids);
+
+
+	return result == record_ids->size();
 }
+
