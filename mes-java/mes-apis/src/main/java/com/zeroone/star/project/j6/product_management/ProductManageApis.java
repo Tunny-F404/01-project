@@ -1,9 +1,9 @@
 package com.zeroone.star.project.j6.product_management;
 
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.dto.ProductDTO;
+import com.zeroone.star.project.j6.product_management.dto.ProductDTO;
 import com.zeroone.star.project.dto.ProductListDTO;
-import com.zeroone.star.project.query.ProductQuery;
+import com.zeroone.star.project.j6.product_management.query.ProductQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 

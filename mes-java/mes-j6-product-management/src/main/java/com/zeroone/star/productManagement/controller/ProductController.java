@@ -2,10 +2,10 @@ package com.zeroone.star.productManagement.controller;
 
 import com.zeroone.star.productManagement.service.IProductService;
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.dto.ProductDTO;
+import com.zeroone.star.project.j6.product_management.dto.ProductDTO;
 import com.zeroone.star.project.dto.ProductListDTO;
 import com.zeroone.star.project.j6.product_management.ProductManageApis;
-import com.zeroone.star.project.query.ProductQuery;
+import com.zeroone.star.project.j6.product_management.query.ProductQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
