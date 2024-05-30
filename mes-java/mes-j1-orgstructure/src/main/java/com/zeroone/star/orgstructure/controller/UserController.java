@@ -1,7 +1,7 @@
 package com.zeroone.star.orgstructure.controller;
 
+import com.zeroone.star.orgstructure.service.IUserQueryService;
 import com.zeroone.star.orgstructure.service.IUserService;
-import com.zeroone.star.orgstructure.service.impl.UserQueryServiceImpl;
 import com.zeroone.star.project.j1.orgstructure.dto.PageDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.*;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
@@ -31,13 +31,13 @@ import java.util.List;
 @Api(tags = "用户管理")
 public class UserController implements UserApis {
     @Autowired
-    private UserQueryServiceImpl userServiceImpl;
+    private IUserQueryService userQueryService;
 
     @Override
     @GetMapping("/query-user-table")
     @ApiOperation("查询用户列表")
     public JsonVO<List<UserDTO>> queryUserList(@Valid UserQuery userQuery) {
-        List<UserDTO> userDTOS = userServiceImpl.queryUserList(userQuery);
+        List<UserDTO> userDTOS = userQueryService.queryUserList(userQuery);
         return JsonVO.success(userDTOS);
     }
 
@@ -46,7 +46,7 @@ public class UserController implements UserApis {
     @ApiOperation("获取用户详情")
     public JsonVO<CompleteUserDTO> queryUser(@Valid UserDTO userDTO) {
 
-        CompleteUserDTO completeUserDTO = userServiceImpl.queryUser(userDTO);
+        CompleteUserDTO completeUserDTO = userQueryService.queryUser(userDTO);
         return JsonVO.success(completeUserDTO);
     }
 
