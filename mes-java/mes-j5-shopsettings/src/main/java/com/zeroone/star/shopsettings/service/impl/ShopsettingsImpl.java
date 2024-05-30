@@ -30,20 +30,20 @@ public class ShopsettingsImpl extends ServiceImpl<WorkShopMapper, WorkShop> impl
         }
         return totalDeleted;
     }
-
-    @Override
-    public int addShiftPlan(GetShopSettingsDTO shopsettingsDTO) {
-        return 0;
-    }
-
-    @Override
-    public int modifyShopSettings(GetShopSettingsDTO shopsettingsDTO) {
-        //修改数据
-        WorkShop workShop = msCalShiftPlanMapper.modifyShiftPlanToShiftPlan(shiftPlanModifyDto);
-        UpdateWrapper<WorkShop> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("workshop_id", workShop.getWorkshop_id());
-        //返回修改的行数
-        return baseMapper.update(workShop, updateWrapper);
-    }
+//
+//    @Override
+//    public int addShiftPlan(GetShopSettingsDTO shopsettingsDTO) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public int modifyShopSettings(GetShopSettingsDTO shopsettingsDTO) {
+//        //修改数据
+//        WorkShop workShop = msCalShiftPlanMapper.modifyShiftPlanToShiftPlan(shiftPlanModifyDto);
+//        UpdateWrapper<WorkShop> updateWrapper = new UpdateWrapper<>();
+//        updateWrapper.eq("workshop_id", workShop.getWorkshop_id());
+//        //返回修改的行数
+//        return baseMapper.update(workShop, updateWrapper);
+//    }
 
 }
