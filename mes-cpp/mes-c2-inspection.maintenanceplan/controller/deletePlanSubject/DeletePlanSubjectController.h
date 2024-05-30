@@ -1,5 +1,5 @@
-#ifndef _REMOVEDEVICECONTROLLER_H_
-#define _REMOVEDEVICECONTROLLER_H_
+#ifndef _DELETEPLANSUBJECTCONTROLLER_H_
+#define _DELETEPLANSUBJECTCONTROLLER_H_
 
 #include "domain/vo/BaseJsonVO.h"
 #include "ApiHelper.h"
