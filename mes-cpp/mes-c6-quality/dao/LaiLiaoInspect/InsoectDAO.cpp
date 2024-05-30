@@ -76,7 +76,7 @@ Inspect_detailDO InspectDAO::selectWithID(const int & line_id)
 	stringstream sql;
 	sql << "SELECT line_id, code, name,vendor_code, vendor_nick, vendor_batch, item_code, item_name, unit_of_measure,quantity_recived, quantity_check, quantity_unqualified, check_result, recive_date, inspect_date, maj_rate,cr_rate, min_rate,list_status FROM  qc_iqc";
 	sql << "where `line_id`=?";
-	InspectMapper mapper;
+	Inspect_detailMapper mapper;
 	string sqlStr = sql.str();
 	std::list<Inspect_detailDO> A = sqlSession->executeQuery<Inspect_detailDO, Inspect_detailMapper>(sqlStr, mapper, "%i", line_id);
 	if (A.size() == 0) return {};

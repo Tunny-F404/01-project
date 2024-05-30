@@ -23,7 +23,7 @@ public:
 		data.setVendor_batch(resultSet->getString(7));
 		data.setItem_code(resultSet->getString(8));
 		data.setItem_name(resultSet->getString(9));
-		data.setQuantity_recived(resultSet->getInt64(10));
+		data.setQuantity_recived(resultSet->getDouble(10));
 		data.setQuantity_check(resultSet->getInt64(11));
 		data.setQuantity_unqualified(resultSet->getInt64(12));
 		data.setCheck_result(resultSet->getString(13));
@@ -50,7 +50,7 @@ public:
 		data.setItem_code(resultSet->getString(7));
 		data.setItem_name(resultSet->getString(8));
 		data.setUnit_of_measure(resultSet->getString(9));
-		data.setQuantity_recived(resultSet->getInt64(10));
+		data.setQuantity_recived(resultSet->getDouble(10));
 		data.setQuantity_check(resultSet->getInt64(11));
 		data.setQuantity_unqualified(resultSet->getInt64(12));
 		data.setCheck_result(resultSet->getString(15));

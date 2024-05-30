@@ -69,14 +69,13 @@ public:
 	// 定义分页查询参数描述
 	API_DEF_ADD_PAGE_PARAMS();
 	// 定义其他查询参数描述
-	API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("inspect.line_id"), 1, false);
+	API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("inspect.line_id"), 1, true);
 	}
 	// 3.2 定义查询来料检验详情接口处理
-	ENDPOINT(API_M_GET, "/Inspect/detail", queryInspect_detail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(userQuery, Inspect_detailQuery, queryParams);
+	ENDPOINT(API_M_GET, "/Inspect/detail", queryInspect_detail, QUERY(UInt64, line_id), API_HANDLER_AUTH_PARAME) {
+
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execQueryInspect_detail(userQuery, authObject->getPayload()));
+		API_HANDLER_RESP_VO(execQueryInspect_detail(line_id));
 	}
 
 	//3.1 定义查看报表接口描述
@@ -134,7 +133,7 @@ private:
 	// 3.3 分页查询来料列表数据
 	InspectPageJsonVO::Wrapper execQueryInspect(const InspectQuery::Wrapper& query, const PayloadDTO& payload);
 	//3.3 分页查询来料检验表详情
-	Inspect_detailJsonVO::Wrapper execQueryInspect_detail(const int& line_id, const PayloadDTO& payload);
+	/*Inspect_detailJsonVO::Wrapper execQueryInspect_detail(const int& line_id, const PayloadDTO& payload);*/
 	Inspect_detailJsonVO::Wrapper execQueryInspect_detail(const int& line_id);
 	//3.3查看报表
 	StringJsonVO::Wrapper execLookTable(const oatpp::List<UInt64>& ids);
