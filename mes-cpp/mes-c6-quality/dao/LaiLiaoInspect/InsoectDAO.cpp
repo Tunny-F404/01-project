@@ -70,6 +70,8 @@ std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& que
 	return sqlSession->executeQuery<InspectDO, InspectMapper>(sqlStr, mapper, params);
 }
 
+
+
 //新增检验表
 uint64_t InspectDAO::insert(const InspectDO& iObj)
 {
