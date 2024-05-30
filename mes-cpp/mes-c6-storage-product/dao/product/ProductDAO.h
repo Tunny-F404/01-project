@@ -24,6 +24,6 @@ class ProductDetailDAO : public BaseDAO
 {
 public:
 	// ²éÑ¯Êý¾Ý
-	ProductDetailDO selectWithDetail(const string& issue_code);
+	ProductDetailDO selectWithDetail(const int& issue_id);
 };
 #endif

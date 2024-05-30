@@ -31,9 +31,9 @@ ProductPageDTO::Wrapper ProductTableService::listAll(const ProductQuery::Wrapper
 	return pages;
 }
 
-ProductDetailDTO::Wrapper ProductDetailService::listONE(const string& issue_code){
+ProductDetailDTO::Wrapper ProductDetailService::listONE(const int& issue_id){
 		ProductDetailDAO dao;
-		ProductDetailDO result = dao.selectWithDetail(issue_code);
+		ProductDetailDO result = dao.selectWithDetail(issue_id);
 		// ½«DO×ª»»³ÉDTO
 		auto dto = ProductDetailDTO::createShared();
 		ZO_STAR_DOMAIN_DO_TO_DTO(dto, result, issue_id, Issue_id, issue_code, Issue_code, issue_name, Issue_name, workorder_code, Workorder_code, client_code, Client_code, client_name, Client_name, issue_date, Issue_date, status, Status1, warehouse_name, Warehouse_name,remark,Remark)

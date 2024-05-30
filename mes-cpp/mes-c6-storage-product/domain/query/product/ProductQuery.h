@@ -30,9 +30,10 @@ class ProductQuery : public PageQuery
 class ProductDetailQuery : public oatpp::DTO
 {
 	// 定义初始化
-	DTO_INIT(ProductQuery, DTO);
+	DTO_INIT(ProductDetailQuery, DTO);
 	//领料单编号
-	API_DTO_FIELD_DEFAULT(String, issue_code, ZH_WORDS_GETTER("product.fields.issue_code"));
+	API_DTO_FIELD_DEFAULT(UInt64, issue_id, ZH_WORDS_GETTER("product.fields.issue_id"));
+	
 
 };
 #include OATPP_CODEGEN_END(DTO)

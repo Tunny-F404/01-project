@@ -47,18 +47,18 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProductDetailJsonVO);
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "issue_code", ZH_WORDS_GETTER("product.fields.issue_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "issue_id", ZH_WORDS_GETTER("product.fields.issue_id"), 1, true);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/product/query-product-detail", queryProductDetail, QUERY(String, issue_code), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/product/query-product-detail", queryProductDetail, QUERY(UInt64, issue_id), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execProductDetail(issue_code));
+		API_HANDLER_RESP_VO(execProductDetail(issue_id));
 	}
 
 private:
 	// 查询数据
 	ProductTableJsonVO::Wrapper execProductTable(const ProductQuery::Wrapper& query,const PayloadDTO& payload);
-	ProductDetailJsonVO::Wrapper execProductDetail(const string& issue_code);
+	ProductDetailJsonVO::Wrapper execProductDetail(const int& issue_id);
 };
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 #endif
