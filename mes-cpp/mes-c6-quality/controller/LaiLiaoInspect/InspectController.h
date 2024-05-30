@@ -134,7 +134,8 @@ private:
 	// 3.3 分页查询来料列表数据
 	InspectPageJsonVO::Wrapper execQueryInspect(const InspectQuery::Wrapper& query, const PayloadDTO& payload);
 	//3.3 分页查询来料检验表详情
-	Inspect_detailJsonVO::Wrapper execQueryInspect_detail(const Inspect_detailQuery::Wrapper& query, const PayloadDTO& payload);
+	Inspect_detailJsonVO::Wrapper execQueryInspect_detail(const int& line_id, const PayloadDTO& payload);
+	Inspect_detailJsonVO::Wrapper execQueryInspect_detail(const int& line_id);
 	//3.3查看报表
 	StringJsonVO::Wrapper execLookTable(const oatpp::List<UInt64>& ids);
 	// 3.3 新增数据

@@ -16,7 +16,7 @@ public:
 	// 分页查询数据
 	list<InspectDO> selectWithPage(const InspectQuery::Wrapper& query);
 	//查询详情
-	InspectDO selectWith(const Inspect_detailQuery::Wrapper& query);
+	Inspect_detailDO selectWithID(const int & line_id);
 	// 插入数据
 	uint64_t insert(const InspectDO& iObj);
 	//// 修改数据

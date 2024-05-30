@@ -56,9 +56,9 @@ public:
 		data.setCheck_result(resultSet->getString(15));
 		data.setRecive_date(resultSet->getString(16));
 		data.setInspect_date(resultSet->getString(17));
-		data.setMaj_rate(resultSet->getString(18));
-		data.setCr_rate(resultSet->getString(19));
-		data.setMin_rate(resultSet->getString(20));
+		data.setMaj_rate(resultSet->getDouble(18));
+		data.setCr_rate(resultSet->getDouble(19));
+		data.setMin_rate(resultSet->getDouble(20));
 		data.setList_status(resultSet->getString(21));
 		return data;
 	}

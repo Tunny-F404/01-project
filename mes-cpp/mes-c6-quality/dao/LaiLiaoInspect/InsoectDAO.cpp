@@ -71,14 +71,16 @@ std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& que
 }
 
 //查询详情
-Inspect_detailDO InspectDAO::selectWith(const Inspect_detailQuery::Wrapper& query)
+Inspect_detailDO InspectDAO::selectWithID(const int & line_id)
 {
 	stringstream sql;
-	sql << "SELECT line_id, code, name, template_id, vendor_name, vendor_nick, vendor_batch, item_code, item_name, quantity_recived, quantity_check, quantity_unqualified, check_result, recive_date, inspect_date, inspector, list_status FROM  qc_iqc";
+	sql << "SELECT line_id, code, name,vendor_code, vendor_nick, vendor_batch, item_code, item_name, unit_of_measure,quantity_recived, quantity_check, quantity_unqualified, check_result, recive_date, inspect_date, maj_rate,cr_rate, min_rate,list_status FROM  qc_iqc";
 	sql << "where `line_id`=?";
 	InspectMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<Inspect_detailDO, InspectMapper>(sqlStr, mapper, "%ull");
+	std::list<Inspect_detailDO> A = sqlSession->executeQuery<Inspect_detailDO, Inspect_detailMapper>(sqlStr, mapper, "%i", line_id);
+	if (A.size() == 0) return {};
+	return A.front();
 }
 
 //新增检验表
