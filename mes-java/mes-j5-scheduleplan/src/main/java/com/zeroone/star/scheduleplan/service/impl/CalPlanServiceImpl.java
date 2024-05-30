@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +43,7 @@ interface MsPlanMapper {
 
 @Service
 public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> implements ICalPlanService {
+@Resource
 
     @Resource
     MsPlanMapper msPlanMapper;
@@ -73,5 +75,12 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
     @Override
     public ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition) {
         return null;
+    }
+
+    public static void main(String[] args) {
+        CalPlanServiceImpl service=new CalPlanServiceImpl();
+        List<Long> l=new ArrayList<>();
+        l.add((long)5);
+        service.removeSchPlan(l);
     }
 }
