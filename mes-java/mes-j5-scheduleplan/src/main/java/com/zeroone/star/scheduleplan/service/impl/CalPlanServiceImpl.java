@@ -51,8 +51,6 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
 
     @Resource
     private MsPlanMapper msPlanMapper;
-    @Resource
-    private CalPlanMapper planMapper;
 
     /**
      * 删除排班计划(可批量删除)
@@ -62,7 +60,7 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
      */
     @Override
     public boolean removeSchPlan(List<Long> rems) {
-        return planMapper.deleteBatchIds(rems) > 0;
+        return baseMapper.deleteBatchIds(rems) > 0;
     }
 
     @Override
@@ -85,7 +83,7 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
         List<CalPlan> planlist = new ArrayList<>();
         //从导出id列表中依次取出id进行查询数据
         for (Long id : ids) {
-            CalPlan plan = planMapper.selectById(id);
+            CalPlan plan = baseMapper.selectById(id);
             //查出数据不为空则将其加入数据列表
             if (plan != null) {
                 planlist.add(plan);
