@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { userStore } from '../stores/user'
+import Station from '../views/Station.vue'
 const routes = []
 routes.push(
   {
@@ -17,7 +18,12 @@ routes.push(
     path: '/error',
     name: 'Error',
     component: () => import('../views/status/500.vue')
-  }
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Station,
+  },
 )
 
 // 读取login模块路由
