@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
@@ -78,7 +79,7 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
     }
 
     @Override
-    public ResponseEntity<byte[]> exportSchPlan(List<Long> ids) {
+    public ResponseEntity<byte[]> exportSchPlan( List<Long> ids) {
         //导出计划数据列表
         List<CalPlan> planlist = new ArrayList<>();
         //从导出id列表中依次取出id进行查询数据

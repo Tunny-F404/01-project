@@ -1,5 +1,6 @@
 package com.zeroone.star.scheduleplan.controller;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
@@ -73,11 +74,14 @@ public class SchedulePlanController implements SchedulePlanApis {
         return calPlanService.modifySchPlanStatus(planDTO) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
-
     @ApiOperation(value = "导出计划")
     @GetMapping("export-schedule-plan")
     @Override
-    public ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition) {
-        return null;
+    public ResponseEntity<byte[]> exportSchPlan(List<Long> ids) {
+        return calPlanService.exportSchPlan(ids);
     }
+
+
+
+
 }

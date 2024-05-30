@@ -74,9 +74,8 @@ public interface SchedulePlanApis {
 
     /**
      * 导出排班计划
-     * @param condition 查询条件
      * @author interstellar
      */
-    ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition);
+    ResponseEntity<byte[]> exportSchPlan(List<Long> ids);
 
 }
