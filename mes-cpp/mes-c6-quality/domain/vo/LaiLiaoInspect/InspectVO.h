@@ -28,9 +28,6 @@ class InspectPageJsonVO : public JsonVO<InspectPageDTO::Wrapper> {
 	DTO_INIT(InspectPageJsonVO, JsonVO<InspectPageDTO::Wrapper>);
 };
 
-class Inspect_detailPageJsonVO : public JsonVO<Inspect_detailPageDTO::Wrapper> {
-	DTO_INIT(Inspect_detailPageJsonVO, JsonVO<Inspect_detailPageDTO::Wrapper>);
-};
 
 #include OATPP_CODEGEN_END(DTO)
 

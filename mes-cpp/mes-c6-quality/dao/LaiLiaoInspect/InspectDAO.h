@@ -22,5 +22,23 @@ public:
 	// 通过ID删除数据
 	int deleteById(uint64_t id);
 };
+
+//查询详情
+class Inspect_detailDAO : public BaseDAO
+{
+public:
+	// 统计数据条数
+	uint64_t count(const Inspect_detailQuery::Wrapper& query);
+	// 分页查询数据
+	list<Inspect_detailDO> selectWithPage(const Inspect_detailQuery::Wrapper& query);
+	// 插入数据
+	uint64_t insert(const Inspect_detailDO& iObj);
+	// 修改数据
+	int update(const Inspect_detailDO& uObj);
+	// 通过ID删除数据
+	int deleteById(uint64_t id);
+};
+
+
 #endif // !_INSPECT_DAO
 

@@ -70,7 +70,7 @@ std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& que
 	return sqlSession->executeQuery<InspectDO, InspectMapper>(sqlStr, mapper, params);
 }
 
-
+//新增检验表
 uint64_t InspectDAO::insert(const InspectDO& iObj)
 {
 	string sql = "INSERT INTO `qc_iqc` ( `line_id`,`code`,`name`,`template_id`, `vendor_id`, `vendor_code`,`vendor_name`,`vendor_nick`,`vendor_batch`,`item_code`,`item_name` ,`quantity_recived`,`quantity_check`,`quantity_unqualified`,`check_result`,`recive_date`,`inspect_date`,`inspector`,`list_status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,)";
@@ -97,24 +97,30 @@ uint64_t InspectDAO::insert(const InspectDO& iObj)
 	);
 }
 
+//修改检验表
 int InspectDAO::update(const InspectDO& uObj)
 {
-	string sql = "UPDATE `qc_iqc` SET `code` = ?, `name`= ?, `template_id`= ?, `source_doc_id`= ? , `source_doc_type`= ?, `quantity_issued`= ?, `batch_code`= ?, `warehouse_name`= ?, `location_name`= ?, `area_name`= ?, `remark`= ? WHERE `line_id` = ?;";
+	string sql = "UPDATE `qc_iqc` SET `code` = ?, `name`= ?, `template_id`= ?, `vendor_id`= ? , `vendor_code`= ?, `vendor_name`= ?, `vendor_nick`= ?, `vendor_batch`= ?, `item_code`= ?, `item_name`= ?, `quantity_recived`= ? ,`quantity_check`=?,`quantity_unqualified`=?,`check_result`=?,`recive_date`=?,`inspect_date`=?,`inspector`=?,`list_status`=? WHERE `line_id` = ?;";
 	return sqlSession->executeUpdate(sql, "%ull%ull%s%s%s%s%d%s%s%s%s%s%ull",
-		uObj.getIssue_id(),
-		uObj.getItem_id(),
+		uObj.getCode(),
+		uObj.getName(),
+		uObj.getTemplate_id(),
+		uObj.getVendor_id(),
+		uObj.getVendor_code(),
+		uObj.getVendor_name(),
+		uObj.getVendor_nick(),
+		uObj.getVendor_batch(),
 		uObj.getItem_code(),
 		uObj.getItem_name(),
-		uObj.getSpecification(),
-		uObj.getUnit_of_measure(),
-		uObj.getQuantity_issued(),
-		uObj.getBatch_code(),
-		uObj.getWarehouse_name(),
-		uObj.getLocation_name(),
-		uObj.getArea_name(),
-		uObj.getRemark(),
+		uObj.getQuantity_recived(),
+		uObj.getQuantity_check(),
+		uObj.getQuantity_unqualified(),
+		uObj.getCheck_result(),
+		uObj.getRecive_date(),
+		uObj.getInspect_date(),
+		uObj.getInspector(),
+		uObj.getList_status(),
 		uObj.getLine_id());
-		
 }
 
 int InspectDAO::deleteById(uint64_t id)

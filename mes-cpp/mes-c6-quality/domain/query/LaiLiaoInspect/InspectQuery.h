@@ -39,9 +39,9 @@ class InspectQuery : public PageQuery
 
 
 //来料检验详情
-class Inspect_detailQuery :public PageQuery
+class Inspect_detailQuery :public oatpp::DTO
 {
-	DTO_INIT(Inspect_detailQuery, PageQuery);
+	DTO_INIT(Inspect_detailQuery, DTO);
 	// 来料检验表主键id
 	API_DTO_FIELD_DEFAULT(String, line_id, ZH_WORDS_GETTER("inspect.line_id"));
 

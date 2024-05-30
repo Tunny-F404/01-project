@@ -14,14 +14,14 @@ InspectPageJsonVO::Wrapper InspectController::execQueryInspect(const InspectQuer
 	jvo->success(result);
 	return jvo;
 }
-Inspect_detailPageJsonVO::Wrapper InspectController::execQueryInspect_detail(const Inspect_detailQuery::Wrapper& query, const PayloadDTO& payload)
+Inspect_detailJsonVO::Wrapper InspectController::execQueryInspect_detail(const Inspect_detailQuery::Wrapper& query, const PayloadDTO& payload)
 {
 	// 定义一个Service
 	InspectService service;
 	// 查询数据
 	auto result = service.list_detailAll(query);
 	// 响应结果
-	auto jvo = InspectPageJsonVO::createShared();
+	auto jvo = Inspect_detailJsonVO::createShared();
 	jvo->success(result);
 	return jvo;
 }

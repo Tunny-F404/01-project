@@ -35,10 +35,10 @@ InspectPageDTO::Wrapper InspectService::listAll(const InspectQuery::Wrapper& que
 }
 
 //查询来料检验详情
-Inspect_detailPageDTO::Wrapper InspectService::list_detailAll(const Inspect_detailQuery::Wrapper& query)
+Inspect_detailDTO::Wrapper InspectService::list_detailAll(const Inspect_detailQuery::Wrapper& query)
 {
 	// 构建返回对象
-	auto pages = Inspect_detailPageDTO::createShared();
+	auto pages = Inspect_detailDTO::createShared();
 	pages->pageIndex = query->pageIndex;
 	pages->pageSize = query->pageSize;
 
