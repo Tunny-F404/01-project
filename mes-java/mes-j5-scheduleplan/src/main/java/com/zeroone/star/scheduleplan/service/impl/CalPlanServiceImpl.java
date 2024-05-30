@@ -7,12 +7,10 @@ import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.zeroone.star.scheduleplan.mapper.CalPlanMapper;
 import com.zeroone.star.scheduleplan.service.ICalPlanService;
 import org.mapstruct.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,16 +44,19 @@ interface MsPlanMapper {
 public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> implements ICalPlanService {
 
     @Resource
-    MsPlanMapper msPlanMapper;
+    private MsPlanMapper msPlanMapper;
+    @Resource
+    private CalPlanMapper planMapper;
 
     /**
      * 删除排班计划(可批量删除)
+     *
      * @param rems 删除数据的id集合
      * @return
      */
     @Override
     public boolean removeSchPlan(List<Long> rems) {
-        return baseMapper.deleteBatchIds(rems) > 0;
+        return planMapper.deleteBatchIds(rems) > 0;
     }
 
     @Override
