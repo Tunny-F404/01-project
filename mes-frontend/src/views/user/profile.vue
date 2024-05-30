@@ -7,14 +7,16 @@
 				<el-card style="max-width: 480px">
 					<template #header>
 						<div class="card-header">
-							<span>个人信息</span>
+							<span style="font-size: large">个人信息</span>
 						</div>
 					</template>
 					<!-- 用户信息展示 -->
 					<el-row justify="center">
 						<div class="demo-type">
-							<el-avatar :size="100" fit="cover" @error="false" :src="url" ><img
-								src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
+							<el-avatar :size="100" fit="cover" @error="false" :src="url"
+								><img
+									src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
+								/>
 							</el-avatar>
 						</div>
 					</el-row>
@@ -50,28 +52,64 @@
 				<el-card>
 					<template #header>
 						<div class="card-header">
-							<span>基本信息</span>
+							<span style="font-size: large">基本信息</span>
 						</div>
 					</template>
 					<!-- 基本资料/修改密码 -->
-					<el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+					<el-tabs
+						v-model="activeName"
+						class="demo-tabs"
+						@tab-click="handleClick"
+					>
 						<el-tab-pane label="基本资料" name="first">
 							<!-- 基本资料表单 -->
-							<el-form :model="infoform" label-width="80px" :inline="false" size="normal"
-								hide-required-asterisk="true">
-								<el-form-item label="用户名称">
+							<el-form
+								:model="infoform"
+								:rules="inforules"
+								label-width="80px"
+								status-icon
+							>
+								<el-form-item label="用户名称" prop="nickName">
 									<el-input v-model="infoform.nickName"></el-input>
 								</el-form-item>
-								<el-form-item label="手机号码">
-									<el-input v-model="infoform.phoneNum"></el-input>
+								<!-- 手机验证 -->
+								<el-form-item label="手机号码" prop="phoneNum">
+									<el-input
+										v-model="infoform.phoneNum"
+										placeholder="123-1234-1234"
+										maxlength="11"
+									>
+										<template #append>
+											<el-button type="primary" @click="getphoneCode"
+												>获取验证码</el-button
+											>
+										</template>
+									</el-input>
 								</el-form-item>
-								<el-form-item label="邮箱">
-									<el-input v-model="infoform.email"></el-input>
+								<el-form-item label="验证码" prop="phoneCode">
+									<el-input v-model="infoform.phoneCode"></el-input>
 								</el-form-item>
-								<el-form-item label="性别">
+								<!-- 邮箱验证 -->
+								<el-form-item label="邮箱" prop="email">
+									<el-input
+										v-model="infoform.email"
+										placeholder="****@exmaple.com"
+									>
+										<template #append>
+											<el-button type="primary" @click="getemailCode"
+												>获取验证码</el-button
+											>
+										</template>
+									</el-input>
+								</el-form-item>
+								<el-form-item label="验证码" prop="emailCode">
+									<el-input v-model="infoform.emailCode"></el-input>
+								</el-form-item>
+
+								<el-form-item label="性别" prop="gender">
 									<el-radio-group v-model="infoform.gender">
-										<el-radio value="male">男</el-radio>
-										<el-radio value="female">女</el-radio>
+										<el-radio value="男">男</el-radio>
+										<el-radio value="女">女</el-radio>
 									</el-radio-group>
 								</el-form-item>
 								<el-form-item>
@@ -83,15 +121,15 @@
 
 						<el-tab-pane label="修改密码" name="second">
 							<!-- 修改密码表单 -->
-							<el-form :model="passwd" label-width="80px" :inline="false" size="normal">
-								<el-form-item label="旧密码">
-									<el-input v-model="passwd.old"></el-input>
+							<el-form :model="passwd" label-width="80px" status-icon>
+								<el-form-item label="旧密码" prop="old">
+									<el-input v-model="passwd.old" show-password></el-input>
 								</el-form-item>
-								<el-form-item label="新密码">
-									<el-input v-model="passwd.new"></el-input>
+								<el-form-item label="新密码" prop="new">
+									<el-input v-model="passwd.new" show-password></el-input>
 								</el-form-item>
-								<el-form-item label="确认密码">
-									<el-input v-model="passwd.confirm"></el-input>
+								<el-form-item label="确认密码" prop="confirm">
+									<el-input v-model="passwd.confirm" show-password></el-input>
 								</el-form-item>
 								<el-form-item>
 									<el-button type="primary" @click="onSubmit">保存</el-button>
@@ -100,7 +138,6 @@
 							</el-form>
 						</el-tab-pane>
 					</el-tabs>
-
 				</el-card>
 			</div>
 		</el-col>
@@ -108,7 +145,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 //tabs配置
 const activeName = ref('first')
@@ -116,25 +153,110 @@ const handleClick = (tab, event) => {
 	console.log(tab, event)
 }
 
-//基本资料表单
+//基本资料 表单
 const infoform = ref({
-	nickName:'',
-	phoneNum:'',
-	email:'',
-	gender:'男'
+	nickName: '',
+	phoneNum: '',
+	phoneCode: '',
+	email: '',
+	emailCode: '',
+	gender: '男'
 })
-const onSubmit = () => {
-	console.log('表单发送成功')
+
+//基本资料表单 验证规则
+const inforules = reactive({
+	nickName: [
+		{ required: true, message: '请输入用户名', trigger: 'blur' },
+		{ min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'change' }
+	],
+	phoneNum: [
+		{
+			required: true,
+			message: '请输入电话号码',
+			trigger: 'blur'
+		},
+		{
+			min: 11,
+			message: '请输入正确的电话号码',
+			trigger: 'change'
+		}
+	],
+	email: [
+		{
+			required: true,
+			message: '请输入邮箱',
+			trigger: 'change'
+		}
+	],
+	gender: [
+		{
+			type: 'date',
+			required: true,
+			message: '请选择你的性别',
+			trigger: 'change'
+		}
+	]
+})
+
+//修改密码 表单
+const passwd = ref({
+	old: '',
+	new: '',
+	confirm: ''
+})
+
+//密码表单 验证规则
+const passwdrules = reactive({
+	nickName: [
+		{ required: true, message: '请输入用户名', trigger: 'blur' },
+		{ min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+	],
+	phoneNum: [
+		{
+			min: 11,
+			message: '请输入正确的电话号码',
+			trigger: 'change'
+		}
+	],
+	email: [
+		{
+			required: true,
+			message: '请输入邮箱',
+			trigger: 'change'
+		}
+	],
+	gender: [
+		{
+			type: 'date',
+			required: true,
+			message: '请选择你的性别',
+			trigger: 'change'
+		}
+	]
+})
+
+// 表单校验
+const onSubmit = (formEl) => {
+	if (!formEl) return
+	formEl.validate((valid) => {
+		if (valid) {
+			console.log('submit!')
+		} else {
+			console.log('error submit!')
+		}
+	})
 }
 
-//修改密码表单
-const passwd = ref({
-	old:'',
-	new:'',
-	confirm:''
-})
-
-const url =ref('')
+//获取 手机验证码
+const getphoneCode = () => {
+	console.log('手机验证码发送成功！')
+}
+//获取 邮箱验证码
+const getemailCode = () => {
+	console.log('邮箱验证码发送成功！')
+}
+// 图片上传
+const url = ref('')
 </script>
 
 <style scoped>
@@ -161,14 +283,12 @@ const url =ref('')
 	display: flex;
 }
 
-.demo-type>div {
+.demo-type > div {
 	flex: 1;
 	text-align: center;
 }
 
-.demo-type>div:not(:last-child) {
+.demo-type > div:not(:last-child) {
 	border-right: 1px solid var(--el-border-color);
 }
-
-/* 输入框 */
 </style>
