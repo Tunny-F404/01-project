@@ -11,4 +11,8 @@ public interface ShopsettingsService extends IService<WorkShop> {
     void Update(GetShopSettingsDTO shopsettingsDTO);
 
     int removeshopsettings(List<Long> ids);
+
+    int addShiftPlan(GetShopSettingsDTO shopsettingsDTO);
+
+    int modifyShopSettings(GetShopSettingsDTO shopsettingsDTO);
 }
