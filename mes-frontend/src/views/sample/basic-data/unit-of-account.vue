@@ -1,44 +1,58 @@
 <script setup >
 import  tableFrame  from '@/components/table-list-use/table-text.vue' 
 import popUp from '@/components/table-list-use/table-components/pop-up.vue'
+import request  from '@/apis/request.js'
 import {ref} from 'vue'
 
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整
 const tableList=ref([{
-    "account":"车",
-    "simply":"C",
-    "enable":"true",
-    "time":"2024.4.1"
-},
-{
-    "account":"顿",
-    "simply":"T",
-    "enable":"true",
-    "time":"2024.3.1"
-},
-{
-    "account":"千克",
-    "simply":"KG",
-    "enable":"false",
-    "time":"2024.2.1"
+  "attr1": "自定义值1",
+  "attr2": "自定义值2",
+  "attr3": 100,
+  "attr4": 200,
+  "changeRate": 1,
+  "enableFlag": "Y",
+  "measureCode": "METER",
+  "measureName": "米",
+  "primaryFlag": "Y",
+  "primaryId": 1,
+  "remark": "这是主单位"
 }
 ]) 
 
 //dialog联系到表格弹窗
 const dialog=ref()
 
+//定义总条数
+const total=ref(13)
+
+const loading=ref(false)//loading状态
 
 //定义请求参数,后期完善
 const parms=ref({
     pagenum:1,//页数
     pagesize: 5,//当前每页面大小
-    state:'成功',//状态
-    classfiy:'时间'
+    state:'',//状态
+    classfiy:''
 })
-const getPageList=()=>{
 
+const getPageList= async (data)=>{
+  //不知道跟着接口写的对不对，希望大佬看一看
+  loading.value=true
+ try {
+  const res=await request(request.GET,'/basicdata/md-unit-measure/list',data,JSON)
+  tableList.value=res.data.rows.data
+  parms.value.pagenum=res.data.pageIndex
+  parms.value.pagesize=res.data.pageSize
+  total.value=res.data.total
+ } catch (error) {
+  console.log('错误或者超时');
+ } 
+
+  loading.value=false
 }
+getPageList()//进来就加载一遍
 //处理分页逻辑
 //改变大小
 const onSizeChange=(size)=>{
@@ -46,14 +60,16 @@ const onSizeChange=(size)=>{
   parms.value.pagenum=1
   parms.value.pagesize=size
   //再利用接口渲染数据getPageList
-  getPageList()
+ const Data={pageSize:'parms.pagesize'}
+  getPageList(Date)
 }
 //改变页数
 const onCurrentChange=(page)=>{
    // console.log('页面变化了',page);
  parms.value.pagenum=page
 //基于当前最新页渲染数据
-  getPageList()
+const Data={pageIndex:'parms.pagenum'}
+  getPageList(Data)
 }
 
 // const tableList=ref([])
@@ -125,13 +141,20 @@ const onAddChannel = () => {
 </el-form>
 
 <!--表格区-->
-    <el-table  :data="tableList" style="width: 100%">
-  <el-table-column type="index" label="序号" width="100"></el-table-column>
-   <el-table-column prop="account" label="单位" width="100"></el-table-column>
-   <el-table-column prop="simply" label="简写" width="150"></el-table-column>
-   <el-table-column prop="enable"  label="是否启用" ></el-table-column>
-   <el-table-column  prop="time"   label="创建时间" ></el-table-column>
-   <el-table-column label="操作" >
+    <el-table  :data="tableList" style="width: 100%" v-loading="loading">
+  <el-table-column type="index" label="序号" ></el-table-column>
+   <el-table-column prop="attr1" label="预留字段1" width="100"></el-table-column>
+   <el-table-column prop="attr2" label="预留字段2" width="100"></el-table-column>
+   <el-table-column prop="attr3" label="预留字段3" width="100"></el-table-column>
+   <el-table-column prop="attr4" label="预留字段4" width="100"></el-table-column>
+   <el-table-column prop="changeRate" label="与主单位换算比例" width="100"></el-table-column>
+   <el-table-column prop="enableFlag"  label="是否启用" ></el-table-column>
+   <el-table-column  prop="measureCode"   label="单位编码" ></el-table-column>
+   <el-table-column  prop="measureName"   label="单位名称" ></el-table-column>
+   <el-table-column  prop="primaryFlag"   label="是否是主单位" ></el-table-column>
+   <el-table-column  prop="primaryId"   label="主单位ID" ></el-table-column>
+   <el-table-column  prop="remark"   label="备注" ></el-table-column>
+   <el-table-column label="操作" width="100" >
     <!-- row是当前一行数据 index是下标-->
     <template #default="{row,$index}">
         <el-button @click="onEditchannel(row,$index)" 
@@ -157,7 +180,7 @@ const onAddChannel = () => {
       :page-sizes="[2, 3, 5, 10]"
       :background="true"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="11"
+      :total="total"
       @size-change="onSizeChange"
       @current-change="OnCurrentChange"
       style="margin-top:20px;justify-content: flex-end;"
