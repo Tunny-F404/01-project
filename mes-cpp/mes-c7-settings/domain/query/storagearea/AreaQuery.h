@@ -13,17 +13,17 @@ class AreaQuery: public PageQuery
 {
 	DTO_INIT(AreaQuery, PageQuery)
 	//≤÷ø‚ø‚Œª±‡¬Î
-	API_DTO_FIELD_DEFAULT(String, area_code, ZH_WORDS_GETTER("storagearea:fields:areacode"))
+	API_DTO_FIELD_DEFAULT(oatpp::String, area_code, ZH_WORDS_GETTER("storagearea:fields:areacode"))
 	//≤÷ø‚ø‚Œª√˚≥∆
-	API_DTO_FIELD_DEFAULT(String, area_name, ZH_WORDS_GETTER("storagearea:fields:areaname"))
+	API_DTO_FIELD_DEFAULT(oatpp::String, area_name, ZH_WORDS_GETTER("storagearea:fields:areaname"))
 	//ø‚«¯ID
-	API_DTO_FIELD_DEFAULT(Int64, location_id, ZH_WORDS_GETTER("storagearea:fields:locationId"))
+	API_DTO_FIELD_DEFAULT(oatpp::Int64, location_id, ZH_WORDS_GETTER("storagearea:fields:locationId"))
 	//≤÷ø‚ø‚ŒªŒª÷√x
-	API_DTO_FIELD_DEFAULT(Int32, position_x, ZH_WORDS_GETTER("storagearea:fields:positionx"))
+	API_DTO_FIELD_DEFAULT(oatpp::Int32, position_x, ZH_WORDS_GETTER("storagearea:fields:positionx"))
 	//≤÷ø‚ø‚ŒªŒª÷√y
-	API_DTO_FIELD_DEFAULT(Int32, position_y, ZH_WORDS_GETTER("storagearea:fields:positiony"))
+	API_DTO_FIELD_DEFAULT(oatpp::Int32, position_y, ZH_WORDS_GETTER("storagearea:fields:positiony"))
 	//≤÷ø‚ø‚ŒªŒª÷√z
-	API_DTO_FIELD_DEFAULT(Int32, position_z, ZH_WORDS_GETTER("storagearea:fields:positionz"))
+	API_DTO_FIELD_DEFAULT(oatpp::Int32, position_z, ZH_WORDS_GETTER("storagearea:fields:positionz"))
 
 };
 

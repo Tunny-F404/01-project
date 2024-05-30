@@ -19,6 +19,7 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include "storagearea/AreaController.h"
 #include "warehouse/GetAllDetailsController.h"
 #include "warehouse/DetailsPageController.h"
 #include "storagearea/AreaController.h"
