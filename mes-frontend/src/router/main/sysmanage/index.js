@@ -33,6 +33,12 @@ const routes = [
 		path: '/un-7',
 		name: 'UN7',
 		component: () => import('@/views/status/404.vue')
+  },
+  // 仓库管理页面
+  {
+    path:'/un-31',
+    name: 'UN31',
+    component: () => import('@/views/warehouse-management/warehouse-management.vue')
 	}
 ]
 
