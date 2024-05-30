@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.project.j3.dto.Session;
 import com.zeroone.star.message.service.SessionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.time.Duration;
 import java.util.Collection;
 import java.util.Map;
@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Service
 public class SessionServiceImpl implements SessionService {
 
-    @Autowired
+    @Resource
     private RedisTemplate<String, Session> redisTemplate;
 
     private static final String SESSION_KEY = "Session";
