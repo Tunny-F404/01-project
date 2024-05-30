@@ -17,11 +17,11 @@ const tableList=ref([{
 
 const multipleSelection=ref([])
 //dialog联系到表格弹窗
-const dialog=ref()
+const dialog = ref();
 
 //定义总条数
-const total=ref(0)
-const loading=ref(false)//loading状态
+const total = ref(0);
+const loading = ref(false); //loading状态
 //定义请求参数,后期完善
 const parms=ref({
     pagenum:1,//页数
@@ -41,45 +41,45 @@ const getPageList= async ()=>{
 getPageList()//进来就加载一遍
 //处理分页逻辑
 //改变大小
-const onSizeChange=(size)=>{
-    //console.log('当前每页面条数',size);
-  parms.value.pagenum=1
-  parms.value.pagesize=size
-  //再利用接口渲染数据getPageList
-  getPageList()
-}
+const onSizeChange = (size) => {
+	//console.log('当前每页面条数',size);
+	parms.value.pagenum = 1;
+	parms.value.pagesize = size;
+	//再利用接口渲染数据getPageList
+	getPageList();
+};
 //改变页数
-const onCurrentChange=(page)=>{
-   // console.log('页面变化了',page);
- parms.value.pagenum=page
-//基于当前最新页渲染数据
-  getPageList()
-}
+const onCurrentChange = (page) => {
+	// console.log('页面变化了',page);
+	parms.value.pagenum = page;
+	//基于当前最新页渲染数据
+	getPageList();
+};
 
 // const tableList=ref([])
-const onSortChannel=()=>{
-    console.log("排序");
-}
-const onEditchannel=(row,$index)=>{
-    //编辑
-    dialog.value.open({row})
-    console.log(row);
-}
-const onDelChannel=async (row)=>{
-    //删除
-    await ElMessageBox.confirm('你确认要删除该分类么', '温馨提示', {
-    type: 'warning',
-    confirmButtonText: '确认',
-    cancelButtonText: '取消'
-  })
-  ElMessage.success('删除成功')
-    console.log(row)
-    //删除后再渲染数据
-    getPageList()
-}
-const onSubmit=()=>{
-    console.log("查询提交");
-}
+const onSortChannel = () => {
+	console.log("排序");
+};
+const onEditchannel = (row, $index) => {
+	//编辑
+	dialog.value.open({ row });
+	console.log(row);
+};
+const onDelChannel = async (row) => {
+	//删除
+	await ElMessageBox.confirm("你确认要删除该分类么", "温馨提示", {
+		type: "warning",
+		confirmButtonText: "确认",
+		cancelButtonText: "取消",
+	});
+	ElMessage.success("删除成功");
+	console.log(row);
+	//删除后再渲染数据
+	getPageList();
+};
+const onSubmit = () => {
+	console.log("查询提交");
+};
 //添加
 const onAddChannel = () => {
   dialog.value.open({})
@@ -89,7 +89,6 @@ const  handleSelectionChange=(val)=> {
         this.multipleSelection = val;
       }
 </script>
-
 
 <template>
         <!--分类，页面只有基本的表现，没有实现数据绑定-->
@@ -108,25 +107,26 @@ const  handleSelectionChange=(val)=> {
     </el-button>
     </slot>
 
-    <!--表单区域-->
-    <el-form :inline="true"  class="demo-form-inline">
-  <el-form-item label="表格分类：" padding="50px">
-    <!--label是用户看，value是收集给后台的-->
-    <el-select v-model="parms.classfiy">
-        <el-option label="按产品" value="001"> </el-option>
-        <el-option label="按时间" value="002"> </el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label="状态" >
-    <el-select v-model="parms.state"><!--后台标记状态-->
-      <el-option label="正常" value="正常"></el-option>
-      <el-option label="失败" value="失败"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit">查询</el-button>
-  </el-form-item>
-</el-form>
+		<!--表单区域-->
+		<el-form :inline="true" class="demo-form-inline">
+			<el-form-item label="表格分类：" padding="50px">
+				<!--label是用户看，value是收集给后台的-->
+				<el-select v-model="parms.classfiy">
+					<el-option label="按产品" value="001"> </el-option>
+					<el-option label="按时间" value="002"> </el-option>
+				</el-select>
+			</el-form-item>
+			<el-form-item label="状态">
+				<el-select v-model="parms.state"
+					><!--后台标记状态-->
+					<el-option label="正常" value="正常"></el-option>
+					<el-option label="失败" value="失败"></el-option>
+				</el-select>
+			</el-form-item>
+			<el-form-item>
+				<el-button type="primary" @click="onSubmit">查询</el-button>
+			</el-form-item>
+		</el-form>
 
 <!--表格区-->
     <el-table  :data="tableList" style="width: 100%" v-loading="loading"
@@ -171,16 +171,14 @@ const  handleSelectionChange=(val)=> {
     />
 <!---->
 
-<!--空处理-->
-    <slot  name=#empty>
-        <el-empty description="没有数据"></el-empty>
-    </slot>
-        </tableFrame>
-<!--引入的弹窗-->
-        <pop-Up ref="dialog"> </pop-Up>
+		<!--空处理-->
+		<slot name="#empty">
+			<el-empty description="没有数据"></el-empty>
+		</slot>
+	</tableFrame>
+	<!--引入的弹窗-->
+	<pop-Up ref="dialog"> </pop-Up>
 </template>
-
-
 
 <style lang="scss" scoped>
 .demo-form-inline{

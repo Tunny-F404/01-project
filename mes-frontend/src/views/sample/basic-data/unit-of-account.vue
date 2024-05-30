@@ -1,9 +1,8 @@
-<script setup >
-import {ref} from 'vue'
-import  tableFrame  from '@/components/table-list-use/table-text.vue' 
-import popUp from '@/components/table-list-use/table-components/pop-up.vue'
-import Request from '@/apis/request.js'
-
+<script setup>
+import tableFrame from "@/components/table-list-use/table-text.vue";
+import popUp from "@/components/table-list-use/table-components/pop-up.vue";
+import request from "@/apis/request.js";
+import { ref } from "vue";
 
 const multipleSelection=ref([])
 //没有中文国际化
@@ -37,10 +36,10 @@ const tableList=ref([{
 ]) 
 
 //dialog联系到表格弹窗
-const dialog=ref()
+const dialog = ref();
 
 //定义总条数
-const total=ref(13)
+const total = ref(13);
 
 //定义查询的数据
 const myInput=ref()
@@ -48,12 +47,12 @@ const unitName=ref()
 const loading=ref(false)//loading状态
 
 //定义请求参数,后期完善
-const parms=ref({
-    pagenum:1,//页数
-    pagesize: 5,//当前每页面大小
-    state:'',//状态
-    classfiy:''
-})
+const parms = ref({
+	pagenum: 1, //页数
+	pagesize: 5, //当前每页面大小
+	state: "", //状态
+	classfiy: "",
+});
 
 const getPageList= async (data)=>{
   //不知道跟着接口写的对不对，希望大佬看一看
@@ -73,22 +72,22 @@ const getPageList= async (data)=>{
 getPageList()//进来就加载一遍
 //处理分页逻辑
 //改变大小
-const onSizeChange=(size)=>{
-    //console.log('当前每页面条数',size);
-  parms.value.pagenum=1
-  parms.value.pagesize=size
-  //再利用接口渲染数据getPageList
- const Data={pageSize:'parms.pagesize'}
-  getPageList(Date)
-}
+const onSizeChange = (size) => {
+	//console.log('当前每页面条数',size);
+	parms.value.pagenum = 1;
+	parms.value.pagesize = size;
+	//再利用接口渲染数据getPageList
+	const Data = { pageSize: "parms.pagesize" };
+	getPageList(Date);
+};
 //改变页数
-const onCurrentChange=(page)=>{
-   // console.log('页面变化了',page);
- parms.value.pagenum=page
-//基于当前最新页渲染数据
-const Data={pageIndex:'parms.pagenum'}
-  getPageList(Data)
-}
+const onCurrentChange = (page) => {
+	// console.log('页面变化了',page);
+	parms.value.pagenum = page;
+	//基于当前最新页渲染数据
+	const Data = { pageIndex: "parms.pagenum" };
+	getPageList(Data);
+};
 
 // const tableList=ref([])
 const onSortChannel=()=>{
@@ -135,7 +134,6 @@ const  handleSelectionChange=(val)=> {
         this.multipleSelection = val;
  }
 </script>
-
 
 <template>
         <!--分类，页面只有基本的表现，没有实现数据绑定-->
@@ -224,16 +222,14 @@ const  handleSelectionChange=(val)=> {
     />
 <!---->
 
-<!--空处理-->
-    <template #empty>
-        <el-empty description="没有数据"></el-empty>
-    </template>
-        </tableFrame>
-<!--引入的弹窗-->
-        <pop-Up ref="dialog"> </pop-Up>
+		<!--空处理-->
+		<template #empty>
+			<el-empty description="没有数据"></el-empty>
+		</template>
+	</tableFrame>
+	<!--引入的弹窗-->
+	<pop-Up ref="dialog"> </pop-Up>
 </template>
-
-
 
 <style lang="scss" scoped>
 .demo-form-inline{

@@ -18,27 +18,32 @@
 			<router-link to="/sample">进入示例演示页面</router-link>
 		</el-card>
 		<!-- 验证码组件 -->
-		<Verify mode="pop" :captchaType="captchaType" :imgSize="{ width: '400px', height: '200px' }" ref="verify"
-			@success="handleSuccess"></Verify>
+		<Verify
+			mode="pop"
+			:captchaType="captchaType"
+			:imgSize="{ width: '400px', height: '200px' }"
+			ref="verify"
+			@success="handleSuccess"
+		></Verify>
 	</div>
 </template>
 
 <script setup>
-import Verify from '@/components/verifition/Verify.vue'
-import Request from '@/apis/request'
-import { ref, reactive } from 'vue'
-import { login } from '@/apis/login'
-import { ElMessage } from 'element-plus'
-import { useRouter } from 'vue-router'
+import Verify from "@/components/verifition/Verify.vue";
+import Request from "@/apis/request";
+import { ref, reactive } from "vue";
+import { login } from "@/apis/login";
+import { ElMessage } from "element-plus";
+import { useRouter } from "vue-router";
 
 // 获取router对象
-const $router = useRouter()
+const $router = useRouter();
 
 // 定义登录数据对象
 const formData = reactive({
-	username: '',
-	password: ''
-})
+	username: "",
+	password: "",
+});
 
 /**
  * 执行登录
@@ -50,18 +55,18 @@ function doLogin(code) {
 		{
 			...formData,
 			clientId: import.meta.env.VITE_CLIENT_ID,
-			code: code
+			code: code,
 		},
 		() => {
 			// 跳转到首页
-			$router.push('/home')
+			$router.push("/home");
 			// 登录成功提示
-			ElMessage.success('登录成功，前往首页')
+			ElMessage.success("登录成功，前往首页");
 		},
 		() => {
-			ElMessage.error('账号或密码错误')
-		}
-	)
+			ElMessage.error("账号或密码错误");
+		},
+	);
 }
 
 // 定义登录提交函数
@@ -73,22 +78,22 @@ function submitForm() {
 	//useVerify('clickWord')
 
 	//TODO[TEST_CODE]:测试直接登录
-	doLogin('')
+	doLogin("");
 }
 
 // 验证码组件引用
-const verify = ref(null)
+const verify = ref(null);
 
 // 验证码类型
-const captchaType = ref('')
+const captchaType = ref("");
 
 /**
  * 弹出验证码框
  * @param type 验证码类型 blockPuzzle滑块验证 clickWord点击文字验证
  */
 function useVerify(type) {
-	captchaType.value = type
-	verify.value.show()
+	captchaType.value = type;
+	verify.value.show();
 }
 
 /**
@@ -119,52 +124,49 @@ function handleSuccess(res) {
 	//     ElMessage.error('账号或密码错误')
 	//   })
 
-	doLogin(res.captchaVerification)
+	doLogin(res.captchaVerification);
 }
 </script>
 
 <style>
- body {
- 	margin: 0;
- 	font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
- }
+body {
+	margin: 0;
+	font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+}
 .box-card {
 	width: 480px;
 	margin: 50px auto;
 	padding: 20px;
-background:rgba(255, 255, 255, 0.5) 
+	background: rgba(255, 255, 255, 0.5);
 }
-.login-container{
+.login-container {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-background-image: url('./img/login.jpg');
+	background-image: url("./img/login.jpg");
 	background-size: cover;
-
 }
-.login-form{
-	
-		display: flex;
-		flex-direction: column;
-		padding: 40px;
-		text-align: center;
-		position: relative;
-		z-index: 100;
-		background: inherit;
-		border-radius: 18px;
-		overflow: hidden;
-		/* 隐藏多余的模糊效果*/
-	
+.login-form {
+	display: flex;
+	flex-direction: column;
+	padding: 40px;
+	text-align: center;
+	position: relative;
+	z-index: 100;
+	background: inherit;
+	border-radius: 18px;
+	overflow: hidden;
+	/* 隐藏多余的模糊效果*/
 }
-.login-button{
-	width: 270px
+.login-button {
+	width: 270px;
 }
 .login-h1 {
 	font-weight: bold;
 	margin: 0;
 	color: burlywood;
-	left: 140px
+	left: 140px;
 }
 </style>
