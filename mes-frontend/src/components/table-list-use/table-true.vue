@@ -1,88 +1,88 @@
 <script setup>
-import tableFrame from '@/components/table-list-use/table-text.vue'
-import popUp from '@/components/table-list-use/table-components/pop-up.vue'
-import request from '@/apis/request.js' //加入请求
-import { ref } from 'vue'
+import tableFrame from "@/components/table-list-use/table-text.vue";
+import popUp from "@/components/table-list-use/table-components/pop-up.vue";
+import request from "@/apis/request.js"; //加入请求
+import { ref } from "vue";
 
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整
 const tableList = ref([
 	{
-		classify: '金属',
-		product: '螺丝',
-		sure: '正常',
-		time: '2024.5.22'
-	}
-])
+		classify: "金属",
+		product: "螺丝",
+		sure: "正常",
+		time: "2024.5.22",
+	},
+]);
 
 //dialog联系到表格弹窗
-const dialog = ref()
+const dialog = ref();
 
 //定义总条数
-const total = ref(0)
-const loading = ref(false) //loading状态
+const total = ref(0);
+const loading = ref(false); //loading状态
 //定义请求参数,后期完善
 const parms = ref({
 	pagenum: 1, //页数
 	pagesize: 5, //当前每页面大小
-	state: '成功', //状态
-	classfiy: '时间'
-})
+	state: "成功", //状态
+	classfiy: "时间",
+});
 const getPageList = async () => {
-	loading.value = true
+	loading.value = true;
 	//里面改接口，可以加个try-catch
 	// const res= await request(request.GET,'/basicdata/md-unit-measure/list',null,JSON)
 	// tableList.value=res.data.rows.data
 	// parms.value.pagenum=res.data.pageIndex
 	// parms.value.pagesize=res.data.pageSize
-	loading.value = false
-}
-getPageList() //进来就加载一遍
+	loading.value = false;
+};
+getPageList(); //进来就加载一遍
 //处理分页逻辑
 //改变大小
 const onSizeChange = (size) => {
 	//console.log('当前每页面条数',size);
-	parms.value.pagenum = 1
-	parms.value.pagesize = size
+	parms.value.pagenum = 1;
+	parms.value.pagesize = size;
 	//再利用接口渲染数据getPageList
-	getPageList()
-}
+	getPageList();
+};
 //改变页数
 const onCurrentChange = (page) => {
 	// console.log('页面变化了',page);
-	parms.value.pagenum = page
+	parms.value.pagenum = page;
 	//基于当前最新页渲染数据
-	getPageList()
-}
+	getPageList();
+};
 
 // const tableList=ref([])
 const onSortChannel = () => {
-	console.log('排序')
-}
+	console.log("排序");
+};
 const onEditchannel = (row, $index) => {
 	//编辑
-	dialog.value.open({ row })
-	console.log(row)
-}
+	dialog.value.open({ row });
+	console.log(row);
+};
 const onDelChannel = async (row) => {
 	//删除
-	await ElMessageBox.confirm('你确认要删除该分类么', '温馨提示', {
-		type: 'warning',
-		confirmButtonText: '确认',
-		cancelButtonText: '取消'
-	})
-	ElMessage.success('删除成功')
-	console.log(row)
+	await ElMessageBox.confirm("你确认要删除该分类么", "温馨提示", {
+		type: "warning",
+		confirmButtonText: "确认",
+		cancelButtonText: "取消",
+	});
+	ElMessage.success("删除成功");
+	console.log(row);
 	//删除后再渲染数据
-	getPageList()
-}
+	getPageList();
+};
 const onSubmit = () => {
-	console.log('查询提交')
-}
+	console.log("查询提交");
+};
 //添加
 const onAddChannel = () => {
-	dialog.value.open({})
-}
+	dialog.value.open({});
+};
 </script>
 
 <template>
@@ -123,17 +123,9 @@ const onAddChannel = () => {
 
 		<!--表格区-->
 		<el-table :data="tableList" style="width: 100%" v-loading="loading">
-			<el-table-column
-				prop="classify"
-				label="分类"
-				width="100"
-			></el-table-column>
+			<el-table-column prop="classify" label="分类" width="100"></el-table-column>
 			<el-table-column type="index" label="排序" width="50"></el-table-column>
-			<el-table-column
-				prop="product"
-				label="物料/产品"
-				width="150"
-			></el-table-column>
+			<el-table-column prop="product" label="物料/产品" width="150"></el-table-column>
 			<el-table-column prop="sure" label="是否启用"></el-table-column>
 			<el-table-column prop="time" label="创建时间"></el-table-column>
 			<el-table-column label="操作">

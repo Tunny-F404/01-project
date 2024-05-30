@@ -64,4 +64,3 @@ npm run lint
 - `README.md`：项目自述文件
 - `vite.config.js`：`Vite`构建工具配置文件
 - `start.sh`：`Linux`下面的启动脚本
-

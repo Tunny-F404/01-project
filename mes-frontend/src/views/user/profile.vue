@@ -13,8 +13,8 @@
 					<!-- 用户信息展示 -->
 					<el-row justify="center">
 						<div class="demo-type">
-							<el-avatar :size="100" fit="cover" @error="false" :src="url" ><img
-								src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
+							<el-avatar :size="100" fit="cover" @error="false" :src="url"
+								><img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
 							</el-avatar>
 						</div>
 					</el-row>
@@ -57,8 +57,7 @@
 					<el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
 						<el-tab-pane label="基本资料" name="first">
 							<!-- 基本资料表单 -->
-							<el-form :model="infoform" label-width="80px" :inline="false" size="normal"
-								hide-required-asterisk="true">
+							<el-form :model="infoform" label-width="80px" :inline="false" size="normal" hide-required-asterisk="true">
 								<el-form-item label="用户名称">
 									<el-input v-model="infoform.nickName"></el-input>
 								</el-form-item>
@@ -100,7 +99,6 @@
 							</el-form>
 						</el-tab-pane>
 					</el-tabs>
-
 				</el-card>
 			</div>
 		</el-col>
@@ -108,33 +106,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 //tabs配置
-const activeName = ref('first')
+const activeName = ref("first");
 const handleClick = (tab, event) => {
-	console.log(tab, event)
-}
+	console.log(tab, event);
+};
 
 //基本资料表单
 const infoform = ref({
-	nickName:'',
-	phoneNum:'',
-	email:'',
-	gender:'男'
-})
+	nickName: "",
+	phoneNum: "",
+	email: "",
+	gender: "男",
+});
 const onSubmit = () => {
-	console.log('表单发送成功')
-}
+	console.log("表单发送成功");
+};
 
 //修改密码表单
 const passwd = ref({
-	old:'',
-	new:'',
-	confirm:''
-})
+	old: "",
+	new: "",
+	confirm: "",
+});
 
-const url =ref('')
+const url = ref("");
 </script>
 
 <style scoped>
@@ -161,12 +159,12 @@ const url =ref('')
 	display: flex;
 }
 
-.demo-type>div {
+.demo-type > div {
 	flex: 1;
 	text-align: center;
 }
 
-.demo-type>div:not(:last-child) {
+.demo-type > div:not(:last-child) {
 	border-right: 1px solid var(--el-border-color);
 }
 
