@@ -232,6 +232,17 @@ public class RoleServiceImpl implements RoleService {
         return roleMapper.update(roleDo, updateRoleInfo);
     }
 
+
+    /*
+    * 查找该角色所分配的用户
+    * */
+    public List<UserRoleDTO> getUsersByRoleId(Long roleId, int offset, int limit) {
+        List<UserDO> userDOList = userRoleMapper.getUsersByRoleId(roleId, offset, limit);
+        return userDOList.stream()
+                .map(userConvertMapper::userDOToUserDTO)
+                .collect(Collectors.toList());
+    }
+
     /*
      * 取消授权
      * */

@@ -68,6 +68,7 @@ public interface RoleApis {
      * @author 0xu0
      * @param roleDTO
      * @return
+     * @author 0xu0
      */
 
     public JsonVO<Integer> addRole(@RequestBody @Valid RoleAddDto roleDTO);
@@ -100,7 +101,9 @@ public interface RoleApis {
     /*
      * 获取角色分配用户列表（条件+分页）
      * */
-    public JsonVO<List<RoleDTO>> queryAllocatedList(Long roleId);
+/*
+    public JsonVO<List<RoleDTO>> queryAllocatedList(Long roleId, int page, int size);
+*/
 
     /*
      * 添加授权
@@ -109,8 +112,8 @@ public interface RoleApis {
 
 
     /*
-    * 取消授权
-    * */
+     * 取消授权
+     * */
     //public JsonVO<Integer> cancelAuthUser(RoleDTO roleDTO);
 
     /*

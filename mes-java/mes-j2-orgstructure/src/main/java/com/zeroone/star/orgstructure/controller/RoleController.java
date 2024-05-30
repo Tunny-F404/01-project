@@ -1,15 +1,23 @@
 package com.zeroone.star.orgstructure.controller;
 
 
+import com.zeroone.star.orgstructure.entity.UserDO;
+import com.zeroone.star.orgstructure.service.RoleService;
+import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.role.*;
+import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
+import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
 import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,6 +32,11 @@ import java.util.List;
 @RequestMapping("/orgstructure/role")
 @Api(tags = "角色控制器")
 public class RoleController implements RoleApis {
+
+
+
+    @Resource
+    private RoleService roleService;
     /**
      *
      * 获取角色名称列表
@@ -139,24 +152,51 @@ public class RoleController implements RoleApis {
         return JsonVO.success(roleDTO);
     }
 
-    @Override
-    public JsonVO<List<RoleDTO>> queryAllocatedList(RoleDTO roleDTO, PageDTO<RoleDTO> pageDTO) {
-        return null;
+    /*
+     * 获取角色分配用户列表（条件+分页）
+     * */
+    @GetMapping("query-allocate-role")
+    @ApiOperation("获取角色分配用户列表（条件+分页）")
+    public JsonVO<List<UserRoleDTO>> queryAllocatedList(@RequestParam Long roleId,
+                                                    @RequestParam int page,
+                                                    @RequestParam int size) {
+        int offset = (page - 1) * size;
+        List<UserRoleDTO> users = roleService.getUsersByRoleId(roleId, offset, size);
+        if (users != null && !users.isEmpty()) {
+            return JsonVO.success(users);
+        } else {
+            return JsonVO.fail(null);
+        }
     }
 
-    @Override
-    public JsonVO<RoleDTO> addAuth(Long roleId, Long[] userIds) {
-        return null;
+
+    /*
+     * 添加授权
+     * */
+    @PutMapping("addAuth")
+    @ApiOperation("添加授权")
+    public JsonVO<RoleDTO> addAuth(@RequestParam Long roleId, @RequestParam Long[] userIds) {
+        Integer result = roleService.insertAuthUsers(roleId, userIds);
+        return result > 0 ? JsonVO.success(null) : JsonVO.fail(null);
     }
 
-    @Override
-    public JsonVO<List<RoleDTO>> cancelAuthUser(Long roleId, Long[] userIds) {
-        return null;
+    /*
+     * 取消授权（支持批量）
+     * */
+    @DeleteMapping("cancel")
+    @ApiOperation("批量取消授权")
+    public JsonVO<Integer> cancelAuthUsers(@RequestParam Long roleId, @RequestParam Long[] userIds) {
+        Integer result = roleService.deleteAuthUsers(roleId, userIds);
+        return result > 0 ? JsonVO.success(result) : JsonVO.fail(result);
     }
 
-    @Override
+    /*
+     * 导出角色
+     * */
+    @GetMapping(value = "export")
+    @ApiOperation("导出角色")
     public ResponseEntity<byte[]> export() {
-        return null;
+        return roleService.downloadExcel();
     }
 
 }
