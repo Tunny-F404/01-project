@@ -32,7 +32,7 @@ uint64_t DetectionItemSettingsDAO::count(const DetectionItemSettingsQuery::Wrapp
 std::list<DetectionItemSettingsDO> DetectionItemSettingsDAO::selectWithPage(const DetectionItemSettingsQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT index_id,index_code,index_name,index_type,qc_tool,remark FROM qc_index";
+	sql << "SELECT index_id,index_code,index_name,(SELECT dict_label FROM sys_dict_data WHERE dict_value= index_type) as index_type,qc_tool,remark FROM qc_index";
 	DIS_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	DetectionItemSettingsMapper mapper;
@@ -44,7 +44,7 @@ uint64_t DetectionItemSettingsDAO::insert(const DetectionItemSettingsDO& iobj)
 {
 	string sql = "INSERT INTO `qc_index` "
 		" (`index_id`,`index_code`,`index_name`,`index_type`,`qc_tool`,`remark`) "
-		" VALUES (?,?,?,?,?,?) ";
+		" VALUES (?,?,?,(SELECT dict_value FROM sys_dict_data WHERE dict_label=?),?,?) ";
 	return sqlSession->executeInsert(sql, "%ull%s%s%s%s%s",
 		iobj.getId(), iobj.getCode(), iobj.getName(), iobj.getType(), iobj.getTool(), iobj.getRemark());
 }
@@ -52,7 +52,9 @@ uint64_t DetectionItemSettingsDAO::insert(const DetectionItemSettingsDO& iobj)
 int DetectionItemSettingsDAO::update(const DetectionItemSettingsDO& uobj)
 {
 	string sql = "UPDATE `qc_index` SET "
-		" `index_code`=?,`index_name`=?,`index_type`=?,`qc_tool`=?,`remark`=? "
+		" `index_code`=?,`index_name`=? "
+		" ,`index_type`=(SELECT dict_value FROM sys_dict_data WHERE dict_label=?) "
+		" ,`qc_tool`=?,`remark`=? "
 		" WHERE `index_id`=?";
 	return sqlSession->executeUpdate(sql,
 		"%s%s%s%s%s%ull", uobj.getCode(), uobj.getName(), uobj.getType(), uobj.getTool(), uobj.getRemark(),
