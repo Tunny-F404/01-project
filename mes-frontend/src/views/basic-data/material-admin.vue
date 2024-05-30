@@ -2,37 +2,20 @@
 import {ref} from 'vue'
 import  tableFrame  from '@/components/table-list-use/table-text.vue' 
 import popUp from '@/components/table-list-use/table-components/pop-up.vue'
-import Request from '@/apis/request.js'
+import Request  from '@/apis/request.js'
 
-
-const multipleSelection=ref([])
-//没有中文国际化
-//每一列数据，例子，后期接口对上再调整
 const tableList=ref([{
-  "attr1": "自定义值1",
-  "attr2": "自定义值2",
-  "attr3": 100,
-  "attr4": 200,
-  "changeRate": 1,
-  "enableFlag": "Y",
-  "measureCode": "METER",
-  "measureName": "米",
-  "primaryFlag": "Y",
-  "primaryId": 1,
-  "remark": "这是主单位"
-},
-{
-  "attr1": "自定义值1",
-  "attr2": "自定义值2",
-  "attr3": 100,
-  "attr4": 200,
-  "changeRate": 1,
-  "enableFlag": "Y",
-  "measureCode": "METER",
-  "measureName": "米",
-  "primaryFlag": "Y",
-  "primaryId": 1,
-  "remark": "这是主单位"
+    "ancestors": "1",
+  "createBy": "阿伟",
+  "enableFlag": "T",
+  "itemOrProduct": "os",
+  "itemTypeCode": "awnb",
+  "itemTypeId": 114514,
+  "itemTypeName": "金属",
+  "orderNum": 1,
+  "parentTypeId": 0,
+  "remark": "0x3f",
+  "updateBy": "东东哥"
 }
 ]) 
 
@@ -44,26 +27,32 @@ const total=ref(13)
 
 //定义查询的数据
 const myInput=ref()
-const unitName=ref()
+
 const loading=ref(false)//loading状态
 
-//定义请求参数,后期完善
+//定义分类的请求参数
 const parms=ref({
-    pagenum:1,//页数
-    pagesize: 5,//当前每页面大小
-    state:'',//状态
-    classfiy:''
+    // pagenum:1,//页数
+    // pagesize: 5,//当前每页面大小
+    // state:'',//状态
+    // classfiy:''
+    enableFlag: "",
+  itemOrProduct: "os",
+  itemTypeCode: "awnb",
+  itemTypeId: '',
+  itemTypeName: "金属",
+  orderNum: '', 
+  page:'', 
+  parentTypeId: '',
+  size:''
 })
 
 const getPageList= async (data)=>{
   //不知道跟着接口写的对不对，希望大佬看一看
   loading.value=true
  try {
-  const res=await Request.request(Request.GET,'/basicdata/md-unit-measure/list',data,null)
-  tableList.value=res.data.rows.data
-  parms.value.pagenum=res.data.pageIndex
-  parms.value.pagesize=res.data.pageSize
-  total.value=res.data.total
+  const res=await Request.request(Request.GET,'/mes/md/itemtype/{itemTypeId}',data)
+  tableList.value=res.data.data
  } catch (error) {
   console.log('错误或者超时');
  } 
@@ -82,18 +71,21 @@ const onSizeChange=(size)=>{
   getPageList(Date)
 }
 //改变页数
-const onCurrentChange=(page)=>{
-   // console.log('页面变化了',page);
- parms.value.pagenum=page
+const onCurrentChange=async (page)=>{
+ parms.value.page=page
 //基于当前最新页渲染数据
-const Data={pageIndex:'parms.pagenum'}
-  getPageList(Data)
+loading.value=true
+ try {
+  const res=await request(request.GET,'/mes/md/itemtype/list',{page:page})
+  tableList.value=res.data.data
+ } catch (error) {
+  console.log('错误或者超时');
+ } 
+  loading.value=false
 }
+ 
 
-// const tableList=ref([])
-const onSortChannel=()=>{
-    console.log("排序");
-}
+
 const onEditchannel=(row,$index)=>{
     //编辑
     dialog.value.open({row})
@@ -107,18 +99,20 @@ const onDelChannel=async (row)=>{
     cancelButtonText: '取消'
   })
   try {
-  const res=await Request.request(Request.DELETE,'/basicdata/md-unit-measure/delete-by-measureIds',{measureIds:row.data.primaryId},null)
+  const res=await Request.request(Request.DELETE,'/mes/md/itemtype/{itemTypeId}',{itemTypeId:row.data.itemTypeId})
  } catch (error) {
   console.log('错误或者超时');
  } 
  if(res.code===200){
     ElMessage.success('删除成功')
  }
+  
+  //  console.log(row)
     //删除后再渲染数据
     getPageList()
 }
 const onSubmit=()=>{
-  getPageList(myInput)
+    getPageList(myInput)
     console.log("查询提交");
 }
 //添加
@@ -128,9 +122,9 @@ const onAddChannel = () => {
 
 const reFresh=()=>{
   myInput=''
-  unitName=''
 }
 
+const multipleSelection=ref([])
 const  handleSelectionChange=(val)=> {
         this.multipleSelection = val;
  }
@@ -138,29 +132,23 @@ const  handleSelectionChange=(val)=> {
 
 
 <template>
-        <!--分类，页面只有基本的表现，没有实现数据绑定-->
-        <tableFrame title="计算单位">
-    <template #extra>
-      <el-button @click="onSortChannel">导出数据     
-        <el-icon :size="20">
-    <UploadFilled /><!--排序图标-->
-        </el-icon>
-    </el-button>
-    <el-button @click="onAddChannel">添加    
-        <el-icon :size="20">
-    <Plus /><!--添加图标-->
-        </el-icon>
-    </el-button>
-    </template>
+        
+        <tableFrame title="物料产品管理">
+   
+
 
     <!--表单区域-->
     <el-form :inline="true"  class="demo-form-inline">
-  <el-form-item label="单位编码：" padding="50px">
-    <!--label是用户看，value是收集给后台的-->
+  <el-form-item label="分类名称：" padding="50px">
+    <!--label是用户看，value是收集给后台的.这个输入框输入查询分类的ID-->
     <el-input v-model="myInput" clearable/>
+        
   </el-form-item>
-  <el-form-item label="单位名称" >
-    <el-input v-model="unitName" clearable/>
+  <el-form-item label="是否启用" >
+    <el-select v-model="parms.state"><!--后台标记状态-->
+      <el-option label="正常" value="true"></el-option>
+      <el-option label="失败" value="false"></el-option>
+    </el-select>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="onSubmit"><el-icon><Search /></el-icon>查询</el-button>
@@ -179,18 +167,17 @@ const  handleSelectionChange=(val)=> {
     @selection-change="handleSelectionChange"
     ref="multipleTable">
     <el-table-column type="selection" width="55" />
-  <el-table-column type="index" label="序号" ></el-table-column>
-   <el-table-column prop="attr1" label="预留字段1" width="100"></el-table-column>
-   <el-table-column prop="attr2" label="预留字段2" width="100"></el-table-column>
-   <el-table-column prop="attr3" label="预留字段3" width="100"></el-table-column>
-   <el-table-column prop="attr4" label="预留字段4" width="100"></el-table-column>
-   <el-table-column prop="changeRate" label="与主单位换算比例" width="100"></el-table-column>
-   <el-table-column prop="enableFlag"  label="是否启用" > </el-table-column>
-   <el-table-column  prop="measureCode"   label="单位编码" ></el-table-column>
-   <el-table-column  prop="measureName"   label="单位名称" ></el-table-column>
-   <el-table-column  prop="primaryFlag"   label="是否是主单位" ></el-table-column>
-   <el-table-column  prop="primaryId"   label="主单位ID" ></el-table-column>
+   <el-table-column prop="ancestors" label="祖先节点列表" width="100"></el-table-column>
+   <el-table-column prop="createBy" label="创建者" width="100"></el-table-column>
+   <el-table-column prop="enableFlag" label="启用标识" width="100"></el-table-column>
+   <el-table-column prop="itemOrProduct" label="产品物料标识" width="100"></el-table-column>
+   <el-table-column prop="itemTypeCode" label="分类编码" width="100"></el-table-column>
+   <el-table-column  prop="itemTypeId"   label="分类ID" ></el-table-column>
+   <el-table-column  prop="itemTypeName"   label="分类名称" ></el-table-column>
+   <el-table-column  prop="orderNum"   label="排序号" ></el-table-column>
+   <el-table-column  prop="parentTypeId"   label="父分类ID" ></el-table-column>
    <el-table-column  prop="remark"   label="备注" ></el-table-column>
+   <el-table-column  prop="updateBy"   label="更新者" ></el-table-column>
    <el-table-column label="操作" width="100" >
     <!-- row是当前一行数据 index是下标-->
     <template #default="{row,$index}">
@@ -244,4 +231,5 @@ const  handleSelectionChange=(val)=> {
   --el-select-width: 220px;
 }
 } 
+
 </style>
