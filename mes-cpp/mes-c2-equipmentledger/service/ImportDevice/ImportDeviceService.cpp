@@ -21,7 +21,7 @@
 #include "stdafx.h"
 #include "Macros.h"
 #include "ImportDeviceService.h"
-#include "domain/dto/ImportDeviceDTO.h"
+
 #include "dao/ImportDevice/ImportDeviceDAO.h"
 
 #include "ExcelComponent.h"

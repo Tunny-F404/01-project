@@ -23,7 +23,7 @@
 #include "ApiHelper.h"
 #include "Macros.h"
 #include "domain/vo/ImportDeviceJsonVO.h"
-#include "domain/dto/ImportDeviceDTO.h"
+
 
 #include OATPP_CODEGEN_BEGIN(ApiController)
 

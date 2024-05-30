@@ -19,7 +19,7 @@
 #include "stdafx.h"
 #include "ImportDeviceController.h"
 #include "service/ImportDevice/ImportDeviceService.h"
-
+#include"../../mes-c2-equipmentledger/domain/dto/ImportDeviceDTo.h"
 StringJsonVO::Wrapper ImportDeviceController::
 	execUploadFile(std::shared_ptr<IncomingRequest> request)
 {

@@ -20,7 +20,8 @@
 #ifndef _IMPORTDEVICESERVICE_H_
 #define _IMPORTDEVICESERVICE_H_
 
-#include "domain/dto/ImportDeviceDTO.h"
+
+#include"../mes-c2-equipmentledger/domain/dto/ImportDeviceDTo.h"
 #include "ApiHelper.h"
 
 /**
