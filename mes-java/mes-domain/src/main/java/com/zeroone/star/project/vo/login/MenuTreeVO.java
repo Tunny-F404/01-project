@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 public class MenuTreeVO extends TreeNode {
     @ApiModelProperty(value = "序号", example = "1")
-    private Integer id;
+    private Long id;
     @ApiModelProperty(value = "菜单名称", example = "主页")
     private String text;
     @ApiModelProperty(value = "图标", example = "dashboard")
@@ -28,7 +28,7 @@ public class MenuTreeVO extends TreeNode {
     @ApiModelProperty(value = "路由地址", example = "/dashboard")
     private String href;
     @ApiModelProperty(value = "父级菜单编号", example = "0")
-    private Integer pid;
+    private Long pid;
     @ApiModelProperty(value = "节点包含的子节点")
     public List<MenuTreeVO> getChildren() {
         return childrenElementTrans();

@@ -42,7 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String clientId = request.getParameter("client_id");
         if (AuthConstant.CLIENT_MANAGER.equals(clientId)) {
-            //TODO：通过用户名查询用户需要根据你的数据库设计来修改代码
+            //TODO：通过用户名查询用户  需要根据你的数据库设计来修改代码
             //1 通过用户名查找用户对象
             User user = new User();
             user.setUsername(username);
@@ -50,7 +50,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             if (user == null) {
                 throw new UsernameNotFoundException("用户名或密码错误");
             }
-            //TODO：通过用户名查询角色需要根据你的数据库设计来修改代码
+            //TODO：通过用户名查询角色  需要根据你的数据库设计来修改代码
             //2 通过用户ID获取角色列表
             List<Role> roles = roleService.listRoleByUserId(user.getId());
             //3 将数据库角色转换成Security权限对象
