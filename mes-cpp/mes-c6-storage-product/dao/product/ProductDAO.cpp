@@ -49,12 +49,13 @@ std::list<ProductTableDO> ProductTableDAO::selectWithPage(const ProductQuery::Wr
 	return sqlSession->executeQuery<ProductTableDO, ProductTableMapper>(sqlStr, mapper, params);
 }
 
-std::list<ProductDetailDO> ProductDetailDAO::selectWithDetail(const ProductDetailQuery::Wrapper& query)
+ProductDetailDO ProductDetailDAO::selectWithDetail(const string& issue_code)
 {
 	stringstream sql;
-	sql << "SELECT issue_id,issue_code,issue_name,workorder_code,client_code,client_name,issue_date,status,warehouse_name,remark FROM  wm_issue_header";
-	SAMPLE_TERAM_PARSE(query, sql);
+	sql << "SELECT issue_id,issue_code,issue_name,workorder_code,client_code,client_name,issue_date,status,warehouse_name,remark FROM  wm_issue_header where issue_code=?";
 	ProductDetailMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<ProductDetailDO, ProductDetailMapper>(sqlStr, mapper, params);
+	std::list<ProductDetailDO> A = sqlSession->executeQuery<ProductDetailDO, ProductDetailMapper>(sqlStr, mapper,"%s", issue_code);
+	if (A.size() == 0) return {};
+	return A.front();
 }

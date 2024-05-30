@@ -50,17 +50,15 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "issue_code", ZH_WORDS_GETTER("product.fields.issue_code"), "", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/product/query-product-detail", queryProductDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(query, ProductDetailQuery, queryParams);
+	ENDPOINT(API_M_GET, "/product/query-product-detail", queryProductDetail, QUERY(String, issue_code), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execProductDetail(query));
+		API_HANDLER_RESP_VO(execProductDetail(issue_code));
 	}
 
 private:
 	// 查询数据
 	ProductTableJsonVO::Wrapper execProductTable(const ProductQuery::Wrapper& query,const PayloadDTO& payload);
-	ProductDetailJsonVO::Wrapper execProductDetail(const ProductQuery::Wrapper& query);
+	ProductDetailJsonVO::Wrapper execProductDetail(const string& issue_code);
 };
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 #endif

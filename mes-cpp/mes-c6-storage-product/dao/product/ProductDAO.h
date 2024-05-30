@@ -24,6 +24,6 @@ class ProductDetailDAO : public BaseDAO
 {
 public:
 	// ²éÑ¯Êý¾Ý
-	list<ProductDetailDO> selectWithDetail(const ProductDetailQuery::Wrapper& query);
+	ProductDetailDO selectWithDetail(const string& issue_code);
 };
 #endif

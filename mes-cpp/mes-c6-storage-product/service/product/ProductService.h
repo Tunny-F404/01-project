@@ -22,7 +22,7 @@ class ProductDetailService
 {
 public:
 	// 查询单个数据
-	ProductDetailDTO::Wrapper listONE(const ProductDetailQuery::Wrapper& query);
+	ProductDetailDTO::Wrapper listONE(const string& issue_code);
 };
 
 #endif

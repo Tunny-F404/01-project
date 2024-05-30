@@ -13,8 +13,14 @@ ProductTableJsonVO::Wrapper ProductController::execProductTable(const ProductQue
 	jvo->success(result);
 	return jvo;
 }
-ProductDetailJsonVO::Wrapper ProductController::execProductDetail(const ProductDetailQuery::Wrapper& query)
+ProductDetailJsonVO::Wrapper ProductController::execProductDetail(const string& issue_code)
 {
-	auto jov = ProductDetailJsonVO::createShared();
-	return jov;
+	// 定义一个Service
+	ProductDetailService service;
+	// 查询数据
+	auto result = service.listONE(issue_code);
+	// 响应结果
+	auto jvo = ProductDetailJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
