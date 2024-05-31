@@ -41,7 +41,7 @@ public:
 	Inspect_detailDO mapper(ResultSet* resultSet) const override
 	{
 		Inspect_detailDO data;
-		data.setIqc_id(resultSet->getInt64(1));
+		data.setIqc_id(resultSet->getUInt64(1));
 		data.setIqc_code(resultSet->getString(2));
 		data.setIqc_name(resultSet->getString(3));
 		data.setVendor_code(resultSet->getString(4));
@@ -53,13 +53,13 @@ public:
 		data.setQuantity_recived(resultSet->getDouble(10));
 		data.setQuantity_check(resultSet->getInt64(11));
 		data.setQuantity_unqualified(resultSet->getInt64(12));
-		data.setCheck_result(resultSet->getString(15));
-		data.setRecive_date(resultSet->getString(16));
-		data.setInspect_date(resultSet->getString(17));
-		data.setMaj_rate(resultSet->getDouble(18));
-		data.setCr_rate(resultSet->getDouble(19));
-		data.setMin_rate(resultSet->getDouble(20));
-		data.setList_status(resultSet->getString(21));
+		data.setCheck_result(resultSet->getString(13));
+		data.setRecive_date(resultSet->getString(14));
+		data.setInspect_date(resultSet->getString(15));
+		data.setMaj_rate(resultSet->getDouble(16));
+		data.setCr_rate(resultSet->getDouble(17));
+		data.setMin_rate(resultSet->getDouble(18));
+		data.setList_status(resultSet->getString(19));
 		return data;
 	}
 };

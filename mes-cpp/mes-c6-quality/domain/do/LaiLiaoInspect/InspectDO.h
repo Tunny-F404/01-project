@@ -11,7 +11,7 @@
 class InspectDO
 {
 	// 来料检验单id
-	CC_SYNTHESIZE(int64_t, iqc_id, Iqc_id);
+	CC_SYNTHESIZE(uint64_t, iqc_id, Iqc_id);
 	// 来料检验单编号
 	CC_SYNTHESIZE(string, iqc_code, Iqc_code);
 	// 来料检验单名称

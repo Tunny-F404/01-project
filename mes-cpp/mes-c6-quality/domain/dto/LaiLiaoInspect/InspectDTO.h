@@ -12,7 +12,7 @@ class InspectDTO:public oatpp::DTO
 {
 	DTO_INIT(InspectDTO, DTO);
 	// 数据库表行id
-	API_DTO_FIELD_DEFAULT(Int64, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
+	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
 	// 来料检验单编号
 	API_DTO_FIELD_DEFAULT(String, iqc_code, ZH_WORDS_GETTER("inspect.iqc_code"));
 	// 来料检验单名称

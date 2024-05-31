@@ -15,7 +15,7 @@ InspectPageJsonVO::Wrapper InspectController::execQueryInspect(const InspectQuer
 	return jvo;
 }
 
-Inspect_detailJsonVO::Wrapper InspectController::execInspect_detail(const uint64_t& iqc_id)
+Inspect_detailJsonVO::Wrapper InspectController::execInspect_detail(const int& iqc_id)
 {
 	// 定义一个Service
 	InspectService service;
@@ -47,24 +47,25 @@ Uint64JsonVO::Wrapper InspectController::execAddInspect(const InspectDTO::Wrappe
 		return jvo;
 	}
 	 //有效值校验
-	/*if ( dto->item_code->empty() || dto->item_name->empty() || (dto->quantity_check> dto->quantity_recived) || dto->quantity_recived<0|| dto->quantity_check<0 || dto->quantity_unqualified>dto->quantity_check)
+	if ( dto->item_code->empty() || dto->item_name->empty() || (dto->quantity_check> dto->quantity_recived) || dto->quantity_recived<0|| dto->quantity_check<0 || dto->quantity_unqualified>dto->quantity_check)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
-	}*/
+	}
 
 	// 定义一个Service
 	InspectService service;
 	// 执行数据新增
 	uint64_t id = service.saveData(dto);
-	if (id > 0) 
+	/*if (id > 0) 
 	{
 		jvo->success(UInt64(id));
 	}
 	else
 	{
 		jvo->fail(UInt64(id));
-	}
+	}*/
+	jvo->success(UInt64(id));
 	//响应结果
 	return jvo;
 }

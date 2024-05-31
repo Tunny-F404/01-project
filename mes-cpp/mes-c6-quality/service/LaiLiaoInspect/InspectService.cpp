@@ -44,8 +44,9 @@ Inspect_detailDTO::Wrapper InspectService::list_detailone(const uint64_t iqc_id)
 	Inspect_detailDO result = dao.selectWithID(iqc_id);
 	// 将DO转换成DTO
 		auto dto = Inspect_detailDTO::createShared();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, result, iqc_id, Iqc_id, iqc_code, Iqc_code, iqc_name, Iqc_name, vendor_id, Vendor_id, vendor_code, Vendor_code, vendor_name, Vendor_name, vendor_nick, Vendor_nick, vendor_batch, Vendor_batch, item_code, Item_code, item_name, Item_name, quantity_recived, Quantity_recived, quantity_check, Quantity_check, quantity_unqualified, Quantity_unqualified, check_result, Check_result, recive_date, Recive_date, inspect_date, Inspect_date, inspector, Inspector, list_status, List_status);
-	return dto;
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, result, iqc_id, Iqc_id, iqc_code, Iqc_code, iqc_name, Iqc_name, vendor_id, Vendor_id, vendor_code, Vendor_code, vendor_name, Vendor_name, vendor_nick, Vendor_nick, vendor_batch, Vendor_batch, item_code, Item_code);
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, result, item_name, Item_name, quantity_recived, Quantity_recived, quantity_check, Quantity_check, quantity_unqualified, Quantity_unqualified, check_result, Check_result, recive_date, Recive_date, inspect_date, Inspect_date, inspector, Inspector, list_status, List_status)
+		return dto;
 }
 
 //保存数据
@@ -53,7 +54,7 @@ uint64_t InspectService::saveData(const InspectDTO::Wrapper& dto)
 {
 	 //组装DO数据
 	InspectDO data;
-	ZO_STAR_DOMAIN_DTO_TO_DO(data,dto, Iqc_code, iqc_code, Iqc_name, iqc_name,  Template_id, template_id,  Vendor_id, vendor_id,  Vendor_code, vendor_code,  Vendor_name, vendor_name,  Vendor_nick, vendor_nick,  Vendor_batch, vendor_batch, Item_id,item_id, Item_code, item_code,  Item_name, item_name,  Quantity_recived, quantity_recived,  Quantity_check, quantity_check,  Quantity_unqualified, quantity_unqualified,  Check_result, check_result,  Recive_date, recive_date,  Inspect_date, inspect_date,  Inspector, inspector, List_status, list_status);
+	ZO_STAR_DOMAIN_DTO_TO_DO(data,dto,Iqc_id,iqc_id, Iqc_code, iqc_code, Iqc_name, iqc_name,  Template_id, template_id,  Vendor_id, vendor_id,  Vendor_code, vendor_code,  Vendor_name, vendor_name,  Vendor_nick, vendor_nick,  Vendor_batch, vendor_batch, Item_id,item_id, Item_code, item_code,  Item_name, item_name,  Quantity_recived, quantity_recived,  Quantity_check, quantity_check,  Quantity_unqualified, quantity_unqualified,  Check_result, check_result,  Recive_date, recive_date,  Inspect_date, inspect_date,  Inspector, inspector, List_status, list_status);
 		 //执行数据添加
 		InspectDAO dao;
 	return dao.insert(data);
