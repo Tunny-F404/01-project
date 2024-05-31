@@ -106,12 +106,15 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
             redisTemplate.delete(sysDictType.getDictType());
         }
         StringBuilder mes = new StringBuilder();
-        for (Long aLong : message) {
-            mes.append(aLong);
-            mes.append(" ");
+        if(message.size()>0){
+            for (Long aLong : message) {
+                mes.append(aLong);
+                mes.append(" ");
+            }
+            mes.append("已分配，不可删除");
+            return JsonVO.create(row,200,mes.toString());
         }
-        mes.append("已分配，不可删除");
-        return JsonVO.create(row,200,mes.toString());
+        return JsonVO.success(row);
     }
 
     /**
@@ -134,7 +137,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
      * 刷新字典数据
      */
     @Override
-    public void refreshCache() {
+    public Void refreshCache() {
 
         //清空所有字典数据
         //获取hash表中多个key
@@ -149,5 +152,6 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
             //DictUtils.setDictCache(entry.getKey(), entry.getValue().stream().sorted(Comparator.comparing(SysDictData::getDictSort)).collect(Collectors.toList()));
             redisTemplate.opsForValue().set(entry.getKey(), entry.getValue().stream().sorted(Comparator.comparing(SysDictData::getDictSort)).collect(Collectors.toList()));
         }
+        return null;
     }
 }

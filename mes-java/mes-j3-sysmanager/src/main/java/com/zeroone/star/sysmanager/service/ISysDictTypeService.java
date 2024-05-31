@@ -41,5 +41,5 @@ public interface ISysDictTypeService extends IService<SysDictType> {
     /**
      * 刷新字典缓存数据
      */
-    void refreshCache();
+    Void refreshCache();
 }

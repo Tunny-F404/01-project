@@ -38,14 +38,14 @@ public class DictionaryManageController implements DictionaryManageApis {
     @ApiOperation(value = "编辑修改字典")
     @PutMapping("modify/update/upate/edit-dict-type")
     public JsonVO<Integer> editDictType(@RequestBody SysDictTypeModifyQuery sysDictTypeModifyQuery) {
-        return JsonVO.success(sysDictTypeService.editDictType(sysDictTypeModifyQuery));
+        return sysDictTypeService.editDictType(sysDictTypeModifyQuery);
     }
 
     @Override
     @ApiOperation(value = "(批量)删除字典")
     @DeleteMapping("remove/remove/delete/delete-dict-type/{dictListIds}")
     public JsonVO<Integer> deleteDictType(@PathVariable Long[] dictListIds) {
-        return JsonVO.success(sysDictTypeService.deleteDictType(dictListIds));
+        return sysDictTypeService.deleteDictType(dictListIds);
     }
 
     @GetMapping("/type/list")
@@ -106,7 +106,7 @@ public class DictionaryManageController implements DictionaryManageApis {
     @ApiOperation(value = "根据字典类型获取字典数据名称列表")
     @GetMapping("query-dictDateNames-by-dictType")
     @Override
-    public JsonVO<List<DictDataNameVO>> queryDictDataNamesByDictType(@NotBlank(message = "字典类型不能为空") String dictType) {
+    public JsonVO<List<DictDataNameVO>> queryDictDataNamesByDictType(String dictType) {
         return null;
     }
 

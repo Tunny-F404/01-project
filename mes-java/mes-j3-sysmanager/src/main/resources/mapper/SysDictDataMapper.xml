@@ -44,7 +44,7 @@
         order by dict_sort asc
     </select>
 
-    <select id="countDictDataByType" resultType="Integer">
+    <select id="countDictDataByType" parameterType="String" resultType="Integer">
         select count(*) from sys_dict_data where dict_type=#{dictType}
     </select>
 

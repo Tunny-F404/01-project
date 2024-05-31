@@ -18,7 +18,7 @@
         from sys_dict_type
     </sql>
 
-    <select id="selectByType" resultType="com.zeroone.star.sysmanager.entity.SysDictType">
+    <select id="selectByType" parameterType="String" resultType="com.zeroone.star.sysmanager.entity.SysDictType">
         <include refid="selectDictTypeVo"/>
         where dict_type = #{dictType}
     </select>
