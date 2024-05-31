@@ -21,7 +21,7 @@
 #include <sstream>
 #include "stdafx.h"
 #include "DownloadTemplateService.h"
-#include "Macros.h";
+#include "Macros.h"
 #include "../../ServerInfo.h"
 #include "NacosClient.h"
 #include "ExcelComponent.h"

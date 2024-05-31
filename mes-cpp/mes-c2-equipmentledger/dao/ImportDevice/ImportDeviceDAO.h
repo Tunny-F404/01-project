@@ -20,7 +20,7 @@
 #ifndef _IMPORTDEVICEDAO_H_
 #define _IMPORTDEVICEDAO_H_
 
-#include "BaseDAO.h";
+#include "BaseDAO.h"
 #include "domain/do/dv_machinery/dvMachineryDO.h"
 
 class ImportDeviceDAO : public BaseDAO
