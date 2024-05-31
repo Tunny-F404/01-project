@@ -7,10 +7,11 @@ import com.zeroone.star.project.j5.dto.shopsettings.ShopSettingsDTO;
 import com.zeroone.star.project.j5.query.shopsettings.ShopSettingsQuery;
 import com.zeroone.star.project.j5.shopsettings.ShopSettingsApis;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.shopsettings.config.Converter;
+import com.zeroone.star.shopsettings.entity.MdWorkshop;
 import com.zeroone.star.shopsettings.service.IMdWorkshopService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,16 +56,19 @@ public class ShopSettingsController implements ShopSettingsApis {
     @Override
     @ApiOperation("更新车间")
     @PutMapping("/modify")
-    public JsonVO<Integer> modifyWorkshop(ModifyShopSettingsDTO modifyShopSettingsDTO) {
-        return null;
+    public JsonVO<Boolean> modifyWorkshop(ModifyShopSettingsDTO modifyShopSettingsDTO) {
+        MdWorkshop workshop = Converter.toModifyMdWorkshop(modifyShopSettingsDTO);
+        boolean res = mdWorkshopService.updateById(workshop);
+        return res ? JsonVO.success(res) : JsonVO.fail(null);
     }
 
     @Override
     @ApiOperation("添加车间")
     @PutMapping("/add")
-    public JsonVO<Integer> addWorkshop(AddShopSettingsDTO addShopSettingsDTO) {
-        System.out.println("apple");
-        return null;
+    public JsonVO<Boolean> addWorkshop(AddShopSettingsDTO addShopSettingsDTO) {
+        MdWorkshop workshop = Converter.toAddMdWorkshop(addShopSettingsDTO);
+        boolean res = mdWorkshopService.save(workshop);
+        return res ? JsonVO.success(res) : JsonVO.fail(null);
     }
 
     @Override

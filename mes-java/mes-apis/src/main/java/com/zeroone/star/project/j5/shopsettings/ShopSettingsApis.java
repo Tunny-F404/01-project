@@ -39,16 +39,18 @@ public interface ShopSettingsApis {
 
     /**
      * 更新车间信息
+     *
      * @param modifyShopSettingsDTO 更新数据
-     * @return  更新行数
+     * @return 更新行数
      */
-    JsonVO<Integer> modifyWorkshop(ModifyShopSettingsDTO modifyShopSettingsDTO);
+    JsonVO<Boolean> modifyWorkshop(ModifyShopSettingsDTO modifyShopSettingsDTO);
     /**
      * 新增车间信息
+     *
      * @param addShopSettingsDTO 新增车间数据
-     * @return  修改行数
+     * @return 修改行数
      */
-    JsonVO<Integer> addWorkshop(AddShopSettingsDTO addShopSettingsDTO);
+    JsonVO<Boolean> addWorkshop(AddShopSettingsDTO addShopSettingsDTO);
     /**
      * 删除或批量删除车间信息
      * @param workshopIds 删除id序列

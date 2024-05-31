@@ -32,6 +32,8 @@ interface msMdWorkshopMapper{
      * @return  车间dto
      */
     ShopSettingsDTO mdWorkshopToShopSettingsDTO(MdWorkshop mdWorkshop);
+
+    MdWorkshop mdWorkshop(ShopSettingsDTO shopSettingsDTO);
 }
 
 @Service
