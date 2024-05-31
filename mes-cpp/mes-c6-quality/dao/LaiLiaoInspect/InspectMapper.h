@@ -31,6 +31,7 @@ public:
 		data.setInspect_date(resultSet->getString(14));
 		data.setInspector(resultSet->getString(15));
 		data.setList_status(resultSet->getString(16));
+		
 		return data;
 	}
 };
@@ -56,10 +57,14 @@ public:
 		data.setCheck_result(resultSet->getString(13));
 		data.setRecive_date(resultSet->getString(14));
 		data.setInspect_date(resultSet->getString(15));
-		data.setMaj_rate(resultSet->getDouble(16));
-		data.setCr_rate(resultSet->getDouble(17));
-		data.setMin_rate(resultSet->getDouble(18));
-		data.setList_status(resultSet->getString(19));
+		data.setMaj_quantity(resultSet->getInt64(16));
+		data.setCr_quantity(resultSet->getInt64(17));
+		data.setMin_quantity(resultSet->getInt64(18));
+		data.setMaj_rate(resultSet->getDouble(19));
+		data.setCr_rate(resultSet->getDouble(20));
+		data.setMin_rate(resultSet->getDouble(21));
+		data.setList_status(resultSet->getString(22));
+		data.setRemark(resultSet->getString(23));
 		return data;
 	}
 };

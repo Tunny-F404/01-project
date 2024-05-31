@@ -19,8 +19,8 @@ public:
 	Inspect_detailDO selectWithID(const int& iqc_id);
 	// 插入数据
 	uint64_t insert(const InspectDO& iObj);
-	//// 修改数据
-	//int update(const InspectDO& uObj);
+	// 修改数据
+	int update(const InspectDO& uObj);
 	// 通过ID删除数据
 	int deleteById(uint64_t iqc_id);
 };

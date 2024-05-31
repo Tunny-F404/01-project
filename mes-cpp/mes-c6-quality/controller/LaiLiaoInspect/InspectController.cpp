@@ -72,8 +72,27 @@ Uint64JsonVO::Wrapper InspectController::execAddInspect(const InspectDTO::Wrappe
 
 Uint64JsonVO::Wrapper InspectController::execModifyInspect(const InspectDTO::Wrapper& dto)
 {
-	//
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->iqc_id || dto->iqc_id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	InspectService service;
+	// 执行数据修改
+	if (service.updateData(dto)) {
+		jvo->success(dto->iqc_id);
+	}
+	else
+	{
+		jvo->fail(dto->iqc_id);
+	}
+	// 响应结果
+	return jvo;
+	
 }
 
 Uint64JsonVO::Wrapper InspectController::execRemoveInspect(const UInt64& iqc_id)
