@@ -30,13 +30,13 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "code", ZH_WORDS_GETTER("inspect.code"),"",false);
+		API_DEF_ADD_QUERY_PARAMS(String, "iqc_code", ZH_WORDS_GETTER("inspect.iqc_code"),"",false);
 
 		API_DEF_ADD_QUERY_PARAMS(String, "vendor_code", ZH_WORDS_GETTER("inspect.vendor_code"), "", false);
 
 		API_DEF_ADD_QUERY_PARAMS(String, "vendor_name", ZH_WORDS_GETTER("inspect.vendor_name"), "", false);
 
-		API_DEF_ADD_QUERY_PARAMS(String, "vd_batch", ZH_WORDS_GETTER("inspect.vd_batch"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "vendor_batch", ZH_WORDS_GETTER("inspect.vendor_batch"), "", false);
 
 		API_DEF_ADD_QUERY_PARAMS(String, "item_code", ZH_WORDS_GETTER("inspect.item_code"), "", false);
 
@@ -67,13 +67,13 @@ public:
 	// 定义响应参数格式
 	API_DEF_ADD_RSP_JSON_WRAPPER(Inspect_detailJsonVO);
 	// 定义其他查询参数描述
-	API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("inspect.line_id"), 1, true);
+	API_DEF_ADD_QUERY_PARAMS(Int64, "iqc_id", ZH_WORDS_GETTER("inspect.iqc_id"), 1, true);
 	}
 	// 3.2 定义查询来料检验详情接口处理
-	ENDPOINT(API_M_GET, "/Inspect/detail", queryInspect_detail, QUERY(UInt64, line_id), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/Inspect/detail", queryInspect_detail, QUERY(Int64, iqc_id), API_HANDLER_AUTH_PARAME) {
 
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execQueryInspect_detail(line_id));
+		API_HANDLER_RESP_VO(execInspect_detail(iqc_id));
 	}
 
 	//3.1 定义查看报表接口描述
@@ -132,7 +132,7 @@ private:
 	InspectPageJsonVO::Wrapper execQueryInspect(const InspectQuery::Wrapper& query, const PayloadDTO& payload);
 	//3.3 分页查询来料检验表详情
 	/*Inspect_detailJsonVO::Wrapper execQueryInspect_detail(const int& line_id, const PayloadDTO& payload);*/
-	Inspect_detailJsonVO::Wrapper execQueryInspect_detail(const int& line_id);
+	Inspect_detailJsonVO::Wrapper execInspect_detail(const int64_t& iqc_id);
 	//3.3查看报表
 	StringJsonVO::Wrapper execLookTable(const oatpp::List<UInt64>& ids);
 	// 3.3 新增数据

@@ -14,9 +14,9 @@ public:
 	InspectDO mapper(ResultSet* resultSet) const override
 	{
 		InspectDO data;
-		//data.setLine_id(resultSet->getUInt64(1));
-		data.setCode(resultSet->getString(1));
-		data.setName(resultSet->getString(2));
+		//data.setIqc_id(resultSet->getInt64(1));
+		data.setIqc_code(resultSet->getString(1));
+		data.setIqc_name(resultSet->getString(2));
 		data.setTemplate_id(resultSet->getUInt64(3));
 		data.setVendor_id(resultSet->getUInt64(4));
 		data.setVendor_nick(resultSet->getString(5));
@@ -41,9 +41,9 @@ public:
 	Inspect_detailDO mapper(ResultSet* resultSet) const override
 	{
 		Inspect_detailDO data;
-		data.setLine_id(resultSet->getUInt64(1));
-		data.setCode(resultSet->getString(2));
-		data.setName(resultSet->getString(3));
+		data.setIqc_id(resultSet->getInt64(1));
+		data.setIqc_code(resultSet->getString(2));
+		data.setIqc_name(resultSet->getString(3));
 		data.setVendor_code(resultSet->getString(4));
 		data.setVendor_nick(resultSet->getString(5));
 		data.setVendor_batch(resultSet->getString(6));

@@ -19,9 +19,9 @@ inspect:
   summary: 完成检验单(修改检验单状态为已确认状态)
 
 
- line_id: 数据库表行id
- code: 来料检验单编号
- name: 来料检验单名称
+ iqc_id: 数据库表行id
+ iqc_code: 来料检验单编号
+ iqc_name: 来料检验单名称
  template_id: 检验模板ID
  vendor_id: 供应商ID
  vendor_code: 供应商编码

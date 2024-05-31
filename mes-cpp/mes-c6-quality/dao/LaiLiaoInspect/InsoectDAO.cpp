@@ -8,9 +8,9 @@
 #define SAMPLE_TERAM_PARSE(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \
-if (query->code) { \
-	sql << " AND `code`=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->code.getValue("")); \
+if (query->iqc_code) { \
+	sql << " AND `iqc_code`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->iqc_code.getValue("")); \
 } ;\
 if (query->vendor_code) { \
 	sql << " AND `vendor_code`=?"; \
@@ -20,9 +20,9 @@ if (query->vendor_name) { \
 	sql << " AND `vendor_name`=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->vendor_name.getValue("")); \
 } ;\
-if (query->vd_batch) { \
-	sql << " AND `vd_batch`=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->vd_batch.getValue("")); \
+if (query->vendor_batch) { \
+	sql << " AND `vendor_batch`=?"; \
+	SQLPARAMS_PUSH(params, "s", std::string, query->vendor_batch.getValue("")); \
 } ;\
 if (query->item_code) { \
 	sql << " AND `item_code`=?"; \
@@ -62,7 +62,7 @@ uint64_t InspectDAO::count(const InspectQuery::Wrapper& query)
 std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT line_id,code,name,template_id,vendor_name,vendor_nick,vendor_batch,item_code,item_name,quantity_recived,quantity_check,quantity_unqualified,check_result,recive_date,inspect_date,inspector,list_status FROM  qc_iqc";
+	sql << "SELECT iqc_code,iqc_name,template_id,vendor_name,vendor_nick,vendor_batch,item_code,item_name,quantity_recived,quantity_check,quantity_unqualified,check_result,recive_date,inspect_date,inspector,status FROM  qc_iqc";
 	SAMPLE_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	InspectMapper mapper;
@@ -71,14 +71,13 @@ std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& que
 }
 
 //查询详情
-Inspect_detailDO InspectDAO::selectWithID(const int & line_id)
+Inspect_detailDO InspectDAO::selectWithID(const int64_t & iqc_id)
 {
 	stringstream sql;
-	sql << "SELECT line_id, code, name,vendor_code, vendor_nick, vendor_batch, item_code, item_name, unit_of_measure,quantity_recived, quantity_check, quantity_unqualified, check_result, recive_date, inspect_date, maj_rate,cr_rate, min_rate,list_status FROM  qc_iqc";
-	sql << "where `line_id`=?";
+	sql << "SELECT iqc_id, iqc_code, iqc_name,vendor_code, vendor_nick, vendor_batch, item_code, item_name, unit_of_measure,quantity_recived, quantity_check, quantity_unqualified, check_result, recive_date, inspect_date, maj_rate,cr_rate, min_rate,status FROM  qc_iqc where iqc_id=?";
 	Inspect_detailMapper mapper;
 	string sqlStr = sql.str();
-	std::list<Inspect_detailDO> A = sqlSession->executeQuery<Inspect_detailDO, Inspect_detailMapper>(sqlStr, mapper, "%i", line_id);
+	std::list<Inspect_detailDO> A = sqlSession->executeQuery<Inspect_detailDO, Inspect_detailMapper>(sqlStr, mapper, "%i", iqc_id);
 	if (A.size() == 0) return {};
 	return A.front();
 }
@@ -86,11 +85,11 @@ Inspect_detailDO InspectDAO::selectWithID(const int & line_id)
 //新增检验表
 uint64_t InspectDAO::insert(const InspectDO& iObj)
 {                                  //`line_id`,
-	string sql = "INSERT INTO `qc_iqc` ( `code`,`name`,`template_id`, `vendor_id`, `vendor_code`,`vendor_name`,`vendor_nick`,`vendor_batch`,`item_code`,`item_name` ,`quantity_recived`,`quantity_check`,`quantity_unqualified`,`check_result`,`recive_date`,`inspect_date`,`inspector`,`list_status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,)";
-	return sqlSession->executeInsert(sql, "%ull%s%s%ull%ull%s%s%s%s%s%s%i%i%i%s%s%s%s%s",
+	string sql = "INSERT INTO `qc_iqc` ( `iqc_code`,`iqc_name`,`template_id`, `vendor_id`, `vendor_code`,`vendor_name`,`vendor_nick`,`vendor_batch`,`item_code`,`item_name` ,`quantity_recived`,`quantity_check`,`quantity_unqualified`,`check_result`,`recive_date`,`inspect_date`,`inspector`,`list_status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,)";
+	return sqlSession->executeInsert(sql, "%s%s%ull%ull%s%s%s%s%s%s%i%i%i%s%s%s%s%s",
 		//iObj.getLine_id(),
-		iObj.getCode(),
-		iObj.getName(),
+		iObj.getIqc_code(),
+		iObj.getIqc_name(),
 		iObj.getTemplate_id(),
 		iObj.getVendor_id(),
 		iObj.getVendor_code(),

@@ -27,12 +27,12 @@ InspectPageJsonVO::Wrapper InspectController::execQueryInspect(const InspectQuer
 //	return jvo;
 //}
 
-Inspect_detailJsonVO::Wrapper InspectController::execQueryInspect_detail(const int& line_id)
+Inspect_detailJsonVO::Wrapper InspectController::execInspect_detail(const int64_t& iqc_id)
 {
 	// 定义一个Service
 	InspectService service;
 	// 查询数据
-	auto result = service.list_detailone(line_id);
+	auto result = service.list_detailone(iqc_id);
 	// 响应结果
 	auto jvo = Inspect_detailJsonVO::createShared();
 	jvo->success(result);
@@ -53,7 +53,7 @@ Uint64JsonVO::Wrapper InspectController::execAddInspect(const InspectDTO::Wrappe
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if ( !dto->code || !dto->name || !dto->vendor_code || !dto->item_code || !dto->quantity_recived || !dto->quantity_check  || !dto->recive_date || !dto->inspect_date)
+	if ( !dto->iqc_code || !dto->iqc_name || !dto->vendor_code || !dto->item_code || !dto->quantity_recived || !dto->quantity_check  || !dto->recive_date || !dto->inspect_date)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;

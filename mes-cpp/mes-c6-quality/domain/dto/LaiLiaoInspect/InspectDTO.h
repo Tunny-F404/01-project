@@ -12,11 +12,11 @@ class InspectDTO:public oatpp::DTO
 {
 	DTO_INIT(InspectDTO, DTO);
 	// 数据库表行id
-	API_DTO_FIELD_DEFAULT(UInt64, line_id, ZH_WORDS_GETTER("inspect.line_id"));
+	API_DTO_FIELD_DEFAULT(Int64, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
 	// 来料检验单编号
-	API_DTO_FIELD_DEFAULT(String, code, ZH_WORDS_GETTER("inspect.code"));
+	API_DTO_FIELD_DEFAULT(String, iqc_code, ZH_WORDS_GETTER("inspect.iqc_code"));
 	// 来料检验单名称
-	API_DTO_FIELD_DEFAULT(String, name, ZH_WORDS_GETTER("inspect.name"));
+	API_DTO_FIELD_DEFAULT(String, iqc_name, ZH_WORDS_GETTER("inspect.iqc_name"));
 	//检验模板ID
 	API_DTO_FIELD_DEFAULT(UInt64, template_id, ZH_WORDS_GETTER("inspect.template_id"));
 	//供应商ID
@@ -34,7 +34,7 @@ class InspectDTO:public oatpp::DTO
 	//产品物料名称
 	API_DTO_FIELD_DEFAULT(String, item_name, ZH_WORDS_GETTER("inspect.item_name"));
 	//接收数量
-	API_DTO_FIELD_DEFAULT(Int64, quantity_recived, ZH_WORDS_GETTER("inspect.quantity_recived"));
+	API_DTO_FIELD_DEFAULT(Float64, quantity_recived, ZH_WORDS_GETTER("inspect.quantity_recived"));
 	//检测数量
 	API_DTO_FIELD_DEFAULT(Int64, quantity_check, ZH_WORDS_GETTER("inspect.quantity_check"));
 	//不合格数

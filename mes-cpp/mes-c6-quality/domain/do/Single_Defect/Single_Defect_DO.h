@@ -6,7 +6,9 @@
 class IndexDO
 {
 	//记录ID
-	CC_SYNTHESIZE(int64_t, line_id, Line_id);
+	CC_SYNTHESIZE(uint64_t, record_id, Record_id);
+	//检测模板ID
+	CC_SYNTHESIZE(int64_t, template_id, Template_id);
 	//检验单ID
 	CC_SYNTHESIZE(int64_t, iqc_id, iqc_id);
 	//检测项ID
@@ -55,7 +57,8 @@ class IndexDO
 	CC_SYNTHESIZE(string, update_time, Update_time);
 public:
 	IndexDO() {
-		line_id = 0;
+		record_id = 0;
+		template_id = 22;
 		iqc_id = 0;
 		index_id = 0;
 		index_code = "";
