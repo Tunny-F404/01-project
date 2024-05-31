@@ -13,10 +13,8 @@
 					<!-- 用户信息展示 -->
 					<el-row justify="center">
 						<div class="demo-type">
-							<el-avatar :size="100" fit="cover" @error="false" :src="url"
-								><img
-									src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
-								/>
+							<el-avatar :size="100" fit="cover" @error="false" :src="url"><img
+									src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
 							</el-avatar>
 						</div>
 					</el-row>
@@ -56,33 +54,19 @@
 						</div>
 					</template>
 					<!-- 基本资料/修改密码 -->
-					<el-tabs
-						v-model="activeName"
-						class="demo-tabs"
-						@tab-click="handleClick"
-					>
+					<el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
 						<el-tab-pane label="基本资料" name="first">
 							<!-- 基本资料表单 -->
-							<el-form
-								:model="infoform"
-								:rules="inforules"
-								label-width="80px"
-								status-icon
-							>
+							<el-form ref="ruleFormRef" :model="infoform" :rules="inforules" label-width="80px"
+								status-icon>
 								<el-form-item label="用户名称" prop="nickName">
 									<el-input v-model="infoform.nickName"></el-input>
 								</el-form-item>
 								<!-- 手机验证 -->
 								<el-form-item label="手机号码" prop="phoneNum">
-									<el-input
-										v-model="infoform.phoneNum"
-										placeholder="123-1234-1234"
-										maxlength="11"
-									>
+									<el-input v-model="infoform.phoneNum" placeholder="123-1234-1234" maxlength="11">
 										<template #append>
-											<el-button type="primary" @click="getphoneCode"
-												>获取验证码</el-button
-											>
+											<el-button type="primary" @click="getphoneCode">获取验证码</el-button>
 										</template>
 									</el-input>
 								</el-form-item>
@@ -91,14 +75,9 @@
 								</el-form-item>
 								<!-- 邮箱验证 -->
 								<el-form-item label="邮箱" prop="email">
-									<el-input
-										v-model="infoform.email"
-										placeholder="****@exmaple.com"
-									>
+									<el-input v-model="infoform.email" placeholder="****@exmaple.com">
 										<template #append>
-											<el-button type="primary" @click="getemailCode"
-												>获取验证码</el-button
-											>
+											<el-button type="primary" @click="getemailCode">获取验证码</el-button>
 										</template>
 									</el-input>
 								</el-form-item>
@@ -162,39 +141,45 @@ const infoform = ref({
 	emailCode: '',
 	gender: '男'
 })
+// 手机验证规则
+const phoneCheck = (rule, value, callback) => {
+	const phone_regex = /^1[3|4|5|6|7|8|9]\d{9}$/;
+	if (value != '') {
+		if (!phone_regex.test(value)) {
+			callback(new Error('手机号码不正确！'))
+		} else {
+			callback()
+		}
+	}
+}
+
+// 邮箱 自定义验证规则
+const emailCheck = (rule, value, callback) => {
+	const email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+	if (value != '') {
+		if (!email_regex.test(value)) {
+			callback(new Error('邮箱不正确！'))
+		} else {
+			callback()
+		}
+	}
+}
 
 //基本资料表单 验证规则
 const inforules = reactive({
 	nickName: [
 		{ required: true, message: '请输入用户名', trigger: 'blur' },
-		{ min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'change' }
+		{ min: 1, max: 20, message: '长度 1 至 20', trigger: 'change' }
 	],
 	phoneNum: [
-		{
-			required: true,
-			message: '请输入电话号码',
-			trigger: 'blur'
-		},
-		{
-			min: 11,
-			message: '请输入正确的电话号码',
-			trigger: 'change'
-		}
+		{ required: true, message: '请输入手机号', trigger: 'blur' },
+		{ validator: phoneCheck, trigger: 'blur' }
 	],
 	email: [
-		{
-			required: true,
-			message: '请输入邮箱',
-			trigger: 'change'
-		}
+		{ validator: emailCheck, trigger: 'blur' }
 	],
 	gender: [
-		{
-			type: 'date',
-			required: true,
-			message: '请选择你的性别',
-			trigger: 'change'
-		}
+		{ type: 'date', required: true, message: '请选择你的性别', trigger: 'change' }
 	]
 })
 
@@ -205,44 +190,30 @@ const passwd = ref({
 	confirm: ''
 })
 
+
 //密码表单 验证规则
 const passwdrules = reactive({
-	nickName: [
-		{ required: true, message: '请输入用户名', trigger: 'blur' },
-		{ min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+	old: [
+		{}
 	],
-	phoneNum: [
-		{
-			min: 11,
-			message: '请输入正确的电话号码',
-			trigger: 'change'
-		}
+	new: [
+		{ min: 11, message: '请输入正确的电话号码', trigger: 'change' }
 	],
-	email: [
-		{
-			required: true,
-			message: '请输入邮箱',
-			trigger: 'change'
-		}
-	],
-	gender: [
-		{
-			type: 'date',
-			required: true,
-			message: '请选择你的性别',
-			trigger: 'change'
-		}
+	confirm: [
+		{ required: true, message: '请输入邮箱', trigger: 'change' },
 	]
 })
 
+
+
 // 表单校验
-const onSubmit = (formEl) => {
+const onSubmit = async (formEl) => {
 	if (!formEl) return
-	formEl.validate((valid) => {
+	formEl.validate((valid, fields) => {
 		if (valid) {
-			console.log('submit!')
+			console.log('submit!', fields)
 		} else {
-			console.log('error submit!')
+			console.log('error submit!', fields)
 		}
 	})
 }
@@ -253,7 +224,7 @@ const getphoneCode = () => {
 }
 //获取 邮箱验证码
 const getemailCode = () => {
-	console.log('邮箱验证码发送成功！')
+	console.log('邮箱验证成功！')
 }
 // 图片上传
 const url = ref('')
@@ -283,12 +254,12 @@ const url = ref('')
 	display: flex;
 }
 
-.demo-type > div {
+.demo-type>div {
 	flex: 1;
 	text-align: center;
 }
 
-.demo-type > div:not(:last-child) {
+.demo-type>div:not(:last-child) {
 	border-right: 1px solid var(--el-border-color);
 }
 </style>
