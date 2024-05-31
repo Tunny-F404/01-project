@@ -59,7 +59,9 @@ const getPageList= async (data)=>{
 
   loading.value=false
 }
+
 getPageList()//进来就加载一遍
+
 //处理分页逻辑
 //改变大小
 const onSizeChange=(size)=>{
@@ -70,6 +72,7 @@ const onSizeChange=(size)=>{
  const Data={pageSize:'parms.pagesize'}
   getPageList(Date)
 }
+
 //改变页数
 const onCurrentChange=async (page)=>{
  parms.value.page=page
@@ -121,7 +124,7 @@ const onAddChannel = () => {
 }
 
 const reFresh=()=>{
-  myInput=''
+  myInput.value=''
 }
 
 const multipleSelection=ref([])
@@ -158,7 +161,7 @@ const  handleSelectionChange=(val)=> {
   </el-form-item>
 </el-form>
 
-<el-button type="primary" plain><el-icon><Plus /></el-icon>新增</el-button>
+<el-button type="primary"  @click="onAddChannel" plain><el-icon><Plus /></el-icon>新增</el-button>
 <el-button type="success" plain><el-icon><EditPen /></el-icon>修改</el-button>
 <el-button type="danger" plain><el-icon><Delete /></el-icon>删除</el-button>
 
@@ -169,7 +172,13 @@ const  handleSelectionChange=(val)=> {
     <el-table-column type="selection" width="55" />
    <el-table-column prop="ancestors" label="祖先节点列表" width="100"></el-table-column>
    <el-table-column prop="createBy" label="创建者" width="100"></el-table-column>
-   <el-table-column prop="enableFlag" label="启用标识" width="100"></el-table-column>
+   <el-table-column prop="enableFlag" label="启用标识" width="100">
+    <template v-slot="{ row }">
+					<el-tag :type="row.enableFlag === 'T' ? 'success' : 'info'">{{
+						row.enableFlag === "T" ? "启用" : "未启用"
+					}}</el-tag>
+				</template>
+   </el-table-column>
    <el-table-column prop="itemOrProduct" label="产品物料标识" width="100"></el-table-column>
    <el-table-column prop="itemTypeCode" label="分类编码" width="100"></el-table-column>
    <el-table-column  prop="itemTypeId"   label="分类ID" ></el-table-column>

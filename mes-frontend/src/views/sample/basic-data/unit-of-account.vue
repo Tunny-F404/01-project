@@ -29,10 +29,10 @@ const tableList=ref([{
   "attr3": 100,
   "attr4": 200,
   "changeRate": 1,
-  "enableFlag": "Y",
+  "enableFlag": "F",
   "measureCode": "METER",
   "measureName": "米",
-  "primaryFlag": "Y",
+  "primaryFlag": "F",
   "primaryId": 1,
   "remark": "这是主单位"
 }
@@ -45,8 +45,8 @@ const dialog = ref();
 const total = ref(13);
 
 //定义查询的数据
-const myInput=ref()
-const unitName=ref()
+let myInput=ref('')
+let unitName=ref('')
 const loading=ref(false)//loading状态
 
 //定义请求参数,后期完善
@@ -72,7 +72,7 @@ const getPageList= async (data)=>{
 
   loading.value=false
 }
-getPageList()//进来就加载一遍
+getPageList(null)//进来就加载一遍
 //处理分页逻辑
 //改变大小
 const onSizeChange = (size) => {
@@ -114,7 +114,7 @@ const onDelChannel = async (row) => {
 	ElMessage.success("删除成功");
 	console.log(row);
 	//删除后再渲染数据
-	getPageList();
+	getPageList(null);
 };
 
 const onSubmit = () => {
@@ -127,8 +127,8 @@ const onAddChannel = () => {
 }
 
 const reFresh=()=>{
-  myInput=''
-  unitName=''
+  myInput.value=''
+  unitName.value=''
 }
 
 const  handleSelectionChange=(val)=> {
@@ -169,7 +169,7 @@ const  handleSelectionChange=(val)=> {
   </el-form-item>
 </el-form>
 
-<el-button type="primary" plain><el-icon><Plus /></el-icon>新增</el-button>
+<el-button type="primary"   @click="onAddChannel" plain><el-icon><Plus /></el-icon>新增</el-button>
 <el-button type="success" plain><el-icon><EditPen /></el-icon>修改</el-button>
 <el-button type="danger" plain><el-icon><Delete /></el-icon>删除</el-button>
 
@@ -184,10 +184,22 @@ const  handleSelectionChange=(val)=> {
    <el-table-column prop="attr3" label="预留字段3" width="100"></el-table-column>
    <el-table-column prop="attr4" label="预留字段4" width="100"></el-table-column>
    <el-table-column prop="changeRate" label="与主单位换算比例" width="100"></el-table-column>
-   <el-table-column prop="enableFlag"  label="是否启用" > </el-table-column>
+   <el-table-column prop="enableFlag"  label="是否启用" >
+    <template v-slot="{ row }">
+					<el-tag :type="row.enableFlag === 'Y' ? 'success' : 'info'">{{
+						row.enableFlag === "Y" ? "启用" : "未启用"
+					}}</el-tag>
+				</template>
+  </el-table-column>
    <el-table-column  prop="measureCode"   label="单位编码" ></el-table-column>
    <el-table-column  prop="measureName"   label="单位名称" ></el-table-column>
-   <el-table-column  prop="primaryFlag"   label="是否是主单位" ></el-table-column>
+   <el-table-column  prop="primaryFlag"   label="是否是主单位" >
+    <template v-slot="{ row }">
+					<el-tag :type="row.enableFlag === 'Y' ? 'success' : 'info'">{{
+						row.enableFlag === "Y" ? "主单位" : "非主单位"
+					}}</el-tag>
+				</template>
+   </el-table-column>
    <el-table-column  prop="primaryId"   label="主单位ID" ></el-table-column>
    <el-table-column  prop="remark"   label="备注" ></el-table-column>
    <el-table-column label="操作" width="100" >
