@@ -41,6 +41,12 @@ const routes = [
 		name: "UN31",
 		component: () => import("@/views/warehouse-management/warehouse-management.vue"),
 	},
+	// 组织架构页面
+	{
+		path: "/un-41",
+		name: "UN41",
+		component: () => import("@/views/organizational-structure/organizational-structure.vue"),
+	},
 ];
 
 export default routes;
