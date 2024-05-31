@@ -1,4 +1,4 @@
-package com.zeroone.star.project.j1.syshome.dto.toDoEvent;
+package com.zeroone.star.syshome.entity.vo.toDoEvent;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @ApiModel("我的待办数据模型")
-public class ToDoEventDTO {
+public class ToDoEventVO {
     @ApiModelProperty(value = "待办类型",example = "dv_repair")
     private String eventType;
     @ApiModelProperty(value = "代办类型名称",example = "维修工单")
