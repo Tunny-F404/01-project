@@ -35,7 +35,7 @@ InspectPageDTO::Wrapper InspectService::listAll(const InspectQuery::Wrapper& que
 }
 
 //查询来料检验详情
-Inspect_detailDTO::Wrapper InspectService::list_detailone(const int& iqc_id)
+Inspect_detailDTO::Wrapper InspectService::list_detailone(const uint64_t iqc_id)
 {
 	// 构建返回对象
 
@@ -63,7 +63,7 @@ uint64_t InspectService::saveData(const InspectDTO::Wrapper& dto)
 //{
 //	// 组装DO数据
 //	InspectDO data;
-//	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Code, code, Name, name, Template_id, template_id, Vendor_id, vendor_id, Vendor_code, vendor_code, Vendor_name, vendor_name, Vd_nick, vd_nick, Vd_batch, vd_batch, Item_code, item_code, Item_name, item_name, Quantity_recived, quantity_recived, Quantity_check, quantity_check, Quantity_unqualified, quantity_unqualified, Check_result, check_result, Recive_date, recive_date, Inspect_date, inspect_date, Inspector, inspector, List_status, list_status, Line_id, line_id)
+//	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Code, code, Name, name, Template_id, template_id, Vendor_id, vendor_id, Vendor_code, vendor_code, Vendor_name, vendor_name, Vd_nick, vd_nick, Vd_batch, vd_batch, Item_code, item_code, Item_name, item_name, Quantity_recived, quantity_recived, Quantity_check, quantity_check, Quantity_unqualified, quantity_unqualified, Check_result, check_result, Recive_date, recive_date, Inspect_date, inspect_date, Inspector, inspector, List_status, list_status, Line_id, iqc_id)
 //		// 执行数据修改
 //		InspectDAO dao;
 //	return dao.update(data) == 1;
@@ -74,3 +74,9 @@ uint64_t InspectService::saveData(const InspectDTO::Wrapper& dto)
 //	InspectDAO dao;
 //	return dao.deleteById(id) == 1;
 //}
+
+bool InspectService::removeData(uint64_t id)
+{
+	InspectDAO dao;
+	return dao.deleteById(id) == 1;
+}

@@ -16,13 +16,13 @@ public:
 	// 分页查询数据
 	list<InspectDO> selectWithPage(const InspectQuery::Wrapper& query);
 	//查询详情
-	Inspect_detailDO selectWithID(const int & iqc_id);
+	Inspect_detailDO selectWithID(const uint64_t iqc_id);
 	// 插入数据
 	uint64_t insert(const InspectDO& iObj);
 	//// 修改数据
 	//int update(const InspectDO& uObj);
-	//// 通过ID删除数据
-	//int deleteById(uint64_t id);
+	// 通过ID删除数据
+	int deleteById(uint64_t iqc_id);
 };
 
 

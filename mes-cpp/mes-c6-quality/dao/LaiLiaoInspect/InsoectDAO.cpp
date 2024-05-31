@@ -71,20 +71,20 @@ std::list<InspectDO> InspectDAO::selectWithPage(const InspectQuery::Wrapper& que
 }
 
 //查询详情
-Inspect_detailDO InspectDAO::selectWithID(const int & iqc_id)
+Inspect_detailDO InspectDAO::selectWithID(const uint64_t iqc_id)
 {
 	stringstream sql;
 	sql << "SELECT iqc_id, iqc_code, iqc_name,vendor_code, vendor_nick, vendor_batch, item_code, item_name, unit_of_measure,quantity_recived, quantity_check, quantity_unqualified, check_result, recive_date, inspect_date, maj_rate,cr_rate, min_rate,status FROM  qc_iqc where iqc_id=?";
 	Inspect_detailMapper mapper;
 	string sqlStr = sql.str();
-	std::list<Inspect_detailDO> A = sqlSession->executeQuery<Inspect_detailDO, Inspect_detailMapper>(sqlStr, mapper, "%i", iqc_id);
+	std::list<Inspect_detailDO> A = sqlSession->executeQuery<Inspect_detailDO, Inspect_detailMapper>(sqlStr, mapper, "%ull", iqc_id);
 	if (A.size() == 0) return {};
 	return A.front();
 }
 
 //新增检验表
 uint64_t InspectDAO::insert(const InspectDO& iObj)
-{                                  //`line_id`,
+{                                  //`iqc_id`,
 	string sql = "INSERT INTO `qc_iqc` ( `iqc_code`,`iqc_name`,`template_id`, `vendor_id`, `vendor_code`,`vendor_name`,`vendor_nick`,`vendor_batch`,`item_id`,`item_code`,`item_name` ,`quantity_recived`,`quantity_check`,`quantity_unqualified`,`check_result`,`recive_date`,`inspect_date`,`inspector`,`status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?，?)";
 	return sqlSession->executeInsert(sql, "%s%s%ull%ull%s%s%s%s%ull%s%s%d%i%i%s%s%s%s%s",
 		//iObj.getLine_id(),
@@ -113,7 +113,7 @@ uint64_t InspectDAO::insert(const InspectDO& iObj)
 ////修改检验表
 //int InspectDAO::update(const InspectDO& uObj)
 //{
-//	string sql = "UPDATE `qc_iqc` SET `code` = ?, `name`= ?, `template_id`= ?, `vendor_id`= ? , `vendor_code`= ?, `vendor_name`= ?, `vendor_nick`= ?, `vendor_batch`= ?, `item_code`= ?, `item_name`= ?, `quantity_recived`= ? ,`quantity_check`=?,`quantity_unqualified`=?,`check_result`=?,`recive_date`=?,`inspect_date`=?,`inspector`=?,`list_status`=? WHERE `line_id` = ?;";
+//	string sql = "UPDATE `qc_iqc` SET `code` = ?, `name`= ?, `template_id`= ?, `vendor_id`= ? , `vendor_code`= ?, `vendor_name`= ?, `vendor_nick`= ?, `vendor_batch`= ?, `item_code`= ?, `item_name`= ?, `quantity_recived`= ? ,`quantity_check`=?,`quantity_unqualified`=?,`check_result`=?,`recive_date`=?,`inspect_date`=?,`inspector`=?,`list_status`=? WHERE `iqc_id` = ?;";
 //	return sqlSession->executeUpdate(sql, "%ull%ull%s%s%s%s%d%s%s%s%s%s%ull",
 //		uObj.getCode(),
 //		uObj.getName(),
@@ -136,8 +136,8 @@ uint64_t InspectDAO::insert(const InspectDO& iObj)
 //		uObj.getLine_id());
 //}
 //
-//int InspectDAO::deleteById(uint64_t id)
-//{
-//	string sql = "DELETE FROM `qc_iqc` WHERE `line_id`=?";
-//	return sqlSession->executeUpdate(sql, "%ull", id);
-//}
+int InspectDAO::deleteById(uint64_t iqc_id)
+{
+	string sql = "DELETE FROM `qc_iqc` WHERE `iqc_id`=?";
+	return sqlSession->executeUpdate(sql, "%ull", iqc_id);
+}

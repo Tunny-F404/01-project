@@ -93,7 +93,7 @@ class Item_idDTO :public oatpp::DTO
 {
 	DTO_INIT(Item_idDTO, DTO);
 	// 数据库表行id
-	API_DTO_FIELD_DEFAULT(UInt64, line_id, ZH_WORDS_GETTER("inspect.line_id"));
+	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
 };
 
 
