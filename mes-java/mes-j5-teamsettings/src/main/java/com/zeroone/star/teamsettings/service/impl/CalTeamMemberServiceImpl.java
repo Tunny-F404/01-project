@@ -10,7 +10,10 @@ import com.zeroone.star.teamsettings.mapper.CalTeamMemberMapper;
 import com.zeroone.star.teamsettings.service.ICalTeamMemberService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.mapstruct.Mapper;
@@ -79,29 +82,27 @@ public class CalTeamMemberServiceImpl extends ServiceImpl<CalTeamMemberMapper, C
 
     @Override
     public boolean addMembers(List<MemberDTO> memberDTOList) {
-        List<CalTeamMember> members = msTeamMemberMapper.memberDTOListToMemberList(memberDTOList);
-        for (CalTeamMember member : members) {
-            this.baseMapper.insert(member); // 使用 BaseMapper 的 insert 方法逐条插入
+        try {
+            List<CalTeamMember> members = msTeamMemberMapper.memberDTOListToMemberList(memberDTOList);
+            for (CalTeamMember member : members) {
+                this.baseMapper.insert(member); // 使用 BaseMapper 的 insert 方法逐条插入
+            }
+            return true; // 插入成功
+        } catch (Exception e) {
+            return false;
         }
-        return false;
     }
 
 
     @Override
-    public void deleteMembers(List<Integer> memberIds) {
-        this.baseMapper.deleteBatchIds(memberIds); // 使用BaseMapper的批量删除方法
+    public boolean deleteMembers(List<Integer> memberIds) {
+        return baseMapper.deleteBatchIds(memberIds) > 0;
     }
 
     @Override
     public byte[] exportMembers(MemberQuery condition) {
         QueryWrapper<CalTeamMember> queryWrapper = new QueryWrapper<>();
-        // 根据需要添加查询条件
-        if (condition.getUsername() != null) {
-            queryWrapper.lambda().like(CalTeamMember::getUserName, condition.getUsername());
-        }
-        if (condition.getPhonenumber() != null) {
-            queryWrapper.lambda().like(CalTeamMember::getTel, condition.getPhonenumber());
-        }
+
         if (condition.getTeamId() != null) {
             queryWrapper.lambda().eq(CalTeamMember::getTeamId, condition.getTeamId());
         }
@@ -114,8 +115,36 @@ public class CalTeamMemberServiceImpl extends ServiceImpl<CalTeamMemberMapper, C
     }
 
     private byte[] convertToByteArray(List<MemberDTO> memberDTOList) {
-        // 实现将 DTO 列表转换为字节数组的逻辑（如 CSV 或 Excel）
-        // 这是一个占位符，需要实际实现
-        return new byte[0];
+        try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            Sheet sheet = workbook.createSheet("Members");
+
+            // 创建标题行
+            Row headerRow = sheet.createRow(0);
+            String[] headers = {"User ID", "Team ID", "Username", "Nickname", "Phone number", "Status", "Create Time"};
+            for (int i = 0; i < headers.length; i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(headers[i]);
+            }
+
+            // 填充数据
+            int rowNum = 1;
+            for (MemberDTO memberDTO : memberDTOList) {
+                Row row = sheet.createRow(rowNum++);
+
+                row.createCell(0).setCellValue(memberDTO.getUserId());
+                row.createCell(1).setCellValue(memberDTO.getTeamId());
+                row.createCell(2).setCellValue(memberDTO.getUserName());
+                row.createCell(3).setCellValue(memberDTO.getNickName());
+                row.createCell(4).setCellValue(memberDTO.getPhonenumber());
+                row.createCell(5).setCellValue(memberDTO.getStatus());
+                row.createCell(6).setCellValue(memberDTO.getCreateTime().toString());
+            }
+
+            workbook.write(out);
+            return out.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace(); // 在实际应用中可能需要处理异常
+            return new byte[0];
+        }
     }
 }

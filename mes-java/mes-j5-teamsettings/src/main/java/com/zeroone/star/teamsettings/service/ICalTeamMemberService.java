@@ -22,7 +22,7 @@ public interface ICalTeamMemberService extends IService<CalTeamMember> {
 
     boolean addMembers(List<MemberDTO> memberDTOList);
 
-    void deleteMembers(List<Integer> memberIds);
+    boolean deleteMembers(List<Integer> memberIds);
 
     byte[] exportMembers(MemberQuery condition);
 }

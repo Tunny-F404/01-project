@@ -48,15 +48,10 @@ public class MembersController implements MembersApis {
         return success ? JsonVO.success(null) : JsonVO.fail(null);
     }
     @ApiOperation(value = "删除班组成员")
-    @PostMapping("delete-member")
+    @DeleteMapping("delete-member")
     @Override
-    public JsonVO<Void> deleteMembers(List<Integer> memberIds) {
-        try {
-            calTeamMemberService.deleteMembers(memberIds);
-            return JsonVO.success(null);
-        } catch (Exception e) {
-            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "Failed to delete members: " + e.getMessage());
-        }
+    public JsonVO<Integer> deleteMembers(@RequestBody List<Integer> memberIds) {
+        return calTeamMemberService.deleteMembers(memberIds) ? JsonVO.success(1) : JsonVO.fail(0);
     }
     @ApiOperation(value = "导出班组成员")
     @GetMapping("export-member")
