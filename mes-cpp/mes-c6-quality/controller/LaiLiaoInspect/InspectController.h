@@ -66,8 +66,6 @@ public:
 	API_DEF_ADD_AUTH();
 	// 定义响应参数格式
 	API_DEF_ADD_RSP_JSON_WRAPPER(Inspect_detailJsonVO);
-	// 定义分页查询参数描述
-	API_DEF_ADD_PAGE_PARAMS();
 	// 定义其他查询参数描述
 	API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("inspect.line_id"), 1, true);
 	}
