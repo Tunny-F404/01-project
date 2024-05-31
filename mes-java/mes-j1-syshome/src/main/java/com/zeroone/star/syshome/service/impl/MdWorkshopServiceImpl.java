@@ -1,12 +1,11 @@
 package com.zeroone.star.syshome.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.j1.syshome.dto.workshop.WorkshopDTO;
 import com.zeroone.star.project.j1.syshome.vo.workshop.WorkshopVO;
 import com.zeroone.star.syshome.entity.MdWorkshop;
 import com.zeroone.star.syshome.mapper.MdWorkshopMapper;
 import com.zeroone.star.syshome.service.IMdWorkshopService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
