@@ -4,10 +4,10 @@
 
 
 
-AddProdWorkorderJsonVO::Wrapper ProdWorkorderController::execAddProdWorkorder(const AddProdWorkorderDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProdWorkorderController::execAddProdWorkorder(const AddProdWorkorderDTO::Wrapper& dto)
 {
 	// 定义返回数据对象
-	auto jvo = AddProdWorkorderJsonVO::createShared();
+	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
 
@@ -28,15 +28,15 @@ AddProdWorkorderJsonVO::Wrapper ProdWorkorderController::execAddProdWorkorder(co
 
 GetProdWorkorderListPageJsonVO::Wrapper ProdWorkorderController::execQueryGetProdWorkorderList(const GetProdWorkorderListQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	//// 定义一个Service
-	//ProdWorkorderService service;
-	//// 查询数据
-	//auto result = service.listAll(query);
-	//// 响应结果
-	//auto jvo = GetProdWorkorderListPageJsonVO::createShared();
-	//jvo->success(result);
-	//return jvo;
-	return {};
+	// 定义一个Service
+	ProdWorkorderService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = GetProdWorkorderListPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
+	//return {};
 }
 
 ProdWorkorderInfoJsonVO::Wrapper ProdWorkorderController::execGetProdWorkorderInfo(const ProdWorkorderInfoDTO::Wrapper& dto)
@@ -51,14 +51,14 @@ ProdWorkorderInfoJsonVO::Wrapper ProdWorkorderController::execGetProdWorkorderIn
 	return jvo;
 }
 
-ProdWorkorderBomListJsonVO::Wrapper ProdWorkorderController::execGetProdWorkorderBomList(const ProdWorkorderBomListDTO::Wrapper& dto)
+ProdWorkorderBomListPageJsonVO::Wrapper ProdWorkorderController::execGetProdWorkorderBomList(const ProdWorkorderBomListQuery::Wrapper& query, const PayloadDTO& payload)
 {
 	// 定义一个Service
 	ProdWorkorderService service;
 	// 查询数据
-	auto result = service.listBomDetail(dto);
+	auto result = service.listBom(query);
 	// 响应结果
-	auto jvo = ProdWorkorderBomListJsonVO::createShared();
+	auto jvo = ProdWorkorderBomListPageJsonVO::createShared();
 	jvo->success(result);
 	return jvo;
 }

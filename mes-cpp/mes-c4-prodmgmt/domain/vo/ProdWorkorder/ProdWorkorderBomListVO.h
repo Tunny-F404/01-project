@@ -14,7 +14,12 @@ class ProdWorkorderBomListJsonVO : public JsonVO<ProdWorkorderBomListDTO::Wrappe
 	DTO_INIT(ProdWorkorderBomListJsonVO, JsonVO<ProdWorkorderBomListDTO::Wrapper>);
 };
 
-
+/**
+ * 获取生产工单BOM列表分页显示JsonVO
+ */
+class ProdWorkorderBomListPageJsonVO : public JsonVO<ProdWorkorderBomListPageDTO::Wrapper> {
+	DTO_INIT(ProdWorkorderBomListPageJsonVO, JsonVO<ProdWorkorderBomListPageDTO::Wrapper>);
+};
 #include OATPP_CODEGEN_END(DTO)
 
 #endif // !_PRODWORKORDERBOMLIST_VO_
