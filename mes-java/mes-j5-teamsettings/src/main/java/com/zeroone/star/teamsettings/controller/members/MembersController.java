@@ -1,7 +1,6 @@
 package com.zeroone.star.teamsettings.controller.members;
 
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j5.dto.teamsettings.AddTeamDTO;
 import com.zeroone.star.project.j5.dto.teamsettings.MemberDTO;
 import com.zeroone.star.project.j5.query.teamsettings.MemberQuery;
 import com.zeroone.star.project.j5.teamsettings.members.MembersApis;
@@ -11,10 +10,7 @@ import com.zeroone.star.teamsettings.service.ICalTeamMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -47,7 +43,7 @@ public class MembersController implements MembersApis {
     }
     @ApiOperation(value = "添加班组成员")
     @PostMapping("add-member")
-    public JsonVO<Void> addMembers(@Validated List<MemberDTO> memberDTOList) {
+    public JsonVO<Void> addMembers(@RequestBody @Validated List<MemberDTO> memberDTOList) {
         boolean success = calTeamMemberService.addMembers(memberDTOList);
         return success ? JsonVO.success(null) : JsonVO.fail(null);
     }
