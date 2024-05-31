@@ -353,19 +353,143 @@ ProMaterialPageJsonVO::Wrapper ProcessController::execQueryProMaterial(const Pro
 }
 
 // 14 删除工艺流程
-Uint64JsonVO::Wrapper ProcessController::execRemoveProRoute(const UInt64& id)
+List<Uint64JsonVO::Wrapper> ProcessController::execRemoveProRoute(const List<UInt64>&Lid)
 {
-	return {};
+	list<Uint64JsonVO::Wrapper> ret;
+	// 定义返回数据对象
+	list<UInt64> id = *(Lid.get());
+	for (auto iter : id)
+	{
+		UInt64 temp = *iter;
+		auto jvo = Uint64JsonVO::createShared();
+		// 参数校验
+		if (!temp || *temp <= 0)
+			jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		else
+		{
+			// 定义一个Service
+			ProcessListService service;
+			// 执行数据删除
+			if (service.removeData(temp.getValue(0))) {
+				jvo->success(temp);
+			}
+			else
+			{
+				jvo->fail(temp);
+			}
+		}
+		ret.emplace_back(jvo);
+	}
+	// 响应结果
+	List< Uint64JsonVO::Wrapper> ans;
+	*(ans.get()) = ret;
+	return ans;
 }
 // 15 删除工艺关联产品
-Uint64JsonVO::Wrapper ProcessController::execRemoveRouteProduct(const UInt64& id)
+List<Uint64JsonVO::Wrapper> ProcessController::execRemoveRouteProduct(const List<UInt64>& Lid)
 {
-	return {};
+	list<Uint64JsonVO::Wrapper> ret;
+	// 定义返回数据对象
+	list<UInt64> id = *(Lid.get());
+	for (auto iter : id)
+	{
+		UInt64 temp = *iter;
+		auto jvo = Uint64JsonVO::createShared();
+		// 参数校验
+		if (!temp || *temp <= 0)
+			jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		else
+		{
+			// 定义一个Service
+			RelateProService service;
+			// 执行数据删除
+			if (service.removeData(temp.getValue(0))) {
+				jvo->success(temp);
+			}
+			else
+			{
+				jvo->fail(temp);
+			}
+		}
+		ret.emplace_back(jvo);
+	}
+	// 响应结果
+	List< Uint64JsonVO::Wrapper> ans;
+	*(ans.get()) = ret;
+	return ans;
 }
 // 16 导出工艺关联产品
-StringJsonVO::Wrapper ProcessController::execOutputRouteProduct(const outputRouteProductQuery::Wrapper& query, const PayloadDTO& payload)
+StringJsonVO::Wrapper ProcessController::execExportRouteProduct(const List<UInt64>& Lid)
 {
-	return {};
+	// 定义一个Service
+	RelateProService service;
+	// 查询数据
+	list<UInt64> id = *(Lid.get());
+	std::vector<std::vector<std::string>> data;
+
+	// DTO数据转换为vector
+	for (const auto& iter : id)
+	{
+		ExportRelateProDTO::Wrapper result = service.listAll(iter.getValue(0));
+		std::vector<std::string> temp;
+
+		//有点问题
+		temp.emplace_back(to_string(result->record_id.getValue(0)));
+		temp.emplace_back(to_string(result->route_id.getValue(0)));
+		temp.emplace_back(to_string(result->item_id.getValue(0)));
+		temp.emplace_back(result->item_code.getValue(""));
+		temp.emplace_back(result->item_name.getValue(""));
+		temp.emplace_back(result->unit_of_measure.getValue(""));
+		temp.emplace_back(result->specification.getValue(""));
+		temp.emplace_back(result->RPmodels.getValue(""));
+		data.emplace_back(temp);
+	}
+
+	// 插入表头
+	data.insert(data.begin(), {
+		ZH_WORDS_GETTER("excel.header.routeproduct.h1"),
+		ZH_WORDS_GETTER("excel.header.routeproduct.h2"),
+		ZH_WORDS_GETTER("excel.header.routeproduct.h3"),
+		ZH_WORDS_GETTER("excel.header.routeproduct.h4"),
+		ZH_WORDS_GETTER("excel.header.routeproduct.h5"),
+		ZH_WORDS_GETTER("excel.header.routeproduct.h6"),
+		ZH_WORDS_GETTER("excel.header.routeproduct.h7"),
+		ZH_WORDS_GETTER("excel.header.routeproduct.h8"),
+		});
+
+	// 保存到文件
+	std::string fileName = "./public/excel/process.xlsx";
+	std::string sheetName = ZH_WORDS_GETTER("excel.sheet.routeproduct.s1");
+	ExcelComponent excel;
+	excel.writeVectorToFile(fileName, sheetName, data);
+
+	std::string filename = "";
+	filename = "./public/excel/process.xlsx";
+	// 创建一个fastdfs对象及前缀
+	ZO_CREATE_DFS_CLIENT_URL(dfs, urlPrefix);
+	// 获取文件后缀名
+	string suffix = "";
+	size_t pos = filename.rfind(".");
+	if (pos != string::npos)
+	{
+		suffix = filename.substr(pos + 1);
+	}
+	// 上传文件
+	string downloadUrl = dfs.uploadFile(filename);
+	downloadUrl = urlPrefix + downloadUrl;
+	OATPP_LOGD("Multipart", "download url='%s'", downloadUrl.c_str());
+
+	// 响应结果
+	auto jvo = StringJsonVO::createShared();
+	if (downloadUrl != "") {
+		jvo->success(downloadUrl);
+	}
+	else {
+		jvo->fail(downloadUrl);
+	}
+	//auto jvo = StringJsonVO::createShared();
+	return jvo;
+
 }
 // 17 删除产品制程物料BOM
 Uint64JsonVO::Wrapper ProcessController::execRemoveProcessBOM(const UInt64& id)

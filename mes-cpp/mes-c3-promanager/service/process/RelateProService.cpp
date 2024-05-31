@@ -35,4 +35,20 @@ bool RelateProService::updateData(const ModRelateProDTO::Wrapper& dto)
 		RelateProDAO dao;
 	return dao.update(data) == 1;
 }
+//删除关联产品
+bool RelateProService::removeData(uint64_t id)
+{
+	RelateProDAO dao;
+	return dao.deleteById(id) == 1;
+}
+//导出关联产品
+ExportRelateProDTO::Wrapper RelateProService::listAll(const uint64_t& id)
+{
+	RelateProDAO dao;
+	list<ProRouteProductDO> result = dao.selectById(id);
+	ProRouteProductDO DO = result.front();
+	auto dto = ExportRelateProDTO::createShared();
+	ZO_STAR_DOMAIN_DO_TO_DTO(dto, DO, record_id, Record_Id, route_id, Route_Id, item_id, Item_Id, item_name, Item_Name, unit_of_measure, Unit_Of_Measure, specification, Specification, RPmodels, Remark)
+		return dto;
+}
 

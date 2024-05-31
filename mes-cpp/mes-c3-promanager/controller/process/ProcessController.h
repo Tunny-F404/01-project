@@ -230,7 +230,7 @@ public:
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.route.id"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/{id}", removeProRoute, PATH(UInt64, id), execRemoveProRoute(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/{id}", removeProRoute, QUERY(List<UInt64>, id), execRemoveProRoute(id));
 
 
 	// 15 定义删除工艺关联产品接口
@@ -240,10 +240,10 @@ public:
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.route.corproductid"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/product/{id}", removeRouteProduct, PATH(UInt64, id), execRemoveRouteProduct(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/product/{id}", removeRouteProduct, QUERY(List<UInt64>, id), execRemoveRouteProduct(id));
 
 	// 16 定义工艺关联产品导出接口
-	ENDPOINT_INFO(outputRouteProduct) {
+	ENDPOINT_INFO(exportRouteProduct) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("process.route.output"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
@@ -254,11 +254,8 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 
 	}
-	ENDPOINT(API_M_POST, "/pro/export-corproducts", outputRouteProduct, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(userQuery, outputRouteProductQuery, queryParams);
-		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execOutputRouteProduct(userQuery, authObject->getPayload()));
+	ENDPOINT(API_M_POST, "/pro/route/{id}", exportRouteProduct, QUERY(List<UInt64>, id), API_HANDLER_AUTH_PARAME) {
+		API_HANDLER_RESP_VO(execExportRouteProduct(id));
 	}
 
 	// 17 删除产品制程物料BOM
@@ -316,11 +313,11 @@ private:
 	// 13 获取产品制程物料BOM列表
 	ProMaterialPageJsonVO::Wrapper execQueryProMaterial(const ProMaterialQuery::Wrapper& query, const PayloadDTO& payload);
 	// 14 删除工艺流程
-	Uint64JsonVO::Wrapper execRemoveProRoute(const UInt64& id);
+	List<Uint64JsonVO::Wrapper> execRemoveProRoute(const List<UInt64>& id);
 	// 15 删除工艺关联产品
-	Uint64JsonVO::Wrapper execRemoveRouteProduct(const UInt64& id);
+	List<Uint64JsonVO::Wrapper> execRemoveRouteProduct(const List<UInt64>& id);
 	// 16 导出工艺关联产品
-	StringJsonVO::Wrapper execOutputRouteProduct(const outputRouteProductQuery::Wrapper& query, const PayloadDTO& payload);
+	StringJsonVO::Wrapper execExportRouteProduct(const List<UInt64>& id);
 	// 17 删除产品制程物料BOM
 	Uint64JsonVO::Wrapper execRemoveProcessBOM(const UInt64& id);
 	// 18 添加产品制程物料BOM

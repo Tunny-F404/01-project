@@ -114,3 +114,9 @@ list<ProcessAddDTO::Wrapper> ProcessListService::listAllForProcess(const Process
 	}
 	return data;
 }
+//É¾³ý¹¤ÒÕ
+bool ProcessListService::removeData(uint64_t id)
+{
+	ProcessDAO dao;
+	return dao.deleteById(id) == 1;
+}

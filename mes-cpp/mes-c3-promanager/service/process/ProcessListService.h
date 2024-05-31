@@ -22,6 +22,8 @@ public:
 	bool updateData(const ProcessDTO::Wrapper& dto);
 	// 导出工艺 查询数据
 	list<ProcessAddDTO::Wrapper> listAllForProcess(const ProcessListQuery::Wrapper& query);
+	// 通过ID删除工艺
+	bool removeData(uint64_t id);
 };
 
 #endif // !_SAMPLE_SERVICE_

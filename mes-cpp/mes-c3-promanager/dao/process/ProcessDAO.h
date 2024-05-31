@@ -6,7 +6,7 @@
 #include "../../domain/query/process/ProcessListQuery.h"
 
 /**
- * 示例表数据库操作实现
+ * 工艺相关的数据库操作实现
  */
 class ProcessDAO : public BaseDAO
 {
@@ -25,6 +25,8 @@ public:
 	int deleteById(list<uint64_t> id);
 	// 导出工艺
 	list<ProRouteDO> selectWithProcessExport(const ProcessListQuery::Wrapper& query);
+	// 删除工艺
+	int deleteById(uint64_t id);
 	
 };
 #endif // !_SAMPLE_DAO_

@@ -12,10 +12,14 @@
 class RelateProService
 {
 public:
-	// 保存数据
+	// 添加关联产品
 	uint64_t saveData(const AddRelateProDTO::Wrapper& dto);
-	// 修改数据
+	// 修改关联产品
 	bool updateData(const ModRelateProDTO::Wrapper& dto);
+	// 删除关联产品
+	bool removeData(uint64_t id);
+	// 分页查询所有数据
+	ExportRelateProDTO::Wrapper listAll(const uint64_t& id);
 };
 
 #endif // !_RELATEPRO_SERVICE_

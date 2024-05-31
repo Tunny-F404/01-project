@@ -37,4 +37,27 @@ class ModRelateProDTO : public AddRelateProDTO
 	//记录ID
 	API_DTO_FIELD(UInt64, record_id, ZH_WORDS_GETTER("RelatePro.DTO.record_id"), true, 1);
 };
+
+class ExportRelateProDTO : public oatpp::DTO
+{
+	DTO_INIT(ExportRelateProDTO, DTO);
+
+	// 记录ID
+	API_DTO_FIELD(UInt64, record_id, ZH_WORDS_GETTER("RelatePro.DTO.record_id"), true, 1);
+	// 工艺路线ID
+	API_DTO_FIELD(UInt64, route_id, ZH_WORDS_GETTER("RelatePro.DTO.route_id"), true, 1);
+	// 产品物料ID
+	API_DTO_FIELD(UInt64, item_id, ZH_WORDS_GETTER("RelatePro.DTO.item_id"), true, 1);
+	// 产品物料编码
+	API_DTO_FIELD(String, item_code, ZH_WORDS_GETTER("RelatePro.DTO.item_code"), true, "null");
+	// 产品物料名称
+	API_DTO_FIELD(String, item_name, ZH_WORDS_GETTER("RelatePro.DTO.item_name"), true, "01star");
+	// 产品物料单位
+	API_DTO_FIELD(String, unit_of_measure, ZH_WORDS_GETTER("RelatePro.DTO.unit_of_measure"), true, "g");
+	// 规格型号
+	API_DTO_FIELD(String, specification, ZH_WORDS_GETTER("RelatePro.DTO.specification"), true, "null");
+	// 备注
+	API_DTO_FIELD(String, RPmodels, ZH_WORDS_GETTER("RelatePro.DTO.RPmodels"), false, "");
+};
+
 #endif // !_RELATEPRO_DTO_

@@ -96,3 +96,9 @@ list<ProRouteDO> ProcessDAO::selectWithProcessExport(const ProcessListQuery::Wra
 	string sqlStr = sql.str();
 	return sqlSession->executeQuery<ProRouteDO, ProcessListMapper>(sqlStr, mapper, params);
 }
+//É¾³ý¹¤ÒÕ
+int ProcessDAO::deleteById(uint64_t id)
+{
+	string sql = "DELETE FROM `pro_route` WHERE `route_id`=?";
+	return sqlSession->executeUpdate(sql, "%ull", id);
+}

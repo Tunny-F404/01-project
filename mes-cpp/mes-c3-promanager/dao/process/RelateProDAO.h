@@ -14,5 +14,9 @@ public:
 	uint64_t insert(const ProRouteProductDO& iObj);
 	// 修改关联产品
 	int update(const ProRouteProductDO& uObj);
+	// 删除关联产品
+	int deleteById(uint64_t id);
+	// 导出关联产品
+	list<ProRouteProductDO> selectById(uint64_t id);
 };
 #endif // ! _RELATEPRO_DAO_
