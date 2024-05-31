@@ -17,9 +17,9 @@ public:
 	// 分页查询来料检验表详情
 	Inspect_detailDTO::Wrapper list_detailone(const uint64_t iqc_id);
 	// 保存数据
-	uint64_t saveData(const Inspect_detailDTO::Wrapper& dto);
+	uint64_t saveData(const InspectDTO::Wrapper& dto);
 	// 修改数据
-	bool updateData(const Inspect_detailDTO::Wrapper& dto);
+	bool updateData(const InspectDTO::Wrapper& dto);
 	// 通过ID删除数据
 	bool removeData(uint64_t id);
 };

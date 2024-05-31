@@ -50,22 +50,22 @@ Inspect_detailDTO::Wrapper InspectService::list_detailone(const uint64_t iqc_id)
 }
 
 //保存数据
-uint64_t InspectService::saveData(const Inspect_detailDTO::Wrapper& dto)
+uint64_t InspectService::saveData(const InspectDTO::Wrapper& dto)
 {
 	 //组装DO数据
 	InspectDO data;
-	ZO_STAR_DOMAIN_DTO_TO_DO(data,dto,Iqc_id,iqc_id, Iqc_code, iqc_code, Iqc_name, iqc_name,  Template_id, template_id,  Vendor_id, vendor_id,  Vendor_code, vendor_code,  Vendor_name, vendor_name,  Vendor_nick, vendor_nick,  Vendor_batch, vendor_batch, Item_id,item_id, Item_code, item_code,  Item_name, item_name,  Quantity_recived, quantity_recived,  Quantity_check, quantity_check,  Quantity_unqualified, quantity_unqualified,  Check_result, check_result,  Recive_date, recive_date,  Inspect_date, inspect_date,  Inspector, inspector, List_status, list_status);
+	ZO_STAR_DOMAIN_DTO_TO_DO(data,dto,Iqc_id,iqc_id, Iqc_code, iqc_code, Iqc_name, iqc_name,  Template_id, template_id,  Vendor_id, vendor_id,  Vendor_code, vendor_code,  Vendor_name, vendor_name,  Vendor_nick, vendor_nick,  Vendor_batch, vendor_batch, Item_id,item_id, Item_code, item_code,  Item_name, item_name, Unit_of_measure, unit_of_measure, Quantity_recived, quantity_recived,  Quantity_check, quantity_check,  Quantity_unqualified, quantity_unqualified,  Check_result, check_result,  Recive_date, recive_date,  Inspect_date, inspect_date,  Inspector, inspector, List_status, list_status);
 		 //执行数据添加
 		InspectDAO dao;
 	return dao.insert(data);
 }
 
 //修改
-bool InspectService::updateData(const Inspect_detailDTO::Wrapper& dto)
+bool InspectService::updateData(const InspectDTO::Wrapper& dto)
 {
 	// 组装DO数据
 	InspectDO data;
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Iqc_code, iqc_code, Iqc_name, iqc_name,  Vendor_code, vendor_code, Vendor_nick, vendor_nick, Vendor_batch, vendor_batch,Item_code, item_code, Item_name, item_name, Unit_of_measure, unit_of_measure, Quantity_recived, quantity_recived, Quantity_check, quantity_check, Quantity_unqualified, quantity_unqualified, Check_result, check_result, Recive_date, recive_date, Inspect_date, inspect_date, List_status, list_status, Iqc_id, iqc_id);
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Iqc_code, iqc_code, Iqc_name, iqc_name,  Vendor_code, vendor_code, Vendor_nick, vendor_nick, Vendor_batch, vendor_batch,Item_code, item_code, Item_name, item_name, Unit_of_measure, unit_of_measure, Quantity_recived, quantity_recived, Quantity_check, quantity_check, Quantity_unqualified, quantity_unqualified, Check_result, check_result, Recive_date, recive_date, Inspect_date, inspect_date, List_status, list_status, Remark, remark ,Iqc_id, iqc_id );
 		// 执行数据修改
 		InspectDAO dao;
 	return dao.update(data) == 1;

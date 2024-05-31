@@ -35,6 +35,8 @@ class InspectDTO:public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, item_code, ZH_WORDS_GETTER("inspect.item_code"));
 	//产品物料名称
 	API_DTO_FIELD_DEFAULT(String, item_name, ZH_WORDS_GETTER("inspect.item_name"));
+	//单位
+	API_DTO_FIELD_DEFAULT(String, unit_of_measure, ZH_WORDS_GETTER("inspect.unit_of_measure"));
 	//接收数量
 	API_DTO_FIELD_DEFAULT(Float64, quantity_recived, ZH_WORDS_GETTER("inspect.quantity_recived"));
 	//检测数量
@@ -51,6 +53,8 @@ class InspectDTO:public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, inspector, ZH_WORDS_GETTER("inspect.inspector"));
 	//单据状态
 	API_DTO_FIELD_DEFAULT(String, list_status, ZH_WORDS_GETTER("inspect.list_status"));
+	//备注
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("inspect.remark"));
 	
 };
 
@@ -64,8 +68,7 @@ class Inspect_detailDTO :public InspectDTO
 {
 	DTO_INIT(Inspect_detailDTO, InspectDTO);
 
-	//单位
-	API_DTO_FIELD_DEFAULT(String, unit_of_measure, ZH_WORDS_GETTER("inspect.unit_of_measure"));
+	
 	//致命缺陷率
 	API_DTO_FIELD_DEFAULT(Float64, maj_rate, ZH_WORDS_GETTER("inspect.maj_rate"));
 	//严重缺陷率
@@ -78,8 +81,7 @@ class Inspect_detailDTO :public InspectDTO
 	API_DTO_FIELD_DEFAULT(Int64, maj_quantity, ZH_WORDS_GETTER("inspect.maj_quantity"));
 	//轻微缺陷数量
 	API_DTO_FIELD_DEFAULT(Int64, min_quantity, ZH_WORDS_GETTER("inspect.min_quantity"));
-	//备注
-	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("inspect.remark"));
+	
 };
 
 

@@ -85,8 +85,8 @@ Inspect_detailDO InspectDAO::selectWithID(const int& iqc_id)
 //新增检验表
 uint64_t InspectDAO::insert(const InspectDO& iObj)
 {                                  //`iqc_id`,
-	string sql = "INSERT INTO `qc_iqc` ( `iqc_id`,`iqc_code`,`iqc_name`,`template_id`, `vendor_id`, `vendor_code`,`vendor_name`,`vendor_nick`,`vendor_batch`,`item_id`,`item_code`,`item_name` ,`quantity_recived`,`quantity_check`,`quantity_unqualified`,`check_result`,`recive_date`,`inspect_date`,`inspector`,`status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?)";//
-	return sqlSession->executeInsert(sql, "%ull%s%s%ull%ull%s%s%s%s%ull%s%s%d%i%i%s%s%s%s%s",  //
+	string sql = "INSERT INTO `qc_iqc` ( `iqc_id`,`iqc_code`,`iqc_name`,`template_id`, `vendor_id`, `vendor_code`,`vendor_name`,`vendor_nick`,`vendor_batch`,`item_id`,`item_code`,`item_name` ,`quantity_recived`,`quantity_check`,`quantity_unqualified`,`check_result`,`recive_date`,`inspect_date`,`inspector`,`remark`,`status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?)";//
+	return sqlSession->executeInsert(sql, "%ull%s%s%ull%ull%s%s%s%s%ull%s%s%d%i%i%s%s%s%s%s%s",  //
 		iObj.getIqc_id(),
 		iObj.getIqc_code(),
 		iObj.getIqc_name(),
@@ -107,6 +107,7 @@ uint64_t InspectDAO::insert(const InspectDO& iObj)
 		iObj.getRecive_date(),
 		iObj.getInspect_date(),
 		iObj.getInspector(),
+		iObj.getRemark(),
 		iObj.getList_status()
 		);
 }
@@ -114,8 +115,8 @@ uint64_t InspectDAO::insert(const InspectDO& iObj)
 //修改检验表
 int InspectDAO::update(const InspectDO& uObj)
 {
-	string sql = "UPDATE `qc_iqc` SET `iqc_code` = ?, `iqc_name`= ?,  `vendor_code`= ?, `vendor_nick`= ?, `vendor_batch`= ?, `item_code`= ?, `item_name`= ?, `unit_of_measure`=?,`quantity_recived`= ? ,`quantity_check`=?,`quantity_unqualified`=?,`check_result`=?,`recive_date`=?,`inspect_date`=?,`list_status`=? WHERE `iqc_id` = ?;";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%d%i%i%s%s%s%s%ull",
+	string sql = "UPDATE `qc_iqc` SET `iqc_code` = ?, `iqc_name`= ?,  `vendor_code`= ?, `vendor_nick`= ?, `vendor_batch`= ?, `item_code`= ?, `item_name`= ?, `unit_of_measure`=?,`quantity_recived`= ? ,`quantity_check`=?,`quantity_unqualified`=?,`check_result`=?,`recive_date`=?,`inspect_date`=?,`status`=? ,`remark`=? WHERE `iqc_id` = ?;";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%d%i%i%s%s%s%s%s%ull",
 		uObj.getIqc_code(),
 		uObj.getIqc_name(),
 		//uObj.getVendor_id(),
@@ -133,6 +134,7 @@ int InspectDAO::update(const InspectDO& uObj)
 		uObj.getRecive_date(),
 		uObj.getInspect_date(),
 		uObj.getList_status(),
+		uObj.getRemark(),
 		uObj.getIqc_id());
 }
 //
