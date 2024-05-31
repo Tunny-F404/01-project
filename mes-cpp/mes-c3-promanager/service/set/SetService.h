@@ -5,9 +5,13 @@
 #include <list>
 #include "domain/vo/set/SetProListVO.h"
 #include "domain/query/set/SetProListQuery.h"
-#include "domain/query/set/ProListQuery.h"
 #include "domain/dto/set/SetProAddDTO.h"
 #include "domain/dto/set/SetProListDTO.h"
+
+#include "domain/vo/set/ProDetailVO.h"
+#include "domain/vo/set/ProNameListVO.h"
+#include "domain/query/set/ProListQuery.h"
+#include "domain/query/set/ProDetailQuery.h"
 
 /**
  * 示例服务实现，演示基础的示例服务实现
@@ -23,6 +27,12 @@ public:
 	// 修改数据
 	bool updateData(const SetProAddTableDTO::Wrapper& dto);
 
+	// 分页查询所有工序
+	ProListPageDTO::Wrapper listAllForProcess(const ProListQuery::Wrapper& query);
+	// 查询工序详情
+	ProDetailDTO::Wrapper getProcessDetail(const ProDetailQuery::Wrapper& query);
+	// 查询工序名称列表
+	ProNameListJsonVO::Wrapper getProcessNameList();
 
 #endif // !_SET_SERVICE_
 

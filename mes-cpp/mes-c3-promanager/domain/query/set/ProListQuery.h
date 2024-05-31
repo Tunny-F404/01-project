@@ -26,17 +26,17 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 分页查询 工序列表（条件+分页）
- */
+* 分页查询 工序列表（条件 + 分页）
+*/
 class ProListQuery : public PageQuery
 {
 	DTO_INIT(ProListQuery, PageQuery);
 	// 工序编码
-	API_DTO_FIELD_DEFAULT(Int32, proCode, ZH_WORDS_GETTER("process.fields.proCode"));
+	API_DTO_FIELD_DEFAULT(String, processCode, ZH_WORDS_GETTER("process.fields.processCode"));
 	// 工序名称
-	API_DTO_FIELD_DEFAULT(String, proName, ZH_WORDS_GETTER("process.fields.proName"));
+	API_DTO_FIELD_DEFAULT(String, processName, ZH_WORDS_GETTER("process.fields.processName"));
 	// 是否启用
-	API_DTO_FIELD(Int32, status, ZH_WORDS_GETTER("process.fields.proStatus"), true, 1);
+	API_DTO_FIELD(String, enableFlag, ZH_WORDS_GETTER("process.fields.enableFlag"), true, "Y");
 };
 
 #include OATPP_CODEGEN_END(DTO)

@@ -82,3 +82,96 @@ bool SetService::updateData(const SetProAddTableDTO::Wrapper& dto)
 		SetDAO dao;
 	return dao.updateSet(data) == 1;
 }
+
+ProListPageDTO::Wrapper SetService::listAllForProcess(const ProListQuery::Wrapper& query)
+{
+	// 构建返回对象
+	auto pages = ProListPageDTO::createShared();
+	pages->pageIndex = query->pageIndex;
+	pages->pageSize = query->pageSize;
+
+	// 查询数据总条数
+	SetDAO dao;
+	uint64_t count = dao.countForProcess(query);
+	if (count <= 0)
+	{
+		return pages;
+	}
+
+	// 分页查询数据
+	pages->total = count;
+	pages->calcPages();
+	list<ProProcessDO> result = dao.selectWithPageForProcess(query);
+
+	// 将DO转换成DTO
+	for (ProProcessDO sub : result)
+	{
+		auto dto = ProListDTO::createShared();
+		dto->processId = sub.getProcessId();
+		dto->processCode = sub.getProcessCode();
+		dto->processName = sub.getProcessName();
+		dto->enableFlag = sub.getEnableFlag();
+		dto->remark = sub.getRemark();
+
+		/*ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub,
+			processId, ProcessId,
+			processCode, ProcessCode,
+			processName, ProcessName,
+			enableFlag, EnableFlag,
+			remark, Remark);*/
+		pages->addData(dto);
+	}
+	return pages;
+}
+
+ProDetailDTO::Wrapper SetService::getProcessDetail(const ProDetailQuery::Wrapper& query)
+{
+	// 构建返回对象
+	auto dto = ProDetailDTO::createShared();
+
+	// 查询工序详情
+	SetDAO dao;
+	std::list<ProProcessDO> contentDo = dao.selectByid(query);
+	auto item = contentDo.front();
+
+	//// 将DO转换成DTO
+	//for (auto item : contentDo) {
+	dto->processId = item.getProcessId();
+	dto->processCode = item.getProcessCode();
+	dto->processName = item.getProcessName();
+	dto->attention = item.getAttention();
+	dto->enableFlag = item.getEnableFlag();
+	dto->remark = item.getRemark();
+	//}
+	/*ZO_STAR_DOMAIN_DO_TO_DTO(dto, item,
+		processId, ProcessId,
+		processCode, ProcessCode,
+		processName, ProcessName,
+		attention, Attention,
+		enableFlag, EnableFlag,
+		remark, Remark)*/
+
+	return dto;
+}
+
+ProNameListJsonVO::Wrapper SetService::getProcessNameList()
+{
+	// 构建返回对象
+	auto vo = ProNameListJsonVO::createShared();
+	auto data = oatpp::List<oatpp::String>::createShared();
+
+	// 查询工序详情
+	SetDAO dao;
+	auto result = dao.selectProNameList();
+
+	// 将DO转换成DTO
+	for (ProProcessDO sub : result)
+	{
+		oatpp::String str(sub.getProcessName());
+		if (data) {
+			data->push_back(str);
+		}
+	}
+	vo->success(data);
+	return vo;
+}

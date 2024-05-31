@@ -26,21 +26,12 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 定义一个工序列表显示JsonVO对象，用于响应给客户端
- */
-class ProListJsonVO : public JsonVO<oatpp::List<ProListDTO::Wrapper>>
-{
-	DTO_INIT(ProListJsonVO, JsonVO<oatpp::List<ProListDTO::Wrapper>>);
-};
-
-/**
  * 定义一个工序列表分页显示JsonVO对象，用于响应给客户端
  */
 class ProListPageJsonVO : public JsonVO<ProListPageDTO::Wrapper>
 {
 	DTO_INIT(ProListPageJsonVO, JsonVO<ProListPageDTO::Wrapper>);
 };
-
 
 #include OATPP_CODEGEN_END(DTO)
 #endif // _PROLISTVO_H_

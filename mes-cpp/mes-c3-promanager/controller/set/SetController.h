@@ -108,9 +108,9 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(Int32, "processCode", ZH_WORDS_GETTER("process.fields.processCode"), 1, false);
+		API_DEF_ADD_QUERY_PARAMS(String, "processCode", ZH_WORDS_GETTER("process.fields.processCode"), "01star", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("process.fields.processName"), "01star", false);
-		API_DEF_ADD_QUERY_PARAMS(Int32, "processStatus", ZH_WORDS_GETTER("process.fields.processStatus"), 1, false);
+		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("process.fields.enableFlag"), "01star", false);
 	}
 	ENDPOINT(API_M_GET, "/set/query-process-list", queryProList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
@@ -130,7 +130,7 @@ public:
 		// 定义分页查询参数描述
 		//API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(Int32, "processCode", ZH_WORDS_GETTER("process.fields.processCode"), 1, true);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "processId", ZH_WORDS_GETTER("process.fields.processId"), 265, true);
 	}
 	ENDPOINT(API_M_GET, "/set/query-process-detail", queryProcessDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
@@ -192,9 +192,9 @@ private:
 	// 5 添加工序步骤
 	Uint64JsonVO::Wrapper execAddStepSet(const SetProListDTO::Wrapper& dto);
 	// 6 获取工序列表
-	ProListJsonVO::Wrapper execQueryProList(const ProListQuery::Wrapper& query);
+	ProListPageJsonVO::Wrapper execQueryProList(const ProListQuery::Wrapper& query);
 	// 7 获取工序名称列表
-	ProListJsonVO::Wrapper execQueryProNameList();
+	ProNameListJsonVO::Wrapper execQueryProNameList();
 	// 8 获取工序详情
 	ProDetailJsonVO::Wrapper execQueryProDetail(const ProDetailQuery::Wrapper& query);
 	//9 修改工序步骤

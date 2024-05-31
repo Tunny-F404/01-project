@@ -200,19 +200,40 @@ Uint64JsonVO::Wrapper SetController::execAddStepSet(const SetProListDTO::Wrapper
 	return jvo;
 }
 // 6 获取工序列表
-ProListJsonVO::Wrapper SetController::execQueryProList(const ProListQuery::Wrapper& query)
+ProListPageJsonVO::Wrapper SetController::execQueryProList(const ProListQuery::Wrapper& query)
 {
-	return ProListJsonVO::Wrapper();
+	// 定义一个Service
+	SetService service;
+	// 查询数据
+	auto result = service.listAllForProcess(query);
+	// 响应结果
+	auto jvo = ProListPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
+	//return ProListPageJsonVO::Wrapper();
 }
 // 7 获取工序名称列表
-ProListJsonVO::Wrapper SetController::execQueryProNameList()
+ProNameListJsonVO::Wrapper SetController::execQueryProNameList()
 {
-	return ProListJsonVO::Wrapper();
+	// 定义一个Service
+	SetService service;
+	// 查询数据
+	auto result = service.getProcessNameList();
+	// 响应结果
+	return result;
 }
 // 8 获取工序详情
 ProDetailJsonVO::Wrapper SetController::execQueryProDetail(const ProDetailQuery::Wrapper& query)
 {
-	return ProDetailJsonVO::Wrapper();
+	// 定义一个Service
+	SetService service;
+	// 查询数据
+	auto result = service.getProcessDetail(query);
+	// 响应结果
+	auto jvo = ProDetailJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
+	//return ProDetailJsonVO::Wrapper();
 }
 // 9 修改工序步骤
 Uint64JsonVO::Wrapper SetController::execModifyStepSet(const SetProListDTO::Wrapper& dto)
