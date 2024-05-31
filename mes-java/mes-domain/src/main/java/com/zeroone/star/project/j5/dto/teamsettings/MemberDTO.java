@@ -17,7 +17,7 @@ public class MemberDTO {
     @ApiModelProperty(value = "用户编号", example = "1")
     private Integer userId;
     @ApiModelProperty(value = "部门编号", example = "210")
-    private Integer deptId;
+    private Integer teamId;
     @ApiModelProperty(value = "用户名称", example = "demo")
     private String userName;
     @ApiModelProperty(value = "用户昵称", example = "test")

@@ -20,8 +20,8 @@ public class MemberVO {
     private Object params;
     @ApiModelProperty(value = "用户编号", example = "1")
     private Integer userId;
-    @ApiModelProperty(value = "部门名称", example = "1")
-    private Integer deptName;
+    @ApiModelProperty(value = "部门id", example = "1")
+    private Integer teamId;
     @ApiModelProperty(value = "用户名称", example = "1")
     private String userName;
     @ApiModelProperty(value = "用户昵称", example = "1")

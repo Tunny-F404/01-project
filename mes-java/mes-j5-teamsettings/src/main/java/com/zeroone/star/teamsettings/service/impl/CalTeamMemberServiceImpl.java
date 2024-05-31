@@ -73,7 +73,8 @@ public class CalTeamMemberServiceImpl extends ServiceImpl<CalTeamMemberMapper, C
         wrapper.lambda()
                 .like(condition.getUsername() != null, CalTeamMember::getUserName, condition.getUsername())
                 .like(condition.getPhonenumber() != null, CalTeamMember::getTel, condition.getPhonenumber())
-                .like(condition.getDeptId() != null, CalTeamMember::getTeamId, condition.getDeptId());
+                .like(condition.getTeamId()!=null,CalTeamMember::getTeamId,condition.getTeamId());
+
 
         Page<CalTeamMember> result = baseMapper.selectPage(page, wrapper);
         return PageDTO.create(result,  msTeamMemberMapper::memberToMemberDTO);
@@ -82,20 +83,30 @@ public class CalTeamMemberServiceImpl extends ServiceImpl<CalTeamMemberMapper, C
     @Override
     public void addMembers(List<MemberDTO> memberDTOList) {
         List<CalTeamMember> members = msTeamMemberMapper.memberDTOListToMemberList(memberDTOList);
-        this.saveBatch(members);
+        //this.baseMapper.insert(); // 使用BaseMapper的批量插入方法
     }
+
 
     @Override
     public void deleteMembers(List<Integer> memberIds) {
-        this.removeByIds(memberIds);
+        this.baseMapper.deleteBatchIds(memberIds); // 使用BaseMapper的批量删除方法
     }
 
     @Override
     public byte[] exportMembers(MemberQuery condition) {
         QueryWrapper<CalTeamMember> queryWrapper = new QueryWrapper<>();
         // 根据需要添加查询条件
+        if (condition.getUsername() != null) {
+            queryWrapper.lambda().like(CalTeamMember::getUserName, condition.getUsername());
+        }
+        if (condition.getPhonenumber() != null) {
+            queryWrapper.lambda().like(CalTeamMember::getTel, condition.getPhonenumber());
+        }
+        if (condition.getTeamId() != null) {
+            queryWrapper.lambda().eq(CalTeamMember::getTeamId, condition.getTeamId());
+        }
 
-        List<CalTeamMember> members = this.list(queryWrapper);
+        List<CalTeamMember> members = this.baseMapper.selectList(queryWrapper);
         List<MemberDTO> memberDTOList = msTeamMemberMapper.memberListToMemberDTOList(members);
 
         // 假设你有一个方法可以将 DTO 列表转换为字节数组（如 CSV 或 Excel）
