@@ -38,12 +38,11 @@ public class MembersController implements MembersApis {
     @GetMapping("query-all")
     @Override
     public JsonVO<PageDTO<MemberDTO>> queryMembers(MemberQuery condition) {
-        try {
             PageDTO<MemberDTO> result = calTeamMemberService.queryMembers(condition);
-            return JsonVO.success(result);
-        } catch (Exception e) {
-            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "Failed to query members: " + e.getMessage());
-        }
+            if (result != null) {
+                return JsonVO.success(result);
+            }
+            return JsonVO.fail(null);
     }
     @ApiOperation(value = "添加班组成员")
     @PostMapping("add-member")

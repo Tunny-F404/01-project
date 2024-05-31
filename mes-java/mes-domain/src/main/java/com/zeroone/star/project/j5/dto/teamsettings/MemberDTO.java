@@ -16,13 +16,13 @@ public class MemberDTO {
     private Object params;
     @ApiModelProperty(value = "用户编号", example = "1")
     private Integer userId;
-    @ApiModelProperty(value = "部门名称", example = "1")
-    private Integer deptName;
-    @ApiModelProperty(value = "用户名称", example = "1")
+    @ApiModelProperty(value = "部门编号", example = "210")
+    private Integer deptId;
+    @ApiModelProperty(value = "用户名称", example = "demo")
     private String userName;
-    @ApiModelProperty(value = "用户昵称", example = "1")
+    @ApiModelProperty(value = "用户昵称", example = "test")
     private String nickName;
-    @ApiModelProperty(value = "手机号码", example = "1321312321213")
+    @ApiModelProperty(value = "手机号码", example = "17565656565")
     private String phonenumber;
     @ApiModelProperty(value = "状态", example = "0")//0表示正常 1表示停用
     private String status;

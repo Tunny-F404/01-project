@@ -72,8 +72,8 @@ public class CalTeamMemberServiceImpl extends ServiceImpl<CalTeamMemberMapper, C
         QueryWrapper<CalTeamMember> wrapper = new QueryWrapper<>();
         wrapper.lambda()
                 .like(condition.getUsername() != null, CalTeamMember::getUserName, condition.getUsername())
-                .like(condition.getDeptId() != null, CalTeamMember::getTeamId, condition.getDeptId())
-                .like(condition.getPhonenumber() != null, CalTeamMember::getTel, condition.getPhonenumber());
+                .like(condition.getPhonenumber() != null, CalTeamMember::getTel, condition.getPhonenumber())
+                .like(condition.getDeptId() != null, CalTeamMember::getTeamId, condition.getDeptId());
 
         Page<CalTeamMember> result = baseMapper.selectPage(page, wrapper);
         return PageDTO.create(result,  msTeamMemberMapper::memberToMemberDTO);
