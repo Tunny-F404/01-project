@@ -5,14 +5,12 @@ import com.zeroone.star.project.j5.dto.teamsettings.MemberDTO;
 import com.zeroone.star.project.j5.query.teamsettings.MemberQuery;
 import com.zeroone.star.project.j5.teamsettings.members.MembersApis;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.teamsettings.service.ICalTeamMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -36,25 +34,34 @@ public class MembersController implements MembersApis {
     @ApiOperation(value = "获取班组成员列表（条件 + 分页）")
     @GetMapping("query-all")
     @Override
-    public JsonVO<PageDTO<MemberDTO>> queryMember(MemberQuery condition) {
-        return null;
+    public JsonVO<PageDTO<MemberDTO>> queryMembers(MemberQuery condition) {
+            PageDTO<MemberDTO> result = calTeamMemberService.queryMembers(condition);
+            if (result != null) {
+                return JsonVO.success(result);
+            }
+            return JsonVO.fail(null);
     }
     @ApiOperation(value = "添加班组成员")
     @PostMapping("add-member")
-    @Override
-    public JsonVO<Void> addMembers(List<MemberDTO> memberDTOList) {
-        return null;
+    public JsonVO<Void> addMembers(@RequestBody @Validated List<MemberDTO> memberDTOList) {
+        boolean success = calTeamMemberService.addMembers(memberDTOList);
+        return success ? JsonVO.success(null) : JsonVO.fail(null);
     }
     @ApiOperation(value = "删除班组成员")
-    @PostMapping("delete-member")
+    @DeleteMapping("delete-member")
     @Override
-    public JsonVO<Void> deleteMembers(List<Integer> memberIds) {
-        return null;
+    public JsonVO<Integer> deleteMembers(@RequestBody List<Integer> memberIds) {
+        return calTeamMemberService.deleteMembers(memberIds) ? JsonVO.success(1) : JsonVO.fail(0);
     }
     @ApiOperation(value = "导出班组成员")
     @GetMapping("export-member")
     @Override
-    public JsonVO<byte[]> exportMembers(MemberQuery condition) {
-        return null;
+    public JsonVO<byte[]> exportMembers(MemberQuery condition){
+    try {
+        byte[] data = calTeamMemberService.exportMembers(condition);
+        return JsonVO.success(data);
+    } catch (Exception e) {
+        return JsonVO.create(null, ResultStatus.FAIL.getCode(), "Failed to export members: " + e.getMessage());
     }
+}
 }

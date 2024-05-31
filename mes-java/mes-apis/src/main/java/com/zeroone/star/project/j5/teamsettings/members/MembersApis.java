@@ -22,7 +22,7 @@ public interface MembersApis {
      * @param condition 查询条件
      * @return 查询结果
      */
-    JsonVO<PageDTO<MemberDTO>> queryMember(MemberQuery condition);
+    JsonVO<PageDTO<MemberDTO>> queryMembers(MemberQuery condition);
 
     /**
      * 多项添加班组成员
@@ -32,10 +32,11 @@ public interface MembersApis {
     JsonVO<Void> addMembers(List<MemberDTO> memberDTOList);
     /**
      * 批量删除班组成员
+     *
      * @param memberIds 成员ID列表
      * @return 删除结果
      */
-    JsonVO<Void> deleteMembers(List<Integer> memberIds);
+    JsonVO<Integer> deleteMembers(List<Integer> memberIds);
     /**
      * 导出班组成员信息
      * @param condition 查询条件

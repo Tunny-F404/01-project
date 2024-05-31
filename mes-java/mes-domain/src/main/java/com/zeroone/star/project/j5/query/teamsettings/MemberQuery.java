@@ -13,10 +13,10 @@ import lombok.Data;
 @Data
 @ApiModel("查询人员")
 public class MemberQuery extends PageQuery {
-    @ApiModelProperty(value = "部门名称id", example = "182")
-    private String deptId;
-    @ApiModelProperty(value = "手机号码", example = "213231")
+    @ApiModelProperty(value = "部门名称id", example = "210")
+    private String teamId;
+    @ApiModelProperty(value = "手机号码", example = "17565656565")
     private String phonenumber;
-    @ApiModelProperty(value = "用户名称", example = "苏念")
+    @ApiModelProperty(value = "用户名称", example = "demo")
     private String username;
 }
