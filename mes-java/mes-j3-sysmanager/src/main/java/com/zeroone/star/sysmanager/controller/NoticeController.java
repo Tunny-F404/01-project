@@ -9,19 +9,21 @@ import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.sysmanager.service.ISysNoticeService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.annotation.Resource;
 import java.util.List;
 
 @Api(tags = "通知公告")
 @Controller
 @RequestMapping("sys-manager/notice")
 public class NoticeController implements NoticeApis {
-    @Autowired
+    @Resource
     private ISysNoticeService noticeService;
     /**
      * 修改通知公告
@@ -35,20 +37,39 @@ public class NoticeController implements NoticeApis {
         noticeService.updateNotice(noticeDTO);
         return JsonVO.success(ResultStatus.SUCCESS);
     }
+    /**
+     * 添加公告
+     * @param dto 新增的数据
+     * @return
+     */
     @Override
     @PostMapping("/add-notice")
     @ApiOperation("添加公告")
-    public JsonVO<Long> addNotice(addNoticeDto dto) {
-        return null;
+    public JsonVO<Boolean> addNotice(@RequestBody AddNoticeDTO dto) {
+        boolean saved = noticeService.addNotice(dto);
+        if (!saved){
+            return JsonVO.create(false, HttpStatus.BAD_REQUEST.value(),"添加公告失败！");
+        }
+        return JsonVO.create(true,200,"添加公告成功！");
     }
 
+
+    /**
+     * 查询公告详情
+     * @param id 查询对象ID
+     * @return
+     */
     @Override
-    @PostMapping("/update-notice")
-    @ApiOperation("更新公告")
-    public JsonVO<Long> updateNotice(UpdateNoticeDTO dto) {
-        //service.updateById(dto);
-        return null;
+    @PostMapping("/query-notice-by-id")
+    @ApiOperation("查询公告详情")
+    public JsonVO<NoticeDTO> queryNoticeById(@RequestParam Integer id) {
+        NoticeDTO noticeDTO = noticeService.queryNoticeById(id);
+        if (null == noticeDTO){
+            return JsonVO.create(null,HttpStatus.BAD_REQUEST.value(),"查询失败！");
+        }
+        return JsonVO.create(noticeDTO,200,"查询成功！");
     }
+
 
     @Override
     @PostMapping("/query-noticeListVos-by-condition")
@@ -57,11 +78,32 @@ public class NoticeController implements NoticeApis {
         return null;
     }
 
-    @Override
-    @PostMapping("/remove-notice")
+    /**
+     * 删除公告
+     * @param ids 数据ID集合
+     * @return
+     */
+    @DeleteMapping("/remove-notice")
     @ApiOperation("删除公告")
-    public JsonVO<List<Long>> removeNotice(List<Long> ids) {
-        return null;
+    @Transactional(rollbackFor = Exception.class)
+    public JsonVO<List<Integer>> removeNotice(@RequestBody List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) {
+            // 手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            // 返回错误信息
+            return JsonVO.create(null, HttpStatus.BAD_REQUEST.value(), "数据为空！");
+        }
+        boolean removed = noticeService.removeByIds(ids);
+        if (!removed) {
+            // 手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            // 返回错误信息
+            return JsonVO.create(ids, HttpStatus.NOT_FOUND.value(), "删除失败，指定的公告不存在或已被删除。");
+        }
+        // 删除成功
+        return JsonVO.create(ids, HttpStatus.OK.value(), "删除成功！");
     }
+
+
 
 }

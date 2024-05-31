@@ -1,5 +1,6 @@
 package com.zeroone.star.sysmanager.service;
 
+import com.zeroone.star.project.j3.dto.AddNoticeDTO;
 import com.zeroone.star.project.j3.dto.NoticeDTO;
 import com.zeroone.star.sysmanager.entity.SysNotice;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -20,4 +21,19 @@ public interface ISysNoticeService extends IService<SysNotice> {
      * @return
      */
     void updateNotice(NoticeDTO noticeDTO);
+
+    /**
+     *
+     * @param dto 新增的数据
+     * @return
+     */
+    boolean addNotice(AddNoticeDTO dto);
+
+    /**
+     *
+     * @param id 查询对象ID
+     * @return
+     */
+    NoticeDTO queryNoticeById(Integer id);
+
 }

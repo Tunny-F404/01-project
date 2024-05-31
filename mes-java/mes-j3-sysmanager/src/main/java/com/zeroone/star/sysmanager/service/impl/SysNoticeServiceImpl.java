@@ -1,15 +1,17 @@
 package com.zeroone.star.sysmanager.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.zeroone.star.project.components.user.UserHolder;
+import com.zeroone.star.project.j3.dto.AddNoticeDTO;
 import com.zeroone.star.project.j3.dto.NoticeDTO;
 import com.zeroone.star.sysmanager.entity.SysNotice;
 import com.zeroone.star.sysmanager.mapper.SysNoticeMapper;
 import com.zeroone.star.sysmanager.service.ISysNoticeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 
 /**
@@ -23,8 +25,11 @@ import java.time.LocalDateTime;
 @Service
 public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice> implements ISysNoticeService {
 
-    @Autowired
+    @Resource
     private SysNoticeMapper sysNoticeMapper;
+    @Resource
+    private UserHolder userHolder;
+
     /**
      * 更新公告
      * @param noticeDTO
@@ -45,5 +50,48 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
         sysNotice.setUpdateTime(LocalDateTime.now());
         sysNoticeMapper.update(sysNotice,sysNoticeQueryWrapper);
     }
+
+    /**
+     *
+     * @param dto 新增数据
+     * @return 成功 true ， 失败 false
+     */
+    @Override
+    public boolean addNotice(AddNoticeDTO dto) {
+        // 1. 验证参数是否为空
+        if (dto == null) {
+            return false;
+        }
+        SysNotice sysNotice = new SysNotice();
+
+        // 3. 将noticeDTO中的属性复制到sysNotice中，并设置关键属性
+        BeanUtils.copyProperties(dto,sysNotice);
+        sysNotice.setCreateTime(LocalDateTime.now());
+        try {
+            sysNotice.setCreateBy(userHolder.getCurrentUser().getUsername());
+        } catch (Exception e) {
+            System.out.println("公告处理——用户名获取异常！");
+        }
+        // 4. 保存更新后的公告到数据库
+        sysNoticeMapper.insert(sysNotice);
+        return true;
+    }
+
+    /**
+     *
+     * @param id 查询对象ID
+     * @return 查询对象
+     */
+    @Override
+    public NoticeDTO queryNoticeById(Integer id) {
+        SysNotice sysNotice = sysNoticeMapper.selectById(id);
+        if (null == sysNotice){
+            return null;
+        }
+        NoticeDTO noticeDTO = new NoticeDTO();
+        BeanUtils.copyProperties(sysNotice,noticeDTO);
+        return noticeDTO;
+    }
+
 
 }

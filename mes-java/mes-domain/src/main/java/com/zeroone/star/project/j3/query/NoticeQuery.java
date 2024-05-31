@@ -15,7 +15,7 @@ public class NoticeQuery extends PageQuery {
     @ApiModelProperty(value = "公告标题",example = "测试公告内容")
     private String noticeTitle;
     @ApiModelProperty(value = "公告类型",example = "公告")
-    private char noticeType;
+    private String noticeType;
     @ApiModelProperty(value = "操作者",example = "admin")
     private String operator;
 }
