@@ -23,11 +23,11 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProductTableJsonVO);
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "pnum", ZH_WORDS_GETTER("product.fields.pnum"), "ISSUE20221115004", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "pname", ZH_WORDS_GETTER("product.fields.pname"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "prname", ZH_WORDS_GETTER("product.fields.prname"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "pdate", ZH_WORDS_GETTER("product.fields.pdate"), "2022-11-15 00:00:00", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "pstatus", ZH_WORDS_GETTER("product.fields.pstatus"), "FINISHED", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "issue_code", ZH_WORDS_GETTER("product.fields.issue_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "issue_name", ZH_WORDS_GETTER("product.fields.issue_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "warehouse_name", ZH_WORDS_GETTER("product.fields.warehouse_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "issue_date", ZH_WORDS_GETTER("product.fields.issue_date"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("product.fields.status"), "", false);
 
 	}
 	// 3.2 定义查询接口处理
@@ -47,20 +47,18 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProductDetailJsonVO);
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "pnum", ZH_WORDS_GETTER("product.fields.pnum"), "ISSUE20221115004", false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "issue_id", ZH_WORDS_GETTER("product.fields.issue_id"), 1, true);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/product/query-product-detail", queryProductDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(query, ProductDetailQuery, queryParams);
+	ENDPOINT(API_M_GET, "/product/query-product-detail", queryProductDetail, QUERY(UInt64, issue_id), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execProductDetail(query));
+		API_HANDLER_RESP_VO(execProductDetail(issue_id));
 	}
 
 private:
 	// 查询数据
 	ProductTableJsonVO::Wrapper execProductTable(const ProductQuery::Wrapper& query,const PayloadDTO& payload);
-	ProductDetailJsonVO::Wrapper execProductDetail(const ProductQuery::Wrapper& query);
+	ProductDetailJsonVO::Wrapper execProductDetail(const int& issue_id);
 };
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 #endif

@@ -15,24 +15,25 @@ class ProductQuery : public PageQuery
 	// 定义初始化
 	DTO_INIT(ProductQuery, PageQuery);
 	//领料单编号
-	API_DTO_FIELD_DEFAULT(String, pnum, ZH_WORDS_GETTER("product.fields.pnum"));
+	API_DTO_FIELD_DEFAULT(String, issue_code, ZH_WORDS_GETTER("product.fields.issue_code"));
 	//领料单名称
-	API_DTO_FIELD_DEFAULT(String, pname, ZH_WORDS_GETTER("product.fields.pname"));
+	API_DTO_FIELD_DEFAULT(String, issue_name, ZH_WORDS_GETTER("product.fields.issue_name"));
 	//仓库名称
-	API_DTO_FIELD_DEFAULT(String, prname, ZH_WORDS_GETTER("product.fields.prname"));
+	API_DTO_FIELD_DEFAULT(String, warehouse_name, ZH_WORDS_GETTER("product.fields.warehouse_name"));
 	//领料日期
-	API_DTO_FIELD_DEFAULT(String, pdate, ZH_WORDS_GETTER("product.fields.pdate"));
+	API_DTO_FIELD_DEFAULT(String, issue_date, ZH_WORDS_GETTER("product.fields.issue_date"));
 	//单据状态
-	API_DTO_FIELD_DEFAULT(String, pstatus, ZH_WORDS_GETTER("product.fields.pstatus"));
+	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("product.fields.status"));
 
 };
 //详情查询
 class ProductDetailQuery : public oatpp::DTO
 {
 	// 定义初始化
-	DTO_INIT(ProductQuery, DTO);
+	DTO_INIT(ProductDetailQuery, DTO);
 	//领料单编号
-	API_DTO_FIELD_DEFAULT(String, pnum, ZH_WORDS_GETTER("product.fields.pnum"));
+	API_DTO_FIELD_DEFAULT(UInt64, issue_id, ZH_WORDS_GETTER("product.fields.issue_id"));
+	
 
 };
 #include OATPP_CODEGEN_END(DTO)
