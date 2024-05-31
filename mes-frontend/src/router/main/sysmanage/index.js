@@ -45,6 +45,7 @@ const routes = [
 	{
 		path: "/un-41",
 		name: "UN41",
+	
 		component: () => import("@/views/organizational-structure/organizational-structure.vue"),
 	},
 ];
