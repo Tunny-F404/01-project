@@ -15,19 +15,7 @@ InspectPageJsonVO::Wrapper InspectController::execQueryInspect(const InspectQuer
 	return jvo;
 }
 
-//Inspect_detailJsonVO::Wrapper InspectController::execQueryInspect_detail(const int& line_id, const PayloadDTO& payload)
-//{
-//	// 定义一个Service
-//	InspectService service;
-//	// 查询数据
-//	auto result = service.list_detailone(line_id);
-//	// 响应结果
-//	auto jvo = Inspect_detailJsonVO::createShared();
-//	jvo->success(result);
-//	return jvo;
-//}
-
-Inspect_detailJsonVO::Wrapper InspectController::execInspect_detail(const int64_t& iqc_id)
+Inspect_detailJsonVO::Wrapper InspectController::execInspect_detail(const int& iqc_id)
 {
 	// 定义一个Service
 	InspectService service;
@@ -89,27 +77,26 @@ Uint64JsonVO::Wrapper InspectController::execModifyInspect(const InspectDTO::Wra
 
 Uint64JsonVO::Wrapper InspectController::execRemoveInspect(const UInt64& id)
 {
-	//// 定义返回数据对象
-	//auto jvo = Uint64JsonVO::createShared();
-	//// 参数校验
-	//if (!id || id <= 0)
-	//{
-	//	jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-	//	return jvo;
-	//}
-	//// 定义一个Service
-	//InspectService service;
-	//// 执行数据删除
-	//if (service.removeData(id.getValue(0))) {
-	//	jvo->success(id);
-	//}
-	//else
-	//{
-	//	jvo->fail(id);
-	//}
-	//// 响应结果
-	//return jvo;
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!id || id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	InspectService service;
+	// 执行数据删除
+	if (service.removeData(id.getValue(0))) {
+		jvo->success(id);
+	}
+	else
+	{
+		jvo->fail(id);
+	}
+	// 响应结果
+	return jvo;
 }
 
 //导出

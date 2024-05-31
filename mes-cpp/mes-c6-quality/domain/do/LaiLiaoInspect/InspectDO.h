@@ -17,9 +17,9 @@ class InspectDO
 	// 来料检验单名称
 	CC_SYNTHESIZE(string, iqc_name, Iqc_name);
 	//检验模板ID
-	CC_SYNTHESIZE(uint64_t, template_id, Template_id);
+	CC_SYNTHESIZE(int64_t, template_id, Template_id);
 	//来源单据ID
-	CC_SYNTHESIZE(uint64_t, source_doc_id, Source_doc_id);
+	CC_SYNTHESIZE(int64_t, source_doc_id, Source_doc_id);
 	// 来源单据类型 
 	CC_SYNTHESIZE(string, source_doc_type, Source_doc_type);
 	// 来源单据编号
@@ -53,9 +53,9 @@ class InspectDO
 	//接收数量
 	CC_SYNTHESIZE(double, quantity_recived, Quantity_recived);
 	//检测数量
-	CC_SYNTHESIZE(int64_t, quantity_check, Quantity_check);
+	CC_SYNTHESIZE(int, quantity_check, Quantity_check);
 	//不合格数
-	CC_SYNTHESIZE(int64_t, quantity_unqualified, Quantity_unqualified);
+	CC_SYNTHESIZE(int, quantity_unqualified, Quantity_unqualified);
 	//致命缺陷率
 	CC_SYNTHESIZE(double, maj_rate, Maj_rate);
 	//严重缺陷率

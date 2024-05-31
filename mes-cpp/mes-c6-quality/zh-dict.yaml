@@ -28,6 +28,7 @@ inspect:
  vendor_name: 供应商名称
  vendor_nick: 供应商简称
  vendor_batch: 供应商批次号
+ item_id: 产品物料ID
  item_code: 产品物料编码
  item_name: 产品物料名称
  quantity_recived: 接收数量

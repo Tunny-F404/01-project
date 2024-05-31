@@ -29,6 +29,8 @@ class InspectDTO:public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, vendor_nick, ZH_WORDS_GETTER("inspect.vendor_nick"));
 	//供应商批次号
 	API_DTO_FIELD_DEFAULT(String, vendor_batch, ZH_WORDS_GETTER("inspect.vendor_batch"));
+	//产品物料ID
+	API_DTO_FIELD_DEFAULT(Int64, item_id, ZH_WORDS_GETTER("inspect.item_id"));
 	//产品物料编码
 	API_DTO_FIELD_DEFAULT(String, item_code, ZH_WORDS_GETTER("inspect.item_code"));
 	//产品物料名称
@@ -81,11 +83,6 @@ class Inspect_detailDTO :public InspectDTO
 };
 
 
-
-//class Inspect_detailPageDTO : public PageDTO<Inspect_detailDTO::Wrapper>
-//{
-//	DTO_INIT(Inspect_detailPageDTO, PageDTO<Inspect_detailDTO::Wrapper>);
-//};
 
 class Inspect_tableDTO : public Inspect_detailDTO
 {
