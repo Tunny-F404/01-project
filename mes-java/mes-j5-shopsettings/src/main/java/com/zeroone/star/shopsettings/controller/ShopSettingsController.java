@@ -75,6 +75,9 @@ public class ShopSettingsController implements ShopSettingsApis {
     @ApiOperation("删除车间（支持批量删除）")
     @DeleteMapping("/delete/{workshopIds}")
     public JsonVO<Integer> removeWorkshop(List<Long> workshopIds) {
-        return null;
+        int deleteRow = mdWorkshopService.removeWorkshop(workshopIds);
+        //返回操作结果
+        return deleteRow > 0 ? JsonVO.success(deleteRow) : JsonVO.fail(null);
+
     }
 }

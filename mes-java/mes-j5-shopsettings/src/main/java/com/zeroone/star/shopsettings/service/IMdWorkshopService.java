@@ -23,4 +23,6 @@ public interface IMdWorkshopService extends IService<MdWorkshop> {
     ShopSettingsDTO queryWorkshopInfo(Long workShopId);
 
     List<String> queryWorkshopNameList();
+
+    int removeWorkshop(List<Long> workshopIds);
 }
