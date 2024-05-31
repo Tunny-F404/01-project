@@ -63,7 +63,7 @@ public interface SchedulePlanApis {
      * @param rems 删除数据的id集合
      *  @author sailing
      */
-    JsonVO<Integer> removeSchPlan(@RequestBody List<Long> rems);
+    JsonVO<Integer> removeSchPlan(List<Long> rems);
 
     /**
      * 修改计划状态

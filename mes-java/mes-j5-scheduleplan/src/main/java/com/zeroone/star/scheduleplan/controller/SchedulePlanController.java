@@ -75,9 +75,9 @@ public class SchedulePlanController implements SchedulePlanApis {
     }
 
     @ApiOperation(value = "导出计划")
-    @GetMapping("export-schedule-plan")
+    @PostMapping("export-schedule-plan")
     @Override
-    public ResponseEntity<byte[]> exportSchPlan(List<Long> ids) {
+    public ResponseEntity<byte[]> exportSchPlan(@RequestBody List<Long> ids) {
         return calPlanService.exportSchPlan(ids);
     }
 
