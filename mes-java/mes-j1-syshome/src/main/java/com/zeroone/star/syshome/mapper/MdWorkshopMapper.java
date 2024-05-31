@@ -1,8 +1,8 @@
 package com.zeroone.star.syshome.mapper;
 
+import com.zeroone.star.project.j1.syshome.vo.workshop.WorkshopVO;
 import com.zeroone.star.syshome.entity.MdWorkshop;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zeroone.star.syshome.entity.vo.workshop.WorkshopVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

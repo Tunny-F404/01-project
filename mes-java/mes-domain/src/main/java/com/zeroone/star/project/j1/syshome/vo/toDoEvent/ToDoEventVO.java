@@ -1,4 +1,4 @@
-package com.zeroone.star.syshome.entity.vo.toDoEvent;
+package com.zeroone.star.project.j1.syshome.vo.toDoEvent;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

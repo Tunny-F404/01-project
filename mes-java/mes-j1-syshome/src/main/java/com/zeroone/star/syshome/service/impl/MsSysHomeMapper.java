@@ -3,9 +3,9 @@ package com.zeroone.star.syshome.service.impl;
 import com.zeroone.star.project.j1.syshome.dto.plan.PlanDTO;
 import com.zeroone.star.project.j1.syshome.dto.toDoEvent.ToDoEventDTO;
 import com.zeroone.star.project.j1.syshome.dto.workshop.WorkshopDTO;
-import com.zeroone.star.syshome.entity.vo.plan.PlanVO;
-import com.zeroone.star.syshome.entity.vo.toDoEvent.ToDoEventVO;
-import com.zeroone.star.syshome.entity.vo.workshop.WorkshopVO;
+import com.zeroone.star.project.j1.syshome.vo.plan.PlanVO;
+import com.zeroone.star.project.j1.syshome.vo.toDoEvent.ToDoEventVO;
+import com.zeroone.star.project.j1.syshome.vo.workshop.WorkshopVO;
 import org.mapstruct.Mapper;
 
 /**

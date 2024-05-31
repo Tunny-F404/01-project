@@ -1,4 +1,4 @@
-package com.zeroone.star.syshome.entity.vo.workshop;
+package com.zeroone.star.project.j1.syshome.vo.workshop;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

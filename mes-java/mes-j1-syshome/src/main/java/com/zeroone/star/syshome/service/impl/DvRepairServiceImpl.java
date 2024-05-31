@@ -3,19 +3,16 @@ package com.zeroone.star.syshome.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j1.syshome.dto.toDoEvent.ToDoEventDTO;
+import com.zeroone.star.project.j1.syshome.vo.toDoEvent.ToDoEventVO;
 import com.zeroone.star.project.query.PageQuery;
 import com.zeroone.star.syshome.entity.DvRepair;
-import com.zeroone.star.syshome.entity.vo.plan.PlanVO;
-import com.zeroone.star.syshome.entity.vo.toDoEvent.ToDoEventVO;
+
 import com.zeroone.star.syshome.mapper.DvRepairMapper;
-import com.zeroone.star.syshome.mapper.ProFeedbackMapper;
 import com.zeroone.star.syshome.service.IDvRepairService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>

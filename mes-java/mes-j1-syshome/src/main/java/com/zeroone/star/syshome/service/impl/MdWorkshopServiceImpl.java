@@ -1,8 +1,8 @@
 package com.zeroone.star.syshome.service.impl;
 
 import com.zeroone.star.project.j1.syshome.dto.workshop.WorkshopDTO;
+import com.zeroone.star.project.j1.syshome.vo.workshop.WorkshopVO;
 import com.zeroone.star.syshome.entity.MdWorkshop;
-import com.zeroone.star.syshome.entity.vo.workshop.WorkshopVO;
 import com.zeroone.star.syshome.mapper.MdWorkshopMapper;
 import com.zeroone.star.syshome.service.IMdWorkshopService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class MdWorkshopServiceImpl extends ServiceImpl<MdWorkshopMapper, MdWorkshop> implements IMdWorkshopService {
     @Resource
     MsSysHomeMapper msSysHomeMapper;
-    @Autowired
+    @Resource
     MdWorkshopMapper mdWorkshopMapper;
 
     @Override
