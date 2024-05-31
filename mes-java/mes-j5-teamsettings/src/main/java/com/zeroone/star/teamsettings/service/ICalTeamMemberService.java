@@ -20,7 +20,7 @@ public interface ICalTeamMemberService extends IService<CalTeamMember> {
 
     PageDTO<MemberDTO> queryMembers(MemberQuery condition);
 
-    void addMembers(List<MemberDTO> memberDTOList);
+    boolean addMembers(List<MemberDTO> memberDTOList);
 
     void deleteMembers(List<Integer> memberIds);
 

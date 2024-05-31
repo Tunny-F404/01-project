@@ -5,17 +5,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.teamsettings.MemberDTO;
 import com.zeroone.star.project.j5.query.teamsettings.MemberQuery;
-import com.zeroone.star.project.query.PageQuery;
-import com.zeroone.star.teamsettings.entity.CalTeam;
 import com.zeroone.star.teamsettings.entity.CalTeamMember;
 import com.zeroone.star.teamsettings.mapper.CalTeamMemberMapper;
 import com.zeroone.star.teamsettings.service.ICalTeamMemberService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 import org.mapstruct.Mapper;
 
 import javax.annotation.Resource;
@@ -81,9 +78,12 @@ public class CalTeamMemberServiceImpl extends ServiceImpl<CalTeamMemberMapper, C
     }
 
     @Override
-    public void addMembers(List<MemberDTO> memberDTOList) {
+    public boolean addMembers(List<MemberDTO> memberDTOList) {
         List<CalTeamMember> members = msTeamMemberMapper.memberDTOListToMemberList(memberDTOList);
-        //this.baseMapper.insert(); // 使用BaseMapper的批量插入方法
+        for (CalTeamMember member : members) {
+            this.baseMapper.insert(member); // 使用 BaseMapper 的 insert 方法逐条插入
+        }
+        return false;
     }
 
 

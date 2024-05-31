@@ -1,6 +1,7 @@
 package com.zeroone.star.teamsettings.controller.members;
 
 import com.zeroone.star.project.dto.PageDTO;
+import com.zeroone.star.project.j5.dto.teamsettings.AddTeamDTO;
 import com.zeroone.star.project.j5.dto.teamsettings.MemberDTO;
 import com.zeroone.star.project.j5.query.teamsettings.MemberQuery;
 import com.zeroone.star.project.j5.teamsettings.members.MembersApis;
@@ -46,14 +47,9 @@ public class MembersController implements MembersApis {
     }
     @ApiOperation(value = "添加班组成员")
     @PostMapping("add-member")
-    @Override
-    public JsonVO<Void> addMembers(List<MemberDTO> memberDTOList) {
-        try {
-            calTeamMemberService.addMembers(memberDTOList);
-            return JsonVO.success(null);
-        } catch (Exception e) {
-            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "Failed to add members: " + e.getMessage());
-        }
+    public JsonVO<Void> addMembers(@Validated List<MemberDTO> memberDTOList) {
+        boolean success = calTeamMemberService.addMembers(memberDTOList);
+        return success ? JsonVO.success(null) : JsonVO.fail(null);
     }
     @ApiOperation(value = "删除班组成员")
     @PostMapping("delete-member")
