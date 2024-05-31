@@ -150,13 +150,13 @@ public:
 	}
 	// 10 删除工序步骤
 	ENDPOINT_INFO(deletestepSet) {
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.delete.summary1"));
-		API_DEF_ADD_AUTH();
-		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+		// 定义标题和返回类型以及授权支持
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("set.modify.summary2"), Uint64JsonVO::Wrapper);
+		// 定义其他路径参数说明
+		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("set.fields.processid"), 1, true);
 	}
-	ENDPOINT(API_M_DEL, "/set/delete-process-step", deletestepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-		API_HANDLER_RESP_VO(execDeleteStepSet(dto));
-	}
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/set/delete-process-step/{id}", deletestepSet, PATH(UInt64, id), execDeleteStepSet(id));
+
 	// 11 导出工序步骤
 	ENDPOINT_INFO(SetStepExport) {
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.export.summary1"));
@@ -173,13 +173,13 @@ public:
 	}
 	// 12 删除工序
 	ENDPOINT_INFO(DeleteSet) {
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.delete.summary2"));
-		API_DEF_ADD_AUTH();
-		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+		// 定义标题和返回类型以及授权支持
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("set.modify.summary3"), Uint64JsonVO::Wrapper);
+		// 定义其他路径参数说明
+		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("set.fields.processid"), 1, true);
 	}
-	ENDPOINT(API_M_DEL, "/set/delete-process", DeleteSet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-		API_HANDLER_RESP_VO(execDeleteSet(dto));
-	}
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/set/delete-set/{id}", DeleteSet, PATH(UInt64, id), execDeleteSet(id));
+
 private:
 	// 1 导出文件
 	StringJsonVO::Wrapper execProcessExport(const ProcessExportQuery::Wrapper& query);
@@ -200,11 +200,11 @@ private:
 	//9 修改工序步骤
 	Uint64JsonVO::Wrapper execModifyStepSet(const SetProListDTO::Wrapper& dto);
 	//10 删除工序步骤
-	Uint64JsonVO::Wrapper execDeleteStepSet(const SetProListDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execDeleteStepSet(const UInt64& id);
 	//11 导出工序步骤
 	StringJsonVO::Wrapper execExportStepSet(const SetStepExportQuery::Wrapper& query);
 	//12 删除工序
-	Uint64JsonVO::Wrapper execDeleteSet(const SetProAddTableDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execDeleteSet(const UInt64& id);
 };
 
 

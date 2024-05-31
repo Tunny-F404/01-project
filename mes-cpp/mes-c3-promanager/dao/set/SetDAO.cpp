@@ -74,7 +74,7 @@ std::list<ProProcessContentDO> SetDAO::selectById(const uint64_t& id)
 uint64_t SetDAO::insertstepSet(const ProProcessContentDO& iObj)
 {
 	string sql = "INSERT INTO `pro_process_content` (`process_id`,`order_num`,`content_text`, `device`, `material`,`doc_url`,`remark`) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
-	return sqlSession->executeInsert(sql, "%ull%d%s%s%s%s%s",iObj.getProcessId(),iObj.getOrderNum(),iObj.getContentText(),iObj.getDevice(),
+	return sqlSession->executeInsert(sql, "%ull%i%s%s%s%s%s",iObj.getProcessId(),iObj.getOrderNum(),iObj.getContentText(),iObj.getDevice(),
 		iObj.getMaterial(),iObj.getDocUrl(), iObj.getRemark());
 }
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SetController.h"
 #include "../../service/set/ProcessExportService.h"
+#include "../../service/set/ContentService.h"
 #include "../../service/set/SetService.h"
 #include "Macros.h"
 #include "ExcelComponent.h"
@@ -235,26 +236,96 @@ ProDetailJsonVO::Wrapper SetController::execQueryProDetail(const ProDetailQuery:
 	return jvo;
 	//return ProDetailJsonVO::Wrapper();
 }
-// 9 修改工序步骤
+//9 修改工序步骤
 Uint64JsonVO::Wrapper SetController::execModifyStepSet(const SetProListDTO::Wrapper& dto)
 {
 	auto jvo = Uint64JsonVO::createShared();
+	if (!dto->contentId || dto->contentId <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	ContentService service;
+	if (service.updateData(dto)) {
+		jvo->success(dto->contentId);
+	}
+	else
+	{
+		jvo->fail(dto->contentId);
+	}
 	return jvo;
 }
-// 10 删除工序步骤
-Uint64JsonVO::Wrapper SetController::execDeleteStepSet(const SetProListDTO::Wrapper& dto)
+//10 删除工序步骤
+Uint64JsonVO::Wrapper SetController::execDeleteStepSet(const UInt64& id)
 {
 	auto jvo = Uint64JsonVO::createShared();
+	if (!id || id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ContentService service;
+	// 执行数据删除
+	if (service.removeStep(id.getValue(0))) {
+		jvo->success(id);
+	}
+	else
+	{
+		jvo->fail(id);
+	}
+	// 响应结果
 	return jvo;
 }
 // 11 导出工序步骤
-StringJsonVO::Wrapper SetController::execExportStepSet(const SetStepExportQuery::Wrapper& dto)
+StringJsonVO::Wrapper SetController::execExportStepSet(const SetStepExportQuery::Wrapper& query)
 {
-	return StringJsonVO::Wrapper();
+	//// 定义返回数据对象
+	auto jvo = StringJsonVO::createShared();
+	//// 定义一个Service
+	//ContentService service;
+	//// 查询数据
+	//auto result = service.listAll(query);
+	//if (!result) {
+	//	jvo->init(String(-1), RS_PARAMS_INVALID);
+	//	return jvo;
+	//}
+
+	//ExcelComponent excelComponent;
+
+	//excelComponent.setColWidth(20.0); 
+	//excelComponent.setRowHeight(15.0); 
+
+	//std::vector<std::vector<std::string>> data;
+	//data.push_back({ "ContentId", "OrderNum", "ContentText", "Device", "Material", "DocUrl", "Remark" });
+	////向data中添加数据
+	//// 
+	//// 写入数据到 Excel 文件
+	//excelComponent.writeVectorToFile(filePath, "Steps", data);
+
+	//// 返回成功结果
+	//jvo->success(result->contentText);
+	return jvo;
 }
+
 // 12 删除工序
-Uint64JsonVO::Wrapper SetController::execDeleteSet(const SetProAddTableDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper SetController::execDeleteSet(const UInt64& id)
 {
+	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
+	if (!id || id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	ContentService service;
+	if (service.removeData(id.getValue(0))) {
+		jvo->success(id);
+	}
+	else
+	{
+		jvo->fail(id);
+	}
+	// 响应结果
 	return jvo;
 }

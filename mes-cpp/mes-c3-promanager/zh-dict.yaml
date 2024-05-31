@@ -92,6 +92,7 @@ set:
   summary: 修改工序
   summary1: 修改工序步骤
   summary2: 删除工序步骤
+  summary3: 删除工序
  addstep: 
   summary: 添加工序步骤
  export:

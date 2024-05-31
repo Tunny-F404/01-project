@@ -15,19 +15,14 @@ class SetStepExportQuery : public PageQuery
 {
 	DTO_INIT(SetStepExportQuery, PageQuery);
 	// 工序步骤ID
-	DTO_FIELD(String, SetStepCode);
-	DTO_FIELD_INFO(SetStepCode) {
+	DTO_FIELD(UInt64, ContentId);
+	DTO_FIELD_INFO(ContentId) {
 		info->description = ZH_WORDS_GETTER("setstep.field.code");
 	}
-	// 工序步骤名称
-	DTO_FIELD(String, SetStepName);
-	DTO_FIELD_INFO(SetStepName) {
+	// 工序步骤顺序
+	DTO_FIELD(UInt32, OrderNum);
+	DTO_FIELD_INFO(OrderNum) {
 		info->description = ZH_WORDS_GETTER("setstep.field.name");
-	}
-	// 是否启用
-	DTO_FIELD(String, enableFlag);
-	DTO_FIELD_INFO(enableFlag) {
-		info->description = ZH_WORDS_GETTER("setstep.field.flag");
 	}
 };
 
