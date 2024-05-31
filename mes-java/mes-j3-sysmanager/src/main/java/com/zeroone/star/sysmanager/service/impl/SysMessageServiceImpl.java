@@ -87,15 +87,15 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
             sysMessage.setRecipientNick(sysUser.getNickName());
 
             //查询发送人用户信息添加到数据库中(暂时没有登录所以token不存在)
-//            UserDTO currentUser = userHolder.getCurrentUser();
-//            Long id = Long.valueOf(currentUser.getId());
-//            String username = currentUser.getUsername();
-//            SysUser recipient = sysUserMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserId, id).select(SysUser::getNickName));
-//            String nickName = recipient.getNickName();
-//            sysMessage.setSenderId(id);
-//            sysMessage.setSenderName(username);
-//            sysMessage.setSenderNick(nickName);
-//            sysMessage.setCreateBy(nickName);
+            UserDTO currentUser = userHolder.getCurrentUser();
+            Long id = Long.valueOf(currentUser.getId());
+            String username = currentUser.getUsername();
+            SysUser recipient = sysUserMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserId, id).select(SysUser::getNickName));
+            String nickName = recipient.getNickName();
+            sysMessage.setSenderId(id);
+            sysMessage.setSenderName(username);
+            sysMessage.setSenderNick(nickName);
+            sysMessage.setCreateBy(nickName);
 
             //额外增加四条属性 id，状态,是否删除,创建时间
             //根据昵称查询用户对应信息
@@ -150,15 +150,15 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
             sysMessage.setRecipientNick(sysUser.getNickName());
 
             //查询发送人用户信息添加到数据库中
-//            UserDTO currentUser = userHolder.getCurrentUser();
-//            Long id = Long.valueOf(currentUser.getId());
-//            String username = currentUser.getUsername();
-//            SysUser sender = sysUserMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserId, id).select(SysUser::getNickName));
-//            String nickName = sender.getNickName();
-//            sysMessage.setSenderId(id);
-//            sysMessage.setSenderName(username);
-//            sysMessage.setSenderNick(nickName);
-//            sysMessage.setUpdateBy(nickName);
+            UserDTO currentUser = userHolder.getCurrentUser();
+            Long id = Long.valueOf(currentUser.getId());
+            String username = currentUser.getUsername();
+            SysUser sender = sysUserMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserId, id).select(SysUser::getNickName));
+            String nickName = sender.getNickName();
+            sysMessage.setSenderId(id);
+            sysMessage.setSenderName(username);
+            sysMessage.setSenderNick(nickName);
+            sysMessage.setUpdateBy(nickName);
 
             // 使用 LambdaUpdateWrapper 来构建更新条件
             LambdaUpdateWrapper<SysMessage> updateWrapper = new LambdaUpdateWrapper<>();
