@@ -11,9 +11,9 @@ class DetectionTemplateDAO : public BaseDAO
 {
 public:
 
-	 //通过ID删除数据
-	int deleteById(uint64_t id);
-	 //统计检测模板数据条数
+	// 通过ID删除检测模板
+	int deleteBydetectiontemplateId(uint64_t template_id);
+	// 统计检测模板数据条数
 	uint64_t count(const DetectionTemplateQuery::Wrapper& query);
 	 //检测模板列表函数, 分页查询数据
 	list<DetectionTemplateDO> selectTemplateListWithPage(const DetectionTemplateQuery::Wrapper& query);

@@ -4,10 +4,11 @@
 #include "../../domain/dto/detectiontemplate/DetectionTemplateDTO.h"
 #include "../../domain/do/DetectionTemplate/DetectionTemplateDO.h"
 
-bool DetectionTemplateService::removeData(uint64_t id)
+bool DetectionTemplateService::RemoveDetectionTemplateData(uint64_t template_id)
 {
 	DetectionTemplateDAO dao;
-	return dao.deleteById(id) == 1;
+	return dao.deleteBydetectiontemplateId(template_id) == 1;
+	return true;
 }
 
 DetectionTemplatePageDTO::Wrapper DetectionTemplateService::listAllTemplateList(const DetectionTemplateQuery::Wrapper& query) {

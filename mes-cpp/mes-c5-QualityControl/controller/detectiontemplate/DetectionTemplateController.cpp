@@ -24,12 +24,12 @@ Uint64JsonVO::Wrapper DetectionTemplateController::execModifyDetectionTemplate(c
 	return result;
 }
 
-Uint64JsonVO::Wrapper DetectionTemplateController::execRemoveSample(const UInt64& id)
+Uint64JsonVO::Wrapper DetectionTemplateController::execRemoveDetectionTemplate(const UInt64& template_id)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!id || id <= 0)
+	if (!template_id || template_id <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -37,12 +37,12 @@ Uint64JsonVO::Wrapper DetectionTemplateController::execRemoveSample(const UInt64
 	// 定义一个Service
 	DetectionTemplateService service;
 	// 执行数据删除
-	if (service.removeData(id.getValue(0))) {
-		jvo->success(id);
+	if (service.RemoveDetectionTemplateData(template_id.getValue(0))) {
+		jvo->success(template_id);
 	}
 	else
 	{
-		jvo->fail(id);
+		jvo->fail(template_id);
 	}
 	// 响应结果
 	return jvo;
