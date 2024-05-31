@@ -3,6 +3,7 @@ package com.zeroone.star.project.j1.orgstructure.user;
 import com.zeroone.star.project.j1.orgstructure.dto.PageDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.*;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
+import com.zeroone.star.project.j1.orgstructure.query.user.UserRoleQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public interface UserApis {
      */
     JsonVO<CompleteUserDTO> queryUser(UserDTO userDTO);
 
+
 	/**
 	 * 设置用户状态
 	 */
@@ -39,30 +41,31 @@ public interface UserApis {
 	public JsonVO resetUserPassword(Integer userId);
 
 
-/**
+    /**
      * 查询角色列表
      * @param userQuery
      * @return
      */
-    JsonVO<PageDTO<UserDTO>> queryRoleList(UserQuery userQuery);
+    JsonVO<PageDTO<SysRoleDTO>> queryRoleList(UserQuery userQuery);
     /**
      * 查询用户分配角色列表
-     * @param UserName
+     * @param userQuery
      * @return
      */
-    JsonVO<PageDTO<UserDTO>> queryUserRoleList(String UserName);
+
+    JsonVO<PageDTO<SysUserRoleDTO>> queryUserRoleList(UserRoleQuery userQuery);
     /**
      * 添加角色
-     * @param userQuery
+     * @param  userQuery
      * @return
      */
-    JsonVO<UserDTO> modifyAddRole(UserQuery userQuery);
+    JsonVO<Boolean> saveRole(UserRoleQuery userQuery);
     /**
      * 取消角色
-     * @param userQuery
+     * @param  userQuery
      * @return
      */
-    JsonVO<UserDTO> modifyDeleteRole(UserQuery userQuery);
+    JsonVO<Boolean> deleteRole(UserRoleQuery userQuery);
 
 
     /**

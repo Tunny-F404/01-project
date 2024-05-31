@@ -1,14 +1,13 @@
-package com.zeroone.star.orgstructure.service.serviceImpl;
+package com.zeroone.star.orgstructure.service.impl;
 
 import com.zeroone.star.orgstructure.mapper.UserMapper;
-import com.zeroone.star.orgstructure.service.Service;
+import com.zeroone.star.orgstructure.service.IService;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserStatusDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 
 @org.springframework.stereotype.Service
-public class ServiceImpl implements Service {
+public class ServiceImpl implements IService {
 	@Resource
 	private UserMapper userMapper;
 

@@ -2,7 +2,7 @@ package com.zeroone.star.orgstructure.service;
 
 import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserStatusDTO;
 
-public interface Service {
+public interface IService {
 	/**
 	 * 根据用户id设置用户状态
 	 * @param userIdStatus 封装了传递进来的用户id和用户状态

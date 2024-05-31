@@ -36,7 +36,7 @@ public class UserQueryServiceImpl implements IUserQueryService {
     @Autowired
     private PostMapper postMapper;
     @Autowired
-    private SysUserRoleMapper sysUserRoleMapper;
+    private SysUserRoleDOMapper sysUserRoleMapper;
     @Autowired
     private RoleMapper roleMapper;
 

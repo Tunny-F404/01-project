@@ -1,10 +1,10 @@
 package com.zeroone.star.orgstructure.controller;
 
-import com.zeroone.star.orgstructure.service.IUserQueryService;
-import com.zeroone.star.orgstructure.service.IUserService;
+import com.zeroone.star.orgstructure.service.*;
 import com.zeroone.star.project.j1.orgstructure.dto.PageDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.*;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
+import com.zeroone.star.project.j1.orgstructure.query.user.UserRoleQuery;
 import com.zeroone.star.project.j1.orgstructure.user.UserApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.seata.common.util.StringUtils;
@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -111,49 +112,65 @@ public class UserController implements UserApis {
 
 
 
-
+    @Resource
+    IService service;
 
     @PutMapping("setUserStatus")
     @ApiOperation("设置用户状态")
     @Override
-    public JsonVO setUserStatus(UpdateUserStatusDTO userDTO) {
-        return null;
+    public JsonVO setUserStatus(UpdateUserStatusDTO userIdStatus) {
+        int flag = service.UpdateUserStatus(userIdStatus);
+        if (flag == 1) {
+            return JsonVO.success("恭喜！设置用户状态成功！");
+        }
+        return JsonVO.fail("抱歉！设置用户状态失败！");
     }
-
-
-
     @PutMapping("resetUserPassword")
     @ApiOperation("重置用户密码")
     @Override
     public JsonVO resetUserPassword(Integer userId) {
-        return null;
+        int flag = service.UpdateUserPassword(userId);
+        if (flag == 1) {
+            return JsonVO.success("恭喜！重置用户密码成功！");
+        }
+        return JsonVO.fail("抱歉！重置用户密码失败！");
     }
+
+
+
+    @Resource
+    ISysRoleService sysRoleService;
+
 
     @GetMapping("query-role-table")
     @ApiOperation(value = "查询角色列表")
     @Override
-    public JsonVO<PageDTO<UserDTO>> queryRoleList(UserQuery userQuery) {
-        return null;
+    public JsonVO<PageDTO<SysRoleDTO>> queryRoleList(@Validated UserQuery userQuery){
+        return JsonVO.success(sysRoleService.queryRoleList(userQuery));
     }
+
+
+
+    @Resource
+    ISysUserRoleService sysUserRoleService;
+
 
     @GetMapping("query-user-role-table")
     @ApiOperation(value = "查询用户分配角色列表")
     @Override
-    public JsonVO<PageDTO<UserDTO>> queryUserRoleList(String UserName) {
-        return null;
+    public JsonVO<PageDTO<SysUserRoleDTO>> queryUserRoleList(@Validated UserRoleQuery userQuery) {
+        return JsonVO.success(sysUserRoleService.queryUserRoleList(userQuery));
     }
-
     @PutMapping("modify-add-role")
     @ApiOperation(value = "添加角色")
     @Override
-    public JsonVO<UserDTO> modifyAddRole(UserQuery userQuery) {
-        return null;
+    public JsonVO<Boolean> saveRole(@Validated UserRoleQuery userQuery) {
+        return JsonVO.success(sysUserRoleService.saveRole(userQuery));
     }
-
     @PutMapping("modify-delete-role")
     @ApiOperation(value = "取消角色")
     @Override
-    public JsonVO<UserDTO> modifyDeleteRole(UserQuery userQuery) {
-        return null;
+    public JsonVO<Boolean> deleteRole(@Validated UserRoleQuery userQuery) {
+        return JsonVO.success(sysUserRoleService.deleteRole(userQuery));
     }
 }
