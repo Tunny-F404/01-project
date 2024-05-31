@@ -1,7 +1,9 @@
 package com.zeroone.star.syshome.controller;
 
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
+import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j1.syshome.SysHomeApis;
-import com.zeroone.star.project.j1.syshome.dto.PageDTO;
 import com.zeroone.star.project.j1.syshome.dto.facility.FacilityDTO;
 import com.zeroone.star.project.j1.syshome.dto.plan.PlanDTO;
 import com.zeroone.star.project.j1.syshome.dto.production.ProductionDTO;
@@ -10,11 +12,10 @@ import com.zeroone.star.project.j1.syshome.dto.repertory.RepertoryDTO;
 import com.zeroone.star.project.j1.syshome.dto.toDoEvent.ToDoEventDTO;
 import com.zeroone.star.project.j1.syshome.dto.workshop.WorkshopDTO;
 import com.zeroone.star.project.j1.syshome.query.EPageQuery;
+import com.zeroone.star.project.query.PageQuery;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.syshome.service.IFacilityService;
-import com.zeroone.star.syshome.service.IProductionService;
-import com.zeroone.star.syshome.service.IQualityService;
-import com.zeroone.star.syshome.service.IRepertoryService;
+import com.zeroone.star.project.vo.ResultStatus;
+import com.zeroone.star.syshome.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -92,24 +93,45 @@ public class SysHomeController implements SysHomeApis {
 
 
 
+    @Resource
+    IMdWorkshopService iMdWorkshopService;
+
     @GetMapping("query-workshop")
     @ApiOperation(value = "查询车间展示信息")
     @Override
-    public JsonVO<List<WorkshopDTO>> queryWorkshopList() {
-        return null;
+    public JsonVO<List<WorkshopDTO>> queryWorkshop() {
+        return JsonVO.success(iMdWorkshopService.listWorkshop());
     }
 
+
+    @Resource
+    ICalTeamMemberService iCalTeamMemberService;
     @GetMapping("query-plan")
     @ApiOperation(value = "查询排班情况信息")
     @Override
-    public JsonVO<PageDTO<PlanDTO>> queryPlan(EPageQuery pageQuery) {
-        return null;
+    public JsonVO<PageDTO<PlanDTO>> queryPlan(PageQuery pageQuery) {
+        return JsonVO.success(iCalTeamMemberService.listPlan(pageQuery));
     }
 
+
+    @Resource
+    UserHolder userHolder;
+    @Resource
+    IDvRepairService iDvRepairService;
     @GetMapping("query-toDoEvent")
     @ApiOperation(value = "查询我的待办信息")
     @Override
-    public JsonVO<PageDTO<ToDoEventDTO>> queryToDoEvent(EPageQuery pageQuery) {
-        return null;
+    public JsonVO<PageDTO<ToDoEventDTO>> queryToDoEvent(PageQuery pageQuery) {
+        UserDTO currentUser;
+        try {
+            currentUser = userHolder.getCurrentUser();
+        } catch (Exception e) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), e.getMessage());
+        }
+        if (currentUser == null) {
+            return JsonVO.fail(null);
+        } else {
+            return JsonVO.success(iDvRepairService.selectToDoEvent(pageQuery, currentUser.getUsername()));
+        }
     }
 }

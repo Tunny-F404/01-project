@@ -10,10 +10,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>mes-j1-syshome</artifactId>
-
-
-
-
     <dependencies>
         <!-- spring web mvc -->
         <dependency>
@@ -65,17 +61,6 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-        </dependency>
-
-        <!-- openfeign -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <!-- seata -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
         </dependency>
     </dependencies>
     <build>

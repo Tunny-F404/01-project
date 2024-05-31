@@ -1,6 +1,6 @@
 package com.zeroone.star.project.j1.syshome;
 
-import com.zeroone.star.project.j1.syshome.dto.PageDTO;
+import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j1.syshome.dto.facility.FacilityDTO;
 import com.zeroone.star.project.j1.syshome.dto.plan.PlanDTO;
 import com.zeroone.star.project.j1.syshome.dto.production.ProductionDTO;
@@ -9,6 +9,7 @@ import com.zeroone.star.project.j1.syshome.dto.repertory.RepertoryDTO;
 import com.zeroone.star.project.j1.syshome.dto.toDoEvent.ToDoEventDTO;
 import com.zeroone.star.project.j1.syshome.dto.workshop.WorkshopDTO;
 import com.zeroone.star.project.j1.syshome.query.EPageQuery;
+import com.zeroone.star.project.query.PageQuery;
 import com.zeroone.star.project.vo.JsonVO;
 
 import java.util.List;
@@ -52,19 +53,19 @@ public interface SysHomeApis {
      * @param
      * @return 查询结果
      */
-    JsonVO<List<WorkshopDTO>> queryWorkshopList();
+    JsonVO<List<WorkshopDTO>> queryWorkshop();
 
     /**
      * 排班情况分页查询
      * @param
      * @return 查询结果
      */
-    JsonVO<PageDTO<PlanDTO>> queryPlan(EPageQuery pageQuery);
+    JsonVO<PageDTO<PlanDTO>> queryPlan(PageQuery pageQuery);
 
     /**
      * 我的待办分页查询
      * @param
      * @return 查询结果
      */
-    JsonVO<PageDTO<ToDoEventDTO>> queryToDoEvent(EPageQuery pageQuery);
+    JsonVO<PageDTO<ToDoEventDTO>> queryToDoEvent(PageQuery pageQuery);
 }
