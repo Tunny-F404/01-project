@@ -56,7 +56,7 @@ public class ShopSettingsController implements ShopSettingsApis {
     @Override
     @ApiOperation("更新车间")
     @PutMapping("/modify")
-    public JsonVO<Boolean> modifyWorkshop(ModifyShopSettingsDTO modifyShopSettingsDTO) {
+    public JsonVO<Boolean> modifyWorkshop(@RequestBody ModifyShopSettingsDTO modifyShopSettingsDTO) {
         MdWorkshop workshop = Converter.toModifyMdWorkshop(modifyShopSettingsDTO);
         boolean res = mdWorkshopService.updateById(workshop);
         return res ? JsonVO.success(res) : JsonVO.fail(null);
@@ -65,7 +65,7 @@ public class ShopSettingsController implements ShopSettingsApis {
     @Override
     @ApiOperation("添加车间")
     @PutMapping("/add")
-    public JsonVO<Boolean> addWorkshop(AddShopSettingsDTO addShopSettingsDTO) {
+    public JsonVO<Boolean> addWorkshop(@RequestBody AddShopSettingsDTO addShopSettingsDTO) {
         MdWorkshop workshop = Converter.toAddMdWorkshop(addShopSettingsDTO);
         boolean res = mdWorkshopService.save(workshop);
         return res ? JsonVO.success(res) : JsonVO.fail(null);
@@ -74,7 +74,7 @@ public class ShopSettingsController implements ShopSettingsApis {
     @Override
     @ApiOperation("删除车间（支持批量删除）")
     @DeleteMapping("/delete/{workshopIds}")
-    public JsonVO<Integer> removeWorkshop(List<Long> workshopIds) {
+    public JsonVO<Integer> removeWorkshop(@PathVariable List<Long> workshopIds) {
         int deleteRow = mdWorkshopService.removeWorkshop(workshopIds);
         //返回操作结果
         return deleteRow > 0 ? JsonVO.success(deleteRow) : JsonVO.fail(null);
