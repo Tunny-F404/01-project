@@ -78,9 +78,9 @@ public class TeamSettingsController implements TeamSettingsApis {
     }
 
     @ApiOperation(value = "导出班组")
-    @GetMapping("export-team")
+    @GetMapping(value = "export-team", produces = "application/octet-stream")
     @Override
     public ResponseEntity<byte[]> exportTeam(@Validated TeamQuery condition) {
-        return null;
+        return calTeamService.queryTeamListByExcel(condition);
     }
 }
