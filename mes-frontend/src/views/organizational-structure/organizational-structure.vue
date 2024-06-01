@@ -12,18 +12,18 @@
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" icon="el-icon-search" size="mini">搜索</el-button>
-                <el-button icon="el-icon-refresh" size="mini">重置</el-button>
+                <el-button type="primary"  size="mini">搜索</el-button>
+                <el-button  size="mini">重置</el-button>
             </el-form-item>
         </el-form>
 
         <!-- Action Buttons -->
         <el-row :gutter="10" class="mb8">
             <el-col :span="1.5">
-                <el-button type="primary" plain icon="el-icon-plus" size="mini">新增</el-button>
+                <el-button type="primary"  size="mini">新增</el-button>
             </el-col>
             <el-col :span="1.5">
-                <el-button type="info" plain icon="el-icon-sort" size="mini">展开/折叠</el-button>
+                <el-button type="info"  size="mini">展开/折叠</el-button>
             </el-col>
         </el-row>
 
@@ -96,132 +96,147 @@
 </template>
 
 
-<script>
+<script setup lang="ts">
+import { ref, reactive, computed, onMounted } from 'vue';
 
-export default {
-    name: "Dept",
-
-    data() {
-        return {
-            loading: false, // Set to false for static data
-            showSearch: true,
-            deptList: [
-                // Static data for testing
-                { deptId: 1, deptName: 'Research', children: [{ deptId: 2, deptName: 'Development' }] },
-                { deptId: 3, deptName: 'Sales', children: [{ deptId: 4, deptName: 'Marketing' }] }
-            ],
-            deptOptions: [
-                // Static data for department options
-                { deptId: 1, deptName: 'Headquarters', children: [] },
-                { deptId: 2, deptName: 'Operations', children: [] }
-            ],
-            title: "",
-            open: false,
-            isExpandAll: true,
-            refreshTable: true,
-            queryParams: {
-                deptName: undefined,
-                status: undefined
-            },
-            form: {
-                deptId: undefined,
-                parentId: undefined,
-                deptName: '',
-                orderNum: 0,
-                leader: '',
-                phone: '',
-                email: '',
-                status: '0'
-            },
-            rules: {
-                parentId: [
-                    { required: true, message: "上级部门不能为空", trigger: "blur" }
-                ],
-                deptName: [
-                    { required: true, message: "部门名称不能为空", trigger: "blur" }
-                ],
-                orderNum: [
-                    { required: true, message: "显示排序不能为空", trigger: "blur" }
-                ],
-                email: [
-                    {
-                        type: "email",
-                        message: "请输入正确的邮箱地址",
-                        trigger: ["blur", "change"]
-                    }
-                ],
-                phone: [
-                    {
-                        pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
-                        message: "请输入正确的手机号码",
-                        trigger: "blur"
-                    }
-                ]
-            }
-        };
-    },
-    methods: {
-        getList() {
-            // Static data, no loading state needed
-        },
-        normalizer(node) {
-            if (node.children && !node.children.length) {
-                delete node.children;
-            }
-            return {
-                id: node.deptId,
-                label: node.deptName,
-                children: node.children
-            };
-        },
-        cancel() {
-            this.open = false;
-            this.reset();
-        },
-        reset() {
-            this.form = {
-                deptId: undefined,
-                parentId: undefined,
-                deptName: '',
-                orderNum: 0,
-                leader: '',
-                phone: '',
-                email: '',
-                status: "0"
-            };
-        },
-        handleQuery() {
-            // Static data, no query logic needed
-        },
-        resetQuery() {
-            this.reset();
-        },
-        handleAdd(row) {
-            this.reset();
-            if (row !== undefined) {
-                this.form.parentId = row.deptId;
-            }
-            this.open = true;
-            this.title = "添加部门";
-        },
-        toggleExpandAll() {
-            this.isExpandAll = !this.isExpandAll;
-        },
-        handleUpdate(row) {
-            this.reset();
-            this.form = Object.assign({}, row);
-            this.open = true;
-            this.title = "修改部门";
-        },
-        submitForm() {
-            // Static data, no submission logic needed
-            this.open = false;
-        },
-        handleDelete(row) {
-            // Static data, no delete logic needed
-            console.log(`Deleted department: ${row.deptName}`);
+// 响应式状态
+const loading = ref(false);
+const showSearch = ref(true);
+const deptList = ref([
+    { deptId: 1, deptName: '研究部', children: [{ deptId: 2, deptName: '开发部' }] },
+    { deptId: 3, deptName: '销售部', children: [{ deptId: 4, deptName: '市场部' }] }
+]);
+const deptOptions = ref([
+    { deptId: 1, deptName: '总部', children: [] },
+    { deptId: 2, deptName: '运营部', children: [] }
+]);
+const title = ref("");
+const open = ref(false);
+const isExpandAll = ref(true);
+const refreshTable = ref(true);
+const queryParams = reactive({
+    deptName: undefined,
+    status: undefined
+});
+const form = reactive({
+    deptId: undefined,
+    parentId: undefined,
+    deptName: '',
+    orderNum: 0,
+    leader: '',
+    phone: '',
+    email: '',
+    status: '0'
+});
+const rules = reactive({
+    parentId: [
+        { required: true, message: "上级部门不能为空", trigger: "blur" }
+    ],
+    deptName: [
+        { required: true, message: "部门名称不能为空", trigger: "blur" }
+    ],
+    orderNum: [
+        { required: true, message: "显示排序不能为空", trigger: "blur" }
+    ],
+    email: [
+        {
+            type: "email",
+            message: "请输入正确的邮箱地址",
+            trigger: ["blur", "change"]
         }
+    ],
+    phone: [
+        {
+            pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
+            message: "请输入正确的手机号码",
+            trigger: "blur"
+        }
+    ]
+});
+
+// 方法定义
+function getList() {
+    // 这里可以添加获取列表的逻辑
+}
+
+function normalizer(node) {
+    if (node.children && !node.children.length) {
+        delete node.children;
     }
-};
+    return {
+        id: node.deptId,
+        label: node.deptName,
+        children: node.children
+    };
+}
+
+function cancel() {
+    open.value = false;
+    reset();
+}
+
+function reset() {
+    form.value = {
+        deptId: undefined,
+        parentId: undefined,
+        deptName: '',
+        orderNum: 0,
+        leader: '',
+        phone: '',
+        email: '',
+        status: "0"
+    };
+}
+
+function handleQuery() {
+    // 这里可以添加查询逻辑
+}
+
+function resetQuery() {
+    reset();
+}
+
+function handleAdd(row) {
+    reset();
+    if (row !== undefined) {
+        form.value.parentId = row.deptId;
+    }
+    open.value = true;
+    title.value = "添加部门";
+}
+
+function toggleExpandAll() {
+    isExpandAll.value = !isExpandAll.value;
+}
+
+function handleUpdate(row) {
+    reset();
+    form.value = Object.assign({}, row);
+    open.value = true;
+    title.value = "修改部门";
+}
+
+function submitForm() {
+    // 这里可以添加提交表单的逻辑
+    open.value = false;
+}
+
+function handleDelete(row) {
+    // 这里可以添加删除部门的逻辑
+    console.log(`删除部门: ${row.deptName}`);
+}
+
+// 生命周期钩子
+onMounted(() => {
+    // 组件挂载后的逻辑
+});
+
 </script>
 
+<style scoped lang="scss">
+.app-container{
+    background-color: aliceblue;
+        width: auto;
+        height: 400px;
+}
+</style>
