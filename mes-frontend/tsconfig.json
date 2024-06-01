@@ -4,7 +4,9 @@
 	https://juejin.cn/post/7043723576121229342
 */
 {
+	
 	"compilerOptions": {
+	
 		"baseUrl": ".",
 		"moduleResolution": "node",
 		"target": "esnext",
@@ -22,6 +24,21 @@
 			"element-plus/global",
 			"vite/client"
 		]
+
+		// "allowJs": true,但是报错
+		 /*
+		 [{
+	"resource": "/f:/f1-harryCong/zero-one-08mes/mes-frontend/tsconfig.json",
+	"owner": "typescript",
+	"severity": 8,
+	"message": "无法写入文件“f:/zero-one-08mes/mes-frontend/src/router/index.js”，因为它会覆盖输入文件。",
+	"source": "ts",
+	"startLineNumber": 1,
+	"startColumn": 1,
+	"endLineNumber": 1,
+	"endColumn": 2
+}]**/
+
 	},
 	/** https://www.typescriptlang.org/tsconfig#include */
 	"include": [
@@ -37,3 +54,4 @@
 	],
 	"exclude": ["node_modules", "dist"]
 }
+
