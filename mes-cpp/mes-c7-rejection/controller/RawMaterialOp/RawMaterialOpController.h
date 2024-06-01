@@ -37,13 +37,14 @@ public:
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("RawMaterialOp.field.id"), 1, true);
 	}
+
 	//定义删除单据接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/RawMaterialOp/{id}", removeRawMaterialOp, PATH(UInt64, id), execRemoveRawMaterialOp(id));
 
 
-	// 3.1 定义修改接口描述
+	// 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("RawMaterialOp.put.summary"), modifyRawMaterialOp, Uint64JsonVO::Wrapper);
-	// 3.2 定义修改接口处理
+	// 定义修改接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/RawMaterialOp/{oprator}", modifyRawMaterialOp, BODY_DTO(RawMaterialOpDTO::Wrapper, dto), execModifyRawMaterialOp(dto));
 
 
@@ -62,6 +63,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "order", ZH_WORDS_GETTER("RawMaterialOp.field.order"), "MO10023110", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "warehouse", ZH_WORDS_GETTER("RawMaterialOp.field.warehouse"), "N", false);
 	}
+
 	//定义查询接口处理
 	ENDPOINT(API_M_GET, "/RawMaterialOpQuery", queryRawMaterialOp, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) 
 	{
@@ -69,6 +71,8 @@ public:
 		API_HANDLER_QUERY_PARAM(userQuery, RawMaterialOpQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryRawMaterialOp(userQuery, authObject->getPayload()));
+		
+		
 	}
 
 
@@ -82,8 +86,8 @@ private:
 
 	// 3.3 修改生产退料单行数据
 	Uint64JsonVO::Wrapper execModifyRawMaterialOp(const RawMaterialOpDTO::Wrapper& dto);
-
-    RawMaterialOpJsonVO::Wrapper execQueryRawMaterialOp(const RawMaterialOpQuery::Wrapper& query, const PayloadDTO& payload);
+	//查询单据导出单据
+	RawMaterialOpPageJsonVO::Wrapper execQueryRawMaterialOp(const RawMaterialOpQuery::Wrapper& query, const PayloadDTO& payload);
 
 
 };
