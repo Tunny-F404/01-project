@@ -32,6 +32,8 @@ interface msMdWorkshopMapper{
      * @return  车间dto
      */
     ShopSettingsDTO mdWorkshopToShopSettingsDTO(MdWorkshop mdWorkshop);
+
+    MdWorkshop mdWorkshop(ShopSettingsDTO shopSettingsDTO);
 }
 
 @Service
@@ -78,5 +80,19 @@ public class MdWorkshopServiceImpl extends ServiceImpl<MdWorkshopMapper, MdWorks
         }
          //去重并返回车间名称列表
         return shopSettingNameList.stream().distinct().collect(Collectors.toList());
+    }
+
+    @Override
+    public int removeWorkshop(List<Long> workshopIds) {
+        int totalDeleted = 0;
+        for(Long workshopId : workshopIds){
+            int deleteRow = baseMapper.delete(new QueryWrapper<MdWorkshop>().eq("workshop_id", workshopId));
+            if(deleteRow < 1){
+                throw new RuntimeException("删除失败");
+            }
+            totalDeleted += deleteRow;
+        }
+        return totalDeleted;
+
     }
 }
