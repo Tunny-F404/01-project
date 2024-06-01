@@ -1,85 +1,104 @@
 <template>
     <div class="app-container">
         <!-- Search Form -->
-        <el-form size="small" inline>
+        <el-form :model="queryParams" ref="queryForm" size="small" inline>
             <el-form-item label="部门名称">
-                <el-input placeholder="请输入部门名称" clearable />
+                <el-input v-model="queryParams.deptName" placeholder="请输入部门名称" clearable />
             </el-form-item>
             <el-form-item label="状态">
-                <el-select placeholder="部门状态" clearable>
+                <el-select v-model="queryParams.status" placeholder="部门状态" clearable>
                     <el-option label="激活" value="active" />
                     <el-option label="禁用" value="disabled" />
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary"  size="mini">搜索</el-button>
-                <el-button  size="mini">重置</el-button>
+                <el-button type="primary" size="small" @click="handleQuery">搜索</el-button>
+                <el-button size="small" @click="resetQuery">重置</el-button>
             </el-form-item>
         </el-form>
 
         <!-- Action Buttons -->
         <el-row :gutter="10" class="mb8">
             <el-col :span="1.5">
-                <el-button type="primary"  size="mini">新增</el-button>
+                <el-button type="primary" size="small" @click="handleAdd">新增</el-button>
             </el-col>
             <el-col :span="1.5">
-                <el-button type="info"  size="mini">展开/折叠</el-button>
+                <el-button type="info" size="small" @click="toggleExpandAll">展开/折叠</el-button>
             </el-col>
         </el-row>
 
-        <!-- Department Table -->
-        <el-table :data="deptList" row-key="deptId" :default-expand-all="isExpandAll"
-            :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-            <el-table-column prop="deptName" label="部门名称" width="260" />
-            <el-table-column prop="orderNum" label="排序" width="200" />
-            <el-table-column prop="status" label="状态" width="100" />
-            <el-table-column label="创建时间" align="center" prop="createTime" width="200" />
-            <el-table-column label="操作" align="center" class-name="small-padding fixed-width" />
+        <!-- 部门表格 -->
+        <el-table v-if="refreshTable" v-loading="loading" :data="deptList" row-key="deptId"
+            :default-expand-all="isExpandAll" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
+            <el-table-column prop="deptName" label="部门名称" :show-overflow-tooltip="true" width="260"></el-table-column>
+            <el-table-column prop="orderNum" label="排序" width="200"></el-table-column>
+            <el-table-column prop="status" label="状态" width="100">
+                <template v-slot="{ row }">
+                    <el-tag :type="row.status === 'active' ? 'success' : 'danger'">
+                        {{ row.status === 'active' ? '激活' : '禁用' }}
+                    </el-tag>
+                </template>
+            </el-table-column>
+            <el-table-column label="创建时间" align="center" prop="createTime" width="200">
+                <template v-slot="{ row }">
+                    <span>{{ formatDate(row.createTime) }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+                <template v-slot="{ row }">
+                    <el-button link size="small" type="primary" icon="el-icon-edit"
+                        @click="handleUpdate(row)">修改</el-button>
+                    <el-button link size="small" type="primary" icon="el-icon-plus"
+                        @click="handleAdd(row)">新增</el-button>
+                    <el-button linksize="small" type="primary" icon="el-icon-delete"
+                        @click="handleDelete(row)">删除</el-button>
+                </template>
+            </el-table-column>
         </el-table>
 
         <!-- Add/Edit Department Dialog -->
-        <el-dialog title="部门详情" :visible.sync="open" width="600px">
+        <el-dialog :title="title" :visible.sync="open" width="600px">
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
                 <el-row>
                     <el-col :span="24">
-                        <el-form-item label="上级部门">
-                            <el-input placeholder="上级部门" />
+                        <el-form-item label="上级部门" prop="parentId">
+                            <el-input v-model="form.parentId" placeholder="上级部门" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
-                        <el-form-item label="部门名称">
-                            <el-input placeholder="请输入部门名称" />
+                        <el-form-item label="部门名称" prop="deptName">
+                            <el-input v-model="form.deptName" placeholder="请输入部门名称" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="显示排序">
-                            <el-input-number controls-position="right" :min="0" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="负责人">
-                            <el-input placeholder="请输入负责人" maxlength="20" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="联系电话">
-                            <el-input placeholder="请输入联系电话" maxlength="11" />
+                        <el-form-item label="显示排序" prop="orderNum">
+                            <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
-                        <el-form-item label="邮箱">
-                            <el-input placeholder="请输入邮箱" maxlength="50" />
+                        <el-form-item label="负责人" prop="leader">
+                            <el-input v-model="form.leader" placeholder="请输入负责人" maxlength="20" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="部门状态">
-                            <el-radio-group>
+                        <el-form-item label="联系电话" prop="phone">
+                            <el-input v-model="form.phone" placeholder="请输入联系电话" maxlength="11" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="邮箱" prop="email">
+                            <el-input v-model="form.email" placeholder="请输入邮箱" maxlength="50" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="部门状态" prop="status">
+                            <el-radio-group v-model="form.status">
                                 <el-radio label="active">激活</el-radio>
                                 <el-radio label="disabled">禁用</el-radio>
                             </el-radio-group>
@@ -88,8 +107,8 @@
                 </el-row>
             </el-form>
             <div class="dialog-footer">
-                <el-button type="primary">确 定</el-button>
-                <el-button>取 消</el-button>
+                <el-button type="primary" @click="submitForm">确 定</el-button>
+                <el-button @click="cancel">取 消</el-button>
             </div>
         </el-dialog>
     </div>
@@ -188,6 +207,7 @@ function reset() {
     };
 }
 
+
 function handleQuery() {
     // 这里可以添加查询逻辑
 }
@@ -224,6 +244,10 @@ function submitForm() {
 function handleDelete(row) {
     // 这里可以添加删除部门的逻辑
     console.log(`删除部门: ${row.deptName}`);
+}
+
+function formatDate(date) {
+    // 格式化日期的逻辑
 }
 
 // 生命周期钩子
