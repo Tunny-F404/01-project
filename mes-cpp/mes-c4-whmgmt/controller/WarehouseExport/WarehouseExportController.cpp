@@ -36,7 +36,6 @@ std::shared_ptr<oatpp::web::server::api::ApiController::OutgoingResponse> Wareho
 	// 判断是否读取成功
 	if (!fstring)
 	{
-		std::cerr << "Failed to open file: " << std::strerror(errno) << std::endl;
 		return createResponse(Status::CODE_404, "File Not Found");
 	}
 
