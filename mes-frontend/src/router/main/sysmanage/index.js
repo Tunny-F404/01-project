@@ -23,7 +23,7 @@ const routes = [
 	{
 		path: "/un-5",
 		name: "UN5",
-		component: () => import("@/views/status/404.vue"),
+		component: () => import("@/views/sample/basedata/supplier.vue"),
 	},
 	{
 		path: "/un-6",
