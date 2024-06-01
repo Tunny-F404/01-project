@@ -30,6 +30,8 @@ class ModifyListDTO : public oatpp::DTO
 {
 	DTO_INIT(ModifyListDTO, DTO);
 
+	//入库单id
+	API_DTO_FIELD_DEFAULT(UInt64, recptid, ZH_WORDS_GETTER("modifylist.field.recptid"));
 
 	//入库单编号
 	DTO_FIELD(String, recptcode);
@@ -43,13 +45,13 @@ class ModifyListDTO : public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, recptdate, ZH_WORDS_GETTER("modifylist.field.recptdate"));
 
 	//采购订单号
-	API_DTO_FIELD_DEFAULT(UInt64, pocode, ZH_WORDS_GETTER("modifylist.field.pocode"));
+	API_DTO_FIELD_DEFAULT(String, pocode, ZH_WORDS_GETTER("modifylist.field.pocode"));
 
 	//单据状态
 	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("modifylist.field.status"));
 
-	//供应商
-	API_DTO_FIELD_DEFAULT(String, vendorid, ZH_WORDS_GETTER("modifylist.field.vendorid"));
+	//供应商id
+	API_DTO_FIELD_DEFAULT(UInt64, vendorid, ZH_WORDS_GETTER("modifylist.field.vendorid"));
 
 
 	//入库仓库

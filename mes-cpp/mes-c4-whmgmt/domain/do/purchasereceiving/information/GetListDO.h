@@ -19,27 +19,30 @@
 */
 #ifndef _GETLIST_DO_
 #define _GETLIST_DO_
-#include "../DoInclude.h"
+#include "../../DoInclude.h"
 
 /**
  * 示例数据库实体类
  */
 class GetListDO
 {
-	// 领单编号
-	CC_SYNTHESIZE(int, id, Id);
-	// 姓名
-	CC_SYNTHESIZE(string, name, Name);
-	// 性别
-	CC_SYNTHESIZE(string, sex, Sex);
-	// 年龄
-	CC_SYNTHESIZE(int, age, Age);
+	//入库单编号
+	CC_SYNTHESIZE(string,recptcode,Recptcode);
+	// 入库单名称
+	CC_SYNTHESIZE(string, recptname, Recptname);
+	// 供应商名称
+	CC_SYNTHESIZE(string, vendorname, Vendorname);
+	// 入库日期
+	CC_SYNTHESIZE(string,recptdate, Recptdate);
+	//订单编号
+	CC_SYNTHESIZE(string, pocode, Pocode);
 public:
-	AddListDO() {
-		id = 0;
-		name = "";
-		sex = "";
-		age = -1;
+	GetListDO() {
+		recptcode = "";
+		recptname = "";
+		vendorname = "";
+		recptdate = "";
+		pocode = "";
 	}
 };
 

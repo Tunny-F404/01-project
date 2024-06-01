@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _MODIFYLIST_VO_
-#define _MODIFYLIST_VO_
+#ifndef _MODIFYLIST_DO_
+#define _MODIFYLIST_DO_
 #include "../DoInclude.h"
 
 /**
@@ -26,22 +26,37 @@
  */
 class ModifyListDO
 {
-	// 领单编号
-	CC_SYNTHESIZE(, id, Id);
-	// 姓名
-	CC_SYNTHESIZE(string, name, Name);
-	// 性别
-	CC_SYNTHESIZE(string, sex, Sex);
-	// 年龄
-	CC_SYNTHESIZE(int, age, Age);
+	// 入库单id 
+	CC_SYNTHESIZE(uint64_t, recptid, Recptid);
+	// 入库单编号
+	CC_SYNTHESIZE(string, recptcode, Recptcode);
+	// 入库单名称
+	CC_SYNTHESIZE(string, recptname, Recptname);
+	// 入库日期
+	CC_SYNTHESIZE(string, recptdate, Recptdate);
+	// 采购订单号
+	CC_SYNTHESIZE(string, pocode, Pocode);
+	//订单状态
+	CC_SYNTHESIZE(string, status, Status);
+	//供应商id
+	CC_SYNTHESIZE(int16_t, vendorid, Vendorid);
+	//入库仓库
+	CC_SYNTHESIZE(string, warehousename, Warehousename);
+	//备注
+	CC_SYNTHESIZE(string, remark, Remark);
+
 public:
 	ModifyListDO() {
-		id = 0;
-		name = "";
-		sex = "";
-		age = -1;
+		recptid = -1;
+		recptcode = "";
+		recptname = "";
+		recptdate = "";
+		pocode = "";
+		status = "PREPARE";
+		vendorid = -1;
+		warehousename = "";
+		remark = "";
 	}
 };
 
 #endif // !_SAMPLE_DO_
-
