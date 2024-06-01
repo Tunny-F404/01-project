@@ -1,7 +1,7 @@
-#pragma once
 
 #include "stdafx.h"
 #include "RemoveWorkReportController.h"
+#include <iostream>
 
 StringJsonVO::Wrapper RemoveWorkReportController::execRemoveWorkReport(const int recordId)
 {
