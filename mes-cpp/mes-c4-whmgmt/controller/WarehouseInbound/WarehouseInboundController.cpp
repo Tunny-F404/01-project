@@ -19,8 +19,30 @@
 
 #include "stdafx.h"
 #include "WarehouseInboundController.h"
+#include "../../service/WarehouseInbound/WarehouseInboundService.h"
 
-Uint64JsonVO::Wrapper WarehouseInboundController::execWarehouseInbound(const UInt64& recpt_id)
+Uint64JsonVO::Wrapper WarehouseInboundController::execWarehouseInbound(const WarehouseInboundDTO::Wrapper& dto)
 {
-    return {};
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->recpt_id || dto->recpt_id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	WarehouseInboundService service;
+	// 执行数据修改
+	if (service.WarehouseInbound(dto->recpt_id)) {
+		jvo->success(dto->recpt_id);
+		jvo->message = "Excute warehousing successfully!";
+	}
+	else
+	{
+		jvo->fail(dto->recpt_id);
+		jvo->message = "Error!";
+	}
+	// 响应结果
+	return jvo;
 }

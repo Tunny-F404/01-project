@@ -24,9 +24,10 @@
 #include "domain/vo/BaseJsonVO.h"
 #include "ApiHelper.h"
 #include "ServerInfo.h"
+#include "domain/dto/WarehouseDelete/WarehouseDeleteDTO.h"
 
 // 0 定义API控制器使用宏
-#include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
+#include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen oatpp::List<UInt64>
 
 /**
  * 删除单据（支持批量删除）
@@ -38,21 +39,15 @@ class WarehouseDeleteController : public oatpp::web::server::api::ApiController 
     // 3 定义接口
 public:
 
-    // 3.1 定义删除接口描述
-    ENDPOINT_INFO(removeWmItemRecpt) {
-        // 定义标题和返回类型以及授权支持
-        API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("wm_item_recpt.delete.summary"), Uint64JsonVO::Wrapper);
-        // 定义其他路径参数说明
-        API_DEF_ADD_PATH_PARAMS(oatpp::List<UInt64>, "recpt_id", ZH_WORDS_GETTER("wm_item_recpt.field.recpt_id"), oatpp::List<UInt64>({1,2,3}), true);
-    }
-    // 3.2 定义删除接口处理
-    API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/wm-item-recpt/{recpt_id}", removeWmItemRecpt, PATH(oatpp::List<UInt64>, recpt_id), execWarehouseDelete(recpt_id));
-
+    // 3.1 定义修改接口描述，审批通过
+    API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("wm_item_recpt.delete.summary"), removeWmItemRecpt, Uint64JsonVO::Wrapper);
+    // 3.2 定义修改接口处理
+    API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/wm-item-recpt/{recpt_id}", removeWmItemRecpt, BODY_DTO(WarehouseDeleteDTO::Wrapper, dto), execWarehouseDelete(dto));
 
 private:
 
     // 3.3 演示删除数据
-    Uint64JsonVO::Wrapper execWarehouseDelete(const oatpp::List<UInt64>& recpt_id);
+    Uint64JsonVO::Wrapper execWarehouseDelete(const WarehouseDeleteDTO::Wrapper& dto);
 };
 
 // 0 取消API控制器使用宏

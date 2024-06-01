@@ -24,7 +24,7 @@
 #include "domain/vo/BaseJsonVO.h"
 #include "ApiHelper.h"
 #include "ServerInfo.h"
-//#include "domain/dto/WarehouseInbound/WarehouseInboundDTO.h"
+#include "domain/dto/WarehouseInbound/WarehouseInboundDTO.h"
 //#include "domain/vo/WarehouseInbound/WarehouseInboundVO.h"
 
 // 0 定义API控制器使用宏
@@ -41,19 +41,15 @@ class WarehouseInboundController : public oatpp::web::server::api::ApiController
 
 public:
 
-    // 3.1 定义修改接口描述
-    ENDPOINT_INFO(modifyWmItemRecpt) {
-        // 定义标题和返回类型以及授权支持
-        API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("wm_item_recpt.put.summary"), Uint64JsonVO::Wrapper);
-        // 定义其他路径参数说明
-        API_DEF_ADD_PATH_PARAMS(UInt64, "recpt_id", ZH_WORDS_GETTER("wm_item_recpt.field.recpt_id"), 1, true);
-    }
+    // 3.1 定义修改接口描述，审批通过
+    API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("wm_item_recpt.put.summary"), modifyWmItemRecpt, Uint64JsonVO::Wrapper);
     // 3.2 定义修改接口处理
-    API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/wm-item-recpt", modifyWmItemRecpt, PATH(UInt64, recpt_id), execWarehouseInbound(recpt_id));
+    API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/wm-item-recpt/", modifyWmItemRecpt, BODY_DTO(WarehouseInboundDTO::Wrapper, dto), execWarehouseInbound(dto));
+
 
 private:
     // 3.3 演示修改数据
-    Uint64JsonVO::Wrapper execWarehouseInbound(const UInt64& recpt_id);
+    Uint64JsonVO::Wrapper execWarehouseInbound(const WarehouseInboundDTO::Wrapper& recpt_id);
 };
 
 // 0 取消API控制器使用宏

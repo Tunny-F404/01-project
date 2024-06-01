@@ -19,8 +19,30 @@
 
 #include "stdafx.h"
 #include "WarehouseDeleteController.h"
+#include "../../service/WarehouseDelete/WarehouseDeleteService.h"
 
-Uint64JsonVO::Wrapper WarehouseDeleteController::execWarehouseDelete(const oatpp::List<UInt64>& recpt_id)
+Uint64JsonVO::Wrapper WarehouseDeleteController::execWarehouseDelete(const WarehouseDeleteDTO::Wrapper& dto)
 {
-    return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (dto->recpt_id->empty())
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	WarehouseDeleteService service;
+	// 执行数据修改
+	if (service.WarehouseDelete(dto)) {
+		jvo->success(UInt64(1));
+		jvo->message = "The file was deleted successfully!";
+	}
+	else
+	{
+		jvo->fail(UInt64(-1));
+		jvo->message = "Error!";
+	}
+	// 响应结果
+	return jvo;
 }

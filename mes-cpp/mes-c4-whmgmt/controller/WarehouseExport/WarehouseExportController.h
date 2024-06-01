@@ -24,8 +24,6 @@
 #include "domain/vo/BaseJsonVO.h"
 #include "ApiHelper.h"
 #include "ServerInfo.h"
-#include "domain/query/WarehouseExport/WarehouseExportQuery.h"
-#include "domain/vo/WarehouseExport/WarehouseExportVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -41,21 +39,15 @@ class WarehouseExportController : public oatpp::web::server::api::ApiController 
 public:
 
     // 3.1 定义查询接口描述
-    ENDPOINT_INFO(exportWarehouse) {
-        API_DEF_ADD_COMMON(ZH_WORDS_GETTER("wm_item_recpt.export.summary"), Void);
-        // 定义导出文件名参数描述
-        API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("wm_item_recpt.field.filename"), "test.xlsx", true);
-
-    }
-
+    API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("wm_item_recpt.export.summary"), exportWarehouse, Void);
     // 3.2 定义查询接口处理
-    ENDPOINT(API_M_GET, "/wm-item-recpt/export", exportWarehouse, QUERY(String, filename)) {
-        return execWarehouseExport(filename);
+    ENDPOINT(API_M_GET, "/wm-item-recpt", exportWarehouse, API_HANDLER_AUTH_PARAME) {
+        return execWarehouseExport();
     }
 
 private:
     // 3.3 演示分页查询数据
-     std::shared_ptr<OutgoingResponse> execWarehouseExport(const String& filename);
+     std::shared_ptr<OutgoingResponse> execWarehouseExport();
 };
 
 // 0 取消API控制器使用宏

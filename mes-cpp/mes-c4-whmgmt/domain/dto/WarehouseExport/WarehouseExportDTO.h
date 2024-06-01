@@ -131,14 +131,5 @@ class WarehouseExportDTO : public oatpp::DTO
         info->description = ZH_WORDS_GETTER("wm_item_recpt.field.status");
     }
 };
-
-/**
- * 物料入库单分页传输对象
- */
-class WarehouseExportPageDTO : public PageDTO<WarehouseExportDTO::Wrapper>
-{
-    DTO_INIT(WarehouseExportPageDTO, PageDTO<WarehouseExportDTO::Wrapper>);
-};
-
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_WAREHOUSING_EXPORT_DTO_

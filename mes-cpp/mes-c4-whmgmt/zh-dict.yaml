@@ -55,6 +55,7 @@ wm_item_recpt:
     summary: 删除单据（支持批量删除）
   export:
     summary: 导出单据
+    sheet: 物料入库单数据
   field:
     recpt_id: 入库单编号
     recpt_code: 入库单编号
@@ -79,3 +80,4 @@ wm_item_recpt:
     status: 单据状态
     filename: 导出文件名称
     format: 导出格式
+    update_time: 更新时间
