@@ -57,7 +57,7 @@
 					<el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
 						<el-tab-pane label="基本资料" name="first">
 							<!-- 基本资料表单 -->
-							<el-form ref="ruleFormRef" :model="infoform" :rules="inforules" label-width="80px"
+							<el-form ref="infoRulesRef" :model="infoform" :rules="inforules" label-width="80px"
 								status-icon>
 								<el-form-item label="用户名称" prop="nickName">
 									<el-input v-model="infoform.nickName"></el-input>
@@ -92,7 +92,7 @@
 									</el-radio-group>
 								</el-form-item>
 								<el-form-item>
-									<el-button type="primary" @click="onSubmit">保存</el-button>
+									<el-button type="primary" @click="onInfoSubmit">保存</el-button>
 									<el-button type="danger">关闭</el-button>
 								</el-form-item>
 							</el-form>
@@ -100,7 +100,7 @@
 
 						<el-tab-pane label="修改密码" name="second">
 							<!-- 修改密码表单 -->
-							<el-form :model="passwd" label-width="80px" status-icon>
+							<el-form ref="passRulesRef" :model="passwd" label-width="80px" status-icon>
 								<el-form-item label="旧密码" prop="old">
 									<el-input v-model="passwd.old" show-password></el-input>
 								</el-form-item>
@@ -111,7 +111,7 @@
 									<el-input v-model="passwd.confirm" show-password></el-input>
 								</el-form-item>
 								<el-form-item>
-									<el-button type="primary" @click="onSubmit">保存</el-button>
+									<el-button type="primary" @click="onPassSubmit">保存</el-button>
 									<el-button type="danger">关闭</el-button>
 								</el-form-item>
 							</el-form>
@@ -134,14 +134,21 @@ const handleClick = (tab, event) => {
 
 //基本资料 表单
 const infoform = ref({
-	nickName: '',
-	phoneNum: '',
+	nickName: 'usertester',
+	phoneNum: '13312341234',
 	phoneCode: '',
-	email: '',
+	email: 'user@example.com',
 	emailCode: '',
 	gender: '男'
 })
-// 手机验证规则
+//修改密码 表单
+const passwd = ref({
+	old: '',
+	new: '',
+	confirm: ''
+})
+
+// 手机号码 自定义验证规则
 const phoneCheck = (rule, value, callback) => {
 	const phone_regex = /^1[3|4|5|6|7|8|9]\d{9}$/;
 	if (value != '') {
@@ -152,66 +159,75 @@ const phoneCheck = (rule, value, callback) => {
 		}
 	}
 }
-
-// 邮箱 自定义验证规则
-const emailCheck = (rule, value, callback) => {
-	const email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+// 密码 自定义验证规则
+const passCheck = (rule, value, callback) => {
+	const phone_regex = /^1[3|4|5|6|7|8|9]\d{9}$/;
 	if (value != '') {
-		if (!email_regex.test(value)) {
-			callback(new Error('邮箱不正确！'))
+		if (!phone_regex.test(value)) {
+			callback(new Error('手机号码不正确！'))
 		} else {
 			callback()
 		}
 	}
 }
 
+
 //基本资料表单 验证规则
 const inforules = reactive({
 	nickName: [
-		{ required: true, message: '请输入用户名', trigger: 'blur' },
+		{ required: true, message: '请输入用户名', trigger: 'change' },
 		{ min: 1, max: 20, message: '长度 1 至 20', trigger: 'change' }
 	],
 	phoneNum: [
-		{ required: true, message: '请输入手机号', trigger: 'blur' },
-		{ validator: phoneCheck, trigger: 'blur' }
+		{ required: true, message: '请输入手机号', trigger: 'change' },
+		{ validator: phoneCheck, trigger: 'change' }
 	],
 	email: [
-		{ validator: emailCheck, trigger: 'blur' }
+		{ required: true, message: '请输入邮箱', trigger: 'change' },
+		{ type: 'email', message: '邮箱不正确', trigger: 'change' }
 	],
 	gender: [
-		{ type: 'date', required: true, message: '请选择你的性别', trigger: 'change' }
+		{ required: true, message: '请选择你的性别', trigger: 'change' }
 	]
 })
 
-//修改密码 表单
-const passwd = ref({
-	old: '',
-	new: '',
-	confirm: ''
-})
+
 
 
 //密码表单 验证规则
 const passwdrules = reactive({
 	old: [
-		{}
+		{ validator: passcheck, trigger: 'change' }
 	],
 	new: [
 		{ min: 11, message: '请输入正确的电话号码', trigger: 'change' }
 	],
 	confirm: [
-		{ required: true, message: '请输入邮箱', trigger: 'change' },
+		{ required: true, message: '请输入邮箱', trigger: 'change' }
 	]
 })
 
+const infoRulesRef = ref('')
+const passRulesRef = ref('')
 
-
-// 表单校验
-const onSubmit = async (formEl) => {
+// 基本资料表单 校验完成发送
+const onInfoSubmit = async (formEl) => {
 	if (!formEl) return
-	formEl.validate((valid, fields) => {
+	infoRulesRef.value.validate((valid, fields) => {
 		if (valid) {
-			console.log('submit!', fields)
+			console.log('info submit!', fields)
+		} else {
+			console.log('error submit!', fields)
+		}
+	})
+}
+
+// 修改密码表单 校验完成发送
+const onPassSubmit = async (formEl) => {
+	if (!formEl) return
+	passRulesRef.value.validate((valid, fields) => {
+		if (valid) {
+			console.log('pass submit!', fields)
 		} else {
 			console.log('error submit!', fields)
 		}
