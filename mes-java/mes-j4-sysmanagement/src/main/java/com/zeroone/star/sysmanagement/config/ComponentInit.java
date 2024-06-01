@@ -17,7 +17,8 @@ import org.springframework.context.annotation.Configuration;
 //        "com.zeroone.star.project.components.jwt",
 //        "com.zeroone.star.project.components.user"
         "com.zeroone.star.project.components.easyexcel",
-        "com.zeroone.star.project.components.fastdfs"
+        "com.zeroone.star.project.components.fastdfs",
+        "com.zeroone.star.project.sysmanage.elk"
 })
 public class ComponentInit {
 }

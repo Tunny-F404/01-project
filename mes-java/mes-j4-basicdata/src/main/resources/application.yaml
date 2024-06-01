@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: ${sn.basicdata}
+logstash:
+  host: 47.113.227.111
 #  cloud:
 #    sentinel:
 #      transport:

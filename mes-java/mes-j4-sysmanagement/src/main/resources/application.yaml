@@ -4,7 +4,8 @@ server:
 spring:
   application:
     name: ${sn.sysmanagement}
-
+logstash:
+  host: 47.113.227.111
 #  cloud:
 #    sentinel:
 #      transport:

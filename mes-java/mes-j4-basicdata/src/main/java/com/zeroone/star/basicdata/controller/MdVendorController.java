@@ -11,6 +11,7 @@ import com.zeroone.star.project.j4.basicdata.SupplierApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ import java.util.List;
 @Api(tags = "供应商相关操作")
 @RequestMapping("/basicdata/md-vendor")
 @Validated
+@Slf4j
 public class MdVendorController {
 
     @Resource
@@ -74,6 +76,7 @@ public class MdVendorController {
         LambdaQueryWrapper<MdVendor> lqw = new LambdaQueryWrapper<>();
         lqw.orderByAsc(MdVendor::getVendorId);
         iMdVendorService.page(pageInfo, lqw);
+        log.debug("供应商分页查询成功");
         return JsonVO.success(pageInfo);
     }
 
