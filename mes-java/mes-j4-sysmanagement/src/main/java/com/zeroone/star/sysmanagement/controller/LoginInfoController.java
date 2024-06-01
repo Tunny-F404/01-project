@@ -4,6 +4,8 @@ package com.zeroone.star.sysmanagement.controller;
 import cn.hutool.core.date.DateTime;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.j4.sysmanagement.logmanagement.LoginLogApis;
+import com.zeroone.star.project.sysmanage.operlog.annotation.Log;
+import com.zeroone.star.project.sysmanage.operlog.constant.BusinessType;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanagement.entity.LoginInfo;
 import com.zeroone.star.sysmanagement.service.LoginInfoService;
@@ -45,6 +47,7 @@ public class LoginInfoController {
      */
     @ApiOperation("删除登录日志")
     @DeleteMapping("remove-LoginLog/{ids}")
+    @Log(title = "登录日志", businessType = BusinessType.DELETE)
     public JsonVO<Long> removeLoginLog(@PathVariable List<Long> ids) {
         Long result = loginInfoService.removeLoginInfo(ids);
         if (result > 0)
@@ -58,6 +61,7 @@ public class LoginInfoController {
      */
     @ApiOperation("清空登录日志")
     @DeleteMapping("clean-LoginLog")
+    @Log(title = "登录日志", businessType = BusinessType.CLEAN)
     public JsonVO<String> clearLoginLog() {
         loginInfoService.clearLoginInfo();
         return JsonVO.success("清空成功");

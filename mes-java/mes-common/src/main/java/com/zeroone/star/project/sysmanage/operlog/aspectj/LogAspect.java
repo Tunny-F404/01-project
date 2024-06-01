@@ -1,14 +1,16 @@
-package com.zeroone.star.sysmanagement.aspectj;
+package com.zeroone.star.project.sysmanage.operlog.aspectj;
 
 import com.alibaba.fastjson.JSON;
-import com.zeroone.star.sysmanagement.annotation.Log;
-import com.zeroone.star.sysmanagement.config.AsyncManager;
-import com.zeroone.star.sysmanagement.constant.BusinessStatus;
-import com.zeroone.star.sysmanagement.entity.SysOperLog;
-import com.zeroone.star.sysmanagement.factory.AsyncFactory;
-import com.zeroone.star.sysmanagement.utils.IpUtils;
-import com.zeroone.star.sysmanagement.utils.ServletUtils;
-import com.zeroone.star.sysmanagement.utils.StringUtils;
+
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
+import com.zeroone.star.project.sysmanage.operlog.annotation.Log;
+import com.zeroone.star.project.sysmanage.operlog.constant.BusinessStatus;
+import com.zeroone.star.project.sysmanage.operlog.entity.SysOperLog;
+import com.zeroone.star.project.sysmanage.operlog.factory.AsyncFactory;
+import com.zeroone.star.project.sysmanage.operlog.utils.IpUtils;
+import com.zeroone.star.project.sysmanage.operlog.utils.ServletUtils;
+import com.zeroone.star.project.sysmanage.operlog.utils.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -18,9 +20,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.HandlerMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
@@ -35,6 +40,9 @@ import java.util.Map;
 public class LogAspect
 {
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
+
+    @Resource
+    UserHolder  userHolder;
 
     /**
      * 处理完请求后执行
@@ -63,8 +71,12 @@ public class LogAspect
     {
         try
         {
-            // todo:获取当前的用户
-//            LoginUser loginUser = SecurityUtils.getLoginUser();
+            ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            HttpServletRequest request = servletRequestAttributes.getRequest();
+            UserDTO loginUser = null;
+            if (request.getHeader("Authorization") != null){
+                loginUser = userHolder.getCurrentUser();
+            }
             // *========数据库日志=========*//
             SysOperLog operLog = new SysOperLog();
             operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
@@ -72,10 +84,10 @@ public class LogAspect
             String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
             operLog.setOperIp(ip);
             operLog.setOperUrl(ServletUtils.getRequest().getRequestURI());
-//            if (loginUser != null)
-//            {
-//                operLog.setOperName(loginUser.getUsername());
-//            }
+            if (loginUser != null)
+            {
+                operLog.setOperName(loginUser.getUsername());
+            }
 
             if (e != null)
             {

@@ -8,6 +8,8 @@ import com.zeroone.star.project.components.fastdfs.FastDfsClientComponent;
 import com.zeroone.star.project.components.fastdfs.FastDfsFileInfo;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.query.j4.sysmanagement.logmanagement.OperationLog.OperationLogQuery;
+import com.zeroone.star.project.sysmanage.operlog.annotation.Log;
+import com.zeroone.star.project.sysmanage.operlog.constant.BusinessType;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.j4.sysmanagement.logmanagement.OperationLog.OperationLogVO;
 import com.zeroone.star.sysmanagement.entity.SysOperLog;
@@ -75,6 +77,7 @@ public class SysOperLogController {
      */
     @ApiOperation(value = "删除日志")
     @DeleteMapping("/remove-operlog/{operIds}")
+    @Log(title = "操作日志", businessType = BusinessType.DELETE)
     public JsonVO<String> removeOperLog(@PathVariable List<Long> operIds) {
         Boolean result = sysOperLogService.removeByIds(operIds);
         if (!result) {
@@ -91,6 +94,7 @@ public class SysOperLogController {
      */
     @ApiOperation(value = "清空日志")
     @DeleteMapping("/clean-operlog")
+    @Log(title = "操作日志", businessType = BusinessType.CLEAN)
     public JsonVO<String> removeAllOperLog() {
         sysOperLogService.removeAllOperLog();
         return JsonVO.success(CLEAR_SUCCESS_MESSAGE);

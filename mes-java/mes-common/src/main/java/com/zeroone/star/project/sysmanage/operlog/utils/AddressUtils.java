@@ -1,7 +1,7 @@
-package com.zeroone.star.sysmanagement.utils;
+package com.zeroone.star.project.sysmanage.operlog.utils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zeroone.star.sysmanagement.constant.Constants;
+import com.zeroone.star.project.sysmanage.operlog.constant.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

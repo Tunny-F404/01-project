@@ -1,11 +1,11 @@
-package com.zeroone.star.sysmanagement.config;
+package com.zeroone.star.project.sysmanage.operlog.aspectj;
 
-import com.zeroone.star.sysmanagement.utils.Threads;
+
+import com.zeroone.star.project.sysmanage.operlog.utils.Threads;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;

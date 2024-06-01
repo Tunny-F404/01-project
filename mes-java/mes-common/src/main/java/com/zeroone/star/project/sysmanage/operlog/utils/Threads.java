@@ -1,4 +1,4 @@
-package com.zeroone.star.sysmanagement.utils;
+package com.zeroone.star.project.sysmanage.operlog.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

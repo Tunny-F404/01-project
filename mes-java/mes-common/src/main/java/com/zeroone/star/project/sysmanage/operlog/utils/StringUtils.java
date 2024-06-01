@@ -1,7 +1,7 @@
-package com.zeroone.star.sysmanagement.utils;
+package com.zeroone.star.project.sysmanage.operlog.utils;
 
 import cn.hutool.core.text.StrFormatter;
-import com.zeroone.star.sysmanagement.constant.Constants;
+import com.zeroone.star.project.sysmanage.operlog.constant.Constants;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.*;

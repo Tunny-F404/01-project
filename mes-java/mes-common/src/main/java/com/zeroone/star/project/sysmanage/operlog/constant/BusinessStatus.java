@@ -1,4 +1,4 @@
-package com.zeroone.star.sysmanagement.constant;
+package com.zeroone.star.project.sysmanage.operlog.constant;
 
 /**
  * 操作状态

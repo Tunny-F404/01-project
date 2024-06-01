@@ -5,6 +5,8 @@ import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.j4.sysmanagement.sysAutoCodePart.SysAutoCodePartDTO;
 import com.zeroone.star.project.j4.sysmanagement.sysAutoCodePart.sysAutoCodePartApis;
 import com.zeroone.star.project.query.j4.sysmanagement.sysAutoCodePart.sysAutoCodePartQuery;
+import com.zeroone.star.project.sysmanage.operlog.annotation.Log;
+import com.zeroone.star.project.sysmanage.operlog.constant.BusinessType;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanagement.service.ISysAutoCodePartService;
 import io.swagger.annotations.Api;
@@ -38,6 +40,7 @@ public class SysAutoCodePartController implements sysAutoCodePartApis {
     @Override
     @ApiOperation("添加编码生成规则组成表")
     @PostMapping("/add-code-rule-part")
+    @Log(title = "规则组成表", businessType = BusinessType.INSERT)
     public JsonVO addCodeRulePart(@RequestBody SysAutoCodePartDTO sysAutoCodePartDTO) {
         log.info("添加编码生成规则组成表,{}",sysAutoCodePartDTO);
         iSysAutoCodePartService.addCodeRulePart(sysAutoCodePartDTO);
@@ -52,6 +55,7 @@ public class SysAutoCodePartController implements sysAutoCodePartApis {
     @Override
     @ApiOperation("修改编码生成规则组成表")
     @PutMapping("/modify-code-rule-part")
+    @Log(title = "规则组成表", businessType = BusinessType.UPDATE)
     public JsonVO modifyCodeRulePart(SysAutoCodePartDTO sysAutoCodePartDTO) {
         log.info("修改编码生成规则组成表,{}",sysAutoCodePartDTO);
         iSysAutoCodePartService.modifyCodeRulePart(sysAutoCodePartDTO);
@@ -66,6 +70,7 @@ public class SysAutoCodePartController implements sysAutoCodePartApis {
     @Override
     @ApiOperation("删除编码生成规则组成表")
     @DeleteMapping("/remove-code-rule-part/{partIds}")
+    @Log(title = "规则组成表", businessType = BusinessType.DELETE)
     public JsonVO removeCodeRulePart(@PathVariable List<String> partIds) {
         log.info("删除编码生成规则组成表,{}",partIds);
         iSysAutoCodePartService.removeCodeRulePart(partIds);

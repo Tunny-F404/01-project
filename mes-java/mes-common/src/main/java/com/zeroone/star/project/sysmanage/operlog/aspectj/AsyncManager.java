@@ -1,7 +1,6 @@
-package com.zeroone.star.sysmanagement.config;
+package com.zeroone.star.project.sysmanage.operlog.aspectj;
 
-import com.zeroone.star.sysmanagement.utils.SpringUtils;
-import com.zeroone.star.sysmanagement.utils.Threads;
+import com.zeroone.star.project.sysmanage.operlog.utils.Threads;
 
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;

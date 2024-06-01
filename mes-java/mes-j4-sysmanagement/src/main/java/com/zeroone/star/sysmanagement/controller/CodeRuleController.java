@@ -6,6 +6,8 @@ import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.j4.sysmanagement.coderule.CodeRuleDTO;
 import com.zeroone.star.project.j4.sysmanagement.coderule.CodeRuleApis;
 import com.zeroone.star.project.query.j4.sysmanagement.coderule.CodeRuleQuery;
+import com.zeroone.star.project.sysmanage.operlog.annotation.Log;
+import com.zeroone.star.project.sysmanage.operlog.constant.BusinessType;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.sysmanagement.entity.CodeRule;
 import com.zeroone.star.sysmanagement.mapper.MsCodeRuleMapper;
@@ -43,6 +45,7 @@ public class CodeRuleController implements CodeRuleApis {
     @DeleteMapping("/remove-code-rule/{ruleIds}")
     @ApiOperation("删除编码规则")
     @Override
+    @Log(title = "编码规则", businessType = BusinessType.DELETE)
     public JsonVO removeCodeRule(@PathVariable List<String> ruleIds) {
         log.info("删除编码规则,{}",ruleIds);
         return iCodeRuleService.removeCodeRule(ruleIds);
@@ -86,6 +89,7 @@ public class CodeRuleController implements CodeRuleApis {
     @PostMapping("/add-code-rule")
     @ApiOperation("新增编码规则")
     @Override
+    @Log(title = "编码规则", businessType = BusinessType.INSERT)
     public JsonVO addCodeRule(@RequestBody CodeRuleDTO CodeRuleDTO) {
         log.info("新增编码规则,{}",CodeRuleDTO);
         iCodeRuleService.saveCodeRule(CodeRuleDTO);
@@ -100,6 +104,7 @@ public class CodeRuleController implements CodeRuleApis {
     @PutMapping("/modify-code-rule")
     @ApiOperation("修改编码规则")
     @Override
+    @Log(title = "编码规则", businessType = BusinessType.UPDATE)
     public JsonVO modifyCodeRule(CodeRuleDTO CodeRuleDTO) {
         log.info("修改编码规则,{}",CodeRuleDTO);
         iCodeRuleService.updateCodeRule(CodeRuleDTO);

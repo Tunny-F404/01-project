@@ -16,6 +16,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
+@MapperScan(value = {"com.zeroone.star.project.sysmanage.operlog.mapper","com.zeroone.star.sysmanagement.mapper"})
 public class SysManagementApplication {
 
     public static void main(String[] args) {

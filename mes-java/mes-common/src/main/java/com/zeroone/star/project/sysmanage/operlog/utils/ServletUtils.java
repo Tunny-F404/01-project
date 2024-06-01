@@ -1,11 +1,10 @@
-package com.zeroone.star.sysmanagement.utils;
+package com.zeroone.star.project.sysmanage.operlog.utils;
 
 import cn.hutool.core.convert.Convert;
-import com.zeroone.star.sysmanagement.constant.Constants;
+import com.zeroone.star.project.sysmanage.operlog.constant.Constants;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

@@ -1,4 +1,4 @@
-package com.zeroone.star.sysmanagement.utils;
+package com.zeroone.star.project.sysmanage.operlog.utils;
 
 /**
  * 处理并记录日志文件

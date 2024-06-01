@@ -1,7 +1,9 @@
-package com.zeroone.star.sysmanagement.annotation;
+package com.zeroone.star.project.sysmanage.operlog.annotation;
 
-import com.zeroone.star.sysmanagement.constant.BusinessType;
-import com.zeroone.star.sysmanagement.constant.OperatorType;
+
+
+import com.zeroone.star.project.sysmanage.operlog.constant.BusinessType;
+import com.zeroone.star.project.sysmanage.operlog.constant.OperatorType;
 
 import java.lang.annotation.*;
 

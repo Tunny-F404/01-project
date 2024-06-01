@@ -14,11 +14,13 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan({
-//        "com.zeroone.star.project.components.jwt",
-//        "com.zeroone.star.project.components.user"
+        "com.zeroone.star.project.components.jwt",
+        "com.zeroone.star.project.components.user",
         "com.zeroone.star.project.components.easyexcel",
         "com.zeroone.star.project.components.fastdfs",
-        "com.zeroone.star.project.sysmanage.elk"
+        "com.zeroone.star.project.sysmanage.elk",
+        "com.zeroone.star.project.sysmanage.operlog.aspectj",
+        "com.zeroone.star.project.sysmanage.operlog.service"
 })
 public class ComponentInit {
 }
