@@ -47,18 +47,22 @@ public class CalTeamshiftServiceImpl extends ServiceImpl<CalTeamshiftMapper, Cal
     @Override
     public List<ScheduleCalendarDTO> listSchedule(ScheduleTypeQuery condition) {
 
+        if (condition.getCalendarType() == null){
+            throw new RuntimeException("请输入排班类型");
+        }
+
         String[] fristAndLastDay = getFristAndLastDay(condition.getTheDay());
 
         //查询指定日期范围的数据
         QueryWrapper<CalTeamshift> queryWrapper = new QueryWrapper();
         CalTeamshift calTeamshift = teamShiftTransfer.queryTypeToTeamshiftDO(condition);
 
-        if (calTeamshift.getTheDay() != null) {
-            queryWrapper.between("the_day",fristAndLastDay[0], fristAndLastDay[1]);
-        }
-        if (calTeamshift.getCalendarType() != null){
-            queryWrapper.eq("calendar_type", calTeamshift.getCalendarType());
-        }
+
+
+        queryWrapper.between("the_day",fristAndLastDay[0], fristAndLastDay[1]);
+
+
+        queryWrapper.eq("calendar_type", calTeamshift.getCalendarType());
         //查询
         List<CalTeamshift> calTeamshifts = calTeamshiftMapper.selectList(queryWrapper);
         //DO转DTO
@@ -69,6 +73,9 @@ public class CalTeamshiftServiceImpl extends ServiceImpl<CalTeamshiftMapper, Cal
 
     @Override
     public List<ScheduleCalendarDTO> listSchedule(ScheduleTeamQuery condition) {
+        if (condition.getTeamId() == null){
+            throw new RuntimeException("请输入班组id");
+        }
 
 
         String[] fristAndLastDay = getFristAndLastDay(condition.getTheDay());
@@ -77,13 +84,12 @@ public class CalTeamshiftServiceImpl extends ServiceImpl<CalTeamshiftMapper, Cal
         QueryWrapper<CalTeamshift> queryWrapper = new QueryWrapper();
         CalTeamshift calTeamshift = teamShiftTransfer.queryTeamToTeamshiftDO(condition);
 
-        if (calTeamshift.getTheDay() != null) {
-            queryWrapper.between("the_day",fristAndLastDay[0], fristAndLastDay[1]);
-        }
+        queryWrapper.between("the_day",fristAndLastDay[0], fristAndLastDay[1]);
 
-        if (calTeamshift.getTeamId() != null){
-            queryWrapper.eq("team_id", calTeamshift.getTeamId());
-        }
+
+
+        queryWrapper.eq("team_id", calTeamshift.getTeamId());
+
         //查询
         List<CalTeamshift> calTeamshifts = calTeamshiftMapper.selectList(queryWrapper);
         //DO转DTO
@@ -94,6 +100,9 @@ public class CalTeamshiftServiceImpl extends ServiceImpl<CalTeamshiftMapper, Cal
 
     @Override
     public List<ScheduleCalendarDTO> listSchedule(ScheduleUserQuery condition) {
+        if (condition.getUserId() == null){
+            throw new RuntimeException("请输入人员id");
+        }
         QueryWrapper<CalTeamMember> queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_id",condition.getUserId());
 
@@ -114,6 +123,10 @@ public class CalTeamshiftServiceImpl extends ServiceImpl<CalTeamshiftMapper, Cal
 //    }
 
     public String[] getFristAndLastDay(LocalDate date){
+        if (date == null){
+            //设置为当天日期
+            date = LocalDate.now();
+        }
         YearMonth yearMonth = YearMonth.from(date);
         //获取月份的第一天和最后一天
         LocalDate firstDay = yearMonth.atDay(1);

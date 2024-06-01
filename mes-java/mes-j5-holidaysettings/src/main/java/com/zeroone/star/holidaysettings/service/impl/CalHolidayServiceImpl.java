@@ -38,6 +38,10 @@ public class CalHolidayServiceImpl extends ServiceImpl<CalHolidayMapper, CalHoli
     HolidatDataTransfer HolidatDataTransfer;
     @Override
     public List<HolidayDTO> getList(ListHolidayQuery condition) {
+
+        if (condition.getDate() == null){
+            condition.setDate(LocalDate.now());
+        }
         LocalDate date = condition.getDate();
         YearMonth yearMonth = YearMonth.from(date);
         //获取月份的第一天和最后一天
@@ -60,6 +64,14 @@ public class CalHolidayServiceImpl extends ServiceImpl<CalHolidayMapper, CalHoli
 
     @Override
     public void setHoliday(SettingHolidayQuery condition) {
+        if (condition.getTheDay() == null){
+            throw new RuntimeException("请输入日期");
+        }
+
+        if (condition.getHolidayType() == null  || condition.getHolidayType() == ""){
+            throw new RuntimeException("请输入假期类型");
+        }
+
         LocalDate date = condition.getTheDay();
         QueryWrapper<CalHoliday> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("the_day",date);
