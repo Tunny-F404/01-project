@@ -212,12 +212,12 @@
     </root>
 
     <!-- 业务日志 -->
-    <logger name="com.zeroone.star.elk" level="DEBUG">
+    <logger name="com.zeroone.star.basicdata" level="DEBUG">
         <appender-ref ref="LOG_STASH_BUSINESS"/>
     </logger>
 
     <!-- 记录日志 -->
-    <logger name="com.zeroone.star.elk.components.WebLogAspect" level="DEBUG">
+    <logger name="com.zeroone.star.project.sysmanage.elk.WebLogAspect" level="DEBUG">
         <appender-ref ref="LOG_STASH_RECORD"/>
     </logger>
 

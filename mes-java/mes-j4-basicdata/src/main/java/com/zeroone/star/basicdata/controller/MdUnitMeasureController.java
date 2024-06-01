@@ -11,6 +11,7 @@ import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ import java.util.List;
 @Api(tags = "单位相关操作")
 @Validated
 @Slf4j
+@EnableAspectJAutoProxy
 public class MdUnitMeasureController implements AccountUnitApis{
     @Resource
     private IMdUnitMeasureService iMdUnitMeasureService;

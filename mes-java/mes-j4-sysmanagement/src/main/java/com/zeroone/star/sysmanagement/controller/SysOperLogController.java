@@ -15,6 +15,7 @@ import com.zeroone.star.sysmanagement.service.ISysOperLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,7 @@ import static com.zeroone.star.sysmanagement.constants.OperLogConstants.*;
 @RequestMapping("/sys/operlog")
 @Api(tags = "操作日志记录")
 @Validated
+@Slf4j
 public class SysOperLogController {
     @Resource
     private ISysOperLogService sysOperLogService; // 操作日志服务接口，用于CRUD操作
@@ -144,6 +146,7 @@ public class SysOperLogController {
         SysOperLog sysOperLog = sysOperLogService.selectOperLogById(operId);
         OperationLogVO operationLogVO = new OperationLogVO();
         BeanUtil.copyProperties(sysOperLog, operationLogVO);
+        log.debug("获取日志详情成功");
         return JsonVO.success(operationLogVO);
     }
 

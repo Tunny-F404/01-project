@@ -33,7 +33,7 @@ import java.util.*;
 public class WebLogAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
 
-    @Pointcut("execution(public * com.zeroone.star.basicdata.controller.*.*(..))")
+    @Pointcut("execution(public * com.zeroone.star.*.controller.*.*(..))")
     public void webLog() {
     }
 
