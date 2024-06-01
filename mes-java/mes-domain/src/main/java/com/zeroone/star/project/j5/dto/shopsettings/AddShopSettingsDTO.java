@@ -6,6 +6,9 @@ import lombok.Data;
 @Data
 public class AddShopSettingsDTO {
 
+
+    @ApiModelProperty(value = "车间id", example = "1")
+    private Long workshopId;;
     @ApiModelProperty(value = "车间编码", example = "WS001")
     private String workshopCode;
     @ApiModelProperty(value = "车间名称", example = "五金车间")

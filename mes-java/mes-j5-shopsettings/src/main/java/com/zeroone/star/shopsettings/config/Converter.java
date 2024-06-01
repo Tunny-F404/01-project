@@ -43,6 +43,7 @@ public class Converter {
         }
 
         MdWorkshop workshop = new MdWorkshop();
+        workshop.setWorkshopId(dto.getWorkshopId());
         workshop.setWorkshopCode(dto.getWorkshopCode());
         workshop.setWorkshopName(dto.getWorkshopName());
         workshop.setArea(dto.getArea());
