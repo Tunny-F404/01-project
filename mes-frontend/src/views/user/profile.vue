@@ -100,7 +100,8 @@
 
 						<el-tab-pane label="修改密码" name="second">
 							<!-- 修改密码表单 -->
-							<el-form ref="passRulesRef" :model="passwd" label-width="80px" status-icon>
+							<el-form ref="passRulesRef" :rules="passRules" :model="passwd" label-width="80px"
+								status-icon>
 								<el-form-item label="旧密码" prop="old">
 									<el-input v-model="passwd.old" show-password></el-input>
 								</el-form-item>
@@ -125,6 +126,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+import Request from "@/apis/request.js";
 
 //tabs配置
 const activeName = ref('first')
@@ -143,14 +145,14 @@ const infoform = ref({
 })
 //修改密码 表单
 const passwd = ref({
-	old: '',
+	old: '12345',
 	new: '',
 	confirm: ''
 })
 
 // 手机号码 自定义验证规则
 const phoneCheck = (rule, value, callback) => {
-	const phone_regex = /^1[3|4|5|6|7|8|9]\d{9}$/;
+	const phone_regex = /^1[3|4|5|6|7|8|9]\d{9}$/
 	if (value != '') {
 		if (!phone_regex.test(value)) {
 			callback(new Error('手机号码不正确！'))
@@ -159,18 +161,17 @@ const phoneCheck = (rule, value, callback) => {
 		}
 	}
 }
-// 密码 自定义验证规则
+// 密码 自定义验证规则(待解决)
 const passCheck = (rule, value, callback) => {
-	const phone_regex = /^1[3|4|5|6|7|8|9]\d{9}$/;
+	const pass_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{5,16}$/
 	if (value != '') {
-		if (!phone_regex.test(value)) {
-			callback(new Error('手机号码不正确！'))
+		if (!pass_regex.test(value)) {
+			callback(new Error('5-16个字符(包含大小写字母数字)'))
 		} else {
 			callback()
 		}
 	}
 }
-
 
 //基本资料表单 验证规则
 const inforules = reactive({
@@ -186,24 +187,19 @@ const inforules = reactive({
 		{ required: true, message: '请输入邮箱', trigger: 'change' },
 		{ type: 'email', message: '邮箱不正确', trigger: 'change' }
 	],
-	gender: [
-		{ required: true, message: '请选择你的性别', trigger: 'change' }
-	]
+	gender: [{ required: true, message: '请选择你的性别', trigger: 'change' }]
 })
-
-
-
-
-//密码表单 验证规则
-const passwdrules = reactive({
+//密码表单 验证规则(待解决)
+const passRules = reactive({
 	old: [
-		{ validator: passcheck, trigger: 'change' }
+		{ required: true, message: '请输入原有密码', trigger: 'change' },
+		{ validator: passCheck, trigger: 'change' }
 	],
 	new: [
-		{ min: 11, message: '请输入正确的电话号码', trigger: 'change' }
+		{ validdator: passCheck, trigger: 'change' }
 	],
 	confirm: [
-		{ required: true, message: '请输入邮箱', trigger: 'change' }
+		{ validdator: passCheck, trigger: 'change' }
 	]
 })
 
@@ -215,19 +211,18 @@ const onInfoSubmit = async (formEl) => {
 	if (!formEl) return
 	infoRulesRef.value.validate((valid, fields) => {
 		if (valid) {
-			console.log('info submit!', fields)
+			console.log('Info submit!', fields)
 		} else {
 			console.log('error submit!', fields)
 		}
 	})
 }
-
 // 修改密码表单 校验完成发送
 const onPassSubmit = async (formEl) => {
 	if (!formEl) return
 	passRulesRef.value.validate((valid, fields) => {
 		if (valid) {
-			console.log('pass submit!', fields)
+			console.log('Pass submit!', fields)
 		} else {
 			console.log('error submit!', fields)
 		}
@@ -236,8 +231,19 @@ const onPassSubmit = async (formEl) => {
 
 //获取 手机验证码
 const getphoneCode = () => {
-	console.log('手机验证码发送成功！')
+	// Request.request(
+	// 	Request.POST,
+	// 	"/mycenter/get-phoneCode",
+	// 	{ phone: infoform.phoneNum }
+	// ).then((res) => {
+	// 	console.log(res);
+		ElMessage.success("验证码发送成功")
+	// }).catch((res) => {
+	// 	console.log(res)
+	// 	ElMessage.error("发送失败")
+	// })
 }
+
 //获取 邮箱验证码
 const getemailCode = () => {
 	console.log('邮箱验证成功！')
