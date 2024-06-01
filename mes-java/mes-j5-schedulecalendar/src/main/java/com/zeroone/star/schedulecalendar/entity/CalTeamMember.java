@@ -1,56 +1,57 @@
-package com.zeroone.star.holidaysettings.entity;
+package com.zeroone.star.schedulecalendar.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 节假日设置
+ * 班组成员表
  * </p>
  *
- * @author interstellar
- * @since 2024-05-25
+ * @author nangua
+ * @since 2024-05-30
  */
 @Getter
 @Setter
-@TableName("cal_holiday")
-public class CalHoliday implements Serializable {
+@TableName("cal_team_member")
+public class CalTeamMember implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 流水号
+     * 班组成员ID
      */
-    @TableId(value = "holiday_id", type = IdType.AUTO)
-    private Long holidayId;
+    @TableId(value = "member_id", type = IdType.AUTO)
+    private Long memberId;
 
     /**
-     * 日期
+     * 班组ID
      */
-    private LocalDate theDay;
+    private Long teamId;
 
     /**
-     * 日期类型
+     * 用户ID
      */
-    private String holidayType;
+    private Long userId;
 
     /**
-     * 开始时间
+     * 用户名
      */
-    private LocalDateTime startTime;
+    private String userName;
 
     /**
-     * 结束时间
+     * 用户昵称
      */
-    private LocalDateTime endTime;
+    private String nickName;
+
+    /**
+     * 电话
+     */
+    private String tel;
 
     /**
      * 备注

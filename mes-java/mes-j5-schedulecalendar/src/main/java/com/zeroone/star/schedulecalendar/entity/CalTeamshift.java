@@ -12,34 +12,59 @@ import lombok.Setter;
 
 /**
  * <p>
- * 排班计划表
+ * 班组排班表
  * </p>
  *
- * @author interstellar
- * @since 2024-05-25
+ * @author nangua
+ * @since 2024-05-28
  */
 @Getter
 @Setter
-@TableName("cal_plan")
-public class CalPlan implements Serializable {
+@TableName("cal_teamshift")
+public class CalTeamshift implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
+     * 流水号
+     */
+    @TableId(value = "record_id", type = IdType.AUTO)
+    private Long recordId;
+
+    /**
+     * 日期
+     */
+    private String theDay;
+
+    /**
+     * 班组ID
+     */
+    private Long teamId;
+
+    /**
+     * 班组名称
+     */
+    private String teamName;
+
+    /**
+     * 班次ID
+     */
+    private Long shiftId;
+
+    /**
+     * 班次名称
+     */
+    private String shiftName;
+
+    /**
+     * 序号
+     */
+    private Integer orderNum;
+
+    /**
      * 计划ID
      */
-    @TableId(value = "plan_id", type = IdType.AUTO)
     private Long planId;
-
-    /**
-     * 计划编号
-     */
-    private String planCode;
-
-    /**
-     * 计划名称
-     */
-    private String planName;
 
     /**
      * 班组类型
@@ -47,34 +72,9 @@ public class CalPlan implements Serializable {
     private String calendarType;
 
     /**
-     * 开始日期
-     */
-    private LocalDateTime startDate;
-
-    /**
-     * 结束日期
-     */
-    private LocalDateTime endDate;
-
-    /**
      * 轮班方式
      */
     private String shiftType;
-
-    /**
-     * 倒班方式
-     */
-    private String shiftMethod;
-
-    /**
-     * 数
-     */
-    private Integer shiftCount;
-
-    /**
-     * 状态
-     */
-    private String status;
 
     /**
      * 备注

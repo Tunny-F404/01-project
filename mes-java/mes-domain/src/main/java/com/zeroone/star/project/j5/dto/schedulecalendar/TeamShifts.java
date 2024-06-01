@@ -37,6 +37,6 @@ public class TeamShifts {
     private int planId;
     @ApiModelProperty(value = "班组类型", example = "ZZ")
     private String calendarType;
-    @ApiModelProperty(value = "轮班方式", example = "SHIFT_TWO")
+    @ApiModelProperty(value = "轮班方式", example = "HSIFT_TWO")
     private String shiftType;
 }
