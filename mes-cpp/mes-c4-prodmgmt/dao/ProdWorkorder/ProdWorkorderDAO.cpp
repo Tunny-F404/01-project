@@ -73,11 +73,11 @@ uint64_t ProdWorkorderDAO::countBom(const ProdWorkorderBomListQuery::Wrapper& qu
 }
 
 //获取生产工单详情
-std::list<ProdWorkorderInfoDO> ProdWorkorderDAO::selectByWorkorderId(const ProdWorkorderInfoDO& Obj)
+std::list<ProdWorkorderInfoDO> ProdWorkorderDAO::selectByWorkorderId(const uint64_t& workorder_id)
 {
-	string sql = "SELECT workorder_code,workorder_name,order_source,source_code,status,workorder_type,product_code,product_name,product_spc,unit_of_measure,quantity,request_date,batch_code,client_code,client_name,vendor_code,vendor_name,remark FROM pro_workorder WHERE `workorder_id` LIKE CONCAT('%',?,'%')";
+	string sql = "SELECT workorder_code,workorder_name,order_source,source_code,status,workorder_type,product_code,product_name,product_spc,unit_of_measure,quantity,request_date,batch_code,client_code,client_name,vendor_code,vendor_name,remark FROM pro_workorder WHERE `workorder_id`=?";
 	ProdWorkorderInfoMapper mapper;
-	return sqlSession->executeQuery<ProdWorkorderInfoDO, ProdWorkorderInfoMapper>(sql, mapper, "%ull", Obj.getWorkorder_id());
+	return sqlSession->executeQuery<ProdWorkorderInfoDO, ProdWorkorderInfoMapper>(sql, mapper, "%ull", workorder_id);
 }
 
 //获取生产工单列表
@@ -96,7 +96,7 @@ std::list<GetProdWorkorderListDO> ProdWorkorderDAO::selectWithPage(const GetProd
 std::list<ProdWorkorderBomListDO> ProdWorkorderDAO::selectByBomId(const ProdWorkorderBomListQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT line_id,item_code,item_name,item_spc,unit_of_measure,item_or_product,quantity FROM pro_workorder_bom WHERE `line_id` LIKE CONCAT('%',?,'%')";
+	sql << "SELECT line_id,item_code,item_name,item_spc,unit_of_measure,item_or_product,quantity FROM pro_workorder_bom";
 	PRODWORKORDER_BOM_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	ProdWorkorderBomListMapper mapper;
@@ -107,6 +107,6 @@ std::list<ProdWorkorderBomListDO> ProdWorkorderDAO::selectByBomId(const ProdWork
 //添加生产工单
 uint64_t ProdWorkorderDAO::insert(const AddProdWorkorderDO& iObj)
 {
-	string sql = "INSERT INTO `pro_workorder` (`workorder_id`, `workorder_code`, `workorder_name`, `order_source`, `status`, `workorder_type`, `product_code`, `product_name`, `product_spc`, `unit_of_measure`, `quantity`, `request_date`, `batch_code`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	return sqlSession->executeInsert(sql, "%ull%s%s%s%s%s%s%s%s%s%d%s%s%s", iObj.getWorkorder_id(), iObj.getWorkorder_code(), iObj.getWorkorder_name(), iObj.getOrder_source(), iObj.getStatus(), iObj.getWorkorder_type(), iObj.getProduct_code(), iObj.getProduct_name(), iObj.getProduct_spc(), iObj.getUnit_of_measure(), iObj.getQuantity(), iObj.getRequest_date(), iObj.getBatch_code(), iObj.getRemark());
+	string sql = "INSERT INTO `pro_workorder` (`workorder_id`, `workorder_code`, `workorder_name`, `order_source`, `status`, `workorder_type`, `product_code`, `product_name`, `product_spc`, `unit_of_measure`, `quantity`, `request_date`, `batch_code`, `remark`, `product_id`, `ancestors`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	return sqlSession->executeInsert(sql, "%ull%s%s%s%s%s%s%s%s%s%d%s%s%s%ull%s", iObj.getWorkorder_id(), iObj.getWorkorder_code(), iObj.getWorkorder_name(), iObj.getOrder_source(), iObj.getStatus(), iObj.getWorkorder_type(), iObj.getProduct_code(), iObj.getProduct_name(), iObj.getProduct_spc(), iObj.getUnit_of_measure(), iObj.getQuantity(), iObj.getRequest_date(), iObj.getBatch_code(), iObj.getRemark(), iObj.getProduct_id(), iObj.getAncestors());
 }

@@ -39,12 +39,12 @@ GetProdWorkorderListPageJsonVO::Wrapper ProdWorkorderController::execQueryGetPro
 	//return {};
 }
 
-ProdWorkorderInfoJsonVO::Wrapper ProdWorkorderController::execGetProdWorkorderInfo(const ProdWorkorderInfoDTO::Wrapper& dto)
+ProdWorkorderInfoJsonVO::Wrapper ProdWorkorderController::execGetProdWorkorderInfo(const UInt64& workorder_id)
 {
 	// 定义一个Service
 	ProdWorkorderService service;
 	// 查询数据
-	auto result = service.listDetail(dto);
+	auto result = service.listDetail(workorder_id);
 	// 响应结果
 	auto jvo = ProdWorkorderInfoJsonVO::createShared();
 	jvo->success(result);

@@ -21,7 +21,7 @@ public:
 	// 通过BOM行ID查询数据
 	list<ProdWorkorderBomListDO> selectByBomId(const ProdWorkorderBomListQuery::Wrapper& query);
 	// 通过工单ID查询数据
-	list<ProdWorkorderInfoDO> selectByWorkorderId(const ProdWorkorderInfoDO& Obj);
+	list<ProdWorkorderInfoDO> selectByWorkorderId(const uint64_t& workorder_id);
 	// 插入数据
 	uint64_t insert(const AddProdWorkorderDO& iObj);
 };

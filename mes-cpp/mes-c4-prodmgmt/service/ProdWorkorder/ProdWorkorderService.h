@@ -18,7 +18,7 @@
 class ProdWorkorderService {
 public:
 	// 获取生产工单详情
-	ProdWorkorderInfoDTO::Wrapper listDetail(const ProdWorkorderInfoDTO::Wrapper& dto);
+	ProdWorkorderInfoDTO::Wrapper listDetail(const uint64_t& workorder_id);
 	//获取生产工单BOM组成列表
 	ProdWorkorderBomListPageDTO::Wrapper listBom(const ProdWorkorderBomListQuery::Wrapper& query);
 	//获取生产工单列表(条件+分页)

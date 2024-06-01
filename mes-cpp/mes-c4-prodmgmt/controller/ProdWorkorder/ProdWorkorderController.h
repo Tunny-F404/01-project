@@ -90,9 +90,9 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProdWorkorderInfoJsonVO);
 	}
 	// 3.2 定义获取生产工单详情接口处理
-	ENDPOINT(API_M_GET, "/ProdWorkorder/GetDetailInfo", prodWorkorderInfo, BODY_DTO(ProdWorkorderInfoDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/ProdWorkorder/GetDetailInfo/{workorder_id}", prodWorkorderInfo, PATH(UInt64, workorder_id), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execGetProdWorkorderInfo(dto));
+		API_HANDLER_RESP_VO(execGetProdWorkorderInfo(workorder_id));
 	}
 
 
@@ -124,7 +124,7 @@ public:
 	// 3.3 演示分页查询数据
 	GetProdWorkorderListPageJsonVO::Wrapper execQueryGetProdWorkorderList(const GetProdWorkorderListQuery::Wrapper& query, const PayloadDTO& payload);
 	// 3.3 演示获取列表详情数据
-	ProdWorkorderInfoJsonVO::Wrapper execGetProdWorkorderInfo(const ProdWorkorderInfoDTO::Wrapper& dto);
+	ProdWorkorderInfoJsonVO::Wrapper execGetProdWorkorderInfo(const UInt64& workorder_id);
 	// 3.3 演示获取BOM列表数据
 	ProdWorkorderBomListPageJsonVO::Wrapper execGetProdWorkorderBomList(const ProdWorkorderBomListQuery::Wrapper& query, const PayloadDTO& payload);
 };

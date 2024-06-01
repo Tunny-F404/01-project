@@ -22,6 +22,8 @@ addprodworkorder:
   quantity_changed: 调整数量
   vendor_name: 供应商名称
   vendor_code: 供应商编码
+  product_id: 产品ID
+  ancestors: 所有父节点ID
  post:
   summary: 新增一条生产工单数据 
 
