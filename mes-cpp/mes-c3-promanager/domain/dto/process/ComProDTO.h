@@ -40,13 +40,13 @@ class ComProListDTO : public oatpp::DTO
 	//工序名称
 	API_DTO_FIELD_DEFAULT(String, process_name, ZH_WORDS_GETTER("pro.fields.proName"));
 	//是否为关键工序
-	API_DTO_FIELD_DEFAULT(String, key_flag, ZH_WORDS_GETTER("pro.fields.key_flag"), true, "N");
+	API_DTO_FIELD(String, key_flag, ZH_WORDS_GETTER("pro.fields.key_flag"), true, "N");
 	//下一道工序
-	API_DTO_FIELD_DEFAULT(String, next_process_name, ZH_WORDS_GETTER("pro.fields.proName"), false, "01star");
+	API_DTO_FIELD(String, next_process_name, ZH_WORDS_GETTER("pro.fields.proName"), false, "01star");
 	//下一道的工序关系
-	API_DTO_FIELD_DEFAULT(String, link_type, ZH_WORDS_GETTER("pro.fields.type"), false, "SS");
+	API_DTO_FIELD(String, link_type, ZH_WORDS_GETTER("pro.fields.type"), false, "SS");
 	//是否质检
-	API_DTO_FIELD_DEFAULT(String, is_check, ZH_WORDS_GETTER("pro.fields.check"), true, "N");
+	API_DTO_FIELD(String, is_check, ZH_WORDS_GETTER("pro.fields.check"), true, "N");
 	//准备时间
 	API_DTO_FIELD(Int32, default_pre_time, ZH_WORDS_GETTER("pro.fields.preTime"), false, 0);
 	//等待时间

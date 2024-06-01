@@ -12,7 +12,7 @@
 #include "domain/vo/process/ProcessProductsVO.h"
 #include "domain/query/process/ProcessQuery.h"
 
-#include "domain/vo/process/ComProVo.h"
+#include "domain/vo/process/ComProVO.h"
 #include "domain/dto/process/ComProDTO.h"
 #include "domain/query/process/ComProQuery.h"
 

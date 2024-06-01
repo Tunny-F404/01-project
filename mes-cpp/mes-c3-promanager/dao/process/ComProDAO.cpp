@@ -19,7 +19,7 @@
 #include "stdafx.h"
 #include "ComProDAO.h"
 #include "ComProMapper.h"
-#include "domain\dto\process\ComProDTO.h"
+#include "domain/dto/process/ComProDTO.h"
 #include <sstream>
 
 //定义条件解析宏，减少重复代码

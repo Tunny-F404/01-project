@@ -3,7 +3,7 @@
 #define _RELATEPRO_SERVICE_
 #include <list>
 
-#include "domain/dto/process/relateproDTO.h"
+#include "domain/dto/process/RelateProDTO.h"
 
 
 /**

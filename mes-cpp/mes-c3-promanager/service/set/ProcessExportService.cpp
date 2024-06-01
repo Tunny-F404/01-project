@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ProcessExportService.h"
-#include "..\..\dao\set\SetExportDAO.h"
+#include "../../dao/set/SetExportDAO.h"
 // 导出工序 查询数据
 list<SetProAddTableDTO::Wrapper> ProcessExportService::listAll(const ProcessExportQuery::Wrapper& query)
 {

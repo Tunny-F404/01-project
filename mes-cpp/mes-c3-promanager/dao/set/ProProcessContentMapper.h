@@ -21,7 +21,7 @@
 #define _SAMPLE_MAPPER_
 
 #include "Mapper.h"
-#include "../../domain\do\pro\ProProcessContentDO.h"
+#include "../../domain/do/pro/ProProcessContentDO.h"
 
 /**
  * Ê¾Àý±í×Ö¶ÎÆ¥ÅäÓ³Éä

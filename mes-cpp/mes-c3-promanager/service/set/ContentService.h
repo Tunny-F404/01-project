@@ -20,9 +20,9 @@
 #ifndef _SAMPLE_SERVICE_
 #define _SAMPLE_SERVICE_
 #include <list>
-#include "domain\dto\set\SetProListDTO.h"
-#include "domain\query\set\SetStepExportQuery.h"
-#include "domain\vo\set\SetProListVO.h"
+#include "domain/dto/set/SetProListDTO.h"
+#include "domain/query/set/SetStepExportQuery.h"
+#include "domain/vo/set/SetProListVO.h"
 
 /**
  * 示例服务实现，演示基础的示例服务实现

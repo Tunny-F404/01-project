@@ -20,8 +20,8 @@
 #ifndef _SAMPLE_DAO_
 #define _SAMPLE_DAO_
 #include "BaseDAO.h"
-#include "../../domain\do\pro\ProProcessContentDO.h"
-#include "../../domain\query\set\SetStepExportQuery.h"
+#include "../../domain/do/pro/ProProcessContentDO.h"
+#include "../../domain/query/set/SetStepExportQuery.h"
 
 /**
  * 示例表数据库操作实现
