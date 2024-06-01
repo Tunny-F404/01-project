@@ -5,6 +5,7 @@ import com.zeroone.star.project.query.PageQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -43,8 +44,9 @@ public class WmOutsourceRecptQuery extends PageQuery {
     /**
      * 入库日期
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "入库日期", example = "2024-05-29 12:00:00")
-    private LocalDateTime recptDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @ApiModelProperty(value = "入库日期", example = "2024-05-29")
+    private Date recptDate;
 
 }

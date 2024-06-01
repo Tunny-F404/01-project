@@ -7,14 +7,13 @@ import com.zeroone.star.project.dto.j4.whsmanagement.wmoutSourceRecpt.WmOutsourc
 import com.zeroone.star.project.j4.whsmanagement.wmoutSourceRcept.WmOutsourceRecptApis;
 import com.zeroone.star.project.query.j4.whsmanagement.wmoutSourceRecpt.WmOutsourceRecptQuery;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.wmoutsourcerecpt.constants.userConstants;
+import com.zeroone.star.wmoutsourcerecpt.constants.statusConstants;
 import com.zeroone.star.wmoutsourcerecpt.entity.WmOutsourceRecpt;
 import com.zeroone.star.wmoutsourcerecpt.entity.WmOutsourceRecptLine;
 import com.zeroone.star.wmoutsourcerecpt.service.IWmOutsourceRecptLineService;
 import com.zeroone.star.wmoutsourcerecpt.service.IWmOutsourceRecptService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +31,6 @@ import java.util.List;
 @RestController
 @RequestMapping("wm-outsource-recpt")
 @Api(tags = "外协入库单表")
-@Slf4j
 public class WmOutsourceRecptController implements WmOutsourceRecptApis {
 
     @Resource
@@ -159,7 +157,7 @@ public class WmOutsourceRecptController implements WmOutsourceRecptApis {
         proWorkorderService.updateProWorkorder(workorder);
          */
         //更新单据状态
-        recpt.setStatus(userConstants.ORDER_STATUS_FINISHED);
+        recpt.setStatus(statusConstants.ORDER_STATUS_FINISHED);
         WmOutsourceRecptDTO recptDTO = new WmOutsourceRecptDTO();
         BeanUtil.copyProperties(recpt, recptDTO);
         if (iWmOutsourceRecptService.modifyWmOutsourceRecpt(recptDTO))

@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @Author: jingzi
@@ -168,14 +169,16 @@ public class OutsourceRecptTxBean {
      * 入库日期
      */
     @ApiModelProperty(value = "入库日期")
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private LocalDateTime recptDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date recptDate;
 
     /**
      * 库存有效期
      */
     @ApiModelProperty(value = "库存有效期")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime expireDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date expireDate;
 
 }

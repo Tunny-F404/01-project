@@ -47,8 +47,7 @@ public class WmOutsourceRecptServiceImpl extends ServiceImpl<WmOutsourceRecptMap
             wrapper.like("workorder_code", query.getWorkorderCode());
         if (StringUtils.isNotBlank(query.getVendorName()))
             wrapper.like("vendor_name", query.getVendorName());
-        if (query.getRecptDate() != null)
-            wrapper.eq("recpt_date", query.getRecptDate());
+        if (query.getRecptDate() != null) wrapper.eq("recpt_date", query.getRecptDate());
 
         //执行查询
         Page<WmOutsourceRecpt> result = wmOutsourceRecptMapper.selectPage(pageInfo, wrapper);
@@ -76,7 +75,7 @@ public class WmOutsourceRecptServiceImpl extends ServiceImpl<WmOutsourceRecptMap
     @Override
     public Boolean modifyWmOutsourceRecpt(WmOutsourceRecptDTO modify) {
         WmOutsourceRecpt wmOutsourceRecpt = new WmOutsourceRecpt();
-        BeanUtil.copyProperties(modify,wmOutsourceRecpt);
+        BeanUtil.copyProperties(modify, wmOutsourceRecpt);
         //执行修改
         return wmOutsourceRecptMapper.updateById(wmOutsourceRecpt) > 0;
     }

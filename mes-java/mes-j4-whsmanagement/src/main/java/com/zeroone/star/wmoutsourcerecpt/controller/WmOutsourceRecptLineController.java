@@ -11,6 +11,7 @@ import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.wmoutsourcerecpt.entity.WmOutsourceRecpt;
 import com.zeroone.star.wmoutsourcerecpt.entity.WmOutsourceRecptLine;
 import com.zeroone.star.wmoutsourcerecpt.service.IWmOutsourceRecptLineService;
+import com.zeroone.star.wmoutsourcerecpt.service.IWmOutsourceRecptService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,9 @@ public class WmOutsourceRecptLineController implements WmOutsourceRecptLineApis 
 
     @Resource
     private IWmOutsourceRecptLineService iWmOutsourceRecptLineService;
+
+    @Resource
+    private IWmOutsourceRecptService iWmOutsourceRecptService;
 
 
     /**
@@ -78,6 +82,8 @@ public class WmOutsourceRecptLineController implements WmOutsourceRecptLineApis 
     @ApiOperation("新增外协入库单行")
     @PostMapping("save")
     public JsonVO saveWmOutsourceRecptLine(@RequestBody WmOutsourceRecptLineDTO save) {
+        if(null==iWmOutsourceRecptService.getWmOutsourceRecpt(save.getLineId()))
+            return JsonVO.fail("请先添加外协入库单!");
         if (null!=iWmOutsourceRecptLineService.getWmOutsourceRecptLine(save.getLineId()))
             return JsonVO.fail("该单据已存在,无需重复添加!");
         Long result = iWmOutsourceRecptLineService.saveWmOutsourceRecptLine(save);

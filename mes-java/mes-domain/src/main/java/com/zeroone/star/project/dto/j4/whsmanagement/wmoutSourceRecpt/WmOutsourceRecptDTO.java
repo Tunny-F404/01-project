@@ -6,8 +6,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @Author: jingzi
@@ -141,15 +142,15 @@ public class WmOutsourceRecptDTO {
     /**
      * 入库日期
      */
-    @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "入库日期", example = "2024-05-29 16:00:00")
-    private LocalDateTime recptDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @ApiModelProperty(value = "入库日期", example = "2024-05-29")
+    private Date recptDate;
 
     /**
      * 单据状态
      */
-    @ApiModelProperty(value = "单据状态", example = "1")
+    @ApiModelProperty(value = "单据状态", example = "PREPARE")
     private String status;
 
     /**
@@ -168,9 +169,10 @@ public class WmOutsourceRecptDTO {
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建日期", example = "2024-05-29 16:00:00")
-    private LocalDateTime createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @ApiModelProperty(value = "创建日期", example = "2024-05-29")
+    private Date createTime;
 
     /**
      * 更新者
@@ -182,9 +184,10 @@ public class WmOutsourceRecptDTO {
      * 更新时间
      */
     @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "更新日期", example = "2024-05-29 16:00:00")
-    private LocalDateTime updateTime;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @ApiModelProperty(value = "更新日期", example = "2024-05-29")
+    private Date updateTime;
 
     /**
      * 预留字段1

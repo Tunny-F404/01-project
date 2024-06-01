@@ -4,15 +4,11 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -152,10 +148,10 @@ public class WmOutsourceRecpt implements Serializable {
     /**
      * 入库日期
      */
-    @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ExcelProperty(value = "入库日期", index = 20)
-    private LocalDateTime recptDate;
+    private Date recptDate;
 
     /**
      * 单据状态
@@ -180,9 +176,10 @@ public class WmOutsourceRecpt implements Serializable {
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ExcelProperty(value = "创建日期", index = 24)
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新者
@@ -194,9 +191,10 @@ public class WmOutsourceRecpt implements Serializable {
      * 更新时间
      */
     @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ExcelProperty(value = "更新日期", index = 26)
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 预留字段1
