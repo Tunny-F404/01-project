@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.PlanStatusDTO;
 import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.zeroone.star.scheduleplan.mapper.CalPlanMapper;
 import com.zeroone.star.scheduleplan.service.ICalPlanService;
@@ -45,6 +46,8 @@ interface MsPlanMapper {
      * @return
      */
     CalPlan PlanDTOToplan(PlanDTO planDTO);
+
+    CalPlan PlanStatusDTOToplan(PlanStatusDTO planDTO);
 }
 
 @Service
@@ -53,6 +56,8 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
     @Resource
     private MsPlanMapper msPlanMapper;
 
+    @Resource
+    EasyExcelComponent excel;
     /**
      * 删除排班计划(可批量删除)
      *
@@ -65,7 +70,7 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
     }
 
     @Override
-    public boolean modifySchPlanStatus(PlanDTO condition) {
+    public boolean modifySchPlanStatus(PlanStatusDTO condition) {
         //1.查询当前数据是否存在
         CalPlan modifyPlan = baseMapper.selectById(condition.getPlanId());
         //2.数据不存在,修改失败,返回false
@@ -73,19 +78,18 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
             return false;
         }
         //3.存在则执行修改操作---将DTO转为DO
-        CalPlan calPlan = msPlanMapper.PlanDTOToplan(condition);
+        CalPlan calPlan = msPlanMapper.PlanStatusDTOToplan(condition);
 
         return baseMapper.updateById(calPlan) > 0;
     }
 
     @Override
-    public ResponseEntity<byte[]> exportSchPlan( List<Long> ids) {
-        //导出计划数据列表
+    public ResponseEntity<byte[]> exportSchPlan( List<Long> ids) throws IOException {
+        //数据列表
         List<CalPlan> planlist = new ArrayList<>();
-        //从导出id列表中依次取出id进行查询数据
+        //查询封装数据
         for (Long id : ids) {
             CalPlan plan = baseMapper.selectById(id);
-            //查出数据不为空则将其加入数据列表
             if (plan != null) {
                 planlist.add(plan);
             }
@@ -95,23 +99,37 @@ public class CalPlanServiceImpl extends ServiceImpl<CalPlanMapper, CalPlan> impl
             return ResponseEntity.notFound().build();
         }
         //输出流，用于将数据写入到一个字节数组中,捕获 EasyExcel 导出操作生成的Excel文件的字节数据
-        try (ByteArrayOutputStream os = new ByteArrayOutputStream();) {
+        ByteArrayOutputStream out=new ByteArrayOutputStream();
+        excel.export("计划列表",out,CalPlan.class, planlist);
+        //获取字节数据
+        byte[] bytes=out.toByteArray();
+        out.close();
+
+        //构建响应头
+        HttpHeaders header = new HttpHeaders();
+        String filename = "scheduleplans-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
+        //指定响应体应该如何被处理,"attachment" 表示响应体应该被下载为一个文件
+        header.setContentDispositionFormData("attachment", filename);
+        // 设置响应头，指示响应体是一个二进制流，通常用于文件下载。
+        header.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+
+        //响应文件给客户端
+        return new ResponseEntity<>(bytes, header, HttpStatus.CREATED);
+
+   /*     try (ByteArrayOutputStream os = new ByteArrayOutputStream();) {
             EasyExcelComponent easyExcelComponent = new EasyExcelComponent();
             //使用easyExcelComponent的export方法将clientList中的数据导出到输出流中
             easyExcelComponent.export("计划列表", os, CalPlan.class, planlist);
             byte[] bytes = os.toByteArray();
-            String filename = "scheduleplans-" + DateTime.now().toString("yyyyMMddHHmmss") + ".xlsx";
-            HttpHeaders header = new HttpHeaders();
-            //指定响应体应该如何被处理,"attachment" 表示响应体应该被下载为一个文件
-            header.setContentDispositionFormData("attachment", filename);
-            // 设置响应头，指示响应体是一个二进制流，通常用于文件下载。
-            header.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-            return new ResponseEntity<>(bytes, header, HttpStatus.CREATED);
+
+
+
+
         } catch (IOException e) {
             // 记录日志并返回错误信息
             log.error("导出Excel文件时发生错误", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(("导出Excel文件时发生错误：" + e.getMessage()).getBytes());
-        }
+        }*/
     }
 }

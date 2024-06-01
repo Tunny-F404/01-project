@@ -3,15 +3,15 @@ package com.zeroone.star.project.j5.scheduleplan;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.PlanStatusDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
 import com.zeroone.star.project.vo.JsonVO;
 
-import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -70,12 +70,12 @@ public interface SchedulePlanApis {
      * @param planDTO  修改状态模型
      * @author sailing
      */
-    JsonVO<Integer>  modifySchPlanStatus(PlanDTO planDTO);
+    JsonVO<Integer>  modifySchPlanStatus(PlanStatusDTO planDTO);
 
     /**
      * 导出排班计划
      * @author interstellar
      */
-    ResponseEntity<byte[]> exportSchPlan(List<Long> ids);
+    ResponseEntity<byte[]> exportSchPlan(List<Long> ids) throws IOException;
 
 }

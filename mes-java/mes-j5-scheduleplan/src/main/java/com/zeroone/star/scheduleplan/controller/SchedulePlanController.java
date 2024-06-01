@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.PlanStatusDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.j5.scheduleplan.SchedulePlanApis;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.Min;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -70,14 +72,14 @@ public class SchedulePlanController implements SchedulePlanApis {
     @ApiOperation(value = "修改计划状态")
     @PutMapping("modify-plans-status")
     @Override
-    public JsonVO<Integer> modifySchPlanStatus(PlanDTO planDTO) {
+    public JsonVO<Integer> modifySchPlanStatus(PlanStatusDTO planDTO) {
         return calPlanService.modifySchPlanStatus(planDTO) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
     @ApiOperation(value = "导出计划")
-    @PostMapping("export-schedule-plan")
+    @PostMapping(value = "export-schedule-plan",produces = "application/octet-stream")
     @Override
-    public ResponseEntity<byte[]> exportSchPlan(@RequestBody List<Long> ids) {
+    public ResponseEntity<byte[]> exportSchPlan(@RequestBody List<Long> ids) throws IOException {
         return calPlanService.exportSchPlan(ids);
     }
 

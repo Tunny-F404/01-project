@@ -1,13 +1,12 @@
 package com.zeroone.star.scheduleplan.service;
 
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
-import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
-import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
-import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.project.j5.dto.scheduleplan.PlanStatusDTO;
 import com.zeroone.star.scheduleplan.entity.CalPlan;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.http.ResponseEntity;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -31,10 +30,10 @@ public interface ICalPlanService extends IService<CalPlan> {
      * @param condition  修改状态模型
      * @author sailing
      */
-    boolean  modifySchPlanStatus(PlanDTO condition);
+    boolean  modifySchPlanStatus(PlanStatusDTO condition);
 
     /**
      * 导出排班计划
      */
-    ResponseEntity<byte[]> exportSchPlan(List<Long> ids);
+    ResponseEntity<byte[]> exportSchPlan(List<Long> ids) throws IOException;
 }
