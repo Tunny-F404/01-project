@@ -19,6 +19,15 @@ public:
 	std::list<ReceiptPageTableDO> selectWithPage(const ReceiptTableQuery::Wrapper& query);
 };
 
+/**
+* 单据详情 数据模型
+*/
+class ReceiptDetailDAO : public BaseDAO
+{
+public:
+	// 查询数据详情
+	ReceiptDetailDO selectByRecptCode(const ReceiptDetailQuery::Wrapper& query);
+};
 
 
 

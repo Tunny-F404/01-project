@@ -15,7 +15,7 @@ ReceiptPageTableDTO::Wrapper ReceiptService::listAll(const ReceiptTableQuery::Wr
 	if (count <= 0) {
 		return pages;
 	}
-
+	
 	pages->total = count;
 	pages->calcPages();
 	std::list<ReceiptPageTableDO> result = dao.selectWithPage(query);
@@ -38,4 +38,27 @@ ReceiptPageTableDTO::Wrapper ReceiptService::listAll(const ReceiptTableQuery::Wr
 	}
 
 	return pages;
+}
+
+ReceiptDetailDTO::Wrapper ReceiptService::getDetail(const ReceiptDetailQuery::Wrapper& query)
+{
+	
+	ReceiptDetailDAO dao;
+	auto result = dao.selectByRecptCode(query);
+
+	// ½«DO×ª»»³ÉDTO
+	auto detail = ReceiptDetailDTO::createShared();
+
+	detail->recptId = result.getRecptId();
+	detail->recptCode = result.getRecptCode();
+	detail->recptName = result.getRecptName();
+	detail->vendorName = result.getVendorName();
+	detail->poCode = result.getPoCode();
+	detail->recptDate = result.getRecptDate();
+	detail->status = result.getStatus();
+	detail->warehouseName = result.getWarehouseName();
+	detail->remark = result.getRemark();
+
+
+	return detail;
 }

@@ -14,11 +14,32 @@ public:
 	ReceiptPageTableDO mapper(ResultSet* resultSet) const override
 	{
 		ReceiptPageTableDO data;
-		data.setRecptCode(resultSet->getString(1));
-		data.setRecptName(resultSet->getString(2));
-		data.setVendorName(resultSet->getString(3));
-		data.setPoCode(resultSet->getString(4));
-		data.setRecptDate(resultSet->getString(5));
+		data.setRecptId(resultSet->getUInt(1));
+		data.setRecptCode(resultSet->getString(2));
+		data.setRecptName(resultSet->getString(3));
+		data.setVendorName(resultSet->getString(4));
+		data.setPoCode(resultSet->getString(5));
+		data.setRecptDate(resultSet->getString(6));
+		data.setStatus(resultSet->getString(7));
+		return data;
+	}
+};
+
+class ReceiptDetailMapper : public Mapper<ReceiptDetailDO>
+{
+public:
+	ReceiptDetailDO mapper(ResultSet* resultSet) const override
+	{
+		ReceiptDetailDO data;
+		data.setRecptId(resultSet->getUInt(1));
+		data.setRecptCode(resultSet->getString(2));
+		data.setRecptName(resultSet->getString(3));
+		data.setVendorName(resultSet->getString(4));
+		data.setPoCode(resultSet->getString(5));
+		data.setRecptDate(resultSet->getString(6));
+		data.setStatus(resultSet->getString(7));
+		data.setWarehouseName(resultSet->getString(8));
+		data.setRemark(resultSet->getString(9));
 		return data;
 	}
 };

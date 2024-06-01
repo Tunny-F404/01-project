@@ -15,6 +15,9 @@ class ReceiptService
 public:
 	// 分页查询列表数据
 	ReceiptPageTableDTO::Wrapper listAll(const ReceiptTableQuery::Wrapper& query);
+
+	// 查询详细数据
+	ReceiptDetailDTO::Wrapper getDetail(const ReceiptDetailQuery::Wrapper& query);
 };
 
 #endif // !__RECEIPT_SERVICE_

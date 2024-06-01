@@ -41,11 +41,29 @@ uint64_t ReceiptPageTableDAO::count(const ReceiptTableQuery::Wrapper & query)
 std::list<ReceiptPageTableDO> ReceiptPageTableDAO::selectWithPage(const ReceiptTableQuery::Wrapper & query)
 {
 	stringstream sql;
-	sql << "select recptId, recptCode, recptName, vendorName, poCode, recptDate, status from wm_item_recpt";
+	sql << "select recpt_id, recpt_code, recpt_name, vendor_name, po_code, recpt_date, status from wm_item_recpt";
 	SAMPLE_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	ReceiptMapper mapper;
 	std::string sqlStr = sql.str();
 
 	return sqlSession->executeQuery<ReceiptPageTableDO, ReceiptMapper>(sqlStr, mapper, params);
+}
+
+ReceiptDetailDO ReceiptDetailDAO::selectByRecptCode(const ReceiptDetailQuery::Wrapper& query)
+{
+	stringstream sql;
+	sql << "select recpt_id, recpt_code, recpt_name, vendor_name, po_code, recpt_date, status, warehouse_name, remark from wm_item_recpt where 1=1";
+	SqlParams params;
+	if (query->recptCode) {
+		sql << " AND recpt_code=?"; 
+		SQLPARAMS_PUSH(params, "s", std::string, query->recptCode.getValue("")); 
+	}
+
+	ReceiptDetailMapper mapper;
+	std::string sqlStr = sql.str();
+
+	auto resultList = sqlSession->executeQuery<ReceiptDetailDO, ReceiptDetailMapper>(sqlStr, mapper, params);
+
+	return resultList.front();
 }
