@@ -3,7 +3,7 @@
 #define _PROCESS_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/vo/process/ProcessListVO.h"
+#include "domain/vo/process/ProcessListVo.h"
 #include "domain/query/process/ProcessListQuery.h"
 #include "domain/dto/process/ProcessListDTO.h"
 
@@ -12,7 +12,7 @@
 #include "domain/vo/process/ProcessProductsVO.h"
 #include "domain/query/process/ProcessQuery.h"
 
-#include "domain/vo/process/ComProVO.h"
+#include "domain/vo/process/ComProVo.h"
 #include "domain/dto/process/ComProDTO.h"
 #include "domain/query/process/ComProQuery.h"
 
