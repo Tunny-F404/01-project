@@ -28,7 +28,7 @@ const routes = [
   {
     path: '/un-6',
     name: 'UN6',
-    component: () => import('@/views/status/403.vue')
+    component: () => import('@/views/sample/productionmanagement/Processsetting.vue')
   },
   {
     path: '/un-7',
