@@ -12,9 +12,16 @@
 		"module": "ESNext",
 		"esModuleInterop": true,
 		// Web 应用需要 DOM 环境
-		"lib": ["ESNext", "ES2020", "DOM", "DOM.Iterable"],
+		"lib": [
+			"ESNext",
+			"ES2020",
+			"DOM",
+			"DOM.Iterable"
+		],
 		"paths": {
-			"@/*": ["src/*"]
+			"@/*": [
+				"src/*"
+			]
 		},
 		"skipLibCheck": true,
 		/* Bundler mode */
@@ -34,7 +41,8 @@
 			"element-plus/global",
 			"vite/client",
 			"node"
-		]
+		],
+		"allowJs": true
 	},
 	/** https://www.typescriptlang.org/tsconfig#include */
 	"include": [
@@ -50,7 +58,10 @@
 		"auto-imports.d.ts",
 		"components.d.ts"
 	],
-	"exclude": ["node_modules", "dist"],
+	"exclude": [
+		"node_modules",
+		"dist"
+	],
 	"references": [
 		{
 			"path": "./tsconfig.node.json"
