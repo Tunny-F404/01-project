@@ -3,13 +3,16 @@ package com.zeroone.star.project.j5.scheduleplan;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.PlanStatusDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanVO;
 import com.zeroone.star.project.vo.JsonVO;
 
-import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
 import org.springframework.http.ResponseEntity;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * <p>
@@ -60,20 +63,19 @@ public interface SchedulePlanApis {
      * @param rems 删除数据的id集合
      *  @author sailing
      */
-    JsonVO<Integer> removeSchPlan(Long[] rems);
+    JsonVO<Integer> removeSchPlan(List<Long> rems);
 
     /**
      * 修改计划状态
-     * @param schPlanDTO  修改状态模型
+     * @param planDTO  修改状态模型
      * @author sailing
      */
-    JsonVO<Integer>  modifySchPlanStatus(SchPlanDTO schPlanDTO);
+    JsonVO<Integer>  modifySchPlanStatus(PlanStatusDTO planDTO);
 
     /**
      * 导出排班计划
-     * @param condition 查询条件
      * @author interstellar
      */
-    ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition);
+    ResponseEntity<byte[]> exportSchPlan(List<Long> ids) throws IOException;
 
 }

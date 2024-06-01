@@ -1,9 +1,10 @@
 package com.zeroone.star.scheduleplan.controller;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.AddPlanDTO;
 import com.zeroone.star.project.j5.dto.scheduleplan.PlanDTO;
-import com.zeroone.star.project.j5.dto.scheduleplan.SchPlanDTO;
+import com.zeroone.star.project.j5.dto.scheduleplan.PlanStatusDTO;
 import com.zeroone.star.project.j5.query.scheduleplan.PlanPageQuery;
 import com.zeroone.star.project.j5.scheduleplan.SchedulePlanApis;
 import com.zeroone.star.project.j5.vo.scheduleplan.PlanListVO;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.Min;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * <p>
@@ -42,8 +45,7 @@ public class SchedulePlanController implements SchedulePlanApis {
     @GetMapping("query-by-id")
     @ApiOperation("获取计划详情")
     public JsonVO<PlanVO> queryPlanDetails(@Min(value = 1,message = "planId最小值为1") @RequestParam Long planId) {
-        PlanVO planDetails = calPlanService.queryPlanDetails(planId);
-        return planDetails != null ? JsonVO.success(planDetails) : JsonVO.fail(null);
+        return null;
     }
 
     @ApiOperation("添加计划")
@@ -61,23 +63,23 @@ public class SchedulePlanController implements SchedulePlanApis {
     @ApiOperation(value = "删除排班计划(可批量删除)")
     @DeleteMapping("delete-schedule-plan")
     @Override
-    public JsonVO<Integer> removeSchPlan(Long[] rems) {
-        return null;
+    public JsonVO<Integer> removeSchPlan(@RequestBody List<Long> rems) {
+        return calPlanService.removeSchPlan(rems) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
 
     @ApiOperation(value = "修改计划状态")
     @PutMapping("modify-plans-status")
     @Override
-    public JsonVO<Integer> modifySchPlanStatus(SchPlanDTO schPlanDTO) {
-        return null;
+    public JsonVO<Integer> modifySchPlanStatus(PlanStatusDTO planDTO) {
+        return calPlanService.modifySchPlanStatus(planDTO) ? JsonVO.success(1) : JsonVO.fail(0);
     }
 
 
     @ApiOperation(value = "导出计划")
-    @GetMapping("export-schedule-plan")
+    @PostMapping(value = "export-schedule-plan",produces = "application/octet-stream")
     @Override
-    public ResponseEntity<byte[]> exportSchPlan(PlanPageQuery condition) {
-        return null;
+    public ResponseEntity<byte[]> exportSchPlan(@RequestBody List<Long> ids) throws IOException {
+        return calPlanService.exportSchPlan(ids);
     }
 }
