@@ -49,7 +49,7 @@
                     <el-button link size="small" type="primary" icon="el-icon-edit"
                         @click="handleUpdate(row)">修改</el-button>
                     <el-button link size="small" type="primary" icon="el-icon-plus"
-                        @click="handleAdd(row)">新增</el-button>
+                        @click="handleAdd()">新增</el-button>
                     <el-button linksize="small" type="primary" icon="el-icon-delete"
                         @click="handleDelete(row)">删除</el-button>
                 </template>
@@ -145,7 +145,7 @@ const form = reactive({
     leader: '',
     phone: '',
     email: '',
-    status: '0'
+    status: 'active' // 默认状态设置为 'active'
 });
 const rules = reactive({
     parentId: [
@@ -173,12 +173,12 @@ const rules = reactive({
     ]
 });
 
-// 方法定义
-function getList() {
-    // 这里可以添加获取列表的逻辑
-}
 
+function getList() {
+    // 实现获取列表的逻辑，例如使用 Axios 请求后端数据
+}
 function normalizer(node) {
+    // 确保 node 是一个对象，并且包含您需要的属性
     if (node.children && !node.children.length) {
         delete node.children;
     }
@@ -189,22 +189,22 @@ function normalizer(node) {
     };
 }
 
+
 function cancel() {
     open.value = false;
     reset();
 }
 
 function reset() {
-    form.value = {
-        deptId: undefined,
-        parentId: undefined,
-        deptName: '',
-        orderNum: 0,
-        leader: '',
-        phone: '',
-        email: '',
-        status: "0"
-    };
+    // 重置表单数据
+    form.deptId = undefined;
+    form.parentId = undefined;
+    form.deptName = '';
+    form.orderNum = 0;
+    form.leader = '';
+    form.phone = '';
+    form.email = '';
+    form.status = 'active';
 }
 
 
@@ -213,14 +213,14 @@ function handleQuery() {
 }
 
 function resetQuery() {
-    reset();
+    // 重置查询参数
+    queryParams.deptName = '';
+    queryParams.status = '';
 }
 
-function handleAdd(row) {
+function handleAdd() {
+    // 处理新增操作
     reset();
-    if (row !== undefined) {
-        form.value.parentId = row.deptId;
-    }
     open.value = true;
     title.value = "添加部门";
 }
@@ -230,14 +230,21 @@ function toggleExpandAll() {
 }
 
 function handleUpdate(row) {
-    reset();
-    form.value = Object.assign({}, row);
+    form.deptId = row.deptId;
+    form.parentId = row.parentId;
+    form.deptName = row.deptName;
+    form.orderNum = row.orderNum;
+    form.leader = row.leader;
+    form.phone = row.phone;
+    form.email = row.email;
+    form.status = row.status;
     open.value = true;
     title.value = "修改部门";
 }
 
 function submitForm() {
     // 这里可以添加提交表单的逻辑
+    console.log('提交表单:', form);
     open.value = false;
 }
 
@@ -247,7 +254,8 @@ function handleDelete(row) {
 }
 
 function formatDate(date) {
-    // 格式化日期的逻辑
+    // 使用 JavaScript 的 Date 对象来格式化日期
+    return new Date(date).toLocaleDateString();
 }
 
 // 生命周期钩子
