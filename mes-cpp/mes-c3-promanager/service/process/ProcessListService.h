@@ -2,7 +2,7 @@
 #ifndef _PROCESSLIST_SERVICE_
 #define _PROCESSLIST_SERVICE_
 #include <list>
-#include "domain/vo/process/ProcessListVO.h"
+#include "domain/vo/process/ProcessListVo.h"
 #include "domain/query/process/ProcessListQuery.h"
 #include "domain/dto/process/ProcessListDTO.h"
 

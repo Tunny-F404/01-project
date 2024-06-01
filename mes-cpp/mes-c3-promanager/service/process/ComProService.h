@@ -2,7 +2,7 @@
 #ifndef _PROCESSPRO_SERVICE_
 #define _PROCESSPRO_SERVICE_
 #include <list>
-#include "domain/vo/process/ComProVO.h"
+#include "domain/vo/process/ComProVo.h"
 #include "domain/query/process/ComProQuery.h"
 #include "domain/dto/process/ComProDTO.h"
 
