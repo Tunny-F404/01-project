@@ -56,11 +56,14 @@
 		"tests/**/*.ts",
 		// 导入自动生成的类型声明文件
 		"auto-imports.d.ts",
-		"components.d.ts"
+		"components.d.ts",
+		"src/vite-env.d.ts"
 	],
 	"exclude": [
 		"node_modules",
-		"dist"
+		"dist",
+		"public",
+		"src/assets"
 	],
 	"references": [
 		{
