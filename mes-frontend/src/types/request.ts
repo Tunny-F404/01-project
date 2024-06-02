@@ -1,10 +1,3 @@
-// import Request from "api/request";
-
-// export type RequestMethod = typeof Request.GET | typeof Request.POST | typeof Request.PUT | typeof Request.DELETE;
-
-// const requestMethod = <const>[Request.GET, Request.POST, Request.PUT, Request.DELETE];
-
-// export type RequestMethod = (typeof ())
 import type { AxiosRequestConfig } from "axios";
 import type { PartialPick } from "type-plus";
 import type { Prettify } from "utils/Prettify";
@@ -21,6 +14,4 @@ export type UpType = UpTypes[keyof UpTypes];
 
 export type AxiosRequestConfigSimple = Prettify<PartialPick<AxiosRequestConfig, HttpConfigExtraKey>>;
 
-export interface Request extends RequestMethods {
-	// request<R>(): Promise<R>;
-}
+export interface Request extends RequestMethods {}
