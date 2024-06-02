@@ -45,13 +45,7 @@ public interface RoleApis {
      */
     public JsonVO<RoleDTO> queryRole(Integer id);
 
-    /**
-     *
-     * 设置数据权限回显
-     * @author 天衍土豆
-     * @return
-     */
-    public JsonVO<RolePermissionsDTO> queryRolePermissions(Integer id);
+
     /**
      * 设置数据权限
      * @author 天衍土豆

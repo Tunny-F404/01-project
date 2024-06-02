@@ -75,16 +75,7 @@ public class RoleController implements RoleApis {
         return JsonVO.success(result);
     }
 
-    /**
-     * 设置数据权限回显
-     */
-    @Override
-    @GetMapping("query-role-Permissions")
-    @ApiOperation("设置数据权限回显")
-    public JsonVO<RolePermissionsDTO> queryRolePermissions(Integer id) {
-        RolePermissionsDTO result = roleService.getPermissions(id);
-        return JsonVO.success(result);
-    }
+
 
 
     /**
@@ -109,6 +100,7 @@ public class RoleController implements RoleApis {
      * @return
      * @author 0xu0
      */
+    @Override
     @PostMapping("add-Role")
     @ApiOperation("添加角色")
     public JsonVO<Long> addRole(@RequestBody @Valid RoleAddDto roleDTO) {
@@ -116,7 +108,7 @@ public class RoleController implements RoleApis {
         if (add > 0) {
             return JsonVO.success(add);
         }
-        return JsonVO.fail(-1l);
+        return JsonVO.fail(-1L);
     }
     /***
      * 修改角色状态（角色页面，有个开关符号，控制停用和启用）
@@ -124,6 +116,7 @@ public class RoleController implements RoleApis {
      * @param roleStatusModifyDto
      * @return
      */
+    @Override
     @PostMapping("modify-RoleStatus")
     @ApiOperation("修改角色状态")
     public JsonVO<Integer> modifyRoleStatus(@RequestBody @Valid RoleStatusModifyDto roleStatusModifyDto){
@@ -147,6 +140,7 @@ public class RoleController implements RoleApis {
      * @param ids
      * @return
      */
+    @Override
     @DeleteMapping("delete-Roles")
     @ApiOperation("删除角色")
     public JsonVO<List<String>> deleteRoles(@RequestParam List<String> ids){
@@ -161,6 +155,7 @@ public class RoleController implements RoleApis {
      * @param roleDTO
      * @return
      */
+    @Override
     @PostMapping("modify-RoleInfo")
     @ApiOperation("修改角色信息")
     public JsonVO<Integer> modifyRoleInfo(@RequestBody @Valid RoleModifyDto roleDTO){

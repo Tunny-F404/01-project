@@ -185,6 +185,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
      * @param roleStatusModifyDto
      * @return
      */
+    @Override
     public Integer modifyRoleStatus(@RequestBody RoleStatusModifyDto roleStatusModifyDto) throws Exception {
         UpdateWrapper updateRoleStatus = new UpdateWrapper();
         updateRoleStatus.eq("role_id", roleStatusModifyDto.getRoleId());
@@ -211,6 +212,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
      * @return
      * @author 0xu0
      */
+    @Override
     public Integer deleteRoles(@RequestParam List<String> ids) {
         return roleMapper.deleteBatchIds(ids);
     }
@@ -221,6 +223,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
      * @param roleDTO
      * @return
      */
+    @Override
     public Integer modifyRoleInfo(@RequestBody RoleModifyDto roleDTO) throws Exception {
         UpdateWrapper updateRoleInfo = new UpdateWrapper();
         updateRoleInfo.eq("role_id", roleDTO.getRoleId());
@@ -239,6 +242,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
     /*
     * 查找该角色所分配的用户
     * */
+    @Override
     public List<UserRoleDTO> getUsersByRoleId(Long roleId, int offset, int limit) {
         List<UserDO> userDOList = userRoleMapper.getUsersByRoleId(roleId, offset, limit);
         return userDOList.stream()
