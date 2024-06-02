@@ -24,6 +24,7 @@
 #include "warehouse/DetailsPageController.h"
 #include "storagearea/AreaController.h"
 #include "storage_area/GetAreaDetailsController.h"
+#include "warehouseArea/warehouseAreaController.h"
 
 #include "add-del-mod/AddDelModController.h"
 #include"warehouse-settings/MergeMenuController.h"
@@ -66,6 +67,7 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(DetailsPageController);
 	ROUTER_SIMPLE_BIND(MergeMenuController);
 
+	ROUTER_SIMPLE_BIND(warehouseAreaController);
 }
 
 #ifdef HTTP_SERVER_DEMO

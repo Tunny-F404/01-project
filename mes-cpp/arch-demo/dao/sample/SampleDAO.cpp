@@ -21,7 +21,7 @@
 #include "SampleMapper.h"
 #include <sstream>
 
-//定义条件解析宏，减少重复代码
+//定义条件解析宏，减少重复代码:作用是根据query的对应字段是否有输入来动态地增加sql语句的查询条件
 #define SAMPLE_TERAM_PARSE(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \
@@ -42,7 +42,7 @@ uint64_t SampleDAO::count(const SampleQuery::Wrapper & query)
 {
 	stringstream sql;
 	sql << "SELECT COUNT(*) FROM sample";
-	SAMPLE_TERAM_PARSE(query, sql);
+	SAMPLE_TERAM_PARSE(query, sql);//将query里的条件加入到sql语句里(query的name sex age)
 	string sqlStr = sql.str();
 	return sqlSession->executeQueryNumerical(sqlStr, params);
 }
@@ -54,7 +54,7 @@ std::list<SampleDO> SampleDAO::selectWithPage(const SampleQuery::Wrapper& query)
 	SAMPLE_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	SampleMapper mapper;
-	string sqlStr = sql.str();
+	string sqlStr = sql.str(); 
 	return sqlSession->executeQuery<SampleDO, SampleMapper>(sqlStr, mapper, params);
 }
 
