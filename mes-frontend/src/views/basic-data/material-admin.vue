@@ -4,48 +4,49 @@ import  tableFrame  from '@/components/table-list-use/table-text.vue'
 import popUp from '@/components/table-list-use/table-components/pop-up.vue'
 import Request  from '@/apis/request.js'
 
-const tableList=ref([{
-    "ancestors": "1",
-  "createBy": "阿伟",
-  "enableFlag": "T",
-  "itemOrProduct": "os",
-  "itemTypeCode": "awnb",
-  "itemTypeId": 114514,
-  "itemTypeName": "金属",
-  "orderNum": 1,
-  "parentTypeId": 0,
-  "remark": "0x3f",
-  "updateBy": "东东哥"
-}
-]) 
+const tableList = ref([
+	{
+		ancestors: "1",
+		createBy: "阿伟",
+		enableFlag: "T",
+		itemOrProduct: "os",
+		itemTypeCode: "awnb",
+		itemTypeId: 114514,
+		itemTypeName: "金属",
+		orderNum: 1,
+		parentTypeId: 0,
+		remark: "0x3f",
+		updateBy: "东东哥",
+	},
+]);
 
 //dialog联系到表格弹窗
-const dialog=ref()
+const dialog = ref();
 
 //定义总条数
-const total=ref(13)
+const total = ref(13);
 
 //定义查询的数据
-const myInput=ref()
+const myInput = ref();
 
-const loading=ref(false)//loading状态
+const loading = ref(false); //loading状态
 
 //定义分类的请求参数
-const parms=ref({
-    // pagenum:1,//页数
-    // pagesize: 5,//当前每页面大小
-    // state:'',//状态
-    // classfiy:''
-    enableFlag: "",
-  itemOrProduct: "os",
-  itemTypeCode: "awnb",
-  itemTypeId: '',
-  itemTypeName: "金属",
-  orderNum: '', 
-  page:'', 
-  parentTypeId: '',
-  size:''
-})
+const parms = ref({
+	// pagenum:1,//页数
+	// pagesize: 5,//当前每页面大小
+	// state:'',//状态
+	// classfiy:''
+	enableFlag: "",
+	itemOrProduct: "os",
+	itemTypeCode: "awnb",
+	itemTypeId: "",
+	itemTypeName: "金属",
+	orderNum: "",
+	page: "",
+	parentTypeId: "",
+	size: "",
+});
 
 const getPageList= async (data)=>{
   //不知道跟着接口写的对不对，希望大佬看一看
@@ -119,8 +120,8 @@ const onSubmit=()=>{
 }
 //添加
 const onAddChannel = () => {
-  dialog.value.open({})
-}
+	dialog.value.open({});
+};
 
 const reFresh=()=>{
   myInput.value=''
@@ -199,7 +200,6 @@ const data = [
   
 ]
 </script>
-
 
 <template>
    <el-container>    
@@ -320,16 +320,13 @@ const data = [
       </el-container> 
 </template>
 
-
-
 <style lang="scss" scoped>
-.demo-form-inline{
-    .el-input {
-  --el-input-width: 220px;
+.demo-form-inline {
+	.el-input {
+		--el-input-width: 220px;
+	}
+	.el-select {
+		--el-select-width: 220px;
+	}
 }
-.el-select {
-  --el-select-width: 220px;
-}
-} 
-
 </style>

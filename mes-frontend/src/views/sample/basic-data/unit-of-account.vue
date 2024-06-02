@@ -5,36 +5,39 @@ import popUp from '@/components/table-list-use/table-components/pop-up.vue'
 import Request  from '@/apis/request.js'
 // defineOptions();
 
-const multipleSelection=ref([])
+const multipleSelection = ref([]);
+
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整
-const tableList=ref([{
-  "attr1": "自定义值1",
-  "attr2": "自定义值2",
-  "attr3": 100,
-  "attr4": 200,
-  "changeRate": 1,
-  "enableFlag": "Y",
-  "measureCode": "METER",
-  "measureName": "米",
-  "primaryFlag": "Y",
-  "primaryId": 1,
-  "remark": "这是主单位"
-},
-{
-  "attr1": "自定义值1",
-  "attr2": "自定义值2",
-  "attr3": 100,
-  "attr4": 200,
-  "changeRate": 1,
-  "enableFlag": "F",
-  "measureCode": "METER",
-  "measureName": "米",
-  "primaryFlag": "F",
-  "primaryId": 1,
-  "remark": "这是主单位"
-}
-]) 
+const tableList = ref([
+	{
+		attr1: "自定义值1",
+		attr2: "自定义值2",
+		attr3: 100,
+		attr4: 200,
+		changeRate: 1,
+		enableFlag: "Y",
+		measureCode: "METER",
+		measureName: "米",
+		primaryFlag: "Y",
+		primaryId: 1,
+		remark: "这是主单位",
+	},
+
+	{
+		attr1: "自定义值1",
+		attr2: "自定义值2",
+		attr3: 100,
+		attr4: 200,
+		changeRate: 1,
+		enableFlag: "Y",
+		measureCode: "METER",
+		measureName: "米",
+		primaryFlag: "Y",
+		primaryId: 1,
+		remark: "这是主单位",
+	},
+]);
 
 //dialog联系到表格弹窗
 const dialog = ref();
@@ -55,22 +58,22 @@ const parms = ref({
 	classfiy: "",
 });
 
-const getPageList= async (data)=>{
-  //不知道跟着接口写的对不对，希望大佬看一看
-  loading.value=true
- try {
-  const res=await Request.request(Request.GET,'/basicdata/md-unit-measure/list',data,null)
-  tableList.value=res.data.rows.data
-  parms.value.pagenum=res.data.pageIndex
-  parms.value.pagesize=res.data.pageSize
-  total.value=res.data.total
- } catch (error) {
-  console.log('错误或者超时');
- } 
+const getPageList = async (data) => {
+	//不知道跟着接口写的对不对，希望大佬看一看
+	loading.value = true;
+	try {
+		const res = await Request.request(Request.GET, "/basicdata/md-unit-measure/list", data, null);
+		tableList.value = res.data.rows.data;
+		parms.value.pagenum = res.data.pageIndex;
+		parms.value.pagesize = res.data.pageSize;
+		total.value = res.data.total;
+	} catch (error) {
+		console.log("错误或者超时");
+	}
 
-  loading.value=false
-}
-getPageList(null)//进来就加载一遍
+	loading.value = false;
+};
+getPageList(); //进来就加载一遍
 //处理分页逻辑
 //改变大小
 const onSizeChange = (size) => {
@@ -121,52 +124,63 @@ const onSubmit = () => {
 
 //添加
 const onAddChannel = () => {
-  dialog.value.open({})
-}
+	dialog.value.open({});
+};
 
-const reFresh=()=>{
-  myInput.value=''
-  unitName.value=''
-}
+const reFresh = () => {
+	myInput = "";
+	unitName = "";
+};
 
-const  handleSelectionChange=(val)=> {
-        this.multipleSelection = val;
- }
+const handleSelectionChange = (val) => {
+	this.multipleSelection = val;
+};
 </script>
 
 <template>
-        <!--分类，页面只有基本的表现，没有实现数据绑定-->
-        <tableFrame title="计算单位">
-    <template #extra>
-      <el-button @click="onSortChannel">导出数据     
-        <el-icon :size="20">
-    <UploadFilled /><!--排序图标-->
-        </el-icon>
-    </el-button>
-    <el-button @click="onAddChannel">添加    
-        <el-icon :size="20">
-    <Plus /><!--添加图标-->
-        </el-icon>
-    </el-button>
-    </template>
+	<!--分类，页面只有基本的表现，没有实现数据绑定-->
+	<tableFrame title="计算单位">
+		<template #extra>
+			<el-button @click="onSortChannel"
+				>导出数据
+				<el-icon :size="20"> <UploadFilled /><!--排序图标--> </el-icon>
+			</el-button>
+			<el-button @click="onAddChannel"
+				>添加
+				<el-icon :size="20"> <Plus /><!--添加图标--> </el-icon>
+			</el-button>
+		</template>
 
-    <!--表单区域-->
-    <el-form :inline="true"  class="demo-form-inline">
-  <el-form-item label="单位编码：" padding="50px">
-    <!--label是用户看，value是收集给后台的-->
-    <el-input v-model="myInput" clearable/>
-  </el-form-item>
-  <el-form-item label="单位名称" >
-    <el-input v-model="unitName" clearable/>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit"><el-icon><Search /></el-icon>查询</el-button>
-  </el-form-item>
-  <el-form-item>
-    <el-button plain @click="reFresh"><el-icon><RefreshLeft /></el-icon>重置</el-button>
-  </el-form-item>
-</el-form>
+		<!--表单区域-->
+		<el-form :inline="true" class="demo-form-inline">
+			<el-form-item label="单位编码：" padding="50px">
+				<!--label是用户看，value是收集给后台的-->
+				<el-input v-model="myInput" clearable />
+			</el-form-item>
+			<el-form-item label="单位名称">
+				<el-input v-model="unitName" clearable />
+			</el-form-item>
+			<el-form-item>
+				<el-button type="primary" @click="onSubmit"
+					><el-icon><Search /></el-icon>查询</el-button
+				>
+			</el-form-item>
+			<el-form-item>
+				<el-button plain @click="reFresh"
+					><el-icon><RefreshLeft /></el-icon>重置</el-button
+				>
+			</el-form-item>
+		</el-form>
 
+		<el-button type="primary" plain
+			><el-icon><Plus /></el-icon>新增</el-button
+		>
+		<el-button type="success" plain
+			><el-icon><EditPen /></el-icon>修改</el-button
+		>
+		<el-button type="danger" plain
+			><el-icon><Delete /></el-icon>删除</el-button
+		>
 <el-button type="primary"   @click="onAddChannel" plain><el-icon><Plus /></el-icon>新增</el-button>
 <el-button type="success" plain><el-icon><EditPen /></el-icon>修改</el-button>
 <el-button type="danger" plain><el-icon><Delete /></el-icon>删除</el-button>

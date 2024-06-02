@@ -21,7 +21,28 @@
 		"paths": {
 			"@/*": [
 				"src/*"
-			]
+			],
+			"components/*": [
+				"src/components/*"
+			],
+			"types/*": [
+				"src/types/*"
+			],
+			"views/*": [
+				"src/views/*"
+			],
+			"api/*": [
+				"src/apis/*"
+			],
+			"stores/*": [
+				"src/stores/*"
+			],
+			"router/*": [
+				"src/router/*"
+			],
+			"utils/*": [
+				"src/utils/*"
+			],
 		},
 		"skipLibCheck": true,
 		/* Bundler mode */
@@ -41,7 +62,10 @@
 			"element-plus/global",
 			"vite/client",
 			"node",
-		]
+			"qs",
+			"unplugin-auto-import",
+		],
+		"allowJs": true
 	},
 	/** https://www.typescriptlang.org/tsconfig#include */
 	"include": [
@@ -50,16 +74,19 @@
 		"src/**/*.tsx",
 		"src/**/*.vue",
 		"src",
-		// "typings",
+		"typings",
 		// 测试文件集
 		"tests/**/*.ts",
 		// 导入自动生成的类型声明文件
 		"auto-imports.d.ts",
 		"components.d.ts",
+		"src/vite-env.d.ts",
 	],
 	"exclude": [
 		"node_modules",
-		"dist"
+		"dist",
+		"public",
+		"src/assets"
 	],
 	"references": [
 		{

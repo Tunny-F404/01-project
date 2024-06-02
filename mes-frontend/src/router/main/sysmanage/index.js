@@ -5,9 +5,9 @@ const routes = [
 		component: () => import("@/views/status/404.vue"),
 	},
 	{
-		path: '/un-2',
-		name: 'UN2',
-		component: () => import('@/views//basic-data/material-admin.vue')
+		path: "/un-2",
+		name: "UN2",
+		component: () => import("@/views//basic-data/material-admin.vue"),
 	},
 	{
 		path: "/un-3",
@@ -17,7 +17,7 @@ const routes = [
 	{
 		path: "/un-4",
 		name: "UN4",
-		component: () => import("@/views/sample/basedata/Clientdemo2.vue"),
+		component: () => import("@/views/basedata/Clientdemo1.vue"),
 	},
 	{
 		path: "/un-5",
@@ -39,6 +39,18 @@ const routes = [
 		path: "/un-31",
 		name: "UN31",
 		component: () => import("@/views/warehouse-management/warehouse-management.vue"),
+	},
+	// 采购入库页面
+	{
+		path: "/un-32",
+		name: "UN32",
+		component: () => import("@/views/warehouse-management/purchase-in.vue"),
+	},
+	// 采购退货页面
+	{
+		path: "/un-33",
+		name: "UN33",
+		component: () => import("@/views/warehouse-management/PurchaseReturn.vue"),
 	},
 ];
 
