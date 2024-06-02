@@ -18,7 +18,7 @@
 */
 #include "stdafx.h"
 #include "DetailsPageService.h"
-#include "../../dao/warehouse\DetailsPageDAO.h"
+#include "../../dao/warehouse/DetailsPageDAO.h"
 DetailsPageDTO::Wrapper DetailsPageService::listAll(const DetailsPageQuery::Wrapper& query)
 {
 	// 构建返回对象

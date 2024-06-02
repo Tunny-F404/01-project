@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "RejectController.h"
 #include "domain/vo/BaseJsonVO.h"
-#include "domain\dto\PayloadDTO.h"
+#include "domain/dto/PayloadDTO.h"
 
 RejectPageJsonVO::Wrapper RejectController::execQueryReject(const RejectQuery::Wrapper& query, const PayloadDTO& payload)
 {
