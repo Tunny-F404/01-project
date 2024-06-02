@@ -5,7 +5,6 @@
 uint64_t RawMaterialOpService::saveData(const RawMaterialOpDTO::Wrapper& dto)
 {
 	RawMaterialOpDO data;
-	
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Rt_Id, rt_id, Rt_Code, rt_code, Rt_Name, rt_name,
 		Workororder_Id, workororder_id, Workororder_Code, workororder_code,
 		Warehouse_Id, warehouse_id, Warehouse_Code, warehouse_code, Warehouse_Name, warehouse_name,
@@ -22,7 +21,6 @@ uint64_t RawMaterialOpService::saveData(const RawMaterialOpDTO::Wrapper& dto)
 bool RawMaterialOpService::updateData(const RawMaterialOpDTO::Wrapper& dto)
 {
 	RawMaterialOpDO data;
-
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Rt_Id, rt_id, Rt_Code, rt_code, Rt_Name, rt_name,
 		Workororder_Id, workororder_id, Workororder_Code, workororder_code,
 		Warehouse_Id, warehouse_id, Warehouse_Code, warehouse_code, Warehouse_Name, warehouse_name,
@@ -72,7 +70,6 @@ RawMaterialOpPageDTO::Wrapper RawMaterialOpService::listAll(const RawMaterialOpQ
 			rt_date, Rt_Date,
 			remark, Remark);
 		pages->addData(dto);
-
 	}
 	return pages;
 }

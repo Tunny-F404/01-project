@@ -3,6 +3,7 @@
 #include "RawMaterialOpDAO.h"
 #include "RawMaterialOpMapper.h"
 #include <sstream>
+#include<iostream>
 
 //定义条件解析宏，减少重复代码
 #define RAWMATERIALOP_TERAM_PARSE(query, sql) \
@@ -86,7 +87,7 @@ uint64_t RawMaterialOpDAO::insert(const RawMaterialOpDO& iObj)
 
 int RawMaterialOpDAO::update(const RawMaterialOpDO& uObj)
 {
-    string sql = "UPDATE `wm_rt_issue` SET `rt_code`=?, `rt_name`=?,`workorder_id`=?, `workorder_code`=?, `warehouse_id`=?, `warehouse_code`=?, `warehouse_name`=?, `location_id`=?, `location_code`=?,`location_name`=?, `area_id`=?, `area_code`=?, `area_name`=?, `rt_date`=?, `remark`=? WHERE `rt_id`=?";
+    string sql = "UPDATE `wm_rt_issue` SET `rt_code`=?,`rt_name`=?,`workorder_id`=?,`workorder_code`=?,`warehouse_id`=?,`warehouse_code`=?,`warehouse_name`=?,`location_id`=?,`location_code`=?,`location_name`=?,`area_id`=?,`area_code`=?,`area_name`=?,`rt_date`=?,`remark`=? WHERE `rt_id`=?";
     return sqlSession->executeUpdate(sql, "%s%s%ull%s%ull%s%s%ull%s%s%ull%s%s%s%s%ull", uObj.getRt_Code(), uObj.getRt_Name(),
         uObj.getWorkororder_Id(), uObj.getWorkororder_Code(), uObj.getWarehouse_Id(), uObj.getWarehouse_Code(), uObj.getWarehouse_Name(),
         uObj.getLocation_Id(), uObj.getLocation_Code(), uObj.getLocation_Name(),

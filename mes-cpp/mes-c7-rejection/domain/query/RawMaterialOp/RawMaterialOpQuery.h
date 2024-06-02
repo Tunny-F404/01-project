@@ -18,11 +18,13 @@ class RawMaterialOpQuery : public PageQuery
 	DTO_FIELD_INFO(rt_id) {
 		info->description = ZH_WORDS_GETTER("RawMaterialOp.field.rt_id");
 	}
+
 	//退料单编号
 	DTO_FIELD(String, rt_code);
 	DTO_FIELD_INFO(rt_code) {
 		info->description = ZH_WORDS_GETTER("RawMaterialOp.field.rt_code");
 	}
+
 	// 退料单名称
 	DTO_FIELD(String, rt_name);
 	DTO_FIELD_INFO(rt_name) {
@@ -34,6 +36,7 @@ class RawMaterialOpQuery : public PageQuery
 	DTO_FIELD_INFO(workorder_id) {
 		info->description = ZH_WORDS_GETTER("RawMaterialOp.field.workororder_id");
 	}
+
 	// 生产工单编号
 	DTO_FIELD(String, workorder_code);
 	DTO_FIELD_INFO(workorder_code) {
