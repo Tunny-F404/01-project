@@ -64,8 +64,14 @@ export default antfu(
 			"no-console": "off",
 			// 设置为总是警告
 			// "style/semi": ["warn", "always"],
-			/**  */
+			/** @see https://typescript-eslint.io/rules/method-signature-style */
 			"@typescript-eslint/method-signature-style": "off",
+
+			/** @see https://typescript-eslint.io/rules/ban-ts-comment/ */
+			"@typescript-eslint/ban-ts-comment": "off",
+
+			/** @see https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/require-description.md */
+			"jsdoc/require-description": "off",
 		},
 	},
 

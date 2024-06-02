@@ -1,9 +1,15 @@
 import axios from "axios";
 import type { AxiosRequestConfig, AxiosStatic } from "axios";
 
-/** 这是阿伟学长预设好的全局http状态码 */
-interface HttpConfig {
-	/** 数据上传数据类型 */
+/**
+ * 这是阿伟学长预设好的全局http状态码
+ * @author 阿伟学长
+ */
+export interface HttpConfig {
+	/**
+	 * 数据上传数据类型
+	 * @author 阿伟学长
+	 */
 	upType: {
 		/** 表单类型 */
 		form: 0;
@@ -18,7 +24,21 @@ interface HttpConfig {
 		stream: 4;
 	};
 
-	/** HTTP状态码 */
+	/**
+	 * 请求方式
+	 * @author f1-阮喵喵
+	 */
+	requestMethod: {
+		GET: 1;
+		POST: 2;
+		PUT: 3;
+		DELETE: 4;
+	};
+
+	/**
+	 * HTTP状态码
+	 * @author 阿伟学长
+	 */
 	httpcode: {
 		/** 暂未登录或TOKEN已经过期 */
 		UNAUTHORIZED: 401;

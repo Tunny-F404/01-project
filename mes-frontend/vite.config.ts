@@ -77,6 +77,7 @@ export default ({ mode }) =>
 				api: fileURLToPath(new URL("./src/api", import.meta.url)),
 				stores: fileURLToPath(new URL("./src/stores", import.meta.url)),
 				router: fileURLToPath(new URL("./src/router", import.meta.url)),
+				utils: fileURLToPath(new URL("./src/utils", import.meta.url)),
 			},
 		},
 	});
