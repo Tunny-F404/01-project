@@ -34,6 +34,7 @@ class ProWorkOrderBomDO
 	CC_SYNTHESIZE(double, quantity, bQuantity);
 	CC_SYNTHESIZE(int, item_id, itemId);
 	CC_SYNTHESIZE(int, workorder_id, workOrderId);
+	CC_SYNTHESIZE(string, create_time, createTime);
 public:
 	ProWorkOrderBomDO() {
 		item_code = "";
@@ -44,6 +45,7 @@ public:
 		quantity = 0.0;
 		item_id = 0;
 		workorder_id = 0;
+		create_time = "";
 	}
 };
 

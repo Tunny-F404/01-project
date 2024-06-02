@@ -27,7 +27,7 @@ class ProWorkorderController : public oatpp::web::server::api::ApiController // 
 	// 3 定义接口
 public:
 	// 定义修改接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("ProdWorkorder.put.summary"), modifyProWorkorder, ModifyProWorkorderJsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("ProdWorkorder.put.summary"), modifyProWorkorder, Uint64JsonVO::Wrapper);
 	// 定义修改接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdWorkorder/modify", modifyProWorkorder, BODY_DTO(ModifyProWorkorderDTO::Wrapper, dto), execModifyProWorkdorder(dto));
 
@@ -67,7 +67,7 @@ public:
 
 private:
 	// 修改数据
-	ModifyProWorkorderJsonVO::Wrapper execModifyProWorkdorder(const ModifyProWorkorderDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyProWorkdorder(const ModifyProWorkorderDTO::Wrapper& dto);
 
 	// 删除数据
 	Uint64JsonVO::Wrapper execRemoveProWorkorder(const UInt64& workorderId);

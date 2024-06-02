@@ -3,9 +3,28 @@
 #include "../mes-c4-prodmgmt/service/ProdWorkorder/ProdWorkorderService.h"
 
 
-ModifyProWorkorderJsonVO::Wrapper ProWorkorderController::execModifyProWorkdorder(const ModifyProWorkorderDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProWorkorderController::execModifyProWorkdorder(const ModifyProWorkorderDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->workorderId || dto->workorderId <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ProdWorkorderService service;
+	// 执行数据修改
+	if (service.updateData(dto)) {
+		jvo->success(dto->workorderId);
+	}
+	else
+	{
+		jvo->fail(dto->workorderId);
+	}
+	// 响应结果
+	return jvo;
 }
 
 Uint64JsonVO::Wrapper ProWorkorderController::execRemoveProWorkorder(const UInt64& id)

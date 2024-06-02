@@ -11,6 +11,12 @@
 class ProdWorkorderDAO : public BaseDAO
 {
 public:
+	// 通过姓名查询数据
+	uint64_t selectByID(uint64_t workorder_id);
+	// 修改数据
+	int update(const ProdWorkorderDO& uObj);
+	
+	uint64_t countById(ProdWorkorderDO iObj);
 	// 通过ID完成生产工单
 	int completeById(uint64_t id);
 	// 通过ID删除生产工单
