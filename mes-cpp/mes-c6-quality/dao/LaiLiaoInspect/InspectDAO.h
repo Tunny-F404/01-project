@@ -23,6 +23,8 @@ public:
 	int update(const InspectDO& uObj);
 	// 通过ID删除数据
 	int deleteById(uint64_t iqc_id);
+	//确认检验单
+	int InspectDAO::Is_Ok(const InspectDO& uObj)
 };
 
 

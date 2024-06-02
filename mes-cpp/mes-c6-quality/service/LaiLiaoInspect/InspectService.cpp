@@ -86,5 +86,5 @@ bool InspectService::Is_Ok(const Item_idDTO::Wrapper& dto)
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Check_result, check_result,Iqc_id, iqc_id);
 	// 执行数据修改
 	InspectDAO dao;
-	return dao.update(data) == 1;
+	return dao.Is_Ok(data) == 1;
 }

@@ -138,8 +138,9 @@ Uint64JsonVO::Wrapper InspectController::execIs_OkInspect(const Item_idDTO::Wrap
 
 	// 定义一个Service
 	InspectService service;
-	// 执行数据修改
-	if (service.updateData(dto)) {
+
+	// 修改检验单状态为确认
+	if (service.Is_Ok(dto)) {
 		jvo->success(dto->iqc_id);
 	}
 	else
@@ -153,24 +154,5 @@ Uint64JsonVO::Wrapper InspectController::execIs_OkInspect(const Item_idDTO::Wrap
 //完成检验表
 Uint64JsonVO::Wrapper InspectController::execIs_FinishedInspect(const Item_idDTO::Wrapper& dto)
 {
-	// 定义返回数据对象
-	auto jvo = Uint64JsonVO::createShared();
-	// 参数校验
-	if (!dto->iqc_id || dto->iqc_id <= 0)
-	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		return jvo;
-	}
-	// 定义一个Service
-	InspectService service;
-	// 执行数据修改
-	if (service.updateData(dto)) {
-		jvo->success(dto->iqc_id);
-	}
-	else
-	{
-		jvo->fail(dto->iqc_id);
-	}
-	// 响应结果
-	return jvo;
+	return {};
 }
