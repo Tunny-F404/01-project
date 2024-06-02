@@ -5,6 +5,8 @@ import com.zeroone.star.project.j3.dto.NoticeDTO;
 import com.zeroone.star.sysmanager.entity.SysNotice;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 通知公告表 服务类
@@ -36,4 +38,10 @@ public interface ISysNoticeService extends IService<SysNotice> {
      */
     NoticeDTO queryNoticeById(Integer id);
 
+    /**
+     *
+     * @param ids 删除的公告ID集合
+     * @return
+     */
+    void removeNoticeByIds(List<Integer> ids);
 }
