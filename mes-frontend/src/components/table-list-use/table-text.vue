@@ -1,4 +1,3 @@
-//这是初始状态，可以添加更多东西
 <script setup>
 defineProps({
 	title: {

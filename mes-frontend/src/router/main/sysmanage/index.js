@@ -7,8 +7,7 @@ const routes = [
 	{
 		path: "/un-2",
 		name: "UN2",
-		// component: () => import('@/views/')
-		component: () => import("@/views/status/403.vue"),
+		component: () => import("@/views//basic-data/material-admin.vue"),
 	},
 	{
 		path: "/un-3",
