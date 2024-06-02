@@ -39,6 +39,9 @@ public:
 		DefectDO data;
 		data.setRecord_id(resultSet->getUInt64(1));
 		data.setIqc_id(resultSet->getUInt64(2));
+
+		//data.setIqc_id(resultSet->getUInt64("20"));
+
 		data.setLine_id(resultSet->getUInt64(3));
 		data.setDefect_name(resultSet->getString(4));
 		data.setDefect_level(resultSet->getString(5));
