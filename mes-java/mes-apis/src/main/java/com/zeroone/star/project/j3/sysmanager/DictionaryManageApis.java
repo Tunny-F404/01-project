@@ -29,18 +29,18 @@ import java.util.List;
  */
 public interface DictionaryManageApis {
     /**
-     *   修改字典
+     * 修改字典
      */
-    JsonVO<Void> editDictType(SysDictTypeModifyQuery sysDictTypeModifyQuery);
+    JsonVO<Integer> editDictType(SysDictTypeModifyQuery sysDictTypeModifyQuery);
 
     /**
-     *  批量删除字典
+     * 批量删除字典
      */
-    JsonVO<Void> deleteDictType(Long[] dictListIds);
+    JsonVO<Integer> deleteDictType(Long[] dictListIds);
     /**
-     *  导出字典
+     * 导出字典
      */
-    JsonVO<Void> exportDictType(SysDictTypeQuery sysDictTypeQuery);
+    ResponseEntity<byte[]> exportDictType(SysDictTypeQuery sysDictTypeQuery);
     /**
      *  刷新字典缓存
      */

@@ -3,6 +3,7 @@ package com.zeroone.star.sysmanager.mapper;
 import com.zeroone.star.sysmanager.entity.SysDictType;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -15,4 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysDictTypeMapper extends BaseMapper<SysDictType> {
 
+    SysDictType selectByType(@Param("dictType") String dictType);
+
+    int deleteDictTypeById(@Param("dictId") Long dictId);
 }

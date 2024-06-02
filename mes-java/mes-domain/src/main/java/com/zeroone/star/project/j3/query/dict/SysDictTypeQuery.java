@@ -20,8 +20,6 @@ import java.util.Date;
 @Data
 @ApiModel("字典类型查询类")
 public class SysDictTypeQuery extends PageQuery implements Serializable {
-
-
     @ApiModelProperty(value = "字典名称", example = "用户性别")
     private String dictName;
 
@@ -38,4 +36,11 @@ public class SysDictTypeQuery extends PageQuery implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建结束时间", example = "2022-04-07 00:29:32")
     private Date createEndTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "开始时间", example = "2022-04-07 00:29:32")
+    private Date startTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "结束时间", example = "2022-04-07 10:29:32")
+    private Date endTime;
 }

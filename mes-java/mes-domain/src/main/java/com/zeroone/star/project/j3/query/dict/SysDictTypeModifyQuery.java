@@ -8,6 +8,9 @@ import lombok.Data;
 @ApiModel("字典类型修改查询类")
 public class SysDictTypeModifyQuery {
 
+    @ApiModelProperty(value = "字典主键", example = "1")
+    private Long dictId;
+
     @ApiModelProperty(value = "字典名称", example = "用户性别")
     private String dictName;
 
