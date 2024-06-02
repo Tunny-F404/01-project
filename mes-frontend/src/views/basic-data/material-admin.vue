@@ -1,5 +1,5 @@
 <script setup >
-import {ref} from 'vue'
+import {ref,watch} from 'vue'
 import  tableFrame  from '@/components/table-list-use/table-text.vue' 
 import popUp from '@/components/table-list-use/table-components/pop-up.vue'
 import Request  from '@/apis/request.js'
@@ -87,13 +87,12 @@ loading.value=true
   loading.value=false
 }
  
-
-
 const onEditchannel=(row,$index)=>{
     //编辑
     dialog.value.open({row})
     console.log(row);
 }
+
 const onDelChannel=async (row)=>{
     //删除
     await ElMessageBox.confirm('你确认要删除该单位么', '温馨提示', {
@@ -131,15 +130,105 @@ const multipleSelection=ref([])
 const  handleSelectionChange=(val)=> {
         this.multipleSelection = val;
  }
+
+//树形组件相关配置
+//定义子节点
+const defaultProps = {
+  children: 'children',
+  label: 'label',
+}
+
+//定义树形组件中查询分类的名字
+const filterText = ref('')
+
+//定义下个节点有没有值
+const filterNode=(value, data)=> {
+        if (!value) return true;
+        return data.label.indexOf(value) !== -1;
+      }
+
+//监听过滤器
+const treeRef = ref();
+watch(filterText, (val) => {
+  this.$refs.treeRef.filter(val);
+})
+
+const data = [
+  {
+    id: 1,
+    label: '物料产品分类',
+    children: [
+      {
+        id: 4,
+        label: '原材料',
+        children: [
+          {
+            id: 9,
+            label: '金属',
+          },
+          {
+            id: 10,
+            label: '纸屑',
+          },
+        ]   
+      },
+      {
+        id:11,
+        label:'产品',
+        children:[
+          {
+            id:2,
+            label:'完美品'
+          },
+          {
+            id:3,
+            label:'瑕疵品'
+          },
+          {
+            id:5,
+            label:'普通品'
+          }
+        ]
+      },
+      {
+        id:6,
+        label:'其它'
+      }
+    ],
+  },
+  
+]
 </script>
 
 
 <template>
-        
-        <tableFrame title="物料产品管理">
+   <el-container>    
+    <el-aside width="200px" style="padding-top: 20px;">
+      <el-input
+    v-model="filterText"
+    style="width: 200px"
+    placeholder='请输入分类名称'
+  >
+  <!--prefix插槽使用，将搜索图标放在输入前面-->
+  <template #prefix>
+        <el-icon class="el-input__icon"><search /></el-icon>
+      </template>
+   </el-input>
+
+  <el-tree
+    ref="treeRef"
+    style="max-width: 200px"
+    class="filter-tree"
+    :data="data"
+    :props="defaultProps"
+    default-expand-all
+    :filter-node-method="filterNode"
+  />
+    </el-aside>
+
+    <el-main>
+    <tableFrame title="物料产品管理">
    
-
-
     <!--表单区域-->
     <el-form :inline="true"  class="demo-form-inline">
   <el-form-item label="分类名称：" padding="50px">
@@ -227,6 +316,8 @@ const  handleSelectionChange=(val)=> {
         </tableFrame>
 <!--引入的弹窗-->
         <pop-Up ref="dialog"> </pop-Up>
+      </el-main>
+      </el-container> 
 </template>
 
 

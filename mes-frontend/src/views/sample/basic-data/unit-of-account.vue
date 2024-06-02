@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
-import tableFrame from "@/components/table-list-use/table-text.vue";
-import popUp from "@/components/table-list-use/table-components/pop-up.vue";
-import request from "@/apis/request.js";
-
+import {ref} from 'vue'
+import  tableFrame  from '@/components/table-list-use/table-text.vue' 
+import popUp from '@/components/table-list-use/table-components/pop-up.vue'
+import Request  from '@/apis/request.js'
 // defineOptions();
 
 const multipleSelection=ref([])
