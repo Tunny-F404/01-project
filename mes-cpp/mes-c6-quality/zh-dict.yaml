@@ -19,7 +19,7 @@ inspect:
   summary: 完成检验单(修改检验单状态为已确认状态)
 
 
- iqc_id: 数据库表行id
+ iqc_id: 来料检验单id
  iqc_code: 来料检验单编号
  iqc_name: 来料检验单名称
  template_id: 检验模板ID
@@ -60,6 +60,8 @@ single:
   summary: 修改缺陷记录
  delete:
   summary: 删除缺陷记录
+ line_id: 记录ID
+ iqc_id: 检验单ID
  index_id: 检测项ID
  index_code: 检测项编码
  index_name: 检测项名称
@@ -73,7 +75,11 @@ single:
  index_remark: 检测项备注
 
  record_id: 缺陷ID(唯一标识)
+ qc_type: 检验单类型
+ qc_id: 检验单id
+ line: 检验单行ID
+ remark: 备注
  defect_name: 缺陷描述
  defect_level: 缺陷等级
  defect_quantity: 缺陷数量
- qc_id: 检验单id
+ 

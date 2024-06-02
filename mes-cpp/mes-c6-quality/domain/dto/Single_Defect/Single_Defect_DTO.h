@@ -8,10 +8,13 @@
 class SingleDTO :public oatpp::DTO
 {
 	DTO_INIT(SingleDTO, DTO);
-
+	//记录ID
+	API_DTO_FIELD_DEFAULT(UInt64, line_id, ZH_WORDS_GETTER("inspect.single.line_id"));
+	//检验单ID
+	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("inspect.single.iqc_id"));
 	// 检测项ID
 	API_DTO_FIELD_DEFAULT(UInt64, index_id, ZH_WORDS_GETTER("inspect.single.index_id"));
-	//检测项编码
+	//检测项编码                  
 	API_DTO_FIELD_DEFAULT(String, index_code, ZH_WORDS_GETTER("inspect.single.index_code"));
 	//检测项名称
 	API_DTO_FIELD_DEFAULT(String, index_name, ZH_WORDS_GETTER("inspect.single.index_name"));
@@ -36,7 +39,7 @@ class SingleDTO :public oatpp::DTO
 	//轻微缺陷数量
 	API_DTO_FIELD_DEFAULT(Int64, min_quantity, ZH_WORDS_GETTER("inspect.min_quantity"));
 	//检测项备注
-	API_DTO_FIELD_DEFAULT(String, index_remark, ZH_WORDS_GETTER("inspect.single.index_remark"));
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("inspect.single.index_remark"));
 };
 
 class SinglePageDTO : public PageDTO<SingleDTO::Wrapper>
@@ -49,15 +52,22 @@ class DefectDTO : public oatpp::DTO
 {
 	DTO_INIT(DefectDTO, DTO);
 	//缺陷ID(唯一标识)
-	API_DTO_FIELD_DEFAULT(UInt64, record_id, ZH_WORDS_GETTER("inspect.single.record_id"));
-	//缺陷描述
-	API_DTO_FIELD_DEFAULT(UInt64, defect_name, ZH_WORDS_GETTER("inspect.single.defect_name"));
-	//缺陷等级
-	API_DTO_FIELD_DEFAULT(String, defect_level, ZH_WORDS_GETTER("inspect.single.defect_level"));
-	//缺陷数量
-	API_DTO_FIELD_DEFAULT(String, defect_quantity, ZH_WORDS_GETTER("inspect.single.defect_quantity"));
+	API_DTO_FIELD_DEFAULT(UInt64, record_id, ZH_WORDS_GETTER("single.record_id"));
+	//检验单类型
+	API_DTO_FIELD_DEFAULT(String, qc_type, ZH_WORDS_GETTER("single.qc_type"));
 	//检验单ID
-	API_DTO_FIELD_DEFAULT(String, qc_id, ZH_WORDS_GETTER("inspect.single.qc_id"));
+	API_DTO_FIELD_DEFAULT(UInt64, qc_id, ZH_WORDS_GETTER("single.qc_id"));
+	//检验单行ID
+	API_DTO_FIELD_DEFAULT(UInt64, line_id, ZH_WORDS_GETTER("single.line"));
+	//缺陷描述
+	API_DTO_FIELD_DEFAULT(String, defect_name, ZH_WORDS_GETTER("single.defect_name"));
+	//缺陷等级
+	API_DTO_FIELD_DEFAULT(String, defect_level, ZH_WORDS_GETTER("single.defect_level"));
+	//缺陷数量
+	API_DTO_FIELD_DEFAULT(Int64, defect_quantity, ZH_WORDS_GETTER("single.defect_quantity"));
+	//备注
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("single.remark"));
+	
 };
 
 //缺陷分页

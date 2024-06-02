@@ -12,17 +12,19 @@ class SingleQuery :public PageQuery
 {
 	DTO_INIT(SingleQuery, PageQuery);
 
-	// 检测项ID
-	API_DTO_FIELD_DEFAULT(UInt64, index_id, ZH_WORDS_GETTER("inspect.single.index_id"));
+	// 检验单ID
+	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("single.qc_id"));
 
 };
+
+
 
 class DefectQuery :public PageQuery
 {
 	DTO_INIT(DefectQuery, PageQuery);
 
 	// 检验单ID
-	API_DTO_FIELD_DEFAULT(UInt64, qc_id, ZH_WORDS_GETTER("inspect.single.qc_id"));
+	API_DTO_FIELD_DEFAULT(UInt64, qc_id, ZH_WORDS_GETTER("single.iqc_id"));
 
 };
 

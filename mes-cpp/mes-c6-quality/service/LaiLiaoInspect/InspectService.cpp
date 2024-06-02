@@ -71,7 +71,7 @@ bool InspectService::updateData(const InspectDTO::Wrapper& dto)
 	return dao.update(data) == 1;
 }
 
-
+//É¾³ý
 bool InspectService::removeData(uint64_t id)
 {
 	InspectDAO dao;
