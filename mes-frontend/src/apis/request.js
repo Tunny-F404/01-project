@@ -33,8 +33,8 @@ export default class Request {
 	static request(method, url, data, upType, options = null) {
 		// 组装参数
 		const config = {
-			url: url,
-			upType: upType,
+			url,
+			upType,
 			...options,
 		};
 		switch (method) {
