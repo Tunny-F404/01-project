@@ -54,7 +54,7 @@ public:
 		rt_name = "";
 		workororder_id = -1;
 		workororder_code = "";
-		warehouse_id = -1;
+		warehouse_id = 1;
 		warehouse_code = "";
 		warehouse_name = "";
 		location_id = -1;
