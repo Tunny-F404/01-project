@@ -98,6 +98,8 @@ class Item_idDTO :public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
 	//¼ì²â½á¹û
 	API_DTO_FIELD_DEFAULT(String, check_result, ZH_WORDS_GETTER("inspect.check_result"));
+	//×´Ì¬
+	API_DTO_FIELD_DEFAULT(String, list_status, ZH_WORDS_GETTER("inspect.list_status"));
 };
 
 

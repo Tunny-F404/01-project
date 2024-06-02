@@ -147,8 +147,8 @@ int InspectDAO::deleteById(uint64_t iqc_id)
 
 int InspectDAO::Is_Ok(const InspectDO& uObj)
 {
-	string sql = "UPDATE `qc_iqc` SET `check_result` = ? WHERE `iqc_id` = ?;";
+	string sql = "UPDATE `qc_iqc` SET `status` = ? WHERE `iqc_id` = ?;";
 	return sqlSession->executeUpdate(sql, "%s%ull",
-		uObj.getCheck_result(),
+		uObj.getList_status(),
 		uObj.getIqc_id());
 }

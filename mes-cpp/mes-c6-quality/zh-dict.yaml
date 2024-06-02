@@ -14,9 +14,9 @@ inspect:
  table: 
   summary: 查看报表
  is_ok: 
-  summary: 确认检验单(修改检验单状态为草稿状态)
+  summary: 确认检验单(修改检验单状态为已确认状态)
  finished:
-  summary: 完成检验单(修改检验单状态为已确认状态)
+  summary: 完成检验单(修改检验单状态为已完成状态)
 
 
  iqc_id: 来料检验单id

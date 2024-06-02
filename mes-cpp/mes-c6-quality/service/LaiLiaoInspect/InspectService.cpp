@@ -83,7 +83,7 @@ bool InspectService::Is_Ok(const Item_idDTO::Wrapper& dto)
 {
 	// 组装DO数据
 	InspectDO data;
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Check_result, check_result,Iqc_id, iqc_id);
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, List_status,list_status,Iqc_id, iqc_id);
 	// 执行数据修改
 	InspectDAO dao;
 	return dao.Is_Ok(data) == 1;
