@@ -38,7 +38,7 @@ DefectPageDTO::Wrapper Single_Defect_Service::listAll_Defect(const DefectQuery::
 	// 构建返回对象
 	auto pages = DefectPageDTO::createShared();
 	pages->pageIndex = query->pageIndex;
-	pages->pageSize = query->pageSize;
+	pages->pageSize = query->pageSize; 
 
 	// 查询数据总条数
 	Single_Defect_DAO dao;
@@ -56,7 +56,7 @@ DefectPageDTO::Wrapper Single_Defect_Service::listAll_Defect(const DefectQuery::
 	for (DefectDO sub : result)
 	{
 		auto dto = DefectDTO::createShared();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, record_id, Record_id, qc_type, Qc_type, qc_id, Qc_id, line_id, Line_id, defect_name, Defect_name, defect_level, Defect_level, defect_quantity, Defect_quantity, remark, Remark);
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, record_id, Record_id, iqc_id, Iqc_id, line_id, Line_id, defect_name, Defect_name, defect_level, Defect_level, defect_quantity, Defect_quantity, remark, Remark);
 		pages->addData(dto);
 	}
 	return pages;
@@ -64,7 +64,12 @@ DefectPageDTO::Wrapper Single_Defect_Service::listAll_Defect(const DefectQuery::
 
 uint64_t Single_Defect_Service::saveData(const DefectDTO::Wrapper& dto)
 {
-	return {};
+	//组装DO数据
+	DefectDO data;
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Record_id, record_id, Iqc_id, iqc_id, Line_id, line_id, Defect_name, defect_name, Defect_level, defect_level, Defect_quantity, defect_quantity, Remark, remark);
+	//执行数据添加
+	Single_Defect_DAO dao;
+	return dao.insert(data);
 }
 
 bool Single_Defect_Service::updateData(const DefectDTO::Wrapper& dto)
@@ -72,7 +77,8 @@ bool Single_Defect_Service::updateData(const DefectDTO::Wrapper& dto)
 	return {};
 }
 
-bool Single_Defect_Service::removeData(uint64_t id)
+bool Single_Defect_Service::removeData(uint64_t record_id)
 {
-	return {};
+	Single_Defect_DAO dao;
+	return dao.deleteById(record_id) == 1;
 }

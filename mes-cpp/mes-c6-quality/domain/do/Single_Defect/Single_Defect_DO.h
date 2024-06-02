@@ -89,10 +89,8 @@ class DefectDO
 {
 	//缺陷ID
 	CC_SYNTHESIZE(uint64_t, record_id, Record_id);
-	//检验单类型
-	CC_SYNTHESIZE(string, qc_type, Qc_type);
 	//来料检验单ID
-	CC_SYNTHESIZE(uint64_t, qc_id, Qc_id);
+	CC_SYNTHESIZE(uint64_t, iqc_id, Iqc_id);
 	//来料检验单行ID
 	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
 	//缺陷描述
@@ -122,8 +120,7 @@ class DefectDO
 public:
 	DefectDO() {
 		record_id = 0;
-		qc_type = "";
-		qc_id = 0;
+		iqc_id = 0;
 		line_id = 0;
 		defect_name = "";
 		defect_level = "";

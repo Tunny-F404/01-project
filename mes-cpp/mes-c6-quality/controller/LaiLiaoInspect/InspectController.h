@@ -51,7 +51,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "inspector", ZH_WORDS_GETTER("inspect.inspector"), "", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/inspect/search_all", queryInspect, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/incoming_inspect/search_all", queryInspect, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, InspectQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -70,7 +70,7 @@ public:
 	API_DEF_ADD_QUERY_PARAMS(UInt64, "iqc_id", ZH_WORDS_GETTER("inspect.iqc_id"), 1, true);
 	}
 	// 3.2 定义查询来料检验详情接口处理
-	ENDPOINT(API_M_GET, "/Inspect/detail", queryInspect_detail, QUERY(UInt64, iqc_id), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/incoming_inspect/detail", queryInspect_detail, QUERY(UInt64, iqc_id), API_HANDLER_AUTH_PARAME) {
 
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execInspect_detail(iqc_id));
@@ -79,7 +79,7 @@ public:
 	//3.1 定义查看报表接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.table.summary"), lookTable, StringJsonVO::Wrapper);
 	// 3.2 定义查看报表接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/inspect/table", lookTable, BODY_DTO(oatpp::List<UInt64>, ids), execLookTable(ids));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/incoming_inspect/table", lookTable, BODY_DTO(oatpp::List<UInt64>, ids), execLookTable(ids));
 
 	// 3.1 定义新增接口描述
 	ENDPOINT_INFO(addInspect) {
@@ -91,7 +91,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/inspect/add", addInspect, BODY_DTO(InspectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/incoming_inspect/add", addInspect, BODY_DTO(InspectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddInspect(dto));
 	}
@@ -99,7 +99,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.change.summary"), modifyInspect, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspect/change", modifyInspect, BODY_DTO(InspectDTO::Wrapper, dto), execModifyInspect(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/incoming_inspect/change", modifyInspect, BODY_DTO(InspectDTO::Wrapper, dto), execModifyInspect(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeInspect) {
@@ -109,22 +109,22 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "iqc_id", ZH_WORDS_GETTER("Inspect.iqc_id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/inspect/delete/{iqc_id}", removeInspect, PATH(UInt64, iqc_id), execRemoveInspect(iqc_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/incoming_inspect/delete/{iqc_id}", removeInspect, PATH(UInt64, iqc_id), execRemoveInspect(iqc_id));
 
 	// 3.1 定义导出接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.export.summary"), exportInspect, StringJsonVO::Wrapper);
 	// 3.2 定义导出接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/inspect/export", exportInspect, BODY_DTO(oatpp::List<UInt64>, ids),execExportInspect(ids));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/incoming_inspect/export", exportInspect, BODY_DTO(oatpp::List<UInt64>, ids),execExportInspect(ids));
 
 	// 3.1 定义确认检验单接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.is_ok.summary"), Is_OkInspect, Uint64JsonVO::Wrapper);
 	// 3.2 定义确认检验单接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspect/is_ok", Is_OkInspect, BODY_DTO(Item_idDTO::Wrapper, dto), execIs_OkInspect(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/incoming_inspect/is_ok", Is_OkInspect, BODY_DTO(Item_idDTO::Wrapper, dto), execIs_OkInspect(dto));
 
 	// 3.1 定义完成检验单接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.finished.summary"), Is_FinishedInspect, Uint64JsonVO::Wrapper);
 	// 3.2 定义完成检验单接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspect/finished", Is_FinishedInspect, BODY_DTO(Item_idDTO::Wrapper, dto),execIs_FinishedInspect(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/incoming_inspect/finished", Is_FinishedInspect, BODY_DTO(Item_idDTO::Wrapper, dto),execIs_FinishedInspect(dto));
 
 
 private:

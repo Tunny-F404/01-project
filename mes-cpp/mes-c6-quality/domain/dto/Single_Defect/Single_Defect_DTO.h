@@ -53,11 +53,13 @@ class DefectDTO : public oatpp::DTO
 	DTO_INIT(DefectDTO, DTO);
 	//缺陷ID(唯一标识)
 	API_DTO_FIELD_DEFAULT(UInt64, record_id, ZH_WORDS_GETTER("single.record_id"));
-	//检验单类型
-	API_DTO_FIELD_DEFAULT(String, qc_type, ZH_WORDS_GETTER("single.qc_type"));
-	//检验单ID
-	API_DTO_FIELD_DEFAULT(UInt64, qc_id, ZH_WORDS_GETTER("single.qc_id"));
-	//检验单行ID
+	//来料检验单ID
+	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("single.iqc_id"));
+	////检验单类型
+	//API_DTO_FIELD_DEFAULT(String, qc_type, ZH_WORDS_GETTER("single.qc_type"));
+	////检验单ID
+	//API_DTO_FIELD_DEFAULT(UInt64, qc_id, ZH_WORDS_GETTER("single.qc_id"));
+	//来料检验单行ID
 	API_DTO_FIELD_DEFAULT(UInt64, line_id, ZH_WORDS_GETTER("single.line"));
 	//缺陷描述
 	API_DTO_FIELD_DEFAULT(String, defect_name, ZH_WORDS_GETTER("single.defect_name"));

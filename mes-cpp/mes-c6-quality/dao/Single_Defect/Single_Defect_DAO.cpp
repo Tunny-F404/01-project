@@ -5,19 +5,19 @@
 
 //定义条件解析宏，减少重复代码
 #define SAMPLE_TERAM_PARSE1(query, sql) \
-SqlParams params; \
+SqlParams params1; \
 sql<<" WHERE 1=1"; \
 if (query->iqc_id) { \
 	sql << " AND `iqc_id`=?"; \
-	SQLPARAMS_PUSH(params, "ull", std::uint64_t, query->iqc_id.getValue(0)); \
+	SQLPARAMS_PUSH(params1, "ull", std::uint64_t, query->iqc_id.getValue(0)); \
 } 
 
 #define SAMPLE_TERAM_PARSE2(query, sql) \
-SqlParams params; \
+SqlParams params2; \
 sql<<" WHERE 1=1"; \
-if (query->qc_id) { \
-	sql << " AND `qc_id`=?"; \
-	SQLPARAMS_PUSH(params, "ull", std::uint64_t, query->qc_id.getValue(0)); \
+if (query->line_id) { \
+	sql << " AND `line_id`=?"; \
+	SQLPARAMS_PUSH(params2, "ull", std::uint64_t, query->line_id.getValue(0)); \
 } 
 
 // 统计检测项表数据条数
@@ -28,16 +28,16 @@ uint64_t Single_Defect_DAO::count_Index(const SingleQuery::Wrapper & query)
 	sql << "SELECT COUNT(*) FROM qc_iqc_line ";
 	SAMPLE_TERAM_PARSE1(query, sql);
 	string sqlStr = sql.str();
-	return sqlSession->executeQueryNumerical(sqlStr, params);
+	return sqlSession->executeQueryNumerical(sqlStr, params1);
 }
 
 uint64_t Single_Defect_DAO::count_Defect(const DefectQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT COUNT(*) FROM qc_defect_record ";
+	sql << "SELECT COUNT(*) FROM qc_iqc_defect ";
 	SAMPLE_TERAM_PARSE2(query, sql);
 	string sqlStr = sql.str();
-	return sqlSession->executeQueryNumerical(sqlStr, params);
+	return sqlSession->executeQueryNumerical(sqlStr, params2);
 }
 
 list<IndexDO> Single_Defect_DAO::selectIndexPage(const SingleQuery::Wrapper& query)
@@ -48,29 +48,32 @@ list<IndexDO> Single_Defect_DAO::selectIndexPage(const SingleQuery::Wrapper& que
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	IndexMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<IndexDO, IndexMapper>(sqlStr, mapper, params);
+	return sqlSession->executeQuery<IndexDO, IndexMapper>(sqlStr, mapper, params1);
 }
 
 list<DefectDO> Single_Defect_DAO::selectDefectPage(const DefectQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT record_id,qc_type,qc_id,line_id,defect_name,defect_level,defect_quantity,remark FROM  qc_defect_record";
+	sql << "SELECT record_id,iqc_id,line_id,defect_name,defect_level,defect_quantity,remark FROM  qc_iqc_defect";
 	SAMPLE_TERAM_PARSE2(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	DefectMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<DefectDO, DefectMapper>(sqlStr, mapper, params);
+	return sqlSession->executeQuery<DefectDO, DefectMapper>(sqlStr, mapper, params2);
 }
 
 uint64_t Single_Defect_DAO::insert(const DefectDO& iObj)
 {
-	//string sql = "INSERT INTO `qc_iqc` ( `iqc_id`,`iqc_code`,) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?)";//
-	//return sqlSession->executeInsert(sql, "%ull%s%s%ull%ull%s%s%s%s%ull%s%s%d%i%i%s%s%s%s%s%s",  //
-	//	iObj.getIqc_id(),
-	//	
-	//);
-
-	return{};
+	string sql = "INSERT INTO `qc_iqc_defect` ( `record_id`,`iqc_id`,`line_id`,`defect_name`,`defect_level`,`defect_quantity`,`remark`) VALUES (?, ?, ?, ?, ?, ?, ?)";//
+	return sqlSession->executeInsert(sql, "%ull%ull%ull%s%s%i%s",  //
+		iObj.getRecord_id(),
+		iObj.getIqc_id(),
+		iObj.getLine_id(),
+		iObj.getDefect_name(),
+		iObj.getDefect_level(),
+		iObj.getDefect_quantity(),
+		iObj.getRemark()
+	);
 }
 
 int Single_Defect_DAO::update(const DefectDO& uObj)
@@ -78,7 +81,8 @@ int Single_Defect_DAO::update(const DefectDO& uObj)
 	return{};
 }
 
-int Single_Defect_DAO::deleteById(uint64_t iqc_id)
+int Single_Defect_DAO::deleteById(uint64_t record_id)
 {
-	return{};
+	string sql = "DELETE FROM `qc_iqc_defect` WHERE `record_id`=?";
+	return sqlSession->executeUpdate(sql, "%ull", record_id);
 }

@@ -61,7 +61,7 @@ single:
  delete:
   summary: 删除缺陷记录
  line_id: 记录ID
- iqc_id: 检验单ID
+ iqc_id: 来料检验单ID
  index_id: 检测项ID
  index_code: 检测项编码
  index_name: 检测项名称
@@ -75,9 +75,7 @@ single:
  index_remark: 检测项备注
 
  record_id: 缺陷ID(唯一标识)
- qc_type: 检验单类型
- qc_id: 检验单id
- line: 检验单行ID
+ line: 来料检验单行ID
  remark: 备注
  defect_name: 缺陷描述
  defect_level: 缺陷等级

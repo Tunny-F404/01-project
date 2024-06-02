@@ -34,7 +34,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "iqc_id", ZH_WORDS_GETTER("single.iqc_id"), 1, true);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/single/search", querySingle, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "incoming_inspect/index-search", querySingle, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, SingleQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -52,10 +52,10 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "qc_id", ZH_WORDS_GETTER("single.qc_id"), 1, false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("single.line"), 1, false);
 	}
 	// 3.2 定义查询缺陷接口处理
-	ENDPOINT(API_M_GET, "/single/defect/search", queryDefect, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "incoming_inspect/defect-search", queryDefect, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, DefectQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -72,7 +72,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增缺陷接口处理
-	ENDPOINT(API_M_POST, "/single/add", addDefect, BODY_DTO(DefectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "incoming_inspect/defect-add", addDefect, BODY_DTO(DefectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddDefect(dto));
 	}
@@ -80,7 +80,7 @@ public:
 	// 3.1 定义修改缺陷接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("single.change.summary"), modifyDefect, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改缺陷接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/single/change", modifyDefect, BODY_DTO(DefectDTO::Wrapper, dto), execModifyDefect(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "incoming_inspect/defect-change", modifyDefect, BODY_DTO(DefectDTO::Wrapper, dto), execModifyDefect(dto));
 
 	// 3.1 定义删除缺陷接口描述
 	ENDPOINT_INFO(removeDefect) {
@@ -90,7 +90,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "record_id", ZH_WORDS_GETTER("single.record_id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/single/{record_id}", removeDefect, PATH(UInt64, record_id), execRemoveDefect(record_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "incoming_inspect/defect-delete/{record_id}", removeDefect, PATH(UInt64, record_id), execRemoveDefect(record_id));
 
 	
 private:
@@ -103,7 +103,7 @@ private:
 	// 3.3 演示修改缺陷数据
 	Uint64JsonVO::Wrapper execModifyDefect(const DefectDTO::Wrapper& dto);
 	// 3.3 演示删除缺陷数据
-	Uint64JsonVO::Wrapper execRemoveDefect(const UInt64& id);
+	Uint64JsonVO::Wrapper execRemoveDefect(const UInt64& record_id);
 };
 
 // 0 取消API控制器使用宏

@@ -38,14 +38,12 @@ public:
 	{
 		DefectDO data;
 		data.setRecord_id(resultSet->getUInt64(1));
-		data.setQc_type(resultSet->getString(2));
-		data.setQc_id(resultSet->getInt64(3));
-		data.setLine_id(resultSet->getInt64(4));
-		data.setDefect_name(resultSet->getString(5));
-		data.setDefect_level(resultSet->getString(6));
-		data.setDefect_quantity(resultSet->getInt64(7));
-		data.setRemark(resultSet->getString(8));
-
+		data.setIqc_id(resultSet->getUInt64(2));
+		data.setLine_id(resultSet->getUInt64(3));
+		data.setDefect_name(resultSet->getString(4));
+		data.setDefect_level(resultSet->getString(5));
+		data.setDefect_quantity(resultSet->getInt(6));
+		data.setRemark(resultSet->getString(7));
 		return data;
 	}
 };
