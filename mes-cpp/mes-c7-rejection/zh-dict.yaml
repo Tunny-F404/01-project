@@ -45,6 +45,7 @@ RawMaterialOp:
   download: 
    summary: 退料单据导出
    filename: 导出文件名称和格式
+
  reject: 
  fields:
   rt_code: 退料单编号
@@ -69,3 +70,4 @@ RawMaterialOp:
   location_code: 库区编码
   area_id: 库位id
   area_code: 库位编码
+

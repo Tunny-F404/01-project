@@ -335,7 +335,7 @@ public:
 
   template<class OtherT>
   DTOWrapper(OtherT&& other)
-    : type::ObjectWrapper<ObjT, __class::Object<ObjT>>(std::move(other.m_ptr))
+  : type::ObjectWrapper<ObjT, __class::Object<ObjT>>(std::move(other.m_ptr))
   {}
 
   static DTOWrapper createShared() {

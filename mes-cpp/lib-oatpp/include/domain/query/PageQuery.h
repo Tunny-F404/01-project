@@ -36,7 +36,7 @@ class PageQuery : public oatpp::DTO
 #ifndef LINUX
 		info->description = u8"当前页码";
 #else
-		info->description = "curr page index";
+		info->description = "curr.page.index";
 #endif
 	}
 	// 查询条数
@@ -45,7 +45,7 @@ class PageQuery : public oatpp::DTO
 #ifndef LINUX
 		info->description = u8"每页数据条数";
 #else
-		info->description = "curr page size";
+		info->description = "curr.page.size";
 #endif
 	}
 };

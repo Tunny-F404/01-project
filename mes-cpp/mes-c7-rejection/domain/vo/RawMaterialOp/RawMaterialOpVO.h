@@ -24,4 +24,4 @@ class RawMaterialOpPageJsonVO : public JsonVO<RawMaterialOpPageDTO::Wrapper> {
 
 #include OATPP_CODEGEN_END(DTO)
 
-#endif // !_MATERIALINFORMATION_VO_
+#endif 
