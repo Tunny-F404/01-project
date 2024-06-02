@@ -42,6 +42,7 @@
         <module>mes-login</module>
         <module>mes-j4-basicdata</module>
         <module>mes-j4-sysmanagement</module>
+        <module>mes-j4-warehousemanagement</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
