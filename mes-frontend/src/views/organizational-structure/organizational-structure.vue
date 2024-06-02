@@ -96,8 +96,8 @@
                     <el-col :span="12">
                         <el-form-item label="部门状态" prop="status">
                             <el-radio-group v-model="form.status">
-                                <el-radio label="active">激活</el-radio>
-                                <el-radio label="disabled">禁用</el-radio>
+                                <el-radio :value="'active'">激活</el-radio>
+                                <el-radio :value="'disabled'">禁用</el-radio>
                             </el-radio-group>
                         </el-form-item>
                     </el-col>
