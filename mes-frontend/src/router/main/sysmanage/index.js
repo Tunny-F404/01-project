@@ -46,6 +46,12 @@ const routes = [
 		name: "UN32",
 		component: () => import("@/views/warehouse-management/purchase-in.vue"),
 	},
+	// 采购退货页面
+	{
+		path: "/un-33",
+		name: "UN33",
+		component: () => import("@/views/warehouse-management/PurchaseReturn.vue"),
+	},
 ];
 
 export default routes;
