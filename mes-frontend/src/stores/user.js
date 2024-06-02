@@ -158,7 +158,7 @@ let testMenus = [
 			},
 			{
 				id: 3,
-				text: "仓库管理2",
+				text: "采购入库",
 				href: "/un-32",
 				icon: "Management",
 				pid: 4,
