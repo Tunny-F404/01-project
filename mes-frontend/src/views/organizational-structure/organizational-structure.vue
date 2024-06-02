@@ -116,6 +116,7 @@
 
 
 <script setup lang="ts">
+import axios from 'axios';
 import { ref, reactive, computed, onMounted } from 'vue';
 
 // 响应式状态
@@ -175,6 +176,7 @@ const rules = reactive({
 
 
 function getList() {
+    axios.get
     // 实现获取列表的逻辑，例如使用 Axios 请求后端数据
 }
 function normalizer(node) {
@@ -197,8 +199,8 @@ function cancel() {
 
 function reset() {
     // 重置表单数据
-    form.deptId = undefined;
-    form.parentId = undefined;
+    form.deptId = '';
+    form.parentId = '';
     form.deptName = '';
     form.orderNum = 0;
     form.leader = '';
