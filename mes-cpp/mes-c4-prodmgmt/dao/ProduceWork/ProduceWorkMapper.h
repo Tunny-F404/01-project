@@ -21,30 +21,31 @@
 #define _PWORK_MAPPER_
 
 #include "Mapper.h"
-#include "../../domain/do/ProduceWork/PworkDo.h"
+#include "../../domain/do/ProduceWork/ProduceWorkDO.h"
 
 /**
  * Ê¾Àý±í×Ö¶ÎÆ¥ÅäÓ³Éä
  */
-class ProduceWorkMapper : public Mapper<PworkDo>
+class ProduceWorkMapper : public Mapper<ProduceWorkDO>
 {
 public:
-	PworkDo mapper(ResultSet* resultSet) const override
+	ProduceWorkDO mapper(ResultSet* resultSet) const override
 	{
-		PworkDo data;
+		ProduceWorkDO data;
 		data.setRecord_id(resultSet->getUInt64(1));
 		data.setFeedback_type(resultSet->getString(2));
-		data.setWorkstation_name(resultSet->getString(3));
-		data.setWorkorder_code(resultSet->getString(5));
-		data.setItem_code(resultSet->getString(6));
-
-		data.setItem_name(resultSet->getString(7));
+		data.setWorkorder_code(resultSet->getString(3));
+		data.setTask_code(resultSet->getString(4));
+		data.setItem_code(resultSet->getString(5));
+		data.setItem_name(resultSet->getString(6));
+		data.setUnit_of_measure(resultSet->getString(7));
 		data.setSpecification(resultSet->getString(8));
-		data.setQuantity_feedback(resultSet->getString(9));
-		data.setUser_name(resultSet->getString(10));
-		data.setFeedback_time(resultSet->getString(11));
+		data.setQuantity_feedback(resultSet->getDouble(9));
+		data.setQuantity_uncheck(resultSet->getDouble(10));
+		data.setNick_name(resultSet->getString(11));
 		data.setRecord_nick(resultSet->getString(12));
-		data.setStatus(resultSet->getString(13));
+		data.setFeedback_time(resultSet->getString(13));
+		data.setRemark(resultSet->getString(14));
 		return data;
 	}
 };

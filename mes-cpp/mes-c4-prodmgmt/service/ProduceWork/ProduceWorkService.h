@@ -17,13 +17,12 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _SAMPLE_SERVICE_
-#define _SAMPLE_SERVICE_
+#ifndef _PRODUCEWORK_SERVICE_
+#define _PRODUCEWORK_SERVICE_
 #include <list>
-#include "domain/vo/ProduceWork/ProduceVO.h"
-#include "domain/query/ProduceWork/PworkQery.h"
-#include "domain/dto/ProduceWork/AddPworkDTO.h"
-#include "domain/dto/ProduceWork/treansformProduceDTO.h"
+#include "domain/vo/ProduceWork/ProduceWorkJsonVO.h"
+#include "domain/dto/ProduceWork/ProduceWorkDTO.h"
+
 
 /**
  * 示例服务实现，演示基础的示例服务实现
@@ -31,12 +30,14 @@
 class ProduceWorkService
 {
 public:
-	// 分页查询所有数据
-	PworkPageDTO::Wrapper listAll(const PworkQery::Wrapper& query);
+	// 获取报工详情
+	ProduceWorkDTO::Wrapper execeQueryDetail(const uint64_t& id);
+
 	// 增加数据
-	uint64_t execAddtTable(const AddPworkTableDTO::Wrapper& dto);
+	uint64_t saveData(const ProduceWorkDTO::Wrapper& dto);
+
 	// 修改数据
-	bool execModifyTable(const treansformProduceDTO::Wrapper& dto);
+	bool updateData(const ProduceWorkDTO::Wrapper& dto);
 	
 };
 

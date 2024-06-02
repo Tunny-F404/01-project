@@ -213,4 +213,5 @@ ProduceWork:
    nick_nameA: 报工人
    nick_nameB: 审核人
  xg:
-    test: 修改功能  
+    test: 修改功能 
+    hq: 获取报工详情

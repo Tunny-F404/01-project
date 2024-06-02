@@ -43,7 +43,7 @@ endif()
 
 # 编译可执行文件
 
-add_executable (${appName} ${SC_FILES} "domain/query/ProdWorkorder/GetProdWorkorderListQuery.h" "domain/dto/ProdWorkorder/GetProdWorkorderListDTO.h" "domain/do/ProdWorkorder/GetProdWorkorderListDO.h" "domain/vo/ProdWorkorder/GetProdWorkorderListVO.h"   "domain/dto/ProdWorkorder/ProdWorkorderInfoDTO.h" "domain/do/ProdWorkorder/ProdWorkorderInfoDO.h" "domain/vo/ProdWorkorder/ProdWorkorderInfoVO.h" "domain/dto/ProdWorkorder/ProdWorkorderBomListDTO.h" "domain/do/ProdWorkorder/ProdWorkorderBomListDO.h" "domain/vo/ProdWorkorder/ProdWorkorderBomListVO.h" "controller/productioninvestigation/ProductionProcessController.cpp" "controller/productioninvestigation/ProductionProcessController.h" "domain/do/pro_process/ProProcess.h" "domain/dto/productioninvestigation/ProductionProcessDTO.h" "domain/query/productioninvestigation/ProductionProcessQuery.h" "domain/vo/productioninvestigation/ProductionProcessVO.h" "domain/dto/ProduceWork/PworkDTO.h")
+add_executable (${appName} ${SC_FILES})
 
 
 # 给架构示例项目添加特有的宏

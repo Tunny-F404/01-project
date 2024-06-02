@@ -20,8 +20,7 @@
 #ifndef _PWORK_DAO_
 #define _PWORK_DAO_
 #include "BaseDAO.h"
-#include "../../domain/do/ProduceWork/PworkDo.h"
-#include "../../domain/query/ProduceWork/PworkQery.h"
+#include "../../domain/do/ProduceWork/ProduceWorkDO.h"
 
 /**
  * 示例表数据库操作实现
@@ -29,16 +28,12 @@
 class ProduceWorkDAO : public BaseDAO
 {
 public:
-	// 统计数据条数
-	uint64_t count(const PworkQery::Wrapper& query);
-	// 分页查询数据
-	list<PworkDo> selectWithPage(const PworkQery::Wrapper& query);
 	// 通过姓名查询数据
-	list<PworkDo> selectByRecord_id(const string& record_id);
+	list<ProduceWorkDO> selectByRecord_id(const uint64_t& record_id);
 	// 插入数据
-	uint64_t insert(const PworkDo& iObj);
-	// 修改数据
-	int update(const PworkDo& uObj);
+	uint64_t insert(const ProduceWorkDO& iObj);
+	//// 修改数据
+	int update(const ProduceWorkDO& uObj);
 
 };
 #endif // !_SAMPLE_DAO_

@@ -17,106 +17,39 @@
  limitations under the License.
 */
 #include "stdafx.h"
-#include "SampleDAO.h"
-#include "SampleMapper.h"
+#include "ProduceWorkDAO.h"
+#include "ProduceWorkMapper.h"
 #include <sstream>
 
-//定义条件解析宏，减少重复代码
-#define SAMPLE_TERAM_PARSE(query, sql) \
-SqlParams params; \
-sql<<" WHERE 1=1"; \
-if (query->record_id) { \
-	sql << " AND `record_id`=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->record_id.getValue("")); \
-} \
-if (query->feedback_type) { \
-	sql << " AND feedback_type=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->feedback_type.getValue("")); \
-} \
-if (query->workstation_name) { \
-	sql << " AND workstation_name=?"; \
-	SQLPARAMS_PUSH(params, "i", int, query->workstation_name.getValue(0)); \
-}\
-if (query->workorder_code) { \
-	sql << " AND workorder_code=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->workorder_code.getValue("")); \
-}\
-if (query->item_code) { \
-	sql << " AND item_code=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->item_code.getValue("")); \
-} \
-if (query->item_name) { \
-	sql << " AND item_name=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->item_name.getValue("")); \
-} \
-if (query->specification) { \
-	sql << " AND specification=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->specification.getValue("")); \
-} \
-if (query->quantity_feedback) { \
-	sql << " AND squantity_feedbackex=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->quantity_feedback.getValue("")); \
-} \
-if (query->user_name) { \
-	sql << " AND user_name=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->user_name.getValue("")); \
-} \
-if (query->feedback_time) { \
-	sql << " AND feedback_time=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->feedback_time.getValue("")); \
-} \
-if (query->record_nick) {\
-	sql << " AND record_nick=?"; \
-		SQLPARAMS_PUSH(params, "s", std::string, query->record_nick.getValue("")); \
-} \
-if (query->status) {\
-    sql << " AND status=?"; \
-		SQLPARAMS_PUSH(params, "s", std::string, query->status.getValue("")); \
-} \
-
-uint64_t ProduceWorkDAO::count(const PworkQery::Wrapper& query)
+list<ProduceWorkDO> ProduceWorkDAO::selectByRecord_id(const uint64_t& record_id)
 {
 	stringstream sql;
-	sql << "SELECT COUNT(*) FROM ktgmes";
-	SAMPLE_TERAM_PARSE(query, sql);
-	string sqlStr = sql.str();
-	return sqlSession->executeQueryNumerical(sqlStr, params);
-}
-
-std::list<PworkDo> ProduceWorkDAO::selectWithPage(const PworkQery::Wrapper& query)
-{
-	stringstream sql;
-	sql << "SELECT record_id,feedback_type,workstation_name,\
-	workorder_code,item_code,item_name,specification,quantity_feedback,\
-	user_name,feedback_time,record_nick,status FROM ktgmes";
-	SAMPLE_TERAM_PARSE(query, sql);
-	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
+	sql << "SELECT record_id,feedback_type,workorder_code,task_code,item_code,item_name,unit_of_measure,specification,quantity_feedback,quantity_uncheck,nick_name,record_nick ,feedback_time,remark FROM pro_feedback WHERE record_id=" << record_id;
 	ProduceWorkMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<PworkDo, ProduceWorkMapper>(sqlStr, mapper, params);
+	return sqlSession->executeQuery<ProduceWorkDO, ProduceWorkMapper>(sqlStr, mapper);
 }
-
-
-std::list<PworkDo> ProduceWorkDAO::selectByName(const string& name)
-{
-	string sql = "SELECT record_id,feedback_type,workstation_name,\
-	workorder_code,item_code,item_name,specification,quantity_feedback,\
-	user_name,feedback_time,record_nick,status FROM ktgmes WHERE `record_id` LIKE CONCAT('%',?,'%')";
-	ProduceWorkMapper mapper;
-	return sqlSession->executeQuery<PworkDo, ProduceWorkMapper>(sql, mapper, "%s", name);
-}
-
-
 //
-uint64_t SampleDAO::insert(const addProduceWorkDo& iObj)
+//
+uint64_t ProduceWorkDAO::insert(const ProduceWorkDO& iObj)
 {
-	string sql = "INSERT INTO `ktgmes` (`name`, `sex`, `age`) VALUES (?, ?, ?)";
-	return sqlSession->executeInsert(sql, "%s%s%i", iObj.getName(), iObj.getSex(), iObj.getAge());
+	string sql = "INSERT INTO `pro_feedback`"
+		         "(`feedback_type`, `workorder_code`, `task_code`, `item_code`,`item_name`,`unit_of_measure`,`specification`,`quantity_feedback`,`quantity_uncheck`,`nick_name`,`record_nick`,`feedback_time`,`remark`,"
+		         "`workstation_id`, `workorder_id`, `route_id`, `process_id`, `item_id`)"
+	             "VALUES(? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)";
+	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s%s%d%d%s%s%s%s%ull%ull%ull%ull%ull", iObj.getFeedback_type(), iObj.getWorkorder_code(), iObj.getTask_code(),iObj.getItem_code(),
+		iObj.getItem_name(),iObj.getUnit_of_measure(),iObj.getSpecification(),iObj.getQuantity_feedback(),iObj.getQuantity_uncheck(),iObj.getNick_name(),
+		iObj.getRecord_nick(),iObj.getFeedback_time(),iObj.getRemark(),iObj.getWorkstation_id(),iObj.getWorkorder_id(),iObj.getRoute_id(),iObj.getProcess_id(),iObj.getItem_id());
 }
-
-int SampleDAO::update(const PworkDo& uObj)
+//
+int ProduceWorkDAO::update(const ProduceWorkDO& uObj)
 {
-	string sql = "UPDATE `ktgmes` SET `name`=?, `sex`=?, `age`=? WHERE `id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%i%ull", uObj.getName(), uObj.getSex(), uObj.getAge(), uObj.getId());
+	string sql = "UPDATE `pro_feedback` SET `feedback_type`=?, `workorder_code`=?, `task_code`=? ,`item_code`=?,"
+	             "`item_name`=?,`unit_of_measure`=?,`specification`=?,`quantity_feedback`=?,`quantity_uncheck`=?,`nick_name`=?,`record_nick`=?,"
+	             "`feedback_time`=?,`remark`=? WHERE `record_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%d%d%s%s%s%s%ull", \
+		uObj.getFeedback_type(), uObj.getWorkorder_code(), uObj.getTask_code(), uObj.getItem_code(), uObj.getItem_name(),
+		uObj.getUnit_of_measure(), uObj.getSpecification(), uObj.getQuantity_feedback(), uObj.getQuantity_uncheck(),
+		uObj.getNick_name(), uObj.getRecord_nick(), uObj.getFeedback_time(), uObj.getRemark(),uObj.getRecord_id());
 }
 

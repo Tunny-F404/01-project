@@ -17,19 +17,12 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _SAMPLE_CONTROLLER_
-#define _SAMPLE_CONTROLLER_
+#ifndef _PRODUCEWORK_CONTROLLER_
+#define _PRODUCEWORK_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/query/ProduceWork/PworkQery.h"
-#include "domain/dto/ProduceWork/PworkDTO.h"
-#include "domain/vo/ProduceWork/ProduceVO.h"
-
-#include "domain/dto/ProduceWork/AddPworkDTO.h"
-#include "domain/vo/ProduceWork/addProduceVO.h"
-
-#include "domain/dto/ProduceWork/treansformProduceDTO.h"
-#include "domain/vo/ProduceWork/treansformProduceVO.h"
+#include "domain/dto/ProduceWork/ProduceWorkDTO.h"
+#include "domain/vo/ProduceWork/ProduceWorkJsonVO.h"
 
 /*
 ø™∑¢»À‘±£∫å≠∫¢◊”
@@ -47,66 +40,42 @@ class ProController : public oatpp::web::server::api::ApiController // 1 ºÃ≥–øÿ÷
 	API_ACCESS_DECLARE(ProController);
 	//  3 ∂®“ÂΩ”ø⁄
 public:
-	// 3.1 ∂®“Â≤È—ØΩ”ø⁄√Ë ˆ
-	ENDPOINT_INFO(QueryPworkTable){
+	 //3.1 ∂®“ÂªÒ»°±®π§œÍ«È
+	ENDPOINT_INFO(queryProduceWorkFeedbackDetail) {
+		// ∂®“Â±ÍÃ‚∫Õ∑µªÿ¿‡–Õ“‘º∞ ⁄»®÷ß≥÷
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("sample.delete.summary"), ProduceWorkJsonVO::Wrapper);
+		// ∂®“Â∆‰À˚¬∑æ∂≤Œ ˝Àµ√˜
+		API_DEF_ADD_PATH_PARAMS(UInt64, "record_id", ZH_WORDS_GETTER("sample.field.id"), 1, true);
+	}
+	API_HANDLER_ENDPOINT_AUTH(API_M_GET, "/ProduceWork/query_detail/{record_id}", queryProduceWorkFeedbackDetail, PATH(UInt64, record_id), execProduceWorkDetail(record_id));
+
+	// ∂®“ÂÃÌº”±®π§Ω”ø⁄
+	ENDPOINT_INFO(addProduceWork) {
 		// ∂®“ÂΩ”ø⁄±ÍÃ‚
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("ProduceWork.query.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("sample.post.summary"));
 		// ∂®“Âƒ¨»œ ⁄»®≤Œ ˝£®ø…—°∂®“Â£¨»Áπ˚∂®“Â¡À£¨œ¬√ÊENDPOINT¿Ô√Ê–Ë“™º”»ÎAPI_HANDLER_AUTH_PARAME£©
 		API_DEF_ADD_AUTH();
-		// ∂®“ÂœÏ”¶≤Œ ˝∏Ò Ω –Ë“™µº»ÎÕ∑Œƒº˛
-		API_DEF_ADD_RSP_JSON_WRAPPER(ProduceTableJsonVO);
-		 // ∂®“Â∑÷“≥≤È—Ø≤Œ ˝√Ë ˆ
-		API_DEF_ADD_PAGE_PARAMS();
-		// ∂®“Â∆‰À˚≤È—Ø≤Œ ˝√Ë ˆ
-			API_DEF_ADD_QUERY_PARAMS(String, "feedback_type", ZH_WORDS_GETTER("ProduceWork.fields.feedback_type"), "mo-ren-gong-", false);
-			API_DEF_ADD_QUERY_PARAMS(String, "workstation_name", ZH_WORDS_GETTER("ProduceWork.fields.workstation_name"), "N", false);
-			API_DEF_ADD_QUERY_PARAMS(String, "workorder_code", ZH_WORDS_GETTER("ProduceWork.fields.workorder_code"), "N", false);
-			API_DEF_ADD_QUERY_PARAMS(String, "item_code", ZH_WORDS_GETTER("ProduceWork.fields.item_code"), "N", false);
-			API_DEF_ADD_QUERY_PARAMS(String, "ite m_name", ZH_WORDS_GETTER("ProduceWork.fields.item_name"), "N", false);
-			API_DEF_ADD_QUERY_PARAMS(String, "user_name", ZH_WORDS_GETTER("ProduceWork.fields.user_nam"), "N", false);
-			API_DEF_ADD_QUERY_PARAMS(String, "record_user", ZH_WORDS_GETTER("ProduceWork.fields.record_user"), "N", false);
-			API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("ProduceWork.fields.status"), "N", false);
-      }
-		// 3.2 ∂®“Â≤È—ØΩ”ø⁄¥¶¿Ì
-		ENDPOINT(API_M_GET, "/ProduceWork/query-Pwork-table", QueryPworkTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME)
-		{
-			// Ω‚Œˆ≤È—Ø≤Œ ˝Œ™Query¡Ï”Úƒ£–Õ
-			API_HANDLER_QUERY_PARAM(query, PworkQery, queryParams);
-			// ∫ÙΩ–÷¥––∫Ø ˝œÏ”¶Ω·π˚
-			API_HANDLER_RESP_VO(execPworkTable(query));
-		}
+		// ∂®“ÂœÏ”¶≤Œ ˝∏Ò Ω
+		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+	}
+	ENDPOINT(API_M_POST, "/ProduceWork/addProduceWork", addProduceWork, BODY_DTO(ProduceWorkDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+		// ∫ÙΩ–÷¥––∫Ø ˝œÏ”¶Ω·π˚
+		API_HANDLER_RESP_VO(execAddProduceWork(dto));
+	}
 
-		// 3.1 ∂®“Â–¬‘ˆΩ”ø⁄√Ë ˆ
-		ENDPOINT_INFO(addPwork) {
-			// ∂®“ÂΩ”ø⁄±ÍÃ‚
-			API_DEF_ADD_TITLE(ZH_WORDS_GETTER("ProduceWork.add.text"));
-			// ∂®“Âƒ¨»œ ⁄»®≤Œ ˝£®ø…—°∂®“Â£¨»Áπ˚∂®“Â¡À£¨œ¬√ÊENDPOINT¿Ô√Ê–Ë“™º”»ÎAPI_HANDLER_AUTH_PARAME£©
-			API_DEF_ADD_AUTH();
-			// ∂®“ÂœÏ”¶≤Œ ˝∏Ò Ω
-			API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
-		}
-		// 3.2 ∂®“Â–¬‘ˆΩ”ø⁄¥¶¿Ì
-		ENDPOINT(API_M_POST, "/ProduceWork-add-Pwork-table", addPwork, BODY_DTO(PworkTableDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-			// ∫ÙΩ–÷¥––∫Ø ˝œÏ”¶Ω·π˚
-			API_HANDLER_RESP_VO(execAddtTable(dto));
-		}
+	// –ﬁ∏ƒΩ”ø⁄√Ë ˆ
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("sample.put.summary"), modifyProduceWork, Uint64JsonVO::Wrapper);
+	// 3.2 ∂®“Â–ﬁ∏ƒΩ”ø⁄¥¶¿Ì
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProduceWork/modifyProduceWork", modifyProduceWork, BODY_DTO(ProduceWorkDTO::Wrapper, dto), execModifyProduceWork(dto));
+private:
+	// 
+	ProduceWorkJsonVO::Wrapper execProduceWorkDetail(const UInt64& record_id);
 
-		// 3.1 ∂®“Â–ﬁ∏ƒΩ”ø⁄√Ë ˆ
-		API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("ProduceWork.xg.test"), modifySample, Uint64JsonVO::Wrapper);
-		// 3.2 ∂®“Â–ﬁ∏ƒΩ”ø⁄¥¶¿Ì
-		API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProduceWork/query-Pwork-table", modifySample, BODY_DTO(treansformProduceDTO::Wrapper, dto), execModifyTable(dto));
+	
+	Uint64JsonVO::Wrapper execAddProduceWork(const ProduceWorkDTO::Wrapper& dto);
 
-
-
-private:// ∂®“ÂΩ”ø⁄÷¥––∫Ø ˝
-	// 3.3 —› æ∑÷“≥≤È—Ø ˝æ›
-	ProduceTableJsonVO::Wrapper execPworkTable(const PworkQery::Wrapper& query);
-
-	// 3.3 —› æ–¬‘ˆ ˝æ›
-	Uint64JsonVO::Wrapper execAddtTable(const PworkTableDTO::Wrapper& dto);
-
-	// 3.3 —› æ–ﬁ∏ƒ ˝æ›
-	Uint64JsonVO::Wrapper execModifyTable(const treansformProduceDTO::Wrapper& dto);
+	
+	Uint64JsonVO::Wrapper execModifyProduceWork(const ProduceWorkDTO::Wrapper& dto);
 };
 
 // 0 »°œ˚APIøÿ÷∆∆˜ π”√∫Í
