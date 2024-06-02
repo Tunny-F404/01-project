@@ -31,6 +31,7 @@ uint64_t Single_Defect_DAO::count_Index(const SingleQuery::Wrapper & query)
 	return sqlSession->executeQueryNumerical(sqlStr, params1);
 }
 
+// 统计对应的缺陷表数据条数
 uint64_t Single_Defect_DAO::count_Defect(const DefectQuery::Wrapper& query)
 {
 	stringstream sql;
@@ -78,7 +79,13 @@ uint64_t Single_Defect_DAO::insert(const DefectDO& iObj)
 
 int Single_Defect_DAO::update(const DefectDO& uObj)
 {
-	return{};
+	string sql = "UPDATE `qc_iqc_defect` SET `defect_name`= ?,  `defect_level`= ?, `defect_quantity`= ? WHERE `record_id` = ?;";
+	return sqlSession->executeUpdate(sql, "%s%s%i%ull",
+		uObj.getDefect_name(),
+		uObj.getDefect_level(),
+		uObj.getDefect_quantity(),
+		uObj.getRecord_id()
+	);
 }
 
 int Single_Defect_DAO::deleteById(uint64_t record_id)

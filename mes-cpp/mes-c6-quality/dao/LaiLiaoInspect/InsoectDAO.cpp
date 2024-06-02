@@ -137,7 +137,8 @@ int InspectDAO::update(const InspectDO& uObj)
 		uObj.getRemark(),
 		uObj.getIqc_id());
 }
-//
+
+//É¾³ý¼ìÑé±í
 int InspectDAO::deleteById(uint64_t iqc_id)
 {
 	string sql = "DELETE FROM `qc_iqc` WHERE `iqc_id`=?";

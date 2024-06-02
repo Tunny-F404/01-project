@@ -92,7 +92,6 @@ Uint64JsonVO::Wrapper InspectController::execModifyInspect(const InspectDTO::Wra
 	}
 	// ÏìÓ¦½á¹û
 	return jvo;
-	
 }
 
 Uint64JsonVO::Wrapper InspectController::execRemoveInspect(const UInt64& iqc_id)

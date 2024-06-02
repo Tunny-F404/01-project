@@ -27,7 +27,6 @@ SinglePageDTO::Wrapper Single_Defect_Service::listAll_Index(const SingleQuery::W
 	{
 		auto dto = SingleDTO::createShared();
 		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, line_id, Line_id, iqc_id, Iqc_id, index_id, Index_id, index_name, Index_name,   index_type, Index_type,  qc_tool, Qc_tool,  check_method, Check_method,  stander_val,Stander_val, unit_of_measure, Unit_of_measure, threshold_max, Threshold_max, threshold_min, Threshold_min, cr_quantity, Cr_quantity, maj_quantity, Maj_quantity, min_quantity, Min_quantity, remark, Remark);
-		//ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub,  );
 		pages->addData(dto);
 	}
 	return pages;
@@ -74,7 +73,12 @@ uint64_t Single_Defect_Service::saveData(const DefectDTO::Wrapper& dto)
 
 bool Single_Defect_Service::updateData(const DefectDTO::Wrapper& dto)
 {
-	return {};
+	// 组装DO数据
+	DefectDO data;
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Defect_name, defect_name, Defect_level, defect_level, Defect_quantity, defect_quantity,Record_id, record_id );
+	// 执行数据修改
+	Single_Defect_DAO dao;
+	return dao.update(data) == 1;
 }
 
 bool Single_Defect_Service::removeData(uint64_t record_id)

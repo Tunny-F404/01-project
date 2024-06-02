@@ -57,7 +57,7 @@ single:
  add:
   summary: 增加缺陷记录
  change:
-  summary: 修改缺陷记录
+  summary: 修改缺陷记录(iqc_id和line_id不会被更改,只需输入大于0的整数即可)
  delete:
   summary: 删除缺陷记录
  line_id: 记录ID
