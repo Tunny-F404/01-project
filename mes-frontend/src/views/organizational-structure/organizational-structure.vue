@@ -117,14 +117,15 @@ import axios from 'axios';
 import { ElMessage, ElMessageBox } from 'element-plus';
 
 // Reactive state
-const loading = ref(false);
-const showSearch = ref(true);
-const deptList = ref([]);
-const deptOptions = ref([]);
-const title = ref('');
-const open = ref(false);
-const isExpandAll = ref(true);
-const refreshTable = ref(true);
+// 定义响应式状态变量
+const loading = ref(false); // 控制加载状态的显示
+const showSearch = ref(true); // 控制搜索表单的显示
+const deptList = ref([]); // 存储部门列表数据
+const deptOptions = ref([]); // 存储部门选项数据（用于下拉选择）
+const title = ref(''); // 对话框标题
+const open = ref(false); // 控制对话框的打开状态
+const isExpandAll = ref(true); // 控制表格是否全部展开
+const refreshTable = ref(true); // 控制表格是否刷新
 const queryParams = reactive({
     deptName: '',
     status: ''
