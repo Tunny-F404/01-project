@@ -1,3 +1,4 @@
+// @ts-check
 import http from "axios";
 
 /**
@@ -7,12 +8,15 @@ export default class Request {
 	static get GET() {
 		return 1;
 	}
+
 	static get POST() {
 		return 2;
 	}
+
 	static get PUT() {
 		return 3;
 	}
+
 	static get DELETE() {
 		return 4;
 	}
@@ -87,12 +91,12 @@ export default class Request {
 	 * @returns {Promise} 请求发送后的Promise对象
 	 */
 	static postFile(url, data, options = null) {
-		//将data转换成FormData对象
+		// 将data转换成FormData对象
 		const formData = new FormData();
-		for (let key in data) {
+		for (const key in data) {
 			formData.append(key, data[key]);
 		}
-		//发送请求
+		// 发送请求
 		return Request.request(Request.POST, url, formData, http.upType.file, options);
 	}
 

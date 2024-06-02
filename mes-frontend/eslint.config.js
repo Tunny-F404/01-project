@@ -64,6 +64,8 @@ export default antfu(
 			"no-console": "off",
 			// 设置为总是警告
 			// "style/semi": ["warn", "always"],
+			/**  */
+			"@typescript-eslint/method-signature-style": "off",
 		},
 	},
 

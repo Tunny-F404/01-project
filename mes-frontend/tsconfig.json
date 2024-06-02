@@ -58,7 +58,9 @@
 			/** https://juejin.cn/post/7262322846252613693 */
 			"element-plus/global",
 			"vite/client",
-			"node"
+			"node",
+			"qs",
+			"unplugin-auto-import",
 		],
 		"allowJs": true
 	},
@@ -69,13 +71,13 @@
 		"src/**/*.tsx",
 		"src/**/*.vue",
 		"src",
-		// "typings",
+		"typings",
 		// 测试文件集
 		"tests/**/*.ts",
 		// 导入自动生成的类型声明文件
 		"auto-imports.d.ts",
 		"components.d.ts",
-		"src/vite-env.d.ts"
+		"src/vite-env.d.ts",
 	],
 	"exclude": [
 		"node_modules",
