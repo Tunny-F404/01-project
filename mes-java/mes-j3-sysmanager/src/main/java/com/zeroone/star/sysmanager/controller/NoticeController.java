@@ -8,10 +8,7 @@ import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.sysmanager.service.ISysNoticeService;
 import io.swagger.annotations.Api;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.ApiOperation;
@@ -20,8 +17,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Api(tags = "通知公告")
-@Controller
-@ResponseBody
+@RestController
 @RequestMapping("sys-manager/notice")
 public class NoticeController implements NoticeApis {
     @Resource
@@ -86,7 +82,7 @@ public class NoticeController implements NoticeApis {
      */
     @DeleteMapping("/remove-notice")
     @ApiOperation("删除公告")
-    @Transactional(rollbackFor = Exception.class)
+    //@Transactional(rollbackFor = Exception.class)
     public JsonVO<List<Integer>> removeNotice(@RequestBody List<Integer> ids) {
         if (ids == null || ids.isEmpty()) {
             // 手动回滚事务
