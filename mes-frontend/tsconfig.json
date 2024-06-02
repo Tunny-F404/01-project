@@ -21,7 +21,25 @@
 		"paths": {
 			"@/*": [
 				"src/*"
-			]
+			],
+			"components/*": [
+				"src/components/*"
+			],
+			"types/*": [
+				"src/types/*"
+			],
+			"views/*": [
+				"src/views/*"
+			],
+			"api/*": [
+				"src/apis/*"
+			],
+			"stores/*": [
+				"src/stores/*"
+			],
+			"router/*": [
+				"src/router/*"
+			],
 		},
 		"skipLibCheck": true,
 		/* Bundler mode */
