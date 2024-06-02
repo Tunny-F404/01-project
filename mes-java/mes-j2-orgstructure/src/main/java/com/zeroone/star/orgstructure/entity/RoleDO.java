@@ -1,16 +1,12 @@
 package com.zeroone.star.orgstructure.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>

@@ -4,7 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.zeroone.star.orgstructure.entity.RoleDO;
-import com.zeroone.star.orgstructure.mapper.UserConvertMapper;
+import com.zeroone.star.orgstructure.mapper.*;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -12,19 +12,18 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.orgstructure.entity.UserRoleDO;
-import com.zeroone.star.orgstructure.mapper.RoleMapper;
-import com.zeroone.star.orgstructure.mapper.UserRoleMapper;
+import com.zeroone.star.orgstructure.parameterMapstruct.MsUserRoleMapper;
 import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
-import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.j2.orgstructure.dto.role.UserRoleDTO;
 import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.*;
 import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
 import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
+import com.zeroone.star.project.j2.orgstructure.query.role.UserRoleQuery;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.cglib.core.Local;
 import org.mapstruct.Mapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +40,7 @@ import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * role对应的MapStructMapper接口
@@ -57,7 +54,9 @@ interface MsRoleMapper {
      * @return
      */
     RoleListDTO roleDOToRoleListDTO(RoleDO roleDO);
+
     RoleDTO roleDOToRoleDTO(RoleDO roleDO);
+
     RolePermissionsDTO roleDOTORolePermissionsDTO(RoleDO roleDO);
 
     List<RoleListDTO> roleDOToRoleListDTO(List<RoleDO> roleDOList);
@@ -83,10 +82,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
     EasyExcelComponent excel;
 
     @Resource
+    private UserMapper userMapper;
+    @Resource
+    private MsUserRoleMapper msUserRoleMapper;
+    @Resource
     private MsRoleMapper msRoleMapper;
 
-    @Resource
-    private UserConvertMapper userConvertMapper;
 
     /**
      * 查询全部角色列表
@@ -116,8 +117,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
         if (StringUtils.isNotEmpty(condition.getStatus())) {
             queryWrapper.eq(RoleDO::getStatus, condition.getStatus());
         }
-        if (StringUtils.isNotEmpty(condition.getStartTime()) && StringUtils.isNotEmpty(condition.getEndTime())){
-            queryWrapper.between(RoleDO::getCreateTime, condition.getStartTime() , condition.getEndTime());
+        if (StringUtils.isNotEmpty(condition.getStartTime()) && StringUtils.isNotEmpty(condition.getEndTime())) {
+            queryWrapper.between(RoleDO::getCreateTime, condition.getStartTime(), condition.getEndTime());
         }
 
         //执行查询
@@ -127,6 +128,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
 
     /**
      * 根据id查询角色详情
+     *
      * @param id
      * @return
      */
@@ -144,8 +146,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
 
     @Override
     public int updatePermissions(RolePermissionsQuery rolePermissionsQuery) {
-        RoleDO roleDO= new RoleDO();
-        BeanUtils.copyProperties(rolePermissionsQuery,roleDO);
+        RoleDO roleDO = new RoleDO();
+        BeanUtils.copyProperties(rolePermissionsQuery, roleDO);
         roleDO.setUpdateTime(LocalDateTime.now());
         int rows = baseMapper.updateById(roleDO);
         return rows;
@@ -167,7 +169,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
         //设置创建者，时间
         roleDo.setCreateTime(LocalDateTime.now());
         roleDo.setDelFlag("0");//伪删除标志，0表示存在2表示删除
-        UserDTO currentUser = null;
+        com.zeroone.star.project.components.user.UserDTO currentUser = null;
         try {
             currentUser = userHolder.getCurrentUser();
         } catch (Exception e) {
@@ -188,11 +190,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
     public Integer modifyRoleStatus(@RequestBody RoleStatusModifyDto roleStatusModifyDto) throws Exception {
         UpdateWrapper updateRoleStatus = new UpdateWrapper();
         updateRoleStatus.eq("role_id", roleStatusModifyDto.getRoleId());
-       RoleDO roleDo = new RoleDO();
+        RoleDO roleDo = new RoleDO();
         //复制给Do
         BeanUtil.copyProperties(roleStatusModifyDto, roleDo, true);
         //设置创建者，时间
-        UserDTO currentUser = userHolder.getCurrentUser();
+        com.zeroone.star.project.components.user.UserDTO currentUser = userHolder.getCurrentUser();
         roleDo.setUpdateBy(currentUser.getUsername());
         roleDo.setUpdateTime(LocalDateTime.now());
         //返回修改的主键值
@@ -228,7 +230,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
         //复制给Do
         BeanUtil.copyProperties(roleDTO, roleDo, true);
         //设置创建者，时间
-        UserDTO currentUser = userHolder.getCurrentUser();
+        com.zeroone.star.project.components.user.UserDTO currentUser = userHolder.getCurrentUser();
         roleDo.setUpdateBy(currentUser.getUsername());
         roleDo.setUpdateTime(LocalDateTime.now());
         //返回修改的主键值
@@ -237,13 +239,31 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
 
 
     /*
-    * 查找该角色所分配的用户
-    * */
-    public List<UserRoleDTO> getUsersByRoleId(Long roleId, int offset, int limit) {
-        List<UserDO> userDOList = userRoleMapper.getUsersByRoleId(roleId, offset, limit);
-        return userDOList.stream()
-                .map(userConvertMapper::userDOToUserDTO)
-                .collect(Collectors.toList());
+     * 查找该角色所分配的用户
+     * */
+    public PageDTO<UserRoleDTO> getUsersByRole(UserRoleQuery query) {
+
+        QueryWrapper<UserRoleDO> queryWrapper = new QueryWrapper<>();
+        // 添加角色条件
+        queryWrapper.eq("role_id", query.getRoleId());
+        //找出符合条件的用户
+        List<UserRoleDO> userRoleDOS = userRoleMapper.selectList(queryWrapper);
+        // 提取用户ID列表
+        List<Long> userIds = new ArrayList<>();
+        for (UserRoleDO userRole : userRoleDOS) {
+            userIds.add(userRole.getUserId());
+        }
+
+        //创建分页条件
+        Page<UserDO> page = new Page<>(query.getPageIndex(), query.getPageSize());
+        // 根据用户ID列表查询用户信息
+        LambdaQueryWrapper<UserDO> lqw = new LambdaQueryWrapper<>();
+        lqw.in(UserDO::getUserId, userIds);
+        if(null != query.getUserName()) lqw.like(UserDO::getUserName,query.getUserName());
+        if(null != query.getPhoneNumber()) lqw.like(UserDO::getPhonenumber, query.getPhoneNumber());
+
+        Page<UserDO> res = userMapper.selectPage(page, lqw);
+        return PageDTO.create(res, src -> msUserRoleMapper.userDOToUserDTO(src));
     }
 
     /*

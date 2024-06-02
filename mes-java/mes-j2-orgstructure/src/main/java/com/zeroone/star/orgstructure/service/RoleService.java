@@ -1,12 +1,10 @@
 package com.zeroone.star.orgstructure.service;
 
-import com.zeroone.star.orgstructure.entity.UserDO;
-import com.zeroone.star.project.components.user.UserDTO;
-
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.*;
 import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
 import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
+import com.zeroone.star.project.j2.orgstructure.query.role.UserRoleQuery;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,8 +63,8 @@ public interface RoleService {
     /*
      * 查找该角色所分配的用户
      * */
-    public List<UserRoleDTO> getUsersByRoleId(Long roleId, int offset, int limit);
-
+    //public List<UserRoleDTO> getUsersByRoleId(Long roleId, int offset, int limit);
+    public PageDTO<UserRoleDTO> getUsersByRole(UserRoleQuery query);
     /**
      * 批量取消授权用户角色
      *

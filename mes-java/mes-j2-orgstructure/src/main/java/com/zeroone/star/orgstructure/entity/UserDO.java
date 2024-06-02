@@ -7,8 +7,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
@@ -21,6 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("sys_user")
+@ToString
 public class UserDO implements Serializable {
 
     private static final long serialVersionUID = 1L;

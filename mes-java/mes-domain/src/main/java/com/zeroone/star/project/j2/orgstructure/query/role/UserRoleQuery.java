@@ -16,6 +16,9 @@ public class UserRoleQuery {
     @ApiModelProperty(value = "查询数据条数",example = "10")
     private long pageSize;
 
+    @ApiModelProperty(value = "角色id", example = "1")
+    private String roleId;
+
     @ApiModelProperty(value = "用户名称", example = "1")
     private String userName;
 

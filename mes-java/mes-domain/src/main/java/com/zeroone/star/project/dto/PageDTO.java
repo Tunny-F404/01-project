@@ -17,6 +17,7 @@ import java.util.List;
  * </p>
  * <p>版权：&copy;01星球</p>
  * <p>地址：01星球总部</p>
+ *
  * @author 阿伟学长
  * @version 1.0.0
  */
@@ -56,6 +57,7 @@ public class PageDTO<T> implements Serializable {
 
     /**
      * 静态构建方法，将分页插件的page对象转换成当前pageDto对象
+     *
      * @param page 分页插件的page对象
      * @param <T>  列表元素类型模板一般是DO
      * @return 返回分页数据对象
@@ -72,6 +74,7 @@ public class PageDTO<T> implements Serializable {
 
     /**
      * 静态构建方法，将分页插件的page对象转换成当前pageDto对象
+     *
      * @param page     分页插件的page对象
      * @param callback 数据转换回调函数
      * @param <T>      列表元素类型模板一般是DTO
@@ -104,6 +107,7 @@ public class PageDTO<T> implements Serializable {
 
     /**
      * 静态构建方法，将分页插件的page对象转换成当前pageDto对象
+     *
      * @param page   分页插件的page对象
      * @param tClass 分页数据列表元素类型
      * @param <T>    列表元素类型模板一般是DTO

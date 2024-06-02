@@ -2,16 +2,19 @@ package com.zeroone.star.orgstructure.controller;
 
 
 import com.zeroone.star.orgstructure.service.RoleService;
+import com.zeroone.star.project.j2.orgstructure.dto.role.UserRoleDTO;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.RoleDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.*;
 import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
 import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
+import com.zeroone.star.project.j2.orgstructure.query.role.UserRoleQuery;
 import com.zeroone.star.project.j2.orgstructure.role.RoleApis;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -181,16 +184,9 @@ public class RoleController implements RoleApis {
      * */
     @GetMapping("query-allocate-role")
     @ApiOperation("获取角色分配用户列表（条件+分页）")
-    public JsonVO<List<UserRoleDTO>> queryAllocatedList(@RequestParam Long roleId,
-                                                    @RequestParam int page,
-                                                    @RequestParam int size) {
-        int offset = (page - 1) * size;
-        List<UserRoleDTO> users = roleService.getUsersByRoleId(roleId, offset, size);
-        if (users != null && !users.isEmpty()) {
-            return JsonVO.success(users);
-        } else {
-            return JsonVO.fail(null);
-        }
+    public JsonVO<PageDTO<UserRoleDTO>> queryAllocatedList(@Validated UserRoleQuery query) {
+        PageDTO<UserRoleDTO> result = roleService.getUsersByRole(query);
+        return JsonVO.success(result);
     }
 
 
