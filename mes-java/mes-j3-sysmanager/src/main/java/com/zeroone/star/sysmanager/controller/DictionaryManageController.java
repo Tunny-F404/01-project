@@ -49,9 +49,6 @@ public class DictionaryManageController implements DictionaryManageApis {
     @Autowired
     ISysDictTypeService sysDictTypeService;
 
-
-    @Resource
-    ISysDictTypeService sysDictTypeService;
     @Resource
     ISysDictDataService sysDictDataService;
     @Resource

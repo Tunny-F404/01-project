@@ -190,7 +190,6 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
         }
         return null;
     }
-}
 
     @Override
     public List<DictTypeNameVO> listDictTypeName() {

@@ -21,6 +21,7 @@ import java.util.List;
 
 @Api(tags = "通知公告")
 @Controller
+@ResponseBody
 @RequestMapping("sys-manager/notice")
 public class NoticeController implements NoticeApis {
     @Resource
