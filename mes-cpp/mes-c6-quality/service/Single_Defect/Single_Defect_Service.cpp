@@ -26,8 +26,8 @@ SinglePageDTO::Wrapper Single_Defect_Service::listAll_Index(const SingleQuery::W
 	for (IndexDO sub : result)
 	{
 		auto dto = SingleDTO::createShared();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, line_id, Line_id, iqc_id, Iqc_id, index_id, Index_id, index_name, Index_name,   index_type, Index_type,  qc_tool, Qc_tool,  check_method, Check_method,  stander_val,Stander_val );
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, unit_of_measure, Unit_of_measure, threshold_max, Threshold_max, threshold_min, Threshold_min, cr_quantity, Cr_quantity, maj_quantity, Maj_quantity, min_quantity, Min_quantity, remark, Remark );
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, line_id, Line_id, iqc_id, Iqc_id, index_id, Index_id, index_name, Index_name,   index_type, Index_type,  qc_tool, Qc_tool,  check_method, Check_method,  stander_val,Stander_val, unit_of_measure, Unit_of_measure, threshold_max, Threshold_max, threshold_min, Threshold_min, cr_quantity, Cr_quantity, maj_quantity, Maj_quantity, min_quantity, Min_quantity, remark, Remark);
+		//ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub,  );
 		pages->addData(dto);
 	}
 	return pages;

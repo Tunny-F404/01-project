@@ -31,7 +31,7 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "index_id", ZH_WORDS_GETTER("single.index_id"), 1, false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "iqc_id", ZH_WORDS_GETTER("single.iqc_id"), 1, true);
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/single/search", querySingle, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {

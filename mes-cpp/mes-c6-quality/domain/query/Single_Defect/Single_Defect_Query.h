@@ -13,7 +13,7 @@ class SingleQuery :public PageQuery
 	DTO_INIT(SingleQuery, PageQuery);
 
 	// ºÏ—Èµ•ID
-	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("single.qc_id"));
+	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("single.iqc_id"));
 
 };
 

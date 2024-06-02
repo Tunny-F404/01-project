@@ -66,9 +66,9 @@ public:
 		stander_val=0;
 		unit_of_measure = "";
 		remark = "";
-		stander_val = 0;
-		threshold_max = 0;
-		threshold_min = 0;
+		stander_val = 0.0;
+		threshold_max = 0.0;
+		threshold_min = 0.0;
 		cr_quantity = 0;
 		maj_quantity = 0;
 		min_quantity = 0;
