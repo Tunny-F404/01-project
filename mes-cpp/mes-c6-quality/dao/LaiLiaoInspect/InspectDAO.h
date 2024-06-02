@@ -25,7 +25,8 @@ public:
 	int deleteById(uint64_t iqc_id);
 	//确认检验单
 	int InspectDAO::Is_Ok(const InspectDO& uObj);
-
+	//完成检验单
+	int InspectDAO::Finished(const InspectDO& uObj);
 };
 
 

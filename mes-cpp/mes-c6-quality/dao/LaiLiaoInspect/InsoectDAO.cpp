@@ -149,6 +149,15 @@ int InspectDAO::Is_Ok(const InspectDO& uObj)
 {
 	string sql = "UPDATE `qc_iqc` SET `status` = ? WHERE `iqc_id` = ?;";
 	return sqlSession->executeUpdate(sql, "%s%ull",
-		uObj.getList_status(),
+		uObj.setList_status("CONFIRMED"),
+		uObj.getIqc_id());
+}
+
+//完成检验单
+int InspectDAO::Finished(const InspectDO& uObj)
+{
+	string sql = "UPDATE `qc_iqc` SET `status` = ? WHERE `iqc_id` = ?;";
+	return sqlSession->executeUpdate(sql, "%s%ull",
+		uObj.setList_status("FINISHED"),
 		uObj.getIqc_id());
 }

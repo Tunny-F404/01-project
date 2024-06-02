@@ -24,6 +24,8 @@ public:
 	bool removeData(uint64_t id);
 	//确认检验单
 	bool InspectService::Is_Ok(const Item_idDTO::Wrapper& dto);
+	//完成检验单
+	bool InspectService::Finished(const Item_idDTO::Wrapper& dto);
 };
 
 #endif // !_INSPECT_SERVICE_

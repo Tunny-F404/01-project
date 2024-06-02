@@ -149,11 +149,32 @@ Uint64JsonVO::Wrapper InspectController::execIs_OkInspect(const Item_idDTO::Wrap
 	}
 	// 响应结果
 	return jvo;
-	
 }
 
 //完成检验表
 Uint64JsonVO::Wrapper InspectController::execIs_FinishedInspect(const Item_idDTO::Wrapper& dto)
 {
-	return {};
+
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!dto->iqc_id || dto->iqc_id <= 0 || !dto->check_result || !dto->list_status)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	// 定义一个Service
+	InspectService service;
+
+	// 修改检验单状态为确认
+	if (service.Finished(dto)) {
+		jvo->success(dto->iqc_id);
+	}
+	else
+	{
+		jvo->fail(dto->iqc_id);
+	}
+	// 响应结果
+	return jvo;
 }

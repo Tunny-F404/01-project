@@ -88,3 +88,14 @@ bool InspectService::Is_Ok(const Item_idDTO::Wrapper& dto)
 	InspectDAO dao;
 	return dao.Is_Ok(data) == 1;
 }
+
+//完成检验单
+bool InspectService::Finished(const Item_idDTO::Wrapper& dto)
+{
+	// 组装DO数据
+	InspectDO data;
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, List_status, list_status, Iqc_id, iqc_id);
+	// 执行数据修改
+	InspectDAO dao;
+	return dao.Finished(data) == 1;
+}
