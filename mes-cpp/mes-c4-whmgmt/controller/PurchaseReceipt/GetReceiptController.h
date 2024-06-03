@@ -60,8 +60,8 @@ public: // 定义接口
 	}
 
 private: // 定义接口执行函数
-	ReceiptPageTableJsonVO::Wrapper GetReceiptController::execQueryReceiptPageTable(const ReceiptTableQuery::Wrapper& query);
-	ReceiptDetailJsonVO::Wrapper GetReceiptController::execQueryReceiptDetail(const ReceiptDetailQuery::Wrapper& query);
+	ReceiptPageTableJsonVO::Wrapper execQueryReceiptPageTable(const ReceiptTableQuery::Wrapper& query);
+	ReceiptDetailJsonVO::Wrapper execQueryReceiptDetail(const ReceiptDetailQuery::Wrapper& query);
 };
 
 #include OATPP_CODEGEN_END(ApiController)
