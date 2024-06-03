@@ -65,11 +65,6 @@ const routes = [
 				path: "/sample/public-form",
 				component: () => import("@/views/sample/public-form/public-form-page.vue"),
 			},
-			// 表单弹窗演示页
-			{
-				path: "/sample/organizational-structure",
-				component: () => import("@/views/organizational-structure/organizational-structure.vue"),
-			},
 		],
 	},
 ];

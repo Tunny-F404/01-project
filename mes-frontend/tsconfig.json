@@ -1,21 +1,22 @@
 /**
-
 	参考资料
 	https://juejin.cn/post/7043723576121229342
 */
 {
+	// 集成基础配置
+	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
 		"baseUrl": ".",
-		"moduleResolution": "node",
-		"target": "esnext",
-		"module": "esnext",
+		"target": "ES2020",
 		"useDefineForClassFields": true,
-		"strict": true,
-		"resolveJsonModule": true,
+		"module": "ESNext",
 		"esModuleInterop": true,
+		// Web 应用需要 DOM 环境
 		"lib": [
 			"ESNext",
-			"DOM"
+			"ES2020",
+			"DOM",
+			"DOM.Iterable"
 		],
 		"paths": {
 			"@/*": [
@@ -43,6 +44,19 @@
 				"src/utils/*"
 			],
 		},
+		"skipLibCheck": true,
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "preserve",
+		/* Linting */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
 		"types": [
 			/** https://juejin.cn/post/7262322846252613693 */
 			"element-plus/global",
