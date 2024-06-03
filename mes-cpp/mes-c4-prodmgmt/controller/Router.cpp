@@ -1,44 +1,30 @@
-/*
- Copyright Zero One Star. All rights reserved.
-
- @Author: awei
- @Date: 2022/12/03 14:58:34
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
-	  https://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
-*/
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
 
-#ifdef HTTP_SERVER_DEMO
-#include "user/UserController.h"
-#include "sample/SampleController.h"
-#include "file/FileController.h"
-#include "ws/WSController.h"
-#endif
+#include "controller/prodmgmt/RemoveWorkReportController.h"
+#include "controller/productionorder/ProductionOrderController.h"
+#include "controller/productioninvestigation/ProductionProcessController.h"
+#include "controller/ProdOrder/ProdOrderController.h"
+#include "controller/ProdWorkorder/ProdWorkorderController.h"
+#include "controller/ApprovalStage/ApprovalStage.h"
+#include "controller/ProdWorkorder/ProWorkorderController.h"
+#include "controller/ProduceWork/ProController.h"
+#include "controller/FeedBack/FeedBackController.h"
+#include "controller/ProdTask/ProdTaskController.h"
 
-// Èç¹û¶¨ÒåÁË¹Ø±ÕSwaggerÎÄµµºê
+// å¦‚æžœå®šä¹‰äº†å…³é—­Swaggeræ–‡æ¡£å®
 #ifdef CLOSE_SWAGGER_DOC
-// ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
+// ç®€åŒ–ç»‘å®šæŽ§åˆ¶å™¨å®å®šä¹‰
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 router->addController(__CLASS__::createShared())
 #else
-// ¼ò»¯°ó¶¨¿ØÖÆÆ÷ºê¶¨Òå
+// ç®€åŒ–ç»‘å®šæŽ§åˆ¶å™¨å®å®šä¹‰
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
 
-Router::Router(Endpoints* docEndpoints, HttpRouter* router)
+Router::Router(Endpoints * docEndpoints, HttpRouter * router)
 {
 	this->docEndpoints = docEndpoints;
 	this->router = router;
@@ -46,25 +32,16 @@ Router::Router(Endpoints* docEndpoints, HttpRouter* router)
 
 void Router::initRouter()
 {
-#ifdef HTTP_SERVER_DEMO
-	createSampleRouter();
-#endif
-
-	//#TIP :ÏµÍ³À©Õ¹Â·ÓÉ¶¨Òå£¬Ð´ÔÚÕâ¸öºóÃæ
-
+	ROUTER_SIMPLE_BIND(ProController);
+	ROUTER_SIMPLE_BIND(ProdWorkorderController);
+	ROUTER_SIMPLE_BIND(RemoveWorkReportController);
+	ROUTER_SIMPLE_BIND(ApprovalStage);
+	ROUTER_SIMPLE_BIND(ProWorkorderController);
+	ROUTER_SIMPLE_BIND(ProductionOrderController);
+	ROUTER_SIMPLE_BIND(ProductionProcessController);
+	ROUTER_SIMPLE_BIND(ProdOrderController);
+	ROUTER_SIMPLE_BIND(FeedBackController);
+	ROUTER_SIMPLE_BIND(ProdTaskController);
 }
 
-#ifdef HTTP_SERVER_DEMO
-void Router::createSampleRouter()
-{
-	// °ó¶¨Ê¾Àý¿ØÖÆÆ÷
-	ROUTER_SIMPLE_BIND(SampleController);
-	// °ó¶¨ÓÃ»§¿ØÖÆÆ÷
-	ROUTER_SIMPLE_BIND(UserController);
-	// °ó¶¨ÎÄ¼þ¿ØÖÆÆ÷
-	ROUTER_SIMPLE_BIND(FileController);
-	
-	// °ó¶¨WebSocket¿ØÖÆÆ÷
-	router->addController(WSContorller::createShared());
-}
-#endif
+
