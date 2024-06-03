@@ -40,7 +40,6 @@ const routes = [
 		name: "UN31",
 		component: () => import("@/views/warehouse-management/warehouse-management.vue"),
 	},
-<<<<<<< f1
 	// 采购入库页面
 	{
 		path: "/un-32",
@@ -52,7 +51,8 @@ const routes = [
 		path: "/un-33",
 		name: "UN33",
 		component: () => import("@/views/warehouse-management/PurchaseReturn.vue"),
-    {
+	},
+	{
 		path: "/un-51",
 		name: "UN51",
 		component: () => import("@/views/status/404.vue"),
