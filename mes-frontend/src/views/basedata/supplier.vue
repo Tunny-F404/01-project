@@ -317,13 +317,38 @@ let supplierList = [
 		enableFlag: "Y",
 	},
 ];
+//对话框标题
+const dialogTitle = ref("");
 let total = 10;
 let loading = false;
 let single = true;
 let multiple = true;
+const formModel = ref({
+	clientCode: "",
+	clientName: "",
+	clientNick: "",
+	clientEn: "",
+	clientType: "",
+	clientDes: "",
+	address: "",
+	website: "",
+	email: "",
+	tel: "",
+	clientLogo: "",
+	contact1: "",
+	contact1Tel: "",
+	contact1Email: "",
+	contact2: "",
+	contact2Tel: "",
+	contact2Email: "",
+	creditCode: "",
+	enableFlag: "",
+	remark: ""
+});
 const testDialogVisible = ref(false);
 const openTestDialog = () => {
 	dialogTitle.value = "添加供应商信息";
+	console.log(11)
 	formModel.value = {
 		supplierCode: "",
 		supplierName: "",
