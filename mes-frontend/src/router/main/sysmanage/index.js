@@ -1,5 +1,10 @@
 const routes = [
 	{
+		path: "/un-0",
+		name: "UN0",
+		component: () => import("@/views/home-system-page/home-system-page.vue"),
+	},
+	{
 		path: "/un-1",
 		name: "UN1",
 		component: () => import("@/views/status/404.vue"),
