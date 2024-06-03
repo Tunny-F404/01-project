@@ -43,35 +43,6 @@ StringJsonVO::Wrapper SetController::execProcessExport(const ProcessExportQuery:
 	std::string sheetName = ZH_WORDS_GETTER("excel.sheet.s1");
 	ExcelComponent excel;
 	excel.writeVectorToFile(fileName, sheetName, data);
-
-	// 文件上传---下面没有用宏定义去写
-	//// 定义一个Nacos客户端对象，用于获取配置
-	//NacosClient ns("192.168.186.137:8848", "4833404f-4b82-462e-889a-3c508160c6b4");
-	//// DFS客户端连接对象
-	//FastDfsClient* client = nullptr;
-	//// 文件下载地址前缀
-	//std::string urlPrefix = "";
-	//// 声明一个上传文件的文件名
-	//std::string filename = "";
-	//// 定义一个临时变量用于存储上次上传成功后的文件field名称
-	//std::string tmpField = "";
-	//// 读取配置数据节点
-	//auto thirdServerConfig = ns.getConfig("./conf/third-services.yaml");
-	//// +FastDFS客户端配置数据
-	//std::string ipPort = YamlHelper().getString(&thirdServerConfig, "fastdfs.tracker-servers");
-	//std::string ip = ipPort.substr(0, ipPort.find(":"));
-	//int port = stoi(ipPort.substr(ipPort.find(":") + 1));
-	//// 设置客户端对象
-	//client = new FastDfsClient(ip, port);
-	//// 设置一个文件上传地址
-	//filename = "./public/excel/process.xlsx";
-	//// 设置url前缀
-	//urlPrefix = "http://" + YamlHelper().getString(&thirdServerConfig, "fastdfs.nginx-servers") + "/";
-	//tmpField = client->uploadFile(filename);
-	//// 输出文件下载地址
-	//std::string downloadUrl = urlPrefix + tmpField;
-	//std::cout << "download url: " << downloadUrl << std::endl;
-
 	std::string filename = "";
 	filename = "./public/excel/process.xlsx";
 	// 创建一个fastdfs对象及前缀
@@ -278,33 +249,66 @@ Uint64JsonVO::Wrapper SetController::execDeleteStepSet(const UInt64& id)
 	return jvo;
 }
 // 11 导出工序步骤
-StringJsonVO::Wrapper SetController::execExportStepSet(const SetStepExportQuery::Wrapper& query)
+StringJsonVO::Wrapper SetController::execExportStepSet(const SetProListQuery::Wrapper& query)
 {
-	//// 定义返回数据对象
+	// 定义一个Service
+	SetService service;
+	// 查询数据
+	list<SetProListDTO::Wrapper> result = service.listAllForExport(query);
+	std::vector<std::vector<std::string>> data;
+
+	// DTO数据转换为vector
+	for (auto sub : result) {
+		std::vector<std::string> tmp;
+		tmp.emplace_back(to_string(sub->processId));
+		tmp.emplace_back(to_string(sub->orderNum));
+		tmp.emplace_back(sub->contentText);
+		tmp.emplace_back(sub->device);
+		tmp.emplace_back(sub->material);
+		tmp.emplace_back(sub->docUrl);
+		data.emplace_back(tmp);
+	}
+
+	// 插入表头
+	data.insert(data.begin(), {
+		ZH_WORDS_GETTER("excel.header.h9"),
+		ZH_WORDS_GETTER("excel.header.h10"),
+		ZH_WORDS_GETTER("excel.header.h11"),
+		ZH_WORDS_GETTER("excel.header.h12"),
+		ZH_WORDS_GETTER("excel.header.h13"),
+		ZH_WORDS_GETTER("excel.header.h14"),
+		});
+
+	// 保存到文件
+	std::string fileName = "./public/excel/process.xlsx";
+	std::string sheetName = ZH_WORDS_GETTER("excel.sheet.s3");
+	ExcelComponent excel;
+	excel.writeVectorToFile(fileName, sheetName, data);
+	std::string filename = "";
+	filename = "./public/excel/process.xlsx";
+	// 创建一个fastdfs对象及前缀
+	ZO_CREATE_DFS_CLIENT_URL(dfs, urlPrefix);
+	// 获取文件后缀名
+	string suffix = "";
+	size_t pos = filename.rfind(".");
+	if (pos != string::npos)
+	{
+		suffix = filename.substr(pos + 1);
+	}
+	// 上传文件
+	string downloadUrl = dfs.uploadFile(filename);
+	downloadUrl = urlPrefix + downloadUrl;
+	OATPP_LOGD("Multipart", "download url='%s'", downloadUrl.c_str());
+
+	// 响应结果
 	auto jvo = StringJsonVO::createShared();
-	//// 定义一个Service
-	//ContentService service;
-	//// 查询数据
-	//auto result = service.listAll(query);
-	//if (!result) {
-	//	jvo->init(String(-1), RS_PARAMS_INVALID);
-	//	return jvo;
-	//}
+	if (downloadUrl != "") {
+		jvo->success(downloadUrl);
+	}
+	else {
+		jvo->fail(downloadUrl);
+	}
 
-	//ExcelComponent excelComponent;
-
-	//excelComponent.setColWidth(20.0); 
-	//excelComponent.setRowHeight(15.0); 
-
-	//std::vector<std::vector<std::string>> data;
-	//data.push_back({ "ContentId", "OrderNum", "ContentText", "Device", "Material", "DocUrl", "Remark" });
-	////向data中添加数据
-	//// 
-	//// 写入数据到 Excel 文件
-	//excelComponent.writeVectorToFile(filePath, "Steps", data);
-
-	//// 返回成功结果
-	//jvo->success(result->contentText);
 	return jvo;
 }
 

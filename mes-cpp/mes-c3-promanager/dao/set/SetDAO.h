@@ -35,6 +35,8 @@ public:
 	std::list<ProProcessDO> selectProNameList();
 	// 通过 工序id 查询 工序说明
 	std::list<ProProcessDO> selectByid(const ProDetailQuery::Wrapper& query);
+	// 导出工序步骤
+	list<ProProcessContentDO> selectWithStepExport(const SetProListQuery::Wrapper& query);
 
 };
 #endif // !_SET_DAO_

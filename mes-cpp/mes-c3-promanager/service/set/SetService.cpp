@@ -175,3 +175,28 @@ ProNameListJsonVO::Wrapper SetService::getProcessNameList()
 	vo->success(data);
 	return vo;
 }
+
+list<SetProListDTO::Wrapper> SetService::listAllForExport(const SetProListQuery::Wrapper& query)
+{
+	// 构建返回对象
+	list<SetProListDTO::Wrapper> data;
+
+	//查询数据
+	SetDAO dao;
+
+	list<ProProcessContentDO> result = dao.selectWithStepExport(query);
+	//将DO转换成DTO
+	for (ProProcessContentDO sub : result)
+	{
+		auto dto = SetProListDTO::createShared();
+		dto->processId = sub.getProcessId();
+		dto->orderNum = sub.getOrderNum();
+		dto->contentText = sub.getContentText();
+		dto->device = sub.getDevice();
+		dto->material = sub.getMaterial();
+		dto->docUrl = sub.getDocUrl();
+		//ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, routeid, RouteId, routecode, RouteCode, routedesc, RouteDesc, enableflag, EnableFlag, remark, Remark)
+		data.emplace_back(dto);
+	}
+	return data;
+}

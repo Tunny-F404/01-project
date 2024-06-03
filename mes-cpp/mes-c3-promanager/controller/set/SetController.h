@@ -89,10 +89,11 @@ public:
 	ENDPOINT_INFO(queryProNameList) {
 		// 定义接口标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("set.query.summary2"));
+		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProNameListJsonVO);
 	}
-	ENDPOINT(API_M_GET, "/set/query-process-name-list", queryProNameList) {
+	ENDPOINT(API_M_GET, "/set/query-process-name-list", queryProNameList,  API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryProNameList());
 	}
@@ -163,12 +164,10 @@ public:
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
 		API_DEF_ADD_PAGE_PARAMS();
-		API_DEF_ADD_QUERY_PARAMS(String, "setstepCode", ZH_WORDS_GETTER("set.fields.code"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "setstepName", ZH_WORDS_GETTER("set.fields.name"), "", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("set.fields.flag"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "processId", ZH_WORDS_GETTER("set.fields.processid"), 1, true);
 	}
 	ENDPOINT(API_M_POST, "/set/export-process-step", SetStepExport, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		API_HANDLER_QUERY_PARAM(setstepQuery, SetStepExportQuery, queryParams);
+		API_HANDLER_QUERY_PARAM(setstepQuery, SetProListQuery, queryParams);
 		API_HANDLER_RESP_VO(execExportStepSet(setstepQuery));
 	}
 	// 12 删除工序
@@ -197,12 +196,12 @@ private:
 	ProNameListJsonVO::Wrapper execQueryProNameList();
 	// 8 获取工序详情
 	ProDetailJsonVO::Wrapper execQueryProDetail(const ProDetailQuery::Wrapper& query);
-	//9 修改工序步骤
+	// 9 修改工序步骤
 	Uint64JsonVO::Wrapper execModifyStepSet(const SetProListDTO::Wrapper& dto);
 	//10 删除工序步骤
 	Uint64JsonVO::Wrapper execDeleteStepSet(const UInt64& id);
 	//11 导出工序步骤
-	StringJsonVO::Wrapper execExportStepSet(const SetStepExportQuery::Wrapper& query);
+	StringJsonVO::Wrapper execExportStepSet(const SetProListQuery::Wrapper& query);
 	//12 删除工序
 	Uint64JsonVO::Wrapper execDeleteSet(const UInt64& id);
 };

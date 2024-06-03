@@ -41,6 +41,22 @@ public:
 		return data;
 	}
 };
+//导出工序步骤
+class SetStepExportMapper : public Mapper<ProProcessContentDO>
+{
+public:
+	ProProcessContentDO mapper(ResultSet* resultSet) const override
+	{
+		ProProcessContentDO data;
+		data.setProcessId(resultSet->getUInt64(1));
+		data.setOrderNum(resultSet->getInt(2));
+		data.setContentText(resultSet->getString(3));
+		data.setDevice(resultSet->getString(4));
+		data.setMaterial(resultSet->getString(5));
+		data.setDocUrl(resultSet->getString(6));
+		return data;
+	}
+};
 /**
  * pro_process表字段匹配映射
  */
