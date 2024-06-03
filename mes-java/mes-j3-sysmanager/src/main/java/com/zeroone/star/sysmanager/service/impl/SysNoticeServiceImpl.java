@@ -10,9 +10,12 @@ import com.zeroone.star.sysmanager.service.ISysNoticeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -93,5 +96,13 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
         return noticeDTO;
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void removeNoticeByIds(List<Integer> ids) {
+        int i = sysNoticeMapper.deleteBatchIds(ids);
+        if (i == 0) {
+            throw new RuntimeException("No records found to delete for the provided IDs: " + ids);
+        }
+    }
 
 }

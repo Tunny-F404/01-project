@@ -8,7 +8,10 @@ import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.sysmanager.service.ISysNoticeService;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +20,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Api(tags = "通知公告")
-@RestController
+@Controller
 @RequestMapping("sys-manager/notice")
 public class NoticeController implements NoticeApis {
     @Resource
@@ -82,23 +85,20 @@ public class NoticeController implements NoticeApis {
      */
     @DeleteMapping("/remove-notice")
     @ApiOperation("删除公告")
-    //@Transactional(rollbackFor = Exception.class)
     public JsonVO<List<Integer>> removeNotice(@RequestBody List<Integer> ids) {
         if (ids == null || ids.isEmpty()) {
-            // 手动回滚事务
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             // 返回错误信息
             return JsonVO.create(null, HttpStatus.BAD_REQUEST.value(), "数据为空！");
         }
-        boolean removed = noticeService.removeByIds(ids);
-        if (!removed) {
-            // 手动回滚事务
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            // 返回错误信息
-            return JsonVO.create(ids, HttpStatus.NOT_FOUND.value(), "删除失败，指定的公告不存在或已被删除。");
+        try {
+            // 调用服务层方法，该方法会抛出异常如果删除失败
+            noticeService.removeNoticeByIds(ids);
+            // 删除成功
+            return JsonVO.create(ids, HttpStatus.OK.value(), "删除成功！");
+        } catch (RuntimeException e) {
+            // 捕获服务层抛出的异常，并返回相应的错误信息
+            return JsonVO.create(ids, HttpStatus.NOT_FOUND.value(), e.getMessage());
         }
-        // 删除成功
-        return JsonVO.create(ids, HttpStatus.OK.value(), "删除成功！");
     }
 
 
