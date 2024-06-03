@@ -27,7 +27,7 @@ class ProWorkorderController : public oatpp::web::server::api::ApiController // 
 	// 3 定义接口
 public:
 	// 定义修改接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("ProdWorkorder.put.summary"), modifyProWorkorder, ModifyProWorkorderJsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("ProdWorkorder.put.summary"), modifyProWorkorder, Uint64JsonVO::Wrapper);
 	// 定义修改接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdWorkorder/modify", modifyProWorkorder, BODY_DTO(ModifyProWorkorderDTO::Wrapper, dto), execModifyProWorkdorder(dto));
 
@@ -40,43 +40,43 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "workorderId", ZH_WORDS_GETTER("ProdWorkorder.field.workorderId"), 1, true);
 	}
 	// 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ProdWorkorder/Delete{workorderId}", removeProWorkorder, PATH(UInt64, workorderId), execRemoveProWorkorder(workorderId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ProdWorkorder/{workorderId}", removeProWorkorder, PATH(UInt64, workorderId), execRemoveProWorkorder(workorderId));
 
 
 	// 定义确认接口描述
 	ENDPOINT_INFO( confirmProWorkorder) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("ProdWorkorder.confirm.summary"), ConfirmProWorkorderJsonVO::Wrapper);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("ProdWorkorder.confirm.summary"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "workorderId", ZH_WORDS_GETTER("ProdWorkorder.field.workorderId"), 1, true);
 	}
 	// 定义确认接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdWorkorder/Confirm{workorderId}", confirmProWorkorder, PATH(UInt64, workorderId), execConfirmProWorkorder(workorderId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdWorkorder/comfirm/{workorderId}", confirmProWorkorder, PATH(UInt64, workorderId), execConfirmProWorkorder(workorderId));
 
 
 	// 定义完成接口描述
 	ENDPOINT_INFO(completeProWorkorder) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("ProdWorkorder.complete.summary"), CompleteProWorkorderJsonVO::Wrapper);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("ProdWorkorder.complete.summary"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "workorderId", ZH_WORDS_GETTER("ProdWorkorder.field.workorderId"), 1, true);
 	}
 	// 定义完成接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdWorkorder/Complete{workorderId}", completeProWorkorder, PATH(UInt64, workorderId), execCompleteProWorkorder(workorderId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdWorkorder/complete/{workorderId}", completeProWorkorder, PATH(UInt64, workorderId), execCompleteProWorkorder(workorderId));
 
 
 private:
 	// 修改数据
-	ModifyProWorkorderJsonVO::Wrapper execModifyProWorkdorder(const ModifyProWorkorderDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyProWorkdorder(const ModifyProWorkorderDTO::Wrapper& dto);
 
 	// 删除数据
-	DeleteProWorkorderJsonVO::Wrapper execRemoveProWorkorder(const UInt64& workorderId);
+	Uint64JsonVO::Wrapper execRemoveProWorkorder(const UInt64& workorderId);
 
 	// 确认数据
-	ConfirmProWorkorderJsonVO::Wrapper execConfirmProWorkorder(const UInt64& workorderId);
+	Uint64JsonVO::Wrapper execConfirmProWorkorder(const UInt64& workorderId);
 
 	// 完成数据
-	CompleteProWorkorderJsonVO::Wrapper execCompleteProWorkorder(const UInt64& workorderId);
+	Uint64JsonVO::Wrapper execCompleteProWorkorder(const UInt64& workorderId);
 };
 
 // 0 取消API控制器使用宏

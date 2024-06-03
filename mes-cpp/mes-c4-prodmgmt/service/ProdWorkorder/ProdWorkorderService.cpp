@@ -1,8 +1,11 @@
+<<<<<<< c4
 #include "stdafx.h"
 #include "ProdWorkorderService.h"
 #include "../../dao/ProdWorkorder/ProdWorkorderDAO.h"
-
-//»ñÈ¡Éú²ú¹¤µ¥ÏêÇé
+#include "../../dao/MdProductBom/MdProductBomDAO.h"
+#include "../../dao/ProWorkorderBom/ProWorkorderBomDAO.h"
+#include "../lib-common/include/SimpleDateTimeFormat.h"
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ProdWorkorderInfoDTO::Wrapper ProdWorkorderService::listDetail(const uint64_t& workorder_id) {
 	
 	ProdWorkorderDAO dao;
@@ -14,12 +17,12 @@ ProdWorkorderInfoDTO::Wrapper ProdWorkorderService::listDetail(const uint64_t& w
 
 	}
 	return temp_dto;
-	//// ×é×°DOÊý¾Ý
+	//// ï¿½ï¿½×°DOï¿½ï¿½ï¿½ï¿½
 	//ProdWorkorderInfoDO data;
 	//ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Workorder_id, workorder_id)
 	////ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Workorder_id, workorder_id, Workorder_code, workorder_code, Workorder_name, workorder_name, Order_source, order_source, Source_code, source_code, Status, status, Workorder_type, workorder_type, Product_code, product_code, Product_name, product_name, Product_spc, product_spc, Unit_of_measure, unit_of_measure, Quantity, quantity, Request_date, request_date, Batch_code, batch_code, Client_code, client_code, Client_name, client_name, Vendor_code, vendor_code, Vendor_name, vendor_name, Remark, remark)
 	//
-	//// Ö´ÐÐÊý¾ÝÌí¼Ó
+	//// Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//ProdWorkorderDAO dao;	
 	// DO×ªDTO
 	//list<ProdWorkorderInfoDO> result = dao.selectByWorkorderId(data);
@@ -32,25 +35,25 @@ ProdWorkorderInfoDTO::Wrapper ProdWorkorderService::listDetail(const uint64_t& w
 	//return temp_dto;
 }
 
-//»ñÈ¡Éú²ú¹¤µ¥ÁÐ±í
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 GetProdWorkorderListPageDTO::Wrapper ProdWorkorderService::listAll(const GetProdWorkorderListQuery::Wrapper& query) {
-	// ¹¹½¨·µ»Ø¶ÔÏó
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½
 	auto pages = GetProdWorkorderListPageDTO::createShared();
 	pages->pageIndex = query->pageIndex;
 	pages->pageSize = query->pageSize;
 
-	// ²éÑ¯Êý¾Ý×ÜÌõÊý
+	// ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ProdWorkorderDAO dao;
 	uint64_t count = dao.count(query);
 	if (count <= 0)
 	{
 		return pages;
 	}
-	// ·ÖÒ³²éÑ¯Êý¾Ý
+	// ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	pages->total = count;
 	pages->calcPages();
 	list<GetProdWorkorderListDO> result = dao.selectWithPage(query);
-	// ½«DO×ª»»³ÉDTO
+	// ï¿½ï¿½DO×ªï¿½ï¿½ï¿½ï¿½DTO
 	for (GetProdWorkorderListDO sub : result)
 	{
 		auto dto = GetProdWorkorderListDTO::createShared();
@@ -60,25 +63,25 @@ GetProdWorkorderListPageDTO::Wrapper ProdWorkorderService::listAll(const GetProd
 	return pages;
 }
 
-//»ñÈ¡Éú²ú¹¤µ¥BOMÁÐ±í
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½BOMï¿½Ð±ï¿½
 ProdWorkorderBomListPageDTO::Wrapper ProdWorkorderService::listBom(const ProdWorkorderBomListQuery::Wrapper& query) {
-	// ¹¹½¨·µ»Ø¶ÔÏó
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½
 	auto pages = ProdWorkorderBomListPageDTO::createShared();
 	pages->pageIndex = query->pageIndex;
 	pages->pageSize = query->pageSize;
 
-	// ²éÑ¯Êý¾Ý×ÜÌõÊý
+	// ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ProdWorkorderDAO dao;
 	uint64_t count = dao.countBom(query);
 	if (count <= 0)
 	{
 		return pages;
 	}
-	// ·ÖÒ³²éÑ¯Êý¾Ý
+	// ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	pages->total = count;
 	pages->calcPages();
 	list<ProdWorkorderBomListDO> result = dao.selectByBomId(query);
-	// ½«DO×ª»»³ÉDTO
+	// ï¿½ï¿½DO×ªï¿½ï¿½ï¿½ï¿½DTO
 	for (ProdWorkorderBomListDO sub : result)
 	{
 		auto dto = ProdWorkorderBomListDTO::createShared();
@@ -88,13 +91,122 @@ ProdWorkorderBomListPageDTO::Wrapper ProdWorkorderService::listBom(const ProdWor
 	return pages;
 }
 
-//Ìí¼ÓÉú²ú¹¤µ¥
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 uint64_t ProdWorkorderService::saveData(const AddProdWorkorderDTO::Wrapper& dto)
 {
-	// ×é×°DOÊý¾Ý
+	// ï¿½ï¿½×°DOï¿½ï¿½ï¿½ï¿½
 	AddProdWorkorderDO data;
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Workorder_id, workorder_id, Workorder_code, workorder_code, Workorder_name, workorder_name, Order_source, order_source, Status, status, Workorder_type, workorder_type, Product_code, product_code, Product_name, product_name, Product_spc, product_spc, Unit_of_measure, unit_of_measure, Quantity, quantity, Request_date, request_date, Batch_code, batch_code, Remark, remark, Product_id, product_id, Ancestors, ancestors)
-	// Ö´ÐÐÊý¾ÝÌí¼Ó
+	// Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ProdWorkorderDAO dao;
 	return dao.insert(data);
 }
+
+
+
+bool ProdWorkorderService::updateData(const ModifyProWorkorderDTO::Wrapper& dto)
+{
+	ProdWorkorderDAO d1;
+	MdProductBomDAO d2;
+	ProdWorkorderBomDAO d3;
+
+	TransactionManager tm(&d1, &d2, &d3);
+
+	//É¾ï¿½ï¿½
+	uint64_t oldProductId = d1.selectByID(dto->workorderId.getValue(0));
+	
+	if (d2.countById(oldProductId) > 0) {
+		//int row = d2.deleteById(productId);
+		int row = d3.deleteByItemId(dto->workorderId.getValue(0));
+		if (row <= 0) {
+			tm.rollback();
+			return false;
+		}
+	}
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½BOM
+	uint64_t productId = dto->productId.getValue(0);
+	if(d2.countById(productId) > 0) {
+		list<MdProductBomDO> mdBom = d2.selectByItemId(dto->productId.getValue(0));
+		for (auto i : mdBom) {
+			ProWorkOrderBomDO data;
+			data.setworkOrderId(dto->workorderId.getValue(0));
+			data.setitemId(i.getBomItemId());
+			data.setitemCode(i.getBomItemCode());
+			data.setitemName(i.getBomItemName());
+			data.setitemSpc(i.getBomItemSpc());
+			data.setunitOfMeasure(i.getUnitOfMeasure());
+			data.setbQuantity(i.getQuantity() * dto->quantity.getValue(0));
+			data.setitemOrProduct(i.getItemOrProduct());
+			//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+			data.setcreateTime(SimpleDateTimeFormat::format());
+			int row = d3.insert(data);
+			if (row <= 0) {
+				tm.rollback();
+				return false;
+			}
+		}
+	}
+	//ï¿½Þ¸ï¿½
+	ProdWorkorderDO dataDO;
+	dataDO.setWorkOrderID(dto->workorderId.getValue(0));
+	dataDO.setWorkOrderCode(dto->workorderCode.getValue(""));
+	dataDO.setWorkOrderName(dto->workorderName.getValue(""));
+	dataDO.setOrderSource(dto->orderSource.getValue(""));
+	dataDO.setSourceCode(dto->sourceCode.getValue(""));
+	dataDO.setWorkOrderType(dto->workorderType.getValue(""));
+	dataDO.setQuantity(dto->quantity.getValue(0));
+	dataDO.setRequestDate(dto->requestDate.getValue(""));
+	dataDO.setBatchCode(dto->batchCode.getValue(""));
+	dataDO.setClientId(dto->clientId.getValue(0));
+	dataDO.setClientCode(dto->clientCode.getValue(""));
+	dataDO.setProductId(dto->productId.getValue(0));
+	dataDO.setProductCode(dto->productCode.getValue(""));
+	dataDO.setProductSpc(dto->productSpc.getValue(""));
+	dataDO.setUnitOfMeasure(dto->unitOfMeasure.getValue(""));
+	dataDO.setClientName(dto->clientName.getValue(""));
+	dataDO.setRemark(dto->remark.getValue(""));
+	dataDO.setUpdateTime(SimpleDateTimeFormat::format());
+	int row = d1.update(dataDO);
+	if (row <= 0) {
+		tm.rollback();
+		return false;
+	}
+	tm.commit();
+	return true;
+}
+
+bool ProdWorkorderService::completeData(uint64_t id)
+{
+	ProdWorkorderDO childData;
+	childData.setParentId(id);
+	childData.setStatus("FINISHED");
+
+	ProdWorkorderDO data;
+	data.setWorkOrderID(id);
+	data.setStatus("CONFIRMED");
+	ProdWorkorderDAO dao;
+	if (dao.countById(childData) > 0 || dao.countById(data) <= 0) {
+		return false;
+	}
+	return dao.completeById(id) == 1;
+}
+
+bool ProdWorkorderService::removeData(uint64_t id)
+{
+	ProdWorkorderDO data;
+	data.setWorkOrderID(id);
+	data.setStatus("PREPARE");
+	ProdWorkorderDAO dao;
+	if (dao.countById(data) <= 0) {
+		return false;
+	}
+	return dao.deleteById(id)==1;
+}
+
+bool ProdWorkorderService::confirmData(uint64_t id)
+{
+	
+	ProdWorkorderDAO dao;
+	return dao.comfirmById(id)==1;
+}
+
