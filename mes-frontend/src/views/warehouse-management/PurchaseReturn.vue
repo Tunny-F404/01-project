@@ -8,7 +8,7 @@ const rtCode = ref("");
 const rtName = ref("");
 const poCode = ref("");
 const vendorName = ref("");
-//存储对话框的标题
+// 存储对话框的标题
 const dialogTitle = ref("");
 // 表格数据
 const tableList = ref([
@@ -29,7 +29,8 @@ const tableList = ref([
     vendorName: "供应商2",
     rtDate: "2023-10-02",
     status: "CONFIRMED",
-  },{
+  },
+  {
     rtCode: "RT003",
     rtName: "退货单3",
     poCode: "PO003",
@@ -67,6 +68,20 @@ const tableList = ref([
   },
 ]);
 
+// 自定义排序逻辑
+function handleSortChange({ prop, order }) {
+  tableList.value.sort((a, b) => {
+    if (order === "ascending") {
+      return a[prop] > b[prop] ? 1 : -1;
+    }
+    else if (order === "descending") {
+      return a[prop] < b[prop] ? 1 : -1;
+    }
+    else {
+      return 0;
+    }
+  });
+}
 // 对话框
 const dialogVisible = ref(false);
 const formRef = ref();
@@ -95,21 +110,22 @@ const rules = {
   rtDate: [{ required: true, message: "请选择退货日期", trigger: "change" }],
 };
 
-const submitForm = () => {
+function submitForm() {
   formRef.value.validate((valid) => {
     if (valid) {
       console.log("提交成功", formModel.value);
       dialogVisible.value = false;
-    } else {
+    }
+    else {
       console.log("提交失败");
       return false;
     }
   });
-};
+}
 
-const cancelForm = () => {
+function cancelForm() {
   dialogVisible.value = false;
-};
+}
 
 // 分页
 const loading = ref(false);
@@ -120,27 +136,64 @@ const parms = ref({
 const total = ref(tableList.value.length);
 
 const originalTableList = ref([...tableList.value]);
-const getPageList = () => {
+function getPageList() {
   loading.value = true;
   const start = (parms.value.pagenum - 1) * parms.value.pagesize;
   const end = start + parms.value.pagesize;
   tableList.value = originalTableList.value.slice(start, end);
   loading.value = false;
-};
+}
 
-const onSizeChange = (size) => {
+function onSizeChange(size) {
   parms.value.pagenum = 1;
   parms.value.pagesize = size;
   getPageList();
-};
+}
 
-const onCurrentChange = (page) => {
+function onCurrentChange(page) {
   parms.value.pagenum = page;
   getPageList();
-};
+}
 
+// 隐藏搜索栏
+const showSearchBar = ref(true);
+function toggleSearchBar() {
+  showSearchBar.value = !showSearchBar.value;
+}
+// 模拟刷新数据
+function refreshData() {
+  loading.value = true; // 显示加载动画
+  // 模拟刷新数据
+  setTimeout(() => {
+    // 调用后端接口获取最新数据
+    // request.get('/api/refresh-data').then(response => {
+    //   tableList.value = response.data;
+    //   originalTableList.value = [...tableList.value];
+    //   getPageList();
+    // }).finally(() => {
+    //   loading.value = false; // 隐藏加载动画
+    // });
+
+    // 模拟数据刷新
+    tableList.value = [
+      ...tableList.value,
+      {
+        rtCode: "RT007",
+        rtName: "退货单7",
+        poCode: "PO007",
+        vendorCode: "V007",
+        vendorName: "供应商7",
+        rtDate: "2023-10-07",
+        status: "PREPARE",
+      },
+    ];
+    originalTableList.value = [...tableList.value];
+    getPageList();
+    loading.value = false; // 隐藏加载动画
+  }, 1000);
+}
 // 新增退货单
-const handleAdd = () => {
+function handleAdd() {
   formModel.value = {
     rtId: "",
     rtCode: "",
@@ -160,24 +213,23 @@ const handleAdd = () => {
   };
   dialogTitle.value = "新增退货单";
   dialogVisible.value = true;
-};
+}
 
-//修改退货单
-const handleUpdate = (row) => {
+// 修改退货单
+function handleUpdate(row) {
   formModel.value = { ...row };
   dialogTitle.value = "修改退货单";
   dialogVisible.value = true;
-};
+}
 
-
-//模拟删除
-const handleDelete = async (row) => {
+// 模拟删除
+async function handleDelete(row) {
   await ElMessageBox.confirm("你确认要删除该退货单么", "温馨提示", {
     type: "warning",
     confirmButtonText: "确认",
     cancelButtonText: "取消",
   });
-	const index = tableList.value.findIndex(item => item.rtCode === row.rtCode);
+  const index = tableList.value.findIndex(item => item.rtCode === row.rtCode);
   if (index !== -1) {
     tableList.value.splice(index, 1);
     originalTableList.value = [...tableList.value];
@@ -186,31 +238,48 @@ const handleDelete = async (row) => {
   ElMessage.success("删除成功");
   console.log(row);
   getPageList();
-};
+}
 
-const handleExport = () => {
+function handleExport() {
   console.log("导出数据");
-};
+}
 
-const handleQuery = () => {
-  console.log("查询提交");
-};
+//模拟搜索筛选
+function handleQuery() {
+  // 模拟过滤数据
+  tableList.value = originalTableList.value.filter(item => {
+    return (
+      (!rtCode.value || item.rtCode.includes(rtCode.value)) &&
+      (!rtName.value || item.rtName.includes(rtName.value)) &&
+      (!poCode.value || item.poCode.includes(poCode.value)) &&
+      (!vendorName.value || item.vendorName.includes(vendorName.value))
+    );
+  });
+  getPageList();
+	// 调用后端接口获取过滤后的数据
+  // request.get('/api/query', { params: { rtCode: rtCode.value, rtName: rtName.value, poCode: poCode.value, vendorName: vendorName.value } })
+  //   .then(response => {
+  //     tableList.value = response.data;
+  //     originalTableList.value = [...tableList.value];
+  //     getPageList();
+  //   });
+}
 
-const resetQuery = () => {
+function resetQuery() {
   rtCode.value = "";
   rtName.value = "";
   poCode.value = "";
   vendorName.value = "";
   handleQuery();
-};
+}
 
-const handleSelectionChange = (val) => {
+function handleSelectionChange(val) {
   selectedRow.value = val.length === 1 ? val[0] : null;
   console.log("选中项变化", val);
-};
+}
 
 // 执行退货
-const handleExecute = async (row) => {
+async function handleExecute(row) {
   try {
     await ElMessageBox.confirm("你确认要执行退货么", "温馨提示", {
       type: "warning",
@@ -220,10 +289,11 @@ const handleExecute = async (row) => {
     ElMessage.success("执行退货成功");
     console.log("执行退货", row);
     // 执行退货的逻辑
-  } catch (error) {
+  }
+  catch (error) {
     console.log("取消执行退货");
   }
-};
+}
 const selectedRow = ref(null);
 
 </script>
@@ -235,7 +305,7 @@ const selectedRow = ref(null);
     </template>
 
     <!-- 搜索表单 -->
-    <el-form :inline="true" class="demo-form-inline">
+    <el-form v-if="showSearchBar" :inline="true" class="demo-form-inline">
       <el-row>
         <el-col :span="8">
           <el-form-item label="退货单编号：">
@@ -264,11 +334,13 @@ const selectedRow = ref(null);
             <el-button type="primary" @click="handleQuery"><el-icon><Search /></el-icon>查询</el-button>
             <el-button @click="resetQuery"><el-icon><Refresh /></el-icon>重置</el-button>
           </el-form-item>
-        </el-col>
+</el-col>
       </el-row>
+
     </el-form>
 
     <!-- 操作按钮 -->
+		<div class="action-buttons">
     <el-button type="primary" plain @click="handleAdd">
       <el-icon><Plus /></el-icon>新增
     </el-button>
@@ -278,17 +350,29 @@ const selectedRow = ref(null);
 <el-button type="danger" plain @click="handleDelete(selectedRow)">
   <el-icon><Delete /></el-icon>删除
 </el-button>
-
+<div class="search-icons">
+<el-tooltip content="隐藏搜索栏" placement="top">
+  <el-button @click="toggleSearchBar" plain>
+    <el-icon><Search /></el-icon>
+  </el-button>
+</el-tooltip>
+<el-tooltip content="刷新" placement="top">
+  <el-button @click="refreshData" plain>
+    <el-icon><Refresh /></el-icon>
+  </el-button>
+</el-tooltip>
+</div>
+</div>
     <!-- 数据表格 -->
-    <el-table :data="tableList" style="width: 100%" v-loading="loading" @selection-change="handleSelectionChange" ref="multipleTable">
-			<el-table-column type="selection" width="45" />
-      <el-table-column type="index" label="序号" width="55"></el-table-column>
-      <el-table-column prop="rtCode" label="退货单编号" width="85" align="center"></el-table-column>
-      <el-table-column prop="rtName" label="退货单名称" width="185" align="center"></el-table-column>
-      <el-table-column prop="poCode" label="采购订单编号" width="125" align="center"></el-table-column>
-      <el-table-column prop="vendorCode" label="供应商编码" width="100" align="center"></el-table-column>
-      <el-table-column prop="vendorName" label="供应商名称" width="150" align="center"></el-table-column>
-      <el-table-column prop="rtDate" label="退货日期" width="150" align="center"></el-table-column>
+    <el-table ref="multipleTable" v-loading="loading" :data="tableList" style="width: 100%" @selection-change="handleSelectionChange"  @sort-change="handleSortChange">
+			<el-table-column type="selection" width="40" />
+      <el-table-column type="index" label="序号" width="55" align="center" sortable="custom"></el-table-column>
+      <el-table-column prop="rtCode" label="退货单编号" width="120" align="center" sortable="custom"></el-table-column>
+      <el-table-column prop="rtName" label="退货单名称" width="165" align="center" ></el-table-column>
+      <el-table-column prop="poCode" label="采购订单编号" width="140" align="center" sortable="custom"></el-table-column>
+      <el-table-column prop="vendorCode" label="供应商编码" width="120" align="center" sortable="custom"></el-table-column>
+      <el-table-column prop="vendorName" label="供应商名称" width="150" align="center" sortable="custom"></el-table-column>
+      <el-table-column prop="rtDate" label="退货日期" width="120" align="center" sortable="custom"></el-table-column>
       <el-table-column prop="status" label="单据状态" width="80" align="center">
         <template #default="{ row }">
           <el-tag :class="row.status === 'PREPARE' ? 'status-enabled' : 'status-disabled'" style="cursor: pointer;">
@@ -298,13 +382,13 @@ const selectedRow = ref(null);
       </el-table-column>
       <el-table-column label="操作" width="200" align="center">
         <template #default="{ row, $index }">
-          <el-button @click="handleUpdate(row, $index)" circle type="primary">
+          <el-button circle type="primary" @click="handleUpdate(row, $index)">
             <el-icon :size="20"> <Edit /></el-icon>
           </el-button>
-          <el-button @click="handleDelete(row, $index)" type="danger" circle>
+          <el-button type="danger" circle @click="handleDelete(row, $index)">
             <el-icon :size="20"> <Delete /></el-icon>
           </el-button>
-          <el-button @click="handleExecute(row, $index)" type="text">
+          <el-button type="text" @click="handleExecute(row, $index)">
             <el-icon :size="10"><VideoPlay /></el-icon>执行退货
           </el-button>
         </template>
@@ -319,9 +403,9 @@ const selectedRow = ref(null);
       :background="true"
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
+      style="margin-top: 20px; justify-content: flex-end"
       @size-change="onSizeChange"
       @current-change="onCurrentChange"
-      style="margin-top: 20px; justify-content: flex-end"
     />
 
     <!-- 添加或修改退货单对话框 -->
@@ -402,5 +486,26 @@ const selectedRow = ref(null);
   color: #f56c6c;
   padding: 5px;
   text-align: center;
+}
+.search-icons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+	// position:absolute;
+  // top: 120px;
+  // right: 30px;
+	margin-left: auto;
+}
+
+.search-icons .el-button {
+  margin-left: 10px;
+  border: none; 
+  box-shadow: none; 
+}
+
+.search-icons.fixed {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 </style>
