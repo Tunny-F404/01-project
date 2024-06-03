@@ -52,6 +52,12 @@ const routes = [
 		name: "UN33",
 		component: () => import("@/views/warehouse-management/PurchaseReturn.vue"),
 	},
+	// 采购系统管理的消息通知页面
+	{
+		path: "/un-41",
+		name: "UN41",
+		component: () => import("@/views/system-management/announcement-management.vue"),
+	},
 ];
 
 export default routes;

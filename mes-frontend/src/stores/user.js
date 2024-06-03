@@ -186,6 +186,49 @@ let testMenus = [
 			},
 		],
 	},
+	//系统管理
+	{
+		id: 5,
+		text: "系统管理",
+		icon: "Management",
+		children: [
+			{
+				id: 2,
+				text: "仓库管理",
+				href: "/un-41",
+				icon: "Management",
+				pid: 5,
+			},
+			{
+				id: 3,
+				text: "采购入库",
+				href: "/un-42",
+				icon: "Management",
+				pid: 5,
+			},
+			{
+				id: 4,
+				text: "采购退货",
+				href: "/un-43",
+				icon: "Management",
+				pid: 5,
+			},
+			{
+				id: 5,
+				text: "仓库管理4",
+				href: "/un-44",
+				icon: "Management",
+				pid: 5,
+			},
+			{
+				id: 6,
+				text: "订单管理5",
+				href: "/un-45",
+				icon: "Management",
+				pid: 5,
+			},
+		],
+	},
 ];
 
 export const userStore = defineStore("user", {
