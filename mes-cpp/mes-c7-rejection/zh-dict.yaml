@@ -45,8 +45,7 @@ RawMaterialOp:
   download: 
    summary: 退料单据导出
    filename: 导出文件名称和格式
-
- reject: 
+reject: 
  fields:
   rt_code: 退料单编号
   workorder_id: 生产工单id

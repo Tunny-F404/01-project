@@ -23,7 +23,6 @@
 
 #include "rejection/RejectController.h"
 
-
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
@@ -62,7 +61,6 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(MaterialInformationController);
 	ROUTER_SIMPLE_BIND(RejectController);
 	ROUTER_SIMPLE_BIND(RawMaterialOpController);
-
 
 }
 
