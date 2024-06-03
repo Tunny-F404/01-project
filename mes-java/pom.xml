@@ -42,6 +42,7 @@
 		<module>mes-gateway</module>
 		<module>mes-oauth2</module>
 		<module>mes-login</module>
+        <module>mes-j3-messageservice</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->

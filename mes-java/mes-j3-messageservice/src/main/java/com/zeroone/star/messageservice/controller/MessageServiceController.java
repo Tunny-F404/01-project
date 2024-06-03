@@ -1,8 +1,8 @@
-package com.zeroone.star.message.controller;
+package com.zeroone.star.messageservice.controller;
 
-import com.zeroone.star.message.service.ISysMessageService;
+import com.zeroone.star.messageservice.service.ISysMessageService;
 import com.zeroone.star.project.components.mail.MailComponent;
-import com.zeroone.star.message.service.ISysMessageService;
+import com.zeroone.star.messageservice.service.ISysMessageService;
 import com.zeroone.star.project.components.mail.MailMessage;
 import com.zeroone.star.project.components.sms.aliyun.SmsResult;
 import com.zeroone.star.project.dto.login.LoginDTO;
