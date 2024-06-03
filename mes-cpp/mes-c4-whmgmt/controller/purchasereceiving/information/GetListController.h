@@ -24,6 +24,7 @@
 #include "domain/query/information/GetListQuery.h"
 #include "domain/dto/purchasereceiving/information/GetListDTO.h"
 #include "domain/vo/purchasereceiving/information/GetListVO.h"
+#include"service/purchasereceiving/information/GetListService.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -56,11 +57,11 @@ public:
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, GetListQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execQuerySample(userQuery, authObject->getPayload()));
+		API_HANDLER_RESP_VO(execQueryGetList(userQuery, authObject->getPayload()));
 	}
 private:
 	// 3.3 演示分页查询数据
-	GetListPageJsonVO::Wrapper execQuerySample(const GetListQuery::Wrapper& query, const PayloadDTO& payload);
+	GetListPageJsonVO::Wrapper execQueryGetList(const GetListQuery::Wrapper& query, const PayloadDTO& payload);
 
 };
 

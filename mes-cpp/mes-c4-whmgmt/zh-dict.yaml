@@ -114,6 +114,7 @@ addlist:
   summary: 添加单据
 modifylist:
  field:
+  recptid: 入库单id
   recptcode: 入库单编号
   recptname: 入库单名称
   recptdate: 入库日期

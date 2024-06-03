@@ -1,9 +1,10 @@
 #pragma once
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2022/10/25 11:34:14
+ @Date: 2022/10/25 11:08:56
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,28 +18,20 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _GETLIST_VO_
-#define _GETLIST_VO_
-
-#include "../../../GlobalInclude.h"
-#include "../../../dto/purchasereceiving/information/GetListDTO.h"
-
-#include OATPP_CODEGEN_BEGIN(DTO)
+#ifndef _MODIFYLIST_SERVICE_
+#define _MODIFYLIST_SERVICE_
+#include <list>
+#include "domain/vo/purchasereceiving/ModifyListVO.h"
+#include "domain/dto/purchasereceiving/ModifyListDTO.h"
 
 /**
- * 示例显示JsonVO，用于响应给客户端的Json对象
+ * 示例服务实现，演示基础的示例服务实现
  */
-class GetListJsonVo : public JsonVO<GetListDTO::Wrapper> {
-	DTO_INIT(GetListJsonVo, JsonVO<GetListDTO::Wrapper>);
+class ModifyListService
+{
+public:
+	bool updateData(const ModifyListDTO::Wrapper& dto);
 };
 
-/**
- * 示例分页显示JsonVO，用于响应给客户端的Json对象
- */
-class GetListPageJsonVO : public JsonVO<GetListPageDTO::Wrapper> {
-	DTO_INIT(GetListPageJsonVO, JsonVO<GetListPageDTO::Wrapper>);
-};
-#include OATPP_CODEGEN_END(DTO)
-
-#endif // !_SAMPLE_VO_
+#endif // !_SAMPLE_SERVICE_
 
