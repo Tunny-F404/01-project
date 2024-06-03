@@ -87,6 +87,12 @@ const routes = [
 		name: "UN57",
 		component: () => import("@/views/status/404.vue"),
 	},
+	// 生产领料页面
+	{
+		path: "/un-34",
+		name: "UN34",
+		component: () => import("@/views/warehouse-management/Material.vue"),
+	},
 ];
 
 export default routes;

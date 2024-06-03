@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import Request from "@/apis/request";
 // 测试菜单数据
-let testMenus = [
+const testMenus = [
 	{
 		id: 1,
 		text: "基础数据",
@@ -142,8 +142,8 @@ let testMenus = [
 			},
 		],
 	},
-	//仓库管理侧边栏
-	//views/warehouse-management
+	// 仓库管理侧边栏
+	// views/warehouse-management
 	{
 		id: 4,
 		text: "仓库管理",
@@ -187,60 +187,60 @@ let testMenus = [
 		],
 	},
 	{
-			id: 5,
-			text: "质量管理",
-			icon: "IconTickets",
-			children: [
-				{
-					id: 2,
-					text: "常见缺陷",
-					href: "/un-51",
-					icon: "IconTickets",
-					pid: 5,
-				},
-				{
-					id: 3,
-					text: "检测项设置",
-					href: "/un-52",
-					icon: "IconTickets",
-					pid: 5,
-				},
-				{
-					id: 4,
-					text: "检测模版",
-					href: "/un-53",
-					icon: "IconTickets",
-					pid: 5,
-				},
-				{
-					id: 5,
-					text: "检测任务",
-					href: "/un-54",
-					icon: "IconTickets",
-					pid: 5,
-				},
-				{
-					id: 6,
-					text: "来料检验",
-					href: "/un-55",
-					icon: "IconTickets",
-					pid: 5,
-				},
-				{
-					id: 7,
-					text: "过程检验",
-					href: "/un-55",
-					icon: "IconTickets",
-					pid: 5,
-				},
-				{
-					id: 8,
-					text: "出货检验",
-					href: "/un-55",
-					icon: "IconTickets",
-					pid: 5,
-				},
-			],
+		id: 5,
+		text: "质量管理",
+		icon: "IconTickets",
+		children: [
+			{
+				id: 2,
+				text: "常见缺陷",
+				href: "/un-51",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 3,
+				text: "检测项设置",
+				href: "/un-52",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 4,
+				text: "检测模版",
+				href: "/un-53",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 5,
+				text: "检测任务",
+				href: "/un-54",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 6,
+				text: "来料检验",
+				href: "/un-55",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 7,
+				text: "过程检验",
+				href: "/un-55",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 8,
+				text: "出货检验",
+				href: "/un-55",
+				icon: "IconTickets",
+				pid: 5,
+			},
+		],
 	},
 ];
 
@@ -276,8 +276,8 @@ export const userStore = defineStore("user", {
 		},
 		// 加载菜单
 		async loadMenus() {
-			//TODO[TEST_CODE]:此处写测试数据设定
-			//测试基础数据菜单板块
+			// TODO[TEST_CODE]:此处写测试数据设定
+			// 测试基础数据菜单板块
 			this.menus = testMenus;
 
 			// 发送获取菜单请求
@@ -286,7 +286,7 @@ export const userStore = defineStore("user", {
 			//   '/login/get-menus',
 			//   null
 			// )
-			//this.menus = data.data
+			// this.menus = data.data
 		},
 		// 加载刷新凭证
 		loadRefreshToken() {
@@ -301,7 +301,7 @@ export const userStore = defineStore("user", {
 				refreshToken: this.refreshToken,
 				clientId: import.meta.env.VITE_API_URL,
 			});
-			//设置Token相关属性
+			// 设置Token相关属性
 			this.setToken(data.data);
 		},
 		// 设置是否加载完成

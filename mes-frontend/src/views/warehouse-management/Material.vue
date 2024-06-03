@@ -4,61 +4,67 @@ import tableFrame from "@/components/table-list-use/table-text.vue";
 import request from "@/apis/request.js";
 
 // 搜索表单
-const recptCode = ref("");
-const recptName = ref("");
-const vendorName = ref("");
-const poCode = ref("");
-const recptDate = ref(null);
+const issueCode = ref("");
+const issueName = ref("");
+const warehouseName = ref("");
+const issueDate = ref(null);
+const status = ref("");
 //对话框标题
 const dialogTitle = ref("");
 // 表格数据
 const tableList = ref([
   {
-    recptCode: "R001",
-    recptName: "入库单1",
-    vendorName: "供应商1",
-    poCode: "PO001",
-    recptDate: "2023-10-01",
+    issueCode: "I001",
+    issueName: "领料单1",
+    workorderCode: "WO001",
+    clientCode: "C001",
+    clientName: "客户1",
+    issueDate: "2023-10-01",
     status: "PREPARE",
   },
   {
-    recptCode: "R002",
-    recptName: "入库单2",
-    vendorName: "供应商2",
-    poCode: "PO002",
-    recptDate: "2023-10-02",
-    status: "CONFIRMED",
-  }, 
-	{
-    recptCode: "R003",
-    recptName: "入库单3",
-    vendorName: "供应商3",
-    poCode: "PO003",
-    recptDate: "2023-10-03",
-    status: "PREPARE",
-  },
-  {
-    recptCode: "R004",
-    recptName: "入库单4",
-    vendorName: "供应商4",
-    poCode: "PO004",
-    recptDate: "2023-10-04",
+    issueCode: "I002",
+    issueName: "领料单2",
+    workorderCode: "WO002",
+    clientCode: "C002",
+    clientName: "客户2",
+    issueDate: "2023-10-02",
     status: "CONFIRMED",
   },
   {
-    recptCode: "R005",
-    recptName: "入库单5",
-    vendorName: "供应商5",
-    poCode: "PO005",
-    recptDate: "2023-10-05",
+    issueCode: "I003",
+    issueName: "领料单3",
+    workorderCode: "WO003",
+    clientCode: "C003",
+    clientName: "客户3",
+    issueDate: "2023-10-03",
     status: "PREPARE",
   },
   {
-    recptCode: "R006",
-    recptName: "入库单6",
-    vendorName: "供应商6",
-    poCode: "PO006",
-    recptDate: "2023-10-06",
+    issueCode: "I004",
+    issueName: "领料单4",
+    workorderCode: "WO004",
+    clientCode: "C004",
+    clientName: "客户4",
+    issueDate: "2023-10-04",
+    status: "CONFIRMED",
+  },
+  {
+    issueCode: "I005",
+    issueName: "领料单5",
+    workorderCode: "WO005",
+    clientCode: "C005",
+    clientName: "客户5",
+    issueDate: "2023-10-05",
+    status: "PREPARE",
+  },
+  {
+    issueCode: "I006",
+    issueName: "领料单6",
+    workorderCode: "WO006",
+    clientCode: "C006",
+    clientName: "客户6",
+    issueDate: "2023-10-06",
     status: "CONFIRMED",
   },
 ]);
@@ -67,24 +73,26 @@ const tableList = ref([
 const dialogVisible = ref(false);
 const formRef = ref();
 const formModel = ref({
-  recptCode: "",
-  recptName: "",
-  recptDate: "",
-  poCode: "",
+  issueCode: "",
+  issueName: "",
+  issueDate: "",
+  workorderCode: "",
   status: "",
-  vendorName: "",
+  clientCode: "",
+  clientName: "",
   warehouseInfo: [],
   remark: "",
 });
 
 const rules = {
-  recptCode: [{ required: true, message: "请输入入库单编号", trigger: "blur" }],
-  recptName: [{ required: true, message: "请输入入库单名称", trigger: "blur" }],
-  recptDate: [{ required: true, message: "请选择入库日期", trigger: "change" }],
-  poCode: [{ required: true, message: "请输入订单编号", trigger: "blur" }],
+  issueCode: [{ required: true, message: "请输入领料单编号", trigger: "blur" }],
+  issueName: [{ required: true, message: "请输入领料单名称", trigger: "blur" }],
+  issueDate: [{ required: true, message: "请选择领料日期", trigger: "change" }],
+  workorderCode: [{ required: true, message: "请输入生产工单", trigger: "blur" }],
   status: [{ required: true, message: "请选择单据状态", trigger: "change" }],
-  vendorName: [{ required: true, message: "请输入供应商名称", trigger: "blur" }],
-  warehouseInfo: [{ required: true, message: "请选择入库仓库", trigger: "change" }],
+  clientCode: [{ required: true, message: "请输入客户编号", trigger: "blur" }],
+  clientName: [{ required: true, message: "请输入客户名称", trigger: "blur" }],
+  warehouseInfo: [{ required: true, message: "请选择领料仓库", trigger: "change" }],
   remark: [{ required: true, message: "请输入备注", trigger: "blur" }],
 };
 // 提交表单
@@ -126,7 +134,7 @@ const onSizeChange = (size) => {
   parms.value.pagesize = size;
   getPageList();
 };
-vue
+
 const onCurrentChange = (page) => {
   parms.value.pagenum = page;
   getPageList();
@@ -135,100 +143,87 @@ const onCurrentChange = (page) => {
 // 表格上面新增操作
 const handleAdd = () => {
   formModel.value = {
-    recptCode: "",
-    recptName: "",
-    recptDate: "",
-    poCode: "",
+    issueCode: "",
+    issueName: "",
+    issueDate: "",
+    workorderCode: "",
     status: "",
-    vendorName: "",
+    clientCode: "",
+    clientName: "",
     warehouseInfo: [],
     remark: "",
   };
-	dialogTitle.value = "新增物料入库单";
+  dialogTitle.value = "新增生产领料单";
   dialogVisible.value = true;
 };
-//表格上面修改操作
+//表格修改操作
 const handleUpdate = (row) => {
   formModel.value = { ...row };
-  dialogTitle.value = "修改物料入库单";
+  dialogTitle.value = "修改生产领料单";
   dialogVisible.value = true;
 };
 
 //模拟删除操作
 const handleDelete = async (row) => {
-    await ElMessageBox.confirm("你确认要删除该入库单么", "温馨提示", {
-      type: "warning",
-      confirmButtonText: "确认",
-      cancelButtonText: "取消",
-    });
-    const index = tableList.value.findIndex(item => item.recptCode === row.recptCode);
-    if (index !== -1) {
-      tableList.value.splice(index, 1);
-      originalTableList.value = [...tableList.value];
-      getPageList();
-    }
-    ElMessage.success("删除成功");
-		console.log(row);
+  await ElMessageBox.confirm("你确认要删除该领料单么", "温馨提示", {
+    type: "warning",
+    confirmButtonText: "确认",
+    cancelButtonText: "取消",
+  });
+  const index = tableList.value.findIndex(item => item.issueCode === row.issueCode);
+  if (index !== -1) {
+    tableList.value.splice(index, 1);
+    originalTableList.value = [...tableList.value];
+    getPageList();
+  }
+  ElMessage.success("删除成功");
+  console.log(row);
   getPageList();
 };
 //导出数据逻辑
 const handleExport = () => {
   console.log("导出数据");
 };
-//查询提交
+//模拟查询提交
 const handleQuery = () => {
   // 模拟过滤逻辑
   tableList.value = originalTableList.value.filter(item => {
     return (
-      (!recptCode.value || item.recptCode.includes(recptCode.value)) &&
-      (!recptName.value || item.recptName.includes(recptName.value)) &&
-      (!vendorName.value || item.vendorName.includes(vendorName.value)) &&
-      (!poCode.value || item.poCode.includes(poCode.value)) &&
-      (!recptDate.value || item.recptDate === recptDate.value)
+      (!issueCode.value || item.issueCode.includes(issueCode.value)) &&
+      (!issueName.value || item.issueName.includes(issueName.value)) &&
+      (!warehouseName.value || item.warehouseName.includes(warehouseName.value)) &&
+      (!issueDate.value || item.issueDate === issueDate.value) &&
+      (!status.value || item.status === status.value)
     );
-		 // 调用后端接口进行过滤
-  // request.get('/api/filter-data', {
-  //   params: {
-  //     recptCode: recptCode.value,
-  //     recptName: recptName.value,
-  //     vendorName: vendorName.value,
-  //     poCode: poCode.value,
-  //     recptDate: recptDate.value,
-  //   }
-  // }).then(response => {
-  //   tableList.value = response.data;
-  //   originalTableList.value = [...tableList.value];
-  //   getPageList();
-  // });
   });
   getPageList();
 };
 //重置
 const resetQuery = () => {
-  recptCode.value = "";
-  recptName.value = "";
-  vendorName.value = "";
-  poCode.value = "";
-  recptDate.value = null;
+  issueCode.value = "";
+  issueName.value = "";
+  warehouseName.value = "";
+  issueDate.value = null;
+  status.value = "";
   handleQuery();
 };
 
 const handleSelectionChange = (val) => {
   console.log("选中项变化", val);
 };
-//执行入库
+//执行领出
 const handleExecute = async (row) => {
   try {
-    await ElMessageBox.confirm("你确认要执行入库么", "温馨提示", {
+    await ElMessageBox.confirm("你确认要执行领出么", "温馨提示", {
       type: "warning",
       confirmButtonText: "确认",
       cancelButtonText: "取消",
     });
-    ElMessage.success("执行入库成功");
-    console.log("执行入库", row);
-    // 执行入库的逻辑
+    ElMessage.success("执行领出成功");
+    console.log("执行领出", row);
+    // 执行领出的逻辑
   } catch (error) {
-    console.log("取消执行入库");
+    console.log("取消执行领出");
   }
 };
 // 自定义排序逻辑
@@ -250,8 +245,8 @@ const showSearchBar = ref(true);
 function toggleSearchBar() {
   showSearchBar.value = !showSearchBar.value;
 }
-        // 模拟刷新数据
-				function refreshData() {
+// 模拟刷新数据
+function refreshData() {
   loading.value = true; // 显示加载动画
   // 模拟刷新数据
   setTimeout(() => {
@@ -268,12 +263,13 @@ function toggleSearchBar() {
     tableList.value = [
       ...tableList.value,
       {
-    recptCode: "R007",
-    recptName: "入库单7",
-    vendorName: "供应商7",
-    poCode: "PO007",
-    recptDate: "2023-10-06",
-    status: "CONFIRMED",
+    issueCode: "I007",
+    issueName: "领料单7",
+    workorderCode: "WO007",
+    clientCode: "C007",
+    clientName: "客户7",
+    issueDate: "2023-10-07",
+    status: "PREPARE",
   },
     ];
     originalTableList.value = [...tableList.value];
@@ -284,7 +280,7 @@ function toggleSearchBar() {
 </script>
 
 <template>
-  <tableFrame title="采购入库管理">
+  <tableFrame title="生产领料管理">
     <template #extra>
       <el-button @click="handleExport">导出数据<el-icon :size="22"><UploadFilled /></el-icon></el-button>
     </template>
@@ -293,30 +289,33 @@ function toggleSearchBar() {
     <el-form v-if="showSearchBar" :inline="true" class="demo-form-inline">
       <el-row>
         <el-col :span="8">
-          <el-form-item label="入库单编号：">
-            <el-input v-model="recptCode" placeholder="请输入入库单编号" clearable />
+          <el-form-item label="领料单编号：">
+            <el-input v-model="issueCode" placeholder="请输入领料单编号" clearable />
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="入库单名称：">
-            <el-input v-model="recptName" placeholder="请输入入库单名称" clearable />
+          <el-form-item label="领料单名称：">
+            <el-input v-model="issueName" placeholder="请输入领料单名称" clearable />
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="供应商名称：">
-            <el-input v-model="vendorName" placeholder="请输入供应商名称" clearable />
+          <el-form-item label="仓库名称：">
+            <el-input v-model="warehouseName" placeholder="请输入仓库名称" clearable />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="8">
-          <el-form-item label="订单编号：">
-            <el-input v-model="poCode" placeholder="请输入订单编号" clearable />
+          <el-form-item label="领料日期：">
+            <el-date-picker v-model="issueDate" type="date" placeholder="请选择领料日期" clearable />
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="入库日期：">
-            <el-date-picker v-model="recptDate" type="date" placeholder="请选择入库日期" clearable />
+          <el-form-item label="单据状态：">
+            <el-select v-model="status" placeholder="请选择单据状态" clearable>
+              <el-option label="已完成" value="PREPARE"></el-option>
+              <el-option label="草稿" value="CONFIRMED"></el-option>
+            </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -329,39 +328,40 @@ function toggleSearchBar() {
     </el-form>
 
     <!-- 操作按钮 -->
-		<div class="action-buttons">
-    <el-button type="primary" plain @click="handleAdd">
-      <el-icon><Plus /></el-icon>新增
-    </el-button>
-    <el-button type="success" plain @click="handleUpdate(row)">
-      <el-icon><EditPen /></el-icon>修改
-    </el-button>
-    <el-button type="danger" plain @click="handleDelete(row)">
-      <el-icon><Delete /></el-icon>删除
-    </el-button>
-		<div class="search-icons">
-<el-tooltip content="隐藏搜索栏" placement="top">
-  <el-button @click="toggleSearchBar" plain>
-    <el-icon><Search /></el-icon>
-  </el-button>
-</el-tooltip>
-<el-tooltip content="刷新" placement="top">
-  <el-button @click="refreshData" plain>
-    <el-icon><Refresh /></el-icon>
-  </el-button>
-</el-tooltip>
-</div>
-</div>
+    <div class="action-buttons">
+      <el-button type="primary" plain @click="handleAdd">
+        <el-icon><Plus /></el-icon>新增
+      </el-button>
+      <el-button type="success" plain @click="handleUpdate(row)">
+        <el-icon><EditPen /></el-icon>修改
+      </el-button>
+      <el-button type="danger" plain @click="handleDelete(row)">
+        <el-icon><Delete /></el-icon>删除
+      </el-button>
+      <div class="search-icons">
+        <el-tooltip content="隐藏搜索栏" placement="top">
+          <el-button @click="toggleSearchBar" plain>
+            <el-icon><Search /></el-icon>
+          </el-button>
+        </el-tooltip>
+        <el-tooltip content="刷新" placement="top">
+          <el-button @click="refreshData" plain>
+            <el-icon><Refresh /></el-icon>
+          </el-button>
+        </el-tooltip>
+      </div>
+    </div>
 
     <!-- 数据表格 -->
     <el-table :data="tableList" style="width: 100%" v-loading="loading" @selection-change="handleSelectionChange" ref="multipleTable" @sort-change="handleSortChange">
       <el-table-column type="selection" width="55" />
-      <el-table-column type="index" label="序号" width="55"></el-table-column>
-      <el-table-column prop="recptCode" label="入库单编号" width="120" align="center" sortable="custom"></el-table-column>
-      <el-table-column prop="recptName" label="入库单名称" width="185" align="center"></el-table-column>
-      <el-table-column prop="vendorName" label="供应商名称" width="125" align="center"></el-table-column>
-      <el-table-column prop="recptDate" label="入库日期" width="150" align="center" sortable="custom"></el-table-column>
-      <el-table-column prop="poCode" label="采购订单号" width="150" align="center"sortable="custom"></el-table-column>
+      <!-- <el-table-column type="index" label="序号" width="55"></el-table-column> -->
+      <el-table-column prop="issueCode" label="领料单编号" width="120" align="center" sortable="custom"></el-table-column>
+      <el-table-column prop="issueName" label="领料单名称" width="175" align="center"></el-table-column>
+      <el-table-column prop="workorderCode" label="生产工单" width="125" align="center"></el-table-column>
+      <el-table-column prop="clientCode" label="客户编号" width="120" align="center" sortable="custom"></el-table-column>
+      <el-table-column prop="clientName" label="客户名称" width="150" align="center" sortable="custom"></el-table-column>
+      <el-table-column prop="issueDate" label="领料日期" width="120" align="center" sortable="custom"></el-table-column>
       <el-table-column prop="status" label="单据状态" width="80" align="center">
         <template #default="{ row }">
           <el-tag :class="row.status === 'PREPARE' ? 'status-enabled' : 'status-disabled'" style="cursor: pointer;">
@@ -377,9 +377,9 @@ function toggleSearchBar() {
           <el-button @click="handleDelete(row, $index)" type="danger" circle>
             <el-icon :size="20"> <Delete /></el-icon>
           </el-button>
-					<el-button @click="handleExecute(row, $index)" type="text">
-      <el-icon :size="10"><VideoPlay /></el-icon>执行入库
-    </el-button>
+          <el-button @click="handleExecute(row, $index)" type="text">
+            <el-icon :size="10"><VideoPlay /></el-icon>执行领出
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -397,30 +397,30 @@ function toggleSearchBar() {
       style="margin-top: 20px; justify-content: flex-end"
     />
 
-    <!-- 添加或修改物料入库单对话框 -->
-    <el-dialog v-model="dialogVisible" title="dialogTitle">
+    <!-- 添加或修改生产领料单对话框 -->
+    <el-dialog v-model="dialogVisible" :title="dialogTitle">
       <el-form ref="formRef" :model="formModel" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="8">
-            <el-form-item label="入库单编号" prop="recptCode">
-              <el-input v-model="formModel.recptCode" placeholder="请输入入库单编号" />
+            <el-form-item label="领料单编号" prop="issueCode">
+              <el-input v-model="formModel.issueCode" placeholder="请输入领料单编号" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="入库单名称" prop="recptName">
-              <el-input v-model="formModel.recptName" placeholder="请输入入库单名称" />
+            <el-form-item label="领料单名称" prop="issueName">
+              <el-input v-model="formModel.issueName" placeholder="请输入领料单名称" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="入库日期" prop="recptDate">
-              <el-date-picker v-model="formModel.recptDate" type="date" placeholder="请选择入库日期" />
+            <el-form-item label="领料日期" prop="issueDate">
+              <el-date-picker v-model="formModel.issueDate" type="date" placeholder="请选择领料日期" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="8">
-            <el-form-item label="采购订单号" prop="poCode">
-              <el-input v-model="formModel.poCode" placeholder="请输入采购订单号" />
+            <el-form-item label="生产工单" prop="workorderCode">
+              <el-input v-model="formModel.workorderCode" placeholder="请输入生产工单" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -432,15 +432,20 @@ function toggleSearchBar() {
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="供应商" prop="vendorName">
-              <el-input v-model="formModel.vendorName" placeholder="请输入供应商名称" />
+            <el-form-item label="客户编号" prop="clientCode">
+              <el-input v-model="formModel.clientCode" placeholder="请输入客户编号" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="24">
-            <el-form-item label="入库仓库" prop="warehouseInfo">
-              <el-cascader v-model="formModel.warehouseInfo" :options="[]" placeholder="请选择入库仓库" />
+          <el-col :span="8">
+            <el-form-item label="客户名称" prop="clientName">
+              <el-input v-model="formModel.clientName" placeholder="请输入客户名称" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="16">
+            <el-form-item label="领料仓库" prop="warehouseInfo">
+              <el-cascader v-model="formModel.warehouseInfo" :options="[]" placeholder="请选择领料仓库" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -487,10 +492,7 @@ function toggleSearchBar() {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-	// position:absolute;
-  // top: 120px;
-  // right: 30px;
-	margin-left: auto;
+  margin-left: auto;
 }
 
 .search-icons .el-button {
