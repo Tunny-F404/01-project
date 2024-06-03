@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @version 1.0.0
  */
-@Api("产品Sip控制器")
+@Api(tags = "产品Sip控制器")
 @RestController
 @RequestMapping("/product-management/sip")
 public class SipController implements SipApis {
@@ -32,7 +32,7 @@ public class SipController implements SipApis {
     @ApiOperation(value = "查询Sip列表")
     @GetMapping("/list")
     public JsonVO<PageDTO<SipDTO>> queryAll(SipQuery query) {
-         return JsonVO.success(iMdProductSipService.selectProductSipPageByItemId(query));
+        return JsonVO.success(iMdProductSipService.selectProductSipPageByItemId(query));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class SipController implements SipApis {
     @ApiOperation(value = "新增Sip")
     @PostMapping("/index")
     public JsonVO<String> add(@RequestBody SipDTO dto) {
-        if(iMdProductSipService.insertProductSip(dto)){
+        if (iMdProductSipService.insertProductSip(dto)) {
             return JsonVO.success("添加成功");
         }
         return JsonVO.fail("添加失败");
