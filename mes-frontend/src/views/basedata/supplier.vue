@@ -11,11 +11,6 @@
 					<!-- 其他内容 -->
 				</div>
 			</template>
-			<!-- <el-button @click="onAddChannel"
-			>添加
-			<el-icon :size="20"> <Plus />
-				添加图标 </el-icon>
-		</el-button> -->
 		</template>
 		<!--表单-->
 		<el-form :inline="true" class="demo-form-inline">
@@ -115,77 +110,69 @@
 	<el-dialog v-model="testDialogVisible" :title="dialogTitle">
 		<el-form ref="formRef" :model="formModel" :rules="rules" label-width="120px">
 			<el-row>
-				<el-col :span="8">
+				<el-col :span="12">
 					<el-form-item label="供应商编码" prop="supplierCode">
 						<el-input v-model="formModel.supplierCode" placeholder="请输入供应商编码" />
 					</el-form-item>
 				</el-col>
-				<el-col :span="8">
+				<el-col :span="12">
 					<el-form-item label="供应商名称" prop="supplierName">
 						<el-input v-model="formModel.supplierName" placeholder="请输入供应商名称" />
 					</el-form-item>
 				</el-col>
-				<el-col :span="8">
+			</el-row>
+			<el-row>
+				<el-col :span="12">
 					<el-form-item label="供应商简称" prop="supplierNick">
 						<el-input v-model="formModel.supplierNick" placeholder="请输入供应商简称" />
 					</el-form-item>
 				</el-col>
-			</el-row>
-			<el-row>
-				<el-col :span="8">
+				<el-col :span="12">
 					<el-form-item label="供应商英文名称" prop="supplierEn">
 						<el-input v-model="formModel.supplierEn" placeholder="请输入供应商英文名称" />
 					</el-form-item>
 				</el-col>
-				<el-col :span="8">
-					<!-- <el-form-item label="供应商类型" prop="supplierType">
-						<el-select v-model="formModel.supplierType" placeholder="请选择供应商类型">
-							<el-option label="类型1" value="type1"></el-option>
-							<el-option label="类型2" value="type2"></el-option>
-						</el-select>
-					</el-form-item> -->
-				</el-col>
-				<el-col :span="8">
+			</el-row>
+			<el-row>
+				<el-col :span="24">
 					<el-form-item label="供应商简介" prop="supplierDes">
-						<el-input v-model="formModel.supplierDes" placeholder="请输入供应商简介" />
+						<el-input v-model="formModel.supplierDes" placeholder="请输入内容" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
-				<el-col :span="18">
-					供应商等级
-				</el-col>
-				<el-col :span="18">
-					供应商评分
-				</el-col>
-			</el-row>
-			<el-row>
-				<el-col :span="12">
+				<el-col :span="24">
 					<el-form-item label="供应商官网地址" prop="website">
-						<el-input v-model="formModel.website" placeholder="请输入供应商官网地址" />
+						<el-input v-model="formModel.website" placeholder="请输入内容" />
 					</el-form-item>
 				</el-col>
-
+			</el-row>
+			<el-row>
 				<el-col :span="12">
+					供应商等级<div class="flex flex-wrap gap-4 items-center">
+						<el-select v-model="GradeValue" :placeholder="GradeSelect" style="width: 240px">
+							<el-option v-for="item in GradeOptions" :key="item.value" :label="item.label" :value="item.value" />
+						</el-select>
+					</div>
+				</el-col>
+				<el-col :span="12">
+					供应商评分<el-input-number v-model="num" :min="0" :max="100" @change="handleChange" />
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span="8">
+					<el-form-item label="供应商官网地址" prop="email">
+						<el-input v-model="formModel.email" placeholder="请输入供应商邮箱地址" />
+					</el-form-item>
+				</el-col>
+				<el-col :span="8">
 					<el-form-item label="供应商邮箱地址" prop="email">
 						<el-input v-model="formModel.email" placeholder="请输入供应商邮箱地址" />
 					</el-form-item>
 				</el-col>
-				<el-col :span="12">
+				<el-col :span="8">
 					<el-form-item label="供应商电话" prop="call">
 						<el-input v-model="formModel.call" placeholder="请输入供应商电话" />
-					</el-form-item>
-				</el-col>
-			</el-row>
-			<el-row>
-				<el-col :span="12">
-					<el-form-item label="供应商电话" prop="tel">
-						<el-input v-model="formModel.tel" placeholder="请输入供应商电话" />
-					</el-form-item>
-				</el-col>
-				<el-col :span="12">
-					<el-form-item label="供应商LOGO" prop="supplierLogo">
-						<el-input v-model="formModel.supplierLogo" placeholder="请输入供应商LOGO" />
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -224,17 +211,23 @@
 				</el-col>
 			</el-row>
 			<el-row>
-				<el-col :span="12">
-					<el-form-item label="社会信用代码" prop="creditCode">
+				<el-col :span="8">
+					<el-form-item label="统一社会信用代码" prop="creditCode">
 						<el-input v-model="formModel.creditCode" placeholder="请输入社会信用代码" />
 					</el-form-item>
 				</el-col>
-				<el-col :span="12">
-					<el-form-item label="是否有效" prop="enableFlag">
+				<el-col :span="8">
+					<el-form-item label="是否启用" prop="enableFlag">
 						<el-radio-group v-model="formModel.enableFlag">
 							<el-radio label="是" value="yes">是</el-radio>
 							<el-radio label="否" value="no">否</el-radio>
 						</el-radio-group>
+					</el-form-item>
+				</el-col>
+
+				<el-col :span="8">
+					<el-form-item label="供应商LOGO" prop="supplierLogo">
+						<el-input v-model="formModel.supplierLogo" placeholder="请输入供应商LOGO" />
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -256,7 +249,6 @@
 <script setup>
 import { ref } from "vue";
 import tableFrame from "@/components/table-list-use/table-text.vue";
-
 let value = "";
 let options = [
 	{
@@ -290,7 +282,6 @@ let supplierList = [
 		supplierGrade: "正常",
 		supplierScore: "0",
 		supplierTel: "",
-		enableFlag: "",
 		comment: '',
 		enableFlag: "Y",
 	},
@@ -301,7 +292,6 @@ let supplierList = [
 		supplierGrade: "正常",
 		supplierScore: "0",
 		supplierTel: "",
-		enableFlag: "",
 		comment: '',
 		enableFlag: "Y",
 	},
@@ -312,7 +302,6 @@ let supplierList = [
 		supplierGrade: "正常",
 		supplierScore: "0",
 		supplierTel: "",
-		enableFlag: "",
 		comment: '',
 		enableFlag: "Y",
 	},
@@ -345,10 +334,13 @@ const formModel = ref({
 	enableFlag: "",
 	remark: ""
 });
+const num = ref(0);
+const toggleStatus = (row) => {
+	row.isEnabled = !row.isEnabled;
+};
 const testDialogVisible = ref(false);
 const openTestDialog = () => {
-	dialogTitle.value = "添加供应商信息";
-	console.log(11)
+	dialogTitle.value = "添加供应商";
 	formModel.value = {
 		supplierCode: "",
 		supplierName: "",
@@ -409,7 +401,7 @@ const rules = {
 	contact2Tel: [{ required: false, message: "请输入联系人2-电话", trigger: "blur" }],
 	contact2Email: [{ required: false, message: "请输入联系人2-邮箱", trigger: "blur" }],
 	creditCode: [{ required: false, message: "请输入社会信用代码", trigger: "blur" }],
-	enableFlag: [{ required: false, message: "请选择是否有效", trigger: "change" }],
+	enableFlag: [{ required: true, message: "请选择是否启用", trigger: "change" }],
 	remark: [{ required: false, message: "请输入备注", trigger: "blur" }]
 };
 const handleQuery = () => {
@@ -446,6 +438,30 @@ const reset = () => {
 		remark: "",
 	};
 };
+const GradeValue = ref('')
+let GradeSelect = '正常';
+const GradeOptions = [
+	{
+		value: 'Option1',
+		label: '优质供应商',
+	},
+	{
+		value: 'Option2',
+		label: '正常',
+	},
+	{
+		value: 'Option3',
+		label: '重点关注',
+	},
+	{
+		value: 'Option4',
+		label: '劣质供应商',
+	},
+	{
+		value: 'Option5',
+		label: '黑名单',
+	},
+]
 const cancel = () => {
 	this.open = false;
 	this.reset();
