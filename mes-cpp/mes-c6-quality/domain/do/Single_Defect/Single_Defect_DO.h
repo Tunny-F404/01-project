@@ -6,9 +6,9 @@
 class IndexDO
 {
 	//记录ID
-	CC_SYNTHESIZE(int64_t, line_id, Line_id);
+	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
 	//检验单ID
-	CC_SYNTHESIZE(int64_t, iqc_id, iqc_id);
+	CC_SYNTHESIZE(int64_t, iqc_id, Iqc_id);
 	//检测项ID
 	CC_SYNTHESIZE(int64_t, index_id, Index_id);
 	//检测项编码
@@ -36,11 +36,11 @@ class IndexDO
 	//轻微缺陷数量
 	CC_SYNTHESIZE(int, min_quantity, Min_quantity);
 	//备注
-	CC_SYNTHESIZE(String, remark, Remark);
+	CC_SYNTHESIZE(string, remark, Remark);
 	//预留字段1
-	CC_SYNTHESIZE(String, attr1, Attr1);
+	CC_SYNTHESIZE(string, attr1, Attr1);
 	//预留字段2
-	CC_SYNTHESIZE(String, attr2, Attr2);
+	CC_SYNTHESIZE(string, attr2, Attr2);
 	//预留字段3
 	CC_SYNTHESIZE(int, attr3, Attr3);
 	//预留字段4
@@ -63,12 +63,12 @@ public:
 		index_type = "";
 		qc_tool = "";
 		check_method = "";
-		stander_va=0;
+		stander_val=0;
 		unit_of_measure = "";
-		index_remark = "";
-		stander_val = 0;
-		threshold_max = 0;
-		threshold_min = 0;
+		remark = "";
+		stander_val = 0.0;
+		threshold_max = 0.0;
+		threshold_min = 0.0;
 		cr_quantity = 0;
 		maj_quantity = 0;
 		min_quantity = 0;
@@ -92,13 +92,13 @@ class DefectDO
 	//来料检验单ID
 	CC_SYNTHESIZE(uint64_t, iqc_id, Iqc_id);
 	//来料检验单行ID
-	CC_SYNTHESIZE(uint64_t, line_id, line_id);
+	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
 	//缺陷描述
-	CC_SYNTHESIZE(string, defect_name, defect_name);
+	CC_SYNTHESIZE(string, defect_name, Defect_name);
 	//缺陷等级
-	CC_SYNTHESIZE(string, defect_level, defect_level);
+	CC_SYNTHESIZE(string, defect_level, Defect_level);
 	//缺陷数量
-	CC_SYNTHESIZE(int, defect_quantity, defect_quantity);
+	CC_SYNTHESIZE(int, defect_quantity, Defect_quantity);
 	//备注
 	CC_SYNTHESIZE(string, remark, Remark);
 	//预留字段1

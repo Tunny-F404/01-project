@@ -11,33 +11,33 @@
 class InspectDO
 {
 	// 来料检验单id
-	CC_SYNTHESIZE(uint64_t, line_id, Line_id);
+	CC_SYNTHESIZE(uint64_t, iqc_id, Iqc_id);
 	// 来料检验单编号
-	CC_SYNTHESIZE(string, code, Code);
+	CC_SYNTHESIZE(string, iqc_code, Iqc_code);
 	// 来料检验单名称
-	CC_SYNTHESIZE(string, name, Name);
+	CC_SYNTHESIZE(string, iqc_name, Iqc_name);
 	//检验模板ID
-	CC_SYNTHESIZE(uint64_t, template_id, Template_id);
+	CC_SYNTHESIZE(int64_t, template_id, Template_id);
 	//来源单据ID
-	CC_SYNTHESIZE(uint64_t, source_doc_id, Source_doc_id);
+	CC_SYNTHESIZE(int64_t, source_doc_id, Source_doc_id);
 	// 来源单据类型 
 	CC_SYNTHESIZE(string, source_doc_type, Source_doc_type);
 	// 来源单据编号
 	CC_SYNTHESIZE(string, source_doc_code, Source_doc_code);
 	// 来源单据行ID
-	CC_SYNTHESIZE(uint64_t, source_line_id, Source_line_id);
+	CC_SYNTHESIZE(int64_t, source_line_id, Source_line_id);
 	//供应商ID
-	CC_SYNTHESIZE(uint64_t, vendor_id, Vendor_id);
+	CC_SYNTHESIZE(int64_t, vendor_id, Vendor_id);
 	//供应商编码
 	CC_SYNTHESIZE(string, vendor_code, Vendor_code);
 	//供应商名称
 	CC_SYNTHESIZE(string, vendor_name, Vendor_name);
 	// 供应商简称
-	CC_SYNTHESIZE(string, vd_nick, Vd_nick);
+	CC_SYNTHESIZE(string, vendor_nick, Vendor_nick);
 	//供应商批次号
-	CC_SYNTHESIZE(string, vd_batch, Vd_batch);
+	CC_SYNTHESIZE(string, vendor_batch, Vendor_batch);
 	//产品物料ID
-	CC_SYNTHESIZE(uint64_t, item_id, Item_id);
+	CC_SYNTHESIZE(int64_t, item_id, Item_id);
 	//产品物料编码
 	CC_SYNTHESIZE(string, item_code, Item_code);
 	//产品物料名称
@@ -53,9 +53,9 @@ class InspectDO
 	//接收数量
 	CC_SYNTHESIZE(double, quantity_recived, Quantity_recived);
 	//检测数量
-	CC_SYNTHESIZE(long long, quantity_check, Quantity_check);
+	CC_SYNTHESIZE(int, quantity_check, Quantity_check);
 	//不合格数
-	CC_SYNTHESIZE(long long, quantity_unqualified, Quantity_unqualified);
+	CC_SYNTHESIZE(int, quantity_unqualified, Quantity_unqualified);
 	//致命缺陷率
 	CC_SYNTHESIZE(double, maj_rate, Maj_rate);
 	//严重缺陷率
@@ -63,11 +63,11 @@ class InspectDO
 	//轻微缺陷率
 	CC_SYNTHESIZE(double, min_rate, Min_rate);
 	//致命缺陷数量
-	CC_SYNTHESIZE(long long, cr_quantity, Cr_quantity);
+	CC_SYNTHESIZE(int64_t, cr_quantity, Cr_quantity);
 	//严重缺陷数量
-	CC_SYNTHESIZE(long long, maj_quantity, Maj_quantity);
+	CC_SYNTHESIZE(int64_t, maj_quantity, Maj_quantity);
 	//轻微缺陷数量
-	CC_SYNTHESIZE(long long, min_quantity, Min_quantity);
+	CC_SYNTHESIZE(int64_t, min_quantity, Min_quantity);
 	//检测结果
 	CC_SYNTHESIZE(string, check_result, Check_result);
 	//来料日期
@@ -77,7 +77,11 @@ class InspectDO
 	//检测人员
 	CC_SYNTHESIZE(string, inspector, Inspector);
 	//单据状态
-	CC_SYNTHESIZE(string, list_status, List_status);
+protected: string list_status; public: string getList_status(void) const {
+	return list_status;
+}public: void setList_status(string var) {
+	list_status = var;
+};
 	//备注
 	CC_SYNTHESIZE(string, remark, Remark);
 	//预留字段1
@@ -98,9 +102,9 @@ class InspectDO
 	CC_SYNTHESIZE(string, update_time, Update_time);
 public:
 	InspectDO() {
-		line_id = 0;
-		code = "";
-		name = "";
+		iqc_id = 0;
+		iqc_code = "";
+		iqc_name = "";
 		template_id = 0;
 		source_doc_id = 0;
 		source_doc_type = "";
@@ -109,8 +113,8 @@ public:
 		vendor_id = 0;
 		vendor_code = "";
 		vendor_name = "";
-		vd_nick = "";
-		vd_batch = "";
+		vendor_nick = "";
+		vendor_batch = "";
 		item_id = 0;
 		item_code = "";
 		item_name = "";
@@ -118,12 +122,12 @@ public:
 		unit_of_measure = "";
 		quantity_min_check = 0;
 		quantity_max_unqualified = 0;
-		quantity_recived = 0;
+		quantity_recived = 0.0;
 		quantity_check = 0;
 		quantity_unqualified = 0;
-		maj_rate = 0;
-		cr_rate = 0;
-		min_rate = 0;
+		maj_rate = 0.0;
+		cr_rate = 0.0;
+		min_rate = 0.0;
 		cr_quantity = 0;
 		maj_quantity = 0;
 		min_quantity = 0;
@@ -150,10 +154,7 @@ public:
  */
 class Inspect_detailDO :public InspectDO
 {
-public:
-	Inspect_detailDO() {
-		
-	}
+
 };
 
 class Inspect_tableDO :public InspectDO

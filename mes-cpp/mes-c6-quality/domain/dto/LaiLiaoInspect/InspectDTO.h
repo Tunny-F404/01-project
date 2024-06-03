@@ -12,11 +12,11 @@ class InspectDTO:public oatpp::DTO
 {
 	DTO_INIT(InspectDTO, DTO);
 	// 数据库表行id
-	API_DTO_FIELD_DEFAULT(UInt64, line_id, ZH_WORDS_GETTER("inspect.line_id"));
+	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
 	// 来料检验单编号
-	API_DTO_FIELD_DEFAULT(String, code, ZH_WORDS_GETTER("inspect.code"));
+	API_DTO_FIELD_DEFAULT(String, iqc_code, ZH_WORDS_GETTER("inspect.iqc_code"));
 	// 来料检验单名称
-	API_DTO_FIELD_DEFAULT(String, name, ZH_WORDS_GETTER("inspect.name"));
+	API_DTO_FIELD_DEFAULT(String, iqc_name, ZH_WORDS_GETTER("inspect.iqc_name"));
 	//检验模板ID
 	API_DTO_FIELD_DEFAULT(UInt64, template_id, ZH_WORDS_GETTER("inspect.template_id"));
 	//供应商ID
@@ -26,15 +26,19 @@ class InspectDTO:public oatpp::DTO
 	// 供应商名称
 	API_DTO_FIELD_DEFAULT(String, vendor_name, ZH_WORDS_GETTER("inspect.vendor_name"));
 	// 供应商简称
-	API_DTO_FIELD_DEFAULT(String, vd_nick, ZH_WORDS_GETTER("inspect.vd_nick"));
+	API_DTO_FIELD_DEFAULT(String, vendor_nick, ZH_WORDS_GETTER("inspect.vendor_nick"));
 	//供应商批次号
-	API_DTO_FIELD_DEFAULT(String, vd_batch, ZH_WORDS_GETTER("inspect.vd_batch"));
+	API_DTO_FIELD_DEFAULT(String, vendor_batch, ZH_WORDS_GETTER("inspect.vendor_batch"));
+	//产品物料ID
+	API_DTO_FIELD_DEFAULT(Int64, item_id, ZH_WORDS_GETTER("inspect.item_id"));
 	//产品物料编码
 	API_DTO_FIELD_DEFAULT(String, item_code, ZH_WORDS_GETTER("inspect.item_code"));
 	//产品物料名称
 	API_DTO_FIELD_DEFAULT(String, item_name, ZH_WORDS_GETTER("inspect.item_name"));
+	//单位
+	API_DTO_FIELD_DEFAULT(String, unit_of_measure, ZH_WORDS_GETTER("inspect.unit_of_measure"));
 	//接收数量
-	API_DTO_FIELD_DEFAULT(Int64, quantity_recived, ZH_WORDS_GETTER("inspect.quantity_recived"));
+	API_DTO_FIELD_DEFAULT(Float64, quantity_recived, ZH_WORDS_GETTER("inspect.quantity_recived"));
 	//检测数量
 	API_DTO_FIELD_DEFAULT(Int64, quantity_check, ZH_WORDS_GETTER("inspect.quantity_check"));
 	//不合格数
@@ -49,6 +53,8 @@ class InspectDTO:public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, inspector, ZH_WORDS_GETTER("inspect.inspector"));
 	//单据状态
 	API_DTO_FIELD_DEFAULT(String, list_status, ZH_WORDS_GETTER("inspect.list_status"));
+	//备注
+	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("inspect.remark"));
 	
 };
 
@@ -62,8 +68,7 @@ class Inspect_detailDTO :public InspectDTO
 {
 	DTO_INIT(Inspect_detailDTO, InspectDTO);
 
-	//单位
-	API_DTO_FIELD_DEFAULT(String, unit_of_measure, ZH_WORDS_GETTER("inspect.unit_of_measure"));
+	
 	//致命缺陷率
 	API_DTO_FIELD_DEFAULT(Float64, maj_rate, ZH_WORDS_GETTER("inspect.maj_rate"));
 	//严重缺陷率
@@ -76,14 +81,10 @@ class Inspect_detailDTO :public InspectDTO
 	API_DTO_FIELD_DEFAULT(Int64, maj_quantity, ZH_WORDS_GETTER("inspect.maj_quantity"));
 	//轻微缺陷数量
 	API_DTO_FIELD_DEFAULT(Int64, min_quantity, ZH_WORDS_GETTER("inspect.min_quantity"));
-	//备注
-	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("inspect.remark"));
+	
 };
 
-class Inspect_detailPageDTO : public PageDTO<Inspect_detailDTO::Wrapper>
-{
-	DTO_INIT(Inspect_detailPageDTO, PageDTO<Inspect_detailDTO::Wrapper>);
-};
+
 
 class Inspect_tableDTO : public Inspect_detailDTO
 {
@@ -94,7 +95,11 @@ class Item_idDTO :public oatpp::DTO
 {
 	DTO_INIT(Item_idDTO, DTO);
 	// 数据库表行id
-	API_DTO_FIELD_DEFAULT(UInt64, line_id, ZH_WORDS_GETTER("inspect.line_id"));
+	API_DTO_FIELD_DEFAULT(UInt64, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
+	//检测结果
+	API_DTO_FIELD_DEFAULT(String, check_result, ZH_WORDS_GETTER("inspect.check_result"));
+	////状态
+	//API_DTO_FIELD_DEFAULT(String, list_status, ZH_WORDS_GETTER("inspect.list_status"));
 };
 
 

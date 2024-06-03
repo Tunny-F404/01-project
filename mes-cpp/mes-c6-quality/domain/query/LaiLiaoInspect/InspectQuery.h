@@ -15,13 +15,13 @@ class InspectQuery : public PageQuery
 	DTO_INIT(InspectQuery, PageQuery);
 	
 	// 来料检验单编号
-	API_DTO_FIELD_DEFAULT(String, code, ZH_WORDS_GETTER("inspect.code"));
+	API_DTO_FIELD_DEFAULT(String, iqc_code, ZH_WORDS_GETTER("inspect.iqc_code"));
 	// 供应商编码
 	API_DTO_FIELD_DEFAULT(String, vendor_code, ZH_WORDS_GETTER("inspect.vendor_code"));
 	// 供应商名称
 	API_DTO_FIELD_DEFAULT(String, vendor_name, ZH_WORDS_GETTER("inspect.vendor_name"));
 	//供应商批次号
-	API_DTO_FIELD_DEFAULT(String, vd_batch, ZH_WORDS_GETTER("inspect.vd_batch"));
+	API_DTO_FIELD_DEFAULT(String, vendor_batch, ZH_WORDS_GETTER("inspect.vendor_batch"));
 	//产品物料编码
 	API_DTO_FIELD_DEFAULT(String, item_code, ZH_WORDS_GETTER("inspect.item_code"));
 	//产品物料名称
@@ -38,21 +38,21 @@ class InspectQuery : public PageQuery
 };
 
 
-//来料检验详情
-class Inspect_detailQuery :public PageQuery
-{
-	DTO_INIT(Inspect_detailQuery, PageQuery);
-	// 来料检验表主键id
-	API_DTO_FIELD_DEFAULT(String, line_id, ZH_WORDS_GETTER("inspect.line_id"));
-
-};
+////来料检验详情
+//class Inspect_detailQuery :public oatpp::DTO
+//{
+//	DTO_INIT(Inspect_detailQuery, DTO);
+//	// 来料检验表主键id
+//	API_DTO_FIELD_DEFAULT(String, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
+//
+//};
 
 //查看报表
 class Inspect_tableQuery :public oatpp::DTO
 {
 	DTO_INIT(Inspect_tableQuery, DTO);
 	// 来料检验表主键id
-	API_DTO_FIELD_DEFAULT(String, line_id, ZH_WORDS_GETTER("inspect.line_id"));
+	API_DTO_FIELD_DEFAULT(String, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
 
 };
 
