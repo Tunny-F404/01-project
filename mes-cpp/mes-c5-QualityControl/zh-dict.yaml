@@ -195,3 +195,12 @@ excel:
    h11: 检测日期
    h12: 检测人员
    h13: 单据状态
+ DetectionItemSettings:
+  path: ./public/excel/ExportDetectionItemSettings.xlsx
+  header:
+   h1: 检测项ID
+   h2: 检测项编码
+   h3: 检测项名称
+   h4: 检测项类型
+   h5: 检测工具
+   h6: 描述

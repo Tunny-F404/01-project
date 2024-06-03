@@ -52,9 +52,25 @@ public:
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/detectionitemsettings/del-code", removeTheDetection, BODY_DTO(oatpp::List<UInt64>, id), execRemoveTheDetection(id));
 
 	// 3.1 定义导出接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("detectionitemsettings.export.summary"), exportDetectionItemSettings, StringJsonVO::Wrapper);
-	// 3.2 定义导出接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/detectionitemsettings/export", exportDetectionItemSettings, BODY_DTO(oatpp::List<UInt64>, id), execExportDetectionItemSettings(id));
+	ENDPOINT_INFO(exportDetectionItemSettings) {
+		// 定义接口标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("detectionitemsettings.export.summary"));
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
+		// 定义其他查询参数描述
+		API_DEF_ADD_QUERY_PARAMS(String, "code", ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.controller.query.code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "name", ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.controller.query.name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "type", ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.controller.query.type"), "", false);
+	}
+	// 3.2 定义查询接口处理
+	ENDPOINT(API_M_GET, "/detectionitemsettings/export-file", exportDetectionItemSettings, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+		// 解析查询参数为Query领域模型
+		API_HANDLER_QUERY_PARAM(userQuery, DetectionItemSettingsQuery, queryParams);
+		// 呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execExportDetectionItemSettings(userQuery, authObject->getPayload()));
+	}
 private:
 	//DetectionItemSettingsPageJsonVO::Wrapper execQueryqc(const DetectionItemSettingsQuery::Wrapper& query, const PayloadDTO& payload);
 	DetectionItemSettingsPageJsonVO::Wrapper execQueryqc(const DetectionItemSettingsQuery::Wrapper& query);
@@ -62,7 +78,7 @@ private:
 	Uint64JsonVO::Wrapper execModifyqc(const DetectionItemSettingsDTO::Wrapper& dto);
 	Uint64JsonVO::Wrapper execRemoveTheDetection(const oatpp::List<UInt64>& id);
 	// 执行文件下载处理
-	StringJsonVO::Wrapper execExportDetectionItemSettings(const oatpp::List<UInt64>& id);
+	StringJsonVO::Wrapper execExportDetectionItemSettings(const DetectionItemSettingsQuery::Wrapper& query, const PayloadDTO& payload);
 };
 
 #include OATPP_CODEGEN_END(ApiController)

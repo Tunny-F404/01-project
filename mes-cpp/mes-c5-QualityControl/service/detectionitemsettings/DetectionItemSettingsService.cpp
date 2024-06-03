@@ -50,3 +50,16 @@ bool DetectionItemSettingsService::removeData(uint64_t id)
 	return dao.remove(id) == 1;
 	return 1;
 }
+
+list<DetectionItemSettingsDO> DetectionItemSettingsService::listAllExort(const DetectionItemSettingsQuery::Wrapper& query)
+{
+	DetectionItemSettingsDAO dao;
+	//查看数据是否存在
+	auto count = dao.count(query);
+	//不存在返回空
+	if (count < 1)
+		return {};
+	//查询所有数据
+	auto dos = dao.selectWithPage(query, 1);
+	return dos;
+}

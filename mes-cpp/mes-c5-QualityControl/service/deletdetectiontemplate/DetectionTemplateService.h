@@ -4,7 +4,6 @@
 #include <list>
 #include "../../dao/detectiontemplate/DetectionTemplateDAO.h"
 
-
 class DetectionTemplateService
 {
 public:
@@ -16,6 +15,7 @@ public:
 	uint64_t saveData(const DetectionTemplateDTO::Wrapper& dto);
 
 	bool update(const DetectionTemplateDTO::Wrapper& dto);
+	
 };
 
 #endif // !_TEST_SERVICE_#pragma once
