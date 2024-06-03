@@ -3,6 +3,7 @@ package com.zeroone.star.productManagement.mapper;
 import com.zeroone.star.productManagement.entity.MdProductSip;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.project.j6.product_management.dto.SipDTO;
+import com.zeroone.star.project.j6.product_management.query.SipQuery;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -17,6 +18,10 @@ import java.util.List;
  */
 @Mapper
 public interface MdProductSipMapper extends BaseMapper<MdProductSip> {
+
+    List<SipDTO> selectProductSipPage(SipQuery query);
+    @Select("SELECT * FROM md_product_sip WHERE sip_id = #{id}")
+    SipDTO selectProductSipPageByItemId(Long id);
 
     // 插入数据
     @Insert("INSERT INTO sip (sip_id, item_id, order_num, process_id, process_code, process_name, sip_title, sip_description, sip_url) " +
