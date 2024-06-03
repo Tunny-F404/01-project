@@ -40,7 +40,7 @@ public class SipController implements SipApis {
 
     @Override
     @ApiOperation(value = "查询Sip")
-    @GetMapping("/add")
+    @GetMapping("/{id}")
     public JsonVO<SipDTO> queryById(@PathVariable @Min(value=1,message="id最小值为1") Long id) {
         SipDTO dto = iMdProductSipService.selectProductSipPageByItemId(id);
         return JsonVO.success(dto);
@@ -58,7 +58,7 @@ public class SipController implements SipApis {
 
     @Override
     @ApiOperation(value = "修改Sip")
-    @PutMapping("/put")
+    @PutMapping("/update")
     public JsonVO<String> edit(@RequestBody SipDTO dto) {
         if (iMdProductSipService.updateProductSip(dto)) {
             return JsonVO.success("修改成功");
@@ -68,7 +68,7 @@ public class SipController implements SipApis {
 
     @Override
     @ApiOperation(value = "删除")
-    @DeleteMapping("/delete")
+    @DeleteMapping("/{ids}")
     public JsonVO<String> remove(@PathVariable Long[] ids) {
 
         if (iMdProductSipService.deleteProductSipByIds(ids)) {
@@ -78,7 +78,7 @@ public class SipController implements SipApis {
     }
 
     @ApiOperation(value = "上传图像")
-    @PostMapping("/export")
+    @PostMapping("/uploadFlied")
     public JsonVO<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String sip_url = iMdProductSipService.uploadFile(file);
         if(sip_url != null){
