@@ -1,6 +1,14 @@
 #include "GetListController.h"
 
-GetListPageJsonVO::Wrapper GetListController::execQuerySample(const GetListQuery::Wrapper& query, const PayloadDTO& payload)
+
+GetListPageJsonVO::Wrapper GetListController::execQueryGetList(const GetListQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	return {};
+	// ����һ��Service
+	GetListService service;
+	// ��ѯ����
+	auto result = service.listAll(query);
+	// ��Ӧ���
+	auto jvo = GetListPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }

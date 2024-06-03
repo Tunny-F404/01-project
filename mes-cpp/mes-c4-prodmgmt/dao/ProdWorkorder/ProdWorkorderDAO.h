@@ -1,27 +1,47 @@
 #pragma once
-
+<<<<<<< c4
 #ifndef _PRODWORKORDER_DAO_
 #define _PRODWORKORDER_DAO_
 #include "BaseDAO.h"
+#include "../../domain/do/ProdWorkorder/AddProdWorkorderDO.h"
+#include "../../domain/do/ProdWorkorder/GetProdWorkorderListDO.h"
+#include "../../domain/do/ProdWorkorder/ProdWorkorderBomListDO.h"
+#include "../../domain/do/ProdWorkorder/ProdWorkorderInfoDO.h"
+
+#include "../../domain/query/ProdWorkorder/GetProdWorkorderListQuery.h"
+#include "../../domain/query/ProdWorkorder/ProdWorkorderBomListQuery.h"
+
+
 #include "../../domain/do/ProdWorkorder/ProdWorkorderDO.h"
 
-/**
- * Éú²ú¹¤µ¥±íÊý¾Ý¿â²Ù×÷ÊµÏÖ
- */
-class ProdWorkorderDAO : public BaseDAO
-{
+class ProdWorkorderDAO : public BaseDAO {
 public:
-	// Í¨¹ýÐÕÃû²éÑ¯Êý¾Ý
+	// Í³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	uint64_t count(const GetProdWorkorderListQuery::Wrapper& query);
+	// BOMÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	uint64_t countBom(const ProdWorkorderBomListQuery::Wrapper& query);
+	// ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+	list<GetProdWorkorderListDO> selectWithPage(const GetProdWorkorderListQuery::Wrapper& query);
+	// Í¨ï¿½ï¿½BOMï¿½ï¿½IDï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+	list<ProdWorkorderBomListDO> selectByBomId(const ProdWorkorderBomListQuery::Wrapper& query);
+	// Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+	list<ProdWorkorderInfoDO> selectByWorkorderId(const uint64_t& workorder_id);
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	uint64_t insert(const AddProdWorkorderDO& iObj);
+
+	//xj
+	// Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	uint64_t selectByID(uint64_t workorder_id);
-	// ÐÞ¸ÄÊý¾Ý
+	// ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	int update(const ProdWorkorderDO& uObj);
 	
 	uint64_t countById(ProdWorkorderDO iObj);
-	// Í¨¹ýIDÍê³ÉÉú²ú¹¤µ¥
+	// Í¨ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int completeById(uint64_t id);
-	// Í¨¹ýIDÉ¾³ýÉú²ú¹¤µ¥
+	// Í¨ï¿½ï¿½IDÉ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int deleteById(uint64_t id);
-	//Í¨¹ýidÈ·ÈÏÉú²ú¹¤µ¥
+	//Í¨ï¿½ï¿½idÈ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int comfirmById(uint64_t id);
 };
 #endif // !_PRODWORKORDER_DAO_
+

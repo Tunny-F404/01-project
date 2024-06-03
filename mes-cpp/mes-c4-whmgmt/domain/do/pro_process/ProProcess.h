@@ -26,9 +26,9 @@
  */
 class ProProcessDO
 {
-	CC_SYNTHESIZE(string, process_code, processCode);
-	CC_SYNTHESIZE(string,process_name, processName);
-	CC_SYNTHESIZE(int, process_id, processId);
+	CC_SYNTHESIZE(string, process_code, Process_code);
+	CC_SYNTHESIZE(string,process_name, Process_Name);
+	CC_SYNTHESIZE(int, process_id, Process_Id);
 public:
 	ProProcessDO() {
 		process_id = 0;

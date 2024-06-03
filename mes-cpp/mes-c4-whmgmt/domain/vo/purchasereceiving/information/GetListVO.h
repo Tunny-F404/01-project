@@ -28,8 +28,8 @@
 /**
  * 示例显示JsonVO，用于响应给客户端的Json对象
  */
-class getlistjsonvo : public JsonVO<GetListDTO::Wrapper> {
-	DTO_INIT(getlistjsonvo, JsonVO<GetListDTO::Wrapper>);
+class GetListJsonVo : public JsonVO<GetListDTO::Wrapper> {
+	DTO_INIT(GetListJsonVo, JsonVO<GetListDTO::Wrapper>);
 };
 
 /**

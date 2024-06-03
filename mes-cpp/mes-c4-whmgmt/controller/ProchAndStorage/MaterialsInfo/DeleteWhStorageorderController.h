@@ -17,18 +17,18 @@ public:
 	//3.1 定义删除接口描述
 	ENDPOINT_INFO(deleteWhStorageorders) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("whstorageorder.delete.summary"), /*Uint64JsonVO::Wrapper*/DeleteWhStorageorderVO::Wrapper);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("whstorageorder.delete.summary"), Uint64JsonVO::Wrapper);
 		// 添加安全验证
 		API_DEF_ADD_AUTH();
 	}
 	// 3.2 定义批量删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ProchAndStorage/MaterialsInfo", deleteWhStorageorders, BODY_DTO(List<UInt64>, ids), execDeleteWhStorageorder(ids));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/prochandstorage/materialsinfo/delete-wh-storage-order", deleteWhStorageorders, BODY_DTO(List<UInt64>, ids), execDeleteWhStorageorder(ids));
 
 private:
 	//3.3 演示删除入库单行
 	Uint64JsonVO::Wrapper execDeleteWhStorageorder(const List<UInt64>& ids);
 };
 
-
+#include OATPP_CODEGEN_END(ApiController)
 
 #endif // _DELETEWHSTORAGEORDERCONTROLLER_H_
