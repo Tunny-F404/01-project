@@ -1,9 +1,8 @@
 <script setup>
-import { ref } from "vue";
-
 import tableFrame from "@/components/table-list-use/table-text.vue";
 import popUp from "@/components/table-list-use/table-components/pop-up.vue";
 import request from "@/apis/request.js"; //加入请求
+import { ref } from "vue";
 
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整
@@ -16,7 +15,6 @@ const tableList = ref([
 	},
 ]);
 
-const multipleSelection = ref([]);
 //dialog联系到表格弹窗
 const dialog = ref();
 
@@ -33,7 +31,7 @@ const parms = ref({
 const getPageList = async () => {
 	loading.value = true;
 	//里面改接口，可以加个try-catch
-	// const res= await Request.request('GET','/basicdata/md-unit-measure/list',null)
+	// const res= await request(request.GET,'/basicdata/md-unit-measure/list',null,JSON)
 	// tableList.value=res.data.rows.data
 	// parms.value.pagenum=res.data.pageIndex
 	// parms.value.pagesize=res.data.pageSize
@@ -85,16 +83,12 @@ const onSubmit = () => {
 const onAddChannel = () => {
 	dialog.value.open({});
 };
-//选择组件
-const handleSelectionChange = (val) => {
-	this.multipleSelection = val;
-};
 </script>
 
 <template>
 	<!--分类，页面只有基本的表现，没有实现数据绑定-->
 	<tableFrame title="实验表格">
-		<slot name="extra">
+		<slot name="#extra">
 			<!-- 具名插槽例子实现 -->
 			<el-button @click="onSortChannel"
 				>排序顺序
@@ -128,14 +122,7 @@ const handleSelectionChange = (val) => {
 		</el-form>
 
 		<!--表格区-->
-		<el-table
-			:data="tableList"
-			style="width: 100%"
-			v-loading="loading"
-			@selection-change="handleSelectionChange"
-			ref="multipleTable"
-		>
-			<el-table-column type="selection" width="55" />
+		<el-table :data="tableList" style="width: 100%" v-loading="loading">
 			<el-table-column prop="classify" label="分类" width="100"></el-table-column>
 			<el-table-column type="index" label="排序" width="50"></el-table-column>
 			<el-table-column prop="product" label="物料/产品" width="150"></el-table-column>
@@ -176,12 +163,11 @@ const handleSelectionChange = (val) => {
 </template>
 
 <style lang="scss" scoped>
-.demo-form-inline {
-	.el-input {
-		--el-input-width: 220px;
-	}
-	.el-select {
-		--el-select-width: 220px;
-	}
+.demo-form-inline .el-input {
+	--el-input-width: 220px;
+}
+
+.demo-form-inline .el-select {
+	--el-select-width: 220px;
 }
 </style>

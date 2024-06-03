@@ -186,6 +186,44 @@ let testMenus = [
 			},
 		],
 	},
+	//组织架构侧边栏
+	//views/organizational-structure
+		{
+			id: 5,
+		text: "组织架构",
+		icon: "Operation",
+		children: [
+			{
+				id: 2,
+				text: "部门管理",
+				href: "/un-41",
+				icon: "Operation",
+				pid: 5,
+			},
+			{
+				id: 3,
+				text: "岗位管理",
+				href: "/un-42",
+				icon: "Operation",
+				pid: 5,
+			},
+			{
+				id: 4,
+				text: "角色管理",
+				href: "/un-43",
+				icon: "Operation",
+				pid: 5,
+			},
+			{
+				id: 5,
+				text: "用户管理",
+				href: "/un-44",
+				icon: "Operation",
+				pid: 5,
+			},
+			
+		],
+	},
 ];
 
 export const userStore = defineStore("user", {

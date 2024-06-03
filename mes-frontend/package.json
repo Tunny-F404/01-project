@@ -13,7 +13,7 @@
 		"corepack:pnpm": "corepack enable && corepack install",
 		"git:fetch": "git fetch -p",
 		"dev": "vite --open",
-		"build": "vue-tsc && vite build",
+		"build": "vite build",
 		"preview": "vite preview --port 4173",
 		"lint:eslint": "eslint . --fix",
 		"format:prettier": "prettier --write ."
@@ -61,10 +61,9 @@
 		"sass": "^1.54.9",
 		"type-plus": "^7.6.2",
 		"typescript": "^5.4.5",
-		"unplugin-auto-import": "^0.17.6",
+		"unplugin-auto-import": "^0.11.5",
 		"unplugin-vue-components": "^0.22.12",
 		"vite": "^5.2.11",
-		"vite-plugin-html": "^3.2.0",
-		"vue-tsc": "^2.0.19"
+		"vite-plugin-html": "^3.2.0"
 	}
 }

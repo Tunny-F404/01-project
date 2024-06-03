@@ -1,11 +1,8 @@
-<script setup lang="ts">
-import { ref } from "vue";
-
+<script setup>
 import tableFrame from "@/components/table-list-use/table-text.vue";
 import popUp from "@/components/table-list-use/table-components/pop-up.vue";
 import request from "@/apis/request.js";
-
-// defineOptions();
+import { ref } from "vue";
 
 const multipleSelection = ref([]);
 
@@ -47,9 +44,6 @@ const dialog = ref();
 //定义总条数
 const total = ref(13);
 
-//定义查询的数据
-const myInput = ref();
-const unitName = ref();
 const loading = ref(false); //loading状态
 
 //定义请求参数,后期完善
@@ -64,7 +58,7 @@ const getPageList = async (data) => {
 	//不知道跟着接口写的对不对，希望大佬看一看
 	loading.value = true;
 	try {
-		const res = await Request.request(Request.GET, "/basicdata/md-unit-measure/list", data, null);
+		const res = await request(request.GET, "/basicdata/md-unit-measure/list", data, JSON);
 		tableList.value = res.data.rows.data;
 		parms.value.pagenum = res.data.pageIndex;
 		parms.value.pagesize = res.data.pageSize;
@@ -86,7 +80,6 @@ const onSizeChange = (size) => {
 	const Data = { pageSize: "parms.pagesize" };
 	getPageList(Date);
 };
-
 //改变页数
 const onCurrentChange = (page) => {
 	// console.log('页面变化了',page);
@@ -100,13 +93,11 @@ const onCurrentChange = (page) => {
 const onSortChannel = () => {
 	console.log("排序");
 };
-
 const onEditchannel = (row, $index) => {
 	//编辑
 	dialog.value.open({ row });
 	console.log(row);
 };
-
 const onDelChannel = async (row) => {
 	//删除
 	await ElMessageBox.confirm("你确认要删除该单位么", "温馨提示", {
@@ -119,23 +110,12 @@ const onDelChannel = async (row) => {
 	//删除后再渲染数据
 	getPageList();
 };
-
 const onSubmit = () => {
 	console.log("查询提交");
 };
-
 //添加
 const onAddChannel = () => {
 	dialog.value.open({});
-};
-
-const reFresh = () => {
-	myInput = "";
-	unitName = "";
-};
-
-const handleSelectionChange = (val) => {
-	this.multipleSelection = val;
 };
 </script>
 
@@ -143,6 +123,7 @@ const handleSelectionChange = (val) => {
 	<!--分类，页面只有基本的表现，没有实现数据绑定-->
 	<tableFrame title="计算单位">
 		<template #extra>
+			<!-- 具名插槽例子实现 -->
 			<el-button @click="onSortChannel"
 				>导出数据
 				<el-icon :size="20"> <UploadFilled /><!--排序图标--> </el-icon>
@@ -155,51 +136,34 @@ const handleSelectionChange = (val) => {
 
 		<!--表单区域-->
 		<el-form :inline="true" class="demo-form-inline">
-			<el-form-item label="单位编码：" padding="50px">
+			<el-form-item label="表格分类：" padding="50px">
 				<!--label是用户看，value是收集给后台的-->
-				<el-input v-model="myInput" clearable />
+				<el-select v-model="parms.account">
+					<el-option label="按名字" value="001"> </el-option>
+					<el-option label="按时间" value="002"> </el-option>
+				</el-select>
 			</el-form-item>
-			<el-form-item label="单位名称">
-				<el-input v-model="unitName" clearable />
+			<el-form-item label="启用状态">
+				<el-select v-model="parms.state"
+					><!--后台标记状态-->
+					<el-option label="正常" value="true"></el-option>
+					<el-option label="失败" value="false"></el-option>
+				</el-select>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="onSubmit"
-					><el-icon><Search /></el-icon>查询</el-button
-				>
-			</el-form-item>
-			<el-form-item>
-				<el-button plain @click="reFresh"
-					><el-icon><RefreshLeft /></el-icon>重置</el-button
-				>
+				<el-button type="primary" @click="onSubmit">查询</el-button>
 			</el-form-item>
 		</el-form>
 
-		<el-button type="primary" plain
-			><el-icon><Plus /></el-icon>新增</el-button
-		>
-		<el-button type="success" plain
-			><el-icon><EditPen /></el-icon>修改</el-button
-		>
-		<el-button type="danger" plain
-			><el-icon><Delete /></el-icon>删除</el-button
-		>
-
 		<!--表格区-->
-		<el-table
-			:data="tableList"
-			style="width: 100%"
-			v-loading="loading"
-			@selection-change="handleSelectionChange"
-			ref="multipleTable"
-		>
-			<el-table-column type="selection" width="55" />
+		<el-table :data="tableList" style="width: 100%" v-loading="loading">
 			<el-table-column type="index" label="序号"></el-table-column>
 			<el-table-column prop="attr1" label="预留字段1" width="100"></el-table-column>
 			<el-table-column prop="attr2" label="预留字段2" width="100"></el-table-column>
 			<el-table-column prop="attr3" label="预留字段3" width="100"></el-table-column>
 			<el-table-column prop="attr4" label="预留字段4" width="100"></el-table-column>
 			<el-table-column prop="changeRate" label="与主单位换算比例" width="100"></el-table-column>
-			<el-table-column prop="enableFlag" label="是否启用"> </el-table-column>
+			<el-table-column prop="enableFlag" label="是否启用"></el-table-column>
 			<el-table-column prop="measureCode" label="单位编码"></el-table-column>
 			<el-table-column prop="measureName" label="单位名称"></el-table-column>
 			<el-table-column prop="primaryFlag" label="是否是主单位"></el-table-column>
@@ -235,19 +199,16 @@ const handleSelectionChange = (val) => {
 			<el-empty description="没有数据"></el-empty>
 		</template>
 	</tableFrame>
-
 	<!--引入的弹窗-->
 	<pop-Up ref="dialog"> </pop-Up>
 </template>
 
 <style lang="scss" scoped>
-.demo-form-inline {
-	.el-input {
-		--el-input-width: 220px;
-	}
+.demo-form-inline .el-input {
+	--el-input-width: 220px;
+}
 
-	.el-select {
-		--el-select-width: 220px;
-	}
+.demo-form-inline .el-select {
+	--el-select-width: 220px;
 }
 </style>
