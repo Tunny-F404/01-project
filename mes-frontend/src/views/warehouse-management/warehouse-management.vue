@@ -24,12 +24,12 @@
 		</TableTrue>
 	</div>
 </template>
-
 <script lang="ts" setup>
-import { ref, computed } from "vue";
 import { ElButton } from "element-plus";
+
 import TableText from "@/components/table-list-use/table-text.vue";
 import TableTrue from "@/components/table-list-use/table-true.vue";
+import { ref, computed } from "vue";
 
 const components = { TableText, TableTrue };
 // 定义数据
