@@ -6,9 +6,9 @@
 
 Uint64JsonVO::Wrapper ModifyListController::execModifyList(const ModifyListDTO::Wrapper& dto)
 {
-	// ¶¨Òå·µ»ØÊý¾Ý¶ÔÏó
+	// ï¿½ï¿½ï¿½å·µï¿½ï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
 	auto jvo = Uint64JsonVO::createShared();
-	// ²ÎÊýÐ£Ñé
+	// ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½
 	//!dto->recptcode || !dto->recptname || 
 	//!dto->recptdate || !dto->pocode || !dto->status || !dto->vendorid ||
 		//!dto->warehousename || !dto->remark
@@ -17,9 +17,9 @@ Uint64JsonVO::Wrapper ModifyListController::execModifyList(const ModifyListDTO::
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	// ¶¨ÒåÒ»¸öService
+	// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Service
 	ModifyListService service;
-	// Ö´ÐÐÊý¾ÝÐÞ¸Ä
+	// Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
 	if (service.updateData(dto)) {
 		jvo->success(dto->recptid);
 	}
@@ -27,6 +27,6 @@ Uint64JsonVO::Wrapper ModifyListController::execModifyList(const ModifyListDTO::
 	{
 		jvo->fail(dto->recptid);
 	}
-	// ÏìÓ¦½á¹û
+	// ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
 	return jvo;
 }

@@ -22,27 +22,27 @@
 #include "../DoInclude.h"
 
 /**
- * Ê¾ÀýÊý¾Ý¿âÊµÌåÀà
+ * Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Êµï¿½ï¿½ï¿½ï¿½
  */
 class ModifyListDO
 {
-	// Èë¿âµ¥id 
+	// ï¿½ï¿½âµ¥id 
 	CC_SYNTHESIZE(uint64_t, recptid, Recptid);
-	// Èë¿âµ¥±àºÅ
+	// ï¿½ï¿½âµ¥ï¿½ï¿½ï¿½
 	CC_SYNTHESIZE(string, recptcode, Recptcode);
-	// Èë¿âµ¥Ãû³Æ
+	// ï¿½ï¿½âµ¥ï¿½ï¿½ï¿½ï¿½
 	CC_SYNTHESIZE(string, recptname, Recptname);
-	// Èë¿âÈÕÆÚ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	CC_SYNTHESIZE(string, recptdate, Recptdate);
-	// ²É¹º¶©µ¥ºÅ
+	// ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	CC_SYNTHESIZE(string, pocode, Pocode);
-	//¶©µ¥×´Ì¬
+	//ï¿½ï¿½ï¿½ï¿½×´Ì¬
 	CC_SYNTHESIZE(string, status, Status);
-	//¹©Ó¦ÉÌid
+	//ï¿½ï¿½Ó¦ï¿½ï¿½id
 	CC_SYNTHESIZE(int16_t, vendorid, Vendorid);
-	//Èë¿â²Ö¿â
+	//ï¿½ï¿½ï¿½Ö¿ï¿½
 	CC_SYNTHESIZE(string, warehousename, Warehousename);
-	//±¸×¢
+	//ï¿½ï¿½×¢
 	CC_SYNTHESIZE(string, remark, Remark);
 
 public:

@@ -5,26 +5,26 @@
 
 Uint64JsonVO::Wrapper AddListController::execAddList(const AddListDTO::Wrapper& dto)
 {
-	// ¶¨Òå·µ»ØÊı¾İ¶ÔÏó
+	// ï¿½ï¿½ï¿½å·µï¿½ï¿½ï¿½ï¿½ï¿½İ¶ï¿½ï¿½ï¿½
 	auto jvo = Uint64JsonVO::createShared();
-	// ²ÎÊıĞ£Ñé
-	// ·Ç¿ÕĞ£Ñé
+	// ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½
+	// ï¿½Ç¿ï¿½Ğ£ï¿½ï¿½
 	if (!dto->recptcode || !dto->recptname || !dto->recptdate || !dto->pocode || !dto->status || !dto-> vendorid || !dto->warehousename || !dto->remark)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	// ÓĞĞ§ÖµĞ£Ñé
+	// ï¿½ï¿½Ğ§ÖµĞ£ï¿½ï¿½
 	if (dto->recptcode->empty() || dto->recptname->empty() || dto->recptdate->empty() || dto->pocode->empty() || dto->status->empty() || dto->vendorid < 0 || dto->warehousename->empty() || dto->remark->empty())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	//service²ã 
+	//serviceï¿½ï¿½ 
 	//.......
-	// ¶¨ÒåÒ»¸öService
+	// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Service
 	AddListService service;
-	// Ö´ĞĞÊı¾İĞÂÔö
+	// Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	uint64_t id = service.saveData(dto);
 	if (id > 0) {
 		jvo->success(UInt64(id));
@@ -33,6 +33,6 @@ Uint64JsonVO::Wrapper AddListController::execAddList(const AddListDTO::Wrapper& 
 	{
 		jvo->fail(UInt64(id));
 	}
-	//ÏìÓ¦½á¹û
+	//ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
 	return jvo;
 }

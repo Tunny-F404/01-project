@@ -22,19 +22,19 @@
 #include "../../DoInclude.h"
 
 /**
- * Ê¾ÀýÊý¾Ý¿âÊµÌåÀà
+ * Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Êµï¿½ï¿½ï¿½ï¿½
  */
 class GetListDO
 {
-	//Èë¿âµ¥±àºÅ
+	//ï¿½ï¿½âµ¥ï¿½ï¿½ï¿½
 	CC_SYNTHESIZE(string,recptcode,Recptcode);
-	// Èë¿âµ¥Ãû³Æ
+	// ï¿½ï¿½âµ¥ï¿½ï¿½ï¿½ï¿½
 	CC_SYNTHESIZE(string, recptname, Recptname);
-	// ¹©Ó¦ÉÌÃû³Æ
+	// ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	CC_SYNTHESIZE(string, vendorname, Vendorname);
-	// Èë¿âÈÕÆÚ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	CC_SYNTHESIZE(string,recptdate, Recptdate);
-	//¶©µ¥±àºÅ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	CC_SYNTHESIZE(string, pocode, Pocode);
 public:
 	GetListDO() {

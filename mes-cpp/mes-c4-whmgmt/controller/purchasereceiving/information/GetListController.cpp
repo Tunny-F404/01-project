@@ -3,11 +3,11 @@
 
 GetListPageJsonVO::Wrapper GetListController::execQueryGetList(const GetListQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	// ¶¨ÒåÒ»¸öService
+	// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Service
 	GetListService service;
-	// ²éÑ¯Êý¾Ý
+	// ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	auto result = service.listAll(query);
-	// ÏìÓ¦½á¹û
+	// ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
 	auto jvo = GetListPageJsonVO::createShared();
 	jvo->success(result);
 	return jvo;
