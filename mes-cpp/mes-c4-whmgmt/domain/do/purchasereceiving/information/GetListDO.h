@@ -35,7 +35,7 @@ class GetListDO
 	// ƒÍ¡‰
 	CC_SYNTHESIZE(int, age, Age);
 public:
-	AddListDO() {
+	GetListDO() {
 		id = 0;
 		name = "";
 		sex = "";

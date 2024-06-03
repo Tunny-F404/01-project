@@ -21,7 +21,7 @@
 #define _PRODORDER_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/query/ProdOrder/ProdOrderQuery.h"
+#include "domain/query/Prodorder/ProdOrderQuery.h"
 #include "domain/dto/ProdOrder/ProdOrderDTO.h"
 #include "domain/vo/ProdOrder/ProdOrderVO.h"
 

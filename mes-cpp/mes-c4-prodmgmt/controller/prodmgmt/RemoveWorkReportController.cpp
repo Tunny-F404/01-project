@@ -1,25 +1,25 @@
-#pragma once
 
 #include "stdafx.h"
 #include "RemoveWorkReportController.h"
+#include <iostream>
 #include "../../service/prodmgmt/DeleteWorkReportService.h"
 #include "../ApiDeclarativeServicesHelper.h"
 
 Uint64JsonVO::Wrapper RemoveWorkReportController::execRemoveWorkReport(const UInt64& recordId)
 {
-	//// ¶¨Òå·µ»ØÊý¾Ý¶ÔÏó
+	//// ï¿½ï¿½ï¿½å·µï¿½ï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
 	auto jvo = Uint64JsonVO::createShared();
-	// ²ÎÊýÐ£Ñé
+	// ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½
 	if (!recordId || recordId <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
 	
-	// ¶¨ÒåÒ»¸öService
+	// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Service
 	DeleteWorkReportService service;
 
-	// Ö´ÐÐÊý¾ÝÉ¾³ý
+	// Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 	if (service.removeData(recordId.getValue(0))) {
 		jvo->success(recordId);
 	}
@@ -27,6 +27,6 @@ Uint64JsonVO::Wrapper RemoveWorkReportController::execRemoveWorkReport(const UIn
 	{
 		jvo->fail(recordId);
 	}
-	//// ÏìÓ¦½á¹û
+	//// ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
 	return jvo;
 }
