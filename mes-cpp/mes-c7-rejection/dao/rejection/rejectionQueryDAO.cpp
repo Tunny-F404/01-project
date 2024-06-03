@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "rejectionQueryDAO.h"
-#include "RejectionMapper.h"
+#include "rejectionMapper.h"
 #include <sstream>
 
 //定义条件解析宏，减少重复代码

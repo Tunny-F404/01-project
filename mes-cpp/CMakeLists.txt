@@ -163,7 +163,7 @@ endif()
 add_subdirectory ("arch-tests")
 #endif()
 # 这是示例模块，后期可以不编译它
-# add_subdirectory ("arch-demo")
+add_subdirectory ("arch-demo")
 # 在后面添加你的模块
 # add_subdirectory ("arch-exercise")
 add_subdirectory ("mes-c7-settings")
