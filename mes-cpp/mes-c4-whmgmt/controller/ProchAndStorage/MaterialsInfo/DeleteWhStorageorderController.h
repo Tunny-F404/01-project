@@ -17,7 +17,7 @@ public:
 	//3.1 定义删除接口描述
 	ENDPOINT_INFO(deleteWhStorageorders) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("whstorageorder.delete.summary"), Uint64JsonVO::Wrapper,/*DeleteWhStorageorderVO::Wrapper*/);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("whstorageorder.delete.summary"), Uint64JsonVO::Wrapper);
 		// 添加安全验证
 		API_DEF_ADD_AUTH();
 	}
