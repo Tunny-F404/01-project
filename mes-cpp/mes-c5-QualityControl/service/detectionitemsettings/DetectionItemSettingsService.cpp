@@ -46,7 +46,7 @@ bool DetectionItemSettingsService::updateData(const DetectionItemSettingsDTO::Wr
 
 bool DetectionItemSettingsService::removeData(uint64_t id)
 {
-	/*SampleDAO dao;
-	return dao.deleteById(id) == 1;*/
+	DetectionItemSettingsDAO dao;
+	return dao.remove(id) == 1;
 	return 1;
 }

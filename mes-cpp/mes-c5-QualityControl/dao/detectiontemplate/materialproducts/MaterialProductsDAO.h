@@ -12,7 +12,10 @@
 class MaterialProductsDAO :public BaseDAO
 {
 public:
-
+	// 统计数据条数
+	uint64_t count(const MaterialProductsQuery::Wrapper& query);
+	//
+	list<MaterialProductsDO> selectWithPage(const MaterialProductsQuery::Wrapper& query);
 	// 修改数据
 	int updateMaterialProducts(const MaterialProductsDO& uObj);
 	// 插入数据

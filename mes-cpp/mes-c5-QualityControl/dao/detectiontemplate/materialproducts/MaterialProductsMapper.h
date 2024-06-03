@@ -20,8 +20,8 @@ public:
 		data.setquantity_unqualified(resultSet->getUInt64(7));
 		data.setcr_rate(resultSet->getDouble(8));
 		data.setmaj_rate(resultSet->getDouble(9));
-		data.setmin_rate(resultSet->getDouble(11));
-		data.setremark(resultSet->getString(12));
+		data.setmin_rate(resultSet->getDouble(10));
+		data.setremark(resultSet->getString(11));
 		return data;
 	}
 };

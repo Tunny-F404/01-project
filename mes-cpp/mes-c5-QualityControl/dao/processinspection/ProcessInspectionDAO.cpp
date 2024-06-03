@@ -51,11 +51,53 @@ if (query->check_result) { \
 }
 
 
-int ProcessInspectionDAO::update(const ProcessinSpectionDO& uObj)
+int ProcessInspectionDAO::update(const ProcessinSpectionDO & uObj)
 {
 	//string sql = "UPDATE `sample` SET `name`=?, `sex`=?, `age`=? WHERE `id`=?";
 	//return sqlSession->executeUpdate(sql, "%s%s%i%ull", uObj.getName(), uObj.getSex(), uObj.getAge(), uObj.getId());
-	return {};
+	string sql = "UPDATE qc_ipqc \
+		SET \
+		ipqc_code=?,\
+		ipqc_name=?,\
+		ipqc_type=?,\
+		workorder_code=?,\
+		workorder_name=?,\
+		workstation_code=?,\
+		workstation_name=?,\
+		item_code=?, \
+		item_name=?, \
+		specification=?, \
+		process_code=?,\
+		process_name=?,\
+		task_code=?,\
+		task_name=?,\
+		unit_of_measure=?,\
+		quantity_check=?, \
+		quantity_unqualified=?,\
+		quantity_qualified=?,\
+		cr_quantity=?,\
+		maj_quantity=?,\
+		min_quantity=?,\
+		inspect_date=?,\
+		check_result=?, \
+		inspector=?,\
+		remark=? WHERE ipqc_id=?";
+	return sqlSession->executeUpdate(sql,
+		"%ull%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d%d%d%d%d%d%s%s%s%s%ull",
+		uObj.getIpqc_Code(), uObj.getIpqc_Name(),
+		uObj.getIpqc_Type(), uObj.getWorkorder_Code(),
+		uObj.getWorkorder_Name(), uObj.getWorkstation_Code(),
+		uObj.getWorkstation_Name(), uObj.getItem_Code(),
+		uObj.getItem_Name(), uObj.getSpecification(),
+		uObj.getProcess_Code(), uObj.getProcess_Name(),
+		uObj.getTask_Code(), uObj.getTask_Name(),
+		uObj.getUnit_Of_Measure(), uObj.getQuantity_Check(),
+		uObj.getQuantity_Unqualified(), uObj.getQuantity_Qualified(),
+		uObj.getCr_Quantity(), uObj.getMaj_Quantity(),
+		uObj.getMin_Quantity(), uObj.getInspect_Date(),
+		uObj.getCheck_Result(), uObj.getInspector(),
+		uObj.getRemark(), uObj.getId());
+	//return {};
 }
 
 list<ProcessinSpectionDO> ProcessInspectionDAO::select(const ProcessinSpectionQuery::Wrapper& query)

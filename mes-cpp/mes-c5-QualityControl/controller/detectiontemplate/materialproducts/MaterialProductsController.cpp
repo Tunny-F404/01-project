@@ -23,17 +23,17 @@
 #include "../../../domain/vo/detectiontemplate/TemplateDetectItemJsonVO.h"
 #include "../../../domain/vo/detectiontemplate/DetectionTemplateVO.h"
 #include "../../../domain/query/detectiontemplate/DetectionTemplateQuery.h"
-MaterialProductsJsonVO::Wrapper MaterialProductsController::execMaterialProducts(const MaterialProductsQuery::Wrapper& query, const PayloadDTO& payload)
+MaterialProductsPageJsonVO::Wrapper MaterialProductsController::execMaterialProducts(const MaterialProductsQuery::Wrapper& query, const PayloadDTO& payload)
 {
 	// 定义一个Service
 	MaterialProductsService service;
 	// 查询数据
 	auto result = service.listAll(query);
 	// 响应结果
-	auto jvo = MaterialProductsJsonVO::createShared();
+	auto jvo = MaterialProductsPageJsonVO::createShared();
 	jvo->success(result);
 	return jvo;
-	return {};
+	//return {};
 }
 
 Uint64JsonVO::Wrapper MaterialProductsController::execModifyMaterialProducts(const MaterialProductsDTO::Wrapper& dto)

@@ -13,6 +13,7 @@ public:
 	list<DetectionItemSettingsDO> selectWithPage(const DetectionItemSettingsQuery::Wrapper& query);
 	uint64_t insert(const DetectionItemSettingsDO& iobj);
 	int update(const DetectionItemSettingsDO& uobj);
+	int remove(uint64_t id);
 };
 
 #endif // !_DETECTIONITEMSETTINGS_DAO_

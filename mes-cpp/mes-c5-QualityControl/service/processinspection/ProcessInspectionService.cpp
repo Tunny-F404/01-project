@@ -23,17 +23,67 @@
 
 bool ProcessInspectionService::updateData(const ProcessinSpectionDTO::Wrapper& dto)
 {
-	//// 组装DO数据
-	//SampleDO data;
-	//// 	data.setId(dto->id.getValue(0));
-	//// 	data.setName(dto->name.getValue(""));
-	//// 	data.setSex(dto->sex.getValue(""));
-	//// 	data.setAge(dto->age.getValue(1));
-	//ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Name, name, Sex, sex, Age, age, Id, id)
-	//// 执行数据修改
-	//SampleDAO dao;
-	//return dao.update(data) == 1;
-	return true;
+	// 组装DO数据
+	ProcessinSpectionDO data;
+	/* 	data.setId(dto->id.getValue(0));
+	// 	data.setName(dto->name.getValue(""));
+	// 	data.setSex(dto->sex.getValue(""));
+	// 	data.setAge(dto->age.getValue(1));
+	data.setId(dto->id);
+	data.setIpqc_Code(dto->ipqc_code);
+	data.setIpqc_Name(dto->ipqc_name);
+	data.setIpqc_Type(dto->ipqc_type);
+	data.setWorkorder_Code(dto->workorder_code);
+	data.setWorkorder_Name(dto->workorder_name);
+	data.setWorkstation_Code(dto->workstation_code);
+	data.setWorkstation_Name(dto->workstation_name);
+	data.setQuantity_Check(dto->quantity_check);
+	data.setItem_Code(dto->item_code);
+	data.setItem_Name(dto->item_name);
+	data.setUnit_Of_Measure(dto->unit_of_measure);
+	data.setSpecification(dto->specification);*/
+	ZO_STAR_DOMAIN_DTO_TO_DO(
+		data, dto,
+		Id, id,
+		Ipqc_Code, ipqc_code,
+		Ipqc_Name, ipqc_name,
+		Ipqc_Type, ipqc_type,
+		Workorder_Code, workorder_code,
+		Workorder_Name, workorder_name,
+		Workstation_Code, workstation_code,
+		Workstation_Name, workstation_name,
+		Quantity_Check, quantity_check,
+		Item_Code, item_code,
+		Item_Name, item_name,
+		Unit_Of_Measure, unit_of_measure,
+		Specification, specification
+	);
+		/*data.setProcess_Code(dto->process_code);
+		data.setProcess_Name(dto->process_name);
+		data.setTask_Code(dto->task_code);
+		data.setTask_Name(dto->task_name);*/
+		ZO_STAR_DOMAIN_DTO_TO_DO(
+			data, dto,
+			Process_Code, process_code,
+			Process_Name, process_name,
+			Task_Code, task_code,
+			Task_Name, task_name,
+			Quantity_Unqualified, quantity_unqualified,
+			Quantity_Qualified, quantity_qualified,
+			Cr_Quantity, cr_quantity,
+			Maj_Quantity, maj_quantity,
+			Min_Quantity, min_quantity,
+			Inspect_Date, inspect_date,
+			Check_Result, check_result,
+			Inspector, inspector,
+			Remark, remark
+			//Status_Order, status
+		);
+		data.setStatus_Order(dto->status.getValue(""));
+		// 执行数据修改
+		ProcessInspectionDAO dao;
+	return dao.update(data) == 1;
+	//return true;
 }
 
 ProcessinSpectionQueryPageDTO::Wrapper ProcessInspectionService::listAll(const ProcessinSpectionQuery::Wrapper& query)

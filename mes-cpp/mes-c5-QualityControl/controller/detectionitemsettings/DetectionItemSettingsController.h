@@ -47,9 +47,9 @@ public:
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("detectionitemsettings.delete.summary"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("detectionitemsettings.field.id"), 1, true);
+		//API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("detectionitemsettings.field.id"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/detectionitemsettings/{id}", removeTheDetection, PATH(UInt64, id), execRemoveTheDetection(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/detectionitemsettings/del-code", removeTheDetection, BODY_DTO(oatpp::List<UInt64>, id), execRemoveTheDetection(id));
 
 	// 3.1 定义导出接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("detectionitemsettings.export.summary"), exportDetectionItemSettings, StringJsonVO::Wrapper);
@@ -60,7 +60,7 @@ private:
 	DetectionItemSettingsPageJsonVO::Wrapper execQueryqc(const DetectionItemSettingsQuery::Wrapper& query);
 	Uint64JsonVO::Wrapper execAddqc(const DetectionItemSettingsDTO::Wrapper& dto);
 	Uint64JsonVO::Wrapper execModifyqc(const DetectionItemSettingsDTO::Wrapper& dto);
-	Uint64JsonVO::Wrapper execRemoveTheDetection(const UInt64& id);
+	Uint64JsonVO::Wrapper execRemoveTheDetection(const oatpp::List<UInt64>& id);
 	// 执行文件下载处理
 	StringJsonVO::Wrapper execExportDetectionItemSettings(const oatpp::List<UInt64>& id);
 };

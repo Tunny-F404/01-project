@@ -59,3 +59,10 @@ int DetectionItemSettingsDAO::update(const DetectionItemSettingsDO& uobj)
 		uobj.getId());
 
 }
+
+int DetectionItemSettingsDAO::remove(uint64_t id)
+{
+	string sql = "DELETE FROM `qc_index` WHERE `index_id` = ?";
+	return sqlSession->executeUpdate(sql, "%ull", id);
+
+}

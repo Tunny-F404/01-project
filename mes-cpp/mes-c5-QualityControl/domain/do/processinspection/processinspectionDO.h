@@ -37,6 +37,8 @@ class ProcessinSpectionDO {
 	CC_SYNTHESIZE(string, process_name, Process_Name);
 	// 任务编号
 	CC_SYNTHESIZE(string, task_code, Task_Code);
+	// 任务编号
+	CC_SYNTHESIZE(string, task_name, Task_Name);
 	// 不合格数
 	CC_SYNTHESIZE(double, quantity_unqualified, Quantity_Unqualified);
 	// 合格品数量
@@ -76,6 +78,7 @@ public:
 		process_code = "";
 		process_name = "";
 		task_code = "";
+		task_name = "";
 		quantity_unqualified = 0.0;
 		quantity_qualified = 0.0;
 		cr_quantity = 0.0;

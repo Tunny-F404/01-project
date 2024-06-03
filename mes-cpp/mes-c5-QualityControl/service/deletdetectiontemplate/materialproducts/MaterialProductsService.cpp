@@ -20,9 +20,47 @@
 #include "MaterialProductsService.h"
 #include "../../../domain/do/DetectionTemplate/MaterialProductsDO.h"
 #include "../../../dao/detectiontemplate/materialproducts/MaterialProductsDAO.h"
-MaterialProductsDTO::Wrapper MaterialProductsService::listAll(const MaterialProductsQuery::Wrapper& query)
+MaterialProductsPageDTO::Wrapper MaterialProductsService::listAll(const MaterialProductsQuery::Wrapper& query)
 {
-	return {};
+	// 构建返回对象
+	auto pages = MaterialProductsPageDTO::createShared();
+	pages->pageIndex = query->pageIndex;
+	pages->pageSize = query->pageSize;
+
+	// 查询数据总条数
+	MaterialProductsDAO dao;
+	uint64_t count = dao.count(query);
+	if (count <= 0)
+	{
+		return pages;
+	}
+
+	//分页查询数据
+	pages->total = count;
+	pages->calcPages();
+	list<MaterialProductsDO> result = dao.selectWithPage(query);
+	// 将DO转换成DTO
+	for (MaterialProductsDO sub : result)
+	{
+		auto dto = MaterialProductsDTO::createShared();
+		ZO_STAR_DOMAIN_DO_TO_DTO(
+			dto, sub,
+			item_code, item_code,
+			item_name, item_name,
+			specification, specification,
+			quantity_check, quantity_check,
+			unit_of_measure, unit_of_measure,
+			quantity_unqualified, quantity_unqualified,
+			cr_rate, cr_rate,
+			maj_rate, maj_rate,
+			min_rate, min_rate,
+			remark, remark
+		);
+		pages->addData(dto);
+
+	}
+	return pages;
+	//return {};
 }
 
 uint64_t MaterialProductsService::saveMaterialProducts(const MaterialProductsDTO::Wrapper& dto)

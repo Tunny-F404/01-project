@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #ifndef _MATERIALPRODUCTS_DO_
 #define _MATERIALPRODUCTS_DO_
 

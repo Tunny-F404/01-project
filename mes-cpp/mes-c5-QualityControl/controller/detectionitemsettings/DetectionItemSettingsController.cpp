@@ -52,29 +52,34 @@ Uint64JsonVO::Wrapper DetectionItemSettingsController::execModifyqc(const Detect
 	return{};
 }
 
-Uint64JsonVO::Wrapper DetectionItemSettingsController::execRemoveTheDetection(const UInt64& id)
+Uint64JsonVO::Wrapper DetectionItemSettingsController::execRemoveTheDetection(const oatpp::List<UInt64>& ids)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
-	// 参数校验
-	if (!id || id <= 0)
+	for (list<UInt64>::iterator i = ids->begin(); i != ids->end(); i++)
 	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		return jvo;
-	}
-	// 定义一个Service
-	DetectionItemSettingsService service;
-	// 执行数据删除
-	if (service.removeData(id.getValue(0))) {
-		jvo->success(id);
-	}
-	else
-	{
-		jvo->fail(id);
+		UInt64 id = *i;
+		// 参数校验
+		if (!id || id <= 0)
+		{
+			jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+			return jvo;
+		}
+		// 定义一个Service
+		DetectionItemSettingsService service;
+		// 执行数据删除
+		if (service.removeData(id.getValue(0))) {
+			jvo->success(id);
+		}
+		else
+		{
+			jvo->fail(id);
+		}
+
 	}
 	// 响应结果
 	return jvo;
-	return {};
+
 }
 
 StringJsonVO::Wrapper DetectionItemSettingsController::execExportDetectionItemSettings(const oatpp::List<UInt64>& id)

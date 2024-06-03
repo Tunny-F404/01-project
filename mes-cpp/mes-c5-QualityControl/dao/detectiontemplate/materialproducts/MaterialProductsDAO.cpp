@@ -6,31 +6,34 @@
 
 //定义条件解析宏，减少重复代码
 #define MaterialProducts_TERAM_PARSE(query, sql) \
-//SqlParams params; \
+SqlParams params; \
+sql<<" WHERE 1=1"; \
+if (query->template_id) { \
+		sql << " AND template_id=?"; \
+		SQLPARAMS_PUSH(params, "ull", uint64_t , query->template_id.getValue(0)); \
+} 
 
-//sql<<" WHERE 1=1"; \
-//if (query->record_id) { \
-		sql << " AND record_id=?"; \
-		SQLPARAMS_PUSH(params, "i", int, query->record_id.getValue(0)); \
-} \
-//if (query->item_code) { \
-//		sql << " AND item_code=?"; \
-//		SQLPARAMS_PUSH(params, "s", std::int, query->item_code.getValue(0)); \
-//} \
-//if (query->item_name) { \
-//		sql << " AND item_name=?"; \
-//		SQLPARAMS_PUSH(params, "s", std::string, query->item_name.getValue("")); \
-//} \
-if (query->specification) { \
-		sql << " AND specification=?"; \
-		SQLPARAMS_PUSH(params, "s", std::string, query->specification.getValue("")); \
+uint64_t MaterialProductsDAO::count(const MaterialProductsQuery::Wrapper & query)
+{
+	stringstream sql;
+	sql << "SELECT COUNT(*) FROM `qc_template_product`";
+	MaterialProducts_TERAM_PARSE(query, sql);
+	string sqlStr = sql.str();
+	return sqlSession->executeQueryNumerical(sqlStr, params);
+	//return 1;
 }
-//if (query->specification) {
-//    \
-//        sql << " AND specification=?"; \
-//        SQLPARAMS_PUSH(params, "s", std::string, query->specification.getValue("")); \
-//}
 
+std::list<MaterialProductsDO> MaterialProductsDAO::selectWithPage(const MaterialProductsQuery::Wrapper& query)
+{
+	stringstream sql;
+	sql << "SELECT record_id,item_code,item_name,specification,unit_of_measure,quantity_check,quantity_unqualified,cr_rate,maj_rate,min_rate,remark FROM qc_template_product";
+	MaterialProducts_TERAM_PARSE(query, sql);
+	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
+	MaterialProductsMapper mapper;
+	string sqlStr = sql.str();
+	return sqlSession->executeQuery<MaterialProductsDO, MaterialProductsMapper>(sqlStr, mapper, params);
+	//return {};
+}
 
 int MaterialProductsDAO::updateMaterialProducts(const MaterialProductsDO& uObj)
 {
@@ -42,7 +45,7 @@ uint64_t MaterialProductsDAO::insertMaterialProducts(const MaterialProductsDO& i
 {
 	string sql = "INSERT INTO `qc_template_product` ( `item_code`, `template_id`,`item_id`,`item_name`, `specification`,`unit_of_measure`, `quantity_check`,`quantity_unqualified`,`cr_rate`,`maj_rate`,`min_rate`,`remark`)VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 	return sqlSession->executeInsert(sql, "%s%ll%ll%s%s%s%i%i%d%d%d%s", iObj.getitem_code(), iObj.gettemplate_id(), iObj.getitem_id(),
-		iObj.getitem_name(), iObj.getspecification(), iObj.getunit_of_measure(), iObj.getquantity_check(), iObj.getquantity_unqualified(),iObj.getcr_rate(), iObj.getmaj_rate(), iObj.getmin_rate(), \
+		iObj.getitem_name(), iObj.getspecification(), iObj.getunit_of_measure(), iObj.getquantity_check(), iObj.getquantity_unqualified(),iObj.getcr_rate(), iObj.getmaj_rate(), iObj.getmin_rate(),
 		iObj.getremark());
 }
 

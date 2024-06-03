@@ -92,7 +92,7 @@ public:
 	}
 
 	// 定义接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.get.summary"), modifyTheProcessInspection, Uint64JsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.put.summary"), modifyTheProcessInspection, Uint64JsonVO::Wrapper);
 
 	// 定义修改过程检验接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/processinspection/modify", modifyTheProcessInspection, BODY_DTO(ProcessinSpectionDTO::Wrapper, dto), execModifyTheProcessInspection(dto));

@@ -29,7 +29,7 @@ class MaterialProductsService
 {
 public:
 	// 分页查询所有数据
-	MaterialProductsDTO::Wrapper listAll(const MaterialProductsQuery::Wrapper& query);
+	MaterialProductsPageDTO::Wrapper listAll(const MaterialProductsQuery::Wrapper& query);
 	
 	uint64_t MaterialProductsService::saveMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
 	

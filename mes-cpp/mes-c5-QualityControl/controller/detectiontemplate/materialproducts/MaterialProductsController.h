@@ -46,19 +46,17 @@ public: // 定义接口
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
-		API_DEF_ADD_RSP_JSON_WRAPPER(MaterialProductsJsonVO);
+		API_DEF_ADD_RSP_JSON_WRAPPER(MaterialProductsPageJsonVO);
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 
 		// 定义其他查询参数描述
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "template_id", ZH_WORDS_GETTER("materialproducts.field.template_id"), , true);
 
-		/*API_DEF_ADD_QUERY_PARAMS(String, "name", ZH_WORDS_GETTER("sample.field.name"), "li ming", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "sex", ZH_WORDS_GETTER("sample.field.sex"), "N", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "age", ZH_WORDS_GETTER("sample.field.sex"), "1", false);*/
 
 	}
 
-	ENDPOINT(API_M_GET, "/materialproducts", queryMaterialProducts, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/materialproducts/query-by-item_code", queryMaterialProducts, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, MaterialProductsQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -100,7 +98,7 @@ public: // 定义接口
 private: // 定义接口的执行函数
 
 	// 分页查询数据
-	MaterialProductsJsonVO::Wrapper execMaterialProducts(const MaterialProductsQuery::Wrapper& query, const PayloadDTO& payload);
+	MaterialProductsPageJsonVO::Wrapper execMaterialProducts(const MaterialProductsQuery::Wrapper& query, const PayloadDTO& payload);
 
 	Uint64JsonVO::Wrapper MaterialProductsController::execModifyMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
 	Uint64JsonVO::Wrapper MaterialProductsController::execRemoveMaterialProduct(const oatpp::List<oatpp::UInt64>& record_ids);
