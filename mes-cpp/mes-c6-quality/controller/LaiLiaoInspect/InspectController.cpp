@@ -130,7 +130,7 @@ Uint64JsonVO::Wrapper InspectController::execIs_OkInspect(const Item_idDTO::Wrap
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!dto->iqc_id || dto->iqc_id <= 0 || !dto->check_result || !dto->list_status)
+	if (!dto->iqc_id || dto->iqc_id <= 0 || !dto->check_result )
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -158,7 +158,7 @@ Uint64JsonVO::Wrapper InspectController::execIs_FinishedInspect(const Item_idDTO
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!dto->iqc_id || dto->iqc_id <= 0 || !dto->check_result || !dto->list_status)
+	if (!dto->iqc_id || dto->iqc_id <= 0 || !dto->check_result)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;

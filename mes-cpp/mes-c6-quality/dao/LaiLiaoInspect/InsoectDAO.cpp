@@ -49,6 +49,7 @@ if (query->inspector) { \
 	SQLPARAMS_PUSH(params, "s", std::string, query->inspector.getValue("")); \
 } ;\
 
+
 uint64_t InspectDAO::count(const InspectQuery::Wrapper& query)
 {
 	stringstream sql;
@@ -145,19 +146,20 @@ int InspectDAO::deleteById(uint64_t iqc_id)
 	return sqlSession->executeUpdate(sql, "%ull", iqc_id);
 }
 
-int InspectDAO::Is_Ok(const InspectDO& uObj)
+//确认检验单
+int InspectDAO::Is_Ok( InspectDO& uObj)
 {
-	string sql = "UPDATE `qc_iqc` SET `status` = ? WHERE `iqc_id` = ?;";
-	return sqlSession->executeUpdate(sql, "%s%ull",
-		uObj.setList_status("CONFIRMED"),
+	string sql = "UPDATE `qc_iqc` SET `status`='CONFIRMED' WHERE `iqc_id` = ?;";
+
+	return sqlSession->executeUpdate(sql, "%ull",
 		uObj.getIqc_id());
 }
 
 //完成检验单
-int InspectDAO::Finished(const InspectDO& uObj)
+int InspectDAO::Finished( InspectDO& uObj)
 {
-	string sql = "UPDATE `qc_iqc` SET `status` = ? WHERE `iqc_id` = ?;";
-	return sqlSession->executeUpdate(sql, "%s%ull",
-		uObj.setList_status("FINISHED"),
+	string sql = "UPDATE `qc_iqc` SET `status`='FINISHED' WHERE `iqc_id` = ?;";
+
+	return sqlSession->executeUpdate(sql, "%ull",
 		uObj.getIqc_id());
 }
