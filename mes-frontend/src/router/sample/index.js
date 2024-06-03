@@ -65,6 +65,10 @@ const routes = [
 				path: "/sample/public-form",
 				component: () => import("@/views/sample/public-form/public-form-page.vue"),
 			},
+			{
+				path: "/sample/detection",
+				component: () => import("@/views/sample/detection/Detection.vue"),
+			}
 		],
 	},
 ];

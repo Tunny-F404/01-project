@@ -7,7 +7,7 @@ const routes = [
 	{
 		path: "/un-2",
 		name: "UN2",
-		component: () => import("@/views//basic-data/material-admin.vue"),
+		component: () => import("@/views/basic-data/material-admin.vue"),
 	},
 	{
 		path: "/un-3",
@@ -22,7 +22,7 @@ const routes = [
 	{
 		path: "/un-5",
 		name: "UN5",
-		component: () => import("@/views/status/404.vue"),
+		component: () => import("@/views/basedata/supplier.vue"),
 	},
 	{
 		path: "/un-6",
@@ -51,6 +51,47 @@ const routes = [
 		path: "/un-33",
 		name: "UN33",
 		component: () => import("@/views/warehouse-management/PurchaseReturn.vue"),
+	},
+	{
+		path: "/un-51",
+		name: "UN51",
+		component: () => import("@/views/status/404.vue"),
+	},
+	{
+		path: "/un-52",
+		name: "UN52",
+		component: () => import("@/views/sample/detection/Detection.vue"),
+	},
+	{
+		path: "/un-53",
+		name: "UN53",
+		component: () => import("@/views/status/404.vue"),
+	},
+	{
+		path: "/un-54",
+		name: "UN54",
+		component: () => import("@/views/status/404.vue"),
+	},
+	{
+		path: "/un-55",
+		name: "UN55",
+		component: () => import("@/views/status/404.vue"),
+	},
+	{
+		path: "/un-56",
+		name: "UN56",
+		component: () => import("@/views/status/404.vue"),
+	},
+	{
+		path: "/un-57",
+		name: "UN57",
+		component: () => import("@/views/status/404.vue"),
+	},
+	// 生产领料页面
+	{
+		path: "/un-34",
+		name: "UN34",
+		component: () => import("@/views/warehouse-management/Material.vue"),
 	},
 ];
 
