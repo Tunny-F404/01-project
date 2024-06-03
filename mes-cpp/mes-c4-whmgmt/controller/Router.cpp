@@ -55,6 +55,7 @@ router->addController(__CLASS__::createShared())
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 router->addController(__CLASS__::createShared())
 #else
+#endif
 #include "WarehouseInbound/WarehouseInboundController.h"
 #include "WarehouseDelete/WarehouseDeleteController.h"
 #include "WarehouseExport/WarehouseExportController.h"
@@ -94,7 +95,12 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(ModifyListController);
 	ROUTER_SIMPLE_BIND(AddListController);
 	ROUTER_SIMPLE_BIND(GetListController);
+	//#TIP :系统扩展路由定义，写在这个后面
+	ROUTER_SIMPLE_BIND(WarehouseInboundController);
 
+	ROUTER_SIMPLE_BIND(WarehouseDeleteController);
+
+	ROUTER_SIMPLE_BIND(WarehouseExportController);
 	
 }
 
@@ -123,10 +129,5 @@ void Router::createSampleRouter()
 		router->addController(WSContorller::createShared());
 }
 #endif
-	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(WarehouseInboundController);
+	
 
-	ROUTER_SIMPLE_BIND(WarehouseDeleteController);
-
-	ROUTER_SIMPLE_BIND(WarehouseExportController);
-}
