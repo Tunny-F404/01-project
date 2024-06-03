@@ -46,7 +46,7 @@ class JwtTokenEnhancer implements TokenEnhancer {
         Map<String, Object> info = new HashMap<>(1);
         //TODO: 如果要扩展凭证中的负载数据需要修改这里的代码
         //把用户ID设置到JWT中
-        info.put("id", securityUser.getUser().getId());
+        info.put("id", securityUser.getUser().getUserId());
         DefaultOAuth2AccessToken result = (DefaultOAuth2AccessToken) oAuth2AccessToken;
         result.setAdditionalInformation(info);
         return result;

@@ -1,10 +1,15 @@
 package com.zeroone.star.login.controller;
 
+import com.anji.captcha.model.common.ResponseModel;
+import com.anji.captcha.model.vo.CaptchaVO;
+import com.anji.captcha.service.CaptchaService;
+import com.zeroone.star.login.config.RedisInit;
 import com.zeroone.star.login.service.CurrUserInfoService;
 import com.zeroone.star.login.service.IMenuService;
 import com.zeroone.star.login.service.OauthService;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.components.user.UserHolder;
+import com.zeroone.star.project.config.redis.RedisConfig;
 import com.zeroone.star.project.constant.AuthConstant;
 import com.zeroone.star.project.dto.login.LoginDTO;
 import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
@@ -15,6 +20,9 @@ import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.project.vo.login.MenuTreeVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +42,7 @@ import java.util.Map;
  * @author 阿伟学长
  * @version 1.0.0
  */
+
 @RestController
 @RequestMapping("login")
 @Api(tags = "登录系统")
@@ -42,21 +51,40 @@ public class LoginController implements LoginApis {
     OauthService oAuthService;
     @Resource
     UserHolder userHolder;
+    @Resource
+    private CaptchaService captchaService;
+    @Resource
+    RedisTemplate<String, Object> redisTemplate;
 
     @ApiOperation(value = "授权登录")
     @PostMapping("auth-login")
     @Override
     public JsonVO<Oauth2TokenDTO> authLogin(LoginDTO loginDTO) {
-        //TODO:未实现验证码验证
+        //TODO:已经实现--实现验证码验证
+        //创建CaptchaVO对象，用于封装验证码验证信息
+        CaptchaVO captchaVO = new CaptchaVO();
+        // 设置验证码字符串
+        captchaVO.setCaptchaVerification(loginDTO.getCode());
+        // 调用验证码服务进行验证
+        ResponseModel response = captchaService.verification(captchaVO);
+        if (!response.isSuccess()) {
+            return JsonVO.create(null,
+                    ResultStatus.FAIL.getCode(),
+                    response.getRepCode()+":"+response.getRepMsg());
+        }
         //账号密码认证
         Map<String, String> params = new HashMap<>(5);
-        params.put("grant_type", "password");
-        params.put("client_id", loginDTO.getClientId());
-        params.put("client_secret", AuthConstant.CLIENT_PASSWORD);
-        params.put("username", loginDTO.getUsername());
-        params.put("password", loginDTO.getPassword());
-        return oAuthService.postAccessToken(params);
-        //TODO:未实现认证成功后如何实现注销凭证（如记录凭证到内存数据库）
+        params.put("grant_type", "password");  //授权模式
+        params.put("client_id", loginDTO.getClientId());  //登录客户端ID
+        params.put("client_secret", AuthConstant.CLIENT_PASSWORD);  //客户端密码
+        params.put("username", loginDTO.getUsername());  //用户名
+        params.put("password", loginDTO.getPassword());  //密码
+        //TODO:已经实现--认证成功后如何实现注销凭证（如记录凭证到内存数据库）
+        JsonVO<Oauth2TokenDTO> oauth2TokenDTOJsonVO = oAuthService.postAccessToken(params);
+        if (oauth2TokenDTOJsonVO.getCode() != ResultStatus.FAIL.getCode()) {
+            redisTemplate.opsForValue().set(oauth2TokenDTOJsonVO.getData().getToken(),"1");
+        }
+        return oauth2TokenDTOJsonVO;
     }
 
     @ApiOperation(value = "刷新登录")
@@ -64,6 +92,9 @@ public class LoginController implements LoginApis {
     @Override
     public JsonVO<Oauth2TokenDTO> refreshToken(Oauth2TokenDTO oauth2TokenDTO) {
         //TODO:未实现注销凭证验证
+        if (Boolean.TRUE.equals(redisTemplate.hasKey(oauth2TokenDTO.getToken()))) {
+            redisTemplate.delete(oauth2TokenDTO.getToken());
+        }
         Map<String, String> params = new HashMap<>(4);
         params.put("grant_type", "refresh_token");
         params.put("client_id", oauth2TokenDTO.getClientId());

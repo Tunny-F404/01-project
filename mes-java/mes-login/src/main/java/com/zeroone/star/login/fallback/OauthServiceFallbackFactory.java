@@ -1,5 +1,6 @@
 package com.zeroone.star.login.fallback;
 
+import com.zeroone.star.login.mapper.OauthMapper;
 import com.zeroone.star.login.service.impl.OauthServiceImpl;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
@@ -20,3 +21,5 @@ public class OauthServiceFallbackFactory implements FallbackFactory<OauthService
         return new OauthServiceImpl(throwable);
     }
 }
+
+
