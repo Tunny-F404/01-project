@@ -58,7 +58,7 @@ uint64_t SampleService::saveData(const SampleDTO::Wrapper& dto)
 {
 	// 组装DO数据
 	SampleDO data;
-// 	data.setName(dto->name.getValue(""));
+	//data.setName(dto->name.getValue(""));
 // 	data.setSex(dto->sex.getValue(""));
 // 	data.setAge(dto->age.getValue(1));
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Name, name, Sex, sex, Age, age)

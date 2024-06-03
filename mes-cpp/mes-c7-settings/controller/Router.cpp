@@ -19,11 +19,18 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
+#include "warehouse/GetAllDetailsController.h"
+#include "warehouse/DetailsPageController.h"
+#include "storagearea/AreaController.h"
+#include "storage_area/GetAreaDetailsController.h"
+
+#include "add-del-mod/AddDelModController.h"
+#include"warehouse-settings/MergeMenuController.h"
+
+
 
 #ifdef HTTP_SERVER_DEMO
-#include "user/UserController.h"
-#include "sample/SampleController.h"
-#include "file/FileController.h"
+#include "add-del-mod/AddDelModController.h"
 #include "ws/WSController.h"
 #endif
 
@@ -49,8 +56,14 @@ void Router::initRouter()
 #ifdef HTTP_SERVER_DEMO
 	createSampleRouter();
 #endif
+	ROUTER_SIMPLE_BIND(AreaController);
 
 	//#TIP :系统扩展路由定义，写在这个后面
+	ROUTER_SIMPLE_BIND(GetAllDetailsController);
+	ROUTER_SIMPLE_BIND(AddDelModController);
+	ROUTER_SIMPLE_BIND(GetAreaDetailsController);
+	ROUTER_SIMPLE_BIND(DetailsPageController);
+	ROUTER_SIMPLE_BIND(MergeMenuController);
 
 }
 

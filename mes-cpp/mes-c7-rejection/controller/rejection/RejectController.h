@@ -46,6 +46,8 @@ public:
 		API_HANDLER_RESP_VO(execQueryReject(query, authObject->getPayload()));
 
 	}
+
+
 	//2. 3.1 定义查询接口描述
 	ENDPOINT_INFO(queryRejectDetail) {
 		// 定义接口标题
@@ -54,8 +56,7 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(RejectDetailJsonVO);
-		// 定义分页查询参数描述
-		//API_DEF_ADD_PAGE_PARAMS();
+
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(String, "rt_code", ZH_WORDS_GETTER("reject.fields.rt_code"), "RMO123456", false);
 		//API_DEF_ADD_QUERY_PARAMS(String, "mo", ZH_WORDS_GETTER("reject.fields.mo"), "N", false);
@@ -64,10 +65,12 @@ public:
 	// 2.3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/reject/query-detail", queryRejectDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(query, RejectQuery, queryParams);
+		API_HANDLER_QUERY_PARAM(query, RejectDetailQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryRejectDetail(query));
 	}
+
+
 
 	// 3.3.1 定义新增接口描述
 	ENDPOINT_INFO(addOrder) {
@@ -93,7 +96,8 @@ public:
 private:
 	// 3.3 演示分页查询数据
 	RejectPageJsonVO::Wrapper execQueryReject(const RejectQuery::Wrapper& query, const PayloadDTO& payload);
-	RejectPageJsonVO::Wrapper execQueryRejectDetail(const RejectQuery::Wrapper& query);
+	//detailQuery
+	RejectDetailJsonVO::Wrapper execQueryRejectDetail(const RejectDetailQuery::Wrapper& query);
 	//// 3.3 演示新增数据
 	Uint64JsonVO::Wrapper execAddReject(const RejectDetailDTO::Wrapper& dto);
 	//// 3.3 演示修改数据
