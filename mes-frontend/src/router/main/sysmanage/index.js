@@ -17,7 +17,7 @@ const routes = [
 	{
 		path: "/un-4",
 		name: "UN4",
-		component: () => import("@/views/sample/basedata/Clientdemo2.vue"),
+		component: () => import("@/views/basedata/Clientdemo1.vue"),
 	},
 	{
 		path: "/un-5",
@@ -40,7 +40,18 @@ const routes = [
 		name: "UN31",
 		component: () => import("@/views/warehouse-management/warehouse-management.vue"),
 	},
-	//质量管理
+<<<<<<< f1
+	// 采购入库页面
+	{
+		path: "/un-32",
+		name: "UN32",
+		component: () => import("@/views/warehouse-management/purchase-in.vue"),
+	},
+	// 采购退货页面
+	{
+		path: "/un-33",
+		name: "UN33",
+		component: () => import("@/views/warehouse-management/PurchaseReturn.vue"),
     {
 		path: "/un-51",
 		name: "UN51",

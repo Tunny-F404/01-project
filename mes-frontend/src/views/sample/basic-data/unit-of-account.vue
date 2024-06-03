@@ -8,6 +8,7 @@ import request from "@/apis/request.js";
 // defineOptions();
 
 const multipleSelection = ref([]);
+
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整
 const tableList = ref([
@@ -24,6 +25,7 @@ const tableList = ref([
 		primaryId: 1,
 		remark: "这是主单位",
 	},
+
 	{
 		attr1: "自定义值1",
 		attr2: "自定义值2",

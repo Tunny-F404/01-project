@@ -158,14 +158,14 @@ let testMenus = [
 			},
 			{
 				id: 3,
-				text: "仓库管理2",
+				text: "采购入库",
 				href: "/un-32",
 				icon: "Management",
 				pid: 4,
 			},
 			{
 				id: 4,
-				text: "仓库管理3",
+				text: "采购退货",
 				href: "/un-33",
 				icon: "Management",
 				pid: 4,
