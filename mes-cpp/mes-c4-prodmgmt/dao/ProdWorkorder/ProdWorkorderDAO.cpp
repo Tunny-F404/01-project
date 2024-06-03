@@ -30,9 +30,10 @@ uint64_t ProdWorkorderDAO::selectByID(uint64_t workorder_id)
 
 int ProdWorkorderDAO::update(const ProdWorkorderDO & uObj)
 {
-	string sql = "UPDATE `pro_workorder` SET `workorder_code`=?, `workorder_name`=?, `order_source`=?, `source_code`=?, `workorder_type`=?, `product_id`=?, `product_code`=?, `product_name`=?, `product_spc`=?, `unit_of_measure`=?, `quantity`=?, `request_date`=?, `batch_code`=?, `client_id`=?, `client_code`=?, `client_name`=?, `remark`=? WHERE `workorder_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%ull%s%s%s%s%d%s%s%ull%s%s%s%ull", uObj.getWorkOrderCode(), uObj.getWorkOrderName(), uObj.getOrderSource(), uObj.getSourceCode(), uObj.getWorkOrderType(), uObj.getProductId(), uObj.getProductCode(), uObj.getProductName(), uObj.getProductSpc(), uObj.getUnitOfMeasure(), uObj.getQuantity(), uObj.getRequestDate(), uObj.getBatchCode(), uObj.getClientId(), uObj.getClientCode(), uObj.getClientName(), uObj.getRemark(), uObj.getWorkOrderID());
-}
+	string sql = "UPDATE `pro_workorder` SET `workorder_code`=?, `workorder_name`=?, `order_source`=?, `source_code`=?, `workorder_type`=?, `product_id`=?, `product_code`=?, `product_name`=?, `product_spc`=?, `unit_of_measure`=?, `quantity`=?, `request_date`=?, `batch_code`=?, `client_id`=?, `client_code`=?, `client_name`=?, `remark`=?,`update_time`=? WHERE `workorder_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%ull%s%s%s%s%d%s%s%ull%s%s%s%s%ull", uObj.getWorkOrderCode(), uObj.getWorkOrderName(), uObj.getOrderSource(), uObj.getSourceCode(), uObj.getWorkOrderType(), uObj.getProductId(), uObj.getProductCode(), uObj.getProductName(), uObj.getProductSpc(), uObj.getUnitOfMeasure(), uObj.getQuantity(), uObj.getRequestDate(), uObj.getBatchCode(), uObj.getClientId(), uObj.getClientCode(), uObj.getClientName(), uObj.getRemark(), uObj.getUpdateTime(), uObj.getWorkOrderID());
+}	
+
 
 uint64_t ProdWorkorderDAO::countById(ProdWorkorderDO iObj)
 {

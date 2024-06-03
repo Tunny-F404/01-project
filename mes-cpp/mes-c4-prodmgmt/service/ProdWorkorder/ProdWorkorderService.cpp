@@ -51,6 +51,7 @@ bool ProdWorkorderService::updateData(const ModifyProWorkorderDTO::Wrapper& dto)
 	}
 	//ÐÞ¸Ä
 	ProdWorkorderDO dataDO;
+	dataDO.setWorkOrderID(dto->workorderId.getValue(0));
 	dataDO.setWorkOrderCode(dto->workorderCode.getValue(""));
 	dataDO.setWorkOrderName(dto->workorderName.getValue(""));
 	dataDO.setOrderSource(dto->orderSource.getValue(""));
@@ -67,6 +68,7 @@ bool ProdWorkorderService::updateData(const ModifyProWorkorderDTO::Wrapper& dto)
 	dataDO.setUnitOfMeasure(dto->unitOfMeasure.getValue(""));
 	dataDO.setClientName(dto->clientName.getValue(""));
 	dataDO.setRemark(dto->remark.getValue(""));
+	dataDO.setUpdateTime(SimpleDateTimeFormat::format());
 	int row = d1.update(dataDO);
 	if (row <= 0) {
 		tm.rollback();

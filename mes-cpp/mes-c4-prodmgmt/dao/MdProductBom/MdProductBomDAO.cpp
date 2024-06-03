@@ -13,7 +13,7 @@ int MdProductBomDAO::countById(uint64_t itemId)
 
 list<MdProductBomDO> MdProductBomDAO::selectByItemId(uint64_t itemId)
 {
-    string sql = "SELECT `bom_item_code`,`bom_item_name`,`bom_item_spec`,`unit_of_measure`,`item_or_product`,`quantity` FROM `md_product_bom` WHERE `item_id` = ?";
+    string sql = "SELECT `bom_item_id`,`bom_item_code`,`bom_item_name`,`bom_item_spec`,`unit_of_measure`,`item_or_product`,`quantity` FROM `md_product_bom` WHERE `item_id` = ?";
     MdProductBomMapper mapper;
     return sqlSession->executeQuery<MdProductBomDO, MdProductBomMapper>(sql, mapper, "%ull", itemId);
     

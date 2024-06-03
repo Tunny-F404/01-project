@@ -13,13 +13,13 @@ public:
 	MdProductBomDO mapper(ResultSet* resultSet) const override
 	{
 		MdProductBomDO data;
-		
-		data.setBomItemCode(resultSet->getString(1));
-		data.setBomItemName(resultSet->getString(2));
-		data.setBomItemSpc(resultSet->getString(3));
-		data.setUnitOfMeasure(resultSet->getString(4));
-		data.setItemOrProduct(resultSet->getString(5));
-		data.setQuantity(resultSet->getDouble(6));
+		data.setBomItemId(resultSet->getInt64(1));
+		data.setBomItemCode(resultSet->getString(2));
+		data.setBomItemName(resultSet->getString(3));
+		data.setBomItemSpc(resultSet->getString(4));
+		data.setUnitOfMeasure(resultSet->getString(5));
+		data.setItemOrProduct(resultSet->getString(6));
+		data.setQuantity(resultSet->getDouble(7));
 
 		return data;
 	}
