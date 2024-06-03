@@ -36,7 +36,10 @@ class AddProdWorkorderDO
 	CC_SYNTHESIZE(string, batch_code, Batch_code);
 	//备注;remark;varchar
 	CC_SYNTHESIZE(string, remark, Remark);
-	
+	//产品ID;product_id;bigint
+	CC_SYNTHESIZE(int, product_id, Product_id);
+	//所有父节点ID;ancestors;varchar
+	CC_SYNTHESIZE(string, ancestors, Ancestors);
 public:
 	AddProdWorkorderDO() {
 		workorder_id = 0;
@@ -53,6 +56,8 @@ public:
 		request_date = "";
 		batch_code = "";
 		remark = "";
+		product_id = 0;
+		ancestors = "";
 	}
 };
 
