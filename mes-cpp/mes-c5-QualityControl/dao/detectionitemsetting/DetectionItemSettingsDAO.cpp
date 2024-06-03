@@ -29,12 +29,13 @@ uint64_t DetectionItemSettingsDAO::count(const DetectionItemSettingsQuery::Wrapp
 	return -1;
 }
 
-std::list<DetectionItemSettingsDO> DetectionItemSettingsDAO::selectWithPage(const DetectionItemSettingsQuery::Wrapper& query)
+std::list<DetectionItemSettingsDO> DetectionItemSettingsDAO::selectWithPage(const DetectionItemSettingsQuery::Wrapper& query,int flag)
 {
 	stringstream sql;
 	sql << "SELECT index_id,index_code,index_name,index_type,qc_tool,remark FROM qc_index";
 	DIS_TERAM_PARSE(query, sql);
-	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
+	if(!flag)
+		sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	DetectionItemSettingsMapper mapper;
 	string sqlStr = sql.str();
 	return sqlSession->executeQuery <DetectionItemSettingsDO, DetectionItemSettingsMapper>(sqlStr, mapper, params);

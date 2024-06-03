@@ -103,7 +103,7 @@ ProcessinSpectionQueryPageDTO::Wrapper ProcessInspectionService::listAll(const P
 	result->total = count;
 	result->calcPages();
 	//查询
-	auto dos = dao.select(query);
+	auto dos = dao.select(query,0);
 	//把list<do>装到QueryPageDTO中
 	for (auto x : dos) {
 		auto dto = ProcessinSpectionQueryDTO::createShared();
@@ -129,6 +129,6 @@ list<ProcessinSpectionDO> ProcessInspectionService::listAllExort(const Processin
 	if (count < 1)
 		return {};
 	//查询所有数据
-	auto dos = dao.select(query);
+	auto dos = dao.select(query,1);
 	return dos;
 }

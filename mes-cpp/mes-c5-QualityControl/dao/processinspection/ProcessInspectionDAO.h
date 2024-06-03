@@ -28,8 +28,8 @@ class ProcessInspectionDAO : public BaseDAO
 public:
 	// 
 	int update(const ProcessinSpectionDO& uObj);
-
-	list<ProcessinSpectionDO> select(const ProcessinSpectionQuery::Wrapper& query);
+	//flag:1是导出,0是查询
+	list<ProcessinSpectionDO> select(const ProcessinSpectionQuery::Wrapper& query,int flag);
 
 	uint64_t count(const ProcessinSpectionQuery::Wrapper& query);
 

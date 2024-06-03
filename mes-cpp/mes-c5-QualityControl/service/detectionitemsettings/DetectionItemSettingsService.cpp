@@ -15,7 +15,7 @@ DetectionItemSettingsPageDTO::Wrapper DetectionItemSettingsService::listAll(cons
 	if (count <= 0)	return pages;
 	pages->total = count;
 	pages->calcPages();
-	list<DetectionItemSettingsDO> res = dao.selectWithPage(query);
+	list<DetectionItemSettingsDO> res = dao.selectWithPage(query,0);
 
 	for (DetectionItemSettingsDO sub : res) {
 		auto dto = DetectionItemSettingsDTO::createShared();

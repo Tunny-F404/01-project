@@ -10,7 +10,8 @@ class DetectionItemSettingsDAO : public BaseDAO
 {
 public:
 	uint64_t count(const DetectionItemSettingsQuery::Wrapper& query);
-	list<DetectionItemSettingsDO> selectWithPage(const DetectionItemSettingsQuery::Wrapper& query);
+	//flag传0是查询,传1是导出
+	list<DetectionItemSettingsDO> selectWithPage(const DetectionItemSettingsQuery::Wrapper& query,int flag);
 	uint64_t insert(const DetectionItemSettingsDO& iobj);
 	int update(const DetectionItemSettingsDO& uobj);
 	int remove(uint64_t id);

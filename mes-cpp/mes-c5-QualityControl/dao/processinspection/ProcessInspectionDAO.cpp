@@ -100,12 +100,13 @@ int ProcessInspectionDAO::update(const ProcessinSpectionDO & uObj)
 	//return {};
 }
 
-list<ProcessinSpectionDO> ProcessInspectionDAO::select(const ProcessinSpectionQuery::Wrapper& query)
+list<ProcessinSpectionDO> ProcessInspectionDAO::select(const ProcessinSpectionQuery::Wrapper& query,int flag)
 {
 	stringstream sql;
 	sql << "SELECT ipqc_id,ipqc_code,ipqc_type,workorder_code,item_code, item_name, specification, unit_of_measure,quantity_check, check_result, inspect_date, inspector,`status` from qc_ipqc";
 	PROCESSINSPECTION_TERAM_PARSE(query, sql);
-	sql << " LIMIT " << ((query->pageIndex-1) * query->pageSize) << "," << query->pageSize;
+	if(!flag)
+		sql << " LIMIT " << ((query->pageIndex-1) * query->pageSize) << "," << query->pageSize;
 	ProcessinSpectionQueryMapper mapper;
 	string str = sql.str();
 	return sqlSession->executeQuery<ProcessinSpectionDO, ProcessinSpectionQueryMapper>(str, mapper,params);
