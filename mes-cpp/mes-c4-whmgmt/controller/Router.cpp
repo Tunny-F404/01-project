@@ -55,6 +55,16 @@ router->addController(__CLASS__::createShared())
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 router->addController(__CLASS__::createShared())
 #else
+#include "WarehouseInbound/WarehouseInboundController.h"
+#include "WarehouseDelete/WarehouseDeleteController.h"
+#include "WarehouseExport/WarehouseExportController.h"
+
+// 如果定义了关闭Swagger文档宏
+#ifdef CLOSE_SWAGGER_DOC
+// 简化绑定控制器宏定义
+#define ROUTER_SIMPLE_BIND(__CLASS__) \
+router->addController(__CLASS__::createShared())
+#else
 // 简化绑定控制器宏定义
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
@@ -113,3 +123,10 @@ void Router::createSampleRouter()
 		router->addController(WSContorller::createShared());
 }
 #endif
+	//#TIP :系统扩展路由定义，写在这个后面
+	ROUTER_SIMPLE_BIND(WarehouseInboundController);
+
+	ROUTER_SIMPLE_BIND(WarehouseDeleteController);
+
+	ROUTER_SIMPLE_BIND(WarehouseExportController);
+}

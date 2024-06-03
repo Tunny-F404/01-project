@@ -135,3 +135,86 @@ getlist:
  get:
   summary: 分页查询数据
   
+user:
+ query-all: 
+  summary: 查询所有用户
+ modify-user:
+  summary: 修改用户信息
+ query-menu:
+  summary: 查询所有菜单
+ field:
+  age: 年龄
+  nickname: 昵称
+  idCard: 身份证号码
+  menuname: 菜单名称
+  menuicon: 图标名称
+  menuhref: 路由地址
+  menusub: 子菜单
+sample:
+ get:
+  summary: 分页查询示例数据
+ post:
+  summary: 新增一条示例数据
+ put:
+  summary: 修改一条示例数据
+ delete:
+  summary: 删除一条示例数据
+ query-one:
+  summary: 使用声明式服务查询一条数据
+ query-all:
+  summary: 使用声明式服务查询多条数据
+ field:
+  id: 编号
+  age: 年龄
+  name: 姓名
+  sex: 性别，如：男
+file:
+ upload: 
+  summary: 单文件上传
+ upload-more:
+  summary: 多文件上传
+ download:
+  summary: 下载文件
+ html:
+  summary: HTML静态页面访问
+ editor-upload-image:
+  summary: editor上传图片示例接口
+ field:
+  filename: 文件名
+  img-url: 图片src
+  img-alt: 图片文字描述
+  img-href: 图片链接地址
+
+wm_item_recpt:
+  put:
+    summary: 执行入库
+  delete:
+    summary: 删除单据（支持批量删除）
+  export:
+    summary: 导出单据
+    sheet: 物料入库单数据
+  field:
+    recpt_id: 入库单编号
+    recpt_code: 入库单编号
+    recpt_name: 入库单名称
+    iqc_id: 来料检验单ID
+    iqc_code: 来料检验单编号
+    po_code: 采购订单编号
+    vendor_id: 供应商ID
+    vendor_code: 供应商编码
+    vendor_name: 供应商名称
+    vendor_nick: 供应商简称
+    warehouse_id: 仓库ID
+    warehouse_code: 仓库编码
+    warehouse_name: 仓库名称
+    location_id: 库区ID
+    location_code: 库区编码
+    location_name: 库区名称
+    area_id: 库位ID
+    area_code: 库位编码
+    area_name: 库位名称
+    recpt_date: 入库日期
+    status: 单据状态
+    filename: 导出文件名称
+    format: 导出格式
+    update_time: 更新时间

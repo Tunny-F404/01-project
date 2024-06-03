@@ -42,7 +42,31 @@ if(WIN32)
 endif()
 
 # 编译可执行文件
-add_executable (${appName} ${SC_FILES})
+add_executable (${appName} ${SC_FILES} 
+"domain/dto/WarehouseInbound/WarehouseInboundDTO.h" 
+"domain/vo/WarehouseInbound/WarehouseInboundVO.h"
+"controller/WarehouseInbound/WarehouseInboundController.h" 
+"controller/WarehouseInbound/WarehouseInboundController.cpp" 
+"dao/WarehouseInbound/WarehouseInboundDAO.h" 
+"dao/WarehouseInbound/WarehouseInboundDAO.cpp" 
+"service/WarehouseInbound/WarehouseInboundService.h" 
+"service/WarehouseInbound/WarehouseInboundService.cpp" 
+"domain/dto/WarehouseDelete/WarehouseDeleteDTO.h" 
+"controller/WarehouseDelete/WarehouseDeleteController.h" 
+"controller/WarehouseDelete/WarehouseDeleteController.cpp" 
+"dao/WarehouseDelete/WarehouseDeleteDAO.h"
+"dao/WarehouseDelete/WarehouseDeleteDAO.cpp"
+"service/WarehouseDelete/WarehouseDeleteService.h"
+"service/WarehouseDelete/WarehouseDeleteService.cpp"
+"domain/dto/WarehouseExport/WarehouseExportDTO.h" 
+"controller/WarehouseExport/WarehouseExportController.h" 
+"controller/WarehouseExport/WarehouseExportController.cpp"
+"dao/WarehouseExport/WarehouseExportDAO.h"
+"dao/WarehouseExport/WarehouseExportDAO.cpp"
+"dao/WarehouseExport/WarehouseExportMapper.h"
+"service/WarehouseExport/WarehouseExportService.h" 
+"service/WarehouseExport/WarehouseExportService.cpp" 
+)
 
 # 给架构示例项目添加特有的宏
 if(${IS_ARCH_DEMO})
