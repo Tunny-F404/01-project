@@ -20,7 +20,7 @@ import java.util.List;
 
 @Api(tags = "车间管理")
 @RestController
-@RequestMapping("ShopSettings")
+@RequestMapping("shop-settings")
 public class ShopSettingsController implements ShopSettingsApis {
     
     @Resource
