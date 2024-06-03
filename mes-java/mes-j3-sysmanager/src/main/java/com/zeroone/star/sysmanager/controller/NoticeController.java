@@ -68,6 +68,7 @@ public class NoticeController implements NoticeApis {
             return JsonVO.create(null,HttpStatus.BAD_REQUEST.value(),"查询失败！");
         }
         return JsonVO.create(noticeDTO,200,"查询成功！");
+
     }
 
 
