@@ -4,7 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.zeroone.star.orgstructure.entity.RoleDO;
-import com.zeroone.star.orgstructure.mapper.UserConvertMapper;
+import com.zeroone.star.orgstructure.mapper.*;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -12,8 +12,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.orgstructure.entity.UserRoleDO;
-import com.zeroone.star.orgstructure.mapper.RoleMapper;
-import com.zeroone.star.orgstructure.mapper.UserRoleMapper;
 import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.components.user.UserDTO;
@@ -87,6 +85,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
 
     @Resource
     private UserConvertMapper userConvertMapper;
+
+    @Resource
+    private UserMapper userMapper;
+    @Resource
+    private MsUserRoleMapper msUserRoleMapper;
+    @Resource
+    private MsRoleMapper msRoleMapper;
 
     /**
      * 查询全部角色列表
@@ -240,14 +245,31 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
 
 
     /*
-    * 查找该角色所分配的用户
-    * */
-    @Override
-    public List<UserRoleDTO> getUsersByRoleId(Long roleId, int offset, int limit) {
-        List<UserDO> userDOList = userRoleMapper.getUsersByRoleId(roleId, offset, limit);
-        return userDOList.stream()
-                .map(userConvertMapper::userDOToUserDTO)
-                .collect(Collectors.toList());
+     * 查找该角色所分配的用户
+     * */
+    public PageDTO<UserRoleDTO> getUsersByRole(UserRoleQuery query) {
+
+        QueryWrapper<UserRoleDO> queryWrapper = new QueryWrapper<>();
+        // 添加角色条件
+        queryWrapper.eq("role_id", query.getRoleId());
+        //找出符合条件的用户
+        List<UserRoleDO> userRoleDOS = userRoleMapper.selectList(queryWrapper);
+        // 提取用户ID列表
+        List<Long> userIds = new ArrayList<>();
+        for (UserRoleDO userRole : userRoleDOS) {
+            userIds.add(userRole.getUserId());
+        }
+
+        //创建分页条件
+        Page<UserDO> page = new Page<>(query.getPageIndex(), query.getPageSize());
+        // 根据用户ID列表查询用户信息
+        LambdaQueryWrapper<UserDO> lqw = new LambdaQueryWrapper<>();
+        lqw.in(UserDO::getUserId, userIds);
+        if(null != query.getUserName()) lqw.like(UserDO::getUserName,query.getUserName());
+        if(null != query.getPhoneNumber()) lqw.like(UserDO::getPhonenumber, query.getPhoneNumber());
+
+        Page<UserDO> res = userMapper.selectPage(page, lqw);
+        return PageDTO.create(res, src -> msUserRoleMapper.userDOToUserDTO(src));
     }
 
     /*
