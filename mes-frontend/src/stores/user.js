@@ -186,6 +186,62 @@ let testMenus = [
 			},
 		],
 	},
+	{
+			id: 5,
+			text: "质量管理",
+			icon: "IconTickets",
+			children: [
+				{
+					id: 2,
+					text: "常见缺陷",
+					href: "/un-51",
+					icon: "IconTickets",
+					pid: 5,
+				},
+				{
+					id: 3,
+					text: "检测项设置",
+					href: "/un-52",
+					icon: "IconTickets",
+					pid: 5,
+				},
+				{
+					id: 4,
+					text: "检测模版",
+					href: "/un-53",
+					icon: "IconTickets",
+					pid: 5,
+				},
+				{
+					id: 5,
+					text: "检测任务",
+					href: "/un-54",
+					icon: "IconTickets",
+					pid: 5,
+				},
+				{
+					id: 6,
+					text: "来料检验",
+					href: "/un-55",
+					icon: "IconTickets",
+					pid: 5,
+				},
+				{
+					id: 7,
+					text: "过程检验",
+					href: "/un-55",
+					icon: "IconTickets",
+					pid: 5,
+				},
+				{
+					id: 8,
+					text: "出货检验",
+					href: "/un-55",
+					icon: "IconTickets",
+					pid: 5,
+				},
+			],
+	},
 ];
 
 export const userStore = defineStore("user", {
