@@ -1,5 +1,6 @@
 <script setup >
 import {ref,watch} from 'vue'
+import http from "axios"
 import  tableFrame  from '@/components/table-list-use/table-text.vue' 
 import popUp from '@/components/table-list-use/table-components/pop-up.vue'
 import Request  from '@/apis/request.js'
@@ -127,10 +128,6 @@ const reFresh=()=>{
   myInput.value=''
 }
 
-const multipleSelection=ref([])
-const  handleSelectionChange=(val)=> {
-        this.multipleSelection = val;
- }
 
 //树形组件相关配置
 //定义子节点
@@ -199,6 +196,95 @@ const data = [
   },
   
 ]
+
+//-----------------多删
+const sels = ref([]);//当前选框中选择的值
+
+//获取选中的值
+function handleSelectionChange (sels) {
+	this.sels = sels;
+};
+
+//批量删除
+const arrDelet=async ()=>{
+	let ids = this.sels.map((item) => item.id);
+    try {
+		const res= await Request.request(Request.DELETE,
+		 "/basicdata/md-unit-measure/delete-by-measureIds", ids, http.upType.json);
+  if( res.code == '10000'){
+	ElMessage.success("删除成功");
+    }else{
+     ElMessage.warning("删除失败");
+	}
+	} catch (error) {
+		console.log("错误或者超时");
+	}
+	//测试的
+	ElMessage.success("删除成功");
+}
+
+
+
+
+//表单--------------------------
+const dialogTitle = ref("");
+const formModel = ref({
+	ancestors: "1",
+		createBy: "阿伟",
+		enableFlag: "T",
+		itemOrProduct: "os",
+		itemTypeCode: "awnb",
+		itemTypeId: 114514,
+		itemTypeName: "金属",
+		orderNum: 1,
+		parentTypeId: 0,
+		remark: "0x3f",
+		updateBy: "东东哥",
+});
+const formRef = ref(null);
+const testDialogVisible = ref(false);
+
+const openTestDialog = () => {
+  dialogTitle.value = "添加信息";
+  formModel.value = {
+    ancestors: "",
+		createBy: "",
+		enableFlag: "",
+		itemOrProduct: "",
+		itemTypeCode: "",
+		itemTypeId: 0,
+		itemTypeName: "",
+		orderNum: 0,
+		parentTypeId: 0,
+		remark: "",
+		updateBy: "",
+  };
+  testDialogVisible.value = true;
+};
+
+const rules = {
+	itemTypeId: [{ required: true, message: "请输入主编码", trigger: "blur" }],
+  enableFlag: [{ required: true, message: "请选择是否有效", trigger: "change" }],
+  remark: [{ required: true, message: "请输入备注", trigger: "blur" }]
+};
+const submitForm = () => {
+  formRef.value.validate((valid) => {
+    if (valid) {
+      console.log("提交成功", formModel.value);
+      testDialogVisible.value = false;
+    } else {
+      console.log("提交失败");
+      return false;
+    }
+  });
+};
+
+const cancelForm = () => {
+  testDialogVisible.value = false;
+};
+
+
+
 </script>
 
 <template>
@@ -250,9 +336,9 @@ const data = [
   </el-form-item>
 </el-form>
 
-<el-button type="primary"  @click="onAddChannel" plain><el-icon><Plus /></el-icon>新增</el-button>
-<el-button type="success" plain><el-icon><EditPen /></el-icon>修改</el-button>
-<el-button type="danger" plain><el-icon><Delete /></el-icon>删除</el-button>
+<el-button type="primary"  @click="openTestDialog" plain><el-icon><Plus /></el-icon>新增</el-button>
+<el-button type="success" @click="onEditchannel(row)" plain><el-icon><EditPen /></el-icon>修改</el-button>
+<el-button type="danger" @click="arrDelet" plain><el-icon><Delete /></el-icon>删除</el-button>
 
 <!--表格区-->
     <el-table  :data="tableList" style="width: 100%" v-loading="loading"
@@ -315,7 +401,53 @@ const data = [
     </template>
         </tableFrame>
 <!--引入的弹窗-->
-        <pop-Up ref="dialog"> </pop-Up>
+        <!-- <pop-Up ref="dialog"> </pop-Up> -->
+
+        <el-dialog v-model="testDialogVisible" :title="dialogTitle" width="500">
+		<!--:before-close="handleClose"//这个属性加上去要二次取消才可以-->
+		<el-form ref="formRef" :model="formModel" :rules="rules" label-width="100px" style="padding-right: 30px">
+			<el-form-item label="祖先节点列表" prop="ancestors">
+				<el-input v-model="formModel.ancestors" placeholder="请输入祖先节点列表"></el-input>
+			</el-form-item>
+			<el-form-item label="创建者" prop="createBy">
+				<el-input v-model="formModel.createBy" placeholder="请输入创建者"></el-input>
+			</el-form-item>
+			<el-form-item label="启用标识" prop="enableFlag">
+				<el-input v-model="formModel.enableFlag" placeholder="请输入启用标识"></el-input>
+			</el-form-item>
+			<el-form-item label="产品物料标识" prop="itemOrProduct">
+				<el-input v-model="formModel.itemOrProduct" placeholder="请输入产品物料标识"></el-input>
+			</el-form-item>
+			<el-form-item label="分类编码" prop="itemTypeCode">
+				<el-input v-model="formModel.itemTypeCode" placeholder="请输入分类编码"></el-input>
+			</el-form-item>
+			<el-form-item label="分类ID" prop="itemTypeId">
+				<el-input v-model="formModel.itemTypeId" placeholder="请输入分类ID"></el-input>
+			</el-form-item>
+			<el-form-item label="分类名称" prop="itemTypeName">
+				<el-input v-model="formModel.itemTypeName" placeholder="请输入分类名称"></el-input>
+			</el-form-item>
+			<el-form-item label="排序号" prop="orderNum">
+				<el-input v-model="formModel.orderNum" placeholder="请输入排序号"></el-input>
+			</el-form-item>
+			<el-form-item label="父分类ID" prop="parentTypeId">
+				<el-input v-model="formModel.parentTypeId" placeholder="请输入父分类ID"></el-input>
+			</el-form-item>
+			<el-form-item label="更新者" prop="updateBy">
+				<el-input v-model="formModel.updateBy" placeholder="请输入更新者"></el-input>
+			</el-form-item>
+			<el-form-item label="备注" prop="remark">
+				<el-input v-model="formModel.remark" placeholder="请输入备注"></el-input>
+			</el-form-item>
+		</el-form>
+		<template #footer>
+			<el-button @click="cancelForm">取消</el-button>
+    <el-button type="primary" @click="submitForm">确定</el-button>
+		</template>
+	</el-dialog>
+
+
+
       </el-main>
       </el-container> 
 </template>
