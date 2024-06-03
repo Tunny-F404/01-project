@@ -1,5 +1,4 @@
 #pragma once
-<<<<<<< c4
 #ifndef _PRODWORKORDER_SERVICE_
 #define _PRODWORKORDER_SERVICE_
 #include <list>
@@ -16,40 +15,18 @@
 #include "../mes-c4-prodmgmt/domain/dto/ProdWorkorder/ProdWorkorderBomListDTO.h"
 #include "../mes-c4-prodmgmt/domain/dto/ProdWorkorder/GetProdWorkorderListDTO.h"
 
-
-#include "../../domain/vo/ProdWorkorder/ConfirmProWorkorderVO.h"
-#include "../../domain/dto/ProdWorkorder/ConfirmProWorkorderDTO.h"
-#include "../../domain/dto/ProdWorkorder/ModifyProWorkorderDTO.h"
-#include "../../domain/do/pro_workorder_bom/ProWorkOrderBomDO.h"
-#include "../../domain/do/MdProductBom/MdProductBomDO.h"
-#include "../../domain/do/ProdWorkorder/ProdWorkorderDO.h"
-
-#include "TransactionManager.h"
-
 class ProdWorkorderService {
 public:
-	// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// »ñÈ¡Éú²ú¹¤µ¥ÏêÇé
 	ProdWorkorderInfoDTO::Wrapper listDetail(const uint64_t& workorder_id);
-	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½BOMï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+	//»ñÈ¡Éú²ú¹¤µ¥BOM×é³ÉÁÐ±í
 	ProdWorkorderBomListPageDTO::Wrapper listBom(const ProdWorkorderBomListQuery::Wrapper& query);
-	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½(ï¿½ï¿½ï¿½ï¿½+ï¿½ï¿½Ò³)
+	//»ñÈ¡Éú²ú¹¤µ¥ÁÐ±í(Ìõ¼þ+·ÖÒ³)
 	GetProdWorkorderListPageDTO::Wrapper listAll(const GetProdWorkorderListQuery::Wrapper& query);
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//Ìí¼ÓÉú²ú¹¤µ¥
 	uint64_t saveData(const AddProdWorkorderDTO::Wrapper& dto);
-
-	//xj
-	// ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½
-	bool updateData(const ModifyProWorkorderDTO::Wrapper& dto);
-	// Í¨ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	bool completeData(uint64_t id);
-	// Í¨ï¿½ï¿½IDÉ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	bool removeData(uint64_t id);
-
-	// Í¨ï¿½ï¿½IDÈ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	bool confirmData(uint64_t id);
 };
 
 
 
 #endif // !_PRODWORKORDER_SERVICE_
-
