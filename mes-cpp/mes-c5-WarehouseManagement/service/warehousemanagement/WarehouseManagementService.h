@@ -15,7 +15,8 @@ class WarehouseManagementService
 public:
 	// 分页查询所有数据
 	WarehouseManagementPageDTO::Wrapper listAll(const WarehouseManagementQuery::Wrapper& query);
-	
+	//生成ecxcel
+	string creatExcel(const WarehouseManagementIdQuery::Wrapper& query);
 };
 
 #endif // !_WAREHOUSEMANAGEMENT_SERVICE_

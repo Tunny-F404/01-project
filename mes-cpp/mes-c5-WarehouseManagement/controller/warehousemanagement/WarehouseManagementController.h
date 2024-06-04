@@ -32,6 +32,11 @@ public:
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(String, "item_code", ZH_WORDS_GETTER("warehousemanagement.field.item_code"), "", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "item_name", ZH_WORDS_GETTER("warehousemanagement.field.item_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "batch_code", ZH_WORDS_GETTER("warehousemanagement.field.batch_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "warehouse_name", ZH_WORDS_GETTER("warehousemanagement.field.warehouse_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "vendor_code", ZH_WORDS_GETTER("warehousemanagement.field.vendor_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "vendor_name", ZH_WORDS_GETTER("warehousemanagement.field.vendor_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "expire_date", ZH_WORDS_GETTER("warehousemanagement.field.expire_date"), "", false);
 	}
 	// 定义查询接口处理
 	ENDPOINT(API_M_GET, "/warehousemanagement", queryWarehouseManagement, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -41,12 +46,18 @@ public:
 		API_HANDLER_RESP_VO(execQueryWarehouseManagement(warehousemanagementQuery, authObject->getPayload()));
 	}
 
+	//导出
+	// 3.1 定义导出接口描述
+	API_DEF_ENDPOINT_INFO(ZH_WORDS_GETTER("warehousemanagement.export.summary"), exportWarehouseManagement, StringJsonVO::Wrapper);
+	// 3.2 定义导出接口处理
+	API_HANDLER_ENDPOINT(API_M_POST, "/warehouse-management/export", exportWarehouseManagement, BODY_DTO(WarehouseManagementIdQuery::Wrapper, query), execExportWarehouseManagement(query));
+
 
 private:
 	// 分页查询数据
 	WarehouseManagementPageJsonVO::Wrapper execQueryWarehouseManagement(const WarehouseManagementQuery::Wrapper& query, const PayloadDTO& payload);
-
-
+	// 导出
+	StringJsonVO::Wrapper execExportWarehouseManagement(const WarehouseManagementIdQuery::Wrapper& query);
 };
 
 // 0 取消API控制器使用宏

@@ -11,11 +11,12 @@
 class WarehouseManagementDAO : public BaseDAO
 {
 public:
-
 	// 统计数据条数
 	uint64_t count(const WarehouseManagementQuery::Wrapper& query);
 	// 分页查询数据
 	list<WarehouseManagementDO> selectWithPage(const WarehouseManagementQuery::Wrapper& query);
+	//查询数据以便生成excel文件
+	list<WarehouseManagementDO> QueryById(const WarehouseManagementIdQuery::Wrapper& query);
 
 
 };

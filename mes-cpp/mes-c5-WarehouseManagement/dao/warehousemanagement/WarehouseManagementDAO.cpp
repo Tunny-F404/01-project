@@ -3,7 +3,7 @@
 #include "WarehouseManagementMapper.h"
 #include <sstream>
 
-//定义条件解析宏，减少重复代码
+// 定义条件解析宏，减少重复代码
 #define WAREHOUSEMANAGEMENT_TERAM_PARSE(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \
@@ -39,8 +39,16 @@ if (query->expire_date) {\
 		SQLPARAMS_PUSH(params, "s", std::string, query->expire_date.getValue("")); \
 } \
 
+#define WAREHOUSEMANAGEMENT_TERAM_PARSE_TO_EXPORT(query, sql) \
+SqlParams params; \
+sql<<" WHERE 1=1"; \
+if (query->item_id) { \
+	sql << " AND `item_id`=?"; \
+	SQLPARAMS_PUSH(params, "i",int , query->item_id.getValue(0)); \
+} 
 
-uint64_t WarehouseManagementDAO::count(const WarehouseManagementQuery::Wrapper& query)
+
+uint64_t WarehouseManagementDAO::count(const WarehouseManagementQuery::Wrapper & query)
 {
 	stringstream sql;
 	sql << "SELECT COUNT(*) FROM wm_transaction";
@@ -59,3 +67,14 @@ std::list<WarehouseManagementDO> WarehouseManagementDAO::selectWithPage(const Wa
 	string sqlStr = sql.str();
 	return sqlSession->executeQuery<WarehouseManagementDO, WarehouseManagementMapper>(sqlStr, mapper, params);
 }
+
+std::list<WarehouseManagementDO> WarehouseManagementDAO::QueryById(const WarehouseManagementIdQuery::Wrapper& query)
+{
+	stringstream sql;
+	sql << "SELECT item_id,item_code,item_name,specification,unit_Of_Measure,batch_code,warehouse_name,location_name,area_name,vendor_code,vendor_name,vendor_nick,workorder_code,recpt_date,expire_date FROM wm_transaction";
+	WAREHOUSEMANAGEMENT_TERAM_PARSE_TO_EXPORT(query, sql);
+	WarehouseManagementExportMapper mapper;
+	string sqlStr = sql.str();
+	return sqlSession->executeQuery<WarehouseManagementDO, WarehouseManagementExportMapper>(sqlStr, mapper, params);
+}
+

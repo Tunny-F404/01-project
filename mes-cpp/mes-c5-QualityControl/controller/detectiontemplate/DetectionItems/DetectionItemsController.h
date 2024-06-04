@@ -24,7 +24,8 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(TemplateDetectItemPageJsonVO);
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
-
+		// 定义其他查询参数描述
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "template_id", ZH_WORDS_GETTER("templatedetectitem.field.template_id"), 1, true);
 	}
 	// 定义查询接口处理
 	ENDPOINT(API_M_GET, "/qc/templatedetect-item/query", queryTemplateDetectItem, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {

@@ -107,5 +107,15 @@ class WarehouseManagementQuery : public PageQuery
 
 };
 
+class WarehouseManagementIdQuery : public PageQuery
+{
+	DTO_INIT(WarehouseManagementIdQuery, PageQuery);
+	//产品物料id
+	DTO_FIELD(UInt64, item_id);
+	DTO_FIELD_INFO(item_id) {
+		info->description = ZH_WORDS_GETTER("WarehouseManagement.field.item_id");
+	}
+};
+
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_WAREHOUSEMANAGEMENT_QUERY_
