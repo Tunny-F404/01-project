@@ -24,6 +24,7 @@
 #include "domain/do/proinspect/ProinspectDO.h"
 #include "domain/dto/processinspection/proinspect/ProinspectDTO.h"
 #include "domain/vo/processinspection/proinspect/ProinspectVO.h"
+#include "domain/query/processinspection/proinspect/proinspectQuery.h"
 /**
  * 示例服务实现，演示基础的示例服务实现
  */
@@ -35,7 +36,11 @@ public:
 	// 修改数据
 	bool updateData(const ProinspectDTO::Wrapper& dto);
 	// 通过ID删除数据
-	bool removeData(uint64_t id);
+	bool removeData(const ProinspectDTO::Wrapper& dto);
+	// 获取过程检验单行列表（条件+分页）
+	ProinspectPageDTO::Wrapper queryProcessInspectionList(const ProinspectQuery::Wrapper& query);
+	// 获取过程检验单行缺陷列表（条件+分页）
+	ProinspectPageDTO::Wrapper queryProcessInspectionDefectList(const ProinspectQuery::Wrapper& query);
 };
 
 #endif // !_SAMPLE_SERVICE_

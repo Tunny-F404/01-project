@@ -40,5 +40,7 @@ public:
 	int updateConfirmOrders(const ProcessinSpectionDO& uObj);
 	// 完成检验单
 	int updateFinishOrders(const ProcessinSpectionDO& uObj);
+	//新增数据
+	uint64_t insert(const ProcessinSpectionDO& iObj);
 };
 #endif // !_SAMPLE_DAO_

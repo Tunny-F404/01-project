@@ -20,12 +20,13 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
+
 	}
-	// 3.2 定义新增接口处理
 	ENDPOINT(API_M_POST, "/proinspect", addrecord, BODY_DTO(ProinspectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddrecord(dto));
 	}
+
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("qualitycontrol.defect.setre"), execModifyrecord, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
@@ -33,14 +34,14 @@ public:
 
 
 	// 3.1 定义删除接口描述
+	//API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("qualitycontrol.defect.record_id"), execRemoverecord, Uint64JsonVO::Wrapper);
 	ENDPOINT_INFO(removerecord) {
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("qualitycontrol.defect.delre"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "record_id", ZH_WORDS_GETTER("qualitycontrol.defect.record_id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/proinspect/{record_id}", removerecord, PATH(UInt64, record_id), execRemoverecord(record_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/proinspect/{record_id}", removerecord, BODY_DTO(ProinspectDTO::Wrapper, dto), execRemoverecord(dto));
 
 	//  定义获取过程检验单行列表接口描述
 	ENDPOINT_INFO(queryProinspectList) {
@@ -50,8 +51,10 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProinspectPageJsonVO);
+		// 定义分页查询参数描述
+		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "template_id", ZH_WORDS_GETTER("processinspection.field.template_id"), 1, true);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "ipqc_id", ZH_WORDS_GETTER("qualitycontrol.defect.qc_id"), , true);
 	}
 	//  定义获取过程检验单行列表接口处理
 	ENDPOINT(API_M_GET, "/inspectionitems1", queryProinspectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -60,6 +63,7 @@ public:
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryProcessInspectionList(userQuery, authObject->getPayload()));
 	}
+	
 	//  定义获取过程检验单行缺陷列表接口描述
 	ENDPOINT_INFO(queryProcessInspectionDefectList) {
 		// 定义接口标题
@@ -68,8 +72,10 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProinspectPageJsonVO);
+		// 定义分页查询参数描述
+		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "template_id", ZH_WORDS_GETTER("processinspection.field.template_id"), 2, true);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("qualitycontrol.defect.line_id"), , true);
 	}
 	//  定义获取过程检验单行缺陷列表接口处理
 	ENDPOINT(API_M_GET, "/inspectionitems2", queryProcessInspectionDefectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -80,12 +86,12 @@ public:
 	}
 
 private:
-	//演示添加数据
+	//添加数据
 	Uint64JsonVO::Wrapper execAddrecord(const ProinspectDTO::Wrapper& dto);
 	// 3.3 修改数据                           
 	Uint64JsonVO::Wrapper execModifyrecord(const ProinspectDTO::Wrapper& dto);
 	// 3.3 删除数据
-	Uint64JsonVO::Wrapper execRemoverecord(const UInt64& record_id);
+	Uint64JsonVO::Wrapper execRemoverecord(const ProinspectDTO::Wrapper& dto);
 	//  获取过程检验单行列表
 	ProinspectPageJsonVO::Wrapper execQueryProcessInspectionList(const ProinspectQuery::Wrapper& query, const PayloadDTO& payload);
 	//  获取过程检验单行缺陷列表

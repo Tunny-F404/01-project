@@ -207,9 +207,41 @@ Uint64JsonVO::Wrapper ProcessinSpectionController::execModifyTheProcessInspectio
 	//return {};
 }
 
-ProcessinSpectionPageJsonVO::Wrapper ProcessinSpectionController::execAddProcessInspection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
+Uint64JsonVO::Wrapper ProcessinSpectionController::execAddProcessInspection(const ProcessinSpectionDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验
+	if (!dto->ipqc_code || !dto->ipqc_type || !dto->workorder_code
+		|| !dto->workstation_code || !dto->quantity_check
+		|| !dto->quantity_unqualified || !dto->quantity_qualified)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->ipqc_code->empty() || dto->ipqc_type->empty() || dto->workorder_code->empty()
+		|| dto->workstation_code->empty() || dto->quantity_check < 0
+		|| dto->quantity_unqualified < 0 || dto->quantity_qualified < 0
+		)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+
+	ProcessInspectionService service;
+	// 执行数据新增
+	uint64_t id = service.saveData(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }
 
 // 确认检验单

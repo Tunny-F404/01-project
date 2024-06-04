@@ -14,6 +14,15 @@
 class ProinspectQuery : public PageQuery
 {
 	DTO_INIT(ProinspectQuery, PageQuery);
+
+	DTO_FIELD(Int32, ipqc_id);
+	DTO_FIELD_INFO(ipqc_id) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.ipqc_id");
+	}
+	DTO_FIELD(Int32, line_id);
+	DTO_FIELD_INFO(line_id) {
+		info->description = ZH_WORDS_GETTER("processinspection.field.ipqc_id");
+	}
 	// ºÏ—Èµ•±‡∫≈
 	DTO_FIELD(String, ipqc_code);
 	DTO_FIELD_INFO(ipqc_code) {
