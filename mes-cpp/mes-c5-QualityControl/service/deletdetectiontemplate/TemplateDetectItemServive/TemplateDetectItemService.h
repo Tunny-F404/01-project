@@ -19,6 +19,8 @@ public:
 	uint64_t saveTemplateDetectItem(const TemplateDetectItemDTO::Wrapper& dto);
 	// 通过ID删除数据
 	bool removeTemplateDetectItem(uint64_t id);
+	// 获取时间，格式化为日期格式
+	string getCurrentTime();
 };
 
 #endif // !_TEMPLATEDETECTITEM_SERVICE_

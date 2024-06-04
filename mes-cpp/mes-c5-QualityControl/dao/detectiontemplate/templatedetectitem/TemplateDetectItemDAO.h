@@ -9,6 +9,8 @@
 class TemplateDetectItemDAO :public BaseDAO
 {
 public:
+	// 统计数据条数
+	uint64_t count(const TemplateDetectItemQuery::Wrapper& query);
 	// 分页查询数据
 	list<TemplateDetectItemDO> selectTemplateDetectItemWithPage(const TemplateDetectItemQuery::Wrapper& query);
 	// 修改数据

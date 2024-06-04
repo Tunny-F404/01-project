@@ -10,7 +10,6 @@ TemplateDetectItemPageJsonVO::Wrapper DetectionItemsController::execQueryTemplat
 	auto jvo = TemplateDetectItemPageJsonVO::createShared();
 	jvo->success(result);
 	return jvo;
-	return {};
 }
 
 Uint64JsonVO::Wrapper DetectionItemsController::execModifyTemplateDetectItem(const TemplateDetectItemDTO::Wrapper& dto)
@@ -27,7 +26,6 @@ Uint64JsonVO::Wrapper DetectionItemsController::execModifyTemplateDetectItem(con
 	}
 	// 响应结果
 	return jvo;
-	return {};
 }
 
 Uint64JsonVO::Wrapper DetectionItemsController::execAddTemplateDetectItem(const TemplateDetectItemDTO::Wrapper& dto)
@@ -42,11 +40,11 @@ Uint64JsonVO::Wrapper DetectionItemsController::execAddTemplateDetectItem(const 
 		return jvo;
 	}
 	// 有效值校验
-	/*if (dto->template_id < 0 || dto->index_id<0 || dto->index_code->empty() || dto->index_name->empty() || dto->index_type->empty())
+	if (dto->template_id < 0 || dto->index_id < 0 || dto->index_code->empty() || dto->index_name->empty() || dto->index_type->empty())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
-	}*/
+	}
 
 	// 定义一个Service
 	TemplateDetectItemService service;
@@ -60,29 +58,35 @@ Uint64JsonVO::Wrapper DetectionItemsController::execAddTemplateDetectItem(const 
 	}
 	//响应结果
 	return jvo;
-	return {};
 }
 
-Uint64JsonVO::Wrapper DetectionItemsController::execRemoveTemplateDetectItem(const UInt64& record_id)
+Uint64JsonVO::Wrapper DetectionItemsController::execRemoveTemplateDetectItem(const oatpp::List<UInt64>& record_ids)
 {
-	// 定义返回数据对象
-	auto jvo = Uint64JsonVO::createShared();
-	// 参数校验
-	if (!record_id || record_id <= 0)
-	{
-		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
-		return jvo;
-	}
 	// 定义一个Service
 	TemplateDetectItemService service;
-	// 执行数据删除
-	if (service.removeTemplateDetectItem(record_id.getValue(0))) {
-		jvo->success(record_id);
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	bool flag = false;
+	for (auto it = record_ids->begin(); it != record_ids->end(); it++) {
+		auto x = (*it).getValue(0);
+		//参数校验
+		if (x < 0 || !x) {
+			if (!flag)
+				jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+			flag = true;
+		}
+		else {
+			// 执行数据删除
+			if (!service.removeTemplateDetectItem(x)) {
+				if (!flag)
+					jvo->init(UInt64(-1), RS_FAIL);
+				flag = true;
+			}
+		}
 	}
-	else {
-		jvo->fail(record_id);
-	}
+
 	// 响应结果
+	if (!flag)
+		jvo->init(UInt64(1), RS_SUCCESS);
 	return jvo;
-	return {};
 }

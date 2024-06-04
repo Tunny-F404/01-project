@@ -26,6 +26,7 @@
 #include "detectiontemplate/DetectionItems/DetectionItemsController.h"
 #include "detectiontemplate/materialproducts/MaterialProductsController.h"
 #include "detectionitemsettings/DetectionItemSettingsController.h"
+#include "detectiontemplate/DetectionItems/DetectionItemsController.h"
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
@@ -64,6 +65,7 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(DetectionItemsController);
 	ROUTER_SIMPLE_BIND(MaterialProductsController);
 	ROUTER_SIMPLE_BIND(DetectionItemSettingsController);
+	ROUTER_SIMPLE_BIND(DetectionItemsController);
 }
 
 #ifdef HTTP_SERVER_DEMO
