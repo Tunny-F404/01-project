@@ -89,7 +89,7 @@
                     <!-- Docker 远程管理地址-->
                     <dockerHost>https://47.115.223.7:2375</dockerHost>
                     <!-- CA 证书位置 -->
-                    <certPath>C:\Users\gg189\Desktop\workspace\docker-ca\shopsettings</certPath>
+                    <certPath>C:\Users\gg189\Desktop\workspace\docker-ca</certPath>
                     <!-- 镜像设置 -->
                     <images>
                         <image>
