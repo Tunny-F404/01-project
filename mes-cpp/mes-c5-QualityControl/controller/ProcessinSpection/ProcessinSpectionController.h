@@ -78,18 +78,26 @@ public:
 		API_HANDLER_RESP_VO(execExportProcessinSpection(userQuery, authObject->getPayload()));
 	}
 
-	// 获取过程检验详情
-	ENDPOINT_INFO(queryGetInspectionDetails) {
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("todo"));
+	// 获取过程检验详情	
+	ENDPOINT_INFO(queryInspectionDetails) {
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("processinspection.get.inspection_details"));
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProcessinSpectionJsonVO);
 		//API_DEF_ADD_PAGE_PARAMS();
-		API_DEF_ADD_QUERY_PARAMS(String, "ipqc_code", ZH_WORDS_GETTER("processinspection.field.ipqc_code"), "test", true);	// 只能根据检验单编号查询
+		API_DEF_ADD_QUERY_PARAMS(String, "ipqc_code", ZH_WORDS_GETTER("processinspection.field.ipqc_code"), "IPQC202310180004", true);	// 只能根据检验单编号查询
 	}
-	ENDPOINT(API_M_GET, "/processinspection/inspectiondetails", queryGetInspectionDetails, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qualityctl/query-inspection-details", queryInspectionDetails, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_QUERY_PARAM(detailsQuery, ProcessinSpectionQuery, queryParams);
 		API_HANDLER_RESP_VO(execQueryInspectionDetails(detailsQuery, authObject->getPayload()));
 	}
+
+	// 确认检验单
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.modify.confirm_orders"), modifyConfirmOrders, Uint64JsonVO::Wrapper);
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qualityctl/modify-confirm-orders", modifyConfirmOrders, BODY_DTO(ProcessinSpectionDTO::Wrapper, dto), execModifyConfirmOrders(dto));
+
+	// 完成检验单
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.modify.finish_orders"), modifyFinishOrders, Uint64JsonVO::Wrapper);
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qualityctl/finish-confirm-orders", modifyFinishOrders, BODY_DTO(ProcessinSpectionDTO::Wrapper, dto), execModifyFinishOrders(dto));
 
 	// 定义接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.put.summary"), modifyTheProcessInspection, Uint64JsonVO::Wrapper);
@@ -128,12 +136,13 @@ private:
 
 	ProcessinSpectionJsonVO::Wrapper execQueryInspectionDetails(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload);
 
-	//Uint64JsonVO::Wrapper execConfirmOrders(const ProcessinSpectionDTO::Wrapper& dto);
-
 	Uint64JsonVO::Wrapper execModifyTheProcessInspection(const ProcessinSpectionDTO::Wrapper& dto);
-
 	//  添加过程检验
 	ProcessinSpectionPageJsonVO::Wrapper execAddProcessInspection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload);
+	//确认订单
+	Uint64JsonVO::Wrapper execModifyConfirmOrders(const ProcessinSpectionDTO::Wrapper& dto);
+	//完成订单
+	Uint64JsonVO::Wrapper execModifyFinishOrders(const ProcessinSpectionDTO::Wrapper& dto);
 };
 
 // 0 取消API控制器使用宏

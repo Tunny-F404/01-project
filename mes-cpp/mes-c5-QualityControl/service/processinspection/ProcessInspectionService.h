@@ -27,7 +27,7 @@
 class ProcessInspectionService
 {
 public:
-	//
+	//更新数据
 	bool updateData(const ProcessinSpectionDTO::Wrapper& dto);
 	//分页查询
 	ProcessinSpectionQueryPageDTO::Wrapper listAll(const ProcessinSpectionQuery::Wrapper& query);
@@ -35,5 +35,11 @@ public:
 	bool remove(uint64_t id);
 	//导出表需要的数据
 	list<ProcessinSpectionDO> listAllExort(const ProcessinSpectionQuery::Wrapper& query);
+	// 获取过程检验单详情
+	ProcessinSpectionDTO::Wrapper getInspectionDetails(const ProcessinSpectionQuery::Wrapper& query);
+	// 确认检验单
+	bool updateConfirmOrdersData(const ProcessinSpectionDTO::Wrapper& dto);
+	// 完成检验单
+	bool updateFinishOrdersData(const ProcessinSpectionDTO::Wrapper& dto);
 };
 #endif

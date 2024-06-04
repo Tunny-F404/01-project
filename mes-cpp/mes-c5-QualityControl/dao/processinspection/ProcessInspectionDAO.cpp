@@ -127,3 +127,27 @@ bool ProcessInspectionDAO::deleteById(uint64_t id)
 	return sqlSession->executeUpdate(sql, "%ull", id);
 }
 
+// 获取过程检验单详情
+std::list<ProcessinSpectionDO> ProcessInspectionDAO::selectInspectionDetails(const ProcessinSpectionQuery::Wrapper& query) {
+	stringstream sql;
+	sql << "SELECT ipqc_id,ipqc_code,ipqc_name,ipqc_type,workorder_code,workorder_name,workstation_code,workstation_name,quantity_check,item_code,item_name,unit_of_measure,specification,process_code,process_name,task_code,quantity_unqualified,quantity_qualified,cr_quantity,maj_quantity,min_quantity,inspect_date,check_result,inspector,remark FROM qc_ipqc";
+	PROCESSINSPECTION_TERAM_PARSE(query, sql);
+	ProcessinSpectionMapper mapper;
+	string sqlStr = sql.str();
+	return sqlSession->executeQuery<ProcessinSpectionDO, ProcessinSpectionMapper>(sqlStr, mapper, params);
+	//return std::list<ProcessinSpectionDO>();
+}
+
+// 确认检验单
+int ProcessInspectionDAO::updateConfirmOrders(const ProcessinSpectionDO& uObj) {
+	string sql = "UPDATE `qc_ipqc` SET `check_result`=?, `status`=? WHERE `ipqc_code`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s", uObj.getCheck_Result(), uObj.getStatus_Order(), uObj.getIpqc_Code());
+	//return 0;
+}
+
+// 完成检验单
+int ProcessInspectionDAO::updateFinishOrders(const ProcessinSpectionDO& uObj) {
+	string sql = "UPDATE `pro_feedback` SET `quantity_qualified`=`quantity_qualified`+?, `quantity_unquanlified`=`quantity_unquanlified`+?, `quantity_uncheck`=`quantity_uncheck`-? WHERE `task_code`=?";
+	return sqlSession->executeUpdate(sql, "%d%d%d%s", uObj.getQuantity_Qualified(), uObj.getQuantity_Unqualified(), uObj.getQuantity_Check(), uObj.getTask_Code());
+	//return 0;
+}

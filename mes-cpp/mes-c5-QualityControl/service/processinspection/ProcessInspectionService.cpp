@@ -132,3 +132,36 @@ list<ProcessinSpectionDO> ProcessInspectionService::listAllExort(const Processin
 	auto dos = dao.select(query,1);
 	return dos;
 }
+
+// 获取过程检验单详情
+ProcessinSpectionDTO::Wrapper ProcessInspectionService::getInspectionDetails(const ProcessinSpectionQuery::Wrapper& query) {
+	auto resDetails = ProcessinSpectionDTO::createShared();
+	ProcessInspectionDAO dao;
+	std::list<ProcessinSpectionDO> result = dao.selectInspectionDetails(query);
+	for (ProcessinSpectionDO sub : result) {
+		auto dto = ProcessinSpectionDTO::createShared();
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, id, Id, ipqc_code, Ipqc_Code, ipqc_name, Ipqc_Name, ipqc_type, Ipqc_Type, workorder_code, Workorder_Code, workorder_name, Workorder_Name, workstation_code, Workstation_Code, workstation_name, Workstation_Name, quantity_check, Quantity_Check, item_code, Item_Code, item_name, Item_Name, unit_of_measure, Unit_Of_Measure, specification, Specification, process_code, Process_Code);
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, process_name, Process_Name, task_code, Task_Code, quantity_unqualified, Quantity_Unqualified, quantity_qualified, Quantity_Qualified, cr_quantity, Cr_Quantity, maj_quantity, Maj_Quantity, min_quantity, Min_Quantity, inspect_date, Inspect_Date, check_result, Check_Result, inspector, Inspector, remark, Remark);
+		return dto;
+	}
+	return ProcessinSpectionDTO::Wrapper();
+}
+
+// 确认检验单
+bool ProcessInspectionService::updateConfirmOrdersData(const ProcessinSpectionDTO::Wrapper& dto) {
+	ProcessinSpectionDO data;
+	dto->status = "CONFIRMED";	// 修改状态为已确认
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Check_Result, check_result, Status_Order, status, Ipqc_Code, ipqc_code);
+	ProcessInspectionDAO dao;
+	return dao.updateConfirmOrders(data) == 1;
+}
+
+// 完成检验单
+bool ProcessInspectionService::updateFinishOrdersData(const ProcessinSpectionDTO::Wrapper& dto) {
+	ProcessinSpectionDO data;
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Quantity_Check, quantity_check, Quantity_Unqualified, quantity_unqualified, Quantity_Qualified, quantity_qualified, Task_Code, task_code);
+	ProcessInspectionDAO dao;
+	return dao.updateFinishOrders(data) == 1;
+	//return false;
+}
+

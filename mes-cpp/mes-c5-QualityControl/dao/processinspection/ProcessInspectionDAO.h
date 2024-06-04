@@ -34,5 +34,11 @@ public:
 	uint64_t count(const ProcessinSpectionQuery::Wrapper& query);
 
 	bool deleteById(uint64_t id);
+	// 获取过程检验详情
+	std::list<ProcessinSpectionDO> selectInspectionDetails(const ProcessinSpectionQuery::Wrapper& query);
+	// 确认检验单
+	int updateConfirmOrders(const ProcessinSpectionDO& uObj);
+	// 完成检验单
+	int updateFinishOrders(const ProcessinSpectionDO& uObj);
 };
 #endif // !_SAMPLE_DAO_

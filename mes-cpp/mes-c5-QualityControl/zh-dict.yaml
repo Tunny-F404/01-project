@@ -11,6 +11,10 @@ processinspection:
   summary: 删除过程检验列表
  get:
   summary: 获取过程检验列表(条件+分页)
+  inspection_details: 获取过程检验详情
+ modify:
+  confirm_orders: 确认检验单
+  finish_orders: 完成检验单
  put:
   summary: 修改过程检测项
  field:

@@ -172,14 +172,13 @@ StringJsonVO::Wrapper ProcessinSpectionController::execExportProcessinSpection(c
 	return ans;
 }
 
+// 获取过程检验单详情
 ProcessinSpectionJsonVO::Wrapper ProcessinSpectionController::execQueryInspectionDetails(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
 {
-	//ProcessinSpectionService service;
-	//auto result = service.getInspectionDetails(query);
+	ProcessInspectionService service;
+	auto result = service.getInspectionDetails(query);
 	auto jvo = ProcessinSpectionJsonVO::createShared();
-	//jvo->success(result);
-	//jvo->success(String("test 1"));
-	//jvo->success(1);
+	jvo->success(result);
 	return jvo;
 }
 
@@ -211,4 +210,43 @@ Uint64JsonVO::Wrapper ProcessinSpectionController::execModifyTheProcessInspectio
 ProcessinSpectionPageJsonVO::Wrapper ProcessinSpectionController::execAddProcessInspection(const ProcessinSpectionQuery::Wrapper& query, const PayloadDTO& payload)
 {
 	return {};
+}
+
+// 确认检验单
+Uint64JsonVO::Wrapper ProcessinSpectionController::execModifyConfirmOrders(const ProcessinSpectionDTO::Wrapper& dto) {
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (dto->check_result != "ACCEPT" && dto->check_result != "REJECT") {
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	ProcessInspectionService service;
+	// 执行数据修改
+	if (service.updateConfirmOrdersData(dto)) {
+		jvo->success(dto->id);
+	}
+	else {
+		jvo->fail(dto->id);
+	}
+	return jvo;
+	//return Uint64JsonVO::Wrapper();
+}
+// 完成检验单
+Uint64JsonVO::Wrapper ProcessinSpectionController::execModifyFinishOrders(const ProcessinSpectionDTO::Wrapper& dto) {
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (dto->workorder_code == "" || !dto->workorder_code) {
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	ProcessInspectionService service;
+	// 执行数据修改
+	if (service.updateFinishOrdersData(dto)) {
+		jvo->success(dto->id);
+	}
+	else {
+		jvo->fail(dto->id);
+	}
+	return jvo;
+	//return Uint64JsonVO::Wrapper();
 }
