@@ -34,7 +34,6 @@ StringJsonVO::Wrapper InspectController::execLookTable(const oatpp::List<UInt64>
 	return {};
 }
 
-
 Uint64JsonVO::Wrapper InspectController::execAddInspect(const InspectDTO::Wrapper& dto)
 {
 	// 定义返回数据对象
@@ -119,10 +118,25 @@ Uint64JsonVO::Wrapper InspectController::execRemoveInspect(const UInt64& iqc_id)
 }
 
 //导出
-StringJsonVO::Wrapper InspectController::execExportInspect(const oatpp::List<UInt64>& ids)
+//StringJsonVO::Wrapper InspectController::execExportInspect(const oatpp::List<UInt64>& ids)
+//{
+//	return StringJsonVO::Wrapper();
+//}
+
+StringJsonVO::Wrapper InspectController::execExportInspect(const Inspect_tableQuery::Wrapper& query)
 {
-	return StringJsonVO::Wrapper();
+	auto res = StringJsonVO::createShared();
+
+	InspectService service;
+	auto url = service.exportTable(query);
+
+	if (url != "")
+		res->success(url);
+	else
+		res->fail("");
+	return res;
 }
+
 
 //确认检验表
 Uint64JsonVO::Wrapper InspectController::execIs_OkInspect(const Item_idDTO::Wrapper& dto)

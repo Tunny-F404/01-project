@@ -26,6 +26,9 @@ public:
 	bool InspectService::Is_Ok(const Item_idDTO::Wrapper& dto);
 	//完成检验单
 	bool InspectService::Finished(const Item_idDTO::Wrapper& dto);
+
+	//导出检验单
+	string exportTable(const Inspect_tableQuery::Wrapper& query);
 };
 
 #endif // !_INSPECT_SERVICE_

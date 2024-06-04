@@ -11,7 +11,7 @@
 class InspectDO
 {
 	// 来料检验单id
-	CC_SYNTHESIZE(uint64_t, iqc_id, Iqc_id);
+	CC_SYNTHESIZE(int64_t, iqc_id, Iqc_id);
 	// 来料检验单编号
 	CC_SYNTHESIZE(string, iqc_code, Iqc_code);
 	// 来料检验单名称
@@ -77,11 +77,13 @@ class InspectDO
 	//检测人员
 	CC_SYNTHESIZE(string, inspector, Inspector);
 	//单据状态
-protected: string list_status; public: string getList_status(void) const {
-	return list_status;
-}public: void setList_status(string var) {
-	list_status = var;
-};
+	CC_SYNTHESIZE(string, list_status, List_status);
+	
+//protected: string list_status; public: string getList_status(void) const {
+//	return list_status;
+//}public: void setList_status(string var) {
+//	list_status = var;
+//};
 	//备注
 	CC_SYNTHESIZE(string, remark, Remark);
 	//预留字段1

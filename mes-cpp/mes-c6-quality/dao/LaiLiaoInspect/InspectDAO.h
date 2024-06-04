@@ -24,9 +24,11 @@ public:
 	// 通过ID删除数据
 	int deleteById(uint64_t iqc_id);
 	//确认检验单
-	int InspectDAO::Is_Ok( InspectDO& uObj);
+	int Is_Ok( InspectDO& uObj);
 	//完成检验单
-	int InspectDAO::Finished( InspectDO& uObj);
+	int Finished( InspectDO& uObj);
+	//导出检验单
+	list<InspectDO> selectAll(const Inspect_tableQuery::Wrapper& query);
 };
 
 

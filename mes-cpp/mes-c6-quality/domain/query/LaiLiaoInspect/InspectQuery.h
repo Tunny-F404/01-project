@@ -37,23 +37,12 @@ class InspectQuery : public PageQuery
 
 };
 
-
-////来料检验详情
-//class Inspect_detailQuery :public oatpp::DTO
-//{
-//	DTO_INIT(Inspect_detailQuery, DTO);
-//	// 来料检验表主键id
-//	API_DTO_FIELD_DEFAULT(String, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
-//
-//};
-
 //查看报表
 class Inspect_tableQuery :public oatpp::DTO
 {
 	DTO_INIT(Inspect_tableQuery, DTO);
 	// 来料检验表主键id
-	API_DTO_FIELD_DEFAULT(String, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
-
+	API_DTO_FIELD_DEFAULT(Int64, iqc_id, ZH_WORDS_GETTER("inspect.iqc_id"));
 };
 
 //

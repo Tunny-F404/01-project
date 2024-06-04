@@ -163,3 +163,26 @@ int InspectDAO::Finished( InspectDO& uObj)
 	return sqlSession->executeUpdate(sql, "%ull",
 		uObj.getIqc_id());
 }
+
+//导出前的查询
+std::list<InspectDO> InspectDAO::selectAll(const Inspect_tableQuery::Wrapper& query)
+{
+	stringstream sql;
+	sql << "SELECT";
+	sql << " `iqc_code`, `iqc_name`";
+	sql << " `vendor_code`,`vendor_name`,";
+	sql << " `item_id`, `item_code`, `item_name`,";
+	sql << " `specification`, `unit_of_measure`, `quantity_min_check`,`quantity_max_unqualified`,";
+	sql << " `quantity_recived`, `quantity_check`, `quantity_unqualified`,`maj_rate`,`min_rate`,`cr_rate`,";
+	sql << " `maj_quantity`, `min_quantity`,`cr_quantity`,`check_result`,`recive_date`,`inspect_date`,`inspector`,`status`";
+	sql << " FROM qc_iqc WHERE 1 = 1";
+
+	SqlParams params;
+	if (query->iqc_id) {
+		sql << " AND (iqc_id=?)";
+		SQLPARAMS_PUSH(params, "i", std::int64_t, query->iqc_id.getValue(1));
+	}
+	TableMapper mapper;
+	std::string sqlStr = sql.str();
+	return sqlSession->executeQuery<InspectDO, TableMapper>(sqlStr, mapper, params);
+}

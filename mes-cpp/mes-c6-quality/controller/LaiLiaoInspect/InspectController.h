@@ -111,10 +111,30 @@ public:
 	// 3.2 定义删除接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/incoming_inspect/delete/{iqc_id}", removeInspect, PATH(UInt64, iqc_id), execRemoveInspect(iqc_id));
 
-	// 3.1 定义导出接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.export.summary"), exportInspect, StringJsonVO::Wrapper);
-	// 3.2 定义导出接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/incoming_inspect/export", exportInspect, BODY_DTO(oatpp::List<UInt64>, ids),execExportInspect(ids));
+	//// 3.1 定义导出接口描述
+	//API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.export.summary"), exportInspect, StringJsonVO::Wrapper);
+	//// 3.2 定义导出接口处理
+	//API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/incoming_inspect/export", exportInspect, BODY_DTO(oatpp::List<UInt64>, ids),execExportInspect(ids));
+
+	ENDPOINT_INFO(exportInspect) {
+		// 定义接口描述标题
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("inspect.export.summary"));
+		// 定义响应参数格式
+		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
+		// 定义其他参数描述
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "iqc_id",
+			ZH_WORDS_GETTER("inspect.iqc_id"), 1, true);
+	}
+
+	ENDPOINT(API_M_GET, "/incoming_inspect/export", exportInspect,
+		QUERIES(QueryParams, queryParams))
+	{
+		// 解析查询参数
+		API_HANDLER_QUERY_PARAM(query, Inspect_tableQuery, queryParams);
+		// 调用执行函数
+		API_HANDLER_RESP_VO(execExportInspect(query));
+	}
+
 
 	// 3.1 定义确认检验单接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.is_ok.summary"), Is_OkInspect, Uint64JsonVO::Wrapper);
@@ -132,7 +152,7 @@ private:
 	InspectPageJsonVO::Wrapper execQueryInspect(const InspectQuery::Wrapper& query, const PayloadDTO& payload);
 	//3.3 查询来料检验表详情
 	Inspect_detailJsonVO::Wrapper execInspect_detail(const int& iqc_id);
-	//3.3查看报表
+	//3.3查看报表(一次只能查一个)
 	StringJsonVO::Wrapper execLookTable(const oatpp::List<UInt64>& ids);
 	// 3.3 新增数据
 	Uint64JsonVO::Wrapper execAddInspect(const InspectDTO::Wrapper& dto);
@@ -141,7 +161,10 @@ private:
 	// 3.3 删除数据
 	Uint64JsonVO::Wrapper execRemoveInspect(const UInt64& id);
 	// 3.3导出数据
-	StringJsonVO::Wrapper execExportInspect(const oatpp::List<UInt64>& ids);
+	//StringJsonVO::Wrapper execExportInspect(const oatpp::UInt64& ids);
+
+	StringJsonVO::Wrapper execExportInspect(const Inspect_tableQuery::Wrapper& query);
+
 	//3.3确认检验单(检验单状态置为草稿状态)
 	Uint64JsonVO::Wrapper execIs_OkInspect(const Item_idDTO::Wrapper& dto);
 	//3.3完成检验单(检验单状态置为已确认状态)

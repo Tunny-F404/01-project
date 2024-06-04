@@ -22,6 +22,7 @@ inspect:
  iqc_id: 来料检验单id
  iqc_code: 来料检验单编号
  iqc_name: 来料检验单名称
+ source_doc_code: 来源单据编号
  template_id: 检验模板ID
  vendor_id: 供应商ID
  vendor_code: 供应商编码
@@ -31,6 +32,11 @@ inspect:
  item_id: 产品物料ID
  item_code: 产品物料编码
  item_name: 产品物料名称
+ specification: 规格型号
+
+ quantity_min_check: 
+ quantity_max_unqualified: 
+
  quantity_recived: 接收数量
  quantity_check: 检测数量
  quantity_unqualified: 不合格数
