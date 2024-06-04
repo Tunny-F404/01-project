@@ -95,17 +95,15 @@ const rules = {
   warehouseInfo: [{ required: true, message: "请选择领料仓库", trigger: "change" }],
   remark: [{ required: true, message: "请输入备注", trigger: "blur" }],
 };
-// 提交表单
-const submitForm = () => {
-  formRef.value.validate((valid) => {
-    if (valid) {
-      console.log("提交成功", formModel.value);
-      dialogVisible.value = false;
-    } else {
-      console.log("提交失败");
-      return false;
-    }
-  });
+// 提交表单，将 submitForm 方法改为 async/await，并在 finally 中处理对话框的关闭逻辑
+const submitForm = async () => {
+  try {
+    await formRef.value.validate();
+    console.log("提交成功", formModel.value);
+    dialogVisible.value = false;
+  } catch (error) {
+    console.log("提交失败");
+  }
 };
 //取消提交
 const cancelForm = () => {
@@ -118,27 +116,48 @@ const parms = ref({
   pagenum: 1,
   pagesize: 5,
 });
+// 总条数
 const total = ref(tableList.value.length);
-
+// 原始表格数据的副本，用于分页和过滤操作,模拟后端获取数据
 const originalTableList = ref([...tableList.value]);
+// 模拟计算，获取当前页的数据列表
 const getPageList = () => {
-  loading.value = true;
+  loading.value = true;// 显示加载动画
   const start = (parms.value.pagenum - 1) * parms.value.pagesize;
   const end = start + parms.value.pagesize;
   tableList.value = originalTableList.value.slice(start, end);
-  loading.value = false;
+  loading.value = false;// 隐藏加载动画
 };
-
+// 当页面大小改变时触发，重新获取分页数据
 const onSizeChange = (size) => {
-  parms.value.pagenum = 1;
-  parms.value.pagesize = size;
-  getPageList();
+  parms.value.pagenum = 1; // 重置当前页码为1
+  parms.value.pagesize = size;// 更新页面大小
+  getPageList();// 重新获取分页数据
 };
-
+// 当页码改变时触发，重新获取分页数据
 const onCurrentChange = (page) => {
-  parms.value.pagenum = page;
-  getPageList();
+  parms.value.pagenum = page;// 更新当前页码
+  getPageList();// 重新获取分页数据
 };
+// 后端获取数据分页
+// const getPageList = async () => {
+//   loading.value = true; // 显示加载动画
+//   try {
+//     // 调用后端接口获取分页数据
+//     const response = await request.get('/api/issues', {
+//       params: {
+//         page: parms.value.pagenum,
+//         size: parms.value.pagesize,
+//       },
+//     });
+//     tableList.value = response.data.items; // 当前页的数据
+//     total.value = response.data.total; // 总条数
+//   } catch (error) {
+//     console.error("获取分页数据失败", error);
+//   } finally {
+//     loading.value = false; // 隐藏加载动画
+//   }
+// };
 
 // 表格上面新增操作
 const handleAdd = () => {
@@ -163,22 +182,45 @@ const handleUpdate = (row) => {
   dialogVisible.value = true;
 };
 
-//模拟删除操作
-const handleDelete = async (row) => {
-  await ElMessageBox.confirm("你确认要删除该领料单么", "温馨提示", {
+//模拟删除操作，使用 then，catch 和 finally
+const handleDelete = (row) => {
+  ElMessageBox.confirm("你确认要删除该领料单么", "温馨提示", {
     type: "warning",
     confirmButtonText: "确认",
     cancelButtonText: "取消",
-  });
-  const index = tableList.value.findIndex(item => item.issueCode === row.issueCode);
-  if (index !== -1) {
-    tableList.value.splice(index, 1);
-    originalTableList.value = [...tableList.value];
-    getPageList();
-  }
-  ElMessage.success("删除成功");
-  console.log(row);
-  getPageList();
+  })
+    .then(() => {
+      // 模拟删除操作
+      const index = tableList.value.findIndex(item => item.issueCode === row.issueCode);
+      if (index !== -1) {
+        tableList.value.splice(index, 1);
+        originalTableList.value = [...tableList.value];
+        ElMessage.success("删除成功");
+      }
+      // 后端接口调用
+      // request.delete(`/api/issues/${row.issueCode}`)
+      //   .then(response => {
+      //     if (response.status === 200) {
+      //       const index = tableList.value.findIndex(item => item.issueCode === row.issueCode);
+      //       if (index !== -1) {
+      //         tableList.value.splice(index, 1);
+      //         originalTableList.value = [...tableList.value];
+      //         ElMessage.success("删除成功");
+      //       }
+      //     } else {
+      //       ElMessage.error("删除失败");
+      //     }
+      //   })
+      //   .catch(error => {
+      //     ElMessage.error("删除失败");
+      //   });
+    })
+    .catch(() => {
+      ElMessage.info("已取消删除");
+    })
+    .finally(() => {
+      getPageList(); // 重新渲染分页数据
+    });
 };
 //导出数据逻辑
 const handleExport = () => {
@@ -245,38 +287,51 @@ const showSearchBar = ref(true);
 function toggleSearchBar() {
   showSearchBar.value = !showSearchBar.value;
 }
-// 模拟刷新数据
-function refreshData() {
+// 模拟刷新数据，使用 async/await，并在 finally 中处理加载动画的隐藏
+const refreshData = async () => {
   loading.value = true; // 显示加载动画
-  // 模拟刷新数据
-  setTimeout(() => {
+  try {
+    // 模拟刷新数据
+    await new Promise(resolve => setTimeout(resolve, 1000));
     // 调用后端接口获取最新数据
-    // request.get('/api/refresh-data').then(response => {
-    //   tableList.value = response.data;
-    //   originalTableList.value = [...tableList.value];
-    //   getPageList();
-    // }).finally(() => {
-    //   loading.value = false; // 隐藏加载动画
-    // });
-
+    // const response = await request.get('/api/refresh-data');
+    // tableList.value = response.data;
+    // originalTableList.value = [...tableList.value];
+    // getPageList();
     // 模拟数据刷新
     tableList.value = [
       ...tableList.value,
       {
-    issueCode: "I007",
-    issueName: "领料单7",
-    workorderCode: "WO007",
-    clientCode: "C007",
-    clientName: "客户7",
-    issueDate: "2023-10-07",
-    status: "PREPARE",
-  },
+        issueCode: "I007",
+        issueName: "领料单7",
+        workorderCode: "WO007",
+        clientCode: "C007",
+        clientName: "客户7",
+        issueDate: "2023-10-07",
+        status: "PREPARE",
+      },
     ];
     originalTableList.value = [...tableList.value];
     getPageList();
+  } finally {
     loading.value = false; // 隐藏加载动画
-  }, 1000);
-}
+  }
+};
+// 真实后端刷新数据
+// const refreshData = async () => {
+//   loading.value = true; // 显示加载动画
+//   try {
+//     // 调用后端接口获取最新数据
+//     const response = await request.get('/api/refresh-data');
+//     tableList.value = response.data;
+//     originalTableList.value = [...tableList.value];
+//     getPageList();
+//   } catch (error) {
+//     console.error("刷新数据失败", error);
+//   } finally {
+//     loading.value = false; // 隐藏加载动画
+//   }
+// };
 </script>
 
 <template>
@@ -493,17 +548,17 @@ function refreshData() {
   justify-content: flex-end;
   align-items: center;
   margin-left: auto;
-}
 
-.search-icons .el-button {
-  margin-left: 10px;
-  border: none; 
-  box-shadow: none; 
-}
+  .el-button {
+    margin-left: 10px;
+    border: none;
+    box-shadow: none;
+  }
 
-.search-icons.fixed {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  &.fixed {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 }
 </style>

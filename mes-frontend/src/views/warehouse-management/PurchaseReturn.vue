@@ -222,24 +222,49 @@ function handleUpdate(row) {
   dialogVisible.value = true;
 }
 
-// 模拟删除
-async function handleDelete(row) {
-  await ElMessageBox.confirm("你确认要删除该退货单么", "温馨提示", {
+// 模拟删除操作
+function handleDelete(row) {
+  ElMessageBox.confirm("你确认要删除该退货单么", "温馨提示", {
     type: "warning",
     confirmButtonText: "确认",
     cancelButtonText: "取消",
-  });
-  const index = tableList.value.findIndex(item => item.rtCode === row.rtCode);
-  if (index !== -1) {
-    tableList.value.splice(index, 1);
-    originalTableList.value = [...tableList.value];
-    getPageList();
-  }
-  ElMessage.success("删除成功");
-  console.log(row);
-  getPageList();
+  })
+    .then(() => {
+      // 模拟删除操作
+      const index = tableList.value.findIndex(item => item.rtCode === row.rtCode);
+      if (index !== -1) {
+        tableList.value.splice(index, 1);
+        originalTableList.value = [...tableList.value];
+        ElMessage.success("删除成功");
+      }
+
+      // 后端接口调用
+      // request.delete(`/api/returns/${row.rtCode}`)
+      //   .then(response => {
+      //     if (response.status === 200) {
+      //       const index = tableList.value.findIndex(item => item.rtCode === row.rtCode);
+      //       if (index !== -1) {
+      //         tableList.value.splice(index, 1);
+      //         originalTableList.value = [...tableList.value];
+      //         ElMessage.success("删除成功");
+      //       }
+      //     } else {
+      //       ElMessage.error("删除失败");
+      //     }
+      //   })
+      //   .catch(error => {
+      //     ElMessage.error("删除失败");
+      //   });
+    })
+    .catch(() => {
+      ElMessage.info("已取消删除");
+    })
+    .finally(() => {
+      getPageList(); // 重新渲染分页数据
+    });
 }
 
+//导出数据逻辑
 function handleExport() {
   console.log("导出数据");
 }
@@ -491,21 +516,17 @@ const selectedRow = ref(null);
   display: flex;
   justify-content: flex-end;
   align-items: center;
-	// position:absolute;
-  // top: 120px;
-  // right: 30px;
-	margin-left: auto;
-}
+  margin-left: auto;
 
-.search-icons .el-button {
-  margin-left: 10px;
-  border: none; 
-  box-shadow: none; 
-}
+  .el-button {
+    margin-left: 10px;
+    border: none;
+    box-shadow: none;
+  }
 
-.search-icons.fixed {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
+  &.fixed {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 </style>
