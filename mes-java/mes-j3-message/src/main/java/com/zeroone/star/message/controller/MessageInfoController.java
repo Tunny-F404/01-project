@@ -2,14 +2,11 @@ package com.zeroone.star.message.controller;
 
 import com.zeroone.star.message.service.ISysMessageService;
 import com.zeroone.star.message.entity.SysMessage;
-import com.zeroone.star.message.service.ISysMessageService;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j3.dto.SysMessageDTO;
-import com.zeroone.star.project.j3.dto.SysUpdateMessageDTO;
 import com.zeroone.star.project.j3.messageinform.MessageInfoApis;
 import com.zeroone.star.project.j3.query.MessageQuery;
 import com.zeroone.star.project.j3.query.NewsPageQuery;
-import com.zeroone.star.project.j3.vo.SysMessageVO;
 import com.zeroone.star.project.j3.vo.UnreadMessageVO;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -17,7 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
