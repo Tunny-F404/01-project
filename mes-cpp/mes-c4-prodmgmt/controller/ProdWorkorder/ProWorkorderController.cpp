@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ProWorkorderController.h"
-#include "../mes-c4-prodmgmt/service/ProdWorkorder/ProdWorkorderService.h"
+#include "../mes-c4-prodmgmt/service/ProWorkorder/ProWorkorderService.h"
 
 
 Uint64JsonVO::Wrapper ProWorkorderController::execModifyProWorkdorder(const ModifyProWorkorderDTO::Wrapper& dto)
@@ -14,7 +14,7 @@ Uint64JsonVO::Wrapper ProWorkorderController::execModifyProWorkdorder(const Modi
 		return jvo;
 	}
 	// 定义一个Service
-	ProdWorkorderService service;
+	ProWorkorderService service;
 	// 执行数据修改
 	if (service.updateData(dto)) {
 		jvo->success(dto->workorderId);
@@ -38,7 +38,7 @@ Uint64JsonVO::Wrapper ProWorkorderController::execRemoveProWorkorder(const UInt6
 		return jvo;
 	}
 	// 定义一个Service
-	ProdWorkorderService service;
+	ProWorkorderService service;
 	// 执行数据删除
 	if (service.removeData(id.getValue(0))) {
 		jvo->success(id);
@@ -62,7 +62,7 @@ Uint64JsonVO::Wrapper ProWorkorderController::execConfirmProWorkorder(const UInt
 		return jvo;
 	}
 	// 定义一个Service
-	ProdWorkorderService service;
+	ProWorkorderService service;
 	
 	if (service.confirmData(workorderId.getValue(0))) {
 		jvo->success(workorderId);
@@ -87,7 +87,7 @@ Uint64JsonVO::Wrapper ProWorkorderController::execCompleteProWorkorder(const UIn
 		return jvo;
 	}
 	// 定义一个Service
-	ProdWorkorderService service;
+	ProWorkorderService service;
 	// 执行数据删除
 	if (service.completeData(workorderId.getValue(0))) {
 		jvo->success(workorderId);

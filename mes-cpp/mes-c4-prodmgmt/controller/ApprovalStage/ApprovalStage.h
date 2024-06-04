@@ -17,26 +17,14 @@ class ApprovalStage : public oatpp::web::server::api::ApiController // 1 ¼Ì³Ð¿ØÖ
 	API_ACCESS_DECLARE(ApprovalStage);
 	// 3 ¶¨Òå½Ó¿Ú
 public:
-	// 3.1 ¶¨ÒåÐÞ¸Ä½Ó¿ÚÃèÊö£¬Ìá½»ÉóÅú
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("Approval.post.submi"), modifyAubmitForApproval, ApprovalStageVO::Wrapper);
+	// 3.1 ¶¨ÒåÐÞ¸Ä½Ó¿ÚÃèÊö
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("Approval.post.name"), modifyApprovalStage, ApprovalStageVO::Wrapper);
 	// 3.2 ¶¨ÒåÐÞ¸Ä½Ó¿Ú´¦Àí
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodmgmt/modifyAubmitForApproval", modifyAubmitForApproval, BODY_DTO(ApprovalStageDTO::Wrapper, dto), execModifyAubmitForApproval(dto));
-
-	// 3.1 ¶¨ÒåÐÞ¸Ä½Ó¿ÚÃèÊö£¬ÉóÅúÍ¨¹ý
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("Approval.post.passed"), modifyApprovalPassed, ApprovalStageVO::Wrapper);
-	// 3.2 ¶¨ÒåÐÞ¸Ä½Ó¿Ú´¦Àí
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodmgmt/modifyApprovalPassed", modifyApprovalPassed, BODY_DTO(ApprovalStageDTO::Wrapper, dto), execModifyApprovalPassed(dto));
-
-	// 3.1 ¶¨ÒåÐÞ¸Ä½Ó¿ÚÃèÊö£¬ÉóÅú²»Í¨¹ý
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("Approval.post.denied"), modifyApprovalNotPassed, ApprovalStageVO::Wrapper);
-	// 3.2 ¶¨ÒåÐÞ¸Ä½Ó¿Ú´¦Àí
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodmgmt/modifyApprovalNotPassed", modifyApprovalNotPassed, BODY_DTO(ApprovalStageDTO::Wrapper, dto), execModifyApprovalNotPassed(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/sample", modifyApprovalStage, BODY_DTO(ApprovalStageDTO::Wrapper, dto), execModifyApprovalStage(dto));
 
 private:
 	// 3.3 ÑÝÊ¾ÐÞ¸ÄÊý¾Ý
-	Uint64JsonVO::Wrapper execModifyAubmitForApproval(const ApprovalStageDTO::Wrapper& dto);
-	Uint64JsonVO::Wrapper execModifyApprovalPassed(const ApprovalStageDTO::Wrapper& dto);
-	Uint64JsonVO::Wrapper execModifyApprovalNotPassed(const ApprovalStageDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyApprovalStage(const ApprovalStageDTO::Wrapper& dto);
 };
 
 // 0 È¡ÏûAPI¿ØÖÆÆ÷Ê¹ÓÃºê

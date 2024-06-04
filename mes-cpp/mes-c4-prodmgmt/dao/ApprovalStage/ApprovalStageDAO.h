@@ -10,12 +10,8 @@
 class ApprovalStageDAO : public BaseDAO
 {
 public:
-	// 提交审批
-	int SubmitForApproval(const ApprovalStageDO& uObj);
-	//审批通过
-	int ApprovalPassed(const ApprovalStageDO& uObj);
-	//审批不通过
-	int ApprovalNotPassed(const ApprovalStageDO& uObj);
+	// 修改数据
+	int update(const ApprovalStageDO& uObj);
 };
 #endif // !_APPROVALSTAGEDTO_DAO_
 

@@ -8,14 +8,14 @@
 /**
  * ÉóÅú×´Ì¬×Ö¶ÎÆ¥ÅäÓ³Éä
  */
-class ApprovalStageMapper : public Mapper<ApprovalStageDO>
+class SampleMapper : public Mapper<ApprovalStageDO>
 {
 public:
 	ApprovalStageDO mapper(ResultSet* resultSet) const override
 	{
 		ApprovalStageDO data;
-		data.setc_record_id(resultSet->getUInt64(1));
-		data.setc_status(resultSet->getString(2));
+		data.setrecord_id(resultSet->getUInt64(1));
+		data.setstatus(resultSet->getString(2));
 		return data;
 	}
 };
