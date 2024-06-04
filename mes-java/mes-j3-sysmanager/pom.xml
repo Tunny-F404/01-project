@@ -128,7 +128,7 @@
                                     <JAVA_OPTS>-Xms256m -Xmx256m</JAVA_OPTS>
                                     <!-- 启动替换参数 -->
                                     <SPRING_ARGS>
-                                        --spring.profiles.active=dev --spring.cloud.nacos.discovery.ip=121.40.75.117
+                                        --spring.profiles.active=test --spring.cloud.nacos.discovery.ip=121.40.75.117
                                     </SPRING_ARGS>
                                 </env>
                             </run>

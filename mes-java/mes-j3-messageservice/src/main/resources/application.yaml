@@ -3,10 +3,3 @@ server:
 spring:
   application:
     name: ${sn.messageservice}
-rocketmq:
-  name-server: 123.57.240.145:8280
-  producer:
-    group: system-notice-producer-group
-#  apache.rocketmq.name-server=123.57.240.145:8280 # RocketMQ NameServer ??
-#  apache.rocketmq.producer.group=system-notice-producer-group # ?????
-#  system-notice-topic=SystemNotice
