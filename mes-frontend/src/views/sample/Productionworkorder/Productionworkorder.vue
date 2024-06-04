@@ -4,6 +4,7 @@
 			<!-- 搜索条件 -->
 			<el-row :gutter="20" class="input-row">
 				<el-col :span="4">
+					<span class="input-label">工单编码：</span>
 					<el-input v-model="workOrderCode" placeholder="请输入工单编码" class="input-size" />
 				</el-col>
 				<el-col :span="4">
