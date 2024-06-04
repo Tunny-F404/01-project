@@ -324,7 +324,7 @@ const selectedRow = ref(null);
 </script>
 
 <template>
-  <tableFrame title="供应商退货管理">
+  <tableFrame title="采购退货管理">
     <template #extra>
       <el-button @click="handleExport">导出数据<el-icon :size="22"><UploadFilled /></el-icon></el-button>
     </template>
@@ -529,4 +529,5 @@ const selectedRow = ref(null);
     top: 10px;
     right: 10px;
   }
+	}
 </style>
