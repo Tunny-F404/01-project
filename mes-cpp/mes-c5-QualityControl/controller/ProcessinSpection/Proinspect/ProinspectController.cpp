@@ -9,13 +9,13 @@ Uint64JsonVO::Wrapper ProinspectController::execAddrecord(const ProinspectDTO::W
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if (!dto->record_id || !dto->qc_type || !dto->qc_id || !dto->line_id || !dto->defect_name || !dto->defect_level)
+	if (!dto->qc_type || !dto->qc_id || !dto->line_id || !dto->defect_name || !dto->defect_level)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->record_id < 0 || dto->qc_type->empty() || dto->qc_id < 0 || dto->line_id < 0 || dto->defect_name->empty() || dto->defect_level->empty())
+	if (dto->qc_type->empty() || dto->qc_id < 0 || dto->line_id < 0 || dto->defect_name->empty() || dto->defect_level->empty())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
