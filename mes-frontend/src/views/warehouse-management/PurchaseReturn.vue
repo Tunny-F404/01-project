@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import tableFrame from "@/components/table-list-use/table-text.vue";
 import request from "@/apis/request.js";
-import { url } from "inspector";
+
 
 // 搜索表单
 const rtCode = ref("");
@@ -169,12 +169,7 @@ const handleUpdate = (row) => {
   dialogTitle.value = "修改退货单";
   dialogVisible.value = true;
 };
-// import  getInfo  from "src/views/sample/basic-data/tests/MdUnitMeasureController.ts";
-import {mdUnitMeasureController} from "src/views/sample/basic-data/tests/MdUnitMeasureController.ts";
-mdUnitMeasureController.getInfo(2)
-const get = () => {
- url:
-}
+
 const data = mdUnitMeasureController.getInfo(2)
 //模拟删除
 const handleDelete = async (row) => {

@@ -1,4 +1,16 @@
+
 <script setup lang="ts">
+
+</script>
+
+<template>
+1111
+</template>
+
+<style scoped>
+
+</style>
+<!-- <script setup lang="ts">
 import { listNotice, getNotice, delNotice, addNotice, updateNotice } from "@/api/system/notice";
 const loading = ref(true)
 const ids = ref('')
@@ -218,4 +230,4 @@ const ids = ref('')
 
     <style scoped>
 
-    </style>
+    </style> -->

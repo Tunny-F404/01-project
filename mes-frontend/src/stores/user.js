@@ -229,6 +229,49 @@ let testMenus = [
 			},
 		],
 	},
+	//架构管理
+	{
+		id: 6,
+		text: "架构管理",
+		icon: "Management",
+		children: [
+			{
+				id: 2,
+				text: "组织管理",
+				href: "/un-51",
+				icon: "Management",
+				pid: 6,
+			},
+			{
+				id: 3,
+				text: "采购入库",
+				href: "/un-52",
+				icon: "Management",
+				pid: 6,
+			},
+			{
+				id: 4,
+				text: "采购退货",
+				href: "/un-53",
+				icon: "Management",
+				pid: 6,
+			},
+			{
+				id: 5,
+				text: "仓库管理4",
+				href: "/un-54",
+				icon: "Management",
+				pid: 6,
+			},
+			{
+				id: 6,
+				text: "订单管理5",
+				href: "/un-55",
+				icon: "Management",
+				pid: 6,
+			},
+		],
+	},
 ];
 
 export const userStore = defineStore("user", {
