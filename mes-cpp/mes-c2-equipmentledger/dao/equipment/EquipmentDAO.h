@@ -37,7 +37,7 @@ public:
 	// 通过设备ID查询数据
 	list<dvMachineryDO> selectWithId(const EquipmentDetailQuery::Wrapper& query);
 	// 插入数据
-	uint64_t insert(const dvMachineryDO& iObj);
+	uint64_t insert( dvMachineryDO& iObj);
 	//通过设备类型名称获得设备类型ID
 	list<dvMachineryTypeDO> getMachinerytypeidByname(std::string name);
 	//通过车间名称获得车间ID

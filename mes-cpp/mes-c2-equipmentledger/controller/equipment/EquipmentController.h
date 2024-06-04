@@ -45,9 +45,9 @@ public:
 		// 定义其他查询参数描述
 	
 		//设备编码
-		API_DEF_ADD_QUERY_PARAMS(String, "eCode", ZH_WORDS_GETTER("equipment.fields.ecode"), "english", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "eCode", ZH_WORDS_GETTER("equipment.fields.ecode"), "M0066", false);
 		//设备名称
-		API_DEF_ADD_QUERY_PARAMS(String, "eName", ZH_WORDS_GETTER("equipment.fields.ename"), "tnb", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "eName", ZH_WORDS_GETTER("equipment.fields.ename"), "TextileMachinery", false);
 	}
 	// 1 定义设备列表查询接口处理
 	ENDPOINT(API_M_GET, "/equipment-ledger/query-equipment", queryEquipment, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -68,7 +68,7 @@ public:
 		// 定义其他查询参数描述
 		
 		//设备ID
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "eId", ZH_WORDS_GETTER("equipment.fields.id"),1, true);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "eId", ZH_WORDS_GETTER("equipment.fields.id"),217, true);
 	}
 	// 2 定义设备详情查询接口处理
 	ENDPOINT(API_M_GET, "/equipment-ledger/query-detail", queryEquipmentDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -90,7 +90,7 @@ public:
 	// 3 定义新增接口处理
 	ENDPOINT(API_M_POST, "/equipment-ledger/add-equipment", addEquipment, BODY_DTO(addEquipmentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execAddEquipment(dto));
+		API_HANDLER_RESP_VO(execAddEquipment(dto, authObject->getPayload()));
 	}
 
 	//4 定义修改设备端点描述
@@ -106,7 +106,7 @@ public:
 	ENDPOINT(API_M_PUT, "/equipment-ledger/modify-equipment", modifyEquipment, BODY_DTO(modifyEquipmentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 
 		//呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(executeModifyEquipment(dto));
+		API_HANDLER_RESP_VO(executeModifyEquipment(dto, authObject->getPayload()));
 	}
 
 	
@@ -119,9 +119,9 @@ private:
 	//获取设备详情
 	EquipmentDetailJsonVO::Wrapper execEquipmentDetail(const EquipmentDetailQuery::Wrapper& query);
 	//增加设备
-	Uint64JsonVO::Wrapper execAddEquipment(const addEquipmentDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddEquipment(const addEquipmentDTO::Wrapper& dto, const PayloadDTO& payload);
 	//修改设备
-	Uint64JsonVO::Wrapper executeModifyEquipment(const modifyEquipmentDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper executeModifyEquipment(const modifyEquipmentDTO::Wrapper& dto, const PayloadDTO& payload);
 	
 };
 

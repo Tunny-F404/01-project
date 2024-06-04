@@ -66,12 +66,12 @@ class addEquipmentDTO :public oatpp::DTO
 	API_DTO_FIELD_DEFAULT(String, eName, ZH_WORDS_GETTER("equipment.fields.ename"));
 	//品牌
 	API_DTO_FIELD_DEFAULT(String, brand, ZH_WORDS_GETTER("equipment.fields.brand"));
-	//设备分类名称
-	API_DTO_FIELD_DEFAULT(String, tName, ZH_WORDS_GETTER("equipment.fields.tname"));
+	//设备分类ID
+	API_DTO_FIELD_DEFAULT(UInt64, tId, ZH_WORDS_GETTER("equipment.fields.tid"));
 	//规格型号
 	API_DTO_FIELD_DEFAULT(String,spec , ZH_WORDS_GETTER("equipment.fields.spec"));
-	//所属车间名称
-	API_DTO_FIELD_DEFAULT(String, workshopName, ZH_WORDS_GETTER("equipment.fields.workshopname"));
+	//所属车间ID
+	API_DTO_FIELD_DEFAULT(UInt64, workshopId, ZH_WORDS_GETTER("equipment.fields.workshopid"));
 	//备注
 	API_DTO_FIELD_DEFAULT(String, note, ZH_WORDS_GETTER("equipment.fields.note"));
 
