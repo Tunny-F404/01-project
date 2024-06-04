@@ -153,28 +153,27 @@ int ProcessInspectionDAO::updateFinishOrders(const ProcessinSpectionDO& uObj) {
 }
 
 uint64_t ProcessInspectionDAO::insert(const ProcessinSpectionDO& iObj) {
-	string sql = "INSERT INTO 'qc_ipqc' \
-		('ipqc_code','ipqc_name','ipqc_type','workorder_code',\
-		'workorder_name','workstation_code','workstation_name',\
-		'item_code','item_name','specification','process_code',\
-		'process_name','task_code','task_name','unit_of_measure',\
-		'quantity_check', 'quantity_unqualified','quantity_qualified',\
-		'cr_quantity','maj_quantity','min_quantity','inspect_date',\
-		'check_result', 'inspector','remark'\
-		 VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+	string sql = "INSERT INTO `qc_ipqc` \
+		(`ipqc_code`, `ipqc_name`, `ipqc_type`,`template_id`, `workorder_id`,\
+		`workstation_id`,`item_id`,`task_code`,`task_name`,`workorder_code`,\
+		`workorder_name`, `workstation_code`, `workstation_name`, `process_code`,\
+		`process_name`,`item_code`, `item_name`, `specification`, `unit_of_measure`,\
+		`quantity_check`, `quantity_unqualified`, `quantity_qualified`, `cr_quantity`,\
+		`maj_quantity`, `min_quantity`, `check_result`, `inspect_date`, `inspector`, `remark`)\
+		 VALUES (?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	return sqlSession->executeInsert(sql,
-		"%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d%d%d%d%d%d%s%s%s%s",
+		"%s%s%s%i%i%i%i%s%s%s%s%s%s%s%s%s%s%s%s%d%d%d%d%d%d%s%s%s%s",
 		iObj.getIpqc_Code(), iObj.getIpqc_Name(),
-		iObj.getIpqc_Type(), iObj.getWorkorder_Code(),
+		iObj.getIpqc_Type(), 0, 0, 0, 0, iObj.getTask_Code(),
+		iObj.getTask_Name(), iObj.getWorkorder_Code(),
 		iObj.getWorkorder_Name(), iObj.getWorkstation_Code(),
-		iObj.getWorkstation_Name(), iObj.getItem_Code(),
+		iObj.getWorkstation_Name(), iObj.getProcess_Code(),
+		iObj.getProcess_Name(), iObj.getItem_Code(),
 		iObj.getItem_Name(), iObj.getSpecification(),
-		iObj.getProcess_Code(), iObj.getProcess_Name(),
-		iObj.getTask_Code(), iObj.getTask_Name(),
 		iObj.getUnit_Of_Measure(), iObj.getQuantity_Check(),
 		iObj.getQuantity_Unqualified(), iObj.getQuantity_Qualified(),
 		iObj.getCr_Quantity(), iObj.getMaj_Quantity(),
-		iObj.getMin_Quantity(), iObj.getInspect_Date(),
-		iObj.getCheck_Result(), iObj.getInspector(),
+		iObj.getMin_Quantity(), iObj.getCheck_Result(),
+		iObj.getInspect_Date(), iObj.getInspector(),
 		iObj.getRemark());
 }

@@ -64,3 +64,8 @@ bool DetectionTemplateDAO::update(const DetectionTemplateDO& iObj)
 	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%ull", iObj.getTemplate_Code(),iObj.getTemplate_Name(),iObj.getQc_Types(),iObj.getEnable_Flag(),iObj.getRemark(), iObj.getTemplate_Id());
 }
 
+list<DetectionTemplateDO> DetectionTemplateDAO::selectByTemplate_code(string template_code) {
+	string sql = "SELECT template_code,template_name,qc_types,enable_flag,remark FROM qc_template WHERE `template_code` LIKE CONCAT('%',?,'%')";
+	DetectionTemplateDetilesMapper mapper;
+	return sqlSession->executeQuery<DetectionTemplateDO, DetectionTemplateDetilesMapper>(sql, mapper, "%s", template_code);
+}

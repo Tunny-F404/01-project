@@ -20,4 +20,19 @@ public:
 	}
 };
 
+class DetectionTemplateDetilesMapper : public Mapper<DetectionTemplateDO>
+{
+public:
+	DetectionTemplateDO mapper(ResultSet* resultSet) const override
+	{
+		DetectionTemplateDO data;
+		data.setTemplate_Code(resultSet->getString(1));
+		data.setTemplate_Name(resultSet->getString(2));
+		data.setQc_Types(resultSet->getString(3));
+		data.setEnable_Flag(resultSet->getString(4));
+		data.setRemark(resultSet->getString(5));
+		return data;
+	}
+};
+
 #endif // !_DETECTIONTEMPLATE_MAPPER_

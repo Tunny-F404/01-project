@@ -159,29 +159,29 @@ uint64_t ProcessInspectionService::saveData(const ProcessinSpectionDTO::Wrapper&
 		Ipqc_Code, ipqc_code,
 		Ipqc_Name, ipqc_name,
 		Ipqc_Type, ipqc_type,
+		Task_Code, task_code,
+		Task_Name, task_name,
 		Workorder_Code, workorder_code,
 		Workorder_Name, workorder_name,
 		Workstation_Code, workstation_code,
 		Workstation_Name, workstation_name,
-		Quantity_Check, quantity_check,
+		Process_Code, process_code,
+		Process_Name, process_name,
 		Item_Code, item_code,
 		Item_Name, item_name,
-		Unit_Of_Measure, unit_of_measure,
-		Specification, specification
+		Specification, specification,
+		Unit_Of_Measure, unit_of_measure
 	)
 		ZO_STAR_DOMAIN_DTO_TO_DO(
 			data, dto,
-			Process_Code, process_code,
-			Process_Name, process_name,
-			Task_Code, task_code,
-			Task_Name, task_name,
+			Quantity_Check, quantity_check,
 			Quantity_Unqualified, quantity_unqualified,
 			Quantity_Qualified, quantity_qualified,
 			Cr_Quantity, cr_quantity,
 			Maj_Quantity, maj_quantity,
 			Min_Quantity, min_quantity,
-			Inspect_Date, inspect_date,
 			Check_Result, check_result,
+			Inspect_Date, inspect_date,
 			Inspector, inspector,
 			Remark, remark
 		)

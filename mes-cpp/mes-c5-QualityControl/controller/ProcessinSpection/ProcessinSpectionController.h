@@ -113,8 +113,7 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式			 
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
-		//// 定义其他查询参数描述
-		
+		// 定义其他查询参数描述
 	}
 	//  定义添加过程检验接口处理
 	ENDPOINT(API_M_POST, "/processinspection", addProcessInspection, BODY_DTO(ProcessinSpectionDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {

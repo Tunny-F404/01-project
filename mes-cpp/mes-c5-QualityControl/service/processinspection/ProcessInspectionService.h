@@ -41,7 +41,7 @@ public:
 	bool updateConfirmOrdersData(const ProcessinSpectionDTO::Wrapper& dto);
 	// 完成检验单
 	bool updateFinishOrdersData(const ProcessinSpectionDTO::Wrapper& dto);
-
+	//新增数据
 	uint64_t saveData(const ProcessinSpectionDTO::Wrapper& dto);
 };
 #endif

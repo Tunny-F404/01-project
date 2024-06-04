@@ -21,5 +21,7 @@ public:
 	uint64_t insert(const DetectionTemplateDO& iObj);
 	//修改数据
 	bool update(const DetectionTemplateDO& iObj);
+	// 获取检验模板详情
+	list<DetectionTemplateDO> selectByTemplate_code(string template_code);
 };
 #endif // !_Ddt_DAO_

@@ -64,3 +64,23 @@ bool DetectionTemplateService::update(const DetectionTemplateDTO::Wrapper& dto)
 	sub.setRemark(dto->remark);
 	return dao.update(sub);
 }
+
+DetectionTemplatePageDTO::Wrapper DetectionTemplateService::queryDetecTempDetails(const string& template_code) {
+	// 构建返回对象
+	auto pages = DetectionTemplatePageDTO::createShared();
+	// 查询数据
+	DetectionTemplateDAO dao;
+	list<DetectionTemplateDO> result = dao.selectByTemplate_code(template_code);
+	// 将DO转换成DTO
+	for (DetectionTemplateDO sub : result)
+	{
+		auto dto = DetectionTemplateDTO::createShared();
+		// 		dto->id = sub.getId();
+		// 		dto->name = sub.getName();
+		// 		dto->sex = sub.getSex();
+		// 		dto->age = sub.getAge();
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, template_code, Template_Code, template_name, Template_Name, qc_types, Qc_Types, enable_flag, Enable_Flag, remark, Remark)
+		pages->addData(dto);
+	}
+	return pages;
+}

@@ -86,9 +86,16 @@ Uint64JsonVO::Wrapper DetectionTemplateController::execAddDetectionTemplate(cons
 	return {};
 }
 
-DetectionTemplatePageJsonVO::Wrapper DetectionTemplateController::execQueryDetecTempDetails(const UInt64& template_id, const PayloadDTO& payload)
+DetectionTemplatePageJsonVO::Wrapper DetectionTemplateController::execQueryDetecTempDetails(const String& template_code, const PayloadDTO& payload)
 {
-	return DetectionTemplatePageJsonVO::Wrapper();
+	// 定义一个Service
+	DetectionTemplateService service;
+	// 查询数据
+	auto result = service.queryDetecTempDetails(template_code);
+	// 响应结果
+	auto jvo = DetectionTemplatePageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
 
 

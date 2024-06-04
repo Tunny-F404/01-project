@@ -82,15 +82,13 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(DetectionTemplatePageJsonVO);
-		// 定义分页查询参数描述
-		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "template_id", ZH_WORDS_GETTER("detectiontemplate.field.template_id"), 1, true);
+		API_DEF_ADD_QUERY_PARAMS(String, "template_code", ZH_WORDS_GETTER("DetectionTemplate.field.template_code"), "", true);
 	}
 	//  定义获取检验模板详情接口处理
-	ENDPOINT(API_M_GET, "/detectiontemplate", queryDetecTempDetails, QUERY(UInt64, template_id), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/detectiontemplate", queryDetecTempDetails, QUERY(String, template_code), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execQueryDetecTempDetails(template_id, authObject->getPayload()));
+		API_HANDLER_RESP_VO(execQueryDetecTempDetails(template_code, authObject->getPayload()));
 	}
 
 private:
@@ -103,7 +101,7 @@ private:
 	// 新增数据
 	Uint64JsonVO::Wrapper execAddDetectionTemplate(const DetectionTemplateDTO::Wrapper& dto);
 	//  获取检验模板详情
-	DetectionTemplatePageJsonVO::Wrapper execQueryDetecTempDetails(const UInt64& template_id, const PayloadDTO& payload);
+	DetectionTemplatePageJsonVO::Wrapper execQueryDetecTempDetails(const String& template_code, const PayloadDTO& payload);
 };
 
 // 0 取消API控制器使用宏

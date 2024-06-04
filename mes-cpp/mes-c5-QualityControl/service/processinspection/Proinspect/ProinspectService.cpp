@@ -31,7 +31,7 @@ uint64_t  ProinspectService::saveData(const ProinspectDTO::Wrapper& dto)
 	// 	data.setAge(dto->age.getValue(1));
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Record_id, record_id, Qc_type, qc_type, Qc_id, qc_id, Line_id, line_id, Defect_name, defect_name, Defect_level, defect_level, Remark, remark, Defect_quantity, defect_quantity)
 		// 执行数据添加
-		ProinspectDAO dao;
+	ProinspectDAO dao;
 	return dao.insert(data);
 }
 
