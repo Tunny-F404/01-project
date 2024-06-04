@@ -30,7 +30,7 @@ class warehouseAreaListDTO : public oatpp::DTO
 {
 	DTO_INIT(warehouseAreaListDTO, DTO);
 	//库区ID-必填
-	API_DTO_FIELD(UInt64,area_id, ZH_WORDS_GETTER("warehouse-area.field.id"),true,1)
+	API_DTO_FIELD(UInt64, area_id, ZH_WORDS_GETTER("warehouse-area.field.id"), true, 1);
 	//编码-必填
 	API_DTO_FIELD(String, area_code, ZH_WORDS_GETTER("warehouse-area.field.code"), true, "default code");
 	//名称-必填
