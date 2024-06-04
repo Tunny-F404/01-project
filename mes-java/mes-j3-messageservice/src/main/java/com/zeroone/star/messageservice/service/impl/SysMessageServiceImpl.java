@@ -30,7 +30,7 @@ import com.zeroone.star.project.j3.vo.LoginResultVO;
 import com.zeroone.star.project.j3.vo.LoginVO;
 import com.zeroone.star.project.vo.ResultStatus;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -226,9 +226,6 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
 
     @Autowired
     private SessionService sessionService;
-
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
 
     @Resource
     private RocketMQTemplate rocketMQTemplate;
