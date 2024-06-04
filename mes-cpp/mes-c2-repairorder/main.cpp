@@ -52,9 +52,9 @@ bool getStartArg(int argc, char* argv[]) {
 	int dbMax = 5;
 #ifdef LINUX
 	// Nacos≈‰÷√≤Œ ˝
-	std::string nacosAddr = "http://121.40.75.117:8848/nacos";
+	std::string nacosAddr = "121.40.75.117:8848";
 	std::string nacosNs = "123";
-	std::string serviceName = "nacosksw";
+	std::string serviceName = "mes-test";
 	std::string regIp = "121.40.75.117";
 #endif
 
