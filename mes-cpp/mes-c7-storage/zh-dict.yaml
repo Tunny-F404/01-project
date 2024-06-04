@@ -1,0 +1,26 @@
+product: 
+ fields:
+  product_name: 产品名称
+  product_code: 产品编码
+  recpt_code: 入库单编号
+  workorder_id: 生产工单id
+  warehouse_name: 仓库名称
+  recpt_id: 入库单id
+  recpt_name: 入库单名称
+  location_name: 库区名称
+  area_name: 库位名称
+  recpt_date: 入库日期
+  status: 单据状态
+  receivedstorage: 接收仓库
+  remark: 备注
+  summary: 列表分页查询
+  detail: 详细信息
+  add: 增加单据
+  modify: 修改单据
+  workorder_code: 生产工单编码
+  warehouse_id: 仓库id
+  warehouse_code: 仓库编码
+  location_id: 库区id
+  location_code: 库区编码
+  area_id: 库位id
+  area_code: 库位编码
