@@ -70,4 +70,5 @@ public class ProductController implements ProductManageApis {
         ProductDTO dto =  productService.myGetById(id);
         return JsonVO.success(dto);
     }
+
 }
