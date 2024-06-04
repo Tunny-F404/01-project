@@ -12,37 +12,16 @@
 		"module": "ESNext",
 		"esModuleInterop": true,
 		// Web 应用需要 DOM 环境
-		"lib": [
-			"ESNext",
-			"ES2020",
-			"DOM",
-			"DOM.Iterable"
-		],
+		"lib": ["ESNext", "ES2020", "DOM", "DOM.Iterable"],
 		"paths": {
-			"@/*": [
-				"src/*"
-			],
-			"components/*": [
-				"src/components/*"
-			],
-			"types/*": [
-				"src/types/*"
-			],
-			"views/*": [
-				"src/views/*"
-			],
-			"api/*": [
-				"src/apis/*"
-			],
-			"stores/*": [
-				"src/stores/*"
-			],
-			"router/*": [
-				"src/router/*"
-			],
-			"utils/*": [
-				"src/utils/*"
-			],
+			"@/*": ["src/*"],
+			"components/*": ["src/components/*"],
+			"types/*": ["src/types/*"],
+			"views/*": ["src/views/*"],
+			"api/*": ["src/apis/*"],
+			"stores/*": ["src/stores/*"],
+			"router/*": ["src/router/*"],
+			"utils/*": ["src/utils/*"]
 		},
 		"skipLibCheck": true,
 		/* Bundler mode */
@@ -63,7 +42,7 @@
 			"vite/client",
 			"node",
 			"qs",
-			"unplugin-auto-import",
+			"unplugin-auto-import"
 		],
 		"allowJs": true
 	},
@@ -80,14 +59,9 @@
 		// 导入自动生成的类型声明文件
 		"auto-imports.d.ts",
 		"components.d.ts",
-		"src/vite-env.d.ts",
+		"src/vite-env.d.ts"
 	],
-	"exclude": [
-		"node_modules",
-		"dist",
-		"public",
-		"src/assets"
-	],
+	"exclude": ["node_modules", "dist", "public", "src/assets"],
 	"references": [
 		{
 			"path": "./tsconfig.node.json"

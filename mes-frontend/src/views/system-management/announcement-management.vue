@@ -1,15 +1,8 @@
+<script setup lang="ts"></script>
 
-<script setup lang="ts">
+<template>1111</template>
 
-</script>
-
-<template>
-1111
-</template>
-
-<style scoped>
-
-</style>
+<style scoped></style>
 <!-- <script setup lang="ts">
 import { listNotice, getNotice, delNotice, addNotice, updateNotice } from "@/api/system/notice";
 const loading = ref(true)
