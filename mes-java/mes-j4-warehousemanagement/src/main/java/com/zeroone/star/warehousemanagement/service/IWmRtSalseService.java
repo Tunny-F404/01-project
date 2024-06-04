@@ -1,6 +1,5 @@
 package com.zeroone.star.warehousemanagement.service;
 
-import com.zeroone.star.project.dto.j4.warehousemanagement.rtsalse.RtSalseDTO;
 import com.zeroone.star.project.dto.j4.warehousemanagement.rtsalse.RtSalsesDTO;
 import com.zeroone.star.warehousemanagement.entity.WmRtSalse;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -38,14 +37,6 @@ public interface IWmRtSalseService extends IService<WmRtSalse> {
      */
     public List<WmRtSalse> selectWmRtSalseList(WmRtSalse wmRtSalse);
 
-
-    /**
-     *
-     * @param rtId
-     * @return
-     */
-    public List<RtSalseDTO> getTxBeans(Long rtId);
-
     /**
      * 检查编号唯一性
      * @return
@@ -68,4 +59,12 @@ public interface IWmRtSalseService extends IService<WmRtSalse> {
      * @return 结果
      */
     public int updateWmRtSalse(RtSalsesDTO rtSalsesDTO);
+
+    /**
+     * 删除产品销售退货单
+     *
+     * @param rtIds 退货单id
+     * @return 结果
+     */
+    String removes(List<Long> rtIds);
 }

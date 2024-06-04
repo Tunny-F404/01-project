@@ -1,15 +1,18 @@
 package com.zeroone.star.warehousemanagement.service.impl;
 
-import com.zeroone.star.project.dto.j4.warehousemanagement.rtsalse.RtSalseDTO;
 import com.zeroone.star.project.dto.j4.warehousemanagement.rtsalse.RtSalsesDTO;
+import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.warehousemanagement.constant.Constants;
+import com.zeroone.star.warehousemanagement.constant.orderConstant;
 import com.zeroone.star.warehousemanagement.entity.WmRtSalse;
+import com.zeroone.star.warehousemanagement.mapper.WmRtSalseLineMapper;
 import com.zeroone.star.warehousemanagement.mapper.WmRtSalseMapper;
 import com.zeroone.star.warehousemanagement.service.IWmRtSalseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.warehousemanagement.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -28,6 +31,8 @@ public class WmRtSalseServiceImpl extends ServiceImpl<WmRtSalseMapper, WmRtSalse
 
     @Resource
     private WmRtSalseMapper wmRtSalseMapper;
+    @Resource
+    private WmRtSalseLineMapper wmRtSalseLineMapper;
 
     /*
     * 删除销售退货单
@@ -59,11 +64,6 @@ public class WmRtSalseServiceImpl extends ServiceImpl<WmRtSalseMapper, WmRtSalse
     public List<WmRtSalse> selectWmRtSalseList(WmRtSalse wmRtSalse)
     {
         return wmRtSalseMapper.selectWmRtSalseList(wmRtSalse);
-    }
-
-    @Override
-    public List<RtSalseDTO> getTxBeans(Long rtId) {
-        return wmRtSalseMapper.getTxBeans(rtId);
     }
 
     @Override
@@ -104,5 +104,22 @@ public class WmRtSalseServiceImpl extends ServiceImpl<WmRtSalseMapper, WmRtSalse
         WmRtSalse wmRtSalse = new WmRtSalse();
         BeanUtils.copyProperties(rtSalsesDTO,wmRtSalse);
         return wmRtSalseMapper.updateWmRtSalse(wmRtSalse);
+    }
+
+    @Transactional
+    @Override
+    public String removes(List<Long> rtIds) {
+        for (Long rtId: rtIds
+        ) {
+            WmRtSalse rtSalse = wmRtSalseMapper.selectWmRtSalseByRtId(rtId);
+            if(!orderConstant.ORDER_STATUS_PREPARE.equals(rtSalse.getStatus())){
+                return  "只能删除草稿状态单据！";
+            }
+            wmRtSalseLineMapper.deleteByRtSalseIds(rtId);
+        }
+        if (wmRtSalseMapper.deleteByIds(rtIds)==0) {
+            return "删除失败！";
+        }
+        return null;
     }
 }

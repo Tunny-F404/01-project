@@ -1,6 +1,5 @@
 package com.zeroone.star.warehousemanagement.mapper;
 
-import com.zeroone.star.project.dto.j4.warehousemanagement.rtsalse.RtSalseDTO;
 import com.zeroone.star.warehousemanagement.entity.WmRtSalse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -33,13 +32,6 @@ public interface WmRtSalseMapper extends BaseMapper<WmRtSalse> {
      * @return 产品销售退货单集合
      */
     public List<WmRtSalse> selectWmRtSalseList(WmRtSalse wmRtSalse);
-
-    /**
-     *
-     * @param rtId
-     * @return
-     */
-    public List<RtSalseDTO> getTxBeans(Long rtId);
 
     /**
      * 检查编号唯一性

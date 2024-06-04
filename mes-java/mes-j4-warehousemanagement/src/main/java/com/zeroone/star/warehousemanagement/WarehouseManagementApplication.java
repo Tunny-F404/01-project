@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableTransactionManagement(proxyTargetClass = true)
+@EnableTransactionManagement
 //@EnableFeignClients
 public class WarehouseManagementApplication {
 

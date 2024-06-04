@@ -95,6 +95,9 @@ public class WmRtSalseController implements RtSalseApis{
         if(Constants.NOT_UNIQUE.equals(wmRtSalseService.checkUnique(rtSalsesDTO))){
             return JsonVO.fail("退货单号已存在!");
         }
+
+        //这里省去了3个判断warehouse,location,area的id如果不为空，需要从warehouse,location,area中查找code和name赋值给这里的RtSalsesDTO
+
         if (wmRtSalseService.updateWmRtSalse(rtSalsesDTO)==0) {
             return JsonVO.fail("修改失败!");
         }
@@ -104,20 +107,12 @@ public class WmRtSalseController implements RtSalseApis{
     /**
      * 删除产品销售退货单
      */
-    @Transactional
     @ApiOperation("删除销售退货单基本信息接口")
     @DeleteMapping
     public JsonVO remove(@RequestParam List<Long> rtIds) {
-        for (Long rtId: rtIds
-        ) {
-            WmRtSalse rtSalse = wmRtSalseService.selectWmRtSalseByRtId(rtId);
-            if(!orderConstant.ORDER_STATUS_PREPARE.equals(rtSalse.getStatus())){
-                return  JsonVO.fail("只能删除草稿状态单据！");
-            }
-            wmRtSalseLineService.deleteByRtId(rtId);
-        }
-        if (wmRtSalseService.deleteByIds(rtIds)==0) {
-            return JsonVO.fail("删除失败！");
+        String result = wmRtSalseService.removes(rtIds);
+        if(result!=null){
+            return JsonVO.fail(result);
         }
         return JsonVO.success("删除成功！");
     }
@@ -127,7 +122,6 @@ public class WmRtSalseController implements RtSalseApis{
      * @param rtId
      * @return
      */
-    @Transactional
     @ApiOperation("执行销售退货接口")
     @PutMapping("/{rtId}")
     public JsonVO execute(@PathVariable Long rtId){
@@ -138,6 +132,9 @@ public class WmRtSalseController implements RtSalseApis{
         if(CollectionUtils.isEmpty(lines)){
             return JsonVO.fail("请添加退货单行信息！");
         }
+
+        //这里省去了销售退货的逻辑（待完善）
+
         rtSalse.setStatus(orderConstant.ORDER_STATUS_FINISHED);
         RtSalsesDTO rtSalsesDTO = new RtSalsesDTO();
         BeanUtils.copyProperties(rtSalse,rtSalsesDTO);
