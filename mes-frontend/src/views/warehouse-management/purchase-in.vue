@@ -126,7 +126,6 @@ const onSizeChange = (size) => {
   parms.value.pagesize = size;
   getPageList();
 };
-vue
 const onCurrentChange = (page) => {
   parms.value.pagenum = page;
   getPageList();
