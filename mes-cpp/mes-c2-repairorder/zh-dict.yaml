@@ -50,3 +50,6 @@ repairorder:
    confirm_by: 验收人员
    status: "单据状态 (PREPARE: 草稿; CONFIRMED: 已确认; APPROVING: 审批中; APPROVED: 已审批; FINISHED: 已完成)"
    remark: 备注
+  example: 
+   machinery_name: WG-A1型纺织机
+   machinery_brand: 万国

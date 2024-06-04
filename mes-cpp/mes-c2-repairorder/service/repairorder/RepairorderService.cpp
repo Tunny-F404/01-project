@@ -2,7 +2,7 @@
  * Copyright Zero One Star. All rights reserved.
  *
  * @Author: Heng_Xin
- * @Date: ${time}$
+ * @Date: 2024/6/4 22:24:35
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
 #include "stdafx.h"
 #include "RepairorderService.h"
 #include "../../dao/repairorder/RepairorderDAO.h"
+#include "SimpleDateTimeFormat.h"
 
 RepairorderPageDTO::Wrapper RepairorderService::listAll(const RepairorderQuery::Wrapper& query)
 {
@@ -89,7 +90,7 @@ RepairorderDetailsDTO::Wrapper RepairorderService::getData(const RepairorderDeta
     return pages;
 }
 
-uint64_t RepairorderService::saveData(const RepairorderDetailsDTO::Wrapper& dto)
+uint64_t RepairorderService::saveData(const RepairorderDetailsDTO::Wrapper& dto, const PayloadDTO& payload)
 {
     DvRepairDO data;
     ZO_STAR_DOMAIN_DTO_TO_DO(data, dto,
@@ -102,11 +103,13 @@ uint64_t RepairorderService::saveData(const RepairorderDetailsDTO::Wrapper& dto)
         Machinery_type_id, machineryTypeId,
         Require_date, requireDate,
         Remark, remark)
+    data.setCreate_by(payload.getUsername());
+    data.setCreate_time(SimpleDateTimeFormat::format());
     RepairorderDAO dao;
     return dao.insert(data);
 }
 
-bool RepairorderService::updateData(const RepairorderDetailsDTO::Wrapper& dto)
+bool RepairorderService::updateData(const RepairorderDetailsDTO::Wrapper& dto, const PayloadDTO& payload)
 {
     DvRepairDO data;
     ZO_STAR_DOMAIN_DTO_TO_DO(data, dto,
@@ -120,6 +123,8 @@ bool RepairorderService::updateData(const RepairorderDetailsDTO::Wrapper& dto)
         Machinery_type_id, machineryTypeId,
         Require_date, requireDate,
         Remark, remark)
+    data.setUpdate_by(payload.getUsername());
+    data.setUpdate_time(SimpleDateTimeFormat::format());
     RepairorderDAO dao;
     return dao.update(data) == 1;
 }

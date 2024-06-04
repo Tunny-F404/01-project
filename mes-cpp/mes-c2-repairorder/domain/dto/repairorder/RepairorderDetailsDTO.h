@@ -34,31 +34,31 @@ class RepairorderDetailsDTO : public oatpp::DTO
     API_DTO_FIELD(UInt64, repairId, ZH_WORDS_GETTER("repairorder.query.fields.repair_id"), true, 1);
     
     // 维修单编号
-    API_DTO_FIELD(String, repairCode, ZH_WORDS_GETTER("repairorder.query.fields.repair_code"), true, "HX666");
+    API_DTO_FIELD(String, repairCode, ZH_WORDS_GETTER("repairorder.query.fields.repair_code"), true, "REP20248120");
 
     // 维修单名称
-    API_DTO_FIELD_DEFAULT(String, repairName, ZH_WORDS_GETTER("repairorder.query.fields.repair_name"));
+    API_DTO_FIELD(String, repairName, ZH_WORDS_GETTER("repairorder.query.fields.repair_name"), false, ZH_WORDS_GETTER("repairorder.query.fields.repair_name"));
 
     // 设备ID
     API_DTO_FIELD(UInt64, machineryId, ZH_WORDS_GETTER("repairorder.query.fields.machinery_id"), true, 1);
 
     // 设备编码 / 设备编号(同一个意思)
-    API_DTO_FIELD(String, machineryCode, ZH_WORDS_GETTER("repairorder.query.fields.machinery_code"), true, "M666");
+    API_DTO_FIELD(String, machineryCode, ZH_WORDS_GETTER("repairorder.query.fields.machinery_code"), true, "M0048");
 
     // 设备名称
-    API_DTO_FIELD(String, machineryName, ZH_WORDS_GETTER("repairorder.query.fields.machinery_name"), true, "Linux");
+    API_DTO_FIELD(String, machineryName, ZH_WORDS_GETTER("repairorder.query.fields.machinery_name"), true, ZH_WORDS_GETTER("repairorder.query.example.machinery_name"));
 
     // 品牌
-    API_DTO_FIELD_DEFAULT(String, machineryBrand, ZH_WORDS_GETTER("repairorder.query.fields.machinery_brand"));
+    API_DTO_FIELD(String, machineryBrand, ZH_WORDS_GETTER("repairorder.query.fields.machinery_brand"), false, ZH_WORDS_GETTER("repairorder.query.example.machinery_brand"));
 
     // 设备类型ID 
-    API_DTO_FIELD_DEFAULT(UInt64, machineryTypeId, ZH_WORDS_GETTER("repairorder.query.fields.machinery_type_id"));
+    API_DTO_FIELD(UInt64, machineryTypeId, ZH_WORDS_GETTER("repairorder.query.fields.machinery_type_id"), false, 1);
 
     // 报修日期
     API_DTO_FIELD(String, requireDate, ZH_WORDS_GETTER("repairorder.query.fields.require_date"), true, "1970-01-01 00:00:00");
 
     // 备注
-    API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("repairorder.query.fields.remark"));
+    API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("repairorder.query.fields.remark"), false, ZH_WORDS_GETTER("repairorder.query.fields.remark"));
 };
 
 #include OATPP_CODEGEN_END(DTO)

@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: Heng_Xin
- @Date: $(time)
+ @Date: 2024/6/4 22:24:58
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -38,9 +38,9 @@ public:
     // 通过ID查询详细信息
     RepairorderDetailsDTO::Wrapper getData(const RepairorderDetailsQuery::Wrapper& id);
     // 保存数据
-    uint64_t saveData(const RepairorderDetailsDTO::Wrapper& dto);
+    uint64_t saveData(const RepairorderDetailsDTO::Wrapper& dto, const PayloadDTO& payload);
     // 修改数据
-    bool updateData(const RepairorderDetailsDTO::Wrapper& dto);
+    bool updateData(const RepairorderDetailsDTO::Wrapper& dto, const PayloadDTO& payload);
     // 通过ID删除数据
     bool removeData(uint64_t id);
 };
