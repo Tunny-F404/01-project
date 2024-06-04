@@ -20,7 +20,47 @@
 #include "ProductRecptController.h"
 #include "service/item-information/ProductRecptService.h"
 
+//controller调用service处理分页查询请求
 ProductRecptPageJsonVO::Wrapper ProductRecptController::execQueryProductRecpt(const ProductRecptQuery::Wrapper& query)
+{//query包含(recpt_code,recpt_name,workorder_code,warehouse_name)
+	//定义service
+	ProductRecptService service;
+	//查询数据
+	auto result = service.listAll(query);//返回PageDTO
+	//响应结果
+	auto jvo = ProductRecptPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
+}
+
+Uint64JsonVO::Wrapper ProductRecptController::execAddProductRecpt(const ProductRecptDTO::Wrapper& dto)
 {
-	return {};
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验:recpt_code workorder_code recpt_date item_id
+	if (!dto->recpt_code || !dto->workorder_code || !dto->recpt_date || !dto->item_id)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 有效值校验
+	if (dto->recpt_code->empty() || dto->workorder_code->empty() || dto->recpt_date->empty() || dto->item_id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ProductRecptService service;
+	// 执行数据新增
+	uint64_t id = service.saveData(dto);
+	if (id > 0) {
+		jvo->success(UInt64(id));
+	}
+	else
+	{
+		jvo->fail(UInt64(id));
+	}
+	//响应结果
+	return jvo;
 }

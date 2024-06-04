@@ -1,13 +1,14 @@
 product-recpt:
  query: 
-  summary: ·ÖÒ³²éÑ¯²úÆ·Èë¿âÊı¾İ
+  summary: åˆ†é¡µæŸ¥è¯¢äº§å“å…¥åº“æ•°æ®
  post: 
-  summary: ĞÂÔöÒ»Ìõ²úÆ·Èë¿âÊı¾İ
+  summary: æ–°å¢ä¸€æ¡äº§å“å…¥åº“æ•°æ®
  field:
-  recpt_code: Èë¿âµ¥±àºÅ
-  recpt_name: Èë¿âµ¥Ãû³Æ
-  workorder_code: Éú²ú¹¤µ¥±àÂë
-  workorder_name: Éú²ú¹¤µ¥Ãû³Æ
-  warehouse_name: ²Ö¿âÃû³Æ
-  recpt_date: Èë¿âÈÕÆÚ
-  remark: ±¸×¢
+  recpt_code: å…¥åº“å•ç¼–å·
+  recpt_name: å…¥åº“å•åç§°
+  workorder_code: ç”Ÿäº§å·¥å•ç¼–ç 
+  workorder_name: ç”Ÿäº§å·¥å•åç§°
+  warehouse_name: ä»“åº“åç§°
+  recpt_date: å…¥åº“æ—¥æœŸ
+  remark: å¤‡æ³¨
+  item_id: äº§å“ç‰©æ–™ID

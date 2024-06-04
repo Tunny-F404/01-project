@@ -29,9 +29,9 @@
 class ProductRecptDTO : public oatpp::DTO
 {
 	DTO_INIT(ProductRecptDTO, DTO);
-	// 入库单编号,必填
+	//入库单编号,必填
 	API_DTO_FIELD(String, recpt_code, ZH_WORDS_GETTER("product-recpt.field.recpt_code"), true, "recpt_code");
-	// 入库单名称，默认：""
+	// 入库单名称,默认:""
 	API_DTO_FIELD_DEFAULT(String, recpt_name, ZH_WORDS_GETTER("product-recpt.field.recpt_name"));
 	//生产工单编码,必填
 	API_DTO_FIELD(String, workorder_code, ZH_WORDS_GETTER("product-recpt.field.workorder_code"), true, "workorder_code");
@@ -41,6 +41,9 @@ class ProductRecptDTO : public oatpp::DTO
 	API_DTO_FIELD(String, recpt_date, ZH_WORDS_GETTER("product-recpt.field.recpt_date"), true, "2024-06-01");
 	//备注
 	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("product-recpt.field.remark"));
+	//产品物料ID,必填
+	API_DTO_FIELD(UInt64, item_id, ZH_WORDS_GETTER("product-recpt.field.item_id"), true, 1);
+
 };
 
 /**
