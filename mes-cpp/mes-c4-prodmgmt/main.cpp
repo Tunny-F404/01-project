@@ -28,51 +28,51 @@
 #include "NacosClient.h"
 #endif
 
-// ï¿½Ç·ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Swaggerï¿½Äµï¿½ï¿½ï¿½
+// ÊÇ·ñÊÇ·¢²¼SwaggerÎÄµµ°ü
 #ifndef _RELEASE_DOC_
-// ï¿½é¿´Swaggerï¿½Äµï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â£¬ï¿½â¿ªï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½Í¹Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
+// ²é¿´SwaggerÎÄµµµÄÊ±ºò²»ÐèÒªÁ¬½ÓÊý¾Ý¿â£¬½â¿ªÏÂÃæµÄ×¢ÊÍ¹Ø±ÕÆô¶¯Á¬½ÓÊý¾Ý¿â
 //#define _RELEASE_DOC_
 #endif
 
 /**
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
- * ×¢ï¿½â£º
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä¸ï¿½Ê½ï¿½ï¿½ï¿½ç£ºsp=8090ï¿½ï¿½sn=feign-cpp-sample
- * Ç°×ºï¿½ï¿½ï¿½ï¿½ÊµÖµÖ®ï¿½ï¿½Ê¹ï¿½ï¿½=ï¿½Ö¸ï¿½
+ * ½âÎöÆô¶¯²ÎÊý
+ * ×¢Òâ£º
+ * ²ÎÊýÖÐÊý¾ÝÐèÒªÂú×ãÒ»¶¨µÄ¸ñÊ½£¬Èç£ºsp=8090¡¢sn=feign-cpp-sample
+ * Ç°×ºÓëÕæÊµÖµÖ®¼äÊ¹ÓÃ=·Ö¸ô
  */
 bool getStartArg(int argc, char* argv[]) {
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½
+	// ·þÎñÆ÷¶Ë¿Ú
 	std::string serverPort = "8092";
-	// ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+	// Êý¾Ý¿âÁ¬½ÓÐÅÏ¢
 	std::string dbUsername = "root";
-	std::string dbPassword = "root";
+	std::string dbPassword = "123456";
 	std::string dbName = "ktgmes";
-	std::string dbHost = "192.168.223.128";
+	std::string dbHost = "192.168.40.132";
 	int dbPort = 3306;
 	int dbMax = 5;
 #ifdef LINUX
-	// Nacosï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
+	// NacosÅäÖÃ²ÎÊý
 	std::string nacosAddr = "192.168.40.132:8848";
 	std::string nacosNs = "4833404f-4b82-462e-889a-3c508160c6b4";
 	std::string serviceName = "";
 	std::string regIp = "";
 #endif
 
-	// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+	// ¿ªÊ¼½âÎö
 	int currIndex = 1;
 	bool isSetDb = false;
 	while (currIndex < argc)
 	{
-		// ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+		// ²ð·Ö×Ö·û´®
 		auto args = StringUtil::split(argv[currIndex], "=");
-		// ï¿½Ð¶Ï²ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Ï·ï¿½
+		// ÅÐ¶Ï²ÎÊýÊÇ·ñºÏ·¨
 		if (args.size() != 2)
 		{
 			cout << "arg: " << argv[currIndex] << ", format error." << endl;
 			exit(1);
 		}
 
-		// ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½Ç°×ºï¿½Ô²ï¿½Í¬ï¿½ï¿½ï¿½Ô¸ï¿½Öµ
+		// ¸ù¾Ý²ÎÊýÇ°×º¶Ô²»Í¬ÊôÐÔ¸³Öµ
 		std::string prefix = args[0];
 		std::string val = args[1];
 		if (prefix == "sp") serverPort = val;
@@ -108,11 +108,11 @@ bool getStartArg(int argc, char* argv[]) {
 		else if (prefix == "sn") serviceName = val;
 		else if (prefix == "ip") regIp = val;
 #endif
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ¸üÐÂË÷Òý
 		currIndex++;
 	}
 
-	// ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½Ú´ï¿½ï¿½Ð·ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
+	// ¼ÇÂ¼·þÎñÆ÷ÅäÖÃµ½ÄÚ´æÖÐ·½±ãÊ¹ÓÃ
 	ServerInfo::getInstance().setServerPort(serverPort);
 	ServerInfo::getInstance().setDbUsername(dbUsername);
 	ServerInfo::getInstance().setDbPassword(dbPassword);
@@ -130,15 +130,15 @@ bool getStartArg(int argc, char* argv[]) {
 }
 
 int main(int argc, char* argv[]) {
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
+	// ·þÎñÆ÷²ÎÊý³õÊ¼»¯
 	bool isSetDb = getStartArg(argc, argv);
 
 #ifdef LINUX
-	// ï¿½ï¿½ï¿½ï¿½Nacosï¿½Í»ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½
+	// ´´½¨Nacos¿Í»§¶Ë¶ÔÏó
 	NacosClient nacosClient(
 		ServerInfo::getInstance().getNacosAddr(),
 		ServerInfo::getInstance().getNacosNs());
-	// ï¿½ï¿½Nacosï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ´ÓNacosÅäÖÃÖÐÐÄÖÐ»ñÈ¡Êý¾Ý¿âÅäÖÃ
 	if (!isSetDb)
 	{
 		YAML::Node node = nacosClient.getConfig("data-source.yaml");
@@ -149,12 +149,12 @@ int main(int argc, char* argv[]) {
 			int dbPort = 0;
 			std::string dbHost = "";
 			std::string dbName = "";
-			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+			// ½âÎöÊý¾Ý¿âÁ¬½Ó×Ö·û´®
 			yaml.parseDbConnUrl(dbUrl, &dbHost, &dbPort, &dbName);
-			// ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			// »ñÈ¡Êý¾Ý¿âÓÃ»§ÃûºÍÃÜÂë
 			std::string dbUsername = yaml.getString(&node, "spring.datasource.username");
 			std::string dbPassword = yaml.getString(&node, "spring.datasource.password");
-			// ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä»ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½
+			// ÖØÐÂÐÞ¸Ä»º´æÖÐµÄÊý¾Ý
 			ServerInfo::getInstance().setDbUsername(dbUsername);
 			ServerInfo::getInstance().setDbPassword(dbPassword);
 			ServerInfo::getInstance().setDbName(dbName);
@@ -163,7 +163,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	// ×¢ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ×¢²á·þÎñ
 	if (!ServerInfo::getInstance().getServiceName().empty() && !ServerInfo::getInstance().getRegIp().empty())
 	{
 		nacosClient.registerInstance(
@@ -174,7 +174,7 @@ int main(int argc, char* argv[]) {
 #endif
 
 #ifndef _RELEASE_DOC_
-	// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ³õÊ¼Êý¾Ý¿âÁ¬½Ó
 	bool initConnPool = DbInit::initDbPool(DBConfig(
 		ServerInfo::getInstance().getDbUsername(),
 		ServerInfo::getInstance().getDbPassword(),
@@ -185,7 +185,7 @@ int main(int argc, char* argv[]) {
 	if (!initConnPool) return -1;
 #endif
 
-	// ï¿½ï¿½ï¿½ï¿½HTTPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// Æô¶¯HTTP·þÎñÆ÷
 	HttpServer::startServer(ServerInfo::getInstance().getServerPort(),
 		[=](Endpoints* doc, HttpRouter* router) {
 			Router(doc, router).initRouter();
@@ -195,12 +195,12 @@ int main(int argc, char* argv[]) {
 		});
 
 #ifndef _RELEASE_DOC_
-	// ï¿½Í·ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ÊÍ·ÅÊý¾Ý¿âÁ¬½Ó
 	DbInit::releasePool();
 #endif
 
 #ifdef LINUX
-	// ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ·´×¢²á·þÎñ
 	if (!ServerInfo::getInstance().getServiceName().empty() && !ServerInfo::getInstance().getRegIp().empty())
 	{
 		nacosClient.deregisterInstance(

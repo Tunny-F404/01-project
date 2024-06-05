@@ -6,7 +6,7 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 修改状态
+ * 新增生成工单传输对象
  */
 class ApprovalStageDTO : public oatpp::DTO
 {
