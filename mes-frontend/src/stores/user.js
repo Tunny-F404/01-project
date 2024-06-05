@@ -242,6 +242,41 @@ const testMenus = [
 			},
 		],
 	},
+	//组织架构侧边栏
+	{
+		id: 6,
+		text: "组织架构",
+		icon: "Management",
+		children: [
+			{
+				id: 2,
+				text: "部门管理",
+				href: "/dept",
+				pid: 4,
+			},
+			{
+				id: 3,
+				text: "岗位管理",
+				href: "/postManage",
+				icon: "Management",
+				pid: 4,
+			},
+			{
+				id: 4,
+				text: "角色管理",
+				href: "/role",
+				icon: "Management",
+				pid: 4,
+			},
+			{
+				id: 5,
+				text: "用户管理",
+				href: "/user",
+				icon: "Management",
+				pid: 4,
+			},
+		],
+	},
 ];
 
 export const userStore = defineStore("user", {
