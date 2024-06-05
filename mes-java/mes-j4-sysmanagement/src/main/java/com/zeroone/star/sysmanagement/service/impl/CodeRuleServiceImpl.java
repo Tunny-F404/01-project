@@ -1,9 +1,11 @@
 package com.zeroone.star.sysmanagement.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.druid.wall.violation.ErrorCode;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zeroone.star.sysmanagement.enums.PartTypeEnum;
 import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.dto.j4.sysmanagement.coderule.CodeRuleDTO;
 import com.zeroone.star.project.query.j4.sysmanagement.coderule.CodeRuleQuery;
@@ -15,12 +17,14 @@ import com.zeroone.star.sysmanagement.mapper.MsCodeRuleMapper;
 import com.zeroone.star.sysmanagement.mapper.SysAutoCodePartMapper;
 import com.zeroone.star.sysmanagement.service.ICodeRuleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zeroone.star.sysmanagement.strategy.AutoCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -38,6 +42,8 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleMapper, CodeRule> i
     private MsCodeRuleMapper msCodeRuleMapper;
     @Autowired
     private SysAutoCodePartMapper sysAutoCodePartMapper;
+    @Autowired
+    private AutoCodeUtil autoCodeUtil;
 //  删除编码规则（支持批量删除）
     @Override
     public JsonVO removeCodeRule(List<String> ruleIds) {
@@ -118,4 +124,27 @@ public class CodeRuleServiceImpl extends ServiceImpl<CodeRuleMapper, CodeRule> i
         BeanUtil.copyProperties(codeRuleDTO, codeRule);
         codeRuleMapper.updateById(codeRule);
     }
+
+    /**
+     * 获取唯一编码
+     * @param ruleCode
+     * @param inputCharacter
+     * @return
+     */
+    @Override
+    public String getAutoCode(String ruleCode, String inputCharacter) {
+        return autoCodeUtil.genSerialCode(ruleCode, inputCharacter);
+    }
+
+    @Override
+    public CodeRule getOne(String ruleCode) {
+        CodeRule param = new CodeRule();
+        param.setRuleCode(ruleCode);
+        List<CodeRule> rules = codeRuleMapper.selectSysAutoCodeResultList(param);
+        if(CollectionUtil.isNotEmpty(rules)){
+            return rules.get(0);
+        }
+        return null;
+    }
+
 }

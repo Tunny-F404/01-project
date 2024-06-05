@@ -26,4 +26,9 @@ public interface ICodeRuleService extends IService<CodeRule> {
     void saveCodeRule(CodeRuleDTO codeRuleDTO);
 
     void updateCodeRule(CodeRuleDTO codeRuleDTO);
+
+    String getAutoCode(String ruleCode, String inputCharacter);
+
+    public CodeRule getOne(String ruleCode);
+
 }

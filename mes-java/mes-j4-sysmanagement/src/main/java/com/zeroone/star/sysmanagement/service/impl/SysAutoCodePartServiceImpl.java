@@ -10,6 +10,7 @@ import com.zeroone.star.sysmanagement.entity.SysAutoCodePart;
 import com.zeroone.star.sysmanagement.mapper.SysAutoCodePartMapper;
 import com.zeroone.star.sysmanagement.service.ISysAutoCodePartService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +25,8 @@ import java.util.List;
  */
 @Service
 public class SysAutoCodePartServiceImpl extends ServiceImpl<SysAutoCodePartMapper, SysAutoCodePart> implements ISysAutoCodePartService {
+    @Autowired
+    private SysAutoCodePartMapper sysAutoCodePartMapper;
     /**
      * 添加编码生成规则组成表
      * @param sysAutoCodePartDTO
@@ -99,5 +102,10 @@ public class SysAutoCodePartServiceImpl extends ServiceImpl<SysAutoCodePartMappe
         List<SysAutoCodePartDTO> sysAutoCodePartDTOList = BeanUtil.copyToList(records, SysAutoCodePartDTO.class);
         sysAutoCodePartDTOPage.setRows(sysAutoCodePartDTOList);
         return sysAutoCodePartDTOPage;
+    }
+
+    @Override
+    public List<SysAutoCodePart> listPart(SysAutoCodePart sysAutoCodePart) {
+        return sysAutoCodePartMapper.selectSysAutoCodePartList(sysAutoCodePart);
     }
 }

@@ -105,5 +105,20 @@ public class CodeRuleController implements CodeRuleApis {
         iCodeRuleService.updateCodeRule(CodeRuleDTO);
         return JsonVO.success(null);
     }
+
+    /**
+     * 获取唯一编码
+     * @param ruleCode
+     * @param inputCharacter
+     * @return
+     */
+    @GetMapping("/get-auto-code/{ruleCode}")
+    @ApiOperation("获取唯一编码")
+    @Override
+    public String getAutoCode(@PathVariable("ruleCode") String ruleCode,
+                              @RequestParam(name = "inputCharacter",required = false) String inputCharacter) {
+        log.info("获取唯一编码,{},{}",ruleCode,inputCharacter);
+        return iCodeRuleService.getAutoCode(ruleCode,inputCharacter);
+    }
 }
 
