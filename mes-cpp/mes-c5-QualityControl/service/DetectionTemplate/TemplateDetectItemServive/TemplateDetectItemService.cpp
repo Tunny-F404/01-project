@@ -108,11 +108,9 @@ uint64_t TemplateDetectItemService::saveTemplateDetectItem(const TemplateDetectI
 	data.setAttr3(dto->attr3);
 	data.setAttr4(dto->attr4);
 	data.setCreate_by(dto->create_by);
-	data.setCreate_time(dto->update_time);
-	//data.setCreate_time(getCurrentTime());
+	data.setCreate_time(getCurrentTime());
 	data.setUpdate_by(dto->update_by);
-	data.setUpdate_time(dto->update_time);
-	//data.setUpdate_time(getCurrentTime());
+	data.setUpdate_time(getCurrentTime());
 	// 执行数据添加
 	TemplateDetectItemDAO dao;
 	return dao.insertTemplateDetectItem(data);
