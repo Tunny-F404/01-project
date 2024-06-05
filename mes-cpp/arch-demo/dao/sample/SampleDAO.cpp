@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
@@ -19,9 +19,9 @@
 #include "stdafx.h"
 #include "SampleDAO.h"
 #include "SampleMapper.h"
-#include <sstream>
+#include <sstream> 
 
-//¶¨ÒåÌõ¼ş½âÎöºê£¬¼õÉÙÖØ¸´´úÂë
+//å®šä¹‰æ¡ä»¶è§£æå®ï¼Œå‡å°‘é‡å¤ä»£ç 
 #define SAMPLE_TERAM_PARSE(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \

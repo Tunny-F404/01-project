@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
@@ -22,43 +22,43 @@
 #include "NacosClient.h"
 #include "gtest/gtest.h"
 
-// ×¢Òâ£ºÓÃµ½FastDfsµÄµØ·½¶¼ÒªÔÚ×îºóÔÚµ¼ÈëDFSµÄÍ·ÎÄ¼ş
+// æ³¨æ„ï¼šç”¨åˆ°FastDfsçš„åœ°æ–¹éƒ½è¦åœ¨æœ€ååœ¨å¯¼å…¥DFSçš„å¤´æ–‡ä»¶
 #include "FastDfsClient.h"
 
-// ¶¨ÒåÒ»¸öÁÙÊ±±äÁ¿ÓÃÓÚ´æ´¢ÉÏ´ÎÉÏ´«³É¹¦ºóµÄÎÄ¼şfieldÃû³Æ
+// å®šä¹‰ä¸€ä¸ªä¸´æ—¶å˜é‡ç”¨äºå­˜å‚¨ä¸Šæ¬¡ä¸Šä¼ æˆåŠŸåçš„æ–‡ä»¶fieldåç§°
 std::string tmpField = "";
 
 /**
- * ´´½¨Ò»¸ö²âÊÔ¼Ğ¾ß£¬ÓÃÓÚ¹ÜÀíDfs¿Í»§¶Ë¶ÔÏó´´½¨¹ı³Ì
+ * åˆ›å»ºä¸€ä¸ªæµ‹è¯•å¤¹å…·ï¼Œç”¨äºç®¡ç†Dfså®¢æˆ·ç«¯å¯¹è±¡åˆ›å»ºè¿‡ç¨‹
  */
 class FastDfsTest : public testing::Test {
 protected:
 	void SetUp() override
 	{
-		// ¶¨ÒåÒ»¸öNacos¿Í»§¶Ë¶ÔÏó£¬ÓÃÓÚ»ñÈ¡ÅäÖÃ
+		// å®šä¹‰ä¸€ä¸ªNacoså®¢æˆ·ç«¯å¯¹è±¡ï¼Œç”¨äºè·å–é…ç½®
 		NacosClient ns(TEST_NS_ADDR, TEST_NS_NAMESPACE);
 #ifdef LINUX
-		// ¶ÁÈ¡ÅäÖÃÊı¾İ½Úµã
+		// è¯»å–é…ç½®æ•°æ®èŠ‚ç‚¹
 		auto thirdServerConfig = ns.getConfig("third-services.yaml");
-		// ´ÓNacosÅäÖÃÖĞĞÄ»ñÈ¡FastDFS¿Í»§¶ËÅäÖÃÊı¾İ
+		// ä»Nacosé…ç½®ä¸­å¿ƒè·å–FastDFSå®¢æˆ·ç«¯é…ç½®æ•°æ®
 		std::string config = ns.getConfigText("client.conf");
-		// ¶¨Òå¿Í»§¶Ë¶ÔÏó
+		// å®šä¹‰å®¢æˆ·ç«¯å¯¹è±¡
 		this->client = new FastDfsClient(config, false);
-		// ÉèÖÃÒ»¸öÎÄ¼şÉÏ´«µØÖ·
+		// è®¾ç½®ä¸€ä¸ªæ–‡ä»¶ä¸Šä¼ åœ°å€
 		this->filename = "/home/file/1.zip";
 #else
-		// ¶ÁÈ¡ÅäÖÃÊı¾İ½Úµã
+		// è¯»å–é…ç½®æ•°æ®èŠ‚ç‚¹
 		auto thirdServerConfig = ns.getConfig("./conf/third-services.yaml");
-		// +FastDFS¿Í»§¶ËÅäÖÃÊı¾İ
+		// +FastDFSå®¢æˆ·ç«¯é…ç½®æ•°æ®
 		std::string ipPort = YamlHelper().getString(&thirdServerConfig, "fastdfs.tracker-servers");
 		std::string ip = ipPort.substr(0, ipPort.find(":"));
 		int port = stoi(ipPort.substr(ipPort.find(":") + 1));
-		// ÉèÖÃ¿Í»§¶Ë¶ÔÏó
+		// è®¾ç½®å®¢æˆ·ç«¯å¯¹è±¡
 		this->client = new FastDfsClient(ip, port);
-		// ÉèÖÃÒ»¸öÎÄ¼şÉÏ´«µØÖ·
-		this->filename = "E:/Images/20141011112401959.jpg.source.jpg";
+		// è®¾ç½®ä¸€ä¸ªæ–‡ä»¶ä¸Šä¼ åœ°å€
+		this->filename = "D:/CodeLamp/C++/c4-prodmgmt-amie/mes-cpp/out/build/x64-Debug/mes-c4-prodmgmt/public/excel/workorder.xlsx";
 #endif
-		// ÉèÖÃurlÇ°×º
+		// è®¾ç½®urlå‰ç¼€
 		this->urlPrefix = "http://" + YamlHelper().getString(&thirdServerConfig, "fastdfs.nginx-servers") + "/";
 	}
 	void TearDown() override
@@ -69,24 +69,24 @@ protected:
 			client = nullptr;
 		}
 	}
-	// DFS¿Í»§¶ËÁ¬½Ó¶ÔÏó
+	// DFSå®¢æˆ·ç«¯è¿æ¥å¯¹è±¡
 	FastDfsClient* client = nullptr;
-	// ÎÄ¼şÏÂÔØµØÖ·Ç°×º
+	// æ–‡ä»¶ä¸‹è½½åœ°å€å‰ç¼€
 	std::string urlPrefix = "";
-	// ÉùÃ÷Ò»¸öÉÏ´«ÎÄ¼şµÄÎÄ¼şÃû
+	// å£°æ˜ä¸€ä¸ªä¸Šä¼ æ–‡ä»¶çš„æ–‡ä»¶å
 	std::string filename = "";
 };
 
-// ²âÊÔÎÄ¼şÉÏ´«
+// æµ‹è¯•æ–‡ä»¶ä¸Šä¼ 
 TEST_F(FastDfsTest, Upload) {
 	tmpField = client->uploadFile(filename);
 	ASSERT_NE(tmpField, "");
-	// Êä³öÎÄ¼şÏÂÔØµØÖ·
+	// è¾“å‡ºæ–‡ä»¶ä¸‹è½½åœ°å€
 	std::string downloadUrl = urlPrefix + tmpField;
 	std::cout << "download url: " << downloadUrl << std::endl;
 }
 
-// ²âÊÔÎÄ¼şÏÂÔØ
+// æµ‹è¯•æ–‡ä»¶ä¸‹è½½
 TEST_F(FastDfsTest, Download) {
 	if (tmpField.empty()) return;
 	std::string path = "./public/fastdfs";
@@ -95,7 +95,7 @@ TEST_F(FastDfsTest, Download) {
 	std::cout << "download savepath is : " << fullPath << std::endl;
 }
 
-// ²âÊÔÎÄ¼şÉ¾³ı
+// æµ‹è¯•æ–‡ä»¶åˆ é™¤
 TEST_F(FastDfsTest, Delete) {
 	if (tmpField.empty()) return;
 	bool res = client->deleteFile(tmpField);

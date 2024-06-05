@@ -2,7 +2,7 @@
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: awei
+ @Author: amie
  @Date: 2022/10/25 10:59:38
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +32,7 @@ class ExportBomOrderDTO : public oatpp::DTO
 	API_DTO_FIELD(Int32, itemId, ZH_WORDS_GETTER("productionorder.query.fields.item_id"), true, 0);
 	API_DTO_FIELD(Int32, workOrderId, ZH_WORDS_GETTER("productionorder.query.fields.workorder_id"), true, 0);
 	API_DTO_FIELD(String, itemName, ZH_WORDS_GETTER("productionorder.query.fields.item_name"), true, "");
+	API_DTO_FIELD(String, itemCode, ZH_WORDS_GETTER("productionorder.query.fields.item_code"), true, "");
 	API_DTO_FIELD(String, itemSpc, ZH_WORDS_GETTER("productionorder.query.fields.item_spc"), true, "");
 	API_DTO_FIELD(String, unitOfMeasure, ZH_WORDS_GETTER("productionorder.query.fields.unit_of_measure"), true, "");
 	API_DTO_FIELD(String, itemOrProduct, ZH_WORDS_GETTER("productionorder.query.fields.item_or_product"), true, "");
