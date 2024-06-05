@@ -78,7 +78,7 @@ Uint64JsonVO::Wrapper ProcessController::execAddProcess(const ProcessAddDTO::Wra
 }
 
 // 4 修改工艺
-Uint64JsonVO::Wrapper ProcessController::execModifyBasicProcess(const ProcessDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProcessController::execModifyBasicProcess(const ProcessDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -220,7 +220,7 @@ ProJsonVO::Wrapper ProcessController::execProTable(const ProQuery::Wrapper& quer
 }
 
 //9 添加组成工序
-Uint64JsonVO::Wrapper ProcessController::execaddComProcess(const NewProcessDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProcessController::execaddComProcess(const NewProcessDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -254,7 +254,7 @@ Uint64JsonVO::Wrapper ProcessController::execaddComProcess(const NewProcessDTO::
 }
 
 //10 修改组成工序
-Uint64JsonVO::Wrapper ProcessController::execModifyProcess(const ModifyProDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProcessController::execModifyProcess(const ModifyProDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -280,7 +280,7 @@ Uint64JsonVO::Wrapper ProcessController::execModifyProcess(const ModifyProDTO::W
 }
 
 // 11 添加工艺关联产品
-Uint64JsonVO::Wrapper ProcessController::execAddRelatePro(const AddRelateProDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProcessController::execAddRelatePro(const AddRelateProDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -301,7 +301,7 @@ Uint64JsonVO::Wrapper ProcessController::execAddRelatePro(const AddRelateProDTO:
 	// 定义一个Service
 	RelateProService service;
 	// 执行数据新增
-	uint64_t id = service.saveData(dto);
+	uint64_t id = service.saveData(dto, payload);
 	if (id > 0) {
 		jvo->success(UInt64(id));
 	}
@@ -314,7 +314,7 @@ Uint64JsonVO::Wrapper ProcessController::execAddRelatePro(const AddRelateProDTO:
 }
 
 // 12 修改工艺关联产品
-Uint64JsonVO::Wrapper ProcessController::execModifyRelatePro(const ModRelateProDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProcessController::execModifyRelatePro(const ModRelateProDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -328,7 +328,7 @@ Uint64JsonVO::Wrapper ProcessController::execModifyRelatePro(const ModRelateProD
 	// 定义一个Service
 	RelateProService service;
 	// 执行数据修改
-	if (service.updateData(dto)) {
+	if (service.updateData(dto, payload)) {
 		jvo->success(dto->record_id);
 	}
 	else
@@ -340,7 +340,7 @@ Uint64JsonVO::Wrapper ProcessController::execModifyRelatePro(const ModRelateProD
 }
 
 // 13 获取产品制程物料BOM列表
-ProMaterialPageJsonVO::Wrapper ProcessController::execQueryProMaterial(const ProMaterialQuery::Wrapper& query, const PayloadDTO& payload)
+ProMaterialPageJsonVO::Wrapper ProcessController::execQueryProMaterial(const ProMaterialQuery::Wrapper& query)
 {
 	// 定义一个Service
 	ProMaterialService service;
@@ -514,7 +514,7 @@ Uint64JsonVO::Wrapper ProcessController::execRemoveProcessBOM(const UInt64& id)
 	return jvo;
 }
 // 18 添加产品制程物料BOM
-Uint64JsonVO::Wrapper ProcessController::execAddProductMaterial(const ProductMaterialDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProcessController::execAddProductMaterial(const ProductMaterialDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -547,7 +547,7 @@ Uint64JsonVO::Wrapper ProcessController::execAddProductMaterial(const ProductMat
 	return jvo;
 }
 // 19 修改产品制程物料BOM
-Uint64JsonVO::Wrapper ProcessController::execModifyProductMaterial(const ProductModefyMaterialDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProcessController::execModifyProductMaterial(const ProductModefyMaterialDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();

@@ -54,7 +54,7 @@ public:
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(Query, ProcessListQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execQueryProcessList(Query));//, authObject->getPayload()
+		API_HANDLER_RESP_VO(execQueryProcessList(Query));
 	}
 
 	// 2 获取工艺详情
@@ -91,7 +91,7 @@ public:
 
 	// 4 修改工艺
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("process.put.summary1"), modifyProcess, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-process", modifyProcess, BODY_DTO(ProcessDTO::Wrapper, dto), execModifyBasicProcess(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-process", modifyProcess, BODY_DTO(ProcessDTO::Wrapper, dto), execModifyBasicProcess(dto, authObject->getPayload()));
 
 	// 5 获取工艺关联产品列表
 	ENDPOINT_INFO(queryCorrProduct) {
@@ -177,12 +177,12 @@ public:
 	}
 	ENDPOINT(API_M_POST, "/pro/add-comprocess", addComProcess, BODY_DTO(NewProcessDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execaddComProcess(dto));
+		API_HANDLER_RESP_VO(execaddComProcess(dto, authObject->getPayload()));
 	}
 
 	// 10 修改组成工序
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("process.modify.summary"), ModifyProcess, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-comprocess", ModifyProcess, BODY_DTO(ModifyProDTO::Wrapper, dto), execModifyProcess(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-comprocess", ModifyProcess, BODY_DTO(ModifyProDTO::Wrapper, dto), execModifyProcess(dto, authObject->getPayload()));
 
 	//11 添加工艺关联产品
 	ENDPOINT_INFO(addRelatePro) {
@@ -195,12 +195,12 @@ public:
 	}
 	ENDPOINT(API_M_POST, "/pro/add-relatepro", addRelatePro, BODY_DTO(AddRelateProDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execAddRelatePro(dto));
+		API_HANDLER_RESP_VO(execAddRelatePro(dto,authObject->getPayload()));
 	}
 
 	// 12 修改工艺关联产品
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("RelatePro.summary.ModRelatePro"), modifyRelatePro, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-relatepro", modifyRelatePro, BODY_DTO(ModRelateProDTO::Wrapper, dto), execModifyRelatePro(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-relatepro", modifyRelatePro, BODY_DTO(ModRelateProDTO::Wrapper, dto), execModifyRelatePro(dto, authObject->getPayload()));
 
 	// 13 获取产品制程物料BOM列表
 	ENDPOINT_INFO(queryProMaterial) {
@@ -220,7 +220,7 @@ public:
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ProMaterialQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execQueryProMaterial(query, authObject->getPayload()));
+		API_HANDLER_RESP_VO(execQueryProMaterial(query));
 	}
 
 	// 14 定义删除工艺流程接口
@@ -278,12 +278,12 @@ public:
 	}
 	ENDPOINT(API_M_POST, "/pro/add-productmaterial", addProductMaterial, BODY_DTO(ProductMaterialDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execAddProductMaterial(dto));
+		API_HANDLER_RESP_VO(execAddProductMaterial(dto, authObject->getPayload()));
 	}
 
 	// 19 修改产品制程BOM
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("process.put.summary2"), modifyProductMaterial, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-productmaterial", modifyProductMaterial, BODY_DTO(ProductModefyMaterialDTO::Wrapper, dto), execModifyProductMaterial(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-productmaterial", modifyProductMaterial, BODY_DTO(ProductModefyMaterialDTO::Wrapper, dto), execModifyProductMaterial(dto, authObject->getPayload()));
 
 private:
 	// 1 获取工艺列表数据
@@ -293,7 +293,7 @@ private:
 	// 3 添加工艺流程
 	Uint64JsonVO::Wrapper execAddProcess(const ProcessAddDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 4 修改工艺基础数据
-	Uint64JsonVO::Wrapper execModifyBasicProcess(const ProcessDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyBasicProcess(const ProcessDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 5 获取工艺关联产品列表
 	ProductsPageJsonVO::Wrapper execQueryProducts(const ProcessProductsQuery::Wrapper& query);
 	// 6 删除组成工序（支持批量删除）
@@ -303,15 +303,15 @@ private:
 	// 8 获取组成工序列表
 	ProJsonVO::Wrapper execProTable(const ProQuery::Wrapper& query);
 	// 9 添加组成工序
-	Uint64JsonVO::Wrapper execaddComProcess(const NewProcessDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execaddComProcess(const NewProcessDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 10 修改组成工序
-	Uint64JsonVO::Wrapper execModifyProcess(const ModifyProDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyProcess(const ModifyProDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 11 添加工艺关联产品
-	Uint64JsonVO::Wrapper execAddRelatePro(const AddRelateProDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddRelatePro(const AddRelateProDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 12 修改工艺关联产品
-	Uint64JsonVO::Wrapper execModifyRelatePro(const ModRelateProDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyRelatePro(const ModRelateProDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 13 获取产品制程物料BOM列表
-	ProMaterialPageJsonVO::Wrapper execQueryProMaterial(const ProMaterialQuery::Wrapper& query, const PayloadDTO& payload);
+	ProMaterialPageJsonVO::Wrapper execQueryProMaterial(const ProMaterialQuery::Wrapper& query);
 	// 14 删除工艺流程
 	List<Uint64JsonVO::Wrapper> execRemoveProRoute(const List<UInt64>& id);
 	// 15 删除工艺关联产品
@@ -321,9 +321,9 @@ private:
 	// 17 删除产品制程物料BOM
 	Uint64JsonVO::Wrapper execRemoveProcessBOM(const UInt64& id);
 	// 18 添加产品制程物料BOM
-	Uint64JsonVO::Wrapper execAddProductMaterial(const ProductMaterialDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddProductMaterial(const ProductMaterialDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 19 修改产品制程物料BOM
-	Uint64JsonVO::Wrapper execModifyProductMaterial(const ProductModefyMaterialDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyProductMaterial(const ProductModefyMaterialDTO::Wrapper& dto, const PayloadDTO& payload);
 };
 
 // 0 取消API控制器使用宏

@@ -22,8 +22,6 @@ if (query->enableFlag) { \
 	SQLPARAMS_PUSH(params, "s", std::string, query->enableFlag.getValue("")); \
 }
 
-SimpleDateTimeFormat systime;
-
 // 统计工艺列表数据条数
 uint64_t ProcessDAO::count(const ProcessListQuery::Wrapper& query)
 {
@@ -64,7 +62,7 @@ std::list<ProRouteDO>  ProcessDAO::selectById(const ProcessDetailQuery::Wrapper&
 uint64_t ProcessDAO::insert(const ProRouteDO& iObj, const string username)
 {
 	string sql = "INSERT INTO `pro_route` (`route_code`, `route_name`, `route_desc`, `enable_flag`, `remark`,`create_by`,`create_time`) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s%s", iObj.getRouteCode(), iObj.getRouteName(), iObj.getRouteDesc(), iObj.getEnableFlag(), iObj.getRemark(), username, systime.format());
+	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s%s", iObj.getRouteCode(), iObj.getRouteName(), iObj.getRouteDesc(), iObj.getEnableFlag(), iObj.getRemark(), username, SimpleDateTimeFormat::format());
 }
 // 修改工艺
 int ProcessDAO::update(const ProRouteDO& iObj)

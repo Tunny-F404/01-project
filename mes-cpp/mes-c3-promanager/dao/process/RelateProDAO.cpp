@@ -2,18 +2,23 @@
 #include "RelateProDAO.h"
 #include <sstream>
 #include "../../dao/process/RelateProMapper.h"
+#include "../../../lib-common/include/SimpleDateTimeFormat.h"
 
 // ²åÈë
-uint64_t RelateProDAO::insert(const ProRouteProductDO & iObj)
+uint64_t RelateProDAO::insert(const ProRouteProductDO & iObj, const PayloadDTO& payload)
 {
-	string sql = "INSERT INTO `pro_route_product` (`record_id`, `route_id`, `item_id`, `item_code`, `item_name`, `specification`, `unit_of_measure`, `quantity`, `production_time`, `time_unit_type`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	return sqlSession->executeInsert(sql, "%ull%ull%ull%s%s%s%s%ui%d%s%s", iObj.getRecord_Id(),iObj.getRoute_Id(),iObj.getItem_Id(),iObj.getItem_Code(), iObj.getItem_Name(), iObj.getSpecification(), iObj.getUnit_Of_Measure(), iObj.getQuantity(), iObj.getProduction_Time(),iObj.getTime_Unit_Type(),iObj.getRemark());
+	string sql = "INSERT INTO `pro_route_product` (`record_id`, `route_id`, `item_id`, `item_code`, `item_name`, `specification`, `unit_of_measure`, `quantity`, `production_time`, `time_unit_type`, `remark`, `create_by`, `create_time`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	return sqlSession->executeInsert(sql, "%ull%ull%ull%s%s%s%s%ui%d%s%s%s%s",
+		iObj.getRecord_Id(), iObj.getRoute_Id(), iObj.getItem_Id(), iObj.getItem_Code(),
+		iObj.getItem_Name(), iObj.getSpecification(), iObj.getUnit_Of_Measure(),
+		iObj.getQuantity(), iObj.getProduction_Time(), iObj.getTime_Unit_Type(),
+		iObj.getRemark(), payload.getUsername(), SimpleDateTimeFormat::format("%Y-%m-%d %H:%M:%S"));
 }
 // ÐÞ¸Ä
-int RelateProDAO::update(const ProRouteProductDO& uObj)
+int RelateProDAO::update(const ProRouteProductDO& uObj, const PayloadDTO& payload)
 {
-	string sql = "UPDATE `pro_route_product` SET `item_code`=?, `item_name`=?, `unit_of_measure`=?, `specification`=?,`remark`=? WHERE `record_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%ull", uObj.getItem_Code(), uObj.getItem_Name(), uObj.getUnit_Of_Measure(), uObj.getSpecification(), uObj.getRemark(), uObj.getRecord_Id());
+	string sql = "UPDATE `pro_route_product` SET `item_code`=?, `item_name`=?, `unit_of_measure`=?, `specification`=?, `remark`=? ,`update_by`=? ,`update_time`=? WHERE `record_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%ull", uObj.getItem_Code(), uObj.getItem_Name(), uObj.getUnit_Of_Measure(), uObj.getSpecification(), uObj.getRemark(), payload.getUsername(), SimpleDateTimeFormat::format("%Y-%m-%d %H:%M:%S"), uObj.getRecord_Id());
 }
 // É¾³ý
 int RelateProDAO::deleteById(uint64_t id)

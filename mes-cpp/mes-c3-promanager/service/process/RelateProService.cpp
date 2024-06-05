@@ -3,7 +3,7 @@
 #include "../../dao/process/RelateProDAO.h"
 
 //添加关联产品
-uint64_t RelateProService::saveData(const AddRelateProDTO::Wrapper& dto)
+uint64_t RelateProService::saveData(const AddRelateProDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
 	ProRouteProductDO data;
@@ -16,10 +16,10 @@ uint64_t RelateProService::saveData(const AddRelateProDTO::Wrapper& dto)
 							Unit_Of_Measure, unit_of_measure, Remark,remark)
 		// 执行数据添加
 		RelateProDAO dao;
-	return dao.insert(data);
+	return dao.insert(data, payload);
 }
 //修改关联产品
-bool RelateProService::updateData(const ModRelateProDTO::Wrapper& dto)
+bool RelateProService::updateData(const ModRelateProDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
 	ProRouteProductDO data;
@@ -33,7 +33,7 @@ bool RelateProService::updateData(const ModRelateProDTO::Wrapper& dto)
 		Unit_Of_Measure, unit_of_measure, Remark, remark, Record_Id, record_id)
 		// 执行数据修改
 		RelateProDAO dao;
-	return dao.update(data) == 1;
+	return dao.update(data, payload) == 1;
 }
 //删除关联产品
 bool RelateProService::removeData(uint64_t id)

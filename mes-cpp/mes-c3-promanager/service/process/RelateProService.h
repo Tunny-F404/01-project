@@ -13,9 +13,9 @@ class RelateProService
 {
 public:
 	// 添加关联产品
-	uint64_t saveData(const AddRelateProDTO::Wrapper& dto);
+	uint64_t saveData(const AddRelateProDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 修改关联产品
-	bool updateData(const ModRelateProDTO::Wrapper& dto);
+	bool updateData(const ModRelateProDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 删除关联产品
 	bool removeData(uint64_t id);
 	// 分页查询所有数据
