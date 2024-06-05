@@ -23,9 +23,9 @@ public:
 	// 通过ID删除数据
 	bool removeData(uint64_t id);
 	//确认检验单
-	bool InspectService::Is_Ok(const Item_idDTO::Wrapper& dto);
+	bool Is_Ok(const Item_idDTO::Wrapper& dto);
 	//完成检验单
-	bool InspectService::Finished(const Item_idDTO::Wrapper& dto);
+	bool Finished(const Item_idDTO::Wrapper& dto);
 
 	//导出检验单
 	string exportTable(const Inspect_tableQuery::Wrapper& query);
