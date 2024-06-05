@@ -104,7 +104,7 @@ std::list<RejectQueryDO> RejectDAO::selectByWorkorder_code(const string& workord
 // 通过仓库名称查询数据
 std::list<RejectQueryDO> RejectDAO::selectByWarehouse_name(const string& warehouse_name)
 {
-	string sql = "SELECT rt_code,workorder_code,warehouse_name FROM wm_rt_issue WHERE `rt_code` LIKE CONCAT('%',?,'%')";
+	string sql = "SELECT rt_code,workorder_code,warehouse_name FROM wm_rt_issue WHERE `warehouse_name` LIKE CONCAT('%',?,'%')";
 	RejectMapper mapper;
 	return sqlSession->executeQuery<RejectQueryDO, RejectMapper>(sql, mapper, "%s", warehouse_name);
 }
