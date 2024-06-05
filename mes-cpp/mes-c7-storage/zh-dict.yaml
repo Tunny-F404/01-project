@@ -13,8 +13,8 @@ product:
   status: 单据状态
   receivedstorage: 接收仓库
   remark: 备注
-  summary: 列表分页查询
-  detail: 详细信息
+  summary: 获取单据列表（条件 + 分页）
+  detail: 获取单据详情
   add: 增加单据
   modify: 修改单据
   workorder_code: 生产工单编码
