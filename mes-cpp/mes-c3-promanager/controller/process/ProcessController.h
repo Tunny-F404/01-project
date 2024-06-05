@@ -86,7 +86,7 @@ public:
 	}
 	ENDPOINT(API_M_POST, "/pro/add-process", addProcess, BODY_DTO(ProcessAddDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execAddProcess(dto));
+		API_HANDLER_RESP_VO(execAddProcess(dto, authObject->getPayload()));
 	}
 
 	// 4 修改工艺
@@ -291,7 +291,7 @@ private:
 	// 2 查询工艺详情
 	ProcessDetailJsonVO::Wrapper execQueryProcessDetail(const ProcessDetailQuery::Wrapper& query);
 	// 3 添加工艺流程
-	Uint64JsonVO::Wrapper execAddProcess(const ProcessAddDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddProcess(const ProcessAddDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 4 修改工艺基础数据
 	Uint64JsonVO::Wrapper execModifyBasicProcess(const ProcessDTO::Wrapper& dto);
 	// 5 获取工艺关联产品列表

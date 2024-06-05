@@ -63,14 +63,14 @@ ProcessDTO::Wrapper ProcessListService::getById(const ProcessDetailQuery::Wrappe
 	return dto;
 }
 // 添加工艺 保存数据
-uint64_t ProcessListService::saveProcessAdd(const ProcessAddDTO::Wrapper& dto)
+uint64_t ProcessListService::saveProcessAdd(const ProcessAddDTO::Wrapper& dto, const string username)
 {
 	// 组装DO数据
 	ProRouteDO data;
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, RouteCode, routeCode, RouteName, routeName, RouteDesc, routeDesc, EnableFlag, enableFlag, Remark, remark)
 	// 执行数据添加
 	ProcessDAO dao;
-	return dao.insert(data);
+	return dao.insert(data, username);
 }
 /**
  * 修改工艺的service

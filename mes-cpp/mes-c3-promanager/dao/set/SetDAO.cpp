@@ -32,14 +32,14 @@ if (query->enableFlag) { \
 
 uint64_t SetDAO::insertSet(const ProProcessDO& iObj)
 {
-	string sql = "INSERT INTO pro_process (`process_code`,`process_name`, `enable_flag`, `attention`,`remark`) VALUES (?, ?, ?, ?, ?)";
+	string sql = "INSERT INTO `pro_process` (`process_code`,`process_name`, `enable_flag`, `attention`,`remark`) VALUES (?, ?, ?, ?, ?)";
 	return sqlSession->executeInsert(sql, "%s%s%s%s%s", iObj.getProcessCode(), iObj.getProcessName(), iObj.getEnableFlag(),
 		iObj.getAttention(), iObj.getRemark());
 }
 
 int SetDAO::updateSet(const ProProcessDO& uObj)
 {
-	string sql = "UPDATE pro_process SET `process_code`= ?, `process_name`= ?, `enable_flag`= ?,`attention`= ?, `remark`= ? WHERE `process_id`= ?";
+	string sql = "UPDATE `pro_process` SET `process_code`= ?, `process_name`= ?, `enable_flag`= ?,`attention`= ?, `remark`= ? WHERE `process_id`= ?";
 	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%ull", uObj.getProcessCode(), uObj.getProcessName(),
 		uObj.getEnableFlag(), uObj.getAttention(), uObj.getRemark(), uObj.getProcessId());
 }

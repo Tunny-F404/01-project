@@ -18,7 +18,7 @@ public:
 	// 通过id查询工艺详情
 	list<ProRouteDO> selectById(const ProcessDetailQuery::Wrapper& query);
 	// 添加工艺
-	uint64_t insert(const ProRouteDO& iObj);
+	uint64_t insert(const ProRouteDO& iObj, const string username);
 	// 修改工艺
 	int update(const ProRouteDO& uObj);
 	// 通过ID删除组成工序

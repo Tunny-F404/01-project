@@ -44,7 +44,7 @@ ProcessDetailJsonVO::Wrapper ProcessController::execQueryProcessDetail(const Pro
 }
 
 // 3 添加工艺
-Uint64JsonVO::Wrapper ProcessController::execAddProcess(const ProcessAddDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ProcessController::execAddProcess(const ProcessAddDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -65,7 +65,7 @@ Uint64JsonVO::Wrapper ProcessController::execAddProcess(const ProcessAddDTO::Wra
 	//定义一个Service
 	ProcessListService service;
 	//执行数据新增
-	uint64_t id = service.saveProcessAdd(dto);
+	uint64_t id = service.saveProcessAdd(dto, payload.getUsername());
 	if (id > 0) {
 		jvo->success(UInt64(id));
 	}
