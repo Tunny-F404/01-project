@@ -37,7 +37,7 @@ class RepaircontentQuery : public PageQuery
 	// 维修单ID(唯一标识)
 	API_DTO_FIELD(UInt64, repair_id, ZH_WORDS_GETTER("repaircontent.query.field.repair_id"), true, 1);
 	//项目名称
-	API_DTO_FIELD(String, subject_name, ZH_WORDS_GETTER("repaircontent.query.field.repair_name"), true, "0LLU");
+	API_DTO_FIELD(String, subject_name, ZH_WORDS_GETTER("repaircontent.query.field.repair_name"), true, ZH_WORDS_GETTER("repaircontent.default.subject_name"));
 	//项目id
 	API_DTO_FIELD(UInt64, subject_id, ZH_WORDS_GETTER("repaircontent.query.field.subject_id"), true, 2);
 

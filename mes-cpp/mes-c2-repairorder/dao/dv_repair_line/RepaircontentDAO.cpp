@@ -88,18 +88,23 @@ uint64_t RepaircontentDAO::insert(const dv_repair_lineDO& iObj)
 	}
 
 
-	string sql = "INSERT INTO `dv_repair_line` (`repair_id`,`subject_id`,`subject_name`, `malfunction`, `malfunction_url`,`repair_des`,`subject_code`,`subject_type`,`subject_content`,`subject_standard`) VALUES (?,?,?,?,?,?,?,?,?,?)";
-	return sqlSession->executeInsert(sql, "%ull%ull%s%s%s%s%s%s%s%s",
+	string sql = "INSERT INTO `dv_repair_line` (`repair_id`,`subject_id`,`subject_name`, `malfunction`, `malfunction_url`,`repair_des`,`subject_code`,`subject_type`,`subject_content`,`subject_standard`,`create_by`,`create_time`,`update_by`,`update_time`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	return sqlSession->executeInsert(sql, "%ull%ull%s%s%s%s%s%s%s%s%s%dt%s%dt",
 		iObj.getrepair_Id(),
 		list_s.begin()->getSubjectId(),
-		iObj.getsubject_Name(), 
+		iObj.getsubject_Name(),
 		iObj.getMalfunction(),
-		iObj.getMalfunction_url(), 
+		iObj.getMalfunction_url(),
 		iObj.getrepair_Des(),
 		list_s.begin()->getSubjectCode(),
 		list_s.begin()->getSubjectType(),
 		list_s.begin()->getSubjectContent(),
-		list_s.begin()->getSubjectStandard()
+		list_s.begin()->getSubjectStandard(),
+		iObj.getCreate_by(),
+		iObj.getCreate_time(),
+		iObj.getUpdate_by(),
+		iObj.getUpdate_time()
+
 
 	);
 }

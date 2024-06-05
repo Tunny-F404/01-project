@@ -103,7 +103,11 @@ uint64_t RepaircontentService::saveData(const AddRepaircontentDTO::Wrapper& dto)
 		subject_Name, subject_name, 
 		Malfunction, malfunction, 
 		Malfunction_url, malfunction_url, 
-		repair_Des, repair_des
+		repair_Des, repair_des,
+		Create_by,create_by,
+		Create_time,create_time,
+		Update_by,update_by,
+		Update_time,update_time
 	)
 		// 执行数据添加
 		RepaircontentDAO dao;

@@ -1,7 +1,7 @@
 repaircontent:
  get:
   summary: 维修内容详情
-  query_repaircontent: 获取维修内容详情（条件+分页）
+  query_repaircontent: 维修内容分页查询
   add_repaircontent: 添加维修内容
   modify_repaircontent: 修改维修内容
   remove_repaircontent: 删除维修内容
@@ -26,6 +26,13 @@ repaircontent:
   attr1: 预留字段(string)
   attr2: 预留字段(int)
   line_id: 行id
+ default:
+  subject_name: 润滑
+  malfunction: 冲床无明显摩擦声
+  malfunction_url: 冲床无明显摩擦声
+  repair_des: 无
+  create_by: hhh
+  update_by: hhh
 repairorder:
  summary: 
   page_query_table: 维修单分页查询
