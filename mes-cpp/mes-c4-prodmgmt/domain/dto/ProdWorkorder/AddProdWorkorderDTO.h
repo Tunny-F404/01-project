@@ -81,16 +81,6 @@ class AddProdWorkorderDTO : public oatpp::DTO
 	DTO_FIELD_INFO(remark) {
 		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.remark");
 	}
-	//产品ID;product_id;bigint
-	DTO_FIELD(UInt64, product_id);
-	DTO_FIELD_INFO(product_id) {
-		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.product_id");
-	}
-	//所有父节点ID;ancestors;varchar
-	DTO_FIELD(String, ancestors);
-	DTO_FIELD_INFO(ancestors) {
-		info->description = ZH_WORDS_GETTER("addprodworkorder.workorder.ancestors");
-	}
 };
 
 #include OATPP_CODEGEN_END(DTO)

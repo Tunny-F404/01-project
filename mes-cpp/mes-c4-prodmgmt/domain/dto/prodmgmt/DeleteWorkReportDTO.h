@@ -16,7 +16,7 @@ class DeleteWorkReportDTO : public oatpp::DTO
 	// 数据库的表： pro_feedback
 	// 
 	// 记录ID
-	API_DTO_FIELD_DEFAULT(Int64, recordId, ZH_WORDS_GETTER("prodmgmt.delete.fields.recordId"));
+	API_DTO_FIELD_DEFAULT(Int32, recordId, ZH_WORDS_GETTER("prodmgmt.delete.fields.recordId"));
 };
 
 #include OATPP_CODEGEN_END(DTO)

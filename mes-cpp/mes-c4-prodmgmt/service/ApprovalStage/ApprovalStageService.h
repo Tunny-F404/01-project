@@ -11,13 +11,8 @@
 class ApprovalStageService
 {
 public:
-	// 提交审批
-	bool submitForApproval(const ApprovalStageDTO::Wrapper& dto);
-	//审批通过
-	bool approvalPassed(const ApprovalStageDTO::Wrapper& dto);
-	//审批不通过
-	bool approvalNotPassed(const ApprovalStageDTO::Wrapper& dto);
-
+	// 修改数据
+	bool updateData(const ApprovalStageDTO::Wrapper& dto);
 };
 
 #endif // !_APPROVALSTAGEDTO_SERVICE_
