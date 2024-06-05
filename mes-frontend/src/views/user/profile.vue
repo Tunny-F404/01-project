@@ -125,7 +125,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive } from "vue"
 import Request from "@/apis/request.js";
 
 //tabs配置
@@ -237,7 +237,7 @@ const getphoneCode = () => {
 	// 	{ phone: infoform.phoneNum }
 	// ).then((res) => {
 	// 	console.log(res);
-		ElMessage.success("验证码发送成功")
+	ElMessage.success("验证码发送成功")
 	// }).catch((res) => {
 	// 	console.log(res)
 	// 	ElMessage.error("发送失败")
@@ -252,14 +252,14 @@ const getemailCode = () => {
 const url = ref('')
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 /* layout样式 */
 .el-row {
 	margin-bottom: 20px;
-}
 
-.el-row:last-child {
-	margin-bottom: 0;
+	:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .el-col {
@@ -274,14 +274,14 @@ const url = ref('')
 /* 头像样式 */
 .demo-type {
 	display: flex;
-}
 
-.demo-type>div {
-	flex: 1;
-	text-align: center;
-}
+	>div {
+		flex: 1;
+		text-align: center;
 
-.demo-type>div:not(:last-child) {
-	border-right: 1px solid var(--el-border-color);
+		:not(:last-child) {
+			border-right: 1px solid var(--el-border-color);
+		}
+	}
 }
 </style>
