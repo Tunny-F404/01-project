@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _SAMPLEMENUDO_H_
-#define _SAMPLEMENUDO_H_
+#ifndef _MENUDO_H_
+#define _MENUDO_H_
 
 #include "../DoInclude.h"
 /**
@@ -48,4 +48,4 @@ public:
 	}
 };
 
-#endif // !_SAMPLEMENUDO_H_
+#endif // !_MENUDO_H_

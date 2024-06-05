@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
@@ -34,6 +34,8 @@ class ProWorkOrderBomDO
 	CC_SYNTHESIZE(string, item_or_product, itemOrProduct);
 	CC_SYNTHESIZE(double, quantity, bQuantity);
 	CC_SYNTHESIZE(int, item_id, itemId);
+	CC_SYNTHESIZE(int, workorder_id, workOrderId);
+	CC_SYNTHESIZE(string, create_time, createTime);//xj字段
 	
 public:
 	ProWorkOrderBomDO() {
@@ -45,6 +47,8 @@ public:
 		item_or_product = "";
 		quantity = 0.0;
 		item_id = 0;
+		workorder_id = 0;
+		create_time = "";
 	}
 };
 

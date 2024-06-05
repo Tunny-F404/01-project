@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
@@ -26,6 +26,9 @@
  */
 class ProRouteProcessDO
 {
+	CC_SYNTHESIZE(string, process_code, Process_code);
+	CC_SYNTHESIZE(string,process_name, Process_Name);
+	CC_SYNTHESIZE(int, process_id, Process_Id);
 	CC_SYNTHESIZE(int, route_id, routeId);
 	CC_SYNTHESIZE(string, process_name, processName);
 	CC_SYNTHESIZE(string, next_process_name, nextProcessName);
