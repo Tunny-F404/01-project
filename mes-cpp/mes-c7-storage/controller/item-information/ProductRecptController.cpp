@@ -64,3 +64,52 @@ Uint64JsonVO::Wrapper ProductRecptController::execAddProductRecpt(const ProductR
 	//响应结果
 	return jvo;
 }
+
+Uint64JsonVO::Wrapper ProductRecptController::execRemoveProductRecpt(const UInt64& id)
+{
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	if (!id || id <= 0)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ProductRecptService service;
+	// 执行数据删除
+	if (service.removeData(id.getValue(0))) {
+		jvo->success(id);
+	}
+	else
+	{
+		jvo->fail(id);
+	}
+	// 响应结果
+	return jvo;
+}
+
+Uint64JsonVO::Wrapper ProductRecptController::execModifyProductRecpt(const ProductRecptDTO::Wrapper& dto)
+{
+	// 定义返回数据对象
+	auto jvo = Uint64JsonVO::createShared();
+	// 参数校验
+	// 非空校验:recpt_code workorder_code recpt_date item_id
+	if (!dto->recpt_code || !dto->workorder_code || !dto->recpt_date || !dto->item_id)
+	{
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	// 定义一个Service
+	ProductRecptService service;
+	// 执行数据修改
+	if (service.updateData(dto)) {
+		jvo->success(dto->item_id);
+	}
+	else
+	{
+		jvo->fail(dto->item_id);
+	}
+	// 响应结果
+	return jvo;
+}

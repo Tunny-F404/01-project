@@ -66,3 +66,15 @@ uint64_t ProductRecptDAO::insert(const ProductRecptDO& iObj)
 	string sql = "INSERT INTO `wm_product_recpt` (`recpt_code`, `recpt_name`, `workorder_code`, `workorder_name`, `recpt_date`, `remark`, `item_id`) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	return sqlSession->executeInsert(sql, "%s%s%s%s%dt%s%ull", iObj.getRecptCode(), iObj.getRecptName(), iObj.getWorkorderCode(), iObj.getWorkorderName(), iObj.getRecptDate(), iObj.getRemark(), iObj.getItemId());
 }
+
+int ProductRecptDAO::deleteById(uint64_t id)
+{
+	string sql = "DELETE FROM `wm_product_recpt` WHERE `recpt_id`=?";
+	return sqlSession->executeUpdate(sql, "%ull", id);
+}
+
+int ProductRecptDAO::update(const ProductRecptDO& uObj)
+{
+	string sql = "UPDATE `wm_product_recpt` SET `recpt_name`=?, `workorder_code`=?, `workorder_name`=?, `recpt_date`=?, `remark`=?, `item_id`=? WHERE `recpt_code`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%dt%s%ull%s", uObj.getRecptName(), uObj.getWorkorderCode(), uObj.getWorkorderName(), uObj.getRecptDate(), uObj.getRemark(), uObj.getItemId(), uObj.getRecptCode());
+}

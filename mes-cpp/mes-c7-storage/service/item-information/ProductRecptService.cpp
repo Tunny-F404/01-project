@@ -57,3 +57,19 @@ uint64_t ProductRecptService::saveData(const ProductRecptDTO::Wrapper& dto)
 	ProductRecptDAO dao;
 	return dao.insert(data);
 }
+
+bool ProductRecptService::removeData(uint64_t id)
+{
+	ProductRecptDAO dao;
+	return dao.deleteById(id) == 1;
+}
+
+bool ProductRecptService::updateData(const ProductRecptDTO::Wrapper& dto)
+{
+	// 组装DO数据
+	ProductRecptDO data;
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, RecptCode, recpt_code, RecptName, recpt_name, WorkorderCode, workorder_code, WorkorderName, workorder_name, RecptDate, recpt_date, Remark, remark, ItemId, item_id);
+	// 执行数据修改
+	ProductRecptDAO dao;
+	return dao.update(data) == 1;
+}

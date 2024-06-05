@@ -35,5 +35,10 @@ public:
 	list<ProductRecptDO> selectWithPage(const ProductRecptQuery::Wrapper& query);
 	// 插入数据
 	uint64_t insert(const ProductRecptDO& iObj);
+	// 通过ID删除数据
+	int deleteById(uint64_t id);
+
+	// 修改数据
+	int update(const ProductRecptDO& uObj);
 };
 #endif // !_PRODUCT_RECPT_DAO_

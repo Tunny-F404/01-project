@@ -34,6 +34,10 @@ public:
 	ProductRecptPageDTO::Wrapper listAll(const ProductRecptQuery::Wrapper& query);
 	// 保存数据
 	uint64_t saveData(const ProductRecptDTO::Wrapper& dto);
+	// 通过ID删除数据
+	bool removeData(uint64_t id);
+	// 修改数据
+	bool updateData(const ProductRecptDTO::Wrapper& dto);
 };
 
 #endif // !_PRODUCT_RECPT_SERVICE_
