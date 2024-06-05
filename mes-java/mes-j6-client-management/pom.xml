@@ -58,7 +58,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.zeroone.star.login.LoginApplication</mainClass>
+                    <mainClass>com.zeroone.star.customer.CustomerApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -66,9 +66,9 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
                     <!-- Docker 远程管理地址-->
-                    <dockerHost>https://47.99.157.191:12375</dockerHost>
+                    <dockerHost>https://39.106.81.10:2380</dockerHost>
                     <!-- CA 证书位置 -->
-                    <certPath>D:\java</certPath>
+                    <certPath>D:\\ABC\\docker-ca</certPath>
                     <!-- 镜像设置 -->
                     <images>
                         <image>
@@ -101,7 +101,7 @@
                                     <JAVA_OPTS>-Xms256m -Xmx256m</JAVA_OPTS>
                                     <!-- 启动替换参数 -->
                                     <SPRING_ARGS>
-                                        --spring.profiles.active=test --spring.cloud.nacos.discovery.ip=47.99.157.191
+                                        --spring.profiles.active=test --spring.cloud.nacos.discovery.ip=39.106.81.10
                                     </SPRING_ARGS>
                                 </env>
                             </run>

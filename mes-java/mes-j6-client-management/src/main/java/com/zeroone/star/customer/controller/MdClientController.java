@@ -51,9 +51,9 @@ public class MdClientController implements ClientApis {
 
 
     @ApiOperation("删除客户")
-    @DeleteMapping("delete-clients")
+    @DeleteMapping("delete-clients/{ids}")
     @Override
-    public JsonVO<String> deleteClient(@RequestBody List<Long> ids) {
+    public JsonVO<String> deleteClient(@PathVariable List<Long> ids) {
         boolean isDeleted = clientService.deleteClient(ids);
         if (isDeleted) {
             return JsonVO.success(null);
@@ -88,16 +88,16 @@ public class MdClientController implements ClientApis {
     }
 
 
-      @GetMapping(value = "/export/queryClientExport", produces = "application/octet-stream")
+    @GetMapping(value = "/export/queryClientExport", produces = "application/octet-stream")
     @ApiOperation(value = "导出客户")
-    public ResponseEntity<byte[]> queryClientExportByExcel(@RequestParam(value="ids",required=true)List<Long> ids) {
+    public ResponseEntity<byte[]> queryClientExportByExcel(@RequestParam(value = "ids", required = true) List<Long> ids) {
         try {
             return clientService.queryClientExportByExcel(ids);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    
+
     @GetMapping(value = "/import/importTemplate", produces = "application/octet-stream")
     @ApiOperation(value = "下载导入客户的模板")
     @Override
