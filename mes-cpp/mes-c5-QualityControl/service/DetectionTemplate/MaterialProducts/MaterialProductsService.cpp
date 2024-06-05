@@ -19,7 +19,7 @@
 #include "stdafx.h"
 #include "MaterialProductsService.h"
 #include "../../../domain/do/DetectionTemplate/MaterialProductsDO.h"
-#include "../../../dao/detectiontemplate/materialproducts/MaterialProductsDAO.h"
+#include "../../../dao/DetectionTemplate/MaterialProducts/MaterialProductsDAO.h"
 MaterialProductsPageDTO::Wrapper MaterialProductsService::listAll(const MaterialProductsQuery::Wrapper& query)
 {
 	// 构建返回对象

@@ -3,7 +3,7 @@
 #define _PROCESSINSPECTION_MAPPER_
 
 #include "Mapper.h"
-#include "../../domain/do/processinspection/processinspectionDO.h"
+#include "../../domain/do/ProcessinSpection/ProcessinSpectionDO.h"
 
 class ProcessinSpectionMapper : public Mapper<ProcessinSpectionDO> {
 public:

@@ -3,7 +3,7 @@
 #define _TEMPLATEDETECTITEM_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/detectiontemplate/TemplateDetectItemDTO.h"
+#include "../../dto/DetectionTemplate/TemplateDetectItemDTO.h"
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 

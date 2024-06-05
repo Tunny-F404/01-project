@@ -3,7 +3,7 @@
 #define _MATERIALPRODUCTS_QUERY_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/detectiontemplate/materialproductsDTO.h"
+#include "../../dto/DetectionTemplate/MaterialProductsDTO.h"
 #include "domain/query/PageQuery.h"
 #include OATPP_CODEGEN_BEGIN(DTO)
 

@@ -20,8 +20,8 @@
 #ifndef _PROCESSINSPECTION_DAO_
 #define _PROCESSINSPECTION_DAO_
 #include "BaseDAO.h"
-#include "../../domain/do/processinspection/processinspectionDO.h"
-#include "../../domain/query/processinspection/ProcessinSpectionQuery.h"
+#include "../../domain/do/ProcessinSpection/ProcessinSpectionDO.h"
+#include "../../domain/query/ProcessinSpection/ProcessinSpectionQuery.h"
 
 class ProcessInspectionDAO : public BaseDAO
 {

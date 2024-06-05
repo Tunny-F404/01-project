@@ -20,17 +20,17 @@
 #ifndef _MATERIALPRODUCTS_CONTROLLER_
 #define _MATERIALPRODUCTS_CONTROLLER_
 
-#include "domain/dto/processinspection/ProcessinSpectionDTO.h"
+#include "domain/dto/ProcessinSpection/ProcessinSpectionDTO.h"
 #include "oatpp/web/server/api/ApiController.hpp"
 #include "oatpp/core/macro/codegen.hpp"
 #include "ServerInfo.h"
 #include "ApiHelper.h"
 #include "domain/query/PageQuery.h"
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/vo/detectiontemplate/materialproductsVO.h"
-#include "domain/query/detectiontemplate/materialproductsQuery.h"
-#include "domain/vo/detectiontemplate/DetectionTemplateVO.h"
-#include "domain/query/detectiontemplate/DetectionTemplateQuery.h"
+#include "domain/vo/DetectionTemplate/MaterialProductsVO.h"
+#include "domain/query/DetectionTemplate/MaterialProductsQuery.h"
+#include "domain/vo/DetectionTemplate/DetectionTemplateVO.h"
+#include "domain/query/DetectionTemplate/DetectionTemplateQuery.h"
 #include OATPP_CODEGEN_BEGIN(ApiController)
 
 class MaterialProductsController : public oatpp::web::server::api::ApiController
@@ -100,9 +100,9 @@ private: // 定义接口的执行函数
 	// 分页查询数据
 	MaterialProductsPageJsonVO::Wrapper execMaterialProducts(const MaterialProductsQuery::Wrapper& query, const PayloadDTO& payload);
 
-	Uint64JsonVO::Wrapper MaterialProductsController::execModifyMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
-	Uint64JsonVO::Wrapper MaterialProductsController::execRemoveMaterialProduct(const oatpp::List<oatpp::UInt64>& record_ids);
-	Uint64JsonVO::Wrapper MaterialProductsController::execAddMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execRemoveMaterialProduct(const oatpp::List<oatpp::UInt64>& record_ids);
+	Uint64JsonVO::Wrapper execAddMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
 };
 
 #include OATPP_CODEGEN_END(ApiController) 

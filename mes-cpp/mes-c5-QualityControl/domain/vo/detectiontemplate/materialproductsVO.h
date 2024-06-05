@@ -3,7 +3,7 @@
 #define _MATERIALPRODUCTS_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/detectiontemplate/MaterialProductsDTO.h"
+#include "../../dto/DetectionTemplate/MaterialProductsDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 

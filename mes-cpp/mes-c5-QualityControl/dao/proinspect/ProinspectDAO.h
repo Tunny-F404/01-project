@@ -21,10 +21,10 @@
 #define _PROINSPECT_DAO_
 #include "BaseDAO.h"
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/do/proinspect/ProinspectDO.h"
-#include "../../domain/dto/processinspection/proinspect/ProinspectDTO.h"
-#include "domain/vo/processinspection/proinspect/ProinspectVO.h"
-#include"domain/query/processinspection/proinspect/proinspectQuery.h"
+#include "domain/do/ProinSpect/ProinSpectDO.h"
+#include "../../domain/dto/ProcessinSpection/ProinSpect/ProinSpectDTO.h"
+#include "domain/vo/ProcessinSpection/ProinSpect/ProinSpectVO.h"
+#include "domain/query/ProcessinSpection/ProinSpect/ProinSpectQuery.h"
 
 /**
  * 示例表数据库操作实现

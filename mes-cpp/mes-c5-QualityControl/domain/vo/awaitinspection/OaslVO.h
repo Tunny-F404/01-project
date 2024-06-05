@@ -4,7 +4,7 @@
 #define _OASL_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/awaitinspection/OaslDTO.h"
+#include "../../dto/AwaitInspection/OaslDTO.h"
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**

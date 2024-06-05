@@ -20,9 +20,9 @@
 #ifndef _MATERIALPRODUCTSDTO_SERVICE_
 #define _MATERIALPRODUCTSDTO_SERVICE_
 #include <list>
-#include "domain/vo/detectiontemplate/materialproductsVO.h"
-#include "domain/query/detectiontemplate/materialproductsQuery.h"
-#include "domain/dto/detectiontemplate/materialproductsDTO.h"
+#include "domain/vo/DetectionTemplate/MaterialProductsVO.h"
+#include "domain/query/DetectionTemplate/MaterialProductsQuery.h"
+#include "domain/dto/DetectionTemplate/MaterialProductsDTO.h"
 #include <oatpp/web/client/ApiClient.hpp>
 
 class MaterialProductsService
@@ -31,13 +31,11 @@ public:
 	// 分页查询所有数据
 	MaterialProductsPageDTO::Wrapper listAll(const MaterialProductsQuery::Wrapper& query);
 	
-	uint64_t MaterialProductsService::saveMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
+	uint64_t saveMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
 	
-	bool MaterialProductsService::updateMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
-
+	bool updateMaterialProducts(const MaterialProductsDTO::Wrapper& dto);
 	
-	
-	bool  MaterialProductsService::deleteByRecordId(const oatpp::List<oatpp::UInt64>& record_id);
+	bool  deleteByRecordId(const oatpp::List<oatpp::UInt64>& record_id);
 };
 
 #endif // !_SAMPLE_SERVICE_

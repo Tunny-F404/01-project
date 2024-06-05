@@ -20,9 +20,9 @@
 #ifndef _PROCESSINSPECTION_SERVICE_
 #define _PROCESSINSPECTION_SERVICE_
 #include "list"
-#include "domain/dto/processinspection/ProcessinSpectionDTO.h"
-#include "domain/query/processinspection/ProcessinSpectionQuery.h"
-#include "domain/do/processinspection/processinspectionDO.h"
+#include "domain/dto/ProcessinSpection/ProcessinSpectionDTO.h"
+#include "domain/query/ProcessinSpection/ProcessinSpectionQuery.h"
+#include "domain/do/ProcessinSpection/ProcessinSpectionDO.h"
 #include "Macros.h"
 class ProcessInspectionService
 {

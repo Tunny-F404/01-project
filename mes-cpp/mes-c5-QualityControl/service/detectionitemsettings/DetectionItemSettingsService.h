@@ -3,11 +3,10 @@
 #define _DETECTIONITEMSETTINGS_SERVICE_
 
 #include <list>
-#include "domain/query/detectionitemsettings/DetectionItemSettingsQuery.h"
-#include "domain/dto/detectionitemsettings/DetectionItemSettingsDTO.h"
-#include "domain/vo/detectionitemsettings/DetectionItemSettingsJsonVO.h"
-#include "domain/do/detectionitemsettings/DetectionItemSettingsDO.h"
-
+#include "domain/query/DetectionItemSettings/DetectionItemSettingsQuery.h"
+#include "domain/dto/DetectionItemSettings/DetectionItemSettingsDTO.h"
+#include "domain/vo/DetectionItemSettings/DetectionItemSettingsJsonVO.h"
+#include "domain/do/DetectionItemSettings/DetectionItemSettingsDO.h"
 class DetectionItemSettingsService
 {
 public:

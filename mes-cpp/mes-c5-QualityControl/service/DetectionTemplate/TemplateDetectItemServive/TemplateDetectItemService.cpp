@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "TemplateDetectItemService.h"
-#include "../../../dao/detectiontemplate/templatedetectitem/TemplateDetectItemDAO.h"
+#include "../../../dao/DetectionTemplate/TemplateDetectItem/TemplateDetectItemDAO.h"
+
+
+
 
 TemplateDetectItemPageDTO::Wrapper TemplateDetectItemService::listAllTemplateDetectItem(const TemplateDetectItemQuery::Wrapper& query)
 {
@@ -105,9 +108,11 @@ uint64_t TemplateDetectItemService::saveTemplateDetectItem(const TemplateDetectI
 	data.setAttr3(dto->attr3);
 	data.setAttr4(dto->attr4);
 	data.setCreate_by(dto->create_by);
-	data.setCreate_time(getCurrentTime());
+	data.setCreate_time(dto->update_time);
+	//data.setCreate_time(getCurrentTime());
 	data.setUpdate_by(dto->update_by);
-	data.setUpdate_time(getCurrentTime());
+	data.setUpdate_time(dto->update_time);
+	//data.setUpdate_time(getCurrentTime());
 	// 执行数据添加
 	TemplateDetectItemDAO dao;
 	return dao.insertTemplateDetectItem(data);
@@ -123,7 +128,7 @@ string TemplateDetectItemService::getCurrentTime()
 {
 	time_t time_seconds = time(0);
 	struct tm now_time;
-	localtime_s(&now_time, &time_seconds);
+	//localtime_s(&now_time, &time_seconds);
 	string time;
 	time += to_string(now_time.tm_year + 1900) + "-";
 	time += to_string(now_time.tm_mon + 1) + "-";

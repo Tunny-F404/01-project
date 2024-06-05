@@ -2,10 +2,10 @@
 #ifndef _PROINSPECT_CONTROLLER_
 #define _PROINSPECT_CONTROLLER_
 #include "domain/vo/BaseJsonVO.h"
-#include "../../../domain/do/proinspect/ProinspectDO.h"
-#include "../../../domain/dto/processinspection/proinspect/ProinspectDTO.h"
-#include "../../../domain/vo/processinspection/proinspect/ProinspectVO.h"
-#include "../../../domain/query/processinspection/proinspect/proinspectQuery.h"
+#include "../../../domain/do/ProinSpect/ProinSpectDO.h"
+#include "../../../domain/dto/ProcessinSpection/ProinSpect/ProinSpectDTO.h"
+#include "../../../domain/vo/ProcessinSpection/ProinSpect/ProinSpectVO.h"
+#include "../../../domain/query/ProcessinSpection/ProinSpect/ProinSpectQuery.h"
 
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 class ProinspectController : public oatpp::web::server::api::ApiController {

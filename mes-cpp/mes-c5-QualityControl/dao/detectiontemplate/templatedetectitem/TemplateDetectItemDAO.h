@@ -3,8 +3,8 @@
 #define _TEMPLATEDETECTITEM_DAO_
 
 #include "BaseDAO.h"
-#include "../../../domain/do/detectiontemplate/TemplateDetectItemDO.h"
-#include "../../../domain/query/detectiontemplate/TemplateDetectItemQuery.h"
+#include "../../../domain/do/DetectionTemplate/TemplateDetectItemDO.h"
+#include "../../../domain/query/DetectionTemplate/TemplateDetectItemQuery.h"
 
 class TemplateDetectItemDAO :public BaseDAO
 {

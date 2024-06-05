@@ -3,7 +3,7 @@
 #define _PROINSPECT_MAPPER2_
 
 #include "Mapper.h"
-#include "../../domain/do/proinspect/ProinspectDO.h"
+#include "../../domain/do/ProinSpect/ProinSpectDO.h"
 
 class ProinspectMapper2 : public Mapper<ProinspectDO>
 {

@@ -3,10 +3,11 @@
 #define _TEMPLATEDETECTITEM_SERVICE_
 
 #include <list>
-#include "../../../domain/dto/detectiontemplate/TemplateDetectItemDTO.h"
-#include "../../../domain/vo/detectiontemplate/TemplateDetectItemJsonVO.h"
+#include "Macros.h"
+#include "../../../domain/dto/DetectionTemplate/TemplateDetectItemDTO.h"
+#include "../../../domain/vo/DetectionTemplate/TemplateDetectItemJsonVO.h"
 #include "../../../domain/do/DetectionTemplate/TemplateDetectItemDO.h"
-#include "../../../domain/query/detectiontemplate/TemplateDetectItemQuery.h"
+#include "../../../domain/query/DetectionTemplate/TemplateDetectItemQuery.h"
 
 class TemplateDetectItemService
 {

@@ -5,9 +5,9 @@
 #include "ApiHelper.h"
 #include "ServerInfo.h"
 #include "domain/vo/BaseJsonVO.h"
-#include "../../../domain/vo/detectiontemplate/TemplateDetectItemJsonVO.h"
-#include "../../../domain/dto/detectiontemplate/TemplateDetectItemDTO.h"
-#include "../../../domain/query/detectiontemplate/TemplateDetectItemQuery.h"
+#include "../../../domain/vo/DetectionTemplate/TemplateDetectItemJsonVO.h"
+#include "../../../domain/dto/DetectionTemplate/TemplateDetectItemDTO.h"
+#include "../../../domain/query/DetectionTemplate/TemplateDetectItemQuery.h"
 
 #include OATPP_CODEGEN_BEGIN(ApiController)
 

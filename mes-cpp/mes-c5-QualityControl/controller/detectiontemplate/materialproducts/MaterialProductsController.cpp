@@ -19,10 +19,8 @@
 #include "stdafx.h"
 #include "MaterialProductsController.h"
 #include "../../ApiDeclarativeServicesHelper.h"
-#include "../../../service/deletdetectiontemplate/materialproducts/MaterialProductsService.h"
-#include "../../../domain/vo/detectiontemplate/TemplateDetectItemJsonVO.h"
-#include "../../../domain/vo/detectiontemplate/DetectionTemplateVO.h"
-#include "../../../domain/query/detectiontemplate/DetectionTemplateQuery.h"
+#include "../../../service/DetectionTemplate/MaterialProducts/MaterialProductsService.h"
+
 MaterialProductsPageJsonVO::Wrapper MaterialProductsController::execMaterialProducts(const MaterialProductsQuery::Wrapper& query, const PayloadDTO& payload)
 {
 	// 定义一个Service

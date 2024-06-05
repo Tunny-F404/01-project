@@ -3,7 +3,7 @@
 #define _TEMPLATEDETECTITEM_MAPPER_
 
 #include "Mapper.h"
-#include "../../../domain/do/detectiontemplate/TemplateDetectItemDO.h"
+#include "../../../domain/do/DetectionTemplate/TemplateDetectItemDO.h"
 
 class TemplateDetectItemMapper : public Mapper<TemplateDetectItemDO>
 {

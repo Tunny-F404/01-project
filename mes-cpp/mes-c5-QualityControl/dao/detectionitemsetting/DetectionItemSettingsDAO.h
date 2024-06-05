@@ -3,8 +3,8 @@
 #define	_DETECTIONITEMSETTINGS_DAO_
 
 #include "BaseDAO.h"
-#include "../../domain/do/detectionitemsettings/DetectionItemSettingsDO.h"
-#include "../../domain/query/detectionitemsettings/DetectionItemSettingsQuery.h"
+#include "../../domain/do/DetectionItemSettings/DetectionItemSettingsDO.h"
+#include "../../domain/query/DetectionItemSettings/DetectionItemSettingsQuery.h"
 
 class DetectionItemSettingsDAO : public BaseDAO
 {

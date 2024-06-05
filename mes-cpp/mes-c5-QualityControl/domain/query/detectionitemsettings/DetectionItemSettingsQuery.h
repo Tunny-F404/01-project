@@ -10,17 +10,14 @@
 class DetectionItemSettingsQuery : public PageQuery
 {
 	DTO_INIT(DetectionItemSettingsQuery, PageQuery);
-	//?им????б└ид??
 	DTO_FIELD(String, code);
 	DTO_FIELD_INFO(code) {
 		info->description = ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.domain.code");
 	}
-	//?им????????
 	DTO_FIELD(String, name);
 	DTO_FIELD_INFO(name) {
 		info->description = ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.domain.name");
 	}
-	//?им?????ид??
 	DTO_FIELD(String, type);
 	DTO_FIELD_INFO(type) {
 		info->description = ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.domain.type");

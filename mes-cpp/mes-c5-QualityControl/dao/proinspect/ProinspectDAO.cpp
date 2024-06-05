@@ -17,10 +17,10 @@
  limitations under the License.
 */
 #include "stdafx.h"
-#include "ProinspectDAO.h"
+#include "ProinSpectDAO.h"
 #include <sstream>
-#include"../../dao/proinspect/ProinspectMapper1.h"
-#include"../../dao/proinspect/ProinspectMapper2.h"
+#include"../../dao/ProinSpect/ProinSpectMapper1.h"
+#include"../../dao/ProinSpect/ProinSpectMapper2.h"
 
 
 //定义条件解析宏，减少重复代码

@@ -3,7 +3,7 @@
 #define _DETECTIONTEMPLATE_QUERY_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/detectiontemplate/DetectionTemplateDTO.h"
+#include "../../dto/DetectionTemplate/DetectionTemplateDTO.h"
 #include "domain/query/PageQuery.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)

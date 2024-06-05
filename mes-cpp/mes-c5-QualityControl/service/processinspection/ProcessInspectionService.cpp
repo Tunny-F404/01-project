@@ -17,9 +17,9 @@
  limitations under the License.
 */
 #include "stdafx.h"
-#include "ProcessInspectionService.h"
-#include "../../domain/dto/processinspection/ProcessinSpectionDTO.h"
-#include "../../dao/processinspection/ProcessInspectionDAO.h"
+#include "ProcessinSpectionService.h"
+#include "../../domain/dto/ProcessinSpection/ProcessinSpectionDTO.h"
+#include "../../dao/ProcessinSpection/ProcessinSpectionDAO.h"
 
 bool ProcessInspectionService::updateData(const ProcessinSpectionDTO::Wrapper& dto)
 {

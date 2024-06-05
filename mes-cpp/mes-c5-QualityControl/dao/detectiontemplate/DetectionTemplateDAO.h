@@ -3,7 +3,7 @@
 #define _DETECTIONTEMPLATE_DAO_
 #include "BaseDAO.h"
 #include "../../domain/do/DetectionTemplate/DetectionTemplateDO.h"
-#include "../../domain/query/detectiontemplate/DetectionTemplateQuery.h"
+#include "../../domain/query/DetectionTemplate/DetectionTemplateQuery.h"
 /**
  * 示例表数据库操作实现
  */

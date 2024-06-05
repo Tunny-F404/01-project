@@ -14,27 +14,22 @@ class DetectionItemSettingsDTO : public oatpp::DTO
 	DTO_FIELD_INFO(id) {
 		info->description = ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.domain.id");
 	}
-	//?им????б└ид??
 	DTO_FIELD(String, code);
 	DTO_FIELD_INFO(code) {
 		info->description = ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.domain.code");
 	}
-	//?им????????
 	DTO_FIELD(String, name);
 	DTO_FIELD_INFO(name) {
 		info->description = ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.domain.name");
 	}
-	//?им?????ид??
 	DTO_FIELD(String, type);
 	DTO_FIELD_INFO(type) {
 		info->description = ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.domain.type");
 	}
-	//?им?????бш??
 	DTO_FIELD(String, tool);
 	DTO_FIELD_INFO(tool) {
 		info->description = ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.domain.tool");
 	}
-	//б└?б┴?
 	DTO_FIELD(String, remark);
 	DTO_FIELD_INFO(remark) {
 		info->description = ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.domain.remark");

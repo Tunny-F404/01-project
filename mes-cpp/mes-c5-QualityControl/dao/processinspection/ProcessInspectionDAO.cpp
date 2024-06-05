@@ -17,7 +17,7 @@
  limitations under the License.
 */
 #include "stdafx.h"
-#include "ProcessInspectionDAO.h"
+#include "ProcessinSpectionDAO.h"
 #include "ProcessinSpectionMapper.h"
 #include <sstream>
 

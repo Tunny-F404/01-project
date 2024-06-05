@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "DetectionItemsController.h"
 #include "../../ApiDeclarativeServicesHelper.h"
-//#include "../../../service/detectiontemplate/TemplateDetectItemService.h"
-#include "../../../service/deletdetectiontemplate/TemplateDetectItemServive/TemplateDetectItemService.h"
+#include "../../../service/DetectionTemplate/TemplateDetectItemServive/TemplateDetectItemService.h"
 TemplateDetectItemPageJsonVO::Wrapper DetectionItemsController::execQueryTemplateDetectItem(const TemplateDetectItemQuery::Wrapper& query)
 {
 	TemplateDetectItemService service;

@@ -4,7 +4,7 @@
 
 
 #include "../../GlobalInclude.h"
-#include "../../dto/detectionitemsettings/DetectionItemSettingsDTO.h"
+#include "../../dto/DetectionItemSettings/DetectionItemSettingsDTO.h"
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 class DetectionItemSettingsJsonVO :public JsonVO<DetectionItemSettingsDTO::Wrapper> {

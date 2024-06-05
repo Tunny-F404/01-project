@@ -2,7 +2,7 @@
 #ifndef _DETECTIONTEMPLATE_SERVICE_
 #define _DETECTIONTEMPLATE_SERVICE_
 #include <list>
-#include "../../dao/detectiontemplate/DetectionTemplateDAO.h"
+#include "../../dao/DetectionTemplate/DetectionTemplateDAO.h"
 
 class DetectionTemplateService
 {

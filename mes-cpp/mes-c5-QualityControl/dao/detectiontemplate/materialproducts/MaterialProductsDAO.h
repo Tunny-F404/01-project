@@ -4,10 +4,9 @@
 
 #include "BaseDAO.h"
 #include "../../../domain/do/DetectionTemplate/MaterialProductsDO.h"
-#include "../../../domain/query/detectiontemplate/materialproductsQuery.h"
+#include "../../../domain/query/DetectionTemplate/MaterialProductsQuery.h"
 #include <oatpp/web/server/api/ApiController.hpp>
 #include <oatpp/web/client/ApiClient.hpp>
-
 
 class MaterialProductsDAO :public BaseDAO
 {

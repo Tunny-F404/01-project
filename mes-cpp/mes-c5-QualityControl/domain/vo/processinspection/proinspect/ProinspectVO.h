@@ -2,7 +2,7 @@
 #define  _PROINSPECTVO_H_
 
 #include "../../../GlobalInclude.h"
-#include "../../../dto/processinspection/proinspect/ProinspectDTO.h"
+#include "../../../dto/ProcessinSpection/ProinSpect/ProinSpectDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 

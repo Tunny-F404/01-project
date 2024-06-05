@@ -3,9 +3,9 @@
 #define _DETECTIONITEMSETTINGS_CONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/query/detectionitemsettings/DetectionItemSettingsQuery.h"
-#include "domain/dto/detectionitemsettings/DetectionItemSettingsDTO.h"
-#include "domain/vo/detectionitemsettings/DetectionItemSettingsJsonVO.h"
+#include "domain/query/DetectionItemSettings/DetectionItemSettingsQuery.h"
+#include "domain/dto/DetectionItemSettings/DetectionItemSettingsDTO.h"
+#include "domain/vo/DetectionItemSettings/DetectionItemSettingsJsonVO.h"
 #include OATPP_CODEGEN_BEGIN(ApiController)
 
 class DetectionItemSettingsController : public oatpp::web::server::api::ApiController

@@ -2,7 +2,7 @@
 #include <sstream>
 #include "MaterialProductsDAO.h"
 #include "MaterialProductsMapper.h"
-#include "domain/dto/detectiontemplate/materialproductsDTO.h"
+#include "domain/dto/DetectionTemplate/MaterialProductsDTO.h"
 
 //定义条件解析宏，减少重复代码
 #define MaterialProducts_TERAM_PARSE(query, sql) \

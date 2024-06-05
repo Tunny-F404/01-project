@@ -17,8 +17,8 @@
  limitations under the License.
 */
 #include "stdafx.h"
-#include "ProinspectService.h"
-#include "dao/proinspect/ProinspectDAO.h"
+#include "ProinSpectService.h"
+#include "dao/ProinSpect/ProinSpectDAO.h"
 
 
 

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DetectionTemplateService.h"
-#include "../../dao/detectiontemplate/DetectionTemplateDAO.h"
-#include "../../domain/dto/detectiontemplate/DetectionTemplateDTO.h"
+#include "../../dao/DetectionTemplate/DetectionTemplateDAO.h"
+#include "../../domain/dto/DetectionTemplate/DetectionTemplateDTO.h"
 #include "../../domain/do/DetectionTemplate/DetectionTemplateDO.h"
 
 bool DetectionTemplateService::RemoveDetectionTemplateData(uint64_t template_id)

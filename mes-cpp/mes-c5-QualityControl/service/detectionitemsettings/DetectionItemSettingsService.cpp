@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "DetectionItemSettingsService.h"
-//#include "../../dao/detectionitemsetting/DetectionItemSettingsDAO.h"
-#include "../../domain/do/detectionitemsettings/DetectionItemSettingsDO.h"
-#include "../../dao/detectionitemsetting/DetectionItemSettingsDAO.h"
+#include "../../domain/do/DetectionItemSettings/DetectionItemSettingsDO.h"
+#include "../../dao/DetectionItemSetting/DetectionItemSettingsDAO.h"
 
 DetectionItemSettingsPageDTO::Wrapper DetectionItemSettingsService::listAll(const DetectionItemSettingsQuery::Wrapper& query)
 {

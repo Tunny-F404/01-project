@@ -4,8 +4,8 @@
 
 #include "ApiHelper.h"
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/vo/awaitinspection/OaslVO.h"
-#include "../../domain/query/awaitinspection/OaslQuery.h"
+#include "domain/vo/AwaitInspection/OaslVO.h"
+#include "../../domain/query/AwaitInspection/OaslQuery.h"
 #include "Macros.h"
 #include OATPP_CODEGEN_BEGIN(ApiController)
 class OaslController : public oatpp::web::server::api::ApiController

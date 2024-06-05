@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DetectionTemplateController.h"
 #include "../ApiDeclarativeServicesHelper.h"
-#include "../../service/deletdetectiontemplate/DetectionTemplateService.h"
+#include "../../service/DetectionTemplate/DetectionTemplateService.h"
 
 Uint64JsonVO::Wrapper DetectionTemplateController::execModifyDetectionTemplate(const DetectionTemplateDTO::Wrapper& dto) {
 	auto result = Uint64JsonVO::createShared();

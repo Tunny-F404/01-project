@@ -4,9 +4,9 @@
 
 #include "Macros.h"
 #include "domain/vo/BaseJsonVO.h"
-#include "../../domain/dto/detectiontemplate/DetectionTemplateDTO.h"
-#include "../../domain/query/detectiontemplate/DetectionTemplateQuery.h"
-#include "../../domain/vo/detectiontemplate/DetectionTemplateVO.h"
+#include "../../domain/dto/DetectionTemplate/DetectionTemplateDTO.h"
+#include "../../domain/query/DetectionTemplate/DetectionTemplateQuery.h"
+#include "../../domain/vo/DetectionTemplate/DetectionTemplateVO.h"
 
 // 0 定义API控制器使用宏
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen

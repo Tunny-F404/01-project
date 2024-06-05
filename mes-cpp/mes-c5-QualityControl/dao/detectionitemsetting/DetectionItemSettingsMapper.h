@@ -2,7 +2,7 @@
 #ifndef _DETECTIONITEMSETTINGS_MAPPER_
 #define _DETECTIONITEMSETTINGS_MAPPER_
 #include "Mapper.h"
-#include "../../domain/do/detectionitemsettings/DetectionItemSettingsDO.h"
+#include "../../domain/do/DetectionItemSettings/DetectionItemSettingsDO.h"
 class DetectionItemSettingsMapper : public Mapper<DetectionItemSettingsDO>
 {
 public:

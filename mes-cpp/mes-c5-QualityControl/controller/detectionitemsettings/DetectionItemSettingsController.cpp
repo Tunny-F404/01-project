@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DetectionItemSettingsController.h"
 #include "../ApiDeclarativeServicesHelper.h"
-#include "../../service/detectionitemsettings/DetectionItemSettingsService.h"
+#include "../../service/DetectionItemSettings/DetectionItemSettingsService.h"
 #include "Macros.h"
 #include "ExcelComponent.h"
 #include "gtest/gtest.h"
