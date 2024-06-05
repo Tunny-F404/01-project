@@ -3,13 +3,11 @@ package com.zeroone.star.login.controller;
 import com.anji.captcha.model.common.ResponseModel;
 import com.anji.captcha.model.vo.CaptchaVO;
 import com.anji.captcha.service.CaptchaService;
-import com.zeroone.star.login.config.RedisInit;
 import com.zeroone.star.login.service.CurrUserInfoService;
 import com.zeroone.star.login.service.IMenuService;
 import com.zeroone.star.login.service.OauthService;
 import com.zeroone.star.project.components.user.UserDTO;
 import com.zeroone.star.project.components.user.UserHolder;
-import com.zeroone.star.project.config.redis.RedisConfig;
 import com.zeroone.star.project.constant.AuthConstant;
 import com.zeroone.star.project.dto.login.LoginDTO;
 import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
@@ -20,15 +18,17 @@ import com.zeroone.star.project.vo.ResultStatus;
 import com.zeroone.star.project.vo.login.MenuTreeVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +39,7 @@ import java.util.Map;
  * </p>
  * <p>版权：&copy;01星球</p>
  * <p>地址：01星球总部</p>
+ *
  * @author 阿伟学长
  * @version 1.0.0
  */
@@ -46,11 +47,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("login")
 @Api(tags = "登录系统")
+@Slf4j
 public class LoginController implements LoginApis {
     @Resource
-    OauthService oAuthService;
+    private OauthService oAuthService;
     @Resource
-    UserHolder userHolder;
+    private UserHolder userHolder;
     @Resource
     private CaptchaService captchaService;
     @Resource
@@ -62,7 +64,7 @@ public class LoginController implements LoginApis {
     public JsonVO<Oauth2TokenDTO> authLogin(LoginDTO loginDTO) {
         //TODO:已经实现--实现验证码验证
         //创建CaptchaVO对象，用于封装验证码验证信息
-        CaptchaVO captchaVO = new CaptchaVO();
+        /*CaptchaVO captchaVO = new CaptchaVO();
         // 设置验证码字符串
         captchaVO.setCaptchaVerification(loginDTO.getCode());
         // 调用验证码服务进行验证
@@ -71,7 +73,7 @@ public class LoginController implements LoginApis {
             return JsonVO.create(null,
                     ResultStatus.FAIL.getCode(),
                     response.getRepCode()+":"+response.getRepMsg());
-        }
+        }*/
         //账号密码认证
         Map<String, String> params = new HashMap<>(5);
         params.put("grant_type", "password");  //授权模式
@@ -79,10 +81,13 @@ public class LoginController implements LoginApis {
         params.put("client_secret", AuthConstant.CLIENT_PASSWORD);  //客户端密码
         params.put("username", loginDTO.getUsername());  //用户名
         params.put("password", loginDTO.getPassword());  //密码
+
+//        return oAuthService.postAccessToken(params);
         //TODO:已经实现--认证成功后如何实现注销凭证（如记录凭证到内存数据库）
         JsonVO<Oauth2TokenDTO> oauth2TokenDTOJsonVO = oAuthService.postAccessToken(params);
         if (oauth2TokenDTOJsonVO.getCode() != ResultStatus.FAIL.getCode()) {
-            redisTemplate.opsForValue().set(oauth2TokenDTOJsonVO.getData().getToken(),"1");
+            redisTemplate.opsForValue().set(oauth2TokenDTOJsonVO.getData().getToken(), "1");
+            redisTemplate.opsForValue().set(oauth2TokenDTOJsonVO.getData().getRefreshToken(), "1");
         }
         return oauth2TokenDTOJsonVO;
     }
@@ -91,9 +96,9 @@ public class LoginController implements LoginApis {
     @PostMapping("refresh-token")
     @Override
     public JsonVO<Oauth2TokenDTO> refreshToken(Oauth2TokenDTO oauth2TokenDTO) {
-        //TODO:未实现注销凭证验证
-        if (Boolean.TRUE.equals(redisTemplate.hasKey(oauth2TokenDTO.getToken()))) {
-            redisTemplate.delete(oauth2TokenDTO.getToken());
+        //TODO:已实现--注销凭证验证
+        if (Boolean.FALSE.equals(redisTemplate.hasKey(oauth2TokenDTO.getRefreshToken()))) {
+            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "刷新凭证无效");
         }
         Map<String, String> params = new HashMap<>(4);
         params.put("grant_type", "refresh_token");
@@ -107,14 +112,24 @@ public class LoginController implements LoginApis {
     @GetMapping("logout")
     @Override
     public JsonVO<String> logout() {
-        //TODO:登出逻辑，需要配合登录逻辑实现
-        return null;
+        //TODO:已实现--登出逻辑，需要配合登录逻辑实现
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (servletRequestAttributes == null) {
+            return null;
+        }
+        HttpServletRequest request = servletRequestAttributes.getRequest();
+        String token = request.getHeader("Authorization");
+        if (Boolean.TRUE.equals(redisTemplate.hasKey(token))){
+            redisTemplate.delete(token);
+            return JsonVO.success("登出成功");
+        }
+        return JsonVO.fail("登录已失效");
     }
-
 
 
     @Resource
     CurrUserInfoService currUserInfoService;
+
     @ApiOperation(value = "获取当前用户")
     @GetMapping("current-user")
     @Override
@@ -132,8 +147,10 @@ public class LoginController implements LoginApis {
             return JsonVO.success(currentUserInfo);
         }
     }
+
     @Resource
     IMenuService menuService;
+
     @ApiOperation(value = "获取菜单")
     @GetMapping("get-menus")
     @Override

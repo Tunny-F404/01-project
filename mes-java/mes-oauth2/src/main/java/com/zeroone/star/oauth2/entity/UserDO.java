@@ -37,7 +37,7 @@ public class UserDO {
 	@TableField(value = "avatar")
 	private String avatar;
 	//密码
-	@TableField(value = "password", select = false)
+	@TableField(value = "password")
 	private String password;
 	//帐号状态（0正常 1停用）
 	@TableField(value = "status")
