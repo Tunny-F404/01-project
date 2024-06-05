@@ -33,11 +33,11 @@ class ReturnQuery : public PageQuery
 	// 定义初始化
 	DTO_INIT(ReturnQuery, PageQuery);
 	// 退货单编号
-	API_DTO_FIELD_DEFAULT(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"));
+	API_DTO_FIELD_DEFAULT(String, returnCode, ZH_WORDS_GETTER("return.fields.rtcode"));
 	// 退货单名称
 	API_DTO_FIELD_DEFAULT(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"));
 	// 采购单编号
-	API_DTO_FIELD_DEFAULT(String, purchaseId, ZH_WORDS_GETTER("return.fields.puid"));
+	API_DTO_FIELD_DEFAULT(String, purchaseCode, ZH_WORDS_GETTER("return.fields.pucode"));
 	// 供应商名称
 	API_DTO_FIELD_DEFAULT(String, vendorName, ZH_WORDS_GETTER("return.fields.vename"));
 };
@@ -50,7 +50,7 @@ class ReturnDetailQuery : public oatpp::DTO
 	// 定义初始化
 	DTO_INIT(ReturnDetailQuery, oatpp::DTO);
 	// 退货单编号
-	API_DTO_FIELD(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"),true,"null");
+	API_DTO_FIELD(String, returnCode, ZH_WORDS_GETTER("return.fields.rtcode"), true, "notnull");
 };
 
 /**
@@ -61,21 +61,21 @@ class ReturnAdd : public oatpp::DTO
 	// 定义初始化
 	DTO_INIT(ReturnAdd, oatpp::DTO);
 	// 退货单编号
-	API_DTO_FIELD(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"),true, "RTV123");
+	API_DTO_FIELD(String, returnCode, ZH_WORDS_GETTER("return.fields.rtcode"), true, "RTV123");
 	// 退货单名称
 	API_DTO_FIELD(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"), true, "01star");
 	// 采购单编号
-	API_DTO_FIELD(String, purchaseId, ZH_WORDS_GETTER("return.fields.puid"),false, "null");
+	API_DTO_FIELD(String, purchaseCode, ZH_WORDS_GETTER("return.fields.pucode"), false, "null");
 	// 供应商名称
 	API_DTO_FIELD(String, vendorName, ZH_WORDS_GETTER("return.fields.vename"), true, "01star");
 	// 批次号
-	API_DTO_FIELD(String, batchCode, ZH_WORDS_GETTER("return.fields.batchcode"),false,"null");
+	API_DTO_FIELD(String, batchCode, ZH_WORDS_GETTER("return.fields.batchcode"), false, "null");
 	// 退货日期
 	API_DTO_FIELD(String, returndate, ZH_WORDS_GETTER("return.fields.rtdate"), true, "2024-5-21");
 	// 单据状态
 	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("return.fields.status"), true, "PREPARE");
 	// 备注
-	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("return.fields.remark"),false, " ");
+	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("return.fields.remark"), false, " ");
 };
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_RETURNQUERY_H_

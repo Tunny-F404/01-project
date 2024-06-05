@@ -48,9 +48,9 @@ public:
 		// 退货单名称
 		API_DEF_ADD_QUERY_PARAMS(String, "returnName", ZH_WORDS_GETTER("return.fields.rtname"), "01star", false);
 		// 退货单编号
-		API_DEF_ADD_QUERY_PARAMS(String, "returnId", ZH_WORDS_GETTER("return.fields.rtid"), "RTV123456", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "returnCode", ZH_WORDS_GETTER("return.fields.rtcode"), "RTV123456", false);
 		// 采购单编号
-		API_DEF_ADD_QUERY_PARAMS(String, "purchaseId", ZH_WORDS_GETTER("return.fields.puid"), "null", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "purchaseCode", ZH_WORDS_GETTER("return.fields.pucode"), "null", false);
 		// 供应商名称
 		API_DEF_ADD_QUERY_PARAMS(String, "vendorName", ZH_WORDS_GETTER("return.fields.vename"), "01star", false);
 	}
@@ -59,9 +59,9 @@ public:
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ReturnQuery, queryParams);
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(executeQueryAll(query, authObject->getPayload()));
+		API_HANDLER_RESP_VO(executeQueryAll(query));
 	}
-	
+
 	// 定义查询单个单据详细信息接口描述
 	ENDPOINT_INFO(queryReturnDetail) {
 		// 定义接口标题
@@ -72,7 +72,7 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义其他查询参数描述
 		// 退货单编号
-		API_DEF_ADD_QUERY_PARAMS(String, "returnId", ZH_WORDS_GETTER("return.fields.rtid"), "RTV123456", true);
+		API_DEF_ADD_QUERY_PARAMS(String, "returnCode", ZH_WORDS_GETTER("return.fields.rtcode"), "RTV123456", true);
 	}
 	// 定义查询单据详细信息接口端点处理
 	ENDPOINT(API_M_GET, "/return/query-detail", queryReturnDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
@@ -92,11 +92,11 @@ public:
 		API_DEF_ADD_AUTH();
 		// 定义其他查询参数描述
 		// 退货单编号
-		API_DEF_ADD_QUERY_PARAMS(String, "returnId", ZH_WORDS_GETTER("return.fields.rtid"), "RTV123", true);
+		API_DEF_ADD_QUERY_PARAMS(String, "returnCode", ZH_WORDS_GETTER("return.fields.rtcode"), "RTV123", true);
 		// 退货单名称
 		API_DEF_ADD_QUERY_PARAMS(String, "returnName", ZH_WORDS_GETTER("return.fields.rtname"), "01star", true);
 		// 采购单编号
-		API_DEF_ADD_QUERY_PARAMS(String, "purchaseId", ZH_WORDS_GETTER("return.fields.puid"), "null", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "purchaseCode", ZH_WORDS_GETTER("return.fields.pucode"), "null", false);
 		// 供应商名称
 		API_DEF_ADD_QUERY_PARAMS(String, "vendorName", ZH_WORDS_GETTER("return.fields.vename"), "01star", true);
 		// 批次号
@@ -116,43 +116,43 @@ public:
 	// 定义修改单据接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.modify-return.summary"), modifyReturn, Uint64JsonVO::Wrapper);
 	// 定义修改单据接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/return/modify-return", modifyReturn, BODY_DTO(ReturnDTO::Wrapper, dto), executeModifyReturn(dto));
-	
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/return/modify-return", modifyReturn, BODY_DTO(ReturnDTO::Wrapper, dto), execModifyReturn(dto));
+
 	// 定义执行退货接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.execute-return.summary"), executeReturn, Uint64JsonVO::Wrapper);
 	// 定义执行退货接口处理 "/return/{returnId}"必须对应
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/{returnIdexec}", executeReturn, PATH(UInt64, returnIdexec), executeExecuteReturn(returnIdexec));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/{returnCodeexec}", executeReturn, PATH(String, returnCodeexec), execExecuteReturn(returnCodeexec));
 
 	// 定义删除单据接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.remove-return.summary"), removeReturn, Uint64JsonVO::Wrapper);
 	// 定义删除单据接口处理 "/return/{returnId}"必须对应
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/{returnIdremo}", removeReturn, PATH(UInt64, returnIdremo), executeRemoveReturn(returnIdremo));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/{returnCoderemo}", removeReturn, PATH(String, returnCoderemo), execRemoveReturn(returnCoderemo));
 
 	// 定义导出单据接口描述
 	ENDPOINT_INFO(downloadFile) {
 		API_DEF_ADD_COMMON(ZH_WORDS_GETTER("return.download-return.summary"), Void);
-		API_DEF_ADD_QUERY_PARAMS(String, "filename", ZH_WORDS_GETTER("return.fields.filename"), "file/C6RyanTest.jpg", true);
+		API_DEF_ADD_QUERY_PARAMS(String, "code", ZH_WORDS_GETTER("return.fields.filename"), "1", true);
 	}
 	// 定义导出单据接口处理
-	ENDPOINT(API_M_GET, "/return/download", downloadFile, QUERY(String, filename)) {
-		return executeDownloadFile(filename);
+	ENDPOINT(API_M_GET, "/return/download", downloadFile, QUERY(String, code)) {
+		return execDownloadFile(code);
 	}
-	
+
 private:
 	// 查询所有单据信息
-	ReturnPageJsonVO::Wrapper executeQueryAll(const ReturnQuery::Wrapper& returnQuery, const PayloadDTO& payload);
+	ReturnPageJsonVO::Wrapper executeQueryAll(const ReturnQuery::Wrapper& returnQuery);
 	// 查询单一单据详细信息
 	ReturnDetailJsonVO::Wrapper executeQueryDetail(const ReturnDetailQuery::Wrapper& returnDetailQuery);
 	// 添加新单据详细信息
 	Uint64JsonVO::Wrapper execAddDetail(const ReturnAdd::Wrapper& returnAdd);
 	// 修改单据
-	Uint64JsonVO::Wrapper executeModifyReturn(const ReturnDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyReturn(const ReturnDTO::Wrapper& dto);
 	// 执行单据
-	Uint64JsonVO::Wrapper executeExecuteReturn(const UInt64& id);
+	Uint64JsonVO::Wrapper execExecuteReturn(const String& code);
 	// 删除单据
-	Uint64JsonVO::Wrapper executeRemoveReturn(const UInt64& id);
+	Uint64JsonVO::Wrapper execRemoveReturn(const String& code);
 	// 导出单据
-	std::shared_ptr<OutgoingResponse> executeDownloadFile(const String& filename);
+	std::shared_ptr<OutgoingResponse> execDownloadFile(const String& code);
 
 };
 

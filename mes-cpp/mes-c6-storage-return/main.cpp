@@ -28,51 +28,47 @@
 #include "NacosClient.h"
 #endif
 
-// 是否是发布Swagger文档包
+
 #ifndef _RELEASE_DOC_
-// 查看Swagger文档的时候不需要连接数据库，解开下面的注释关闭启动连接数据库
+
 //#define _RELEASE_DOC_
 #endif
 
-/**
- * 解析启动参数
- * 注意：
- * 参数中数据需要满足一定的格式，如：sp=8090、sn=feign-cpp-sample
- * 前缀与真实值之间使用=分隔
- */
+
 bool getStartArg(int argc, char* argv[]) {
-	// 服务器端口
+	
 	std::string serverPort = "8090";
-	// 数据库连接信息
+	
 	std::string dbUsername = "root";
-	std::string dbPassword = "1234abc";
-	std::string dbName = "test";
-	std::string dbHost = "127.0.0.1";
+	std::string dbPassword = "123456";
+
+	std::string dbName = "ktgmes";
+	std::string dbHost = "192.168.62.142";
+
 	int dbPort = 3306;
 	int dbMax = 5;
 #ifdef LINUX
-	// Nacos配置参数
+	
 	std::string nacosAddr = "192.168.220.128:8848";
 	std::string nacosNs = "4833404f-4b82-462e-889a-3c508160c6b4";
 	std::string serviceName = "";
 	std::string regIp = "";
 #endif
 
-	// 开始解析
+	
 	int currIndex = 1;
 	bool isSetDb = false;
 	while (currIndex < argc)
 	{
-		// 拆分字符串
+		
 		auto args = StringUtil::split(argv[currIndex], "=");
-		// 判断参数是否合法
+		
 		if (args.size() != 2)
 		{
 			cout << "arg: " << argv[currIndex] << ", format error." << endl;
 			exit(1);
 		}
 
-		// 根据参数前缀对不同属性赋值
 		std::string prefix = args[0];
 		std::string val = args[1];
 		if (prefix == "sp") serverPort = val;
@@ -108,11 +104,11 @@ bool getStartArg(int argc, char* argv[]) {
 		else if (prefix == "sn") serviceName = val;
 		else if (prefix == "ip") regIp = val;
 #endif
-		// 更新索引
+
 		currIndex++;
 	}
 
-	// 记录服务器配置到内存中方便使用
+
 	ServerInfo::getInstance().setServerPort(serverPort);
 	ServerInfo::getInstance().setDbUsername(dbUsername);
 	ServerInfo::getInstance().setDbPassword(dbPassword);
@@ -130,15 +126,15 @@ bool getStartArg(int argc, char* argv[]) {
 }
 
 int main(int argc, char* argv[]) {
-	// 服务器参数初始化
+	
 	bool isSetDb = getStartArg(argc, argv);
 
 #ifdef LINUX
-	// 创建Nacos客户端对象
+	
 	NacosClient nacosClient(
 		ServerInfo::getInstance().getNacosAddr(),
 		ServerInfo::getInstance().getNacosNs());
-	// 从Nacos配置中心中获取数据库配置
+	
 	if (!isSetDb)
 	{
 		YAML::Node node = nacosClient.getConfig("data-source.yaml");
@@ -149,12 +145,12 @@ int main(int argc, char* argv[]) {
 			int dbPort = 0;
 			std::string dbHost = "";
 			std::string dbName = "";
-			// 解析数据库连接字符串
+			
 			yaml.parseDbConnUrl(dbUrl, &dbHost, &dbPort, &dbName);
-			// 获取数据库用户名和密码
+			
 			std::string dbUsername = yaml.getString(&node, "spring.datasource.username");
 			std::string dbPassword = yaml.getString(&node, "spring.datasource.password");
-			// 重新修改缓存中的数据
+			
 			ServerInfo::getInstance().setDbUsername(dbUsername);
 			ServerInfo::getInstance().setDbPassword(dbPassword);
 			ServerInfo::getInstance().setDbName(dbName);
@@ -163,7 +159,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	// 注册服务
+	
 	if (!ServerInfo::getInstance().getServiceName().empty() && !ServerInfo::getInstance().getRegIp().empty())
 	{
 		nacosClient.registerInstance(
@@ -174,7 +170,7 @@ int main(int argc, char* argv[]) {
 #endif
 
 #ifndef _RELEASE_DOC_
-	// 初始数据库连接
+	
 	bool initConnPool = DbInit::initDbPool(DBConfig(
 		ServerInfo::getInstance().getDbUsername(),
 		ServerInfo::getInstance().getDbPassword(),
@@ -185,7 +181,7 @@ int main(int argc, char* argv[]) {
 	if (!initConnPool) return -1;
 #endif
 
-	// 启动HTTP服务器
+	
 	HttpServer::startServer(ServerInfo::getInstance().getServerPort(),
 		[=](Endpoints* doc, HttpRouter* router) {
 			Router(doc, router).initRouter();
@@ -195,12 +191,12 @@ int main(int argc, char* argv[]) {
 		});
 
 #ifndef _RELEASE_DOC_
-	// 释放数据库连接
+	
 	DbInit::releasePool();
 #endif
 
 #ifdef LINUX
-	// 反注册服务
+	
 	if (!ServerInfo::getInstance().getServiceName().empty() && !ServerInfo::getInstance().getRegIp().empty())
 	{
 		nacosClient.deregisterInstance(
