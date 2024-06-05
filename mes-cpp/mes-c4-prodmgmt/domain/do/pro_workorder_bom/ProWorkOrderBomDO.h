@@ -34,7 +34,7 @@ class ProWorkOrderBomDO
 	CC_SYNTHESIZE(string, item_or_product, itemOrProduct);
 	CC_SYNTHESIZE(double, quantity, bQuantity);
 	CC_SYNTHESIZE(int, item_id, itemId);
-	CC_SYNTHESIZE(int, workorder_id, workOrderId);
+	
 	CC_SYNTHESIZE(string, create_time, createTime);//xj字段
 	
 public:

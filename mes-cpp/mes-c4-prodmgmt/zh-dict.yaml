@@ -286,10 +286,10 @@ prod1:
    summary: "删除一条生产任务"
   get:
    summary: "获取报工列表"  
-    process_name: 工序名称
-    process_id:  工序ID
-    process_code: 工序编号
-    item_code: 物料编号
-    route_id: 工艺路线ID
-    next_process_code: 下一个工序编号
-    next_process_name: 下一个工序的名称
+   process_name: 工序名称
+   process_id:  工序ID
+   process_code: 工序编号
+   item_code: 物料编号
+   route_id: 工艺路线ID
+   next_process_code: 下一个工序编号
+   next_process_name: 下一个工序的名称
