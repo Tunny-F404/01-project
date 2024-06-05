@@ -43,7 +43,7 @@ endif()
 
 # 编译可执行文件
 
-add_executable (${appName} ${SC_FILES})
+add_executable (${appName} ${SC_FILES} "dao/ProdTask/ProdTaskDAO.h" "dao/ProdTask/ProdTaskDAO.cpp" "dao/ProdTask/ProdTaskMapper.h" "dao/FeedBack/FeedBackDAO.cpp" "dao/FeedBack/FeedBackMapper.h" "service/ProdTask/ProdTaskService.h" "service/ProdTask/ProdTaskService.cpp" "service/FeedBack/FeedBackService.cpp")
 
 if(WIN32)
 	target_compile_options(${appName} PRIVATE /bigobj)

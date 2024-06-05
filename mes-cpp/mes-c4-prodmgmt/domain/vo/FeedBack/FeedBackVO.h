@@ -27,21 +27,17 @@
 /**
  * 定义一个报工显示JsonVO对象，用于响应给客户端
  */
-class FeedBackJsonVO : public JsonVO<oatpp::List<FeedBackDTO::Wrapper>>
+class FeedBackJsonVO : public JsonVO<FeedBackDTO::Wrapper>
 {
-	DTO_INIT(FeedBackJsonVO, JsonVO<oatpp::List<FeedBackDTO::Wrapper>>);
-	FeedBackJsonVO()
-	{
-		this->data = {};
-	}
+	DTO_INIT(FeedBackJsonVO, JsonVO<FeedBackDTO::Wrapper>);
 };
 
 /**
  * 定义一个报工分页显示JsonVO对象，用于响应给客户端
  */
-class FeedBackPageJsonVO : public JsonVO<oatpp::List<FeedBackPageDTO::Wrapper>>
+class FeedBackPageJsonVO : public JsonVO<FeedBackPageDTO::Wrapper>
 {
-	DTO_INIT(FeedBackPageJsonVO, JsonVO<oatpp::List<FeedBackPageDTO::Wrapper>>);
+	DTO_INIT(FeedBackPageJsonVO, JsonVO<FeedBackPageDTO::Wrapper>);
 
 };
 
