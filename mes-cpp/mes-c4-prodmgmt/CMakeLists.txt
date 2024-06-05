@@ -43,7 +43,7 @@ endif()
 
 # 编译可执行文件
 
-add_executable (${appName} ${SC_FILES})
+add_executable (${appName} ${SC_FILES} "service/ProWorkorder/ProWorkorderService.cpp" "service/ProWorkorder/ProWorkorderService.h")
 
 if(WIN32)
 	target_compile_options(${appName} PRIVATE /bigobj)
