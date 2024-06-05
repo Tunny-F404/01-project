@@ -1,0 +1,6 @@
+warehousemanagement:
+ get:
+  summary: 获取库存列表（条件+分页）
+ field:
+  item_code: 产品物料编码
+  item_name: 产品物料名称
