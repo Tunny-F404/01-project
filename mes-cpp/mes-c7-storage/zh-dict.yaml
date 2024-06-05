@@ -1,0 +1,43 @@
+storage: 
+ get:
+  summary: 产品入库单据列表导出
+ put:
+  summary: 执行产品入库（修改入库表）
+ delete:
+  summary: 删除产品入库单行列表（支持批量删除）
+ field:
+  id: 产品入库编号
+  name: 产品单名称
+  order: 生产工单
+  warehouse: 接收仓库
+  date: 接收日期
+  common: 备注
+ file: 
+  download: 
+   summary: 产品单据导出
+   filename: 导出文件名称和格式
+accept: 
+ fields:
+  re_code: 产品单编号
+  workorder_id: 生产工单id
+  warehouse_name: 仓库名称
+  re_id: 产品单id
+  re_name: 产品单名称
+  location_name: 库区名称
+  area_name: 库位名称
+  re_date: 入库日期
+  status: 单据状态
+  receivedstorage: 接收仓库
+  remark: 备注
+  summary: 列表分页查询
+  detail: 详细信息
+  add: 增加单据
+  modify: 修改单据
+  workorder_code: 生产工单编码
+  warehouse_id: 仓库id
+  warehouse_code: 仓库编码
+  location_id: 库区id
+  location_code: 库区编码
+  area_id: 库位id
+  area_code: 库位编码
+

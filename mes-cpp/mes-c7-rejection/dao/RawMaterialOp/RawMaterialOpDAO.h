@@ -15,8 +15,6 @@ public:
 	uint64_t count(const RawMaterialOpQuery::Wrapper& query);
 	// 分页查询数据
 	list<RawMaterialOpDO> selectWithPage(const RawMaterialOpQuery::Wrapper& query);
-	// 通过姓名查询数据
-	list<RawMaterialOpDO> selectByName(const string& name);
 	// 插入数据
 	uint64_t insert(const RawMaterialOpDO& iObj);
 	// 修改数据
