@@ -3,19 +3,20 @@
 #include "../mes-c4-prodmgmt/service/ProWorkorder/ProWorkorderService.h"
 
 
-Uint64JsonVO::Wrapper ProWorkorderController::execModifyProWorkdorder(const ModifyProWorkorderDTO::Wrapper& dto)
+
+ModifyProWorkorderJsonVO::Wrapper ProWorkorderController::execModifyProWorkdorder(const ModifyProWorkorderDTO::Wrapper& dto)
 {
-	// ¶¨Òå·µ»ØÊý¾Ý¶ÔÏó
+	// ï¿½ï¿½ï¿½å·µï¿½ï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
 	auto jvo = Uint64JsonVO::createShared();
-	// ²ÎÊýÐ£Ñé
+	// ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½
 	if (!dto->workorderId || dto->workorderId <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	// ¶¨ÒåÒ»¸öService
+	// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Service
 	ProWorkorderService service;
-	// Ö´ÐÐÊý¾ÝÐÞ¸Ä
+	// Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
 	if (service.updateData(dto)) {
 		jvo->success(dto->workorderId);
 	}
@@ -23,23 +24,23 @@ Uint64JsonVO::Wrapper ProWorkorderController::execModifyProWorkdorder(const Modi
 	{
 		jvo->fail(dto->workorderId);
 	}
-	// ÏìÓ¦½á¹û
+	// ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper ProWorkorderController::execRemoveProWorkorder(const UInt64& id)
+DeleteProWorkorderJsonVO::Wrapper ProWorkorderController::execRemoveProWorkorder(const UInt64& id)
 {
-	// ¶¨Òå·µ»ØÊý¾Ý¶ÔÏó
+	// ï¿½ï¿½ï¿½å·µï¿½ï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
 	auto jvo = Uint64JsonVO::createShared();
-	// ²ÎÊýÐ£Ñé
+	// ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½
 	if (!id || id <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	// ¶¨ÒåÒ»¸öService
+	// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Service
 	ProWorkorderService service;
-	// Ö´ÐÐÊý¾ÝÉ¾³ý
+	// Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 	if (service.removeData(id.getValue(0))) {
 		jvo->success(id);
 	}
@@ -47,21 +48,21 @@ Uint64JsonVO::Wrapper ProWorkorderController::execRemoveProWorkorder(const UInt6
 	{
 		jvo->fail(id);
 	}
-	// ÏìÓ¦½á¹û
+	// ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper ProWorkorderController::execConfirmProWorkorder(const UInt64& workorderId)
+ConfirmProWorkorderJsonVO::Wrapper ProWorkorderController::execConfirmProWorkorder(const UInt64& workorderId)
 {
-	// ¶¨Òå·µ»ØÊý¾Ý¶ÔÏó
+	// ï¿½ï¿½ï¿½å·µï¿½ï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
 	auto jvo = Uint64JsonVO::createShared();
-	// ²ÎÊýÐ£Ñé
+	// ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½
 	if (!workorderId || workorderId <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	// ¶¨ÒåÒ»¸öService
+	// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Service
 	ProWorkorderService service;
 	
 	if (service.confirmData(workorderId.getValue(0))) {
@@ -71,24 +72,24 @@ Uint64JsonVO::Wrapper ProWorkorderController::execConfirmProWorkorder(const UInt
 	{
 		jvo->fail(workorderId);
 	}
-	// ÏìÓ¦½á¹û
+	// ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
 	return jvo;
 	
 }
 
-Uint64JsonVO::Wrapper ProWorkorderController::execCompleteProWorkorder(const UInt64& workorderId)
+CompleteProWorkorderJsonVO::Wrapper ProWorkorderController::execCompleteProWorkorder(const UInt64& workorderId)
 {
-	// ¶¨Òå·µ»ØÊý¾Ý¶ÔÏó
+	// ï¿½ï¿½ï¿½å·µï¿½ï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
 	auto jvo = Uint64JsonVO::createShared();
-	// ²ÎÊýÐ£Ñé
+	// ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½
 	if (!workorderId || workorderId <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
-	// ¶¨ÒåÒ»¸öService
+	// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Service
 	ProWorkorderService service;
-	// Ö´ÐÐÊý¾ÝÉ¾³ý
+	// Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 	if (service.completeData(workorderId.getValue(0))) {
 		jvo->success(workorderId);
 	}
@@ -96,7 +97,7 @@ Uint64JsonVO::Wrapper ProWorkorderController::execCompleteProWorkorder(const UIn
 	{
 		jvo->fail(workorderId);
 	}
-	// ÏìÓ¦½á¹û
+	// ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
 	return jvo;
 }
 
