@@ -325,37 +325,37 @@ const onDelChannel = (row) => {
     cancelButtonText: "取消",
   })
     .then(() => {
-      // 从 originalTableList 中删除该项
       const index = originalTableList.value.findIndex(item => item.clientCode === row.clientCode);
       if (index !== -1) {
         originalTableList.value.splice(index, 1);
         total.value = originalTableList.value.length; // 更新总条数
         ElMessage.success("删除成功");
+        getPageList(); // 重新渲染分页数据
       }
-			 // 后端接口调用
-      // request.delete(`/api/clients/${row.clientCode}`)
-      //   .then(response => {
-      //     if (response.status === 200) {
-      //       const index = originalTableList.value.findIndex(item => item.clientCode === row.clientCode);
-      //       if (index !== -1) {
-      //         originalTableList.value.splice(index, 1);
-      //         total.value = originalTableList.value.length; // 更新总条数
-      //         ElMessage.success("删除成功");
-      //       }
-      //     } else {
-      //       ElMessage.error("删除失败");
-      //     }
-      //   })
-      //   .catch(error => {
-      //     ElMessage.error("删除失败");
-      //   });
     })
     .catch(() => {
       ElMessage.info("已取消删除");
-    })
-    .finally(() => {
-      getPageList(); // 重新渲染分页数据
     });
+		//后端
+		// .then(() => {
+    //   return request.delete(`/api/clients/${row.clientCode}`);
+    // })
+    // .then(response => {
+    //   if (response.status === 200) {
+    //     const index = originalTableList.value.findIndex(item => item.clientCode === row.clientCode);
+    //     if (index !== -1) {
+    //       originalTableList.value.splice(index, 1);
+    //       total.value = originalTableList.value.length; // 更新总条数
+    //       ElMessage.success("删除成功");
+    //       getPageList(); // 重新渲染分页数据
+    //     }
+    //   } else {
+    //     ElMessage.error("删除失败");
+    //   }
+    // })
+    // .catch(() => {
+    //   ElMessage.info("已取消删除");
+    // });
 };
 
 // 模拟搜索筛选
