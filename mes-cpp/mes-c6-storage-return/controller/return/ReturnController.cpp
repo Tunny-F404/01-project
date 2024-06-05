@@ -12,19 +12,39 @@
 #include "NacosClient.h"
 #include "FastDfsClient.h"
 
-ReturnPageJsonVO::Wrapper ReturnController::executeQueryAll(const ReturnQuery::Wrapper& query, const PayloadDTO& payload)
+
+ReturnPageJsonVO::Wrapper ReturnController::executeQueryAll(const ReturnQuery::Wrapper& query)
 {
-	return {};
+	ReturnService service;
+	auto result = service.listAll(query);
+	auto jvo = ReturnPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
+
 }
 
 ReturnDetailJsonVO::Wrapper ReturnController::executeQueryDetail(const ReturnDetailQuery::Wrapper& returnDetailQuery)
 {
-	return {};
+
+	ReturnService service;
+	auto result = service.getDetail(returnDetailQuery);
+	auto jvo = ReturnDetailJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
+
 }
 
 Uint64JsonVO::Wrapper ReturnController::execAddDetail(const ReturnAdd::Wrapper& dto)
 {
-	return {};
+	auto jvo = Uint64JsonVO::createShared();
+	if (dto->returnCode->empty()||dto->returnName->empty()||dto->returndate->empty()||dto->vendorName->empty()) {
+		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+		return jvo;
+	}
+	ReturnService service;
+	auto result = service.saveData(dto);
+	jvo->success(result);
+	return jvo;
 }
 // ÐÞ¸Äµ¥¾Ý
 Uint64JsonVO::Wrapper ReturnController::execModifyReturn(const ReturnDTO::Wrapper& dto)

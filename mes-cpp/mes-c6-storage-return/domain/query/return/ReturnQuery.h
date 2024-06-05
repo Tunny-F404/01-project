@@ -1,22 +1,5 @@
 #pragma once
-/*
- Copyright Zero One Star. All rights reserved.
 
- @Author: awei
- @Date: 2022/12/03 11:01:02
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
-	  https://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
-*/
 #ifndef _RETURNQUERY_H_
 #define _RETURNQUERY_H_
 
@@ -33,11 +16,11 @@ class ReturnQuery : public PageQuery
 	// 定义初始化
 	DTO_INIT(ReturnQuery, PageQuery);
 	// 退货单编号
-	API_DTO_FIELD_DEFAULT(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"));
+	API_DTO_FIELD_DEFAULT(String, returnCode, ZH_WORDS_GETTER("return.fields.rtcode"));
 	// 退货单名称
 	API_DTO_FIELD_DEFAULT(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"));
 	// 采购单编号
-	API_DTO_FIELD_DEFAULT(String, purchaseId, ZH_WORDS_GETTER("return.fields.puid"));
+	API_DTO_FIELD_DEFAULT(String, purchaseCode, ZH_WORDS_GETTER("return.fields.pucode"));
 	// 供应商名称
 	API_DTO_FIELD_DEFAULT(String, vendorName, ZH_WORDS_GETTER("return.fields.vename"));
 };
@@ -50,7 +33,7 @@ class ReturnDetailQuery : public oatpp::DTO
 	// 定义初始化
 	DTO_INIT(ReturnDetailQuery, oatpp::DTO);
 	// 退货单编号
-	API_DTO_FIELD(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"), true, "null");
+	API_DTO_FIELD(String, returnCode, ZH_WORDS_GETTER("return.fields.rtcode"), true, "notnull");
 };
 
 /**
@@ -61,11 +44,11 @@ class ReturnAdd : public oatpp::DTO
 	// 定义初始化
 	DTO_INIT(ReturnAdd, oatpp::DTO);
 	// 退货单编号
-	API_DTO_FIELD(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"), true, "RTV123");
+	API_DTO_FIELD(String, returnCode, ZH_WORDS_GETTER("return.fields.rtcode"), true, "RTV123");
 	// 退货单名称
 	API_DTO_FIELD(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"), true, "01star");
 	// 采购单编号
-	API_DTO_FIELD(String, purchaseId, ZH_WORDS_GETTER("return.fields.puid"), false, "null");
+	API_DTO_FIELD(String, purchaseCode, ZH_WORDS_GETTER("return.fields.pucode"), false, "null");
 	// 供应商名称
 	API_DTO_FIELD(String, vendorName, ZH_WORDS_GETTER("return.fields.vename"), true, "01star");
 	// 批次号

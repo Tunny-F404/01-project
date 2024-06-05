@@ -42,7 +42,7 @@ bool getStartArg(int argc, char* argv[]) {
 	std::string dbUsername = "root";
 	std::string dbPassword = "123456";
 
-	std::string dbName = "test";
+	std::string dbName = "ktgmes";
 	std::string dbHost = "localhost";
 
 	int dbPort = 3306;

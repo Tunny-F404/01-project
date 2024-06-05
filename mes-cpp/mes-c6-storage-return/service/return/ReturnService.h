@@ -32,8 +32,10 @@ class ReturnService
 public:
 	// 分页查询所有数据
 	ReturnPageDTO::Wrapper listAll(const ReturnQuery::Wrapper& query);
+	// 查询单一数据
+	ReturnDetailDTO::Wrapper getDetail(const ReturnDetailQuery::Wrapper& returnDetailQuery);
 	// 保存数据
-	// uint64_t saveData(const ReturnDTO::Wrapper& dto);
+	uint64_t saveData(const ReturnAdd::Wrapper& dto);
 	// 修改数据
 	bool updateData(const ReturnDTO::Wrapper& dto);
 	// 通过ID删除数据
