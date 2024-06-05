@@ -43,9 +43,8 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
         String realToken = token.replace("Bearer ", "");
-        //TODO：已经实现--判断凭证是否注销需要在此补充逻辑
         if (Boolean.FALSE.equals(redisTemplate.hasKey(realToken))) {
-            return CommonSender.sender(exchange, ResultStatus.UNAUTHORIZED, "token已注销");
+            return CommonSender.sender(exchange, ResultStatus.UNAUTHORIZED, "暂未登录或token已过期");
         }
         try {
             //从token中解析用户信息并设置到Header中去
