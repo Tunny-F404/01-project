@@ -20,6 +20,7 @@
 #include "Router.h"
 #include "ApiHelper.h"
 #include "item-information/ProductRecptController.h"
+#include "storage/storageController.h"
 #include"document/productController.h"
 
 #ifdef HTTP_SERVER_DEMO
@@ -55,6 +56,8 @@ void Router::initRouter()
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(ProductRecptController);
 	ROUTER_SIMPLE_BIND(ProductController);
+	ROUTER_SIMPLE_BIND(storageController);
+
 }
 
 
