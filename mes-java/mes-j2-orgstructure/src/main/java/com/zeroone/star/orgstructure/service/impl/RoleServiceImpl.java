@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.orgstructure.entity.UserDO;
 import com.zeroone.star.orgstructure.entity.UserRoleDO;
+import com.zeroone.star.orgstructure.parameterMapstruct.MsUserRoleMapper;
 import com.zeroone.star.orgstructure.service.RoleService;
 import com.zeroone.star.project.components.easyexcel.EasyExcelComponent;
 import com.zeroone.star.project.components.user.UserDTO;
@@ -20,6 +21,7 @@ import com.zeroone.star.project.dto.PageDTO;
 import com.zeroone.star.project.j2.orgstructure.dto.role.*;
 import com.zeroone.star.project.j2.orgstructure.query.role.RoleConditionQuery;
 import com.zeroone.star.project.j2.orgstructure.query.role.RolePermissionsQuery;
+import com.zeroone.star.project.j2.orgstructure.query.role.UserRoleQuery;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.cglib.core.Local;
@@ -90,8 +92,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
     private UserMapper userMapper;
     @Resource
     private MsUserRoleMapper msUserRoleMapper;
-    @Resource
-    private MsRoleMapper msRoleMapper;
+
 
     /**
      * 查询全部角色列表
@@ -247,6 +248,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDO> implements 
     /*
      * 查找该角色所分配的用户
      * */
+    @Override
     public PageDTO<UserRoleDTO> getUsersByRole(UserRoleQuery query) {
 
         QueryWrapper<UserRoleDO> queryWrapper = new QueryWrapper<>();

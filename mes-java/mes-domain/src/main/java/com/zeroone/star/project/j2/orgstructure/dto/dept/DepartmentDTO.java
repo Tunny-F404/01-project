@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class DepartmentDTO {
 
     //部门Id
-    @ApiModelProperty(value = "部门Id",example = "宵夜部")
+    @ApiModelProperty(value = "部门Id",example = "1")
     private Long deptId;
 
     //父部门id
