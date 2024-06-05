@@ -241,7 +241,7 @@ Uint64JsonVO::Wrapper ProcessController::execaddComProcess(const NewProcessDTO::
 	// 定义一个Service
 	ComProService service;
 	// 执行数据新增
-	uint64_t id = service.saveData(dto);
+	uint64_t id = service.saveData(dto, payload);
 	if (id > 0) {
 		jvo->success(UInt64(id));
 	}
@@ -268,7 +268,7 @@ Uint64JsonVO::Wrapper ProcessController::execModifyProcess(const ModifyProDTO::W
 	// 定义一个Service
 	ComProService service;
 	// 执行数据修改
-	if (service.updateData(dto)) {
+	if (service.updateData(dto, payload)) {
 		jvo->success(dto->record_id);
 	}
 	else

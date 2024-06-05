@@ -34,12 +34,10 @@ public:
 	uint64_t count(const ProQuery::Wrapper& query);
 	// 分页查询数据
 	list<ProRouteProcessDO> selectWithPage(const ProQuery::Wrapper& query);
-	// 通过工序id查询数据
-	//list<ProRouteProcessDO> selectByProcessID(const ComProListDTO::Wrapper& query);
 	// 插入
-	uint64_t insert(const ProRouteProcessDO& iObj);
+	uint64_t insert(const ProRouteProcessDO& iObj, const PayloadDTO& payload);
 	// 修改
-	int update(const ProRouteProcessDO& uObj);
+	int update(const ProRouteProcessDO& uObj, const PayloadDTO& payload);
 
 };
 #endif // !_COMPRO_DAO_

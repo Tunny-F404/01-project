@@ -36,7 +36,7 @@ ComProPageDTO::Wrapper ComProService::listAll(const ProQuery::Wrapper& query)
 	return pages;
 }
 //新增
-uint64_t ComProService::saveData(const NewProcessDTO::Wrapper& dto)
+uint64_t ComProService::saveData(const NewProcessDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
 	ProRouteProcessDO data;
@@ -46,10 +46,10 @@ uint64_t ComProService::saveData(const NewProcessDTO::Wrapper& dto)
 		DefaultSufTime, default_suf_time, ColorCode, color_code, Remark, Remark)
 		// 执行数据添加
 		ComProDAO dao;
-	return dao.insert(data);
+	return dao.insert(data, payload);
 }
 //修改
-bool ComProService::updateData(const ModifyProDTO::Wrapper& dto)
+bool ComProService::updateData(const ModifyProDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
 	ProRouteProcessDO data;
@@ -67,7 +67,7 @@ bool ComProService::updateData(const ModifyProDTO::Wrapper& dto)
 	data.setRecordId(dto->record_id.getValue({}));
 	// 执行数据修改
 	ComProDAO dao;
-	return dao.update(data) == 1;
+	return dao.update(data, payload) == 1;
 }
 
 
