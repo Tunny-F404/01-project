@@ -128,9 +128,9 @@ bool EquipmentService::modifyData(const modifyEquipmentDTO::Wrapper& dto, const 
 	data.setMachineryCode(dto->eCode.getValue(""));
 	data.setMachineryName(dto->eName.getValue(""));
 	data.setMachineryBrand(dto->brand.getValue(""));
-	data.setMachineryTypeId(dto->tId.getValue(1));
+	data.setMachineryTypeId(dto->tId.getValue(numeric_limits<uint64_t>::max()));
 	data.setMachinerySpec(dto->spec.getValue(""));
-	data.setWorkshopId(dto->workshopId.getValue(1));
+	data.setWorkshopId(dto->workshopId.getValue(numeric_limits<uint64_t>::max()));
 	data.setRemark(dto->note.getValue(""));
 	data.setUpdateBy(payload.getUsername());
 	data.setUpdateTime(SimpleDateTimeFormat::format());

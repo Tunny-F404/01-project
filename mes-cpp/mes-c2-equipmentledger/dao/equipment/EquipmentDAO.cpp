@@ -76,8 +76,7 @@ int EquipmentDAO::modify( dvMachineryDO iObj)
 	list<dvMachineryDO> MachineryList = getMachineryByid(iObj.getMachineryId());
 	dvMachineryDO machinery;
 
-	EquipmentDAO dao;
-
+	uint64_t invalidTypeId = numeric_limits<uint64_t>::max();
 
 	if (!MachineryList.empty())
 	{
@@ -137,17 +136,11 @@ int EquipmentDAO::modify( dvMachineryDO iObj)
 		iObj.setMachineryBrand( machinery.getMachineryBrand());
 	}
 
-	if (iObj.getMachineryTypeId()<0)
+
+	if (iObj.getMachineryTypeId()!= invalidTypeId)
 	{
-		RS_PARAMS_INVALID;
-		iObj.setMachineryTypeId( machinery.getMachineryTypeId());
-		iObj.setMachineryTypeCode(machinery.getMachineryTypeCode());
-		iObj.setMachineryTypeName(machinery.getMachineryTypeName());
-	}
-	else
-	{
-		RS_PARAMS_INVALID;
-		list<dvMachineryTypeDO>path1 = dao.getMachinerytypeByid(iObj.getMachineryTypeId());
+		
+		list<dvMachineryTypeDO>path1 = getMachinerytypeByid(iObj.getMachineryTypeId());
 		if (!path1.empty())
 		{
 			auto it = path1.begin();
@@ -156,15 +149,23 @@ int EquipmentDAO::modify( dvMachineryDO iObj)
 		}
 
 	}
+	else
+	{
+		
+		iObj.setMachineryTypeId( machinery.getMachineryTypeId());
+		iObj.setMachineryTypeCode(machinery.getMachineryTypeCode());
+		iObj.setMachineryTypeName(machinery.getMachineryTypeName());
+	}
+	
 
 	if (iObj.getMachinerySpec().empty())
 	{
 		iObj.setMachinerySpec(machinery.getMachinerySpec());
 	}
 
-	if (iObj.getWorkshopId())
+	if (iObj.getWorkshopId()!= invalidTypeId)
 	{
-		list<MdWorkshopDO> path = dao.getWorkshopByid(iObj.getWorkshopId());
+		list<MdWorkshopDO> path = getWorkshopByid(iObj.getWorkshopId());
 		if (!path.empty())
 		{
 			auto it = path.begin();
