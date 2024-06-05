@@ -13,7 +13,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Min;
 
 /**
@@ -25,7 +24,7 @@ import javax.validation.constraints.Min;
  */
 @Api(tags = "产品Sip控制器")
 @RestController
-@RequestMapping("/product-management/sip")
+@RequestMapping("md/product-management/sip")
 public class SipController implements SipApis {
 
     @Autowired
@@ -35,13 +34,13 @@ public class SipController implements SipApis {
     @ApiOperation(value = "查询Sip列表")
     @GetMapping("/list")
     public JsonVO<PageDTO<SipDTO>> queryAll(@Validated SipQuery query) {
-         return JsonVO.success(iMdProductSipService.selectProductSipPage(query));
+        return JsonVO.success(iMdProductSipService.selectProductSipPage(query));
     }
 
     @Override
     @ApiOperation(value = "查询Sip")
     @GetMapping("/{id}")
-    public JsonVO<SipDTO> queryById(@PathVariable @Min(value=1,message="id最小值为1") Long id) {
+    public JsonVO<SipDTO> queryById(@PathVariable @Min(value = 1, message = "id最小值为1") Long id) {
         SipDTO dto = iMdProductSipService.selectProductSipPageByItemId(id);
         return JsonVO.success(dto);
     }
@@ -81,13 +80,13 @@ public class SipController implements SipApis {
     @PostMapping("/uploadFlied")
     public JsonVO<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String sip_url = iMdProductSipService.uploadFile(file);
-        if(sip_url != null){
+        if (sip_url != null) {
             SipDTO dto = new SipDTO();
             dto.setSipUrl(sip_url);
             return JsonVO.success(sip_url);
-        }else{
+        } else {
             return JsonVO.fail("文件上传失败");
-    }
+        }
     }
 }
 

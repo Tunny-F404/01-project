@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
-import java.util.Arrays;
 
 /**
  * <p>
  * 描述：产品SOP控制器
  * </p>
+ *
  * @version 1.0.0
  */
-@Api(tags ="产品sop相关接口")
+@Api(tags = "产品sop相关接口")
 @RestController
-@RequestMapping("/product-management/sop")
+@RequestMapping("md/product-management/sop")
 public class ProductSopController implements ProductSopApis {
 
     @Autowired
@@ -40,7 +40,7 @@ public class ProductSopController implements ProductSopApis {
     @Override
     @ApiOperation(value = "查询sop")
     @GetMapping("/{id}")
-    public JsonVO<ProductSopDTO> queryById(@PathVariable @Min(value = 1,message = "id最小值为1") Long id) {
+    public JsonVO<ProductSopDTO> queryById(@PathVariable @Min(value = 1, message = "id最小值为1") Long id) {
         ProductSopDTO dto = ProductSopService.selectProductSopById(id);
         return JsonVO.success(dto);
     }
@@ -71,12 +71,13 @@ public class ProductSopController implements ProductSopApis {
     @ApiOperation(value = "删除sop数据")
     @DeleteMapping("/{ids}")
     public JsonVO<String> remove(@PathVariable Long[] ids) {
-        boolean count =ProductSopService.deleteProductSopByIds(ids);
+        boolean count = ProductSopService.deleteProductSopByIds(ids);
         if (count) {
             return JsonVO.success("删除成功");
         }
         return JsonVO.fail("删除失败");
     }
+
     @Override
     @ApiOperation(value = "上传SOP文件")
     @PostMapping("/uploadFile")

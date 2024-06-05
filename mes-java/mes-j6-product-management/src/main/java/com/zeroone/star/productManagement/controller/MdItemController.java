@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @Api(tags = "产品导入,导出")
-@RequestMapping("/mes/md/mditem")
+@RequestMapping("md/product-management/items")
 public class MdItemController implements MdItemApis {
     @Autowired
     EasyExcelComponent excel;

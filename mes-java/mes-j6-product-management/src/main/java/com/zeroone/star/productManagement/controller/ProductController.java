@@ -2,9 +2,9 @@ package com.zeroone.star.productManagement.controller;
 
 import com.zeroone.star.productManagement.service.IProductService;
 import com.zeroone.star.project.dto.PageDTO;
-import com.zeroone.star.project.j6.product_management.dto.ProductDTO;
 import com.zeroone.star.project.dto.ProductListDTO;
 import com.zeroone.star.project.j6.product_management.ProductManageApis;
+import com.zeroone.star.project.j6.product_management.dto.ProductDTO;
 import com.zeroone.star.project.j6.product_management.query.ProductQuery;
 import com.zeroone.star.project.vo.JsonVO;
 import io.swagger.annotations.Api;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product-management/product")
+@RequestMapping("md/product-management/products")
 @Api(tags = "产品物料相关接口")
 public class ProductController implements ProductManageApis {
 
@@ -38,7 +38,7 @@ public class ProductController implements ProductManageApis {
         //获取ids
         List<Long> productIds = dto.getProductIds();
         //判断ids合法
-        if(productIds == null || productIds.isEmpty()){
+        if (productIds == null || productIds.isEmpty()) {
             return JsonVO.fail("Id为空");
         }
         productService.myDelete(productIds);
@@ -62,12 +62,11 @@ public class ProductController implements ProductManageApis {
     }
 
 
-
     @GetMapping("/{id}")
     @ApiOperation(value = "根据id获得一个产品信息")
     @Override
     public JsonVO<ProductDTO> queryByID(@PathVariable Long id) {
-        ProductDTO dto =  productService.myGetById(id);
+        ProductDTO dto = productService.myGetById(id);
         return JsonVO.success(dto);
     }
 

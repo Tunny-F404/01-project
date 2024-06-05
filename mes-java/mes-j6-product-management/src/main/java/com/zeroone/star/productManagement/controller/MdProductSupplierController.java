@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2024-05-22
  */
 @RestController
-@RequestMapping("/product-management/suppliers")
+@RequestMapping("md/product-management/suppliers")
 @Api(tags = "关联供应商相关接口")
 public class MdProductSupplierController implements SupplierApis {
     @Autowired
@@ -73,12 +73,12 @@ public class MdProductSupplierController implements SupplierApis {
     public JsonVO<String> updateSupplier(SupplierDTO dto) {
         Long id = dto.getId();
         if (id != null) {
-           if(isUnvalid(id)){
-               return JsonVO.fail("Invalid id");
-           }
-           if(mdProductSupplierService.getById(id) == null){
-               return JsonVO.fail("No record found for the given id");
-           }
+            if (isUnvalid(id)) {
+                return JsonVO.fail("Invalid id");
+            }
+            if (mdProductSupplierService.getById(id) == null) {
+                return JsonVO.fail("No record found for the given id");
+            }
         }
 
         Long productId = dto.getProductId();

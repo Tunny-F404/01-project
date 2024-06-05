@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("md-clients")
+@RequestMapping("md/clients")
 @Api(tags = "客户管理")
 @Validated
 public class MdClientController implements ClientApis {

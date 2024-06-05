@@ -58,7 +58,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.zeroone.star.customer.CustomerApplication</mainClass>
+                    <mainClass>com.zeroone.star.customer.ClientApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>

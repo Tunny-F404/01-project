@@ -16,10 +16,11 @@ import java.util.List;
 
 @Api(tags = "物料产品分类管理")
 @RestController
-@RequestMapping("/mes/md/itemtype")
+@RequestMapping("md/item-type")
 public class ItemTypeController implements ItemTypeApis {
     @Autowired
     private IItemTypeService iItemTypeService;
+
     @ApiOperation("查询分类列表")
     @GetMapping("/list")
     @Override
@@ -48,10 +49,10 @@ public class ItemTypeController implements ItemTypeApis {
     @PostMapping
     @Override
     public JsonVO<String> addItemType(@ApiParam(value = "物料分类信息") @Validated @RequestBody ItemTypeDTO itemTypeDTO) {
-        if(iItemTypeService.checkItemTypeCodeUnique(itemTypeDTO).equals("NOT_UNIQUE")) {
+        if (iItemTypeService.checkItemTypeCodeUnique(itemTypeDTO).equals("NOT_UNIQUE")) {
             return JsonVO.fail("分类" + itemTypeDTO.getItemTypeCode() + "编码已存在");
         }
-        if(iItemTypeService.checkItemTypeNameUnique(itemTypeDTO).equals("NOT_UNIQUE")) {
+        if (iItemTypeService.checkItemTypeNameUnique(itemTypeDTO).equals("NOT_UNIQUE")) {
             return JsonVO.fail("分类" + itemTypeDTO.getItemTypeName() + "名称已存在");
         }
         iItemTypeService.insertItemType(itemTypeDTO);
@@ -62,10 +63,10 @@ public class ItemTypeController implements ItemTypeApis {
     @PutMapping
     @Override
     public JsonVO<String> updateItemType(@ApiParam(value = "物料分类信息") @Validated @RequestBody ItemTypeDTO itemTypeDTO) {
-        if(iItemTypeService.checkItemTypeCodeUnique(itemTypeDTO).equals("NOT_UNIQUE")) {
+        if (iItemTypeService.checkItemTypeCodeUnique(itemTypeDTO).equals("NOT_UNIQUE")) {
             return JsonVO.fail("分类" + itemTypeDTO.getItemTypeCode() + "编码已存在");
         }
-        if(iItemTypeService.checkItemTypeNameUnique(itemTypeDTO).equals("NOT_UNIQUE")) {
+        if (iItemTypeService.checkItemTypeNameUnique(itemTypeDTO).equals("NOT_UNIQUE")) {
             return JsonVO.fail("分类" + itemTypeDTO.getItemTypeName() + "名称已存在");
         }
         iItemTypeService.updateItemType(itemTypeDTO);
@@ -76,10 +77,10 @@ public class ItemTypeController implements ItemTypeApis {
     @DeleteMapping("/{itemTypeId}")
     @Override
     public JsonVO<String> deleteItemType(@ApiParam(value = "分类ID") @PathVariable Long itemTypeId) {
-        if(iItemTypeService.checkHasChild(itemTypeId)) {
+        if (iItemTypeService.checkHasChild(itemTypeId)) {
             return JsonVO.fail("分类下有子分类，请先删除子分类");
         }
-        if(iItemTypeService.checkHasItem(itemTypeId)) {
+        if (iItemTypeService.checkHasItem(itemTypeId)) {
             return JsonVO.fail("分类下有物料，请先删除物料");
         }
         iItemTypeService.removeItemType(itemTypeId);

@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2024-05-27
  */
 @RestController
-@RequestMapping("/product-management/bom")
+@RequestMapping("md/product-management/bom")
 @Api(tags = "BOM部分相关接口")
 public class MdProductBomController implements BomApis {
     @Autowired
