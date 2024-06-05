@@ -3,6 +3,7 @@
 #ifndef _DELETEWORKREPORT_SERVICE_H
 #define _DELETEWORKREPORT_SERVICE_H
 #include <list>
+#include <cstdint> 
 /**
  * 删除报工 服务实现
  */

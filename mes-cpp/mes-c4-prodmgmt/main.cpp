@@ -42,7 +42,7 @@
  */
 bool getStartArg(int argc, char* argv[]) {
 	// 服务器端口
-	std::string serverPort = "8092";
+	std::string serverPort = "8090";
 	// 数据库连接信息
 	std::string dbUsername = "root";
 	std::string dbPassword = "root";
@@ -52,8 +52,8 @@ bool getStartArg(int argc, char* argv[]) {
 	int dbMax = 5;
 #ifdef LINUX
 	// Nacos���ò���
-	std::string nacosAddr = "192.168.40.132:8848";
-	std::string nacosNs = "4833404f-4b82-462e-889a-3c508160c6b4";
+	std::string nacosAddr = "121.40.75.117:8848";
+	std::string nacosNs = "mes-test";
 	std::string serviceName = "";
 	std::string regIp = "";
 #endif
