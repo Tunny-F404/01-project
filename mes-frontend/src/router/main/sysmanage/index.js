@@ -55,7 +55,7 @@ const routes = [
 	{
 		path: "/un-51",
 		name: "UN51",
-		component: () => import("@/views/status/404.vue"),
+		component: () => import("@/views/quality-control/defect.vue"),
 	},
 	{
 		path: "/un-52",
