@@ -89,11 +89,13 @@ loading.value=true
   loading.value=false
 }
  
-const onEditchannel=(row,$index)=>{
-    //编辑
-    dialog.value.open({row})
-    console.log(row);
-}
+
+const onEditchannel = (row, $index) => {
+	//编辑
+	dialogTitle.value = "修改信息";
+  formModel.value = { ...row };
+  testDialogVisible.value = true;
+};
 
 const onDelChannel=async (row)=>{
     //删除
@@ -108,13 +110,12 @@ const onDelChannel=async (row)=>{
   console.log('错误或者超时');
  } 
  if(res.code===200){
-    ElMessage.success('删除成功')
- }
-  
-  //  console.log(row)
+    ElMessage.success('删除成功') 
     //删除后再渲染数据
     getPageList()
+ }
 }
+
 const onSubmit=()=>{
     getPageList(myInput)
     console.log("查询提交");
@@ -202,11 +203,12 @@ const sels = ref([]);//当前选框中选择的值
 
 //获取选中的值
 function handleSelectionChange (sels) {
-	this.sels = sels;
+	sels.value = sels;
+  console.log("选中的值",sels.map((item) => item.id));
 };
 
 //批量删除
-const arrDelet=async ()=>{
+async function arrDelet(){
 	let ids = this.sels.map((item) => item.id);
     try {
 		const res= await Request.request(Request.DELETE,

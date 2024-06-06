@@ -363,6 +363,41 @@ const testMenus = [
 			},
 		],
 	},
+	{
+		id: 100,
+		text: "排班管理",
+		icon: "Avatar",
+		children: [
+			{
+				id: 101,
+				text: "班组设置",
+				href: "/un-101",
+				icon: "UserFilled",
+				pid: 4,
+			},
+			{
+				id: 102,
+				text: "节假日设置",
+				href: "/un-102",
+				icon: "List",
+				pid: 4,
+			},
+			{
+				id: 103,
+				text: "排班日历",
+				href: "/un-103",
+				icon: "Checked",
+				pid: 4,
+			},
+			{
+				id: 104,
+				text: "排班设计",
+				href: "/un-104",
+				icon: "List",
+				pid: 4,
+			},
+		]
+	}
 ];
 
 export const userStore = defineStore("user", {

@@ -164,6 +164,30 @@ const routes = [
 		name: "UN51",
 		component: () => import("@/views/organizational-structure/organizational-structure.vue"),
 	},
+	//班组设置
+	{
+		path: "/un-101",
+		name: "UN101",
+		component: () => import("@/views/workforce-management/working-schedule.vue"),
+	},
+	//节假日设置
+	{
+		path: "/un-102",
+		name: "UN102",
+		component: () => import("@/views/status/404.vue"),
+	},
+	//排班日历
+	{
+		path: "/un-103",
+		name: "UN103",
+		component: () => import("@/views/status/404.vue"),
+	},
+	//排班计划
+	{
+		path: "/un-104",
+		name: "UN104",
+		component: () => import("@/views/workforce-management/team-group.vue"),
+	}
 ];
 
 export default routes;

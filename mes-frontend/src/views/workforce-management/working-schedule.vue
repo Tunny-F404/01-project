@@ -2,39 +2,23 @@
 import {ref} from 'vue'
 import http from "axios"
 import  tableFrame  from 'components/std-table/src/table-text.vue' 
-import popUp from 'components/std-table/src/pop-up.vue'
 import Request  from '@/apis/request.js'
-// defineOptions();
 
-
-//每一列数据，例子，后期接口对上再调整
 const tableList = ref([
 	{
-		attr1: "自定义值1",
-		attr2: "自定义值2",
-		attr3: 100,
-		attr4: 200,
-		changeRate: 1,
-		enableFlag: "Y",
-		measureCode: "METER",
-		measureName: "米",
-		primaryFlag: "Y",
-		primaryId: 1,
-		remark: "这是主单位",
+		calendarType:"cnc",
+        remark:"这是备注",
+        teamCode:"Tx001",
+        teamId: 1,
+        teamName:"风塔二组"
 	},
 
 	{
-		attr1: "自定义值1",
-		attr2: "自定义值2",
-		attr3: 100,
-		attr4: 200,
-		changeRate: 1,
-		enableFlag: "Y",
-		measureCode: "METER",
-		measureName: "米",
-		primaryFlag: "Y",
-		primaryId: 1,
-		remark: "这是主单位",
+        calendarType:"TNT",
+        remark:"炸弹",
+        teamCode:"Tx002",
+        teamId: 2,
+        teamName:"爆破一组"
 	},
 ]);
 
@@ -53,27 +37,31 @@ const loading=ref(false)//loading状态
 const parms = ref({
 	pagenum: 1, //页数
 	pagesize: 5, //当前每页面大小
-	state: "", //状态
-	classfiy: "",
+	code: 404, //状态码
+	message: "",
 });
+
+const teamSelect=ref();
 
 const getPageList = async (data) => {
 	//不知道跟着接口写的对不对，希望大佬看一看
 	loading.value = true;
 	const res='';
 	try {
-		const res = await Request.request(Request.GET, "/basicdata/md-unit-measure/list", data, http.upType.json);
+		const res = await Request.request(Request.GET, "/sch-manage/team-settings/query-all", data, http.upType.json);
 		tableList.value = res.data.rows.data;
 		parms.value.pagenum = res.data.pageIndex;
 		parms.value.pagesize = res.data.pageSize;
+        parms.value.code=res.code;
+        parms.message=res.messsage
 		total.value = res.data.total;
-
 	}catch (error) {
 		console.log("错误或者超时");
 	}
-
+    
 	loading.value = false;
 };
+
 getPageList(null); //进来就加载一遍
 //处理分页逻辑
 //改变大小
@@ -82,7 +70,7 @@ const onSizeChange = (size) => {
 	parms.value.pagenum = 1;
 	parms.value.pagesize = size;
 	//再利用接口渲染数据getPageList
-	const Data = { pageSize: "parms.pagesize" };
+	const Data = { pageSize: "parms.pagesize",pageIndex: 1 };
 	getPageList(Date);
 };
 
@@ -95,10 +83,10 @@ const onCurrentChange = (page) => {
 	getPageList(Data);
 };
 
-//导出单位
+//导出班组
 const onSortChannel = async () => {
 	try {
-  const res=await Request.request(Request.GET,'/basicdata/md-unit-measure/download-unitMeasure',null, http.upType.json)
+  const res=await Request.request(Request.GET,'/sch-manage/team-settings/export-team',null, http.upType.json)
  } catch (error) {
   console.log('错误或者超时');
  } 
@@ -107,21 +95,15 @@ const onSortChannel = async () => {
  }
 };
 
-const onEditchannel = (row, $index) => {
-	//编辑
-	dialogTitle.value = "修改信息";
-  formModel.value = { ...row };
-  testDialogVisible.value = true;
-};
-const onDelChannel = async (row) => {
-	//删除
-	await ElMessageBox.confirm("你确认要删除该单位么", "温馨提示", {
-		type: "warning",
-		confirmButtonText: "确认",
-		cancelButtonText: "取消",
-	});
-	try {
-  const res=await Request.request(Request.DELETE,'/basicdata/md-unit-measure/delete-by-measureIds',{measureIds:row.data.primaryId}, http.upType.json)
+const onDelChannel=async (row)=>{
+    //删除
+    await ElMessageBox.confirm('你确认要删除该班组么', '温馨提示', {
+    type: 'warning',
+    confirmButtonText: '确认',
+    cancelButtonText: '取消'
+  })
+  try {
+  const res=await Request.request(Request.DELETE,'/sch-manage/team-settings/delete-team',{ids:row.data.teamId}, http.upType.json)
  } catch (error) {
   console.log('错误或者超时');
  } 
@@ -130,7 +112,16 @@ const onDelChannel = async (row) => {
     //删除后再渲染数据
     getPageList(null)
  }
+}
+
+const onEditchannel = (row, $index) => {
+	//编辑
+	dialogTitle.value = "修改班组";
+  formModel.value = { ...row };
+  testDialogVisible.value = true;
 };
+
+
 
 const onSubmit = () => {
 	console.log("查询提交");
@@ -154,7 +145,6 @@ function handleSelectionChange (sels) {
 	this.sels = sels;
 };
 
-//批量删除
 const arrDelet=async ()=>{
 	let ids = this.sels.map((item) => item.id);
     try {
@@ -162,60 +152,46 @@ const arrDelet=async ()=>{
 		 "/basicdata/md-unit-measure/delete-by-measureIds", ids, http.upType.json);
   if( res.code == '10000'){
 	ElMessage.success("删除成功");
-	getPageList(null);
+    getPageList(null);
     }else{
      ElMessage.warning("删除失败");
 	}
 	} catch (error) {
 		console.log("错误或者超时");
 	}
-	//测试的
-	
 }
-
 
 
 
 //表单--------------------------
 const dialogTitle = ref("");
 const formModel = ref({
-	attr1: "自定义值1",
-	attr2: "自定义值2",
-	attr3: 100,
-	attr4: 200,
-	changeRate: 1,
-	enableFlag: "Y",
-	measureCode: "METER",
-	measureName: "米",
-	primaryFlag: "Y",
-	primaryId: 1,
-	remark: "这是主单位",
+    calendarType:"TNT",
+        remark:"炸弹",
+        teamCode:"Tx002",
+
+        teamId:2 ,
+        teamName:"爆破一组"
 });
 const formRef = ref(null);
 const testDialogVisible = ref(false);
 
 const openTestDialog = () => {
-  dialogTitle.value = "添加信息";
+  dialogTitle.value = "添加班组";
   formModel.value = {
-	attr1: "",
-	attr2: "",
-	attr3: 0,
-	attr4:0 ,
-	changeRate: 0,
-	enableFlag: "",
-	measureCode: "",
-	measureName: "",
-	primaryFlag: "",
-	primaryId: 0,
-	remark: "",
+    calendarType:"",
+        remark:"",
+        teamCode:"",
+        teamId: 0,
+        teamName:""
   };
   testDialogVisible.value = true;
 };
 
 const rules = {
-	primaryId: [{ required: true, message: "请输入主编码", trigger: "blur" }],
-  enableFlag: [{ required: true, message: "请选择是否有效", trigger: "change" }],
-  remark: [{ required: true, message: "请输入备注", trigger: "blur" }]
+    teamCode: [{ required: true, message: "班组编码不能为空", trigger: "blur" }],
+  teamId: [{ required: true, message: "班组Id不能为空", trigger: "change" }],
+  teamName: [{ required: true, message: "班组名字不可以为空", trigger: "blur" }]
 };
 const submitForm = () => {
   formRef.value.validate((valid) => {
@@ -237,7 +213,7 @@ const cancelForm = () => {
 
 <template>
 	<!--分类，页面只有基本的表现，没有实现数据绑定-->
-	<tableFrame title="计算单位">
+	<tableFrame title="班组设计">
 		<template #extra>
 			<el-button @click="onSortChannel"
 				>导出数据
@@ -250,12 +226,20 @@ const cancelForm = () => {
 		</template>
 
 		<!--表单区域-->
+        
 		<el-form :inline="true" class="demo-form-inline">
-			<el-form-item label="单位编码：" padding="50px">
+            <el-form-item label="班组类型" >
+             <el-select v-model="teamSelect">
+             <el-option label="机加工" value="1"></el-option>
+             <el-option label="组装" value="2"></el-option>
+             <el-option label="仓库" value="3"></el-option>
+            </el-select>
+        </el-form-item>
+			<el-form-item label="班组编号：" padding="50px">
 				<!--label是用户看，value是收集给后台的-->
 				<el-input v-model="myInput" clearable />
 			</el-form-item>
-			<el-form-item label="单位名称">
+			<el-form-item label="班组名称">
 				<el-input v-model="unitName" clearable />
 			</el-form-item>
 			<el-form-item>
@@ -279,31 +263,12 @@ const cancelForm = () => {
     @selection-change="handleSelectionChange"
     ref="multipleTable">
     <el-table-column type="selection" width="55" />
-  <el-table-column type="index" label="序号" ></el-table-column>
-   <el-table-column prop="attr1" label="预留字段1" width="100"></el-table-column>
-   <el-table-column prop="attr2" label="预留字段2" width="100"></el-table-column>
-   <el-table-column prop="attr3" label="预留字段3" width="100"></el-table-column>
-   <el-table-column prop="attr4" label="预留字段4" width="100"></el-table-column>
-   <el-table-column prop="changeRate" label="与主单位换算比例" width="100"></el-table-column>
-   <el-table-column prop="enableFlag"  label="是否启用" >
-    <template v-slot="{ row }">
-					<el-tag :type="row.enableFlag === 'Y' ? 'success' : 'info'">{{
-						row.enableFlag === "Y" ? "启用" : "未启用"
-					}}</el-tag>
-				</template>
-  </el-table-column>
-   <el-table-column  prop="measureCode"   label="单位编码" ></el-table-column>
-   <el-table-column  prop="measureName"   label="单位名称" ></el-table-column>
-   <el-table-column  prop="primaryFlag"   label="是否是主单位" >
-    <template v-slot="{ row }">
-					<el-tag :type="row.enableFlag === 'Y' ? 'success' : 'info'">{{
-						row.enableFlag === "Y" ? "主单位" : "非主单位"
-					}}</el-tag>
-				</template>
-   </el-table-column>
-   <el-table-column  prop="primaryId"   label="主单位ID" ></el-table-column>
-   <el-table-column  prop="remark"   label="备注" ></el-table-column>
-   <el-table-column label="操作" width="100" >
+  <el-table-column prop="calendarType" label="班组类型" width="150"  ></el-table-column>
+   <el-table-column prop="remark" label="备注" width="150"></el-table-column>
+   <el-table-column prop="teamCode" label="班组编号" width="150"></el-table-column>
+   <el-table-column prop="teamId" label="班组ID" width="150"></el-table-column>
+   <el-table-column prop="teamName" label="班组名称" width="150"></el-table-column>
+   <el-table-column label="操作" width="200" >
     <!-- row是当前一行数据 index是下标-->
     <template #default="{row,$index}">
         <el-button @click="onEditchannel(row,$index)" 
@@ -348,38 +313,20 @@ const cancelForm = () => {
 	<el-dialog v-model="testDialogVisible" :title="dialogTitle" width="500">
 		<!--:before-close="handleClose"//这个属性加上去要二次取消才可以-->
 		<el-form ref="formRef" :model="formModel" :rules="rules" label-width="100px" style="padding-right: 30px">
-			<el-form-item label="自定义值1" prop="attr1">
-				<el-input v-model="formModel.attr1" placeholder="请输入自定义值1"></el-input>
-			</el-form-item>
-			<el-form-item label="自定义值2" prop="attr2">
-				<el-input v-model="formModel.attr2" placeholder="请输入自定义值2"></el-input>
-			</el-form-item>
-			<el-form-item label="自定义值3" prop="attr3">
-				<el-input v-model="formModel.attr3" placeholder="自定义值3"></el-input>
-			</el-form-item>
-			<el-form-item label="自定义值4" prop="attr4">
-				<el-input v-model="formModel.attr4" placeholder="自定义值4"></el-input>
-			</el-form-item>
-			<el-form-item label="与主单位换算比例" prop="changeRate">
-				<el-input v-model="formModel.changeRate" placeholder="与主单位换算比例"></el-input>
-			</el-form-item>
-			<el-form-item label="是否启用" prop="enableFlag">
-				<el-input v-model="formModel.enableFlag" placeholder="是否启用"></el-input>
-			</el-form-item>
-			<el-form-item label="单位编码" prop="measureCode">
-				<el-input v-model="formModel.measureCode" placeholder="单位编码"></el-input>
-			</el-form-item>
-			<el-form-item label="单位名称" prop="measureName">
-				<el-input v-model="formModel.measureName" placeholder="单位名称"></el-input>
-			</el-form-item>
-			<el-form-item label="是否是主单位" prop="primaryFlag">
-				<el-input v-model="formModel.primaryFlag" placeholder="是否是主单位"></el-input>
-			</el-form-item>
-			<el-form-item label="主单位ID" prop="primaryId">
-				<el-input v-model="formModel.primaryId" placeholder="主单位ID"></el-input>
+			<el-form-item label="班组类型" prop="calendarType">
+				<el-input v-model="formModel.calendarType" placeholder="请输入班组类型"></el-input>
 			</el-form-item>
 			<el-form-item label="备注" prop="remark">
-				<el-input v-model="formModel.remark" placeholder="备注"></el-input>
+				<el-input v-model="formModel.remark" placeholder="请输入备注"></el-input>
+			</el-form-item>
+			<el-form-item label="班组编号" prop="teamCode">
+				<el-input v-model="formModel.teamCode" placeholder="请输入班组编号"></el-input>
+			</el-form-item>
+			<el-form-item label="班组ID" prop="attr4">
+				<el-input v-model="formModel.attr4" placeholder="请输入班组ID"></el-input>
+			</el-form-item>
+			<el-form-item label="班组名称" prop="teamName">
+				<el-input v-model="formModel.teamName" placeholder="请输入班组名称"></el-input>
 			</el-form-item>
 		</el-form>
 		<template #footer>
