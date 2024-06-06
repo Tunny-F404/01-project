@@ -33,7 +33,7 @@ machinery-list:
   plan-id: 计划ID
   machinery-id: 设备ID
  query:
-  summary: 分页查询设备清单数据
+  summary: 获取点检/保养设备列表（条件+分页）
 machinery-plan:
  field:
   plan-id: 计划ID
@@ -47,9 +47,9 @@ machinery-plan:
   status: 状态
   remark: 备注
  query:
-  summary: 分页查询点检/保养设备计划列表数据
+  summary: 获取计划列表（条件+分页）
  query-details:
-  summary: 查询点检/保养设备计划详细信息
+  summary: 获取计划详情
 machinery-subject:
  field:
   record-id: 流水号
@@ -62,7 +62,7 @@ machinery-subject:
   subject-standard: 标准
   remark: 备注
  query:
-  summary: 分页查询点检/保养项目列表数据
+  summary: 获取计划点检/保养项目列表（条件+分页）
 planSubject:
  query:
   summaryTable: 获取计划要处理的项目列表
