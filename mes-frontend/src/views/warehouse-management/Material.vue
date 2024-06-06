@@ -98,36 +98,36 @@ const rules = {
 
 // 提交表单,用 Promise 链式操作
 const submitForm = () => {
-     formRef.value.validate()
-       .then(() => {
-         console.log("提交成功", formModel.value);
-         dialogVisible.value = false;
-         // 添加提交表单后的其他逻辑
-       })
-       .catch(() => {
-         console.log("提交失败");
-       });
-   };
+	formRef.value
+		.validate()
+		.then(() => {
+			console.log("提交成功", formModel.value);
+			dialogVisible.value = false;
+			// 添加提交表单后的其他逻辑
+		})
+		.catch(() => {
+			console.log("提交失败");
+		});
+};
 //后端   const submitForm = () => {
-	// formRef.value.validate()
-  //      .then(() => {
-  //        // 替换为后端请求
-  //        request.post('/api/submit', formModel.value)
-  //          .then(response => {
-  //            console.log("提交成功", response.data);
-  //            dialogVisible.value = false;
-  //            // 添加提交表单后的其他逻辑
-  //            getPageList(); // 重新获取分页数据
-  //          })
-  //          .catch(error => {
-  //            console.log("提交失败", error);
-  //          });
-  //      })
-  //      .catch(() => {
-  //        console.log("提交失败");
-  //      });
-  //  };
-
+// formRef.value.validate()
+//      .then(() => {
+//        // 替换为后端请求
+//        request.post('/api/submit', formModel.value)
+//          .then(response => {
+//            console.log("提交成功", response.data);
+//            dialogVisible.value = false;
+//            // 添加提交表单后的其他逻辑
+//            getPageList(); // 重新获取分页数据
+//          })
+//          .catch(error => {
+//            console.log("提交失败", error);
+//          });
+//      })
+//      .catch(() => {
+//        console.log("提交失败");
+//      });
+//  };
 
 //取消提交
 
@@ -154,18 +154,17 @@ const getPageList = () => {
 	loading.value = false; // 隐藏加载动画
 };
 //后端   const getPageList = () => {
-	// loading.value = true;
-  //    // 替换为后端请求
-  //    request.get('/api/page', { params: { pagenum: parms.value.pagenum, pagesize: parms.value.pagesize } })
-  //      .then(response => {
-  //        tableList.value = response.data.list;
-  //        total.value = response.data.total;
-  //      })
-  //      .finally(() => {
-  //        loading.value = false;
-  //      });
-  //  };
-
+// loading.value = true;
+//    // 替换为后端请求
+//    request.get('/api/page', { params: { pagenum: parms.value.pagenum, pagesize: parms.value.pagesize } })
+//      .then(response => {
+//        tableList.value = response.data.list;
+//        total.value = response.data.total;
+//      })
+//      .finally(() => {
+//        loading.value = false;
+//      });
+//  };
 
 // 当页面大小改变时触发，重新获取分页数据
 const onSizeChange = (size) => {
@@ -223,48 +222,48 @@ const handleUpdate = (row) => {
 
 //模拟删除操作
 const handleDelete = (row) => {
-     ElMessageBox.confirm("你确认要删除该领料单么", "温馨提示", {
-       type: "warning",
-       confirmButtonText: "确认",
-       cancelButtonText: "取消",
-     })
-       .then(() => {
-         // 模拟删除操作
-         const index = tableList.value.findIndex((item) => item.issueCode === row.issueCode);
-         if (index !== -1) {
-           tableList.value.splice(index, 1);
-           originalTableList.value = [...tableList.value];
-           ElMessage.success("删除成功");
-           getPageList(); // 重新请求列表数据
-         }
-       })
-       .catch(() => {
-         ElMessage.info("已取消删除");
-       });
-   };
-	//   const handleDelete = (row) => {
-	// 	ElMessageBox.confirm("你确认要删除该领料单么", "温馨提示", {
-  //      type: "warning",
-  //      confirmButtonText: "确认",
-  //      cancelButtonText: "取消",
-  //    })
-  //      .then(() => {
-  //        // 替换为后端请求
-  //        request.delete(`/api/delete/${row.issueCode}`)
-  //          .then(response => {
-  //            console.log("删除成功", response.data);
-  //            ElMessage.success("删除成功");
-  //            getPageList(); // 重新获取分页数据
-  //          })
-  //          .catch(error => {
-  //            console.log("删除失败", error);
-  //            ElMessage.error("删除失败");
-  //          });
-  //      })
-  //      .catch(() => {
-  //        ElMessage.info("已取消删除");
-  //      });
-  //  };
+	ElMessageBox.confirm("你确认要删除该领料单么", "温馨提示", {
+		type: "warning",
+		confirmButtonText: "确认",
+		cancelButtonText: "取消",
+	})
+		.then(() => {
+			// 模拟删除操作
+			const index = tableList.value.findIndex((item) => item.issueCode === row.issueCode);
+			if (index !== -1) {
+				tableList.value.splice(index, 1);
+				originalTableList.value = [...tableList.value];
+				ElMessage.success("删除成功");
+				getPageList(); // 重新请求列表数据
+			}
+		})
+		.catch(() => {
+			ElMessage.info("已取消删除");
+		});
+};
+//   const handleDelete = (row) => {
+// 	ElMessageBox.confirm("你确认要删除该领料单么", "温馨提示", {
+//      type: "warning",
+//      confirmButtonText: "确认",
+//      cancelButtonText: "取消",
+//    })
+//      .then(() => {
+//        // 替换为后端请求
+//        request.delete(`/api/delete/${row.issueCode}`)
+//          .then(response => {
+//            console.log("删除成功", response.data);
+//            ElMessage.success("删除成功");
+//            getPageList(); // 重新获取分页数据
+//          })
+//          .catch(error => {
+//            console.log("删除失败", error);
+//            ElMessage.error("删除失败");
+//          });
+//      })
+//      .catch(() => {
+//        ElMessage.info("已取消删除");
+//      });
+//  };
 
 //导出数据逻辑
 const handleExport = () => {
@@ -273,36 +272,34 @@ const handleExport = () => {
 
 //模拟查询提交
 const handleQuery = () => {
-     new Promise((resolve) => {
-       tableList.value = originalTableList.value.filter((item) => {
-         return (
-           (!issueCode.value || item.issueCode.includes(issueCode.value)) &&
-           (!issueName.value || item.issueName.includes(issueName.value)) &&
-           (!warehouseName.value || item.warehouseName.includes(warehouseName.value)) &&
-           (!issueDate.value || item.issueDate === issueDate.value) &&
-           (!status.value || item.status === status.value)
-         );
-       });
-       resolve();
-     })
-       .then(() => {
-         getPageList();
-       });
-   };
-	 //后端   const handleQuery = () => {
-  //    loading.value = true;
-  //    // 替换为后端请求
-  //    request.get('/api/query', { params: { issueCode: issueCode.value, issueName: issueName.value, warehouseName: warehouseName.value, issueDate: issueDate.value, status: status.value } })
-  //      .then(response => {
-  //        tableList.value = response.data;
-  //        originalTableList.value = [...response.data];
-  //        getPageList();
-  //      })
-  //      .finally(() => {
-  //        loading.value = false;
-  //      });
-  //  };
-
+	new Promise((resolve) => {
+		tableList.value = originalTableList.value.filter((item) => {
+			return (
+				(!issueCode.value || item.issueCode.includes(issueCode.value)) &&
+				(!issueName.value || item.issueName.includes(issueName.value)) &&
+				(!warehouseName.value || item.warehouseName.includes(warehouseName.value)) &&
+				(!issueDate.value || item.issueDate === issueDate.value) &&
+				(!status.value || item.status === status.value)
+			);
+		});
+		resolve();
+	}).then(() => {
+		getPageList();
+	});
+};
+//后端   const handleQuery = () => {
+//    loading.value = true;
+//    // 替换为后端请求
+//    request.get('/api/query', { params: { issueCode: issueCode.value, issueName: issueName.value, warehouseName: warehouseName.value, issueDate: issueDate.value, status: status.value } })
+//      .then(response => {
+//        tableList.value = response.data;
+//        originalTableList.value = [...response.data];
+//        getPageList();
+//      })
+//      .finally(() => {
+//        loading.value = false;
+//      });
+//  };
 
 //重置
 const resetQuery = () => {
@@ -319,22 +316,21 @@ const handleSelectionChange = (val) => {
 };
 
 //执行领出
-const handleExecute = async (row) => {
-	const handleExecute = (row) => {
-     ElMessageBox.confirm("你确认要执行领出么", "温馨提示", {
-       type: "warning",
-       confirmButtonText: "确认",
-       cancelButtonText: "取消",
-     })
-       .then(() => {
-         ElMessage.success("执行领出成功");
-         console.log("执行领出", row);
-         // 执行领出的逻辑
-       })
-       .catch(() => {
-         console.log("取消执行领出");
-       });
-   };
+const handleExecute = (row) => {
+	ElMessageBox.confirm("你确认要执行领出么", "温馨提示", {
+		type: "warning",
+		confirmButtonText: "确认",
+		cancelButtonText: "取消",
+	})
+		.then(() => {
+			ElMessage.success("执行领出成功");
+			console.log("执行领出", row);
+			// 执行领出的逻辑
+		})
+		.catch(() => {
+			console.log("取消执行领出");
+		});
+};
 
 // 自定义排序逻辑
 function handleSortChange({ prop, order }) {
@@ -355,45 +351,45 @@ function toggleSearchBar() {
 }
 // 模拟刷新数据，使用 async/await，并在 finally 中处理加载动画的隐藏
 const refreshData = () => {
-     loading.value = true; // 显示加载动画
-     new Promise((resolve) => {
-       setTimeout(() => {
-         tableList.value = [
-           ...tableList.value,
-           {
-             issueCode: "I007",
-             issueName: "领料单7",
-             workorderCode: "WO007",
-             clientCode: "C007",
-             clientName: "客户7",
-             issueDate: "2023-10-07",
-             status: "PREPARE",
-           },
-         ];
-         originalTableList.value = [...tableList.value];
-         resolve();
-       }, 500);
-     })
-       .then(() => {
-         getPageList();
-       })
-       .finally(() => {
-         loading.value = false; // 隐藏加载动画
-       });
-   };
+	loading.value = true; // 显示加载动画
+	new Promise((resolve) => {
+		setTimeout(() => {
+			tableList.value = [
+				...tableList.value,
+				{
+					issueCode: "I007",
+					issueName: "领料单7",
+					workorderCode: "WO007",
+					clientCode: "C007",
+					clientName: "客户7",
+					issueDate: "2023-10-07",
+					status: "PREPARE",
+				},
+			];
+			originalTableList.value = [...tableList.value];
+			resolve();
+		}, 500);
+	})
+		.then(() => {
+			getPageList();
+		})
+		.finally(() => {
+			loading.value = false; // 隐藏加载动画
+		});
+};
 //后端   const refreshData = () => {
-	// loading.value = true;
-  //    // 替换为后端请求
-  //    request.get('/api/refresh')
-  //      .then(response => {
-  //        tableList.value = response.data;
-  //        originalTableList.value = [...response.data];
-  //        getPageList();
-  //      })
-  //      .finally(() => {
-  //        loading.value = false;
-  //      });
-  //  };
+// loading.value = true;
+//    // 替换为后端请求
+//    request.get('/api/refresh')
+//      .then(response => {
+//        tableList.value = response.data;
+//        originalTableList.value = [...response.data];
+//        getPageList();
+//      })
+//      .finally(() => {
+//        loading.value = false;
+//      });
+//  };
 </script>
 
 <template>

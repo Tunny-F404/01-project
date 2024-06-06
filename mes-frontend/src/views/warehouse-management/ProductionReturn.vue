@@ -100,7 +100,8 @@ const rules = {
 
 // 提交表单,用 Promise 链式操作
 const submitForm = () => {
-	formRef.value.validate()
+	formRef.value
+		.validate()
 		.then(() => {
 			console.log("提交成功", formModel.value);
 			dialogVisible.value = false;
@@ -264,10 +265,9 @@ const handleQuery = () => {
 			);
 		});
 		resolve();
-	})
-		.then(() => {
-			getPageList();
-		});
+	}).then(() => {
+		getPageList();
+	});
 };
 //后端
 // const handleQuery = () => {
@@ -466,14 +466,8 @@ const refreshData = () => {
 			@sort-change="handleSortChange"
 		>
 			<el-table-column type="selection" width="55" />
-			<el-table-column
-				prop="rtCode"
-				label="退料单编号"
-				width="120"
-				align="center"
-				sortable="custom"
-			></el-table-column>
-			<el-table-column prop="rtName" label="退料单名称" width="130" align="center"></el-table-column>
+			<el-table-column prop="rtCode" label="退料单编号" width="120" align="center" sortable="custom"></el-table-column>
+			<el-table-column prop="rtName" label="退料单名称" width="120" align="center"></el-table-column>
 			<el-table-column prop="workorderCode" label="生产工单" width="120" align="center"></el-table-column>
 			<el-table-column
 				prop="warehouseName"
@@ -616,5 +610,3 @@ const refreshData = () => {
 	}
 }
 </style>
-
-					

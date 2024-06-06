@@ -186,7 +186,7 @@ const testMenus = [
 			},
 			{
 				id: 6,
-				text: "生产入库",
+				text: "产品入库",
 				href: "/un-36",
 				icon: "Management",
 				pid: 4,

@@ -68,7 +68,7 @@ const routes = [
 			{
 				path: "/sample/detection",
 				component: () => import("@/views/sample/detection/Detection.vue"),
-			}
+			},
 		],
 	},
 ];
