@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref, toRefs } from "vue";
 import { ElMessage } from "element-plus";
-import { addMessage, delMessage, getMessage, listMessage, updateMessage } from "@/api/system/message";
+ import { addMessage, delMessage, getMessage, listMessage, updateMessage } from "@/apis/system/message";
 import UserSingleSelect from "@/components/userSelect/single.vue";
 
 // 响应式状态
@@ -84,7 +84,7 @@ function getList() {
 		messageList.value = response.rows;
 		total.value = response.total;
 		loading.value = false;
-	});
+	}).catch(()=>ElMessage('获取数据异常'));
 }
 
 function handleQuery() {
@@ -266,8 +266,8 @@ function onUserSelected(user) {
 			</el-form-item>
 			<!-- 搜索和重置按钮 -->
 			<el-form-item>
-				<el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-				<el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+				<el-button type="primary" icon="el-icon-search" size="small" @click="handleQuery">搜索</el-button>
+				<el-button icon="el-icon-refresh" size="small" @click="resetQuery">重置</el-button>
 			</el-form-item>
 		</el-form>
 
