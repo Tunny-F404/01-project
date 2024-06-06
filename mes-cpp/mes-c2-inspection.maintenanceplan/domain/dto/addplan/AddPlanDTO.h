@@ -30,24 +30,24 @@ class AddPlanDTO : public oatpp::DTO
 {
 	DTO_INIT(AddPlanDTO, DTO);
 	// 计划编码
-	API_DTO_FIELD_DEFAULT(String, planCode, ZH_WORDS_GETTER("add-mj.fields.pid"));
+	API_DTO_FIELD(String, planCode, ZH_WORDS_GETTER("add-mj.fields.pid"),true,"plancode");
 	//计划名称
-	API_DTO_FIELD_DEFAULT(String, planName, ZH_WORDS_GETTER("add-mj.fields.pname"));
+	API_DTO_FIELD(String, planName, ZH_WORDS_GETTER("add-mj.fields.pname"),true, "planname");
 	//计划类型
-	API_DTO_FIELD_DEFAULT(String, planType, ZH_WORDS_GETTER("add-mj.fields.ptype"));
+	API_DTO_FIELD(String, planType, ZH_WORDS_GETTER("add-mj.fields.ptype"),true, "plan_type");
 
 	//频率
-	API_DTO_FIELD_DEFAULT(String, cycleType, ZH_WORDS_GETTER("add-mj.fields.ctype"));
+	API_DTO_FIELD(String, cycleType, ZH_WORDS_GETTER("add-mj.fields.ctype"),true, "cycle_type");
 	//次数
-	API_DTO_FIELD_DEFAULT(UInt32, cycleCount, ZH_WORDS_GETTER("add-mj.fields.ccount"));
+	API_DTO_FIELD(UInt32, cycleCount, ZH_WORDS_GETTER("add-mj.fields.ccount"),true, 1);
 	//开始日期
-	API_DTO_FIELD_DEFAULT(String, startDate, ZH_WORDS_GETTER("add-mj.fields.sdate"));
+	API_DTO_FIELD(String, startDate, ZH_WORDS_GETTER("add-mj.fields.sdate"),true, "2024-05-05 00:00:00");
 	//结束日期
-	API_DTO_FIELD_DEFAULT(String, endDate, ZH_WORDS_GETTER("add-mj.fields.edate"));
+	API_DTO_FIELD(String, endDate, ZH_WORDS_GETTER("add-mj.fields.edate"),true, "2024-05-05 00:00:00");
 	//状态
-	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("add-mj.fields.status"));
+	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("add-mj.fields.status"),true, "status");
 	//备注
-	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("add-mj.fields.remark"));
+	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("add-mj.fields.remark"),true,"remark");
 };
 
 

@@ -34,12 +34,13 @@ int AddprojectDao::savedate(const DvCheckSubjectDO& uObj)
 		sub.setSubjectType(it->getSubjectType());
 		sub.setSubjectContent(it->getSubjectContent());
 		sub.setSubjectStandard(it->getSubjectStandard());
+		
 	}
 	
 
-	string sql = "INSERT INTO `dv_check_subject` (`plan_id`, `subject_id`, `subject_code`,`subject_name`,`subject_type`,`subject_content`,`subject_standard`) VALUES (?, ?, ?,?,?,?,?)";
+	string sql = "INSERT INTO `dv_check_subject` (`plan_id`, `subject_id`, `subject_code`,`subject_name`,`subject_type`,`subject_content`,`subject_standard`,`create_by`,`create_time`) VALUES (?, ?, ?,?,?,?,?,?,?)";
 
-	return sqlSession->executeInsert(sql, "%i%i%s%s%s%s%s",uObj.getPlan_id(),uObj.getSubject_id(), sub.getSubjectCode(), sub.getSubjectName(), sub.getSubjectType(), sub.getSubjectContent(), sub.getSubjectStandard());
+	return sqlSession->executeInsert(sql, "%i%i%s%s%s%s%s%s%s",uObj.getPlan_id(),uObj.getSubject_id(), sub.getSubjectCode(), sub.getSubjectName(), sub.getSubjectType(), sub.getSubjectContent(), sub.getSubjectStandard(),uObj.getCreate_by(),uObj.getCreate_time());
 }
 
 list<dvSubjectDO> AddprojectDao::getDvSubject(uint64_t id)

@@ -32,7 +32,7 @@ class AddPlanService
 public:
 
 	// ±£´æÊý¾Ý
-	uint64_t saveData(const AddPlanDTO::Wrapper& dto);
+	uint64_t saveData(const AddPlanDTO::Wrapper& dto, const PayloadDTO& payload);
 
 };
 

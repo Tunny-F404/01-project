@@ -4,13 +4,13 @@
 #include "../ApiDeclarativeServicesHelper.h"
 
 
-Uint64JsonVO::Wrapper AddPlanController::execAddplan(const AddPlanDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper AddPlanController::execAddplan(const AddPlanDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if (!dto->planCode || !dto->planType || !dto->cycleCount)
+	if (!dto->planCode || !dto->planType || !dto->cycleCount||!dto->planName)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -25,7 +25,7 @@ Uint64JsonVO::Wrapper AddPlanController::execAddplan(const AddPlanDTO::Wrapper& 
 	// 定义一个Service
 	AddPlanService service;
 	// 执行数据新增
-	uint64_t id = service.saveData(dto);
+	uint64_t id = service.saveData(dto,payload);
 	if (id > 0) {
 		jvo->success(UInt64(id));
 	}

@@ -31,7 +31,7 @@ class AddprojectService
 {
 public:
 	// 新增数据
-	uint64_t saveData(const MaintainProjDTO::Wrapper& dto);
+	uint64_t saveData(const MaintainProjDTO::Wrapper& dto, const PayloadDTO& payload);
 
 };
 

@@ -18,8 +18,8 @@
 */
 #include "stdafx.h"
 #include "AddprojectService.h"
-
-uint64_t AddprojectService::saveData(const MaintainProjDTO::Wrapper& dto)
+#include"../lib-common/include/SimpleDateTimeFormat.h"
+uint64_t AddprojectService::saveData(const MaintainProjDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
 	DvCheckSubjectDO  data;
@@ -28,7 +28,8 @@ uint64_t AddprojectService::saveData(const MaintainProjDTO::Wrapper& dto)
 	AddprojectDao dao;
 	
 	std::stringstream ss(dto->machineryId.getValue(""));
-
+	data.setCreate_by(payload.getUsername());
+	data.setCreate_time(SimpleDateTimeFormat::format());
 	std::string id;
 	while (std::getline(ss, id, ',')) {
 		data.setSubject_id(stoi(id));

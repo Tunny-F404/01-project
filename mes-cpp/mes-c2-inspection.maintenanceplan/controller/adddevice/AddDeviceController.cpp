@@ -21,7 +21,7 @@
 #include "../../service/adddevice/AddDeviceService.h"
 #include "../ApiDeclarativeServicesHelper.h"
 
-Uint64JsonVO::Wrapper AddDeviceController::execAddProj(const AddDeviceDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper AddDeviceController::execAddProj(const AddDeviceDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -34,7 +34,7 @@ Uint64JsonVO::Wrapper AddDeviceController::execAddProj(const AddDeviceDTO::Wrapp
 	}
 	// 定义一个Service
 	AddDeviceService service;
-	uint64_t id = service.saveData(dto);
+	uint64_t id = service.saveData(dto,payload);
 	if (id > 0)
 	{
 		jvo->success(UInt64(id));

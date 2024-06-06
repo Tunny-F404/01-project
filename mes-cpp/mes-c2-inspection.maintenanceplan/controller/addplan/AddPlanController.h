@@ -30,11 +30,11 @@ public:
 	// 3.2 定义新增接口处理
 	ENDPOINT(API_M_POST, "/inspection-maintenanceplan/add-plan", addplanTable, BODY_DTO(AddPlanDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execAddplan(dto));
+		API_HANDLER_RESP_VO(execAddplan(dto, authObject->getPayload()));
 	}
 private: // 定义接口执行函数
 	// 3.3 演示新增数据
-	Uint64JsonVO::Wrapper execAddplan(const AddPlanDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddplan(const AddPlanDTO::Wrapper& dto, const PayloadDTO& payload);
 };
 
 #include OATPP_CODEGEN_END(ApiController)
