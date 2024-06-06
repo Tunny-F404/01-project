@@ -101,10 +101,10 @@ deleteTemplate:
   keyPri: 主表主键
 deleteOP:
  summary:
-  plan: 删除点检/保养计划
+  plan: 删除点检/保养计划（参数为主键列表，例如：[1,2]）
   planDelete: 删除计划前的存在性检测
-  machiner: 删除计划里要点检/保养的机器
-  subject: 删除计划里要点检/保养的项目
+  machiner: 删除计划里要点检/保养的机器（参数为主键列表，例如：[1,2]）
+  subject: 删除计划里要点检/保养的项目（参数为主键列表，例如：[1,2]）
 device-list:
  summary:
   add-proj: 添加点检/保养设备
