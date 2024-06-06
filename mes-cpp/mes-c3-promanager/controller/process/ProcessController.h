@@ -227,20 +227,16 @@ public:
 	ENDPOINT_INFO(removeProRoute) {
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("process.route.delete1"), Uint64JsonVO::Wrapper);
-		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.route.id"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/{id}", removeProRoute, QUERY(List<UInt64>, id), execRemoveProRoute(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/{id}", removeProRoute, BODY_DTO(List<UInt64>, id), execRemoveProRoute(id));
 
 
 	// 15 定义删除工艺关联产品接口
 	ENDPOINT_INFO(removeRouteProduct) {
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("process.route.delete2"), Uint64JsonVO::Wrapper);
-		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("process.route.corproductid"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/product/{id}", removeRouteProduct, QUERY(List<UInt64>, id), execRemoveRouteProduct(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/route/product/{id}", removeRouteProduct, BODY_DTO(List<UInt64>, id), execRemoveRouteProduct(id));
 
 	// 16 定义工艺关联产品导出接口
 	ENDPOINT_INFO(exportRouteProduct) {
@@ -254,7 +250,7 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 
 	}
-	ENDPOINT(API_M_POST, "/pro/route/{id}", exportRouteProduct, QUERY(List<UInt64>, id), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/pro/route/{id}", exportRouteProduct, BODY_DTO(List<UInt64>, id), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_RESP_VO(execExportRouteProduct(id));
 	}
 

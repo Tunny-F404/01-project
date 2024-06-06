@@ -268,7 +268,7 @@ Uint64JsonVO::Wrapper ProcessController::execModifyProcess(const ModifyProDTO::W
 	// 定义一个Service
 	ComProService service;
 	// 执行数据修改
-	if (service.updateData(dto, payload)) {
+	if (service.updateData(dto,payload)) {
 		jvo->success(dto->record_id);
 	}
 	else
@@ -355,12 +355,16 @@ ProMaterialPageJsonVO::Wrapper ProcessController::execQueryProMaterial(const Pro
 // 14 删除工艺流程
 List<Uint64JsonVO::Wrapper> ProcessController::execRemoveProRoute(const List<UInt64>&Lid)
 {
-	list<Uint64JsonVO::Wrapper> ret;
+	// 响应结果
+	List< Uint64JsonVO::Wrapper> temp;
+	auto ans = temp.createShared();
 	// 定义返回数据对象
 	list<UInt64> id = *(Lid.get());
 	for (auto iter : id)
 	{
 		UInt64 temp = *iter;
+		//printf("-----------test-----------\n---------%d---------\n", iter.getValue(0));
+
 		auto jvo = Uint64JsonVO::createShared();
 		// 参数校验
 		if (!temp || *temp <= 0)
@@ -378,17 +382,18 @@ List<Uint64JsonVO::Wrapper> ProcessController::execRemoveProRoute(const List<UIn
 				jvo->fail(temp);
 			}
 		}
-		ret.emplace_back(jvo);
+		ans.get()->emplace_back(jvo);
+		//it.get()->emplace_back(jvo);
 	}
-	// 响应结果
-	List< Uint64JsonVO::Wrapper> ans;
-	*(ans.get()) = ret;
+
 	return ans;
 }
 // 15 删除工艺关联产品
 List<Uint64JsonVO::Wrapper> ProcessController::execRemoveRouteProduct(const List<UInt64>& Lid)
 {
-	list<Uint64JsonVO::Wrapper> ret;
+	// 响应结果
+	List< Uint64JsonVO::Wrapper> temp;
+	auto ans = temp.createShared();
 	// 定义返回数据对象
 	list<UInt64> id = *(Lid.get());
 	for (auto iter : id)
@@ -411,11 +416,9 @@ List<Uint64JsonVO::Wrapper> ProcessController::execRemoveRouteProduct(const List
 				jvo->fail(temp);
 			}
 		}
-		ret.emplace_back(jvo);
+		ans.get()->emplace_back(jvo);
 	}
-	// 响应结果
-	List< Uint64JsonVO::Wrapper> ans;
-	*(ans.get()) = ret;
+
 	return ans;
 }
 // 16 导出工艺关联产品
@@ -520,13 +523,13 @@ Uint64JsonVO::Wrapper ProcessController::execAddProductMaterial(const ProductMat
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if (!dto->record_id || !dto->item_name || !dto->unit_of_measure || !dto->quantity)
+	if (!dto->item_name || !dto->unit_of_measure || !dto->quantity)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->record_id < 0 || dto->item_name->empty())
+	if ( dto->item_name->empty())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;

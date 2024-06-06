@@ -4,6 +4,15 @@
 #include "../../dao/process/RelateProMapper.h"
 #include "../../../lib-common/include/SimpleDateTimeFormat.h"
 
+//定义条件解析宏，减少重复代码
+#define SAMPLE_TERAM_PARSE(id, sql) \
+SqlParams params; \
+sql<<" WHERE 1=1"; \
+if (id) { \
+	sql << " AND `record_id`=?"; \
+	SQLPARAMS_PUSH(params, "i", int, id); \
+}
+
 // 插入
 uint64_t RelateProDAO::insert(const ProRouteProductDO & iObj, const PayloadDTO& payload)
 {
@@ -31,10 +40,7 @@ list<ProRouteProductDO> RelateProDAO::selectById(uint64_t id)
 {
 	stringstream sql;
 	sql << "SELECT record_id,route_id,item_id,item_code,item_name,specification,unit_of_measure,quantity,production_time,time_unit_type,remark FROM pro_route_product";
-	SqlParams params; sql << " WHERE 1=1";
-	if (id) {
-		sql << " AND `record_id`=?"; params.emplace_back(SqlParam("i", std::make_shared<int>(id)));
-	};
+	SAMPLE_TERAM_PARSE(id, sql);
 	exportRouteProductMapper mapper;
 	string sqlStr = sql.str();
 	return sqlSession->executeQuery<ProRouteProductDO, exportRouteProductMapper>(sqlStr, mapper, params);

@@ -12,15 +12,15 @@
 class ProductMaterialDTO : public oatpp::DTO
 {
 	DTO_INIT(ProductMaterialDTO, DTO);
-	// 记录id
+	// 工艺路线ID
 	API_DTO_FIELD(UInt64, route_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.record_id"), true, 1);
-	// 记录id
+	// 工序ID
 	API_DTO_FIELD(UInt64, process_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.record_id"), true, 1);
 	// 记录id
-	API_DTO_FIELD(UInt64, record_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.record_id"), true, 1);
-	// 记录id
+	//API_DTO_FIELD(UInt64, record_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.record_id"), true, 1);
+	// 产品物料ID
 	API_DTO_FIELD(UInt64, product_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.record_id"), true, 1);
-	// 记录id
+	// 产品物料ID
 	API_DTO_FIELD(UInt64, item_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.record_id"), true, 1);
 	// 物料编码
 	API_DTO_FIELD(String, item_code, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"), true, "");
