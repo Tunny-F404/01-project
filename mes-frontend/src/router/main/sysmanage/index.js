@@ -22,7 +22,7 @@ const routes = [
 	{
 		path: "/un-5",
 		name: "UN5",
-		component: () => import("@/views/basedata/supplier.vue"),
+		component: () => import("@/views/sample/Productionworkorder/Productionworkorder.vue"),
 	},
 	{
 		path: "/un-6",
@@ -32,7 +32,17 @@ const routes = [
 	{
 		path: "/un-7",
 		name: "UN7",
-		component: () => import("@/views/status/404.vue"),
+		component: () => import("@/views/sample/station/Station.vue"),
+	},
+	{
+		path: "/un-8",
+		name: "UN8",
+		component: () => import("@/views/sample/productionmanagement/Processsetting.vue"),
+	},
+	{
+		path: "/un-9",
+		name: "UN9",
+		component: () => import("@/views/sample/technologicalprocess/technologicalprocess.vue"),
 	},
 	// 仓库管理页面
 	{
