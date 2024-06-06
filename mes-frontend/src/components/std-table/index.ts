@@ -4,5 +4,10 @@ import TableText from "./src/table-text.vue";
 
 import type { Operations, TableTrueProps } from "./src/std-table";
 
-export { StdTable, PopUp, TableText };
+export {
+	/** 标准表格 */
+	StdTable,
+	PopUp,
+	TableText,
+};
 export type { Operations, TableTrueProps };

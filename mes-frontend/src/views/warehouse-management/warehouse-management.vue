@@ -1,6 +1,6 @@
 <template>
 	<div class="app-container">
-		<TableTrue :data="filteredData">
+		<StdTable :data="filteredData">
 			<template #extra>
 				<div class="wareHouseSearchDiv">
 					<el-form size="small" :inline="true" label-width="82px">
@@ -21,17 +21,14 @@
 
 			<!-- 想实现自定义表格字段但是没成功 -->
 			<template #empty> &ensp; </template>
-		</TableTrue>
+		</StdTable>
 	</div>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed } from "vue";
-import { ElButton } from "element-plus";
-import TableText from "components/std-table/src/table-text.vue";
-import TableTrue from "components/std-table/src/std-table.vue";
+import { StdTable, TableText } from "components/std-table";
 
-const components = { TableText, TableTrue };
 // 定义数据
 const warehouseCode = ref("");
 //对应"classify": "金属",
