@@ -23,7 +23,7 @@ const routes = [
 	{
 		path: "/un-4",
 		name: "UN4",
-		component: () => import("@/views/basedata/Clientdemo1.vue"),
+		component: () => import("@/views/basedata/Clientdemo.vue"),
 	},
 	{
 		path: "/un-5",
@@ -108,6 +108,18 @@ const routes = [
 		path: "/un-34",
 		name: "UN34",
 		component: () => import("@/views/warehouse-management/Material.vue"),
+	},
+	// 生产退料页面
+	{
+		path: "/un-35",
+		name: "UN35",
+		component: () => import("@/views/warehouse-management/ProductionReturn.vue"),
+	},
+	// 产品入库页面
+	{
+		path: "/un-36",
+		name: "UN36",
+		component: () => import("@/views/warehouse-management/Productrecpt.vue"),
 	},
 	// 组织架构主菜单
 	{

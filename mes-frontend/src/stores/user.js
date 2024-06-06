@@ -179,8 +179,15 @@ const testMenus = [
 			},
 			{
 				id: 6,
-				text: "订单管理5",
+				text: "生产退料",
 				href: "/un-35",
+				icon: "Management",
+				pid: 4,
+			},
+			{
+				id: 6,
+				text: "生产入库",
+				href: "/un-36",
 				icon: "Management",
 				pid: 4,
 			},
@@ -328,7 +335,7 @@ const testMenus = [
 			},
 		],
 	},
-	//组织架构侧边栏
+	// 组织架构侧边栏
 	{
 		id: 6,
 		text: "组织架构",
