@@ -86,3 +86,8 @@ accept:
   area_id: 库位id
   area_code: 库位编码
 
+recpt:
+ put:
+  update: 修改单据
+ post:
+  add: 添加单据   

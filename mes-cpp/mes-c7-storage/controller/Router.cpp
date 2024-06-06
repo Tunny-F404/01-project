@@ -22,6 +22,8 @@
 #include "item-information/ProductRecptController.h"
 #include "storage/storageController.h"
 #include"document/productController.h"
+#include"document/AddrecptController.h"
+#include"document/UpdaterecptController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -57,6 +59,8 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(ProductRecptController);
 	ROUTER_SIMPLE_BIND(ProductController);
 	ROUTER_SIMPLE_BIND(storageController);
+	ROUTER_SIMPLE_BIND(AddrecptController);
+	ROUTER_SIMPLE_BIND(UpdaterecptController);
 
 }
 
