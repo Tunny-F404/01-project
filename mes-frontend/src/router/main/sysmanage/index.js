@@ -1,4 +1,5 @@
 const routes = [
+	// 基础数据主菜单
 	{
 		path: "/un-1",
 		name: "UN1",
@@ -103,6 +104,36 @@ const routes = [
 		name: "UN34",
 		component: () => import("@/views/warehouse-management/Material.vue"),
 	},
+	// 组织架构主菜单
+	{
+		path: "/orgstructure",
+		name: "Orgstructure",
+
+		children: [
+			// 所有组织架构的相关页面 在这里添加路由映射
+			{
+				path: "/dept",
+				name: "dept",
+				component: () => import("@/views/status/404.vue"),
+			},
+			{
+				path: "/postManage",
+				name: "postManage",
+				component: () => import("@/views/orgstructure/postmanage/postmanage.vue"),
+			},
+			{
+				path: "/role",
+				name: "role",
+				component: () => import("@/views/status/404.vue"),
+			},
+			{
+				path: "/user",
+				name: "user",
+				component: () => import("@/views/status/404.vue"),
+			},
+		],
+	},
+
 	// 工艺流程页面
 	{
 		path: "/un-514",
