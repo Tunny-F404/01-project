@@ -99,13 +99,10 @@ const menus = reactive([
 		path: "/sample/public-form",
 		text: "表单演示页",
 	},
+
 	{
 		path: "/sample/table-list-use",
 		text: "表格演示",
-	},
-	{
-		path: "/sample/table-list",
-		text: "表格1演示页",
 	},
 
 	// 阮喵喵 标准表格组件 演示页
