@@ -38,8 +38,8 @@ class Wm_product_recptDO
 	CC_SYNTHESIZE(string, workorder_code, Workorder_code);
 	// 生产工单名称
 	CC_SYNTHESIZE(string, workorder_name, Workorder_name);
-	//// 产品物料id
-	//CC_SYNTHESIZE(int64_t, item_id, Item_id);
+	// 产品物料id
+	CC_SYNTHESIZE(int64_t, item_id, Item_id);
 	//// 产品物料编码
 	//CC_SYNTHESIZE(string, item_code, Item_code);
 	////产品物料名称
@@ -54,7 +54,7 @@ class Wm_product_recptDO
 	CC_SYNTHESIZE(string, remark, Remark);
 public:
 	Wm_product_recptDO() {}
-	Wm_product_recptDO(int64_t recpt_id, string recpt_code, string recpt_name, int64_t workorder_id, string workorder_code, string workorder_name, string recpt_date, string remark)
+	Wm_product_recptDO(int64_t recpt_id, string recpt_code, string recpt_name, int64_t workorder_id, string workorder_code, string workorder_name, string recpt_date, string remark,int64_t item_id)
 	{
 		this->recpt_id = recpt_id;
 		this->recpt_code = recpt_code;
@@ -64,6 +64,7 @@ public:
 		this->workorder_name = workorder_name;
 		this->recpt_date = recpt_date;
 		this->remark = remark;
+		this->item_id = item_id;
 	}
 };
 

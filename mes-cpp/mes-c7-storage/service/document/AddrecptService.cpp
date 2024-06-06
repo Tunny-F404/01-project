@@ -31,7 +31,8 @@ uint64_t AddrecptService::saveData(const AddrecptDTO::Wrapper& dto)//注意dto还包
 	data.setRemark(dto->remark.getValue(""));
 	data.setWorkorder_code(dto->workorder_code.getValue(""));
 	data.setWorkorder_name(dto->workorder_name.getValue(""));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Recpt_code,recpt_code,Recpt_date,recpt_date,Recpt_name,recpt_name,Remark,remark,Workorder_code,workorder_code,Workorder_name,workorder_name)//data.setName(dto.name)...
+	data.setItem_id(dto->item_id.getValue(0));
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Recpt_code,recpt_code,Recpt_date,recpt_date,Recpt_name,recpt_name,Remark,remark,Workorder_code,workorder_code,Workorder_name,workorder_name,Item_id,item_id)//data.setName(dto.name)...
 		// 执行数据添加
 		AddrecptDAO dao;
 	return dao.insert(data);

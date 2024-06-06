@@ -23,8 +23,8 @@
 
 uint64_t AddrecptDAO::insert(const Wm_product_recptDO& iObj)
 {
-	string sql = "INSERT INTO `wm_product_recpt` (`recpt_code`, `recpt_date`, `recpt_id`,`recpt_name`,`remark`,`workorder_code`,`workorder_id`,`workorder_name`) VALUES (?, ?, ?,?,?,?,?,?)";
-	return sqlSession->executeInsert(sql, "%s%s%i%s%s%s%i%s", iObj.getRecpt_code(), iObj.getRecpt_date(), iObj.getRecpt_id(), iObj.getRecpt_name(), iObj.getRemark(), iObj.getWorkorder_code(), iObj.getWorkorder_id(), iObj.getWorkorder_name());
+	string sql = "INSERT INTO `wm_product_recpt` (`recpt_code`, `recpt_date`, `recpt_id`,`recpt_name`,`remark`,`workorder_code`,`workorder_id`,`workorder_name`,`item_id`) VALUES (?, ?, ?,?,?,?,?,?,?)";
+	return sqlSession->executeInsert(sql, "%s%s%i%s%s%s%i%s%i", iObj.getRecpt_code(), iObj.getRecpt_date(), iObj.getRecpt_id(), iObj.getRecpt_name(), iObj.getRemark(), iObj.getWorkorder_code(), iObj.getWorkorder_id(), iObj.getWorkorder_name(),iObj.getItem_id());
 }
 
 //int SampleDAO::update(const SampleDO& uObj)

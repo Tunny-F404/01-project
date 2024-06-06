@@ -69,6 +69,11 @@ class AddrecptDTO : public oatpp::DTO
 	DTO_FIELD_INFO(remark) {
 		info->description = ZH_WORDS_GETTER("recpt.field.remark");
 	}
+	//产品物料id
+	DTO_FIELD(UInt64,item_id );
+	DTO_FIELD_INFO(item_id) {
+		info->description = ZH_WORDS_GETTER("recpt.field.item_id");
+	}
 };
 
 #include OATPP_CODEGEN_END(DTO)
