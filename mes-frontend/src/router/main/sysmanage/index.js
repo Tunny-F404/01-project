@@ -103,11 +103,18 @@ const routes = [
 		name: "UN34",
 		component: () => import("@/views/warehouse-management/Material.vue"),
 	},
-		// 车间设置
+	// 工艺流程页面
 	{
-			path: '/un-114',
-			name: 'WorkshopSettings',
-			component: () => import('@/views/sample/workshop/WorkshopSettings.vue'),
+		path: "/un-514",
+		name: "UN514",
+		component: () => import("@/views/sample/process-flow/ProcessFlow.vue"),
+	},
+
+	// 车间设置
+	{
+		path: "/un-114",
+		name: "WorkshopSettings",
+		component: () => import("@/views/sample/workshop/WorkshopSettings.vue"),
 	},
 ];
 
