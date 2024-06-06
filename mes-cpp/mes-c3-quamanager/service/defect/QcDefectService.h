@@ -34,7 +34,7 @@ public:
 	// 分页查询所有数据
 	DefectPageDTO::Wrapper listAll(const QcDefectQuery::Wrapper& query);
 	// 插入数据
-	uint64_t insert(const DefectDTO::Wrapper& dto);
+	uint64_t insert(const DefectDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 删除数据
 	uint64_t remove(const std::string ids);
 	// 修改数据

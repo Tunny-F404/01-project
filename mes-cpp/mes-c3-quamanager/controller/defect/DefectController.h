@@ -52,7 +52,7 @@ public:
 	}
 	ENDPOINT(API_M_POST, "/defect/add-defect", addDefect, BODY_DTO(DefectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execAddDefect(dto));
+		API_HANDLER_RESP_VO(execAddDefect(dto, authObject->getPayload()));
 	}
 
 	// 3 修改缺陷
@@ -62,7 +62,7 @@ public:
 		"/defect/modify-defect",				 //
 		modifyDefect,							 //
 		BODY_DTO(DefectModifyDTO::Wrapper, dto), //
-		execModifyDefect(dto)					 //
+		execModifyDefect(dto, authObject->getPayload())					 //
 	);
 
 	// 4 删除缺陷
@@ -92,9 +92,9 @@ private:
 	// 1 获取缺陷列表（条件+分页）
 	DefectPageJsonVO::Wrapper execQueryDefect(const QcDefectQuery::Wrapper& query, const PayloadDTO& payload);
 	// 2 添加缺陷
-	Uint64JsonVO::Wrapper execAddDefect(const DefectDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddDefect(const DefectDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 3 修改缺陷
-	Uint64JsonVO::Wrapper execModifyDefect(const DefectModifyDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyDefect(const DefectModifyDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 4 删除缺陷
 	Uint64JsonVO::Wrapper execRemoveDefect(const String& ids);
 	// 5 导出缺陷、

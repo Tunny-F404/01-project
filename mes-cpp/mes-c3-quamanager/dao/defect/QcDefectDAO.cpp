@@ -81,9 +81,10 @@ std::list<QcDefectDO> QcDefectDAO::selectByLevel(const string& level)
 
 uint64_t QcDefectDAO::insert(const QcDefectDO& iObj)
 {
-	string sql = "INSERT INTO `qc_defect` (`defect_code`, `defect_name`, `index_type`, `defect_level`) VALUES (?, ?, ?, ?)";
-	return sqlSession->executeInsert(sql, "%s%s%s%s", iObj.getDefectCode(), iObj.getDefectName(), iObj.getIndexType(), iObj.getDefectLevel());
+	string sql = "INSERT INTO `qc_defect` (`defect_code`, `defect_name`, `index_type`, `defect_level`, `create_by`,	`create_time`) VALUES (?, ?, ?, ?, ?, ?)";
+	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s", iObj.getDefectCode(), iObj.getDefectName(), iObj.getIndexType(), iObj.getDefectLevel(), iObj.getCreateBy(), iObj.getCreateTime());
 }
+
 uint64_t QcDefectDAO::remove(const string& ids)
 {
 	string sql = "DELETE FROM `qc_defect` WHERE `defect_id` IN (" + ids + ")";

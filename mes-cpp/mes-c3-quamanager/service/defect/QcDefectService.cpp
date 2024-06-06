@@ -19,6 +19,7 @@
 #include "stdafx.h"
 #include "QcDefectService.h"
 #include "../../dao/defect/QcDefectDAO.h"
+#include "SimpleDateTimeFormat.h"
 
 DefectPageDTO::Wrapper DefectService::listAll(const QcDefectQuery::Wrapper& query)
 {
@@ -54,15 +55,19 @@ DefectPageDTO::Wrapper DefectService::listAll(const QcDefectQuery::Wrapper& quer
 	return pages;
 }
 
-uint64_t DefectService::insert(const DefectDTO::Wrapper& dto)
+uint64_t DefectService::insert(const DefectDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
+	string username = payload.getUsername();
+	string time = SimpleDateTimeFormat().format();
 	QcDefectDO data;
- 	//data.setDefectCode(dto->defect_code.getValue(""));
- 	///data.setDefectName(dto->defect_name.getValue(""));
- 	//data.setIndexType(dto->index_type.getValue(""));
-	//data.setDefectLevel(dto->defect_level.getValue(""));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, DefectCode, defect_code, DefectName, defect_name, IndexType, index_type, DefectLevel, defect_level)
+	data.setDefectCode(dto->defect_code.getValue(""));
+	data.setDefectName(dto->defect_name.getValue(""));
+	data.setIndexType(dto->index_type.getValue(""));
+	data.setDefectLevel(dto->defect_level.getValue(""));
+	data.setCreateBy(username);
+	data.setCreateTime(time);
+	//ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, DefectCode, defect_code, DefectName, defect_name, IndexType, index_type, DefectLevel, defect_level);
 	// 执行数据添加
 	QcDefectDAO dao;
 	return dao.insert(data);

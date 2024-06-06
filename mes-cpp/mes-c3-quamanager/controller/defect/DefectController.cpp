@@ -21,7 +21,7 @@ DefectPageJsonVO::Wrapper DefectController::execQueryDefect(const QcDefectQuery:
 	return jvo;
 }
 // 2 添加缺陷
-Uint64JsonVO::Wrapper DefectController::execAddDefect(const DefectDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper DefectController::execAddDefect(const DefectDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
@@ -41,7 +41,7 @@ Uint64JsonVO::Wrapper DefectController::execAddDefect(const DefectDTO::Wrapper& 
 	// 定义一个Service
 	DefectService service;
 	// 执行数据新增
-	uint64_t id = service.insert(dto);
+	uint64_t id = service.insert(dto, payload);
 	if (id > 0) {
 		jvo->success(UInt64(id));
 	}
@@ -53,7 +53,7 @@ Uint64JsonVO::Wrapper DefectController::execAddDefect(const DefectDTO::Wrapper& 
 	return jvo;
 }
 // 3 修改缺陷
-Uint64JsonVO::Wrapper DefectController::execModifyDefect(const DefectModifyDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper DefectController::execModifyDefect(const DefectModifyDTO::Wrapper& dto, const PayloadDTO& payload)
 {
     auto jvo = Uint64JsonVO::createShared();
     // 参数校验
