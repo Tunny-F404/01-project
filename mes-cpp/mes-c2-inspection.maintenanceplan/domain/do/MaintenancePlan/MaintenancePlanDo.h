@@ -38,15 +38,17 @@ class MaintenancePlanDo
 	// 频率类型
 	CC_SYNTHESIZE(string, cycletype, Cycletype);
 	// 频率次数
-	CC_SYNTHESIZE(string, cyclecount, Cyclecount);
+	CC_SYNTHESIZE(int32_t, cyclecount, Cyclecount);
 	// 计划开始时间
 	CC_SYNTHESIZE(string, startdate, Startdate);
 	// 计划结束时间
 	CC_SYNTHESIZE(string, enddate, Enddate);
-	//// 计划状态（草稿或已完成，不可修改）
-	//CC_SYNTHESIZE(string, status, Status);
 	// 备注
 	CC_SYNTHESIZE(string, remark, Remark);
+	// 更新者
+	CC_SYNTHESIZE(string, updateby, Updateby);
+	// 更新时间
+	CC_SYNTHESIZE(string, updatetime, Updatetime);
 public:
 	MaintenancePlanDo() {
 		id = 0;
@@ -54,11 +56,13 @@ public:
 		name = "";
 		type = "";
 		cycletype = "";
-		cyclecount = "";
+		cyclecount = 0;
 		startdate = "";
 		enddate = "";
 		//status = "";
 		remark = "";
+		updateby = "";
+		updatetime = "";
 	}
 };
 

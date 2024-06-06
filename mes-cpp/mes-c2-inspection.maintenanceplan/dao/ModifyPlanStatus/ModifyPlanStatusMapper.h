@@ -35,6 +35,8 @@ public:
 		ModifyPlanStatusDo data;
 		data.setId(resultSet->getUInt64(1));
 		data.setStatus(resultSet->getString(9));
+		data.setUpdateby(resultSet->getString(17));
+		data.setUpdatetime(resultSet->getString(18));
 
 		return data;
 	}
