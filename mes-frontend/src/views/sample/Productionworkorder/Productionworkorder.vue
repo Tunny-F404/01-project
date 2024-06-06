@@ -8,42 +8,53 @@
 					<el-input v-model="workOrderCode" placeholder="请输入工单编码" class="input-size" />
 				</el-col>
 				<el-col :span="4">
+					<span class="input-label">工单名称：</span>
 					<el-input v-model="workOrderName" placeholder="请输入工单名称" class="input-size" />
 				</el-col>
 				<el-col :span="4">
+					<span class="input-label">工单类型：</span>
 					<el-select v-model="workOrderType" placeholder="请选择工单类型" class="input-size">
 						<el-option label="自产" value="自产"></el-option>
 						<el-option label="外购" value="外购"></el-option>
 					</el-select>
 				</el-col>
 				<el-col :span="4">
+					<span class="input-label">产品编号：</span>
+					<el-input v-model="productCode" placeholder="请输入产品编号" class="input-size" />
+				</el-col>
+				<el-col :span="4">
+					<span class="input-label">产品名称：</span>
+					<el-input v-model="productName" placeholder="请输入产品名称" class="input-size" />
+				</el-col>
+				<el-col :span="4">
+					<span class="input-label">来源单据：</span>
+					<el-input v-model="sourceOrder" placeholder="请输入来源单据" class="input-size" />
+				</el-col>
+			</el-row>
+			<el-row :gutter="20" class="input-row">
+				<el-col :span="4">
+					<span class="input-label">客户编码：</span>
+					<el-input v-model="customerCode" placeholder="请输入客户编码" class="input-size" />
+				</el-col>
+				<el-col :span="4">
+					<span class="input-label">客户名称：</span>
+					<el-input v-model="customerName" placeholder="请输入客户名称" class="input-size" />
+				</el-col>
+				<el-col :span="4">
+					<span class="input-label">请选择单据状态：</span>
+					<el-select v-model="orderStatus" placeholder="请选择单据状态" class="input-size">
+						<el-option label="已确认" value="已确认"></el-option>
+						<el-option label="未确认" value="未确认"></el-option>
+					</el-select>
+				</el-col>
+				<el-col :span="4">
+					<span class="input-label">需求日期：</span>
 					<el-date-picker
 						v-model="demandDate"
 						placeholder="请选择需求日期"
 						type="date"
 						class="input-size"
 					></el-date-picker>
-				</el-col>
-				<el-col :span="4">
-					<el-input v-model="productCode" placeholder="请输入产品编号" class="input-size" />
-				</el-col>
-				<el-col :span="4">
-					<el-input v-model="productName" placeholder="请输入产品名称" class="input-size" />
-				</el-col>
-				<el-col :span="4">
-					<el-input v-model="sourceOrder" placeholder="请输入来源单据" class="input-size" />
-				</el-col>
-				<el-col :span="4">
-					<el-input v-model="customerCode" placeholder="请输入客户编码" class="input-size" />
-				</el-col>
-				<el-col :span="4">
-					<el-input v-model="customerName" placeholder="请输入客户名称" class="input-size" />
-				</el-col>
-				<el-col :span="4">
-					<el-select v-model="orderStatus" placeholder="请选择单据状态" class="input-size">
-						<el-option label="已确认" value="已确认"></el-option>
-						<el-option label="未确认" value="未确认"></el-option>
-					</el-select>
 				</el-col>
 				<el-col :span="4" class="button-container">
 					<el-button type="primary" @click="search">搜索</el-button>
@@ -294,7 +305,7 @@ export default {
 	margin-bottom: 20px;
 }
 .input-size {
-	width: 100%;
+	width: 50%;
 }
 .button-container {
 	display: flex;
