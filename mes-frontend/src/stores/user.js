@@ -363,6 +363,27 @@ const testMenus = [
 			},
 		],
 	},
+	//工装夹具管理
+	{
+		id: 7,
+		text: "工装夹具",
+		icon: "Management",
+		children: [
+			{
+				id: 2,
+				text: "类型设置",
+				href: "/un-607",
+				pid: 7,
+			},
+			{
+				id: 3,
+				text: "工装夹具台账",
+				href: "/un-608",
+				icon: "Management",
+				pid: 7,
+			}
+		],
+	},
 ];
 
 export const userStore = defineStore("user", {
