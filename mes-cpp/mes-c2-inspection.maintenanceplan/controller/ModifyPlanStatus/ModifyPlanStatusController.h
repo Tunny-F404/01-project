@@ -38,7 +38,7 @@ public:
 	// 3.1 定义修改接口描述;
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("modifyplanstatus.summary"), modifyplanstatus, ModifyPlanStatusDto::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ModifyPlanStatus/modify-plan-status", modifyplanstatus, BODY_DTO(ModifyPlanStatusDto::Wrapper, dto), execModifyPlanStatus(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspe-matain/modify-plan-status", modifyplanstatus, BODY_DTO(ModifyPlanStatusDto::Wrapper, dto), execModifyPlanStatus(dto));
 private:
 	// 3.3 演示修改数据
 	ModifyPlanStatusJsonVo::Wrapper execModifyPlanStatus(const ModifyPlanStatusDto::Wrapper& dto);
