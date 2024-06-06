@@ -3,6 +3,7 @@ import { onMounted, reactive, ref, toRefs } from "vue";
 import { ElMessage } from "element-plus";
  import { addMessage, delMessage, getMessage, listMessage, updateMessage } from "@/apis/system/message";
 import UserSingleSelect from "@/components/userSelect/single.vue";
+import { error } from "console";
 
 // 响应式状态
 const state = reactive({
@@ -84,7 +85,7 @@ function getList() {
 		messageList.value = response.rows;
 		total.value = response.total;
 		loading.value = false;
-	}).catch(()=>ElMessage('获取数据异常'));
+	}).catch(() => ElMessage('获取数据异常'));
 }
 
 function handleQuery() {
