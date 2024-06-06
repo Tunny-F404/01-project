@@ -32,7 +32,7 @@ public:
 	/**
 	 * 删除单个设备
 	 */
-	bool removeDeviceOne(const std::string code);
+	bool removeDeviceOne(const std::uint64_t code);
 };
 
 #endif // !_REMOVEDEVICEDAO_H_

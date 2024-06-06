@@ -50,8 +50,8 @@ public:
 class RemoveDeviceDTO : public oatpp::DTO
 {
 	DTO_INIT(RemoveDeviceDTO, DTO)
-	API_DTO_FIELD_DEFAULT(String, device_code, 
-		ZH_WORDS_GETTER("equipmentledger.remove-device.device-code"))
+	API_DTO_FIELD_DEFAULT(UInt64, device_id, 
+		ZH_WORDS_GETTER("equipmentledger.remove-device.device-id"))
 };
 
 /**

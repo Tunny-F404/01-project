@@ -20,9 +20,9 @@
 #include "stdafx.h"
 #include "RemoveDeviceDAO.h"
 
-bool RemoveDeviceDAO::removeDeviceOne(const std::string code)
+bool RemoveDeviceDAO::removeDeviceOne(const std::uint64_t code)
 {
 	// 只涉及到一个数据库实体字段，所以不需要mapper
-	std::string sql = "DELETE FROM `dv_machinery` WHERE `machinery_code`=?";
-	return sqlSession->executeUpdate(sql, "%s", code) == true;
+	std::string sql = "DELETE FROM `dv_machinery` WHERE `machinery_id`=?";
+	return sqlSession->executeUpdate(sql, "%i", code);
 }
