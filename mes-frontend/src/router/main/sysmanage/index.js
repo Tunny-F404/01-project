@@ -103,6 +103,12 @@ const routes = [
 		name: "UN34",
 		component: () => import("@/views/warehouse-management/Material.vue"),
 	},
+		// 车间设置
+	{
+			path: '/un-114',
+			name: 'WorkshopSettings',
+			component: () => import('@/views/sample/workshop/WorkshopSettings.vue'),
+	},
 ];
 
 export default routes;
