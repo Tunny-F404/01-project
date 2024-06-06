@@ -4,9 +4,9 @@ import { merge } from "lodash-es";
 import { reactify } from "@vueuse/core";
 import type { TableProps, ButtonProps } from "element-plus";
 
-import tableFrame from "@/components/table-list-use/table-text.vue";
-import popUp from "@/components/table-list-use/table-components/pop-up.vue";
-import request from "@/apis/request.js"; //加入请求
+import tableFrame from "components/std-table/src/table-text.vue";
+import popUp from "components/std-table/src/pop-up.vue";
+import request from "api/request.js"; //加入请求
 
 defineOptions({
 	/** 表格组件 */

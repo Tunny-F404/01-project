@@ -1,8 +1,8 @@
 <script setup >
 import {ref,watch} from 'vue'
 import http from "axios"
-import  tableFrame  from '@/components/table-list-use/table-text.vue' 
-import popUp from '@/components/table-list-use/table-components/pop-up.vue'
+import  tableFrame  from 'components/std-table/src/table-text.vue' 
+import popUp from 'components/std-table/src/pop-up.vue'
 import Request  from '@/apis/request.js'
 
 const tableList = ref([

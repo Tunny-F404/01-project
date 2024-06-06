@@ -248,7 +248,7 @@
 
 <script setup>
 import { ref } from "vue";
-import tableFrame from "@/components/table-list-use/table-text.vue";
+import tableFrame from "components/std-table/src/table-text.vue";
 let value = "";
 let options = [
 	{

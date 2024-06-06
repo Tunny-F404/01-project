@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import tableFrame from "@/components/table-list-use/table-text.vue";
+import tableFrame from "components/std-table/src/table-text.vue";
 import request from "@/apis/request.js";
 
 const clientCode = ref("");
