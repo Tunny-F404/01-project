@@ -1,10 +1,14 @@
 package com.zeroone.star.login.service.impl;
 
+import com.zeroone.star.login.mapper.OauthMapper;
 import com.zeroone.star.login.service.OauthService;
 import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -18,6 +22,7 @@ import java.util.Map;
  */
 @AllArgsConstructor
 public class OauthServiceImpl implements OauthService {
+
     private Throwable throwable;
 
     private void setMessage(JsonVO<?> vo) {

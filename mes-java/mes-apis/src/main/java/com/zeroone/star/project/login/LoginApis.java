@@ -7,6 +7,8 @@ import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.login.LoginVO;
 import com.zeroone.star.project.vo.login.MenuTreeVO;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -54,4 +56,6 @@ public interface LoginApis {
      */
     ////JsonVO<List<CurrentUserMenuVO>> getMenus(Integer userId) throws Exception;
     JsonVO<List<MenuTreeVO>> getMenus() throws Exception;
+
+    void getVerificationCodePhoto(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 }
