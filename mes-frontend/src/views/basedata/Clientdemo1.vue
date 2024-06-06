@@ -318,24 +318,44 @@ const onSortChannel = () => {
 };
 
 //模拟删除
-const onDelChannel = async (row) => {
-  try {
-    await ElMessageBox.confirm("你确认要删除该单位么", "温馨提示", {
-      type: "warning",
-      confirmButtonText: "确认",
-      cancelButtonText: "取消",
+const onDelChannel = (row) => {
+  ElMessageBox.confirm("你确认要删除该单位么", "温馨提示", {
+    type: "warning",
+    confirmButtonText: "确认",
+    cancelButtonText: "取消",
+  })
+    .then(() => {
+      const index = originalTableList.value.findIndex(item => item.clientCode === row.clientCode);
+      if (index !== -1) {
+        originalTableList.value.splice(index, 1);
+        total.value = originalTableList.value.length; // 更新总条数
+        ElMessage.success("删除成功");
+        getPageList(); // 重新渲染分页数据
+      }
+    })
+    .catch(() => {
+      ElMessage.info("已取消删除");
     });
-    // 从 originalTableList 中删除该项
-    const index = originalTableList.value.findIndex(item => item.clientCode === row.clientCode);
-    if (index !== -1) {
-      originalTableList.value.splice(index, 1);
-      total.value = originalTableList.value.length; // 更新总条数
-      getPageList(); // 重新渲染分页数据
-      ElMessage.success("删除成功");
-    }
-  } catch (error) {
-    ElMessage.info("已取消删除");
-  }
+		//后端
+		// .then(() => {
+    //   return request.delete(`/api/clients/${row.clientCode}`);
+    // })
+    // .then(response => {
+    //   if (response.status === 200) {
+    //     const index = originalTableList.value.findIndex(item => item.clientCode === row.clientCode);
+    //     if (index !== -1) {
+    //       originalTableList.value.splice(index, 1);
+    //       total.value = originalTableList.value.length; // 更新总条数
+    //       ElMessage.success("删除成功");
+    //       getPageList(); // 重新渲染分页数据
+    //     }
+    //   } else {
+    //     ElMessage.error("删除失败");
+    //   }
+    // })
+    // .catch(() => {
+    //   ElMessage.info("已取消删除");
+    // });
 };
 
 // 模拟搜索筛选
@@ -758,9 +778,11 @@ function refreshData() {
     height: 35px; 
     cursor: pointer;
 }
-.el-table th,
-.el-table td {
-  text-align: center;
+.el-table {
+  th,
+  td {
+    text-align: center;
+  }
 }
 
 .action-buttons {
@@ -773,21 +795,18 @@ function refreshData() {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-	// position:absolute;
-  // top: 120px;
-  // right: 30px;
-	margin-left: auto;
-}
+  margin-left: auto;
 
-.search-icons .el-button {
-  margin-left: 10px;
-  border: none; 
-  box-shadow: none; 
-}
+  .el-button {
+    margin-left: 10px;
+    border: none;
+    box-shadow: none;
+  }
 
-.search-icons.fixed {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  &.fixed {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 }
 </style>
