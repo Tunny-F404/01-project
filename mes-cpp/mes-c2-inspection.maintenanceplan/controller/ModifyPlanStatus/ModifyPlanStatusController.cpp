@@ -12,7 +12,7 @@ ModifyPlanStatusJsonVo::Wrapper ModifyPlanStatusController::execModifyPlanStatus
 		jvo->init(dto, RS_PARAMS_INVALID);
 		return jvo;
 	}
-	if (!dto->status)
+	if (!dto->status || !dto->updateby || !dto->updatetime)
 	{
 		jvo->init(dto, RS_PARAMS_INVALID);
 		return jvo;

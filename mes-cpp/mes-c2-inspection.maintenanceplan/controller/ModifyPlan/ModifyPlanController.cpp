@@ -12,7 +12,7 @@ MaintenancePlanJsonVo::Wrapper ModifyPlanController::execModifyPlan(const Mainte
 		jvo->init(dto, RS_PARAMS_INVALID);
 		return jvo;
 	}
-	if (!dto->code || !dto->name || !dto->type || !dto->cyclecount || !dto->cycletype )
+	if (!dto->code || !dto->name || !dto->type || !dto->cyclecount || !dto->cycletype || !dto->updateby || !dto->updatetime)
 	{
 		jvo->init(dto, RS_PARAMS_INVALID);
 		return jvo;
