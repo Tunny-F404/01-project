@@ -74,7 +74,7 @@ int ProcessDAO::update(const ProRouteDO& iObj)
 int ProcessDAO::deleteById(list<uint64_t> id)
 {
 	stringstream sql;
-	sql << "DELETE FROM `pro_route_process` WHERE `process_id` in (";
+	sql << "DELETE FROM `pro_route_process` WHERE `record_id` in (";
 	auto p = id.begin();
 	//第一个单独处理
 	sql << to_string(*p);

@@ -101,7 +101,9 @@ public:
 	ProProcessDO mapper(ResultSet* resultSet) const override
 	{
 		ProProcessDO data;
-		data.setProcessName(resultSet->getString(1));
+		data.setProcessId(resultSet->getUInt64(1));
+		data.setProcessCode(resultSet->getString(2));
+		data.setProcessName(resultSet->getString(3));
 		return data;
 	}
 };

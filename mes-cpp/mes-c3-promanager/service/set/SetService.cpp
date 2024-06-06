@@ -154,26 +154,25 @@ ProDetailDTO::Wrapper SetService::getProcessDetail(const ProDetailQuery::Wrapper
 	return dto;
 }
 
-ProNameListJsonVO::Wrapper SetService::getProcessNameList()
+ListDTO::Wrapper SetService::getProcessNameList()
 {
-	// 构建返回对象
-	auto vo = ProNameListJsonVO::createShared();
-	auto data = oatpp::List<oatpp::String>::createShared();
-
+	auto data = ListDTO::createShared();
 	// 查询工序详情
 	SetDAO dao;
-	auto result = dao.selectProNameList();
+	list<ProProcessDO> result = dao.selectProNameList();
 
-	// 将DO转换成DTO
+
+	//将DO转换成DTO
 	for (ProProcessDO sub : result)
 	{
-		oatpp::String str(sub.getProcessName());
-		if (data) {
-			data->push_back(str);
-		}
+		auto dto = ProNameListDTO::createShared();
+		dto->processId = sub.getProcessId();
+		dto->proCode = sub.getProcessCode();
+		dto->proName = sub.getProcessName();
+		//ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, routeid, RouteId, routecode, RouteCode, routedesc, RouteDesc, enableflag, EnableFlag, remark, Remark)
+		data->addData(dto);
 	}
-	vo->success(data);
-	return vo;
+	return data;
 }
 
 list<SetProListDTO::Wrapper> SetService::listAllForExport(const SetProListQuery::Wrapper& query)

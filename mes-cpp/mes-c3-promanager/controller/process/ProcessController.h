@@ -156,8 +156,8 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(String, "process_name", ZH_WORDS_GETTER("pro.fields.proName"), "01 star", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "process_code", ZH_WORDS_GETTER("pro.fields.proCode"), "0", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "key_flag", ZH_WORDS_GETTER("pro.fields.key_flag"), "No", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "process_code", ZH_WORDS_GETTER("pro.fields.proCode"), "1", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "key_flag", ZH_WORDS_GETTER("pro.fields.key_flag"), "Y", false);
 	}
 	ENDPOINT(API_M_GET, "/pro/query-pro-table", QueryProTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型

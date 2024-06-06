@@ -32,7 +32,7 @@ public:
 	// 查询工序详情
 	ProDetailDTO::Wrapper getProcessDetail(const ProDetailQuery::Wrapper& query);
 	// 查询工序名称列表
-	ProNameListJsonVO::Wrapper getProcessNameList();
+	ListDTO::Wrapper getProcessNameList();
 	// 导出工序步骤
 	list<SetProListDTO::Wrapper> listAllForExport(const SetProListQuery::Wrapper& query);
 

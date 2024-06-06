@@ -29,9 +29,9 @@
  * 定义一个工序名称列表显示JsonVO对象，用于响应给客户端
  */
 
-class ProNameListJsonVO : public JsonVO< oatpp::List<oatpp::String> >
+class ProNameListJsonVO : public JsonVO<ListDTO::Wrapper>
 {
-	DTO_INIT(ProNameListJsonVO, JsonVO< oatpp::List<oatpp::String> >);
+	DTO_INIT(ProNameListJsonVO, JsonVO< ListDTO::Wrapper>);
 };
 
 

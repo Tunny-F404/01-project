@@ -187,12 +187,14 @@ ProListPageJsonVO::Wrapper SetController::execQueryProList(const ProListQuery::W
 // 7 获取工序名称列表
 ProNameListJsonVO::Wrapper SetController::execQueryProNameList()
 {
+	auto jvo = ProNameListJsonVO::createShared();
 	// 定义一个Service
 	SetService service;
 	// 查询数据
 	auto result = service.getProcessNameList();
 	// 响应结果
-	return result;
+	jvo->success(result);
+	return jvo;
 }
 // 8 获取工序详情
 ProDetailJsonVO::Wrapper SetController::execQueryProDetail(const ProDetailQuery::Wrapper& query)

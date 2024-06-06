@@ -21,6 +21,8 @@
 #define _PRONAMELISTDTO_H_
 
 #include "../../GlobalInclude.h"
+#include "oatpp/core/macro/codegen.hpp"
+#include "oatpp/core/Types.hpp"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 /**
@@ -33,7 +35,36 @@ class ProNameListDTO : public oatpp::DTO
 	API_DTO_FIELD(UInt64, processId, ZH_WORDS_GETTER("process.fields.processId"), true, 1);
 	// 工序名称
 	API_DTO_FIELD(String, proName, ZH_WORDS_GETTER("process.fields.processName"), true, "01star");
+	// 工序编号
+	API_DTO_FIELD(String, proCode, ZH_WORDS_GETTER("process.fields.processCode"), true, "01star");
 };
+/**
+ * 分页数据实体
+ */
+//template <class T>
+class ListDTO : public oatpp::DTO
+{
+	// 初始化
+	DTO_INIT(ListDTO, DTO);
+
+	/**
+	 * 当前页数据列表
+	 */
+	DTO_FIELD(List<ProNameListDTO::Wrapper>, rows) = {};
+	DTO_FIELD_INFO(rows) {}
+
+public:
+
+	// 添加一条数据
+	void addData(ProNameListDTO::Wrapper one) {
+		this->rows->push_back(one);
+	}
+};
+
+//class NameListDTO : public ListDTO<ProNameListDTO::Wrapper>
+//{
+//	DTO_INIT(NameListDTO, ListDTO<ProNameListDTO::Wrapper>);
+//};
 
 #include OATPP_CODEGEN_END(DTO)
 #endif // _PRONAMELISTDTO_H_

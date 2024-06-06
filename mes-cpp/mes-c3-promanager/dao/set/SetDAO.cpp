@@ -99,7 +99,7 @@ std::list<ProProcessDO> SetDAO::selectWithPageForProcess(const ProListQuery::Wra
 std::list<ProProcessDO> SetDAO::selectProNameList()
 {
 	stringstream sql;
-	sql << "SELECT `process_name` FROM pro_process";
+	sql << "SELECT `process_id`,`process_code`,`process_name` FROM pro_process";
 	ProNameListMapper mapper;
 	string sqlStr = sql.str();
 	return sqlSession->executeQuery<ProProcessDO, ProNameListMapper>(sqlStr, mapper);
