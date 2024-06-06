@@ -56,7 +56,7 @@ public: // 定义接口
 
 	}
 
-	ENDPOINT(API_M_GET, "/qc/material-products/query-by-item_code", queryMaterialProducts, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/detection-template/material-products/query-by-item_code", queryMaterialProducts, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, MaterialProductsQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -73,7 +73,7 @@ public: // 定义接口
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 定义新增接口处理
-	ENDPOINT(API_M_POST, "/qc/material-products/add-template-materialproducts", addMaterialProducts, BODY_DTO(MaterialProductsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/qc/detection-template/material-products/add", addMaterialProducts, BODY_DTO(MaterialProductsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddMaterialProducts(dto));
 	}
@@ -86,12 +86,12 @@ public: // 定义接口
 		/*API_DEF_ADD_PATH_PARAMS(UInt64, "record_id", ZH_WORDS_GETTER("materialproducts.field.record_id"), 1, true);*/
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/qc/material-products/delete-template-materialproducts/{record_id}", removeMaterialProducts, BODY_DTO(oatpp::List<oatpp::UInt64>, record_id), execRemoveMaterialProduct(record_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/qc/detection-template/material-products/delete/{record_id}", removeMaterialProducts, BODY_DTO(oatpp::List<oatpp::UInt64>, record_id), execRemoveMaterialProduct(record_id));
 
 	// 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("materialproducts.put.summary"), modifyMaterialProducts, Uint64JsonVO::Wrapper);
 	// 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/modify-template-materialproducts", modifyMaterialProducts, BODY_DTO(MaterialProductsDTO::Wrapper, dto), execModifyMaterialProducts(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/detection-template/modify", modifyMaterialProducts, BODY_DTO(MaterialProductsDTO::Wrapper, dto), execModifyMaterialProducts(dto));
 
 	
 

@@ -1,4 +1,6 @@
 warehousemanagement:
+ export: 
+  summary: 导出库存
  get:
   summary: 获取库存列表（条件+分页）
  field:

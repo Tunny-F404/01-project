@@ -39,7 +39,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "expire_date", ZH_WORDS_GETTER("warehousemanagement.field.expire_date"), "", false);
 	}
 	// 定义查询接口处理
-	ENDPOINT(API_M_GET, "/warehousemanagement", queryWarehouseManagement, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/wm/inventory-on-hand/query-by-page", queryWarehouseManagement, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(warehousemanagementQuery, WarehouseManagementQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -50,7 +50,7 @@ public:
 	// 3.1 定义导出接口描述
 	API_DEF_ENDPOINT_INFO(ZH_WORDS_GETTER("warehousemanagement.export.summary"), exportWarehouseManagement, StringJsonVO::Wrapper);
 	// 3.2 定义导出接口处理
-	API_HANDLER_ENDPOINT(API_M_POST, "/warehouse-management/export", exportWarehouseManagement, BODY_DTO(WarehouseManagementIdQuery::Wrapper, query), execExportWarehouseManagement(query));
+	API_HANDLER_ENDPOINT(API_M_POST, "/wm/inventory-on-hand/export", exportWarehouseManagement, BODY_DTO(WarehouseManagementIdQuery::Wrapper, query), execExportWarehouseManagement(query));
 
 
 private:

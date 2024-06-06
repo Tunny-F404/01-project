@@ -22,7 +22,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 
 	}
-	ENDPOINT(API_M_POST, "/proinspect", addrecord, BODY_DTO(ProinspectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/qc/process-inspection/proinspect/add", addrecord, BODY_DTO(ProinspectDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddrecord(dto));
 	}
@@ -30,7 +30,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("qualitycontrol.defect.setre"), execModifyrecord, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/proinspect", execModifyrecord, BODY_DTO(ProinspectDTO::Wrapper, dto), execModifyrecord(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/process-inspection/proinspect/modify", execModifyrecord, BODY_DTO(ProinspectDTO::Wrapper, dto), execModifyrecord(dto));
 
 
 	// 3.1 定义删除接口描述
@@ -41,7 +41,7 @@ public:
 		// 定义其他路径参数说明
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/proinspect/{record_id}", removerecord, BODY_DTO(ProinspectDTO::Wrapper, dto), execRemoverecord(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/qc/process-inspection/proinspect/remove/{record_id}", removerecord, BODY_DTO(ProinspectDTO::Wrapper, dto), execRemoverecord(dto));
 
 	//  定义获取过程检验单行列表接口描述
 	ENDPOINT_INFO(queryProinspectList) {
@@ -57,7 +57,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "ipqc_id", ZH_WORDS_GETTER("qualitycontrol.defect.qc_id"), , true);
 	}
 	//  定义获取过程检验单行列表接口处理
-	ENDPOINT(API_M_GET, "/inspectionitems1", queryProinspectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/process-inspection/proinspect/query-by-id", queryProinspectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ProinspectQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -78,7 +78,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("qualitycontrol.defect.line_id"), , true);
 	}
 	//  定义获取过程检验单行缺陷列表接口处理
-	ENDPOINT(API_M_GET, "/inspectionitems2", queryProcessInspectionDefectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/process-inspection/proinspect/query-by-id", queryProcessInspectionDefectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ProinspectQuery, queryParams);
 		// 呼叫执行函数响应结果

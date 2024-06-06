@@ -23,7 +23,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("DetectionTemplate.put.summary"), modifyDetectionTemplate, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/detectiontemplate/modify", modifyDetectionTemplate, BODY_DTO(DetectionTemplateDTO::Wrapper, dto), execModifyDetectionTemplate(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/detection-template/modify", modifyDetectionTemplate, BODY_DTO(DetectionTemplateDTO::Wrapper, dto), execModifyDetectionTemplate(dto));
 
 	//定义删除检测模板接口描述
 	ENDPOINT_INFO(removeDetectionTemplate) {
@@ -33,7 +33,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "template_id", ZH_WORDS_GETTER("detection_template.fields.id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/qc/detectiontemplate/delete/{template_id}", removeDetectionTemplate, PATH(UInt64, template_id), execRemoveDetectionTemplate(template_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/qc/detection-template/delete/{template_id}", removeDetectionTemplate, PATH(UInt64, template_id), execRemoveDetectionTemplate(template_id));
 
 	ENDPOINT_INFO(queryDetectionTemplateList) {
 		// 定义接口标题
@@ -52,7 +52,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "remark", ZH_WORDS_GETTER("DetectionTemplate.field.remark"), "", false);
 	}
 
-	ENDPOINT(API_M_GET, "/qc/detectiontemplate/getdetectiontemplatelist/page", queryDetectionTemplateList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/detection-template/query-by-page", queryDetectionTemplateList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(templateListQuery, DetectionTemplateQuery, queryParams);
 		// 呼叫执行函数
@@ -69,7 +69,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 定义新增接口处理
-	ENDPOINT(API_M_POST, "/qc/detectiontemplate/add", addDetectionTemplate, BODY_DTO(DetectionTemplateDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/qc/detection-template/add", addDetectionTemplate, BODY_DTO(DetectionTemplateDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddDetectionTemplate(dto));
 	}
@@ -86,7 +86,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "template_code", ZH_WORDS_GETTER("DetectionTemplate.field.template_code"), "", true);
 	}
 	//  定义获取检验模板详情接口处理
-	ENDPOINT(API_M_GET, "/qc/detectiontemplate/query-by-details", queryDetecTempDetails, QUERY(String, template_code), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/detection-template/query-by-details", queryDetecTempDetails, QUERY(String, template_code), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryDetecTempDetails(template_code, authObject->getPayload()));
 	}

@@ -28,7 +28,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "template_id", ZH_WORDS_GETTER("templatedetectitem.field.template_id"), 1, true);
 	}
 	// 定义查询接口处理
-	ENDPOINT(API_M_GET, "/qc/templatedetect-item/query", queryTemplateDetectItem, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/templatedetect-item/query-by-page", queryTemplateDetectItem, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, TemplateDetectItemQuery, queryParams);
 		// 呼叫执行函数响应结果
