@@ -1,5 +1,5 @@
 const routes = [
-	//基础数据主菜单
+	// 基础数据主菜单
 	{
 		path: "/un-1",
 		name: "UN1",
@@ -98,9 +98,9 @@ const routes = [
 	{
 		path: "/orgstructure",
 		name: "Orgstructure",
-		
+
 		children: [
-			//所有组织架构的相关页面 在这里添加路由映射
+			// 所有组织架构的相关页面 在这里添加路由映射
 			{
 				path: "/dept",
 				name: "dept",
@@ -121,9 +121,8 @@ const routes = [
 				name: "user",
 				component: () => import("@/views/status/404.vue"),
 			},
-			
-		]
-	}
+		],
+	},
 ];
 
 export default routes;
