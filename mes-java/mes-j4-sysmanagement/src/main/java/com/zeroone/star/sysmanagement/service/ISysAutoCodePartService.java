@@ -27,4 +27,6 @@ public interface ISysAutoCodePartService extends IService<SysAutoCodePart> {
     SysAutoCodePartDTO queryCodeRulePart(String partId);
 
     PageDTO<SysAutoCodePartDTO> queryCodeRuleParts(sysAutoCodePartQuery sysAutoCodePartQuery);
+
+    List<SysAutoCodePart> listPart(SysAutoCodePart sysAutoCodePart);
 }

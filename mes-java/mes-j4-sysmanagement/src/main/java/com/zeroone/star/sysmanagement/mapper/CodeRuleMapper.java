@@ -4,6 +4,8 @@ import com.zeroone.star.sysmanagement.entity.CodeRule;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 编码生成规则表 Mapper 接口
@@ -15,4 +17,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CodeRuleMapper extends BaseMapper<CodeRule> {
 
+    public List<CodeRule> selectSysAutoCodeResultList(CodeRule param);
 }

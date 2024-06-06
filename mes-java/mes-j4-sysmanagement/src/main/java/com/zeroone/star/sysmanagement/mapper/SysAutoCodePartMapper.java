@@ -4,6 +4,8 @@ import com.zeroone.star.sysmanagement.entity.SysAutoCodePart;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 编码生成规则组成表 Mapper 接口
@@ -15,4 +17,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysAutoCodePartMapper extends BaseMapper<SysAutoCodePart> {
 
+    List<SysAutoCodePart> selectSysAutoCodePartList(SysAutoCodePart sysAutoCodePart);
 }

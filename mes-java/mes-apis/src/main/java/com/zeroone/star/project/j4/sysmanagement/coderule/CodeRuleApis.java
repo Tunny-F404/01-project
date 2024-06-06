@@ -23,4 +23,6 @@ public interface CodeRuleApis {
     public JsonVO addCodeRule(CodeRuleDTO sysAutoCodeRuleDTO);
 
     public JsonVO modifyCodeRule(CodeRuleDTO sysAutoCodeRuleDTO);
+
+    public String getAutoCode(String ruleCode,String inputCharacter);
 }
