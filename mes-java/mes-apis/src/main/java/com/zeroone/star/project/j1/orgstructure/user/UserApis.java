@@ -5,7 +5,10 @@ import com.zeroone.star.project.j1.orgstructure.dto.user.*;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserQuery;
 import com.zeroone.star.project.j1.orgstructure.query.user.UserRoleQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -88,5 +91,26 @@ public interface UserApis {
      * @return 返回信息
      */
     JsonVO<String> removeUser(List<Long> userIds);
+
+    /**
+     * 用户导出
+     * @param
+     * @return 返回excel文件
+     */
+    JsonVO<String> userExport(HttpServletResponse response) throws IOException;
+
+    /**
+     * 用户导入
+     * @param
+     * @return
+     */
+    JsonVO<String> userImport(MultipartFile file) throws IOException;
+
+    /**
+     * 用户导出
+     * @param
+     * @return 返回excel文件
+     */
+    JsonVO<String> downloadUserTemplate(HttpServletResponse response) throws IOException;
 
 }

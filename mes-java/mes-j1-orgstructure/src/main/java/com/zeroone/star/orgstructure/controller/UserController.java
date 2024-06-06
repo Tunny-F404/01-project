@@ -14,9 +14,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -110,8 +113,6 @@ public class UserController implements UserApis {
     }
 
 
-
-
     @Resource
     IService service;
 
@@ -172,5 +173,33 @@ public class UserController implements UserApis {
     @Override
     public JsonVO<Boolean> deleteRole(@Validated UserRoleQuery userQuery) {
         return JsonVO.success(sysUserRoleService.deleteRole(userQuery));
+    }
+
+
+    @GetMapping("/user-export")
+    @ApiOperation(value = "用户导出")
+    @Override
+    public JsonVO<String> userExport(HttpServletResponse response) throws IOException {
+
+        //写入Excel文件
+        userService.userExport(response);
+        return JsonVO.success("用户导出成功");
+    }
+
+
+    @PostMapping("/user-import")
+    @ApiOperation(value = "用户导入")
+    @Override
+    public JsonVO<String> userImport(MultipartFile file) throws IOException {
+        userService.userImport(file);
+        return JsonVO.success("用户导入成功");
+    }
+
+    @GetMapping("/user-template")
+    @ApiOperation(value = "下载用户导入模版")
+    @Override
+    public JsonVO<String> downloadUserTemplate(HttpServletResponse response) throws IOException {
+        userService.downloadUserTemplate(response);
+        return JsonVO.success("用户导出模版下载成功");
     }
 }

@@ -1,5 +1,8 @@
 package com.zeroone.star.orgstructure.service.impl;
 
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.context.AnalysisContext;
+import com.alibaba.excel.event.AnalysisEventListener;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zeroone.star.orgstructure.entity.User;
@@ -13,11 +16,16 @@ import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.project.j1.orgstructure.dto.user.AddUserDTO;
 import com.zeroone.star.project.j1.orgstructure.dto.user.UpdateUserDTO;
 
+import com.zeroone.star.project.j1.orgstructure.dto.user.UserTemplateDTO;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -184,5 +192,65 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         queryWrapper.eq(User::getUserId, userId);
         User user = userMapper.selectOne(queryWrapper);
         return user != null;
+    }
+
+
+    @Override
+    public void userExport(HttpServletResponse response) throws IOException {
+
+        //将查询到的所有用户数据users存入userTemplateDTOList
+        List<User> users = this.list();
+        List<UserTemplateDTO> userTemplateDTOList = new ArrayList<>();
+        for (User user : users) {
+            UserTemplateDTO dto = new UserTemplateDTO();
+            BeanUtils.copyProperties(user, dto);
+            userTemplateDTOList.add(dto);
+        }
+
+        // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        String fileName = URLEncoder.encode("用户导出", "UTF-8").replaceAll("\\+", "%20");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(), UserTemplateDTO.class).sheet("用户").doWrite(userTemplateDTOList);
+    }
+
+    @Override
+    public void userImport(MultipartFile file) throws IOException {
+
+        // 读取excel
+        EasyExcel.read(file.getInputStream(), UserTemplateDTO.class, new AnalysisEventListener<UserTemplateDTO>() {
+            // 每解析一行数据,该方法会被调用一次
+            @Override
+            public void invoke(UserTemplateDTO userTemplateDTO, AnalysisContext analysisContext) {
+                System.out.println("解析数据为:" + userTemplateDTO.toString());
+
+                //将解析的数据保存到数据库
+                //将解析到的usersTemplateDTO存入AddUserDTO
+                AddUserDTO addUserDTO = new AddUserDTO();
+                BeanUtils.copyProperties(userTemplateDTO, addUserDTO,"userId");
+                saveUser(addUserDTO);
+            }
+            // 全部解析完成被调用
+            @Override
+            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+                System.out.println("解析完成...");
+            }
+        }).sheet().doRead();
+
+    }
+
+    @Override
+    public void downloadUserTemplate(HttpServletResponse response) throws IOException {
+        //写一个空数据
+        List<UserTemplateDTO> users = new ArrayList<>();
+        // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        String fileName = URLEncoder.encode("用户模版", "UTF-8").replaceAll("\\+", "%20");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(), UserTemplateDTO.class).sheet("模板").doWrite(users);
     }
 }
