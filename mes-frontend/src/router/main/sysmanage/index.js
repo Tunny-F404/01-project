@@ -1,6 +1,11 @@
 const routes = [
 	// 基础数据主菜单
 	{
+		path: "/un-0",
+		name: "UN0",
+		component: () => import("@/views/home-system-page/home-system-page.vue"),
+	},
+	{
 		path: "/un-1",
 		name: "UN1",
 		component: () => import("@/views/status/404.vue"),
@@ -23,7 +28,7 @@ const routes = [
 	{
 		path: "/un-5",
 		name: "UN5",
-		component: () => import("@/views/basedata/supplier.vue"),
+		component: () => import("@/views/sample/Productionworkorder/Productionworkorder.vue"),
 	},
 	{
 		path: "/un-6",
@@ -33,7 +38,17 @@ const routes = [
 	{
 		path: "/un-7",
 		name: "UN7",
-		component: () => import("@/views/status/404.vue"),
+		component: () => import("@/views/sample/station/Station.vue"),
+	},
+	{
+		path: "/un-8",
+		name: "UN8",
+		component: () => import("@/views/sample/productionmanagement/Processsetting.vue"),
+	},
+	{
+		path: "/un-9",
+		name: "UN9",
+		component: () => import("@/views/sample/technologicalprocess/technologicalprocess.vue"),
 	},
 	// 仓库管理页面
 	{
@@ -56,7 +71,7 @@ const routes = [
 	{
 		path: "/un-51",
 		name: "UN51",
-		component: () => import("@/views/status/404.vue"),
+		component: () => import("@/views/quality-control/defect.vue"),
 	},
 	{
 		path: "/un-52",
@@ -122,6 +137,32 @@ const routes = [
 				component: () => import("@/views/status/404.vue"),
 			},
 		],
+	},
+
+	// 工艺流程页面
+	{
+		path: "/un-514",
+		name: "UN514",
+		component: () => import("@/views/sample/process-flow/ProcessFlow.vue"),
+	},
+
+	// 车间设置
+	{
+		path: "/un-114",
+		name: "WorkshopSettings",
+		component: () => import("@/views/sample/workshop/WorkshopSettings.vue"),
+	},
+	// 采购系统管理的消息通知页面
+	{
+		path: "/un-41",
+		name: "UN41",
+		component: () => import("@/views/system-management/announcement-management.vue"),
+	},
+	// 采购系统管理的消息通知页面
+	{
+		path: "/un-51",
+		name: "UN51",
+		component: () => import("@/views/organizational-structure/organizational-structure.vue"),
 	},
 ];
 

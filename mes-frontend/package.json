@@ -24,6 +24,7 @@
 		"@vueuse/core": "^10.9.0",
 		"@wangeditor/editor": "^5.1.23",
 		"@wangeditor/editor-for-vue": "^5.1.12",
+		"@zanmato/vue3-treeselect": "^0.2.0",
 		"axios": "^0.27.2",
 		"crypto-js": "^4.1.1",
 		"element-plus": "^2.7.3",

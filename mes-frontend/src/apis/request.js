@@ -35,7 +35,7 @@ export default class Request {
 	 * @param { unknown } data 上传数据
 	 * @param { import("types/request").UpType } upType 上传数据方式，如http.upType.form
 	 * @param options [可选]其他配置选项
-	 * @returns { Promise<unknown> } 请求发送后的Promise对象
+	 * @returns 请求发送后的Promise对象
 	 */
 	static request(method, url, data, upType, options = null) {
 		// 组装参数

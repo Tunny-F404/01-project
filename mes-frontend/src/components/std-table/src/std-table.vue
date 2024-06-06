@@ -1,9 +1,23 @@
-<script setup>
+<script setup lang="ts" generic="TableRow extends Record<string, unknown>">
 import { ref } from "vue";
+import { merge } from "lodash-es";
+import { reactify } from "@vueuse/core";
 
-import tableFrame from "@/components/table-list-use/table-text.vue";
-import popUp from "@/components/table-list-use/table-components/pop-up.vue";
-import request from "@/apis/request.js"; //加入请求
+import tableFrame from "components/std-table/src/table-text.vue";
+import popUp from "components/std-table/src/pop-up.vue";
+import request from "api/request.js"; //加入请求
+
+import type { Operations, TableTrueProps } from "./std-table.ts";
+
+defineOptions({
+	/** 表格组件 */
+	name: "TableTrue",
+});
+
+const props = withDefaults(defineProps<TableTrueProps<TableRow>>(), {
+	data: () => [] as TableRow[],
+	// data: [] as TableRow[],
+});
 
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整

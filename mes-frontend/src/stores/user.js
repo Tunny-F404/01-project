@@ -186,6 +186,92 @@ const testMenus = [
 			},
 		],
 	},
+	// 系统管理
+	{
+		id: 5,
+		text: "系统管理",
+		icon: "Management",
+		children: [
+			{
+				id: 2,
+				text: "消息通知",
+				href: "/un-41",
+				icon: "Management",
+				pid: 5,
+			},
+			{
+				id: 3,
+				text: "系统管理",
+				href: "/un-42",
+				icon: "Management",
+				pid: 5,
+			},
+			{
+				id: 4,
+				text: "系统管理",
+				href: "/un-43",
+				icon: "Management",
+				pid: 5,
+			},
+			{
+				id: 5,
+				text: "系统管理4",
+				href: "/un-44",
+				icon: "Management",
+				pid: 5,
+			},
+			{
+				id: 6,
+				text: "系统管理5",
+				href: "/un-45",
+				icon: "Management",
+				pid: 5,
+			},
+		],
+	},
+	// 架构管理
+	{
+		id: 6,
+		text: "架构管理",
+		icon: "Management",
+		children: [
+			{
+				id: 2,
+				text: "组织管理",
+				href: "/un-51",
+				icon: "Management",
+				pid: 6,
+			},
+			{
+				id: 3,
+				text: "架构管理",
+				href: "/un-52",
+				icon: "Management",
+				pid: 6,
+			},
+			{
+				id: 4,
+				text: "架构管理",
+				href: "/un-53",
+				icon: "Management",
+				pid: 6,
+			},
+			{
+				id: 5,
+				text: "架构管理4",
+				href: "/un-54",
+				icon: "Management",
+				pid: 6,
+			},
+			{
+				id: 6,
+				text: "架构管理",
+				href: "/un-55",
+				icon: "Management",
+				pid: 6,
+			},
+		],
+	},
 	{
 		id: 5,
 		text: "质量管理",
