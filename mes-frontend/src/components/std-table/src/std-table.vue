@@ -6,7 +6,6 @@ import { reactify } from "@vueuse/core";
 import tableFrame from "components/std-table/src/table-text.vue";
 import popUp from "components/std-table/src/pop-up.vue";
 import request from "api/request.js"; //加入请求
-
 import type { Operations, TableTrueProps } from "./std-table.ts";
 
 defineOptions({
