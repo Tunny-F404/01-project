@@ -22,11 +22,11 @@ public:
 	// 通过id查询工序
 	list<ProProcessContentDO> selectById(const uint64_t& id);
 	// 添加工序
-	uint64_t insertSet(const ProProcessDO& iObj);
+	uint64_t insertSet(const ProProcessDO& iObj, const string username);
 	// 添加工序步骤数据
-	uint64_t insertstepSet(const ProProcessContentDO& iObj);
+	uint64_t insertstepSet(const ProProcessContentDO& iObj, const string username);
 	// 修改工序
-	int updateSet(const ProProcessDO& uObj);
+	int updateSet(const ProProcessDO& uObj, const string username);
 	// 统计数据条数
 	uint64_t countForProcess(const ProListQuery::Wrapper& query);
 	// 分页查询工序

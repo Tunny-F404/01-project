@@ -55,12 +55,12 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	ENDPOINT(API_M_POST, "/set/add-set", addSet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-		API_HANDLER_RESP_VO(execAddSet(dto));
+		API_HANDLER_RESP_VO(execAddSet(dto, authObject->getPayload()));
 	}
 
 	// 3 修改工序接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("set.modify.summary"), modifySet, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/set/modify-set", modifySet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), execModifySet(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/set/modify-set", modifySet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), execModifySet(dto, authObject->getPayload()));
 
 	// 4 获取工序步骤列表接口
 	ENDPOINT_INFO(querySet) {
@@ -82,7 +82,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	ENDPOINT(API_M_POST, "/set/addstep-set", addstepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-		API_HANDLER_RESP_VO(execAddStepSet(dto));
+		API_HANDLER_RESP_VO(execAddStepSet(dto, authObject->getPayload()));
 	}
 
 	// 6 获取工序名称列表
@@ -147,7 +147,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	ENDPOINT(API_M_PUT, "/set/modifystep-set", modifystepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-		API_HANDLER_RESP_VO(execModifyStepSet(dto));
+		API_HANDLER_RESP_VO(execModifyStepSet(dto, authObject->getPayload()));
 	}
 	// 10 删除工序步骤
 	ENDPOINT_INFO(deletestepSet) {
@@ -183,13 +183,13 @@ private:
 	// 1 导出文件
 	StringJsonVO::Wrapper execProcessExport(const ProcessExportQuery::Wrapper& query);
 	// 2 添加工序
-	Uint64JsonVO::Wrapper execAddSet(const SetProAddTableDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddSet(const SetProAddTableDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 3 修改工序
-	Uint64JsonVO::Wrapper execModifySet(const SetProAddTableDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifySet(const SetProAddTableDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 4 获取工序步骤列表
 	SetProListPageJsonVO::Wrapper execQuerySet(const SetProListQuery::Wrapper& query, const PayloadDTO& payload);
 	// 5 添加工序步骤
-	Uint64JsonVO::Wrapper execAddStepSet(const SetProListDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddStepSet(const SetProListDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 6 获取工序列表
 	ProListPageJsonVO::Wrapper execQueryProList(const ProListQuery::Wrapper& query);
 	// 7 获取工序名称列表
@@ -197,7 +197,7 @@ private:
 	// 8 获取工序详情
 	ProDetailJsonVO::Wrapper execQueryProDetail(const ProDetailQuery::Wrapper& query);
 	// 9 修改工序步骤
-	Uint64JsonVO::Wrapper execModifyStepSet(const SetProListDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyStepSet(const SetProListDTO::Wrapper& dto, const PayloadDTO& payload);
 	//10 删除工序步骤
 	Uint64JsonVO::Wrapper execDeleteStepSet(const UInt64& id);
 	//11 导出工序步骤

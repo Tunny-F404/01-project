@@ -22,10 +22,10 @@ public:
 	// 分页查询所有数据
 	SetProListPageDTO::Wrapper listAll(const SetProListQuery::Wrapper& query);
 	// 保存数据
-	uint64_t saveData(const SetProAddTableDTO::Wrapper& dto);
-	uint64_t saveStepData(const SetProListDTO::Wrapper& dto);
+	uint64_t saveData(const SetProAddTableDTO::Wrapper& dto, const string username);
+	uint64_t saveStepData(const SetProListDTO::Wrapper& dto, const string username);
 	// 修改数据
-	bool updateData(const SetProAddTableDTO::Wrapper& dto);
+	bool updateData(const SetProAddTableDTO::Wrapper& dto, const string username);
 
 	// 分页查询所有工序
 	ProListPageDTO::Wrapper listAllForProcess(const ProListQuery::Wrapper& query);
@@ -33,7 +33,7 @@ public:
 	ProDetailDTO::Wrapper getProcessDetail(const ProDetailQuery::Wrapper& query);
 	// 查询工序名称列表
 	ProNameListJsonVO::Wrapper getProcessNameList();
-	//导出工序步骤
+	// 导出工序步骤
 	list<SetProListDTO::Wrapper> listAllForExport(const SetProListQuery::Wrapper& query);
 
 #endif // !_SET_SERVICE_

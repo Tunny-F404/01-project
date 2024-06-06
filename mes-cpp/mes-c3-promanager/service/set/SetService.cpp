@@ -39,7 +39,7 @@ SetProListPageDTO::Wrapper SetService::listAll(const SetProListQuery::Wrapper& q
 	return pages;
 }
 //添加工序
-uint64_t SetService::saveData(const SetProAddTableDTO::Wrapper& dto)
+uint64_t SetService::saveData(const SetProAddTableDTO::Wrapper& dto, const string username)
 {
 	// 组装DO数据
 	ProProcessDO data;
@@ -50,10 +50,10 @@ uint64_t SetService::saveData(const SetProAddTableDTO::Wrapper& dto)
 		 EnableFlag, enableFlag, Attention, attention, Remark, remark);
 		// 执行数据添加
 		SetDAO dao;
-	return dao.insertSet(data);
+	return dao.insertSet(data, username);
 }
 //添加工序步骤
-uint64_t SetService::saveStepData(const SetProListDTO::Wrapper& dto)
+uint64_t SetService::saveStepData(const SetProListDTO::Wrapper& dto, const string username)
 {
 	// 组装DO数据
 	ProProcessContentDO data;
@@ -64,11 +64,11 @@ uint64_t SetService::saveStepData(const SetProListDTO::Wrapper& dto)
 		Device, device, DocUrl,docUrl,Material, material, Remark, remark);
 	// 执行数据添加
 	SetDAO dao;
-	return dao.insertstepSet(data);
+	return dao.insertstepSet(data, username);
 }
 
 //修改工序
-bool SetService::updateData(const SetProAddTableDTO::Wrapper& dto)
+bool SetService::updateData(const SetProAddTableDTO::Wrapper& dto, const string username)
 {
 	// 组装DO数据
 	ProProcessDO data;
@@ -80,7 +80,7 @@ bool SetService::updateData(const SetProAddTableDTO::Wrapper& dto)
 		 EnableFlag, enableFlag,Attention,attention,Remark, remark);
 		// 执行数据修改
 		SetDAO dao;
-	return dao.updateSet(data) == 1;
+	return dao.updateSet(data, username) == 1;
 }
 
 ProListPageDTO::Wrapper SetService::listAllForProcess(const ProListQuery::Wrapper& query)

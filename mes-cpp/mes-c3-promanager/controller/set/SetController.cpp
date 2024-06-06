@@ -71,7 +71,7 @@ StringJsonVO::Wrapper SetController::execProcessExport(const ProcessExportQuery:
 	return jvo;
 }
 // 2 添加工序
-Uint64JsonVO::Wrapper SetController::execAddSet(const SetProAddTableDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper SetController::execAddSet(const SetProAddTableDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -92,7 +92,7 @@ Uint64JsonVO::Wrapper SetController::execAddSet(const SetProAddTableDTO::Wrapper
 	// 定义一个Service
 	SetService service;
 	// 执行数据新增
-	uint64_t id = service.saveData(dto);
+	uint64_t id = service.saveData(dto,payload.getUsername());
 	if (id > 0) {
 		jvo->success(UInt64(id));
 	}
@@ -105,7 +105,7 @@ Uint64JsonVO::Wrapper SetController::execAddSet(const SetProAddTableDTO::Wrapper
 
 }
 // 3 修改工序
-Uint64JsonVO::Wrapper SetController::execModifySet(const SetProAddTableDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper SetController::execModifySet(const SetProAddTableDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -118,7 +118,7 @@ Uint64JsonVO::Wrapper SetController::execModifySet(const SetProAddTableDTO::Wrap
 	// 定义一个Service
 	SetService service;
 	// 执行数据修改
-	if (service.updateData(dto)) {
+	if (service.updateData(dto,payload.getUsername())) {
 		jvo->success(dto->processId);
 	}
 	else
@@ -140,7 +140,7 @@ SetProListPageJsonVO::Wrapper SetController::execQuerySet(const SetProListQuery:
 	return jvo;
 }
 // 5 添加工序步骤
-Uint64JsonVO::Wrapper SetController::execAddStepSet(const SetProListDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper SetController::execAddStepSet(const SetProListDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
@@ -160,7 +160,7 @@ Uint64JsonVO::Wrapper SetController::execAddStepSet(const SetProListDTO::Wrapper
 	// 定义一个Service
 	SetService service;
 	// 执行数据新增
-	uint64_t id = service.saveStepData(dto);
+	uint64_t id = service.saveStepData(dto, payload.getUsername());
 	if (id > 0) {
 		jvo->success(UInt64(id));
 	}
@@ -208,7 +208,7 @@ ProDetailJsonVO::Wrapper SetController::execQueryProDetail(const ProDetailQuery:
 	//return ProDetailJsonVO::Wrapper();
 }
 //9 修改工序步骤
-Uint64JsonVO::Wrapper SetController::execModifyStepSet(const SetProListDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper SetController::execModifyStepSet(const SetProListDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	auto jvo = Uint64JsonVO::createShared();
 	if (!dto->contentId || dto->contentId <= 0)
