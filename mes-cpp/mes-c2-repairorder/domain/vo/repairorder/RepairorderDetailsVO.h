@@ -32,6 +32,13 @@ class RepairorderDetailsJsonVO : public JsonVO<RepairorderDetailsDTO::Wrapper> {
     DTO_INIT(RepairorderDetailsJsonVO, JsonVO<RepairorderDetailsDTO::Wrapper>);
 };
 
+/**
+ * 添加维修单数据传输JsonVO，用于传输给服务端的Json对象
+ */
+class RepairorderDetailsByAddJsonVO : public JsonVO<RepairorderDetailsByAddDTO::Wrapper> {
+    DTO_INIT(RepairorderDetailsByAddJsonVO, JsonVO<RepairorderDetailsByAddDTO::Wrapper>);
+};
+
 #include OATPP_CODEGEN_END(DTO)
 
 #endif // !_REPAIROR_DERDETAILS_VO_

@@ -38,7 +38,7 @@ public:
     // 通过ID查询详细信息
     RepairorderDetailsDTO::Wrapper getData(const RepairorderDetailsQuery::Wrapper& id);
     // 保存数据
-    uint64_t saveData(const RepairorderDetailsDTO::Wrapper& dto, const PayloadDTO& payload);
+    uint64_t saveData(const RepairorderDetailsByAddDTO::Wrapper& dto, const PayloadDTO& payload);
     // 修改数据
     bool updateData(const RepairorderDetailsDTO::Wrapper& dto, const PayloadDTO& payload);
     // 通过ID删除数据

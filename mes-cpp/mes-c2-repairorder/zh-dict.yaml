@@ -41,6 +41,7 @@ repairorder:
    machinery_id: 设备ID
    machinery_code: 设备编码
    machinery_name: 设备名称
+   machinery_type_id: 设备类型ID
    machinery_brand: 品牌
    require_date: 报修日期
    finish_date: 维修完成日期

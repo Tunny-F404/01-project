@@ -70,6 +70,14 @@ RepairorderDetailsDTO::Wrapper RepairorderService::getData(const RepairorderDeta
     RepairorderDAO dao;
     uint64_t count = dao.count(id);
     if (count <= 0) {
+        pages->repairId = -1;
+        pages->repairCode = "";
+        pages->repairName = "";
+        pages->machineryCode = "";
+        pages->machineryName = "";
+        pages->machineryBrand = "";
+        pages->requireDate = "";
+        pages->remark = "";
         return pages;
     }
 
@@ -90,7 +98,7 @@ RepairorderDetailsDTO::Wrapper RepairorderService::getData(const RepairorderDeta
     return pages;
 }
 
-uint64_t RepairorderService::saveData(const RepairorderDetailsDTO::Wrapper& dto, const PayloadDTO& payload)
+uint64_t RepairorderService::saveData(const RepairorderDetailsByAddDTO::Wrapper& dto, const PayloadDTO& payload)
 {
     DvRepairDO data;
     ZO_STAR_DOMAIN_DTO_TO_DO(data, dto,

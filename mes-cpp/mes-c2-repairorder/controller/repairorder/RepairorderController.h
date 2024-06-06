@@ -93,7 +93,7 @@ public:
         API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
     }
     // 添加维修单 接口处理
-    ENDPOINT(API_M_POST, "/repairorder/add-repairorder", addRepairorder, BODY_DTO(RepairorderDetailsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+    ENDPOINT(API_M_POST, "/repairorder/add-repairorder", addRepairorder, BODY_DTO(RepairorderDetailsByAddDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
         // 呼叫执行函数响应结果
         API_HANDLER_RESP_VO(execAddRepairorder(dto, authObject->getPayload()));
     }
@@ -134,7 +134,7 @@ private:
     RepairorderDetailsJsonVO::Wrapper execQueryDetailsRepairorder(const RepairorderDetailsQuery::Wrapper& id);
 
     // 添加维修单
-    Uint64JsonVO::Wrapper execAddRepairorder(const RepairorderDetailsDTO::Wrapper& dto, const PayloadDTO& payload);
+    Uint64JsonVO::Wrapper execAddRepairorder(const RepairorderDetailsByAddDTO::Wrapper& dto, const PayloadDTO& payload);
 
     // 修改维修单
     Uint64JsonVO::Wrapper execModifyRepairorder(const RepairorderDetailsDTO::Wrapper& dto, const PayloadDTO& payload);
