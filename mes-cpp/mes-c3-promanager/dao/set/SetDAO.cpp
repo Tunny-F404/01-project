@@ -89,10 +89,12 @@ uint64_t SetDAO::countForProcess(const ProListQuery::Wrapper& query)
 std::list<ProProcessDO> SetDAO::selectWithPageForProcess(const ProListQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT `process_name` FROM pro_process";
-	ProNameListMapper mapper;
+	sql << "SELECT process_id,process_code, process_name, enable_flag, remark FROM pro_process";
+	XSL_TERM_PARSE(query, sql);
+	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
+	ProListMapper mapper;
 	string sqlStr = sql.str();
-	return sqlSession->executeQuery<ProProcessDO, ProNameListMapper>(sqlStr, mapper);
+	return sqlSession->executeQuery<ProProcessDO, ProListMapper>(sqlStr, mapper, params);
 }
 std::list<ProProcessDO> SetDAO::selectProNameList()
 {

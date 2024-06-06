@@ -109,9 +109,9 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "processCode", ZH_WORDS_GETTER("process.fields.processCode"), "01star", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("process.fields.processName"), "01star", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("process.fields.enableFlag"), "01star", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "processCode", ZH_WORDS_GETTER("process.fields.processCode"), "1", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("process.fields.processName"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("process.fields.enableFlag"), "Y", false);
 	}
 	ENDPOINT(API_M_GET, "/set/query-process-list", queryProList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
