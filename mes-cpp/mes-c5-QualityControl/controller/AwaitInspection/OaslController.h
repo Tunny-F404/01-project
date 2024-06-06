@@ -30,7 +30,7 @@ public://定义接口
         API_DEF_ADD_QUERY_PARAMS(String, "detectionType", ZH_WORDS_GETTER("Pending_inspection.fields.detectionType"), "", false); // 检测类型
     }
     // 定义获取待检任务列表接口处理
-    ENDPOINT(API_M_GET, "/awaitinspection/getawaitinspectionlist/page", getPendingInspectionTasks, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+    ENDPOINT(API_M_GET, "/qc/await-inspection/getawaitinspectionlist/page", getPendingInspectionTasks, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
         // 解析查询参数为Query领域模型
         API_HANDLER_QUERY_PARAM(userQuery, OaslQuery, queryParams);
         // 呼叫执行函数响应结果

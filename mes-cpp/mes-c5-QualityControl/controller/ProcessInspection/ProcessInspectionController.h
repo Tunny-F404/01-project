@@ -42,7 +42,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "check_result", ZH_WORDS_GETTER("processinspection.field.check_result"), "", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/process-inspection/query-by-page", queryProcessInspection, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/process-inspection/query-by-page", queryProcessInspection, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ProcessInspectionQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -52,7 +52,7 @@ public:
 	// 3.1 定义删除接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.delete.summary"), removeProcessInspection, Uint64JsonVO::Wrapper);
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/process-inspection/remove", removeProcessInspection, BODY_DTO(oatpp::List<UInt64>, ids), execRemoveProcessInspection(ids));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/qc/process-inspection/remove", removeProcessInspection, BODY_DTO(oatpp::List<UInt64>, ids), execRemoveProcessInspection(ids));
 
 	// 3.1 定义导出接口描述
 	ENDPOINT_INFO(exportProcessInspection) {
@@ -71,7 +71,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "check_result", ZH_WORDS_GETTER("processinspection.field.check_result"), "", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/process-inspection/export", exportProcessInspection, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/process-inspection/export", exportProcessInspection, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ProcessInspectionQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -86,24 +86,24 @@ public:
 		//API_DEF_ADD_PAGE_PARAMS();
 		API_DEF_ADD_QUERY_PARAMS(String, "ipqc_code", ZH_WORDS_GETTER("processinspection.field.ipqc_code"), "IPQC202310180004", true);	// 只能根据检验单编号查询
 	}
-	ENDPOINT(API_M_GET, "/qualityctl/query-inspection-details", queryInspectionDetails, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/qualityctl/query-inspection-details", queryInspectionDetails, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_QUERY_PARAM(detailsQuery, ProcessInspectionQuery, queryParams);
 		API_HANDLER_RESP_VO(execQueryInspectionDetails(detailsQuery, authObject->getPayload()));
 	}
 
 	// 确认检验单
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.modify.confirm_orders"), modifyConfirmOrders, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qualityctl/modify-confirm-orders", modifyConfirmOrders, BODY_DTO(ProcessInspectionDTO::Wrapper, dto), execModifyConfirmOrders(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/qualityctl/modify-confirm-orders", modifyConfirmOrders, BODY_DTO(ProcessInspectionDTO::Wrapper, dto), execModifyConfirmOrders(dto));
 
 	// 完成检验单
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.modify.finish_orders"), modifyFinishOrders, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qualityctl/finish-confirm-orders", modifyFinishOrders, BODY_DTO(ProcessInspectionDTO::Wrapper, dto), execModifyFinishOrders(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/qualityctl/finish-confirm-orders", modifyFinishOrders, BODY_DTO(ProcessInspectionDTO::Wrapper, dto), execModifyFinishOrders(dto));
 
 	// 定义接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("processinspection.put.summary"), modifyTheProcessInspection, Uint64JsonVO::Wrapper);
 
 	// 定义修改过程检验接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/processinspection/modify", modifyTheProcessInspection, BODY_DTO(ProcessInspectionDTO::Wrapper, dto), execModifyTheProcessInspection(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/processinspection/modify", modifyTheProcessInspection, BODY_DTO(ProcessInspectionDTO::Wrapper, dto), execModifyTheProcessInspection(dto));
 
 	//  定义添加过程检验接口描述
 	ENDPOINT_INFO(addProcessInspection) {
@@ -116,7 +116,7 @@ public:
 		// 定义其他查询参数描述
 	}
 	//  定义添加过程检验接口处理
-	ENDPOINT(API_M_POST, "/processinspection", addProcessInspection, BODY_DTO(ProcessInspectionDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/qc/processinspection/add", addProcessInspection, BODY_DTO(ProcessInspectionDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		//// 解析查询参数为Query领域模型
 		//API_HANDLER_QUERY_PARAM(userQuery, ProcessinSpectionQuery, queryParams);
 		// 呼叫执行函数响应结果

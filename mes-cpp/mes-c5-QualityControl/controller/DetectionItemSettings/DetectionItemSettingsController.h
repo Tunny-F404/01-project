@@ -22,7 +22,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "name", ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.controller.query.name"), "", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "type", ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.controller.query.type"), "", false);
 	}
-	ENDPOINT(API_M_GET, "/query-qcsettings", QueryqcSettings, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/detection-item-settings/query-qcsettings", QueryqcSettings, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_QUERY_PARAM(qcsettingsQuery, DetectionItemSettingsQuery, queryParams);
 		//API_HANDLER_RESP_VO(execQueryqc(qcsettingsQuery,authObject->getPayload()));
 		API_HANDLER_RESP_VO(execQueryqc(qcsettingsQuery));
@@ -34,7 +34,7 @@ public:
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	ENDPOINT(API_M_POST, "/add-qcsettings", addDetectionItemSettings, BODY_DTO(DetectionItemSettingsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/qc/detection-item-settings/add-qcsettings", addDetectionItemSettings, BODY_DTO(DetectionItemSettingsDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddqc(dto));
 	}
@@ -49,7 +49,7 @@ public:
 		// 定义其他路径参数说明
 		//API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("detectionitemsettings.field.id"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/detectionitemsettings/del-code", removeTheDetection, BODY_DTO(oatpp::List<UInt64>, id), execRemoveTheDetection(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/qc/detection-item-settings/detectionitemsettings/del-code", removeTheDetection, BODY_DTO(oatpp::List<UInt64>, id), execRemoveTheDetection(id));
 
 	// 3.1 定义导出接口描述
 	ENDPOINT_INFO(exportDetectionItemSettings) {
@@ -65,7 +65,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "type", ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.controller.query.type"), "", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/detectionitemsettings/export-file", exportDetectionItemSettings, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/detection-item-settings/export-file", exportDetectionItemSettings, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, DetectionItemSettingsQuery, queryParams);
 		// 呼叫执行函数响应结果
