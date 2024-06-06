@@ -1,3 +1,4 @@
+<!-- eslint-disable antfu/top-level-function -->
 <template>
 	<el-row :gutter="20">
 		<!-- 栏1 -->
@@ -13,8 +14,8 @@
 					<!-- 用户信息展示 -->
 					<el-row justify="center">
 						<div class="demo-type">
-							<el-avatar :size="100" fit="cover" @error="false" :src="url"><img
-									src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
+							<el-avatar :size="100" fit="cover" @error="false" :src="url">
+								<img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
 							</el-avatar>
 						</div>
 					</el-row>
@@ -57,8 +58,7 @@
 					<el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
 						<el-tab-pane label="基本资料" name="first">
 							<!-- 基本资料表单 -->
-							<el-form ref="infoRulesRef" :model="infoform" :rules="inforules" label-width="80px"
-								status-icon>
+							<el-form ref="infoRulesRef" :model="infoform" :rules="inforules" label-width="80px" status-icon>
 								<el-form-item label="用户名称" prop="nickName">
 									<el-input v-model="infoform.nickName"></el-input>
 								</el-form-item>
@@ -100,8 +100,7 @@
 
 						<el-tab-pane label="修改密码" name="second">
 							<!-- 修改密码表单 -->
-							<el-form ref="passRulesRef" :rules="passRules" :model="passwd" label-width="80px"
-								status-icon>
+							<el-form ref="passRulesRef" :rules="passRules" :model="passwd" label-width="80px" status-icon>
 								<el-form-item label="旧密码" prop="old">
 									<el-input v-model="passwd.old" show-password></el-input>
 								</el-form-item>
@@ -125,50 +124,50 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue"
+import { reactive, ref } from "vue";
 import Request from "@/apis/request.js";
 
 //tabs配置
-const activeName = ref('first')
-const handleClick = (tab, event) => {
-	console.log(tab, event)
+const activeName = ref("first");
+function handleClick(tab, event) {
+	console.log(tab, event);
 }
 
 //基本资料 表单
 const infoform = ref({
-	nickName: 'usertester',
-	phoneNum: '13312341234',
-	phoneCode: '',
-	email: 'user@example.com',
-	emailCode: '',
-	gender: '男'
-})
+	nickName: "usertester",
+	phoneNum: "13312341234",
+	phoneCode: "",
+	email: "user@example.com",
+	emailCode: "",
+	gender: "男",
+});
 //修改密码 表单
 const passwd = ref({
-	old: '12345',
-	new: '',
-	confirm: ''
-})
+	old: "12345",
+	new: "",
+	confirm: "",
+});
 
 // 手机号码 自定义验证规则
-const phoneCheck = (rule, value, callback) => {
-	const phone_regex = /^1[3|4|5|6|7|8|9]\d{9}$/
-	if (value != '') {
+function phoneCheck(rule, value, callback) {
+	const phone_regex = /^1[3-9]\d{9}$/;
+	if (value !== "") {
 		if (!phone_regex.test(value)) {
-			callback(new Error('手机号码不正确！'))
+			callback(new Error("手机号码不正确！"));
 		} else {
-			callback()
+			callback();
 		}
 	}
 }
 // 密码 自定义验证规则(待解决)
-const passCheck = (rule, value, callback) => {
-	const pass_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{5,16}$/
-	if (value != '') {
+function passCheck(rule, value, callback) {
+	const pass_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\s\S]{5,16}$/;
+	if (value !== "") {
 		if (!pass_regex.test(value)) {
-			callback(new Error('5-16个字符(包含大小写字母数字)'))
+			callback(new Error("5-16个字符(包含大小写字母数字)"));
 		} else {
-			callback()
+			callback();
 		}
 	}
 }
@@ -176,68 +175,64 @@ const passCheck = (rule, value, callback) => {
 //基本资料表单 验证规则
 const inforules = reactive({
 	nickName: [
-		{ required: true, message: '请输入用户名', trigger: 'change' },
-		{ min: 1, max: 20, message: '长度 1 至 20', trigger: 'change' }
+		{ required: true, message: "请输入用户名", trigger: "change" },
+		{ min: 1, max: 20, message: "长度 1 至 20", trigger: "change" },
 	],
 	phoneNum: [
-		{ required: true, message: '请输入手机号', trigger: 'change' },
-		{ validator: phoneCheck, trigger: 'change' }
+		{ required: true, message: "请输入手机号", trigger: "change" },
+		{ validator: phoneCheck, trigger: "change" },
 	],
 	email: [
-		{ required: true, message: '请输入邮箱', trigger: 'change' },
-		{ type: 'email', message: '邮箱不正确', trigger: 'change' }
+		{ required: true, message: "请输入邮箱", trigger: "change" },
+		{ type: "email", message: "邮箱不正确", trigger: "change" },
 	],
-	gender: [{ required: true, message: '请选择你的性别', trigger: 'change' }]
-})
+	gender: [{ required: true, message: "请选择你的性别", trigger: "change" }],
+});
 //密码表单 验证规则(待解决)
 const passRules = reactive({
 	old: [
-		{ required: true, message: '请输入原有密码', trigger: 'change' },
-		{ validator: passCheck, trigger: 'change' }
+		{ required: true, message: "请输入原有密码", trigger: "change" },
+		{ validator: passCheck, trigger: "change" },
 	],
-	new: [
-		{ validdator: passCheck, trigger: 'change' }
-	],
-	confirm: [
-		{ validdator: passCheck, trigger: 'change' }
-	]
-})
+	new: [{ validdator: passCheck, trigger: "change" }],
+	confirm: [{ validdator: passCheck, trigger: "change" }],
+});
 
-const infoRulesRef = ref('')
-const passRulesRef = ref('')
+const infoRulesRef = ref("");
+const passRulesRef = ref("");
 
 // 基本资料表单 校验完成发送
-const onInfoSubmit = async (formEl) => {
-	if (!formEl) return
+async function onInfoSubmit(formEl) {
+	if (!formEl) return;
 	infoRulesRef.value.validate((valid, fields) => {
 		if (valid) {
-			console.log('Info submit!', fields)
+			console.log("Info submit!", fields);
 		} else {
-			console.log('error submit!', fields)
+			console.log("error submit!", fields);
 		}
-	})
+	});
 }
 // 修改密码表单 校验完成发送
-const onPassSubmit = async (formEl) => {
-	if (!formEl) return
+async function onPassSubmit(formEl) {
+	if (!formEl) return;
 	passRulesRef.value.validate((valid, fields) => {
 		if (valid) {
-			console.log('Pass submit!', fields)
+			console.log("Pass submit!", fields);
 		} else {
-			console.log('error submit!', fields)
+			console.log("error submit!", fields);
 		}
-	})
+	});
 }
 
 //获取 手机验证码
-const getphoneCode = () => {
+function getphoneCode() {
 	// Request.request(
 	// 	Request.POST,
 	// 	"/mycenter/get-phoneCode",
 	// 	{ phone: infoform.phoneNum }
 	// ).then((res) => {
 	// 	console.log(res);
-	ElMessage.success("验证码发送成功")
+	ElMessage.success("验证码发送成功");
 	// }).catch((res) => {
 	// 	console.log(res)
 	// 	ElMessage.error("发送失败")
@@ -245,11 +240,11 @@ const getphoneCode = () => {
 }
 
 //获取 邮箱验证码
-const getemailCode = () => {
-	console.log('邮箱验证成功！')
+function getemailCode() {
+	console.log("邮箱验证成功！");
 }
 // 图片上传
-const url = ref('')
+const url = ref("");
 </script>
 
 <style lang="scss" scoped>
@@ -275,7 +270,7 @@ const url = ref('')
 .demo-type {
 	display: flex;
 
-	>div {
+	> div {
 		flex: 1;
 		text-align: center;
 
