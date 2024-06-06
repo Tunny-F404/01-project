@@ -38,7 +38,7 @@ const routes = [
 			//阿门表格组件
 			{
 				path: "/sample/table-list",
-				component: () => import("components/std-table/src/table-true.vue"),
+				component: () => import("components/std-table/src/std-table.vue"),
 			},
 			// 搜索栏演示页
 			{

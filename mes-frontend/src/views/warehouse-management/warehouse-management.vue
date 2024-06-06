@@ -29,7 +29,7 @@
 import { ref, computed } from "vue";
 import { ElButton } from "element-plus";
 import TableText from "components/std-table/src/table-text.vue";
-import TableTrue from "components/std-table/src/table-true.vue";
+import TableTrue from "components/std-table/src/std-table.vue";
 
 const components = { TableText, TableTrue };
 // 定义数据

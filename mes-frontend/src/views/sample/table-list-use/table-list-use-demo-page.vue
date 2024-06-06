@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from "vue";
 
-import TableTrue from "components/std-table/src/table-true.vue";
+import TableTrue from "components/std-table/src/std-table.vue";
 
 defineOptions({
 	/** 列表页用的表格组件 演示页 */
