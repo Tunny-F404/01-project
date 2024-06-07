@@ -49,7 +49,7 @@ uint64_t MatService::saveData(const AddReturnDTO::Wrapper& dto1)
 	return dao.insert1(data1);
 }
 
-bool MatService::updateData(const ModifyReturnDTO::Wrapper& dto)
+bool MatService::updateData(const AddReturnDTO::Wrapper& dto)
 {
 	// 组装listDO数据
 	MatlistDO data1;

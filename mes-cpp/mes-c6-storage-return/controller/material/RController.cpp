@@ -49,12 +49,12 @@ Uint64JsonVO::Wrapper RController::execAddReturnLine(const AddReturnDTO::Wrapper
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper RController::execModifyReturnline(const ModifyReturnDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper RController::execModifyReturnline(const AddReturnDTO::Wrapper& dto)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
-	if (!dto->lineid || dto->lineid <= 0)
+	if (!dto->rtid || dto->rtid <= 0)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;

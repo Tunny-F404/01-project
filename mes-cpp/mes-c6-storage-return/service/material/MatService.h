@@ -36,7 +36,7 @@ public:
 	// 保存数据-插入数据
 	uint64_t saveData(const AddReturnDTO::Wrapper& dto1);
 	// 修改数据
-	bool updateData(const ModifyReturnDTO::Wrapper& dto);
+	bool updateData(const AddReturnDTO::Wrapper& dto);
 	// 通过ID删除数据
 	bool removeData(uint64_t id);
 };

@@ -51,8 +51,11 @@ list<MatlistDO> MatDAO::selectByName1(const string& name)
 uint64_t MatDAO::insert1(const MatlistDO& iObj)
 {
 	string sql = "INSERT INTO `wm_rt_vendor` (`rt_code`, `rt_name`, `po_code`,`vendor_name`, `batch_code`, `rt_date`, `status`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	time_t now = time(0);
+	tm* ltm = localtime(&now);
+	string date = to_string(1900 + ltm->tm_year) + "-" + to_string(1 + ltm->tm_mon) + "-" + to_string(ltm->tm_mday) + " " + to_string(ltm->tm_hour) + ":" + to_string(ltm->tm_min) + ":" + to_string(ltm->tm_sec);
 	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s%s%s", iObj.getRtcode(), iObj.getRtname(), iObj.getPocode(),
-		iObj.getVendorname(), iObj.getBatchcode(), iObj.getRtdate(),
+		iObj.getVendorname(), iObj.getBatchcode(), date,
 		iObj.getStatuss(), iObj.getRemark());
 }
 
@@ -67,9 +70,12 @@ uint64_t MatDAO::insert2(const MatlineDO& iObj)
 
 int MatDAO::update1(const MatlistDO& uObj)
 {
-	string sql = "UPDATE INTO `wm_rt_vendor` (`rtcode`, `rtname`, `pocode`,`vendorname`, `batchcode`, `rtdate`, `statuss`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s", uObj.getRtcode(), uObj.getRtname(), uObj.getPocode(),
-		uObj.getVendorname(), uObj.getBatchcode(), uObj.getRtdate(),
+	string sql = "UPDATE INTO `wm_rt_vendor` (`rtcode`, `rtname`, `pocode`,`vendorname`, `batchcode`, `rtdate`, `status`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	time_t now = time(0);
+	tm* ltm = localtime(&now);
+	string date = to_string(1900 + ltm->tm_year) + "-" + to_string(1 + ltm->tm_mon) + "-" + to_string(ltm->tm_mday) + " " + to_string(ltm->tm_hour) + ":" + to_string(ltm->tm_min) + ":" + to_string(ltm->tm_sec);
+	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s%s%s", uObj.getRtcode(), uObj.getRtname(), uObj.getPocode(),
+		uObj.getVendorname(), uObj.getBatchcode(), date,
 		uObj.getStatuss(), uObj.getRemark());
 }
 
