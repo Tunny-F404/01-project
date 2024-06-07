@@ -20,7 +20,7 @@
 #include "stdafx.h"
 #include "ExportPlanController.h"
 #include "domain/query/ExportPlanQuery.h"
-#include "service/ExportPlan/ExportPlanService.h"
+#include "../mes-c2-inspection.maintenanceplan/service/ExportPlan/ExportPlanService.h"
 
 StringJsonVO::Wrapper ExportPlanController::
 	execExportPlan(const ExportPlanQuery::Wrapper & query)
