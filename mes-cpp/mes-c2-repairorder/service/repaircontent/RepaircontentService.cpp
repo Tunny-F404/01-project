@@ -100,14 +100,12 @@ uint64_t RepaircontentService::saveData(const AddRepaircontentDTO::Wrapper& dto)
 	dv_repair_lineDO data;
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto,
 		repair_Id,repair_id,
-		subject_Name, subject_name, 
+		subject_Id, subject_id, 
 		Malfunction, malfunction, 
 		Malfunction_url, malfunction_url, 
 		repair_Des, repair_des,
 		Create_by,create_by,
-		Create_time,create_time,
-		Update_by,update_by,
-		Update_time,update_time
+		Create_time,create_time
 	)
 		// 执行数据添加
 		RepaircontentDAO dao;
@@ -118,7 +116,7 @@ bool RepaircontentService::updateData(const ModifyRepaircontentDTO::Wrapper& dto
 {
 	dv_repair_lineDO data;
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, 
-		subject_Name, subject_name, 
+		subject_Id, subject_id, 
 		Malfunction, malfunction, 
 		Malfunction_url, malfunction_url, 
 		repair_Des, repair_des,
