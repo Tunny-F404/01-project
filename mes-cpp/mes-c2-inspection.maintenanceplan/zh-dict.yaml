@@ -11,10 +11,15 @@ maintenanceplan:
   enddata: 结束时间
   status: 状态
   remark: 备注
+  updateby: 更新者
+  updatetime: 更新时间
 modifyplanstatus:
  summary: 修改点检计划状态
  fields:
+  planid: 计划ID
   status: 状态（启用或停用）   
+  updateby: 更新者
+  updatetime: 更新时间
 plan:
  export-plan:
   summary: 导出计划

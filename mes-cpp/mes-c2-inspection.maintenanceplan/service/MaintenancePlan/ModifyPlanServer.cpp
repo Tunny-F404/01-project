@@ -30,7 +30,7 @@ bool ModifyPlanService::updateData(const MaintenancePlanDto::Wrapper& dto)
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Id, id, Code, code, Name, name, Type, type, Cycletype, cycletype, Cyclecount, cyclecount, Startdate, startdate, Enddate, enddate, Remark, remark)
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Id, id, Code, code, Name, name, Type, type, Cycletype, cycletype, Cyclecount, cyclecount, Startdate, startdate, Enddate, enddate, Remark, remark, Updateby, updateby, Updatetime, updatetime)
 	// 执行数据修改
 	ModifyPlanDao dao;
 	return dao.update(data) == 1;

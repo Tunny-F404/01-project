@@ -31,10 +31,16 @@ class ModifyPlanStatusDo
 	CC_SYNTHESIZE(uint64_t, id, Id);
 	// 计划状态（草稿或已完成，不可修改）
 	CC_SYNTHESIZE(string, status, Status);
+	// 更新者
+	CC_SYNTHESIZE(string, updateby, Updateby);
+	// 更新时间
+	CC_SYNTHESIZE(string, updatetime, Updatetime)
 public:
 	ModifyPlanStatusDo() {
 		id = 0;
 		status = "";
+		updateby = "";
+		updatetime = "";
 	}
 };
 

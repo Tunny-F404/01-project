@@ -42,6 +42,6 @@
 
 int ModifyPlanStatusDao::update(const ModifyPlanStatusDo& uObj)
 {
-	string sql = "UPDATE `dv_check_plan` SET `status`=? WHERE `plan_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%ull",  uObj.getStatus(), uObj.getId());
+	string sql = "UPDATE `dv_check_plan` SET `status`=?,`updateby`=?,`updatetime`=? WHERE `plan_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%ull",  uObj.getStatus(), uObj.getUpdateby(), uObj.getUpdatetime(), uObj.getId());
 }

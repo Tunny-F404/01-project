@@ -29,7 +29,7 @@ bool ModifyPlanStatusService::updateData(const ModifyPlanStatusDto::Wrapper& dto
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Id, id, Status, status)
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Id, id, Status, status, Updateby, updateby, Updatetime, updatetime)
 	// 执行数据修改
 	ModifyPlanStatusDao dao;
 	return dao.update(data) == 1;
