@@ -37,13 +37,13 @@ class AddDeviceController : public oatpp::web::server::api::ApiController // 1 ¼
 	// 3 ¶¨Òå½Ó¿Ú
 public:
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("device-list.summary.add-proj"), addProj, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/device-list/add-device", addProj, BODY_DTO(AddDeviceDTO::Wrapper, dto), execAddProj(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/inspe-matain/add-device", addProj, BODY_DTO(AddDeviceDTO::Wrapper, dto), execAddProj(dto, authObject->getPayload()));
 
 
 
 private:
 
-	Uint64JsonVO::Wrapper execAddProj(const AddDeviceDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddProj(const AddDeviceDTO::Wrapper& dto, const PayloadDTO& payload);
 
 
 };

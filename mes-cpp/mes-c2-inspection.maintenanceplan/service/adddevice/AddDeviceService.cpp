@@ -19,9 +19,9 @@
 #include "stdafx.h"
 #include "AddDeviceService.h"
 #include "../../dao/adddevice/AddDeviceDAO.h"
+#include"../lib-common/include/SimpleDateTimeFormat.h"
 
-
-uint64_t AddDeviceService::saveData(const AddDeviceDTO::Wrapper& dto)
+uint64_t AddDeviceService::saveData(const AddDeviceDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// ¡Á¨¦¡Á¡ãDO????
 	Dv_check_machineryDO  data;
@@ -30,7 +30,8 @@ uint64_t AddDeviceService::saveData(const AddDeviceDTO::Wrapper& dto)
 	AddDeviceDAO dao;
 
 	std::stringstream ss(dto->machineryId.getValue(""));
-
+	data.setCreate_by(payload.getUsername());
+	data.setCreate_time(SimpleDateTimeFormat::format());
 	std::string id;
 	while (std::getline(ss, id, ',')) {
 		data.setMachinery_id(stoi(id));

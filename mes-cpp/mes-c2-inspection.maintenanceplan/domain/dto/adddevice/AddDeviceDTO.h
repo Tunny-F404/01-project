@@ -28,10 +28,10 @@ class AddDeviceDTO : public oatpp::DTO
 	DTO_INIT(AddDeviceDTO, DTO);
 
 	//????id
-	API_DTO_FIELD_DEFAULT(UInt64, planId, ZH_WORDS_GETTER("device-list.field.planId"));
+	API_DTO_FIELD(UInt64, planId, ZH_WORDS_GETTER("device-list.field.planId"),true,210);
 
 	//?¨²?¡Âid
-	API_DTO_FIELD_DEFAULT(String, machineryId, ZH_WORDS_GETTER("device-list.field.machineryId"));
+	API_DTO_FIELD(String, machineryId, ZH_WORDS_GETTER("device-list.field.machineryId"),true,"machineryid");
 
 };
 

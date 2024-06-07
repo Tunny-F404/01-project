@@ -38,7 +38,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "plan_id", ZH_WORDS_GETTER("machinery-list.field.plan-id"), 207, true);
 	}
 	// 定义查询设备清单列表接口处理
-	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-list", queryMachineryList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/inspe-matain/machinery-list", queryMachineryList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析领域模型
 		API_HANDLER_QUERY_PARAM(querymachinerylist, MachineryListQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -63,7 +63,7 @@ public:
 	}
 
 	// 定义查询设备清单列表接口处理
-	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-plan", queryMachineryPlan, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/inspe-matain/machinery-plan", queryMachineryPlan, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析领域模型
 		API_HANDLER_QUERY_PARAM(querymachineryplan, MachineryPlanQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -82,7 +82,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "plan_id", ZH_WORDS_GETTER("machinery-plan.field.plan-id"), 207, true);
 	}
 	// 定义查询设备清单列表接口处理
-	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-plan-details", queryMachineryPlanDetails, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/inspe-matain/machinery-plan-details", queryMachineryPlanDetails, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析领域模型
 		API_HANDLER_QUERY_PARAM(querymachineryplandetails, MachineryPlanDetailsQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -103,7 +103,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "plan_id", ZH_WORDS_GETTER("machinery-subject.field.plan-id"), 207, true);
 	}
 	// 定义查询点检/保养项目列表接口处理
-	ENDPOINT(API_M_GET, "/inspection-maintenanceplan/machinery-subject", queryMachinerySubject, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/inspe-matain/machinery-subject", queryMachinerySubject, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析领域模型
 		API_HANDLER_QUERY_PARAM(querymachinerysubject, MachinerySubjectQuery, queryParams);
 		// 呼叫执行函数响应结果

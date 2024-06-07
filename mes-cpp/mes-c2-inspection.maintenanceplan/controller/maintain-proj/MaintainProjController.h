@@ -38,11 +38,11 @@ public:
 
 
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("maintain-proj.summary.add-proj"), addProj, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/maintain-proj/add-proj", addProj, BODY_DTO(MaintainProjDTO::Wrapper, dto), execAddProj(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/inspe-matain/add-proj", addProj, BODY_DTO(MaintainProjDTO::Wrapper, dto), execAddProj(dto, authObject->getPayload()));
 
 private:
 
-	Uint64JsonVO::Wrapper execAddProj(const MaintainProjDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddProj(const MaintainProjDTO::Wrapper& dto, const PayloadDTO& payload);
 
 
 };

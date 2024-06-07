@@ -19,8 +19,8 @@
 #include "stdafx.h"
 #include "AddPlanService.h"
 #include"./dao/AddPlan/AddPlanDAO.h"
-
-uint64_t AddPlanService::saveData(const AddPlanDTO::Wrapper& dto)
+#include"../lib-common/include/SimpleDateTimeFormat.h"
+uint64_t AddPlanService::saveData(const AddPlanDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
 	Dv_check_planDO data;
@@ -29,6 +29,8 @@ uint64_t AddPlanService::saveData(const AddPlanDTO::Wrapper& dto)
 	// 	data.setAge(dto->age.getValue(1));
 	//(`plan_code`,`plan_name`, `plan_type`, `cycle_count`, `cycle_type`, `start_date`, `end_date`, `status`, `remark`)
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Plan_code, planCode, Plan_name, planName, Plan_type, planType, Cycle_count, cycleCount, Cycle_type, cycleType, Start_date, startDate, End_date, endDate, Status, status, Remark, remark);
+	data.setCreate_by(payload.getUsername());
+	data.setCreate_time(SimpleDateTimeFormat::format());
 	// 执行数据添加
 	AddPlanDAO dao;
 	return dao.insert(data);

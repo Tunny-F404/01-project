@@ -28,10 +28,10 @@ class MaintainProjDTO : public oatpp::DTO
 	DTO_INIT(MaintainProjDTO, DTO);
 
 	//计划id
-	API_DTO_FIELD_DEFAULT(UInt64, planId, ZH_WORDS_GETTER("maintain-proj.field.planId"));
+	API_DTO_FIELD(UInt64, planId, ZH_WORDS_GETTER("maintain-proj.field.planId"),true,210);
 
-	//机器id
-	API_DTO_FIELD_DEFAULT(String, machineryId, ZH_WORDS_GETTER("maintain-proj.field.machineryId"));
+	//项目id
+	API_DTO_FIELD(String, machineryId, ZH_WORDS_GETTER("maintain-proj.field.machineryId"),true,"subjectid");
 
 };
 

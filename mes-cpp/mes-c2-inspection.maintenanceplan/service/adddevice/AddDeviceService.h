@@ -32,7 +32,7 @@ class AddDeviceService
 public:
 
 	// ±£´æÊý¾Ý
-	uint64_t saveData(const AddDeviceDTO::Wrapper& dto);
+	uint64_t saveData(const AddDeviceDTO::Wrapper& dto, const PayloadDTO& payload);
 
 };
 

@@ -35,7 +35,7 @@ remark, attr1, attr2, attr3, attr4, create_by, create_time, update_by, update_ti
 		sub.setWorkshopName(it->getWorkshopName());
 		sub.setStatus(it->getStatus());
 		sub.setRemark(it->getRemark());
-		sub.setCreateTime(it->getCreateTime());
+		
 		/*sub.setAttr1(it->getAttr1());
 		sub.setAttr2(it->getAttr2());
 		sub.setCreateBy(it->getCreateBy());
@@ -45,9 +45,9 @@ remark, attr1, attr2, attr3, attr4, create_by, create_time, update_by, update_ti
 	}
 
 
-	string sql = "INSERT INTO `dv_check_machinery` (`plan_id`, `machinery_id`, `machinery_code`,`machinery_name`,`machinery_brand`,`machinery_spec`,`remark`,`create_time`) VALUES (?, ?, ?,?,?,?,?,?)";
+	string sql = "INSERT INTO `dv_check_machinery` (`plan_id`, `machinery_id`, `machinery_code`,`machinery_name`,`machinery_brand`,`machinery_spec`,`remark`,`create_by`,`create_time`) VALUES (?, ?, ?,?,?,?,?,?,?)";
 
-	return sqlSession->executeInsert(sql, "%i%i%s%s%s%s%s%s", iObj.getPlan_id(), iObj.getMachinery_id(), sub.getMachineryCode(), sub.getMachineryName(), sub.getMachineryBrand(), sub.getMachinerySpec(), sub.getRemark(), sub.getCreateTime());
+	return sqlSession->executeInsert(sql, "%i%i%s%s%s%s%s%s%s", iObj.getPlan_id(), iObj.getMachinery_id(), sub.getMachineryCode(), sub.getMachineryName(), sub.getMachineryBrand(), sub.getMachinerySpec(), sub.getRemark(), iObj.getCreate_by(), iObj.getCreate_time());
 
 
 }

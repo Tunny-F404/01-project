@@ -42,7 +42,7 @@ public:
 	}
 	// 3.2 定义查询接口处理                                  查询参数                          开启授权才能用
 	//
-	ENDPOINT(API_M_GET, "/planSubject/query-panSubject-table", queryPlanSubjectTablePage, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) 
+	ENDPOINT(API_M_GET, "/inspe-matain/query-panSubject-table", queryPlanSubjectTablePage, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) 
 	// 暂时不开授权
 	//ENDPOINT(API_M_GET, "/planSubject/query-panSubject-table", queryPlanSubjectTablePage, QUERIES(QueryParams, queryParams))
 	{
