@@ -29,10 +29,10 @@ class ProcessBOMService
 public:
 	// 删除BOM
 	bool removeBOM(uint64_t id);
-	// 添加BOM
-	uint64_t saveBOM(const ProductMaterialDTO::Wrapper& dto);
+	//添加BOM
+	uint64_t saveBOM(const ProductMaterialDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 更新BOM
-	bool updateBOM(const ProductModefyMaterialDTO::Wrapper& dto);
+	bool updateBOM(const ProductModefyMaterialDTO::Wrapper& dto, const PayloadDTO& payload);
 };
 
 #endif // !_PROCESS_LIST_SERVICE_

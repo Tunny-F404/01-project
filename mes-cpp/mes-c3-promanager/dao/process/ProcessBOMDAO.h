@@ -21,12 +21,13 @@
 #define _SAMPLE_DAO_
 #include "BaseDAO.h"
 #include "../../domain/do/pro/ProRouteProductBomDO.h"
+#include"../../lib-oatpp/include/domain/dto/PayloadDTO.h"
 class ProcessBOMDAO : public BaseDAO
 {
 public:
 	// 通过ID删除数据
 	int deleteById(uint64_t id);
-	uint64_t insert(const ProRouteProductBomDO& iObj);
-	int update(const ProRouteProductBomDO& iObj);
+	uint64_t insert(const ProRouteProductBomDO& iObj, const PayloadDTO& payload);
+	int update(const ProRouteProductBomDO& iObj, const PayloadDTO& payload);
 };
 #endif // !_SAMPLE_DAO_

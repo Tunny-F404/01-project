@@ -538,7 +538,7 @@ Uint64JsonVO::Wrapper ProcessController::execAddProductMaterial(const ProductMat
 	// 定义一个Service
 	ProcessBOMService service;
 	// 执行数据新增
-	uint64_t id = service.saveBOM(dto);
+	uint64_t id = service.saveBOM(dto, payload);
 	if (id > 0) {
 		jvo->success(UInt64(id));
 	}
@@ -563,7 +563,7 @@ Uint64JsonVO::Wrapper ProcessController::execModifyProductMaterial(const Product
 	// 定义一个Service
 	ProcessBOMService service;
 	// 执行数据修改
-	if (service.updateBOM(dto)) {
+	if (service.updateBOM(dto, payload)) {
 		jvo->success(dto->record_id);
 	}
 	else

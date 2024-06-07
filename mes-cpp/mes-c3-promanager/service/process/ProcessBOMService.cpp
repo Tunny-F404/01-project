@@ -26,20 +26,20 @@ bool ProcessBOMService::removeBOM(uint64_t id)
 	ProcessBOMDAO dao;
 	return dao.deleteById(id) == 1;
 }
-uint64_t ProcessBOMService::saveBOM(const ProductMaterialDTO::Wrapper& dto)
+uint64_t ProcessBOMService::saveBOM(const ProductMaterialDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
 	ProRouteProductBomDO data;
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Route_id, route_id, Process_id, process_id, Product_id, product_id, Item_id, item_id, Item_code, item_code, Item_name, item_name, Unit_of_measure, unit_of_measure, Specification, specification, Quantity, quantity, Remark, remark)
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Route_id, route_id, Item_code, item_code, Item_name, item_name, Unit_of_measure, unit_of_measure, Specification, specification, Quantity, quantity, Remark, remark)
 		// 执行数据修改
-	ProcessBOMDAO dao;
-	return dao.insert(data);
+		ProcessBOMDAO dao;
+	return dao.insert(data, payload);
 }
-bool ProcessBOMService::updateBOM(const ProductModefyMaterialDTO::Wrapper& dto)
+bool ProcessBOMService::updateBOM(const ProductModefyMaterialDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	ProRouteProductBomDO data;
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Record_id, record_id, Item_code, item_code, Item_name, item_name, Unit_of_measure, unit_of_measure, Specification, specification, Quantity, quantity, Remark, remark)
 		// 执行数据修改
 		ProcessBOMDAO dao;
-	return dao.update(data)==1;
+	return dao.update(data, payload) == 1;
 }
