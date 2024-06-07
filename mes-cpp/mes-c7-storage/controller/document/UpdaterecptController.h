@@ -39,7 +39,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("recpt.put.update"), modifyrecpt, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/recpt", modifyrecpt, BODY_DTO(UpdaterecptDTO::Wrapper, dto), execModifyrecpt(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/storage/mod-documents", modifyrecpt, BODY_DTO(UpdaterecptDTO::Wrapper, dto), execModifyrecpt(dto));
 
 private:
 	// 3.3 演示修改数据

@@ -56,12 +56,16 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(ProductRecptController);
-	ROUTER_SIMPLE_BIND(ProductController);
-	ROUTER_SIMPLE_BIND(storageController);
-	ROUTER_SIMPLE_BIND(AddrecptController);
-	ROUTER_SIMPLE_BIND(UpdaterecptController);
 
+	ROUTER_SIMPLE_BIND(ProductController);
+
+	ROUTER_SIMPLE_BIND(AddrecptController);
+
+	ROUTER_SIMPLE_BIND(UpdaterecptController);
+	
+	ROUTER_SIMPLE_BIND(ProductRecptController);
+	
+	ROUTER_SIMPLE_BIND(storageController);
 }
 
 

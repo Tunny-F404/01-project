@@ -48,7 +48,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/warehouse-settings/add-warehouse", addWarehouse, BODY_DTO(AddDelModDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/settings/add-warehouse", addWarehouse, BODY_DTO(AddDelModDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddWarehouse(dto));
 	}
@@ -56,7 +56,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("add-del-mod.controller.put.summary"), modifyWarehouse, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/warehouse-settings/mod-warehouse", modifyWarehouse, BODY_DTO(AddDelModDTO::Wrapper, dto), execModifyWarehouse(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/settings/mod-warehouse", modifyWarehouse, BODY_DTO(AddDelModDTO::Wrapper, dto), execModifyWarehouse(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeWarehouse) {
@@ -66,7 +66,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "warehouse_id", ZH_WORDS_GETTER("add-del-mod.controller.delete.warehouse_id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/warehouse-settings/del-warehouse/{warehouse_id}", removeWarehouse, PATH(UInt64, warehouse_id), execRemoveWarehouse(warehouse_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/settings/del-warehouse-by-warehouse_id/{warehouse_id}", removeWarehouse, PATH(UInt64, warehouse_id), execRemoveWarehouse(warehouse_id));
 
 private:
 	// 3.3 演示新增数据

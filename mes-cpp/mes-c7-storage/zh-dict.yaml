@@ -1,10 +1,10 @@
 product-recpt:
  query: 
-  summary: 分页查询产品入库数据
+  summary: 获取产品入库单行列表（条件+分页）
  post: 
-  summary: 新增一条产品入库数据
+  summary: 添加产品入库单行
  delete:
-  summary: 删除产品入库单行
+  summary: 删除产品入库单行（支持批量删除）
  put:
   summary: 修改产品入库单行
  field:
@@ -32,9 +32,9 @@ product:
   status: 单据状态
   receivedstorage: 接收仓库
   remark: 备注
-  summary: 获取单据列表（条件 + 分页）
+  summary: 获取单据列表（条件+分页）
   detail: 获取单据详情
-  add: 增加单据
+  add: 添加单据
   modify: 修改单据
   workorder_code: 生产工单编码
   warehouse_id: 仓库id
@@ -45,11 +45,11 @@ product:
   area_code: 库位编码
 storage: 
  get:
-  summary: 产品入库单据列表导出
+  summary: 导出单据
  put:
-  summary: 执行产品入库（修改入库表）
+  summary: 执行入库
  delete:
-  summary: 删除产品入库单行列表（支持批量删除）
+  summary: 删除单据（支持批量删除）
  field:
   id: 产品入库编号
   name: 产品单名称
@@ -85,7 +85,6 @@ accept:
   location_code: 库区编码
   area_id: 库位id
   area_code: 库位编码
-
 recpt:
  put:
   update: 修改单据

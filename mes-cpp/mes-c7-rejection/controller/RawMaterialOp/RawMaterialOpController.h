@@ -29,6 +29,13 @@ class RawMaterialOpController : public oatpp::web::server::api::ApiController //
 	// 3 定义接口
 public:
 
+	// 定义修改接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("RawMaterialOp.put.summary"), modifyRawMaterialOp, Uint64JsonVO::Wrapper);
+	// 定义修改接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/rejection/mod-raw_material", modifyRawMaterialOp, BODY_DTO(RawMaterialOpDTO::Wrapper, dto), execModifyRawMaterialOp(dto));
+
+
+
 	// 定义删除单据接口描述
 	ENDPOINT_INFO(removeRawMaterialOp)
 	{
@@ -39,13 +46,7 @@ public:
 	}
 
 	//定义删除单据接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/RawMaterialOp/{id}", removeRawMaterialOp, PATH(UInt64, id), execRemoveRawMaterialOp(id));
-
-
-	// 定义修改接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("RawMaterialOp.put.summary"), modifyRawMaterialOp, Uint64JsonVO::Wrapper);
-	// 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/RawMaterialOp/{oprator}", modifyRawMaterialOp, BODY_DTO(RawMaterialOpDTO::Wrapper, dto), execModifyRawMaterialOp(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/rejection/del-raw_material-by-rt_id/{rt_id}", removeRawMaterialOp, PATH(UInt64, id), execRemoveRawMaterialOp(id));
 
 
 	// 定义查询接口描述
@@ -65,7 +66,7 @@ public:
 	}
 
 	//定义查询接口处理
-	ENDPOINT(API_M_GET, "/RawMaterialOpQuery", queryRawMaterialOp, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) 
+	ENDPOINT(API_M_GET, "/rejection/query-raw_material", queryRawMaterialOp, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) 
 	{
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, RawMaterialOpQuery, queryParams);

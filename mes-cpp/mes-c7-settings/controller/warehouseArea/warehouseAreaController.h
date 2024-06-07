@@ -51,7 +51,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "warehouseAreaName", ZH_WORDS_GETTER("warehouse-area.field.name"),"default name",false);
 	}
 	// 1.2 定义查询接口处理:路由到URL/warehouseArea找到queryWarehouseArea端点,产生查询请求queryParams
-	ENDPOINT(API_M_GET, "/warehouseArea-settings/query-warehouseArea", queryWarehouseArea, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/settings/location/query-warehouse_location-page", queryWarehouseArea, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为WarehouseAreaQuery领域模型
 		API_HANDLER_QUERY_PARAM(query, WarehouseAreaQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -68,7 +68,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 2.2 定义新增接口处理 注意！！！！！这里虽然传了库区id,但具体实现没有传入库区id,而是按照数据库自增方式生成库区id
-	ENDPOINT(API_M_POST, "/warehouseArea-settings/add-warehouseArea", addWarehouseArea, BODY_DTO(warehouseAreaListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/settings/location/add-warehouse_location", addWarehouseArea, BODY_DTO(warehouseAreaListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddWarehouseArea(dto));
 	}
@@ -76,7 +76,7 @@ public:
 	// 3.1 定义修改库区接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("warehouse-area.put.summary"), modifyWarehouseArea, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改库区接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/warehouseArea-settings/modify-warehouseArea", modifyWarehouseArea, BODY_DTO(warehouseAreaListDTO::Wrapper, dto), execModifyWarehouseArea(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/settings/location/mod-warehouse_location", modifyWarehouseArea, BODY_DTO(warehouseAreaListDTO::Wrapper, dto), execModifyWarehouseArea(dto));
 
 	//// 4.1 定义删除接口描述
 	//ENDPOINT_INFO(removeWarehouseArea) {
@@ -93,7 +93,7 @@ public:
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("warehouse-area.delete.summary"), Uint64JsonVO::Wrapper);
 	}
 	// 4.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/warehouseArea-settings/del-warehouseArea-by-id", removeWarehouseArea, BODY_DTO(List<UInt64>,ids), execRemoveWarehouseArea(ids));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/settings/location/del-warehouse_location-by-location_id/{location_id}", removeWarehouseArea, BODY_DTO(List<UInt64>,ids), execRemoveWarehouseArea(ids));
 
 	
 private:

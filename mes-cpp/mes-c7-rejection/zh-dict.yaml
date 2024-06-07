@@ -1,12 +1,12 @@
 materialinformation:
  get:
-  summary: 分页查询示例数据
+  summary: 获取生产退料单行列表（条件+分页）
  post:
-  summary: 添加生产退料单行列表
+  summary: 添加生产退料单行
  put:
-  summary: 修改生产退料单行列表
+  summary: 修改生产退料单行
  delete:
-  summary: 删除生产退料单行列表（支持批量删除）
+  summary: 删除生产退料单行（支持批量删除）
  field:
   rt_id: 生产退料ID
   rt_code: 退料单编号
@@ -27,13 +27,13 @@ materialinformation:
  
 RawMaterialOp:
  get:
-  summary: 生产退料单据列表导出
+  summary: 导出单据
  post:
   summary: 添加生产退料单行列表
  put:
-  summary: 执行退料（修改退料单）
+  summary: 执行退料
  delete:
-  summary: 删除生产退料单行列表（支持批量删除）
+  summary: 删除单据（支持批量删除）
  field:
   id: 生产退料编号
   name: 退料单名称
@@ -45,6 +45,7 @@ RawMaterialOp:
   download: 
    summary: 退料单据导出
    filename: 导出文件名称和格式
+
 reject: 
  fields:
   rt_code: 退料单编号
@@ -58,9 +59,9 @@ reject:
   status: 单据状态
   receivedstorage: 接收仓库
   remark: 备注
-  summary: 列表分页查询
-  detail: 详细信息
-  add: 增加单据
+  summary: 获取单据列表（条件+分页）
+  detail: 获取单据详情
+  add: 添加单据
   modify: 修改单据
   workorder_code: 生产工单编码
   warehouse_id: 仓库id

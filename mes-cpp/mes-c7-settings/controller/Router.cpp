@@ -58,16 +58,34 @@ void Router::initRouter()
 #ifdef HTTP_SERVER_DEMO
 	createSampleRouter();
 #endif
-	ROUTER_SIMPLE_BIND(AreaController);
+	
 
 	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(GetAllDetailsController);
-	ROUTER_SIMPLE_BIND(AddDelModController);
-	ROUTER_SIMPLE_BIND(GetAreaDetailsController);
-	ROUTER_SIMPLE_BIND(DetailsPageController);
 	ROUTER_SIMPLE_BIND(MergeMenuController);
 
+	ROUTER_SIMPLE_BIND(DetailsPageController);
+
+	ROUTER_SIMPLE_BIND(GetAllDetailsController);
+
+	ROUTER_SIMPLE_BIND(AddDelModController);
+
 	ROUTER_SIMPLE_BIND(warehouseAreaController);
+
+
+
+
+	// ROUTER_SIMPLE_BIND(GetAreaDetailsController);
+
+	ROUTER_SIMPLE_BIND(AreaController);
+
+
+	
+	
+	
+	
+	
+
+	
 }
 
 #ifdef HTTP_SERVER_DEMO

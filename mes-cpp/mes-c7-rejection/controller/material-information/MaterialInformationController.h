@@ -50,7 +50,7 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/materialinformation", queryMaterialInformation, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/rejection/material/query-product_reject-page", queryMaterialInformation, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, MaterialInformationQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -67,7 +67,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/materialinformation", addMaterialInformation, BODY_DTO(MaterialInformationDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/rejection/material/add-product_reject", addMaterialInformation, BODY_DTO(MaterialInformationDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddMaterialInformation(dto));
 	}
@@ -75,7 +75,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("materialinformation.put.summary"), modifyMaterialInformation, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/materialinformation", modifyMaterialInformation, BODY_DTO(MaterialInformationDTO::Wrapper, dto), execModifyMaterialInformation(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/rejection/material/mod-product_reject", modifyMaterialInformation, BODY_DTO(MaterialInformationDTO::Wrapper, dto), execModifyMaterialInformation(dto));
 
 
 	// 3.1 定义删除接口描述
@@ -86,7 +86,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("materialinformation.field.id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/materialinformation/{id}", removeMaterialInformation, PATH(UInt64, id), execRemoveMaterialInformation(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/rejection/material/del-product_reject-by-rt_id/{rt_id}", removeMaterialInformation, PATH(UInt64, id), execRemoveMaterialInformation(id));
 	
 private:
 	// 3.3 新增生产退料单行数据

@@ -39,7 +39,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "warehouse_name", ZH_WORDS_GETTER("reject.fields.warehouse_name"), "warehouse_name", false);
 	}
 	// 1.3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/reject/query-table", queryRejectTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/rejection/query-documents-page", queryRejectTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, RejectQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -63,7 +63,7 @@ public:
 		//API_DEF_ADD_QUERY_PARAMS(String, "sname", ZH_WORDS_GETTER("reject.fields.sname"), "N", false);
 	}
 	// 2.3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/reject/query-detail", queryRejectDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/rejection/query-documents-details", queryRejectDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, RejectDetailQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -82,7 +82,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/reject/add-order", addOrder, BODY_DTO(RejectDetailDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/rejection/add-documents", addOrder, BODY_DTO(RejectDetailDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddReject(dto));
 	}
@@ -90,7 +90,7 @@ public:
 	// 4.3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("reject.fields.modify"), modifyReject, Uint64JsonVO::Wrapper);
 	// 4.3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/reject/modify-order", modifyReject, BODY_DTO(RejectDetailDTO::Wrapper, dto), execModifyReject(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/rejection/mod-documents", modifyReject, BODY_DTO(RejectDetailDTO::Wrapper, dto), execModifyReject(dto));
 
 	
 private:

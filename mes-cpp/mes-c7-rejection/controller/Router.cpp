@@ -55,13 +55,11 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-
-	ROUTER_SIMPLE_BIND(RawMaterialOpController);
+	ROUTER_SIMPLE_BIND(RejectController);
 
 	ROUTER_SIMPLE_BIND(MaterialInformationController);
-	ROUTER_SIMPLE_BIND(RejectController);
-	ROUTER_SIMPLE_BIND(RawMaterialOpController);
 
+	ROUTER_SIMPLE_BIND(RawMaterialOpController);
 }
 
 #ifdef HTTP_SERVER_DEMO

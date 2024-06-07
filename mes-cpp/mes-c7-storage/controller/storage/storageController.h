@@ -27,6 +27,11 @@ class storageController : public oatpp::web::server::api::ApiController // 1 ¼Ì³
 	API_ACCESS_DECLARE(storageController);
 public:
 
+	// ¶¨ÒåĞŞ¸Ä½Ó¿ÚÃèÊö
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("storage.put.summary"), modifystorage, Uint64JsonVO::Wrapper);
+	// ¶¨ÒåĞŞ¸Ä½Ó¿Ú´¦Àí
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/storage/mod-storage", modifystorage, BODY_DTO(storageDTO::Wrapper, dto), execModifystorage(dto));
+
 	// ¶¨ÒåÉ¾³ıµ¥¾İ½Ó¿ÚÃèÊö Ö§³ÖÅúÁ¿É¾³ı
 	ENDPOINT_INFO(removestorage)
 	{
@@ -37,12 +42,9 @@ public:
 	}
 
 	//¶¨ÒåÉ¾³ıµ¥¾İ½Ó¿Ú´¦Àí
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/storage/{id}", removestorage, PATH(UInt64, id), execRemovestorage(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/storage/del-storage-by-recpt_id/{recpt_id}", removestorage, PATH(UInt64, id), execRemovestorage(id));
 
-	// ¶¨ÒåĞŞ¸Ä½Ó¿ÚÃèÊö
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("storage.put.summary"), modifystorage, Uint64JsonVO::Wrapper);
-	// ¶¨ÒåĞŞ¸Ä½Ó¿Ú´¦Àí
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/storage/{oprator}", modifystorage, BODY_DTO(storageDTO::Wrapper, dto), execModifystorage(dto));
+	
 
 
 	// ¶¨Òå²éÑ¯½Ó¿ÚÃèÊö
@@ -62,7 +64,7 @@ public:
 	}
 
 	//¶¨Òå²éÑ¯½Ó¿Ú´¦Àí
-	ENDPOINT(API_M_GET, "/Query", querystorage, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME)
+	ENDPOINT(API_M_GET, "/storage/query-storage", querystorage, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME)
 	{
 		// ½âÎö²éÑ¯²ÎÊıÎªQueryÁìÓòÄ£ĞÍ
 		API_HANDLER_QUERY_PARAM(userQuery, storageQuery, queryParams);

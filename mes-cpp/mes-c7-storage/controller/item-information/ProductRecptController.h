@@ -54,7 +54,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "warehouse_name", ZH_WORDS_GETTER("product-recpt.field.warehouse_name"), "warehouse_name", false);
 	}
 	//1.2定义查询接口处理
-	ENDPOINT(API_M_GET, "/ProductRecpt/query-ProductRecpt", queryProductRecpt, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/storage/material/query-product_recpt-page", queryProductRecpt, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为ProductRecptQuery领域模型,包含查询信息(recpt_code,recpt_name,workorder_code,warehouse_name)
 		API_HANDLER_QUERY_PARAM(query, ProductRecptQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -71,10 +71,15 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	//2.2新增产品入库接口处理
-	ENDPOINT(API_M_POST, "/ProductRecpt/add-ProductRecpt", addProductRecpt, BODY_DTO(ProductRecptDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/storage/material/add-product_recpt", addProductRecpt, BODY_DTO(ProductRecptDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddProductRecpt(dto));
 	}
+
+	// 3.1 定义修改接口描述
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("product-recpt.put.summary"), modifyProductRecpt, Uint64JsonVO::Wrapper);
+	// 3.2 定义修改接口处理
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/storage/material/mod-product_recpt", modifyProductRecpt, BODY_DTO(ProductRecptDTO::Wrapper, dto), execModifyProductRecpt(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeProductRecpt) {
@@ -84,12 +89,8 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "recpt_id", ZH_WORDS_GETTER("product-recpt.field.recpt_id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/product-recpt/{recpt_id}", removeProductRecpt, PATH(UInt64, recpt_id), execRemoveProductRecpt(recpt_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/storage/material/del-product_recpt-by-recpt_id/{recpt_id}", removeProductRecpt, PATH(UInt64, recpt_id), execRemoveProductRecpt(recpt_id));
 
-	// 3.1 定义修改接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("product-recpt.put.summary"), modifyProductRecpt, Uint64JsonVO::Wrapper);
-	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/product-recpt", modifyProductRecpt, BODY_DTO(ProductRecptDTO::Wrapper, dto), execModifyProductRecpt(dto));
 
 private:
 	// 1.3 分页查询产品入库

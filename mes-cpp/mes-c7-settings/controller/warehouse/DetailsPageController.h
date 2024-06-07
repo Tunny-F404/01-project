@@ -54,7 +54,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "warehouse_name", ZH_WORDS_GETTER("warehouse.field.warehouse_name"),"",false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/warehouse/warehousedetailspage", queryDetailsPage, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/settings/query-warehouse-page", queryDetailsPage, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, DetailsPageQuery, queryParams);
 		// 呼叫执行函数响应结果

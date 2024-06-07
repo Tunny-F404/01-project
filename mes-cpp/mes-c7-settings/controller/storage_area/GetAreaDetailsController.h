@@ -48,7 +48,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "nickname", ZH_WORDS_GETTER("user.field.nickname"), "li ming", true);
 	}
 	// 定义查询所有用户信息接口端点处理
-	API_HANDLER_ENDPOINT_QUERY_AUTH(API_M_GET, "/area/get", queryGetAreaDatails, GetAreaDetailsQuery, executeQueryAll(query));
+	API_HANDLER_ENDPOINT_QUERY_AUTH(API_M_GET, "/settings/area/get", queryGetAreaDatails, GetAreaDetailsQuery, executeQueryAll(query));
 private:
 	// 查询所有
 	GetAreaDetailsPageJsonVO::Wrapper executeQueryAll(const GetAreaDetailsQuery::Wrapper& userQuery);

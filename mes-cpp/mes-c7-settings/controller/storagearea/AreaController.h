@@ -38,7 +38,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(Int32, "position_z", ZH_WORDS_GETTER("storagearea.fields.positionz"), 0, false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/storagearea/query-area-table", queryArea, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/settings/area/query-warehouse_area-page", queryArea, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, AreaQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -56,7 +56,7 @@ public:
 	}
 		
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/storagearea/add-area", addArea, BODY_DTO(AreaDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/settings/area/add-warehouse_area", addArea, BODY_DTO(AreaDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddArea(dto, authObject->getPayload()));
 	}
@@ -64,12 +64,12 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("storagearea.modify.update"), modifyArea, Uint64JsonVO::Wrapper)
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/storagearea/modify-area", modifyArea, BODY_DTO(AreaDTO::Wrapper, dto), execModifyArea(dto, authObject->getPayload()));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/settings/area/mod-warehouse_area", modifyArea, BODY_DTO(AreaDTO::Wrapper, dto), execModifyArea(dto, authObject->getPayload()));
 
 	// 3.1 定义删除接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("storagearea.remove.delete"), removeArea, Uint64JsonVO::Wrapper)
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/storagearea/remove-area", removeArea, BODY_DTO(List<Int32>, idsdto), execRemoveArea(idsdto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/settings/area/del-warehouse_area-by-area_id/{area_id}", removeArea, BODY_DTO(List<Int32>, idsdto), execRemoveArea(idsdto));
 
 private:
 	// 3.3 演示分页查询数据
