@@ -61,9 +61,13 @@ public:
 		data.setMachineryName(resultSet->getString(3));
 		data.setMachineryBrand(resultSet->getString(4));
 		data.setMachineryTypeId(resultSet->getUInt64(5));
-		data.setMachinerySpec(resultSet->getString(6));
-		data.setWorkshopId(resultSet->getUInt64(7));
-		data.setRemark(resultSet->getString(8));
+		data.setMachineryTypeCode(resultSet->getString(6));
+		data.setMachineryTypeName(resultSet->getString(7));
+		data.setMachinerySpec(resultSet->getString(8));
+		data.setWorkshopId(resultSet->getUInt64(9));
+		data.setWorkshopCode(resultSet->getString(10));
+		data.setWorkshopName(resultSet->getString(11));
+		data.setRemark(resultSet->getString(12));
 
 
 		return data;

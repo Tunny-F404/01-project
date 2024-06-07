@@ -31,27 +31,27 @@ class MaintenancePlanDto : public oatpp::DTO
 {
 	DTO_INIT(MaintenancePlanDto, DTO);
 	//计划ID
-	API_DTO_FIELD(UInt64, id, ZH_WORDS_GETTER("maintenance.fields.planid"), false, 1);
+	API_DTO_FIELD(UInt64, id, ZH_WORDS_GETTER("maintenance.fields.planid"), true, 1);
 	//计划编码
-	API_DTO_FIELD(String,code,ZH_WORDS_GETTER("maintenance.fields.plancode"),true,"PLAN2024518");
+	API_DTO_FIELD(String,code,ZH_WORDS_GETTER("maintenance.fields.plancode"),true,"");
 	//计划名称
-	API_DTO_FIELD(String, name, ZH_WORDS_GETTER("maintenance.fields.planname"), true,"1");
+	API_DTO_FIELD(String, name, ZH_WORDS_GETTER("maintenance.fields.planname"), true,nullptr);
 	//计划类型
-	API_DTO_FIELD(String, type, ZH_WORDS_GETTER("maintenance.fields.plantype"), true,"CHECK");
+	API_DTO_FIELD(String, type, ZH_WORDS_GETTER("maintenance.fields.plantype"), true,"");
 	//频率类型（天，时，分）
-	API_DTO_FIELD(String, cycletype, ZH_WORDS_GETTER("maintenance.fields.cycletype"), true,"DAY");
+	API_DTO_FIELD(String, cycletype, ZH_WORDS_GETTER("maintenance.fields.cycletype"), true,nullptr);
 	//频率次数
-	API_DTO_FIELD(String, cyclecount, ZH_WORDS_GETTER("maintenance.fields.cyclecount"), true,"1");
+	API_DTO_FIELD(Int32, cyclecount, ZH_WORDS_GETTER("maintenance.fields.cyclecount"), true,0);
 	//计划开始时间
-	API_DTO_FIELD(String, startdate, ZH_WORDS_GETTER("maintenance.fields.startdate"), false,"2024-5-18");
+	API_DTO_FIELD(String, startdate, ZH_WORDS_GETTER("maintenance.fields.startdate"), false,nullptr);
 	//计划结束时间
-	API_DTO_FIELD(String, enddate, ZH_WORDS_GETTER("maintenance.fields.enddata"), false,"2024-5-19");
-	////计划状态（草稿或已完成，不可修改）
-	//API_DTO_FIELD(String, status, ZH_WORDS_GETTER("maintenance.fields.status"), true,"PREPARE");
-	////计划状态（停用或启用，可修改）
-	//API_DTO_FIELD(Int32, status01, ZH_WORDS_GETTER("maintenance.fields.status01"), true, 0);
+	API_DTO_FIELD(String, enddate, ZH_WORDS_GETTER("maintenance.fields.enddata"), false,nullptr);
 	//备注
 	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("maintenance.fields.remark"), false,"");
+	//更新者
+	API_DTO_FIELD(String, updateby, ZH_WORDS_GETTER("maintenance.fields.updateby"), true, "");
+	//更新时间
+	API_DTO_FIELD(String, updatetime, ZH_WORDS_GETTER("maintenance.fields.updatetime"), true, "");
 
 };
 

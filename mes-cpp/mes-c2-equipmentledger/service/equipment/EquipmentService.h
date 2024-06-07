@@ -31,9 +31,9 @@ public:
 	// 获取设备详情
 	EquipmentDetailDTO::Wrapper getDetail(const EquipmentDetailQuery::Wrapper& query);
 	//新增设备
-	uint64_t saveData(const addEquipmentDTO::Wrapper& dto);
+	uint64_t saveData(const addEquipmentDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 修改数据
-	bool modifyData(const modifyEquipmentDTO::Wrapper& dto);
+	bool modifyData(const modifyEquipmentDTO::Wrapper& dto, const PayloadDTO& payload);
 	
 };
 

@@ -101,8 +101,8 @@ list<DvRepairDO> RepairorderDAO::selectById(const uint64_t& id)
 
 uint64_t RepairorderDAO::insert(const DvRepairDO& iObj)
 {
-    string sql = "INSERT INTO `dv_repair` (`repair_code`, `repair_name`, `machinery_id`, `machinery_code`, `machinery_name`, `machinery_brand`, `machinery_type_id`, `require_date`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    return sqlSession->executeInsert(sql, "%s%s%ull%s%s%s%ull%dt%s",
+    string sql = "INSERT INTO `dv_repair` (`repair_code`, `repair_name`, `machinery_id`, `machinery_code`, `machinery_name`, `machinery_brand`, `machinery_type_id`, `require_date`, `remark`, `create_by`, `create_time`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    return sqlSession->executeInsert(sql, "%s%s%ull%s%s%s%ull%dt%s%s%s",
         iObj.getRepair_code(),
         iObj.getRepair_name(),
         iObj.getMachinery_id(),
@@ -111,13 +111,15 @@ uint64_t RepairorderDAO::insert(const DvRepairDO& iObj)
         iObj.getMachinery_brand(),
         iObj.getMachinery_type_id(),
         iObj.getRequire_date(),
-        iObj.getRemark());
+        iObj.getRemark(),
+        iObj.getCreate_by(),
+        iObj.getCreate_time());
 }
 
 int RepairorderDAO::update(const DvRepairDO& uObj)
 {
-    string sql = "UPDATE `dv_repair` SET `repair_code`=?, `repair_name`=?, `machinery_id`=?, `machinery_code`=?, `machinery_name`=?, `machinery_brand`=?, `machinery_type_id`=?, `require_date`=?, `remark`=? WHERE `repair_id`=?";
-    return sqlSession->executeUpdate(sql, "%s%s%ull%s%s%s%ull%dt%s%ull",
+    string sql = "UPDATE `dv_repair` SET `repair_code`=?, `repair_name`=?, `machinery_id`=?, `machinery_code`=?, `machinery_name`=?, `machinery_brand`=?, `machinery_type_id`=?, `require_date`=?, `remark`=?, `update_by`=?, `update_time`=? WHERE `repair_id`=?";
+    return sqlSession->executeUpdate(sql, "%s%s%ull%s%s%s%ull%dt%s%s%s%ull",
         uObj.getRepair_code(),
         uObj.getRepair_name(),
         uObj.getMachinery_id(),
@@ -127,6 +129,8 @@ int RepairorderDAO::update(const DvRepairDO& uObj)
         uObj.getMachinery_type_id(),
         uObj.getRequire_date(),
         uObj.getRemark(),
+        uObj.getUpdate_by(),
+        uObj.getUpdate_time(),
         uObj.getRepair_id());
 }
 

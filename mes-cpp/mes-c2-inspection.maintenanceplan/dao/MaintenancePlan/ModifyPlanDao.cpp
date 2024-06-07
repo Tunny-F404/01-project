@@ -42,6 +42,6 @@
 
 int ModifyPlanDao::update(const MaintenancePlanDo& uObj)
 {
-	string sql = "UPDATE `dv_check_plan` SET `plan_code`=?, `plan_name`=?, `plan_type`=?,`cycle_type`=?,`cycle_count`=?,`start_date`=?,`end_date`=?,`remark`=? WHERE `plan_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%ull", uObj.getCode(), uObj.getName(), uObj.getType(), uObj.getCycletype(), uObj.getCyclecount(), uObj.getStartdate(), uObj.getEnddate(), uObj.getRemark(), uObj.getId());
+	string sql = "UPDATE `dv_check_plan` SET `plan_code`=?, `plan_name`=?, `plan_type`=?,`cycle_type`=?,`cycle_count`=?,`start_date`=?,`end_date`=?,`remark`=?,`updateby`=?,`updatetime`=? WHERE `plan_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%i%s%s%s%s%s%ull", uObj.getCode(), uObj.getName(), uObj.getType(), uObj.getCycletype(), uObj.getCyclecount(), uObj.getStartdate(), uObj.getEnddate(), uObj.getRemark(), uObj.getUpdateby(), uObj.getUpdatetime(), uObj.getId());
 }

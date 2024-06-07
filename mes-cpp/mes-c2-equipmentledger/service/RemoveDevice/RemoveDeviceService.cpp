@@ -30,9 +30,9 @@ bool RemoveDeviceService::removeDevice(const RemoveDeviceListDTO::Wrapper& listD
 	sqlSession->beginTransaction();
 	bool flag = true;
 	for (auto code : *(listDto->item)) {
-		std::string device_code(code->device_code);
-		std::cout << device_code << std::endl;
-		if (!dao.removeDeviceOne(device_code)) {
+		std::uint64_t device_id(code->device_id);
+		std::cout << device_id << std::endl;
+		if (!dao.removeDeviceOne(device_id)) {
 			// É¾³ýÊ§°Ü£¬»Ø¹ö
 			sqlSession->rollbackTransaction();
 			flag = false;

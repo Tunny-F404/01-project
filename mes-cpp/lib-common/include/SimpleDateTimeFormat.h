@@ -37,7 +37,7 @@ public:
 	// Parameter: const std::string & fmt 格式字符串，默认值%Y-%m-%d %H:%M:%S（对应格式如：2023-01-01 01:01:01）
 	//************************************
 	static std::string format(const std::string& fmt = "%Y-%m-%d %H:%M:%S");
-
+	
 	//************************************
 	// Method:    formatWithMilli
 	// FullName:  SimpleDateTimeFormat::formatWithMilli

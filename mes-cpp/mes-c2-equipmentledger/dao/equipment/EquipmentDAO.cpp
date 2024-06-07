@@ -76,7 +76,8 @@ int EquipmentDAO::modify( dvMachineryDO iObj)
 	list<dvMachineryDO> MachineryList = getMachineryByid(iObj.getMachineryId());
 	dvMachineryDO machinery;
 
-	
+	uint64_t invalidTypeId = numeric_limits<uint64_t>::max();
+
 	if (!MachineryList.empty())
 	{
 		//获取指向第一个元素的迭代器
@@ -86,8 +87,12 @@ int EquipmentDAO::modify( dvMachineryDO iObj)
 		machinery.setMachineryName(it->getMachineryName());
 		machinery.setMachineryBrand(it->getMachineryBrand());
 		machinery.setMachineryTypeId(it->getMachineryTypeId());
+		machinery.setMachineryTypeCode(it->getMachineryTypeCode());
+		machinery.setMachineryTypeName(it->getMachineryTypeName());
 		machinery.setMachinerySpec(it->getMachinerySpec());
 		machinery.setWorkshopId(it->getWorkshopId());
+		machinery.setWorkshopCode(it->getWorkshopCode());
+		machinery.setWorkshopName(it->getWorkshopName());
 		machinery.setRemark(it->getRemark());
 	}
 	else
@@ -96,26 +101,26 @@ int EquipmentDAO::modify( dvMachineryDO iObj)
 		return 0;
 	}
 
-	uint64_t WorkshopId;
-	uint64_t machineryTypeId;
-	list<dvMachineryTypeDO>s1 = getMachinerytypeidByname(iObj.getMachineryTypeName());
-	if (!s1.empty())
-	{
-		 //获取指向第一个元素的迭代器
-		list<dvMachineryTypeDO>::iterator it = s1.begin();
-		// 获取第一个 machinery_type_id
-		machineryTypeId = it->getMachineryTypeId();
-	}
-	
+	//uint64_t WorkshopId;
+	//uint64_t machineryTypeId;
+	//list<dvMachineryTypeDO>s1 = getMachinerytypeidByname(iObj.getMachineryTypeName());
+	//if (!s1.empty())
+	//{
+	//	 //获取指向第一个元素的迭代器
+	//	list<dvMachineryTypeDO>::iterator it = s1.begin();
+	//	// 获取第一个 machinery_type_id
+	//	machineryTypeId = it->getMachineryTypeId();
+	//}
+	//
 
-	list<MdWorkshopDO>s2 = getWorkshopidByname(iObj.getWorkshopName());
-	if (!s2.empty())
-	{
-		// 获取指向第一个元素的迭代器
-		list<MdWorkshopDO>::iterator it = s2.begin();
-		// 获取第一个 machinery_type_id
-		WorkshopId = it->getWorkshopId();
-	}
+	//list<MdWorkshopDO>s2 = getWorkshopidByname(iObj.getWorkshopName());
+	//if (!s2.empty())
+	//{
+	//	// 获取指向第一个元素的迭代器
+	//	list<MdWorkshopDO>::iterator it = s2.begin();
+	//	// 获取第一个 machinery_type_id
+	//	WorkshopId = it->getWorkshopId();
+	//}
 
 
 	if (iObj.getMachineryCode().empty())
@@ -130,17 +135,50 @@ int EquipmentDAO::modify( dvMachineryDO iObj)
 	{
 		iObj.setMachineryBrand( machinery.getMachineryBrand());
 	}
-	if (iObj.getMachineryTypeName().empty())
+
+
+	if (iObj.getMachineryTypeId()!= invalidTypeId)
 	{
-		machineryTypeId = machinery.getMachineryTypeId();
+		
+		list<dvMachineryTypeDO>path1 = getMachinerytypeByid(iObj.getMachineryTypeId());
+		if (!path1.empty())
+		{
+			auto it = path1.begin();
+			iObj.setMachineryTypeCode(it->getMachineryTypeCode());
+			iObj.setMachineryTypeName(it->getMachineryTypeName());
+		}
+
 	}
+	else
+	{
+		
+		iObj.setMachineryTypeId( machinery.getMachineryTypeId());
+		iObj.setMachineryTypeCode(machinery.getMachineryTypeCode());
+		iObj.setMachineryTypeName(machinery.getMachineryTypeName());
+	}
+	
+
 	if (iObj.getMachinerySpec().empty())
 	{
 		iObj.setMachinerySpec(machinery.getMachinerySpec());
 	}
-	if (iObj.getWorkshopName().empty())
+
+	if (iObj.getWorkshopId()!= invalidTypeId)
 	{
-		WorkshopId = machinery.getWorkshopId();
+		list<MdWorkshopDO> path = getWorkshopByid(iObj.getWorkshopId());
+		if (!path.empty())
+		{
+			auto it = path.begin();
+			iObj.setWorkshopCode(it->getWorkshopCode());
+			iObj.setWorkshopName(it->getWorkshopName());
+		}
+	}
+	else
+	{
+		iObj.setWorkshopId(machinery.getWorkshopId());
+		iObj.setWorkshopCode(machinery.getWorkshopCode());
+		iObj.setWorkshopName(machinery.getWorkshopName());
+
 	}
 	if (iObj.getRemark().empty())
 	{
@@ -148,8 +186,11 @@ int EquipmentDAO::modify( dvMachineryDO iObj)
 	}
 
 
-	string sql = "UPDATE `dv_machinery` SET `machinery_code`=?, `machinery_name`=?, `machinery_brand`=?,`machinery_type_id`=?,`machinery_spec`=?,`workshop_id`=?,`remark`=? WHERE `machinery_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%i%s%i%s%i", iObj.getMachineryCode(), iObj.getMachineryName(), iObj.getMachineryBrand(), machineryTypeId, iObj.getMachinerySpec(), WorkshopId, iObj.getRemark(),iObj.getMachineryId());
+
+
+
+	string sql = "UPDATE `dv_machinery` SET `machinery_code`=?, `machinery_name`=?, `machinery_brand`=?,`machinery_type_id`=?,`machinery_type_code`=?,`machinery_type_name`=?,`machinery_spec`=?,`workshop_id`=?,`workshop_code`=?,`workshop_name`=?,`remark`=?,`update_by`=?,`update_time`=? WHERE `machinery_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%i%s%s%s%i%s%s%s%s%s%i", iObj.getMachineryCode(), iObj.getMachineryName(), iObj.getMachineryBrand(), iObj.getMachineryTypeId(),iObj.getMachineryTypeCode(),iObj.getMachineryTypeName(), iObj.getMachinerySpec(), iObj.getWorkshopId(),iObj.getWorkshopCode(),iObj.getWorkshopName(), iObj.getRemark(),iObj.getUpdateBy(),iObj.getUpdateTime(), iObj.getMachineryId());
 }
 
 list<MdWorkshopDO> EquipmentDAO::getWorkshopByid(std::int64_t id)
@@ -168,46 +209,63 @@ list<dvMachineryTypeDO> EquipmentDAO::getMachinerytypeByid(std::int64_t id)
 
 list<dvMachineryDO> EquipmentDAO::getMachineryByid(std::int64_t id)
 {
-	string sql = "SELECT machinery_id,machinery_code,machinery_name,machinery_brand,machinery_type_id,machinery_spec,workshop_id,remark FROM dv_machinery WHERE `machinery_id`=?";
+	string sql = "SELECT machinery_id,machinery_code,machinery_name,machinery_brand,machinery_type_id,machinery_type_code,machinery_type_name,machinery_spec,workshop_id,workshop_code,workshop_name,remark FROM dv_machinery WHERE `machinery_id`=?";
 	EquipmentSampleMapper mapper;
 	return sqlSession->executeQuery<dvMachineryDO, EquipmentSampleMapper>(sql, mapper, "%i", id);
 }
 
-uint64_t EquipmentDAO::insert(const dvMachineryDO& iObj)
+uint64_t EquipmentDAO::insert( dvMachineryDO& iObj)
 {
-	uint64_t machineryTypeId;
-	uint64_t WorkshopId;
-	list<dvMachineryTypeDO>s1= getMachinerytypeidByname(iObj.getMachineryTypeName());
-	if (!s1.empty())
+	//uint64_t machineryTypeId;
+	//uint64_t WorkshopId;
+	//list<dvMachineryTypeDO>s1= getMachinerytypeidByname(iObj.getMachineryTypeName());
+	//if (!s1.empty())
+	//{
+	//	// 获取指向第一个元素的迭代器
+	//	list<dvMachineryTypeDO>::iterator it = s1.begin();
+	//	// 获取第一个 machinery_type_id
+	//	 machineryTypeId = it->getMachineryTypeId();
+	//}
+	//else
+	//{
+	//	RS_PARAMS_INVALID;
+	//	return 0;
+	//}
+
+	//list<MdWorkshopDO>s2 = getWorkshopidByname(iObj.getWorkshopName());
+	//if (!s2.empty())
+	//{
+	//	// 获取指向第一个元素的迭代器
+	//	list<MdWorkshopDO>::iterator it = s2.begin();
+	//	// 获取第一个 machinery_type_id
+	//	 WorkshopId = it->getWorkshopId();
+	//}
+	//else
+	//{
+	//	RS_PARAMS_INVALID;
+	//	return 0;
+	//}
+
+	EquipmentDAO dao;
+	list<MdWorkshopDO> path = dao.getWorkshopByid(iObj.getWorkshopId());
+	if (!path.empty())
 	{
-		// 获取指向第一个元素的迭代器
-		list<dvMachineryTypeDO>::iterator it = s1.begin();
-		// 获取第一个 machinery_type_id
-		 machineryTypeId = it->getMachineryTypeId();
+		auto it = path.begin();
+		iObj.setWorkshopCode(it->getWorkshopCode());
+		iObj.setWorkshopName(it->getWorkshopName());
 	}
-	else
+
+	list<dvMachineryTypeDO>path1 = dao.getMachinerytypeByid(iObj.getMachineryTypeId());
+	if (!path1.empty())
 	{
-		RS_PARAMS_INVALID;
-		return 0;
-	}
-
-	list<MdWorkshopDO>s2 = getWorkshopidByname(iObj.getWorkshopName());
-	if (!s2.empty())
-	{
-		// 获取指向第一个元素的迭代器
-		list<MdWorkshopDO>::iterator it = s2.begin();
-		// 获取第一个 machinery_type_id
-		 WorkshopId = it->getWorkshopId();
-	}
-	else
-	{
-		RS_PARAMS_INVALID;
-		return 0;
+		auto it = path1.begin();
+		iObj.setMachineryTypeCode(it->getMachineryTypeCode());
+		iObj.setMachineryTypeName(it->getMachineryTypeName());
 	}
 
 
 
-	string sql = "INSERT INTO `dv_machinery` (`machinery_code`, `machinery_name`, `machinery_brand`,`machinery_type_id`,`machinery_spec`,`workshop_id`,`remark`) VALUES (?, ?, ?,?,?,?,?)";
+	string sql = "INSERT INTO `dv_machinery` (`machinery_code`, `machinery_name`, `machinery_brand`,`machinery_type_id`,`machinery_type_code`,`machinery_type_name`,`machinery_spec`,`workshop_id`,`workshop_code`,`workshop_name`,`create_by`,`create_time`,`remark`) VALUES (?, ?, ?,?,?,?,?,?,?,?,?,?,?)";
 
-	return sqlSession->executeInsert(sql, "%s%s%s%i%s%i%s", iObj.getMachineryCode(), iObj.getMachineryName(), iObj.getMachineryBrand(), machineryTypeId, iObj.getMachinerySpec(), WorkshopId, iObj.getRemark());
+	return sqlSession->executeInsert(sql, "%s%s%s%i%s%s%s%i%s%s%s%s%s", iObj.getMachineryCode(), iObj.getMachineryName(), iObj.getMachineryBrand(),iObj.getMachineryTypeId(), iObj.getMachineryTypeCode(),iObj.getMachineryTypeName(),iObj.getMachinerySpec(), iObj.getWorkshopId(),iObj.getWorkshopCode(),iObj.getWorkshopName(),iObj.getCreateBy(),iObj.getCreateTime(), iObj.getRemark());
 }

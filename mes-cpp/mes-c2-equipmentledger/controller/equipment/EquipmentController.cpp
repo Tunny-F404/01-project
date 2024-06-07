@@ -45,19 +45,19 @@ EquipmentDetailJsonVO::Wrapper EquipmentController::execEquipmentDetail(const Eq
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper EquipmentController::execAddEquipment(const addEquipmentDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper EquipmentController::execAddEquipment(const addEquipmentDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if (!dto->eCode || !dto->eName || !dto->brand || !dto->tName || !dto->spec || !dto->workshopName|| !dto->note)
+	if (!dto->eCode || !dto->eName || !dto->tId  || !dto->workshopId)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->eCode->empty() || dto->eName->empty()  || dto->tName->empty() || dto->workshopName->empty() )
+	if (dto->eCode->empty() || dto->eName->empty()  || dto->tId<0 || dto->workshopId<0 )
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -66,7 +66,7 @@ Uint64JsonVO::Wrapper EquipmentController::execAddEquipment(const addEquipmentDT
 	// 定义一个Service
 	EquipmentService service;
 	// 执行数据新增
-	uint64_t id = service.saveData(dto);
+	uint64_t id = service.saveData(dto,payload);
 	if (id > 0) 
 	{
 		jvo->success(UInt64(id));
@@ -79,13 +79,13 @@ Uint64JsonVO::Wrapper EquipmentController::execAddEquipment(const addEquipmentDT
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper EquipmentController::executeModifyEquipment(const modifyEquipmentDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper EquipmentController::executeModifyEquipment(const modifyEquipmentDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 	// 参数校验
 	// 非空校验
-	if (!dto->eId || !dto->eCode || !dto->eName || !dto->brand || !dto->tName || !dto->spec || !dto->workshopName || !dto->note)
+	if (!dto->eId)
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -100,7 +100,7 @@ Uint64JsonVO::Wrapper EquipmentController::executeModifyEquipment(const modifyEq
 	// 定义一个Service
 	EquipmentService service;
 	// 执行数据
-	uint64_t id = service.modifyData(dto);
+	uint64_t id = service.modifyData(dto,payload);
 	if (id > 0)
 	{
 		jvo->success(UInt64(id));

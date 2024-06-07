@@ -43,10 +43,13 @@ public: // 定义接口
 			ZH_WORDS_GETTER("equipmentledger.export-device.device-code"), {}, false);
 		API_DEF_ADD_QUERY_PARAMS(String, "device_name",
 			ZH_WORDS_GETTER("equipmentledger.export-device.device-name"), {}, false);
+
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
 	}
 
 	ENDPOINT(API_M_GET, "/equipment-ledger/export-device", exportDevice,
-		QUERIES(QueryParams, queryParams))
+		QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME)
 	{
 		// 解析查询参数
 		API_HANDLER_QUERY_PARAM(query, ExportDeviceQuery, queryParams);

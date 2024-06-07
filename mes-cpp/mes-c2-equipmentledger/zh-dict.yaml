@@ -11,7 +11,7 @@ equipment:
   tname: 设备类型名称
   tid: 设备类型id
   tcode: 设备类型编码
-  id: 设备主键
+  id: 设备ID
   brand: 品牌
   spec: 规格型号
   workshopid: 所属车间Id

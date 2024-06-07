@@ -38,9 +38,12 @@ public: // 定义接口
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("equipmentledger.download-template.summary"));
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
+
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
 	}
 	// 定义接口执行
-	ENDPOINT(API_M_GET, "/equipment-ledger/download-template", downloadTemplate) {
+	ENDPOINT(API_M_GET, "/equipment-ledger/download-template", downloadTemplate, API_HANDLER_AUTH_PARAME) {
 		// 定义执行函数
 		API_HANDLER_RESP_VO(execDownloadTemplate());
 	}
