@@ -38,6 +38,9 @@ public: // 定义接口
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
 
+		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
+		API_DEF_ADD_AUTH();
+
 		// 定义其它参数描述
 		API_DEF_ADD_QUERY_PARAMS(String, "plan_code",
 			ZH_WORDS_GETTER("plan.export-plan.plan-code"), {}, false);
@@ -50,7 +53,7 @@ public: // 定义接口
 	}
 
 	ENDPOINT(API_M_GET, "/inspe-matain/export-plan/", exportPlan,
-		QUERIES(QueryParams, queryParams))
+		QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME)
 	{
 		// 解析查询参数
 		API_HANDLER_QUERY_PARAM(query, ExportPlanQuery, queryParams);
