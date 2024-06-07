@@ -227,20 +227,35 @@ export default {
 	},
 	methods: {
 		search() {
-			console.log(
-				"搜索:",
-				this.workOrderCode,
-				this.workOrderName,
-				this.workOrderType,
-				this.demandDate,
-				this.productCode,
-				this.productName,
-				this.sourceOrder,
-				this.customerCode,
-				this.customerName,
-				this.orderStatus,
-			);
-			// 这里添加搜索逻辑
+			const filters = {
+				workstationCode: this.workstationCode.trim(), // 去除输入内容两端的空白字符
+				workstationName: this.workstationName.trim(), // 去除输入内容两端的空白字符
+				selectedWorkshop: this.selectedWorkshop,
+				selectedOrder: this.selectedOrder,
+			};
+
+			// 如果两个输入框都为空，则恢复显示所有数据
+			if (!filters.workstationCode && !filters.workstationName) {
+				this.reset();
+				return;
+			}
+
+			// 对表格数据进行过滤
+			const filteredData = this.tableData.filter((item) => {
+				// 根据工作站编码进行过滤
+				if (filters.workstationCode && !item.code.includes(filters.workstationCode)) {
+					return false;
+				}
+				// 根据工作站名称进行过滤
+				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
+					return false;
+				}
+
+				return true; // 如果都符合过滤条件，则返回 true
+			});
+
+			// 更新表格数据为过滤后的数据
+			this.tableData = filteredData;
 		},
 		reset() {
 			this.workOrderCode = "";
