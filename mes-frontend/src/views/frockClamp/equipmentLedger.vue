@@ -79,20 +79,20 @@
 		<el-button type="danger" plain><el-icon>
 				<Delete />
 			</el-icon>删除</el-button>
-		<el-table v-loading="loading" :data="typeList" @selection-change="handleSelectionChange">
+		<el-table v-loading="loading" :data="equipmentLedgerList" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55"></el-table-column>
 			<el-table-column prop="equipmentLedgerCode" label="编号" align="center"></el-table-column>
 			<el-table-column prop="equipmentLedgerName" label="名称" align="center"></el-table-column>
 			<el-table-column prop="brand" label="品牌" align="center"></el-table-column>
 			<el-table-column prop="equipmentLedgerType" label="型号" align="center"></el-table-column>
-			<el-table-column prop="enableFlag" label="类型" align="center"></el-table-column>
-			<el-table-column prop="enableFlag" label="存货数量" align="center"></el-table-column>
-			<el-table-column prop="enableFlag" label="可用数量" align="center"></el-table-column>
-			<el-table-column prop="enableFlag" label="保养维护类型" align="center"></el-table-column>
-			<el-table-column prop="enableFlag" label="下次保养周期" align="center"></el-table-column>
-			<el-table-column prop="enableFlag" label="下次保养日期" align="center"></el-table-column>
-			<el-table-column prop="enableFlag" label="状态" align="center"></el-table-column>
-			<el-table-column prop="enableFlag" label="操作" align="center"></el-table-column>
+			<el-table-column prop="type" label="类型" align="center"></el-table-column>
+			<el-table-column prop="inventory" label="存货数量" align="center"></el-table-column>
+			<el-table-column prop="usable" label="可用数量" align="center"></el-table-column>
+			<el-table-column prop="maintenance" label="保养维护类型" align="center"></el-table-column>
+			<el-table-column prop="maintenanceWeek" label="下次保养周期" align="center"></el-table-column>
+			<el-table-column prop="maintenanceDay" label="下次保养日期" align="center"></el-table-column>
+			<el-table-column prop="state" label="状态" align="center"></el-table-column>
+			<el-table-column prop="handle" label="操作" align="center"></el-table-column>
 		</el-table>
 	</tableFrame>
 </template>
@@ -140,7 +140,7 @@ const equipmentLedgerType = ref('');
 const brand = ref('');
 const model = ref('');
 const state = ref('');
-const type = reactive({
+const equipmentLedger = reactive({
 	equipmentLedgerCode: '',
 	equipmentLedgerName: '',
 	equipmentLedgerType: '',
@@ -156,6 +156,36 @@ const reFresh = () => {
 	model.value = '';
 	state.value = '';
 }
+const equipmentLedgerList = [
+	{
+		equipmentLedgerCode: 'T00074',
+		equipmentLedgerName: 'XX刀具',
+		brand: 'XX品牌',
+		equipmentLedgerType: 'XXX型号',
+		type: '刀具',
+		inventory: 70,
+		usable: 60,
+		maintenance: '定期维护',
+		maintenanceWeek: '',
+		maintenanceDay: '2025-05-16',
+		state: '在库',
+		handle: ''
+	},
+	{
+		equipmentLedgerCode: 'T00060',
+		equipmentLedgerName: 'XX模具',
+		brand: 'XXX牌',
+		equipmentLedgerType: 'XXX型号',
+		type: '模具',
+		inventory: 1,
+		usable: 1,
+		maintenance: '定期维护',
+		maintenanceWeek: '',
+		maintenanceDay: '2025-05-20',
+		state: '在库',
+		handle: ''
+	},
+] 
 </script>
 
 <style></style>
