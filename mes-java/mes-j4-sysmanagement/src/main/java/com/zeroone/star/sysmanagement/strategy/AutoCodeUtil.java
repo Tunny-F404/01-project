@@ -37,7 +37,6 @@ public class AutoCodeUtil {
 
     private String lastSerialNo;
 
-    @Log(title = "生成业务编号",businessType = BusinessType.INSERT)
     synchronized
     public String genSerialCode(String ruleCode,String inputCharacter){
 

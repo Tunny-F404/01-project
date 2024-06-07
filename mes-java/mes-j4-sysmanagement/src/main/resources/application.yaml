@@ -1,9 +1,9 @@
 server:
-  port: ${sp.sysmanagement}
+  port: ${sp.sysmanagementj4}
 
 spring:
   application:
-    name: ${sn.sysmanagement}
+    name: ${sn.sysmanagementj4}
 logstash:
   host: 47.113.227.111
   cloud:

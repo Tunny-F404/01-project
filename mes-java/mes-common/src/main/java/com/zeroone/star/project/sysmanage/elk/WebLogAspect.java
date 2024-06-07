@@ -95,7 +95,11 @@ public class WebLogAspect {
             }
             //将RequestParam注解修饰的参数作为请求参数
             RequestParam requestParam = parameters[i].getAnnotation(RequestParam.class);
-            String clsName = args[i].getClass().getName();
+            String clsName = "";
+            if (args[i]!=null) {
+                clsName = args[i].getClass().getName();
+            }
+//            String clsName = args[i].getClass().getName();
             if (requestParam != null) {
                 Map<String, Object> map = new HashMap<>(1);
                 String key = parameters[i].getName();

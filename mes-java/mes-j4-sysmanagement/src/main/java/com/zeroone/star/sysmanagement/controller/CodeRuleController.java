@@ -7,13 +7,15 @@ import com.zeroone.star.project.dto.j4.sysmanagement.coderule.CodeRuleDTO;
 import com.zeroone.star.project.j4.sysmanagement.coderule.CodeRuleApis;
 import com.zeroone.star.project.query.j4.sysmanagement.coderule.CodeRuleQuery;
 import com.zeroone.star.project.vo.JsonVO;
+import com.zeroone.star.sysmanagement.annotation.Log;
+import com.zeroone.star.sysmanagement.constant.BusinessType;
 import com.zeroone.star.sysmanagement.entity.CodeRule;
 import com.zeroone.star.sysmanagement.mapper.MsCodeRuleMapper;
 import com.zeroone.star.sysmanagement.service.ICodeRuleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -108,6 +110,7 @@ public class CodeRuleController implements CodeRuleApis {
 
     /**
      * 获取唯一编码
+     *
      * @param ruleCode
      * @param inputCharacter
      * @return
@@ -115,10 +118,12 @@ public class CodeRuleController implements CodeRuleApis {
     @GetMapping("/get-auto-code/{ruleCode}")
     @ApiOperation("获取唯一编码")
     @Override
-    public String getAutoCode(@PathVariable("ruleCode") String ruleCode,
-                              @RequestParam(name = "inputCharacter",required = false) String inputCharacter) {
+    @Log(title = "生成业务编号",businessType = BusinessType.INSERT)
+    public JsonVO<String> getAutoCode(@ApiParam(value = "规则编码", example = "CLIENT_CODE") @PathVariable("ruleCode") String ruleCode,
+                                      @ApiParam(value = "输入字符", example = "SERIALNO") @RequestParam(name = "inputCharacter",required = false) String inputCharacter) {
         log.info("获取唯一编码,{},{}",ruleCode,inputCharacter);
-        return iCodeRuleService.getAutoCode(ruleCode,inputCharacter);
+        String autoCode = iCodeRuleService.getAutoCode(ruleCode, inputCharacter);
+        return JsonVO.success(autoCode);
     }
 }
 
