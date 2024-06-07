@@ -41,7 +41,7 @@ public:
 	//API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ModifyPlanStatus/modify-plan-status", modifyplanstatus, BODY_DTO(ModifyPlanStatusDto::Wrapper, dto), execModifyPlanStatus(dto));
 	
 	// 4定义修改设备端点处理
-	ENDPOINT(API_M_PUT, "/ModifyPlanStatus/modify-plan-status", modifyplanstatus, BODY_DTO(ModifyPlanStatusDto::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_PUT, "/inspe-matain/modify-plan-status", modifyplanstatus, BODY_DTO(ModifyPlanStatusDto::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 
 		//呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execModifyPlanStatus(dto, authObject->getPayload()));
