@@ -52,7 +52,7 @@ public: // 定义接口
 			ZH_WORDS_GETTER("plan.export-plan.state"), {}, false);*/
 	}
 
-	ENDPOINT(API_M_GET, "/inspe-matain/export-plan/", exportPlan,
+	ENDPOINT(API_M_GET, "/inspe-matain/export-plan", exportPlan,
 		QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME)
 	{
 		// 解析查询参数
