@@ -1,6 +1,5 @@
 #pragma once
-tations under the License.
-*/
+
 #ifndef _RETURN_DO_
 #define _RETURN_DO_
 #include "../DoInclude.h"
