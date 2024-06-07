@@ -4,7 +4,7 @@ import { ElMessage } from "element-plus";
  import { addMessage, delMessage, getMessage, listMessage, updateMessage } from "@/apis/system/message";
 import UserSingleSelect from "@/components/userSelect/single.vue";
 import { error } from "console";
-
+import { ElPagination } from 'element-plus';
 // 响应式状态
 const state = reactive({
 	loading: true,
@@ -234,11 +234,28 @@ function onUserSelected(user) {
 		form.value.recipientNick = user.nickName;
 	}
 }
+
+function formatMessageType(value) {
+	const type = messageTypes.value.find((type) => type.value === value);
+	return type ? type.label : value;
+}
+
+function formatMessageLevel(value) {
+	const level = messageLevels.value.find((level) => level.value === value);
+	return level ? level.label : value;
+}
+
+function formatStatus(value) {
+	const status = messageStatuses.value.find((status) => status.value === value);
+	return status ? status.label : value;
+}
 </script>
 
 <template>
 	<div class="app-container">
-		<el-form v-show="showSearch" ref="queryForm" :model="queryParams" size="small" :inline="true" label-width="100px">
+		<!-- 搜索表单 -->
+		<el-form v-show="showSearch" ref="queryForm" :model="queryParams" size="small" :inline="true"
+			label-width="100px">
 			<!-- 消息类型选择 -->
 			<el-form-item label="消息类型" prop="messageType">
 				<el-select v-model="queryParams.messageType" placeholder="请选择消息类型" clearable>
@@ -248,7 +265,8 @@ function onUserSelected(user) {
 			<!-- 消息级别选择 -->
 			<el-form-item label="消息级别" prop="messageLevel">
 				<el-select v-model="queryParams.messageLevel" placeholder="请选择消息级别" clearable>
-					<el-option v-for="item in messageLevels" :key="item.value" :label="item.label" :value="item.value" />
+					<el-option v-for="item in messageLevels" :key="item.value" :label="item.label"
+						:value="item.value" />
 				</el-select>
 			</el-form-item>
 			<!-- 发送人输入 -->
@@ -262,34 +280,50 @@ function onUserSelected(user) {
 			<!-- 状态选择 -->
 			<el-form-item label="状态" prop="status">
 				<el-select v-model="queryParams.status" placeholder="请选择状态" clearable>
-					<el-option v-for="item in messageStatuses" :key="item.value" :label="item.label" :value="item.value" />
+					<el-option v-for="item in messageStatuses" :key="item.value" :label="item.label"
+						:value="item.value" />
 				</el-select>
 			</el-form-item>
 			<!-- 搜索和重置按钮 -->
 			<el-form-item>
-				<el-button type="primary" icon="el-icon-search" size="small" @click="handleQuery">搜索</el-button>
-				<el-button icon="el-icon-refresh" size="small" @click="resetQuery">重置</el-button>
+				<el-button type="primary" size="small" @click="handleQuery">搜索</el-button>
+				<el-button size="small" @click="resetQuery">重置</el-button>
 			</el-form-item>
 		</el-form>
 
 		<!-- 消息列表表格 -->
 		<el-table v-loading="loading" :data="messageList" @selection-change="handleSelectionChange">
-			<!-- 表格列定义 -->
+			<el-table-column type="selection" width="55"></el-table-column>
+			<el-table-column prop="messageTitle" label="消息标题" sortable></el-table-column>
+			<el-table-column prop="messageType" label="消息类型" :formatter="formatMessageType"></el-table-column>
+			<el-table-column prop="messageLevel" label="消息级别" :formatter="formatMessageLevel"></el-table-column>
+			<el-table-column prop="senderName" label="发送人"></el-table-column>
+			<el-table-column prop="recipientName" label="接收人"></el-table-column>
+			<el-table-column prop="status" label="状态" :formatter="formatStatus"></el-table-column>
+			<el-table-column prop="createTime" label="创建时间" sortable></el-table-column>
+			<el-table-column label="操作" fixed="right" width="120">
+				<template #default="{ row }">
+					<el-button type="text" size="small" @click="handleUpdate(row)">编辑</el-button>
+					<el-button type="text" size="small" @click="handleDelete(row)">删除</el-button>
+				</template>
+			</el-table-column>
 		</el-table>
 
 		<!-- 分页组件 -->
-		<pagination
-			v-show="total > 0"
-			v-model:page="queryParams.pageNum"
-			v-model:limit="queryParams.pageSize"
-			:total="total"
-			@pagination="getList"
-		/>
+		<el-pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
+			:total="total" @pagination="getList" />
 
 		<!-- 添加或修改消息对话框 -->
 		<el-dialog v-model:visible="open" :title="title" width="960px" append-to-body>
 			<el-form ref="form" :model="form" :rules="rules" label-width="100px">
 				<!-- 表单内容 -->
+				<el-form-item label="消息标题" prop="messageTitle">
+					<el-input v-model="form.messageTitle" placeholder="请输入消息标题"></el-input>
+				</el-form-item>
+				<el-form-item label="消息内容" prop="messageContent">
+					<el-input type="textarea" v-model="form.messageContent" placeholder="请输入消息内容"></el-input>
+				</el-form-item>
+				<!-- 其他表单项 -->
 			</el-form>
 			<template #footer>
 				<div class="dialog-footer">

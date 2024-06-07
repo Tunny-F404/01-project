@@ -231,9 +231,9 @@ const selectedRow = ref(null);
 <template>
 	<tableFrame title="供应商退货管理">
 		<template #extra>
-			<el-button @click="handleExport"
-				>导出数据<el-icon :size="22"><UploadFilled /></el-icon
-			></el-button>
+			<el-button @click="handleExport">导出数据<el-icon :size="22">
+					<UploadFilled />
+				</el-icon></el-button>
 		</template>
 
 		<!-- 搜索表单 -->
@@ -263,12 +263,12 @@ const selectedRow = ref(null);
 				</el-col>
 				<el-col :span="8">
 					<el-form-item>
-						<el-button type="primary" @click="handleQuery"
-							><el-icon><Search /></el-icon>查询</el-button
-						>
-						<el-button @click="resetQuery"
-							><el-icon><Refresh /></el-icon>重置</el-button
-						>
+						<el-button type="primary" @click="handleQuery"><el-icon>
+								<Search />
+							</el-icon>查询</el-button>
+						<el-button @click="resetQuery"><el-icon>
+								<Refresh />
+							</el-icon>重置</el-button>
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -276,23 +276,24 @@ const selectedRow = ref(null);
 
 		<!-- 操作按钮 -->
 		<el-button type="primary" plain @click="handleAdd">
-			<el-icon><Plus /></el-icon>新增
+			<el-icon>
+				<Plus />
+			</el-icon>新增
 		</el-button>
 		<el-button type="success" plain @click="handleUpdate(selectedRow)">
-			<el-icon><EditPen /></el-icon>修改
+			<el-icon>
+				<EditPen />
+			</el-icon>修改
 		</el-button>
 		<el-button type="danger" plain @click="handleDelete(selectedRow)">
-			<el-icon><Delete /></el-icon>删除
+			<el-icon>
+				<Delete />
+			</el-icon>删除
 		</el-button>
 
 		<!-- 数据表格 -->
-		<el-table
-			:data="tableList"
-			style="width: 100%"
-			v-loading="loading"
-			@selection-change="handleSelectionChange"
-			ref="multipleTable"
-		>
+		<el-table :data="tableList" style="width: 100%" v-loading="loading" @selection-change="handleSelectionChange"
+			ref="multipleTable">
 			<el-table-column type="selection" width="45" />
 			<el-table-column type="index" label="序号" width="55"></el-table-column>
 			<el-table-column prop="rtCode" label="退货单编号" width="85" align="center"></el-table-column>
@@ -303,7 +304,8 @@ const selectedRow = ref(null);
 			<el-table-column prop="rtDate" label="退货日期" width="150" align="center"></el-table-column>
 			<el-table-column prop="status" label="单据状态" width="80" align="center">
 				<template #default="{ row }">
-					<el-tag :class="row.status === 'PREPARE' ? 'status-enabled' : 'status-disabled'" style="cursor: pointer">
+					<el-tag :class="row.status === 'PREPARE' ? 'status-enabled' : 'status-disabled'"
+						style="cursor: pointer">
 						{{ row.status === "PREPARE" ? "草稿" : "已完成" }}
 					</el-tag>
 				</template>
@@ -311,30 +313,29 @@ const selectedRow = ref(null);
 			<el-table-column label="操作" width="200" align="center">
 				<template #default="{ row, $index }">
 					<el-button @click="handleUpdate(row, $index)" circle type="primary">
-						<el-icon :size="20"> <Edit /></el-icon>
+						<el-icon :size="20">
+							<Edit />
+						</el-icon>
 					</el-button>
 					<el-button @click="handleDelete(row, $index)" type="danger" circle>
-						<el-icon :size="20"> <Delete /></el-icon>
+						<el-icon :size="20">
+							<Delete />
+						</el-icon>
 					</el-button>
 					<el-button @click="handleExecute(row, $index)" type="text">
-						<el-icon :size="10"><VideoPlay /></el-icon>执行退货
+						<el-icon :size="10">
+							<VideoPlay />
+						</el-icon>执行退货
 					</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
 
 		<!-- 分页组件 -->
-		<el-pagination
-			v-model:current-page="parms.pagenum"
-			v-model:page-size="parms.pagesize"
-			:page-sizes="[2, 3, 5, 10]"
-			:background="true"
-			layout="total, sizes, prev, pager, next, jumper"
-			:total="total"
-			@size-change="onSizeChange"
-			@current-change="onCurrentChange"
-			style="margin-top: 20px; justify-content: flex-end"
-		/>
+		<el-pagination v-model:current-page="parms.pagenum" v-model:page-size="parms.pagesize"
+			:page-sizes="[2, 3, 5, 10]" :background="true" layout="total, sizes, prev, pager, next, jumper"
+			:total="total" @size-change="onSizeChange" @current-change="onCurrentChange"
+			style="margin-top: 20px; justify-content: flex-end"></el-pagination>
 
 		<!-- 添加或修改退货单对话框 -->
 		<el-dialog v-model="dialogVisible" :title="dialogTitle">
