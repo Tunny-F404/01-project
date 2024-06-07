@@ -78,17 +78,17 @@ public class LoginController implements LoginApis {
     @Override
     public JsonVO<Oauth2TokenDTO> authLogin(LoginDTO loginDTO) {
 
-//        //创建CaptchaVO对象，用于封装验证码验证信息
-//        CaptchaVO captchaVO = new CaptchaVO();
-//        // 设置验证码字符串
-//        captchaVO.setCaptchaVerification(loginDTO.getCode());
-//        // 调用验证码服务进行验证
-//        ResponseModel response = captchaService.verification(captchaVO);
-//        if (!response.isSuccess()) {
-//            return JsonVO.create(null,
-//                    ResultStatus.FAIL.getCode(),
-//                    response.getRepCode()+":"+response.getRepMsg());
-//        }
+        //创建CaptchaVO对象，用于封装验证码验证信息
+        CaptchaVO captchaVO = new CaptchaVO();
+        // 设置验证码字符串
+        captchaVO.setCaptchaVerification(loginDTO.getCode());
+        // 调用验证码服务进行验证
+        ResponseModel response = captchaService.verification(captchaVO);
+        if (!response.isSuccess()) {
+            return JsonVO.create(null,
+                    ResultStatus.FAIL.getCode(),
+                    response.getRepCode()+":"+response.getRepMsg());
+        }
         //账号密码认证
         Map<String, String> params = new HashMap<>(5);
         params.put("grant_type", "password");  //授权模式
