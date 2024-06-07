@@ -38,7 +38,7 @@ public:
 	// 删除数据
 	uint64_t remove(const std::string ids);
 	// 修改数据
-	uint64_t modify(const DefectModifyDTO::Wrapper& dto);
+	uint64_t modify(const DefectModifyDTO::Wrapper& dto, const std::string& update_by, const std::string& update_time);
 };
 
 #endif // !_DEFECT_SERVICE_

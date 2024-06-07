@@ -45,6 +45,6 @@ public:
 	// 删除数据
 	uint64_t remove(const string& ids);
 	// 更新数据
-	uint64_t modify(const DefectModifyDTO::Wrapper& dto);
+	uint64_t modify(const DefectModifyDTO::Wrapper& dto, const string& update_by, const string& update_time);
 };
 #endif // !_QC_DEFECT_DAO_

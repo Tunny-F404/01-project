@@ -77,7 +77,7 @@ uint64_t DefectService::remove(const std::string ids)
 	return QcDefectDAO().remove(ids);
 }
 
-uint64_t DefectService::modify(const DefectModifyDTO::Wrapper& dto)
+uint64_t DefectService::modify(const DefectModifyDTO::Wrapper& dto, const std::string& update_by, const std::string& update_time)
 {
-	return QcDefectDAO().modify(dto);
+	return QcDefectDAO().modify(dto, update_by, update_time);
 }

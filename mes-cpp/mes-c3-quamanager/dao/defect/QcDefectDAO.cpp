@@ -91,14 +91,15 @@ uint64_t QcDefectDAO::remove(const string& ids)
 	return sqlSession->executeUpdate(sql);
 }
 
-uint64_t QcDefectDAO::modify(const DefectModifyDTO::Wrapper& dto)
+uint64_t QcDefectDAO::modify(const DefectModifyDTO::Wrapper& dto, const string& update_by, const string& update_time)
 {
-	const string sql = "UPDATE `qc_defect` SET `defect_name`=?, `index_type`=?, `defect_level`=?, `update_time`=? WHERE `defect_id`=?";
+	const string sql = "UPDATE `qc_defect` SET `defect_name`=?, `index_type`=?, `defect_level`=?, `update_by`=?, `update_time`=? WHERE `defect_id`=?";
 	return sqlSession->executeUpdate(sql,                            //
-		"%s%s%s%s%ll",                  //
+		"%s%s%s%s%s%ll",                //
 		dto->defect_name.getValue({}),  //
 		dto->index_type.getValue({}),   //
 		dto->defect_level.getValue({}), //
-		dto->update_time.getValue({}),  //
+		update_by,                      //
+		update_time,                    //
 		dto->defect_id.getValue({}));
 }

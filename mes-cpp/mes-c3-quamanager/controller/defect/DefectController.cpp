@@ -3,6 +3,7 @@
 #include "DefectController.h"
 #include "service/defect/QcDefectService.h"
 #include <ExcelComponent.h>
+#include <SimpleDateTimeFormat.h>
 #include <ctime>
 #include <iostream>
 #include <regex>
@@ -77,11 +78,6 @@ Uint64JsonVO::Wrapper DefectController::execModifyDefect(const DefectModifyDTO::
         jvo->init(UInt64(-1), ResultStatus("defect_level must exits"));
         return jvo;
     }
-    if (!dto->update_time)
-    {
-        jvo->init(UInt64(-1), ResultStatus("update_time must exits"));
-        return jvo;
-    }
     if (dto->defect_id.getValue({}) <= 0)
     {
         jvo->init(UInt64(-1), ResultStatus("defect_id must greater than 0"));
@@ -105,28 +101,12 @@ Uint64JsonVO::Wrapper DefectController::execModifyDefect(const DefectModifyDTO::
         jvo->init(UInt64(-1), ResultStatus("defect_level must in CR, MAJ, MIN"));
         return jvo;
     }
-    static const auto is_valid_time = [](const std::string& time)
-    {
-        std::tm tm{};
-        try
-        {
-            std::istringstream ss(time);
-            ss >> std::get_time(&tm, "%Y-%m-%d %H:%M:%S");
-            return !ss.fail();
-        }
-        catch (const std::exception& e)
-        {
-            return false;
-        }
-    };
-    if (!is_valid_time(dto->update_time.getValue({})))
-    {
-        jvo->init(UInt64(-1), ResultStatus("update_time must be yyyy-MM-dd HH:mm:ss"));
-        return jvo;
-    }
+
+    const string update_by = payload.getUsername();
+    const string update_time = SimpleDateTimeFormat::format("%Y-%m-%d %H:%M:%S");
 
     DefectService service;
-    if (service.modify(dto))
+    if (service.modify(dto, update_by, update_time))
     {
         jvo->success(UInt64(200));
     }
