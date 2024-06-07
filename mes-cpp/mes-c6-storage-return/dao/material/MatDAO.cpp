@@ -12,15 +12,15 @@ if (query->rtcode) { \
 	SQLPARAMS_PUSH(params, "s", std::string, query->rtcode.getValue("")); \
 } \
 if (query->rtname) { \
-	sql << " AND rt_name=?"; \
+	sql << " AND `rt_name`=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->rtname.getValue("")); \
 } \
 if (query->pocode) { \
-	sql << " AND po_code=?"; \
+	sql << " AND `po_code`=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->pocode.getValue("")); \
 } \
 if (query->vendorname) { \
-	sql << " AND vendor_name=?"; \
+	sql << " AND `vendor_name`=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->vendorname.getValue("")); \
 }
 uint64_t MatDAO::count1(const GetReturnListQuery::Wrapper& query)
@@ -50,7 +50,7 @@ list<MatlistDO> MatDAO::selectByName1(const string& name)
 
 uint64_t MatDAO::insert1(const MatlistDO& iObj)
 {
-	string sql = "INSERT INTO `wm_rt_vendor` (`rt_code`, `rt_name`, `po_code`,`vendor_name`, `batch_code`, `rt_date`, `statuss`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	string sql = "INSERT INTO `wm_rt_vendor` (`rt_code`, `rt_name`, `po_code`,`vendor_name`, `batch_code`, `rt_date`, `status`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s%s%s", iObj.getRtcode(), iObj.getRtname(), iObj.getPocode(),
 		iObj.getVendorname(), iObj.getBatchcode(), iObj.getRtdate(),
 		iObj.getStatuss(), iObj.getRemark());

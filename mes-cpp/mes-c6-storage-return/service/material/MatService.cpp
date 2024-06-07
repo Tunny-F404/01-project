@@ -28,7 +28,7 @@ GetReturnListPageDTO::Wrapper MatService::listAll(const GetReturnListQuery::Wrap
 		// 		dto->name = sub.getName();
 		// 		dto->sex = sub.getSex();
 		// 		dto->age = sub.getAge();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, rtcode, Rtcode, rtname, Rtname, pocode, Pocode, vendorcode, Vendorcode, vendorname, Vendorname, rtdate, Rtdate, status, Statuss)
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, rtcode, Rtcode, rtname, Rtname, pocode, Pocode, vendorcode, Vendorcode, vendorname, Vendorname, rtdate, Rtdate, statuss, Statuss)
 		pages->addData(dto);
 
 	}
