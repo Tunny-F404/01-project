@@ -43,13 +43,13 @@ public: // 定义接口
 			ZH_WORDS_GETTER("plan.export-plan.plan-code"), {}, false);
 		API_DEF_ADD_QUERY_PARAMS(String, "plan_name",
 			ZH_WORDS_GETTER("plan.export-plan.plan-name"), {}, false);
-		API_DEF_ADD_QUERY_PARAMS(String, "plan_type",
+		/*API_DEF_ADD_QUERY_PARAMS(String, "plan_type",
 			ZH_WORDS_GETTER("plan.export-plan.plan-type"), {}, false);
 		API_DEF_ADD_QUERY_PARAMS(String, "state",
-			ZH_WORDS_GETTER("plan.export-plan.state"), {}, false);
+			ZH_WORDS_GETTER("plan.export-plan.state"), {}, false);*/
 	}
 
-	ENDPOINT(API_M_GET, "/plan/export-plan/", exportPlan,
+	ENDPOINT(API_M_GET, "/plan/export-plan", exportPlan,
 		QUERIES(QueryParams, queryParams))
 	{
 		// 解析查询参数

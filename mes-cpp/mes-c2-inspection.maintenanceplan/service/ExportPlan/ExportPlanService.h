@@ -2,8 +2,8 @@
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: awei
- @Date: 2022/10/25 11:08:56
+ @Author: 独自
+ @Date: 2024/06/7 18:41:17
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,22 +17,22 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _MODIFY_PLAN_SERVICE_
-#define _MODIFY_PLAN_SERVICE_
+#ifndef _EXPORTPLANSERVICE_H_
+#define _EXPORTPLANSERVICE_H_
+
+#include "domain/query/ExportPlanQuery.h"
 #include <list>
-#include "../../domain/vo/MaintenancePlan/MaintenancePlanVo.h"
-#include "../../domain/dto/MaintenancePlan/MaintenancePlanDto.h"
+#include <string>
 
 /**
- * 示例服务实现，演示基础的示例服务实现
+ * 导出设备service
+ * 负责人：独自
  */
-class ModifyPlanService
+class ExportPlanService
 {
 public:
-	// 修改数据
-	bool updateData(const MaintenancePlanDto::Wrapper& dto, const PayloadDTO& payload);
-
+	std::string exportPlan(const ExportPlanQuery::Wrapper& query);
 };
 
-#endif // !_SAMPLE_SERVICE_
 
+#endif // !_EXPORTDEVICESERVICE_H_

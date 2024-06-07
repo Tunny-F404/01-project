@@ -48,10 +48,10 @@ class MaintenancePlanDto : public oatpp::DTO
 	API_DTO_FIELD(String, enddate, ZH_WORDS_GETTER("maintenance.fields.enddata"), false,nullptr);
 	//备注
 	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("maintenance.fields.remark"), false,"");
-	//更新者
-	API_DTO_FIELD(String, updateby, ZH_WORDS_GETTER("maintenance.fields.updateby"), true, "");
-	//更新时间
-	API_DTO_FIELD(String, updatetime, ZH_WORDS_GETTER("maintenance.fields.updatetime"), true, "");
+	////更新者
+	//API_DTO_FIELD(String, updateby, ZH_WORDS_GETTER("maintenance.fields.updateby"), true, "");
+	////更新时间
+	//API_DTO_FIELD(String, updatetime, ZH_WORDS_GETTER("maintenance.fields.updatetime"), true, "");
 
 };
 

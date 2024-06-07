@@ -2,8 +2,8 @@
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: awei
- @Date: 2022/10/25 11:08:56
+ @Author: 独自
+ @Date: 2024/06/7 18:51:36
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,22 +17,20 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _MODIFY_PLAN_SERVICE_
-#define _MODIFY_PLAN_SERVICE_
-#include <list>
-#include "../../domain/vo/MaintenancePlan/MaintenancePlanVo.h"
-#include "../../domain/dto/MaintenancePlan/MaintenancePlanDto.h"
+#ifndef _EXPORTPLANDAO_H_
+#define _EXPORTPLANDAO_H_
 
-/**
- * 示例服务实现，演示基础的示例服务实现
- */
-class ModifyPlanService
+#include "BaseDAO.h"
+#include "domain/query/ExportPlanQuery.h"
+#include "domain/do/dv_check_plan/dv_check_planDO.h"
+#include <list>
+#include <vector>
+
+class ExportPlanDAO : public BaseDAO
 {
 public:
-	// 修改数据
-	bool updateData(const MaintenancePlanDto::Wrapper& dto, const PayloadDTO& payload);
-
+	// 根据query查询数据，返回需要的行
+	std::list<Dv_check_planDO> selectAll(const ExportPlanQuery::Wrapper& query);
 };
 
-#endif // !_SAMPLE_SERVICE_
-
+#endif // !_EXPORTDEVICEDAO_H_

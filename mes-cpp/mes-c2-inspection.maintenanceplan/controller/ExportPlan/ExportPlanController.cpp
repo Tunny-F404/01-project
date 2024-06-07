@@ -19,13 +19,20 @@
 
 #include "stdafx.h"
 #include "ExportPlanController.h"
+#include "domain/query/ExportPlanQuery.h"
+#include "service/ExportPlan/ExportPlanService.h"
 
 StringJsonVO::Wrapper ExportPlanController::
 	execExportPlan(const ExportPlanQuery::Wrapper & query)
 {
 	auto res = StringJsonVO::createShared();
 
-	std::string ans = "123123";
-	res->success(ans);
+	ExportPlanService service;
+	auto url = service.exportPlan(query);
+
+	if (url != "")
+		res->success(url);
+	else
+		res->fail("");
 	return res;
 }

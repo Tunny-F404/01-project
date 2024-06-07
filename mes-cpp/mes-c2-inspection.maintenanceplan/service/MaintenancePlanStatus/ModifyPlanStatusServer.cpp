@@ -20,8 +20,9 @@
 #include "ModifyPlanStatusServer.h"
 #include "../../dao/ModifyPlanStatus/ModifyPlanStatusDao.h"
 #include"./domain/do/ModifyPlanStatus/ModifyPlanStatusDo.h"
+#include <SimpleDateTimeFormat.h>
 
-bool ModifyPlanStatusService::updateData(const ModifyPlanStatusDto::Wrapper& dto)
+bool ModifyPlanStatusService::updateData(const ModifyPlanStatusDto::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
 	ModifyPlanStatusDo data;
@@ -29,7 +30,11 @@ bool ModifyPlanStatusService::updateData(const ModifyPlanStatusDto::Wrapper& dto
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Id, id, Status, status, Updateby, updateby, Updatetime, updatetime)
+	/*data.setId(dto->id.getValue(0));
+	data.setStatus(dto->status.getValue(""));*/
+	data.setUpdateby(payload.getUsername());
+	data.setUpdatetime(SimpleDateTimeFormat::format());
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Id, id, Status, status)
 	// 执行数据修改
 	ModifyPlanStatusDao dao;
 	return dao.update(data) == 1;
