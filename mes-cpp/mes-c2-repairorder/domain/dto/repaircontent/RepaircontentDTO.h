@@ -84,10 +84,6 @@ class AddRepaircontentDTO : public oatpp::DTO
 	API_DTO_FIELD(String, malfunction_url, ZH_WORDS_GETTER("repaircontent.field.malfunction_url"), true, ZH_WORDS_GETTER("repaircontent.default.malfunction_url"));
 	//维修情况
 	API_DTO_FIELD(String, repair_des, ZH_WORDS_GETTER("repaircontent.field.repair_des"), true, ZH_WORDS_GETTER("repaircontent.default.repair_des"));
-	//创建者
-	API_DTO_FIELD(String, create_by, ZH_WORDS_GETTER("repaircontent.field.create_by"), true, ZH_WORDS_GETTER("repaircontent.default.create_by"));
-	//创建时间
-	API_DTO_FIELD(String, create_time, ZH_WORDS_GETTER("repaircontent.field.create_time"), true, "2024-05-26 15:46:55");
 };
 
 class ModifyRepaircontentDTO : public oatpp::DTO
@@ -104,10 +100,6 @@ class ModifyRepaircontentDTO : public oatpp::DTO
 	API_DTO_FIELD(String, malfunction_url, ZH_WORDS_GETTER("repaircontent.field.malfunction_url"), true, ZH_WORDS_GETTER("repaircontent.default.malfunction_url"));
 	//维修情况
 	API_DTO_FIELD(String, repair_des, ZH_WORDS_GETTER("repaircontent.field.repair_des"), true, ZH_WORDS_GETTER("repaircontent.default.repair_des"));
-	//更新者
-	API_DTO_FIELD(String, update_by, ZH_WORDS_GETTER("repaircontent.field.update_by"), true, ZH_WORDS_GETTER("repaircontent.default.update_by"));
-	//更新时间
-	API_DTO_FIELD(String, update_time, ZH_WORDS_GETTER("repaircontent.field.update_time"), true, "2024-05-27 12:38:53");
 
 };
 

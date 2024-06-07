@@ -75,7 +75,7 @@ public:
 	// 添加维修单 接口处理
 	ENDPOINT(API_M_POST, "/repaircontent/add-repaircontent", addRepaircontent, BODY_DTO(AddRepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execAddRepaircontent(dto));
+		API_HANDLER_RESP_VO(execAddRepaircontent(dto, authObject->getPayload()));
 	}
 
 	// 修改维修单 接口描述
@@ -90,7 +90,7 @@ public:
 	// 修改维修单 接口处理
 	ENDPOINT(API_M_PUT, "/repaircontent/modify-repaircontent", modifyRepaircontent, BODY_DTO(ModifyRepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
-		API_HANDLER_RESP_VO(execModifyRepaircontent(dto));
+		API_HANDLER_RESP_VO(execModifyRepaircontent(dto, authObject->getPayload()));
 	}
 
 	// 删除维修单 接口描述
@@ -116,9 +116,9 @@ private:
 	// 3.3 维修单内容详情数据
 	RepaircontentJsonVO::Wrapper execDetailsRepaircontent(const RepaircontentQuery::Wrapper& id);	
 	// 3.3 添加维修单内容
-	Uint64JsonVO::Wrapper execAddRepaircontent(const AddRepaircontentDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execAddRepaircontent(const AddRepaircontentDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 3.3 修改维修单内容
-	Uint64JsonVO::Wrapper execModifyRepaircontent(const ModifyRepaircontentDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyRepaircontent(const ModifyRepaircontentDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 3.3 删除维修单内容
 	Uint64JsonVO::Wrapper execRemoveRepaircontent(const DeleteMultiRepaircontentDTO::Wrapper& id);
 };
