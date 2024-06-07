@@ -26,15 +26,15 @@
 SqlParams params; \
 sql<<" WHERE 1=1"; \
 if (query->pCode) { \
-	sql << " AND pCode=?"; \
+	sql << " AND `subject_code`=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->pCode.getValue("")); \
 } \
 if (query->pName) { \
-	sql << " AND `pName`=?"; \
+	sql << " AND `subject_name`=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->pName.getValue("")); \
 } \
 if (query->pType) { \
-	sql << " AND pType=?"; \
+	sql << " AND `subject_type`=?"; \
 	SQLPARAMS_PUSH(params, "s", std::string, query->pType.getValue("")); \
 }\
 
