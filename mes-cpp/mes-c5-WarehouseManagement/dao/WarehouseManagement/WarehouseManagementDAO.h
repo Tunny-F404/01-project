@@ -16,7 +16,7 @@ public:
 	// 分页查询数据
 	list<WarehouseManagementDO> selectWithPage(const WarehouseManagementQuery::Wrapper& query);
 	//查询数据以便生成excel文件
-	list<WarehouseManagementDO> QueryById(const WarehouseManagementIdQuery::Wrapper& query);
+	list<WarehouseManagementDO> QueryByExport(const WarehouseManagementQuery::Wrapper& query);
 
 
 };

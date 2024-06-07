@@ -91,7 +91,7 @@ public: // 定义接口
 	// 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("materialproducts.put.summary"), modifyMaterialProducts, Uint64JsonVO::Wrapper);
 	// 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/detection-template/modify", modifyMaterialProducts, BODY_DTO(MaterialProductsDTO::Wrapper, dto), execModifyMaterialProducts(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/detection-template/material-products/modify", modifyMaterialProducts, BODY_DTO(MaterialProductsDTO::Wrapper, dto), execModifyMaterialProducts(dto));
 
 	
 

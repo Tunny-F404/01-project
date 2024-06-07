@@ -21,7 +21,7 @@
 #include "ApiHelper.h"
 #include "ProcessInspection/ProcessInspectionController.h"
 #include "ProcessInspection/ProinSpect/ProinSpectController.h"
-#include "AwaitInspection/OaslController.h"
+#include "AwaitinSpection/AwaitinSpectionController.h"
 #include "DetectionTemplate/DetectionTemplateController.h"
 #include "DetectionTemplate/DetectionItems/DetectionItemsController.h"
 #include "DetectionTemplate/MaterialProducts/MaterialProductsController.h"
@@ -60,7 +60,7 @@ void Router::initRouter()
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(ProcessInspectionController);
 	ROUTER_SIMPLE_BIND(ProinspectController);
-	ROUTER_SIMPLE_BIND(OaslController);
+	ROUTER_SIMPLE_BIND(AwaitinSpectionController);
 	ROUTER_SIMPLE_BIND(DetectionTemplateController);
 	ROUTER_SIMPLE_BIND(DetectionItemsController);
 	ROUTER_SIMPLE_BIND(MaterialProductsController);

@@ -68,7 +68,7 @@ std::list<WarehouseManagementDO> WarehouseManagementDAO::selectWithPage(const Wa
 	return sqlSession->executeQuery<WarehouseManagementDO, WarehouseManagementMapper>(sqlStr, mapper, params);
 }
 
-std::list<WarehouseManagementDO> WarehouseManagementDAO::QueryById(const WarehouseManagementIdQuery::Wrapper& query)
+std::list<WarehouseManagementDO> WarehouseManagementDAO::QueryByExport(const WarehouseManagementQuery::Wrapper& query)
 {
 	stringstream sql;
 	sql << "SELECT item_id,item_code,item_name,specification,unit_Of_Measure,batch_code,warehouse_name,location_name,area_name,vendor_code,vendor_name,vendor_nick,workorder_code,recpt_date,expire_date FROM wm_transaction";

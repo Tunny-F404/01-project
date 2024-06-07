@@ -41,7 +41,7 @@ public:
 
 	//修改检测项接口
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("qualitycontrol.detectionitemsettings.controller.modify.summary"), modifyDetectionItemSettings, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/modify-qcsettings", modifyDetectionItemSettings, BODY_DTO(DetectionItemSettingsDTO::Wrapper, dto), execModifyqc(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/qc/detection-item-settings/modify", modifyDetectionItemSettings, BODY_DTO(DetectionItemSettingsDTO::Wrapper, dto), execModifyqc(dto));
 
 	ENDPOINT_INFO(removeTheDetection) {
 		// 定义标题和返回类型以及授权支持

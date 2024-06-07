@@ -46,7 +46,7 @@ processinspection:
   inspector: 检测人员
   status: 单据状态
   remark: 备注
-DetectionTemplate:
+DetectionTemplate: 
  get:
   title: 获取检测模板列表
  post:
@@ -55,7 +55,7 @@ DetectionTemplate:
   summary: 删除检测项
  querydetectempdetails:
   summary: 获取检验模板详情
- put:
+ modify: 
   summary: 修改检测模板
  export:
   summary: 文件导出
@@ -106,11 +106,11 @@ materialproducts:
  get:
   summary: 获取模板关联产品列表（条件+分页）
  put:
-  summary: 修改数据
+  summary: 修改模板关联产品数据
  post:
-  summary: 增加数据
+  summary: 增加模板关联产品数据
  delete:
-  summary: 删除数据
+  summary: 删除模板关联产品数据
  field:
   record_id: 记录id（主键）
   template_id: 检测模板ID
@@ -133,11 +133,11 @@ templatedetectitem:
  get:
   summary: 检测模板检测项分页查询
  put:
-  summary: 修改数据
+  summary: 检测模板检测项修改数据
  post:
-  summary: 增加数据
+  summary: 检测模板检测项增加数据
  delete:
-  summary: 删除数据
+  summary: 检测模板检测项删除数据
  field:
   record_id: 记录ID
   template_id: 检测模板ID

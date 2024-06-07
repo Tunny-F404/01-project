@@ -40,11 +40,11 @@ WarehouseManagementPageDTO::Wrapper WarehouseManagementService::listAll(const Wa
 }
 
 //导出Excel
-string WarehouseManagementService::creatExcel(const WarehouseManagementIdQuery::Wrapper& query)
+string WarehouseManagementService::creatExcel(const WarehouseManagementQuery::Wrapper& query)
 {
 	WarehouseManagementDAO dao;
 
-	list<WarehouseManagementDO> result = dao.QueryById(query);
+	list<WarehouseManagementDO> result = dao.QueryByExport(query);
 
 	std::vector<std::vector<std::string>> vvexcel;
 	vvexcel.insert(vvexcel.begin(), {
@@ -89,7 +89,6 @@ string WarehouseManagementService::creatExcel(const WarehouseManagementIdQuery::
 	//生成excel文件
 	ExcelComponent excel;
 	excel.writeVectorToFile(tempfilePath, tempsheetName, vvexcel);
-
 	ZO_CREATE_DFS_CLIENT_URL(dfs, urlPrefix);
 	// 获取文件后缀名
 	string suffix = "";

@@ -19,7 +19,7 @@ WarehouseManagementPageJsonVO::Wrapper WarehouseManagementController::execQueryW
 	return {};
 }
 
-StringJsonVO::Wrapper WarehouseManagementController::execExportWarehouseManagement(const WarehouseManagementIdQuery::Wrapper& query)
+StringJsonVO::Wrapper WarehouseManagementController::execExportWarehouseManagement(const WarehouseManagementQuery::Wrapper& query)
 {
 	auto jvo = StringJsonVO::createShared();
 
@@ -35,7 +35,7 @@ StringJsonVO::Wrapper WarehouseManagementController::execExportWarehouseManageme
 	}
 	else
 	{
-		jvo->init(to_string(query->item_id), ResultStatus(url));
+		jvo->init(url, RS_SUCCESS);
 	}
 
 	return jvo;
