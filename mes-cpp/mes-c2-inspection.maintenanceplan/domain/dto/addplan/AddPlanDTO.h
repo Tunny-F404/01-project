@@ -37,17 +37,17 @@ class AddPlanDTO : public oatpp::DTO
 	API_DTO_FIELD(String, planType, ZH_WORDS_GETTER("add-mj.fields.ptype"),true, "plan_type");
 
 	//频率
-	API_DTO_FIELD(String, cycleType, ZH_WORDS_GETTER("add-mj.fields.ctype"),true, "cycle_type");
+	API_DTO_FIELD(String, cycleType, ZH_WORDS_GETTER("add-mj.fields.ctype"),false, "cycle_type");
 	//次数
 	API_DTO_FIELD(UInt32, cycleCount, ZH_WORDS_GETTER("add-mj.fields.ccount"),true, 1);
 	//开始日期
-	API_DTO_FIELD(String, startDate, ZH_WORDS_GETTER("add-mj.fields.sdate"),true, "2024-05-05 00:00:00");
+	API_DTO_FIELD(String, startDate, ZH_WORDS_GETTER("add-mj.fields.sdate"), false, "2024-05-05 00:00:00");
 	//结束日期
-	API_DTO_FIELD(String, endDate, ZH_WORDS_GETTER("add-mj.fields.edate"),true, "2024-05-05 00:00:00");
+	API_DTO_FIELD(String, endDate, ZH_WORDS_GETTER("add-mj.fields.edate"), false, "2024-05-05 00:00:00");
 	//状态
-	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("add-mj.fields.status"),true, "status");
+	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("add-mj.fields.status"), false, "status");
 	//备注
-	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("add-mj.fields.remark"),true,"remark");
+	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("add-mj.fields.remark"), false,"remark");
 };
 
 
