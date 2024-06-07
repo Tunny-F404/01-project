@@ -28,7 +28,7 @@
 				<el-col :span="6">
 					<el-form-item label="保养维护类型">
 						<div class="flex flex-wrap gap-4 items-center">
-							<el-select v-model="SelectValue" placeholder="Select" style="width: 240px">
+							<el-select v-model="SelectValue" placeholder="请选择保养维护类型" style="width: 240px">
 								<el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value" />
 							</el-select>
 						</div>
@@ -56,7 +56,6 @@
 		<el-button type="danger" plain><el-icon>
 				<Delete />
 			</el-icon>删除</el-button>
-		<!-- 表格 -->
 		<el-table v-loading="loading" :data="typeList" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55"></el-table-column>
 			<el-table-column prop="typeCode" label="类型编码" align="center"></el-table-column>
@@ -153,12 +152,12 @@
 import tableFrame from "components/std-table/src/table-text.vue";
 import { ref, reactive } from 'vue'
 
-const SelectValue = ref('请选择保养维护类型')
+const SelectValue = ref('')
 const typeName = ref('');
 let dialogFormVisible = ref(false)
 const codingType = ref('');
 const reFresh = () => {
-	SelectValue.value = '请选择保养维护类型';
+	SelectValue.value = '';
 	typeName.value = '';
 	codingType.value = '';
 }
@@ -193,7 +192,7 @@ let typeList = [
 const type = reactive({
 	codingType: '',
 	typeName: '',
-	SelectValue: '请选择保养维护类型',
+	SelectValue: '',
 	maintainPeriod: '',
 	enableFlag: 'yes'
 })
