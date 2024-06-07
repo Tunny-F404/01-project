@@ -40,6 +40,9 @@ MachineryPlanDetailsDTO::Wrapper MachineryPlanService::getDetails(const Machiner
 	MachineryPlanDAO dao;
 	list<Dv_check_planDO> sub = dao.selectByPlanId(query);
 
+	if (sub.empty())
+		return dto;
+
 	// 取出数据
 	Dv_check_planDO res = sub.front();
 
