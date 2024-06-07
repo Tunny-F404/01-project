@@ -20,6 +20,8 @@
 #include "RepaircontentService.h"
 #include "../../dao/dv_repair_line/RepaircontentDAO.h"
 #include "../../domain/do/dv_repair_line/RepaircontentDO.h"
+#include "SimpleDateTimeFormat.h"
+
 
 RepaircontentPageDTO::Wrapper RepaircontentService::listAll(const RepaircontentQuery::Wrapper& query)
 {
@@ -94,7 +96,7 @@ RepaircontentDTO::Wrapper RepaircontentService::getData(const RepaircontentQuery
 	return pages;
 }
 
-uint64_t RepaircontentService::saveData(const AddRepaircontentDTO::Wrapper& dto)
+uint64_t RepaircontentService::saveData(const AddRepaircontentDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
 	dv_repair_lineDO data;
@@ -103,16 +105,16 @@ uint64_t RepaircontentService::saveData(const AddRepaircontentDTO::Wrapper& dto)
 		subject_Id, subject_id, 
 		Malfunction, malfunction, 
 		Malfunction_url, malfunction_url, 
-		repair_Des, repair_des,
-		Create_by,create_by,
-		Create_time,create_time
+		repair_Des, repair_des
 	)
+	data.setCreate_by(payload.getUsername());
+	data.setCreate_time(SimpleDateTimeFormat::format());
 		// 执行数据添加
 		RepaircontentDAO dao;
 	return dao.insert(data);
 }
 
-bool RepaircontentService::updateData(const ModifyRepaircontentDTO::Wrapper& dto)
+bool RepaircontentService::updateData(const ModifyRepaircontentDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	dv_repair_lineDO data;
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, 
@@ -122,6 +124,8 @@ bool RepaircontentService::updateData(const ModifyRepaircontentDTO::Wrapper& dto
 		repair_Des, repair_des,
 		line_Id,line_id
 		)
+	data.setUpdate_by(payload.getUsername());
+	data.setUpdate_time(SimpleDateTimeFormat::format());
 		RepaircontentDAO dao;
 	return dao.update(data) == 1;
 }

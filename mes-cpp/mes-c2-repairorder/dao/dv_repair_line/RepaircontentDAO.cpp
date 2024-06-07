@@ -100,8 +100,8 @@ uint64_t RepaircontentDAO::insert(const dv_repair_lineDO& iObj)
 		list_s.begin()->getSubjectType(),
 		list_s.begin()->getSubjectContent(),
 		list_s.begin()->getSubjectStandard(),
-		list_s.begin()->getCreateBy(),
-		list_s.begin()->getCreateTime()
+		iObj.getCreate_by(),
+		iObj.getCreate_time()
 	);
 }
 
@@ -117,8 +117,8 @@ int RepaircontentDAO::update(const dv_repair_lineDO& uObj)
 		return 0;
 	}
 
-	string sql = "UPDATE `dv_repair_line` SET `subject_Name`=?, `Malfunction`=?, `Malfunction_url`=?,`repair_Des`=?,subject_code=?,subject_type=?,subject_content=?,subject_standard=?,create_by=?,create_time=?,update_by=?,update_time=?  WHERE `line_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%s%dt%s%dt%ull", 
+	string sql = "UPDATE `dv_repair_line` SET `subject_Name`=?, `Malfunction`=?, `Malfunction_url`=?,`repair_Des`=?,subject_code=?,subject_type=?,subject_content=?,subject_standard=?,update_by=?,update_time=?  WHERE `line_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%s%dt%ull", 
 		list_s.begin()->getSubjectName(), 
 		uObj.getMalfunction(),
 		uObj.getMalfunction_url(), 
@@ -127,10 +127,8 @@ int RepaircontentDAO::update(const dv_repair_lineDO& uObj)
 		list_s.begin()->getSubjectType(),
 		list_s.begin()->getSubjectContent(),
 		list_s.begin()->getSubjectStandard(),
-		list_s.begin()->getCreateBy(),
-		list_s.begin()->getCreateTime(),
-		list_s.begin()->getUpdateBy(),
-		list_s.begin()->getUpdateTime(),
+		uObj.getUpdate_by(),
+		uObj.getUpdate_time(),
 		uObj.getline_Id()
 	);
 }

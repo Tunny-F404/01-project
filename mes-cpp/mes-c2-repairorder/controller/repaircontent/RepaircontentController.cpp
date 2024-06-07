@@ -53,7 +53,7 @@ RepaircontentJsonVO::Wrapper RepaircontentController::execDetailsRepaircontent(c
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const AddRepaircontentDTO::Wrapper& dto) {
+Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const AddRepaircontentDTO::Wrapper& dto, const PayloadDTO& payload) {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
 
@@ -76,7 +76,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const AddRep
 	// 定义一个Service
 	RepaircontentService service;
 	// 执行数据新增
-	uint64_t res = service.saveData(dto);
+	uint64_t res = service.saveData(dto,payload);
 	if (res > 0) {
 		jvo->success(res);
 	}
@@ -87,7 +87,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const AddRep
 	return jvo;
 }
 
-Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const ModifyRepaircontentDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const ModifyRepaircontentDTO::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -106,7 +106,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const Mod
 	// 定义一个Service
 	RepaircontentService service;
 	// 执行数据新增
-	if (service.updateData(dto)) {
+	if (service.updateData(dto,payload)) {
 		jvo->success(dto->line_id);
 	}
 	else {

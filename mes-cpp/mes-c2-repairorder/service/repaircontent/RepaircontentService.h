@@ -36,9 +36,9 @@ public:
 	//通过项目名称获取数据
 	RepaircontentDTO::Wrapper getData(const RepaircontentQuery::Wrapper& id);
 	// 保存数据
-	uint64_t saveData(const AddRepaircontentDTO::Wrapper& dto);
+	uint64_t saveData(const AddRepaircontentDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 修改数据
-	bool updateData(const ModifyRepaircontentDTO::Wrapper& dto);
+	bool updateData(const ModifyRepaircontentDTO::Wrapper& dto, const PayloadDTO& payload);
 	// 通过ID删除数据
 	bool removeData(uint64_t id);
 };
