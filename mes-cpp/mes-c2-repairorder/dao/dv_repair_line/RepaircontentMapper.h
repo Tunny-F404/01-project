@@ -49,7 +49,7 @@ public:
 	}
 };
 
-//string sql = "SELECT subject_id,subject_code,subject_type,subject_content,subject_standard FROM dv_subject WHERE subject_name= ? ";
+//string sql = "SELECT subject_name,subject_code,subject_type,subject_content,subject_standard,create_by,create_time,update_by,update_time FROM dv_subject WHERE `subject_id` = ? ";
 //data.setsubject_Id(resultSet->getString(1));
 class AddRepaircontentMapper : public Mapper<dvSubjectDO>
 {
@@ -57,11 +57,15 @@ public:
 	dvSubjectDO mapper(ResultSet* resultSet) const override
 	{
 		dvSubjectDO data;
-		data.setSubjectId(resultSet->getUInt64(1));
+		data.setSubjectName(resultSet->getString(1));
 		data.setSubjectCode(resultSet->getString(2));
 		data.setSubjectType(resultSet->getString(3));
 		data.setSubjectContent(resultSet->getString(4));
 		data.setSubjectStandard(resultSet->getString(5));
+		data.setCreateBy(resultSet->getString(6));
+		data.setCreateTime(resultSet->getString(7));
+		data.setUpdateBy(resultSet->getString(8));
+		data.setUpdateTime(resultSet->getString(9));
 		return data;
 	}
 };

@@ -37,7 +37,7 @@ public:
 	list<dv_repair_lineDO> selectByName(const string& name);
 
 	// 通过项目名称查询数据--
-	list<dvSubjectDO> selectSubject_Name(const string& name);
+	list<dvSubjectDO> selectSubject_Name(const uint64_t& id);
 
 	// 插入数据
 	uint64_t insert(const dv_repair_lineDO& iObj);

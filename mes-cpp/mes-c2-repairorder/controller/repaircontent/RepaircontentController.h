@@ -103,7 +103,7 @@ public:
 		API_DEF_ADD_AUTH();
 	}
 	// 删除维修单 接口处理
-	ENDPOINT(API_M_DEL, "/repaircontent/remove-repaircontent", removeRepaircontent, BODY_DTO(DeleteMultiRepaircontentDTO::Wrapper, line_idList), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_DEL, "/repaircontent/del-repaircontent", removeRepaircontent, BODY_DTO(DeleteMultiRepaircontentDTO::Wrapper, line_idList), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execRemoveRepaircontent(line_idList));
 	}

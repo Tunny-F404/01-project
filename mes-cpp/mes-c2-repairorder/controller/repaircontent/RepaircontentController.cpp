@@ -59,7 +59,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const AddRep
 
 	 //非空校验
 	if (!dto->repair_id || 
-		!dto->subject_name ||
+		!dto->subject_id ||
 		!dto->malfunction ||
 		!dto->malfunction_url ||
 		!dto->repair_des) {
@@ -67,7 +67,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execAddRepaircontent(const AddRep
 		return jvo;
 	}
 	// 有效值校验
-	if (dto->repair_id < 0 || dto->subject_name->empty() || dto->malfunction->empty())
+	if (dto->repair_id < 0 || dto->subject_id<0 || dto->malfunction->empty())
 	{
 		jvo->init(UInt64(-1), RS_PARAMS_INVALID);
 		return jvo;
@@ -94,7 +94,7 @@ Uint64JsonVO::Wrapper RepaircontentController::execModifyRepaircontent(const Mod
 
 	// 非空校验
 	if ( !dto->line_id ||
-		!dto->subject_name ||
+		!dto->subject_id ||
 		!dto->repair_des ||
 		!dto->malfunction ||
 		!dto->malfunction_url)
