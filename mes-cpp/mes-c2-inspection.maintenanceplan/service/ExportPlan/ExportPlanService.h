@@ -1,8 +1,9 @@
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: 。好
- @Date: 2024/05/20 16:24:24
+ @Author: 独自
+ @Date: 2024/06/7 18:41:17
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,23 +17,22 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
+#ifndef _EXPORTPLANSERVICE_H_
+#define _EXPORTPLANSERVICE_H_
 
-#include "stdafx.h"
-#include "ExportPlanController.h"
 #include "domain/query/ExportPlanQuery.h"
-#include "service/ExportPlan/ExportPlanService.h"
+#include <list>
+#include <string>
 
-StringJsonVO::Wrapper ExportPlanController::
-	execExportPlan(const ExportPlanQuery::Wrapper & query)
+/**
+ * 导出设备service
+ * 负责人：独自
+ */
+class ExportPlanService
 {
-	auto res = StringJsonVO::createShared();
+public:
+	std::string exportPlan(const ExportPlanQuery::Wrapper& query);
+};
 
-	ExportPlanService service;
-	auto url = service.exportPlan(query);
 
-	if (url != "")
-		res->success(url);
-	else
-		res->fail("");
-	return res;
-}
+#endif // !_EXPORTDEVICESERVICE_H_

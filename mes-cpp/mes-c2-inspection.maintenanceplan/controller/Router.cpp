@@ -77,7 +77,7 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(ModifyPlanController);
 	ROUTER_SIMPLE_BIND(ModifyPlanStatusController);
 	ROUTER_SIMPLE_BIND(AddDeviceController);
-
+	ROUTER_SIMPLE_BIND(ExportPlanController);
 }
 
 #ifdef HTTP_SERVER_DEMO

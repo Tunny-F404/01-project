@@ -1,8 +1,9 @@
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
- @Author: 。好
- @Date: 2024/05/20 16:24:24
+ @Author: 独自
+ @Date: 2024/06/7 18:51:36
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,23 +17,20 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
+#ifndef _EXPORTPLANDAO_H_
+#define _EXPORTPLANDAO_H_
 
-#include "stdafx.h"
-#include "ExportPlanController.h"
+#include "BaseDAO.h"
 #include "domain/query/ExportPlanQuery.h"
-#include "service/ExportPlan/ExportPlanService.h"
+#include "domain/do/dv_check_plan/dv_check_planDO.h"
+#include <list>
+#include <vector>
 
-StringJsonVO::Wrapper ExportPlanController::
-	execExportPlan(const ExportPlanQuery::Wrapper & query)
+class ExportPlanDAO : public BaseDAO
 {
-	auto res = StringJsonVO::createShared();
+public:
+	// 根据query查询数据，返回需要的行
+	std::list<Dv_check_planDO> selectAll(const ExportPlanQuery::Wrapper& query);
+};
 
-	ExportPlanService service;
-	auto url = service.exportPlan(query);
-
-	if (url != "")
-		res->success(url);
-	else
-		res->fail("");
-	return res;
-}
+#endif // !_EXPORTDEVICEDAO_H_

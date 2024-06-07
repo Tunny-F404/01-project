@@ -32,10 +32,10 @@ class ExportPlanQuery : public oatpp::DTO
 		ZH_WORDS_GETTER("plan.export-plan.plan-code"))
 	API_DTO_FIELD_DEFAULT(String, plan_name,
 		ZH_WORDS_GETTER("plan.export-plan.plan-name"))
-	API_DTO_FIELD_DEFAULT(Boolean, plan_type,
+	/*API_DTO_FIELD_DEFAULT(Boolean, plan_type,
 		ZH_WORDS_GETTER("plan.export-plan.plan-type"))
 	API_DTO_FIELD_DEFAULT(String, state, 
-		ZH_WORDS_GETTER("plan.export-plan.state"))
+		ZH_WORDS_GETTER("plan.export-plan.state"))*/
 };
 
 #include OATPP_CODEGEN_END(DTO)
