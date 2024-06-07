@@ -19,7 +19,7 @@ public:
 	// 添加工艺 保存数据
 	uint64_t saveProcessAdd(const ProcessAddDTO::Wrapper& dto, const string username);
 	// 修改工艺
-	bool updateData(const ProcessDTO::Wrapper& dto);
+	bool updateData(const ProcessDTO::Wrapper& dto, const string updatename);
 	// 导出工艺 查询数据
 	list<ProcessAddDTO::Wrapper> listAllForProcess(const ProcessListQuery::Wrapper& query);
 	// 通过ID删除工艺

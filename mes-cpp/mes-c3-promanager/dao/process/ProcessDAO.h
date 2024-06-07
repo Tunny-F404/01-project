@@ -20,7 +20,7 @@ public:
 	// 添加工艺
 	uint64_t insert(const ProRouteDO& iObj, const string username);
 	// 修改工艺
-	int update(const ProRouteDO& uObj);
+	int update(const ProRouteDO& uObj, const string updatename);
 	// 通过ID删除组成工序
 	int deleteById(list<uint64_t> id);
 	// 导出工艺

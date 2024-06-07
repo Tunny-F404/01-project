@@ -75,7 +75,7 @@ uint64_t ProcessListService::saveProcessAdd(const ProcessAddDTO::Wrapper& dto, c
 /**
  * 修改工艺的service
  */
-bool ProcessListService::updateData(const ProcessDTO::Wrapper& dto)
+bool ProcessListService::updateData(const ProcessDTO::Wrapper& dto, const string updatename)
 {
 	// 组装DO数据
 	ProRouteDO data;
@@ -87,7 +87,7 @@ bool ProcessListService::updateData(const ProcessDTO::Wrapper& dto)
 	data.setRouteId(dto->routeId.getValue({}));*/
 	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, RouteCode, routeCode, RouteName, routeName, RouteDesc, routeDesc, EnableFlag, enableFlag, Remark, remark, RouteId, routeId)
 	ProcessDAO dao;
-	return dao.update(data) == 1;
+	return dao.update(data, updatename) == 1;
 }
 /**
 * 导出工艺

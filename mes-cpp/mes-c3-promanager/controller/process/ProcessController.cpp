@@ -91,7 +91,7 @@ Uint64JsonVO::Wrapper ProcessController::execModifyBasicProcess(const ProcessDTO
 	// 定义一个Service
 	ProcessListService service;
 	// 执行数据修改
-	if (service.updateData(dto)) {
+	if (service.updateData(dto, payload.getUsername())) {
 		jvo->success(dto->routeId);
 	}
 	else

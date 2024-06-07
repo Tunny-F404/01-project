@@ -65,10 +65,10 @@ uint64_t ProcessDAO::insert(const ProRouteDO& iObj, const string username)
 	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s%s", iObj.getRouteCode(), iObj.getRouteName(), iObj.getRouteDesc(), iObj.getEnableFlag(), iObj.getRemark(), username, SimpleDateTimeFormat::format());
 }
 // ÐÞ¸Ä¹¤ÒÕ
-int ProcessDAO::update(const ProRouteDO& iObj)
+int ProcessDAO::update(const ProRouteDO& iObj, const string updatename)
 {
-	string sql = "UPDATE `pro_route` SET `route_code`=?, `route_name`=?, `route_desc`=?, `enable_flag`=?, `remark`=? WHERE `route_id`=?";
-	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%ull", iObj.getRouteCode(), iObj.getRouteName(), iObj.getRouteDesc(), iObj.getEnableFlag(), iObj.getRemark(), iObj.getRouteId());
+	string sql = "UPDATE `pro_route` SET `route_code`=?, `route_name`=?, `route_desc`=?, `enable_flag`=?, `remark`=?, `update_by`=?, `update_time`=? WHERE `route_id`=?";
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%ull", iObj.getRouteCode(), iObj.getRouteName(), iObj.getRouteDesc(), iObj.getEnableFlag(), iObj.getRemark(), updatename, SimpleDateTimeFormat::format(), iObj.getRouteId());
 }
 
 int ProcessDAO::deleteById(list<uint64_t> id)
