@@ -40,13 +40,13 @@ public: // 定义接口
 	//----↓abf，删除【计划，计划涉及的项目，计划涉及的设备】
 
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("deleteOP.summary.machiner"), deletePlanMachiner, BooleanJsonVO::Wrapper)
-		API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/device-manage/delete-plan-machiner", deletePlanMachiner, BODY_DTO(DeleteMachinerDTO::Wrapper, dto), execDeletePlanMachiner(dto))
+		API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/inspe-matain/delete-plan-machiner", deletePlanMachiner, BODY_DTO(DeleteMachinerDTO::Wrapper, dto), execDeletePlanMachiner(dto))
 
 		API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("deleteOP.summary.subject"), deletePlanSubject, BooleanJsonVO::Wrapper)
-		API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/device-manage/delete-plan-subject", deletePlanSubject, BODY_DTO(DeleteSubjectDTO::Wrapper, dto), execDeletePlanSubject(dto))
+		API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/inspe-matain/delete-plan-subject", deletePlanSubject, BODY_DTO(DeleteSubjectDTO::Wrapper, dto), execDeletePlanSubject(dto))
 		//暂时下移了
 		API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("deleteOP.summary.plan"), deletePlan, BooleanJsonVO::Wrapper)
-		API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/device-manage/delete-plan", deletePlan, BODY_DTO(DeletePlanDTO::Wrapper, dto), execDeletePlan(dto))
+		API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/inspe-matain/delete-plan", deletePlan, BODY_DTO(DeletePlanDTO::Wrapper, dto), execDeletePlan(dto))
 
 		//API_DEF_ENDPOINT_INFO(ZH_WORDS_GETTER("machinery-plan.query-details.summary"), deletePlanQuery, DeletePlanQueryJsonVO::Wrapper)
 		//API_HANDLER_ENDPOINT(API_M_GET, "/device-manage/delete-plan", deletePlanQuery, BODY_DTO(DeletePlanQuery::Wrapper, dto), execDeletePlanQuery(dto))
