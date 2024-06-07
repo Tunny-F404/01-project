@@ -37,10 +37,10 @@ public:
 		data.setCode(resultSet->getString(2));
 		data.setName(resultSet->getString(3));
 		data.setType(resultSet->getString(4));
-		data.setCycletype(resultSet->getString(7));
-		data.setCyclecount(resultSet->getInt(8));
 		data.setStartdate(resultSet->getString(5));
 		data.setEnddate(resultSet->getString(6));
+		data.setCycletype(resultSet->getString(7));
+		data.setCyclecount(resultSet->getInt(8));
 		//data.setStatus(resultSet->getString(9));
 		data.setRemark(resultSet->getString(10));
 		data.setUpdateby(resultSet->getString(17));

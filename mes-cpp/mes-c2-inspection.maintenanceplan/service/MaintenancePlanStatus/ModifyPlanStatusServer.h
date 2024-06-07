@@ -30,7 +30,7 @@ class ModifyPlanStatusService
 {
 public:
 	// ÐÞ¸ÄÊý¾Ý
-	bool updateData(const ModifyPlanStatusDto::Wrapper& dto);
+	bool updateData(const ModifyPlanStatusDto::Wrapper& dto, const PayloadDTO& payload);
 
 };
 

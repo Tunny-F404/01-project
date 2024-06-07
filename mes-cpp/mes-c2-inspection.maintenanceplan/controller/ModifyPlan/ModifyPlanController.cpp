@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "service/MaintenancePlan/ModifyPlanServer.h"
 
-MaintenancePlanJsonVo::Wrapper ModifyPlanController::execModifyPlan(const MaintenancePlanDto::Wrapper& dto)
+MaintenancePlanJsonVo::Wrapper ModifyPlanController::execModifyPlan(const MaintenancePlanDto::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 定义返回数据对象
 	auto jvo = MaintenancePlanJsonVo::createShared();
@@ -12,7 +12,7 @@ MaintenancePlanJsonVo::Wrapper ModifyPlanController::execModifyPlan(const Mainte
 		jvo->init(dto, RS_PARAMS_INVALID);
 		return jvo;
 	}
-	if (!dto->code || !dto->name || !dto->type || !dto->cyclecount || !dto->cycletype || !dto->updateby || !dto->updatetime)
+	if (!dto->code || !dto->name || !dto->type || !dto->cyclecount || !dto->cycletype)
 	{
 		jvo->init(dto, RS_PARAMS_INVALID);
 		return jvo;
@@ -25,7 +25,7 @@ MaintenancePlanJsonVo::Wrapper ModifyPlanController::execModifyPlan(const Mainte
 	// 定义一个Service
 	ModifyPlanService service;
 	// 执行数据修改
-	if (service.updateData(dto)) {
+	if (service.updateData(dto,payload)) {
 		jvo->success(dto);
 	}
 	else

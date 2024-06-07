@@ -20,9 +20,11 @@
 #include "ModifyPlanServer.h"
 #include"./dao/MaintenancePlan/ModifyPlanDao.h"
 #include"./domain/do/MaintenancePlan/MaintenancePlanDo.h"
+#include <alibabacloud/core/CommonResponse.h>
+#include <SimpleDateTimeFormat.h>
 
 
-bool ModifyPlanService::updateData(const MaintenancePlanDto::Wrapper& dto)
+bool ModifyPlanService::updateData(const MaintenancePlanDto::Wrapper& dto, const PayloadDTO& payload)
 {
 	// 组装DO数据
 	MaintenancePlanDo data;
@@ -30,7 +32,9 @@ bool ModifyPlanService::updateData(const MaintenancePlanDto::Wrapper& dto)
 	// 	data.setName(dto->name.getValue(""));
 	// 	data.setSex(dto->sex.getValue(""));
 	// 	data.setAge(dto->age.getValue(1));
-	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Id, id, Code, code, Name, name, Type, type, Cycletype, cycletype, Cyclecount, cyclecount, Startdate, startdate, Enddate, enddate, Remark, remark, Updateby, updateby, Updatetime, updatetime)
+	data.setUpdateby(payload.getUsername());
+	data.setUpdatetime(SimpleDateTimeFormat::format());
+	ZO_STAR_DOMAIN_DTO_TO_DO(data, dto, Id, id, Code, code, Name, name, Type, type, Cycletype, cycletype, Cyclecount, cyclecount, Startdate, startdate, Enddate, enddate, Remark, remark)
 	// 执行数据修改
 	ModifyPlanDao dao;
 	return dao.update(data) == 1;

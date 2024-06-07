@@ -37,11 +37,18 @@ class ModifyPlanStatusController : public oatpp::web::server::api::ApiController
 public:
 	// 3.1 定义修改接口描述;
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("modifyplanstatus.summary"), modifyplanstatus, ModifyPlanStatusDto::Wrapper);
-	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ModifyPlanStatus/modify-plan-status", modifyplanstatus, BODY_DTO(ModifyPlanStatusDto::Wrapper, dto), execModifyPlanStatus(dto));
+	//// 3.2 定义修改接口处理
+	//API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ModifyPlanStatus/modify-plan-status", modifyplanstatus, BODY_DTO(ModifyPlanStatusDto::Wrapper, dto), execModifyPlanStatus(dto));
+	
+	// 4定义修改设备端点处理
+	ENDPOINT(API_M_PUT, "/ModifyPlanStatus/modify-plan-status", modifyplanstatus, BODY_DTO(ModifyPlanStatusDto::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+
+		//呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execModifyPlanStatus(dto, authObject->getPayload()));
+	}
 private:
 	// 3.3 演示修改数据
-	ModifyPlanStatusJsonVo::Wrapper execModifyPlanStatus(const ModifyPlanStatusDto::Wrapper& dto);
+	ModifyPlanStatusJsonVo::Wrapper execModifyPlanStatus(const ModifyPlanStatusDto::Wrapper& dto, const PayloadDTO& payload);
 };
 
 // 0 取消API控制器使用宏
