@@ -39,7 +39,14 @@ public:
 	// 3.1 定义修改接口描述;
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("maintenanceplan.summary"), modifyplan, MaintenancePlanDto::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/inspe-matain/modify-plan", modifyplan, BODY_DTO(MaintenancePlanDto::Wrapper, dto), execModifyPlan(dto, authObject->getPayload()));
+	//API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ModifyPlan/modify-plan", modifyplan, BODY_DTO(MaintenancePlanDto::Wrapper, dto), BODY_DTO(PayloadDTO, payload) execModifyPlan(dto,payload));
+
+	// 4定义修改设备端点处理
+	ENDPOINT(API_M_PUT, "/inspe-matain/modify-plan", modifyplan, BODY_DTO(MaintenancePlanDto::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+
+		//呼叫执行函数响应结果
+		API_HANDLER_RESP_VO(execModifyPlan(dto, authObject->getPayload()));
+	}
 private:
 	// 3.3 演示修改数据
 	MaintenancePlanJsonVo::Wrapper execModifyPlan(const MaintenancePlanDto::Wrapper& dto, const PayloadDTO& payload);
