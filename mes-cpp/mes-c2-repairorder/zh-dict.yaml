@@ -41,6 +41,7 @@ repairorder:
    machinery_id: 设备ID
    machinery_code: 设备编码
    machinery_name: 设备名称
+   machinery_type_id: 设备类型ID
    machinery_brand: 品牌
    require_date: 报修日期
    finish_date: 维修完成日期
@@ -50,3 +51,6 @@ repairorder:
    confirm_by: 验收人员
    status: "单据状态 (PREPARE: 草稿; CONFIRMED: 已确认; APPROVING: 审批中; APPROVED: 已审批; FINISHED: 已完成)"
    remark: 备注
+  example: 
+   machinery_name: WG-A1型纺织机
+   machinery_brand: 万国

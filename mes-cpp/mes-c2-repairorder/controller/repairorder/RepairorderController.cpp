@@ -41,20 +41,32 @@ RepairorderDetailsJsonVO::Wrapper RepairorderController::execQueryDetailsRepairo
     auto jvo = RepairorderDetailsJsonVO::createShared();
     // 参数校验
     if (id->repairId <= 0) {
-        jvo->fail(RepairorderDetailsDTO::Wrapper());
+        auto tmp = RepairorderDetailsDTO::createShared();
+        tmp->repairId = -1;
+        tmp->repairCode = "";
+        tmp->repairName = "";
+        tmp->machineryCode = "";
+        tmp->machineryName = "";
+        tmp->machineryBrand = "";
+        tmp->requireDate = "";
+        tmp->remark = "";
+        jvo->init(tmp, RS_PARAMS_INVALID);
         return jvo;
     }
     // 定义一个Service
     RepairorderService service;
     // 执行数据查询
     auto dto = service.getData(id);
-    jvo->success(dto);
+    if (dto->repairId == -1)
+        jvo->fail(dto);
+    else
+        jvo->success(dto);
     // 响应结果
     return jvo;
 }
 
 // 添加维修单
-Uint64JsonVO::Wrapper RepairorderController::execAddRepairorder(const RepairorderDetailsDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper RepairorderController::execAddRepairorder(const RepairorderDetailsByAddDTO::Wrapper& dto, const PayloadDTO& payload)
 {
     // 定义返回数据对象
     auto jvo = Uint64JsonVO::createShared();
@@ -68,11 +80,20 @@ Uint64JsonVO::Wrapper RepairorderController::execAddRepairorder(const Repairorde
         jvo->init(UInt64(-1), RS_PARAMS_INVALID);
         return jvo;
     }
+    // 有效值校验
+    if (dto->repairCode == "" ||
+        dto->machineryId <= 0 ||
+        dto->machineryCode == "" ||
+        dto->machineryName == "" ||
+        dto->requireDate == "") {
+        jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+        return jvo;
+    }
 
     // 定义一个Service
     RepairorderService service;
     // 执行数据新增
-    uint64_t res = service.saveData(dto);
+    uint64_t res = service.saveData(dto, payload);
     if (res > 0) {
         jvo->success(res);
     } else {
@@ -83,17 +104,26 @@ Uint64JsonVO::Wrapper RepairorderController::execAddRepairorder(const Repairorde
 }
 
 // 修改维修单
-Uint64JsonVO::Wrapper RepairorderController::execModifyRepairorder(const RepairorderDetailsDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper RepairorderController::execModifyRepairorder(const RepairorderDetailsDTO::Wrapper& dto, const PayloadDTO& payload)
 {
     // 定义返回数据对象
     auto jvo = Uint64JsonVO::createShared();
 
     // 非空校验
     if (!dto->repairCode ||
-        !dto->machineryBrand ||
+        !dto->machineryId ||
         !dto->machineryCode ||
         !dto->machineryName ||
         !dto->requireDate) {
+        jvo->init(UInt64(-1), RS_PARAMS_INVALID);
+        return jvo;
+    }
+    // 有效值校验
+    if (dto->repairCode == "" ||
+        dto->machineryId <= 0 ||
+        dto->machineryCode == "" ||
+        dto->machineryName == "" ||
+        dto->requireDate == "") {
         jvo->init(UInt64(-1), RS_PARAMS_INVALID);
         return jvo;
     }
@@ -101,7 +131,7 @@ Uint64JsonVO::Wrapper RepairorderController::execModifyRepairorder(const Repairo
     // 定义一个Service
     RepairorderService service;
     // 执行数据新增
-    if (service.updateData(dto)) {
+    if (service.updateData(dto, payload)) {
         jvo->success(dto->repairId);
     } else {
         jvo->fail(dto->repairId);
