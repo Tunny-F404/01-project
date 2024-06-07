@@ -53,13 +53,13 @@ public: // 定义接口
 	}
 	
 	// 2.1 定义接口描述
-	API_DEF_ENDPOINT_INFO(
+	API_DEF_ENDPOINT_INFO_AUTH(
 		ZH_WORDS_GETTER("equipmentledger.import-device.summary"),
 		importDevice,
 		ImportDeviceJsonVO::Wrapper
 	)
 	// 2.2 定义接口执行
-	API_HANDLER_ENDPOINT(
+	API_HANDLER_ENDPOINT_AUTH(
 		API_M_POST,
 		"/equipment-ledger/import-device",
 		importDevice,
