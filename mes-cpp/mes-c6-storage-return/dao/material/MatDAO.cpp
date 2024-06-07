@@ -70,13 +70,13 @@ uint64_t MatDAO::insert2(const MatlineDO& iObj)
 
 int MatDAO::update1(const MatlistDO& uObj)
 {
-	string sql = "UPDATE INTO `wm_rt_vendor` (`rtcode`, `rtname`, `pocode`,`vendorname`, `batchcode`, `rtdate`, `status`, `remark`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	string sql = "UPDATE `wm_rt_vendor` SET `rt_code`=?, `rt_name`=?, `po_code`=?,`vendor_name`=?, `batch_code`=?, `rt_date`=?, `status`=?, `remark`=? WHERE `rt_id`=?";
 	time_t now = time(0);
 	tm* ltm = localtime(&now);
 	string date = to_string(1900 + ltm->tm_year) + "-" + to_string(1 + ltm->tm_mon) + "-" + to_string(ltm->tm_mday) + " " + to_string(ltm->tm_hour) + ":" + to_string(ltm->tm_min) + ":" + to_string(ltm->tm_sec);
-	return sqlSession->executeInsert(sql, "%s%s%s%s%s%s%s%s", uObj.getRtcode(), uObj.getRtname(), uObj.getPocode(),
+	return sqlSession->executeUpdate(sql, "%s%s%s%s%s%s%s%s%ull", uObj.getRtcode(), uObj.getRtname(), uObj.getPocode(),
 		uObj.getVendorname(), uObj.getBatchcode(), date,
-		uObj.getStatuss(), uObj.getRemark());
+		uObj.getStatuss(), uObj.getRemark(),uObj.getRtid());
 }
 
 int MatDAO::deleteById1(uint64_t id)

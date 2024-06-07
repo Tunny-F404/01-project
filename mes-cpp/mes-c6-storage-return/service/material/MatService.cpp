@@ -60,7 +60,7 @@ bool MatService::updateData(const AddReturnDTO::Wrapper& dto)
 
 	// 执行数据添加
 	MatDAO dao;
-	return dao.update1(data1);
+	return dao.update1(data1)==1;
 }
 
 bool MatService::removeData(uint64_t id)
