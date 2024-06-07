@@ -47,3 +47,16 @@ material:
  remark: 备注
  lineid: 退货行id
  rtid: 退货单id
+ itemcode: 产品物料编码
+ itemname: 产品物料名称
+ quantityrted: 退货数量
+ specification: 规格型号
+ unitofmeasure: 单位
+ warehouseid: 仓库ID
+ warehousename: 仓库名称
+ locationid: 库区ID
+ locationname: 库区名称
+ areaid: 库位ID
+ areaname: 库位名称
+
+

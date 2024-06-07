@@ -29,7 +29,7 @@
 /**
  * 定义一个用户信息显示JsonVO对象，用于响应给客户端
  */
-class GetReturnListJsonVO : public JsonVO<oatpp::List<GetReturnListDTO::Wrapper>>
+class GetReturnListJsonVO : public JsonVO<GetReturnListDTO::Wrapper>
 {
 	DTO_INIT(GetReturnListJsonVO, JsonVO<GetReturnListDTO::Wrapper>);
 };
@@ -37,7 +37,7 @@ class GetReturnListJsonVO : public JsonVO<oatpp::List<GetReturnListDTO::Wrapper>
 /**
  * 定义一个用户信息分页显示JsonVO对象，用于响应给客户端
  */
-class GetReturnListPageJsonVO : public JsonVO<oatpp::List<GetReturnListPageDTO::Wrapper>>
+class GetReturnListPageJsonVO : public JsonVO<GetReturnListPageDTO::Wrapper>
 {
 	DTO_INIT(GetReturnListPageJsonVO, JsonVO<GetReturnListPageDTO::Wrapper>);
 };

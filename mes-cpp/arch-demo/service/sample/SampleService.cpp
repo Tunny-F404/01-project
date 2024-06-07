@@ -34,7 +34,6 @@ SamplePageDTO::Wrapper SampleService::listAll(const SampleQuery::Wrapper& query)
 	{
 		return pages;
 	}
-
 	// 分页查询数据
 	pages->total = count;
 	pages->calcPages();
