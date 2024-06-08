@@ -59,4 +59,54 @@ material:
  areaid: 库位ID
  areaname: 库位名称
 
+ return:
+ query-all: 
+  summary: 查询所有供应商退货单
+ query-detail:
+  summary: 查询退货单据详细信息
+ add-detail:
+  summary: 新增单据详细信息
+ modify:
+  summary: 修改单据
+ execute:
+  summary: 执行退货
+ remove:
+  summary: 删除单据
+ download:
+  summary: 导出单据
+ fields: 
+  rt_id: 退货单ID
+  rt_code: 退货单编号
+  rt_name: 退货单名称 
+  po_code: 采购订单编号 
+  vendor_id: 供应商ID
+  vendor_code: 供应商编码
+  vendor_name: 供应商名称 
+  vendor_nick: 供应商简称
+  batch_code: 批次号
+  rt_date: 退货日期 
+  status: 单据状态
+  remark: 备注
+  attr1: 预留字段1
+  attr2: 预留字段2
+  attr3: 预留字段3
+  attr4: 预留字段4
+  create_by: 创建者
+  create_time: 创建时间
+  update_by: 更新者
+  update_time: 更新时间
 
+
+excel:
+ return:
+  path: ./public/excel/ExportReturn.xlsx
+  sheet:
+   s1: 数据表1
+  header:
+   h1: 退货单编号
+   h2: 退货单名称
+   h3: 采购订单编号
+   h4: 供应商编号
+   h5: 供应商名称
+   h6: 退货日期
+   h7: 单据状态

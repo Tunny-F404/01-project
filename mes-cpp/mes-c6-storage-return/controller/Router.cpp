@@ -5,6 +5,7 @@
 
 //新添加的文件
 #include "return/ReturnController.h"
+#include "return-ryan/ReturnController_r.h"
 #include "controller/material/RController.h"
 
 #ifdef HTTP_SERVER_DEMO
@@ -42,7 +43,9 @@ void Router::initRouter()
 
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(ReturnController);
+	ROUTER_SIMPLE_BIND(ReturnController_r);
 	ROUTER_SIMPLE_BIND(RController);
+	
 }
 
 #ifdef HTTP_SERVER_DEMO
