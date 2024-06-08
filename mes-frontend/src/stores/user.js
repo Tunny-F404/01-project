@@ -222,7 +222,7 @@ const testMenus = [
 			},
 			{
 				id: 6,
-				text: "系统管理5",
+				text: "编码规则",
 				href: "/un-45",
 				icon: "Management",
 				pid: 5,
