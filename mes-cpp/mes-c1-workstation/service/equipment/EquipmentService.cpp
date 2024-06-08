@@ -20,6 +20,14 @@
 #include "EquipmentService.h"
 #include "../../dao/equipment/EquipmentDAO.h"
 
+list<EquipmentTypeDO> EquipmentService::listTypeAll()
+{
+	EquipmentDAO dao;
+	// 查询设备类型总列表
+	list<EquipmentTypeDO> result = dao.selectTypeList();
+	return result;
+}
+
 EquipmentPageDTO::Wrapper EquipmentService::listAll(const EquipmentQuery::Wrapper& query)
 {
 	// 构建返回对象
@@ -47,8 +55,8 @@ EquipmentPageDTO::Wrapper EquipmentService::listAll(const EquipmentQuery::Wrappe
 		// 		dto->name = sub.getName();
 		// 		dto->sex = sub.getSex();
 		// 		dto->age = sub.getAge();
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, equipmentCode, EquipmentCode, equipmentName, EquipmentName, brand, Brand,
-			specificationsAndModels, SpecificationsAndModels, equipmentStatus, EquipmentStatus, createTime, CreateTime)
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, equipmentId, EquipmentId, equipmentCode, EquipmentCode, equipmentName, EquipmentName, brand, Brand,
+			specificationsAndModels, SpecificationsAndModels, workshopName, WorkshopName, createTime, CreateTime)
 			pages->addData(dto);
 
 	}

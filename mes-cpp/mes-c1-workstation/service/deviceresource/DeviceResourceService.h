@@ -20,9 +20,9 @@
 #ifndef _DEVICE_RESOURCE_SERVICE_
 #define _DEVICE_RESOURCE_SERVICE_
 #include <list>
-#include "domain/vo/deviceResource/DeviceResourceVO.h"
-#include "domain/dto/deviceResource/DeviceResourceDTO.h"
-#include "domain/query/deviceResource/DeviceResourceQuery.h"
+#include "domain/vo/deviceresource/DeviceResourceVO.h"
+#include "domain/dto/deviceresource/DeviceResourceDTO.h"
+#include "domain/query/deviceresource/DeviceResourceQuery.h"
 
 /**
  * 设备资源服务接口

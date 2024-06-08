@@ -21,7 +21,7 @@
 #define _DEVICE_RESOURCE_VO_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/deviceResource/DeviceResourceDTO.h"
+#include "../../dto/deviceresource/DeviceResourceDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 

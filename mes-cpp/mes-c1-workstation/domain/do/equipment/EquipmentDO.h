@@ -26,6 +26,8 @@
  */
 class EquipmentDO
 {
+	// 设备id
+	CC_SYNTHESIZE(uint64_t, equipmentId, EquipmentId)
 	// 设备编码
 	CC_SYNTHESIZE(string, equipmentCode, EquipmentCode);
 	// 设备名称
@@ -34,12 +36,15 @@ class EquipmentDO
 	CC_SYNTHESIZE(string, brand, Brand);
 	// 规格型号
 	CC_SYNTHESIZE(string, specificationsAndModels, SpecificationsAndModels);
+	// 所属车间
+	CC_SYNTHESIZE(string, workshopName, WorkshopName);
 	// 设备状态
 	CC_SYNTHESIZE(string, equipmentStatus, EquipmentStatus);
 	// 创建时间
 	CC_SYNTHESIZE(string, createTime, CreateTime);
 public:
 	EquipmentDO() {
+		equipmentId = 0;
 		equipmentCode = "";
 		equipmentName = "";
 		brand = "";

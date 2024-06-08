@@ -23,6 +23,7 @@
 #include "domain/vo/equipment/EquipmentVO.h"
 #include "domain/query/equipment/EquipmentQuery.h"
 #include "domain/dto/equipment/EquipmentDTO.h"
+#include "domain/do/equipment/EquipmentTypeDO.h"
 
 /**
  * 示例服务实现，演示基础的示例服务实现
@@ -30,6 +31,8 @@
 class EquipmentService
 {
 public:
+	// 分页查询设备类型所有数据
+	list<EquipmentTypeDO> listTypeAll();
 	// 分页查询所有数据
 	EquipmentPageDTO::Wrapper listAll(const EquipmentQuery::Wrapper& query);
 };

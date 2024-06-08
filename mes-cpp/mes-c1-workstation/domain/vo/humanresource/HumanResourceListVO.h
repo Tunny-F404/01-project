@@ -22,15 +22,15 @@
 
 #include "../../GlobalInclude.h"
 #include "../../dto/humanresource/HumanResourceListDTO.h"
-
+//#include<List>
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
  * 定义一个人力资源列表 显示JsonVO对象，用于响应给客户端,也许不需要这个，只需要下面分页的
  */
-class HumanResourceListVO : public JsonVO<List<HumanResourceListDTO::Wrapper>>
+class HumanResourceListVO : public JsonVO<HumanResourceListDTO::Wrapper>
 {
-	DTO_INIT(HumanResourceListVO, JsonVO<List<HumanResourceListDTO::Wrapper>>);
+	DTO_INIT(HumanResourceListVO, JsonVO<HumanResourceListDTO::Wrapper>);
 };
 
 /**

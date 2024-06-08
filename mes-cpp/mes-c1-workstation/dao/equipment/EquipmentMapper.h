@@ -32,6 +32,14 @@ public:
 	EquipmentDO mapper(ResultSet* resultSet) const override
 	{
 		EquipmentDO data;
+		data.setEquipmentId(resultSet->getUInt64(1));
+		data.setEquipmentCode(resultSet->getString(2));
+		data.setEquipmentName(resultSet->getString(3));
+		data.setBrand(resultSet->getString(4));
+		data.setSpecificationsAndModels(resultSet->getString(5));
+		data.setWorkshopName(resultSet->getString(6));
+		data.setEquipmentStatus(resultSet->getString(7));
+		data.setCreateTime(resultSet->getString(8));
 		return data;
 	}
 };

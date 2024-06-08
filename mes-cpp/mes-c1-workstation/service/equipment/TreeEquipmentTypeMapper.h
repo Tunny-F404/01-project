@@ -38,6 +38,8 @@ public:
 		res->_id(source->getMachineryTypeId());
 		res->_pid(source->getParentTypeId());
 		// À©Õ¹ÊôÐÔÓ³Éä
+		res->machineryTypeId = source->getMachineryTypeId();
+		res->parentTypeId = source->getParentTypeId();
 		res->machineryTypeCode = source->getMachineryTypeCode();
 		res->machineryTypeName = source->getMachineryTypeName();
 		res->enableFlag = source->getEnableFlag();

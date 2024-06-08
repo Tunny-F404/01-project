@@ -4,7 +4,7 @@
 #define _GETWORKSTATIONLIST_VO_H_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/WorkStation/GetWorkStationListDTO.h"
+#include "../../dto/workstation/WorkStationDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 

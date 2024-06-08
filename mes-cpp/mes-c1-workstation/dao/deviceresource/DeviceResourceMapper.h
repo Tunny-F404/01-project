@@ -21,7 +21,7 @@
 #define _DEVICE_RESOURCE_MAPPER_
 
 #include "Mapper.h"
-#include "../../domain/do/deviceResource/DeviceResourceDO.h"
+#include "../../domain/do/deviceresource/DeviceResourceDO.h"
 
 /**
  * 设备资源表字段匹配映射
@@ -32,6 +32,10 @@ public:
 	DeviceResourceDO mapper(ResultSet* resultSet) const override
 	{
 		DeviceResourceDO data;
+		data.setMachineryId(resultSet->getUInt64(1));
+		data.setEquipmentCode(resultSet->getString(2));
+		data.setEquipmentName(resultSet->getString(3));
+		data.setQuantity(resultSet->getInt(4));
 		return data;
 	}
 };

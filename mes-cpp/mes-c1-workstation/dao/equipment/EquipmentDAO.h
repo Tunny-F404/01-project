@@ -22,16 +22,19 @@
 #include "BaseDAO.h"
 #include "../../domain/do/equipment/EquipmentDO.h"
 #include "../../domain/query/equipment/EquipmentQuery.h"
+#include "domain/do/equipment/EquipmentTypeDO.h"
 
 /**
- * 绀轰緥琛ㄦ暟鎹簱鎿嶄綔瀹炵幇
+ * 示例表数据库操作实现
  */
 class EquipmentDAO : public BaseDAO
 {
 public:
-	// 缁熻鏁版嵁鏉℃暟
+	// 统计数据条数
 	uint64_t count(const EquipmentQuery::Wrapper& query);
-	// 鍒嗛〉鏌ヨ鏁版嵁
+	// 分页查询数据
 	list<EquipmentDO> selectWithPage(const EquipmentQuery::Wrapper& query);
+	// 查询设备类型列表
+	list<EquipmentTypeDO> selectTypeList();
 };
 #endif // !_EQUIPMENT_DAO_

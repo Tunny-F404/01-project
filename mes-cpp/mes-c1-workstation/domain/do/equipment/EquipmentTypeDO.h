@@ -33,4 +33,4 @@ public:
 	}
 };
 
-#endif // !_SAMPLEMENUDO_H_
+#endif // !_EQUIPMENTYPEDO_H_

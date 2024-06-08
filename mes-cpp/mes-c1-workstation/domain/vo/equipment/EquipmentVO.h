@@ -26,14 +26,14 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 示例显示JsonVO，用于响应给客户端的Json对象
+ * 设备显示JsonVO，用于响应给客户端的Json对象
  */
 class EquipmentVO : public JsonVO<EquipmentDTO::Wrapper> {
 	DTO_INIT(EquipmentVO, JsonVO<EquipmentDTO::Wrapper>);
 };
 
 /**
- * 示例分页显示JsonVO，用于响应给客户端的Json对象
+ * 设备分页显示JsonVO，用于响应给客户端的Json对象
  */
 class EquipmentPageVO : public JsonVO<EquipmentPageDTO::Wrapper> {
 	DTO_INIT(EquipmentPageVO, JsonVO<EquipmentPageDTO::Wrapper>);

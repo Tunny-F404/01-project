@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _EQUIPMENTTYPETREEVO_H_
-#define _EQUIPMENTTYPETREEVO_H_
+#ifndef _EQUIPMENT_TYPETREEVO_H_
+#define _EQUIPMENT_TYPETREEVO_H_
 #include "../../GlobalInclude.h"
 #include "../../dto/equipment/EquipmentTypeDTO.h"
 
@@ -39,4 +39,4 @@ public:
 
 #include OATPP_CODEGEN_END(DTO)
 
-#endif // !EquipmentTypeTreeVO
+#endif // !_EQUIPMENT_TYPETREEVO_H_

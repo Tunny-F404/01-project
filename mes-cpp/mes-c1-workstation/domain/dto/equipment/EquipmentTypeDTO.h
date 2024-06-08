@@ -32,7 +32,7 @@ class EquipmentTypeDTO : public oatpp::DTO, public TreeNode
 {
 	DTO_INIT(EquipmentTypeDTO, DTO);
 	// 设备类型id
-	API_DTO_FIELD_DEFAULT(Int64, machineryTypeId, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.machineryTypeId"));
+	API_DTO_FIELD_DEFAULT(String, machineryTypeId, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.machineryTypeId"));
 	// 设备类型编码
 	API_DTO_FIELD_DEFAULT(String, machineryTypeCode, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.machineryTypeCode"));
 	// 设备类型名称
@@ -42,7 +42,7 @@ class EquipmentTypeDTO : public oatpp::DTO, public TreeNode
 	// 备注
 	API_DTO_FIELD_DEFAULT(String, remark, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.remark"));
 	// 设备类型父id
-	API_DTO_FIELD_DEFAULT(Int64, parentTypeId, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.parentTypeId"));
+	API_DTO_FIELD_DEFAULT(String, parentTypeId, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.parentTypeId"));
 	// 子设备列表
 	API_DTO_FIELD(List<EquipmentTypeDTO::Wrapper>, children, ZH_WORDS_GETTER("equipment.equipmentTypeTreeDto.child"), false, {});
 public:

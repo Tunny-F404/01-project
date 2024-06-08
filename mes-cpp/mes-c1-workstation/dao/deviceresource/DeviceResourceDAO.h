@@ -20,8 +20,8 @@
 #ifndef _DEVICE_RESOURCE_DAO_
 #define _DEVICE_RESOURCE_DAO_
 #include "BaseDAO.h"
-#include "../../domain/do/deviceResource/DeviceResourceDO.h"
-#include "../../domain/query/deviceResource/DeviceResourceQuery.h"
+#include "../../domain/do/deviceresource/DeviceResourceDO.h"
+#include "../../domain/query/deviceresource/DeviceResourceQuery.h"
 
 /**
  * 示例表数据库操作实现

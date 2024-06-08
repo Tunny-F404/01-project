@@ -1,28 +1,10 @@
 #pragma once
-/*
- Copyright Zero One Star. All rights reserved.
-
- @Author: awei
- @Date: 2022/10/25 0:27:04
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
-	  https://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
-*/
 #ifndef _HUMANRESOURCELISTCONTROLLER_
 #define _HUMANRESOURCELISTCONTROLLER_
 
 #include "domain/vo/BaseJsonVO.h"
 #include "domain/query/humanresource/HumanResourceListQuery.h"
-//#include "domain/dto/sample/SampleDTO.h"
+#include "domain/dto/humanresource/HumanResourceListDTO.h"
 #include "domain/vo/humanresource/HumanResourceListVO.h"
 
 // 0 定义API控制器使用宏
@@ -38,7 +20,6 @@ class HumanResourceListController : public oatpp::web::server::api::ApiControlle
 	// 3 定义接口
 public:
 
-
 	// 3.1 定义查询接口描述
 	ENDPOINT_INFO(queryHumanResource) {
 		// 定义接口标题
@@ -50,13 +31,13 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "workstation_id", ZH_WORDS_GETTER("post.fields.workstationid"), 1, false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "workstationId", ZH_WORDS_GETTER("post.fields.workstationid"), 1, false);
 
 	}
 	// 3.2 定义查询接口处理
 	ENDPOINT(API_M_GET, "/huamnresource/query-humanresource-list", queryHumanResource, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
-		API_HANDLER_QUERY_PARAM(query,HumanResourceListQuery, queryParams);
+		API_HANDLER_QUERY_PARAM(query, HumanResourceListQuery, queryParams);
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryHumanResourceList(query));
 	}
@@ -79,32 +60,29 @@ public:
 	// 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("modify.summary"), modifyHumanResource, Uint64JsonVO::Wrapper);
 	// 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/humanresource/modify-hunmanresource", modifyHumanResource, BODY_DTO(HumanResourceModifyDTO::Wrapper, dto), execModifyHumanResource(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/humanresource/modify-hunmanresource", modifyHumanResource, BODY_DTO(HumanResourceListDTO::Wrapper, dto), execModifyHumanResource(dto));
 
 	// 定义删除接口描述
 	ENDPOINT_INFO(removeHumanResource) {
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("remove.summary"), Uint64JsonVO::Wrapper);
 		// 定义其他路径参数说明
-		API_DEF_ADD_PATH_PARAMS(UInt64, "recordid", ZH_WORDS_GETTER("post.fields.recordid"), 1, true);
+		API_DEF_ADD_PATH_PARAMS(UInt64, "recordId", ZH_WORDS_GETTER("post.fields.recordid"), 1, true);
 	}
 	// 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/humanresource/remove-hunmanresource", removeHumanResource, PATH(UInt64, id), execRemoveHumanResource(id));
-
-
-
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/humanresource/remove-hunmanresource/{recordId}", removeHumanResource, PATH(UInt64, recordId), execRemoveHumanResource(recordId));
 
 private:
 	// 分页查询数据
 	HumanResourceListPageVO::Wrapper execQueryHumanResourceList(const HumanResourceListQuery::Wrapper& query);
 	// 新增数据
 	Uint64JsonVO::Wrapper execAddHumanResourceList(const HumanResourceListDTO::Wrapper& dto);
-	// 新增修改实现
-	Uint64JsonVO::Wrapper execModifyHumanResource(const HumanResourceModifyDTO::Wrapper& dto);
-	// 删除数据实现
-	Uint64JsonVO::Wrapper execRemoveHumanResource(const UInt64& id);
+	// 修改数据
+	Uint64JsonVO::Wrapper execModifyHumanResource(const HumanResourceListDTO::Wrapper& dto);
+	// 删除数据
+	Uint64JsonVO::Wrapper execRemoveHumanResource(const UInt64& recordId);
 };
 
 // 0 取消API控制器使用宏
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
-#endif // _SAMPLE_CONTROLLER_
+#endif // 

@@ -32,16 +32,16 @@ class EquipmentQuery : public PageQuery
 {
 	DTO_INIT(EquipmentQuery, PageQuery);
 	// 设备编码
-	DTO_FIELD(String, equimentCode);
-	DTO_FIELD_INFO(equimentCode) {
-		info->description = ZH_WORDS_GETTER("equipment.equipmentQuery.equimentCode");
+	DTO_FIELD(String, equipmentCode);
+	DTO_FIELD_INFO(equipmentCode) {
+		info->description = ZH_WORDS_GETTER("equipment.equipmentQuery.equipmentCode");
 	}
 	// 设备名称
-	DTO_FIELD(String, equimentName);
-	DTO_FIELD_INFO(equimentName){
-		info->description = ZH_WORDS_GETTER("equipment.equipmentQuery.equimentName");
+	DTO_FIELD(String, equipmentName);
+	DTO_FIELD_INFO(equipmentName){
+		info->description = ZH_WORDS_GETTER("equipment.equipmentQuery.equipmentName");
 	}
 };
 
 #include OATPP_CODEGEN_END(DTO)
-#endif // !_SAMPLE_QUERY_
+#endif // !_EQUIPMENT_QUERY_

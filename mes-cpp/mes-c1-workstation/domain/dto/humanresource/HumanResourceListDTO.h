@@ -30,40 +30,18 @@ class HumanResourceListDTO : public oatpp::DTO
 {
 	DTO_INIT(HumanResourceListDTO, DTO);
 	// 岗位名称
-	API_DTO_FIELD(String, postName, ZH_WORDS_GETTER("post.fields.pname"),true,"ceo");
-	// 岗位数量
-	API_DTO_FIELD(Int32, quantity, ZH_WORDS_GETTER("post.fields.quantity"),true,1);
-	// 记录ID
-	API_DTO_FIELD(UInt64, recordId, ZH_WORDS_GETTER("post.fields.recordid"), true,1);
-
-};
-/**
- * 岗位列表详情，也许没有，看我的原型好像没有
- */
-class HumanResourceDetailDTO : public HumanResourceListDTO
-{
-	DTO_INIT(HumanResourceListDTO, HumanResourceListDTO);
-	// 岗位名称
 	API_DTO_FIELD(String, postName, ZH_WORDS_GETTER("post.fields.pname"), true, "ceo");
 	// 岗位数量
 	API_DTO_FIELD(Int32, quantity, ZH_WORDS_GETTER("post.fields.quantity"), true, 1);
 	// 记录ID
 	API_DTO_FIELD(UInt64, recordId, ZH_WORDS_GETTER("post.fields.recordid"), true, 1);
-};
-/**
- * 修改人力资源岗位
- */
-class HumanResourceModifyDTO : public oatpp::DTO
-{
-	DTO_INIT(HumanResourceModifyDTO, DTO);
-	// 岗位名称
-	API_DTO_FIELD(String, postName, ZH_WORDS_GETTER("post.fields.pname"), true, "ceo");
-	// 岗位数量
-	API_DTO_FIELD(Int32, quantity, ZH_WORDS_GETTER("post.fields.quantity"), true, 1);
-	// 记录ID
-	API_DTO_FIELD(UInt64, recordId, ZH_WORDS_GETTER("post.fields.recordid"), true, 1);
+	// 工作站ID
+	API_DTO_FIELD(UInt64, workstationId, ZH_WORDS_GETTER("post.fields.workstationdid"), true, 1);
+	// 岗位ID
+	API_DTO_FIELD(UInt64, postId, ZH_WORDS_GETTER("post.fields.postid"), true, 1);
 
 };
+
 /**
  * 定义一个岗位信息分页传输对象
  */

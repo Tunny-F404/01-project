@@ -1,21 +1,20 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include"controller/WorkStation/GetWorkStationListController.h"
-#include"controller/WorkStation/AddWorkStationController.h"
-#include"controller/WorkStation/ModifyWorkStationController.h"
-#include"controller/WorkStation/ExportWorkStationController.h"
+#include "controller/workstation/WorkStationController.h"
 #include "humanresource/HumanResourceListController.h"
 #include "add-wf-for-ws/AddWorkFixtureForWorkStationController.h"
 #include "get-wf-for-ws/GetWorkFixtureForWorkStationController.h"
+#include "deviceresource/DeviceResourceController.h"
+#include "equipment/EquipmentController.h"
+#include "wk_delete/Delete_Workwear_Controller.h"
+#include "wk_change/WorkeChange_Controller.h"
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
 #include "sample/SampleController.h"
 #include "file/FileController.h"
 #include "ws/WSController.h"
 #endif
-#include "deviceResource/DeviceResourceController.h"
-#include "equipment/EquipmentController.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -41,18 +40,14 @@ void Router::initRouter()
 #endif
 
 	//#TIP :系统扩展路由定义，写在这个后面
-		// 绑定示例控制器
-	ROUTER_SIMPLE_BIND(DeviceResourceController);
-	ROUTER_SIMPLE_BIND(EquipmentController);
-
-	ROUTER_SIMPLE_BIND(GetWorkStationListController); 
-	ROUTER_SIMPLE_BIND(AddWorkStationController);
-	ROUTER_SIMPLE_BIND(ModifyWorkStationController);
-	ROUTER_SIMPLE_BIND(ExportWorkStationController);
-	ROUTER_SIMPLE_BIND(ExportWorkStationController);
+	ROUTER_SIMPLE_BIND(WorkStationController);
 	ROUTER_SIMPLE_BIND(HumanResourceListController);
 	ROUTER_SIMPLE_BIND(AddWorkFixtureForWorkStationController);
 	ROUTER_SIMPLE_BIND(GetWorkFixtureForWorkStationController);
+	ROUTER_SIMPLE_BIND(DeviceResourceController);
+	ROUTER_SIMPLE_BIND(EquipmentController);
+	ROUTER_SIMPLE_BIND(ChangeWorkwearController);
+	ROUTER_SIMPLE_BIND(DeleteWorkwearController);
 }
 
 #ifdef HTTP_SERVER_DEMO

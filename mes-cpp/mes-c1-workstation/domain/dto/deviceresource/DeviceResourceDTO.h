@@ -30,10 +30,15 @@
 class DeviceResourceDTO : public oatpp::DTO
 {
 	DTO_INIT(DeviceResourceDTO, DTO);
-	// 设备资源id
-	DTO_FIELD(UInt64, deviceResourceId);
-	DTO_FIELD_INFO(deviceResourceId) {
-		info->description = ZH_WORDS_GETTER("deviceResource.deviceResourceDTO.deviceResourceId");
+	// 工作站id
+	DTO_FIELD(UInt64, workstationId);
+	DTO_FIELD_INFO(workstationId) {
+		info->description = ZH_WORDS_GETTER("deviceResource.deviceResourceDTO.workstationId");
+	}
+	// 设备id
+	DTO_FIELD(UInt64, machineryId);
+	DTO_FIELD_INFO(machineryId) {
+		info->description = ZH_WORDS_GETTER("deviceResource.deviceResourceDTO.machineryId");
 	}
 	// 设备编号
 	DTO_FIELD(String, equipmentCode);
@@ -46,9 +51,9 @@ class DeviceResourceDTO : public oatpp::DTO
 		info->description = ZH_WORDS_GETTER("deviceResource.deviceResourceDTO.equipmentName");
 	}
 	// 数量
-	DTO_FIELD(UInt64, count);
-	DTO_FIELD_INFO(count) {
-		info->description = ZH_WORDS_GETTER("deviceResource.deviceResourceDTO.count");
+	DTO_FIELD(UInt64, quantity);
+	DTO_FIELD_INFO(quantity) {
+		info->description = ZH_WORDS_GETTER("deviceResource.deviceResourceDTO.quantity");
 	}
 };
 

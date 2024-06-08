@@ -29,6 +29,11 @@
 class EquipmentDTO : public oatpp::DTO
 {
 	DTO_INIT(EquipmentDTO, DTO);
+	// 设备id
+	DTO_FIELD(UInt64, equipmentId);
+	DTO_FIELD_INFO(equipmentId) {
+		info->description = ZH_WORDS_GETTER("equipment.equipmentDto.equipmentId");
+	}
 	// 设备编号
 	DTO_FIELD(String, equipmentCode);
 	DTO_FIELD_INFO(equipmentCode) {
@@ -49,6 +54,11 @@ class EquipmentDTO : public oatpp::DTO
 	DTO_FIELD_INFO(specificationsAndModels) {
 		info->description = ZH_WORDS_GETTER("equipment.equipmentDto.specificationsAndModels");
 	}
+	//所属车间名称
+	DTO_FIELD(String, workshopName);
+	DTO_FIELD_INFO(workshopName) {
+		info->description = ZH_WORDS_GETTER("equipment.equipmentDto.workshopName");
+	}
 	//设备状态
 	DTO_FIELD(String, equipmentStatus);
 	DTO_FIELD_INFO(equipmentStatus) {
@@ -62,7 +72,7 @@ class EquipmentDTO : public oatpp::DTO
 };
 
 /**
- * 示例分页传输对象
+ * 设备分页传输对象
  */
 class EquipmentPageDTO : public PageDTO<EquipmentDTO::Wrapper>
 {
