@@ -57,5 +57,4 @@ public interface LoginApis {
     ////JsonVO<List<CurrentUserMenuVO>> getMenus(Integer userId) throws Exception;
     JsonVO<List<MenuTreeVO>> getMenus() throws Exception;
 
-    void getVerificationCodePhoto(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 }

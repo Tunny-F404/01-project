@@ -1,6 +1,8 @@
 package com.zeroone.star.login.controller;
 
-import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.anji.captcha.model.common.ResponseModel;
+import com.anji.captcha.model.vo.CaptchaVO;
+import com.anji.captcha.service.CaptchaService;
 import com.zeroone.star.login.service.CurrUserInfoService;
 import com.zeroone.star.login.service.IMenuService;
 import com.zeroone.star.login.service.OauthService;
@@ -18,6 +20,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +58,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("login")
 @Api(tags = "登录系统")
 @Slf4j
+@RefreshScope
 public class LoginController implements LoginApis {
     @Resource
     private OauthService oAuthService;
@@ -61,10 +66,11 @@ public class LoginController implements LoginApis {
     private UserHolder userHolder;
     @Resource
     RedisTemplate<String, Object> redisTemplate;
-    @Autowired
-    private DefaultKaptcha captchaProducer;
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    @Resource
+    private CaptchaService captchaService;
+
+    @Value("${secure.opencaptcha}")
+    private boolean isOpenCaptcha;
 
     private static final long CAPTCHA_EXPIRATION = 5; // 验证码有效期（分钟）
 
@@ -73,41 +79,22 @@ public class LoginController implements LoginApis {
     private static final long REFRESH_TOKEN_EXPIRATION = 7; // refresh_token有效期（天)
 
 
-    @ApiOperation("获取验证码图片")
-    @GetMapping("/code")
-    public void getVerificationCodePhoto(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        byte[] captchaOutputStream = null;
-        ByteArrayOutputStream imgOutputStream = new ByteArrayOutputStream();
-        try {
-            //生成验证码
-            String verifyCode = captchaProducer.createText();
-            //验证码字符串保存到redis中
-            stringRedisTemplate.opsForValue().set(verifyCode, verifyCode, CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
-            BufferedImage challenge = captchaProducer.createImage(verifyCode);
-            //设置写出图片的格式
-            ImageIO.write(challenge, "jpg", imgOutputStream);
-        } catch (IllegalArgumentException e) {
-            httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-        captchaOutputStream = imgOutputStream.toByteArray();
-        httpServletResponse.setHeader("Cache-Control", "no-store");
-        httpServletResponse.setHeader("Pragma", "no-cache");
-        httpServletResponse.setDateHeader("Expires", 0);
-        httpServletResponse.setContentType("image/jpg");
-        ServletOutputStream responseOutputStream = httpServletResponse.getOutputStream();
-        responseOutputStream.write(captchaOutputStream);
-        responseOutputStream.flush();
-        responseOutputStream.close();
-    }
-
     @ApiOperation(value = "授权登录")
     @PostMapping("auth-login")
     @Override
     public JsonVO<Oauth2TokenDTO> authLogin(LoginDTO loginDTO) {
-        String storedCaptcha = stringRedisTemplate.opsForValue().get(loginDTO.getCode());
-        if (storedCaptcha == null) {
-            return JsonVO.create(null, ResultStatus.FAIL.getCode(), "验证码错误或已过期");
+        if (isOpenCaptcha) {
+            //创建CaptchaVO对象，用于封装验证码验证信息
+            CaptchaVO captchaVO = new CaptchaVO();
+            // 设置验证码字符串
+            captchaVO.setCaptchaVerification(loginDTO.getCode());
+            // 调用验证码服务进行验证
+            ResponseModel response = captchaService.verification(captchaVO);
+            if (!response.isSuccess()) {
+                return JsonVO.create(null,
+                        ResultStatus.FAIL.getCode(),
+                        response.getRepCode()+":"+response.getRepMsg());
+            }
         }
         //账号密码认证
         Map<String, String> params = new HashMap<>(5);
@@ -156,8 +143,13 @@ public class LoginController implements LoginApis {
         String token = request.getHeader("Authorization");
         String realToken = token.replace("Bearer ", "");
         if (Boolean.TRUE.equals(redisTemplate.hasKey(realToken))){
-            redisTemplate.delete(token);
-            return JsonVO.success("登出成功");
+
+            Boolean delete = redisTemplate.delete(realToken);
+            if (delete) {
+                return JsonVO.success("登出成功");
+            }else {
+                return JsonVO.fail("登出失败");
+            }
         }
         return JsonVO.fail("登录已失效");
     }
