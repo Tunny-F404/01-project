@@ -107,7 +107,7 @@
 			<el-empty description="没有数据"></el-empty>
 		</template>
 	</tableFrame>
-	<el-dialog v-model="testDialogVisible" :title="dialogTitle">
+	<el-dialog v-model="testDialogVisible" :title="dialogTitle" style="width:700px">
 		<el-form ref="formRef" :model="formModel" :rules="rules" label-width="120px">
 			<el-row>
 				<el-col :span="12">

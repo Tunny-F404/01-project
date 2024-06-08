@@ -115,36 +115,40 @@
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="工装夹具类型">
-						<el-input v-model="equipmentLedger.equipmentLedgerType" autocomplete="off" />
+						<div class="flex flex-wrap gap-4 items-center">
+							<el-select v-model="select" placeholder="请选择类型" style="width: 240px">
+								<el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value" />
+							</el-select>
+						</div>
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="工装夹具名称">
-						<el-input v-model="equipmentLedger.equipmentLedgerName" autocomplete="off" />
+						<el-input v-model="equipmentLedger.equipmentLedgerName" placeholder="请输入工装夹具名称" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="品牌">
-						<el-input v-model="equipmentLedger.brand" autocomplete="off" />
+						<el-input v-model="equipmentLedger.brand" placeholder="请输入品牌" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="型号">
-						<el-input v-model="equipmentLedger.brand" autocomplete="off" />
+						<el-input v-model="equipmentLedger.brand" placeholder="请输入型号" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="工装夹具编号">
-						<el-input v-model="equipmentLedger.type" />
+						<el-input v-model="equipmentLedger.type" placeholder="请输入工装夹具编号" />
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="数量">
-						<el-input v-model="equipmentLedger.inventory" />
+						<el-input-number v-model="num" :min="1" :max="100000000" />
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -156,26 +160,45 @@
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="保养维护类型">
-						<el-input v-model="equipmentLedger.maintenance" />
+						<div class="flex flex-wrap gap-4 items-center">
+							<el-select v-model="equipmentLedger.maintenance" placeholder="定期维护" style="width: 240px">
+								<el-option v-for="item in maintenanceOptions" :key="item.value" :label="item.label"
+									:value="item.value" />
+							</el-select>
+						</div>
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="下一次保养日期">
-						<el-input v-model="equipmentLedger.maintenanceDay" />
+						<div class="demo-date-picker">
+							<div class="block">
+								<el-date-picker v-model="equipmentLedger.maintenanceDay" type="date" placeholder="请选择下一次保养日期"
+									:size="size" />
+							</div>
+						</div>
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="状态">
-						<el-input v-model="equipmentLedger.state" />
+						<div class="flex flex-wrap gap-4 items-center">
+							<el-radio v-model="state" disabled value="zaiku">在库</el-radio>
+							<el-radio v-model="state" disabled value="beilingyong">
+								被领用
+							</el-radio>
+							<el-radio v-model="state" disabled value="baofei">报废</el-radio>
+							<el-radio v-model="state" disabled value="weixiuzhong">
+								维修中
+							</el-radio>
+						</div>
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="24">
 					<el-form-item label="备注">
-						<el-input v-model="equipmentLedger.remark" />
+						<el-input v-model="equipmentLedger.remark" placeholder="请输入内容" />
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -209,6 +232,16 @@ const selectOptions = [
 		label: '夹具',
 	}
 ];
+const maintenanceOptions = [
+	{
+		value: 'Option1',
+		label: '定期维护'
+	},
+	{
+		value: 'Option2',
+		label: '按使用次数维护'
+	},
+];
 const stateOptions = [
 	{
 		value: 'Option1',
@@ -233,6 +266,7 @@ const equipmentLedgerType = ref('');
 const brand = ref('');
 const model = ref('');
 const state = ref('');
+const num = ref(1);
 let dialogFormVisible = ref(false)
 const equipmentLedger = reactive({
 	equipmentLedgerCode: '',
@@ -243,8 +277,8 @@ const equipmentLedger = reactive({
 	type: '',
 	inventory: '',
 	maintenance: '',
-	usable: '',
-	state: '',
+	usable: 0,
+	state: 'zaiku',
 	maintenanceDay: '',
 	state: '',
 	remark: ''
@@ -257,7 +291,7 @@ const reFresh = () => {
 	model.value = '';
 	state.value = '';
 }
-const onEditchannel = () => {
+const onEditchannel = (row) => {
 	dialogTitle.value = "修改工装夹具清单";
 	equipmentLedger.value = { ...row };
 	dialogFormVisible.value = true;
