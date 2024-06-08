@@ -26,7 +26,7 @@
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
-					<el-form-item label="工装夹具类型">
+					<el-form-item label="工装夹具类型" prop="equipmentLedgerType">
 						<div class="flex flex-wrap gap-4 items-center">
 							<el-select v-model="equipmentLedgerType" placeholder="请选择类型" style="width: 240px">
 								<el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value" />
@@ -86,7 +86,7 @@
 			<el-table-column prop="brand" label="品牌" align="center"></el-table-column>
 			<el-table-column prop="equipmentLedgerType" label="型号" align="center"></el-table-column>
 			<el-table-column prop="type" label="类型" align="center"></el-table-column>
-			<el-table-column prop="inventory" label="存货数量" align="center"></el-table-column>
+			<el-table-column prop="num" label="存货数量" align="center"></el-table-column>
 			<el-table-column prop="usable" label="可用数量" align="center"></el-table-column>
 			<el-table-column prop="maintenance" label="保养维护类型" align="center"></el-table-column>
 			<el-table-column prop="maintenanceWeek" label="下次保养周期" align="center"></el-table-column>
@@ -114,16 +114,16 @@
 		<el-form :model="equipmentLedger" :rules="rules">
 			<el-row>
 				<el-col :span="12">
-					<el-form-item label="工装夹具类型">
+					<el-form-item label="工装夹具类型" prop="equipmentLedgerType">
 						<div class="flex flex-wrap gap-4 items-center">
-							<el-select v-model="select" placeholder="请选择类型" style="width: 240px">
+							<el-select v-model="equipmentLedgerType" placeholder="请选择类型" style="width: 240px">
 								<el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value" />
 							</el-select>
 						</div>
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
-					<el-form-item label="工装夹具名称">
+					<el-form-item label="工装夹具名称" prop="equipmentLedgerName">
 						<el-input v-model="equipmentLedger.equipmentLedgerName" placeholder="请输入工装夹具名称" autocomplete="off" />
 					</el-form-item>
 				</el-col>
@@ -147,8 +147,8 @@
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
-					<el-form-item label="数量">
-						<el-input-number v-model="num" :min="1" :max="100000000" />
+					<el-form-item label="数量" prop="num">
+						<el-input-number v-model="num" :min="0" :max="100000000" />
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -275,7 +275,7 @@ const equipmentLedger = reactive({
 	brand: '',
 	model: '',
 	type: '',
-	inventory: '',
+	num: '',
 	maintenance: '',
 	usable: 0,
 	state: 'zaiku',
@@ -296,6 +296,11 @@ const onEditchannel = (row) => {
 	equipmentLedger.value = { ...row };
 	dialogFormVisible.value = true;
 }
+const rules = {
+	equipmentLedgerType: [{ required: true, trigger: "blur" }],
+	equipmentLedgerName: [{ required: true, message: '工装夹具名称不能为空', trigger: "blur" }],
+	num: [{ required: true, trigger: "blur" }]
+}
 const equipmentLedgerList = [
 	{
 		equipmentLedgerCode: 'T00074',
@@ -303,8 +308,8 @@ const equipmentLedgerList = [
 		brand: 'XX品牌',
 		equipmentLedgerType: 'XXX型号',
 		type: '刀具',
-		inventory: 70,
-		usable: 60,
+		num: 70,//库存数量
+		usable: 60,//可用数量
 		maintenance: '定期维护',
 		maintenanceWeek: '',
 		maintenanceDay: '2025-05-16',
@@ -317,7 +322,7 @@ const equipmentLedgerList = [
 		brand: 'XXX牌',
 		equipmentLedgerType: 'XXX型号',
 		type: '模具',
-		inventory: 1,
+		num: 1,
 		usable: 1,
 		maintenance: '定期维护',
 		maintenanceWeek: '',
@@ -336,7 +341,7 @@ const openTestDialog = () => {
 		equipmentLedgerType: '',
 		brand: '',
 		type: '',
-		inventory: '',
+		num: '',
 		usable: '',
 		maintenance: '',
 		maintenanceWeek: '',

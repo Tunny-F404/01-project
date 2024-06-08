@@ -196,11 +196,11 @@ const type = reactive({
 	enableFlag: true
 })
 const rules = {
-	codingType: [{ required: true, message: '类型编码不能为空' }],
-	typeName: [{ required: true, message: '类型名称不能为空' }],
-	enableFlag: [{ required: true }],
-	SelectValue: [{ required: false }],
-	maintainPeriod: [{ message: '请输入保养周期' }],
+	codingType: [{ required: true, message: '类型编码不能为空', trigger: "blur" }],
+	typeName: [{ required: true, message: '类型名称不能为空', trigger: "blur" }],
+	enableFlag: [{ required: true, trigger: "blur" }],
+	SelectValue: [{ required: false, trigger: "blur" }],
+	maintainPeriod: [{ message: '请输入保养周期', trigger: "blur" }],
 };
 //函数
 const toggleStatus = (row) => {
