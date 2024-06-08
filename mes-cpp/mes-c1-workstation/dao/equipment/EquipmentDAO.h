@@ -24,14 +24,14 @@
 #include "../../domain/query/equipment/EquipmentQuery.h"
 
 /**
- * 示例表数据库操作实现
+ * 绀轰緥琛ㄦ暟鎹簱鎿嶄綔瀹炵幇
  */
 class EquipmentDAO : public BaseDAO
 {
 public:
-	// 统计数据条数
+	// 缁熻鏁版嵁鏉℃暟
 	uint64_t count(const EquipmentQuery::Wrapper& query);
-	// 分页查询数据
+	// 鍒嗛〉鏌ヨ鏁版嵁
 	list<EquipmentDO> selectWithPage(const EquipmentQuery::Wrapper& query);
 };
 #endif // !_EQUIPMENT_DAO_
