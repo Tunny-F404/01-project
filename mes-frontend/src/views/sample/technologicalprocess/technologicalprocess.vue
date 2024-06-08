@@ -19,7 +19,7 @@
 				</el-col>
 				<el-col :span="5">
 					<span class="input-label">是否启用：</span>
-					<el-input v-model="workstationName" placeholder="请输入是否启用" class="input-size" />
+					<el-input v-model="enabled" placeholder="请输入是否启用" class="input-size" />
 				</el-col>
 
 				<el-col :span="5" class="button-container">
@@ -60,15 +60,15 @@
 				</el-col>
 			</el-row>
 
-			<el-dialog title="编辑工作站信息" v-model="editDialogVisible">
+			<el-dialog title="编辑工艺信息" v-model="editDialogVisible">
 				<el-form label-width="80px">
-					<el-form-item label="工序编码">
+					<el-form-item label="工艺路线编号">
 						<el-input v-model="editingRow.code" />
 					</el-form-item>
-					<el-form-item label="工序名称">
+					<el-form-item label="工艺路线名称">
 						<el-input v-model="editingRow.name" />
 					</el-form-item>
-					<el-form-item label="工艺说明">
+					<el-form-item label="工艺路线说明">
 						<el-input v-model="editingRow.discription" />
 					</el-form-item>
 					<el-form-item label="是否启用">
@@ -150,6 +150,9 @@ export default {
 				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
 					return false;
 				}
+				if (filters.enabled && !item.code.includes(filters.enabled)) {
+					return false;
+				}
 
 				return true; // 如果都符合过滤条件，则返回 true
 			});
@@ -157,16 +160,8 @@ export default {
 			// 更新表格数据为过滤后的数据
 			this.tableData = filteredData;
 		},
-		reset() {
-			this.workstationCode = "";
-			this.workstationName = "";
-			this.selectedWorkshop = "";
-			this.selectedOrder = "";
-			console.log("已重置所有输入");
-		},
-		resetTableData() {
-			// 恢复表格数据为原始数据
-		},
+		reset() {},
+
 		handleHumanResource() {
 			console.log("处理人力资源");
 		},

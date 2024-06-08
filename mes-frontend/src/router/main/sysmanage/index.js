@@ -23,7 +23,7 @@ const routes = [
 	{
 		path: "/un-5",
 		name: "UN5",
-		component: () => import("@/views/sample/Productionreport/Productionreport.vue"),
+		component: () => import("@/views/sample/Productionworkorder/Productionworkorder.vue"),
 	},
 	{
 		path: "/un-6",

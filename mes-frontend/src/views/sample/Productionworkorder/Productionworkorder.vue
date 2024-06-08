@@ -114,7 +114,7 @@
 		</el-main>
 
 		<!-- 编辑弹窗 -->
-		<el-dialog title="编辑工单" :visible.sync="editDialogVisible">
+		<el-dialog title="编辑工单" v-model="editDialogVisible">
 			<el-form :model="editingRow">
 				<el-form-item label="工单编码">
 					<el-input v-model="editingRow.workOrderCode" disabled></el-input>
@@ -214,7 +214,7 @@ export default {
 				// 其他数据...
 			],
 			editDialogVisible: false,
-			editingRow: {},
+			editingRow: null,
 			selectedRows: [],
 		};
 	},
@@ -270,8 +270,17 @@ export default {
 			this.orderStatus = "";
 		},
 		addNew() {
-			// 新增逻辑
-			console.log("新增");
+			// 打开编辑对话框
+			this.editingRow = {
+				code: "", // 根据需求设置默认值
+				name: "", // 根据需求设置默认值
+				location: "", // 根据需求设置默认值
+				workshop: "", // 根据需求设置默认值
+				order: "", // 根据需求设置默认值
+				enabled: true, // 根据需求设置默认值
+				note: "", // 根据需求设置默认值
+			};
+			this.editDialogVisible = true;
 		},
 		exportData() {
 			// 导出逻辑
@@ -292,24 +301,30 @@ export default {
 		},
 		handleEdit(row) {
 			this.editingRow = { ...row };
+			// 打开修改对话框
 			this.editDialogVisible = true;
-		},
-		handleDelete(row) {
-			const index = this.tableData.indexOf(row);
-			if (index !== -1) {
-				this.tableData.splice(index, 1);
-			}
-		},
-		cancelEdit() {
-			this.editDialogVisible = false;
+			// 这里可以编写打开修改对话框的逻辑
 		},
 		saveEdit() {
-			// 保存编辑逻辑
-			const index = this.tableData.findIndex((item) => item.workOrderCode === this.editingRow.workOrderCode);
+			// 根据编辑对话框中的数据更新表格中对应行的数据
+			const index = this.tableData.findIndex((item) => item.code === this.editingRow.code);
 			if (index !== -1) {
 				this.tableData.splice(index, 1, this.editingRow);
+			} else {
+				this.tableData.push({ ...this.editingRow });
 			}
+			// 关闭对话框
 			this.editDialogVisible = false;
+		},
+		cancelEdit() {
+			// 关闭对话框
+			this.editDialogVisible = false;
+		},
+		handleDelete(row) {
+			console.log("删除", row);
+			// 在这里实现单行删除的逻辑
+			const index = this.tableData.indexOf(row);
+			this.tableData.splice(index, 1);
 		},
 	},
 };
