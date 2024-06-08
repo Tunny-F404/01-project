@@ -95,6 +95,96 @@
 			<el-table-column prop="handle" label="操作" align="center"></el-table-column>
 		</el-table>
 	</tableFrame>
+	<el-dialog class="demo-form-inline" title="添加工装夹具清单" width="500">
+		<el-form :model="equipmentLedger" :rules="rules">
+			<el-row>
+				<el-col :span="12">
+					<el-form-item label="工装夹具类型">
+						<el-input autocomplete="off" />
+					</el-form-item>
+				</el-col>
+				<el-col :span="12">
+					<el-form-item label="工装夹具名称">
+						<el-input autocomplete="off" />
+					</el-form-item>
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span="12">
+					<el-form-item label="品牌">
+						<div class="mb-2 flex items-center text-sm">
+							<el-radio-group v-model="enableFlag" class="ml-4">
+								<el-radio value="yes" label="是">是</el-radio>
+								<el-radio value="no" label="否">否</el-radio>
+							</el-radio-group>
+						</div>
+					</el-form-item>
+				</el-col>
+				<el-col :span="12">
+					<el-form-item label="型号">
+						<div>
+							<el-radio-group>
+								<el-radio-button label="定期维护" value="New York" />
+								<el-radio-button label="按使用次数维护" value="Washington" />
+							</el-radio-group>
+						</div>
+					</el-form-item>
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span="12">
+					<el-form-item label="工装夹具编号">
+						<el-input />
+					</el-form-item>
+				</el-col>
+				<el-col :span="12">
+					<el-form-item label="数量">
+						<el-input />
+					</el-form-item>
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span="12">
+					<el-form-item label="可用数量">
+						<el-input />
+					</el-form-item>
+				</el-col>
+				<el-col :span="12">
+					<el-form-item label="保养维护类型">
+						<el-input />
+					</el-form-item>
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span="12">
+					<el-form-item label="下一次保养日期">
+						<el-input />
+					</el-form-item>
+				</el-col>
+				<el-col :span="12">
+					<el-form-item label="状态">
+						<el-input />
+					</el-form-item>
+				</el-col>
+			</el-row>
+
+			<el-row>
+				<el-col :span="24">
+					<el-form-item label="备注">
+						<el-input />
+					</el-form-item>
+				</el-col>
+			</el-row>
+		</el-form>
+		<template #footer>
+			<div class="dialog-footer">
+				<el-button @click="dialogFormVisible = false">取消</el-button>
+				<el-button type="primary" @click="dialogFormVisible = false">
+					确定
+				</el-button>
+			</div>
+		</template>
+	</el-dialog>
 </template>
 
 <script setup>
@@ -140,6 +230,7 @@ const equipmentLedgerType = ref('');
 const brand = ref('');
 const model = ref('');
 const state = ref('');
+let dialogFormVisible = ref(false)
 const equipmentLedger = reactive({
 	equipmentLedgerCode: '',
 	equipmentLedgerName: '',

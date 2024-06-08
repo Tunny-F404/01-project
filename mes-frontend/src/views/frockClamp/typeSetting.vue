@@ -15,17 +15,17 @@
 		<!-- 表单 -->
 		<el-form>
 			<el-row>
-				<el-col :span="6">
+				<el-col :span="8">
 					<el-form-item label="编码类型">
 						<el-input v-model="codingType" style="width: 260px" placeholder="请输入编码类型" clearable />
 					</el-form-item>
 				</el-col>
-				<el-col :span="6">
+				<el-col :span="8">
 					<el-form-item label="类型名称">
 						<el-input v-model="typeName" style="width: 260px" placeholder="请输入类型名称" clearable />
 					</el-form-item>
 				</el-col>
-				<el-col :span="6">
+				<el-col :span="8">
 					<el-form-item label="保养维护类型">
 						<div class="flex flex-wrap gap-4 items-center">
 							<el-select v-model="SelectValue" placeholder="请选择保养维护类型" style="width: 240px">
@@ -88,17 +88,17 @@
 			</el-table-column>
 		</el-table>
 	</tableFrame>
-	<el-dialog v-model="dialogFormVisible" class="demo-form-inline" title="添加工装夹具类型" width="500">
+	<el-dialog v-model="dialogFormVisible" class="demo-form-inline" :title="dialogTitle" width="900">
 		<el-form :model="type" :rules="rules">
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="类型编码">
-						<el-input v-model="type.codingType" autocomplete="off" />
+						<el-input v-model="type.codingType" placeholder="请输入编码类型" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="类型名称">
-						<el-input v-model="type.codingName" autocomplete="off" />
+						<el-input v-model="type.codingName" placeholder="请输入类型名称" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -114,25 +114,24 @@
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
-					<el-form-item label="保养维护类型">
-						<div>
-							<el-radio-group v-model="maintainType">
-								<el-radio-button label="定期维护" value="New York" />
-								<el-radio-button label="按使用次数维护" value="Washington" />
-							</el-radio-group>
+					<el-form-item label="请选择保养维护类型">
+						<div class="flex flex-wrap gap-4 items-center">
+							<el-select v-model="SelectValue" placeholder="请选择保养维护类型" size="large" style="width: 120px">
+								<el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value" />
+							</el-select>
 						</div>
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
 					<el-form-item label="保养周期">
-						<el-input v-model="type.maintainPeriod" autocomplete="off" />
+						<el-input v-model="type.maintainPeriod" placeholder="请选择保养周期" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="24">
 					<el-form-item label="备注">
-						<el-input v-model="type.maintainPeriod" />
+						<el-input v-model="type.maintainPeriod" placeholder="请输入内容" style="width:1200px;" />
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -154,8 +153,9 @@ import { ref, reactive } from 'vue'
 
 const SelectValue = ref('')
 const typeName = ref('');
-let dialogFormVisible = ref(false)
+let dialogFormVisible = ref(false);
 const codingType = ref('');
+let dialogTitle = ref('新增工装夹具类型');
 const reFresh = () => {
 	SelectValue.value = '';
 	typeName.value = '';
@@ -213,6 +213,11 @@ let openTestDialog = () => {
 		codingType: ''
 	}
 }
+const onEditchannel = (row) => {
+	dialogTitle.value = "修改工装夹具类型";
+	type.value = { ...row };
+	dialogFormVisible.value = true;
+};
 </script>
 
 <style lang="scss">
