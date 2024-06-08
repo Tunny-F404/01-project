@@ -21,17 +21,17 @@
 #define _PROCESS_QUERY_
 
 #include "../../GlobalInclude.h"
+#include "domain/query/PageQuery.h"
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
  * 
  */
-class ProductionProcessQuery : public oatpp::DTO{
-	DTO_INIT(ProductionProcessQuery, DTO);
-API_DTO_FIELD_DEFAULT(String, itemCode, ZH_WORDS_GETTER("productionorder.query.fields.item_code"));
-API_DTO_FIELD_DEFAULT(String, itemName, ZH_WORDS_GETTER("productionorder.query.fields.item_name"));
-API_DTO_FIELD_DEFAULT(String, productName, ZH_WORDS_GETTER("productionorder.query.fields.product_name"));
-API_DTO_FIELD_DEFAULT(String, productCode, ZH_WORDS_GETTER("productionorder.query.fields.product_code"));
+class ProductionProcessQuery : public PageQuery 
+{
+	DTO_INIT(ProductionProcessQuery, PageQuery);
+	API_DTO_FIELD_DEFAULT(String, itemCode, ZH_WORDS_GETTER("productionprocess.query.fields.item_code"));
+	API_DTO_FIELD_DEFAULT(String, nextProcessCode, ZH_WORDS_GETTER("productionprocess.query.fields.next_process_code"));
 };
 
 #include OATPP_CODEGEN_END(DTO)

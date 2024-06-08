@@ -8,10 +8,11 @@
  */
 class ApprovalStageDO
 {
+public:
 	//记录id/生产工单编号;record_id;bigint
-	CC_SYNTHESIZE(uint64_t, record_id, record_id);
+	CC_SYNTHESIZE(uint64_t, record_id, c_record_id);
 	//报工状态;status;varchar
-	CC_SYNTHESIZE(string, status, status);
+	CC_SYNTHESIZE(string, status, c_status);
 public:
 	ApprovalStageDO() {
 		record_id = 0;

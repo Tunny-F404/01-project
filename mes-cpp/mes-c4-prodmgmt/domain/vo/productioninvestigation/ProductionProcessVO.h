@@ -31,6 +31,11 @@
 class ProductionProcessJsonVO : public JsonVO<ProductionProcessDTO::Wrapper> {
 	DTO_INIT(ProductionProcessJsonVO, JsonVO<ProductionProcessDTO::Wrapper>);
 };
-#include OATPP_CODEGEN_END(DTO)
+/**
+ * 示例分页显示JsonVO，用于响应给客户端的Json对象
+ */
+class ProductionProcessPageJsonVO : public JsonVO<ProductionProcessPageDTO::Wrapper> {
+	DTO_INIT(ProductionProcessPageJsonVO, JsonVO<ProductionProcessPageDTO::Wrapper>);
+};
 
 #endif // !_PROCESS_VO_

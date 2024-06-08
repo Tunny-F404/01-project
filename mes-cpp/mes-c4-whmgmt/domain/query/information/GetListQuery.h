@@ -47,8 +47,8 @@ class GetListQuery : public PageQuery
 	//入库日期
 	API_DTO_FIELD_DEFAULT(String, recptdate, ZH_WORDS_GETTER("getlist.field.recptdate"));
 
-	//订单编号（未找到）
-	API_DTO_FIELD_DEFAULT(String, status, ZH_WORDS_GETTER("getlist.field.status"));
+	//订单编号
+	API_DTO_FIELD_DEFAULT(String, pocode, ZH_WORDS_GETTER("getlist.field.pocode"));
 
 };
 

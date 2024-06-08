@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
@@ -26,6 +26,7 @@
  */
 class ProWorkOrderBomDO
 {
+	CC_SYNTHESIZE(int, workorder_id, workOrderId);
 	CC_SYNTHESIZE(string, item_code, itemCode);
 	CC_SYNTHESIZE(string, item_name, itemName);
 	CC_SYNTHESIZE(string, item_spc, itemSpc);
@@ -33,9 +34,12 @@ class ProWorkOrderBomDO
 	CC_SYNTHESIZE(string, item_or_product, itemOrProduct);
 	CC_SYNTHESIZE(double, quantity, bQuantity);
 	CC_SYNTHESIZE(int, item_id, itemId);
-	CC_SYNTHESIZE(int, workorder_id, workOrderId);
+	
+	CC_SYNTHESIZE(string, create_time, createTime);//xj字段
+	
 public:
 	ProWorkOrderBomDO() {
+		workorder_id = 0;
 		item_code = "";
 		item_name = "";
 		item_spc = "";
@@ -44,6 +48,7 @@ public:
 		quantity = 0.0;
 		item_id = 0;
 		workorder_id = 0;
+		create_time = "";
 	}
 };
 

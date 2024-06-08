@@ -24,6 +24,7 @@
 #include "domain/query/information/GetListQuery.h"
 #include "domain/dto/purchasereceiving/information/GetListDTO.h"
 #include "domain/vo/purchasereceiving/information/GetListVO.h"
+#include"service/purchasereceiving/information/GetListService.h"
 
 // 0 ∂®“ÂAPIøÿ÷∆∆˜ π”√∫Í
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
@@ -38,7 +39,7 @@ class GetListController : public oatpp::web::server::api::ApiController // 1 ºÃ≥
 	// 3 ∂®“ÂΩ”ø⁄
 public:
 	// 3.1 ∂®“Â≤È—ØΩ”ø⁄√Ë ˆ
-	ENDPOINT_INFO(GetListQuery) {
+	ENDPOINT_INFO(getListQuery) {
 		// ∂®“ÂΩ”ø⁄±ÍÃ‚
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("getlist.get.summary"));
 		// ∂®“Âƒ¨»œ ⁄»®≤Œ ˝£®ø…—°∂®“Â£¨»Áπ˚∂®“Â¡À£¨œ¬√ÊENDPOINT¿Ô√Ê–Ë“™º”»ÎAPI_HANDLER_AUTH_PARAME£©
@@ -52,15 +53,15 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "sex", ZH_WORDS_GETTER("getlist.field.sex"), "N", false);
 	}
 	// 3.2 ∂®“Â≤È—ØΩ”ø⁄¥¶¿Ì
-	ENDPOINT(API_M_GET, "purchasereceiving/information/getlist", GetListQuery, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "purchasereceiving/information/getlist", getListQuery, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// Ω‚Œˆ≤È—Ø≤Œ ˝Œ™Query¡Ï”Úƒ£–Õ
 		API_HANDLER_QUERY_PARAM(userQuery, GetListQuery, queryParams);
 		// ∫ÙΩ–÷¥––∫Ø ˝œÏ”¶Ω·π˚
-		API_HANDLER_RESP_VO(execQuerySample(userQuery, authObject->getPayload()));
+		API_HANDLER_RESP_VO(execQueryGetList(userQuery, authObject->getPayload()));
 	}
 private:
 	// 3.3 —› æ∑÷“≥≤È—Ø ˝æ›
-	GetListPageJsonVO::Wrapper execQuerySample(const GetListQuery::Wrapper& query, const PayloadDTO& payload);
+	GetListPageJsonVO::Wrapper execQueryGetList(const GetListQuery::Wrapper& query, const PayloadDTO& payload);
 
 };
 

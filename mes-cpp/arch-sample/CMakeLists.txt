@@ -42,7 +42,7 @@ if(WIN32)
 endif()
 
 # 编译可执行文件
-add_executable (${appName} ${SC_FILES} "domain/query/productionorder/ExportBomOrderQuery.h" "domain/dto/productionorder/ExportBomOrderDTO.h" "domain/vo/productionorder/ExportBomOrderVO.h" "controller/productionorder/ProductionOrderController.h" "controller/productionorder/ProductionOrderController.cpp" "domain/dto/productionorder/ExportOrderDTO.h" "domain/do/pro_workorder_bom/ProWorkOrderBomDO.h" "domain/do/pro_workorder/ProWorkOrder.h" "domain/dto/productioninvestigation/ProductionProcessDTO.h" "domain/vo/productioninvestigation/ProductionProcessVO.h" "domain/do/pro_process/ProProcess.h" "controller/productioninvestigation/ProductionProcessController.h" "controller/productioninvestigation/ProductionProcessController.cpp")
+add_executable (${appName} ${SC_FILES})
 
 # 给架构示例项目添加特有的宏
 if(${IS_ARCH_DEMO})

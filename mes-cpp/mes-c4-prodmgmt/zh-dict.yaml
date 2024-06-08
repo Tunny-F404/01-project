@@ -60,7 +60,7 @@ Approval:
   draft: 草稿
   remark: 状态
   name: 审批相关
-  submi: 审批中
+  submi: 提交审批
   passed: 审批通过
   denied: 审批不通过
 
@@ -129,6 +129,43 @@ productionorder:
     unit_of_measure: 单位
     item_or_product: 物料产品标识
     quantity: 物料预计使用量
+ excel:
+  sheet:
+   s1: 生产工单数据
+   s2: 生产工单BOM组成数据
+  header:
+   h1: 工单编码
+   h2: 工单名称
+   h3: 工单类型
+   h4: 来源类型
+   h5: 来源单据
+   h6: 产品ID
+   h7: 产品编号
+   h8: 产品名称
+   h9: 规格型号
+   h10: 单位
+   h11: 批次号
+   h12: 生产数量
+   h13: 已生产数量
+   h14: 调整数量
+   h15: 已排产数量
+   h16: 客户ID
+   h17: 客户编码
+   h18: 客户名称
+   h19: 供应商ID
+   h20: 供应商编号
+   h21: 供应商名称
+   h22: 需求日期
+   h23: 完成时间
+   h24: 单据状态
+   h25: 生产工单ID
+   h26: BOM物料ID
+   h27: BOM物料编号
+   h28: BOM物料名称
+   h29: 规格型号
+   h30: 单位
+   h31: 物料产品标识
+   h32: 预计使用量
 productionprocess:
  query:
   summary: 生产排查
@@ -249,3 +286,10 @@ prod1:
    summary: "删除一条生产任务"
   get:
    summary: "获取报工列表"  
+   process_name: 工序名称
+   process_id:  工序ID
+   process_code: 工序编号
+   item_code: 物料编号
+   route_id: 工艺路线ID
+   next_process_code: 下一个工序编号
+   next_process_name: 下一个工序的名称
