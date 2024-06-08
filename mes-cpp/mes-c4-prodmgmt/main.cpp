@@ -42,13 +42,13 @@
  */
 bool getStartArg(int argc, char* argv[]) {
 	// �������˿�
-	std::string serverPort = "3333";
+	std::string serverPort = "8090";
 	// ���ݿ�������Ϣ
 	std::string dbUsername = "root";
-	std::string dbPassword = "jingziRoot1234";
+	std::string dbPassword = "root";
 	std::string dbName = "ktgmes";
-	std::string dbHost = "47.120.28.247";
-	int dbPort = 3333;
+	std::string dbHost = "192.168.223.128";
+	int dbPort = 3306;
 	int dbMax = 5;
 #ifdef LINUX
 	// Nacos���ò���
