@@ -27,8 +27,7 @@ class FeedBackDO
 	//ÉóºËÈË record_user, Record_user
 	CC_SYNTHESIZE(string, record_user, Record_user);
 	//×´Ì¬
-	CC_SYNTHESIZE(string, status, Status);
-	FeedBackDO() {};
+	CC_SYNTHESIZE(string, _status, _Status);
 	FeedBackDO() { 
 		this->feedback_type = "";
 		this->workorder_code = "";
@@ -40,7 +39,7 @@ class FeedBackDO
 		this->user_name = "";
 		this->feedback_time = "";
 		this->record_user = "";
-		this->status = "";
+		this->_status = "";
 	};
 
 };

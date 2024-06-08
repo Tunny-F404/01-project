@@ -6,7 +6,12 @@
 
 FeedBackPageJsonVO::Wrapper FeedBackController::execQueryFeedBack(const FeedBackQuery::Wrapper& query)
 {
-	return {};
+	// 定义一个Service
+	FeedBackService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = FeedBackPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }
-
-
