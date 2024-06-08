@@ -565,33 +565,33 @@ const created = () => {
 	.el-select {
 		--el-select-width: 220px;
 	}
+}
 
-	.status-enabled {
-		background-color: rgba(64, 158, 255, 0.2);
-		color: #409eff;
-		padding: 5px;
-		text-align: center;
-	}
+.status-enabled {
+	background-color: rgba(64, 158, 255, 0.2);
+	color: #409eff;
+	padding: 5px;
+	text-align: center;
+}
 
-	.status-disabled {
-		background-color: rgba(245, 108, 108, 0.2);
-		color: #f56c6c;
-		padding: 5px;
-		text-align: center;
-	}
+.status-disabled {
+	background-color: rgba(245, 108, 108, 0.2);
+	color: #f56c6c;
+	padding: 5px;
+	text-align: center;
+}
 
-	.status-tag {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 35px;
-		height: 35px;
-		cursor: pointer;
-	}
+.status-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+}
 
-	.el-table th,
-	.el-table td {
-		text-align: center;
-	}
+.el-table th,
+.el-table td {
+	text-align: center;
 }
 </style>

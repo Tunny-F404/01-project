@@ -13,7 +13,7 @@
 			</template>
 		</template>
 		<!-- 表单 -->
-		<el-form>
+		<el-form class="demo-form-inline">
 			<el-row>
 				<el-col :span="8">
 					<el-form-item label="工装夹具编码">
@@ -79,7 +79,7 @@
 		<el-button type="danger" plain><el-icon>
 				<Delete />
 			</el-icon>删除</el-button>
-		<el-table v-loading="loading" :data="equipmentLedgerList" @selection-change="handleSelectionChange">
+		<el-table :data="equipmentLedgerList" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55"></el-table-column>
 			<el-table-column prop="equipmentLedgerCode" label="编号" align="center"></el-table-column>
 			<el-table-column prop="equipmentLedgerName" label="名称" align="center"></el-table-column>
@@ -93,85 +93,89 @@
 			<el-table-column prop="maintenanceDay" label="下次保养日期" align="center"></el-table-column>
 			<el-table-column prop="state" label="状态" align="center"></el-table-column>
 			<el-table-column prop="handle" label="操作" align="center"></el-table-column>
+			<el-table-column label="操作" width="150" align="center">
+				<template #default="{ row, $index }">
+					<el-button @click="onEditchannel(row, $index)" circle type="primary">
+						<el-icon :size="20">
+							<Edit />
+						</el-icon>
+					</el-button>
+					<el-button @click="onDelChannel(row, $index)" type="danger" circle>
+						<el-icon>
+							<Delete />
+						</el-icon>
+					</el-button>
+				</template>
+			</el-table-column>
 		</el-table>
 	</tableFrame>
-	<el-dialog class="demo-form-inline" title="添加工装夹具清单" width="500">
+	<!-- 对话框 -->
+	<el-dialog v-model="dialogFormVisible" :title="dialogTitle" style="width: 700px;">
 		<el-form :model="equipmentLedger" :rules="rules">
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="工装夹具类型">
-						<el-input autocomplete="off" />
+						<el-input v-model="equipmentLedger.equipmentLedgerType" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="工装夹具名称">
-						<el-input autocomplete="off" />
+						<el-input v-model="equipmentLedger.equipmentLedgerName" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="品牌">
-						<div class="mb-2 flex items-center text-sm">
-							<el-radio-group v-model="enableFlag" class="ml-4">
-								<el-radio value="yes" label="是">是</el-radio>
-								<el-radio value="no" label="否">否</el-radio>
-							</el-radio-group>
-						</div>
+						<el-input v-model="equipmentLedger.brand" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="型号">
-						<div>
-							<el-radio-group>
-								<el-radio-button label="定期维护" value="New York" />
-								<el-radio-button label="按使用次数维护" value="Washington" />
-							</el-radio-group>
-						</div>
+						<el-input v-model="equipmentLedger.brand" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="工装夹具编号">
-						<el-input />
+						<el-input v-model="equipmentLedger.type" />
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="数量">
-						<el-input />
+						<el-input v-model="equipmentLedger.inventory" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="可用数量">
-						<el-input />
+						<el-input v-model="equipmentLedger.usable" />
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="保养维护类型">
-						<el-input />
+						<el-input v-model="equipmentLedger.maintenance" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="下一次保养日期">
-						<el-input />
+						<el-input v-model="equipmentLedger.maintenanceDay" />
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="状态">
-						<el-input />
+						<el-input v-model="equipmentLedger.state" />
 					</el-form-item>
 				</el-col>
 			</el-row>
-
 			<el-row>
 				<el-col :span="24">
 					<el-form-item label="备注">
-						<el-input />
+						<el-input v-model="equipmentLedger.remark" />
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -188,10 +192,9 @@
 </template>
 
 <script setup>
-
 import tableFrame from "components/std-table/src/table-text.vue";
 import { ref, reactive } from 'vue'
-
+let dialogTitle = ref('');
 const selectOptions = [
 	{
 		value: 'Option1',
@@ -237,7 +240,14 @@ const equipmentLedger = reactive({
 	equipmentLedgerType: '',
 	brand: '',
 	model: '',
-	state: ''
+	type: '',
+	inventory: '',
+	maintenance: '',
+	usable: '',
+	state: '',
+	maintenanceDay: '',
+	state: '',
+	remark: ''
 })
 const reFresh = () => {
 	equipmentLedgerCode.value = '';
@@ -246,6 +256,11 @@ const reFresh = () => {
 	brand.value = '';
 	model.value = '';
 	state.value = '';
+}
+const onEditchannel = () => {
+	dialogTitle.value = "修改工装夹具清单";
+	equipmentLedger.value = { ...row };
+	dialogFormVisible.value = true;
 }
 const equipmentLedgerList = [
 	{
@@ -275,8 +290,38 @@ const equipmentLedgerList = [
 		maintenanceDay: '2025-05-20',
 		state: '在库',
 		handle: ''
-	},
-] 
+	}
+]
+//函数
+const openTestDialog = () => {
+	dialogTitle.value = '新增工装夹具清单';
+	dialogFormVisible.value = true;
+	equipmentLedger.value = {
+		equipmentLedgerCode: '',
+		equipmentLedgerName: '',
+		equipmentLedgerType: '',
+		brand: '',
+		type: '',
+		inventory: '',
+		usable: '',
+		maintenance: '',
+		maintenanceWeek: '',
+		maintenanceDay: '',
+		state: '',
+		handle: '',
+	}
+
+}
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.demo-form-inline {
+	.el-input {
+		--el-input-width: 220px;
+	}
+
+	.el-select {
+		--el-select-width: 220px;
+	}
+}
+</style>

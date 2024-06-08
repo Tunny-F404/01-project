@@ -13,10 +13,10 @@
 			</template>
 		</template>
 		<!-- 表单 -->
-		<el-form>
+		<el-form class="demo-form-inline">
 			<el-row>
 				<el-col :span="8">
-					<el-form-item label="编码类型">
+					<el-form-item label="类型编码">
 						<el-input v-model="codingType" style="width: 260px" placeholder="请输入编码类型" clearable />
 					</el-form-item>
 				</el-col>
@@ -66,7 +66,6 @@
 						style="cursor: pointer;" class="status-tag">
 						{{ row.isEnabled ? '是' : '否' }}
 					</el-tag>
-
 				</template>
 			</el-table-column>
 			<el-table-column prop="maintainType" label="保养维护类型" align="center"></el-table-column>
@@ -88,33 +87,33 @@
 			</el-table-column>
 		</el-table>
 	</tableFrame>
-	<el-dialog v-model="dialogFormVisible" class="demo-form-inline" :title="dialogTitle" width="900">
-		<el-form :model="type" :rules="rules">
+	<el-dialog v-model="dialogFormVisible" :title="dialogTitle" style="width:700px">
+		<el-form :model="type" :rules="rules" label-width="120px">
 			<el-row>
 				<el-col :span="12">
-					<el-form-item label="类型编码">
+					<el-form-item label="类型编码" prop="codingType">
 						<el-input v-model="type.codingType" placeholder="请输入编码类型" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
-					<el-form-item label="类型名称">
-						<el-input v-model="type.codingName" placeholder="请输入类型名称" autocomplete="off" />
+					<el-form-item label="类型名称" prop="typeName">
+						<el-input v-model="type.typeName" placeholder="请输入类型名称" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="8">
-					<el-form-item label="是否编码管理">
+					<el-form-item label="是否编码管理" prop="enableFlag">
 						<div class="mb-2 flex items-center text-sm">
-							<el-radio-group v-model="enableFlag" class="ml-4">
-								<el-radio value="yes" label="是">是</el-radio>
-								<el-radio value="no" label="否">否</el-radio>
+							<el-radio-group v-model="type.enableFlag" class="ml-4">
+								<el-radio :value='true' label='是'>是</el-radio>
+								<el-radio :value='false' label='否'>否</el-radio>
 							</el-radio-group>
 						</div>
 					</el-form-item>
 				</el-col>
-				<el-col :span="8">
-					<el-form-item label="请选择保养维护类型">
+				<el-col :span="8" v-if="type.enableFlag">
+					<el-form-item label="请选择保养维护类型" prop="SelectValue">
 						<div class="flex flex-wrap gap-4 items-center">
 							<el-select v-model="SelectValue" placeholder="请选择保养维护类型" size="large" style="width: 120px">
 								<el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value" />
@@ -122,15 +121,15 @@
 						</div>
 					</el-form-item>
 				</el-col>
-				<el-col :span="8">
-					<el-form-item label="保养周期">
+				<el-col :span="8" v-if="type.enableFlag">
+					<el-form-item label="保养周期" prop="maintainPeriod">
 						<el-input v-model="type.maintainPeriod" placeholder="请选择保养周期" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="24">
-					<el-form-item label="备注">
+					<el-form-item label="备注" prop="maintainPeriod">
 						<el-input v-model="type.maintainPeriod" placeholder="请输入内容" style="width:1200px;" />
 					</el-form-item>
 				</el-col>
@@ -155,7 +154,7 @@ const SelectValue = ref('')
 const typeName = ref('');
 let dialogFormVisible = ref(false);
 const codingType = ref('');
-let dialogTitle = ref('新增工装夹具类型');
+let dialogTitle = ref('');
 const reFresh = () => {
 	SelectValue.value = '';
 	typeName.value = '';
@@ -171,11 +170,11 @@ const selectOptions = [
 		label: '按使用次数维护',
 	}
 ]
-let typeList = [
+let typeList = reactive([
 	{
 		typeCode: 'TT003',
 		typeName: '刀具',
-		enableFlag: '是',
+		enableFlag: true,
 		maintainType: '无',
 		maintainPeriod: '无',
 		remark: ''
@@ -183,24 +182,24 @@ let typeList = [
 	{
 		typeCode: 'TT022',
 		typeName: '模具',
-		enableFlag: '是',
+		enableFlag: true,
 		maintainType: '按使用次数维护',
 		maintainPeriod: '50次',
 		remark: ''
 	}
-]
+]);
 const type = reactive({
 	codingType: '',
 	typeName: '',
 	SelectValue: '',
 	maintainPeriod: '',
-	enableFlag: 'yes'
+	enableFlag: true
 })
 const rules = {
-	codingType: [{ required: true, message: '请输入供应商编码' }],
-	typeName: [{ required: true }],
+	codingType: [{ required: true, message: '类型编码不能为空' }],
+	typeName: [{ required: true, message: '类型名称不能为空' }],
 	enableFlag: [{ required: true }],
-	SelectValue: [{}],
+	SelectValue: [{ required: false }],
 	maintainPeriod: [{ message: '请输入保养周期' }],
 };
 //函数
@@ -208,9 +207,14 @@ const toggleStatus = (row) => {
 	row.isEnabled = !row.isEnabled
 }
 let openTestDialog = () => {
+	dialogTitle.value = '新增工装夹具类型'
 	dialogFormVisible.value = true
 	type.value = {
-		codingType: ''
+		codingType: '',
+		typeName: '',
+		enableFlag: '',
+		SelectValue: '',
+		maintainPeriod: ''
 	}
 }
 const onEditchannel = (row) => {
@@ -220,37 +224,37 @@ const onEditchannel = (row) => {
 };
 </script>
 
-<style lang="scss">
-.el-input {
-	--el-input-width: 220px;
-}
-
-.el-select {
-	--el-select-width: 220px;
-}
-
+<style lang="scss" scoped>
 .demo-form-inline {
-	.status-enabled {
-		background-color: rgba(64, 158, 255, 0.2);
-		color: #409eff;
-		padding: 5px;
-		text-align: center;
+	.el-input {
+		--el-input-width: 220px;
 	}
 
-	.status-disabled {
-		background-color: rgba(245, 108, 108, 0.2);
-		color: #f56c6c;
-		padding: 5px;
-		text-align: center;
+	.el-select {
+		--el-select-width: 220px;
 	}
+}
 
-	.status-tag {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 35px;
-		height: 35px;
-		cursor: pointer;
-	}
+.status-enabled {
+	background-color: rgba(64, 158, 255, 0.2);
+	color: #409eff;
+	padding: 5px;
+	text-align: center;
+}
+
+.status-disabled {
+	background-color: rgba(245, 108, 108, 0.2);
+	color: #f56c6c;
+	padding: 5px;
+	text-align: center;
+}
+
+.status-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
 }
 </style>
