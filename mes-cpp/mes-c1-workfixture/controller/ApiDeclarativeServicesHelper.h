@@ -31,9 +31,12 @@
 #endif
 //////////////////////////////////////////////////////////////////////////
 // #TIP: 项目中的ApiClient在这里导入
-
-
-
+#include "domain/query/WorkFixture/WorkFixtureTypeListQuery.h"
+#include "domain/query/WorkFixture/WorkFixtureTypeNameListQuery.h"
+#include "domain/vo/WorkFixture/WorkFixtureTypeListVO.h"
+#include "domain/vo/WorkFixture/WorkFixtureTypeNameListVO.h"
+#include "domain/dto/WorkFixture/WorkFixtureTypeListDTO.h"
+#include "domain/dto/WorkFixture/WorkFixtureTypeNameListDTO.h"
 //////////////////////////////////////////////////////////////////////////
 
 /**

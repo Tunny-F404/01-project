@@ -42,7 +42,7 @@ class OtherComponent : public AbstractComponentReg
 		}());
 	// 定义一个示例RequestExecutor组件用于发送api请求
 	OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::web::client::HttpRequestExecutor>, sampleApiExecutor)("sample-api", [] {
-		auto connectionProvider = oatpp::network::tcp::client::ConnectionProvider::createShared({ "192.168.31.99", 10100 });
+		auto connectionProvider = oatpp::network::tcp::client::ConnectionProvider::createShared({ "192.168.31.242", 10100 });
 		return oatpp::web::client::HttpRequestExecutor::createShared(connectionProvider);
 		}());
 #endif
