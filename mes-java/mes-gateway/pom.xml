@@ -80,7 +80,7 @@
                     <!-- Docker 远程管理地址-->
                     <dockerHost>https://47.113.227.111:2100</dockerHost>
                     <!-- CA 证书位置 -->
-                    <certPath>/home/docker-ca</certPath>
+                    <certPath>F:\WindowsFile\Desktop\gateway</certPath>
                     <!-- 镜像设置 -->
                     <images>
                         <image>
