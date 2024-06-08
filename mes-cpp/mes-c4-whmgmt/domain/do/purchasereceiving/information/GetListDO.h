@@ -19,27 +19,30 @@
 */
 #ifndef _GETLIST_DO_
 #define _GETLIST_DO_
-#include "../DoInclude.h"
+#include "../../DoInclude.h"
 
 /**
- * Ê¾ÀýÊý¾Ý¿âÊµÌåÀà
+ * Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Êµï¿½ï¿½ï¿½ï¿½
  */
 class GetListDO
 {
-	// Áìµ¥±àºÅ
-	CC_SYNTHESIZE(int, id, Id);
-	// ÐÕÃû
-	CC_SYNTHESIZE(string, name, Name);
-	// ÐÔ±ð
-	CC_SYNTHESIZE(string, sex, Sex);
-	// ÄêÁä
-	CC_SYNTHESIZE(int, age, Age);
+	//ï¿½ï¿½âµ¥ï¿½ï¿½ï¿½
+	CC_SYNTHESIZE(string,recptcode,Recptcode);
+	// ï¿½ï¿½âµ¥ï¿½ï¿½ï¿½ï¿½
+	CC_SYNTHESIZE(string, recptname, Recptname);
+	// ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	CC_SYNTHESIZE(string, vendorname, Vendorname);
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	CC_SYNTHESIZE(string,recptdate, Recptdate);
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	CC_SYNTHESIZE(string, pocode, Pocode);
 public:
-	AddListDO() {
-		id = 0;
-		name = "";
-		sex = "";
-		age = -1;
+	GetListDO() {
+		recptcode = "";
+		recptname = "";
+		vendorname = "";
+		recptdate = "";
+		pocode = "";
 	}
 };
 

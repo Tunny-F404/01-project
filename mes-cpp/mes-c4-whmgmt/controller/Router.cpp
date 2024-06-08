@@ -35,7 +35,7 @@
 #include "ws/WSController.h"
 <<<<<< < HEAD
 
-#endif
+#endif 
 
 	// 濡傛灉瀹氫箟浜嗗叧闂璖wagger鏂囨。瀹?
 #include "controller/ProchAndStorage/MaterialsInfo/AddWhStorageorderController.h"
@@ -48,6 +48,17 @@
 router->addController(__CLASS__::createShared())
 #else
 #endif
+
+// 如果定义了关闭Swagger文档宏
+#ifdef CLOSE_SWAGGER_DOC
+// 简化绑定控制器宏定义
+#define ROUTER_SIMPLE_BIND(__CLASS__) \
+router->addController(__CLASS__::createShared())
+#else
+#endif
+#include "WarehouseInbound/WarehouseInboundController.h"
+#include "WarehouseDelete/WarehouseDeleteController.h"
+#include "WarehouseExport/WarehouseExportController.h"
 
 // 如果定义了关闭Swagger文档宏
 #ifdef CLOSE_SWAGGER_DOC
@@ -80,11 +91,16 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(AddWhStorageorderController);
 	ROUTER_SIMPLE_BIND(ModifyWhStorageorderController);
 	ROUTER_SIMPLE_BIND(DeleteWhStorageorderController);
-	//#TIP :ϵͳ��չ·�ɶ��壬д���������
+	////#TIP :ϵͳ��չ·�ɶ��壬д���������
 	ROUTER_SIMPLE_BIND(ModifyListController);
 	ROUTER_SIMPLE_BIND(AddListController);
 	ROUTER_SIMPLE_BIND(GetListController);
+	//#TIP :系统扩展路由定义，写在这个后面
+	ROUTER_SIMPLE_BIND(WarehouseInboundController);
 
+	ROUTER_SIMPLE_BIND(WarehouseDeleteController);
+
+	ROUTER_SIMPLE_BIND(WarehouseExportController);
 	
 }
 
@@ -113,3 +129,5 @@ void Router::createSampleRouter()
 		router->addController(WSContorller::createShared());
 }
 #endif
+	
+

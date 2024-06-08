@@ -1,6 +1,13 @@
 ﻿#include "ProductionProcessController.h"
-
-ProductionProcessJsonVO::Wrapper ProductionProcessController::execQueryProcess(const ProductionProcessQuery::Wrapper& query)
+#include "../../service/productioninvestigation/ProductionProcessService.h"
+ProductionProcessPageJsonVO::Wrapper ProductionProcessController::execQueryProcess(const ProductionProcessQuery::Wrapper& query)
 {
-	return ProductionProcessJsonVO::Wrapper();
+	// 定义一个Service
+	ProductionProcessService service;
+	// 查询数据
+	auto result = service.listAll(query);
+	// 响应结果
+	auto jvo = ProductionProcessPageJsonVO::createShared();
+	jvo->success(result);
+	return jvo;
 }

@@ -25,106 +25,106 @@
 #include "domain/dto/sample/SampleDTO.h"
 #include "domain/vo/sample/SampleVO.h"
 
-// 0 ¶¨ÒåAPI¿ØÖÆÆ÷Ê¹ÓÃºê
+// 0 å®šä¹‰APIæ§åˆ¶å™¨ä½¿ç”¨å®
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
 /**
- * Ê¾Àı¿ØÖÆÆ÷£¬ÑİÊ¾»ù´¡½Ó¿ÚµÄÊ¹ÓÃ
+ * ç¤ºä¾‹æ§åˆ¶å™¨ï¼Œæ¼”ç¤ºåŸºç¡€æ¥å£çš„ä½¿ç”¨
  */
-class SampleController : public oatpp::web::server::api::ApiController // 1 ¼Ì³Ğ¿ØÖÆÆ÷
+class SampleController : public oatpp::web::server::api::ApiController // 1 ç»§æ‰¿æ§åˆ¶å™¨
 {
-	// 2 ¶¨Òå¿ØÖÆÆ÷·ÃÎÊÈë¿Ú
+	// 2 å®šä¹‰æ§åˆ¶å™¨è®¿é—®å…¥å£
 	API_ACCESS_DECLARE(SampleController);
-	// 3 ¶¨Òå½Ó¿Ú
+	// 3 å®šä¹‰æ¥å£
 public:
-	// 3.1 ¶¨Òå²éÑ¯½Ó¿ÚÃèÊö
+	// 3.1 å®šä¹‰æŸ¥è¯¢æ¥å£æè¿°
 	ENDPOINT_INFO(querySample) {
-		// ¶¨Òå½Ó¿Ú±êÌâ
+		// å®šä¹‰æ¥å£æ ‡é¢˜
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("sample.get.summary"));
-		// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+		// å®šä¹‰é»˜è®¤æˆæƒå‚æ•°ï¼ˆå¯é€‰å®šä¹‰ï¼Œå¦‚æœå®šä¹‰äº†ï¼Œä¸‹é¢ENDPOINTé‡Œé¢éœ€è¦åŠ å…¥API_HANDLER_AUTH_PARAMEï¼‰
 		API_DEF_ADD_AUTH();
-		// ¶¨ÒåÏìÓ¦²ÎÊı¸ñÊ½
+		// å®šä¹‰å“åº”å‚æ•°æ ¼å¼
 		API_DEF_ADD_RSP_JSON_WRAPPER(SamplePageJsonVO);
-		// ¶¨Òå·ÖÒ³²éÑ¯²ÎÊıÃèÊö
+		// å®šä¹‰åˆ†é¡µæŸ¥è¯¢å‚æ•°æè¿°
 		API_DEF_ADD_PAGE_PARAMS();
-		// ¶¨ÒåÆäËû²éÑ¯²ÎÊıÃèÊö
+		// å®šä¹‰å…¶ä»–æŸ¥è¯¢å‚æ•°æè¿°
 		API_DEF_ADD_QUERY_PARAMS(String, "name", ZH_WORDS_GETTER("sample.field.name"), "li ming", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "sex", ZH_WORDS_GETTER("sample.field.sex"), "N", false);
 	}
-	// 3.2 ¶¨Òå²éÑ¯½Ó¿Ú´¦Àí
+	// 3.2 å®šä¹‰æŸ¥è¯¢æ¥å£å¤„ç†
 	ENDPOINT(API_M_GET, "/sample", querySample, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
-		// ½âÎö²éÑ¯²ÎÊıÎªQueryÁìÓòÄ£ĞÍ
+		// è§£ææŸ¥è¯¢å‚æ•°ä¸ºQueryé¢†åŸŸæ¨¡å‹
 		API_HANDLER_QUERY_PARAM(userQuery, SampleQuery, queryParams);
-		// ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+		// å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æœ
 		API_HANDLER_RESP_VO(execQuerySample(userQuery, authObject->getPayload()));
 	}
 
-	// 3.1 ¶¨ÒåĞÂÔö½Ó¿ÚÃèÊö
+	// 3.1 å®šä¹‰æ–°å¢æ¥å£æè¿°
 	ENDPOINT_INFO(addSample) {
-		// ¶¨Òå½Ó¿Ú±êÌâ
+		// å®šä¹‰æ¥å£æ ‡é¢˜
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("sample.post.summary"));
-		// ¶¨ÒåÄ¬ÈÏÊÚÈ¨²ÎÊı£¨¿ÉÑ¡¶¨Òå£¬Èç¹û¶¨ÒåÁË£¬ÏÂÃæENDPOINTÀïÃæĞèÒª¼ÓÈëAPI_HANDLER_AUTH_PARAME£©
+		// å®šä¹‰é»˜è®¤æˆæƒå‚æ•°ï¼ˆå¯é€‰å®šä¹‰ï¼Œå¦‚æœå®šä¹‰äº†ï¼Œä¸‹é¢ENDPOINTé‡Œé¢éœ€è¦åŠ å…¥API_HANDLER_AUTH_PARAMEï¼‰
 		API_DEF_ADD_AUTH();
-		// ¶¨ÒåÏìÓ¦²ÎÊı¸ñÊ½
+		// å®šä¹‰å“åº”å‚æ•°æ ¼å¼
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	// 3.2 ¶¨ÒåĞÂÔö½Ó¿Ú´¦Àí
+	// 3.2 å®šä¹‰æ–°å¢æ¥å£å¤„ç†
 	ENDPOINT(API_M_POST, "/sample", addSample, BODY_DTO(SampleDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
-		// ºô½ĞÖ´ĞĞº¯ÊıÏìÓ¦½á¹û
+		// å‘¼å«æ‰§è¡Œå‡½æ•°å“åº”ç»“æœ
 		API_HANDLER_RESP_VO(execAddSample(dto));
 	}
 
-	// 3.1 ¶¨ÒåĞŞ¸Ä½Ó¿ÚÃèÊö
+	// 3.1 å®šä¹‰ä¿®æ”¹æ¥å£æè¿°
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("sample.put.summary"), modifySample, Uint64JsonVO::Wrapper);
-	// 3.2 ¶¨ÒåĞŞ¸Ä½Ó¿Ú´¦Àí
+	// 3.2 å®šä¹‰ä¿®æ”¹æ¥å£å¤„ç†
 	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/sample", modifySample, BODY_DTO(SampleDTO::Wrapper, dto), execModifySample(dto));
 
-	// 3.1 ¶¨ÒåÉ¾³ı½Ó¿ÚÃèÊö
+	// 3.1 å®šä¹‰åˆ é™¤æ¥å£æè¿°
 	ENDPOINT_INFO(removeSample) {
-		// ¶¨Òå±êÌâºÍ·µ»ØÀàĞÍÒÔ¼°ÊÚÈ¨Ö§³Ö
+		// å®šä¹‰æ ‡é¢˜å’Œè¿”å›ç±»å‹ä»¥åŠæˆæƒæ”¯æŒ
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("sample.delete.summary"), Uint64JsonVO::Wrapper);
-		// ¶¨ÒåÆäËûÂ·¾¶²ÎÊıËµÃ÷
+		// å®šä¹‰å…¶ä»–è·¯å¾„å‚æ•°è¯´æ˜
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("sample.field.id"), 1, true);
 	}
-	// 3.2 ¶¨ÒåÉ¾³ı½Ó¿Ú´¦Àí
+	// 3.2 å®šä¹‰åˆ é™¤æ¥å£å¤„ç†
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/sample/{id}", removeSample, PATH(UInt64, id), execRemoveSample(id));
 
-	// 3.1 ¶¨Òå²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃµÄ½Ó¿Ú1ÃèÊö
+	// 3.1 å®šä¹‰æµ‹è¯•å£°æ˜å¼æœåŠ¡è°ƒç”¨çš„æ¥å£1æè¿°
 	ENDPOINT_INFO(queryOne) {
-		// ¶¨Òå±êÌâºÍ·µ»ØÀàĞÍÒÔ¼°ÊÚÈ¨Ö§³Ö
+		// å®šä¹‰æ ‡é¢˜å’Œè¿”å›ç±»å‹ä»¥åŠæˆæƒæ”¯æŒ
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("sample.query-one.summary"), SampleJsonVO::Wrapper);
-		// ¶¨ÒåÆäËûÂ·¾¶²ÎÊıËµÃ÷
+		// å®šä¹‰å…¶ä»–è·¯å¾„å‚æ•°è¯´æ˜
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "id", ZH_WORDS_GETTER("sample.field.id"), 1, true);
 	}
-	// 3.2 ¶¨Òå²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃµÄ½Ó¿Ú1´¦Àí
+	// 3.2 å®šä¹‰æµ‹è¯•å£°æ˜å¼æœåŠ¡è°ƒç”¨çš„æ¥å£1å¤„ç†
 	API_HANDLER_ENDPOINT_AUTH(API_M_GET, "/sample/query-one", queryOne, QUERY(UInt64, id), execQueryOne(id, authObject->getPayload()));
 
-	// 3.1 ¶¨Òå²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃµÄ½Ó¿Ú2ÃèÊö
+	// 3.1 å®šä¹‰æµ‹è¯•å£°æ˜å¼æœåŠ¡è°ƒç”¨çš„æ¥å£2æè¿°
 	ENDPOINT_INFO(queryAll) {
-		// ¶¨Òå±êÌâºÍ·µ»ØÀàĞÍÒÔ¼°ÊÚÈ¨Ö§³Ö
+		// å®šä¹‰æ ‡é¢˜å’Œè¿”å›ç±»å‹ä»¥åŠæˆæƒæ”¯æŒ
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("sample.query-all.summary"), SamplePageJsonVO::Wrapper);
-		// ¶¨Òå·ÖÒ³²éÑ¯²ÎÊıÃèÊö
+		// å®šä¹‰åˆ†é¡µæŸ¥è¯¢å‚æ•°æè¿°
 		API_DEF_ADD_PAGE_PARAMS();
-		// ¶¨ÒåÆäËû²éÑ¯²ÎÊıÃèÊö
+		// å®šä¹‰å…¶ä»–æŸ¥è¯¢å‚æ•°æè¿°
 		API_DEF_ADD_QUERY_PARAMS(String, "name", ZH_WORDS_GETTER("sample.field.name"), "li ming", false);
 	}
-	// 3.2 ¶¨Òå²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃµÄ½Ó¿Ú1´¦Àí
+	// 3.2 å®šä¹‰æµ‹è¯•å£°æ˜å¼æœåŠ¡è°ƒç”¨çš„æ¥å£1å¤„ç†
 	API_HANDLER_ENDPOINT_QUERY_AUTH(API_M_GET, "/sample/query-all", queryAll, SampleQuery, execQueryAll(query, authObject->getPayload()));
 private:
-	// 3.3 ÑİÊ¾·ÖÒ³²éÑ¯Êı¾İ
+	// 3.3 æ¼”ç¤ºåˆ†é¡µæŸ¥è¯¢æ•°æ®
 	SamplePageJsonVO::Wrapper execQuerySample(const SampleQuery::Wrapper& query, const PayloadDTO& payload);
-	// 3.3 ÑİÊ¾ĞÂÔöÊı¾İ
+	// 3.3 æ¼”ç¤ºæ–°å¢æ•°æ®
 	Uint64JsonVO::Wrapper execAddSample(const SampleDTO::Wrapper& dto);
-	// 3.3 ÑİÊ¾ĞŞ¸ÄÊı¾İ
+	// 3.3 æ¼”ç¤ºä¿®æ”¹æ•°æ®
 	Uint64JsonVO::Wrapper execModifySample(const SampleDTO::Wrapper& dto);
-	// 3.3 ÑİÊ¾É¾³ıÊı¾İ
+	// 3.3 æ¼”ç¤ºåˆ é™¤æ•°æ®
 	Uint64JsonVO::Wrapper execRemoveSample(const UInt64& id);
-	// 3.3 ²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃ1
+	// 3.3 æµ‹è¯•å£°æ˜å¼æœåŠ¡è°ƒç”¨1
 	SampleJsonVO::Wrapper execQueryOne(const UInt64& id, const PayloadDTO& payload);
-	// 3.3 ²âÊÔÉùÃ÷Ê½·şÎñµ÷ÓÃ2
+	// 3.3 æµ‹è¯•å£°æ˜å¼æœåŠ¡è°ƒç”¨2
 	SamplePageJsonVO::Wrapper execQueryAll(const SampleQuery::Wrapper& query, const PayloadDTO& payload);
 };
 
-// 0 È¡ÏûAPI¿ØÖÆÆ÷Ê¹ÓÃºê
+// 0 å–æ¶ˆAPIæ§åˆ¶å™¨ä½¿ç”¨å®
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 #endif // _SAMPLE_CONTROLLER_

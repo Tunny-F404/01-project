@@ -17,31 +17,46 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _MODIFYLIST_VO_
-#define _MODIFYLIST_VO_
+#ifndef _MODIFYLIST_DO_
+#define _MODIFYLIST_DO_
 #include "../DoInclude.h"
 
 /**
- * Ê¾ÀýÊý¾Ý¿âÊµÌåÀà
+ * Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Êµï¿½ï¿½ï¿½ï¿½
  */
 class ModifyListDO
 {
-	// Áìµ¥±àºÅ
-	CC_SYNTHESIZE(, id, Id);
-	// ÐÕÃû
-	CC_SYNTHESIZE(string, name, Name);
-	// ÐÔ±ð
-	CC_SYNTHESIZE(string, sex, Sex);
-	// ÄêÁä
-	CC_SYNTHESIZE(int, age, Age);
+	// ï¿½ï¿½âµ¥id 
+	CC_SYNTHESIZE(uint64_t, recptid, Recptid);
+	// ï¿½ï¿½âµ¥ï¿½ï¿½ï¿½
+	CC_SYNTHESIZE(string, recptcode, Recptcode);
+	// ï¿½ï¿½âµ¥ï¿½ï¿½ï¿½ï¿½
+	CC_SYNTHESIZE(string, recptname, Recptname);
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	CC_SYNTHESIZE(string, recptdate, Recptdate);
+	// ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	CC_SYNTHESIZE(string, pocode, Pocode);
+	//ï¿½ï¿½ï¿½ï¿½×´Ì¬
+	CC_SYNTHESIZE(string, status, Status);
+	//ï¿½ï¿½Ó¦ï¿½ï¿½id
+	CC_SYNTHESIZE(int16_t, vendorid, Vendorid);
+	//ï¿½ï¿½ï¿½Ö¿ï¿½
+	CC_SYNTHESIZE(string, warehousename, Warehousename);
+	//ï¿½ï¿½×¢
+	CC_SYNTHESIZE(string, remark, Remark);
+
 public:
 	ModifyListDO() {
-		id = 0;
-		name = "";
-		sex = "";
-		age = -1;
+		recptid = -1;
+		recptcode = "";
+		recptname = "";
+		recptdate = "";
+		pocode = "";
+		status = "PREPARE";
+		vendorid = -1;
+		warehousename = "";
+		remark = "";
 	}
 };
 
 #endif // !_SAMPLE_DO_
-

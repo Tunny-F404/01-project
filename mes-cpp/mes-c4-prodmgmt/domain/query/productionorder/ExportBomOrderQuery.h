@@ -31,14 +31,7 @@
 class ExportBomOrderQuery : public PageQuery
 {
 	DTO_INIT(ExportBomOrderQuery, PageQuery);
-	API_DTO_FIELD_DEFAULT(Int32, workOrderId, ZH_WORDS_GETTER("productionorder.query.fields.workorder_id"));
-	API_DTO_FIELD_DEFAULT(Int32, itemId, ZH_WORDS_GETTER("productionorder.query.fields.item_id"));
-	API_DTO_FIELD_DEFAULT(String, itemCode, ZH_WORDS_GETTER("productionorder.query.fields.item_code"));
-	API_DTO_FIELD_DEFAULT(String, itemName, ZH_WORDS_GETTER("productionorder.query.fields.item_name"));
-	API_DTO_FIELD_DEFAULT(String, itemSpc, ZH_WORDS_GETTER("productionorder.query.fields.item_spc"));
-	API_DTO_FIELD_DEFAULT(String, uintOfMeasure, ZH_WORDS_GETTER("productionorder.query.fields.unit_of_measure"));
-	API_DTO_FIELD_DEFAULT(String, itemOrProduct, ZH_WORDS_GETTER("productionorder.query.fields.item_or_product"));
-	API_DTO_FIELD_DEFAULT(Float64, quantity, ZH_WORDS_GETTER("productionorder.query.fields.quantity"));
+	API_DTO_FIELD_DEFAULT(String, workOrderCode, ZH_WORDS_GETTER("productionorder.query.fields.workroder_code"));
 };
 
 #include OATPP_CODEGEN_END(DTO)
