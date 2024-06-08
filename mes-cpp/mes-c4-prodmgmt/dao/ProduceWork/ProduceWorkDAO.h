@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2023/09/18 14:46:10
+ @Date: 2022/10/25 14:23:49
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,23 +17,23 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _TSVO_H_
-#define _TSVO_H_
-
-#include "../../GlobalInclude.h"
-#include "../../dto/ProduceWork/treansformProduceDTO.h"
-
-#include OATPP_CODEGEN_BEGIN(DTO)
+#ifndef _PWORK_DAO_
+#define _PWORK_DAO_
+#include "BaseDAO.h"
+#include "../../domain/do/ProduceWork/ProduceWorkDO.h"
 
 /**
- * 定义一个列表显示生产报工
+ * 示例表数据库操作实现
  */
-class treansformProduceVO : public JsonVO<treansformProduceDTO::Wrapper>
+class ProduceWorkDAO : public BaseDAO
 {
-	DTO_INIT(treansformProduceVO, JsonVO<treansformProduceDTO::Wrapper>);
+public:
+	// 通过姓名查询数据
+	list<ProduceWorkDO> selectByRecord_id(const uint64_t& record_id);
+	// 插入数据
+	uint64_t insert(const ProduceWorkDO& iObj);
+	//// 修改数据
+	int update(const ProduceWorkDO& uObj);
 
 };
-
-#include OATPP_CODEGEN_END(DTO)
-
-#endif // !_PROEVO_H_
+#endif // !_SAMPLE_DAO_

@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2023/09/18 14:46:10
+ @Date: 2022/10/25 11:08:56
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,23 +17,29 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _ADDPROEVO_H_
-#define _ADDPROEVO_H_
+#ifndef _PRODUCEWORK_SERVICE_
+#define _PRODUCEWORK_SERVICE_
+#include <list>
+#include "domain/vo/ProduceWork/ProduceWorkJsonVO.h"
+#include "domain/dto/ProduceWork/ProduceWorkDTO.h"
 
-#include "../../GlobalInclude.h"
-#include "../../dto/ProduceWork/PworkDTO.h"
-
-#include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * 定义一个列表显示生产报工
+ * 示例服务实现，演示基础的示例服务实现
  */
-class addProduceJsonVO : public JsonVO<AddPworkTableDTO::Wrapper>
+class ProduceWorkService
 {
-	DTO_INIT(addProduceJsonVO, JsonVO<AddPworkTableDTO::Wrapper>);
+public:
+	// 获取报工详情
+	ProduceWorkDTO::Wrapper execeQueryDetail(const uint64_t& id);
 
+	// 增加数据
+	uint64_t saveData(const ProduceWorkDTO::Wrapper& dto);
+
+	// 修改数据
+	bool updateData(const ProduceWorkDTO::Wrapper& dto);
+	
 };
 
-#include OATPP_CODEGEN_END(DTO)
+#endif // !_SAMPLE_SERVICE_
 
-#endif // !_PROEVO_H_
