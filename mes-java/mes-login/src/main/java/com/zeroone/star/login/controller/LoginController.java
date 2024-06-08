@@ -20,6 +20,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,6 +58,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("login")
 @Api(tags = "登录系统")
 @Slf4j
+@RefreshScope
 public class LoginController implements LoginApis {
     @Resource
     private OauthService oAuthService;
@@ -65,6 +68,9 @@ public class LoginController implements LoginApis {
     RedisTemplate<String, Object> redisTemplate;
     @Resource
     private CaptchaService captchaService;
+
+    @Value("${secure.opencaptcha}")
+    private boolean isOpenCaptcha;
 
     private static final long CAPTCHA_EXPIRATION = 5; // 验证码有效期（分钟）
 
@@ -77,17 +83,18 @@ public class LoginController implements LoginApis {
     @PostMapping("auth-login")
     @Override
     public JsonVO<Oauth2TokenDTO> authLogin(LoginDTO loginDTO) {
-
-        //创建CaptchaVO对象，用于封装验证码验证信息
-        CaptchaVO captchaVO = new CaptchaVO();
-        // 设置验证码字符串
-        captchaVO.setCaptchaVerification(loginDTO.getCode());
-        // 调用验证码服务进行验证
-        ResponseModel response = captchaService.verification(captchaVO);
-        if (!response.isSuccess()) {
-            return JsonVO.create(null,
-                    ResultStatus.FAIL.getCode(),
-                    response.getRepCode()+":"+response.getRepMsg());
+        if (isOpenCaptcha) {
+            //创建CaptchaVO对象，用于封装验证码验证信息
+            CaptchaVO captchaVO = new CaptchaVO();
+            // 设置验证码字符串
+            captchaVO.setCaptchaVerification(loginDTO.getCode());
+            // 调用验证码服务进行验证
+            ResponseModel response = captchaService.verification(captchaVO);
+            if (!response.isSuccess()) {
+                return JsonVO.create(null,
+                        ResultStatus.FAIL.getCode(),
+                        response.getRepCode()+":"+response.getRepMsg());
+            }
         }
         //账号密码认证
         Map<String, String> params = new HashMap<>(5);
