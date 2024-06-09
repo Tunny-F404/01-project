@@ -1,8 +1,64 @@
-<script setup>
-import tableFrame from "@/components/table-list-use/table-text.vue";
-import popUp from "@/components/table-list-use/table-components/pop-up.vue";
-import request from "@/apis/request.js"; //加入请求
+<script setup lang="ts" generic="TableRow extends Record<string, unknown>">
 import { ref } from "vue";
+import { merge } from "lodash-es";
+import { reactify } from "@vueuse/core";
+
+import { TableFrame } from "components/std-table";
+import popUp from "components/std-table/src/pop-up.vue";
+import request from "api/request.js"; //加入请求
+import type { Prettify } from "utils/Prettify.ts";
+
+import type { ComputedRef } from "vue";
+import type { TableProps } from "element-plus";
+import type { RequiredPick } from "type-plus";
+import type { Operations, StdTableProps } from "./std-table.ts";
+
+defineOptions({
+	/** 表格组件 */
+	name: "TableTrue",
+});
+
+type Props = Prettify<Readonly<StdTableProps<TableRow>>>;
+
+const props = withDefaults(defineProps<Props>(), {
+	data: () => [] as TableRow[],
+	// data: [] as TableRow[],
+}) as Props;
+
+const defaultPropsKeys = ["data", "operations", "size", "border"] as const;
+type DefaultPropsKeys = (typeof defaultPropsKeys)[number];
+type DefaultProps = Prettify<Readonly<RequiredPick<Props, DefaultPropsKeys>>>;
+
+// type Merge = <TObject, T = DefaultProps>(object: TObject, source: T) => TObject & T;
+type MergeReactify = <TObject, TSource>(object: TObject, source: TSource) => ComputedRef<TObject & TSource>;
+// type Merge = <TObject, TSource>(object: TObject, source: TSource) => TObject & TSource;
+const mergeReactify = reactify(merge) as MergeReactify;
+
+/**
+ * 默认的 props 配置对象
+ * @description
+ * 未来，如果表格组件需要配置很多预设的行为 在此配置即可
+ */
+const defaultProps: DefaultProps = {
+	data: [] as TableRow[],
+	operations: [],
+	size: "small",
+	border: true,
+};
+
+/**
+ * 创建一个全新的默认props对象
+ * @description
+ * ### *设计理由*
+ * 用于确保生成的默认值是独一无二的对象，确保不会和其他表格组件实例共用对象
+ */
+function createDefaultProps() {
+	return merge({}, defaultProps);
+}
+
+const stdTableProps = mergeReactify(createDefaultProps(), props);
+
+// stdTableProps.value.
 
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整
@@ -15,6 +71,7 @@ const tableList = ref([
 	},
 ]);
 
+const multipleSelection = ref([]);
 //dialog联系到表格弹窗
 const dialog = ref();
 
@@ -31,7 +88,7 @@ const parms = ref({
 const getPageList = async () => {
 	loading.value = true;
 	//里面改接口，可以加个try-catch
-	// const res= await request(request.GET,'/basicdata/md-unit-measure/list',null,JSON)
+	// const res= await Request.request('GET','/basicdata/md-unit-measure/list',null)
 	// tableList.value=res.data.rows.data
 	// parms.value.pagenum=res.data.pageIndex
 	// parms.value.pagesize=res.data.pageSize
@@ -83,12 +140,16 @@ const onSubmit = () => {
 const onAddChannel = () => {
 	dialog.value.open({});
 };
+//选择组件
+const handleSelectionChange = (val) => {
+	this.multipleSelection = val;
+};
 </script>
 
 <template>
 	<!--分类，页面只有基本的表现，没有实现数据绑定-->
 	<tableFrame title="实验表格">
-		<slot name="#extra">
+		<slot name="extra">
 			<!-- 具名插槽例子实现 -->
 			<el-button @click="onSortChannel"
 				>排序顺序
@@ -122,7 +183,14 @@ const onAddChannel = () => {
 		</el-form>
 
 		<!--表格区-->
-		<el-table :data="tableList" style="width: 100%" v-loading="loading">
+		<el-table
+			:data="tableList"
+			style="width: 100%"
+			v-loading="loading"
+			@selection-change="handleSelectionChange"
+			ref="multipleTable"
+		>
+			<el-table-column type="selection" width="55" />
 			<el-table-column prop="classify" label="分类" width="100"></el-table-column>
 			<el-table-column type="index" label="排序" width="50"></el-table-column>
 			<el-table-column prop="product" label="物料/产品" width="150"></el-table-column>
@@ -163,11 +231,12 @@ const onAddChannel = () => {
 </template>
 
 <style lang="scss" scoped>
-.demo-form-inline .el-input {
-	--el-input-width: 220px;
-}
-
-.demo-form-inline .el-select {
-	--el-select-width: 220px;
+.demo-form-inline {
+	.el-input {
+		--el-input-width: 220px;
+	}
+	.el-select {
+		--el-select-width: 220px;
+	}
 }
 </style>

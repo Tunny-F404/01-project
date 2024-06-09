@@ -1,12 +1,27 @@
 <script setup>
-import tableFrame from "@/components/table-list-use/table-text.vue";
-import popUp from "@/components/table-list-use/table-components/pop-up.vue";
-import request from "@/apis/request.js";
 import { ref } from "vue";
+import http from "axios";
+import { TableFrame } from "components/std-table";
+import popUp from "components/std-table/src/pop-up.vue";
+import Request from "@/apis/request.js";
+// defineOptions();
 
-//没有中文国际化
 //每一列数据，例子，后期接口对上再调整
 const tableList = ref([
+	{
+		attr1: "自定义值1",
+		attr2: "自定义值2",
+		attr3: 100,
+		attr4: 200,
+		changeRate: 1,
+		enableFlag: "Y",
+		measureCode: "METER",
+		measureName: "米",
+		primaryFlag: "Y",
+		primaryId: 1,
+		remark: "这是主单位",
+	},
+
 	{
 		attr1: "自定义值1",
 		attr2: "自定义值2",
@@ -28,6 +43,9 @@ const dialog = ref();
 //定义总条数
 const total = ref(13);
 
+//定义查询的数据
+let myInput = ref("");
+let unitName = ref("");
 const loading = ref(false); //loading状态
 
 //定义请求参数,后期完善
@@ -41,8 +59,9 @@ const parms = ref({
 const getPageList = async (data) => {
 	//不知道跟着接口写的对不对，希望大佬看一看
 	loading.value = true;
+	const res = "";
 	try {
-		const res = await request(request.GET, "/basicdata/md-unit-measure/list", data, JSON);
+		const res = await Request.request(Request.GET, "/basicdata/md-unit-measure/list", data, http.upType.json);
 		tableList.value = res.data.rows.data;
 		parms.value.pagenum = res.data.pageIndex;
 		parms.value.pagesize = res.data.pageSize;
@@ -53,7 +72,7 @@ const getPageList = async (data) => {
 
 	loading.value = false;
 };
-getPageList(); //进来就加载一遍
+getPageList(null); //进来就加载一遍
 //处理分页逻辑
 //改变大小
 const onSizeChange = (size) => {
@@ -64,6 +83,7 @@ const onSizeChange = (size) => {
 	const Data = { pageSize: "parms.pagesize" };
 	getPageList(Date);
 };
+
 //改变页数
 const onCurrentChange = (page) => {
 	// console.log('页面变化了',page);
@@ -73,14 +93,28 @@ const onCurrentChange = (page) => {
 	getPageList(Data);
 };
 
-// const tableList=ref([])
-const onSortChannel = () => {
-	console.log("排序");
+//导出单位
+const onSortChannel = async () => {
+	try {
+		const res = await Request.request(
+			Request.GET,
+			"/basicdata/md-unit-measure/download-unitMeasure",
+			null,
+			http.upType.json,
+		);
+	} catch (error) {
+		console.log("错误或者超时");
+	}
+	if (res.code === 200) {
+		ElMessage.success("导出成功");
+	}
 };
+
 const onEditchannel = (row, $index) => {
 	//编辑
-	dialog.value.open({ row });
-	console.log(row);
+	dialogTitle.value = "修改信息";
+	formModel.value = { ...row };
+	testDialogVisible.value = true;
 };
 const onDelChannel = async (row) => {
 	//删除
@@ -89,25 +123,127 @@ const onDelChannel = async (row) => {
 		confirmButtonText: "确认",
 		cancelButtonText: "取消",
 	});
-	ElMessage.success("删除成功");
-	console.log(row);
-	//删除后再渲染数据
-	getPageList();
+	try {
+		const res = await Request.request(
+			Request.DELETE,
+			"/basicdata/md-unit-measure/delete-by-measureIds",
+			{ measureIds: row.data.primaryId },
+			http.upType.json,
+		);
+	} catch (error) {
+		console.log("错误或者超时");
+	}
+	if (res.code === 200) {
+		ElMessage.success("删除成功");
+		//删除后再渲染数据
+		getPageList(null);
+	}
 };
+
 const onSubmit = () => {
 	console.log("查询提交");
 };
+
 //添加
-const onAddChannel = () => {
-	dialog.value.open({});
+const onAddChannel = () => {};
+
+const reFresh = () => {
+	myInput = "";
+	unitName = "";
+};
+
+//------批量删除有关
+const sels = ref([]); //当前选框中选择的值
+
+//获取选中的值
+function handleSelectionChange(sels) {
+	this.sels = sels;
+}
+
+//批量删除
+const arrDelet = async () => {
+	let ids = this.sels.map((item) => item.id);
+	try {
+		const res = await Request.request(
+			Request.DELETE,
+			"/basicdata/md-unit-measure/delete-by-measureIds",
+			ids,
+			http.upType.json,
+		);
+		if (res.code == "10000") {
+			ElMessage.success("删除成功");
+			getPageList(null);
+		} else {
+			ElMessage.warning("删除失败");
+		}
+	} catch (error) {
+		console.log("错误或者超时");
+	}
+	//测试的
+};
+
+//表单--------------------------
+const dialogTitle = ref("");
+const formModel = ref({
+	attr1: "自定义值1",
+	attr2: "自定义值2",
+	attr3: 100,
+	attr4: 200,
+	changeRate: 1,
+	enableFlag: "Y",
+	measureCode: "METER",
+	measureName: "米",
+	primaryFlag: "Y",
+	primaryId: 1,
+	remark: "这是主单位",
+});
+const formRef = ref(null);
+const testDialogVisible = ref(false);
+
+const openTestDialog = () => {
+	dialogTitle.value = "添加信息";
+	formModel.value = {
+		attr1: "",
+		attr2: "",
+		attr3: 0,
+		attr4: 0,
+		changeRate: 0,
+		enableFlag: "",
+		measureCode: "",
+		measureName: "",
+		primaryFlag: "",
+		primaryId: 0,
+		remark: "",
+	};
+	testDialogVisible.value = true;
+};
+
+const rules = {
+	primaryId: [{ required: true, message: "请输入主编码", trigger: "blur" }],
+	enableFlag: [{ required: true, message: "请选择是否有效", trigger: "change" }],
+	remark: [{ required: true, message: "请输入备注", trigger: "blur" }],
+};
+const submitForm = () => {
+	formRef.value.validate((valid) => {
+		if (valid) {
+			console.log("提交成功", formModel.value);
+			testDialogVisible.value = false;
+		} else {
+			console.log("提交失败");
+			return false;
+		}
+	});
+};
+
+const cancelForm = () => {
+	testDialogVisible.value = false;
 };
 </script>
 
 <template>
 	<!--分类，页面只有基本的表现，没有实现数据绑定-->
-	<tableFrame title="计算单位">
+	<TableFrame title="计算单位">
 		<template #extra>
-			<!-- 具名插槽例子实现 -->
 			<el-button @click="onSortChannel"
 				>导出数据
 				<el-icon :size="20"> <UploadFilled /><!--排序图标--> </el-icon>
@@ -120,37 +256,66 @@ const onAddChannel = () => {
 
 		<!--表单区域-->
 		<el-form :inline="true" class="demo-form-inline">
-			<el-form-item label="表格分类：" padding="50px">
+			<el-form-item label="单位编码：" padding="50px">
 				<!--label是用户看，value是收集给后台的-->
-				<el-select v-model="parms.account">
-					<el-option label="按名字" value="001"> </el-option>
-					<el-option label="按时间" value="002"> </el-option>
-				</el-select>
+				<el-input v-model="myInput" clearable />
 			</el-form-item>
-			<el-form-item label="启用状态">
-				<el-select v-model="parms.state"
-					><!--后台标记状态-->
-					<el-option label="正常" value="true"></el-option>
-					<el-option label="失败" value="false"></el-option>
-				</el-select>
+			<el-form-item label="单位名称">
+				<el-input v-model="unitName" clearable />
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="onSubmit">查询</el-button>
+				<el-button type="primary" @click="onSubmit"
+					><el-icon><Search /></el-icon>查询</el-button
+				>
+			</el-form-item>
+			<el-form-item>
+				<el-button plain @click="reFresh"
+					><el-icon><RefreshLeft /></el-icon>重置</el-button
+				>
 			</el-form-item>
 		</el-form>
 
+		<el-button type="primary" @click="openTestDialog" plain
+			><el-icon><Plus /></el-icon>新增</el-button
+		>
+		<el-button type="success" @click="onEditchannel(row)" plain
+			><el-icon><EditPen /></el-icon>修改</el-button
+		>
+		<el-button type="danger" @click="arrDelet" plain
+			><el-icon><Delete /></el-icon>删除</el-button
+		>
+
 		<!--表格区-->
-		<el-table :data="tableList" style="width: 100%" v-loading="loading">
+		<el-table
+			:data="tableList"
+			style="width: 100%"
+			v-loading="loading"
+			@selection-change="handleSelectionChange"
+			ref="multipleTable"
+		>
+			<el-table-column type="selection" width="55" />
 			<el-table-column type="index" label="序号"></el-table-column>
 			<el-table-column prop="attr1" label="预留字段1" width="100"></el-table-column>
 			<el-table-column prop="attr2" label="预留字段2" width="100"></el-table-column>
 			<el-table-column prop="attr3" label="预留字段3" width="100"></el-table-column>
 			<el-table-column prop="attr4" label="预留字段4" width="100"></el-table-column>
 			<el-table-column prop="changeRate" label="与主单位换算比例" width="100"></el-table-column>
-			<el-table-column prop="enableFlag" label="是否启用"></el-table-column>
+			<el-table-column prop="enableFlag" label="是否启用">
+				<template v-slot="{ row }">
+					<el-tag :type="row.enableFlag === 'Y' ? 'success' : 'info'">{{
+						row.enableFlag === "Y" ? "启用" : "未启用"
+					}}</el-tag>
+				</template>
+			</el-table-column>
 			<el-table-column prop="measureCode" label="单位编码"></el-table-column>
 			<el-table-column prop="measureName" label="单位名称"></el-table-column>
-			<el-table-column prop="primaryFlag" label="是否是主单位"></el-table-column>
+			<el-table-column prop="primaryFlag" label="是否是主单位">
+				<template v-slot="{ row }">
+					<el-tag :type="row.enableFlag === 'Y' ? 'success' : 'info'">{{
+						row.enableFlag === "Y" ? "主单位" : "非主单位"
+					}}</el-tag>
+				</template>
+			</el-table-column>
 			<el-table-column prop="primaryId" label="主单位ID"></el-table-column>
 			<el-table-column prop="remark" label="备注"></el-table-column>
 			<el-table-column label="操作" width="100">
@@ -182,17 +347,63 @@ const onAddChannel = () => {
 		<template #empty>
 			<el-empty description="没有数据"></el-empty>
 		</template>
-	</tableFrame>
-	<!--引入的弹窗-->
-	<pop-Up ref="dialog"> </pop-Up>
+	</TableFrame>
+
+	<!-- 引入的弹窗
+	<pop-Up ref="dialog"> </pop-Up> -->
+
+	<el-dialog v-model="testDialogVisible" :title="dialogTitle" width="500">
+		<!--:before-close="handleClose"//这个属性加上去要二次取消才可以-->
+		<el-form ref="formRef" :model="formModel" :rules="rules" label-width="100px" style="padding-right: 30px">
+			<el-form-item label="自定义值1" prop="attr1">
+				<el-input v-model="formModel.attr1" placeholder="请输入自定义值1"></el-input>
+			</el-form-item>
+			<el-form-item label="自定义值2" prop="attr2">
+				<el-input v-model="formModel.attr2" placeholder="请输入自定义值2"></el-input>
+			</el-form-item>
+			<el-form-item label="自定义值3" prop="attr3">
+				<el-input v-model="formModel.attr3" placeholder="自定义值3"></el-input>
+			</el-form-item>
+			<el-form-item label="自定义值4" prop="attr4">
+				<el-input v-model="formModel.attr4" placeholder="自定义值4"></el-input>
+			</el-form-item>
+			<el-form-item label="与主单位换算比例" prop="changeRate">
+				<el-input v-model="formModel.changeRate" placeholder="与主单位换算比例"></el-input>
+			</el-form-item>
+			<el-form-item label="是否启用" prop="enableFlag">
+				<el-input v-model="formModel.enableFlag" placeholder="是否启用"></el-input>
+			</el-form-item>
+			<el-form-item label="单位编码" prop="measureCode">
+				<el-input v-model="formModel.measureCode" placeholder="单位编码"></el-input>
+			</el-form-item>
+			<el-form-item label="单位名称" prop="measureName">
+				<el-input v-model="formModel.measureName" placeholder="单位名称"></el-input>
+			</el-form-item>
+			<el-form-item label="是否是主单位" prop="primaryFlag">
+				<el-input v-model="formModel.primaryFlag" placeholder="是否是主单位"></el-input>
+			</el-form-item>
+			<el-form-item label="主单位ID" prop="primaryId">
+				<el-input v-model="formModel.primaryId" placeholder="主单位ID"></el-input>
+			</el-form-item>
+			<el-form-item label="备注" prop="remark">
+				<el-input v-model="formModel.remark" placeholder="备注"></el-input>
+			</el-form-item>
+		</el-form>
+		<template #footer>
+			<el-button @click="cancelForm">取消</el-button>
+			<el-button type="primary" @click="submitForm">确定</el-button>
+		</template>
+	</el-dialog>
 </template>
 
 <style lang="scss" scoped>
-.demo-form-inline .el-input {
-	--el-input-width: 220px;
-}
+.demo-form-inline {
+	.el-input {
+		--el-input-width: 220px;
+	}
 
-.demo-form-inline .el-select {
-	--el-select-width: 220px;
+	.el-select {
+		--el-select-width: 220px;
+	}
 }
 </style>

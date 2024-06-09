@@ -4,33 +4,18 @@
 		<el-form :model="queryParams" ref="queryForm" size="small" :inline="true" label-width="100px">
 			<el-row>
 				<el-col :span="8">
-					<el-form-item label="客户编码" prop="clientCode">
-						<el-input v-model="queryParams.clientCode" placeholder="请输入客户编码" clearable />
+					<el-form-item label="检测项编码" prop="clientCode">
+						<el-input v-model="queryParams.clientCode" placeholder="请输入检测项编码" clearable />
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
-					<el-form-item label="客户名称" prop="clientName">
-						<el-input v-model="queryParams.clientName" placeholder="请输入客户名称" clearable />
+					<el-form-item label="检测项名称" prop="clientName">
+						<el-input v-model="queryParams.clientName" placeholder="请输入检测项名称" clearable />
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
-					<el-form-item label="客户简称" prop="clientNick">
-						<el-input v-model="queryParams.clientNick" placeholder="请输入客户简称" clearable />
-					</el-form-item>
-				</el-col>
-			</el-row>
-			<el-row>
-				<el-col :span="8">
-					<el-form-item label="客户英文名称" prop="clientEn">
-						<el-input v-model="queryParams.clientEn" placeholder="请输入客户英文名称" clearable />
-					</el-form-item>
-				</el-col>
-				<el-col :span="8">
-					<el-form-item label="是否启用" prop="enableFlag">
-						<el-select v-model="queryParams.enableFlag" placeholder="是否启用" clearable>
-							<el-option label="是" value="Y"></el-option>
-							<el-option label="否" value="N"></el-option>
-						</el-select>
+					<el-form-item label="检测项类型" prop="clientNick">
+						<el-input v-model="queryParams.clientNick" placeholder="请输入检测项" clearable />
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
@@ -48,26 +33,17 @@
 				<el-button type="primary" @click="handleAdd">新增</el-button>
 				<el-button type="success" :disabled="single" @click="handleUpdate">修改</el-button>
 				<el-button type="danger" :disabled="multiple" @click="handleDelete">删除</el-button>
+				<el-button type="danger" :disabled="export" @click="handleExport">导出</el-button>
 			</el-col>
 		</el-row>
 
 		<!-- 数据表格 -->
 		<el-table v-loading="loading" :data="clientList" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55"></el-table-column>
-			<el-table-column prop="clientCode" label="客户编码" align="center"></el-table-column>
-			<el-table-column prop="clientName" label="客户名称" align="center"></el-table-column>
-			<el-table-column prop="clientNick" label="客户简称" align="center"></el-table-column>
-			<el-table-column prop="clientType" label="客户类型" align="center"></el-table-column>
-			<el-table-column prop="tel" label="客户电话" align="center"></el-table-column>
-			<el-table-column prop="contact1" label="联系人" align="center"></el-table-column>
-			<el-table-column prop="contact1Tel" label="联系人-电话" align="center"></el-table-column>
-			<el-table-column prop="enableFlag" label="是否启用" align="center">
-				<template v-slot="{ row }">
-					<el-tag :type="row.enableFlag === 'Y' ? 'success' : 'info'">{{
-						row.enableFlag === "Y" ? "启用" : "未启用"
-					}}</el-tag>
-				</template>
-			</el-table-column>
+			<el-table-column prop="clientCode" label="检测项编码" align="center" class="sizeFont"></el-table-column>
+			<el-table-column prop="clientName" label="检测项名称" align="center"></el-table-column>
+			<el-table-column prop="clientType" label="检测项类型" align="center"></el-table-column>
+			<el-table-column prop="clientNick" label="检测工具" align="center"></el-table-column>
 			<el-table-column fixed="right" label="操作" align="center">
 				<template v-slot="{ row }">
 					<el-button size="mini" type="text" @click="handleUpdate(row)">修改</el-button>
@@ -76,82 +52,8 @@
 			</el-table-column>
 		</el-table>
 
-		<!-- 分页 -->
-		<!-- <pagination :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList"></pagination>
-		<el-dialog :title="title" :visible.sync="open" width="30%">
-  <div>测试对话框是否显示</div>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="open = false">关闭</el-button>
-  </span>
-</el-dialog> -->
 		<!-- 新增对话框 -->
-		<el-dialog :title="title" :visible.sync="open" width="960px" append-to-body>
-			<el-form ref="form" :model="form" :rules="rules" label-width="120px">
-				<!-- 客户编码 -->
-				<el-form-item label="客户编码" prop="clientCode">
-					<el-input v-model="form.clientCode" placeholder="请输入客户编码" />
-				</el-form-item>
-				<!-- 客户名称 -->
-				<el-form-item label="客户名称" prop="clientName">
-					<el-input v-model="form.clientName" placeholder="请输入客户名称" />
-				</el-form-item>
-				<!-- 客户简称 -->
-				<el-form-item label="客户简称" prop="clientNick">
-					<el-input v-model="form.clientNick" placeholder="请输入客户简称" />
-				</el-form-item>
-				<!-- 客户英文名称 -->
-				<el-form-item label="客户英文名称" prop="clientEn">
-					<el-input v-model="form.clientEn" placeholder="请输入客户英文名称" />
-				</el-form-item>
-				<!-- 客户类型 -->
-				<el-form-item label="客户类型" prop="clientType">
-					<el-select v-model="form.clientType" placeholder="请选择客户类型">
-						<el-option
-							v-for="dict in dict.type.mes_client_type"
-							:key="dict.value"
-							:label="dict.label"
-							:value="dict.value"
-						/>
-					</el-select>
-				</el-form-item>
-				<!-- 客户简介 -->
-				<el-form-item label="客户简介" prop="clientDes">
-					<el-input type="textarea" v-model="form.clientDes" placeholder="请输入客户简介" />
-				</el-form-item>
-				<!-- 客户地址 -->
-				<el-form-item label="客户地址" prop="address">
-					<el-input type="textarea" v-model="form.address" placeholder="请输入客户地址" />
-				</el-form-item>
-				<!-- 客户官网地址 -->
-				<el-form-item label="客户官网地址" prop="website">
-					<el-input v-model="form.website" placeholder="请输入客户官网地址" />
-				</el-form-item>
-				<!-- 客户邮箱地址 -->
-				<el-form-item label="客户邮箱地址" prop="email">
-					<el-input v-model="form.email" placeholder="请输入客户邮箱地址" />
-				</el-form-item>
-				<!-- 客户电话 -->
-				<el-form-item label="客户电话" prop="tel">
-					<el-input v-model="form.tel" placeholder="请输入客户电话" />
-				</el-form-item>
-				<!-- 是否有效 -->
-				<el-form-item label="是否有效" prop="enableFlag">
-					<el-radio-group v-model="form.enableFlag">
-						<el-radio v-for="dict in dict.type.sys_yes_no" :key="dict.value" :label="dict.value">{{
-							dict.label
-						}}</el-radio>
-					</el-radio-group>
-				</el-form-item>
-				<!-- 备注 -->
-				<el-form-item label="备注" prop="remark">
-					<el-input type="textarea" v-model="form.remark" placeholder="请输入备注" />
-				</el-form-item>
-				<div slot="footer" class="dialog-footer">
-					<el-button @click="cancel">取消</el-button>
-					<el-button type="primary" @click="submitForm">确定</el-button>
-				</div>
-			</el-form>
-		</el-dialog>
+		
 	</div>
 </template>
 
@@ -409,3 +311,9 @@ export default {
 	},
 };
 </script>
+
+<style>
+.sizeFont {
+	font-weight: bold;
+}
+</style>

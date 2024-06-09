@@ -1,10 +1,10 @@
-import { fileURLToPath, URL } from "node:url";
 import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { createHtmlPlugin } from "vite-plugin-html";
+import { fileURLToPath, URL } from "node:url";
 
 const getViteEnv = (mode, target) => {
 	return loadEnv(mode, process.cwd())[target];
@@ -72,6 +72,13 @@ export default ({ mode }) =>
 		resolve: {
 			alias: {
 				"@": fileURLToPath(new URL("./src", import.meta.url)),
+				components: fileURLToPath(new URL("./src/components", import.meta.url)),
+				types: fileURLToPath(new URL("./src/types", import.meta.url)),
+				views: fileURLToPath(new URL("./src/views", import.meta.url)),
+				api: fileURLToPath(new URL("./src/apis", import.meta.url)),
+				stores: fileURLToPath(new URL("./src/stores", import.meta.url)),
+				router: fileURLToPath(new URL("./src/router", import.meta.url)),
+				utils: fileURLToPath(new URL("./src/utils", import.meta.url)),
 			},
 		},
 	});

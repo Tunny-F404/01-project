@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import Request from "@/apis/request";
 // 测试菜单数据
-let testMenus = [
+const testMenus = [
 	{
 		id: 1,
 		text: "基础数据",
@@ -142,8 +142,8 @@ let testMenus = [
 			},
 		],
 	},
-	//仓库管理侧边栏
-	//views/warehouse-management
+	// 仓库管理侧边栏
+	// views/warehouse-management
 	{
 		id: 4,
 		text: "仓库管理",
@@ -158,31 +158,271 @@ let testMenus = [
 			},
 			{
 				id: 3,
-				text: "仓库管理2",
+				text: "采购入库",
 				href: "/un-32",
 				icon: "Management",
 				pid: 4,
 			},
 			{
 				id: 4,
-				text: "仓库管理3",
+				text: "采购退货",
 				href: "/un-33",
 				icon: "Management",
 				pid: 4,
 			},
 			{
 				id: 5,
-				text: "仓库管理4",
+				text: "生产领料",
 				href: "/un-34",
 				icon: "Management",
 				pid: 4,
 			},
 			{
 				id: 6,
-				text: "订单管理5",
+				text: "生产退料",
 				href: "/un-35",
 				icon: "Management",
 				pid: 4,
+			},
+			{
+				id: 6,
+				text: "产品入库",
+				href: "/un-36",
+				icon: "Management",
+				pid: 4,
+			},
+		],
+	},
+	// 系统管理
+	{
+		id: 5,
+		text: "系统管理",
+		icon: "Stamp",
+		children: [
+			{
+				id: 2,
+				text: "消息通知",
+				href: "/un-41",
+				icon: "Stamp",
+				pid: 5,
+			},
+			{
+				id: 3,
+				text: "系统管理",
+				href: "/un-42",
+				icon: "Stamp",
+				pid: 5,
+			},
+			{
+				id: 4,
+				text: "系统管理",
+				href: "/un-43",
+				icon: "Stamp",
+				pid: 5,
+			},
+			{
+				id: 5,
+				text: "系统管理4",
+				href: "/un-44",
+				icon: "Stamp",
+				pid: 5,
+			},
+			{
+				id: 6,
+				text: "编码规则",
+				href: "/un-45",
+				icon: "Stamp",
+				pid: 5,
+			},
+		],
+	},
+	// 架构管理
+	{
+		id: 6,
+		text: "架构管理",
+		icon: "Operation",
+		children: [
+			{
+				id: 2,
+				text: "组织管理",
+				href: "/un-51",
+				icon: "Operation",
+				pid: 6,
+			},
+			{
+				id: 3,
+				text: "架构管理",
+				href: "/un-52",
+				icon: "Operation",
+				pid: 6,
+			},
+			{
+				id: 4,
+				text: "架构管理",
+				href: "/un-53",
+				icon: "Operation",
+				pid: 6,
+			},
+			{
+				id: 5,
+				text: "架构管理4",
+				href: "/un-54",
+				icon: "Operation",
+				pid: 6,
+			},
+			{
+				id: 6,
+				text: "架构管理",
+				href: "/un-55",
+				icon: "Operation",
+				pid: 6,
+			},
+		],
+	},
+	{
+		id: 5,
+		text: "质量管理",
+		icon: "IconTickets",
+		children: [
+			{
+				id: 2,
+				text: "常见缺陷",
+				href: "/un-51",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 3,
+				text: "检测项设置",
+				href: "/un-52",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 4,
+				text: "检测模版",
+				href: "/un-53",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 5,
+				text: "检测任务",
+				href: "/un-54",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 6,
+				text: "来料检验",
+				href: "/un-55",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 7,
+				text: "过程检验",
+				href: "/un-55",
+				icon: "IconTickets",
+				pid: 5,
+			},
+			{
+				id: 8,
+				text: "出货检验",
+				href: "/un-55",
+				icon: "IconTickets",
+				pid: 5,
+			},
+		],
+	},
+	// 组织架构侧边栏
+	{
+		id: 6,
+		text: "组织架构",
+		icon: "Management",
+		children: [
+			{
+				id: 2,
+				text: "部门管理",
+				href: "/dept",
+				pid: 4,
+			},
+			{
+				id: 3,
+				text: "岗位管理",
+				href: "/postManage",
+				icon: "Management",
+				pid: 4,
+			},
+			{
+				id: 4,
+				text: "角色管理",
+				href: "/role",
+				icon: "Management",
+				pid: 4,
+			},
+			{
+				id: 5,
+				text: "用户管理",
+				href: "/user",
+				icon: "Management",
+				pid: 4,
+			},
+		],
+	},
+	{
+		id: 100,
+		text: "排班管理",
+		icon: "Avatar",
+		children: [
+			{
+				id: 101,
+				text: "班组设置",
+				href: "/un-101",
+				icon: "UserFilled",
+				pid: 4,
+			},
+			{
+				id: 102,
+				text: "节假日设置",
+				href: "/un-102",
+				icon: "List",
+				pid: 4,
+			},
+			{
+				id: 103,
+				text: "排班日历",
+				href: "/un-103",
+				icon: "Checked",
+				pid: 4,
+			},
+			{
+				id: 104,
+				text: "排班设计",
+				href: "/un-104",
+				icon: "List",
+				pid: 4,
+			},
+		],
+	},
+	// 工装夹具管理
+	{
+		id: 7,
+		text: "工装夹具",
+		icon: "Management",
+		children: [
+			{
+				id: 2,
+				text: "类型设置",
+				href: "/un-607",
+				pid: 7,
+			},
+			{
+				id: 3,
+				text: "工装夹具台账",
+				href: "/un-608",
+				icon: "Management",
+				pid: 7,
 			},
 		],
 	},
@@ -220,8 +460,8 @@ export const userStore = defineStore("user", {
 		},
 		// 加载菜单
 		async loadMenus() {
-			//TODO[TEST_CODE]:此处写测试数据设定
-			//测试基础数据菜单板块
+			// TODO[TEST_CODE]:此处写测试数据设定
+			// 测试基础数据菜单板块
 			this.menus = testMenus;
 
 			// 发送获取菜单请求
@@ -230,7 +470,7 @@ export const userStore = defineStore("user", {
 			//   '/login/get-menus',
 			//   null
 			// )
-			//this.menus = data.data
+			// this.menus = data.data
 		},
 		// 加载刷新凭证
 		loadRefreshToken() {
@@ -245,7 +485,7 @@ export const userStore = defineStore("user", {
 				refreshToken: this.refreshToken,
 				clientId: import.meta.env.VITE_API_URL,
 			});
-			//设置Token相关属性
+			// 设置Token相关属性
 			this.setToken(data.data);
 		},
 		// 设置是否加载完成
