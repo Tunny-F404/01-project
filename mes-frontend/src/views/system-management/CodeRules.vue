@@ -15,13 +15,28 @@
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-                <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+                <el-button type="primary" icon="el-icon-search" size="small" @click="handleQuery">搜索</el-button>
+                <el-button icon="el-icon-refresh" size="small" @click="resetQuery">重置</el-button>
             </el-form-item>
         </el-form>
 
         <!-- 表格和其他组件... -->
-
+        <el-row :gutter="10" class="mb8">
+            <el-col :span="1.5">
+                <el-button type="primary" plain icon="el-plus" size="small" @click="handleAdd"
+                    v-if="hasPermission('system:autocode:rule:add')">新增</el-button>
+            </el-col>
+            <el-col :span="1.5">
+                <el-button type="success" plain icon="el-edit" size="small" :disabled="single" @click="handleUpdate"
+                    v-if="hasPermission('system:autocode:rule:edit')">修改</el-button>
+            </el-col>
+            <el-col :span="1.5">
+                <el-button type="danger" plain icon="el-delete" size="small" :disabled="multiple" @click="handleDelete"
+                    v-if="hasPermission('system:autocode:rule:remove')">删除</el-button>
+            </el-col>
+            <right-toolbar :modelValue="showSearch" @update:modelValue="val => showSearch = val"
+                @queryTable="getList"></right-toolbar>
+        </el-row>
         <!-- 表格显示规则列表 -->
         <el-table :data="ruleList" style="width: 100%" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
@@ -35,19 +50,57 @@
             </el-table-column>
             <el-table-column label="操作" width="180">
                 <template #default="{ row }">
-                    <el-button size="mini" @click="handleUpdate(row)">编辑</el-button>
-                    <el-button size="mini" type="danger" @click="handleDelete(row)">删除</el-button>
+                    <el-button size="small" @click="handleUpdate(row)">编辑</el-button>
+                    <el-button size="small" type="danger" @click="handleDelete(row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
-        <el-dialog :title="title" v-model="open" width="500px">
+        <el-pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+            :limit.sync="queryParams.pageSize" @pagination="getList" />
+
+        <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                <!-- 表单元素... -->
+                <el-form-item label="规则编码" prop="ruleCode">
+                    <el-input v-model="form.ruleCode" placeholder="请输入规则编码" />
+                </el-form-item>
+                <el-form-item label="规则名称" prop="ruleName">
+                    <el-input v-model="form.ruleName" placeholder="请输入规则名称" />
+                </el-form-item>
+                <el-form-item label="描述" prop="ruleDesc">
+                    <el-input v-model="form.ruleDesc" placeholder="请输入描述信息" />
+                </el-form-item>
+                <el-form-item label="最大长度" prop="maxLength">
+                    <el-input-number v-model="form.maxLength" controls-position="right" :min="0" />
+                </el-form-item>
+                <el-form-item label="是否补齐" prop="isPadded">
+                    <el-radio-group v-model="form.isPadded">
+                        <el-radio label="Y">是</el-radio>
+                        <el-radio label="N">否</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="补齐字符" prop="paddedChar" v-if="form.isPadded == 'Y'">
+                    <el-input v-model="form.paddedChar" placeholder="请输入补齐字符" />
+                </el-form-item>
+                <el-form-item label="补齐方式" prop="paddedMethod" v-if="form.isPadded == 'Y'">
+                    <el-radio-group v-model="form.paddedMethod">
+                        <el-radio label="L">左补齐</el-radio>
+                        <el-radio label="R">右补齐</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="是否启用" prop="enableFlag">
+                    <el-radio-group v-model="form.enableFlag">
+                        <el-radio v-for="dict in dict.type.sys_yes_no" :key="dict.value" :label="dict.value">{{
+                            dict.label }}</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="备注" prop="remark">
+                    <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
+                </el-form-item>
             </el-form>
-            <span slot="footer">
+            <div slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="submitForm">确 定</el-button>
                 <el-button @click="cancel">取 消</el-button>
-            </span>
+            </div>
         </el-dialog>
     </div>
 </template>
@@ -139,6 +192,12 @@ const confirm = (msg, callback) => {
             callback();
         })
         .catch(() => { });
+};
+
+// 定义 hasPermission 函数
+const hasPermission = (permission) => {
+    // 这里应该是您的权限检查逻辑
+    return true; // 示例返回值
 };
 // 生命周期钩子
 onMounted(() => {
