@@ -1,7 +1,8 @@
 <template>
-	<tableFrame title="类型管理">
+	<TableFrame title="类型管理">
 		<template #extra>
-			<el-button>导出数据<el-icon :size="22">
+			<el-button
+				>导出数据<el-icon :size="22">
 					<UploadFilled />
 				</el-icon>
 			</el-button>
@@ -36,35 +37,49 @@
 				</el-col>
 				<el-col :span="6">
 					<el-form-item>
-						<el-button type="primary" @click="search"> <el-icon>
-								<Search />
-							</el-icon>查询</el-button>
-						<el-button @click="reFresh"><el-icon>
-								<Refresh />
-							</el-icon>重置</el-button>
+						<el-button type="primary" @click="search">
+							<el-icon>
+								<Search /> </el-icon
+							>查询</el-button
+						>
+						<el-button @click="reFresh"
+							><el-icon>
+								<Refresh /> </el-icon
+							>重置</el-button
+						>
 					</el-form-item>
 				</el-col>
 			</el-row>
 		</el-form>
 		<!-- 表格 -->
-		<el-button type="primary" plain @click="openTestDialog"><el-icon>
-				<Plus />
-			</el-icon>新增</el-button>
-		<el-button type="success" plain @click="onEditchannel(row)"><el-icon>
-				<EditPen />
-			</el-icon>修改</el-button>
-		<el-button type="danger" plain><el-icon>
-				<Delete />
-			</el-icon>删除</el-button>
+		<el-button type="primary" plain @click="openTestDialog"
+			><el-icon>
+				<Plus /> </el-icon
+			>新增</el-button
+		>
+		<el-button type="success" plain @click="onEditchannel(row)"
+			><el-icon>
+				<EditPen /> </el-icon
+			>修改</el-button
+		>
+		<el-button type="danger" plain
+			><el-icon>
+				<Delete /> </el-icon
+			>删除</el-button
+		>
 		<el-table v-loading="loading" :data="typeList" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55"></el-table-column>
 			<el-table-column prop="typeCode" label="类型编码" align="center"></el-table-column>
 			<el-table-column prop="typeName" label="类型名称" align="center"></el-table-column>
 			<el-table-column prop="enableFlag" label="是否编码管理" align="center">
 				<template #default="{ row }">
-					<el-tag :class="row.isEnabled ? 'status-enabled' : 'status-disabled'" @click="toggleStatus(row)"
-						style="cursor: pointer;" class="status-tag">
-						{{ row.isEnabled ? '是' : '否' }}
+					<el-tag
+						:class="row.isEnabled ? 'status-enabled' : 'status-disabled'"
+						@click="toggleStatus(row)"
+						style="cursor: pointer"
+						class="status-tag"
+					>
+						{{ row.isEnabled ? "是" : "否" }}
 					</el-tag>
 				</template>
 			</el-table-column>
@@ -86,8 +101,8 @@
 				</template>
 			</el-table-column>
 		</el-table>
-	</tableFrame>
-	<el-dialog v-model="dialogFormVisible" :title="dialogTitle" style="width:700px">
+	</TableFrame>
+	<el-dialog v-model="dialogFormVisible" :title="dialogTitle" style="width: 700px">
 		<el-form :model="type" :rules="rules" label-width="120px">
 			<el-row>
 				<el-col :span="12">
@@ -106,8 +121,8 @@
 					<el-form-item label="是否编码管理" prop="enableFlag">
 						<div class="mb-2 flex items-center text-sm">
 							<el-radio-group v-model="type.enableFlag" class="ml-4">
-								<el-radio :value='true' label='是'>是</el-radio>
-								<el-radio :value='false' label='否'>否</el-radio>
+								<el-radio :value="true" label="是">是</el-radio>
+								<el-radio :value="false" label="否">否</el-radio>
 							</el-radio-group>
 						</div>
 					</el-form-item>
@@ -130,7 +145,7 @@
 			<el-row>
 				<el-col :span="24">
 					<el-form-item label="备注" prop="maintainPeriod">
-						<el-input v-model="type.maintainPeriod" placeholder="请输入内容" style="width:1200px;" />
+						<el-input v-model="type.maintainPeriod" placeholder="请输入内容" style="width: 1200px" />
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -138,85 +153,83 @@
 		<template #footer>
 			<div class="dialog-footer">
 				<el-button @click="dialogFormVisible = false">取消</el-button>
-				<el-button type="primary" @click="dialogFormVisible = false">
-					确定
-				</el-button>
+				<el-button type="primary" @click="dialogFormVisible = false"> 确定 </el-button>
 			</div>
 		</template>
 	</el-dialog>
 </template>
 
 <script setup>
-import tableFrame from "../../components/std-table/src/table-frame.vue";
-import { ref, reactive } from 'vue'
+import { ref, reactive } from "vue";
+import { TableFrame } from "components/std-table";
 
-const SelectValue = ref('')
-const typeName = ref('');
+const SelectValue = ref("");
+const typeName = ref("");
 let dialogFormVisible = ref(false);
-const codingType = ref('');
-let dialogTitle = ref('');
+const codingType = ref("");
+let dialogTitle = ref("");
 const reFresh = () => {
-	SelectValue.value = '';
-	typeName.value = '';
-	codingType.value = '';
-}
+	SelectValue.value = "";
+	typeName.value = "";
+	codingType.value = "";
+};
 const selectOptions = [
 	{
-		value: 'Option1',
-		label: '定期维护',
+		value: "Option1",
+		label: "定期维护",
 	},
 	{
-		value: 'Option2',
-		label: '按使用次数维护',
-	}
-]
+		value: "Option2",
+		label: "按使用次数维护",
+	},
+];
 let typeList = reactive([
 	{
-		typeCode: 'TT003',
-		typeName: '刀具',
+		typeCode: "TT003",
+		typeName: "刀具",
 		enableFlag: true,
-		maintainType: '无',
-		maintainPeriod: '无',
-		remark: ''
+		maintainType: "无",
+		maintainPeriod: "无",
+		remark: "",
 	},
 	{
-		typeCode: 'TT022',
-		typeName: '模具',
+		typeCode: "TT022",
+		typeName: "模具",
 		enableFlag: true,
-		maintainType: '按使用次数维护',
-		maintainPeriod: '50次',
-		remark: ''
-	}
+		maintainType: "按使用次数维护",
+		maintainPeriod: "50次",
+		remark: "",
+	},
 ]);
 const type = reactive({
-	codingType: '',
-	typeName: '',
-	SelectValue: '',
-	maintainPeriod: '',
-	enableFlag: true
-})
+	codingType: "",
+	typeName: "",
+	SelectValue: "",
+	maintainPeriod: "",
+	enableFlag: true,
+});
 const rules = {
-	codingType: [{ required: true, message: '类型编码不能为空', trigger: "blur" }],
-	typeName: [{ required: true, message: '类型名称不能为空', trigger: "blur" }],
+	codingType: [{ required: true, message: "类型编码不能为空", trigger: "blur" }],
+	typeName: [{ required: true, message: "类型名称不能为空", trigger: "blur" }],
 	enableFlag: [{ required: true, trigger: "blur" }],
 	SelectValue: [{ required: false, trigger: "blur" }],
-	maintainPeriod: [{ message: '请输入保养周期', trigger: "blur" }],
+	maintainPeriod: [{ message: "请输入保养周期", trigger: "blur" }],
 };
 //函数
 const toggleStatus = (row) => {
-	row.isEnabled = !row.isEnabled
-}
+	row.isEnabled = !row.isEnabled;
+};
 let openTestDialog = () => {
-	dialogTitle.value = '新增工装夹具类型'
-	dialogFormVisible.value = true
+	dialogTitle.value = "新增工装夹具类型";
+	dialogFormVisible.value = true;
 	type.value = {
-		codingType: '',
-		typeName: '',
-		enableFlag: '',
-		SelectValue: '',
-		maintainPeriod: ''
-	}
-}
+		codingType: "",
+		typeName: "",
+		enableFlag: "",
+		SelectValue: "",
+		maintainPeriod: "",
+	};
+};
 const onEditchannel = (row) => {
 	dialogTitle.value = "修改工装夹具类型";
 	type.value = { ...row };

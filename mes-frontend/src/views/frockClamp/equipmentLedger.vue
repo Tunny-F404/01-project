@@ -1,7 +1,8 @@
 <template>
-	<tableFrame title="工装夹具台账">
+	<TableFrame title="工装夹具台账">
 		<template #extra>
-			<el-button>导出数据<el-icon :size="22">
+			<el-button
+				>导出数据<el-icon :size="22">
 					<UploadFilled />
 				</el-icon>
 			</el-button>
@@ -59,26 +60,26 @@
 				</el-col>
 				<el-col :span="6">
 					<el-form-item>
-						<el-button type="primary" @click="search"> <el-icon>
-								<Search />
-							</el-icon>查询</el-button>
-						<el-button @click="reFresh"><el-icon>
-								<Refresh />
-							</el-icon>重置</el-button>
+						<el-button type="primary" @click="search">
+							<el-icon> <Search /> </el-icon>查询</el-button
+						>
+						<el-button @click="reFresh"
+							><el-icon> <Refresh /> </el-icon>重置</el-button
+						>
 					</el-form-item>
 				</el-col>
 			</el-row>
 		</el-form>
 		<!-- 表格 -->
-		<el-button type="primary" plain @click="openTestDialog"><el-icon>
-				<Plus />
-			</el-icon>新增</el-button>
-		<el-button type="success" plain @click="onEditchannel(row)"><el-icon>
-				<EditPen />
-			</el-icon>修改</el-button>
-		<el-button type="danger" plain><el-icon>
-				<Delete />
-			</el-icon>删除</el-button>
+		<el-button type="primary" plain @click="openTestDialog"
+			><el-icon> <Plus /> </el-icon>新增</el-button
+		>
+		<el-button type="success" plain @click="onEditchannel(row)"
+			><el-icon> <EditPen /> </el-icon>修改</el-button
+		>
+		<el-button type="danger" plain
+			><el-icon> <Delete /> </el-icon>删除</el-button
+		>
 		<el-table :data="equipmentLedgerList" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55"></el-table-column>
 			<el-table-column prop="equipmentLedgerCode" label="编号" align="center"></el-table-column>
@@ -108,9 +109,9 @@
 				</template>
 			</el-table-column>
 		</el-table>
-	</tableFrame>
+	</TableFrame>
 	<!-- 对话框 -->
-	<el-dialog v-model="dialogFormVisible" :title="dialogTitle" style="width: 700px;">
+	<el-dialog v-model="dialogFormVisible" :title="dialogTitle" style="width: 700px">
 		<el-form :model="equipmentLedger" :rules="rules">
 			<el-row>
 				<el-col :span="12">
@@ -124,7 +125,11 @@
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="工装夹具名称" prop="equipmentLedgerName">
-						<el-input v-model="equipmentLedger.equipmentLedgerName" placeholder="请输入工装夹具名称" autocomplete="off" />
+						<el-input
+							v-model="equipmentLedger.equipmentLedgerName"
+							placeholder="请输入工装夹具名称"
+							autocomplete="off"
+						/>
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -162,8 +167,12 @@
 					<el-form-item label="保养维护类型">
 						<div class="flex flex-wrap gap-4 items-center">
 							<el-select v-model="equipmentLedger.maintenance" placeholder="定期维护" style="width: 240px">
-								<el-option v-for="item in maintenanceOptions" :key="item.value" :label="item.label"
-									:value="item.value" />
+								<el-option
+									v-for="item in maintenanceOptions"
+									:key="item.value"
+									:label="item.label"
+									:value="item.value"
+								/>
 							</el-select>
 						</div>
 					</el-form-item>
@@ -174,8 +183,12 @@
 					<el-form-item label="下一次保养日期">
 						<div class="demo-date-picker">
 							<div class="block">
-								<el-date-picker v-model="equipmentLedger.maintenanceDay" type="date" placeholder="请选择下一次保养日期"
-									:size="size" />
+								<el-date-picker
+									v-model="equipmentLedger.maintenanceDay"
+									type="date"
+									placeholder="请选择下一次保养日期"
+									:size="size"
+								/>
 							</div>
 						</div>
 					</el-form-item>
@@ -184,13 +197,9 @@
 					<el-form-item label="状态">
 						<div class="flex flex-wrap gap-4 items-center">
 							<el-radio v-model="state" disabled value="zaiku">在库</el-radio>
-							<el-radio v-model="state" disabled value="beilingyong">
-								被领用
-							</el-radio>
+							<el-radio v-model="state" disabled value="beilingyong"> 被领用 </el-radio>
 							<el-radio v-model="state" disabled value="baofei">报废</el-radio>
-							<el-radio v-model="state" disabled value="weixiuzhong">
-								维修中
-							</el-radio>
+							<el-radio v-model="state" disabled value="weixiuzhong"> 维修中 </el-radio>
 						</div>
 					</el-form-item>
 				</el-col>
@@ -206,151 +215,148 @@
 		<template #footer>
 			<div class="dialog-footer">
 				<el-button @click="dialogFormVisible = false">取消</el-button>
-				<el-button type="primary" @click="dialogFormVisible = false">
-					确定
-				</el-button>
+				<el-button type="primary" @click="dialogFormVisible = false"> 确定 </el-button>
 			</div>
 		</template>
 	</el-dialog>
 </template>
 
 <script setup>
-import tableFrame from "../../components/std-table/src/table-frame.vue";
-import { ref, reactive } from 'vue'
-let dialogTitle = ref('');
+import { ref, reactive } from "vue";
+import { TableFrame } from "components/std-table";
+let dialogTitle = ref("");
 const selectOptions = [
 	{
-		value: 'Option1',
-		label: '刀具',
+		value: "Option1",
+		label: "刀具",
 	},
 	{
-		value: 'Option2',
-		label: '模具',
+		value: "Option2",
+		label: "模具",
 	},
 	{
-		value: 'Option3',
-		label: '夹具',
-	}
+		value: "Option3",
+		label: "夹具",
+	},
 ];
 const maintenanceOptions = [
 	{
-		value: 'Option1',
-		label: '定期维护'
+		value: "Option1",
+		label: "定期维护",
 	},
 	{
-		value: 'Option2',
-		label: '按使用次数维护'
+		value: "Option2",
+		label: "按使用次数维护",
 	},
 ];
 const stateOptions = [
 	{
-		value: 'Option1',
-		label: '在线'
+		value: "Option1",
+		label: "在线",
 	},
 	{
-		value: 'Option2',
-		label: '被领用'
+		value: "Option2",
+		label: "被领用",
 	},
 	{
-		value: 'Option3',
-		label: '报废'
+		value: "Option3",
+		label: "报废",
 	},
 	{
-		value: 'Option4',
-		label: '维修中'
+		value: "Option4",
+		label: "维修中",
 	},
-]
-const equipmentLedgerCode = ref('');
-const equipmentLedgerName = ref('');
-const equipmentLedgerType = ref('');
-const brand = ref('');
-const model = ref('');
-const state = ref('');
+];
+const equipmentLedgerCode = ref("");
+const equipmentLedgerName = ref("");
+const equipmentLedgerType = ref("");
+const brand = ref("");
+const model = ref("");
+const state = ref("");
 const num = ref(1);
-let dialogFormVisible = ref(false)
+let dialogFormVisible = ref(false);
 const equipmentLedger = reactive({
-	equipmentLedgerCode: '',
-	equipmentLedgerName: '',
-	equipmentLedgerType: '',
-	brand: '',
-	model: '',
-	type: '',
-	num: '',
-	maintenance: '',
+	equipmentLedgerCode: "",
+	equipmentLedgerName: "",
+	equipmentLedgerType: "",
+	brand: "",
+	model: "",
+	type: "",
+	num: "",
+	maintenance: "",
 	usable: 0,
-	state: 'zaiku',
-	maintenanceDay: '',
-	state: '',
-	remark: ''
-})
+	state: "zaiku",
+	maintenanceDay: "",
+	state: "",
+	remark: "",
+});
 const reFresh = () => {
-	equipmentLedgerCode.value = '';
-	equipmentLedgerName.value = '';
-	equipmentLedgerType.value = '';
-	brand.value = '';
-	model.value = '';
-	state.value = '';
-}
+	equipmentLedgerCode.value = "";
+	equipmentLedgerName.value = "";
+	equipmentLedgerType.value = "";
+	brand.value = "";
+	model.value = "";
+	state.value = "";
+};
 const onEditchannel = (row) => {
 	dialogTitle.value = "修改工装夹具清单";
 	equipmentLedger.value = { ...row };
 	dialogFormVisible.value = true;
-}
+};
 const rules = {
 	equipmentLedgerType: [{ required: true, trigger: "blur" }],
-	equipmentLedgerName: [{ required: true, message: '工装夹具名称不能为空', trigger: "blur" }],
-	num: [{ required: true, trigger: "blur" }]
-}
+	equipmentLedgerName: [{ required: true, message: "工装夹具名称不能为空", trigger: "blur" }],
+	num: [{ required: true, trigger: "blur" }],
+};
 const equipmentLedgerList = [
 	{
-		equipmentLedgerCode: 'T00074',
-		equipmentLedgerName: 'XX刀具',
-		brand: 'XX品牌',
-		equipmentLedgerType: 'XXX型号',
-		type: '刀具',
-		num: 70,//库存数量
-		usable: 60,//可用数量
-		maintenance: '定期维护',
-		maintenanceWeek: '',
-		maintenanceDay: '2025-05-16',
-		state: '在库',
-		handle: ''
+		equipmentLedgerCode: "T00074",
+		equipmentLedgerName: "XX刀具",
+		brand: "XX品牌",
+		equipmentLedgerType: "XXX型号",
+		type: "刀具",
+		num: 70, //库存数量
+		usable: 60, //可用数量
+		maintenance: "定期维护",
+		maintenanceWeek: "",
+		maintenanceDay: "2025-05-16",
+		state: "在库",
+		handle: "",
 	},
 	{
-		equipmentLedgerCode: 'T00060',
-		equipmentLedgerName: 'XX模具',
-		brand: 'XXX牌',
-		equipmentLedgerType: 'XXX型号',
-		type: '模具',
+		equipmentLedgerCode: "T00060",
+		equipmentLedgerName: "XX模具",
+		brand: "XXX牌",
+		equipmentLedgerType: "XXX型号",
+		type: "模具",
 		num: 1,
 		usable: 1,
-		maintenance: '定期维护',
-		maintenanceWeek: '',
-		maintenanceDay: '2025-05-20',
-		state: '在库',
-		handle: ''
-	}
-]
+		maintenance: "定期维护",
+		maintenanceWeek: "",
+		maintenanceDay: "2025-05-20",
+		state: "在库",
+		handle: "",
+	},
+];
 //函数
 const openTestDialog = () => {
-	dialogTitle.value = '新增工装夹具清单';
+	dialogTitle.value = "新增工装夹具清单";
 	dialogFormVisible.value = true;
 	equipmentLedger.value = {
-		equipmentLedgerCode: '',
-		equipmentLedgerName: '',
-		equipmentLedgerType: '',
-		brand: '',
-		type: '',
-		num: '',
-		usable: '',
-		maintenance: '',
-		maintenanceWeek: '',
-		maintenanceDay: '',
-		state: '',
-		handle: '',
-	}
-
-}
+		equipmentLedgerCode: "",
+		equipmentLedgerName: "",
+		equipmentLedgerType: "",
+		brand: "",
+		type: "",
+		num: "",
+		usable: "",
+		maintenance: "",
+		maintenanceWeek: "",
+		maintenanceDay: "",
+		state: "",
+		handle: "",
+	};
+};
 </script>
 
 <style lang="scss" scoped>

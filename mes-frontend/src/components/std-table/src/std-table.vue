@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { merge } from "lodash-es";
 import { reactify } from "@vueuse/core";
 
-import tableFrame from "components/std-table/src/table-frame.vue";
+import { TableFrame } from "components/std-table";
 import popUp from "components/std-table/src/pop-up.vue";
 import request from "api/request.js"; //加入请求
 import type { Prettify } from "utils/Prettify.ts";

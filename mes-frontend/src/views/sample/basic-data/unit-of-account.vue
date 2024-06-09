@@ -1,11 +1,10 @@
-<script setup >
-import {ref} from 'vue'
-import http from "axios"
-import  tableFrame  from 'components/std-table/src/table-frame.vue' 
-import popUp from 'components/std-table/src/pop-up.vue'
-import Request  from '@/apis/request.js'
+<script setup>
+import { ref } from "vue";
+import http from "axios";
+import { TableFrame } from "components/std-table";
+import popUp from "components/std-table/src/pop-up.vue";
+import Request from "@/apis/request.js";
 // defineOptions();
-
 
 //每一列数据，例子，后期接口对上再调整
 const tableList = ref([
@@ -45,9 +44,9 @@ const dialog = ref();
 const total = ref(13);
 
 //定义查询的数据
-let myInput=ref('')
-let unitName=ref('')
-const loading=ref(false)//loading状态
+let myInput = ref("");
+let unitName = ref("");
+const loading = ref(false); //loading状态
 
 //定义请求参数,后期完善
 const parms = ref({
@@ -60,15 +59,14 @@ const parms = ref({
 const getPageList = async (data) => {
 	//不知道跟着接口写的对不对，希望大佬看一看
 	loading.value = true;
-	const res='';
+	const res = "";
 	try {
 		const res = await Request.request(Request.GET, "/basicdata/md-unit-measure/list", data, http.upType.json);
 		tableList.value = res.data.rows.data;
 		parms.value.pagenum = res.data.pageIndex;
 		parms.value.pagesize = res.data.pageSize;
 		total.value = res.data.total;
-
-	}catch (error) {
+	} catch (error) {
 		console.log("错误或者超时");
 	}
 
@@ -98,20 +96,25 @@ const onCurrentChange = (page) => {
 //导出单位
 const onSortChannel = async () => {
 	try {
-  const res=await Request.request(Request.GET,'/basicdata/md-unit-measure/download-unitMeasure',null, http.upType.json)
- } catch (error) {
-  console.log('错误或者超时');
- } 
-  if(res.code===200){
-    ElMessage.success('导出成功') 
- }
+		const res = await Request.request(
+			Request.GET,
+			"/basicdata/md-unit-measure/download-unitMeasure",
+			null,
+			http.upType.json,
+		);
+	} catch (error) {
+		console.log("错误或者超时");
+	}
+	if (res.code === 200) {
+		ElMessage.success("导出成功");
+	}
 };
 
 const onEditchannel = (row, $index) => {
 	//编辑
 	dialogTitle.value = "修改信息";
-  formModel.value = { ...row };
-  testDialogVisible.value = true;
+	formModel.value = { ...row };
+	testDialogVisible.value = true;
 };
 const onDelChannel = async (row) => {
 	//删除
@@ -121,15 +124,20 @@ const onDelChannel = async (row) => {
 		cancelButtonText: "取消",
 	});
 	try {
-  const res=await Request.request(Request.DELETE,'/basicdata/md-unit-measure/delete-by-measureIds',{measureIds:row.data.primaryId}, http.upType.json)
- } catch (error) {
-  console.log('错误或者超时');
- } 
- if(res.code===200){
-    ElMessage.success('删除成功') 
-    //删除后再渲染数据
-    getPageList(null)
- }
+		const res = await Request.request(
+			Request.DELETE,
+			"/basicdata/md-unit-measure/delete-by-measureIds",
+			{ measureIds: row.data.primaryId },
+			http.upType.json,
+		);
+	} catch (error) {
+		console.log("错误或者超时");
+	}
+	if (res.code === 200) {
+		ElMessage.success("删除成功");
+		//删除后再渲染数据
+		getPageList(null);
+	}
 };
 
 const onSubmit = () => {
@@ -137,9 +145,7 @@ const onSubmit = () => {
 };
 
 //添加
-const onAddChannel = () => {
-	
-};
+const onAddChannel = () => {};
 
 const reFresh = () => {
 	myInput = "";
@@ -147,34 +153,34 @@ const reFresh = () => {
 };
 
 //------批量删除有关
-const sels = ref([]);//当前选框中选择的值
+const sels = ref([]); //当前选框中选择的值
 
 //获取选中的值
-function handleSelectionChange (sels) {
+function handleSelectionChange(sels) {
 	this.sels = sels;
-};
+}
 
 //批量删除
-const arrDelet=async ()=>{
+const arrDelet = async () => {
 	let ids = this.sels.map((item) => item.id);
-    try {
-		const res= await Request.request(Request.DELETE,
-		 "/basicdata/md-unit-measure/delete-by-measureIds", ids, http.upType.json);
-  if( res.code == '10000'){
-	ElMessage.success("删除成功");
-	getPageList(null);
-    }else{
-     ElMessage.warning("删除失败");
-	}
+	try {
+		const res = await Request.request(
+			Request.DELETE,
+			"/basicdata/md-unit-measure/delete-by-measureIds",
+			ids,
+			http.upType.json,
+		);
+		if (res.code == "10000") {
+			ElMessage.success("删除成功");
+			getPageList(null);
+		} else {
+			ElMessage.warning("删除失败");
+		}
 	} catch (error) {
 		console.log("错误或者超时");
 	}
 	//测试的
-	
-}
-
-
-
+};
 
 //表单--------------------------
 const dialogTitle = ref("");
@@ -195,49 +201,48 @@ const formRef = ref(null);
 const testDialogVisible = ref(false);
 
 const openTestDialog = () => {
-  dialogTitle.value = "添加信息";
-  formModel.value = {
-	attr1: "",
-	attr2: "",
-	attr3: 0,
-	attr4:0 ,
-	changeRate: 0,
-	enableFlag: "",
-	measureCode: "",
-	measureName: "",
-	primaryFlag: "",
-	primaryId: 0,
-	remark: "",
-  };
-  testDialogVisible.value = true;
+	dialogTitle.value = "添加信息";
+	formModel.value = {
+		attr1: "",
+		attr2: "",
+		attr3: 0,
+		attr4: 0,
+		changeRate: 0,
+		enableFlag: "",
+		measureCode: "",
+		measureName: "",
+		primaryFlag: "",
+		primaryId: 0,
+		remark: "",
+	};
+	testDialogVisible.value = true;
 };
 
 const rules = {
 	primaryId: [{ required: true, message: "请输入主编码", trigger: "blur" }],
-  enableFlag: [{ required: true, message: "请选择是否有效", trigger: "change" }],
-  remark: [{ required: true, message: "请输入备注", trigger: "blur" }]
+	enableFlag: [{ required: true, message: "请选择是否有效", trigger: "change" }],
+	remark: [{ required: true, message: "请输入备注", trigger: "blur" }],
 };
 const submitForm = () => {
-  formRef.value.validate((valid) => {
-    if (valid) {
-      console.log("提交成功", formModel.value);
-      testDialogVisible.value = false;
-    } else {
-      console.log("提交失败");
-      return false;
-    }
-  });
+	formRef.value.validate((valid) => {
+		if (valid) {
+			console.log("提交成功", formModel.value);
+			testDialogVisible.value = false;
+		} else {
+			console.log("提交失败");
+			return false;
+		}
+	});
 };
 
 const cancelForm = () => {
-  testDialogVisible.value = false;
+	testDialogVisible.value = false;
 };
-
 </script>
 
 <template>
 	<!--分类，页面只有基本的表现，没有实现数据绑定-->
-	<tableFrame title="计算单位">
+	<TableFrame title="计算单位">
 		<template #extra>
 			<el-button @click="onSortChannel"
 				>导出数据
@@ -270,77 +275,79 @@ const cancelForm = () => {
 			</el-form-item>
 		</el-form>
 
-<el-button type="primary"   @click="openTestDialog" plain><el-icon><Plus /></el-icon>新增</el-button>
-<el-button type="success"  @click="onEditchannel(row)"  plain><el-icon><EditPen /></el-icon>修改</el-button>
-<el-button type="danger" @click="arrDelet" plain><el-icon><Delete /></el-icon>删除</el-button>
+		<el-button type="primary" @click="openTestDialog" plain
+			><el-icon><Plus /></el-icon>新增</el-button
+		>
+		<el-button type="success" @click="onEditchannel(row)" plain
+			><el-icon><EditPen /></el-icon>修改</el-button
+		>
+		<el-button type="danger" @click="arrDelet" plain
+			><el-icon><Delete /></el-icon>删除</el-button
+		>
 
-<!--表格区-->
-    <el-table  :data="tableList" style="width: 100%" v-loading="loading"
-    @selection-change="handleSelectionChange"
-    ref="multipleTable">
-    <el-table-column type="selection" width="55" />
-  <el-table-column type="index" label="序号" ></el-table-column>
-   <el-table-column prop="attr1" label="预留字段1" width="100"></el-table-column>
-   <el-table-column prop="attr2" label="预留字段2" width="100"></el-table-column>
-   <el-table-column prop="attr3" label="预留字段3" width="100"></el-table-column>
-   <el-table-column prop="attr4" label="预留字段4" width="100"></el-table-column>
-   <el-table-column prop="changeRate" label="与主单位换算比例" width="100"></el-table-column>
-   <el-table-column prop="enableFlag"  label="是否启用" >
-    <template v-slot="{ row }">
+		<!--表格区-->
+		<el-table
+			:data="tableList"
+			style="width: 100%"
+			v-loading="loading"
+			@selection-change="handleSelectionChange"
+			ref="multipleTable"
+		>
+			<el-table-column type="selection" width="55" />
+			<el-table-column type="index" label="序号"></el-table-column>
+			<el-table-column prop="attr1" label="预留字段1" width="100"></el-table-column>
+			<el-table-column prop="attr2" label="预留字段2" width="100"></el-table-column>
+			<el-table-column prop="attr3" label="预留字段3" width="100"></el-table-column>
+			<el-table-column prop="attr4" label="预留字段4" width="100"></el-table-column>
+			<el-table-column prop="changeRate" label="与主单位换算比例" width="100"></el-table-column>
+			<el-table-column prop="enableFlag" label="是否启用">
+				<template v-slot="{ row }">
 					<el-tag :type="row.enableFlag === 'Y' ? 'success' : 'info'">{{
 						row.enableFlag === "Y" ? "启用" : "未启用"
 					}}</el-tag>
 				</template>
-  </el-table-column>
-   <el-table-column  prop="measureCode"   label="单位编码" ></el-table-column>
-   <el-table-column  prop="measureName"   label="单位名称" ></el-table-column>
-   <el-table-column  prop="primaryFlag"   label="是否是主单位" >
-    <template v-slot="{ row }">
+			</el-table-column>
+			<el-table-column prop="measureCode" label="单位编码"></el-table-column>
+			<el-table-column prop="measureName" label="单位名称"></el-table-column>
+			<el-table-column prop="primaryFlag" label="是否是主单位">
+				<template v-slot="{ row }">
 					<el-tag :type="row.enableFlag === 'Y' ? 'success' : 'info'">{{
 						row.enableFlag === "Y" ? "主单位" : "非主单位"
 					}}</el-tag>
 				</template>
-   </el-table-column>
-   <el-table-column  prop="primaryId"   label="主单位ID" ></el-table-column>
-   <el-table-column  prop="remark"   label="备注" ></el-table-column>
-   <el-table-column label="操作" width="100" >
-    <!-- row是当前一行数据 index是下标-->
-    <template #default="{row,$index}">
-        <el-button @click="onEditchannel(row,$index)" 
-         circle
-        type="primary"> 
-        <el-icon :size="20">
-    <Edit /><!--修改图标-->
-        </el-icon>
-</el-button>
-        <el-button @click="onDelChannel(row,$index)" 
-        type="danger"
-         circle>
-         <el-icon>
-    <Delete /><!--删除图标-->
-       </el-icon>
-        </el-button>
-    </template>
-   </el-table-column>
-    </el-table>
-<el-pagination
-      v-model:current-page="parms.pagenum"
-      v-model:page-size="parms.pagesize"
-      :page-sizes="[2, 3, 5, 10]"
-      :background="true"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="total"
-      @size-change="onSizeChange"
-      @current-change="OnCurrentChange"
-      style="margin-top:20px;justify-content: flex-end;"
-    />
-<!---->
+			</el-table-column>
+			<el-table-column prop="primaryId" label="主单位ID"></el-table-column>
+			<el-table-column prop="remark" label="备注"></el-table-column>
+			<el-table-column label="操作" width="100">
+				<!-- row是当前一行数据 index是下标-->
+				<template #default="{ row, $index }">
+					<el-button @click="onEditchannel(row, $index)" circle type="primary">
+						<el-icon :size="20"> <Edit /><!--修改图标--> </el-icon>
+					</el-button>
+					<el-button @click="onDelChannel(row, $index)" type="danger" circle>
+						<el-icon> <Delete /><!--删除图标--> </el-icon>
+					</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
+		<el-pagination
+			v-model:current-page="parms.pagenum"
+			v-model:page-size="parms.pagesize"
+			:page-sizes="[2, 3, 5, 10]"
+			:background="true"
+			layout="total, sizes, prev, pager, next, jumper"
+			:total="total"
+			@size-change="onSizeChange"
+			@current-change="OnCurrentChange"
+			style="margin-top: 20px; justify-content: flex-end"
+		/>
+		<!---->
 
 		<!--空处理-->
 		<template #empty>
 			<el-empty description="没有数据"></el-empty>
 		</template>
-	</tableFrame>
+	</TableFrame>
 
 	<!-- 引入的弹窗
 	<pop-Up ref="dialog"> </pop-Up> -->
@@ -384,7 +391,7 @@ const cancelForm = () => {
 		</el-form>
 		<template #footer>
 			<el-button @click="cancelForm">取消</el-button>
-    <el-button type="primary" @click="submitForm">确定</el-button>
+			<el-button type="primary" @click="submitForm">确定</el-button>
 		</template>
 	</el-dialog>
 </template>
