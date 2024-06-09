@@ -1,13 +1,17 @@
 import StdTable from "./src/std-table.vue";
-import PopUp from "./src/pop-up.vue";
-import TableText from "./src/table-text.vue";
+
+/** TODO: 重命名为标准表单弹框 */
+import StdFormDialog from "./src/pop-up.vue";
+
+/** TODO: 更新组件的名称 重设成合适的名称 阮喵喵 */
+import TableFrame from "./src/table-text.vue";
 
 import type { Operations, TableTrueProps } from "./src/std-table";
 
 export {
 	/** 标准表格 */
 	StdTable,
-	PopUp,
-	TableText,
+	StdFormDialog,
+	TableFrame,
 };
 export type { Operations, TableTrueProps };
