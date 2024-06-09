@@ -28,7 +28,7 @@ const routes = [
 	{
 		path: "/un-5",
 		name: "UN5",
-		component: () => import("@/views/sample/Productionworkorder/Productionworkorder.vue"),
+		component: () => import("@/views/basedata/supplier.vue"),
 	},
 	{
 		path: "/un-6",
@@ -172,7 +172,7 @@ const routes = [
 	},
 	// 采购系统管理的消息通知页面
 	{
-		path: "/un-51",
+		path: "/un-606",
 		name: "UN51",
 		component: () => import("@/views/organizational-structure/organizational-structure.vue"),
 	},
@@ -205,6 +205,17 @@ const routes = [
 		path: "/un-104",
 		name: "UN104",
 		component: () => import("@/views/workforce-management/team-group.vue"),
+	},
+	// 工装夹具管理/类型设置
+	{
+		path: "/un-607",
+		name: "UN607",
+		component: () => import("@/views/frockClamp/typeSetting.vue"),
+	}, // 工装夹具管理/工装夹具台账
+	{
+		path: "/un-608",
+		name: "UN608",
+		component: () => import("@/views/frockClamp/equipmentLedger.vue"),
 	},
 ];
 
