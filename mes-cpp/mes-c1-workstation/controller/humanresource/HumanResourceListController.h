@@ -35,7 +35,7 @@ public:
 
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/huamnresource/query-humanresource-list", queryHumanResource, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/ws/huamnresource/query-humanresource-list", queryHumanResource, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, HumanResourceListQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -53,14 +53,14 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/humanresource/add-hunmanresource-list", addHumanResource, BODY_DTO(HumanResourceListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/ws/humanresource/add-hunmanresource-list", addHumanResource, BODY_DTO(HumanResourceListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddHumanResourceList(dto));
 	}
 	// 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("modify.summary"), modifyHumanResource, Uint64JsonVO::Wrapper);
 	// 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/humanresource/modify-hunmanresource", modifyHumanResource, BODY_DTO(HumanResourceListDTO::Wrapper, dto), execModifyHumanResource(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ws/humanresource/modify-hunmanresource", modifyHumanResource, BODY_DTO(HumanResourceListDTO::Wrapper, dto), execModifyHumanResource(dto));
 
 	// 定义删除接口描述
 	ENDPOINT_INFO(removeHumanResource) {
@@ -70,7 +70,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "recordId", ZH_WORDS_GETTER("post.fields.recordid"), 1, true);
 	}
 	// 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/humanresource/remove-hunmanresource/{recordId}", removeHumanResource, PATH(UInt64, recordId), execRemoveHumanResource(recordId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ws/humanresource/remove-hunmanresource/{recordId}", removeHumanResource, PATH(UInt64, recordId), execRemoveHumanResource(recordId));
 
 private:
 	// 分页查询数据

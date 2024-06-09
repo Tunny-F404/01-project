@@ -52,7 +52,7 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/deviceResource/getDeviceResourcetList", getDeviceResourcetList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/ws/deviceResource/getDeviceResourcetList", getDeviceResourcetList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(deviceResourceQuery, DeviceResourceQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -69,14 +69,14 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/deviceResource/addDeviceResource", addDeviceResource, BODY_DTO(DeviceResourceDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/ws/deviceResource/addDeviceResource", addDeviceResource, BODY_DTO(DeviceResourceDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddDeviceResource(dto));
 	}
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("deviceResource.modifyDeviceResource.summary"), modifyDeviceResource, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/deviceResource/modifyDeviceResource", modifyDeviceResource, BODY_DTO(DeviceResourceDTO::Wrapper, dto), execModifyDeviceResource(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ws/deviceResource/modifyDeviceResource", modifyDeviceResource, BODY_DTO(DeviceResourceDTO::Wrapper, dto), execModifyDeviceResource(dto));
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(deleteDeviceResource) {
 		// 定义标题和返回类型以及授权支持
@@ -85,7 +85,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "deviceResourceId", ZH_WORDS_GETTER("deviceResource.deviceResourceDTO.deviceResourceId"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/deviceResource/{deviceResourceId}", deleteDeviceResource, PATH(UInt64, deviceResourceId), execDeleteDeviceResource(deviceResourceId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ws/deviceResource/{deviceResourceId}", deleteDeviceResource, PATH(UInt64, deviceResourceId), execDeleteDeviceResource(deviceResourceId));
 
 private:
 	// 3.3 设备资源分页查询数据

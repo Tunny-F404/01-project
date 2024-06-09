@@ -42,7 +42,7 @@ public:
 	// 定义查询设备类型名称列表树接口端点描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("equipment.getEquipmentTypeTree.summary"), getEquipmentTypeTree, EquipmentTypeTreeVO::Wrapper);
 	// 定义查询设备类型名称列表树接口端点处理
-	API_HANDLER_ENDPOINT_NOPARAM_AUTH(API_M_GET, "/equipment/getEquipmentTypeTree", getEquipmentTypeTree, executeGetEquipmentTypeTree(authObject->getPayload()));
+	API_HANDLER_ENDPOINT_NOPARAM_AUTH(API_M_GET, "/ws/equipment/getEquipmentTypeTree", getEquipmentTypeTree, executeGetEquipmentTypeTree(authObject->getPayload()));
 
 	//获取设备列表(条件 + 分页)
 		// 3.1 定义查询接口描述
@@ -60,7 +60,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "equimentName", ZH_WORDS_GETTER("equipmentQuery.equimentName"), "测试人员", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/equipment/getEquipmentList", getEquipmentList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/ws/equipment/getEquipmentList", getEquipmentList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(equipmentQuery, EquipmentQuery, queryParams);
 		// 呼叫执行函数响应结果

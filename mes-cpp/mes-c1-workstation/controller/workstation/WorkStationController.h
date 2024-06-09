@@ -79,7 +79,7 @@ public:
 		// 定义响应参数格式（返回的字符串可以是文件下载地址，具体取决于实现）
 		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/workstation/export", exportWorkStation, BODY_DTO(List<UInt64>, id), execExportWorkStation(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/ws/workstation/export", exportWorkStation, BODY_DTO(List<UInt64>, id), execExportWorkStation(id));
 
 
 
@@ -116,7 +116,7 @@ public:
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("workstation.remove.summary"), Uint64JsonVO::Wrapper);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/workstation/remove", removeWorkStation, BODY_DTO(List<UInt64>, id), execRemoveWorkStation(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ws/workstation/remove", removeWorkStation, BODY_DTO(List<UInt64>, id), execRemoveWorkStation(id));
 
 	//ENDPOINT_INFO(removeWorkStation) {
 	//	// 定义标题和返回类型以及授权支持

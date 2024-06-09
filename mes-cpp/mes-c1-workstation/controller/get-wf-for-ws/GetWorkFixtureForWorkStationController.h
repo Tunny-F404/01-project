@@ -36,7 +36,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "GetWFForWSAccount", ZH_WORDS_GETTER("wf_for_ws.fields.account"), 1, false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/wf_for_ws", queryWorkFixtureForWorkStation, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/ws/wf_for_ws", queryWorkFixtureForWorkStation, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, GetWorkFixtureForWorkStationQuery, queryParams);
 		// 呼叫执行函数响应结果

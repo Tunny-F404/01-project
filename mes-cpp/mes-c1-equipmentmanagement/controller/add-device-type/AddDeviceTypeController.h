@@ -26,7 +26,7 @@ public://定义接口
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "AddDeviceType/Add-device-type", AddDeviceSample, BODY_DTO(AddDeviceTypeListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/em/AddDeviceType/Add-device-type", AddDeviceSample, BODY_DTO(AddDeviceTypeListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddDeviceType(dto, authObject->getPayload()));
 	}

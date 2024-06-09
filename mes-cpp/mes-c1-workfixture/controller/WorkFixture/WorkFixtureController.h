@@ -34,7 +34,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("workfixture.fields.status"), "", false);
 	}
 	// 定义查询接口处理
-	ENDPOINT(API_M_GET, "/workfixture/query", queryWorkFixtureTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/tm/workfixture/query", queryWorkFixtureTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, WorkFixtureQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -45,7 +45,7 @@ public:
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("workfixture.query.detail"), WorkFixtureDetailJsonVO::Wrapper);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_GET, "/workfixture/query/detail", queryWorkFixtureDetail, QUERY(UInt64, id), execQueryWorkFixtureDetail(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_GET, "/tm/workfixture/query/detail", queryWorkFixtureDetail, QUERY(UInt64, id), execQueryWorkFixtureDetail(id));
 
 	// 2. 定义新增接口描述
 	ENDPOINT_INFO(addWorkFixture) {
@@ -58,21 +58,21 @@ public:
 		// 注：POST和PUT方法都是通过请求体而不是url传入参数，因此只有GET方法需要定义查询/路径参数（只有GET是通过url传入参数）
 	}
 	// 定义新增接口处理
-	ENDPOINT(API_M_POST, "/workfixture/add", addWorkFixture, BODY_DTO(WorkFixtureDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/tm/workfixture/add", addWorkFixture, BODY_DTO(WorkFixtureDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddWorkFixture(dto));
 	}
 
 	// 3. 定义修改接口描述和处理
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("workfixture.modify.summary"), modifyWorkFixture, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/workfixture/modify", modifyWorkFixture, BODY_DTO(WorkFixtureDTO::Wrapper, dto), execModifyWorkFixture(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/tm/workfixture/modify", modifyWorkFixture, BODY_DTO(WorkFixtureDTO::Wrapper, dto), execModifyWorkFixture(dto));
 
 	// 4. 定义删除接口描述和处理
 	ENDPOINT_INFO(removeWorkFixture) {
 		// 定义标题和返回类型以及授权支持
 		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("workfixture.remove.summary"), Uint64JsonVO::Wrapper);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/workfixture/remove", removeWorkFixture, BODY_DTO(List<UInt64>, id), execRemoveWorkFixture(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/tm/workfixture/remove", removeWorkFixture, BODY_DTO(List<UInt64>, id), execRemoveWorkFixture(id));
 
 	// 5. 定义工装夹具导出接口描述和处理
 	ENDPOINT_INFO(exportWorkFixture) {
@@ -83,7 +83,7 @@ public:
 		// 定义响应参数格式（返回的字符串可以是文件下载地址，具体取决于实现）
 		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/workfixture/export", exportWorkFixture, BODY_DTO(List<UInt64>, id), execExportWorkFixture(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/tm/workfixture/export", exportWorkFixture, BODY_DTO(List<UInt64>, id), execExportWorkFixture(id));
 
 private:
 	// 查询工装夹具列表功能实现
