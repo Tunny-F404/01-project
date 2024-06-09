@@ -7,13 +7,17 @@
 #define SAMPLE_TERAM_PARSE(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \
-if (query->item_code) { \
-	sql << " AND `item_code`=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->item_code.getValue("")); \
+if (query->route_id) { \
+	sql << " AND `route_id`=?"; \
+	SQLPARAMS_PUSH(params, "ull", uint64_t, query->route_id.getValue(1)); \
 } \
-if (query->item_name) { \
-	sql << " AND item_name=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->item_name.getValue("")); \
+if (query->process_id) { \
+	sql << " AND process_id=?"; \
+	SQLPARAMS_PUSH(params, "ull", uint64_t, query->process_id.getValue(1)); \
+}\
+if (query->product_id) { \
+	sql << " AND product_id=?"; \
+	SQLPARAMS_PUSH(params, "ull", uint64_t, query->product_id.getValue(1)); \
 } 
 
 uint64_t ProMaterialDAO::count(const ProMaterialQuery::Wrapper& query)
@@ -28,7 +32,7 @@ uint64_t ProMaterialDAO::count(const ProMaterialQuery::Wrapper& query)
 std::list<ProRouteProductBomDO> ProMaterialDAO::selectWithPage(const ProMaterialQuery::Wrapper& query)
 {
 	stringstream sql;
-	sql << "SELECT item_code,item_name,specification,unit_of_measure,quantity,remark FROM pro_route_product_bom";
+	sql << "SELECT item_code,item_name,specification,unit_of_measure,quantity FROM pro_route_product_bom";
 	SAMPLE_TERAM_PARSE(query, sql);
 	sql << " LIMIT " << ((query->pageIndex - 1) * query->pageSize) << "," << query->pageSize;
 	ProMaterialMapper mapper;

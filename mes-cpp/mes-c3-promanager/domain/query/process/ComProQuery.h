@@ -32,12 +32,14 @@ class ProQuery : public PageQuery
 {
 	//初始化
 	DTO_INIT(ProQuery, PageQuery);
-	//工序编码
-	API_DTO_FIELD_DEFAULT(String, process_code, ZH_WORDS_GETTER("pro.fields.proCode"));
-	//工序名称
-	API_DTO_FIELD_DEFAULT(String, process_name, ZH_WORDS_GETTER("pro.fields.proName"));
-	//是否为关键工序
-	API_DTO_FIELD_DEFAULT(String, key_flag, ZH_WORDS_GETTER("pro.fields.key_flag"));
+	//工序id
+	API_DTO_FIELD_DEFAULT(UInt32, route_id, ZH_WORDS_GETTER("pro.fields.routeId"));
+	////工序编码
+	//API_DTO_FIELD_DEFAULT(String, process_code, ZH_WORDS_GETTER("pro.fields.proCode"));
+	//////工序名称
+	//API_DTO_FIELD_DEFAULT(String, process_name, ZH_WORDS_GETTER("pro.fields.proName"));
+	////是否为关键工序
+	//API_DTO_FIELD_DEFAULT(String, key_flag, ZH_WORDS_GETTER("pro.fields.key_flag"));
 
 };
 

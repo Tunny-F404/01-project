@@ -27,14 +27,11 @@
 #define SAMPLE_TERAM_PARSE(query, sql) \
 SqlParams params; \
 sql<<" WHERE 1=1"; \
-if (query->process_name) { \
-	sql << " AND `process_name`=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->process_name.getValue("")); \
-} \
-if (query->process_code) { \
-	sql << " AND process_code=?"; \
-	SQLPARAMS_PUSH(params, "s", std::string, query->process_code.getValue("")); \
+if (query->route_id) { \
+	sql << " AND `route_id`=?"; \
+	SQLPARAMS_PUSH(params, "i", uint32_t, query->route_id.getValue(1)); \
 } 
+
 //统计组成工序列表数据条数
 uint64_t ComProDAO::count(const ProQuery::Wrapper & query)
 {

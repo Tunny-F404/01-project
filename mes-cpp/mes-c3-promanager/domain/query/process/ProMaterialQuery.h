@@ -13,8 +13,9 @@
 class ProMaterialQuery : public PageQuery
 {
 	DTO_INIT(ProMaterialQuery, PageQuery);
-	API_DTO_FIELD_DEFAULT(String, item_code, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"));
-	API_DTO_FIELD_DEFAULT(String, item_name, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_name"));
+	API_DTO_FIELD_DEFAULT(UInt64, route_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.route_id"));
+	API_DTO_FIELD_DEFAULT(UInt64, process_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.process_id"));
+	API_DTO_FIELD_DEFAULT(UInt64, product_id, ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.product_id"));
 };
 
 #include OATPP_CODEGEN_END(DTO)

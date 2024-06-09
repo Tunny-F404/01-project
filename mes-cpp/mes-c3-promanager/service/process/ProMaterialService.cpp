@@ -26,14 +26,8 @@ ProMaterialPageDTO::Wrapper ProMaterialService::listAll(const ProMaterialQuery::
 	for (ProRouteProductBomDO sub : result)
 	{
 		auto dto = ProMaterialDTO::createShared();
-		dto->item_code = sub.getItem_code();
-		dto->item_name = sub.getItem_name();
-		dto->specification = sub.getSpecification();
-		dto->unit_of_measure = sub.getUnit_of_measure();
-		dto->quantity = sub.getQuantity();
-
-		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, item_code, Item_code, item_name, Item_name, specification, Specification, unit_of_measure, Unit_of_measure)
-		pages->addData(dto);
+		ZO_STAR_DOMAIN_DO_TO_DTO(dto, sub, item_code, Item_code, item_name, Item_name, specification, Specification, unit_of_measure, Unit_of_measure, quantity, Quantity)
+			pages->addData(dto);
 
 	}
 	return pages;

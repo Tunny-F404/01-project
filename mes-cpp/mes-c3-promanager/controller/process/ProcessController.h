@@ -155,9 +155,8 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(String, "process_name", ZH_WORDS_GETTER("pro.fields.proName"), "01 star", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "process_code", ZH_WORDS_GETTER("pro.fields.proCode"), "1", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "key_flag", ZH_WORDS_GETTER("pro.fields.key_flag"), "Y", false);
+		API_DEF_ADD_QUERY_PARAMS(UInt32, "route_id", ZH_WORDS_GETTER("pro.fields.proName"), 1 , false);
+		
 	}
 	ENDPOINT(API_M_GET, "/pro/query-pro-table", QueryProTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
@@ -213,8 +212,9 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查询参数描述
-		API_DEF_ADD_QUERY_PARAMS(UInt64, "item_code", ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_code"), 1, false);
-		API_DEF_ADD_QUERY_PARAMS(String, "item_name", ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.item_name"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "route_id", ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.route_id"), 1, false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "process_id", ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.process_id"), 1, false);
+		API_DEF_ADD_QUERY_PARAMS(UInt64, "product_id", ZH_WORDS_GETTER("RelatePro.ProMaterialDTO.product_id"), 1, false);
 	}
 	ENDPOINT(API_M_GET, "/pro/query-promaterial-table", queryProMaterial, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型

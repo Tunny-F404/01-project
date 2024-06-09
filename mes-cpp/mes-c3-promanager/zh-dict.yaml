@@ -132,6 +132,9 @@ RelatePro:
   specification: 规格型号
   quantity: 用料比例
   RPmodels: 备注
+  route_id: 工艺id
+  process_id: 工序id
+  product_id: 产品物料id
   #Ratio_of_materials_used: 用料比例
 excel:
  sheet:

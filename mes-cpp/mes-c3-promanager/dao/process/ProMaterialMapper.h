@@ -19,7 +19,6 @@ public:
 		data.setSpecification(resultSet->getString(3));
 		data.setUnit_of_measure(resultSet->getString(4));
 		data.setQuantity(resultSet->getDouble(5));
-		data.setRemark(resultSet->getString(6));
 		return data;
 	}
 };

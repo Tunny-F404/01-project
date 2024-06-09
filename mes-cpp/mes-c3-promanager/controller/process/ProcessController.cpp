@@ -450,19 +450,19 @@ StringJsonVO::Wrapper ProcessController::execExportRouteProduct(const List<UInt6
 
 	// 插入表头
 	data.insert(data.begin(), {
-		ZH_WORDS_GETTER("excel.header.routeproduct.h1"),
-		ZH_WORDS_GETTER("excel.header.routeproduct.h2"),
-		ZH_WORDS_GETTER("excel.header.routeproduct.h3"),
-		ZH_WORDS_GETTER("excel.header.routeproduct.h4"),
-		ZH_WORDS_GETTER("excel.header.routeproduct.h5"),
-		ZH_WORDS_GETTER("excel.header.routeproduct.h6"),
-		ZH_WORDS_GETTER("excel.header.routeproduct.h7"),
-		ZH_WORDS_GETTER("excel.header.routeproduct.h8"),
+		ZH_WORDS_GETTER("excel.header.h1"),
+		ZH_WORDS_GETTER("excel.header.h2"),
+		ZH_WORDS_GETTER("excel.header.h3"),
+		ZH_WORDS_GETTER("excel.header.h4"),
+		ZH_WORDS_GETTER("excel.header.h5"),
+		ZH_WORDS_GETTER("excel.header.h6"),
+		ZH_WORDS_GETTER("excel.header.h7"),
+		ZH_WORDS_GETTER("excel.header.h8"),
 		});
 
 	// 保存到文件
 	std::string fileName = "./public/excel/process.xlsx";
-	std::string sheetName = ZH_WORDS_GETTER("excel.sheet.routeproduct.s1");
+	std::string sheetName = ZH_WORDS_GETTER("excel.sheet.s1");
 	ExcelComponent excel;
 	excel.writeVectorToFile(fileName, sheetName, data);
 
