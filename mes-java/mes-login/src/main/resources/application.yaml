@@ -16,7 +16,7 @@ feign:
   sentinel:
     enabled: true
 secure:
-  opencaptcha: ${secure.opencaptcha}
+  opencaptcha: true
 # 负载均衡配置
 ribbon:
   MaxAutoRetries: 0 #（默认1次 不包括第一次）最大重试次数，当注册中心中可以找到服务，但是服务连不上时将会重试，如果注册中心中找不到服务则直接走断路器
