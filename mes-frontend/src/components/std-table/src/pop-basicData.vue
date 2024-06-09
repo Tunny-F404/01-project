@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import Request from "@/apis/request.js";
+import Request from "api/request.js";
 const dialogVisible = ref(false);
 //定义表单内容，现在有点bug,
 //1,判断不了是修改还是增加组件，两个的判断条件我这没有写好,
