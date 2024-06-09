@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: ${sn.sysmanagementj4}
+  cloud:
+    nacos:
+      discovery:
+        ip: 47.94.77.184
+        port: 10700
 logstash:
   host: 47.113.227.111
   cloud:

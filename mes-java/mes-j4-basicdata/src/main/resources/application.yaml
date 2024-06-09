@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: ${sn.basicdata}
+    cloud:
+      nacos:
+        discovery:
+          ip: 47.121.133.142
+          port: 10690
 logstash:
   host: 47.113.227.111
   cloud:

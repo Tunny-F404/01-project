@@ -1,6 +1,8 @@
 package com.zeroone.star.sysmanagement.aspectj;
 
 import com.alibaba.fastjson.JSON;
+import com.zeroone.star.project.components.user.UserDTO;
+import com.zeroone.star.project.components.user.UserHolder;
 import com.zeroone.star.sysmanagement.annotation.Log;
 import com.zeroone.star.sysmanagement.config.AsyncManager;
 import com.zeroone.star.sysmanagement.constant.BusinessStatus;
@@ -21,8 +23,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.HandlerMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Map;
 
@@ -35,6 +39,8 @@ import java.util.Map;
 public class LogAspect
 {
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
+    @Resource
+    UserHolder userHolder;
 
     /**
      * 处理完请求后执行
@@ -63,8 +69,7 @@ public class LogAspect
     {
         try
         {
-            // todo:获取当前的用户
-//            LoginUser loginUser = SecurityUtils.getLoginUser();
+            UserDTO currentUser = userHolder.getCurrentUser();
             // *========数据库日志=========*//
             SysOperLog operLog = new SysOperLog();
             operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
@@ -72,11 +77,12 @@ public class LogAspect
             String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
             operLog.setOperIp(ip);
             operLog.setOperUrl(ServletUtils.getRequest().getRequestURI());
-//            if (loginUser != null)
-//            {
-//                operLog.setOperName(loginUser.getUsername());
-//            }
-
+            if (currentUser != null)
+            {
+                operLog.setOperName(currentUser.getUsername());
+            }
+            LocalDateTime now = LocalDateTime.now();
+            operLog.setOperTime(now);
             if (e != null)
             {
                 operLog.setStatus(BusinessStatus.FAIL.ordinal());
