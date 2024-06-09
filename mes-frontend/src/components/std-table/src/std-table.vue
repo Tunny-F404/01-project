@@ -18,7 +18,10 @@ defineOptions({
 	name: "TableTrue",
 });
 
-type Props = Prettify<Readonly<StdTableProps<TableRow>>>;
+// FIXME: [@vue/compiler-sfc] Failed to resolve index type into finite keys
+// 这里出现无限递归了
+// type Props = Prettify<StdTableProps<TableRow>>;
+type Props = Readonly<StdTableProps<TableRow>>;
 
 const props = withDefaults(defineProps<Props>(), {
 	data: () => [] as TableRow[],
@@ -208,6 +211,7 @@ const handleSelectionChange = (val) => {
 				</template>
 			</el-table-column>
 		</el-table>
+
 		<el-pagination
 			v-model:current-page="parms.pagenum"
 			v-model:page-size="parms.pagesize"
@@ -219,7 +223,6 @@ const handleSelectionChange = (val) => {
 			@current-change="OnCurrentChange"
 			style="margin-top: 20px; justify-content: flex-end"
 		/>
-		<!---->
 
 		<!--空处理-->
 		<slot name="#empty">

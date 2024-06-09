@@ -10,6 +10,7 @@ defineProps({
 		required: true,
 		type: String,
 	},
+	// config: {},
 });
 </script>
 
@@ -28,7 +29,13 @@ defineProps({
 		</template>
 
 		<!--//默认插槽，内容页-->
-		<slot> </slot>
+		<slot></slot>
+
+		<!-- 
+			主内容插槽
+			尽量重命名插槽的名称，避免在父组件内出现插槽名称冲突
+		-->
+		<slot name="tableFrameMain"> </slot>
 	</el-card>
 </template>
 

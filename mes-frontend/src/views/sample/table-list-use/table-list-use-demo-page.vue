@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch } from "vue";
-
 import { ElButton, ElCard } from "element-plus";
-
-import { StdTable } from "components/std-table";
+import { StdTable, TableFrame } from "components/std-table";
 
 import { type UnitMeasureDTO, mdUnitMeasureController } from "views/sample/basic-data/tests/MdUnitMeasureController";
 
@@ -11,6 +9,8 @@ defineOptions({
 	/** 列表页用的表格组件 演示页 */
 	name: "TableListUseDemoPage",
 });
+
+const tableFrameTitle = ref("列表页用的表格组件-阮喵喵");
 
 const { getInfo, addUnitMeasure, list } = mdUnitMeasureController;
 
@@ -62,6 +62,8 @@ async function getlist() {
 		<ElCard v-loading="isLoading">
 			{{ tableRows }}
 		</ElCard>
+
+		<TableFrame :title="tableFrameTitle"> </TableFrame>
 	</section>
 </template>
 
