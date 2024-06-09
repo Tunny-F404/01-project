@@ -31,7 +31,7 @@ public:
 
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/product/query-product-table", queryProductTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/incoming/query-product-table", queryProductTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ProductQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -50,7 +50,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "issue_id", ZH_WORDS_GETTER("product.fields.issue_id"), 1, true);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/product/query-product-detail", queryProductDetail, QUERY(UInt64, issue_id), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/incoming/query-product-detail", queryProductDetail, QUERY(UInt64, issue_id), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execProductDetail(issue_id));
 	}

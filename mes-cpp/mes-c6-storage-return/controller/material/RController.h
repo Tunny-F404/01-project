@@ -57,7 +57,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "vendorname", ZH_WORDS_GETTER("material.vendorname"), " ", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/get/returnlist", returnlist, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/return/get-returnlist", returnlist, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(Query, GetReturnListQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -74,7 +74,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/add/returnline", addreturnline, BODY_DTO(AddReturnDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/return/add-returnline", addreturnline, BODY_DTO(AddReturnDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddReturnLine(dto));
 	}
@@ -82,7 +82,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("material.alter.summary"), modifyReturnline, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/alter/returnline", modifyReturnline, BODY_DTO(AddReturnDTO::Wrapper, dto), execModifyReturnline(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/return/alter-returnline", modifyReturnline, BODY_DTO(AddReturnDTO::Wrapper, dto), execModifyReturnline(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeReturnline) {
@@ -92,7 +92,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "lineid", ZH_WORDS_GETTER("material.lineid"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/delete/{lineid}", removeReturnline, PATH(UInt64, lineid), execRemoveReturnline(lineid));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/delete-{lineid}", removeReturnline, PATH(UInt64, lineid), execRemoveReturnline(lineid));
 	
 private:
 	GetReturnListPageJsonVO::Wrapper execQueryList(const GetReturnListQuery::Wrapper& query);

@@ -33,7 +33,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "issue_id", ZH_WORDS_GETTER("Material.field.issue_id"), 1, false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/Material", queryMaterial, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/incoming/search", queryMaterial, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, MaterialQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -50,7 +50,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/Material", addMaterial, BODY_DTO(MaterialDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/incoming/add", addMaterial, BODY_DTO(MaterialDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddMaterial(dto));
 	}
@@ -58,7 +58,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("Material.put.summary"), modifyMaterial, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/Material", modifyMaterial, BODY_DTO(MaterialDTO::Wrapper, dto), execModifyMaterial(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/incoming/change", modifyMaterial, BODY_DTO(MaterialDTO::Wrapper, dto), execModifyMaterial(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeMaterial) {
@@ -68,7 +68,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("Material.field.id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/Material/{line_id}", removeMaterial, PATH(UInt64, line_id), execRemoveMaterial(line_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/incoming/delete-{line_id}", removeMaterial, PATH(UInt64, line_id), execRemoveMaterial(line_id));
 
 private:
 	// 3.3 分页查询数据
