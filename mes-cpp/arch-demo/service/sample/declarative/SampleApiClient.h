@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 /*
  Copyright Zero One Star. All rights reserved.
 
@@ -20,30 +20,28 @@
 #ifndef _SAMPLEAPICLIENT_H_
 #define _SAMPLEAPICLIENT_H_
 
-// 1 µ¼Èë±ØĞëÍ·ÎÄ¼ş
+// 1 å¯¼å…¥å¿…é¡»å¤´æ–‡ä»¶
 #include "oatpp/web/client/ApiClient.hpp"
 #include "ApiHelper.h"
 
 /**
- * ÊéĞ´Ê¾ÀıApiClientÀ´ÑİÊ¾¶¨ÒåÉùÃ÷Ê½·şÎñ
+ * ä¹¦å†™ç¤ºä¾‹ApiClientæ¥æ¼”ç¤ºå®šä¹‰å£°æ˜å¼æœåŠ¡
  */
-class SampleApiClient : public oatpp::web::client::ApiClient // 2 ¼Ì³ĞÕâ¸öÀà
+class SampleApiClient : public oatpp::web::client::ApiClient // 2 ç»§æ‰¿è¿™ä¸ªç±»
 {
-	// 3 ¶¨ÒåApiClient¿ØÖÆÆ÷Ê¹ÓÃºê---¿ªÊ¼
+	// 3 å®šä¹‰ApiClientæ§åˆ¶å™¨ä½¿ç”¨å®---å¼€å§‹
 #include OATPP_CODEGEN_BEGIN(ApiClient)
 	
-	// 4 ³õÊ¼»¯¶¨Òå
+	// 4 åˆå§‹åŒ–å®šä¹‰
 	API_CLIENT_INIT(SampleApiClient);
-	
-	// 5 Ê¹ÓÃAPI_CALL»òAPI_CALL_ASYNCÉùÃ÷µ÷ÓÃ·şÎñ½Ó¿Ú
-
-	// Í¨¹ıID²éÑ¯
+	// 5 ä½¿ç”¨API_CALLæˆ–API_CALL_ASYNCå£°æ˜è°ƒç”¨æœåŠ¡æ¥å£
+	// é€šè¿‡IDæŸ¥è¯¢
 	API_CALL(API_M_GET, "/sample/query-one", queryById, API_HANDLER_AUTN_HEADER, QUERY(UInt64, id));
-	// ¶àÌõ¼ş²éÑ¯
+	// å¤šæ¡ä»¶æŸ¥è¯¢
 	API_CALL(API_M_GET, "/sample/query-all", queryAll, API_HANDLER_AUTN_HEADER, API_HANDLER_PAGE_PARAME, QUERY(String, name));
 	
 #include OATPP_CODEGEN_END(ApiClient)
-	// 3 È¡ÏûApiClient¿ØÖÆÆ÷Ê¹ÓÃºê---½áÊø
+	// 3 å–æ¶ˆApiClientæ§åˆ¶å™¨ä½¿ç”¨å®---ç»“æŸ
 };
 
 #endif // !_SAMPLEAPICLIENT_H_

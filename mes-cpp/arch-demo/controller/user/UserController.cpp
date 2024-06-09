@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
@@ -25,36 +25,36 @@
 #include "service/user/TreeMenuMapper.h"
 #include "tree/TreeUtil.h"
 
-// FastDFSĞèÒªµ¼ÈëµÄÍ·
+// FastDFSéœ€è¦å¯¼å…¥çš„å¤´
 #include "ServerInfo.h"
 #include "NacosClient.h"
 #include "FastDfsClient.h"
 
 /**
- * ×¢Òâ£ºÕâÀïµÄ²¿·Ö´úÂë±¾Ó¦¸Ã·Åµ½service²ãÖĞ£¬ÎªÁË·½±ãÑİÊ¾¾ÍĞ´ÔÚÒ»ÆğÁË
+ * æ³¨æ„ï¼šè¿™é‡Œçš„éƒ¨åˆ†ä»£ç æœ¬åº”è¯¥æ”¾åˆ°serviceå±‚ä¸­ï¼Œä¸ºäº†æ–¹ä¾¿æ¼”ç¤ºå°±å†™åœ¨ä¸€èµ·äº†
  */
 
 UserPageJsonVO::Wrapper UserController::executeQueryAll(const UserQuery::Wrapper& query)
 {
-	// ¶¨ÒåÒ»¸öJsonVO¶ÔÏó
+	// å®šä¹‰ä¸€ä¸ªJsonVOå¯¹è±¡
 	auto vo = UserPageJsonVO::createShared();
-	// ¶¨ÒåÒ»¸ö·ÖÒ³¶ÔÏó
+	// å®šä¹‰ä¸€ä¸ªåˆ†é¡µå¯¹è±¡
 	auto page = UserPageDTO::createShared();
 	page->pageIndex = query->pageIndex;
 	page->pageSize = query->pageSize;
 	page->total = 20;
 	page->calcPages();
 
-	// Ä£Äâ¼ÆËã·ÖÒ³Êı¾İ
+	// æ¨¡æ‹Ÿè®¡ç®—åˆ†é¡µæ•°æ®
 	int64_t start = (page->pageIndex.getValue(1) - 1) * page->pageSize.getValue(1);
 	int64_t end = start + page->pageSize.getValue(1);
-	// ±ß½çÖµÖµ´¦Àí
+	// è¾¹ç•Œå€¼å€¼å¤„ç†
 	if (start >= page->total.getValue(0) || start < 0) {
 		vo->fail(page);
 		return vo;
 	}
 	if (end > page->total.getValue(0)) end = page->total.getValue(0);
-	// Ñ­»·Éú³É²âÊÔÊı¾İ
+	// å¾ªç¯ç”Ÿæˆæµ‹è¯•æ•°æ®
 	for (int64_t i = start; i < end; i++)
 	{
 		auto user = UserDTO::createShared();
@@ -69,18 +69,18 @@ UserPageJsonVO::Wrapper UserController::executeQueryAll(const UserQuery::Wrapper
 
 StringJsonVO::Wrapper UserController::executeModifyUser(const String& fileBody, const UserDTO::Wrapper& dto)
 {
-	// ½«Í·ÏñÉÏ´«µ½FastDFSÎÄ¼ş·şÎñÆ÷
+	// å°†å¤´åƒä¸Šä¼ åˆ°FastDFSæ–‡ä»¶æœåŠ¡å™¨
 	ZO_CREATE_DFS_CLIENT_URL(dfs, urlPrefix);
 	std::string fieldName = dfs.uploadFile(fileBody->data(), fileBody->size(), "png");
 	std::cout << "upload fieldname is : " << fieldName << std::endl;
 
-	// Æ´½ÓÎÄ¼şÏÂÔØÂ·¾¶
+	// æ‹¼æ¥æ–‡ä»¶ä¸‹è½½è·¯å¾„
 	std::stringstream ss;
 	ss << urlPrefix << fieldName;
 
-	// TODO:±£´æÓÃ»§Êı¾İµ½Êı¾İ¿â¹ı³ÌÂÔ¹ı
+	// TODO:ä¿å­˜ç”¨æˆ·æ•°æ®åˆ°æ•°æ®åº“è¿‡ç¨‹ç•¥è¿‡
 
-	// ´´½¨ÏìÓ¦Êı¾İ
+	// åˆ›å»ºå“åº”æ•°æ®
 	auto vo = StringJsonVO::createShared();
 	vo->success(String(ss.str().c_str()));
 	return vo;
@@ -88,23 +88,23 @@ StringJsonVO::Wrapper UserController::executeModifyUser(const String& fileBody, 
 
 MenuJsonVO::Wrapper UserController::executeQueryMenu(const PayloadDTO& payload)
 {
-	// ¶¨ÒåÒ»¸öJsonVO¶ÔÏó
+	// å®šä¹‰ä¸€ä¸ªJsonVOå¯¹è±¡
 	auto vo = MenuJsonVO::createShared();
-	// ´´½¨Ä£Äâ²Ëµ¥Êı¾İ£¨´ËÊı¾İÓ¦À´Ô´ÓÚÊı¾İ¿â£©
+	// åˆ›å»ºæ¨¡æ‹Ÿèœå•æ•°æ®ï¼ˆæ­¤æ•°æ®åº”æ¥æºäºæ•°æ®åº“ï¼‰
 	list<MenuDO> listData;
-	listData.push_back(MenuDO("1", u8"ÏµÍ³¹ÜÀí", "sm", "/sm", ""));
-	listData.push_back(MenuDO("2", u8"ÓÃ»§¹ÜÀí", "sm", "/sm/um", "1"));
-	listData.push_back(MenuDO("3", u8"½ÇÉ«¹ÜÀí", "sm", "/sm/rm", "1"));
-	listData.push_back(MenuDO("4", u8"²Ëµ¥¹ÜÀí", "sm", "/sm/mm", "1"));
-	listData.push_back(MenuDO("5", u8"¶©µ¥¹ÜÀí", "om", "/om", ""));
-	listData.push_back(MenuDO("6", u8"Èë¿â¶©µ¥", "om", "/om/em", "5"));
-	listData.push_back(MenuDO("7", u8"³ö¿â¶©µ¥", "om", "/om/om", "5"));
-	listData.push_back(MenuDO("8", u8"ÏúÊÛ¶©µ¥", "om", "/om/sm", "5"));
-	listData.push_back(MenuDO("9", u8"¶©µ¥Í³¼Æ", "om", "/om/sm/t1", "8"));
-	listData.push_back(MenuDO("10",u8"¶©µ¥±¨±í", "om", "/om/sm/t2", "8"));
-	// ×ª»»ÎªÊ÷ĞÎ½á¹¹
+	listData.push_back(MenuDO("1", u8"ç³»ç»Ÿç®¡ç†", "sm", "/sm", ""));
+	listData.push_back(MenuDO("2", u8"ç”¨æˆ·ç®¡ç†", "sm", "/sm/um", "1"));
+	listData.push_back(MenuDO("3", u8"è§’è‰²ç®¡ç†", "sm", "/sm/rm", "1"));
+	listData.push_back(MenuDO("4", u8"èœå•ç®¡ç†", "sm", "/sm/mm", "1"));
+	listData.push_back(MenuDO("5", u8"è®¢å•ç®¡ç†", "om", "/om", ""));
+	listData.push_back(MenuDO("6", u8"å…¥åº“è®¢å•", "om", "/om/em", "5"));
+	listData.push_back(MenuDO("7", u8"å‡ºåº“è®¢å•", "om", "/om/om", "5"));
+	listData.push_back(MenuDO("8", u8"é”€å”®è®¢å•", "om", "/om/sm", "5"));
+	listData.push_back(MenuDO("9", u8"è®¢å•ç»Ÿè®¡", "om", "/om/sm/t1", "8"));
+	listData.push_back(MenuDO("10",u8"è®¢å•æŠ¥è¡¨", "om", "/om/sm/t2", "8"));
+	// è½¬æ¢ä¸ºæ ‘å½¢ç»“æ„
 	list<shared_ptr<TreeNode>> res = TreeUtil::listToTree<MenuDO>(listData, TreeMenuMapper());
-	// ½«¸ù½Úµã´æ´¢µ½ÁĞ±íÖĞ
+	// å°†æ ¹èŠ‚ç‚¹å­˜å‚¨åˆ°åˆ—è¡¨ä¸­
 	for (auto one : res)
 	{
 		vo->data->push_back(MenuDTO::Wrapper(dynamic_pointer_cast<MenuDTO>(one), MenuDTO::Wrapper::Class::getType()));
