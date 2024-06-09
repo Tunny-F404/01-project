@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { merge } from "lodash-es";
 import { reactify } from "@vueuse/core";
 
-import tableFrame from "components/std-table/src/table-text.vue";
+import tableFrame from "components/std-table/src/table-frame.vue";
 import popUp from "components/std-table/src/pop-up.vue";
 import request from "api/request.js"; //加入请求
 import type { Prettify } from "utils/Prettify.ts";
@@ -18,16 +18,16 @@ defineOptions({
 	name: "TableTrue",
 });
 
-type Props = Prettify<StdTableProps<TableRow>>;
+type Props = Prettify<Readonly<StdTableProps<TableRow>>>;
 
 const props = withDefaults(defineProps<Props>(), {
 	data: () => [] as TableRow[],
 	// data: [] as TableRow[],
 }) as Props;
 
-const defaultPropsKeys = ["data", "operations", "size"] as const;
+const defaultPropsKeys = ["data", "operations", "size", "border"] as const;
 type DefaultPropsKeys = (typeof defaultPropsKeys)[number];
-type DefaultProps = Prettify<RequiredPick<Props, DefaultPropsKeys>>;
+type DefaultProps = Prettify<Readonly<RequiredPick<Props, DefaultPropsKeys>>>;
 
 // type Merge = <TObject, T = DefaultProps>(object: TObject, source: T) => TObject & T;
 type MergeReactify = <TObject, TSource>(object: TObject, source: TSource) => ComputedRef<TObject & TSource>;
@@ -43,6 +43,7 @@ const defaultProps: DefaultProps = {
 	data: [] as TableRow[],
 	operations: [],
 	size: "small",
+	border: true,
 };
 
 /**

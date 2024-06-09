@@ -215,7 +215,7 @@
 </template>
 
 <script setup>
-import tableFrame from "components/std-table/src/table-text.vue";
+import tableFrame from "../../components/std-table/src/table-frame.vue";
 import { ref, reactive } from 'vue'
 let dialogTitle = ref('');
 const selectOptions = [

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import tableFrame from "components/std-table/src/table-text.vue";
+import tableFrame from "components/std-table/src/table-frame.vue";
 import request from "@/apis/request.js";
 
 // 搜索表单

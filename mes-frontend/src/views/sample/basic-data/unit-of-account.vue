@@ -1,7 +1,7 @@
 <script setup >
 import {ref} from 'vue'
 import http from "axios"
-import  tableFrame  from 'components/std-table/src/table-text.vue' 
+import  tableFrame  from 'components/std-table/src/table-frame.vue' 
 import popUp from 'components/std-table/src/pop-up.vue'
 import Request  from '@/apis/request.js'
 // defineOptions();
