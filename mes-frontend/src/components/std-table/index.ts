@@ -6,7 +6,7 @@ import StdFormDialog from "./src/pop-up.vue";
 /** TODO: 更新组件的名称 重设成合适的名称 阮喵喵 */
 import TableFrame from "./src/table-text.vue";
 
-import type { Operations, TableTrueProps } from "./src/std-table";
+import type { Operations, StdTableProps } from "./src/std-table";
 
 export {
 	/** 标准表格 */
@@ -14,4 +14,4 @@ export {
 	StdFormDialog,
 	TableFrame,
 };
-export type { Operations, TableTrueProps };
+export type { Operations, StdTableProps as TableTrueProps };
