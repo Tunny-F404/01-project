@@ -45,10 +45,10 @@ public class ResourceServiceImpl {
         List<MenuDO> tMenus = menuService.listAllLinkUrl();  //tMenus 里面只有 path
         tMenus.forEach(menu -> {  //遍历tMenus
             // 2 获取菜单对应的角色
-            List<RoleDO> rolesMenu = roleService.listRoleByMenuPath(menu.getPath());  // rolesMenu只有role_id,role_key ，一个菜单对应的所有角色
+            List<RoleDO> rolesMenu = roleService.listRoleByMenuPath(menu.getComponent());  // rolesMenu只有role_id,role_key ，一个菜单对应的所有角色
             List<String> roles = new ArrayList<>();
             rolesMenu.forEach(role -> roles.add(role.getRoleKey()));  //遍历一个菜单对应的所有角色
-            resourceRolesMap.put(menu.getPath(), roles);  //将菜单与角色对应关系添加到缓存map
+            resourceRolesMap.put(menu.getComponent(), roles);  //将菜单与角色对应关系添加到缓存map
         });
         //将资源缓存到redis
         redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLES_MAP, resourceRolesMap);
