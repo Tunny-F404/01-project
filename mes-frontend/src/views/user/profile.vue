@@ -1,3 +1,4 @@
+<!-- eslint-disable antfu/top-level-function -->
 <template>
 	<el-row :gutter="20">
 		<!-- 栏1 -->
@@ -7,14 +8,14 @@
 				<el-card style="max-width: 480px">
 					<template #header>
 						<div class="card-header">
-							<span>个人信息</span>
+							<span style="font-size: large">个人信息</span>
 						</div>
 					</template>
 					<!-- 用户信息展示 -->
 					<el-row justify="center">
 						<div class="demo-type">
-							<el-avatar :size="100" fit="cover" @error="false" :src="url"
-								><img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
+							<el-avatar :size="100" fit="cover" @error="false" :src="url">
+								<img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
 							</el-avatar>
 						</div>
 					</el-row>
@@ -50,31 +51,48 @@
 				<el-card>
 					<template #header>
 						<div class="card-header">
-							<span>基本信息</span>
+							<span style="font-size: large">基本信息</span>
 						</div>
 					</template>
 					<!-- 基本资料/修改密码 -->
 					<el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
 						<el-tab-pane label="基本资料" name="first">
 							<!-- 基本资料表单 -->
-							<el-form :model="infoform" label-width="80px" :inline="false" size="normal" hide-required-asterisk="true">
-								<el-form-item label="用户名称">
+							<el-form ref="infoRulesRef" :model="infoform" :rules="inforules" label-width="80px" status-icon>
+								<el-form-item label="用户名称" prop="nickName">
 									<el-input v-model="infoform.nickName"></el-input>
 								</el-form-item>
-								<el-form-item label="手机号码">
-									<el-input v-model="infoform.phoneNum"></el-input>
+								<!-- 手机验证 -->
+								<el-form-item label="手机号码" prop="phoneNum">
+									<el-input v-model="infoform.phoneNum" placeholder="123-1234-1234" maxlength="11">
+										<template #append>
+											<el-button type="primary" @click="getphoneCode">获取验证码</el-button>
+										</template>
+									</el-input>
 								</el-form-item>
-								<el-form-item label="邮箱">
-									<el-input v-model="infoform.email"></el-input>
+								<el-form-item label="验证码" prop="phoneCode">
+									<el-input v-model="infoform.phoneCode"></el-input>
 								</el-form-item>
-								<el-form-item label="性别">
+								<!-- 邮箱验证 -->
+								<el-form-item label="邮箱" prop="email">
+									<el-input v-model="infoform.email" placeholder="****@exmaple.com">
+										<template #append>
+											<el-button type="primary" @click="getemailCode">获取验证码</el-button>
+										</template>
+									</el-input>
+								</el-form-item>
+								<el-form-item label="验证码" prop="emailCode">
+									<el-input v-model="infoform.emailCode"></el-input>
+								</el-form-item>
+
+								<el-form-item label="性别" prop="gender">
 									<el-radio-group v-model="infoform.gender">
-										<el-radio value="male">男</el-radio>
-										<el-radio value="female">女</el-radio>
+										<el-radio value="男">男</el-radio>
+										<el-radio value="女">女</el-radio>
 									</el-radio-group>
 								</el-form-item>
 								<el-form-item>
-									<el-button type="primary" @click="onSubmit">保存</el-button>
+									<el-button type="primary" @click="onInfoSubmit">保存</el-button>
 									<el-button type="danger">关闭</el-button>
 								</el-form-item>
 							</el-form>
@@ -82,18 +100,18 @@
 
 						<el-tab-pane label="修改密码" name="second">
 							<!-- 修改密码表单 -->
-							<el-form :model="passwd" label-width="80px" :inline="false" size="normal">
-								<el-form-item label="旧密码">
-									<el-input v-model="passwd.old"></el-input>
+							<el-form ref="passRulesRef" :rules="passRules" :model="passwd" label-width="80px" status-icon>
+								<el-form-item label="旧密码" prop="old">
+									<el-input v-model="passwd.old" show-password></el-input>
 								</el-form-item>
-								<el-form-item label="新密码">
-									<el-input v-model="passwd.new"></el-input>
+								<el-form-item label="新密码" prop="new">
+									<el-input v-model="passwd.new" show-password></el-input>
 								</el-form-item>
-								<el-form-item label="确认密码">
-									<el-input v-model="passwd.confirm"></el-input>
+								<el-form-item label="确认密码" prop="confirm">
+									<el-input v-model="passwd.confirm" show-password></el-input>
 								</el-form-item>
 								<el-form-item>
-									<el-button type="primary" @click="onSubmit">保存</el-button>
+									<el-button type="primary" @click="onPassSubmit">保存</el-button>
 									<el-button type="danger">关闭</el-button>
 								</el-form-item>
 							</el-form>
@@ -106,43 +124,137 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
+import Request from "@/apis/request.js";
 
 //tabs配置
 const activeName = ref("first");
-const handleClick = (tab, event) => {
+function handleClick(tab, event) {
 	console.log(tab, event);
-};
+}
 
-//基本资料表单
+//基本资料 表单
 const infoform = ref({
-	nickName: "",
-	phoneNum: "",
-	email: "",
+	nickName: "usertester",
+	phoneNum: "13312341234",
+	phoneCode: "",
+	email: "user@example.com",
+	emailCode: "",
 	gender: "男",
 });
-const onSubmit = () => {
-	console.log("表单发送成功");
-};
-
-//修改密码表单
+//修改密码 表单
 const passwd = ref({
-	old: "",
+	old: "12345",
 	new: "",
 	confirm: "",
 });
 
+// 手机号码 自定义验证规则
+function phoneCheck(rule, value, callback) {
+	const phone_regex = /^1[3-9]\d{9}$/;
+	if (value !== "") {
+		if (!phone_regex.test(value)) {
+			callback(new Error("手机号码不正确！"));
+		} else {
+			callback();
+		}
+	}
+}
+// 密码 自定义验证规则(待解决)
+function passCheck(rule, value, callback) {
+	const pass_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\s\S]{5,16}$/;
+	if (value !== "") {
+		if (!pass_regex.test(value)) {
+			callback(new Error("5-16个字符(包含大小写字母数字)"));
+		} else {
+			callback();
+		}
+	}
+}
+
+//基本资料表单 验证规则
+const inforules = reactive({
+	nickName: [
+		{ required: true, message: "请输入用户名", trigger: "change" },
+		{ min: 1, max: 20, message: "长度 1 至 20", trigger: "change" },
+	],
+	phoneNum: [
+		{ required: true, message: "请输入手机号", trigger: "change" },
+		{ validator: phoneCheck, trigger: "change" },
+	],
+	email: [
+		{ required: true, message: "请输入邮箱", trigger: "change" },
+		{ type: "email", message: "邮箱不正确", trigger: "change" },
+	],
+	gender: [{ required: true, message: "请选择你的性别", trigger: "change" }],
+});
+//密码表单 验证规则(待解决)
+const passRules = reactive({
+	old: [
+		{ required: true, message: "请输入原有密码", trigger: "change" },
+		{ validator: passCheck, trigger: "change" },
+	],
+	new: [{ validdator: passCheck, trigger: "change" }],
+	confirm: [{ validdator: passCheck, trigger: "change" }],
+});
+
+const infoRulesRef = ref("");
+const passRulesRef = ref("");
+
+// 基本资料表单 校验完成发送
+async function onInfoSubmit(formEl) {
+	if (!formEl) return;
+	infoRulesRef.value.validate((valid, fields) => {
+		if (valid) {
+			console.log("Info submit!", fields);
+		} else {
+			console.log("error submit!", fields);
+		}
+	});
+}
+// 修改密码表单 校验完成发送
+async function onPassSubmit(formEl) {
+	if (!formEl) return;
+	passRulesRef.value.validate((valid, fields) => {
+		if (valid) {
+			console.log("Pass submit!", fields);
+		} else {
+			console.log("error submit!", fields);
+		}
+	});
+}
+
+//获取 手机验证码
+function getphoneCode() {
+	// Request.request(
+	// 	Request.POST,
+	// 	"/mycenter/get-phoneCode",
+	// 	{ phone: infoform.phoneNum }
+	// ).then((res) => {
+	// 	console.log(res);
+	ElMessage.success("验证码发送成功");
+	// }).catch((res) => {
+	// 	console.log(res)
+	// 	ElMessage.error("发送失败")
+	// })
+}
+
+//获取 邮箱验证码
+function getemailCode() {
+	console.log("邮箱验证成功！");
+}
+// 图片上传
 const url = ref("");
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 /* layout样式 */
 .el-row {
 	margin-bottom: 20px;
-}
 
-.el-row:last-child {
-	margin-bottom: 0;
+	:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .el-col {
@@ -157,16 +269,14 @@ const url = ref("");
 /* 头像样式 */
 .demo-type {
 	display: flex;
-}
 
-.demo-type > div {
-	flex: 1;
-	text-align: center;
-}
+	> div {
+		flex: 1;
+		text-align: center;
 
-.demo-type > div:not(:last-child) {
-	border-right: 1px solid var(--el-border-color);
+		:not(:last-child) {
+			border-right: 1px solid var(--el-border-color);
+		}
+	}
 }
-
-/* 输入框 */
 </style>

@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import tableFrame from "@/components/table-list-use/table-text.vue";
+import tableFrame from "components/std-table/src/table-text.vue";
 import request from "@/apis/request.js";
 
-const customerCode = ref("");
-const customerName = ref("");
-const customerShortName = ref("");
-const customerEnglishName = ref("");
+const clientCode = ref("");
+const clientName = ref("");
+const clientNick = ref("");
+const clientEn = ref("");
+const enableFlag = ref(null);
 //对话框标题
 const dialogTitle = ref("");
 // defineOptions();
@@ -316,23 +317,78 @@ const onSortChannel = () => {
 	console.log("排序");
 };
 
-const onDelChannel = async (row) => {
-	//删除
-	await ElMessageBox.confirm("你确认要删除该单位么", "温馨提示", {
+//模拟删除
+const onDelChannel = (row) => {
+	ElMessageBox.confirm("你确认要删除该单位么", "温馨提示", {
 		type: "warning",
 		confirmButtonText: "确认",
 		cancelButtonText: "取消",
-	});
-	ElMessage.success("删除成功");
-	console.log(row);
-	//删除后再渲染数据
-	getPageList();
+	})
+		.then(() => {
+			const index = originalTableList.value.findIndex((item) => item.clientCode === row.clientCode);
+			if (index !== -1) {
+				originalTableList.value.splice(index, 1);
+				total.value = originalTableList.value.length; // 更新总条数
+				ElMessage.success("删除成功");
+				getPageList(); // 重新渲染分页数据
+			}
+		})
+		.catch(() => {
+			ElMessage.info("已取消删除");
+		});
+	//后端
+	// .then(() => {
+	//   return request.delete(`/api/clients/${row.clientCode}`);
+	// })
+	// .then(response => {
+	//   if (response.status === 200) {
+	//     const index = originalTableList.value.findIndex(item => item.clientCode === row.clientCode);
+	//     if (index !== -1) {
+	//       originalTableList.value.splice(index, 1);
+	//       total.value = originalTableList.value.length; // 更新总条数
+	//       ElMessage.success("删除成功");
+	//       getPageList(); // 重新渲染分页数据
+	//     }
+	//   } else {
+	//     ElMessage.error("删除失败");
+	//   }
+	// })
+	// .catch(() => {
+	//   ElMessage.info("已取消删除");
+	// });
 };
 
+// 模拟搜索筛选
 const onSubmit = () => {
-	console.log("查询提交");
+	// 模拟数据过滤
+	const filteredList = originalTableList.value.filter((item) => {
+		return (
+			(!clientCode.value || item.clientCode.includes(clientCode.value)) &&
+			(!clientName.value || item.clientName.includes(clientName.value)) &&
+			(!clientNick.value || item.clientNick.includes(clientNick.value)) &&
+			(!clientEn.value || item.clientEn.includes(clientEn.value)) &&
+			(enableFlag.value === null || item.enableFlag === (enableFlag.value ? "yes" : "no"))
+		);
+	});
+	tableList.value = filteredList;
+	total.value = filteredList.length;
+	getPageList();
+
+	// 后端接口调用
+	// request.post('/api/search', {
+	//   clientCode: clientCode.value,
+	//   clientName: clientName.value,
+	//   clientNick: clientNick.value,
+	//   clientEn: clientEn.value,
+	//   enableFlag: enableFlag.value
+	// }).then(response => {
+	//   tableList.value = response.data;
+	//   total.value = response.data.length;
+	//   getPageList();
+	// });
 };
 
+// 重置搜索栏
 const reFresh = () => {
 	customerCode = "";
 	customerName = "";
@@ -343,6 +399,71 @@ const reFresh = () => {
 const handleSelectionChange = (val) => {
 	this.multipleSelection = val;
 };
+// 自定义排序逻辑
+function handleSortChange({ prop, order }) {
+	tableList.value.sort((a, b) => {
+		if (order === "ascending") {
+			return a[prop] > b[prop] ? 1 : -1;
+		} else if (order === "descending") {
+			return a[prop] < b[prop] ? 1 : -1;
+		} else {
+			return 0;
+		}
+	});
+}
+// 隐藏搜索栏
+const showSearchBar = ref(true);
+
+function toggleSearchBar() {
+	showSearchBar.value = !showSearchBar.value;
+}
+
+// 模拟刷新数据
+function refreshData() {
+	loading.value = true; // 显示加载动画
+	// 模拟刷新数据
+	setTimeout(() => {
+		// 调用后端接口获取最新数据
+		// request.get('/api/refresh-data').then(response => {
+		//   tableList.value = response.data;
+		//   originalTableList.value = [...tableList.value];
+		//   getPageList();
+		// }).finally(() => {
+		//   loading.value = false; // 隐藏加载动画
+		// });
+
+		// 模拟数据刷新
+		tableList.value = [
+			...tableList.value,
+			{
+				clientCode: "C006",
+				clientName: "南京软件开发有限公司",
+				clientNick: "南软",
+				clientEn: "Nanjing Software Dev Co., Ltd.",
+				clientType: "软件",
+				clientDes: "软件开发公司",
+				address: "南京市鼓楼区",
+				website: "http://www.nanjing-software.com",
+				email: "info@nanjing-software.com",
+				tel: "025-87654321",
+				clientLogo: "logo6.png",
+				contact1: "褚十三",
+				contact1Tel: "13487654321",
+				contact1Email: "chushisan@nanjing-software.com",
+				contact2: "卫十四",
+				contact2Tel: "13387654321",
+				contact2Email: "weishisi@nanjing-software.com",
+				creditCode: "91320108MA5DXXXXXX",
+				enableFlag: "yes",
+				remark: "备注信息6",
+				isEnabled: true,
+			},
+		];
+		originalTableList.value = [...tableList.value];
+		getPageList();
+		loading.value = false; // 隐藏加载动画
+	}, 1000);
+}
 </script>
 <template>
 	<!--分类，页面只有基本的表现，没有实现数据绑定-->
@@ -363,8 +484,8 @@ const handleSelectionChange = (val) => {
 		</el-button> -->
 		</template>
 
-		<!--表单区域-->
-		<el-form :inline="true" class="demo-form-inline">
+		<!--搜索表单区域-->
+		<el-form v-if="showSearchBar" :inline="true" class="demo-form-inline">
 			<el-row>
 				<el-col :span="8">
 					<el-form-item label="客户编码：">
@@ -429,12 +550,24 @@ const handleSelectionChange = (val) => {
 		>
 			<el-table-column type="selection" width="55" align="center" />
 			<el-table-column type="index" label="序号" width="55" align="center"></el-table-column>
-			<el-table-column prop="clientCode" label="客户编码" width="100" align="center"></el-table-column>
+			<el-table-column
+				prop="clientCode"
+				label="客户编码"
+				width="120"
+				align="center"
+				sortable="custom"
+			></el-table-column>
 			<el-table-column prop="clientName" label="客户名称" width="185" align="center"></el-table-column>
 			<el-table-column prop="clientNick" label="客户简称" width="125" align="center"></el-table-column>
 			<el-table-column prop="clientType" label="客户类型" width="125" align="center"></el-table-column>
-			<el-table-column prop="tel" label="客户电话" width="150" align="center"></el-table-column>
-			<el-table-column prop="contact1Tel" label="联系人电话" width="150" align="center"></el-table-column>
+			<el-table-column prop="tel" label="客户电话" width="150" align="center" sortable="custom"></el-table-column>
+			<el-table-column
+				prop="contact1Tel"
+				label="联系人电话"
+				width="150"
+				align="center"
+				sortable="custom"
+			></el-table-column>
 			<el-table-column prop="isEnabled" label="是否启用" width="84" align="center">
 				<template #default="{ row }">
 					<el-tag
@@ -654,5 +787,23 @@ const handleSelectionChange = (val) => {
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
+}
+.search-icons {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-left: auto;
+
+	.el-button {
+		margin-left: 10px;
+		border: none;
+		box-shadow: none;
+	}
+
+	&.fixed {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
 }
 </style>

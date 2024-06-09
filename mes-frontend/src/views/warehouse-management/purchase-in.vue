@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import tableFrame from "@/components/table-list-use/table-text.vue";
+import tableFrame from "components/std-table/src/table-text.vue";
 import request from "@/apis/request.js";
 
 // 搜索表单
@@ -87,7 +87,7 @@ const rules = {
 	warehouseInfo: [{ required: true, message: "请选择入库仓库", trigger: "change" }],
 	remark: [{ required: true, message: "请输入备注", trigger: "blur" }],
 };
-
+// 提交表单
 const submitForm = () => {
 	formRef.value.validate((valid) => {
 		if (valid) {
@@ -99,7 +99,7 @@ const submitForm = () => {
 		}
 	});
 };
-
+//取消提交
 const cancelForm = () => {
 	dialogVisible.value = false;
 };
@@ -126,13 +126,12 @@ const onSizeChange = (size) => {
 	parms.value.pagesize = size;
 	getPageList();
 };
-
 const onCurrentChange = (page) => {
 	parms.value.pagenum = page;
 	getPageList();
 };
 
-// 操作相关
+// 表格上面新增操作
 const handleAdd = () => {
 	formModel.value = {
 		recptCode: "",
@@ -147,7 +146,7 @@ const handleAdd = () => {
 	dialogTitle.value = "新增物料入库单";
 	dialogVisible.value = true;
 };
-
+//表格上面修改操作
 const handleUpdate = (row) => {
 	formModel.value = { ...row };
 	dialogTitle.value = "修改物料入库单";
@@ -175,7 +174,7 @@ const handleDelete = async (row) => {
 const handleExport = () => {
 	console.log("导出数据");
 };
-
+//查询提交
 const handleQuery = () => {
 	console.log("查询提交");
 };
@@ -192,6 +191,7 @@ const resetQuery = () => {
 const handleSelectionChange = (val) => {
 	console.log("选中项变化", val);
 };
+//执行入库
 const handleExecute = async (row) => {
 	try {
 		await ElMessageBox.confirm("你确认要执行入库么", "温馨提示", {
@@ -206,6 +206,54 @@ const handleExecute = async (row) => {
 		console.log("取消执行入库");
 	}
 };
+// 自定义排序逻辑
+function handleSortChange({ prop, order }) {
+	tableList.value.sort((a, b) => {
+		if (order === "ascending") {
+			return a[prop] > b[prop] ? 1 : -1;
+		} else if (order === "descending") {
+			return a[prop] < b[prop] ? 1 : -1;
+		} else {
+			return 0;
+		}
+	});
+}
+// 隐藏搜索栏
+const showSearchBar = ref(true);
+function toggleSearchBar() {
+	showSearchBar.value = !showSearchBar.value;
+}
+// 模拟刷新数据
+function refreshData() {
+	loading.value = true; // 显示加载动画
+	// 模拟刷新数据
+	setTimeout(() => {
+		// 调用后端接口获取最新数据
+		// request.get('/api/refresh-data').then(response => {
+		//   tableList.value = response.data;
+		//   originalTableList.value = [...tableList.value];
+		//   getPageList();
+		// }).finally(() => {
+		//   loading.value = false; // 隐藏加载动画
+		// });
+
+		// 模拟数据刷新
+		tableList.value = [
+			...tableList.value,
+			{
+				recptCode: "R007",
+				recptName: "入库单7",
+				vendorName: "供应商7",
+				poCode: "PO007",
+				recptDate: "2023-10-06",
+				status: "CONFIRMED",
+			},
+		];
+		originalTableList.value = [...tableList.value];
+		getPageList();
+		loading.value = false; // 隐藏加载动画
+	}, 1000);
+}
 </script>
 
 <template>
@@ -217,7 +265,7 @@ const handleExecute = async (row) => {
 		</template>
 
 		<!-- 搜索表单 -->
-		<el-form :inline="true" class="demo-form-inline">
+		<el-form v-if="showSearchBar" :inline="true" class="demo-form-inline">
 			<el-row>
 				<el-col :span="8">
 					<el-form-item label="入库单编号：">
@@ -405,5 +453,23 @@ const handleExecute = async (row) => {
 	color: #f56c6c;
 	padding: 5px;
 	text-align: center;
+}
+.search-icons {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-left: auto;
+
+	.el-button {
+		margin-left: 10px;
+		border: none;
+		box-shadow: none;
+	}
+
+	&.fixed {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
 }
 </style>

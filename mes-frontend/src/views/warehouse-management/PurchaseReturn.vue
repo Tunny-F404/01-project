@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import tableFrame from "@/components/table-list-use/table-text.vue";
+import tableFrame from "components/std-table/src/table-text.vue";
 import request from "@/apis/request.js";
 
 // 搜索表单
@@ -8,7 +8,7 @@ const rtCode = ref("");
 const rtName = ref("");
 const poCode = ref("");
 const vendorName = ref("");
-//存储对话框的标题
+// 存储对话框的标题
 const dialogTitle = ref("");
 // 表格数据
 const tableList = ref([
@@ -68,6 +68,18 @@ const tableList = ref([
 	},
 ]);
 
+// 自定义排序逻辑
+function handleSortChange({ prop, order }) {
+	tableList.value.sort((a, b) => {
+		if (order === "ascending") {
+			return a[prop] > b[prop] ? 1 : -1;
+		} else if (order === "descending") {
+			return a[prop] < b[prop] ? 1 : -1;
+		} else {
+			return 0;
+		}
+	});
+}
 // 对话框
 const dialogVisible = ref(false);
 const formRef = ref();
@@ -170,7 +182,6 @@ const handleUpdate = (row) => {
 	dialogVisible.value = true;
 };
 
-const data = mdUnitMeasureController.getInfo(2);
 //模拟删除
 const handleDelete = async (row) => {
 	await ElMessageBox.confirm("你确认要删除该退货单么", "温馨提示", {
