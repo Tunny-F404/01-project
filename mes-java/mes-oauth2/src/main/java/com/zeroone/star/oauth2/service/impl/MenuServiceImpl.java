@@ -23,8 +23,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuDO> implements 
     @Override
     public List<MenuDO> listAllLinkUrl() {
         QueryWrapper<MenuDO> wrapper = new QueryWrapper<>();
-        wrapper.select("path")
-                .isNotNull("path");
+        wrapper.select("component")
+                .isNotNull("component");
         return baseMapper.selectList(wrapper);
     }
 }
