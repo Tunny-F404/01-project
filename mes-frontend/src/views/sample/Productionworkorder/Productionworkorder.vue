@@ -117,7 +117,7 @@
 		<el-dialog title="编辑工单" v-model="editDialogVisible">
 			<el-form :model="editingRow">
 				<el-form-item label="工单编码">
-					<el-input v-model="editingRow.workOrderCode" disabled></el-input>
+					<el-input v-model="editingRow.workOrderCode"></el-input>
 				</el-form-item>
 				<el-form-item label="工单名称">
 					<el-input v-model="editingRow.workOrderName"></el-input>
@@ -228,25 +228,46 @@ export default {
 	methods: {
 		search() {
 			const filters = {
-				workstationCode: this.workstationCode.trim(), // 去除输入内容两端的空白字符
+				workOrderCode: this.workOrderCode.trim(), // 去除输入内容两端的空白字符
 				workstationName: this.workstationName.trim(), // 去除输入内容两端的空白字符
 				selectedWorkshop: this.selectedWorkshop,
 				selectedOrder: this.selectedOrder,
 			};
 
 			// 如果两个输入框都为空，则恢复显示所有数据
-			if (!filters.workstationCode && !filters.workstationName) {
-				this.reset();
-				return;
-			}
+			//if (!filters.workstationCode && !filters.workstationName) {
+			//this.reset();
+			//	return;
+			//	}
 
 			// 对表格数据进行过滤
 			const filteredData = this.tableData.filter((item) => {
 				// 根据工作站编码进行过滤
-				if (filters.workstationCode && !item.code.includes(filters.workstationCode)) {
+				if (filters.workOrderCode && !item.workOrderCode.includes(filters.workOrderCode)) {
 					return false;
 				}
 				// 根据工作站名称进行过滤
+				if (filters.workOrderName && !item.workOrderName.includes(filters.workOrderName)) {
+					return false;
+				}
+				if (filters.workOrderType && item.workOrderType !== filters.workOrderType) {
+					return false;
+				}
+				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
+					return false;
+				}
+				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
+					return false;
+				}
+				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
+					return false;
+				}
+				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
+					return false;
+				}
+				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
+					return false;
+				}
 				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
 					return false;
 				}
