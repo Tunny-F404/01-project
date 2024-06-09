@@ -52,7 +52,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "pType", ZH_WORDS_GETTER("project.fields.ptype"), "QW",false);
 	}
 	// 1.2 定义项目列表查询接口处理
-	ENDPOINT(API_M_GET, "/device-manage/query-progectList", queryProgectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/equipment-ledger/device-manage/query-progectList", queryProgectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, GetProgectQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -73,7 +73,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "pId", ZH_WORDS_GETTER("project.fields.pid"), 1, true);
 	}
 	// 2.2 定义设备详情查询接口处理
-	ENDPOINT(API_M_GET, "/device-manage/query-progectdetail", queryProgectDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/equipment-ledger/device-manage/query-progectdetail", queryProgectDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, GetProgectDetailQuery, queryParams);
 		// 呼叫执行函数响应结果

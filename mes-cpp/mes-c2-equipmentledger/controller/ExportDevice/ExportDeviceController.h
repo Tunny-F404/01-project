@@ -48,7 +48,7 @@ public: // 定义接口
 		API_DEF_ADD_AUTH();
 	}
 
-	ENDPOINT(API_M_GET, "/equipment-ledger/export-device", exportDevice,
+	ENDPOINT(API_M_GET, "/equipment-ledger/equip/export-device", exportDevice,
 		QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME)
 	{
 		// 解析查询参数

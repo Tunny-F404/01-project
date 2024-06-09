@@ -55,7 +55,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "subject_name", ZH_WORDS_GETTER("repaircontent.get.repair_name")," ", false);
 	}
 	//维修单内容查询 接口处理
-	ENDPOINT(API_M_GET, "/repairorder/query-repaircontent", queryRepaircontent, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/equipment-ledger/repairorder/query-repaircontent", queryRepaircontent, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(repair_id, RepaircontentQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -73,7 +73,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 添加维修单 接口处理
-	ENDPOINT(API_M_POST, "/repairorder/add-repaircontent", addRepaircontent, BODY_DTO(AddRepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/equipment-ledger/repairorder/add-repaircontent", addRepaircontent, BODY_DTO(AddRepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddRepaircontent(dto, authObject->getPayload()));
 	}
@@ -88,7 +88,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 修改维修单 接口处理
-	ENDPOINT(API_M_PUT, "/repairorder/modify-repaircontent", modifyRepaircontent, BODY_DTO(ModifyRepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_PUT, "/equipment-ledger/repairorder/modify-repaircontent", modifyRepaircontent, BODY_DTO(ModifyRepaircontentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execModifyRepaircontent(dto, authObject->getPayload()));
 	}
@@ -103,7 +103,7 @@ public:
 		API_DEF_ADD_AUTH();
 	}
 	// 删除维修单 接口处理
-	ENDPOINT(API_M_DEL, "/repairorder/del-repaircontent", removeRepaircontent, BODY_DTO(DeleteMultiRepaircontentDTO::Wrapper, line_idList), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_DEL, "/equipment-ledger/repairorder/del-repaircontent", removeRepaircontent, BODY_DTO(DeleteMultiRepaircontentDTO::Wrapper, line_idList), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execRemoveRepaircontent(line_idList));
 	}

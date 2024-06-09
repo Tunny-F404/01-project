@@ -36,7 +36,7 @@ class DeviceListController : public oatpp::web::server::api::ApiController // 1 
 	// 3 定义接口
 public:
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("device-list.summary.add-proj"), addProj, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/inspe-matain/add-proj", addProj, BODY_DTO(DeviceListDTO::Wrapper, dto), execAddProj(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/equipment-ledger/inspe-matain/add-proj", addProj, BODY_DTO(DeviceListDTO::Wrapper, dto), execAddProj(dto));
 
 
 

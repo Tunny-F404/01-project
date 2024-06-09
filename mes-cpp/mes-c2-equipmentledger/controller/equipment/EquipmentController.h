@@ -50,7 +50,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "eName", ZH_WORDS_GETTER("equipment.fields.ename"), "TextileMachinery", false);
 	}
 	// 1 定义设备列表查询接口处理
-	ENDPOINT(API_M_GET, "/equipment-ledger/query-equipment", queryEquipment, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/equipment-ledger/equip/query-equipment", queryEquipment, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, EquipmentQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -71,7 +71,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "eId", ZH_WORDS_GETTER("equipment.fields.id"),217, true);
 	}
 	// 2 定义设备详情查询接口处理
-	ENDPOINT(API_M_GET, "/equipment-ledger/query-detail", queryEquipmentDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/equipment-ledger/equip/query-detail", queryEquipmentDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, EquipmentDetailQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -88,7 +88,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3 定义新增接口处理
-	ENDPOINT(API_M_POST, "/equipment-ledger/add-equipment", addEquipment, BODY_DTO(addEquipmentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/equipment-ledger/equip/add-equipment", addEquipment, BODY_DTO(addEquipmentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddEquipment(dto, authObject->getPayload()));
 	}
@@ -103,7 +103,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 4定义修改设备端点处理
-	ENDPOINT(API_M_PUT, "/equipment-ledger/modify-equipment", modifyEquipment, BODY_DTO(modifyEquipmentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_PUT, "/equipment-ledger/equip/modify-equipment", modifyEquipment, BODY_DTO(modifyEquipmentDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 
 		//呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(executeModifyEquipment(dto, authObject->getPayload()));

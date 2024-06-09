@@ -43,7 +43,7 @@ public: // 定义接口
 		API_DEF_ADD_AUTH();
 	}
 	// 定义接口执行
-	ENDPOINT(API_M_GET, "/equipment-ledger/download-template", downloadTemplate, API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/equipment-ledger/equip/download-template", downloadTemplate, API_HANDLER_AUTH_PARAME) {
 		// 定义执行函数
 		API_HANDLER_RESP_VO(execDownloadTemplate());
 	}

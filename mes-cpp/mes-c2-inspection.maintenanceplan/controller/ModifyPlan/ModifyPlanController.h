@@ -42,7 +42,7 @@ public:
 	//API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ModifyPlan/modify-plan", modifyplan, BODY_DTO(MaintenancePlanDto::Wrapper, dto), BODY_DTO(PayloadDTO, payload) execModifyPlan(dto,payload));
 
 	// 4定义修改设备端点处理
-	ENDPOINT(API_M_PUT, "/inspe-matain/modify-plan", modifyplan, BODY_DTO(MaintenancePlanDto::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_PUT, "/equipment-ledger/inspe-matain/modify-plan", modifyplan, BODY_DTO(MaintenancePlanDto::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 
 		//呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execModifyPlan(dto, authObject->getPayload()));

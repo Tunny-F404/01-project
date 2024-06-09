@@ -45,7 +45,7 @@ public: // 定义接口
 	}
 
 	// 1.2 定义接口执行
-	ENDPOINT(API_M_POST, "/equipment-ledger/upload-file", uploadFile,
+	ENDPOINT(API_M_POST, "/equipment-ledger/equip/upload-file", uploadFile,
 		REQUEST(std::shared_ptr<IncomingRequest>, request),API_HANDLER_AUTH_PARAME)
 	{
 		// 定义执行函数
@@ -61,7 +61,7 @@ public: // 定义接口
 	// 2.2 定义接口执行
 	API_HANDLER_ENDPOINT_AUTH(
 		API_M_POST,
-		"/equipment-ledger/import-device",
+		"/equipment-ledger/equip/import-device",
 		importDevice,
 		BODY_STRING(String, filename),
 		execImportDevice(filename)

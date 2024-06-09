@@ -40,19 +40,19 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("device-manage.summary.modify-proj"), modifyProj, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/device-manage/modify-proj", modifyProj, BODY_DTO(DeviceManageDTO::Wrapper, dto), execModifyProj(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/equipment-ledger/device-manage/modify-proj", modifyProj, BODY_DTO(DeviceManageDTO::Wrapper, dto), execModifyProj(dto));
 
 	//删除接口描述和处理
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("device-manage.summary.remove-proj"), removeProj, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/device-manage/remove-proj", removeProj, BODY_DTO(DeviceManageIdDTO::Wrapper, dto), execRemoveProj(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/equipment-ledger/device-manage/remove-proj", removeProj, BODY_DTO(DeviceManageIdDTO::Wrapper, dto), execRemoveProj(dto));
 
 	//导出接口描述和处理
 	API_DEF_ENDPOINT_INFO(ZH_WORDS_GETTER("device-manage.summary.export-proj"), exportProj, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT(API_M_POST, "/device-manage/export-proj", exportProj, BODY_DTO(DeviceManageIdDTO::Wrapper, dto), execExportProj(dto));
+	API_HANDLER_ENDPOINT(API_M_POST, "/equipment-ledger/device-manage/export-proj", exportProj, BODY_DTO(DeviceManageIdDTO::Wrapper, dto), execExportProj(dto));
 
 	//新增接口描述和处理
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("device-manage.summary.add-proj"), addProj, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/device-manage/add-proj", addProj, BODY_DTO(DeviceManageAddDTO::Wrapper, dto), execAddProj(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/equipment-ledger/device-manage/add-proj", addProj, BODY_DTO(DeviceManageAddDTO::Wrapper, dto), execAddProj(dto));
 
 
 
