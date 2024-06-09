@@ -31,7 +31,7 @@
 // 是否是发布Swagger文档包
 #ifndef _RELEASE_DOC_
 // 查看Swagger文档的时候不需要连接数据库，解开下面的注释关闭启动连接数据库
-#define _RELEASE_DOC_
+//#define _RELEASE_DOC_
 #endif
 
 /**
@@ -45,15 +45,15 @@ bool getStartArg(int argc, char* argv[]) {
 	std::string serverPort = "8090";
 	// 数据库连接信息
 	std::string dbUsername = "root";
-	std::string dbPassword = "password";
-	std::string dbName = "ktgmes";
-	std::string dbHost = "192.168.238.128";
-	int dbPort = 3306;
+	std::string dbPassword = "jingziRoot1234";
+	std::string dbName = "zo_mes";
+	std::string dbHost = "47.120.28.247";
+	int dbPort = 3333;
 	int dbMax = 5;
 #ifdef LINUX
 	// Nacos配置参数
-	std::string nacosAddr = "192.168.220.128:8848";
-	std::string nacosNs = "4833404f-4b82-462e-889a-3c508160c6b4";
+	std::string nacosAddr = "121.40.75.117:8848";
+	std::string nacosNs = "mes-test";
 	std::string serviceName = "";
 	std::string regIp = "";
 #endif

@@ -19,8 +19,8 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include "WorkFixture/WorkFixtureController.h"
-#include "WorkFixture/WorkFixtureTypeController.h"
+#include "workfixture/WorkFixtureController.h"
+#include "workfixture/WorkFixtureTypeSettingController.h"
 
 #ifdef HTTP_SERVER_DEMO
 #include "user/UserController.h"
@@ -30,13 +30,13 @@
 #endif
 
 
-// 如果定义了关闭Swagger文档宏
+// ��������˹ر�Swagger�ĵ���
 #ifdef CLOSE_SWAGGER_DOC
-// 简化绑定控制器宏定义
+// �򻯰󶨿������궨��
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 router->addController(__CLASS__::createShared())
 #else
-// 简化绑定控制器宏定义
+// �򻯰󶨿������궨��
 #define ROUTER_SIMPLE_BIND(__CLASS__) \
 BIND_CONTROLLER(docEndpoints, router, __CLASS__)
 #endif
@@ -52,24 +52,23 @@ void Router::initRouter()
 #ifdef HTTP_SERVER_DEMO
 	createSampleRouter();
 #endif
+	//#TIP :ϵͳ��չ·�ɶ��壬д���������
 
-	//#TIP :系统扩展路由定义，写在这个后面
-
-	ROUTER_SIMPLE_BIND(WorkFixtureTypeController);
+	ROUTER_SIMPLE_BIND(WorkFixtureTypeSettingController);
 	ROUTER_SIMPLE_BIND(WorkFixtureController);
 }
 
 #ifdef HTTP_SERVER_DEMO
 void Router::createSampleRouter()
 {
-	// 绑定示例控制器
+	// ��ʾ��������
 	ROUTER_SIMPLE_BIND(SampleController);
-	// 绑定用户控制器
+	// ���û�������
 	ROUTER_SIMPLE_BIND(UserController);
-	// 绑定文件控制器
+	// ���ļ�������
 	ROUTER_SIMPLE_BIND(FileController);
 	
-	// 绑定WebSocket控制器
+	// ��WebSocket������
 	router->addController(WSContorller::createShared());
 }
 #endif

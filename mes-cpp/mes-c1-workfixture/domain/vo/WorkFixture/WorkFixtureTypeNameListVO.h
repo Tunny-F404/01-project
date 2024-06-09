@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 /*
 
  @Author: Croissant
@@ -9,15 +9,15 @@
 #define _WORKFIXTURETYPENAMELISTVO_H_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/WorkFixture/WorkFixtureTypeNameListDTO.h"
+#include "../../dto/workfixture/WorkFixtureTypeNameListDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
- * Ê¾ÀıÏÔÊ¾JsonVO£¬ÓÃÓÚÏìÓ¦¸ø¿Í»§¶ËµÄJson¶ÔÏó
+ * ç¤ºä¾‹æ˜¾ç¤ºJsonVOï¼Œç”¨äºå“åº”ç»™å®¢æˆ·ç«¯çš„Jsonå¯¹è±¡
  */
-class WorkFixtureTypeNameListJsonVO : public JsonVO<WorkFixtureTypeNameListDTO::Wrapper> {
-	DTO_INIT(WorkFixtureTypeNameListJsonVO, JsonVO<WorkFixtureTypeNameListDTO::Wrapper>);
+class WorkFixtureTypeNameListJsonVO : public JsonVO<oatpp::List<WorkFixtureTypeNameListDTO::Wrapper>> {
+	DTO_INIT(WorkFixtureTypeNameListJsonVO, JsonVO<oatpp::List<WorkFixtureTypeNameListDTO::Wrapper>>);
 };
 
 #include OATPP_CODEGEN_END(DTO)

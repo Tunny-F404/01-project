@@ -27,6 +27,10 @@
   query:
    summaryT: 获取工装夹具类型列表
    summaryTN: 获取工装夹具类型名称列表
+   create: 工装夹具类型设置新增
+   delete: 工装夹具类型设置删除
+   export: 工装夹具类型设置导出
+   update: 工装夹具类型设置修改
   fields:
    id: 工装夹具类型ID
    code: 工装夹具类型编号
@@ -35,3 +39,9 @@
    mtype: 工装夹具类型保养维护类型
    mperiod: 工装夹具类型保养周期
    remark: 工装夹具类型备注
+   excel: excel文件
+   deleteid: 需要删除数据的唯一编码
+   url: 文件url
+   alt: 文件文字描述
+   href: 文件下载地址
+   list: 类型名称列表

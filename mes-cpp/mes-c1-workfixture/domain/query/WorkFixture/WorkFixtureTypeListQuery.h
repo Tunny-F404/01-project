@@ -20,9 +20,9 @@ class WorkFixtureTypeListQuery : public PageQuery
 {
 	DTO_INIT(WorkFixtureTypeListQuery, PageQuery);
 	//类型编码
-	API_DTO_FIELD_DEFAULT(String, toolTypeCode, ZH_WORDS_GETTER("workfixture.type.fields.code"));
+	API_DTO_FIELD_DEFAULT(String, typeCode, ZH_WORDS_GETTER("workfixture.type.fields.code"));
 	//类型名称
-	API_DTO_FIELD_DEFAULT(String, toolTypeName, ZH_WORDS_GETTER("workfixture.type.fields.name"));
+	API_DTO_FIELD_DEFAULT(String, typeName, ZH_WORDS_GETTER("workfixture.type.fields.name"));
 	//保养维护类型 REGULAR定期维护 USAGE按使用次数维护
 	API_DTO_FIELD_DEFAULT(String, maintenType, ZH_WORDS_GETTER("workfixture.type.fields.mtype"));
 };
