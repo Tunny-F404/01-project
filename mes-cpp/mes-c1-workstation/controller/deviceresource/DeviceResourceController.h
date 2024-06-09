@@ -23,8 +23,8 @@
 #include "ApiHelper.h"
 #include "ServerInfo.h"
 #include "domain/vo/BaseJsonVO.h"
-#include "../../domain/query/deviceresource/DeviceResourceQuery.h"
-#include "../../domain/vo/deviceresource/DeviceResourceVO.h"
+#include "../mes-c1-workstation/domain/query/deviceresource/DeviceResourceQuery.h"
+#include "../mes-c1-workstation/domain/vo/deviceresource/DeviceResourceVO.h"
 
 
 // 0 定义API控制器使用宏
