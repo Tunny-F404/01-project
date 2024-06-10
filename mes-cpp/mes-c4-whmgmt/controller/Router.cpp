@@ -83,24 +83,17 @@ void Router::initRouter()
 	createSampleRouter();
 #endif
 
-	//#TIP :ϵͳ��չ·�ɶ��壬д���������
-	ROUTER_SIMPLE_BIND(GetReceiptController);
-	//#TIP :绯荤粺鎵╁睍璺敱瀹氫箟锛屽啓鍦ㄨ繖涓悗闈?
-	
-	//#TIP :ϵͳ��չ·�ɶ��壬д���������
-	ROUTER_SIMPLE_BIND(AddWhStorageorderController);
-	ROUTER_SIMPLE_BIND(ModifyWhStorageorderController);
-	ROUTER_SIMPLE_BIND(DeleteWhStorageorderController);
-	////#TIP :ϵͳ��չ·�ɶ��壬д���������
-	ROUTER_SIMPLE_BIND(ModifyListController);
-	ROUTER_SIMPLE_BIND(AddListController);
-	ROUTER_SIMPLE_BIND(GetListController);
 	//#TIP :系统扩展路由定义，写在这个后面
-	ROUTER_SIMPLE_BIND(WarehouseInboundController);
-
-	ROUTER_SIMPLE_BIND(WarehouseDeleteController);
-
-	ROUTER_SIMPLE_BIND(WarehouseExportController);
+	ROUTER_SIMPLE_BIND(GetReceiptController);//shudeqilong	
+	ROUTER_SIMPLE_BIND(ModifyListController);//upup
+	ROUTER_SIMPLE_BIND(AddListController);//upup
+	ROUTER_SIMPLE_BIND(GetListController);//upup
+	ROUTER_SIMPLE_BIND(AddWhStorageorderController);//xiaoyang
+	ROUTER_SIMPLE_BIND(ModifyWhStorageorderController);//xiaoyang
+	ROUTER_SIMPLE_BIND(DeleteWhStorageorderController);//xiaoyang
+	ROUTER_SIMPLE_BIND(WarehouseInboundController);//xinye
+	ROUTER_SIMPLE_BIND(WarehouseDeleteController);//xinye
+	ROUTER_SIMPLE_BIND(WarehouseExportController);//xinye
 	
 }
 

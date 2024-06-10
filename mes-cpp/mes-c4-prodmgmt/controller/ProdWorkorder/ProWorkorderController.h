@@ -29,7 +29,7 @@ public:
 	// 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("ProdWorkorder.put.summary"), modifyProWorkorder, Uint64JsonVO::Wrapper);
 	// 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdWorkorder/modify", modifyProWorkorder, BODY_DTO(ModifyProWorkorderDTO::Wrapper, dto), execModifyProWorkdorder(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodmgmt/prodworkorder/modify", modifyProWorkorder, BODY_DTO(ModifyProWorkorderDTO::Wrapper, dto), execModifyProWorkdorder(dto));
 
 
 	// 定义删除接口描述
@@ -40,7 +40,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "workorderId", ZH_WORDS_GETTER("ProdWorkorder.field.workorderId"), 1, true);
 	}
 	// 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ProdWorkorder/{workorderId}", removeProWorkorder, PATH(UInt64, workorderId), execRemoveProWorkorder(workorderId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/prodmgmt/prodworkorder/delete/{workorderId}", removeProWorkorder, PATH(UInt64, workorderId), execRemoveProWorkorder(workorderId));
 
 
 	// 定义确认接口描述
@@ -51,7 +51,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "workorderId", ZH_WORDS_GETTER("ProdWorkorder.field.workorderId"), 1, true);
 	}
 	// 定义确认接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdWorkorder/comfirm/{workorderId}", confirmProWorkorder, PATH(UInt64, workorderId), execConfirmProWorkorder(workorderId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodmgmt/prodworkorder/confirm/{workorderId}", confirmProWorkorder, PATH(UInt64, workorderId), execConfirmProWorkorder(workorderId));
 
 
 	// 定义完成接口描述
@@ -62,7 +62,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "workorderId", ZH_WORDS_GETTER("ProdWorkorder.field.workorderId"), 1, true);
 	}
 	// 定义完成接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProdWorkorder/complete/{workorderId}", completeProWorkorder, PATH(UInt64, workorderId), execCompleteProWorkorder(workorderId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodmgmt/prodworkorder/complete/{workorderId}", completeProWorkorder, PATH(UInt64, workorderId), execCompleteProWorkorder(workorderId));
 
 
 private:

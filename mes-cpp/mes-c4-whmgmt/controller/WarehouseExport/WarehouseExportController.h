@@ -41,7 +41,7 @@ public:
     // 3.1 定义查询接口描述
     API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("wm_item_recpt.export.summary"), exportWarehouse, Void);
     // 3.2 定义查询接口处理
-    ENDPOINT(API_M_GET, "/wm-item-recpt", exportWarehouse, API_HANDLER_AUTH_PARAME) {
+    ENDPOINT(API_M_GET, "/whmgmt/purchase/export", exportWarehouse, API_HANDLER_AUTH_PARAME) {
         return execWarehouseExport();
     }
 

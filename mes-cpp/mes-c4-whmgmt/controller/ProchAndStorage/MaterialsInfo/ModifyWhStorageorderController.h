@@ -17,7 +17,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("whstorageorder.modify.summary"), modifyWhStorageorder, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prochandstorage/materialsinfo/modify-wh-storage-order", modifyWhStorageorder, BODY_DTO(ModifyWhStorageorderDTO::Wrapper, dto), execModifyWhStorageorder(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/whmgmt/purchase/modify2", modifyWhStorageorder, BODY_DTO(ModifyWhStorageorderDTO::Wrapper, dto), execModifyWhStorageorder(dto));
 
 	
 private://定义接口执行函数

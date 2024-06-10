@@ -26,7 +26,7 @@ public: // 定义接口
 		API_DEF_ADD_PATH_PARAMS(UInt64, "recordId", ZH_WORDS_GETTER("prodmgmt.delete.fields.recordId"), 1, false);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/prodmgmt/remove-work-report/{recordId}", removeWorkReport, PATH(UInt64, recordId), execRemoveWorkReport(recordId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/prodmgmt/prodreport/delete/{recordId}", removeWorkReport, PATH(UInt64, recordId), execRemoveWorkReport(recordId));
 
 
 

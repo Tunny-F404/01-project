@@ -42,7 +42,7 @@ public:
     // 3.1 定义修改接口描述，审批通过
     API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("wm_item_recpt.delete.summary"), removeWmItemRecpt, Uint64JsonVO::Wrapper);
     // 3.2 定义修改接口处理
-    API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/wm-item-recpt/{recpt_id}", removeWmItemRecpt, BODY_DTO(WarehouseDeleteDTO::Wrapper, dto), execWarehouseDelete(dto));
+    API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/whmgmt/purchase/delete2/{recpt_id}", removeWmItemRecpt, BODY_DTO(WarehouseDeleteDTO::Wrapper, dto), execWarehouseDelete(dto));
 
 private:
 

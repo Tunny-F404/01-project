@@ -96,7 +96,8 @@ ProdWorkorder:
 
 productionorder:
  query:
-  summary: 生产工单
+  summary: 导出生产工单BOM组成
+  summary-another: 导出生产工单
   fields:
     workorder_code: 工单编号
     workorder_name: 工单名称
@@ -168,7 +169,7 @@ productionorder:
    h32: 预计使用量
 productionprocess:
  query:
-  summary: 生产排查
+  summary: 获取产品/物料对应的工艺流程
   fields:
    process_name: 工序名称
    process_id:  工序ID

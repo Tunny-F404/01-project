@@ -58,7 +58,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "end_time", ZH_WORDS_GETTER("prod.field.endTime"), "N", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/prodOrder/query", queryProdOrder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/prodmgmt/prodschedule/querylist", queryProdOrder, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ProdOrderQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -95,7 +95,7 @@ public:
 	// 定义查询用户菜单接口端点描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("prod.getTree.summary"), queryTreeProdOrder, ProdOrderQueryTreeJsonVO::Wrapper);
 	// 定义查询用户菜单接口端点处理
-	API_HANDLER_ENDPOINT_NOPARAM_AUTH(API_M_GET, "/prodOrder/queryTree", queryTreeProdOrder, execQueryTreeProdOrder(authObject->getPayload()))
+	API_HANDLER_ENDPOINT_NOPARAM_AUTH(API_M_GET, "/prodmgmt/prodschedule/querytree", queryTreeProdOrder, execQueryTreeProdOrder(authObject->getPayload()))
 	
 	// 3.1 定义新增接口描述
 	ENDPOINT_INFO(addProdOrder) {
@@ -107,7 +107,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProdOrderAddJsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "/ProdOrder/add", addProdOrder, BODY_DTO(ProdOrderDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/prodmgmt/prodschedule/add", addProdOrder, BODY_DTO(ProdOrderDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddProdOrder(dto));
 	}

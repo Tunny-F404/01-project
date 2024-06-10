@@ -32,16 +32,17 @@ Router::Router(Endpoints * docEndpoints, HttpRouter * router)
 
 void Router::initRouter()
 {
-	ROUTER_SIMPLE_BIND(ProController);
-	ROUTER_SIMPLE_BIND(ProdWorkorderController);
-	ROUTER_SIMPLE_BIND(RemoveWorkReportController);
-	ROUTER_SIMPLE_BIND(ApprovalStage);
-	ROUTER_SIMPLE_BIND(ProWorkorderController);
-	ROUTER_SIMPLE_BIND(ProductionOrderController);
-	ROUTER_SIMPLE_BIND(ProductionProcessController);
-	ROUTER_SIMPLE_BIND(ProdOrderController);
-	ROUTER_SIMPLE_BIND(FeedBackController);
-	ROUTER_SIMPLE_BIND(ProdTaskController);
+	
+	ROUTER_SIMPLE_BIND(ProdWorkorderController);//shuibuzhao
+	ROUTER_SIMPLE_BIND(ProWorkorderController);//xijin	
+	ROUTER_SIMPLE_BIND(ProductionOrderController);//amie
+	ROUTER_SIMPLE_BIND(ProductionProcessController);//amie
+	ROUTER_SIMPLE_BIND(ProdOrderController);//dingzhen
+	ROUTER_SIMPLE_BIND(FeedBackController);//jieke
+	ROUTER_SIMPLE_BIND(ProdTaskController);//jieke
+	ROUTER_SIMPLE_BIND(ProController);//Xhaizi
+	ROUTER_SIMPLE_BIND(ApprovalStage);//qizhewoniu
+	ROUTER_SIMPLE_BIND(RemoveWorkReportController);//shudeqilong
 }
 
 

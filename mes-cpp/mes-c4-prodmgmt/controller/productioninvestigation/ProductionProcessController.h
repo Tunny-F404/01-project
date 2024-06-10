@@ -50,7 +50,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "itemCode", ZH_WORDS_GETTER("productionprocess.query.fields.item_code"), "", false);
 	}
 	// 3.2 定义查询接口处理
-	ENDPOINT(API_M_GET, "/productionprocess/query-production-process", productionProcess,QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/prodmgmt/prodschedule/query", productionProcess,QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ProductionProcessQuery, queryParams);
 		// 呼叫执行函数响应结果

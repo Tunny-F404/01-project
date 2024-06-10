@@ -64,7 +64,7 @@ public:
 			API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("ProduceWork.fields.status"), "N", false);
       }
 		// 3.2 定义查询接口处理
-		ENDPOINT(API_M_GET, "/ProduceWork/query-Pwork-table", QueryPworkTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME)
+		ENDPOINT(API_M_GET, "/prodmgmt/prodreport/querydetail", QueryPworkTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME)
 		{
 			// 解析查询参数为Query领域模型
 			API_HANDLER_QUERY_PARAM(query, PworkQery, queryParams);
@@ -82,7 +82,7 @@ public:
 			API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 		}
 		// 3.2 定义新增接口处理
-		ENDPOINT(API_M_POST, "/ProduceWork-add-Pwork-table", addPwork, BODY_DTO(PworkTableDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+		ENDPOINT(API_M_POST, "/prodmgmt/prodreport/add", addPwork, BODY_DTO(PworkTableDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 			// 呼叫执行函数响应结果
 			API_HANDLER_RESP_VO(execAddtTable(dto));
 		}
@@ -90,7 +90,7 @@ public:
 		// 3.1 定义修改接口描述
 		API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("ProduceWork.xg.test"), modifySample, Uint64JsonVO::Wrapper);
 		// 3.2 定义修改接口处理
-		API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProduceWork/query-Pwork-table", modifySample, BODY_DTO(treansformProduceDTO::Wrapper, dto), execModifySample(dto));
+		API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodmgmt/prodreport/modify", modifySample, BODY_DTO(treansformProduceDTO::Wrapper, dto), execModifySample(dto));
 
 
 

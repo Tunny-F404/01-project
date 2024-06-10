@@ -33,7 +33,7 @@ public: // 定义接口
 		API_DEF_ADD_QUERY_PARAMS(String, "recptDate", ZH_WORDS_GETTER("receipt.query.fields.recptDate"), "2023-06-15", false);
 	}
 	// 获取单据列表接口
-	ENDPOINT(API_M_GET, "/whmgmt/query-receipt-page-table", queryReceiptPageTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/whmgmt/purchase/querylist", queryReceiptPageTable, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ReceiptTableQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -52,7 +52,7 @@ public: // 定义接口
 		API_DEF_ADD_QUERY_PARAMS(String, "recptCode", ZH_WORDS_GETTER("receipt.query.fields.recptCode"), "R20231019001", false);
 	}
 	// 获取单据详情接口
-	ENDPOINT(API_M_GET, "/whmgmt/query-receipt-detail", queryReceiptDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/whmgmt/purchase/querydetail", queryReceiptDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ReceiptDetailQuery, queryParams);
 		// 呼叫执行函数响应结果

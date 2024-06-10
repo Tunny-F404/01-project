@@ -22,7 +22,7 @@ public:
 		API_DEF_ADD_AUTH();
 	}
 	// 3.2 定义批量删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/prochandstorage/materialsinfo/delete-wh-storage-order", deleteWhStorageorders, BODY_DTO(List<UInt64>, ids), execDeleteWhStorageorder(ids));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/whmgmt/purchase/delete1", deleteWhStorageorders, BODY_DTO(List<UInt64>, ids), execDeleteWhStorageorder(ids));
 
 private:
 	//3.3 演示删除入库单行

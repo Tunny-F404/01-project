@@ -38,7 +38,7 @@ public:
 	// 3.1 定义修改接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("prod1.put.summary"), modifyProdTask, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodtask-modify", modifyProdTask, BODY_DTO(ProdTaskModifyDTO::Wrapper, dto), execModifyProdTask(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodmgmt/prodschedule/modify", modifyProdTask, BODY_DTO(ProdTaskModifyDTO::Wrapper, dto), execModifyProdTask(dto));
 
 	// 3.1 定义删除接口描述
 	ENDPOINT_INFO(removeProdTask) {
@@ -48,7 +48,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("prod1.field.id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/prodtask-delete/{id}", removeProdTask, PATH(UInt64, id), execRemoveProdTask(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/prodmgmt/prodschedule/delete/{id}", removeProdTask, PATH(UInt64, id), execRemoveProdTask(id));
 
 private:
 	// 3.3 演示修改数据

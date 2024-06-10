@@ -44,7 +44,7 @@ public:
     // 3.1 定义修改接口描述，审批通过
     API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("wm_item_recpt.put.summary"), modifyWmItemRecpt, Uint64JsonVO::Wrapper);
     // 3.2 定义修改接口处理
-    API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/wm-item-recpt/", modifyWmItemRecpt, BODY_DTO(WarehouseInboundDTO::Wrapper, dto), execWarehouseInbound(dto));
+    API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/whmgmt/purchase/modify3", modifyWmItemRecpt, BODY_DTO(WarehouseInboundDTO::Wrapper, dto), execWarehouseInbound(dto));
 
 
 private:
