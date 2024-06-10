@@ -1,8 +1,6 @@
 <script setup>
 import { onMounted, reactive, ref, watch } from "vue";
-import { ElNotification } from "element-plus";
-import Treeselect from "@riophae/vue-treeselect";
-import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import { ElNotification, ElTree } from "element-plus";
 
 // 假设的静态用户数据
 const mockUserList = [
@@ -83,6 +81,7 @@ const state = reactive({
 		{ key: 0, label: `用户编号`, visible: true },
 		// 其他列定义
 	],
+	deptTreeData: mockDeptOptions,
 });
 
 // 监听部门名称的变化
@@ -171,124 +170,66 @@ function confirmSelect() {
 			<!-- 部门数据 -->
 			<el-col :span="4" :xs="24">
 				<div class="head-container">
-					<el-input
-						v-model="deptName"
-						placeholder="请输入部门名称"
-						clearable
-						size="small"
-						prefix-icon="el-icon-search"
-						style="margin-bottom: 20px"
-					/>
+					<el-input v-model="deptName" placeholder="请输入部门名称" clearable size="small"
+						prefix-icon="el-icon-search" style="margin-bottom: 20px" />
 				</div>
 				<div class="head-container">
-					<el-tree
-						ref="tree"
-						:data="deptOptions"
-						:props="defaultProps"
-						:expand-on-click-node="false"
-						:filter-node-method="filterNode"
-						default-expand-all
-						@node-click="handleNodeClick"
-					/>
+					<el-tree ref="tree" :data="state.deptTreeData" :props="state.defaultProps"
+						:expand-on-click-node="false" :filter-node-method="filterNode" default-expand-all
+						@node-click="handleNodeClick" />
 				</div>
 			</el-col>
 			<!-- 用户数据 -->
 			<el-col :span="20" :xs="24">
-				<el-form
-					v-show="showSearch"
-					ref="queryForm"
-					:model="queryParams"
-					size="small"
-					:inline="true"
-					label-width="68px"
-				>
+				<el-form v-show="showSearch" ref="queryForm" :model="queryParams" size="small" :inline="true"
+					label-width="68px">
 					<el-form-item label="用户名称" prop="userName">
-						<el-input
-							v-model="queryParams.userName"
-							placeholder="请输入用户名称"
-							clearable
-							style="width: 240px"
-							@keyup.enter.enter="handleQuery"
-						/>
+						<el-input v-model="queryParams.userName" placeholder="请输入用户名称" clearable style="width: 240px"
+							@keyup.enter.enter="handleQuery" />
 					</el-form-item>
 					<el-form-item label="手机号码" prop="phonenumber">
-						<el-input
-							v-model="queryParams.phonenumber"
-							placeholder="请输入手机号码"
-							clearable
-							style="width: 240px"
-							@keyup.enter.enter="handleQuery"
-						/>
+						<el-input v-model="queryParams.phonenumber" placeholder="请输入手机号码" clearable style="width: 240px"
+							@keyup.enter.enter="handleQuery" />
 					</el-form-item>
 					<el-form-item>
 						<el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
 						<el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
 					</el-form-item>
 				</el-form>
-				<el-table v-loading="loading" :data="userList" @current-change="handleCurrent" @row-dblclick="handleRowDbClick">
+				<el-table v-loading="loading" :data="userList" @current-change="handleCurrent"
+					@row-dblclick="handleRowDbClick">
 					<el-table-column width="55" align="center">
 						<template #default="scope">
-							<el-radio v-model="selectedId" :label="scope.row.userId" @change="handleRowChange(scope.row)">{{
+							<el-radio v-model="selectedId" :label="scope.row.userId"
+								@change="handleRowChange(scope.row)">{{
 								""
-							}}</el-radio>
+								}}</el-radio>
 						</template>
 					</el-table-column>
-					<el-table-column
-						v-if="columns[1].visible"
-						key="userName"
-						label="用户名称"
-						align="center"
-						prop="userName"
-						:show-overflow-tooltip="true"
-					/>
-					<el-table-column
-						v-if="columns[2].visible"
-						key="nickName"
-						label="用户昵称"
-						align="center"
-						prop="nickName"
-						:show-overflow-tooltip="true"
-					/>
-					<el-table-column
-						v-if="columns[3].visible"
-						key="deptName"
-						label="部门"
-						align="center"
-						prop="dept.deptName"
-						:show-overflow-tooltip="true"
-					/>
-					<el-table-column
-						v-if="columns[4].visible"
-						key="phonenumber"
-						label="手机号码"
-						align="center"
-						prop="phonenumber"
-						width="120"
-					/>
+					<el-table-column v-if="columns[1].visible" key="userName" label="用户名称" align="center"
+						prop="userName" :show-overflow-tooltip="true" />
+					<el-table-column v-if="columns[2].visible" key="nickName" label="用户昵称" align="center"
+						prop="nickName" :show-overflow-tooltip="true" />
+					<el-table-column v-if="columns[3].visible" key="deptName" label="部门" align="center"
+						prop="dept.deptName" :show-overflow-tooltip="true" />
+					<el-table-column v-if="columns[4].visible" key="phonenumber" label="手机号码" align="center"
+						prop="phonenumber" width="120" />
 					<el-table-column v-if="columns[5].visible" key="status" label="状态" align="center">
 						<template #default="scope">
-							<el-switch
-								v-model="scope.row.status"
-								active-value="0"
-								inactive-value="1"
-								@change="handleStatusChange(scope.row)"
-							></el-switch>
+							<el-switch v-model="scope.row.status" active-value="0" inactive-value="1"
+								@change="handleStatusChange(scope.row)"></el-switch>
 						</template>
 					</el-table-column>
-					<el-table-column v-if="columns[6].visible" label="创建时间" align="center" prop="createTime" width="160">
+					<el-table-column v-if="columns[6].visible" label="创建时间" align="center" prop="createTime"
+						width="160">
 						<template #default="scope">
 							<span>{{ parseTime(scope.row.createTime) }}</span>
 						</template>
 					</el-table-column>
 				</el-table>
 
-				<pagination
-					v-show="total > 0"
-					v-model:page="queryParams.pageNum"
-					v-model:limit="queryParams.pageSize"
-					:total="total"
-					@pagination="getList"
-				/>
+				<pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
+					:total="total" @pagination="getList" />
 			</el-col>
 		</el-row>
 		<template #footer>

@@ -3,20 +3,62 @@ import { ref } from "vue";
 import { merge } from "lodash-es";
 import { reactify } from "@vueuse/core";
 
-import tableFrame from "components/std-table/src/table-text.vue";
+import { TableFrame } from "components/std-table";
 import popUp from "components/std-table/src/pop-up.vue";
 import request from "api/request.js"; //加入请求
-import type { Operations, TableTrueProps } from "./std-table.ts";
+import type { Prettify } from "utils/Prettify.ts";
+
+import type { ComputedRef } from "vue";
+import type { TableProps } from "element-plus";
+import type { RequiredPick } from "type-plus";
+import type { Operations, StdTableProps } from "./std-table.ts";
 
 defineOptions({
 	/** 表格组件 */
 	name: "TableTrue",
 });
 
-const props = withDefaults(defineProps<TableTrueProps<TableRow>>(), {
+type Props = Prettify<Readonly<StdTableProps<TableRow>>>;
+
+const props = withDefaults(defineProps<Props>(), {
 	data: () => [] as TableRow[],
 	// data: [] as TableRow[],
-});
+}) as Props;
+
+const defaultPropsKeys = ["data", "operations", "size", "border"] as const;
+type DefaultPropsKeys = (typeof defaultPropsKeys)[number];
+type DefaultProps = Prettify<Readonly<RequiredPick<Props, DefaultPropsKeys>>>;
+
+// type Merge = <TObject, T = DefaultProps>(object: TObject, source: T) => TObject & T;
+type MergeReactify = <TObject, TSource>(object: TObject, source: TSource) => ComputedRef<TObject & TSource>;
+// type Merge = <TObject, TSource>(object: TObject, source: TSource) => TObject & TSource;
+const mergeReactify = reactify(merge) as MergeReactify;
+
+/**
+ * 默认的 props 配置对象
+ * @description
+ * 未来，如果表格组件需要配置很多预设的行为 在此配置即可
+ */
+const defaultProps: DefaultProps = {
+	data: [] as TableRow[],
+	operations: [],
+	size: "small",
+	border: true,
+};
+
+/**
+ * 创建一个全新的默认props对象
+ * @description
+ * ### *设计理由*
+ * 用于确保生成的默认值是独一无二的对象，确保不会和其他表格组件实例共用对象
+ */
+function createDefaultProps() {
+	return merge({}, defaultProps);
+}
+
+const stdTableProps = mergeReactify(createDefaultProps(), props);
+
+// stdTableProps.value.
 
 //没有中文国际化
 //每一列数据，例子，后期接口对上再调整

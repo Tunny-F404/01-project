@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import tableFrame from "components/std-table/src/table-text.vue";
+import { TableFrame } from "components/std-table";
 import request from "@/apis/request.js";
 
 // 搜索表单
@@ -240,10 +240,10 @@ const selectedRow = ref(null);
 </script>
 
 <template>
-	<tableFrame title="供应商退货管理">
+	<TableFrame title="采购退货管理">
 		<template #extra>
 			<el-button @click="handleExport"
-				>导出数据<el-icon :size="22"><UploadFilled /></el-icon
+				>导出数据<el-icon :size="22"> <UploadFilled /> </el-icon
 			></el-button>
 		</template>
 
@@ -275,10 +275,10 @@ const selectedRow = ref(null);
 				<el-col :span="8">
 					<el-form-item>
 						<el-button type="primary" @click="handleQuery"
-							><el-icon><Search /></el-icon>查询</el-button
+							><el-icon> <Search /> </el-icon>查询</el-button
 						>
 						<el-button @click="resetQuery"
-							><el-icon><Refresh /></el-icon>重置</el-button
+							><el-icon> <Refresh /> </el-icon>重置</el-button
 						>
 					</el-form-item>
 				</el-col>
@@ -287,13 +287,13 @@ const selectedRow = ref(null);
 
 		<!-- 操作按钮 -->
 		<el-button type="primary" plain @click="handleAdd">
-			<el-icon><Plus /></el-icon>新增
+			<el-icon> <Plus /> </el-icon>新增
 		</el-button>
 		<el-button type="success" plain @click="handleUpdate(selectedRow)">
-			<el-icon><EditPen /></el-icon>修改
+			<el-icon> <EditPen /> </el-icon>修改
 		</el-button>
 		<el-button type="danger" plain @click="handleDelete(selectedRow)">
-			<el-icon><Delete /></el-icon>删除
+			<el-icon> <Delete /> </el-icon>删除
 		</el-button>
 
 		<!-- 数据表格 -->
@@ -322,13 +322,17 @@ const selectedRow = ref(null);
 			<el-table-column label="操作" width="200" align="center">
 				<template #default="{ row, $index }">
 					<el-button @click="handleUpdate(row, $index)" circle type="primary">
-						<el-icon :size="20"> <Edit /></el-icon>
+						<el-icon :size="20">
+							<Edit />
+						</el-icon>
 					</el-button>
 					<el-button @click="handleDelete(row, $index)" type="danger" circle>
-						<el-icon :size="20"> <Delete /></el-icon>
+						<el-icon :size="20">
+							<Delete />
+						</el-icon>
 					</el-button>
 					<el-button @click="handleExecute(row, $index)" type="text">
-						<el-icon :size="10"><VideoPlay /></el-icon>执行退货
+						<el-icon :size="10"> <VideoPlay /> </el-icon>执行退货
 					</el-button>
 				</template>
 			</el-table-column>
@@ -345,7 +349,7 @@ const selectedRow = ref(null);
 			@size-change="onSizeChange"
 			@current-change="onCurrentChange"
 			style="margin-top: 20px; justify-content: flex-end"
-		/>
+		></el-pagination>
 
 		<!-- 添加或修改退货单对话框 -->
 		<el-dialog v-model="dialogVisible" :title="dialogTitle">
@@ -400,7 +404,7 @@ const selectedRow = ref(null);
 				<el-button type="primary" @click="submitForm">确定</el-button>
 			</template>
 		</el-dialog>
-	</tableFrame>
+	</TableFrame>
 </template>
 
 <style lang="scss" scoped>

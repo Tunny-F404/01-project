@@ -23,12 +23,12 @@ const routes = [
 	{
 		path: "/un-4",
 		name: "UN4",
-		component: () => import("@/views/basedata/Clientdemo1.vue"),
+		component: () => import("@/views/basedata/Clientdemo.vue"),
 	},
 	{
 		path: "/un-5",
 		name: "UN5",
-		component: () => import("@/views/sample/Productionworkorder/Productionworkorder.vue"),
+		component: () => import("@/views/basedata/supplier.vue"),
 	},
 	{
 		path: "/un-6",
@@ -109,6 +109,18 @@ const routes = [
 		name: "UN34",
 		component: () => import("@/views/warehouse-management/Material.vue"),
 	},
+	// 生产退料页面
+	{
+		path: "/un-35",
+		name: "UN35",
+		component: () => import("@/views/warehouse-management/ProductionReturn.vue"),
+	},
+	// 产品入库页面
+	{
+		path: "/un-36",
+		name: "UN36",
+		component: () => import("@/views/warehouse-management/Productrecpt.vue"),
+	},
 	// 组织架构主菜单
 	{
 		path: "/orgstructure",
@@ -160,9 +172,50 @@ const routes = [
 	},
 	// 采购系统管理的消息通知页面
 	{
-		path: "/un-51",
+		path: "/un-606",
 		name: "UN51",
 		component: () => import("@/views/organizational-structure/organizational-structure.vue"),
+	},
+	// 采购系统管理的消息通知页面
+	{
+		path: "/un-45",
+		name: "UN45",
+		component: () => import("@/views/system-management/CodeRules.vue"),
+	},
+	// 班组设置
+	{
+		path: "/un-101",
+		name: "UN101",
+		component: () => import("@/views/workforce-management/working-schedule.vue"),
+	},
+	// 节假日设置
+	{
+		path: "/un-102",
+		name: "UN102",
+		component: () => import("@/views/status/404.vue"),
+	},
+	// 排班日历
+	{
+		path: "/un-103",
+		name: "UN103",
+		component: () => import("@/views/status/404.vue"),
+	},
+	// 排班计划
+	{
+		path: "/un-104",
+		name: "UN104",
+		component: () => import("@/views/workforce-management/team-group.vue"),
+	},
+	// 工装夹具管理/类型设置
+	{
+		path: "/un-607",
+		name: "UN607",
+		component: () => import("@/views/frockClamp/typeSetting.vue"),
+	}, // 工装夹具管理/工装夹具台账
+	{
+		path: "/un-608",
+		name: "UN608",
+		component: () => import("@/views/frockClamp/equipmentLedger.vue"),
 	},
 ];
 

@@ -4,67 +4,68 @@ import { TableFrame } from "components/std-table";
 import request from "@/apis/request.js";
 
 // 搜索表单
-const issueCode = ref("");
-const issueName = ref("");
+const recptCode = ref("");
+const recptName = ref("");
+const workorderCode = ref("");
 const warehouseName = ref("");
-const issueDate = ref(null);
+const recptDate = ref(null);
 const status = ref("");
 //对话框标题
 const dialogTitle = ref("");
 // 表格数据
 const tableList = ref([
 	{
-		issueCode: "I001",
-		issueName: "领料单1",
+		recptCode: "R001",
+		recptName: "入库单1",
 		workorderCode: "WO001",
-		clientCode: "C001",
-		clientName: "客户1",
-		issueDate: "2023-10-01",
+		itemCode: "P001",
+		itemName: "产品1",
+		recptDate: "2023-10-01",
 		status: "PREPARE",
 	},
 	{
-		issueCode: "I002",
-		issueName: "领料单2",
+		recptCode: "R002",
+		recptName: "入库单2",
 		workorderCode: "WO002",
-		clientCode: "C002",
-		clientName: "客户2",
-		issueDate: "2023-10-02",
+		itemCode: "P002",
+		itemName: "产品2",
+		recptDate: "2023-10-02",
 		status: "CONFIRMED",
 	},
 	{
-		issueCode: "I003",
-		issueName: "领料单3",
+		recptCode: "R003",
+		recptName: "入库单3",
 		workorderCode: "WO003",
-		clientCode: "C003",
-		clientName: "客户3",
-		issueDate: "2023-10-03",
+		itemCode: "P003",
+		itemName: "产品3",
+		recptDate: "2023-10-03",
 		status: "PREPARE",
 	},
 	{
-		issueCode: "I004",
-		issueName: "领料单4",
+		recptCode: "R004",
+		recptName: "入库单4",
 		workorderCode: "WO004",
-		clientCode: "C004",
-		clientName: "客户4",
-		issueDate: "2023-10-04",
+		itemCode: "P004",
+		itemName: "产品4",
+		recptDate: "2023-10-04",
 		status: "CONFIRMED",
 	},
 	{
-		issueCode: "I005",
-		issueName: "领料单5",
+		recptCode: "R005",
+		recptName: "入库单5",
 		workorderCode: "WO005",
-		clientCode: "C005",
-		clientName: "客户5",
-		issueDate: "2023-10-05",
+		itemCode: "P005",
+		itemName: "产品5",
+		recptDate: "2023-10-05",
 		status: "PREPARE",
 	},
 	{
-		issueCode: "I006",
-		issueName: "领料单6",
+		recptCode: "R006",
+		recptName: "入库单6",
 		workorderCode: "WO006",
-		clientCode: "C006",
-		clientName: "客户6",
-		issueDate: "2023-10-06",
+		itemCode: "P006",
+		itemName: "产品6",
+		recptDate: "2023-10-06",
 		status: "CONFIRMED",
 	},
 ]);
@@ -73,26 +74,21 @@ const tableList = ref([
 const dialogVisible = ref(false);
 const formRef = ref();
 const formModel = ref({
-	issueCode: "",
-	issueName: "",
-	issueDate: "",
+	recptCode: "",
+	recptName: "",
 	workorderCode: "",
+	workorderName: "",
+	recptDate: "",
 	status: "",
-	clientCode: "",
-	clientName: "",
-	warehouseInfo: [],
 	remark: "",
 });
 
 const rules = {
-	issueCode: [{ required: true, message: "请输入领料单编号", trigger: "blur" }],
-	issueName: [{ required: true, message: "请输入领料单名称", trigger: "blur" }],
-	issueDate: [{ required: true, message: "请选择领料日期", trigger: "change" }],
+	recptCode: [{ required: true, message: "请输入入库单编号", trigger: "blur" }],
+	recptName: [{ required: true, message: "请输入入库单名称", trigger: "blur" }],
 	workorderCode: [{ required: true, message: "请输入生产工单", trigger: "blur" }],
+	recptDate: [{ required: true, message: "请选择入库日期", trigger: "change" }],
 	status: [{ required: true, message: "请选择单据状态", trigger: "change" }],
-	clientCode: [{ required: true, message: "请输入客户编号", trigger: "blur" }],
-	clientName: [{ required: true, message: "请输入客户名称", trigger: "blur" }],
-	warehouseInfo: [{ required: true, message: "请选择领料仓库", trigger: "change" }],
 	remark: [{ required: true, message: "请输入备注", trigger: "blur" }],
 };
 
@@ -130,7 +126,6 @@ const submitForm = () => {
 //  };
 
 //取消提交
-
 const cancelForm = () => {
 	dialogVisible.value = false;
 };
@@ -145,6 +140,7 @@ const parms = ref({
 const total = ref(tableList.value.length);
 // 原始表格数据的副本，用于分页和过滤操作,模拟后端获取数据
 const originalTableList = ref([...tableList.value]);
+
 // 模拟计算，获取当前页的数据列表
 const getPageList = () => {
 	loading.value = true; // 显示加载动画
@@ -177,59 +173,38 @@ const onCurrentChange = (page) => {
 	parms.value.pagenum = page; // 更新当前页码
 	getPageList(); // 重新获取分页数据
 };
-// 后端获取数据分页
-// const getPageList = async () => {
-//   loading.value = true; // 显示加载动画
-//   try {
-//     // 调用后端接口获取分页数据
-//     const response = await request.get('/api/issues', {
-//       params: {
-//         page: parms.value.pagenum,
-//         size: parms.value.pagesize,
-//       },
-//     });
-//     tableList.value = response.data.items; // 当前页的数据
-//     total.value = response.data.total; // 总条数
-//   } catch (error) {
-//     console.error("获取分页数据失败", error);
-//   } finally {
-//     loading.value = false; // 隐藏加载动画
-//   }
-// };
 
 // 表格上面新增操作
 const handleAdd = () => {
 	formModel.value = {
-		issueCode: "",
-		issueName: "",
-		issueDate: "",
+		recptCode: "",
+		recptName: "",
 		workorderCode: "",
+		workorderName: "",
+		recptDate: "",
 		status: "",
-		clientCode: "",
-		clientName: "",
-		warehouseInfo: [],
 		remark: "",
 	};
-	dialogTitle.value = "新增生产领料单";
+	dialogTitle.value = "新增产品入库单";
 	dialogVisible.value = true;
 };
 //表格修改操作
 const handleUpdate = (row) => {
 	formModel.value = { ...row };
-	dialogTitle.value = "修改生产领料单";
+	dialogTitle.value = "修改产品入库单";
 	dialogVisible.value = true;
 };
 
 //模拟删除操作
 const handleDelete = (row) => {
-	ElMessageBox.confirm("你确认要删除该领料单么", "温馨提示", {
+	ElMessageBox.confirm("你确认要删除该入库单么", "温馨提示", {
 		type: "warning",
 		confirmButtonText: "确认",
 		cancelButtonText: "取消",
 	})
 		.then(() => {
 			// 模拟删除操作
-			const index = tableList.value.findIndex((item) => item.issueCode === row.issueCode);
+			const index = tableList.value.findIndex((item) => item.recptCode === row.recptCode);
 			if (index !== -1) {
 				tableList.value.splice(index, 1);
 				originalTableList.value = [...tableList.value];
@@ -242,14 +217,14 @@ const handleDelete = (row) => {
 		});
 };
 //   const handleDelete = (row) => {
-// 	ElMessageBox.confirm("你确认要删除该领料单么", "温馨提示", {
+// 	ElMessageBox.confirm("你确认要删除该入库单么", "温馨提示", {
 //      type: "warning",
 //      confirmButtonText: "确认",
 //      cancelButtonText: "取消",
 //    })
 //      .then(() => {
 //        // 替换为后端请求
-//        request.delete(`/api/delete/${row.issueCode}`)
+//        request.delete(`/api/delete/${row.recptCode}`)
 //          .then(response => {
 //            console.log("删除成功", response.data);
 //            ElMessage.success("删除成功");
@@ -275,10 +250,11 @@ const handleQuery = () => {
 	new Promise((resolve) => {
 		tableList.value = originalTableList.value.filter((item) => {
 			return (
-				(!issueCode.value || item.issueCode.includes(issueCode.value)) &&
-				(!issueName.value || item.issueName.includes(issueName.value)) &&
+				(!recptCode.value || item.recptCode.includes(recptCode.value)) &&
+				(!recptName.value || item.recptName.includes(recptName.value)) &&
+				(!workorderCode.value || item.workorderCode.includes(workorderCode.value)) &&
 				(!warehouseName.value || item.warehouseName.includes(warehouseName.value)) &&
-				(!issueDate.value || item.issueDate === issueDate.value) &&
+				(!recptDate.value || item.recptDate === recptDate.value) &&
 				(!status.value || item.status === status.value)
 			);
 		});
@@ -290,7 +266,7 @@ const handleQuery = () => {
 //后端   const handleQuery = () => {
 //    loading.value = true;
 //    // 替换为后端请求
-//    request.get('/api/query', { params: { issueCode: issueCode.value, issueName: issueName.value, warehouseName: warehouseName.value, issueDate: issueDate.value, status: status.value } })
+//    request.get('/api/query', { params: { recptCode: recptCode.value, recptName: recptName.value, workorderCode: workorderCode.value, warehouseName: warehouseName.value, recptDate: recptDate.value, status: status.value } })
 //      .then(response => {
 //        tableList.value = response.data;
 //        originalTableList.value = [...response.data];
@@ -303,10 +279,11 @@ const handleQuery = () => {
 
 //重置
 const resetQuery = () => {
-	issueCode.value = "";
-	issueName.value = "";
+	recptCode.value = "";
+	recptName.value = "";
+	workorderCode.value = "";
 	warehouseName.value = "";
-	issueDate.value = null;
+	recptDate.value = null;
 	status.value = "";
 	handleQuery();
 };
@@ -315,20 +292,20 @@ const handleSelectionChange = (val) => {
 	console.log("选中项变化", val);
 };
 
-//执行领出
+//执行入库
 const handleExecute = (row) => {
-	ElMessageBox.confirm("你确认要执行领出么", "温馨提示", {
+	ElMessageBox.confirm("你确认要执行入库么", "温馨提示", {
 		type: "warning",
 		confirmButtonText: "确认",
 		cancelButtonText: "取消",
 	})
 		.then(() => {
-			ElMessage.success("执行领出成功");
-			console.log("执行领出", row);
-			// 执行领出的逻辑
+			ElMessage.success("执行入库成功");
+			console.log("执行入库", row);
+			// 执行入库的逻辑
 		})
 		.catch(() => {
-			console.log("取消执行领出");
+			console.log("取消执行入库");
 		});
 };
 
@@ -357,12 +334,12 @@ const refreshData = () => {
 			tableList.value = [
 				...tableList.value,
 				{
-					issueCode: "I007",
-					issueName: "领料单7",
+					recptCode: "R007",
+					recptName: "入库单7",
 					workorderCode: "WO007",
-					clientCode: "C007",
-					clientName: "客户7",
-					issueDate: "2023-10-07",
+					itemCode: "P007",
+					itemName: "产品7",
+					recptDate: "2023-10-07",
 					status: "PREPARE",
 				},
 			];
@@ -393,7 +370,7 @@ const refreshData = () => {
 </script>
 
 <template>
-	<TableFrame title="生产领料管理">
+	<TableFrame title="产品入库管理">
 		<template #extra>
 			<el-button @click="handleExport"
 				>导出数据<el-icon :size="22"><UploadFilled /></el-icon
@@ -403,29 +380,34 @@ const refreshData = () => {
 		<!-- 搜索表单 -->
 		<el-form v-if="showSearchBar" :inline="true" class="demo-form-inline">
 			<el-row>
-				<el-col :span="8">
-					<el-form-item label="领料单编号：">
-						<el-input v-model="issueCode" placeholder="请输入领料单编号" clearable />
+				<el-col :span="6">
+					<el-form-item label="入库单编号：">
+						<el-input v-model="recptCode" placeholder="请输入入库单编号" clearable />
 					</el-form-item>
 				</el-col>
-				<el-col :span="8">
-					<el-form-item label="领料单名称：">
-						<el-input v-model="issueName" placeholder="请输入领料单名称" clearable />
+				<el-col :span="6">
+					<el-form-item label="入库单名称：">
+						<el-input v-model="recptName" placeholder="请输入入库单名称" clearable />
 					</el-form-item>
 				</el-col>
-				<el-col :span="8">
-					<el-form-item label="仓库名称：">
-						<el-input v-model="warehouseName" placeholder="请输入仓库名称" clearable />
+				<el-col :span="6">
+					<el-form-item label="生产工单：">
+						<el-input v-model="workorderCode" placeholder="请输入生产工单" clearable />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
-				<el-col :span="8">
-					<el-form-item label="领料日期：">
-						<el-date-picker v-model="issueDate" type="date" placeholder="请选择领料日期" clearable />
+				<el-col :span="6">
+					<el-form-item label="仓库名称：">
+						<el-input v-model="warehouseName" placeholder="请输入仓库名称" clearable />
 					</el-form-item>
 				</el-col>
-				<el-col :span="8">
+				<el-col :span="6">
+					<el-form-item label="入库日期：">
+						<el-date-picker v-model="recptDate" type="date" placeholder="请选择入库日期" clearable />
+					</el-form-item>
+				</el-col>
+				<el-col :span="6">
 					<el-form-item label="单据状态：">
 						<el-select v-model="status" placeholder="请选择单据状态" clearable>
 							<el-option label="已完成" value="PREPARE"></el-option>
@@ -433,7 +415,7 @@ const refreshData = () => {
 						</el-select>
 					</el-form-item>
 				</el-col>
-				<el-col :span="8">
+				<el-col :span="6">
 					<el-form-item>
 						<el-button type="primary" @click="handleQuery"
 							><el-icon><Search /></el-icon>查询</el-button
@@ -481,31 +463,18 @@ const refreshData = () => {
 			@sort-change="handleSortChange"
 		>
 			<el-table-column type="selection" width="55" />
-			<!-- <el-table-column type="index" label="序号" width="55"></el-table-column> -->
 			<el-table-column
-				prop="issueCode"
-				label="领料单编号"
+				prop="recptCode"
+				label="入库单编号"
 				width="120"
 				align="center"
 				sortable="custom"
 			></el-table-column>
-			<el-table-column prop="issueName" label="领料单名称" width="175" align="center"></el-table-column>
-			<el-table-column prop="workorderCode" label="生产工单" width="125" align="center"></el-table-column>
-			<el-table-column
-				prop="clientCode"
-				label="客户编号"
-				width="120"
-				align="center"
-				sortable="custom"
-			></el-table-column>
-			<el-table-column
-				prop="clientName"
-				label="客户名称"
-				width="150"
-				align="center"
-				sortable="custom"
-			></el-table-column>
-			<el-table-column prop="issueDate" label="领料日期" width="120" align="center" sortable="custom"></el-table-column>
+			<el-table-column prop="recptName" label="入库单名称" width="175" align="center"></el-table-column>
+			<el-table-column prop="workorderCode" label="生产工单编码" width="125" align="center"></el-table-column>
+			<el-table-column prop="itemCode" label="产品编码" width="120" align="center" sortable="custom"></el-table-column>
+			<el-table-column prop="itemName" label="产品名称" width="150" align="center" sortable="custom"></el-table-column>
+			<el-table-column prop="recptDate" label="入库日期" width="120" align="center" sortable="custom"></el-table-column>
 			<el-table-column prop="status" label="单据状态" width="80" align="center">
 				<template #default="{ row }">
 					<el-tag :class="row.status === 'PREPARE' ? 'status-enabled' : 'status-disabled'" style="cursor: pointer">
@@ -522,7 +491,7 @@ const refreshData = () => {
 						<el-icon :size="20"> <Delete /></el-icon>
 					</el-button>
 					<el-button @click="handleExecute(row, $index)" type="text">
-						<el-icon :size="10"><VideoPlay /></el-icon>执行领出
+						<el-icon :size="10"><VideoPlay /></el-icon>执行入库
 					</el-button>
 				</template>
 			</el-table-column>
@@ -541,23 +510,23 @@ const refreshData = () => {
 			style="margin-top: 20px; justify-content: flex-end"
 		/>
 
-		<!-- 添加或修改生产领料单对话框 -->
+		<!-- 添加或修改产品入库单对话框 -->
 		<el-dialog v-model="dialogVisible" :title="dialogTitle">
 			<el-form ref="formRef" :model="formModel" :rules="rules" label-width="120px">
 				<el-row>
 					<el-col :span="8">
-						<el-form-item label="领料单编号" prop="issueCode">
-							<el-input v-model="formModel.issueCode" placeholder="请输入领料单编号" />
+						<el-form-item label="入库单编号" prop="recptCode">
+							<el-input v-model="formModel.recptCode" placeholder="请输入入库单编号" />
 						</el-form-item>
 					</el-col>
 					<el-col :span="8">
-						<el-form-item label="领料单名称" prop="issueName">
-							<el-input v-model="formModel.issueName" placeholder="请输入领料单名称" />
+						<el-form-item label="入库单名称" prop="recptName">
+							<el-input v-model="formModel.recptName" placeholder="请输入入库单名称" />
 						</el-form-item>
 					</el-col>
 					<el-col :span="8">
-						<el-form-item label="领料日期" prop="issueDate">
-							<el-date-picker v-model="formModel.issueDate" type="date" placeholder="请选择领料日期" />
+						<el-form-item label="入库日期" prop="recptDate">
+							<el-date-picker v-model="formModel.recptDate" type="date" placeholder="请选择入库日期" />
 						</el-form-item>
 					</el-col>
 				</el-row>
@@ -568,28 +537,16 @@ const refreshData = () => {
 						</el-form-item>
 					</el-col>
 					<el-col :span="8">
+						<el-form-item label="生产工单名称" prop="workorderName">
+							<el-input v-model="formModel.workorderName" placeholder="请输入生产工单名称" />
+						</el-form-item>
+					</el-col>
+					<el-col :span="8">
 						<el-form-item label="单据状态" prop="status">
 							<el-select v-model="formModel.status" placeholder="请选择单据状态">
 								<el-option label="已完成" value="PREPARE"></el-option>
 								<el-option label="草稿" value="CONFIRMED"></el-option>
 							</el-select>
-						</el-form-item>
-					</el-col>
-					<el-col :span="8">
-						<el-form-item label="客户编号" prop="clientCode">
-							<el-input v-model="formModel.clientCode" placeholder="请输入客户编号" />
-						</el-form-item>
-					</el-col>
-				</el-row>
-				<el-row>
-					<el-col :span="8">
-						<el-form-item label="客户名称" prop="clientName">
-							<el-input v-model="formModel.clientName" placeholder="请输入客户名称" />
-						</el-form-item>
-					</el-col>
-					<el-col :span="16">
-						<el-form-item label="领料仓库" prop="warehouseInfo">
-							<el-cascader v-model="formModel.warehouseInfo" :options="[]" placeholder="请选择领料仓库" />
 						</el-form-item>
 					</el-col>
 				</el-row>
