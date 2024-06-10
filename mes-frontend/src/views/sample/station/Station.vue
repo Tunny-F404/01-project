@@ -138,14 +138,7 @@ export default {
 			selectedOrder: "",
 			pageSize: 6,
 			currentPage: 1,
-			workshops: [
-				{ value: "workshop1", label: "车间1" },
-				{ value: "workshop2", label: "车间2" },
-			],
-			orders: [
-				{ value: "order1", label: "工序1" },
-				{ value: "order2", label: "工序2" },
-			],
+
 			tableData: [
 				{
 					code: "WS0707",

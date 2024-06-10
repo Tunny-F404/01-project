@@ -66,17 +66,17 @@
 				<el-col :span="24">
 					<el-table :data="paginatedData" @selection-change="handleRowSelectionChange" style="width: 100%">
 						<el-table-column type="selection" width="40"></el-table-column>
-						<el-table-column prop="workOrderCode" label="报工类型" width="180"></el-table-column>
+						<el-table-column prop="orderStatus" label="报工类型" width="180"></el-table-column>
 						<el-table-column prop="workOrderName" label="工作站名称" width="180"></el-table-column>
-						<el-table-column prop="workOrderType" label="生产工单编号" width="100"></el-table-column>
+						<el-table-column prop="workOrderType" label="生产工单编号" width="180"></el-table-column>
 						<el-table-column prop="productCode" label="产品物料编码" width="180"></el-table-column>
 						<el-table-column prop="productName" label="产品物料名称" width="180"></el-table-column>
-						<el-table-column prop="models" label="规格型号" width="80"></el-table-column>
-						<el-table-column prop="sourceOrder" label="报工人" width="100"></el-table-column>
-						<el-table-column prop="sourceQty" label="报工数量" width="120"></el-table-column>
-						<el-table-column prop="sourceTime" label="报工时间" width="120"></el-table-column>
-						<el-table-column prop="noteKeeper" label="记录人" width="120"></el-table-column>
-						<el-table-column prop="states" label="状态" width="120"></el-table-column>
+						<el-table-column prop="models" label="规格型号" width="180"></el-table-column>
+						<el-table-column prop="sourceOrder" label="报工人" width="180"></el-table-column>
+						<el-table-column prop="sourceQty" label="报工数量" width="180"></el-table-column>
+						<el-table-column prop="sourceTime" label="报工时间" width="180"></el-table-column>
+						<el-table-column prop="noteKeeper" label="记录人" width="180"></el-table-column>
+						<el-table-column prop="states" label="状态" width="180"></el-table-column>
 						<el-table-column label="操作" width="180">
 							<template v-slot="scope">
 								<el-button type="text" size="small" @click="handleEdit(scope.row)">修改</el-button>
@@ -102,13 +102,13 @@
 		<!-- 编辑弹窗 -->
 		<el-dialog title="编辑工单" :visible.sync="editDialogVisible">
 			<el-form :model="editingRow">
-				<el-form-item label="工单编码">
-					<el-input v-model="editingRow.workOrderCode" disabled></el-input>
+				<el-form-item label="报工类型">
+					<el-input v-model="editingRow.orderStatus" disabled></el-input>
 				</el-form-item>
-				<el-form-item label="工单名称">
+				<el-form-item label="工作站名称">
 					<el-input v-model="editingRow.workOrderName"></el-input>
 				</el-form-item>
-				<el-form-item label="工单类型">
+				<el-form-item label="生产工单编号">
 					<el-select v-model="editingRow.workOrderType">
 						<el-option label="自产" value="自产"></el-option>
 						<el-option label="外购" value="外购"></el-option>
@@ -148,7 +148,7 @@
 					<el-date-picker v-model="editingRow.demandDate" type="date"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="状态">
-					<el-select v-model="editingRow.orderStatus">
+					<el-select v-model="editingRow.status">
 						<el-option label="已确认" value="已确认"></el-option>
 						<el-option label="未确认" value="未确认"></el-option>
 						<el-option label="草稿" value="草稿"></el-option>
@@ -171,13 +171,14 @@
 export default {
 	data() {
 		return {
-			workOrderCode: "",
+			orderStatus: "",
 			workOrderName: "",
+			placeholder: "",
 			workOrderType: "",
 			demandDate: "",
 			productCode: "",
 			productName: "",
-			sourceOrder: "",
+			states: "",
 			customerCode: "",
 			customerName: "",
 			orderStatus: "",
@@ -186,7 +187,7 @@ export default {
 			tableData: [
 				// 数据示例
 				{
-					workOrderCode: "MO202406020003",
+					orderStatus: "MO202406020003",
 					workOrderName: "test.洛斯达",
 					workOrderType: "自产",
 					sourceOrder: "库存备货",
@@ -205,7 +206,7 @@ export default {
 				// 其他数据...
 			],
 			editDialogVisible: false,
-			editingRow: {},
+			editingRow: null,
 			selectedRows: [],
 		};
 	},
@@ -218,37 +219,36 @@ export default {
 	},
 	methods: {
 		search() {
+			// 搜索逻辑
 			const filters = {
-				workstationCode: this.workstationCode.trim(), // 去除输入内容两端的空白字符
-				workstationName: this.workstationName.trim(), // 去除输入内容两端的空白字符
-				selectedWorkshop: this.selectedWorkshop,
-				selectedOrder: this.selectedOrder,
+				workOrderName: this.workOrderName.trim(),
+				workOrderType: this.workOrderType,
+				productCode: this.productCode.trim(),
+				productName: this.productName.trim(),
+				sourceOrder: this.sourceOrder.trim(),
+				customerCode: this.customerCode.trim(),
+				customerName: this.customerName.trim(),
+				orderStatus: this.orderStatus,
+				demandDate: this.demandDate,
 			};
 
-			// 如果两个输入框都为空，则恢复显示所有数据
-			if (!filters.workstationCode && !filters.workstationName) {
-				this.reset();
-				return;
-			}
-
-			// 对表格数据进行过滤
 			const filteredData = this.tableData.filter((item) => {
-				if (filters.workstationCode && !item.code.includes(filters.workstationCode)) {
-					return false;
-				}
-
-				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
-					return false;
-				}
-
-				return true;
+				return (
+					(!filters.workOrderName || item.workOrderName.includes(filters.workOrderName)) &&
+					(!filters.workOrderType || item.workOrderType === filters.workOrderType) &&
+					(!filters.productCode || item.productCode.includes(filters.productCode)) &&
+					(!filters.productName || item.productName.includes(filters.productName)) &&
+					(!filters.sourceOrder || item.sourceOrder.includes(filters.sourceOrder)) &&
+					(!filters.customerCode || item.customerCode.includes(filters.customerCode)) &&
+					(!filters.customerName || item.customerName.includes(filters.customerName)) &&
+					(!filters.status || item.status === filters.status) &&
+					(!filters.demandDate || item.demandDate === filters.demandDate)
+				);
 			});
 
-			// 更新表格数据为过滤后的数据
 			this.tableData = filteredData;
 		},
 		reset() {
-			this.workOrderCode = "";
 			this.workOrderName = "";
 			this.workOrderType = "";
 			this.demandDate = "";

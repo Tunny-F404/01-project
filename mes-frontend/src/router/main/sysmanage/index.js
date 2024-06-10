@@ -38,7 +38,7 @@ const routes = [
 	{
 		path: "/un-7",
 		name: "UN7",
-		component: () => import("@/views/sample/station/Station.vue"),
+		component: () => import("@/views/sample/Productionreport/Productionreport.vue"),
 	},
 	{
 		path: "/un-8",

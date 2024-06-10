@@ -4,57 +4,68 @@
 			<!-- 搜索条件 -->
 			<el-row :gutter="20" class="input-row">
 				<el-col :span="4">
-					<span class="input-label">工单编码：</span>
-					<el-input v-model="workOrderCode" placeholder="请输入工单编码" class="input-size" />
+					<el-form-item label="工单编码">
+						<el-input v-model="workOrderCode" placeholder="请输入工单编码" class="input-size" />
+					</el-form-item>
 				</el-col>
 				<el-col :span="4">
-					<span class="input-label">工单名称：</span>
-					<el-input v-model="workOrderName" placeholder="请输入工单名称" class="input-size" />
+					<el-form-item label="工单名称">
+						<el-input v-model="workOrderName" placeholder="请输入工单名称" class="input-size" />
+					</el-form-item>
 				</el-col>
 				<el-col :span="4">
-					<span class="input-label">工单类型：</span>
-					<el-select v-model="workOrderType" placeholder="请选择工单类型" class="input-size">
-						<el-option label="自产" value="自产"></el-option>
-						<el-option label="外购" value="外购"></el-option>
-					</el-select>
+					<el-form-item label="工单类型">
+						<el-select v-model="workOrderType" placeholder="请选择工单类型" class="input-size">
+							<el-option label="自产" value="自产"></el-option>
+							<el-option label="外购" value="外购"></el-option>
+						</el-select>
+					</el-form-item>
 				</el-col>
 				<el-col :span="4">
-					<span class="input-label">产品编号：</span>
-					<el-input v-model="productCode" placeholder="请输入产品编号" class="input-size" />
+					<el-form-item label="产品编号">
+						<el-input v-model="productCode" placeholder="请输入产品编号" class="input-size" />
+					</el-form-item>
 				</el-col>
 				<el-col :span="4">
-					<span class="input-label">产品名称：</span>
-					<el-input v-model="productName" placeholder="请输入产品名称" class="input-size" />
+					<el-form-item label="产品名称">
+						<el-input v-model="productName" placeholder="请输入产品名称" class="input-size" />
+					</el-form-item>
 				</el-col>
 				<el-col :span="4">
-					<span class="input-label">来源单据：</span>
-					<el-input v-model="sourceOrder" placeholder="请输入来源单据" class="input-size" />
+					<el-form-item label="来源单据">
+						<el-input v-model="sourceOrder" placeholder="请输入来源单据" class="input-size" />
+					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row :gutter="20" class="input-row">
 				<el-col :span="4">
-					<span class="input-label">客户编码：</span>
-					<el-input v-model="customerCode" placeholder="请输入客户编码" class="input-size" />
+					<el-form-item label="客户编码">
+						<el-input v-model="customerCode" placeholder="请输入客户编码" class="input-size" />
+					</el-form-item>
 				</el-col>
 				<el-col :span="4">
-					<span class="input-label">客户名称：</span>
-					<el-input v-model="customerName" placeholder="请输入客户名称" class="input-size" />
+					<el-form-item label="客户名称">
+						<el-input v-model="customerName" placeholder="请输入客户名称" class="input-size" />
+					</el-form-item>
 				</el-col>
 				<el-col :span="4">
-					<span class="input-label">请选择单据状态：</span>
-					<el-select v-model="orderStatus" placeholder="请选择单据状态" class="input-size">
-						<el-option label="已确认" value="已确认"></el-option>
-						<el-option label="未确认" value="未确认"></el-option>
-					</el-select>
+					<el-form-item label="单据状态">
+						<el-select v-model="orderStatus" placeholder="请选择单据状态" class="input-size">
+							<el-option label="已确认" value="已确认"></el-option>
+							<el-option label="未确认" value="未确认"></el-option>
+						</el-select>
+					</el-form-item>
 				</el-col>
 				<el-col :span="4">
-					<span class="input-label">需求日期：</span>
-					<el-date-picker
-						v-model="demandDate"
-						placeholder="请选择需求日期"
-						type="date"
-						class="input-size"
-					></el-date-picker>
+					<el-form-item label="需求日期">
+						<el-date-picker
+							v-model="demandDate"
+							placeholder="请选择需求日期"
+							type="date"
+							value-format="YYYY-MM-DD"
+							class="input-size"
+						/>
+					</el-form-item>
 				</el-col>
 				<el-col :span="4" class="button-container">
 					<el-button type="primary" @click="search">搜索</el-button>
@@ -159,7 +170,12 @@
 					<el-input v-model="editingRow.customerName"></el-input>
 				</el-form-item>
 				<el-form-item label="需求日期">
-					<el-date-picker v-model="editingRow.demandDate" type="date"></el-date-picker>
+					<el-date-picker
+						v-model="editingRow.demandDate"
+						type="date"
+						value-format="YYYY-MM-DD"
+						class="input-size"
+					></el-date-picker>
 				</el-form-item>
 				<el-form-item label="单据状态">
 					<el-select v-model="editingRow.orderStatus">
@@ -193,7 +209,6 @@ export default {
 			pageSize: 10,
 			currentPage: 1,
 			tableData: [
-				// 数据示例
 				{
 					workOrderCode: "MO202406020003",
 					workOrderName: "test.洛斯达",
@@ -227,55 +242,35 @@ export default {
 	},
 	methods: {
 		search() {
+			// 搜索逻辑
 			const filters = {
-				workOrderCode: this.workOrderCode.trim(), // 去除输入内容两端的空白字符
-				workstationName: this.workstationName.trim(), // 去除输入内容两端的空白字符
-				selectedWorkshop: this.selectedWorkshop,
-				selectedOrder: this.selectedOrder,
+				workOrderCode: this.workOrderCode.trim(),
+				workOrderName: this.workOrderName.trim(),
+				workOrderType: this.workOrderType,
+				productCode: this.productCode.trim(),
+				productName: this.productName.trim(),
+				sourceOrder: this.sourceOrder.trim(),
+				customerCode: this.customerCode.trim(),
+				customerName: this.customerName.trim(),
+				orderStatus: this.orderStatus,
+				demandDate: this.demandDate,
 			};
 
-			// 如果两个输入框都为空，则恢复显示所有数据
-			//if (!filters.workstationCode && !filters.workstationName) {
-			//this.reset();
-			//	return;
-			//	}
-
-			// 对表格数据进行过滤
 			const filteredData = this.tableData.filter((item) => {
-				// 根据工作站编码进行过滤
-				if (filters.workOrderCode && !item.workOrderCode.includes(filters.workOrderCode)) {
-					return false;
-				}
-				// 根据工作站名称进行过滤
-				if (filters.workOrderName && !item.workOrderName.includes(filters.workOrderName)) {
-					return false;
-				}
-				if (filters.workOrderType && item.workOrderType !== filters.workOrderType) {
-					return false;
-				}
-				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
-					return false;
-				}
-				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
-					return false;
-				}
-				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
-					return false;
-				}
-				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
-					return false;
-				}
-				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
-					return false;
-				}
-				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
-					return false;
-				}
-
-				return true; // 如果都符合过滤条件，则返回 true
+				return (
+					(!filters.workOrderCode || item.workOrderCode.includes(filters.workOrderCode)) &&
+					(!filters.workOrderName || item.workOrderName.includes(filters.workOrderName)) &&
+					(!filters.workOrderType || item.workOrderType === filters.workOrderType) &&
+					(!filters.productCode || item.productCode.includes(filters.productCode)) &&
+					(!filters.productName || item.productName.includes(filters.productName)) &&
+					(!filters.sourceOrder || item.sourceOrder.includes(filters.sourceOrder)) &&
+					(!filters.customerCode || item.customerCode.includes(filters.customerCode)) &&
+					(!filters.customerName || item.customerName.includes(filters.customerName)) &&
+					(!filters.orderStatus || item.orderStatus === filters.orderStatus) &&
+					(!filters.demandDate || item.demandDate === filters.demandDate)
+				);
 			});
 
-			// 更新表格数据为过滤后的数据
 			this.tableData = filteredData;
 		},
 		reset() {
@@ -291,15 +286,22 @@ export default {
 			this.orderStatus = "";
 		},
 		addNew() {
-			// 打开编辑对话框
 			this.editingRow = {
-				code: "", // 根据需求设置默认值
-				name: "", // 根据需求设置默认值
-				location: "", // 根据需求设置默认值
-				workshop: "", // 根据需求设置默认值
-				order: "", // 根据需求设置默认值
-				enabled: true, // 根据需求设置默认值
-				note: "", // 根据需求设置默认值
+				workOrderCode: "",
+				workOrderName: "",
+				workOrderType: "",
+				sourceOrder: "",
+				productCode: "",
+				productName: "",
+				unit: "",
+				workOrderQty: 0,
+				adjustedQty: 0,
+				producedQty: 0,
+				batchNo: "",
+				customerCode: "",
+				customerName: "",
+				demandDate: "",
+				orderStatus: "",
 			};
 			this.editDialogVisible = true;
 		},
@@ -308,8 +310,12 @@ export default {
 			console.log("导出");
 		},
 		batchDelete() {
-			// 批量删除逻辑
-			console.log("批量删除", this.selectedRows);
+			this.selectedRows.forEach((row) => {
+				const index = this.tableData.indexOf(row);
+				if (index !== -1) {
+					this.tableData.splice(index, 1);
+				}
+			});
 		},
 		handleRowSelectionChange(selectedRows) {
 			this.selectedRows = selectedRows;
@@ -322,30 +328,25 @@ export default {
 		},
 		handleEdit(row) {
 			this.editingRow = { ...row };
-			// 打开修改对话框
 			this.editDialogVisible = true;
-			// 这里可以编写打开修改对话框的逻辑
 		},
 		saveEdit() {
-			// 根据编辑对话框中的数据更新表格中对应行的数据
-			const index = this.tableData.findIndex((item) => item.code === this.editingRow.code);
+			const index = this.tableData.findIndex((item) => item.workOrderCode === this.editingRow.workOrderCode);
 			if (index !== -1) {
 				this.tableData.splice(index, 1, this.editingRow);
 			} else {
 				this.tableData.push({ ...this.editingRow });
 			}
-			// 关闭对话框
 			this.editDialogVisible = false;
 		},
 		cancelEdit() {
-			// 关闭对话框
 			this.editDialogVisible = false;
 		},
 		handleDelete(row) {
-			console.log("删除", row);
-			// 在这里实现单行删除的逻辑
 			const index = this.tableData.indexOf(row);
-			this.tableData.splice(index, 1);
+			if (index !== -1) {
+				this.tableData.splice(index, 1);
+			}
 		},
 	},
 };
@@ -356,7 +357,7 @@ export default {
 	margin-bottom: 20px;
 }
 .input-size {
-	width: 50%;
+	width: 100%;
 }
 .button-container {
 	display: flex;
