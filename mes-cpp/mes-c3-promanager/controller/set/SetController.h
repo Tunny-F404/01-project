@@ -43,7 +43,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("set.field.name"), "111", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("set.field.flag"), "Y", false);
 	}
-	ENDPOINT(API_M_POST, "/set/export-procedure", queryProcessExport, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/pro/export-procedure", queryProcessExport, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_QUERY_PARAM(Query, ProcessExportQuery, queryParams);
 		API_HANDLER_RESP_VO(execProcessExport(Query));
 	}
@@ -54,13 +54,13 @@ public:
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	ENDPOINT(API_M_POST, "/set/add-set", addSet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/pro/add-set", addSet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_RESP_VO(execAddSet(dto, authObject->getPayload()));
 	}
 
 	// 3 修改工序接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("set.modify.summary"), modifySet, Uint64JsonVO::Wrapper);
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/set/modify-set", modifySet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), execModifySet(dto, authObject->getPayload()));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pro/modify-set", modifySet, BODY_DTO(SetProAddTableDTO::Wrapper, dto), execModifySet(dto, authObject->getPayload()));
 
 	// 4 获取工序步骤列表接口
 	ENDPOINT_INFO(querySet) {
@@ -70,7 +70,7 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "processId", ZH_WORDS_GETTER("set.fields.processid"), 1, false);
 	}
-	ENDPOINT(API_M_GET, "/set/query-list-set", querySet, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/pro/query-list-set", querySet, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_QUERY_PARAM(query, SetProListQuery, queryParams);
 		API_HANDLER_RESP_VO(execQuerySet(query, authObject->getPayload()));
 	}
@@ -81,7 +81,7 @@ public:
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	ENDPOINT(API_M_POST, "/set/addstep-set", addstepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/pro/addstep-set", addstepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_RESP_VO(execAddStepSet(dto, authObject->getPayload()));
 	}
 
@@ -93,7 +93,7 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(ProNameListJsonVO);
 	}
-	ENDPOINT(API_M_GET, "/set/query-process-name-list", queryProNameList,  API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/pro/query-process-name-list", queryProNameList,  API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execQueryProNameList());
 	}
@@ -113,7 +113,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(String, "processName", ZH_WORDS_GETTER("process.fields.processName"), "", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "enableFlag", ZH_WORDS_GETTER("process.fields.enableFlag"), "Y", false);
 	}
-	ENDPOINT(API_M_GET, "/set/query-process-list", queryProList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/pro/query-process-list", queryProList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ProListQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -133,7 +133,7 @@ public:
 		// 定义其他查询参数描述
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "processId", ZH_WORDS_GETTER("process.fields.processId"), 265, true);
 	}
-	ENDPOINT(API_M_GET, "/set/query-process-detail", queryProcessDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/pro/query-process-detail", queryProcessDetail, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(query, ProDetailQuery, queryParams);
 		// 呼叫执行函数响应结果
@@ -146,7 +146,7 @@ public:
 		API_DEF_ADD_AUTH();
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	ENDPOINT(API_M_PUT, "/set/modifystep-set", modifystepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_PUT, "/pro/modifystep-set", modifystepSet, BODY_DTO(SetProListDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_RESP_VO(execModifyStepSet(dto, authObject->getPayload()));
 	}
 	// 10 删除工序步骤
@@ -156,7 +156,7 @@ public:
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("set.fields.processid"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/set/delete-process-step/{id}", deletestepSet, PATH(UInt64, id), execDeleteStepSet(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete-process-step/{id}", deletestepSet, PATH(UInt64, id), execDeleteStepSet(id));
 
 	// 11 导出工序步骤
 	ENDPOINT_INFO(SetStepExport) {
@@ -166,7 +166,7 @@ public:
 		API_DEF_ADD_PAGE_PARAMS();
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "processId", ZH_WORDS_GETTER("set.fields.processid"), 1, true);
 	}
-	ENDPOINT(API_M_POST, "/set/export-process-step", SetStepExport, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/pro/export-process-step", SetStepExport, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		API_HANDLER_QUERY_PARAM(setstepQuery, SetProListQuery, queryParams);
 		API_HANDLER_RESP_VO(execExportStepSet(setstepQuery));
 	}
@@ -177,7 +177,7 @@ public:
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("set.fields.processid"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/set/delete-set/{id}", DeleteSet, PATH(UInt64, id), execDeleteSet(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/pro/delete-set/{id}", DeleteSet, PATH(UInt64, id), execDeleteSet(id));
 
 private:
 	// 1 导出文件
