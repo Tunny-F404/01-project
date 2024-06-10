@@ -15,27 +15,28 @@
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" icon="el-icon-search" size="small" @click="handleQuery">搜索</el-button>
-                <el-button icon="el-icon-refresh" size="small" @click="resetQuery">重置</el-button>
+                <el-button type="primary" icon="Search" size="small" @click="handleQuery">搜索</el-button>
+                <el-button icon="Refresh" size="small" @click="resetQuery">重置</el-button>
             </el-form-item>
         </el-form>
 
         <!-- 表格和其他组件... -->
         <el-row :gutter="10" class="mb8">
             <el-col :span="1.5">
-                <el-button type="primary" plain icon="el-plus" size="small" @click="handleAdd"
+                <el-button type="primary" plain icon="Plus" size="small" @click="handleAdd"
                     v-if="hasPermission('system:autocode:rule:add')">新增</el-button>
             </el-col>
             <el-col :span="1.5">
-                <el-button type="success" plain icon="el-edit" size="small" :disabled="single" @click="handleUpdate"
+                <el-button type="success" plain icon="Edit" size="small" :disabled="single" @click="handleUpdate"
                     v-if="hasPermission('system:autocode:rule:edit')">修改</el-button>
             </el-col>
             <el-col :span="1.5">
-                <el-button type="danger" plain icon="el-delete" size="small" :disabled="multiple" @click="handleDelete"
+                <el-button type="danger" plain icon="Delete" size="small" :disabled="multiple" @click="handleDelete"
                     v-if="hasPermission('system:autocode:rule:remove')">删除</el-button>
             </el-col>
-            <right-toolbar :modelValue="showSearch" @update:modelValue="val => showSearch = val"
-                @queryTable="getList"></right-toolbar>
+            <!-- <right-toolbar :modelValue="showSearch" @update:modelValue="val => showSearch = val"
+                @queryTable="getList"></right-toolbar> -->
+            <!-- 需要自己拟定right-toolbar组件 -->
         </el-row>
         <!-- 表格显示规则列表 -->
         <el-table :data="ruleList" style="width: 100%" @selection-change="handleSelectionChange">
@@ -106,6 +107,7 @@
 </template>
 
 <script setup>
+
 import { ref, reactive, toRefs, onMounted } from 'vue';
 import { ElForm, ElInput, ElSelect, ElOption, ElButton, ElTable, ElTableColumn, ElPagination, ElDialog, ElInputNumber, ElRadioGroup, ElRadio, ElMessage, ElMessageBox } from 'element-plus';
 
@@ -143,6 +145,10 @@ const state = reactive({
         ]
     }
 });
+const yesNoOptions = ref([
+    { label: '是', value: true },
+    { label: '否', value: false }
+]);
 
 // 解构响应式状态以便在模板中使用
 const { loading, ids, single, multiple, showSearch, total, ruleList, title, open, dateRange, queryParams, form, rules } = toRefs(state);
