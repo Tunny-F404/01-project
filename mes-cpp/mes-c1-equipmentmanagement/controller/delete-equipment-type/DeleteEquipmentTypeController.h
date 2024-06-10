@@ -43,7 +43,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "id", ZH_WORDS_GETTER("equipment-type.field.id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/em/equipmentmanagement/delete-type/{id}", deleteEquipmentType, PATH(UInt64, id), execDeleteEquipmentType(id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/equipment-ledger/equipmentmanagement/delete-type/{id}", deleteEquipmentType, PATH(UInt64, id), execDeleteEquipmentType(id));
 
 private:
 	// 3.3 演示删除数据
