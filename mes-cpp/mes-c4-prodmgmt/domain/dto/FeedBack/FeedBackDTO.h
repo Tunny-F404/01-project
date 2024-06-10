@@ -60,7 +60,7 @@ class FeedBackDTO : public oatpp::DTO
 		info->description = ZH_WORDS_GETTER("prod1.field.specification");
 	}
 	//报工数量
-	DTO_FIELD(String, quantity_feedback);
+	DTO_FIELD(UInt64, quantity_feedback);
 	DTO_FIELD_INFO(quantity_feedback) {
 		info->description = ZH_WORDS_GETTER("prod1.field.quantity_feedback");
 	}
@@ -80,8 +80,8 @@ class FeedBackDTO : public oatpp::DTO
 		info->description = ZH_WORDS_GETTER("prod1.field.record_user");
 	}
 	//状态
-	DTO_FIELD(String, status);
-	DTO_FIELD_INFO(status) {
+	DTO_FIELD(String, _status);
+	DTO_FIELD_INFO(_status) {
 		info->description = ZH_WORDS_GETTER("prod1.field.status");
 	}
 };

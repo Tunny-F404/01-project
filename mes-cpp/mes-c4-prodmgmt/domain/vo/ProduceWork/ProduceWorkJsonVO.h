@@ -17,20 +17,20 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _PROEVO_H_
-#define _PROEVO_H_
+#ifndef _ADDPROEVO_H_
+#define _ADDPROEVO_H_
 
 #include "../../GlobalInclude.h"
-#include "../../dto/ProduceWork/PworkDTO.h"
+#include "../../dto/ProduceWork/ProduceWorkDTO.h"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 /**
  * 定义一个列表显示生产报工
  */
-class ProduceTableJsonVO : public JsonVO<PworkTableDTO::Wrapper>
+class ProduceWorkJsonVO : public JsonVO<ProduceWorkDTO::Wrapper>
 {
-	DTO_INIT(ProduceTableJsonVO, JsonVO<PworkTableDTO::Wrapper>);
+	DTO_INIT(ProduceWorkJsonVO, JsonVO<ProduceWorkDTO::Wrapper>);
 
 };
 

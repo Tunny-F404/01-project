@@ -6,6 +6,8 @@
 */
 class ProdTaskModifyDO
 {
+	//任务ID
+	CC_SYNTHESIZE(uint64_t, task_id, Task_id);
 	// 任务名
 	CC_SYNTHESIZE(string, task_name, Task_name);
 	// 工作站
@@ -19,6 +21,7 @@ class ProdTaskModifyDO
 public:
 	//ProdTaskModifyDO() {}
 	ProdTaskModifyDO() {
+		task_id = 0;
 		task_name = "";
 		workstation_name = "";
 		process_name = "";
@@ -32,6 +35,8 @@ public:
 
 class ProdTaskRemoveDO
 {
+	//任务ID
+	CC_SYNTHESIZE(uint64_t, task_id, Task_id);
 	// 任务名
 	CC_SYNTHESIZE(string, task_name, Task_name);
 	// 工作站
@@ -45,6 +50,7 @@ class ProdTaskRemoveDO
 public:
 	//ProdTaskRemoveDO() {}
 	ProdTaskRemoveDO() {
+		task_id = 0;
 		task_name = "";
 		workstation_name = "";
 		process_name = "";

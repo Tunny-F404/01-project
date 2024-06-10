@@ -50,16 +50,16 @@ public:
 		// 定义分页查询参数描述
 		API_DEF_ADD_PAGE_PARAMS();
 		// 定义其他查Q
-		API_DEF_ADD_QUERY_PARAMS(String, "feedbackType", ZH_WORDS_GETTER("prod1.field.feedback_type"), "N", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "workstationName", ZH_WORDS_GETTER("prod1.field.workstation_name"), "N", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "workorderCode", ZH_WORDS_GETTER("prod1.field.workorder_code"), "N", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "itemCode", ZH_WORDS_GETTER("prod1.field.item_code"), "N", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "itemName", ZH_WORDS_GETTER("prod1.field.item_name"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "feedback_type", ZH_WORDS_GETTER("prod1.field.feedback_type"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workstation_name", ZH_WORDS_GETTER("prod1.field.workstation_name"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "workorder_code", ZH_WORDS_GETTER("prod1.field.workorder_code"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "item_code", ZH_WORDS_GETTER("prod1.field.item_code"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "item_name", ZH_WORDS_GETTER("prod1.field.item_name"), "N", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "specification", ZH_WORDS_GETTER("prod1.field.specification"), "N", false);
-		API_DEF_ADD_QUERY_PARAMS(Int32, "feedbackQuantity", ZH_WORDS_GETTER("prod1.field.quantity_feedback"), 0, false);
-		API_DEF_ADD_QUERY_PARAMS(String, "userName", ZH_WORDS_GETTER("prod1.field.user_name"), "N", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "feedbackTime", ZH_WORDS_GETTER("prod1.field.feedback_time"), "N", false);
-		API_DEF_ADD_QUERY_PARAMS(String, "recordUser", ZH_WORDS_GETTER("prod1.field.record_user"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(Int32, "quantity_feedback", ZH_WORDS_GETTER("prod1.field.quantity_feedback"), 0, false);
+		API_DEF_ADD_QUERY_PARAMS(String, "user_name", ZH_WORDS_GETTER("prod1.field.user_name"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "feedback_time", ZH_WORDS_GETTER("prod1.field.feedback_time"), "N", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "record_user", ZH_WORDS_GETTER("prod1.field.record_user"), "N", false);
 		API_DEF_ADD_QUERY_PARAMS(String, "status", ZH_WORDS_GETTER("prod1.field.status"), "N", false);
 
 	}

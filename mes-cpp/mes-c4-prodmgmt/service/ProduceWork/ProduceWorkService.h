@@ -3,7 +3,7 @@
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
- @Date: 2022/10/26 23:47:08
+ @Date: 2022/10/25 11:08:56
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -17,29 +17,29 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _FEEDBACKVO_H_
-#define _FEEDBACKVO_H_
+#ifndef _PRODUCEWORK_SERVICE_
+#define _PRODUCEWORK_SERVICE_
+#include <list>
+#include "domain/vo/ProduceWork/ProduceWorkJsonVO.h"
+#include "domain/dto/ProduceWork/ProduceWorkDTO.h"
 
-#include "../../dto/FeedBack/FeedBackDTO.h"
-
-#include OATPP_CODEGEN_BEGIN(DTO)
-
-/**
- * 定义一个报工显示JsonVO对象，用于响应给客户端
- */
-class FeedBackJsonVO : public JsonVO<FeedBackDTO::Wrapper>
-{
-	DTO_INIT(FeedBackJsonVO, JsonVO<FeedBackDTO::Wrapper>);
-};
 
 /**
- * 定义一个报工分页显示JsonVO对象，用于响应给客户端
+ * 示例服务实现，演示基础的示例服务实现
  */
-class FeedBackPageJsonVO : public JsonVO<FeedBackPageDTO::Wrapper>
+class ProduceWorkService
 {
-	DTO_INIT(FeedBackPageJsonVO, JsonVO<FeedBackPageDTO::Wrapper>);
+public:
+	// 获取报工详情
+	ProduceWorkDTO::Wrapper execeQueryDetail(const uint64_t& id);
 
+	// 增加数据
+	uint64_t saveData(const ProduceWorkDTO::Wrapper& dto);
+
+	// 修改数据
+	bool updateData(const ProduceWorkDTO::Wrapper& dto);
+	
 };
 
-#include OATPP_CODEGEN_END(DTO)
-#endif // _FEEDBACKVO_H_
+#endif // !_SAMPLE_SERVICE_
+

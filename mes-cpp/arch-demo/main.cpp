@@ -41,14 +41,13 @@
  * 前缀与真实值之间使用=分隔
  */
 bool getStartArg(int argc, char* argv[]) {
-	// 服务器端口
-	std::string serverPort = "8090";
-	// 数据库连接信息
+	std::string serverPort = "3333";
+	// ���ݿ�������Ϣ
 	std::string dbUsername = "root";
-	std::string dbPassword = "123456";
-	std::string dbName = "zo_mes";
-	std::string dbHost = "192.168.147.130";
-	int dbPort = 3306;
+	std::string dbPassword = "jingziRoot1234";
+	std::string dbName = "ktgmes";
+	std::string dbHost = "47.120.28.247";
+	int dbPort = 3333;
 	int dbMax = 5;
 #ifdef LINUX
 	// Nacos配置参数

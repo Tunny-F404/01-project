@@ -31,6 +31,11 @@ class ProdTaskModifyDTO : public oatpp::DTO
 {
 	DTO_INIT(ProdTaskModifyDTO, DTO);
 
+	// 任务id
+	DTO_FIELD(Int64, task_id);
+	DTO_FIELD_INFO(task_id) {
+		info->description = ZH_WORDS_GETTER("prod1.field.task_id");
+	}
 	// 任务名
 	DTO_FIELD(String, task_name);
 	DTO_FIELD_INFO(task_name) {
@@ -65,7 +70,12 @@ class ProdTaskModifyDTO : public oatpp::DTO
 class ProdTaskRemoveDTO : public oatpp::DTO
 {
 	DTO_INIT(ProdTaskRemoveDTO, DTO);
-
+	
+	// 任务id
+	DTO_FIELD(Int64, task_id);
+	DTO_FIELD_INFO(task_id) {
+		info->description = ZH_WORDS_GETTER("prod1.field.task_id");
+	}
 	// 任务名
 	DTO_FIELD(String, task_name);
 	DTO_FIELD_INFO(task_name) {
