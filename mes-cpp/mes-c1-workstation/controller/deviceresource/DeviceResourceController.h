@@ -85,7 +85,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "deviceResourceId", ZH_WORDS_GETTER("deviceResource.deviceResourceDTO.deviceResourceId"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ws/deviceResource/{deviceResourceId}", deleteDeviceResource, PATH(UInt64, deviceResourceId), execDeleteDeviceResource(deviceResourceId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/ws/deviceResource/removeDeviceResource/{deviceResourceId}", deleteDeviceResource, PATH(UInt64, deviceResourceId), execDeleteDeviceResource(deviceResourceId));
 
 private:
 	// 3.3 设备资源分页查询数据
