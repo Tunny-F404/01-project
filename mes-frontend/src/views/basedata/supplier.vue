@@ -1,7 +1,8 @@
 <template>
-	<tableFrame title="供应商管理">
+	<TableFrame title="供应商管理">
 		<template #extra>
-			<el-button @click="onExportData">导出数据<el-icon :size="22">
+			<el-button @click="onExportData"
+				>导出数据<el-icon :size="22">
 					<UploadFilled />
 				</el-icon>
 			</el-button>
@@ -47,26 +48,26 @@
 				</el-col>
 				<el-col :span="8">
 					<el-form-item>
-						<el-button type="primary" @click="onSubmit"> <el-icon>
-								<Search />
-							</el-icon>查询</el-button>
-						<el-button @click="reFresh"><el-icon>
-								<Refresh />
-							</el-icon>重置</el-button>
+						<el-button type="primary" @click="onSubmit">
+							<el-icon> <Search /> </el-icon>查询</el-button
+						>
+						<el-button @click="reFresh"
+							><el-icon> <Refresh /> </el-icon>重置</el-button
+						>
 					</el-form-item>
 				</el-col>
 			</el-row>
 		</el-form>
 
-		<el-button type="primary" plain @click="openTestDialog"><el-icon>
-				<Plus />
-			</el-icon>新增</el-button>
-		<el-button type="success" plain @click="onEditchannel(row)"><el-icon>
-				<EditPen />
-			</el-icon>修改</el-button>
-		<el-button type="danger" plain><el-icon>
-				<Delete />
-			</el-icon>删除</el-button>
+		<el-button type="primary" plain @click="openTestDialog"
+			><el-icon> <Plus /> </el-icon>新增</el-button
+		>
+		<el-button type="success" plain @click="onEditchannel(row)"
+			><el-icon> <EditPen /> </el-icon>修改</el-button
+		>
+		<el-button type="danger" plain
+			><el-icon> <Delete /> </el-icon>删除</el-button
+		>
 		<!-- 表格 -->
 		<el-table v-loading="loading" :data="supplierList" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55"></el-table-column>
@@ -78,11 +79,14 @@
 			<el-table-column prop="supplierTel" label="供应商电话" align="center"></el-table-column>
 			<el-table-column prop="enableFlag" label="是否启用" align="center">
 				<template #default="{ row }">
-					<el-tag :class="row.isEnabled ? 'status-enabled' : 'status-disabled'" @click="toggleStatus(row)"
-						style="cursor: pointer;" class="status-tag">
-						{{ row.isEnabled ? '是' : '否' }}
+					<el-tag
+						:class="row.isEnabled ? 'status-enabled' : 'status-disabled'"
+						@click="toggleStatus(row)"
+						style="cursor: pointer"
+						class="status-tag"
+					>
+						{{ row.isEnabled ? "是" : "否" }}
 					</el-tag>
-
 				</template>
 			</el-table-column>
 
@@ -106,8 +110,8 @@
 		<template #empty>
 			<el-empty description="没有数据"></el-empty>
 		</template>
-	</tableFrame>
-	<el-dialog v-model="testDialogVisible" :title="dialogTitle">
+	</TableFrame>
+	<el-dialog v-model="testDialogVisible" :title="dialogTitle" style="width: 700px">
 		<el-form ref="formRef" :model="formModel" :rules="rules" label-width="120px">
 			<el-row>
 				<el-col :span="12">
@@ -149,7 +153,8 @@
 			</el-row>
 			<el-row>
 				<el-col :span="12">
-					供应商等级<div class="flex flex-wrap gap-4 items-center">
+					供应商等级
+					<div class="flex flex-wrap gap-4 items-center">
 						<el-select v-model="GradeValue" :placeholder="GradeSelect" style="width: 240px">
 							<el-option v-for="item in GradeOptions" :key="item.value" :label="item.label" :value="item.value" />
 						</el-select>
@@ -248,7 +253,7 @@
 
 <script setup>
 import { ref } from "vue";
-import tableFrame from "@/components/table-list-use/table-text.vue";
+import { TableFrame } from "components/std-table";
 let value = "";
 let options = [
 	{
@@ -282,7 +287,7 @@ let supplierList = [
 		supplierGrade: "正常",
 		supplierScore: "0",
 		supplierTel: "",
-		comment: '',
+		comment: "",
 		enableFlag: "Y",
 	},
 	{
@@ -292,7 +297,7 @@ let supplierList = [
 		supplierGrade: "正常",
 		supplierScore: "0",
 		supplierTel: "",
-		comment: '',
+		comment: "",
 		enableFlag: "Y",
 	},
 	{
@@ -302,7 +307,7 @@ let supplierList = [
 		supplierGrade: "正常",
 		supplierScore: "0",
 		supplierTel: "",
-		comment: '',
+		comment: "",
 		enableFlag: "Y",
 	},
 ];
@@ -313,17 +318,17 @@ let loading = false;
 let single = true;
 let multiple = true;
 const formModel = ref({
-	clientCode: "",
-	clientName: "",
-	clientNick: "",
-	clientEn: "",
-	clientType: "",
-	clientDes: "",
+	supplierCode: "",
+	supplierName: "",
+	supplierNick: "",
+	supplierEn: "",
+	supplierType: "",
+	supplierDes: "",
 	address: "",
 	website: "",
 	email: "",
 	tel: "",
-	clientLogo: "",
+	supplierLogo: "",
 	contact1: "",
 	contact1Tel: "",
 	contact1Email: "",
@@ -332,7 +337,7 @@ const formModel = ref({
 	contact2Email: "",
 	creditCode: "",
 	enableFlag: "",
-	remark: ""
+	remark: "",
 });
 const num = ref(0);
 const toggleStatus = (row) => {
@@ -349,7 +354,7 @@ const openTestDialog = () => {
 		supplierDes: "",
 		website: "",
 		email: "",
-		call: '',
+		call: "",
 		tel: "",
 		supplierLogo: "",
 		contact1: "",
@@ -360,7 +365,7 @@ const openTestDialog = () => {
 		contact2Email: "",
 		creditCode: "",
 		enableFlag: "",
-		remark: ""
+		remark: "",
 	};
 	testDialogVisible.value = true;
 };
@@ -402,19 +407,19 @@ const rules = {
 	contact2Email: [{ required: false, message: "请输入联系人2-邮箱", trigger: "blur" }],
 	creditCode: [{ required: false, message: "请输入社会信用代码", trigger: "blur" }],
 	enableFlag: [{ required: true, message: "请选择是否启用", trigger: "change" }],
-	remark: [{ required: false, message: "请输入备注", trigger: "blur" }]
+	remark: [{ required: false, message: "请输入备注", trigger: "blur" }],
 };
 const handleQuery = () => {
 	console.log("查询操作");
 };
 const resetQuery = () => {
 	this.queryParams = {
-		supplierCode: 'V0060',
-		supplierName: '大特点',
-		supplierForshort: '迪飞斯',
-		supplierScore: '0',
-		supplierTel: '',
-		enableFlag: '',
+		supplierCode: "V0060",
+		supplierName: "大特点",
+		supplierForshort: "迪飞斯",
+		supplierScore: "0",
+		supplierTel: "",
+		enableFlag: "",
 	};
 };
 const handleSelectionChange = (selection) => {
@@ -438,30 +443,30 @@ const reset = () => {
 		remark: "",
 	};
 };
-const GradeValue = ref('')
-let GradeSelect = '正常';
+const GradeValue = ref("");
+let GradeSelect = "正常";
 const GradeOptions = [
 	{
-		value: 'Option1',
-		label: '优质供应商',
+		value: "Option1",
+		label: "优质供应商",
 	},
 	{
-		value: 'Option2',
-		label: '正常',
+		value: "Option2",
+		label: "正常",
 	},
 	{
-		value: 'Option3',
-		label: '重点关注',
+		value: "Option3",
+		label: "重点关注",
 	},
 	{
-		value: 'Option4',
-		label: '劣质供应商',
+		value: "Option4",
+		label: "劣质供应商",
 	},
 	{
-		value: 'Option5',
-		label: '黑名单',
+		value: "Option5",
+		label: "黑名单",
 	},
-]
+];
 const cancel = () => {
 	this.open = false;
 	this.reset();
@@ -553,7 +558,6 @@ const getList = () => {
 const created = () => {
 	this.getList();
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -565,33 +569,33 @@ const created = () => {
 	.el-select {
 		--el-select-width: 220px;
 	}
+}
 
-	.status-enabled {
-		background-color: rgba(64, 158, 255, 0.2);
-		color: #409eff;
-		padding: 5px;
-		text-align: center;
-	}
+.status-enabled {
+	background-color: rgba(64, 158, 255, 0.2);
+	color: #409eff;
+	padding: 5px;
+	text-align: center;
+}
 
-	.status-disabled {
-		background-color: rgba(245, 108, 108, 0.2);
-		color: #f56c6c;
-		padding: 5px;
-		text-align: center;
-	}
+.status-disabled {
+	background-color: rgba(245, 108, 108, 0.2);
+	color: #f56c6c;
+	padding: 5px;
+	text-align: center;
+}
 
-	.status-tag {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 35px;
-		height: 35px;
-		cursor: pointer;
-	}
+.status-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+}
 
-	.el-table th,
-	.el-table td {
-		text-align: center;
-	}
+.el-table th,
+.el-table td {
+	text-align: center;
 }
 </style>

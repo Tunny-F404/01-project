@@ -25,27 +25,24 @@ const routes = [
 				path: "/sample/pdfobject",
 				component: () => import("@/views/sample/pdfobject/PdfObject.vue"),
 			},
-			//表格组件
+			// 表格组件
 			{
 				path: "/sample/table-list-use",
 				component: () => import("@/views/sample/table-list-use/table.vue"),
 			},
-			//表格组件
+
+			// 阮喵喵 标准表格组件 演示页
 			{
-				path: "/sample/table-list-use",
-				component: () => import("@/views/sample/table-list-use/table.vue"),
+				path: "/sample/table-list-use-demo-page",
+				component: () => import("views/sample/table-list-use/table-list-use-demo-page.vue"),
 			},
-			//阿门表格组件
-			{
-				path: "/sample/table-list",
-				component: () => import("@/components/table-list-use/table-true.vue"),
-			},
+
 			// 搜索栏演示页
 			{
 				path: "/sample/search-bar",
 				component: () => import("@/views/sample/search-bar/search-bar-page.vue"),
 			},
-			//计算单位演示页
+			// 计算单位演示页
 			{
 				path: "/sample/unit-account",
 				component: () => import("@/views/sample/basic-data/unit-of-account.vue"),
@@ -55,7 +52,7 @@ const routes = [
 				path: "/sample/workshop-settings",
 				component: () => import("@/views/sample/workshop/WorkshopSettings.vue"),
 			},
-			//工艺流程
+			// 工艺流程
 			{
 				path: "/sample/process-flow",
 				component: () => import("@/views/sample/process-flow/ProcessFlow.vue"),
@@ -68,7 +65,7 @@ const routes = [
 			{
 				path: "/sample/detection",
 				component: () => import("@/views/sample/detection/Detection.vue"),
-			}
+			},
 		],
 	},
 ];

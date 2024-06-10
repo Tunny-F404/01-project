@@ -1,6 +1,11 @@
 <script setup>
 import { ref } from "vue";
 
+defineOptions({
+	/** TODO: 重命名为标准表单弹框 */
+	name: "StdFormDialog",
+});
+
 const dialogVisible = ref(false);
 // 定义表单内容，现在有点bug,
 // 1,判断不了是修改还是增加组件，两个的判断条件我这没有写好
