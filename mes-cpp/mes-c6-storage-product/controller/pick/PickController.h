@@ -32,7 +32,7 @@ public:
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
 	// 3.2 定义新增接口处理
-	ENDPOINT(API_M_POST, "//incoming/add-1", addPick, BODY_DTO(PickDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/incoming/add-1", addPick, BODY_DTO(PickDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddPick(dto));
 	}
@@ -45,12 +45,12 @@ public:
 	// 定义执行领取物料接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pick.execute-get.summary"), executeGet, Uint64JsonVO::Wrapper);
 	// 定义执行领取物料接口处理 "/pick/{Id}"必须对应
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/pick/{getId}", executeGet, PATH(UInt64, getId), executeExecuteGet(getId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/incoming/do-{getId}", executeGet, PATH(UInt64, getId), executeExecuteGet(getId));
 
 	// 定义删除单据接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pick.delete.summary"), removeReturn, Uint64JsonVO::Wrapper);
 	// 定义删除单据接口处理 "/pick/{Id}"必须对应
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/incomingreturn/delete1-{deleteId}", removeReturn, PATH(UInt64, deleteId), executeRemoveReturn(deleteId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/incoming/delete1-{deleteId}", removeReturn, PATH(UInt64, deleteId), executeRemoveReturn(deleteId));
 
 	
 	// 3.1 定义导出接口描述
