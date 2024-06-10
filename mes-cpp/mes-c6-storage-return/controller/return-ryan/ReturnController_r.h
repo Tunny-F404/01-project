@@ -20,10 +20,11 @@
 #ifndef _RETURNCONTROLLER_R_H_
 #define _RETURNCONTROLLER_R_H_
 #include "oatpp-swagger/Types.hpp"
-#include "domain/query/return-ryan/ReturnQuery.h"
+#include "domain/query/return-ryan/ReturnQuery_r.h"
 #include "domain/vo/BaseJsonVO.h"
-#include "domain/vo/return-ryan/ReturnVO.h"
+#include "domain/vo/return-ryan/ReturnVO_r.h"
 #include "ApiHelper.h"
+#include "domain/dto/return-ryan/ReturnDTO_r.h"
 
 using namespace oatpp;
 
@@ -119,17 +120,17 @@ public:
 	// 定义修改单据接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.modify.summary"), modifyReturn, Uint64JsonVO::Wrapper);
 	// 定义修改单据接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/return/modify", modifyReturn, BODY_DTO(ReturnDTO::Wrapper, dto), execModifyReturn(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/return/modify", modifyReturn, BODY_DTO(ReturnDTO_r::Wrapper, dto), execModifyReturn(dto));
 
 	// 定义执行退货接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.execute.summary"), executeReturn, Uint64JsonVO::Wrapper);
 	// 定义执行退货接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/do-{rt_id_exec}", executeReturn, PATH(UInt64, rt_id_exec), execExecuteReturn(rt_id_exec));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/return/{rt_id_exec}", executeReturn, PATH(UInt64, rt_id_exec), execExecuteReturn(rt_id_exec));
 
 	// 定义删除单据接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.remove.summary"), removeReturn, Uint64JsonVO::Wrapper);
 	// 定义删除单据接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/remove", removeReturn, BODY_DTO(List<UInt64>, rt_id_remo), execRemoveReturn(rt_id_remo));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/remove", removeReturn, BODY_DTO(List<UInt64>, ids), execRemoveReturn(ids));
 
 	// 定义导出单据接口描述
 	ENDPOINT_INFO(downloadFile) {
@@ -139,10 +140,15 @@ public:
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(StringJsonVO);
 		// 定义其他查询参数描述
+		
 		API_DEF_ADD_QUERY_PARAMS(String, "rt_code", ZH_WORDS_GETTER("return.field.rt_code"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "rt_name", ZH_WORDS_GETTER("return.field.rt_name"), "", false);
+		API_DEF_ADD_QUERY_PARAMS(String, "po_code", ZH_WORDS_GETTER("return.field.po_code"), "", false);
+
+
 	}
 	// 定义导出单据接口处理
-	ENDPOINT(API_M_GET, "/return/download", downloadFile, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/return/export", downloadFile, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ReturnQuery_r, queryParams);
 		// 呼叫执行函数响应结果
@@ -157,13 +163,15 @@ private:
 	//// 添加新单据详细信息
 	//Uint64JsonVO::Wrapper execAddDetail(const ReturnAdd::Wrapper& returnAdd);
 	// 修改单据
-	Uint64JsonVO::Wrapper execModifyReturn(const ReturnDTO::Wrapper& dto);
+	Uint64JsonVO::Wrapper execModifyReturn(const ReturnDTO_r::Wrapper& dto);
 	// 执行单据
 	Uint64JsonVO::Wrapper execExecuteReturn(const UInt64& id);
 	// 删除单据
 	Uint64JsonVO::Wrapper execRemoveReturn(const oatpp::List<UInt64>& ids);
 	// 导出单据
 	StringJsonVO::Wrapper execDownloadFile(const ReturnQuery_r::Wrapper& query, const PayloadDTO& payload);
+	//
+	StringJsonVO::Wrapper execDownloadFile_q(const ReturnQuery_r::Wrapper& query);
 
 };
 

@@ -17,30 +17,30 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _RETURN_DAO_
-#define _RETURN_DAO_
+#ifndef _RETURN_DAO_R_
+#define _RETURN_DAO_R_
 #include "BaseDAO.h"
-#include "../../domain/do/return-ryan/ReturnDO.h"
-#include "../../domain/query/return-ryan/ReturnQuery.h"
+#include "../../domain/do/return-ryan/ReturnDO_r.h"
+#include "../../domain/query/return-ryan/ReturnQuery_r.h"
 
 /**
  * 示例表数据库操作实现
  */
-class ReturnDAO : public BaseDAO
+class ReturnDAO_r : public BaseDAO
 {
 public:
 	// 统计数据条数
 	uint64_t count(const ReturnQuery_r::Wrapper& query);
 	// 分页查询数据
-	list<ReturnDO> selectWithPage(const ReturnQuery_r::Wrapper& query);
+	list<ReturnDO_r> selectWithPage(const ReturnQuery_r::Wrapper& query, int flag);
 	// 通过姓名查询数据
-	list<ReturnDO> selectByName(const string& name);
+	list<ReturnDO_r> selectByName(const string& name);
 	// 插入数据
-	uint64_t insert(const ReturnDO& iObj);
+	uint64_t insert(const ReturnDO_r& iObj);
 
 
 	// 修改数据
-	int update(const ReturnDO& uObj);
+	int update(const ReturnDO_r& uObj);
 	// 通过ID删除数据
 	int deleteById(uint64_t id);
 	// 通过ID修改状态

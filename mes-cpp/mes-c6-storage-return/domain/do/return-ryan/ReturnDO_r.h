@@ -17,14 +17,14 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _RETURN_DO_
-#define _RETURN_DO_
+#ifndef _RETURN_DO_R_
+#define _RETURN_DO_R_
 #include "../DoInclude.h"
 
 /**
  * 示例数据库实体类
  */
-class ReturnDO
+class ReturnDO_r
 {
 	//退货单ID
 	CC_SYNTHESIZE(uint64_t, rt_id, Rt_id);
@@ -68,7 +68,7 @@ class ReturnDO
 	CC_SYNTHESIZE(string, update_time, Update_time);
 
 public:
-	ReturnDO() {
+	ReturnDO_r() {
 		rt_id = 1;
 		rt_code = "111";
 		rt_name = "rt_name";

@@ -17,8 +17,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-#ifndef _RETURNDTO_H_
-#define _RETURNDTO_H_
+#ifndef _RETURNDTO_R_H_
+#define _RETURNDTO_R_H_
 
 #include "../../GlobalInclude.h"
 
@@ -26,9 +26,9 @@
 /**
  * 定义一个修改供应商退货信息的数据传输模型
  */
-class ReturnDTO : public oatpp::DTO
+class ReturnDTO_r : public oatpp::DTO
 {
-	DTO_INIT(ReturnDTO, DTO);
+	DTO_INIT(ReturnDTO_r, DTO);
 	//退货单ID
 	DTO_FIELD(UInt64, rt_id);
 	DTO_FIELD_INFO(rt_id) {
@@ -58,9 +58,9 @@ class ReturnDTO : public oatpp::DTO
 /**
 * 定义一个单据详情传输对象
 */
-class ReturnDetailDTO : public ReturnDTO
+class ReturnDetailDTO_r : public ReturnDTO_r
 {
-	DTO_INIT(ReturnDetailDTO, ReturnDTO);
+	DTO_INIT(ReturnDetailDTO_r, ReturnDTO_r);
 	//// 批次号
 	//API_DTO_FIELD_DEFAULT(String, batch_code, ZH_WORDS_GETTER("return.fields.batch_code"));
 	//// 备注
@@ -69,9 +69,9 @@ class ReturnDetailDTO : public ReturnDTO
 /**
  * 定义一个单据信息分页传输对象
  */
-class ReturnPageDTO : public PageDTO<ReturnDTO::Wrapper>
+class ReturnPageDTO_r : public PageDTO<ReturnDTO_r::Wrapper>
 {
-	DTO_INIT(ReturnPageDTO, PageDTO<ReturnDTO::Wrapper>);
+	DTO_INIT(ReturnPageDTO_r, PageDTO<ReturnDTO_r::Wrapper>);
 };
 
 #include OATPP_CODEGEN_END(DTO)

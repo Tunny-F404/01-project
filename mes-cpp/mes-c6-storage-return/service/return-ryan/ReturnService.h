@@ -20,10 +20,10 @@
 #ifndef _RETURN_SERVICE_
 #define _RETURN_SERVICE_
 #include <list>
-#include "domain/vo/return-ryan/ReturnVO.h"
-#include "domain/query/return-ryan/ReturnQuery.h"
-#include "domain/dto/return-ryan/ReturnDTO.h"
-#include "domain/do/return-ryan/ReturnDO.h"
+#include "domain/vo/return-ryan/ReturnVO_r.h"
+#include "domain/query/return-ryan/ReturnQuery_r.h"
+#include "domain/dto/return-ryan/ReturnDTO_r.h"
+#include "domain/do/return-ryan/ReturnDO_r.h"
 
 /**
  * 示例服务实现，演示基础的示例服务实现
@@ -32,17 +32,19 @@ class ReturnService
 {
 public:
 	// 分页查询所有数据
-	ReturnPageDTO::Wrapper listAll_r(const ReturnQuery_r::Wrapper& query);
+	ReturnPageDTO_r::Wrapper listAll_r(const ReturnQuery_r::Wrapper& query);
 	// 保存数据
-	uint64_t saveData_r(const ReturnDTO::Wrapper& dto);
+	uint64_t saveData_r(const ReturnDTO_r::Wrapper& dto);
 	// 修改数据
-	bool updateData(const ReturnDTO::Wrapper& dto);
+	bool updateData(const ReturnDTO_r::Wrapper& dto);
 	// 通过ID删除数据
 	bool removeData(uint64_t id);
 	// 执行退货（修改数据状态）
 	bool excuteData(uint64_t id);
 	//
-	list<ReturnDO>listAllExort(const ReturnQuery_r::Wrapper& query);
+	list<ReturnDO_r>listAllExort(const ReturnQuery_r::Wrapper& query);
+	//导出
+	string exportTable(const ReturnQuery_r::Wrapper& query);
 };
 
 #endif // !_RETURN_SERVICE_

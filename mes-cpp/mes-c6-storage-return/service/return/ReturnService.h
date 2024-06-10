@@ -22,7 +22,7 @@
 #include <list>
 #include "domain/vo/return/ReturnVO.h"
 #include "domain/query/return/ReturnQuery.h"
-#include "domain/dto/return/ReturnDTO.h"
+#include "domain/dto/return-ryan/ReturnDTO_r.h"
 
 /**
  * 示例服务实现，演示基础的示例服务实现
@@ -37,7 +37,7 @@ public:
 	// 保存数据
 	uint64_t saveData(const ReturnAdd::Wrapper& dto);
 	// 修改数据
-	bool updateData(const ReturnDTO::Wrapper& dto);
+	bool updateData(const ReturnDTO_r::Wrapper& dto);
 	// 通过ID删除数据
 	// bool removeData(uint64_t id);
 };

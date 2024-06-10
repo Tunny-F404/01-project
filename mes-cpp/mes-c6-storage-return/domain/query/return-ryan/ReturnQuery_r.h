@@ -33,13 +33,12 @@ class ReturnQuery_r : public PageQuery
 	// 定义初始化
 	DTO_INIT(ReturnQuery_r, PageQuery);
 	// 退货单编号
-	API_DTO_FIELD_DEFAULT(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"));
+	API_DTO_FIELD_DEFAULT(String, rt_code, ZH_WORDS_GETTER("return.fields.rt_code"));
 	// 退货单名称
-	API_DTO_FIELD_DEFAULT(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"));
-	// 采购单编号
-	API_DTO_FIELD_DEFAULT(String, purchaseId, ZH_WORDS_GETTER("return.fields.puid"));
-	// 供应商名称
-	API_DTO_FIELD_DEFAULT(String, vendorName, ZH_WORDS_GETTER("return.fields.vename"));
+	API_DTO_FIELD_DEFAULT(String, rt_name, ZH_WORDS_GETTER("return.fields.rt_name"));
+	// 类型
+	API_DTO_FIELD_DEFAULT(String, po_code, ZH_WORDS_GETTER("return.fields.po_code"));
+
 };
 
 /**
@@ -50,7 +49,7 @@ class ReturnDetailQuery_r : public oatpp::DTO
 	// 定义初始化
 	DTO_INIT(ReturnDetailQuery_r, oatpp::DTO);
 	// 退货单编号
-	API_DTO_FIELD(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"), true, "null");
+	/*API_DTO_FIELD(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"), true, "null");*/
 };
 
 /**
@@ -60,22 +59,22 @@ class ReturnAdd_r : public oatpp::DTO
 {
 	// 定义初始化
 	DTO_INIT(ReturnAdd_r, oatpp::DTO);
-	// 退货单编号
-	API_DTO_FIELD(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"), true, "RTV123");
-	// 退货单名称
-	API_DTO_FIELD(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"), true, "01star");
-	// 采购单编号
-	API_DTO_FIELD(String, purchaseId, ZH_WORDS_GETTER("return.fields.puid"), false, "null");
-	// 供应商名称
-	API_DTO_FIELD(String, vendorName, ZH_WORDS_GETTER("return.fields.vename"), true, "01star");
-	// 批次号
-	API_DTO_FIELD(String, batchCode, ZH_WORDS_GETTER("return.fields.batchcode"), false, "null");
-	// 退货日期
-	API_DTO_FIELD(String, returndate, ZH_WORDS_GETTER("return.fields.rtdate"), true, "2024-5-21");
-	// 单据状态
-	API_DTO_FIELD(String, status, ZH_WORDS_GETTER("return.fields.status"), true, "PREPARE");
-	// 备注
-	API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("return.fields.remark"), false, " ");
+	//// 退货单编号
+	//API_DTO_FIELD(String, returnId, ZH_WORDS_GETTER("return.fields.rtid"), true, "RTV123");
+	//// 退货单名称
+	//API_DTO_FIELD(String, returnName, ZH_WORDS_GETTER("return.fields.rtname"), true, "01star");
+	//// 采购单编号
+	//API_DTO_FIELD(String, purchaseId, ZH_WORDS_GETTER("return.fields.puid"), false, "null");
+	//// 供应商名称
+	//API_DTO_FIELD(String, vendorName, ZH_WORDS_GETTER("return.fields.vename"), true, "01star");
+	//// 批次号
+	//API_DTO_FIELD(String, batchCode, ZH_WORDS_GETTER("return.fields.batchcode"), false, "null");
+	//// 退货日期
+	//API_DTO_FIELD(String, returndate, ZH_WORDS_GETTER("return.fields.rtdate"), true, "2024-5-21");
+	//// 单据状态
+	//API_DTO_FIELD(String, status, ZH_WORDS_GETTER("return.fields.status"), true, "PREPARE");
+	//// 备注
+	//API_DTO_FIELD(String, remark, ZH_WORDS_GETTER("return.fields.remark"), false, " ");
 };
 #include OATPP_CODEGEN_END(DTO)
 #endif // !_RETURNQUERY_H_

@@ -81,7 +81,7 @@ excel:
  return:
   path: ./public/excel/ExportReturn.xlsx
   sheet:
-   s1: 数据表1
+   s1: table1
   header:
    h1: 退货单编号
    h2: 退货单名称

@@ -31,7 +31,7 @@
 
 
 // 修改单据
-Uint64JsonVO::Wrapper ReturnController_r::execModifyReturn(const ReturnDTO::Wrapper& dto)
+Uint64JsonVO::Wrapper ReturnController_r::execModifyReturn(const ReturnDTO_r::Wrapper& dto)
 {
 	// 定义返回数据对象
 	auto jvo = Uint64JsonVO::createShared();
@@ -120,6 +120,7 @@ StringJsonVO::Wrapper ReturnController_r::execDownloadFile(const ReturnQuery_r::
 	//读取数据
 	for (auto i = result.begin(); i != result.end(); ++i) {
 		auto x = *i;
+		//rt_id,rt_code,rt_name,po_code, vendor_name, batch_code, rt_date, status, remark
 		vector<std::string> row;
 		ss.clear();
 		ss << x.getRt_code();
@@ -133,11 +134,6 @@ StringJsonVO::Wrapper ReturnController_r::execDownloadFile(const ReturnQuery_r::
 
 		ss.str("");
 		ss << x.getPo_code();
-		row.push_back(ss.str());
-		ss.str("");
-
-		ss.str("");
-		ss << x.getVendor_code();
 		row.push_back(ss.str());
 		ss.str("");
 
@@ -160,7 +156,8 @@ StringJsonVO::Wrapper ReturnController_r::execDownloadFile(const ReturnQuery_r::
 	}
 	std::string fileName = ZH_WORDS_GETTER("excel.Return.path");
 	// 中文词典
-	std::string sheetName = ZH_WORDS_GETTER("excel.Return.sheet.s1");
+	//std::string sheetName = ZH_WORDS_GETTER("excel.Return.sheet.s1");
+	std::string sheetName = "title";
 	// 插入表头
 	data.insert(data.begin(), {
 		ZH_WORDS_GETTER("excel.Return.header.h1"),
@@ -168,8 +165,7 @@ StringJsonVO::Wrapper ReturnController_r::execDownloadFile(const ReturnQuery_r::
 		ZH_WORDS_GETTER("excel.Return.header.h3"),
 		ZH_WORDS_GETTER("excel.Return.header.h4"),
 		ZH_WORDS_GETTER("excel.Return.header.h5"),
-		ZH_WORDS_GETTER("excel.Return.header.h6"),
-		ZH_WORDS_GETTER("excel.Return.header.h7")
+		ZH_WORDS_GETTER("excel.Return.header.h6")
 		});
 	//创建excel
 	excel.writeVectorToFile(fileName, sheetName, data);
@@ -196,4 +192,19 @@ StringJsonVO::Wrapper ReturnController_r::execDownloadFile(const ReturnQuery_r::
 	//删除本地文件
 	std::remove(fileName.c_str());
 	return ans;
+}
+
+StringJsonVO::Wrapper ReturnController_r::execDownloadFile_q(const ReturnQuery_r::Wrapper& query)
+{
+	auto res = StringJsonVO::createShared();
+
+	ReturnService service;
+	auto url = service.exportTable(query);
+
+	if (url != "")
+		res->success(url);
+	else
+		res->fail("");
+	return res;
+	return StringJsonVO::Wrapper();
 }
