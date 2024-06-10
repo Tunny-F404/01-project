@@ -43,30 +43,30 @@ public:
 	 //3.1 定义获取报工详情
 	ENDPOINT_INFO(queryProduceWorkFeedbackDetail) {
 		// 定义标题和返回类型以及授权支持
-		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("sample.delete.summary"), ProduceWorkJsonVO::Wrapper);
+		API_DEF_ADD_COMMON_AUTH(ZH_WORDS_GETTER("ProduceWork.query.summary"), ProduceWorkJsonVO::Wrapper);
 		// 定义其他路径参数说明
 		API_DEF_ADD_PATH_PARAMS(UInt64, "record_id", ZH_WORDS_GETTER("sample.field.id"), 1, true);
 	}
-	API_HANDLER_ENDPOINT_AUTH(API_M_GET, "/ProduceWork/query_detail/{record_id}", queryProduceWorkFeedbackDetail, PATH(UInt64, record_id), execProduceWorkDetail(record_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_GET, "/prodmgmt/prodreport/querydetail/{record_id}", queryProduceWorkFeedbackDetail, PATH(UInt64, record_id), execProduceWorkDetail(record_id));
 
 	// 定义添加报工接口
 	ENDPOINT_INFO(addProduceWork) {
 		// 定义接口标题
-		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("sample.post.summary"));
+		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("ProduceWork.post.summary"));
 		// 定义默认授权参数（可选定义，如果定义了，下面ENDPOINT里面需要加入API_HANDLER_AUTH_PARAME）
 		API_DEF_ADD_AUTH();
 		// 定义响应参数格式
 		API_DEF_ADD_RSP_JSON_WRAPPER(Uint64JsonVO);
 	}
-	ENDPOINT(API_M_POST, "/ProduceWork/addProduceWork", addProduceWork, BODY_DTO(ProduceWorkDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_POST, "/prodmgmt/prodreport/add", addProduceWork, BODY_DTO(ProduceWorkDTO::Wrapper, dto), API_HANDLER_AUTH_PARAME) {
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddProduceWork(dto));
 	}
 
 	// 修改接口描述
-	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("sample.put.summary"), modifyProduceWork, Uint64JsonVO::Wrapper);
+	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("ProduceWork.put.summary"), modifyProduceWork, Uint64JsonVO::Wrapper);
 	// 3.2 定义修改接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/ProduceWork/modifyProduceWork", modifyProduceWork, BODY_DTO(ProduceWorkDTO::Wrapper, dto), execModifyProduceWork(dto));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/prodmgmt/prodreport/modify", modifyProduceWork, BODY_DTO(ProduceWorkDTO::Wrapper, dto), execModifyProduceWork(dto));
 private:
 	// 
 	ProduceWorkJsonVO::Wrapper execProduceWorkDetail(const UInt64& record_id);

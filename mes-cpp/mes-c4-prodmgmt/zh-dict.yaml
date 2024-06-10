@@ -208,6 +208,10 @@ prod:
 ProduceWork:
  query:
   summary: 获取报工详情查询
+ post:
+  summary: 添加报工
+ put:
+  summary: 修改报工
  fields:
    workstation_name: 工作站名称
    feedback_type: 报工类型
