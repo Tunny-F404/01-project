@@ -280,7 +280,7 @@ const testMenus = [
 		],
 	},
 	{
-		id: 5,
+		id: 102,
 		text: "质量管理",
 		icon: "IconTickets",
 		children: [
@@ -322,14 +322,14 @@ const testMenus = [
 			{
 				id: 7,
 				text: "过程检验",
-				href: "/un-55",
+				href: "/un-56",
 				icon: "IconTickets",
 				pid: 5,
 			},
 			{
 				id: 8,
 				text: "出货检验",
-				href: "/un-55",
+				href: "/un-57",
 				icon: "IconTickets",
 				pid: 5,
 			},
@@ -337,7 +337,7 @@ const testMenus = [
 	},
 	// 组织架构侧边栏
 	{
-		id: 6,
+		id: 101,
 		text: "组织架构",
 		icon: "Management",
 		children: [
