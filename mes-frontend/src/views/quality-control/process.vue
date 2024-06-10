@@ -104,10 +104,10 @@
 	</el-table>
 	<!-- 对话框 -->
 	<el-dialog v-model="dialogFormVisible" :title="dialogTitle" style="width: 700px">
-		<el-form :model="process">
+		<el-form :model="process" :rules="rules">
 			<el-row>
 				<el-col :span="12">
-					<el-form-item label="检验单编号">
+					<el-form-item label="检验单编号" prop="inspectionCode">
 						<el-input v-model="process.inspectionCode" placeholder="请输入检验单编号" autocomplete="off" />
 					</el-form-item>
 				</el-col>
@@ -119,14 +119,14 @@
 			</el-row>
 			<el-row>
 				<el-col :span="8">
-					<el-form-item label="检验类型">
+					<el-form-item label="检验类型" prop="type">
 						<el-select v-model="process.type" placeholder="请选择检验类型">
 							<el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value" />
 						</el-select>
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
-					<el-form-item label="工单编码">
+					<el-form-item label="工单编码" prop="workCode">
 						<el-input v-model="process.workCode" placeholder="请选择生产工单" autocomplete="off" />
 					</el-form-item>
 				</el-col>
@@ -138,7 +138,7 @@
 			</el-row>
 			<el-row>
 				<el-col :span="8">
-					<el-form-item label="工作站编号">
+					<el-form-item label="工作站编号" prop="workstationCode">
 						<el-input v-model="process.workstationCode" placeholder="请输入工作站编号" autocomplete="off" />
 					</el-form-item>
 				</el-col>
@@ -148,20 +148,44 @@
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
-					<el-form-item label="检测数量">
+					<el-form-item label="检测数量" prop="checkNum">
 						<el-input v-model="process.checkNum" placeholder="请输入检测数量" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="24">
-					<span>更多信息</span>
+					<el-collapse class="demo-collapse" v-model="activeNames" @change="handleChange">
+						<el-collapse-item title="更多信息" name="1">
+							<el-row>
+								<el-col :span="8">
+									<el-form-item label="工作站编号" prop="workstationCode">
+										<el-input v-model="process.workstationCode" placeholder="请输入工作站编号" autocomplete="off" />
+									</el-form-item>
+								</el-col>
+								<el-col :span="8">
+									<el-form-item label="工作站名称">
+										<el-input v-model="process.workstationName" placeholder="请输入工作站名称" autocomplete="off" />
+									</el-form-item>
+								</el-col>
+								<el-col :span="8">
+									<el-form-item label="检测数量" prop="checkNum">
+										<el-input v-model="process.checkNum" placeholder="请输入检测数量" autocomplete="off" />
+									</el-form-item>
+								</el-col>
+							</el-row>
+						</el-collapse-item>
+					</el-collapse>
 				</el-col>
 			</el-row>
 			<el-row>
 				<el-col :span="8">
 					<el-form-item label="检测日期">
-						<el-input v-model="process.checkDate" placeholder="请输入工作站编号" autocomplete="off" />
+						<div class="demo-date-picker">
+							<div class="block">
+								<el-date-picker v-model="process.checkDate" type="date" placeholder="请选择检测日期" :size="size" />
+							</div>
+						</div>
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
@@ -244,7 +268,7 @@ const process = reactive({
 	type: "", //检验类型
 	workCode: "", //工单编码
 	productmaterialCode: "", //产品物料编码
-	//工单名称
+	productName: "", //工单名称
 	workstationCode: "", //工作站编号
 	workstationName: "", //工作站名称
 	checkNum: "", //检测数量
@@ -254,6 +278,13 @@ const process = reactive({
 	personnel: "", //检测人员
 	remark: "", //备注
 });
+const rules = {
+	inspectionCode: [{ required: true, message: "请输入生产检验单编号" }], //检验单编号
+	type: [{ required: true }], //检验类型
+	workCode: [{ required: true, message: "请选择生产工单" }], //工单编码
+	workstationCode: [{ required: true, message: "请选择工作站" }], //工作站编号
+	checkNum: [{ required: true, message: "检测数量不能为空" }], //检测数量
+};
 const processList = reactive([
 	{
 		inspectionCode: "IPQC202406090001",
@@ -344,5 +375,30 @@ const onEditchannel = function (row) {
 		border-radius: 4px;
 		min-height: 36px;
 	}
+}
+
+.demo-date-picker {
+	display: flex;
+	width: 100%;
+	padding: 0;
+	flex-wrap: wrap;
+}
+
+.demo-date-picker .block {
+	padding: 30px 0;
+	text-align: center;
+	border-right: solid 1px var(--el-border-color);
+	flex: 1;
+}
+
+.demo-date-picker .block:last-child {
+	border-right: none;
+}
+
+.demo-date-picker .demonstration {
+	display: block;
+	color: var(--el-text-color-secondary);
+	font-size: 14px;
+	margin-bottom: 20px;
 }
 </style>

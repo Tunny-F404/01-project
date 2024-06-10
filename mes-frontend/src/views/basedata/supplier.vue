@@ -218,8 +218,8 @@
 				<el-col :span="8">
 					<el-form-item label="是否启用" prop="enableFlag">
 						<el-radio-group v-model="formModel.enableFlag">
-							<el-radio label="是" value="yes">是</el-radio>
-							<el-radio label="否" value="no">否</el-radio>
+							<el-radio label="是" :value="true">是</el-radio>
+							<el-radio label="否" :value="false">否</el-radio>
 						</el-radio-group>
 					</el-form-item>
 				</el-col>
@@ -270,7 +270,7 @@ const supplierList = [
 		supplierScore: "0",
 		supplierTel: "",
 		comment: "",
-		enableFlag: "Y",
+		enableFlag: true,
 	},
 	{
 		supplierCode: "V0063",
@@ -280,7 +280,7 @@ const supplierList = [
 		supplierScore: "0",
 		supplierTel: "",
 		comment: "",
-		enableFlag: "Y",
+		enableFlag: true,
 	},
 	{
 		supplierCode: "V0067",
@@ -290,7 +290,7 @@ const supplierList = [
 		supplierScore: "0",
 		supplierTel: "",
 		comment: "",
-		enableFlag: "Y",
+		enableFlag: false,
 	},
 ];
 //对话框标题
