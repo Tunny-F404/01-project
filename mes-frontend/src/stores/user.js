@@ -179,8 +179,15 @@ const testMenus = [
 			},
 			{
 				id: 6,
-				text: "订单管理5",
+				text: "生产退料",
 				href: "/un-35",
+				icon: "Management",
+				pid: 4,
+			},
+			{
+				id: 6,
+				text: "产品入库",
+				href: "/un-36",
 				icon: "Management",
 				pid: 4,
 			},
@@ -190,41 +197,41 @@ const testMenus = [
 	{
 		id: 5,
 		text: "系统管理",
-		icon: "Management",
+		icon: "Stamp",
 		children: [
 			{
 				id: 2,
 				text: "消息通知",
 				href: "/un-41",
-				icon: "Management",
+				icon: "Stamp",
 				pid: 5,
 			},
 			{
 				id: 3,
 				text: "系统管理",
 				href: "/un-42",
-				icon: "Management",
+				icon: "Stamp",
 				pid: 5,
 			},
 			{
 				id: 4,
 				text: "系统管理",
 				href: "/un-43",
-				icon: "Management",
+				icon: "Stamp",
 				pid: 5,
 			},
 			{
 				id: 5,
 				text: "系统管理4",
 				href: "/un-44",
-				icon: "Management",
+				icon: "Stamp",
 				pid: 5,
 			},
 			{
 				id: 6,
-				text: "系统管理5",
+				text: "编码规则",
 				href: "/un-45",
-				icon: "Management",
+				icon: "Stamp",
 				pid: 5,
 			},
 		],
@@ -233,41 +240,41 @@ const testMenus = [
 	{
 		id: 6,
 		text: "架构管理",
-		icon: "Management",
+		icon: "Operation",
 		children: [
 			{
 				id: 2,
 				text: "组织管理",
 				href: "/un-51",
-				icon: "Management",
+				icon: "Operation",
 				pid: 6,
 			},
 			{
 				id: 3,
 				text: "架构管理",
 				href: "/un-52",
-				icon: "Management",
+				icon: "Operation",
 				pid: 6,
 			},
 			{
 				id: 4,
 				text: "架构管理",
 				href: "/un-53",
-				icon: "Management",
+				icon: "Operation",
 				pid: 6,
 			},
 			{
 				id: 5,
 				text: "架构管理4",
 				href: "/un-54",
-				icon: "Management",
+				icon: "Operation",
 				pid: 6,
 			},
 			{
 				id: 6,
 				text: "架构管理",
 				href: "/un-55",
-				icon: "Management",
+				icon: "Operation",
 				pid: 6,
 			},
 		],
@@ -328,7 +335,7 @@ const testMenus = [
 			},
 		],
 	},
-	//组织架构侧边栏
+	// 组织架构侧边栏
 	{
 		id: 6,
 		text: "组织架构",
@@ -396,8 +403,29 @@ const testMenus = [
 				icon: "List",
 				pid: 4,
 			},
-		]
-	}
+		],
+	},
+	// 工装夹具管理
+	{
+		id: 7,
+		text: "工装夹具",
+		icon: "Management",
+		children: [
+			{
+				id: 2,
+				text: "类型设置",
+				href: "/un-607",
+				pid: 7,
+			},
+			{
+				id: 3,
+				text: "工装夹具台账",
+				href: "/un-608",
+				icon: "Management",
+				pid: 7,
+			},
+		],
+	},
 ];
 
 export const userStore = defineStore("user", {

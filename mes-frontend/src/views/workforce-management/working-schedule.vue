@@ -6,19 +6,19 @@ import Request  from '@/apis/request.js'
 
 const tableList = ref([
 	{
-		calendarType:"cnc",
-        remark:"这是备注",
-        teamCode:"Tx001",
-        teamId: 1,
-        teamName:"风塔二组"
+		calendarType: "cnc",
+		remark: "这是备注",
+		teamCode: "Tx001",
+		teamId: 1,
+		teamName: "风塔二组",
 	},
 
 	{
-        calendarType:"TNT",
-        remark:"炸弹",
-        teamCode:"Tx002",
-        teamId: 2,
-        teamName:"爆破一组"
+		calendarType: "TNT",
+		remark: "炸弹",
+		teamCode: "Tx002",
+		teamId: 2,
+		teamName: "爆破一组",
 	},
 ]);
 
@@ -29,9 +29,9 @@ const dialog = ref();
 const total = ref(13);
 
 //定义查询的数据
-let myInput=ref('')
-let unitName=ref('')
-const loading=ref(false)//loading状态
+let myInput = ref("");
+let unitName = ref("");
+const loading = ref(false); //loading状态
 
 //定义请求参数,后期完善
 const parms = ref({
@@ -41,24 +41,24 @@ const parms = ref({
 	message: "",
 });
 
-const teamSelect=ref();
+const teamSelect = ref();
 
 const getPageList = async (data) => {
 	//不知道跟着接口写的对不对，希望大佬看一看
 	loading.value = true;
-	const res='';
+	const res = "";
 	try {
 		const res = await Request.request(Request.GET, "/sch-manage/team-settings/query-all", data, http.upType.json);
 		tableList.value = res.data.rows.data;
 		parms.value.pagenum = res.data.pageIndex;
 		parms.value.pagesize = res.data.pageSize;
-        parms.value.code=res.code;
-        parms.message=res.messsage
+		parms.value.code = res.code;
+		parms.message = res.messsage;
 		total.value = res.data.total;
-	}catch (error) {
+	} catch (error) {
 		console.log("错误或者超时");
 	}
-    
+
 	loading.value = false;
 };
 onMounted(async ()=>{
@@ -72,7 +72,7 @@ const onSizeChange = (size) => {
 	parms.value.pagenum = 1;
 	parms.value.pagesize = size;
 	//再利用接口渲染数据getPageList
-	const Data = { pageSize: "parms.pagesize",pageIndex: 1 };
+	const Data = { pageSize: "parms.pagesize", pageIndex: 1 };
 	getPageList(Date);
 };
 
@@ -88,42 +88,45 @@ const onCurrentChange = (page) => {
 //导出班组
 const onSortChannel = async () => {
 	try {
-  const res=await Request.request(Request.GET,'/sch-manage/team-settings/export-team',null, http.upType.json)
- } catch (error) {
-  console.log('错误或者超时');
- } 
-  if(res.code===200){
-    ElMessage.success('导出成功') 
- }
+		const res = await Request.request(Request.GET, "/sch-manage/team-settings/export-team", null, http.upType.json);
+	} catch (error) {
+		console.log("错误或者超时");
+	}
+	if (res.code === 200) {
+		ElMessage.success("导出成功");
+	}
 };
 
-const onDelChannel=async (row)=>{
-    //删除
-    await ElMessageBox.confirm('你确认要删除该班组么', '温馨提示', {
-    type: 'warning',
-    confirmButtonText: '确认',
-    cancelButtonText: '取消'
-  })
-  try {
-  const res=await Request.request(Request.DELETE,'/sch-manage/team-settings/delete-team',{ids:row.data.teamId}, http.upType.json)
- } catch (error) {
-  console.log('错误或者超时');
- } 
- if(res.code===200){
-    ElMessage.success('删除成功') 
-    //删除后再渲染数据
-    getPageList(null)
- }
-}
+const onDelChannel = async (row) => {
+	//删除
+	await ElMessageBox.confirm("你确认要删除该班组么", "温馨提示", {
+		type: "warning",
+		confirmButtonText: "确认",
+		cancelButtonText: "取消",
+	});
+	try {
+		const res = await Request.request(
+			Request.DELETE,
+			"/sch-manage/team-settings/delete-team",
+			{ ids: row.data.teamId },
+			http.upType.json,
+		);
+	} catch (error) {
+		console.log("错误或者超时");
+	}
+	if (res.code === 200) {
+		ElMessage.success("删除成功");
+		//删除后再渲染数据
+		getPageList(null);
+	}
+};
 
 const onEditchannel = (row, $index) => {
 	//编辑
 	dialogTitle.value = "修改班组";
-  formModel.value = { ...row };
-  testDialogVisible.value = true;
+	formModel.value = { ...row };
+	testDialogVisible.value = true;
 };
-
-
 
 const onSubmit = () => {
 	const Sub={teamCode:myInput,calendarType:unitName}
@@ -132,9 +135,7 @@ const onSubmit = () => {
 };
 
 //添加
-const onAddChannel = () => {
-	
-};
+const onAddChannel = () => {};
 
 const reFresh = () => {
 	myInput = "";
@@ -142,7 +143,7 @@ const reFresh = () => {
 };
 
 //------批量删除有关
-const sels = ref([]);//当前选框中选择的值
+const sels = ref([]); //当前选框中选择的值
 
 //获取选中的值
 function handleSelectionChange (sels) {
@@ -163,9 +164,7 @@ const arrDelet=async ()=>{
 	} catch (error) {
 		console.log("错误或者超时");
 	}
-}
-
-
+};
 
 //表单--------------------------
 const dialogTitle = ref("");
@@ -180,43 +179,42 @@ const formRef = ref(null);
 const testDialogVisible = ref(false);
 
 const openTestDialog = () => {
-  dialogTitle.value = "添加班组";
-  formModel.value = {
-    calendarType:"",
-        remark:"",
-        teamCode:"",
-        teamId: 0,
-        teamName:""
-  };
-  testDialogVisible.value = true;
+	dialogTitle.value = "添加班组";
+	formModel.value = {
+		calendarType: "",
+		remark: "",
+		teamCode: "",
+		teamId: 0,
+		teamName: "",
+	};
+	testDialogVisible.value = true;
 };
 
 const rules = {
-    teamCode: [{ required: true, message: "班组编码不能为空", trigger: "blur" }],
-  teamId: [{ required: true, message: "班组Id不能为空", trigger: "change" }],
-  teamName: [{ required: true, message: "班组名字不可以为空", trigger: "blur" }]
+	teamCode: [{ required: true, message: "班组编码不能为空", trigger: "blur" }],
+	teamId: [{ required: true, message: "班组Id不能为空", trigger: "change" }],
+	teamName: [{ required: true, message: "班组名字不可以为空", trigger: "blur" }],
 };
 const submitForm = () => {
-  formRef.value.validate((valid) => {
-    if (valid) {
-      console.log("提交成功", formModel.value);
-      testDialogVisible.value = false;
-    } else {
-      console.log("提交失败");
-      return false;
-    }
-  });
+	formRef.value.validate((valid) => {
+		if (valid) {
+			console.log("提交成功", formModel.value);
+			testDialogVisible.value = false;
+		} else {
+			console.log("提交失败");
+			return false;
+		}
+	});
 };
 
 const cancelForm = () => {
-  testDialogVisible.value = false;
+	testDialogVisible.value = false;
 };
-
 </script>
 
 <template>
 	<!--分类，页面只有基本的表现，没有实现数据绑定-->
-	<tableFrame title="班组设计">
+	<TableFrame title="班组设计">
 		<template #extra>
 			<el-button @click="onSortChannel"
 				>导出数据
@@ -229,15 +227,15 @@ const cancelForm = () => {
 		</template>
 
 		<!--表单区域-->
-        
+
 		<el-form :inline="true" class="demo-form-inline">
-            <el-form-item label="班组类型" >
-             <el-select v-model="teamSelect">
-             <el-option label="机加工" value="1"></el-option>
-             <el-option label="组装" value="2"></el-option>
-             <el-option label="仓库" value="3"></el-option>
-            </el-select>
-        </el-form-item>
+			<el-form-item label="班组类型">
+				<el-select v-model="teamSelect">
+					<el-option label="机加工" value="1"></el-option>
+					<el-option label="组装" value="2"></el-option>
+					<el-option label="仓库" value="3"></el-option>
+				</el-select>
+			</el-form-item>
 			<el-form-item label="班组编号：" padding="50px">
 				<!--label是用户看，value是收集给后台的-->
 				<el-input v-model="myInput" clearable />
@@ -257,58 +255,60 @@ const cancelForm = () => {
 			</el-form-item>
 		</el-form>
 
-<el-button type="primary"   @click="openTestDialog" plain><el-icon><Plus /></el-icon>新增</el-button>
-<el-button type="success"  @click="onEditchannel(row)"  plain><el-icon><EditPen /></el-icon>修改</el-button>
-<el-button type="danger" @click="arrDelet" plain><el-icon><Delete /></el-icon>删除</el-button>
+		<el-button type="primary" @click="openTestDialog" plain
+			><el-icon><Plus /></el-icon>新增</el-button
+		>
+		<el-button type="success" @click="onEditchannel(row)" plain
+			><el-icon><EditPen /></el-icon>修改</el-button
+		>
+		<el-button type="danger" @click="arrDelet" plain
+			><el-icon><Delete /></el-icon>删除</el-button
+		>
 
-<!--表格区-->
-    <el-table  :data="tableList" style="width: 100%" v-loading="loading"
-    @selection-change="handleSelectionChange"
-    ref="multipleTable">
-    <el-table-column type="selection" width="55" />
-  <el-table-column prop="calendarType" label="班组类型" width="150"  ></el-table-column>
-   <el-table-column prop="remark" label="备注" width="150"></el-table-column>
-   <el-table-column prop="teamCode" label="班组编号" width="150"></el-table-column>
-   <el-table-column prop="teamId" label="班组ID" width="150"></el-table-column>
-   <el-table-column prop="teamName" label="班组名称" width="150"></el-table-column>
-   <el-table-column label="操作" width="200" >
-    <!-- row是当前一行数据 index是下标-->
-    <template #default="{row,$index}">
-        <el-button @click="onEditchannel(row,$index)" 
-         circle
-        type="primary"> 
-        <el-icon :size="20">
-    <Edit /><!--修改图标-->
-        </el-icon>
-</el-button>
-        <el-button @click="onDelChannel(row,$index)" 
-        type="danger"
-         circle>
-         <el-icon>
-    <Delete /><!--删除图标-->
-       </el-icon>
-        </el-button>
-    </template>
-   </el-table-column>
-    </el-table>
-<el-pagination
-      v-model:current-page="parms.pagenum"
-      v-model:page-size="parms.pagesize"
-      :page-sizes="[2, 3, 5, 10]"
-      :background="true"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="total"
-      @size-change="onSizeChange"
-      @current-change="OnCurrentChange"
-      style="margin-top:20px;justify-content: flex-end;"
-    />
-<!---->
+		<!--表格区-->
+		<el-table
+			:data="tableList"
+			style="width: 100%"
+			v-loading="loading"
+			@selection-change="handleSelectionChange"
+			ref="multipleTable"
+		>
+			<el-table-column type="selection" width="55" />
+			<el-table-column prop="calendarType" label="班组类型" width="150"></el-table-column>
+			<el-table-column prop="remark" label="备注" width="150"></el-table-column>
+			<el-table-column prop="teamCode" label="班组编号" width="150"></el-table-column>
+			<el-table-column prop="teamId" label="班组ID" width="150"></el-table-column>
+			<el-table-column prop="teamName" label="班组名称" width="150"></el-table-column>
+			<el-table-column label="操作" width="200">
+				<!-- row是当前一行数据 index是下标-->
+				<template #default="{ row, $index }">
+					<el-button @click="onEditchannel(row, $index)" circle type="primary">
+						<el-icon :size="20"> <Edit /><!--修改图标--> </el-icon>
+					</el-button>
+					<el-button @click="onDelChannel(row, $index)" type="danger" circle>
+						<el-icon> <Delete /><!--删除图标--> </el-icon>
+					</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
+		<el-pagination
+			v-model:current-page="parms.pagenum"
+			v-model:page-size="parms.pagesize"
+			:page-sizes="[2, 3, 5, 10]"
+			:background="true"
+			layout="total, sizes, prev, pager, next, jumper"
+			:total="total"
+			@size-change="onSizeChange"
+			@current-change="OnCurrentChange"
+			style="margin-top: 20px; justify-content: flex-end"
+		/>
+		<!---->
 
 		<!--空处理-->
 		<template #empty>
 			<el-empty description="没有数据"></el-empty>
 		</template>
-	</tableFrame>
+	</TableFrame>
 
 	<!-- 引入的弹窗
 	<pop-Up ref="dialog"> </pop-Up> -->
@@ -334,7 +334,7 @@ const cancelForm = () => {
 		</el-form>
 		<template #footer>
 			<el-button @click="cancelForm">取消</el-button>
-    <el-button type="primary" @click="submitForm">确定</el-button>
+			<el-button type="primary" @click="submitForm">确定</el-button>
 		</template>
 	</el-dialog>
 </template>
