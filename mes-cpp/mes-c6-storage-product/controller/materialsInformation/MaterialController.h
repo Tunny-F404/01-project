@@ -68,7 +68,7 @@ public:
 		API_DEF_ADD_PATH_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("Material.field.id"), 1, true);
 	}
 	// 3.2 定义删除接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/incoming/delete-{line_id}", removeMaterial, PATH(UInt64, line_id), execRemoveMaterial(line_id));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/incoming/{line_id}", removeMaterial, PATH(UInt64, line_id), execRemoveMaterial(line_id));
 
 private:
 	// 3.3 分页查询数据
