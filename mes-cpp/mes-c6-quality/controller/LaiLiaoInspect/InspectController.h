@@ -111,11 +111,6 @@ public:
 	// 3.2 定义删除接口处理
 	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/incoming-inspect/delete/{iqc_id}", removeInspect, PATH(UInt64, iqc_id), execRemoveInspect(iqc_id));
 
-	//// 3.1 定义导出接口描述
-	//API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("inspect.export.summary"), exportInspect, StringJsonVO::Wrapper);
-	//// 3.2 定义导出接口处理
-	//API_HANDLER_ENDPOINT_AUTH(API_M_POST, "/incoming_inspect/export", exportInspect, BODY_DTO(oatpp::List<UInt64>, ids),execExportInspect(ids));
-
 	ENDPOINT_INFO(exportInspect) {
 		// 定义接口描述标题
 		API_DEF_ADD_TITLE(ZH_WORDS_GETTER("inspect.export.summary"));
