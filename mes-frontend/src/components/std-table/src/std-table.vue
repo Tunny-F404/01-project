@@ -1,7 +1,8 @@
 <script setup lang="ts" generic="TableRow extends Record<string, unknown>">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { merge } from "lodash-es";
 import { reactify } from "@vueuse/core";
+import { ElButton } from "element-plus";
 
 import { TableFrame, TableInnerLayout } from "components/std-table";
 import popUp from "components/std-table/src/pop-up.vue";
@@ -15,7 +16,7 @@ import type { Operations, StdTableProps } from "./std-table.ts";
 
 defineOptions({
 	/** 表格组件 */
-	name: "TableTrue",
+	name: "StdTable",
 });
 
 // FIXME: [@vue/compiler-sfc] Failed to resolve index type into finite keys
@@ -59,7 +60,11 @@ function createDefaultProps() {
 	return merge({}, defaultProps);
 }
 
+/** 本组件实际有的全部可用props值 */
 const stdTableProps = mergeReactify(createDefaultProps(), props);
+
+/** 操作栏配置对象 */
+const operations = computed(() => stdTableProps.value.operations);
 
 // stdTableProps.value.
 
@@ -157,7 +162,15 @@ const handleSelectionChange = (val) => {
 
 		<TableInnerLayout>
 			<template #tableInnerButtons>
-				<slot name="stdTableButtons"> </slot>
+				<slot name="stdTableButtons">
+					<template v-for="(operation, indx) in operations" :key="indx">
+						<ElButton v-bind="operation">
+							<section>
+								{{ operation.buttonName }}
+							</section>
+						</ElButton>
+					</template>
+				</slot>
 			</template>
 
 			<template #tableInnerMain>

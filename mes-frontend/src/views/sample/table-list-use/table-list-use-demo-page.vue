@@ -2,6 +2,7 @@
 import { computed, onMounted, ref, watch } from "vue";
 import { ElButton, ElCard } from "element-plus";
 import { StdTable, TableFrame } from "components/std-table";
+import type { StdTableProps } from "components/std-table";
 
 import { type UnitMeasureDTO, mdUnitMeasureController } from "views/sample/basic-data/tests/MdUnitMeasureController";
 
@@ -21,6 +22,10 @@ const tableRows = ref<UnitMeasureDTO[]>([]);
 const query = ref<UnitMeasureDTO>({
 	changeRate: -0.114514,
 	createBy: "",
+});
+
+const stdTableProps = ref<StdTableProps<UnitMeasureDTO>>({
+	data: [],
 });
 
 onMounted(async () => {
@@ -68,7 +73,7 @@ async function getlist() {
 		</TableFrame>
 
 		<!-- 测试标准组件 -->
-		<StdTable :data="tableRows">
+		<StdTable v-bind="stdTableProps">
 			<!-- <template #> </template> -->
 		</StdTable>
 	</section>
