@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="TableRow extends Record<string, unknown>">
 import { computed, ref, onMounted } from "vue";
-import { merge } from "lodash-es";
+import { merge, isEmpty } from "lodash-es";
 import { reactify } from "@vueuse/core";
 import { ElButton } from "element-plus";
 
@@ -26,8 +26,7 @@ type Props = Readonly<StdTableProps<TableRow>>;
 
 const props = withDefaults(defineProps<Props>(), {
 	data: () => [] as TableRow[],
-	// data: [] as TableRow[],
-}) as Props;
+});
 
 const defaultPropsKeys = ["data", "operations", "size", "border"] as const;
 type DefaultPropsKeys = (typeof defaultPropsKeys)[number];
@@ -62,6 +61,15 @@ function createDefaultProps() {
 
 /** 本组件实际有的全部可用props值 */
 const stdTableProps = mergeReactify(createDefaultProps(), props);
+
+/**
+ * 按钮栏配置对象
+ * @description
+ * 及时不提供任何值 在此处也是默认提供一个空数组
+ *
+ * 不考虑将该空数组设置成默认值
+ */
+const buttons = computed(() => stdTableProps.value.buttons ?? []);
 
 /** 操作栏配置对象 */
 const operations = computed(() => stdTableProps.value.operations);
@@ -167,12 +175,14 @@ const handleSelectionChange = (val) => {
 		<TableInnerLayout>
 			<template #tableInnerButtons>
 				<slot name="stdTableButtons">
-					<template v-for="(operation, indx) in operations" :key="indx">
-						<ElButton v-bind="operation">
-							<section>
-								{{ operation.buttonName }}
-							</section>
-						</ElButton>
+					<template v-if="!isEmpty(buttons)">
+						<template v-for="(button, indx) in buttons" :key="indx">
+							<ElButton v-bind="button">
+								<section>
+									{{ button.buttonName }}
+								</section>
+							</ElButton>
+						</template>
 					</template>
 				</slot>
 			</template>

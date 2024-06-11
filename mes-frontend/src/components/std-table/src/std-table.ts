@@ -28,6 +28,8 @@ export interface Operations<T> extends CommonButton {
 	): void;
 }
 
+// FIXME: 经过 Prettify 修饰过的类型 被提示出错误 不使用时即可
+// export type TablePropsWithoutContext<T> = Prettify<Omit<TableProps<T>, "context">>;
 /**
  * 特殊移除掉类型不兼容的 context 属性
  *
@@ -41,13 +43,23 @@ export interface Operations<T> extends CommonButton {
  *
  * @author f1-阮喵喵
  */
-type TablePropsWithoutContext<T> = Prettify<Omit<TableProps<T>, "context">>;
+export type TablePropsWithoutContext<T> = Omit<TableProps<T>, "context">;
 
 /**
  * 标准表格的 props 类型
  * @author f1-阮喵喵
  */
 export interface StdTableProps<T> extends TablePropsWithoutContext<T> {
+	/**
+	 * 人工覆盖掉该内容
+	 * @description
+	 * 设置该类型不存在，且不传递
+	 */
+	// context?: undefined;
+
+	/** 按钮栏 */
+	buttons?: Buttons[];
+
 	/** 操作栏 */
 	operations?: Operations<T>[];
 
