@@ -1,118 +1,112 @@
 <template>
-	<TableFrame title="供应商管理">
-		<template #extra>
-			<el-button @click="onExportData"
-				>导出数据<el-icon :size="22">
-					<UploadFilled />
-				</el-icon>
-			</el-button>
-			<template>
-				<div>
-					<slot name="extra"></slot>
-					<!-- 其他内容 -->
-				</div>
-			</template>
-		</template>
-		<!--表单-->
-		<el-form :inline="true" class="demo-form-inline">
-			<el-row>
-				<el-col :span="8">
-					<el-form-item label="供应商编码：">
-						<el-input v-model="supplierCode" placeholder="请输入供应商编码" clearable />
-					</el-form-item>
-				</el-col>
-				<el-col :span="8">
-					<el-form-item label="供应商名称：">
-						<el-input v-model="supplierName" placeholder="请输入供应商名称" clearable />
-					</el-form-item>
-				</el-col>
-				<el-col :span="8">
-					<el-form-item label="供应商简称：">
-						<el-input v-model="supplierNick" placeholder="请输入供应商简称" clearable />
-					</el-form-item>
-				</el-col>
-			</el-row>
-			<el-row>
-				<el-col :span="8">
-					<el-form-item label="供应商英文名称：">
-						<el-input v-model="supplierEn" placeholder="请输入供应商英文名称" clearable />
-					</el-form-item>
-				</el-col>
-				<el-col :span="8">
-					<el-form-item label="是否启用：">
-						<el-select v-model="enableFlag" placeholder="请选择">
-							<el-option label="是" :value="true"></el-option>
-							<el-option label="否" :value="false"></el-option>
-						</el-select>
-					</el-form-item>
-				</el-col>
-				<el-col :span="8">
-					<el-form-item>
-						<el-button type="primary" @click="onSubmit">
-							<el-icon> <Search /> </el-icon>查询</el-button
-						>
-						<el-button @click="reFresh"
-							><el-icon> <Refresh /> </el-icon>重置</el-button
-						>
-					</el-form-item>
-				</el-col>
-			</el-row>
-		</el-form>
-
-		<el-button type="primary" plain @click="openTestDialog"
-			><el-icon> <Plus /> </el-icon>新增</el-button
-		>
-		<el-button type="success" plain @click="onEditchannel(row)"
-			><el-icon> <EditPen /> </el-icon>修改</el-button
-		>
-		<el-button type="danger" plain
-			><el-icon> <Delete /> </el-icon>删除</el-button
-		>
-		<!-- 表格 -->
-		<el-table v-loading="loading" :data="supplierList" @selection-change="handleSelectionChange">
-			<el-table-column type="selection" width="55"></el-table-column>
-			<el-table-column prop="supplierCode" label="供应商编码" align="center"></el-table-column>
-			<el-table-column prop="supplierName" label="供应商名称" align="center"></el-table-column>
-			<el-table-column prop="supplierForshort" label="供应商简称" align="center"></el-table-column>
-			<el-table-column prop="supplierGrade" label="供应商等级" align="center"></el-table-column>
-			<el-table-column prop="supplierScore" label="供应商评分" align="center"></el-table-column>
-			<el-table-column prop="supplierTel" label="供应商电话" align="center"></el-table-column>
-			<el-table-column prop="enableFlag" label="是否启用" align="center">
-				<template #default="{ row }">
-					<el-tag
-						:class="row.isEnabled ? 'status-enabled' : 'status-disabled'"
-						@click="toggleStatus(row)"
-						style="cursor: pointer"
-						class="status-tag"
-					>
-						{{ row.isEnabled ? "是" : "否" }}
-					</el-tag>
-				</template>
-			</el-table-column>
-
-			<el-table-column label="操作" width="150" align="center">
-				<template #default="{ row, $index }">
-					<el-button @click="onEditchannel(row, $index)" circle type="primary">
-						<el-icon :size="20">
-							<Edit />
-						</el-icon>
-					</el-button>
-					<el-button @click="onDelChannel(row, $index)" type="danger" circle>
+	<!--表单-->
+	<el-form :inline="true" class="demo-form-inline">
+		<el-row>
+			<el-col :span="8">
+				<el-form-item label="供应商编码：">
+					<el-input v-model="supplierCode" placeholder="请输入供应商编码" clearable />
+				</el-form-item>
+			</el-col>
+			<el-col :span="8">
+				<el-form-item label="供应商名称：">
+					<el-input v-model="supplierName" placeholder="请输入供应商名称" clearable />
+				</el-form-item>
+			</el-col>
+			<el-col :span="8">
+				<el-form-item label="供应商简称：">
+					<el-input v-model="supplierForshort" placeholder="请输入供应商简称" clearable />
+				</el-form-item>
+			</el-col>
+		</el-row>
+		<el-row>
+			<el-col :span="8">
+				<el-form-item label="供应商英文名称：">
+					<el-input v-model="supplierEn" placeholder="请输入供应商英文名称" clearable />
+				</el-form-item>
+			</el-col>
+			<el-col :span="8">
+				<el-form-item label="是否启用：">
+					<el-select v-model="enableFlag" placeholder="请选择">
+						<el-option label="是" :value="true"></el-option>
+						<el-option label="否" :value="false"></el-option>
+					</el-select>
+				</el-form-item>
+			</el-col>
+			<el-col :span="8">
+				<el-form-item>
+					<el-button type="primary" @click="onSubmit">
 						<el-icon>
-							<Delete />
+							<Search />
 						</el-icon>
+						查询
 					</el-button>
-				</template>
-			</el-table-column>
-		</el-table>
+					<el-button @click="reFresh">
+						<el-icon>
+							<Refresh />
+						</el-icon>
+						重置
+					</el-button>
+				</el-form-item>
+			</el-col>
+		</el-row>
+	</el-form>
 
-		<!--空处理-->
-		<template #empty>
-			<el-empty description="没有数据"></el-empty>
-		</template>
-	</TableFrame>
-	<el-dialog v-model="testDialogVisible" :title="dialogTitle" style="width: 700px">
-		<el-form ref="formRef" :model="formModel" :rules="rules" label-width="120px">
+	<el-button type="primary" plain @click="openTestDialog">
+		<el-icon>
+			<Plus />
+		</el-icon>
+		新增
+	</el-button>
+	<el-button type="success" plain @click="onEditchannel(row)">
+		<el-icon>
+			<EditPen />
+		</el-icon>
+		修改
+	</el-button>
+	<el-button type="danger" plain>
+		<el-icon>
+			<Delete />
+		</el-icon>
+		删除
+	</el-button>
+	<!-- 表格 -->
+	<el-table v-loading="loading" :data="supplierList" @selection-change="handleSelectionChange">
+		<el-table-column type="selection" width="55"></el-table-column>
+		<el-table-column prop="supplierCode" label="供应商编码" align="center"></el-table-column>
+		<el-table-column prop="supplierName" label="供应商名称" align="center"></el-table-column>
+		<el-table-column prop="supplierForshort" label="供应商简称" align="center"></el-table-column>
+		<el-table-column prop="supplierGrade" label="供应商等级" align="center"></el-table-column>
+		<el-table-column prop="supplierScore" label="供应商评分" align="center"></el-table-column>
+		<el-table-column prop="supplierTel" label="供应商电话" align="center"></el-table-column>
+		<el-table-column prop="enableFlag" label="是否启用" align="center">
+			<template #default="{ row }">
+				<el-tag :class="row.isEnabled ? 'status-enabled' : 'status-disabled'" @click="toggleStatus(row)"
+					style="cursor: pointer" class="status-tag">
+					{{ row.isEnabled ? "是" : "否" }}
+				</el-tag>
+			</template>
+		</el-table-column>
+
+		<el-table-column label="操作" width="150" align="center">
+			<template #default="{ row, $index }">
+				<el-button @click="onEditchannel(row, $index)" circle type="primary">
+					<el-icon :size="20">
+						<Edit />
+					</el-icon>
+				</el-button>
+				<el-button @click="onDelChannel(row, $index)" type="danger" circle>
+					<el-icon>
+						<Delete />
+					</el-icon>
+				</el-button>
+			</template>
+		</el-table-column>
+	</el-table>
+
+	<!-- </TableFrame> -->
+	<!-- 对话框 -->
+	<el-dialog v-model="dialogFormVisible" :title="dialogTitle" style="width: 700px">
+		<el-form :model="formModel" :rules="rules" label-width="120px">
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="供应商编码" prop="supplierCode">
@@ -127,8 +121,8 @@
 			</el-row>
 			<el-row>
 				<el-col :span="12">
-					<el-form-item label="供应商简称" prop="supplierNick">
-						<el-input v-model="formModel.supplierNick" placeholder="请输入供应商简称" />
+					<el-form-item label="供应商简称" prop="supplierForshort">
+						<el-input v-model="formModel.supplierForshort" placeholder="请输入供应商简称" />
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
@@ -224,8 +218,8 @@
 				<el-col :span="8">
 					<el-form-item label="是否启用" prop="enableFlag">
 						<el-radio-group v-model="formModel.enableFlag">
-							<el-radio label="是" value="yes">是</el-radio>
-							<el-radio label="否" value="no">否</el-radio>
+							<el-radio label="是" :value="true">是</el-radio>
+							<el-radio label="否" :value="false">否</el-radio>
 						</el-radio-group>
 					</el-form-item>
 				</el-col>
@@ -244,42 +238,30 @@
 				</el-col>
 			</el-row>
 		</el-form>
-		<template #footer>
-			<el-button @click="cancelForm">取消</el-button>
-			<el-button type="primary" @click="submitForm">确定</el-button>
-		</template>
+		<div class="dialog-footer">
+			<el-button @click="dialogFormVisible = false">取消</el-button>
+			<el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
+		</div>
 	</el-dialog>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { TableFrame } from "components/std-table";
-let value = "";
-let options = [
-	{
-		value: "Option1",
-		label: "是",
-	},
-	{
-		value: "Option2",
-		label: "否",
-	},
-];
-let input = "";
-let open = ref(true);
-let queryParams = {
-	supplierCode: "",
-	supplierName: "",
-	supplierForshort: "",
-	supplierGrade: "",
-	supplierScore: "",
-	supplierTel: "",
-	enableFlag: "",
-	pageNum: 1,
-	pageSize: 10,
+// import { TableFrame } from "components/std-table";
+// import { constants } from "os";
+const supplierCode = ref("");
+const supplierName = ref("");
+const supplierForshort = ref("");
+const supplierEn = ref("");
+const enableFlag = ref("");
+const reFresh = function () {
+	supplierCode.value = "";
+	supplierName.value = "";
+	supplierForshort.value = "";
+	supplierEn.value = "";
+	enableFlag.value = "";
 };
-
-let supplierList = [
+const supplierList = [
 	{
 		supplierCode: "V0060",
 		supplierName: "大特点",
@@ -288,7 +270,7 @@ let supplierList = [
 		supplierScore: "0",
 		supplierTel: "",
 		comment: "",
-		enableFlag: "Y",
+		enableFlag: true,
 	},
 	{
 		supplierCode: "V0063",
@@ -298,7 +280,7 @@ let supplierList = [
 		supplierScore: "0",
 		supplierTel: "",
 		comment: "",
-		enableFlag: "Y",
+		enableFlag: true,
 	},
 	{
 		supplierCode: "V0067",
@@ -308,19 +290,16 @@ let supplierList = [
 		supplierScore: "0",
 		supplierTel: "",
 		comment: "",
-		enableFlag: "Y",
+		enableFlag: false,
 	},
 ];
 //对话框标题
 const dialogTitle = ref("");
-let total = 10;
-let loading = false;
-let single = true;
-let multiple = true;
+const loading = false;
 const formModel = ref({
 	supplierCode: "",
 	supplierName: "",
-	supplierNick: "",
+	supplierForshort: "",
 	supplierEn: "",
 	supplierType: "",
 	supplierDes: "",
@@ -340,16 +319,16 @@ const formModel = ref({
 	remark: "",
 });
 const num = ref(0);
-const toggleStatus = (row) => {
+const toggleStatus = function (row) {
 	row.isEnabled = !row.isEnabled;
 };
-const testDialogVisible = ref(false);
-const openTestDialog = () => {
+const dialogFormVisible = ref(false);
+const openTestDialog = function () {
 	dialogTitle.value = "添加供应商";
 	formModel.value = {
 		supplierCode: "",
 		supplierName: "",
-		supplierNick: "",
+		supplierForshort: "",
 		supplierEn: "",
 		supplierDes: "",
 		website: "",
@@ -367,30 +346,18 @@ const openTestDialog = () => {
 		enableFlag: "",
 		remark: "",
 	};
-	testDialogVisible.value = true;
+	dialogFormVisible.value = true;
 };
 //修改供应商信息对话框
-const onEditchannel = (row) => {
+const onEditchannel = function (row) {
 	dialogTitle.value = "修改供应商信息";
 	formModel.value = { ...row };
-	testDialogVisible.value = true;
-};
-const onDelChannel = async (row) => {
-	//删除
-	await ElMessageBox.confirm("你确认要删除该单位么", "温馨提示", {
-		type: "warning",
-		confirmButtonText: "确认",
-		cancelButtonText: "取消",
-	});
-	ElMessage.success("删除成功");
-	console.log(row);
-	//删除后再渲染数据
-	getPageList();
+	dialogFormVisible.value = true;
 };
 const rules = {
 	supplierCode: [{ required: true, message: "请输入供应商编码", trigger: "blur" }],
 	supplierName: [{ required: true, message: "请输入供应商名称", trigger: "blur" }],
-	supplierNick: [{ required: false, message: "请输入供应商简称", trigger: "blur" }],
+	supplierForshort: [{ required: false, message: "请输入供应商简称", trigger: "blur" }],
 	supplierEn: [{ required: false, message: "请输入供应商英文名称", trigger: "blur" }],
 	// supplierType: [{ required: false, message: "请选择供应商类型", trigger: "change" }],
 	supplierDes: [{ required: false, message: "请输入内容", trigger: "blur" }],
@@ -409,42 +376,8 @@ const rules = {
 	enableFlag: [{ required: true, message: "请选择是否启用", trigger: "change" }],
 	remark: [{ required: false, message: "请输入备注", trigger: "blur" }],
 };
-const handleQuery = () => {
-	console.log("查询操作");
-};
-const resetQuery = () => {
-	this.queryParams = {
-		supplierCode: "V0060",
-		supplierName: "大特点",
-		supplierForshort: "迪飞斯",
-		supplierScore: "0",
-		supplierTel: "",
-		enableFlag: "",
-	};
-};
-const handleSelectionChange = (selection) => {
-	this.single = selection.length !== 1;
-	this.multiple = selection.length === 0;
-};
-const reset = () => {
-	// 假设一个表单数据对象叫做 form
-	this.form = {
-		supplierCode: "",
-		supplierName: "",
-		supplierNick: "",
-		supplierEn: "",
-		supplierType: "",
-		supplierDes: "",
-		address: "",
-		website: "",
-		email: "",
-		tel: "",
-		enableFlag: "",
-		remark: "",
-	};
-};
 const GradeValue = ref("");
-let GradeSelect = "正常";
+const GradeSelect = "正常";
 const GradeOptions = [
 	{
 		value: "Option1",
@@ -467,97 +400,6 @@ const GradeOptions = [
 		label: "黑名单",
 	},
 ];
-const cancel = () => {
-	this.open = false;
-	this.reset();
-};
-const submitForm = () => {
-	formRef.value.validate((valid) => {
-		if (valid) {
-			console.log("提交成功", formModel.value);
-			testDialogVisible.value = false;
-		} else {
-			console.log("提交失败");
-			return false;
-		}
-	});
-};
-
-// 这是一个模拟的异步请求，实际应用中应该是一个 API 调用
-const getsupplier = (supplierId) => {
-	return new Promise((resolve, reject) => {
-		if (!supplierId) {
-			reject("supplier ID is undefined");
-			return;
-		}
-		const supplierData = this.supplierList.find((supplier) => supplier.supplierCode === supplierId);
-		if (supplierData) {
-			resolve({ data: supplierData });
-		} else {
-			reject("No data found for supplier with ID: " + supplierId);
-		}
-	});
-};
-const handleAdd = () => {
-	//触发新增操作
-	this.open = true;
-	this.reset();
-	// 重置表单到初始状态
-	console.log("新增操作");
-	this.title = "添加供应商";
-	this.optType = "add";
-};
-
-// this.form = Object.assign({}, row);
-
-// handleUpdate(row) {
-//   console.log('Triggering handleUpdate with row:', row);
-//   this.reset();
-//   const supplierId = row.supplierCode; // 属性来获取 supplierId
-//   this.getsupplier(supplierId).then(response => {
-//     console.log('Data received from getsupplier:', response.data);
-//     if (response.data) {
-//       this.form = response.data;
-//       this.open = true;
-//       this.title = "修改供应商";
-//       this.optType = "edit";
-//     } else {
-//       console.error('No data found for supplier with ID:', supplierId);
-//     }
-//   }).catch(error => {
-//     console.error('Failed to fetch supplier data:', error);
-//   });
-// },
-const handleUpdate = (row) => {
-	this.open = true;
-	console.log("Triggering handleUpdate with row:", row);
-	this.reset();
-	const supplierId = row.supplierCode;
-	this.getsupplier(supplierId)
-		.then((response) => {
-			console.log("Data received from getsupplier:", response.data);
-			this.form = response.data;
-			this.open = true;
-			this.title = "修改供应商";
-			this.optType = "edit";
-		})
-		.catch((error) => {
-			console.error("Failed to fetch supplier data:", error);
-		});
-};
-const handleDelete = (row) => {
-	console.log("删除操作", row);
-	// 模拟删除操作
-	this.supplierList = this.supplierList.filter((supplier) => supplier.supplierCode !== row.supplierCode);
-};
-const getList = () => {
-	console.log("页面加载和查询列表");
-	// 模拟数据加载
-	this.loading = false;
-};
-const created = () => {
-	this.getList();
-};
 </script>
 
 <style lang="scss" scoped>

@@ -1,115 +1,115 @@
 <template>
-	<TableFrame title="工装夹具台账">
-		<template #extra>
-			<el-button
-				>导出数据<el-icon :size="22">
-					<UploadFilled />
-				</el-icon>
-			</el-button>
-			<template>
-				<div>
-					<slot name="extra"></slot>
-					<!-- 其他内容 -->
-				</div>
-			</template>
-		</template>
-		<!-- 表单 -->
-		<el-form class="demo-form-inline">
-			<el-row>
-				<el-col :span="8">
-					<el-form-item label="工装夹具编码">
-						<el-input v-model="equipmentLedgerCode" style="width: 260px" placeholder="请输入编码类型" clearable />
-					</el-form-item>
-				</el-col>
-				<el-col :span="8">
-					<el-form-item label="工装夹具名称">
-						<el-input v-model="equipmentLedgerName" style="width: 260px" placeholder="请输入类型名称" clearable />
-					</el-form-item>
-				</el-col>
-				<el-col :span="8">
-					<el-form-item label="工装夹具类型" prop="equipmentLedgerType">
-						<div class="flex flex-wrap gap-4 items-center">
-							<el-select v-model="equipmentLedgerType" placeholder="请选择类型" style="width: 240px">
-								<el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value" />
-							</el-select>
-						</div>
-					</el-form-item>
-				</el-col>
-			</el-row>
-		</el-form>
-		<el-form>
-			<el-row>
-				<el-col :span="6">
-					<el-form-item label="品牌">
-						<el-input v-model="brand" style="width: 260px" placeholder="请输入编码类型" clearable />
-					</el-form-item>
-				</el-col>
-				<el-col :span="6">
-					<el-form-item label="型号">
-						<el-input v-model="model" style="width: 260px" placeholder="请输入型号" clearable />
-					</el-form-item>
-				</el-col>
-				<el-col :span="6">
-					<el-form-item label="状态">
-						<div class="flex flex-wrap gap-4 items-center">
-							<el-select v-model="state" placeholder="请选择状态" style="width: 240px">
-								<el-option v-for="item in stateOptions" :key="item.value" :label="item.label" :value="item.value" />
-							</el-select>
-						</div>
-					</el-form-item>
-				</el-col>
-				<el-col :span="6">
-					<el-form-item>
-						<el-button type="primary" @click="search">
-							<el-icon> <Search /> </el-icon>查询</el-button
-						>
-						<el-button @click="reFresh"
-							><el-icon> <Refresh /> </el-icon>重置</el-button
-						>
-					</el-form-item>
-				</el-col>
-			</el-row>
-		</el-form>
-		<!-- 表格 -->
-		<el-button type="primary" plain @click="openTestDialog"
-			><el-icon> <Plus /> </el-icon>新增</el-button
-		>
-		<el-button type="success" plain @click="onEditchannel(row)"
-			><el-icon> <EditPen /> </el-icon>修改</el-button
-		>
-		<el-button type="danger" plain
-			><el-icon> <Delete /> </el-icon>删除</el-button
-		>
-		<el-table :data="equipmentLedgerList" @selection-change="handleSelectionChange">
-			<el-table-column type="selection" width="55"></el-table-column>
-			<el-table-column prop="equipmentLedgerCode" label="编号" align="center"></el-table-column>
-			<el-table-column prop="equipmentLedgerName" label="名称" align="center"></el-table-column>
-			<el-table-column prop="brand" label="品牌" align="center"></el-table-column>
-			<el-table-column prop="equipmentLedgerType" label="型号" align="center"></el-table-column>
-			<el-table-column prop="type" label="类型" align="center"></el-table-column>
-			<el-table-column prop="num" label="存货数量" align="center"></el-table-column>
-			<el-table-column prop="usable" label="可用数量" align="center"></el-table-column>
-			<el-table-column prop="maintenance" label="保养维护类型" align="center"></el-table-column>
-			<el-table-column prop="maintenanceWeek" label="下次保养周期" align="center"></el-table-column>
-			<el-table-column prop="maintenanceDay" label="下次保养日期" align="center"></el-table-column>
-			<el-table-column prop="state" label="状态" align="center"></el-table-column>
-			<el-table-column prop="handle" label="操作" align="center"></el-table-column>
-			<el-table-column label="操作" width="150" align="center">
-				<template #default="{ row, $index }">
-					<el-button @click="onEditchannel(row, $index)" circle type="primary">
-						<el-icon :size="20">
-							<Edit />
-						</el-icon>
-					</el-button>
-					<el-button @click="onDelChannel(row, $index)" type="danger" circle>
+	<!-- 表单 -->
+	<el-form class="demo-form-inline">
+		<el-row>
+			<el-col :span="8">
+				<el-form-item label="工装夹具编码">
+					<el-input v-model="equipmentLedgerCode" style="width: 260px" placeholder="请输入编码类型" clearable />
+				</el-form-item>
+			</el-col>
+			<el-col :span="8">
+				<el-form-item label="工装夹具名称">
+					<el-input v-model="equipmentLedgerName" style="width: 260px" placeholder="请输入类型名称" clearable />
+				</el-form-item>
+			</el-col>
+			<el-col :span="8">
+				<el-form-item label="工装夹具类型" prop="equipmentLedgerType">
+					<div class="flex flex-wrap gap-4 items-center">
+						<el-select v-model="equipmentLedgerType" placeholder="请选择类型" style="width: 240px">
+							<el-option v-for="item in selectOptions" :key="item.value" :label="item.label" :value="item.value" />
+						</el-select>
+					</div>
+				</el-form-item>
+			</el-col>
+		</el-row>
+	</el-form>
+	<el-form>
+		<el-row>
+			<el-col :span="6">
+				<el-form-item label="品牌">
+					<el-input v-model="brand" style="width: 260px" placeholder="请输入编码类型" clearable />
+				</el-form-item>
+			</el-col>
+			<el-col :span="6">
+				<el-form-item label="型号">
+					<el-input v-model="model" style="width: 260px" placeholder="请输入型号" clearable />
+				</el-form-item>
+			</el-col>
+			<el-col :span="6">
+				<el-form-item label="状态">
+					<div class="flex flex-wrap gap-4 items-center">
+						<el-select v-model="state" placeholder="请选择状态" style="width: 240px">
+							<el-option v-for="item in stateOptions" :key="item.value" :label="item.label" :value="item.value" />
+						</el-select>
+					</div>
+				</el-form-item>
+			</el-col>
+			<el-col :span="6">
+				<el-form-item>
+					<el-button type="primary" @click="search">
 						<el-icon>
-							<Delete />
+							<Search />
 						</el-icon>
+						查询
 					</el-button>
-				</template>
-			</el-table-column>
-		</el-table>
-	</TableFrame>
+					<el-button @click="reFresh">
+						<el-icon>
+							<Refresh />
+						</el-icon>
+						重置
+					</el-button>
+				</el-form-item>
+			</el-col>
+		</el-row>
+	</el-form>
+	<!-- 表格 -->
+	<el-button type="primary" plain @click="openTestDialog">
+		<el-icon>
+			<Plus />
+		</el-icon>
+		新增
+	</el-button>
+	<el-button type="success" plain @click="onEditchannel(row)">
+		<el-icon>
+			<EditPen />
+		</el-icon>
+		修改
+	</el-button>
+	<el-button type="danger" plain>
+		<el-icon>
+			<Delete />
+		</el-icon>
+		删除
+	</el-button>
+	<el-table :data="equipmentLedgerList" @selection-change="handleSelectionChange">
+		<el-table-column type="selection" width="55"></el-table-column>
+		<el-table-column prop="equipmentLedgerCode" label="编号" align="center"></el-table-column>
+		<el-table-column prop="equipmentLedgerName" label="名称" align="center"></el-table-column>
+		<el-table-column prop="brand" label="品牌" align="center"></el-table-column>
+		<el-table-column prop="equipmentLedgerType" label="型号" align="center"></el-table-column>
+		<el-table-column prop="type" label="类型" align="center"></el-table-column>
+		<el-table-column prop="num" label="存货数量" align="center"></el-table-column>
+		<el-table-column prop="usable" label="可用数量" align="center"></el-table-column>
+		<el-table-column prop="maintenance" label="保养维护类型" align="center"></el-table-column>
+		<el-table-column prop="maintenanceWeek" label="下次保养周期" align="center"></el-table-column>
+		<el-table-column prop="maintenanceDay" label="下次保养日期" align="center"></el-table-column>
+		<el-table-column prop="state" label="状态" align="center"></el-table-column>
+		<el-table-column prop="handle" label="操作" align="center"></el-table-column>
+		<el-table-column label="操作" width="150" align="center">
+			<template #default="{ row, $index }">
+				<el-button @click="onEditchannel(row, $index)" circle type="primary">
+					<el-icon :size="20">
+						<Edit />
+					</el-icon>
+				</el-button>
+				<el-button @click="onDelChannel(row, $index)" type="danger" circle>
+					<el-icon>
+						<Delete />
+					</el-icon>
+				</el-button>
+			</template>
+		</el-table-column>
+	</el-table>
 	<!-- 对话框 -->
 	<el-dialog v-model="dialogFormVisible" :title="dialogTitle" style="width: 700px">
 		<el-form :model="equipmentLedger" :rules="rules">
@@ -125,11 +125,7 @@
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="工装夹具名称" prop="equipmentLedgerName">
-						<el-input
-							v-model="equipmentLedger.equipmentLedgerName"
-							placeholder="请输入工装夹具名称"
-							autocomplete="off"
-						/>
+						<el-input v-model="equipmentLedger.equipmentLedgerName" placeholder="请输入工装夹具名称" autocomplete="off" />
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -167,12 +163,8 @@
 					<el-form-item label="保养维护类型">
 						<div class="flex flex-wrap gap-4 items-center">
 							<el-select v-model="equipmentLedger.maintenance" placeholder="定期维护" style="width: 240px">
-								<el-option
-									v-for="item in maintenanceOptions"
-									:key="item.value"
-									:label="item.label"
-									:value="item.value"
-								/>
+								<el-option v-for="item in maintenanceOptions" :key="item.value" :label="item.label"
+									:value="item.value" />
 							</el-select>
 						</div>
 					</el-form-item>
@@ -183,12 +175,8 @@
 					<el-form-item label="下一次保养日期">
 						<div class="demo-date-picker">
 							<div class="block">
-								<el-date-picker
-									v-model="equipmentLedger.maintenanceDay"
-									type="date"
-									placeholder="请选择下一次保养日期"
-									:size="size"
-								/>
+								<el-date-picker v-model="equipmentLedger.maintenanceDay" type="date" placeholder="请选择下一次保养日期"
+									:size="size" />
 							</div>
 						</div>
 					</el-form-item>
@@ -212,19 +200,17 @@
 				</el-col>
 			</el-row>
 		</el-form>
-		<template #footer>
-			<div class="dialog-footer">
-				<el-button @click="dialogFormVisible = false">取消</el-button>
-				<el-button type="primary" @click="dialogFormVisible = false"> 确定 </el-button>
-			</div>
-		</template>
+		<div class="dialog-footer">
+			<el-button @click="dialogFormVisible = false">取消</el-button>
+			<el-button type="primary" @click="dialogFormVisible = false"> 确定 </el-button>
+		</div>
 	</el-dialog>
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
-import { TableFrame } from "components/std-table";
-let dialogTitle = ref("");
+import { reactive, ref } from "vue";
+
+const dialogTitle = ref("");
 const selectOptions = [
 	{
 		value: "Option1",
@@ -274,7 +260,7 @@ const brand = ref("");
 const model = ref("");
 const state = ref("");
 const num = ref(1);
-let dialogFormVisible = ref(false);
+const dialogFormVisible = ref(false);
 const equipmentLedger = reactive({
 	equipmentLedgerCode: "",
 	equipmentLedgerName: "",
@@ -290,7 +276,7 @@ const equipmentLedger = reactive({
 	state: "",
 	remark: "",
 });
-const reFresh = () => {
+const reFresh = function () {
 	equipmentLedgerCode.value = "";
 	equipmentLedgerName.value = "";
 	equipmentLedgerType.value = "";
@@ -298,7 +284,7 @@ const reFresh = () => {
 	model.value = "";
 	state.value = "";
 };
-const onEditchannel = (row) => {
+const onEditchannel = function (row) {
 	dialogTitle.value = "修改工装夹具清单";
 	equipmentLedger.value = { ...row };
 	dialogFormVisible.value = true;
@@ -339,7 +325,7 @@ const equipmentLedgerList = [
 	},
 ];
 //函数
-const openTestDialog = () => {
+const openTestDialog = function () {
 	dialogTitle.value = "新增工装夹具清单";
 	dialogFormVisible.value = true;
 	equipmentLedger.value = {
@@ -368,5 +354,30 @@ const openTestDialog = () => {
 	.el-select {
 		--el-select-width: 220px;
 	}
+}
+
+.demo-date-picker {
+	display: flex;
+	width: 100%;
+	padding: 0;
+	flex-wrap: wrap;
+}
+
+.demo-date-picker .block {
+	padding: 30px 0;
+	text-align: center;
+	border-right: solid 1px var(--el-border-color);
+	flex: 1;
+}
+
+.demo-date-picker .block:last-child {
+	border-right: none;
+}
+
+.demo-date-picker .demonstration {
+	display: block;
+	color: var(--el-text-color-secondary);
+	font-size: 14px;
+	margin-bottom: 20px;
 }
 </style>
