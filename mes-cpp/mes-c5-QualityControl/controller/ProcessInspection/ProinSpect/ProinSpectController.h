@@ -78,7 +78,7 @@ public:
 		API_DEF_ADD_QUERY_PARAMS(UInt64, "line_id", ZH_WORDS_GETTER("qualitycontrol.defect.line_id"), , true);
 	}
 	//  定义获取过程检验单行缺陷列表接口处理
-	ENDPOINT(API_M_GET, "/qc/process-inspection/proinspect/query-by-id", queryProcessInspectionDefectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
+	ENDPOINT(API_M_GET, "/qc/process-inspection/proinspect-defect/query-by-id", queryProcessInspectionDefectList, QUERIES(QueryParams, queryParams), API_HANDLER_AUTH_PARAME) {
 		// 解析查询参数为Query领域模型
 		API_HANDLER_QUERY_PARAM(userQuery, ProinspectQuery, queryParams);
 		// 呼叫执行函数响应结果
