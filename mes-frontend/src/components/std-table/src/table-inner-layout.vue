@@ -22,7 +22,8 @@ defineOptions({
 
 <template>
 	<section class="table-inner-layout-root">
-		<slot name="default"></slot>
+		<!-- <slot name="default"></slot> -->
+		<slot name="tableInnerButtons"></slot>
 		<slot name="tableInnerMain"></slot>
 		<slot name="tableInnerPagination"></slot>
 	</section>

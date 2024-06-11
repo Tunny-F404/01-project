@@ -63,7 +63,14 @@ async function getlist() {
 			{{ tableRows }}
 		</ElCard>
 
-		<TableFrame :title="tableFrameTitle"> </TableFrame>
+		<TableFrame :title="tableFrameTitle">
+			<!-- <template # > </template> -->
+		</TableFrame>
+
+		<!-- 测试标准组件 -->
+		<StdTable :data="tableRows">
+			<!-- <template #> </template> -->
+		</StdTable>
 	</section>
 </template>
 
