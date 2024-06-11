@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import http from "axios";
-import { TableFrame } from "components/std-table";
+import { onMounted } from "vue";
+import  TableFrame  from 'components/std-table/src/table-frame.vue' 
 import Request from "@/apis/request.js";
 
 const tableList = ref([
