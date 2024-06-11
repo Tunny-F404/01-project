@@ -98,30 +98,6 @@ public:
 		// 呼叫执行函数响应结果
 		API_HANDLER_RESP_VO(execAddDetail(dto));
 	}
-	//// 定义修改单据接口描述
-	//API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.modify-return.summary"), modifyReturn, Uint64JsonVO::Wrapper);
-	//// 定义修改单据接口处理
-	//API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/return/modify-return", modifyReturn, BODY_DTO(ReturnDTO::Wrapper, dto), execModifyReturn(dto));
-
-	//// 定义执行退货接口描述
-	//API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.execute-return.summary"), executeReturn, Uint64JsonVO::Wrapper);
-	//// 定义执行退货接口处理 "/return/{returnId}"必须对应
-	//API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/{returnCodeexec}", executeReturn, PATH(String, returnCodeexec), execExecuteReturn(returnCodeexec));
-
-	//// 定义删除单据接口描述
-	//API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.remove-return.summary"), removeReturn, Uint64JsonVO::Wrapper);
-	//// 定义删除单据接口处理 "/return/{returnId}"必须对应
-	//API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/{returnCoderemo}", removeReturn, PATH(String, returnCoderemo), execRemoveReturn(returnCoderemo));
-
-	//// 定义导出单据接口描述
-	//ENDPOINT_INFO(downloadFile) {
-	//	API_DEF_ADD_COMMON(ZH_WORDS_GETTER("return.download-return.summary"), Void);
-	//	API_DEF_ADD_QUERY_PARAMS(String, "code", ZH_WORDS_GETTER("return.fields.filename"), "1", true);
-	//}
-	//// 定义导出单据接口处理
-	//ENDPOINT(API_M_GET, "/return/download", downloadFile, QUERY(String, code)) {
-	//	return execDownloadFile(code);
-	//}
 
 private:
 
@@ -131,15 +107,6 @@ private:
 	ReturnDetailJsonVO::Wrapper executeQueryDetail(const ReturnDetailQuery::Wrapper& returnDetailQuery);
 	// 添加新单据详细信息
 	Uint64JsonVO::Wrapper execAddDetail(const ReturnAdd::Wrapper& returnAdd);
-	//// 修改单据
-	//Uint64JsonVO::Wrapper execModifyReturn(const ReturnDTO::Wrapper& dto);
-	//// 执行单据
-	//Uint64JsonVO::Wrapper execExecuteReturn(const String& code);
-	//// 删除单据
-	//Uint64JsonVO::Wrapper execRemoveReturn(const String& code);
-	//// 导出单据
-	//std::shared_ptr<OutgoingResponse> execDownloadFile(const String& code);
-
 };
 
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
