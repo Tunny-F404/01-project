@@ -2,14 +2,30 @@ import type { ButtonProps, TableProps } from "element-plus";
 import type { Prettify } from "utils/Prettify";
 
 /**
- * 操作栏
+ * 通用的按钮配置
  */
-export interface Operations<T> extends ButtonProps {
-	/** 点击按钮回调函数 */
-	clickCallBack?(row: T): void;
-
-	/** 操作栏的按钮名称 */
+interface CommonButton extends Partial<ButtonProps> {
+	/** 按钮名称 */
 	buttonName: string;
+}
+
+/**
+ * 导航栏的按钮组配置
+ */
+export interface Buttons extends CommonButton {
+	/** 点击按钮回调函数 */
+	clickCallBack?(): void;
+}
+
+/**
+ * 操作栏配置
+ */
+export interface Operations<T> extends CommonButton {
+	/** 点击按钮回调函数 */
+	clickCallBack?(
+		/** 当前行数据 */
+		row: T,
+	): void;
 }
 
 /**

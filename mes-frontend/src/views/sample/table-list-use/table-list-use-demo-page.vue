@@ -26,6 +26,29 @@ const query = ref<UnitMeasureDTO>({
 
 const stdTableProps = ref<StdTableProps<UnitMeasureDTO>>({
 	data: [],
+
+	operations: [
+		{
+			buttonName: "修改",
+			clickCallBack(row) {
+				console.log(row);
+			},
+		},
+
+		{
+			buttonName: "编辑",
+			clickCallBack(row) {
+				console.log(row);
+			},
+		},
+
+		{
+			buttonName: "标记了好玩",
+			clickCallBack(row) {
+				console.log(row);
+			},
+		},
+	],
 });
 
 onMounted(async () => {

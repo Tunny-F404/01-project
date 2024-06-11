@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="TableRow extends Record<string, unknown>">
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { merge } from "lodash-es";
 import { reactify } from "@vueuse/core";
 import { ElButton } from "element-plus";
@@ -7,8 +7,8 @@ import { ElButton } from "element-plus";
 import { TableFrame, TableInnerLayout } from "components/std-table";
 import popUp from "components/std-table/src/pop-up.vue";
 import request from "api/request.js"; //加入请求
-import type { Prettify } from "utils/Prettify.ts";
 
+import type { Prettify } from "utils/Prettify.ts";
 import type { ComputedRef } from "vue";
 import type { TableProps } from "element-plus";
 import type { RequiredPick } from "type-plus";
@@ -65,6 +65,10 @@ const stdTableProps = mergeReactify(createDefaultProps(), props);
 
 /** 操作栏配置对象 */
 const operations = computed(() => stdTableProps.value.operations);
+
+onMounted(async () => {
+	await stdTableProps.value.init?.();
+});
 
 // stdTableProps.value.
 
