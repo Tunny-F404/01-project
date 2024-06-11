@@ -27,6 +27,15 @@ const query = ref<UnitMeasureDTO>({
 const stdTableProps = ref<StdTableProps<UnitMeasureDTO>>({
 	data: [],
 
+	buttons: [
+		{
+			buttonName: "新增",
+			clickCallBack() {
+				console.log("新增");
+			},
+		},
+	],
+
 	operations: [
 		{
 			buttonName: "修改",
@@ -92,13 +101,12 @@ async function getlist() {
 		</ElCard>
 
 		<TableFrame :title="tableFrameTitle">
-			<!-- <template # > </template> -->
+			<template #tableFrameMain>
+				<StdTable v-bind="stdTableProps">
+					<!-- <template #> </template> -->
+				</StdTable>
+			</template>
 		</TableFrame>
-
-		<!-- 测试标准组件 -->
-		<StdTable v-bind="stdTableProps">
-			<!-- <template #> </template> -->
-		</StdTable>
 	</section>
 </template>
 

@@ -1,4 +1,4 @@
-import type { ButtonProps, TableProps } from "element-plus";
+import type { ButtonProps, ComponentSize, TableProps } from "element-plus";
 import type { Prettify } from "utils/Prettify";
 
 /**
@@ -62,6 +62,13 @@ export interface StdTableProps<T> extends TablePropsWithoutContext<T> {
 
 	/** 操作栏 */
 	operations?: Operations<T>[];
+
+	/**
+	 * 统一组件尺寸
+	 * @description
+	 * 整个组件的统一组件尺寸配置。
+	 */
+	unifySize?: ComponentSize;
 
 	/**
 	 * 初始化函数

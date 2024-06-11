@@ -32,9 +32,7 @@ const defaultPropsKeys = ["data", "operations", "size", "border"] as const;
 type DefaultPropsKeys = (typeof defaultPropsKeys)[number];
 type DefaultProps = Prettify<Readonly<RequiredPick<Props, DefaultPropsKeys>>>;
 
-// type Merge = <TObject, T = DefaultProps>(object: TObject, source: T) => TObject & T;
 type MergeReactify = <TObject, TSource>(object: TObject, source: TSource) => ComputedRef<TObject & TSource>;
-// type Merge = <TObject, TSource>(object: TObject, source: TSource) => TObject & TSource;
 const mergeReactify = reactify(merge) as MergeReactify;
 
 /**
@@ -45,7 +43,7 @@ const mergeReactify = reactify(merge) as MergeReactify;
 const defaultProps: DefaultProps = {
 	data: [] as TableRow[],
 	operations: [],
-	size: "small",
+	unifySize: "small",
 	border: true,
 };
 
@@ -73,6 +71,10 @@ const buttons = computed(() => stdTableProps.value.buttons ?? []);
 
 /** 操作栏配置对象 */
 const operations = computed(() => stdTableProps.value.operations);
+
+const unifySize = computed(() => stdTableProps.value.unifySize);
+
+// ElButtonSize
 
 onMounted(async () => {
 	await stdTableProps.value.init?.();
@@ -177,7 +179,7 @@ const handleSelectionChange = (val) => {
 				<slot name="stdTableButtons">
 					<template v-if="!isEmpty(buttons)">
 						<template v-for="(button, indx) in buttons" :key="indx">
-							<ElButton v-bind="button">
+							<ElButton v-bind="button" :size="unifySize">
 								<section>
 									{{ button.buttonName }}
 								</section>
