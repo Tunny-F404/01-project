@@ -75,7 +75,10 @@ const getPageList = async (data) => {
 	loading.value = false;
 };
 
-getPageList(null); //进来就加载一遍
+onMounted(async ()=>{
+await	getPageList(null); //进来就加载一遍
+})
+
 //处理分页逻辑
 //改变大小
 const onSizeChange = (size) => {
@@ -139,6 +142,8 @@ const onEditchannel = (row, $index) => {
 
 
 const onSubmit = () => {
+  const Sub={planNumber:myInput,planName:unitName}
+  getPageList(Sub)
 	console.log("查询提交");
 };
 
@@ -157,14 +162,14 @@ const sels = ref([]);//当前选框中选择的值
 
 //获取选中的值
 function handleSelectionChange (sels) {
-	this.sels = sels;
+	this.sels.value = sels;
 };
 
 const arrDelet=async ()=>{
-	let ids = this.sels.map((item) => item.id);
+	let ids = this.sels.map((item) => item. planId);
     try {
 		const res= await Request.request(Request.DELETE,
-		 "/sch-manage/sch-plan/delete-schedule-plan", ids, http.upType.json);
+		 "/sch-manage/sch-plan/delete-schedule-plan", {rems:ids}, http.upType.json);
   if( res.code == '10000'){
 	ElMessage.success("删除成功");
     getPageList(null);

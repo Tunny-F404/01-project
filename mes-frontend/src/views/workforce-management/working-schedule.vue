@@ -1,5 +1,5 @@
 <script setup >
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import http from "axios"
 import  tableFrame  from 'components/std-table/src/table-text.vue' 
 import Request  from '@/apis/request.js'
@@ -61,8 +61,10 @@ const getPageList = async (data) => {
     
 	loading.value = false;
 };
+onMounted(async ()=>{
+await	getPageList(null); //进来就加载一遍
+})
 
-getPageList(null); //进来就加载一遍
 //处理分页逻辑
 //改变大小
 const onSizeChange = (size) => {
@@ -124,6 +126,8 @@ const onEditchannel = (row, $index) => {
 
 
 const onSubmit = () => {
+	const Sub={teamCode:myInput,calendarType:unitName}
+	getPageList(Sub)
 	console.log("查询提交");
 };
 
@@ -142,14 +146,14 @@ const sels = ref([]);//当前选框中选择的值
 
 //获取选中的值
 function handleSelectionChange (sels) {
-	this.sels = sels;
+	this.sels.value = sels;
 };
 
 const arrDelet=async ()=>{
-	let ids = this.sels.map((item) => item.id);
+	let ids = this.sels.map((item) => item.teamId);
     try {
 		const res= await Request.request(Request.DELETE,
-		 "/basicdata/md-unit-measure/delete-by-measureIds", ids, http.upType.json);
+		 "/basicdata/md-unit-measure/delete-by-measureIds", {ids:ids}, http.upType.json);
   if( res.code == '10000'){
 	ElMessage.success("删除成功");
     getPageList(null);
@@ -169,7 +173,6 @@ const formModel = ref({
     calendarType:"TNT",
         remark:"炸弹",
         teamCode:"Tx002",
-
         teamId:2 ,
         teamName:"爆破一组"
 });

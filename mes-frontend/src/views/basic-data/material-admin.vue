@@ -53,7 +53,7 @@ const getPageList= async (data)=>{
   //不知道跟着接口写的对不对，希望大佬看一看
   loading.value=true
  try {
-  const res=await Request.request(Request.GET,'/mes/md/itemtype/{itemTypeId}',data)
+  const res=await Request.request(Request.GET,'/mes/md/itemtype/{itemTypeId}',data,http.upType.json)
   tableList.value=res.data.data
  } catch (error) {
   console.log('错误或者超时');
@@ -62,7 +62,10 @@ const getPageList= async (data)=>{
   loading.value=false
 }
 
-getPageList()//进来就加载一遍
+onMounted(async ()=>{
+await	getPageList(null); //进来就加载一遍
+})
+
 
 //处理分页逻辑
 //改变大小
@@ -152,7 +155,7 @@ watch(filterText, (val) => {
   this.$refs.treeRef.filter(val);
 })
 
-const data = [
+const data =ref([
   {
     id: 1,
     label: '物料产品分类',
@@ -196,23 +199,31 @@ const data = [
     ],
   },
   
-]
-
+]) 
+//定义请求树形数据函数·1、
+const getTreeDate=async ()=>{
+  try {
+  const res=await Request.request(Request.GET,'/mes/md/itemtype/treeselect',{},http.upType.json)
+  data.value=res.data.data
+ } catch (error) {
+  console.log('错误或者超时');
+ } 
+}
 //-----------------多删
 const sels = ref([]);//当前选框中选择的值
 
 //获取选中的值
 function handleSelectionChange (sels) {
-	sels.value = sels;
+	this.sels.value = sels;
   console.log("选中的值",sels.map((item) => item.id));
 };
 
 //批量删除
 async function arrDelet(){
-	let ids = this.sels.map((item) => item.id);
+	let ids = this.sels.map((item) => item.itemTypeId);
     try {
 		const res= await Request.request(Request.DELETE,
-		 "/basicdata/md-unit-measure/delete-by-measureIds", ids, http.upType.json);
+		 "/basicdata/md-unit-measure/delete-by-measureIds", {itemTypeId:ids}, http.upType.json);
   if( res.code == '10000'){
 	ElMessage.success("删除成功");
     }else{
