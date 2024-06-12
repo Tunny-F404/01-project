@@ -45,12 +45,12 @@ public:
 	// 定义执行领取物料接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pick.execute-get.summary"), executeGet, Uint64JsonVO::Wrapper);
 	// 定义执行领取物料接口处理 "/pick/{Id}"必须对应
-	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/incoming/do-{getId}", executeGet, PATH(UInt64, getId), executeExecuteGet(getId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_PUT, "/incoming/do/{getId}", executeGet, PATH(UInt64, getId), executeExecuteGet(getId));
 
 	// 定义删除单据接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("pick.delete.summary"), removeReturn, Uint64JsonVO::Wrapper);
 	// 定义删除单据接口处理 "/pick/{Id}"必须对应
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/incoming/delete1-{deleteId}", removeReturn, PATH(UInt64, deleteId), executeRemoveReturn(deleteId));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/incoming/delete1/{deleteId}", removeReturn, PATH(UInt64, deleteId), executeRemoveReturn(deleteId));
 
 	
 	// 3.1 定义导出接口描述
