@@ -44,7 +44,7 @@ public:
 	// 定义执行退货接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.execute.summary"), executeReturn, Uint64JsonVO::Wrapper);
 	// 定义执行退货接口处理
-	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/delete/{rt_id_exec}", executeReturn, PATH(UInt64, rt_id_exec), execExecuteReturn(rt_id_exec));
+	API_HANDLER_ENDPOINT_AUTH(API_M_DEL, "/return/do/{rt_id_exec}", executeReturn, PATH(UInt64, rt_id_exec), execExecuteReturn(rt_id_exec));
 
 	// 定义删除单据接口描述
 	API_DEF_ENDPOINT_INFO_AUTH(ZH_WORDS_GETTER("return.remove.summary"), removeReturn, Uint64JsonVO::Wrapper);
