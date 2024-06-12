@@ -2,7 +2,7 @@
 #ifndef _RERURN_MAPPER_H_
 #define _RETURN_MAPPER_H_
 #include "Mapper.h"
-#include "../../domain/do/Return-ryan/ReturnDO_r.h"
+#include "../../domain/do/return-ryan/ReturnDO_r.h"
 class ReturnMapper_r : public Mapper<ReturnDO_r>
 {
 public:
