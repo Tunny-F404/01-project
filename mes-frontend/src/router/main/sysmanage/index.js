@@ -88,15 +88,17 @@ const routes = [
 		name: "UN54",
 		component: () => import("@/views/status/404.vue"),
 	},
+	// 来料检验
 	{
 		path: "/un-55",
 		name: "UN55",
-		component: () => import("@/views/status/404.vue"),
+		component: () => import("@/views/quality-control/incoming.vue"),
 	},
+	// 过程检验
 	{
 		path: "/un-56",
 		name: "UN56",
-		component: () => import("@/views/status/404.vue"),
+		component: () => import("@/views/quality-control/process.vue"),
 	},
 	{
 		path: "/un-57",
