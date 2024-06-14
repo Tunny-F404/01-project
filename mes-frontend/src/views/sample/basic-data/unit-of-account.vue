@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import http from "axios";
-import { TableFrame } from "components/std-table";
+import { onMounted } from "vue";
+import  TableFrame  from 'components/std-table/src/table-frame.vue' ;
 import popUp from "components/std-table/src/pop-up.vue";
 import Request from "@/apis/request.js";
 // defineOptions();
@@ -72,7 +73,10 @@ const getPageList = async (data) => {
 
 	loading.value = false;
 };
-getPageList(null); //进来就加载一遍
+onMounted(async ()=>{
+await	getPageList(null); //进来就加载一遍
+})
+
 //处理分页逻辑
 //改变大小
 const onSizeChange = (size) => {
@@ -141,7 +145,8 @@ const onDelChannel = async (row) => {
 };
 
 const onSubmit = () => {
-	console.log("查询提交");
+	const Sub={measureCode:myInput,measureName:unitName}
+	getPageList(Sub);
 };
 
 //添加
@@ -156,26 +161,22 @@ const reFresh = () => {
 const sels = ref([]); //当前选框中选择的值
 
 //获取选中的值
-function handleSelectionChange(sels) {
-	this.sels = sels;
-}
+function handleSelectionChange (sels) {
+	this.sels.value = sels;
+};
 
 //批量删除
-const arrDelet = async () => {
-	let ids = this.sels.map((item) => item.id);
-	try {
-		const res = await Request.request(
-			Request.DELETE,
-			"/basicdata/md-unit-measure/delete-by-measureIds",
-			ids,
-			http.upType.json,
-		);
-		if (res.code == "10000") {
-			ElMessage.success("删除成功");
-			getPageList(null);
-		} else {
-			ElMessage.warning("删除失败");
-		}
+async function arrDelet(){
+	let ids = this.sels.map((item) => item.primaryId);
+    try {
+		const res= await Request.request(Request.DELETE,
+		 "/basicdata/md-unit-measure/delete-by-measureIds", {primaryId:ids}, http.upType.json);
+  if( res.code == '10000'){
+	ElMessage.success("删除成功");
+	getPageList(null);
+    }else{
+     ElMessage.warning("删除失败");
+	}
 	} catch (error) {
 		console.log("错误或者超时");
 	}
