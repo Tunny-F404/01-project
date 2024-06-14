@@ -25,13 +25,27 @@ const query = ref<UnitMeasureDTO>({
 });
 
 const stdTableProps = ref<StdTableProps<UnitMeasureDTO>>({
+	unifySize: "large",
+
 	data: [],
 
 	buttons: [
 		{
 			buttonName: "新增",
+			size: "small",
+			round: true,
+			type: "danger",
 			clickCallBack() {
 				console.log("新增");
+			},
+		},
+
+		{
+			buttonName: "导出",
+			size: "default",
+			type: "success",
+			clickCallBack() {
+				console.log("导出数据");
 			},
 		},
 	],
