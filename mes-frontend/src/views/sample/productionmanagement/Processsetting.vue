@@ -19,7 +19,7 @@
 				</el-col>
 				<el-col :span="5">
 					<span class="input-label">是否启用：</span>
-					<el-input v-model="workstationName" placeholder="请输入是否启用" class="input-size" />
+					<el-input v-model="enabled" placeholder="请输入是否启用" class="input-size" />
 				</el-col>
 
 				<el-col :span="5" class="button-container">
@@ -146,6 +146,9 @@ export default {
 				if (filters.workstationName && !item.name.includes(filters.workstationName)) {
 					return false;
 				}
+				if (filters.enabled && !item.code.includes(filters.enabled)) {
+					return false;
+				}
 
 				return true; // 如果都符合过滤条件，则返回 true
 			});
@@ -161,55 +164,7 @@ export default {
 			console.log("已重置所有输入");
 		},
 		resetTableData() {
-			// 恢复表格数据为原始数据
-			this.tableData = [
-				{
-					code: "WS0707",
-					name: "组装1号站",
-					location: "--",
-					workshop: "生产车间",
-					order: "涂胶",
-					enabled: "是",
-					note: "--",
-				},
-				{
-					code: "WS0720",
-					name: "151541515",
-					location: "4545",
-					workshop: "生产车间",
-					order: "涂胶",
-					enabled: "是",
-					note: "--",
-				},
-				{
-					code: "WS0734",
-					name: "111",
-					location: "111",
-					workshop: "方大二",
-					order: "开料",
-					enabled: "是",
-					note: "1-111",
-				},
-				{ code: "WS0802", name: "包娟", location: "莆", workshop: "一车间", order: "安装", enabled: "是", note: "--" },
-				{
-					code: "WS0831",
-					name: "AGV接驳",
-					location: "--",
-					workshop: "二车间",
-					order: "AGV与舱段2、3接驳",
-					enabled: "是",
-					note: "--",
-				},
-				{
-					code: "WS0835",
-					name: "宣家机架中心",
-					location: "--",
-					workshop: "二车间",
-					order: "工序1",
-					enabled: "是",
-					note: "--",
-				},
-			];
+			// 恢复表格数据
 		},
 		handleHumanResource() {
 			console.log("处理人力资源");
