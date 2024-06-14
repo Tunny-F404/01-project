@@ -13,7 +13,8 @@
 		"corepack:pnpm": "corepack enable && corepack install",
 		"git:fetch": "git fetch -p",
 		"dev": "vite --open",
-		"build": "vue-tsc && vite build",
+		"build": "vite build",
+		"build:vue-tsc": "vue-tsc && vite build",
 		"preview": "vite preview --port 4173",
 		"lint:eslint": "eslint . --fix",
 		"format:prettier": "prettier --write ."
