@@ -1,3 +1,5 @@
+import TableInnerLayout from "./src/table-inner-layout.vue";
+
 import StdTable from "./src/std-table.vue";
 
 /** TODO: 重命名为标准表单弹框 */
@@ -13,5 +15,6 @@ export {
 	StdTable,
 	StdFormDialog,
 	TableFrame,
+	TableInnerLayout,
 };
 export type { Operations, StdTableProps };

@@ -1,13 +1,14 @@
 <script setup lang="ts" generic="TableRow extends Record<string, unknown>">
-import { ref } from "vue";
-import { merge } from "lodash-es";
+import { computed, ref, onMounted } from "vue";
+import { merge, isEmpty } from "lodash-es";
 import { reactify } from "@vueuse/core";
+import { ElButton } from "element-plus";
 
-import { TableFrame } from "components/std-table";
+import { TableFrame, TableInnerLayout } from "components/std-table";
 import popUp from "components/std-table/src/pop-up.vue";
 import request from "api/request.js"; //加入请求
-import type { Prettify } from "utils/Prettify.ts";
 
+import type { Prettify } from "utils/Prettify.ts";
 import type { ComputedRef } from "vue";
 import type { TableProps } from "element-plus";
 import type { RequiredPick } from "type-plus";
@@ -15,23 +16,23 @@ import type { Operations, StdTableProps } from "./std-table.ts";
 
 defineOptions({
 	/** 表格组件 */
-	name: "TableTrue",
+	name: "StdTable",
 });
 
-type Props = Prettify<Readonly<StdTableProps<TableRow>>>;
+// FIXME: [@vue/compiler-sfc] Failed to resolve index type into finite keys
+// 这里出现无限递归了
+// type Props = Prettify<StdTableProps<TableRow>>;
+type Props = Readonly<StdTableProps<TableRow>>;
 
 const props = withDefaults(defineProps<Props>(), {
 	data: () => [] as TableRow[],
-	// data: [] as TableRow[],
-}) as Props;
+});
 
 const defaultPropsKeys = ["data", "operations", "size", "border"] as const;
 type DefaultPropsKeys = (typeof defaultPropsKeys)[number];
 type DefaultProps = Prettify<Readonly<RequiredPick<Props, DefaultPropsKeys>>>;
 
-// type Merge = <TObject, T = DefaultProps>(object: TObject, source: T) => TObject & T;
 type MergeReactify = <TObject, TSource>(object: TObject, source: TSource) => ComputedRef<TObject & TSource>;
-// type Merge = <TObject, TSource>(object: TObject, source: TSource) => TObject & TSource;
 const mergeReactify = reactify(merge) as MergeReactify;
 
 /**
@@ -42,7 +43,7 @@ const mergeReactify = reactify(merge) as MergeReactify;
 const defaultProps: DefaultProps = {
 	data: [] as TableRow[],
 	operations: [],
-	size: "small",
+	unifySize: "small",
 	border: true,
 };
 
@@ -56,7 +57,28 @@ function createDefaultProps() {
 	return merge({}, defaultProps);
 }
 
+/** 本组件实际有的全部可用props值 */
 const stdTableProps = mergeReactify(createDefaultProps(), props);
+
+/**
+ * 按钮栏配置对象
+ * @description
+ * 及时不提供任何值 在此处也是默认提供一个空数组
+ *
+ * 不考虑将该空数组设置成默认值
+ */
+const buttons = computed(() => stdTableProps.value.buttons ?? []);
+
+/** 操作栏配置对象 */
+const operations = computed(() => stdTableProps.value.operations);
+
+const unifySize = computed(() => stdTableProps.value.unifySize);
+
+// ElButtonSize
+
+onMounted(async () => {
+	await stdTableProps.value.init?.();
+});
 
 // stdTableProps.value.
 
@@ -78,6 +100,7 @@ const dialog = ref();
 //定义总条数
 const total = ref(0);
 const loading = ref(false); //loading状态
+
 //定义请求参数,后期完善
 const parms = ref({
 	pagenum: 1, //页数
@@ -85,6 +108,7 @@ const parms = ref({
 	state: "成功", //状态
 	classfiy: "时间",
 });
+
 const getPageList = async () => {
 	loading.value = true;
 	//里面改接口，可以加个try-catch
@@ -147,6 +171,34 @@ const handleSelectionChange = (val) => {
 </script>
 
 <template>
+	<section class="std-table-root">
+		<slot name="stdTableSearch"> </slot>
+
+		<TableInnerLayout>
+			<template #tableInnerButtons>
+				<slot name="stdTableButtons">
+					<template v-if="!isEmpty(buttons)">
+						<template v-for="(button, indx) in buttons" :key="indx">
+							<ElButton v-bind="button" :size="unifySize">
+								<section>
+									{{ button.buttonName }}
+								</section>
+							</ElButton>
+						</template>
+					</template>
+				</slot>
+			</template>
+
+			<template #tableInnerMain>
+				<slot name="stdTableMain"> </slot>
+			</template>
+
+			<template #tableInnerPagination>
+				<slot name="stdTablePagination"> </slot>
+			</template>
+		</TableInnerLayout>
+	</section>
+
 	<!--分类，页面只有基本的表现，没有实现数据绑定-->
 	<tableFrame title="实验表格">
 		<slot name="extra">
@@ -208,6 +260,7 @@ const handleSelectionChange = (val) => {
 				</template>
 			</el-table-column>
 		</el-table>
+
 		<el-pagination
 			v-model:current-page="parms.pagenum"
 			v-model:page-size="parms.pagesize"
@@ -219,18 +272,21 @@ const handleSelectionChange = (val) => {
 			@current-change="OnCurrentChange"
 			style="margin-top: 20px; justify-content: flex-end"
 		/>
-		<!---->
 
 		<!--空处理-->
 		<slot name="#empty">
 			<el-empty description="没有数据"></el-empty>
 		</slot>
 	</tableFrame>
+
 	<!--引入的弹窗-->
 	<pop-Up ref="dialog"> </pop-Up>
 </template>
 
 <style lang="scss" scoped>
+.std-table-root {
+}
+
 .demo-form-inline {
 	.el-input {
 		--el-input-width: 220px;

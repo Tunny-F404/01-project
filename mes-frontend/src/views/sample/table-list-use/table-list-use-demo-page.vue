@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch } from "vue";
-
 import { ElButton, ElCard } from "element-plus";
-
-import { StdTable } from "components/std-table";
+import { StdTable, TableFrame } from "components/std-table";
+import type { StdTableProps } from "components/std-table";
 
 import { type UnitMeasureDTO, mdUnitMeasureController } from "views/sample/basic-data/tests/MdUnitMeasureController";
 
@@ -11,6 +10,8 @@ defineOptions({
 	/** 列表页用的表格组件 演示页 */
 	name: "TableListUseDemoPage",
 });
+
+const tableFrameTitle = ref("列表页用的表格组件-阮喵喵");
 
 const { getInfo, addUnitMeasure, list } = mdUnitMeasureController;
 
@@ -21,6 +22,56 @@ const tableRows = ref<UnitMeasureDTO[]>([]);
 const query = ref<UnitMeasureDTO>({
 	changeRate: -0.114514,
 	createBy: "",
+});
+
+const stdTableProps = ref<StdTableProps<UnitMeasureDTO>>({
+	unifySize: "large",
+
+	data: [],
+
+	buttons: [
+		{
+			buttonName: "新增",
+			size: "small",
+			round: true,
+			type: "danger",
+			clickCallBack() {
+				console.log("新增");
+			},
+		},
+
+		{
+			buttonName: "导出",
+			size: "default",
+			type: "success",
+			clickCallBack() {
+				console.log("导出数据");
+			},
+		},
+	],
+
+	operations: [
+		{
+			buttonName: "修改",
+			clickCallBack(row) {
+				console.log(row);
+			},
+		},
+
+		{
+			buttonName: "编辑",
+			clickCallBack(row) {
+				console.log(row);
+			},
+		},
+
+		{
+			buttonName: "标记了好玩",
+			clickCallBack(row) {
+				console.log(row);
+			},
+		},
+	],
 });
 
 onMounted(async () => {
@@ -62,6 +113,14 @@ async function getlist() {
 		<ElCard v-loading="isLoading">
 			{{ tableRows }}
 		</ElCard>
+
+		<TableFrame :title="tableFrameTitle">
+			<template #tableFrameMain>
+				<StdTable v-bind="stdTableProps">
+					<!-- <template #> </template> -->
+				</StdTable>
+			</template>
+		</TableFrame>
 	</section>
 </template>
 
