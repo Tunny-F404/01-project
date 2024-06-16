@@ -48,6 +48,9 @@
         <module>mes-j3-message</module>
         <module>mes-j3-sysmanager</module>
         <module>mes-j3-messageservice</module>
+        <module>mes-j4-basicdata</module>
+        <module>mes-j4-sysmanagement</module>
+        <module>mes-j4-warehousemanagement</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
