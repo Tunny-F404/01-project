@@ -56,6 +56,9 @@
         <module>mes-j5-shopsettings</module>
         <module>mes-j5-teamsettings</module>
         <module>mes-j5-schedulecalendar</module>
+        <module>mes-j6-product-classification</module>
+        <module>mes-j6-product-management</module>
+        <module>mes-j6-client-management</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
