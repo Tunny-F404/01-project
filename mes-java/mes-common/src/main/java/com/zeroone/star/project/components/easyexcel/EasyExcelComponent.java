@@ -4,6 +4,9 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.builder.ExcelWriterBuilder;
 import com.alibaba.excel.write.metadata.WriteSheet;
+import com.alibaba.excel.write.metadata.style.WriteCellStyle;
+import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -67,7 +70,13 @@ public class EasyExcelComponent {
      * @throws IOException IO异常
      */
     public <T> void export(String sheetName, OutputStream os, Class<T> clazz, List<T> dataList) throws IOException {
-        ExcelWriterBuilder builder = EasyExcel.write(os, clazz);
+        WriteCellStyle headWriteCellStyle = new WriteCellStyle();
+        //内容策略
+        WriteCellStyle contentWriteCellStyle = new WriteCellStyle();
+        //设置 水平居中
+        contentWriteCellStyle.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        HorizontalCellStyleStrategy horizontalCellStyleStrategy = new HorizontalCellStyleStrategy(headWriteCellStyle,contentWriteCellStyle);
+        ExcelWriterBuilder builder = EasyExcel.write(os, clazz).registerWriteHandler(horizontalCellStyleStrategy);
         ExcelWriter writer = builder.build();
         //计算总页数
         int sheetCount = dataList.size() / MAX_COUNT_PER_SHEET;

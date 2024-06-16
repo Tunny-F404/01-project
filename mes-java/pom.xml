@@ -43,6 +43,8 @@
         <module>mes-j1-syshome</module>
         <module>mes-j1-mycenter</module>
         <module>mes-j1-orgstructure</module>
+        <module>mes-j2-sysmanagement</module>
+        <module>mes-j2-orgstructure</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->
