@@ -1,5 +1,4 @@
 /*
->>>>>>> 68ca23adf7d849ebe7f628a278360730cc296bae
  Copyright Zero One Star. All rights reserved.
 
  @Author: awei
@@ -20,42 +19,13 @@
 #include "stdafx.h"
 #include "Router.h"
 #include "ApiHelper.h"
-#include"controller/purchasereceiving/AddListController.h"
-#include"controller/purchasereceiving/ModifyListController.h"
-#include"controller/purchasereceiving/information/GetListController.h"
-
-
+#include "controller/purchasereceiving/AddListController.h"
+#include "controller/purchasereceiving/ModifyListController.h"
+#include "controller/purchasereceiving/information/GetListController.h"
 #include "PurchaseReceipt/GetReceiptController.h"
-
-
-#ifdef HTTP_SERVER_DEMO
-#include "user/UserController.h"
-#include "sample/SampleController.h"
-#include "file/FileController.h"
-#include "ws/WSController.h"
-<<<<<< < HEAD
-
-#endif 
-
-	// 濡傛灉瀹氫箟浜嗗叧闂璖wagger鏂囨。瀹?
 #include "controller/ProchAndStorage/MaterialsInfo/AddWhStorageorderController.h"
 #include "controller/ProchAndStorage/MaterialsInfo/ModifyWhStorageorderController.h"
 #include "controller/ProchAndStorage/MaterialsInfo/DeleteWhStorageorderController.h"
-// ��������˹ر�Swagger�ĵ���
-#ifdef CLOSE_SWAGGER_DOC
-// 绠€鍖栫粦瀹氭帶鍒跺櫒瀹忓畾涔?
-#define ROUTER_SIMPLE_BIND(__CLASS__) \
-router->addController(__CLASS__::createShared())
-#else
-#endif
-
-// 如果定义了关闭Swagger文档宏
-#ifdef CLOSE_SWAGGER_DOC
-// 简化绑定控制器宏定义
-#define ROUTER_SIMPLE_BIND(__CLASS__) \
-router->addController(__CLASS__::createShared())
-#else
-#endif
 #include "WarehouseInbound/WarehouseInboundController.h"
 #include "WarehouseDelete/WarehouseDeleteController.h"
 #include "WarehouseExport/WarehouseExportController.h"
@@ -79,10 +49,6 @@ Router::Router(Endpoints * docEndpoints, HttpRouter * router)
 
 void Router::initRouter()
 {
-#ifdef HTTP_SERVER_DEMO
-	createSampleRouter();
-#endif
-
 	//#TIP :系统扩展路由定义，写在这个后面
 	ROUTER_SIMPLE_BIND(GetReceiptController);//shudeqilong	
 	ROUTER_SIMPLE_BIND(ModifyListController);//upup
@@ -94,33 +60,4 @@ void Router::initRouter()
 	ROUTER_SIMPLE_BIND(WarehouseInboundController);//xinye
 	ROUTER_SIMPLE_BIND(WarehouseDeleteController);//xinye
 	ROUTER_SIMPLE_BIND(WarehouseExportController);//xinye
-	
 }
-
-#ifdef HTTP_SERVER_DEMO
-void Router::createSampleRouter()
-{
-	<<<<<< < HEAD
-		// 缁戝畾绀轰緥鎺у埗鍣?
-		ROUTER_SIMPLE_BIND(SampleController);
-	// 缁戝畾鐢ㄦ埛鎺у埗鍣?
-	ROUTER_SIMPLE_BIND(UserController);
-	// 缁戝畾鏂囦欢鎺у埗鍣?
-	ROUTER_SIMPLE_BIND(FileController);
-
-	// 缁戝畾WebSocket鎺у埗鍣?
-	====== =
-		// 绑定示例控制器
-		ROUTER_SIMPLE_BIND(SampleController);
-	// 绑定用户控制器
-	ROUTER_SIMPLE_BIND(UserController);
-	// 绑定文件控制器
-	ROUTER_SIMPLE_BIND(FileController);
-
-	// 绑定WebSocket控制器
-	>>>>>> > 68ca23adf7d849ebe7f628a278360730cc296bae
-		router->addController(WSContorller::createShared());
-}
-#endif
-	
-

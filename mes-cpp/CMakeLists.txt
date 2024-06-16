@@ -180,3 +180,7 @@ add_subdirectory ("mes-c5-WarehouseManagement")
 add_subdirectory ("mes-c6-quality")
 add_subdirectory ("mes-c6-storage-product")
 add_subdirectory ("mes-c6-storage-return")
+add_subdirectory ("mes-c7-settings")
+add_subdirectory ("mes-c7-rejection")
+add_subdirectory ("mes-c7-storage")
+
