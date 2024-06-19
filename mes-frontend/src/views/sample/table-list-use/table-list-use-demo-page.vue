@@ -2,6 +2,8 @@
 import { computed, onMounted, ref, watch } from "vue";
 import { ElButton, ElCard } from "element-plus";
 import { StdTable, TableFrame } from "components/std-table";
+import { queryCodeRuleParts } from "api/sysmanagement/SysAutoCodePartController";
+
 import type { StdTableProps } from "components/std-table";
 
 import { type UnitMeasureDTO, mdUnitMeasureController } from "views/sample/basic-data/tests/MdUnitMeasureController";
@@ -92,7 +94,7 @@ async function add() {
 
 async function getlist() {
 	isLoading.value = true;
-	await list(query.value)
+	await queryCodeRuleParts(query.value)
 		.then((response) => {
 			// tableRows.value = response.data.data.rows;
 			// @ts-expect-error
