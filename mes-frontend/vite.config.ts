@@ -11,8 +11,11 @@ const getViteEnv = (mode, target) => {
 };
 
 // https://vitejs.dev/config/
-export default ({ mode }) =>
-	defineConfig({
+export default defineConfig(({ command, mode }) => {
+	const env = loadEnv(mode, process.cwd(), "");
+	console.log(" 当前全部的环境变量 ", env);
+
+	return {
 		define: {
 			// 启用生产环境构建下激活不匹配的详细警告
 			__VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "true",
@@ -28,9 +31,11 @@ export default ({ mode }) =>
 					// rewrite: (path) => path.replace(/^\/api/, '')
 
 					//TODO[TEST_CODE]:使用ApiPost云MOCK
-					target: "https://console-mock.apipost.cn/mock/99738a62-8857-4bb2-8010-c92424b03584",
+					// target: "https://console-mock.apipost.cn/mock/99738a62-8857-4bb2-8010-c92424b03584",
+					target: env.VITE_API_URL,
 					rewrite: (path) => path.replace(/^\/api/, ""),
 				},
+
 				"/captcha": {
 					changeOrigin: true,
 					target: "http://localhost:10680",
@@ -38,6 +43,7 @@ export default ({ mode }) =>
 				},
 			},
 		},
+
 		build: {
 			assetsDir: "static",
 			chunkSizeWarningLimit: 1000,
@@ -81,4 +87,5 @@ export default ({ mode }) =>
 				utils: fileURLToPath(new URL("./src/utils", import.meta.url)),
 			},
 		},
-	});
+	};
+});

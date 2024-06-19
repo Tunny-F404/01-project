@@ -1,4 +1,5 @@
 import Request from "api/request.js";
+import http from "axios";
 
 /** 添加编码生成规则组成表 */
 export function addCodeRulePart({ sysAutoCodePartDTO, success = () => {}, fail = () => {} }) {
