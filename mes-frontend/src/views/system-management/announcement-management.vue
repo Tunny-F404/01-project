@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref, toRefs } from "vue";
 import { ElMessage } from "element-plus";
- import { addMessage, delMessage, getMessage, listMessage, updateMessage } from "@/apis/system/message";
+import { addMessage, delMessage, getMessage, listMessage, updateMessage } from "@/apis/system/message";
 import UserSingleSelect from "@/components/userSelect/single.vue";
 import { error } from "console";
-import { ElPagination } from 'element-plus';
+import { ElPagination } from "element-plus";
 // 响应式状态
 const state = reactive({
 	loading: true,
@@ -81,11 +81,13 @@ onMounted(() => {
 // 方法
 function getList() {
 	loading.value = true;
-	listMessage(queryParams.value).then((response) => {
-		messageList.value = response.rows;
-		total.value = response.total;
-		loading.value = false;
-	}).catch(() => ElMessage('获取数据异常'));
+	listMessage(queryParams.value)
+		.then((response) => {
+			messageList.value = response.rows;
+			total.value = response.total;
+			loading.value = false;
+		})
+		.catch(() => ElMessage("获取数据异常"));
 }
 
 function handleQuery() {
@@ -254,8 +256,7 @@ function formatStatus(value) {
 <template>
 	<div class="app-container">
 		<!-- 搜索表单 -->
-		<el-form v-show="showSearch" ref="queryForm" :model="queryParams" size="small" :inline="true"
-			label-width="100px">
+		<el-form v-show="showSearch" ref="queryForm" :model="queryParams" size="small" :inline="true" label-width="100px">
 			<!-- 消息类型选择 -->
 			<el-form-item label="消息类型" prop="messageType">
 				<el-select v-model="queryParams.messageType" placeholder="请选择消息类型" clearable>
@@ -265,8 +266,7 @@ function formatStatus(value) {
 			<!-- 消息级别选择 -->
 			<el-form-item label="消息级别" prop="messageLevel">
 				<el-select v-model="queryParams.messageLevel" placeholder="请选择消息级别" clearable>
-					<el-option v-for="item in messageLevels" :key="item.value" :label="item.label"
-						:value="item.value" />
+					<el-option v-for="item in messageLevels" :key="item.value" :label="item.label" :value="item.value" />
 				</el-select>
 			</el-form-item>
 			<!-- 发送人输入 -->
@@ -280,8 +280,7 @@ function formatStatus(value) {
 			<!-- 状态选择 -->
 			<el-form-item label="状态" prop="status">
 				<el-select v-model="queryParams.status" placeholder="请选择状态" clearable>
-					<el-option v-for="item in messageStatuses" :key="item.value" :label="item.label"
-						:value="item.value" />
+					<el-option v-for="item in messageStatuses" :key="item.value" :label="item.label" :value="item.value" />
 				</el-select>
 			</el-form-item>
 			<!-- 搜索和重置按钮 -->
@@ -310,8 +309,13 @@ function formatStatus(value) {
 		</el-table>
 
 		<!-- 分页组件 -->
-		<el-pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
-			:total="total" @pagination="getList" />
+		<el-pagination
+			v-show="total > 0"
+			v-model:page="queryParams.pageNum"
+			v-model:limit="queryParams.pageSize"
+			:total="total"
+			@pagination="getList"
+		/>
 
 		<!-- 添加或修改消息对话框 -->
 		<el-dialog v-model:visible="open" :title="title" width="960px" append-to-body>

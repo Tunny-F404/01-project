@@ -125,7 +125,11 @@
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="工装夹具名称" prop="equipmentLedgerName">
-						<el-input v-model="equipmentLedger.equipmentLedgerName" placeholder="请输入工装夹具名称" autocomplete="off" />
+						<el-input
+							v-model="equipmentLedger.equipmentLedgerName"
+							placeholder="请输入工装夹具名称"
+							autocomplete="off"
+						/>
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -163,8 +167,12 @@
 					<el-form-item label="保养维护类型">
 						<div class="flex flex-wrap gap-4 items-center">
 							<el-select v-model="equipmentLedger.maintenance" placeholder="定期维护" style="width: 240px">
-								<el-option v-for="item in maintenanceOptions" :key="item.value" :label="item.label"
-									:value="item.value" />
+								<el-option
+									v-for="item in maintenanceOptions"
+									:key="item.value"
+									:label="item.label"
+									:value="item.value"
+								/>
 							</el-select>
 						</div>
 					</el-form-item>
@@ -175,8 +183,12 @@
 					<el-form-item label="下一次保养日期">
 						<div class="demo-date-picker">
 							<div class="block">
-								<el-date-picker v-model="equipmentLedger.maintenanceDay" type="date" placeholder="请选择下一次保养日期"
-									:size="size" />
+								<el-date-picker
+									v-model="equipmentLedger.maintenanceDay"
+									type="date"
+									placeholder="请选择下一次保养日期"
+									:size="size"
+								/>
 							</div>
 						</div>
 					</el-form-item>

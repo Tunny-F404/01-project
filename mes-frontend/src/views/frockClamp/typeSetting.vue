@@ -1,5 +1,4 @@
 <template>
-
 	<!-- 表单 -->
 	<el-form class="demo-form-inline">
 		<el-row>
@@ -65,8 +64,12 @@
 		<el-table-column prop="typeName" label="类型名称" align="center"></el-table-column>
 		<el-table-column prop="enableFlag" label="是否编码管理" align="center">
 			<template #default="{ row }">
-				<el-tag :class="row.isEnabled ? 'status-enabled' : 'status-disabled'" @click="toggleStatus(row)"
-					style="cursor: pointer" class="status-tag">
+				<el-tag
+					:class="row.isEnabled ? 'status-enabled' : 'status-disabled'"
+					@click="toggleStatus(row)"
+					style="cursor: pointer"
+					class="status-tag"
+				>
 					{{ row.isEnabled ? "是" : "否" }}
 				</el-tag>
 			</template>
